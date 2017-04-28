@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.media.presentation;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -27,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = CHROME)
 public class PresentationRequest extends EventTarget {
 
     /**

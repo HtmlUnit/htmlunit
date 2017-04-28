@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
 
 import org.apache.xml.utils.PrefixResolver;
 
@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 /**
@@ -33,8 +32,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClass(browsers = @WebBrowser(EDGE))
-@JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = EDGE)
+@JsxClass(isJSObject = false, browsers = CHROME)
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Object element_;
@@ -42,7 +41,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor(EDGE)
     public XPathNSResolver() {
     }
 

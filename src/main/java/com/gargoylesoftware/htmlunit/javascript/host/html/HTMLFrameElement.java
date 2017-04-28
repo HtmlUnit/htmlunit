@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 
@@ -43,7 +42,7 @@ public class HTMLFrameElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLFrameElement() {
     }
 
@@ -130,7 +129,7 @@ public class HTMLFrameElement extends HTMLElement {
      * Gets the {@code border} attribute.
      * @return the {@code border} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -140,7 +139,7 @@ public class HTMLFrameElement extends HTMLElement {
      * Sets the {@code border} attribute.
      * @param border the {@code border} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }

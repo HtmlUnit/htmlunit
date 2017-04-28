@@ -18,8 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTIO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_LIST_ENUMERATE_FUNCTIONS;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -84,7 +83,7 @@ public class AbstractList extends SimpleScriptable implements Function {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxConstructor({CHROME, FF})
     public AbstractList() {
     }
 

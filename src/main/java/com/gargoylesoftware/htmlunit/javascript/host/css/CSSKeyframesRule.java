@@ -15,15 +15,14 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSS_MOZ_CSS_KEYFRAMES_RULE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code CSSKeyframesRule}.
@@ -31,14 +30,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52),
-        @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = {CHROME, FF52, IE, EDGE})
 public class CSSKeyframesRule extends CSSRule {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, EDGE})
     public CSSKeyframesRule() {
     }
 

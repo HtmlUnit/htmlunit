@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MAP_CONSTRUCTOR_ARGUMENT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.util.LinkedHashMap;
 
@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
@@ -195,7 +194,7 @@ public class Map extends SimpleScriptable {
      * Map object in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxFunction({CHROME, FF, EDGE})
     public Object entries() {
         final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.entrySet().iterator());
         object.setParentScope(getParentScope());
@@ -208,7 +207,7 @@ public class Map extends SimpleScriptable {
      * in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxFunction({CHROME, FF, EDGE})
     public Object keys() {
         final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.keySet().iterator());
         object.setParentScope(getParentScope());
@@ -221,7 +220,7 @@ public class Map extends SimpleScriptable {
      * in insertion order.
      * @return a new {@code Iterator} object
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxFunction({CHROME, FF, EDGE})
     public Object values() {
         final SimpleScriptable object = new Iterator(MAP_ITERATOR_NAME, map_.values().iterator());
         object.setParentScope(getParentScope());

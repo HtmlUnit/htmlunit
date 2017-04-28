@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -44,7 +44,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
@@ -102,7 +101,7 @@ public class Node2 extends EventTarget2 {
      * @return the parent element
      * @see #getParentNode()
      */
-    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Getter({FF, CHROME})
     public Element2 getParentElement() {
         final Node2 parent = getParent();
         if (!(parent instanceof Element2)) {
@@ -502,7 +501,7 @@ public class Node2 extends EventTarget2 {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getAttributes() {
         return null;
     }
@@ -565,7 +564,7 @@ public class Node2 extends EventTarget2 {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -588,7 +587,7 @@ public class Node2 extends EventTarget2 {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

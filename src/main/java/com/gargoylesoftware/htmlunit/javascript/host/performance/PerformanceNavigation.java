@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.performance;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code PerformanceNavigation}.
@@ -54,7 +53,7 @@ public class PerformanceNavigation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public PerformanceNavigation() {
     }
 
@@ -80,7 +79,7 @@ public class PerformanceNavigation extends SimpleScriptable {
      * The {@code toJSON} function.
      * @return the {@code toJSON} object
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction({FF, IE})
     public Object toJSON() {
         throw new UnsupportedOperationException();
     }

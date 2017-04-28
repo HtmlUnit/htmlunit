@@ -25,9 +25,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -100,7 +100,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
 import com.gargoylesoftware.js.nashorn.internal.runtime.FindProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.JSType;
@@ -1039,7 +1038,7 @@ public class HTMLDocument2 extends Document2 {
      * Gets the default character set from the current regional language settings.
      * @return the default character set from the current regional language settings
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public String getDefaultCharset() {
         return "windows-1252";
     }
@@ -1048,7 +1047,7 @@ public class HTMLDocument2 extends Document2 {
      * Gets the window in which this document is contained.
      * @return the window
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Global getParentWindow() {
         return getWindow().getGlobal();
     }
@@ -1187,7 +1186,7 @@ public class HTMLDocument2 extends Document2 {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -1210,7 +1209,7 @@ public class HTMLDocument2 extends Document2 {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

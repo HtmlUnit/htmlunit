@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.IOException;
 import java.net.URL;
@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -65,7 +64,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chuck Dumont
  * @author Frank Danek
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass(browsers = IE)
 public class XMLDOMDocument extends XMLDOMNode {
 
     private static final Log LOG = LogFactory.getLog(XMLDOMDocument.class);

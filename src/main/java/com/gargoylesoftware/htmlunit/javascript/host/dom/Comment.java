@@ -14,17 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code Comment}.
@@ -43,7 +42,7 @@ public class Comment extends CharacterData {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public Comment() {
     }
 
@@ -51,7 +50,7 @@ public class Comment extends CharacterData {
      * Returns the text of this element.
      * @return the text
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getText() {
         return "<!--" + getData() + "-->";
     }
@@ -61,7 +60,7 @@ public class Comment extends CharacterData {
      * @param attributeName the name of the attribute to retrieve
      * @return the attribute node for the specified attribute
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object getAttributeNode(final String attributeName) {
         return null;
     }
@@ -74,7 +73,7 @@ public class Comment extends CharacterData {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536429.aspx">MSDN Documentation</a>
      * @see <a href="http://reference.sitepoint.com/javascript/Element/getAttribute">IE Bug Documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object getAttribute(final String attributeName, final Integer flags) {
         return null;
     }

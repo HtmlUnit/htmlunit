@@ -20,10 +20,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -115,7 +117,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -152,58 +153,58 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlAbbreviated.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlAcronym.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlAddress.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlAbbreviated.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlAcronym.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlAddress.class, browsers = {CHROME, FF})
 @JsxClass(domClass = HtmlArticle.class)
 @JsxClass(domClass = HtmlAside.class)
-@JsxClass(domClass = HtmlBaseFont.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = @WebBrowser(CHROME))
-@JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlBig.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlBold.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlCenter.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
-@JsxClass(domClass = HtmlCitation.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlCode.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlDefinition.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlDefinitionTerm.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlElement.class, browsers = {@WebBrowser(FF), @WebBrowser(IE)})
-@JsxClass(domClass = HtmlEmphasis.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(value = FF, maxVersion = 45))
+@JsxClass(domClass = HtmlBaseFont.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlBidirectionalIsolation.class, browsers = CHROME)
+@JsxClass(domClass = HtmlBidirectionalOverride.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlBig.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlBold.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlCenter.class, browsers = {CHROME, FF, EDGE})
+@JsxClass(domClass = HtmlCitation.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlCode.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlDefinition.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlDefinitionTerm.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlElement.class, browsers = {FF, IE})
+@JsxClass(domClass = HtmlEmphasis.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlExample.class, browsers = FF45)
 @JsxClass(domClass = HtmlFigure.class)
 @JsxClass(domClass = HtmlFigureCaption.class)
 @JsxClass(domClass = HtmlFooter.class)
 @JsxClass(domClass = HtmlHeader.class)
-@JsxClass(domClass = HtmlItalic.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlKeyboard.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlLayer.class, browsers = @WebBrowser(CHROME))
-@JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(value = FF, maxVersion = 45))
+@JsxClass(domClass = HtmlItalic.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlKeyboard.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlLayer.class, browsers = CHROME)
+@JsxClass(domClass = HtmlListing.class, browsers = FF45)
 @JsxClass(domClass = HtmlMark.class)
 @JsxClass(domClass = HtmlNav.class)
-@JsxClass(domClass = HtmlNoBreak.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlNoBreak.class, browsers = {CHROME, FF})
 @JsxClass(domClass = HtmlNoEmbed.class)
 @JsxClass(domClass = HtmlNoFrames.class)
-@JsxClass(domClass = HtmlNoLayer.class, browsers = @WebBrowser(CHROME))
+@JsxClass(domClass = HtmlNoLayer.class, browsers = CHROME)
 @JsxClass(domClass = HtmlNoScript.class)
-@JsxClass(domClass = HtmlPlainText.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlRuby.class, browsers = @WebBrowser(CHROME))
-@JsxClass(domClass = HtmlRp.class, browsers = @WebBrowser(CHROME))
-@JsxClass(domClass = HtmlRt.class, browsers = @WebBrowser(CHROME))
-@JsxClass(domClass = HtmlS.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlSample.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlPlainText.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlRuby.class, browsers = CHROME)
+@JsxClass(domClass = HtmlRp.class, browsers = CHROME)
+@JsxClass(domClass = HtmlRt.class, browsers = CHROME)
+@JsxClass(domClass = HtmlS.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlSample.class, browsers = {CHROME, FF})
 @JsxClass(domClass = HtmlSection.class)
-@JsxClass(domClass = HtmlSmall.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlStrike.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlStrong.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlSubscript.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlSummary.class, browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
-@JsxClass(domClass = HtmlSuperscript.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlTeletype.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlUnderlined.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlSmall.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlStrike.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlStrong.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlSubscript.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlSummary.class, browsers = {CHROME, FF52})
+@JsxClass(domClass = HtmlSuperscript.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlTeletype.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlUnderlined.class, browsers = {CHROME, FF})
 @JsxClass(domClass = HtmlWordBreak.class)
-@JsxClass(domClass = HtmlMain.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(domClass = HtmlVariable.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlMain.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlVariable.class, browsers = {CHROME, FF})
 public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
@@ -388,7 +389,7 @@ public class HTMLElement extends Element {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLElement() {
     }
 
@@ -431,7 +432,7 @@ public class HTMLElement extends Element {
      * Returns true if this element is disabled.
      * @return true if this element is disabled
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isDisabled() {
         return getDomNodeOrDie().hasAttribute("disabled");
     }
@@ -440,7 +441,7 @@ public class HTMLElement extends Element {
      * Sets whether or not to disable this element.
      * @param disabled True if this is to be disabled
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setDisabled(final boolean disabled) {
         final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
@@ -474,7 +475,7 @@ public class HTMLElement extends Element {
     /**
      * An IE-only method which clears all custom attributes.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void clearAttributes() {
         final HtmlElement node = getDomNodeOrDie();
 
@@ -509,7 +510,7 @@ public class HTMLElement extends Element {
      * @param source the source element from which to copy the custom attributes
      * @param preserveIdentity if {@code false}, the <tt>name</tt> and <tt>id</tt> attributes are not copied
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
         final HtmlElement src = source.getDomNodeOrDie();
         final HtmlElement target = getDomNodeOrDie();
@@ -576,7 +577,7 @@ public class HTMLElement extends Element {
      * @param removeChildren whether to remove children or no
      * @return a reference to the object that is removed
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public HTMLElement removeNode(final boolean removeChildren) {
         final HTMLElement parent = (HTMLElement) getParentElement();
         if (parent != null) {
@@ -607,7 +608,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({@WebBrowser(IE)})
+    @JsxFunction({IE})
     public HTMLCollection getElementsByClassName(final String className) {
         return super.getElementsByClassName(className);
     }
@@ -616,7 +617,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(propertyName = "className", value = @WebBrowser(IE))
+    @JsxGetter(propertyName = "className", value = IE)
     public Object getClassName_js() {
         return super.getClassName_js();
     }
@@ -625,7 +626,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getOuterHTML() {
         return super.getOuterHTML();
     }
@@ -634,7 +635,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setOuterHTML(final Object value) {
         super.setOuterHTML(value);
     }
@@ -643,7 +644,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getInnerHTML() {
         return super.getInnerHTML();
     }
@@ -652,7 +653,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setInnerHTML(final Object value) {
         super.setInnerHTML(value);
     }
@@ -661,7 +662,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(propertyName = "className", value = @WebBrowser(IE))
+    @JsxSetter(propertyName = "className", value = IE)
     public void setClassName_js(final String className) {
         super.setClassName_js(className);
     }
@@ -670,7 +671,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void insertAdjacentHTML(final String position, final String text) {
         super.insertAdjacentHTML(position, text);
     }
@@ -679,7 +680,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void insertAdjacentText(final String where, final String text) {
         super.insertAdjacentText(where, text);
     }
@@ -688,7 +689,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         return super.insertAdjacentElement(where, insertedElement);
     }
@@ -1238,7 +1239,7 @@ public class HTMLElement extends Element {
      * @param tagUrn the Uniform Resource Name (URN) specified in the namespace declaration
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534658.aspx">MSDN documentation</a>
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTagUrn(final String tagUrn) {
         throw Context.reportRuntimeError("Error trying to set tagUrn to '" + tagUrn + "'.");
     }
@@ -1261,7 +1262,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void scrollIntoView() { /* do nothing at the moment */ }
 
     /**
@@ -1269,7 +1270,7 @@ public class HTMLElement extends Element {
      * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
      * @return an auto-generated, unique identifier for the object
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
             uniqueID_ = "ms__id" + UniqueID_Counter_++;
@@ -1318,7 +1319,7 @@ public class HTMLElement extends Element {
      * Sets the object as active without setting focus to the object.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void setActive() {
         final Window window = getWindow();
         final HTMLDocument document = (HTMLDocument) window.getDocument();
@@ -1363,7 +1364,7 @@ public class HTMLElement extends Element {
      * Returns the {@code spellcheck} property.
      * @return the {@code spellcheck} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public boolean isSpellcheck() {
         return Context.toBoolean(getDomNodeOrDie().getAttribute("spellcheck"));
     }
@@ -1372,7 +1373,7 @@ public class HTMLElement extends Element {
      * Sets the {@code spellcheck} property.
      * @param spellcheck the {@code spellcheck} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setSpellcheck(final boolean spellcheck) {
         getDomNodeOrDie().setAttribute("spellcheck", Boolean.toString(spellcheck));
     }
@@ -1399,7 +1400,7 @@ public class HTMLElement extends Element {
      * Returns the {@code language} property.
      * @return the {@code language} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getLanguage() {
         return getDomNodeOrDie().getAttribute("language");
     }
@@ -1408,7 +1409,7 @@ public class HTMLElement extends Element {
      * Sets the {@code language} property.
      * @param language the {@code language} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setLanguage(final String language) {
         getDomNodeOrDie().setAttribute("language", language);
     }
@@ -1984,7 +1985,7 @@ public class HTMLElement extends Element {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -2002,8 +2003,8 @@ public class HTMLElement extends Element {
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME),
-        @WebBrowser(IE)})
+    @JsxGetter({FF, CHROME,
+        IE})
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
@@ -2066,7 +2067,7 @@ public class HTMLElement extends Element {
      * @param retargetToElement if true, all events are targeted directly to this element;
      * if false, events can also fire at descendants of this element
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction({FF, IE})
     public void setCapture(final boolean retargetToElement) {
         // empty
     }
@@ -2075,7 +2076,7 @@ public class HTMLElement extends Element {
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction({FF, IE})
     public boolean releaseCapture() {
         return true;
     }
@@ -2149,7 +2150,7 @@ public class HTMLElement extends Element {
      * Returns the runtime style object for this element.
      * @return the runtime style object for this element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public CSSStyleDeclaration getRuntimeStyle() {
         return super.getStyle();
     }
@@ -2158,7 +2159,7 @@ public class HTMLElement extends Element {
      * Returns the current (calculated) style object for this element.
      * @return the current (calculated) style object for this element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public ComputedCSSStyleDeclaration getCurrentStyle() {
         if (!getDomNodeOrDie().isAttachedToPage()) {
             return null;

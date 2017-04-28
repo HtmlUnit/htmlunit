@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -37,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Sudhan Moghe
  * @author Frank Danek
  */
-@JsxClass(domClass = DomAttr.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = DomAttr.class, browsers = IE)
 public class XMLDOMAttribute extends XMLDOMNode {
 
     private XMLDOMText textNode_;

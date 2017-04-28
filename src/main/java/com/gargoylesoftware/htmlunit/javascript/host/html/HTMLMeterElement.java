@@ -14,14 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMeter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 /**
@@ -31,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMeter.class, browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(domClass = HtmlMeter.class, browsers = {FF, CHROME})
 public class HTMLMeterElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
@@ -40,7 +39,7 @@ public class HTMLMeterElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxConstructor({CHROME, FF})
     public HTMLMeterElement() {
     }
 
@@ -123,7 +122,7 @@ public class HTMLMeterElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());

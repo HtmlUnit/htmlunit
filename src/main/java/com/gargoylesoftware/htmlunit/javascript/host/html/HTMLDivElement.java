@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLDivElement}.
@@ -35,13 +34,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlDivision.class)
-@JsxClass(domClass = HtmlMarquee.class, browsers = @WebBrowser(FF))
+@JsxClass(domClass = HtmlMarquee.class, browsers = FF)
 public class HTMLDivElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLDivElement() {
     }
 
@@ -68,7 +67,7 @@ public class HTMLDivElement extends HTMLElement {
      * @return the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isNoWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
@@ -78,7 +77,7 @@ public class HTMLDivElement extends HTMLElement {
      * @param noWrap the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
             getDomNodeOrDie().setAttribute("noWrap", "");

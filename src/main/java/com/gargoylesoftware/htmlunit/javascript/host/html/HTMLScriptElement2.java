@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -33,7 +33,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
@@ -147,7 +146,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      * Returns the event handler that fires on every state change.
      * @return the event handler that fires on every state change
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getOnreadystatechange() {
         return getEventHandlerProp("onreadystatechange");
     }
@@ -156,7 +155,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      * Sets the event handler that fires on every state change.
      * @param handler the event handler that fires on every state change
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setOnreadystatechange(final Object handler) {
         setEventHandlerProp("onreadystatechange", handler);
     }
@@ -188,7 +187,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getReadyState() {
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
         if (tmpScript.wasCreatedByJavascript()) {

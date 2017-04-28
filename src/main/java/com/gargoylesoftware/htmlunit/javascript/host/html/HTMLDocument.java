@@ -32,10 +32,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
@@ -86,7 +86,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
@@ -209,7 +208,7 @@ public class HTMLDocument extends Document {
     /**
      * The constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLDocument() {
     }
 
@@ -314,7 +313,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Object getAnchors() {
         return super.getAnchors();
     }
@@ -323,7 +322,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Object getApplets() {
         return super.getApplets();
     }
@@ -772,7 +771,7 @@ public class HTMLDocument extends Document {
      * Gets the window in which this document is contained.
      * @return the window
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public Object getParentWindow() {
         return getWindow();
     }
@@ -958,7 +957,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         return super.getBody();
@@ -1235,7 +1234,7 @@ public class HTMLDocument extends Document {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
      * @return the live collection of frames contained by this document
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public Object getFrames() {
         return getWindow().getFrames_js();
     }
@@ -1492,7 +1491,7 @@ public class HTMLDocument extends Document {
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxSetter({FF, IE})
     public void setHead(final ScriptableObject head) {
         //ignore
     }
@@ -1510,7 +1509,7 @@ public class HTMLDocument extends Document {
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxFunction({FF, IE})
     public boolean releaseCapture() {
         return true;
     }
@@ -1584,7 +1583,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public String getDesignMode() {
         return super.getDesignMode();
     }
@@ -1593,7 +1592,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(@WebBrowser(CHROME))
+    @JsxSetter(CHROME)
     public void setDesignMode(final String mode) {
         super.setDesignMode(mode);
     }

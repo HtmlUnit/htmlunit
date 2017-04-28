@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +34,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -58,7 +57,7 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLTableElement() {
     }
 
@@ -365,7 +364,7 @@ public class HTMLTableElement extends RowContainer {
      * Gets the {@code borderColor} property.
      * @return the property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColor() {
         return getDomNodeOrDie().getAttribute("borderColor");
     }
@@ -374,7 +373,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the {@code borderColor} property.
      * @param borderColor the new property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColor(final String borderColor) {
         setColorAttribute("borderColor", borderColor);
     }
@@ -383,7 +382,7 @@ public class HTMLTableElement extends RowContainer {
      * Gets the {@code borderColor} property.
      * @return the property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColorDark() {
         return getDomNodeOrDie().getAttribute("borderColorDark");
     }
@@ -392,7 +391,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the {@code borderColor} property.
      * @param borderColor the new property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColorDark(final String borderColor) {
         setColorAttribute("borderColorDark", borderColor);
     }
@@ -401,7 +400,7 @@ public class HTMLTableElement extends RowContainer {
      * Gets the {@code borderColor} property.
      * @return the property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColorLight() {
         return getDomNodeOrDie().getAttribute("borderColorLight");
     }
@@ -410,7 +409,7 @@ public class HTMLTableElement extends RowContainer {
      * Sets the {@code borderColor} property.
      * @param borderColor the new property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColorLight(final String borderColor) {
         setColorAttribute("borderColorLight", borderColor);
     }

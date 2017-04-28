@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -46,7 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = DomElement.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = DomElement.class, browsers = IE)
 public class XMLDOMElement extends XMLDOMNode {
 
     private XMLDOMNamedNodeMap attributes_;

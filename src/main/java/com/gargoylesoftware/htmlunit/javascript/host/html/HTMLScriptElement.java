@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -51,7 +50,7 @@ public class HTMLScriptElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLScriptElement() {
     }
 
@@ -138,7 +137,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Returns the event handler that fires on every state change.
      * @return the event handler that fires on every state change
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public Object getOnreadystatechange() {
         return getEventHandlerProp("onreadystatechange");
     }
@@ -147,7 +146,7 @@ public class HTMLScriptElement extends HTMLElement {
      * Sets the event handler that fires on every state change.
      * @param handler the event handler that fires on every state change
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setOnreadystatechange(final Object handler) {
         setEventHandlerProp("onreadystatechange", handler);
     }
@@ -179,7 +178,7 @@ public class HTMLScriptElement extends HTMLElement {
      * @see DomNode#READY_STATE_INTERACTIVE
      * @see DomNode#READY_STATE_COMPLETE
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public Object getReadyState() {
         final HtmlScript tmpScript = (HtmlScript) getDomNodeOrDie();
         if (tmpScript.wasCreatedByJavascript()) {

@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMComment.<br>
@@ -29,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomComment.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = DomComment.class, browsers = IE)
 public final class XMLDOMComment extends XMLDOMCharacterData {
 
     /**

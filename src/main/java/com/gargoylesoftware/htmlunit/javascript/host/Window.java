@@ -20,10 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -97,7 +97,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
@@ -156,11 +155,11 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     private static final Log LOG = LogFactory.getLog(Window.class);
 
     /** To be documented. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant(CHROME)
     public static final short TEMPORARY = 0;
 
     /** To be documented. */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant(CHROME)
     public static final short PERSISTENT = 1;
 
     /**
@@ -214,7 +213,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
         throw ScriptRuntime.typeError("Illegal constructor");
@@ -367,7 +366,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the current event.
      * @return the current event, or {@code null} if no event is currently available
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxGetter({IE, CHROME})
     public Object getEvent() {
         return currentEvent_;
     }
@@ -548,7 +547,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxGetter({IE, CHROME})
     public Navigator getClientInformation() {
         return navigator_;
     }
@@ -557,7 +556,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the JavaScript property {@code clipboardData}.
      * @return the {@link DataTransfer}
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public DataTransfer getClipboardData() {
         final DataTransfer dataTransfer = new DataTransfer();
         dataTransfer.setParentScope(this);
@@ -660,7 +659,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Prints messages to the {@code console}.
      * @param message the message to log
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction(FF)
     public void dump(final String message) {
         if (console_ instanceof Console) {
             Console.log(null, console_, new Object[] {message}, null);
@@ -1002,7 +1001,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void navigate(final String url) throws IOException {
         getLocation().assign(url);
     }
@@ -1059,7 +1058,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Scrolls the window content down by the specified number of lines.
      * @param lines the number of lines to scroll down
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction(FF)
     public void scrollByLines(final int lines) {
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
@@ -1071,7 +1070,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Scrolls the window content down by the specified number of pages.
      * @param pages the number of pages to scroll down
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction(FF)
     public void scrollByPages(final int pages) {
         final HTMLElement body = ((HTMLDocument) document_).getBody();
         if (body != null) {
@@ -1581,7 +1580,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     /**
      * An undocumented IE function.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void CollectGarbage() {
         // Empty.
     }
@@ -1679,7 +1678,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @JsxFunction({@WebBrowser(IE), @WebBrowser(FF)})
+    @JsxFunction({IE, FF})
     public Object showModalDialog(final String url, final Object arguments, final String features) {
         final WebWindow webWindow = getWebWindow();
         final WebClient client = webWindow.getWebClient();
@@ -1706,7 +1705,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @return a reference to the new window object created for the modeless dialog
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object showModelessDialog(final String url, final Object arguments, final String features) {
         final WebWindow webWindow = getWebWindow();
         final WebClient client = webWindow.getWebClient();
@@ -1727,7 +1726,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
      * @return some object
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Object getControllers() {
         return controllers_;
     }
@@ -1736,7 +1735,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code controllers}.
      * @param value the new value
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setControllers(final Object value) {
         controllers_ = value;
     }
@@ -1745,7 +1744,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of {@code mozInnerScreenX} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getMozInnerScreenX() {
         return 11;
     }
@@ -1754,7 +1753,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code mozInnerScreenY} property.
      * @return the value of {@code mozInnerScreenY} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getMozInnerScreenY() {
         return 91;
     }
@@ -1763,7 +1762,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code mozPaintCount} property.
      * @return the value of {@code mozPaintCount} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getMozPaintCount() {
         return 0;
     }
@@ -1932,7 +1931,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
      * @return "JScript"
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public String ScriptEngine() {
         return "JScript";
     }
@@ -1942,7 +1941,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
      * @return the build version
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public int ScriptEngineBuildVersion() {
         return 12345;
     }
@@ -1952,7 +1951,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
      * @return the major version
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public int ScriptEngineMajorVersion() {
         return getBrowserVersion().getBrowserVersionNumeric();
     }
@@ -1962,7 +1961,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
      * @return the minor version
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public int ScriptEngineMinorVersion() {
         return 0;
     }
@@ -1972,7 +1971,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * (currently empty implementation)
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxFunction({CHROME, FF})
     public void stop() {
         //empty
     }
@@ -1999,7 +1998,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code scrollX} property.
      * @return the value of {@code scrollX} property
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public int getScrollX() {
         return 0;
     }
@@ -2008,7 +2007,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code scrollY} property.
      * @return the value of {@code scrollY} property
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public int getScrollY() {
         return 0;
     }
@@ -2017,7 +2016,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code netscape} property.
      * @return the value of {@code netscape} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Netscape getNetscape() {
         return new Netscape(this);
     }
@@ -2182,7 +2181,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code styleMedia} property.
      * @return the {@code styleMedia} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public StyleMedia getStyleMedia() {
         final StyleMedia styleMedia = new StyleMedia();
         styleMedia.setParentScope(this);
@@ -2215,7 +2214,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxFunction({CHROME, FF})
     public boolean find(final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -2226,7 +2225,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code speechSynthesis} property.
      * @return the {@code speechSynthesis} property
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public SpeechSynthesis getSpeechSynthesis() {
         final SpeechSynthesis speechSynthesis = new SpeechSynthesis();
         speechSynthesis.setParentScope(this);
@@ -2238,7 +2237,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code offscreenBuffering} property.
      * @return the {@code offscreenBuffering} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public Object getOffscreenBuffering() {
         if (getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
             return "auto";
@@ -2250,7 +2249,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code crypto} property.
      * @return the {@code crypto} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public Crypto getCrypto() {
         if (crypto_ == null) {
             crypto_ = new Crypto(this);

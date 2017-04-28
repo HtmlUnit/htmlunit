@@ -14,26 +14,26 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code DOMSettableTokenList}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(value = FF, maxVersion = 45), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = {FF45, IE, EDGE})
 public class DOMSettableTokenList extends DOMTokenList {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({FF, EDGE})
     public DOMSettableTokenList() {
     }
 }

@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import org.w3c.css.sac.CSSException;
 
@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -48,7 +47,7 @@ public class DocumentFragment extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public DocumentFragment() {
     }
 
@@ -58,7 +57,7 @@ public class DocumentFragment extends Node {
      * @param attributeName the name of the attribute to create
      * @return an attribute with the specified name
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object createAttribute(final String attributeName) {
         return getDocument().createAttribute(attributeName);
     }
@@ -76,7 +75,7 @@ public class DocumentFragment extends Node {
      * @param comment the comment text
      * @return the new Comment
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object createComment(final String comment) {
         return getDocument().createComment(comment);
     }
@@ -85,7 +84,7 @@ public class DocumentFragment extends Node {
      * Creates a new document fragment.
      * @return a newly created document fragment
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object createDocumentFragment() {
         return getDocument().createDocumentFragment();
     }
@@ -96,7 +95,7 @@ public class DocumentFragment extends Node {
      * @param newData the string value for the text node
      * @return the new text node or NOT_FOUND if there is an error
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object createTextNode(final String newData) {
         return getDocument().createTextNode(newData);
     }

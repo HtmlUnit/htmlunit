@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF45;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
 /**
@@ -26,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(value = FF, maxVersion = 45))
+@JsxClass(browsers = FF45)
 public class SVGDocument extends Document {
 
     /**

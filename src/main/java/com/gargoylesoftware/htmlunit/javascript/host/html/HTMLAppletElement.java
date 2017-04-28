@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.applet.Applet;
 import java.lang.reflect.Method;
@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -42,13 +41,13 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlApplet.class, browsers = {@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(domClass = HtmlApplet.class, browsers = {FF, IE, EDGE})
 public class HTMLAppletElement extends HTMLElement {
 
     /**
      * The constructor.
      */
-    @JsxConstructor({@WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({FF, EDGE})
     public HTMLAppletElement() {
     }
 
@@ -129,7 +128,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Gets the {@code border} attribute.
      * @return the {@code border} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorder() {
         final String border = getDomNodeOrDie().getAttribute("border");
         return border;
@@ -139,7 +138,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the {@code border} attribute.
      * @param border the {@code border} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -166,7 +165,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getClassid() {
         return getDomNodeOrDie().getAttribute("classid");
     }
@@ -175,7 +174,7 @@ public class HTMLAppletElement extends HTMLElement {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         // see HTMLObjectElement.setClassid

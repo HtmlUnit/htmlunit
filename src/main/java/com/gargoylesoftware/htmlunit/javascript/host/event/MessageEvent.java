@@ -15,16 +15,15 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMESSAGE_DEFAULT_DATA_NULL;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 
@@ -79,7 +78,7 @@ public class MessageEvent extends Event {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
@@ -127,7 +126,7 @@ public class MessageEvent extends Event {
      * @param source the window object that contains the document that caused the event
      * @param ports the message ports
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF)})
+    @JsxFunction({CHROME, IE, FF})
     public void initMessageEvent(
             final String type,
             final boolean canBubble,
@@ -175,7 +174,7 @@ public class MessageEvent extends Event {
      * Retrieves the identifier of the last event.
      * @return the identified of the last event
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public String getLastEventId() {
         return lastEventId_;
     }
@@ -193,7 +192,7 @@ public class MessageEvent extends Event {
      * Returns the {@code ports} property.
      * @return the {@code ports} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(FF)})
+    @JsxGetter({CHROME, IE, FF})
     public Object getPorts() {
         return ports_;
     }

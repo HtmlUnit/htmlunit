@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -45,27 +44,27 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
-@JsxClass(className = "OfflineResourceList", browsers = @WebBrowser(FF))
+@JsxClass(browsers = {CHROME, IE, EDGE})
+@JsxClass(className = "OfflineResourceList", browsers = FF)
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxConstant({CHROME, IE})
     public static final short OBSOLETE = 5;
 
     private short status_ = UNCACHED;
@@ -73,7 +72,7 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public ApplicationCache() {
     }
 

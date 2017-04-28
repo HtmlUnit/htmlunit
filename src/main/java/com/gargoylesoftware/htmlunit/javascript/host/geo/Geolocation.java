@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -51,8 +50,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(IE), @WebBrowser(EDGE)})
-@JsxClass(isJSObject = false, browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
+@JsxClass(browsers = {IE, EDGE})
+@JsxClass(isJSObject = false, browsers = {FF, CHROME})
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
@@ -67,7 +66,7 @@ public class Geolocation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor(EDGE)
     public Geolocation() {
     }
 

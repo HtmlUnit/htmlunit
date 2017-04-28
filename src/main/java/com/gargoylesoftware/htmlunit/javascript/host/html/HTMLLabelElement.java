@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_NULL;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code HTMLLabelElement}.
@@ -43,7 +42,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLLabelElement() {
     }
 
@@ -69,7 +68,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * @return the HTMLElement to which the given label object is assigned
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public HTMLElement getControl() {
         final String id = getHtmlFor();
         if (StringUtils.isBlank(id)) {

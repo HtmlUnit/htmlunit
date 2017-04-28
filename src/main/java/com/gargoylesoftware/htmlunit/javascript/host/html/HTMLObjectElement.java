@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_OBJECT_CLASSID;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.applet.Applet;
 import java.lang.reflect.Method;
@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObjectImpl;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -59,7 +58,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLObjectElement() {
     }
 
@@ -121,7 +120,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Returns the value of the {@code alt} property.
      * @return the value of the {@code alt} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getAlt() {
         final String alt = getDomNodeOrDie().getAttribute("alt");
         return alt;
@@ -131,7 +130,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Returns the value of the {@code alt} property.
      * @param alt the value
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setAlt(final String alt) {
         getDomNodeOrDie().setAttribute("alt", alt);
     }
@@ -159,7 +158,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Gets the {@code classid} attribute.
      * @return the {@code classid} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getClassid() {
         final String classid = getDomNodeOrDie().getAttribute("classid");
         return classid;
@@ -169,7 +168,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      * Sets the {@code classid} attribute.
      * @param classid the {@code classid} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setClassid(final String classid) {
         getDomNodeOrDie().setAttribute("classid", classid);
         if (classid.indexOf(':') != -1 && getBrowserVersion().hasFeature(HTML_OBJECT_CLASSID)) {

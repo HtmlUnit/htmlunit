@@ -21,10 +21,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_D
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -74,7 +74,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
@@ -202,7 +201,7 @@ public class Document extends EventNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public Document() {
     }
 
@@ -301,7 +300,7 @@ public class Document extends EventNode {
      * Returns a value which indicates whether or not the document can be edited.
      * @return a value which indicates whether or not the document can be edited
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxGetter({FF, IE})
     public String getDesignMode() {
         if (designMode_ == null) {
             if (getBrowserVersion().hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT)) {
@@ -318,7 +317,7 @@ public class Document extends EventNode {
      * Sets a value which indicates whether or not the document can be edited.
      * @param mode a value which indicates whether or not the document can be edited
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxSetter({FF, IE})
     public void setDesignMode(final String mode) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final boolean inherit = browserVersion.hasFeature(JS_DOCUMENT_DESIGN_MODE_INHERIT);
@@ -453,7 +452,7 @@ public class Document extends EventNode {
      * @return an XPathNSResolver which resolves namespaces with respect to the definitions
      *         in scope for a specified node
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public XPathNSResolver createNSResolver(final Node nodeResolver) {
         final XPathNSResolver resolver = new XPathNSResolver();
         resolver.setElement(nodeResolver);
@@ -513,7 +512,7 @@ public class Document extends EventNode {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult xPathResult = (XPathResult) result;
@@ -716,7 +715,7 @@ public class Document extends EventNode {
      * Gets the default character set from the current regional language settings.
      * @return the default character set from the current regional language settings
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getDefaultCharset() {
         return "windows-1252";
     }
@@ -728,7 +727,7 @@ public class Document extends EventNode {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public Object getAnchors() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
@@ -765,7 +764,7 @@ public class Document extends EventNode {
      * Gecko DOM reference</a>
      * @return the value of this property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public Object getApplets() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -779,7 +778,7 @@ public class Document extends EventNode {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         final Page page = getPage();
@@ -820,7 +819,7 @@ public class Document extends EventNode {
      * Returns the {@code documentMode} property.
      * @return the {@code documentMode} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getDocumentMode() {
         if (documentMode_ != -1) {
             return documentMode_;
@@ -977,7 +976,7 @@ public class Document extends EventNode {
      * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
      * @return an auto-generated, unique identifier for the object
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
             uniqueID_ = "ms__id" + UniqueID_Counter_++;
@@ -998,7 +997,7 @@ public class Document extends EventNode {
      * Returns the value of the {@code URLUnencoded} property.
      * @return the value of the {@code URLUnencoded} property
      */
-    @JsxGetter(value = @WebBrowser(IE), propertyName = "URLUnencoded")
+    @JsxGetter(value = IE, propertyName = "URLUnencoded")
     public String getURLUnencoded() {
         return getURL();
     }

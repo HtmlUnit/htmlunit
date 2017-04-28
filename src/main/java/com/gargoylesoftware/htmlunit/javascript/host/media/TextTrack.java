@@ -14,15 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -34,31 +33,31 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 public class TextTrack extends EventTarget {
 
     /** Constant for {@code NONE}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int NONE = 0;
     /** Constant for {@code LOADING}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int LOADING = 1;
     /** Constant for {@code LOADED}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int LOADED = 2;
     /** Constant for {@code ERROR}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int ERROR = 3;
     /** Constant for {@code DISABLED}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int DISABLED = 0;
     /** Constant for {@code HIDDEN}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int HIDDEN = 1;
     /** Constant for {@code SHOWING}. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final int SHOWING = 2;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public TextTrack() {
     }
 

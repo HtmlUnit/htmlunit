@@ -14,17 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code MouseWheelEvent}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass(browsers = IE)
 public class MouseWheelEvent extends UIEvent {
 
 }

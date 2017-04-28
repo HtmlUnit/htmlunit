@@ -20,9 +20,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -48,7 +48,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -221,7 +220,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the value of the rev property.
      * @return the referrerPolicy property
      */
-    @Getter(@WebBrowser(CHROME))
+    @Getter(CHROME)
     public String getReferrerPolicy() {
         String attrib = ((HtmlAnchor) getDomNodeOrDie()).getAttribute("referrerPolicy");
         if (StringUtils.isEmpty(attrib)) {
@@ -238,7 +237,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the rev property.
      * @param referrerPolicy referrerPolicy attribute value
      */
-    @Setter(@WebBrowser(CHROME))
+    @Setter(CHROME)
     public void setReferrerPolicy(final String referrerPolicy) {
         getDomNodeOrDie().setAttribute("referrerPolicy", referrerPolicy);
     }
@@ -621,7 +620,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code origin} attribute.
      * @return the {@code origin} attribute
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Getter({CHROME, FF})
     public String getOrigin() {
         if (!getDomNodeOrDie().hasAttribute("href")) {
             return "";
@@ -639,7 +638,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code origin} attribute.
      * @param origin {@code origin} attribute
      */
-    @Setter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Setter({CHROME, FF})
     public void setOrigin(final String origin) {
         // ignore
     }
@@ -648,7 +647,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code username} attribute.
      * @return the {@code username} attribute
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Getter({CHROME, FF})
     public String getUsername() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -657,7 +656,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code username} attribute.
      * @param username {@code username} attribute
      */
-    @Setter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Setter({CHROME, FF})
     public void setUsername(final String username) {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -666,7 +665,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code password} attribute.
      * @return the {@code password} attribute
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Getter({CHROME, FF})
     public String getPassword() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -675,7 +674,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code password} attribute.
      * @param password {@code password} attribute
      */
-    @Setter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Setter({CHROME, FF})
     public void setPassword(final String password) {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -684,7 +683,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code download} attribute.
      * @return the {@code download} attribute
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Getter({CHROME, FF})
     public String getDownload() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -693,7 +692,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code download} attribute.
      * @param download {@code download} attribute
      */
-    @Setter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Setter({CHROME, FF})
     public void setDownload(final String download) {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -702,7 +701,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code ping} attribute.
      * @return the {@code ping} attribute
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Getter({CHROME, FF})
     public String getPing() {
         return ((HtmlAnchor) getDomNodeOrDie()).getPingAttribute();
     }
@@ -711,7 +710,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code ping} attribute.
      * @param ping {@code ping} attribute
      */
-    @Setter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Setter({CHROME, FF})
     public void setPing(final String ping) {
         getDomNodeOrDie().setAttribute("ping", ping);
     }
@@ -756,7 +755,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public DOMTokenList getRelList() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -765,7 +764,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code protocolLong} attribute.
      * @return the {@code protocolLong} attribute
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public String getProtocolLong() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -774,7 +773,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code Methods} attribute.
      * @return the {@code Methods} attribute
      */
-    @Getter(name = "Methods", value = @WebBrowser(IE))
+    @Getter(name = "Methods", value = IE)
     public String getMethods() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -783,7 +782,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code Methods} attribute.
      * @param methods {@code Methods} attribute
      */
-    @Setter(name = "Methods", value = @WebBrowser(IE))
+    @Setter(name = "Methods", value = IE)
     public void setMethods(final String methods) {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -792,7 +791,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code mimeType} attribute.
      * @return the {@code mimeType} attribute
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public String getMimeType() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -801,7 +800,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code mimeType} attribute.
      * @param mimeType {@code mimeType} attribute
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setMimeType(final String mimeType) {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -810,7 +809,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code nameProp} attribute.
      * @return the {@code nameProp} attribute
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public String getNameProp() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -819,7 +818,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Returns the {@code urn} attribute.
      * @return the {@code urn} attribute
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public String getUrn() {
         throw new RuntimeException(new UnsupportedOperationException());
     }
@@ -828,7 +827,7 @@ public class HTMLAnchorElement2 extends HTMLElement2 {
      * Sets the {@code urn} attribute.
      * @param urn {@code urn} attribute
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setUrn(final String urn) {
         throw new RuntimeException(new UnsupportedOperationException());
     }

@@ -15,10 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILE_SHORT_DATE_FORMAT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.Date;
 import java.util.Locale;
@@ -30,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code File}.
@@ -47,7 +47,7 @@ public class File extends Blob {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public File() {
     }
 
@@ -87,7 +87,7 @@ public class File extends Blob {
      * Returns the {@code lastModified} property.
      * @return the {@code lastModified} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public long getLastModified() {
         return file_.lastModified();
     }
@@ -96,7 +96,7 @@ public class File extends Blob {
      * Returns the {@code webkitRelativePath} property.
      * @return the {@code webkitRelativePath} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxGetter({CHROME, FF52})
     public String getWebkitRelativePath() {
         return "";
     }
@@ -129,7 +129,7 @@ public class File extends Blob {
     /**
      * Closes the file.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void msClose() {
     }
 

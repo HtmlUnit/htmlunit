@@ -14,28 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code CSSGroupingRule}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
-@JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
+@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass(isJSObject = false, browsers = IE)
 public class CSSGroupingRule extends CSSRule {
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, EDGE})
     public CSSGroupingRule() {
     }
 

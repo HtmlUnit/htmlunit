@@ -14,16 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -39,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = {CHROME, IE, EDGE})
 public class PointerEvent extends MouseEvent {
 
     private int pointerId_;
@@ -65,7 +64,7 @@ public class PointerEvent extends MouseEvent {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, EDGE})
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {

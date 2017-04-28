@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -53,7 +52,7 @@ public class HTMLTableSectionElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLTableSectionElement() {
     }
 
@@ -131,7 +130,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @return the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBgColor() {
         return getDomNodeOrDie().getAttribute("bgColor");
     }
@@ -141,7 +140,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param bgColor the value of the {@code bgColor} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
     }
@@ -162,7 +161,7 @@ public class HTMLTableSectionElement extends RowContainer {
      * @param value the new value for the contents of this node
      */
     @Override
-    @JsxSetter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxSetter({IE, CHROME})
     public void setInnerText(final Object value) {
         super.setInnerText(value);
     }

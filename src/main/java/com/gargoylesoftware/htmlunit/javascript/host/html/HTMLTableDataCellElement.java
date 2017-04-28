@@ -14,26 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableDataCell;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object representing a TD.
  *
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlTableDataCell.class, browsers = {@WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(domClass = HtmlTableDataCell.class, browsers = {IE, EDGE})
 public class HTMLTableDataCellElement extends HTMLTableCellElement {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor(EDGE)
     public HTMLTableDataCellElement() {
     }
 }

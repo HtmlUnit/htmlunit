@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -38,10 +38,10 @@ public @interface BrowserFeature {
      * @return the {@link WebBrowser}s
      */
     WebBrowser[] value() default {
-        @WebBrowser(IE),
-        @WebBrowser(FF),
-        @WebBrowser(CHROME),
-        @WebBrowser(EDGE)
+        CHROME,
+        FF,
+        IE,
+        EDGE
     };
 }
 

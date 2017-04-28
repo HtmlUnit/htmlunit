@@ -14,18 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlIsIndex;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLIsIndexElement}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlIsIndex.class, browsers = {@WebBrowser(IE)})
+@JsxClass(domClass = HtmlIsIndex.class, browsers = {IE})
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

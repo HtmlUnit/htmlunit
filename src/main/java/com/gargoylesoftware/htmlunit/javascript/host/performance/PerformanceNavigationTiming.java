@@ -14,26 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.performance;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code PerformanceNavigationTiming}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(IE)})
+@JsxClass(browsers = {CHROME, IE})
 public class PerformanceNavigationTiming extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor(@WebBrowser(CHROME))
+    @JsxConstructor(CHROME)
     public PerformanceNavigationTiming() {
     }
 }

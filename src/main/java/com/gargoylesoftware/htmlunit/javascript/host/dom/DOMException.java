@@ -14,17 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -115,10 +114,10 @@ public class DOMException extends SimpleScriptable {
     @JsxConstant
     public static final short DATA_CLONE_ERR = 25;
     /** Parse error. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final short PARSE_ERR = 81;
     /** Serialize error. */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final short SERIALIZE_ERR = 82;
 
     private final short code_;
@@ -129,7 +128,7 @@ public class DOMException extends SimpleScriptable {
     /**
      * Default constructor used to build the prototype.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public DOMException() {
         code_ = -1;
         message_ = null;
@@ -173,7 +172,7 @@ public class DOMException extends SimpleScriptable {
      * Gets the line at which the exception occurred.
      * @return the line of the exception
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Object getLineNumber() {
         if (lineNumber_ == -1) {
             return Undefined.instance;
@@ -185,7 +184,7 @@ public class DOMException extends SimpleScriptable {
      * Gets the name of the in which the exception occurred.
      * @return the name of the source file
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public Object getFilename() {
         if (fileName_ == null) {
             return Undefined.instance;

@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLDDElement}.
@@ -28,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = IE)
 public class HTMLDDElement extends HTMLElement {
 
     /**
@@ -36,7 +35,7 @@ public class HTMLDDElement extends HTMLElement {
      * @return the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isNoWrap() {
         return getDomNodeOrDie().hasAttribute("noWrap");
     }
@@ -46,7 +45,7 @@ public class HTMLDDElement extends HTMLElement {
      * @param noWrap the value of the {@code noWrap} attribute
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534196.aspx">MSDN Documentation</a>
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setNoWrap(final boolean noWrap) {
         if (noWrap) {
             getDomNodeOrDie().setAttribute("noWrap", "");

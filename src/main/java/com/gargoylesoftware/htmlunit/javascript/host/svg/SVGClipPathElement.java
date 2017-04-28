@@ -14,15 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
 
 /**
@@ -34,19 +33,19 @@ import com.gargoylesoftware.htmlunit.svg.SvgClipPath;
 public class SVGClipPathElement extends SVGElement {
 
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxConstant({FF, IE})
     public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
     /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxConstant({FF, IE})
     public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
     /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxConstant({FF, IE})
     public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public SVGClipPathElement() {
     }
 }

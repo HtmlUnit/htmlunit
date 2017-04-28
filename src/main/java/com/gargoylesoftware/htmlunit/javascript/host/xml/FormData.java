@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
@@ -99,7 +98,7 @@ public class FormData extends SimpleScriptable {
      * Removes the entry (if exists).
      * @param name the name of the field to remove
      */
-    @JsxFunction(functionName = "delete", value = {@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction(functionName = "delete", value = {FF, CHROME})
     public void delete_js(final String name) {
         if (StringUtils.isEmpty(name)) {
             return;
@@ -118,7 +117,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public String get(final String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
@@ -138,7 +137,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmpty(name)) {
             return Context.getCurrentContext().newArray(this, 0);
@@ -161,7 +160,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return true if the name exists
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public boolean has(final String name) {
         if (StringUtils.isEmpty(name)) {
             return false;
@@ -184,7 +183,7 @@ public class FormData extends SimpleScriptable {
      * @param value the field's value
      * @param filename the filename reported to the server (optional)
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public void set(final String name, final Object value, final Object filename) {
         if (StringUtils.isEmpty(name)) {
             return;

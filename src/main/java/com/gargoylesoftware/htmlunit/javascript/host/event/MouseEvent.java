@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.util.LinkedList;
 
@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -45,25 +44,25 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class MouseEvent extends UIEvent {
 
     /** Constant for {@code MOZ_SOURCE_UNKNOWN}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_UNKNOWN = 0;
     /** Constant for {@code MOZ_SOURCE_MOUSE}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_MOUSE = 1;
     /** Constant for {@code MOZ_SOURCE_PEN}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_PEN = 2;
     /** Constant for {@code MOZ_SOURCE_ERASER}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_ERASER = 3;
     /** Constant for {@code MOZ_SOURCE_CURSOR}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_CURSOR = 4;
     /** Constant for {@code MOZ_SOURCE_TOUCH}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_TOUCH = 5;
     /** Constant for {@code MOZ_SOURCE_KEYBOARD}. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int MOZ_SOURCE_KEYBOARD = 6;
 
     /** The click event type, triggered by {@code onclick} event handlers. */
@@ -111,7 +110,7 @@ public class MouseEvent extends UIEvent {
     /**
      * Used to build the prototype.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public MouseEvent() {
         screenX_ = Integer.valueOf(0);
         screenY_ = Integer.valueOf(0);
@@ -191,7 +190,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #getScreenX()})
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageX">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getPageX() {
         return getScreenX();
     }
@@ -238,7 +237,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #getScreenY()})
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageY">Mozilla doc</a>
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getPageY() {
         return getScreenY();
     }

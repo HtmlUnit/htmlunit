@@ -14,17 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code Screen}.
@@ -45,7 +44,7 @@ public class Screen extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public Screen() {
     }
 
@@ -71,7 +70,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public int getAvailLeft() {
         return 0;
     }
@@ -80,7 +79,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxSetter({FF, CHROME})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -89,7 +88,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public int getAvailTop() {
         return 0;
     }
@@ -98,7 +97,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxSetter({FF, CHROME})
     public void setAvailTop(final int availTop) {
         // ignore
     }
@@ -125,7 +124,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code bufferDepth} property.
      * @return the {@code bufferDepth} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getBufferDepth() {
         return 0;
     }
@@ -134,7 +133,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code bufferDepth} property.
      * @param bufferDepth the {@code bufferDepth} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBufferDepth(final int bufferDepth) {
         // ignore
     }
@@ -161,7 +160,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code deviceXDPI} property.
      * @return the {@code deviceXDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getDeviceXDPI() {
         return 96;
     }
@@ -170,7 +169,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code deviceXDPI} property.
      * @param deviceXDPI the {@code deviceXDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setDeviceXDPI(final int deviceXDPI) {
         // ignore
     }
@@ -179,7 +178,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code deviceYDPI} property.
      * @return the {@code deviceYDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getDeviceYDPI() {
         return 96;
     }
@@ -188,7 +187,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code deviceYDPI} property.
      * @param deviceYDPI the {@code deviceYDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setDeviceYDPI(final int deviceYDPI) {
         // ignore
     }
@@ -197,7 +196,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code fontSmoothingEnabled} property.
      * @return the {@code fontSmoothingEnabled} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isFontSmoothingEnabled() {
         return true;
     }
@@ -206,7 +205,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code fontSmoothingEnabled} property.
      * @param fontSmoothingEnabled the {@code fontSmoothingEnabled} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setFontSmoothingEnabled(final boolean fontSmoothingEnabled) {
         // ignore
     }
@@ -233,7 +232,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code left} property.
      * @return the {@code left} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getLeft() {
         return 0;
     }
@@ -242,7 +241,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code left} property.
      * @param left the {@code left} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setLeft(final int left) {
         // ignore
     }
@@ -251,7 +250,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code logicalXDPI} property.
      * @return the {@code logicalXDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getLogicalXDPI() {
         return 96;
     }
@@ -260,7 +259,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code logicalXDPI} property.
      * @param logicalXDPI the {@code logicalXDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setLogicalXDPI(final int logicalXDPI) {
         // ignore
     }
@@ -269,7 +268,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code logicalYDPI} property.
      * @return the {@code logicalYDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getLogicalYDPI() {
         return 96;
     }
@@ -278,7 +277,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code logicalYDPI} property.
      * @param logicalYDPI the {@code logicalYDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setLogicalYDPI(final int logicalYDPI) {
         // ignore
     }
@@ -305,7 +304,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code systemXDPI} property.
      * @return the {@code systemXDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getSystemXDPI() {
         return 96;
     }
@@ -314,7 +313,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code systemXDPI} property.
      * @param systemXDPI the {@code systemXDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setSystemXDPI(final int systemXDPI) {
         // ignore
     }
@@ -323,7 +322,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code systemYDPI} property.
      * @return the {@code systemYDPI} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getSystemYDPI() {
         return 96;
     }
@@ -332,7 +331,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code systemYDPI} property.
      * @param systemYDPI the {@code systemYDPI} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setSystemYDPI(final int systemYDPI) {
         // ignore
     }
@@ -341,7 +340,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code top} property.
      * @return the {@code top} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getTop() {
         return 0;
     }
@@ -350,7 +349,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code top} property.
      * @param top the {@code top} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setTop(final int top) {
         // ignore
     }

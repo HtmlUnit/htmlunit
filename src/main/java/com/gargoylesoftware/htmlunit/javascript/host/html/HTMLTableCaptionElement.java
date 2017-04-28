@@ -15,17 +15,16 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_ALIGN_INVALID;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlCaption;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -47,7 +46,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLTableCaptionElement() {
     }
 
@@ -74,7 +73,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Returns the value of the {@code vAlign} property.
      * @return the value of the {@code vAlign} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getVAlign() {
         return getVAlign(VALIGN_VALID_VALUES_IE, VALIGN_DEFAULT_VALUE);
     }
@@ -83,7 +82,7 @@ public class HTMLTableCaptionElement extends HTMLElement {
      * Sets the value of the {@code vAlign} property.
      * @param vAlign the value of the {@code vAlign} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setVAlign(final Object vAlign) {
         setVAlign(vAlign, VALIGN_VALID_VALUES_IE);
     }

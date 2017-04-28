@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 
 /**
  * A node which supports all of the <tt>onXXX</tt> event handlers and other event-related functions.
@@ -107,7 +106,7 @@ public class EventNode2 extends Node2 {
      * Sets the {@code onfocusin} event handler for this element.
      * @param handler the {@code onfocusin} event handler for this element
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setOnfocusin(final Object handler) {
         setEventHandlerProp("onfocusin", handler);
     }
@@ -116,7 +115,7 @@ public class EventNode2 extends Node2 {
      * Returns the {@code onfocusin} event handler for this element.
      * @return the {@code onfocusin} event handler for this element
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getOnfocusin() {
         return getEventHandlerProp("onfocusin");
     }
@@ -125,7 +124,7 @@ public class EventNode2 extends Node2 {
      * Sets the {@code onfocusout} event handler for this element.
      * @param handler the {@code onfocusout} event handler for this element
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setOnfocusout(final Object handler) {
         setEventHandlerProp("onfocusout", handler);
     }
@@ -134,7 +133,7 @@ public class EventNode2 extends Node2 {
      * Returns the {@code onfocusout} event handler for this element.
      * @return the {@code onfocusout} event handler for this element
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getOnfocusout() {
         return getEventHandlerProp("onfocusout");
     }
@@ -323,7 +322,7 @@ public class EventNode2 extends Node2 {
      * Sets the {@code onpropertychange} event handler for this element.
      * @param handler the {@code onpropertychange} event handler for this element
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setOnpropertychange(final Object handler) {
         setEventHandlerProp("onpropertychange", handler);
     }
@@ -332,7 +331,7 @@ public class EventNode2 extends Node2 {
      * Returns the {@code onpropertychange} event handler for this element.
      * @return the {@code onpropertychange} event handler for this element
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public Object getOnpropertychange() {
         return getEventHandlerProp("onpropertychange");
     }

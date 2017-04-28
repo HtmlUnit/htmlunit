@@ -24,10 +24,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -83,7 +82,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLInputElement() {
     }
 
@@ -304,7 +303,7 @@ public class HTMLInputElement extends FormField {
      * Gets the value of {@code textLength} attribute.
      * @return the text length
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public int getTextLength() {
         return getValue().length();
     }
@@ -424,7 +423,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code minLength}.
      * @return the {@code minLength}
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
         return NumberUtils.toInt(attrValue, -1);
@@ -434,7 +433,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
-    @JsxSetter(@WebBrowser(CHROME))
+    @JsxSetter(CHROME)
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
     }
@@ -526,7 +525,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code border} attribute.
      * @return the {@code border} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorder() {
         return getDomNodeOrDie().getAttribute("border");
     }
@@ -535,7 +534,7 @@ public class HTMLInputElement extends FormField {
      * Sets the {@code border} attribute.
      * @param border the {@code border} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorder(final String border) {
         getDomNodeOrDie().setAttribute("border", border);
     }
@@ -809,7 +808,7 @@ public class HTMLInputElement extends FormField {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
@@ -830,7 +829,7 @@ public class HTMLInputElement extends FormField {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public TextRange createTextRange() {
         return super.createTextRange();
     }

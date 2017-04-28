@@ -14,20 +14,19 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPicture;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLPictureElement}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlPicture.class, browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
+@JsxClass(domClass = HtmlPicture.class, browsers = {CHROME, FF})
 public class HTMLPictureElement extends HTMLElement {
 
     /**

@@ -14,19 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code AppBannerPromptResult}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = CHROME)
 public class AppBannerPromptResult extends SimpleScriptable {
 
     /**

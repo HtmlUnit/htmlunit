@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_LOWERCASE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -44,7 +43,7 @@ public class CSSStyleRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, EDGE})
     public CSSStyleRule() {
     }
 
@@ -105,7 +104,7 @@ public class CSSStyleRule extends CSSRule {
      * Returns the readonly property.
      * @return the readonly value.
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isReadOnly() {
         return false;
     }

@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -64,7 +64,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
@@ -443,7 +442,7 @@ public class Document2 extends EventNode2 {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @Function({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Function({FF, CHROME})
     public XPathResult2 evaluate(final String expression, final Node2 contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult2 xPathResult = (XPathResult2) result;
@@ -508,7 +507,7 @@ public class Document2 extends EventNode2 {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -531,7 +530,7 @@ public class Document2 extends EventNode2 {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

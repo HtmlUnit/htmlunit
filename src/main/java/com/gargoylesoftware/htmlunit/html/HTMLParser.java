@@ -140,8 +140,12 @@ public final class HTMLParser {
      */
     public static void parseFragment(final DomNode parent, final DomNode context, final String source)
         throws SAXException, IOException {
-        final HtmlPage page = (HtmlPage) parent.getPage();
-        final URL url = page.getUrl();
+        final Page page = parent.getPage();
+        if (!(page instanceof HtmlPage)) {
+            return;
+        }
+        final HtmlPage htmlPage = (HtmlPage) page;
+        final URL url = htmlPage.getUrl();
 
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(parent, url, source);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
@@ -164,14 +168,14 @@ public final class HTMLParser {
 
         final XMLInputSource in = new XMLInputSource(null, url.toString(), null, new StringReader(source), null);
 
-        page.registerParsingStart();
-        page.registerSnippetParsingStart();
+        htmlPage.registerParsingStart();
+        htmlPage.registerSnippetParsingStart();
         try {
             domBuilder.parse(in);
         }
         finally {
-            page.registerParsingEnd();
-            page.registerSnippetParsingEnd();
+            htmlPage.registerParsingEnd();
+            htmlPage.registerSnippetParsingEnd();
         }
     }
 

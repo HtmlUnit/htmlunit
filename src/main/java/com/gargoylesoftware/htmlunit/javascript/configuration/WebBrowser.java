@@ -14,35 +14,28 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
- * An annotation to specify a range of browser, e.g. Firefox from version 45 to version 52.
+ * An annotation to specify a browser.
  *
  * @author Ahmed Ashour
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface WebBrowser {
+public enum WebBrowser {
 
-    /**
-     * The browser name.
-     * @return the browser name
-     */
-    BrowserName value();
+    /** Latest version of Chrome. */
+    CHROME,
 
-    /**
-     * The minimum version which supports this feature.
-     * @return the minimum version
-     */
-    int minVersion() default 0;
+    /** Internet Explorer 11. */
+    IE,
 
-    /**
-     * The maximum version which supports this feature.
-     * @return the maximum version
-     */
-    int maxVersion() default Integer.MAX_VALUE;
+    /** Edge. */
+    EDGE,
+
+    /** All versions of Firefox. */
+    FF,
+
+    /** Firefox 45. */
+    FF45,
+
+    /** Firefox 52. */
+    FF52
 }

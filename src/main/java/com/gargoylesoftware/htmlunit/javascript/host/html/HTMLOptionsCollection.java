@@ -22,9 +22,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -62,8 +61,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {@WebBrowser(CHROME), @WebBrowser(FF)})
-@JsxClass(isJSObject = false, browsers = @WebBrowser(IE))
+@JsxClass(browsers = {CHROME, FF})
+@JsxClass(isJSObject = false, browsers = IE)
 public class HTMLOptionsCollection extends SimpleScriptable {
 
     private HtmlSelect htmlSelect_;
@@ -71,7 +70,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxConstructor({CHROME, FF})
     public HTMLOptionsCollection() {
     }
 
@@ -363,7 +362,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
      * Returns the child nodes of the current element.
      * @return the child nodes of the current element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public NodeList getChildNodes() {
         return new NodeList(htmlSelect_, false) {
             @Override

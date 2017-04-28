@@ -17,10 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_BASE_URL_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
@@ -148,7 +148,7 @@ public class Node extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public Node() {
         // Empty.
     }
@@ -373,7 +373,7 @@ public class Node extends EventTarget {
      * Removes the DOM node from its parent.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxFunction({FF, CHROME, EDGE})
     public void remove() {
         getDomNodeOrDie().remove();
     }
@@ -474,7 +474,7 @@ public class Node extends EventTarget {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52), @WebBrowser(IE)})
+    @JsxFunction({CHROME, FF52, IE})
     public boolean isSameNode(final Object other) {
         return other == this;
     }
@@ -591,7 +591,7 @@ public class Node extends EventTarget {
      * @param listener the event listener
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void detachEvent(final String type, final Function listener) {
         removeEventListener(StringUtils.substring(type, 2), listener, false);
     }
@@ -683,7 +683,7 @@ public class Node extends EventTarget {
      * @return the parent element
      * @see #getParentNode()
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxGetter({FF, CHROME})
     public Element getParentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {
@@ -697,7 +697,7 @@ public class Node extends EventTarget {
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/Node.attributes">Gecko DOM Reference</a>
      * @return the attributes of this XML element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public Object getAttributes() {
         return null;
     }
@@ -737,7 +737,7 @@ public class Node extends EventTarget {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getBaseURI() {
         if ("Element".equals(getClass().getSimpleName()) && getBrowserVersion().hasFeature(JS_ELEMENT_BASE_URL_NULL)) {
             return null;

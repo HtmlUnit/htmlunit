@@ -61,9 +61,9 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.awt.Color;
 import java.io.Serializable;
@@ -107,7 +107,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -1808,7 +1807,7 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -1831,7 +1830,7 @@ public class CSSStyleDeclaration2 extends SimpleScriptObject {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

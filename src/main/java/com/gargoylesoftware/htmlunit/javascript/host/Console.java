@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSOLE_HANDLE_WINDOW;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -50,8 +49,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  *
  * @author Andrea Martino
  */
-@JsxClass(isJSObject = false, browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
-@JsxClass(browsers = {@WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(isJSObject = false, browsers = {FF, CHROME})
+@JsxClass(browsers = {IE, EDGE})
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
@@ -62,7 +61,7 @@ public class Console extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(@WebBrowser(EDGE))
+    @JsxConstructor(EDGE)
     public Console() {
     }
 
@@ -278,7 +277,7 @@ public class Console extends SimpleScriptable {
      * Because there is no timeline in HtmlUnit this does nothing.
      * @param label the label
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public void timeStamp(final String label) {
     }
 

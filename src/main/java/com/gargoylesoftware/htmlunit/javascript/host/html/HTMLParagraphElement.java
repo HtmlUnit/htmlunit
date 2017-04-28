@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -46,7 +45,7 @@ public class HTMLParagraphElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLParagraphElement() {
     }
 
@@ -72,7 +71,7 @@ public class HTMLParagraphElement extends HTMLElement {
      * Returns the value of the {@code clear} property.
      * @return the value of the {@code clear} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getClear() {
         final String clear = getDomNodeOrDie().getAttribute("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
@@ -85,7 +84,7 @@ public class HTMLParagraphElement extends HTMLElement {
      * Sets the value of the {@code clear} property.
      * @param clear the value of the {@code clear} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setClear(final String clear) {
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             throw Context.reportRuntimeError("Invalid clear property value: '" + clear + "'.");

@@ -14,19 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDialog;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLDialogElement}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDialog.class, browsers = @WebBrowser(CHROME))
+@JsxClass(domClass = HtmlDialog.class, browsers = CHROME)
 public class HTMLDialogElement extends HTMLElement {
 
     /**

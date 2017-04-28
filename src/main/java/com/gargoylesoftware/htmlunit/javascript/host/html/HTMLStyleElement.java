@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.io.StringReader;
 
@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -47,7 +46,7 @@ public class HTMLStyleElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLStyleElement() {
     }
 
@@ -125,7 +124,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Returns the scoped of this style.
      * @return the scoped
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public boolean isScoped() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.hasAttribute("scoped");
@@ -135,7 +134,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Sets the scoped of this style.
      * @param scoped the new scoped
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setScoped(final boolean scoped) {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         style.setAttribute("scoped", Boolean.toString(scoped));

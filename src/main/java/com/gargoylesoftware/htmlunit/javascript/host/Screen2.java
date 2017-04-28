@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -27,7 +27,6 @@ import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -82,7 +81,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Getter({FF, CHROME})
     public int getAvailLeft() {
         return 0;
     }
@@ -91,7 +90,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @Setter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Setter({FF, CHROME})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -100,7 +99,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Getter({FF, CHROME})
     public int getAvailTop() {
         return 0;
     }
@@ -109,7 +108,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @Setter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Setter({FF, CHROME})
     public void setAvailTop(final int availTop) {
         // ignore
     }
@@ -136,7 +135,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code bufferDepth} property.
      * @return the {@code bufferDepth} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getBufferDepth() {
         return 0;
     }
@@ -145,7 +144,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code bufferDepth} property.
      * @param bufferDepth the {@code bufferDepth} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setBufferDepth(final int bufferDepth) {
         // ignore
     }
@@ -172,7 +171,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code deviceXDPI} property.
      * @return the {@code deviceXDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getDeviceXDPI() {
         return 96;
     }
@@ -181,7 +180,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code deviceXDPI} property.
      * @param deviceXDPI the {@code deviceXDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setDeviceXDPI(final int deviceXDPI) {
         // ignore
     }
@@ -190,7 +189,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code deviceYDPI} property.
      * @return the {@code deviceYDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getDeviceYDPI() {
         return 96;
     }
@@ -199,7 +198,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code deviceYDPI} property.
      * @param deviceYDPI the {@code deviceYDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setDeviceYDPI(final int deviceYDPI) {
         // ignore
     }
@@ -208,7 +207,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code fontSmoothingEnabled} property.
      * @return the {@code fontSmoothingEnabled} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public boolean isFontSmoothingEnabled() {
         return true;
     }
@@ -217,7 +216,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code fontSmoothingEnabled} property.
      * @param fontSmoothingEnabled the {@code fontSmoothingEnabled} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setFontSmoothingEnabled(final boolean fontSmoothingEnabled) {
         // ignore
     }
@@ -244,7 +243,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code left} property.
      * @return the {@code left} property
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public int getLeft() {
         return 0;
     }
@@ -253,7 +252,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code left} property.
      * @param left the {@code left} property
      */
-    @Setter(@WebBrowser(FF))
+    @Setter(FF)
     public void setLeft(final int left) {
         // ignore
     }
@@ -262,7 +261,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code logicalXDPI} property.
      * @return the {@code logicalXDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getLogicalXDPI() {
         return 96;
     }
@@ -271,7 +270,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code logicalXDPI} property.
      * @param logicalXDPI the {@code logicalXDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setLogicalXDPI(final int logicalXDPI) {
         // ignore
     }
@@ -280,7 +279,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code logicalYDPI} property.
      * @return the {@code logicalYDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getLogicalYDPI() {
         return 96;
     }
@@ -289,7 +288,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code logicalYDPI} property.
      * @param logicalYDPI the {@code logicalYDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setLogicalYDPI(final int logicalYDPI) {
         // ignore
     }
@@ -316,7 +315,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code systemXDPI} property.
      * @return the {@code systemXDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getSystemXDPI() {
         return 96;
     }
@@ -325,7 +324,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code systemXDPI} property.
      * @param systemXDPI the {@code systemXDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setSystemXDPI(final int systemXDPI) {
         // ignore
     }
@@ -334,7 +333,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code systemYDPI} property.
      * @return the {@code systemYDPI} property
      */
-    @Getter(@WebBrowser(IE))
+    @Getter(IE)
     public int getSystemYDPI() {
         return 96;
     }
@@ -343,7 +342,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code systemYDPI} property.
      * @param systemYDPI the {@code systemYDPI} property
      */
-    @Setter(@WebBrowser(IE))
+    @Setter(IE)
     public void setSystemYDPI(final int systemYDPI) {
         // ignore
     }
@@ -352,7 +351,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code top} property.
      * @return the {@code top} property
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public int getTop() {
         return 0;
     }
@@ -361,7 +360,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code top} property.
      * @param top the {@code top} property
      */
-    @Setter(@WebBrowser(FF))
+    @Setter(FF)
     public void setTop(final int top) {
         // ignore
     }

@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.lang.reflect.Method;
 import java.util.LinkedList;
@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -138,7 +137,7 @@ public class Event extends SimpleScriptable {
     public static final String TYPE_OPEN = "open";
 
     /** No event phase. */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxConstant({CHROME, FF})
     public static final short NONE = 0;
 
     /** The first event phase: the capturing phase. */
@@ -154,19 +153,19 @@ public class Event extends SimpleScriptable {
     public static final short BUBBLING_PHASE = 3;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final int META_MASK = 0x8;
 
     private Object srcElement_;        // IE-only writable equivalent of target.
@@ -277,7 +276,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -322,7 +321,7 @@ public class Event extends SimpleScriptable {
      * Returns the object that fired the event.
      * @return the object that fired the event
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxGetter({IE, CHROME, EDGE})
     public Object getSrcElement() {
         return srcElement_;
     }
@@ -331,7 +330,7 @@ public class Event extends SimpleScriptable {
      * Sets the object that fired the event.
      * @param srcElement the object that fired the event
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setSrcElement(final Object srcElement) {
         srcElement_ = srcElement;
     }
@@ -527,7 +526,7 @@ public class Event extends SimpleScriptable {
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+    @JsxGetter({FF, IE, EDGE})
     public boolean isDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
@@ -535,7 +534,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return indicates if event propagation is stopped
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isCancelBubble() {
         return stopPropagation_;
     }
@@ -543,7 +542,7 @@ public class Event extends SimpleScriptable {
     /**
      * @param newValue indicates if event propagation is stopped
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setCancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
     }

@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLInlineQuotationElement}.
@@ -29,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, browsers = {@WebBrowser(IE)})
+@JsxClass(domClass = HtmlInlineQuotation.class, browsers = {IE})
 public class HTMLInlineQuotationElement extends HTMLElement {
 
     /**
@@ -63,7 +62,7 @@ public class HTMLInlineQuotationElement extends HTMLElement {
      * Returns the value of the {@code dateTime} property.
      * @return the value of the {@code dateTime} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getDateTime() {
         final String cite = getDomNodeOrDie().getAttribute("datetime");
         return cite;
@@ -73,7 +72,7 @@ public class HTMLInlineQuotationElement extends HTMLElement {
      * Returns the value of the {@code dateTime} property.
      * @param dateTime the value
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setDateTime(final String dateTime) {
         getDomNodeOrDie().setAttribute("datetime", dateTime);
     }

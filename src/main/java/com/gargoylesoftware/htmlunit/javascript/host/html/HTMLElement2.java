@@ -20,9 +20,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -74,7 +74,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
@@ -561,7 +560,7 @@ public class HTMLElement2 extends Element2 {
      * Sets the object as active without setting focus to the object.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536738.aspx">MSDN documentation</a>
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public void setActive() {
         final Window2 window = getWindow();
         final HTMLDocument2 document = (HTMLDocument2) Window2.getDocument(window);
@@ -724,7 +723,7 @@ public class HTMLElement2 extends Element2 {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @Function({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @Function({CHROME, IE})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -751,7 +750,7 @@ public class HTMLElement2 extends Element2 {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @Function({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @Function({CHROME, IE})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
@@ -1259,7 +1258,7 @@ public class HTMLElement2 extends Element2 {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -1282,7 +1281,7 @@ public class HTMLElement2 extends Element2 {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

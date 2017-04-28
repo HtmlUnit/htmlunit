@@ -20,10 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.ByteArrayInputStream;
@@ -101,7 +101,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -183,7 +182,7 @@ public class CSSStyleSheet extends StyleSheet {
     /**
      * Creates a new empty stylesheet.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public CSSStyleSheet() {
         wrapped_ = new CSSStyleSheetImpl();
         ownerNode_ = null;
@@ -1037,7 +1036,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the owner element, same as {@link #getOwnerNode()}.
      * @return the owner element
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public HTMLElement getOwningElement() {
         return ownerNode_;
     }
@@ -1046,7 +1045,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxGetter({IE, CHROME})
     public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getRules() {
         return getCssRules();
     }
@@ -1178,7 +1177,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
-    @JsxFunction({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxFunction({IE, CHROME})
     public int addRule(final String selector, final String rule) {
         final String completeRule = selector + " {" + rule + "}";
         try {
@@ -1197,7 +1196,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
-    @JsxFunction({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @JsxFunction({IE, CHROME})
     public void removeRule(final int position) {
         try {
             initCssRules();

@@ -25,9 +25,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
@@ -66,7 +66,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -1004,7 +1003,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Returns the {@code upload} property.
      * @return the {@code upload} property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public XMLHttpRequestUpload getUpload() {
         final XMLHttpRequestUpload upload = new XMLHttpRequestUpload();
         upload.setParentScope(getParentScope());
@@ -1016,7 +1015,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * Returns the {@code upload} property - IE version.
      * @return the {@code upload} property
      */
-    @JsxGetter(value = @WebBrowser(IE), propertyName = "upload")
+    @JsxGetter(value = IE, propertyName = "upload")
     public XMLHttpRequestEventTarget getUploadIE() {
         final XMLHttpRequestEventTarget upload = new XMLHttpRequestEventTarget();
         upload.setParentScope(getParentScope());

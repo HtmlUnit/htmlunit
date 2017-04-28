@@ -14,21 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLDetailsElement}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDetails.class, browsers = {@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+@JsxClass(domClass = HtmlDetails.class, browsers = {CHROME, FF52})
 public class HTMLDetailsElement extends HTMLElement {
 
     /**

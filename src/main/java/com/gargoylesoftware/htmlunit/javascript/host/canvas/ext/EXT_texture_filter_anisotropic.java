@@ -14,12 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas.ext;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code EXT_texture_filter_anisotropic}.
@@ -27,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = @WebBrowser(IE))
+@JsxClass(browsers = IE)
 public class EXT_texture_filter_anisotropic extends SimpleScriptable {
 
     /** The constant {@code MAX_TEXTURE_MAX_ANISOTROPY_EXT}. */

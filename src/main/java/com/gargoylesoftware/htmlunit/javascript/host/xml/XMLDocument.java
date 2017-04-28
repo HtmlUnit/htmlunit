@@ -19,9 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.io.IOException;
 
@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
@@ -79,7 +78,7 @@ public class XMLDocument extends Document {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public XMLDocument() {
         this(null);
     }
@@ -104,7 +103,7 @@ public class XMLDocument extends Document {
      * Sets the {@code async} attribute.
      * @param async Whether or not to send the request to the server asynchronously
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setAsync(final boolean async) {
         async_ = async;
     }
@@ -113,7 +112,7 @@ public class XMLDocument extends Document {
      * Returns Whether or not to send the request to the server asynchronously.
      * @return the {@code async} attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public boolean isAsync() {
         return async_;
     }
@@ -124,7 +123,7 @@ public class XMLDocument extends Document {
      * @param xmlSource a string containing a URL that specifies the location of the XML file
      * @return true if the load succeeded; false if the load failed
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction(FF)
     public boolean load(final String xmlSource) {
         if (async_) {
             if (LOG.isDebugEnabled()) {

@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLKEYGEN_END_TAG_FORBIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAddress;
@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPlainText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 
 /**
@@ -37,12 +36,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlAddress.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlBlockQuote.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlCenter.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlExample.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlListing.class, browsers = @WebBrowser(IE))
-@JsxClass(domClass = HtmlPlainText.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = HtmlAddress.class, browsers = IE)
+@JsxClass(domClass = HtmlBlockQuote.class, browsers = IE)
+@JsxClass(domClass = HtmlCenter.class, browsers = IE)
+@JsxClass(domClass = HtmlExample.class, browsers = IE)
+@JsxClass(domClass = HtmlListing.class, browsers = IE)
+@JsxClass(domClass = HtmlPlainText.class, browsers = IE)
 public class HTMLBlockElement extends HTMLElement {
 
     /**

@@ -14,17 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLMetaElement}.
@@ -37,7 +36,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLMetaElement() {
     }
 
@@ -45,7 +44,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns the {@code charset} attributee.
      * @return the {@code charset} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getCharset() {
         return "";
     }
@@ -54,7 +53,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the {@code charset} attribute.
      * @param charset the {@code charset} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setCharset(final String charset) {
         //empty
     }
@@ -135,7 +134,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Returns the {@code url} attribute.
      * @return the {@code url} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getUrl() {
         return "";
     }
@@ -144,7 +143,7 @@ public class HTMLMetaElement extends HTMLElement {
      * Sets the {@code url} attribute.
      * @param url the {@code url} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setUrl(final String url) {
         //empty
     }

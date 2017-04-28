@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
@@ -55,8 +54,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  */
-@JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(CHROME)})
-@JsxClass(className = "WorkerGlobalScope", browsers = @WebBrowser(IE))
+@JsxClass(browsers = {FF, CHROME})
+@JsxClass(className = "WorkerGlobalScope", browsers = IE)
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);

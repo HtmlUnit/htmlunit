@@ -29,6 +29,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
@@ -429,18 +430,21 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     private void initDefaultFeatures() {
-        final String expectedBrowserName;
-        if (isIE()) {
-            expectedBrowserName = "IE";
+        final WebBrowser expectedBrowser;
+        if (isChrome()) {
+            expectedBrowser = WebBrowser.CHROME;
         }
         else if (isFirefox()) {
-            expectedBrowserName = "FF";
+            expectedBrowser = WebBrowser.FF45;
         }
-        else if (isEdge()) {
-            expectedBrowserName = "EDGE";
+        else if (this == FIREFOX_52) {
+            expectedBrowser = WebBrowser.FF52;
+        }
+        else if (isIE()) {
+            expectedBrowser = WebBrowser.IE;
         }
         else {
-            expectedBrowserName = "CHROME";
+            expectedBrowser = WebBrowser.EDGE;
         }
 
         for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
@@ -449,9 +453,7 @@ public class BrowserVersion implements Serializable, Cloneable {
                 final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
                 if (browserFeature != null) {
                     for (final WebBrowser browser : browserFeature.value()) {
-                        if (expectedBrowserName.equals(browser.value().name())
-                                && browser.minVersion() <= getBrowserVersionNumeric()
-                                && browser.maxVersion() >= getBrowserVersionNumeric()) {
+                        if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowser, browser)) {
                             features_.add(features);
                         }
                     }

@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -56,7 +56,7 @@ public class NodeList extends AbstractList {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public NodeList() {
     }
 
@@ -109,7 +109,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxFunction({CHROME, FF52})
     public Iterator keys() {
         final int length = getElements().size();
         final List<Integer> list = new ArrayList<>();
@@ -126,7 +126,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all keys contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxFunction({CHROME, FF52})
     public Iterator values() {
         final List<DomNode> list = getElements();
         final Iterator object = new Iterator(ITERATOR_NAME, list.iterator());
@@ -139,7 +139,7 @@ public class NodeList extends AbstractList {
      * Returns an {@link Iterator} allowing to go through all key/value pairs contained in this object.
      * @return an {@link Iterator}
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxFunction({CHROME, FF52})
     public Iterator entries() {
         final List<DomNode> elements = getElements();
         final Context context = Context.getCurrentContext();
@@ -167,7 +167,7 @@ public class NodeList extends AbstractList {
      * Calls the {@code callback} given in parameter once for each value pair in the list, in insertion order.
      * @param callback function to execute for each element
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxFunction({CHROME, FF52})
     public void forEach(final Object callback) {
         final List<DomNode> nodes = getElements();
         final Context context = Context.enter();

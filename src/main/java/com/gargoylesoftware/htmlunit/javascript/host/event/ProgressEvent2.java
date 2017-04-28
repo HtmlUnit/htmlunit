@@ -63,7 +63,7 @@ public class ProgressEvent2 extends Event2 {
      * {@inheritDoc}
      */
     @Override
-//    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+//    @JsxConstructor({CHROME, FF, EDGE})
     public void jsConstructor(final String type, final ScriptObject details) {
         super.jsConstructor(type, details);
 

@@ -14,18 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlNextId;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLNextIdElement}.
  *
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlNextId.class, browsers = {@WebBrowser(IE)})
+@JsxClass(domClass = HtmlNextId.class, browsers = {IE})
 public class HTMLNextIdElement extends HTMLElement {
 
     /**

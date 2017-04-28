@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code CSSRule}.
@@ -45,7 +44,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant({@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+    @JsxConstant({FF, IE, EDGE})
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -93,13 +92,13 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframesRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final short MOZ_KEYFRAMES_RULE        = 7;
 
     /**
      * The rule is a {@code CSSKeyframesRule}.
      */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant(CHROME)
     public static final short WEBKIT_KEYFRAMES_RULE     = 7;
 
     /**
@@ -111,13 +110,13 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframeRule}.
      */
-    @JsxConstant(@WebBrowser(CHROME))
+    @JsxConstant(CHROME)
     public static final short WEBKIT_KEYFRAME_RULE      = 8;
 
     /**
      * The rule is a {@code CSSKeyframeRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final short MOZ_KEYFRAME_RULE         = 8;
 
     /**
@@ -129,25 +128,25 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final short COUNTER_STYLE_RULE        = 11;
 
     /**
      * The rule is a {@code CSSSupportsRule}.
      */
-    @JsxConstant({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxConstant({CHROME, FF})
     public static final short SUPPORTS_RULE             = 12;
 
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant(@WebBrowser(FF))
+    @JsxConstant(FF)
     public static final short FONT_FEATURE_VALUES_RULE  = 14;
 
     /**
      * The rule is a {@code CSSViewportRule}.
      */
-    @JsxConstant(@WebBrowser(IE))
+    @JsxConstant(IE)
     public static final short VIEWPORT_RULE  = 15;
 
     private final CSSStyleSheet stylesheet_;
@@ -157,7 +156,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, EDGE})
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;
@@ -232,7 +231,7 @@ public class CSSRule extends SimpleScriptable {
      * Sets the parsable textual representation of the rule.
      * @param cssText the parsable textual representation of the rule
      */
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxSetter({FF, IE})
     public void setCssText(final String cssText) {
         rule_.setCssText(cssText);
     }

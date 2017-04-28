@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
 
 /**
@@ -26,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = @WebBrowser(CHROME))
+@JsxClass(browsers = CHROME)
 public class CanvasCaptureMediaStreamTrack extends MediaStreamTrack {
 
     /**

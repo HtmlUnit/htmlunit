@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -40,7 +40,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.AccessorProperty;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PrototypeObject;
@@ -146,7 +145,7 @@ public class Event2 extends SimpleScriptObject {
 
     /** No event phase. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = {@WebBrowser(CHROME), @WebBrowser(FF)},
+            value = {CHROME, FF},
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final short NONE = 0;
 
@@ -167,121 +166,121 @@ public class Event2 extends SimpleScriptObject {
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int BLUR = 0x2000;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int CHANGE = 0x8000;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int CLICK = 0x40;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int DBLCLICK = 0x80;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int DRAGDROP = 0x800;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int FOCUS = 0x1000;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int KEYDOWN = 0x100;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int KEYPRESS = 0x400;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int KEYUP = 0x200;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEDOWN = 0x1;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEDRAG = 0x20;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEMOVE = 0x10;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEOUT = 0x8;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEOVER = 0x4;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int MOUSEUP = 0x2;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(CHROME),
+            value = CHROME,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int SELECT = 0x4000;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(FF),
+            value = FF,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(FF),
+            value = FF,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(FF),
+            value = FF,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property(
-            value = @WebBrowser(FF),
+            value = FF,
             attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE, where = Where.CONSTRUCTOR)
     public static final int META_MASK = 0x8;
 
@@ -384,7 +383,7 @@ public class Event2 extends SimpleScriptObject {
      * @param type the event type
      * @param details the event details (optional)
      */
-//    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+//    @JsxConstructor({CHROME, FF, EDGE})
     public void jsConstructor(final String type, final ScriptObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -732,7 +731,7 @@ public class Event2 extends SimpleScriptObject {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -923,7 +922,7 @@ public class Event2 extends SimpleScriptObject {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

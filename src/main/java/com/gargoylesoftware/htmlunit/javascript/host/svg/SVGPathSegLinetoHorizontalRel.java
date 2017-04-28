@@ -14,26 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for {@code SVGPathSegLinetoHorizontalRel}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(IE), @WebBrowser(EDGE)})
+@JsxClass(browsers = {FF, IE, EDGE})
 public class SVGPathSegLinetoHorizontalRel extends SVGPathSeg {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({FF, EDGE})
     public SVGPathSegLinetoHorizontalRel() {
     }
 

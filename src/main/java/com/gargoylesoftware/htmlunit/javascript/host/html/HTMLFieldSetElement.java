@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlFieldSet;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * The JavaScript object {@code HTMLFieldSetElement}.
@@ -38,7 +37,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLFieldSetElement() {
     }
 
@@ -46,7 +45,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Returns the value of the {@code align} property.
      * @return the value of the {@code align} property
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getAlign() {
         return getAlign(false);
     }
@@ -55,7 +54,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Sets the value of the {@code align} property.
      * @param align the value of the {@code align} property
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setAlign(final String align) {
         setAlign(align, false);
     }
@@ -64,7 +63,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Returns the {@code name} attribute.
      * @return the {@code name} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getName() {
         return getDomNodeOrDie().getAttribute("name");
     }
@@ -73,7 +72,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      * Sets the {@code name} attribute.
      * @param name the {@code name} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }

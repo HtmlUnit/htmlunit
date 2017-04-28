@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +88,6 @@ import com.gargoylesoftware.js.nashorn.api.scripting.NashornScriptEngineFactory;
 import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
@@ -183,24 +186,24 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         holdPostponedActions_ = false;
     }
 
-    private static Browser getBrowser(final BrowserVersion version) {
-        final BrowserFamily family;
+    private static WebBrowser getBrowser(final BrowserVersion version) {
+        final WebBrowser browser;
         if (version.isFirefox()) {
-            family = BrowserFamily.FF;
+            browser = WebBrowser.FF;
         }
         else if (version.isIE()) {
-            family = BrowserFamily.IE;
+            browser = WebBrowser.IE;
         }
         else if (version.isEdge()) {
-            family = BrowserFamily.EDGE;
+            browser = WebBrowser.EDGE;
         }
         else {
-            family = BrowserFamily.CHROME;
+            browser = WebBrowser.CHROME;
         }
-        return new Browser(family, (int) version.getBrowserVersionNumeric());
+        return browser;
     }
 
-    private static void initGlobal(final WebWindow webWindow, final Browser browser) {
+    private static void initGlobal(final WebWindow webWindow, final WebBrowser browser) {
         Browser.setCurrent(browser);
         final Global global = getGlobal(webWindow);
         final Global oldGlobal = Context.getGlobal();
@@ -292,18 +295,21 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         return superClass.getName();
     }
 
-    private static boolean isSupported(final ClassConstructor constructor, final Browser browser) {
-        final int version = browser.getVersion();
+    private static boolean isSupported(final ClassConstructor constructor, final WebBrowser browser) {
         if (constructor != null) {
             for (final WebBrowser webBrowser : constructor.value()) {
-                if (webBrowser.value() == browser.getFamily()
-                        && webBrowser.minVersion() <= version
-                        && webBrowser.maxVersion() >= version) {
+                if (isCompatible(webBrowser, browser)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    private static boolean isCompatible(final WebBrowser browser1, final WebBrowser browser2) {
+        return (browser1 == browser2)
+                || (browser1 == WebBrowser.FF && (browser2 == WebBrowser.FF45 || browser2 == WebBrowser.FF52))
+                || (browser2 == WebBrowser.FF && (browser1 == WebBrowser.FF45 || browser1 == WebBrowser.FF52));
     }
 
     private static boolean isNullProto(final Class<?> enclosingClass) {

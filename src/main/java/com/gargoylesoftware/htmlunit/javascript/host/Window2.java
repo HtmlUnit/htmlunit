@@ -19,9 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.BrowserFamily.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;
@@ -104,7 +104,6 @@ import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Function;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Where;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ECMAErrors;
@@ -173,13 +172,13 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     /** To be documented. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property
         (attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE,
-        where = Where.CONSTRUCTOR, value = @WebBrowser(CHROME))
+        where = Where.CONSTRUCTOR, value = CHROME)
     public static final int TEMPORARY = 0;
 
     /** To be documented. */
     @com.gargoylesoftware.js.nashorn.internal.objects.annotations.Property
         (attributes = Attribute.NOT_WRITABLE | Attribute.NOT_CONFIGURABLE,
-        where = Where.CONSTRUCTOR, value = @WebBrowser(CHROME))
+        where = Where.CONSTRUCTOR, value = CHROME)
     public static final int PERSISTENT = 1;
 
     /**
@@ -319,7 +318,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
      * @return some object
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public static Object getControllers(final Object self) {
         return getWindow(self).controllers_;
     }
@@ -329,7 +328,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @param value the new value
      */
-    @Setter(@WebBrowser(FF))
+    @Setter(FF)
     public static void setControllers(final Object self, final Object value) {
         getWindow(self).controllers_ = value;
     }
@@ -372,7 +371,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param stringToEncode string to encode
      * @return the encoded string
      */
-    @Function({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @Function
     public static String btoa(final Object self, final String stringToEncode) {
         return new String(Base64.encodeBase64(stringToEncode.getBytes()));
     }
@@ -383,7 +382,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param encodedData the encoded string
      * @return the decoded value
      */
-    @Function({ @WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(value = IE, minVersion = 11) })
+    @Function
     public static String atob(final Object self, final String encodedData) {
         return new String(Base64.decodeBase64(encodedData.getBytes()));
     }
@@ -392,7 +391,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * An undocumented IE function.
      * @param self this object
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static void CollectGarbage(final Object self) {
         // Empty.
     }
@@ -634,7 +633,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @Function({ @WebBrowser(CHROME), @WebBrowser(FF) })
+    @Function({ CHROME, FF })
     public static boolean find(final Object self, final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -956,7 +955,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the current event, or {@code null} if no event is currently available
      */
-    @Getter({@WebBrowser(IE), @WebBrowser(CHROME)})
+    @Getter({IE, CHROME})
     public static Object getEvent(final Object self) {
         return getWindow(self).currentEvent_;
     }
@@ -1144,7 +1143,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code scrollX} property
      */
-    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Getter({FF, CHROME})
     public static int getScrollX(final Object self) {
         return 0;
     }
@@ -1154,7 +1153,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code scrollY} property
      */
-    @Getter({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @Getter({FF, CHROME})
     public static int getScrollY(final Object self) {
         return 0;
     }
@@ -1363,7 +1362,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @param message the message to log
      */
-    @Function(@WebBrowser(FF))
+    @Function(FF)
     public static void dump(final Object self, final String message) {
         final Object console = getWindow(self).console_;
         if (console instanceof Console2) {
@@ -1376,7 +1375,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code mozInnerScreenX} property
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public static int getMozInnerScreenX(final Object self) {
         return 11;
     }
@@ -1386,7 +1385,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code mozInnerScreenY} property
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public static int getMozInnerScreenY(final Object self) {
         return 91;
     }
@@ -1396,7 +1395,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code mozPaintCount} property
      */
-    @Getter(@WebBrowser(FF))
+    @Getter(FF)
     public static int getMozPaintCount(final Object self) {
         return 0;
     }
@@ -1406,7 +1405,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @param lines the number of lines to scroll down
      */
-    @Function(@WebBrowser(FF))
+    @Function(FF)
     public static void scrollByLines(final Object self, final int lines) {
         final HTMLElement2 body = ((HTMLDocument2) getWindow(self).document_).getBody();
         if (body != null) {
@@ -1419,7 +1418,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @param pages the number of pages to scroll down
      */
-    @Function(@WebBrowser(FF))
+    @Function(FF)
     public static void scrollByPages(final Object self, final int pages) {
         final Window2 window = getWindow(self);
         final HTMLElement2 body = ((HTMLDocument2) window.document_).getBody();
@@ -1482,7 +1481,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @Function({@WebBrowser(IE), @WebBrowser(FF)})
+    @Function({IE, FF})
     public static Object showModalDialog(final Object self, final String url, final Object arguments,
             final String features) {
         final Window2 window = getWindow(self);
@@ -1512,7 +1511,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @return a reference to the new window object created for the modeless dialog
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static Global showModelessDialog(final Object self, final String url, final Object arguments,
             final String features) {
         final Window2 window = getWindow(self);
@@ -1534,7 +1533,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
      * @return "JScript"
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static String ScriptEngine(final Object self) {
         return "JScript";
     }
@@ -1545,7 +1544,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
      * @return the build version
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static int ScriptEngineBuildVersion(final Object self) {
         return 12345;
     }
@@ -1556,7 +1555,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
      * @return the major version
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static int ScriptEngineMajorVersion(final Object self) {
         return getWindow(self).getBrowserVersion().getBrowserVersionNumeric();
     }
@@ -1567,7 +1566,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
      * @return the minor version
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static int ScriptEngineMinorVersion(final Object self) {
         return 0;
     }
@@ -1787,7 +1786,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self self
      * @see <a href="https://developer.mozilla.org/en/DOM/window.stop">window.stop</a>
      */
-    @Function({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @Function({CHROME, FF})
     public static void stop(final Object self) {
         //empty
     }
@@ -1797,7 +1796,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self self
      * @return the {@code offscreenBuffering} property
      */
-    @Getter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @Getter({CHROME, IE})
     public static Object getOffscreenBuffering(final Object self) {
         if (getWindow(self).getBrowserVersion().hasFeature(JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID)) {
             return "auto";
@@ -1812,7 +1811,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @throws IOException if loading the specified location fails
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536638%28VS.85%29.aspx">MSDN Documentation</a>
      */
-    @Function(@WebBrowser(IE))
+    @Function(IE)
     public static void navigate(final Object self, final String url) throws IOException {
         getLocation(self).assign(url);
     }
@@ -1928,7 +1927,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     /**
      * Function constructor.
      */
-    @ClassConstructor({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @ClassConstructor({CHROME, FF})
     public static final class FunctionConstructor extends ScriptFunction {
         /**
          * Constructor.
@@ -1967,7 +1966,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     }
 
     /** Object constructor. */
-    @ClassConstructor(@WebBrowser(IE))
+    @ClassConstructor(IE)
     public static final class ObjectConstructor extends SimpleObjectConstructor {
         /** Constructor. */
         public ObjectConstructor() {

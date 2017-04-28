@@ -14,13 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
@@ -29,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @see org.w3c.dom.css.CSSPrimitiveValue
  * @author Marc Guillemot
  */
-@JsxClass(browsers = @WebBrowser(FF))
+@JsxClass(browsers = FF)
 public class CSSPrimitiveValue extends CSSValue {
 
     /**

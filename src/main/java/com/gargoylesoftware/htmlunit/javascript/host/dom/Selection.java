@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -54,7 +53,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public Selection() {
     }
 
@@ -148,7 +147,7 @@ public class Selection extends SimpleScriptable {
      * Returns the type of selection (IE only).
      * @return the type of selection
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public String getType() {
         return type_;
     }
@@ -261,7 +260,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none.
      */
-    @JsxFunction(@WebBrowser(CHROME))
+    @JsxFunction(CHROME)
     public void empty() {
         removeAllRanges();
     }
@@ -271,7 +270,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the node within which the focus will be moved
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
-    @JsxFunction({@WebBrowser(FF), @WebBrowser(CHROME)})
+    @JsxFunction({FF, CHROME})
     public void extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {

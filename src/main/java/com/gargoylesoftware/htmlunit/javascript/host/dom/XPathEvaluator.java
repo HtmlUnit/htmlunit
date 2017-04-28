@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
 
 import org.apache.xml.utils.PrefixResolver;
 
@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -37,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(browsers = {@WebBrowser(FF), @WebBrowser(CHROME), @WebBrowser(EDGE)})
+@JsxClass(browsers = {FF, CHROME, EDGE})
 public class XPathEvaluator extends SimpleScriptable {
 
     /**

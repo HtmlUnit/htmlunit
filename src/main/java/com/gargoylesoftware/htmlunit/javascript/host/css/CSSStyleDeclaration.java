@@ -26,10 +26,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
@@ -134,7 +134,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -245,7 +244,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public CSSStyleDeclaration() {
     }
 
@@ -553,7 +552,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code accelerator} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getAccelerator() {
         return defaultIfEmpty(getStyleAttribute(ACCELERATOR), "false");
     }
@@ -562,7 +561,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code accelerator} style attribute.
      * @param accelerator the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setAccelerator(final String accelerator) {
         setStyleAttribute(ACCELERATOR.getAttributeName(), accelerator);
     }
@@ -1721,7 +1720,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code msImeAlign} style attribute.
      * @param msImeAlign the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setMsImeAlign(final String msImeAlign) {
         setStyleAttribute(Definition.MS_IME_ALIGN.getAttributeName(), msImeAlign);
     }
@@ -1921,7 +1920,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code page} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public String getPage() {
         return getStyleAttribute(PAGE);
     }
@@ -1930,7 +1929,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code page} style attribute.
      * @param page the new attribute
      */
-    @JsxSetter(@WebBrowser(CHROME))
+    @JsxSetter(CHROME)
     public void setPage(final String page) {
         setStyleAttribute(PAGE.getAttributeName(), page);
     }
@@ -1939,7 +1938,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelBottom} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelBottom() {
         return pixelValue(getBottom());
     }
@@ -1948,7 +1947,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelBottom} style attribute.
      * @param pixelBottom the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelBottom(final int pixelBottom) {
         setBottom(pixelBottom + "px");
     }
@@ -1957,7 +1956,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelHeight} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelHeight() {
         return pixelValue(getHeight());
     }
@@ -1966,7 +1965,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelHeight} style attribute.
      * @param pixelHeight the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelHeight(final int pixelHeight) {
         setHeight(pixelHeight + "px");
     }
@@ -1975,7 +1974,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelLeft} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelLeft() {
         return pixelValue(getLeft());
     }
@@ -1984,7 +1983,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelLeft} style attribute.
      * @param pixelLeft the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelLeft(final int pixelLeft) {
         setLeft(pixelLeft + "px");
     }
@@ -1993,7 +1992,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelRight} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelRight() {
         return pixelValue(getRight());
     }
@@ -2002,7 +2001,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelRight} style attribute.
      * @param pixelRight the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelRight(final int pixelRight) {
         setRight(pixelRight + "px");
     }
@@ -2011,7 +2010,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelTop} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelTop() {
         return pixelValue(getTop());
     }
@@ -2020,7 +2019,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelTop} style attribute.
      * @param pixelTop the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelTop(final int pixelTop) {
         setTop(pixelTop + "px");
     }
@@ -2029,7 +2028,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code pixelWidth} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPixelWidth() {
         return pixelValue(getWidth());
     }
@@ -2038,7 +2037,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code pixelWidth} style attribute.
      * @param pixelWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPixelWidth(final int pixelWidth) {
         setWidth(pixelWidth + "px");
     }
@@ -2047,7 +2046,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posBottom} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosBottom() {
         return 0;
     }
@@ -2056,7 +2055,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posBottom} style attribute.
      * @param posBottom the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosBottom(final int posBottom) {
         // Empty.
     }
@@ -2065,7 +2064,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posHeight} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosHeight() {
         return 0;
     }
@@ -2074,7 +2073,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posHeight} style attribute.
      * @param posHeight the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosHeight(final int posHeight) {
         // Empty.
     }
@@ -2083,7 +2082,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posLeft} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosLeft() {
         return 0;
     }
@@ -2092,7 +2091,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posLeft} style attribute.
      * @param posLeft the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosLeft(final int posLeft) {
         // Empty.
     }
@@ -2101,7 +2100,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posRight} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosRight() {
         return 0;
     }
@@ -2110,7 +2109,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posRight} style attribute.
      * @param posRight the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosRight(final int posRight) {
         // Empty.
     }
@@ -2119,7 +2118,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posTop} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosTop() {
         return 0;
     }
@@ -2128,7 +2127,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posTop} style attribute.
      * @param posTop the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosTop(final int posTop) {
         // Empty.
     }
@@ -2137,7 +2136,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code posWidth} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public int getPosWidth() {
         return 0;
     }
@@ -2146,7 +2145,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code posWidth} style attribute.
      * @param posWidth the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setPosWidth(final int posWidth) {
         // Empty.
     }
@@ -2173,7 +2172,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code rubyAlign} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(IE), @WebBrowser(FF)})
+    @JsxGetter({IE, FF})
     public String getRubyAlign() {
         return getStyleAttribute(RUBY_ALIGN);
     }
@@ -2182,7 +2181,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code rubyAlign} style attribute.
      * @param rubyAlign the new attribute
      */
-    @JsxSetter({@WebBrowser(IE), @WebBrowser(FF)})
+    @JsxSetter({IE, FF})
     public void setRubyAlign(final String rubyAlign) {
         setStyleAttribute(RUBY_ALIGN.getAttributeName(), rubyAlign);
     }
@@ -2191,7 +2190,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code size} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(CHROME))
+    @JsxGetter(CHROME)
     public String getSize() {
         return getStyleAttribute(SIZE);
     }
@@ -2200,7 +2199,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code size} style attribute.
      * @param size the new attribute
      */
-    @JsxSetter(@WebBrowser(CHROME))
+    @JsxSetter(CHROME)
     public void setSize(final String size) {
         setStyleAttribute(SIZE.getAttributeName(), size);
     }
@@ -2209,7 +2208,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code textDecorationBlink} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isTextDecorationBlink() {
         return false;
     }
@@ -2218,7 +2217,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code textDecorationBlink} style attribute.
      * @param textDecorationBlink the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTextDecorationBlink(final boolean textDecorationBlink) {
         // Empty.
     }
@@ -2227,7 +2226,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code textDecorationLineThrough} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isTextDecorationLineThrough() {
         return false;
     }
@@ -2236,7 +2235,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code textDecorationLineThrough} style attribute.
      * @param textDecorationLineThrough the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTextDecorationLineThrough(final boolean textDecorationLineThrough) {
         // Empty.
     }
@@ -2245,7 +2244,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code textDecorationNone} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isTextDecorationNone() {
         return false;
     }
@@ -2254,7 +2253,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code textDecorationNone} style attribute.
      * @param textDecorationNone the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTextDecorationNone(final boolean textDecorationNone) {
         // Empty.
     }
@@ -2263,7 +2262,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code textDecorationOverline} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean isTextDecorationOverline() {
         return false;
     }
@@ -2272,7 +2271,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code textDecorationOverline} style attribute.
      * @param textDecorationOverline the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTextDecorationOverline(final boolean textDecorationOverline) {
         // Empty.
     }
@@ -2281,7 +2280,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code textDecorationUnderline} style attribute.
      * @return the style attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public boolean getTextDecorationUnderline() {
         return false;
     }
@@ -2290,7 +2289,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code textDecorationUnderline} style attribute.
      * @param textDecorationUnderline the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setTextDecorationUnderline(final boolean textDecorationUnderline) {
         // Empty.
     }
@@ -2372,7 +2371,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code widows} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public String getWidows() {
         return getStyleAttribute(WIDOWS);
     }
@@ -2381,7 +2380,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code widows} style attribute.
      * @param widows the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxSetter({CHROME, IE})
     public void setWidows(final String widows) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -2400,7 +2399,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Gets the {@code orphans} style attribute.
      * @return the style attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxGetter({CHROME, IE})
     public String getOrphans() {
         return getStyleAttribute(ORPHANS);
     }
@@ -2409,7 +2408,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Sets the {@code orphans} style attribute.
      * @param orphans the new attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(IE)})
+    @JsxSetter({CHROME, IE})
     public void setOrphans(final String orphans) {
         if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
             try {
@@ -2545,7 +2544,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name the name of the property to retrieve
      * @return the value
      */
-    @JsxFunction(@WebBrowser(FF))
+    @JsxFunction(FF)
     public CSSValue getPropertyCSSValue(final String name) {
         LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
         // following is a hack, just to have basic support for getPropertyCSSValue
@@ -2668,7 +2667,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param flag 0 for case insensitive, 1 (default) for case sensitive
      * @return the value of the specified attribute
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object getAttribute(final String name, final int flag) {
         // Case-insensitive.
         final StyleElement style = getStyleElementCaseInSensitive(name);
@@ -2686,7 +2685,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param value the value to assign to the attribute
      * @param flag 0 for case insensitive, 1 (default) for case sensitive
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void setAttribute(final String name, final String value, final Object flag) {
         // Case-insensitive.
         final StyleElement style = getStyleElementCaseInSensitive(name);
@@ -2703,7 +2702,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param flag 0 for case insensitive, 1 (default) for case sensitive
      * @return {@code true} if the attribute was successfully removed, {@code false} otherwise
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public boolean removeAttribute(final String name, final Object flag) {
         // Case-insensitive.
         final StyleElement style = getStyleElementCaseInSensitive(name);

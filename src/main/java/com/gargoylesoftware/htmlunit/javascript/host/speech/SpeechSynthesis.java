@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -26,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, browsers = @WebBrowser(CHROME))
+@JsxClass(isJSObject = false, browsers = CHROME)
 public class SpeechSynthesis extends EventTarget {
 
     /**

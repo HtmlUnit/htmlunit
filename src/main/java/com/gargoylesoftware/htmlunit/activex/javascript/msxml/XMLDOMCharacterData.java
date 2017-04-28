@@ -14,14 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -34,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chris Erskine
  * @author Frank Danek
  */
-@JsxClass(domClass = DomCharacterData.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = DomCharacterData.class, browsers = IE)
 public class XMLDOMCharacterData extends XMLDOMNode {
 
     /**

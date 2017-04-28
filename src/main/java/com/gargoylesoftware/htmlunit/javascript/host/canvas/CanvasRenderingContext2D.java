@@ -15,9 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
 
 import java.io.IOException;
 
@@ -31,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.GaeRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
@@ -60,7 +60,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public CanvasRenderingContext2D() {
         canvas_ = null;
         renderingBackend_ = null;
@@ -363,7 +363,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param endAngle the endAngle
      * @param anticlockwise the anticlockwise
      */
-    @JsxFunction({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxFunction({CHROME, FF52})
     public void ellipse(final double x, final double y,
                     final double radiusX, final double radiusY,
                     final double rotation, final double startAngle, final double endAngle,

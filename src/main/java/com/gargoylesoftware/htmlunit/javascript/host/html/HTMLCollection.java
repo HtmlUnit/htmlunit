@@ -18,10 +18,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTIO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_SUPPORTS_PARANTHESES;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -67,7 +66,7 @@ public class HTMLCollection extends AbstractList {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLCollection() {
     }
 
@@ -252,7 +251,7 @@ public class HTMLCollection extends AbstractList {
      * Returns the next node in the collection (supporting iteration in IE only).
      * @return the next node in the collection
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object nextNode() {
         final Object nextNode;
         final List<DomNode> elements = getElements();
@@ -269,7 +268,7 @@ public class HTMLCollection extends AbstractList {
     /**
      * Resets the node iterator accessed via {@link #nextNode()}.
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public void reset() {
         currentIndex_ = 0;
     }
@@ -282,7 +281,7 @@ public class HTMLCollection extends AbstractList {
      * @return all the elements in this element array that have the specified tag name
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536776.aspx">MSDN doc</a>
      */
-    @JsxFunction(@WebBrowser(IE))
+    @JsxFunction(IE)
     public Object tags(final String tagName) {
         final HTMLCollection collection = new HTMLSubCollection(this) {
             @Override

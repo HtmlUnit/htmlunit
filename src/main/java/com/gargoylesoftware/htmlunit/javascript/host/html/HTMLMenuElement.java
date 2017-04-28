@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_EMPTY;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -46,7 +45,7 @@ public class HTMLMenuElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLMenuElement() {
         label_ = "";
     }
@@ -56,7 +55,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxGetter({FF, IE})
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -77,7 +76,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter({@WebBrowser(FF), @WebBrowser(IE)})
+    @JsxSetter({FF, IE})
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {
@@ -102,7 +101,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Returns the value of the {@code label} property.
      * @return the value of the {@code label} property
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public String getLabel() {
         return label_;
     }
@@ -111,7 +110,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * Sets the value of the {@code label} property.
      * @param label the value of the {@code label} property
      */
-    @JsxSetter(@WebBrowser(FF))
+    @JsxSetter(FF)
     public void setLabel(final String label) {
         label_ = label;
     }

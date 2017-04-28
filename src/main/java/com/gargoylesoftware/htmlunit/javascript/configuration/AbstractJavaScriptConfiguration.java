@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -94,20 +95,22 @@ public abstract class AbstractJavaScriptConfiguration {
     public static ClassConfiguration getClassConfiguration(final Class<? extends HtmlUnitScriptable> klass,
         final BrowserVersion browser) {
         if (browser != null) {
-            final String expectedBrowserName;
-            if (browser.isIE()) {
-                expectedBrowserName = "IE";
+            final WebBrowser expectedBrowser;
+            if (browser == BrowserVersion.CHROME) {
+                expectedBrowser = WebBrowser.CHROME;
             }
-            else if (browser.isFirefox()) {
-                expectedBrowserName = "FF";
+            else if (browser == BrowserVersion.INTERNET_EXPLORER) {
+                expectedBrowser = WebBrowser.IE;
             }
-            else if (browser.isEdge()) {
-                expectedBrowserName = "EDGE";
+            else if (browser == BrowserVersion.FIREFOX_45) {
+                expectedBrowser = WebBrowser.FF45;
+            }
+            else if (browser == BrowserVersion.FIREFOX_52) {
+                expectedBrowser = WebBrowser.FF52;
             }
             else {
-                expectedBrowserName = "CHROME";
+                expectedBrowser = WebBrowser.EDGE;
             }
-            final float browserVersionNumeric = browser.getBrowserVersionNumeric();
 
             final String hostClassName = klass.getName();
             final JsxClasses jsxClasses = klass.getAnnotation(JsxClasses.class);
@@ -128,8 +131,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 for (int i = 0; i < jsxClassValues.length; i++) {
                     final JsxClass jsxClass = jsxClassValues[i];
 
-                    if (jsxClass != null
-                            && isSupported(jsxClass.browsers(), expectedBrowserName, browserVersionNumeric)) {
+                    if (jsxClass != null && isSupported(jsxClass.browsers(), expectedBrowser)) {
                         domClasses.add(jsxClass.domClass());
                         if (jsxClass.isJSObject()) {
                             isJsObject = true;
@@ -144,12 +146,12 @@ public abstract class AbstractJavaScriptConfiguration {
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
                                 className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowser);
                 return classConfiguration;
             }
 
             final JsxClass jsxClass = klass.getAnnotation(JsxClass.class);
-            if (jsxClass != null && isSupported(jsxClass.browsers(), expectedBrowserName, browserVersionNumeric)) {
+            if (jsxClass != null && isSupported(jsxClass.browsers(), expectedBrowser)) {
 
                 final Set<Class<?>> domClasses = new HashSet<>();
                 final Class<?> domClass = jsxClass.domClass();
@@ -165,7 +167,7 @@ public abstract class AbstractJavaScriptConfiguration {
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
                             className);
 
-                process(classConfiguration, hostClassName, expectedBrowserName, browserVersionNumeric);
+                process(classConfiguration, hostClassName, expectedBrowser);
                 return classConfiguration;
             }
         }
@@ -173,8 +175,7 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     private static void process(final ClassConfiguration classConfiguration,
-            final String hostClassName, final String expectedBrowserName,
-            final float browserVersionNumeric) {
+            final String hostClassName, final WebBrowser expectedBrowser) {
         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
 
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
@@ -183,7 +184,7 @@ public abstract class AbstractJavaScriptConfiguration {
         for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
             for (final Annotation annotation : constructor.getAnnotations()) {
                 if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                        expectedBrowserName, browserVersionNumeric)) {
+                        expectedBrowser)) {
                     classConfiguration.setJSConstructor(constructor);
                 }
             }
@@ -192,7 +193,7 @@ public abstract class AbstractJavaScriptConfiguration {
             for (final Annotation annotation : method.getAnnotations()) {
                 if (annotation instanceof JsxGetter) {
                     final JsxGetter jsxGetter = (JsxGetter) annotation;
-                    if (isSupported(jsxGetter.value(), expectedBrowserName, browserVersionNumeric)) {
+                    if (isSupported(jsxGetter.value(), expectedBrowser)) {
                         String property;
                         if (jsxGetter.propertyName().isEmpty()) {
                             final int prefix = method.getName().startsWith("is") ? 2 : 3;
@@ -207,7 +208,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 else if (annotation instanceof JsxSetter) {
                     final JsxSetter jsxSetter = (JsxSetter) annotation;
-                    if (isSupported(jsxSetter.value(), expectedBrowserName, browserVersionNumeric)) {
+                    if (isSupported(jsxSetter.value(), expectedBrowser)) {
                         String property;
                         if (jsxSetter.propertyName().isEmpty()) {
                             property = method.getName().substring(3);
@@ -221,7 +222,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 else if (annotation instanceof JsxFunction) {
                     final JsxFunction jsxFunction = (JsxFunction) annotation;
-                    if (isSupported(jsxFunction.value(), expectedBrowserName, browserVersionNumeric)) {
+                    if (isSupported(jsxFunction.value(), expectedBrowser)) {
                         final String name;
                         if (jsxFunction.functionName().isEmpty()) {
                             name = method.getName();
@@ -234,7 +235,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 else if (annotation instanceof JsxStaticGetter) {
                     final JsxStaticGetter jsxStaticGetter = (JsxStaticGetter) annotation;
-                    if (isSupported(jsxStaticGetter.value(), expectedBrowserName, browserVersionNumeric)) {
+                    if (isSupported(jsxStaticGetter.value(), expectedBrowser)) {
                         final int prefix = method.getName().startsWith("is") ? 2 : 3;
                         String property = method.getName().substring(prefix);
                         property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
@@ -243,7 +244,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
                 else if (annotation instanceof JsxStaticFunction) {
                     final JsxStaticFunction jsxStaticFunction = (JsxStaticFunction) annotation;
-                    if (isSupported(jsxStaticFunction.value(), expectedBrowserName, browserVersionNumeric)) {
+                    if (isSupported(jsxStaticFunction.value(), expectedBrowser)) {
                         final String name;
                         if (jsxStaticFunction.functionName().isEmpty()) {
                             name = method.getName();
@@ -255,14 +256,14 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
                 else if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                        expectedBrowserName, browserVersionNumeric)) {
+                        expectedBrowser)) {
                     classConfiguration.setJSConstructor(method);
                 }
             }
         }
         for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
             final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowserName, browserVersionNumeric)) {
+            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
                 classConfiguration.addConstant(field.getName());
             }
         }
@@ -272,16 +273,25 @@ public abstract class AbstractJavaScriptConfiguration {
         }
     }
 
-    private static boolean isSupported(final WebBrowser[] browsers, final String expectedBrowserName,
-            final float expectedVersionNumeric) {
+    private static boolean isSupported(final WebBrowser[] browsers, final WebBrowser expectedBrowser) {
         for (final WebBrowser browser : browsers) {
-            if (browser.value().name().equals(expectedBrowserName)
-                    && browser.minVersion() <= expectedVersionNumeric
-                    && browser.maxVersion() >= expectedVersionNumeric) {
+            if (isCompatible(browser, expectedBrowser)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns whether the two {@link WebBrowser} are compatible or not.
+     * @param browser1 the first {@link WebBrowser}
+     * @param browser2 the second {@link WebBrowser}
+     * @return whether the two {@link WebBrowser} are compatible or not
+     */
+    public static boolean isCompatible(final WebBrowser browser1, final WebBrowser browser2) {
+        return (browser1 == browser2)
+                || (browser1 == FF && (browser2 == FF45 || browser2 == FF52))
+                || (browser2 == FF && (browser1 == FF45 || browser1 == FF52));
     }
 
     /**

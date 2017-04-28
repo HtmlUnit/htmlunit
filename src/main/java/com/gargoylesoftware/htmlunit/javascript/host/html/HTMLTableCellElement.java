@@ -18,10 +18,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_OFFSET_INCLUDES_BORDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.util.List;
 
@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
@@ -56,7 +55,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLTableCellElement() {
     }
 
@@ -346,7 +345,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColor() {
         return getDomNodeOrDie().getAttribute("borderColor");
     }
@@ -355,7 +354,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColor(final String borderColor) {
         setColorAttribute("borderColor", borderColor);
     }
@@ -364,7 +363,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColorDark() {
         return "";
     }
@@ -373,7 +372,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColorDark(final String borderColor) {
         // ignore
     }
@@ -382,7 +381,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Gets the {@code borderColor} attribute.
      * @return the attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getBorderColorLight() {
         return "";
     }
@@ -391,7 +390,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      * Sets the {@code borderColor} attribute.
      * @param borderColor the new attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setBorderColorLight(final String borderColor) {
         // ignore
     }

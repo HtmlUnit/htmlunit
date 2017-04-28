@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomCDataSection;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMCDATASection.<br>
@@ -28,6 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomCDataSection.class, browsers = @WebBrowser(IE))
+@JsxClass(domClass = DomCDataSection.class, browsers = IE)
 public final class XMLDOMCDATASection extends XMLDOMText {
 }

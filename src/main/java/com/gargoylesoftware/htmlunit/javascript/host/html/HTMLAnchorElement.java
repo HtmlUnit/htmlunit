@@ -20,10 +20,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -43,7 +44,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -69,7 +69,7 @@ public class HTMLAnchorElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({@WebBrowser(CHROME), @WebBrowser(FF), @WebBrowser(EDGE)})
+    @JsxConstructor({CHROME, FF, EDGE})
     public HTMLAnchorElement() {
     }
 
@@ -210,7 +210,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the value of the rev property.
      * @return the referrerPolicy property
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxGetter({CHROME, FF52})
     public String getReferrerPolicy() {
         String attrib = ((HtmlAnchor) getDomNodeOrDie()).getAttribute("referrerPolicy");
         if (StringUtils.isEmpty(attrib)) {
@@ -227,7 +227,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the rev property.
      * @param referrerPolicy referrerPolicy attribute value
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(value = FF, minVersion = 52)})
+    @JsxSetter({CHROME, FF52})
     public void setReferrerPolicy(final String referrerPolicy) {
         getDomNodeOrDie().setAttribute("referrerPolicy", referrerPolicy);
     }
@@ -610,7 +610,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code origin} attribute.
      * @return the {@code origin} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getOrigin() {
         if (!getDomNodeOrDie().hasAttribute("href")) {
             return "";
@@ -628,7 +628,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code origin} attribute.
      * @param origin {@code origin} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setOrigin(final String origin) {
         // ignore
     }
@@ -637,7 +637,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code username} attribute.
      * @return the {@code username} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getUsername() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -646,7 +646,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code username} attribute.
      * @param username {@code username} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setUsername(final String username) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -655,7 +655,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code password} attribute.
      * @return the {@code password} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getPassword() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -664,7 +664,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code password} attribute.
      * @param password {@code password} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setPassword(final String password) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -673,7 +673,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code download} attribute.
      * @return the {@code download} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getDownload() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -682,7 +682,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code download} attribute.
      * @param download {@code download} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setDownload(final String download) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -691,7 +691,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code ping} attribute.
      * @return the {@code ping} attribute
      */
-    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxGetter({CHROME, FF})
     public String getPing() {
         return ((HtmlAnchor) getDomNodeOrDie()).getPingAttribute();
     }
@@ -700,7 +700,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code ping} attribute.
      * @param ping {@code ping} attribute
      */
-    @JsxSetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    @JsxSetter({CHROME, FF})
     public void setPing(final String ping) {
         getDomNodeOrDie().setAttribute("ping", ping);
     }
@@ -745,7 +745,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter(@WebBrowser(FF))
+    @JsxGetter(FF)
     public DOMTokenList getRelList() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -754,7 +754,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code protocolLong} attribute.
      * @return the {@code protocolLong} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getProtocolLong() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -763,7 +763,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code Methods} attribute.
      * @return the {@code Methods} attribute
      */
-    @JsxGetter(propertyName = "Methods", value = @WebBrowser(IE))
+    @JsxGetter(propertyName = "Methods", value = IE)
     public String getMethods() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -772,7 +772,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code Methods} attribute.
      * @param methods {@code Methods} attribute
      */
-    @JsxSetter(propertyName = "Methods", value = @WebBrowser(IE))
+    @JsxSetter(propertyName = "Methods", value = IE)
     public void setMethods(final String methods) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -781,7 +781,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code mimeType} attribute.
      * @return the {@code mimeType} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getMimeType() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -790,7 +790,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code mimeType} attribute.
      * @param mimeType {@code mimeType} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setMimeType(final String mimeType) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -799,7 +799,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code nameProp} attribute.
      * @return the {@code nameProp} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getNameProp() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -808,7 +808,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Returns the {@code urn} attribute.
      * @return the {@code urn} attribute
      */
-    @JsxGetter(@WebBrowser(IE))
+    @JsxGetter(IE)
     public String getUrn() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
@@ -817,7 +817,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the {@code urn} attribute.
      * @param urn {@code urn} attribute
      */
-    @JsxSetter(@WebBrowser(IE))
+    @JsxSetter(IE)
     public void setUrn(final String urn) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
