@@ -80,7 +80,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList2;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
