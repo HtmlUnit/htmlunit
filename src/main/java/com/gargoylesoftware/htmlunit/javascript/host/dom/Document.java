@@ -691,6 +691,10 @@ public class Document extends EventNode {
      */
     @JsxGetter
     public String getCharacterSet() {
+        if (!(getPage() instanceof HtmlPage)) {
+            // TODO: implement XmlPage.getCharset
+            return "";
+        }
         final Charset charset = getPage().getCharset();
         if (charset != null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
             return charset.name().toLowerCase(Locale.ROOT);
@@ -704,6 +708,10 @@ public class Document extends EventNode {
      */
     @JsxGetter
     public String getCharset() {
+        if (!(getPage() instanceof HtmlPage)) {
+            // TODO: implement XmlPage.getCharset
+            return "";
+        }
         final Charset charset = getPage().getCharset();
         if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
             return charset.name().toLowerCase(Locale.ROOT);
@@ -990,6 +998,10 @@ public class Document extends EventNode {
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
+        if (!(getPage() instanceof HtmlPage)) {
+            // TODO: implement XmlPage.getUrl
+            return "";
+        }
         return getPage().getUrl().toExternalForm();
     }
 
