@@ -173,7 +173,7 @@ public class Event extends SimpleScriptable {
     private EventTarget target_;       // W3C standard read-only equivalent of srcElement.
     private Scriptable currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
-    private Object keyCode_;           // Key code for a keypress
+    private int keyCode_;           // Key code for a keypress
     private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
     private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
@@ -410,7 +410,7 @@ public class Event extends SimpleScriptable {
      * Sets the key code.
      * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
      */
-    protected void setKeyCode(final Object keyCode) {
+    protected void setKeyCode(final int keyCode) {
         keyCode_ = keyCode;
     }
 
@@ -418,10 +418,7 @@ public class Event extends SimpleScriptable {
      * Returns the key code associated with the event.
      * @return the key code associated with the event
      */
-    public Object getKeyCode() {
-        if (keyCode_ == null) {
-            return Integer.valueOf(0);
-        }
+    public int getKeyCode() {
         return keyCode_;
     }
 

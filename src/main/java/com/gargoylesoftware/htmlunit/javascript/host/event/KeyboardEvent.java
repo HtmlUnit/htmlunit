@@ -808,7 +808,7 @@ public class KeyboardEvent extends UIEvent {
     public static final int DOM_VK_WIN_OEM_CLEAR = 254;
 
     /**
-     * For {@link #KEYDOWN} and {@link #KEYUP}, this map stores {@link #setKeyCode(Object)} associated with
+     * For {@link #KEYDOWN} and {@link #KEYUP}, this map stores {@link #setKeyCode(int)} associated with
      * the character (if they are not the same).
      * You can verify this <a href="http://www.asquare.net/javascript/tests/KeyCode.html">here</a>
      */
@@ -984,7 +984,7 @@ public class KeyboardEvent extends UIEvent {
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
-        setKeyCode(Integer.valueOf(keyCode));
+        setKeyCode(keyCode);
         setMetaKey(metaKey);
         charCode_ = 0;
     }
@@ -1030,7 +1030,7 @@ public class KeyboardEvent extends UIEvent {
      */
     @Override
     @JsxGetter
-    public Object getKeyCode() {
+    public int getKeyCode() {
         return super.getKeyCode();
     }
 
@@ -1060,4 +1060,44 @@ public class KeyboardEvent extends UIEvent {
     public boolean isAltKey() {
         return super.isAltKey();
     }
+
+    /**
+     * Returns the value of a key or keys pressed by the user.
+     * @return the value of a key or keys pressed by the user
+     */
+    @JsxGetter
+    public String getKey() {
+        switch (getKeyCode()) {
+            case DOM_VK_SHIFT:
+                return "Shift";
+
+            default:
+                return String.valueOf(isShiftKey() ? Character.toUpperCase((char) which_) : (char) which_);
+        }
+    }
+
+    /**
+     * Returns the value of a key or keys pressed by the user.
+     * @return the value of a key or keys pressed by the user
+     */
+    @JsxGetter(@WebBrowser(IE))
+    public int getChar() {
+        return charCode_;
+    }
+
+    /**
+     * Returns a physical key on the keyboard.
+     * @return a physical key on the keyboard
+     */
+    @JsxGetter({@WebBrowser(CHROME), @WebBrowser(FF)})
+    public String getCode() {
+        switch (getKeyCode()) {
+            case DOM_VK_SHIFT:
+                return "ShiftLeft";
+
+            default:
+                return "Key" + (isShiftKey() ? Character.toUpperCase((char) which_) : (char) which_);
+        }
+    }
+
 }
