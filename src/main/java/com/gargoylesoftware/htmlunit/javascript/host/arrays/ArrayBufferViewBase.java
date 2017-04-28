@@ -121,9 +121,12 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      */
     @JsxFunction
     public void set(final ScriptableObject sourceArray, final int offset) {
-        final int length = ((Number) ScriptableObject.getProperty(sourceArray, "length")).intValue();
-        for (int i = 0; i < length; i++) {
-            put(i + offset, this, sourceArray.get(i));
+        final Object lengthProperty = ScriptableObject.getProperty(sourceArray, "length");
+        if (lengthProperty instanceof Number) {
+            final int length = ((Number) lengthProperty).intValue();
+            for (int i = 0; i < length; i++) {
+                put(i + offset, this, sourceArray.get(i));
+            }
         }
     }
 
