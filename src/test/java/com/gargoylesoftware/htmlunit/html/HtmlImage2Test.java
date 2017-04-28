@@ -135,7 +135,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            FF52 = "false")
     public void isDisplayedEmptySource() throws Exception {
         isDisplayed("src=''");
     }
