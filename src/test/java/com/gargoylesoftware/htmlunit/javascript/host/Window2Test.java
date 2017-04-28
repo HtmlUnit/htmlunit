@@ -685,7 +685,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"675", "1256", "658", "1239"},
-            FF = {"674", "1258", "657", "1241"},
+            FF45 = {"674", "1258", "657", "1241"},
+            FF52 = {"851", "1266", "834", "1249"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -719,7 +720,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"})
+            FF45 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"},
+            FF52 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1592"})
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -808,7 +810,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            FF = {"11", "91", "0"})
+            FF45 = {"11", "91", "0"},
+            FF52 = {"11", "91", "8"})
     public void mozInnerScreenX() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
