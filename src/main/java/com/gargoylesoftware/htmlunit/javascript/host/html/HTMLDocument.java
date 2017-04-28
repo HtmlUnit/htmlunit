@@ -32,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -117,7 +116,6 @@ import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -1480,38 +1478,6 @@ public class HTMLDocument extends Document {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        final Object response = super.get(name, start);
-
-        // IE8 support .querySelector(All) but not in quirks mode
-        // => TODO: find a better way to handle this!
-        if (response instanceof FunctionObject
-            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
-            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            Document document = null;
-            if (start instanceof DocumentProxy) {
-                // if in prototype no domNode is set -> use start
-                document = ((DocumentProxy) start).getDelegee();
-            }
-            else {
-                final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
-                if (page != null) {
-                    document = (Document) page.getScriptableObject();
-                }
-            }
-            if (document != null && document instanceof HTMLDocument
-                && ((HTMLDocument) document).getDocumentMode() < 8) {
-                return NOT_FOUND;
-            }
-        }
-
-        return response;
     }
 
     /**

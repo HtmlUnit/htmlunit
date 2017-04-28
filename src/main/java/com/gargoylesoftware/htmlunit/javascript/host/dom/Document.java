@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_C
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.BrowserName.FF;
@@ -79,13 +80,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code Document}.
@@ -996,6 +1001,38 @@ public class Document extends EventNode {
     @JsxGetter(value = @WebBrowser(IE), propertyName = "URLUnencoded")
     public String getURLUnencoded() {
         return getURL();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        final Object response = super.get(name, start);
+
+        // IE support .querySelector(All) but not in quirks mode
+        // => TODO: find a better way to handle this!
+        if (response instanceof FunctionObject
+            && ("querySelectorAll".equals(name) || "querySelector".equals(name))
+            && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+            Document document = null;
+            if (start instanceof DocumentProxy) {
+                // if in prototype no domNode is set -> use start
+                document = ((DocumentProxy) start).getDelegee();
+            }
+            else {
+                final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
+                if (page != null) {
+                    document = (Document) page.getScriptableObject();
+                }
+            }
+            if (document != null && document instanceof HTMLDocument
+                && ((HTMLDocument) document).getDocumentMode() < 8) {
+                return NOT_FOUND;
+            }
+        }
+
+        return response;
     }
 
 }
