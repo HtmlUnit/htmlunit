@@ -202,4 +202,22 @@ public class ArrayBufferViewBase extends ArrayBufferView {
         return 1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            final int length = getLength();
+            final StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < length; i++) {
+                builder.append(get(i, this));
+                if (i < length - 1) {
+                    builder.append(',');
+                }
+            }
+            return builder.toString();
+        }
+        return super.getDefaultValue(hint);
+    }
 }

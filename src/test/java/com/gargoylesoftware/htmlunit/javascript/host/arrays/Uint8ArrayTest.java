@@ -171,4 +171,33 @@ public class Uint8ArrayTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1"},
+            IE = "exception")
+    public void defineProperty() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var array = new Uint8Array(1);\n"
+            + "    (false) || Object.defineProperty(array, Symbol, {\n"
+            + "      get: function() {\n"
+            + "        return 1;\n"
+            + "      }\n"
+            + "    });\n"
+            + "    alert(array);\n"
+            + "    alert(array[Symbol]);\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
