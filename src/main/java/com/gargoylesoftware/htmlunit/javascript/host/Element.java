@@ -1245,7 +1245,7 @@ public class Element extends EventNode {
     }
 
     /**
-     * Implement the scrollIntoView() JavaScript function but don't actually do
+     * Implement the {@code scrollIntoView()} JavaScript function but don't actually do
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */
@@ -1253,7 +1253,7 @@ public class Element extends EventNode {
     public void scrollIntoView() { /* do nothing at the moment */ }
 
     /**
-     * Implement the {@code scrollIntoViewIfNeeded(){ JavaScript function but don't actually do
+     * Implement the {@code scrollIntoViewIfNeeded()} JavaScript function but don't actually do
      * anything.
      */
     @JsxFunction({@WebBrowser(CHROME), @WebBrowser(FF)})

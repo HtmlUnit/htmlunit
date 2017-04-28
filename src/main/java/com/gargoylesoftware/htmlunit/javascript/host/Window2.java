@@ -1701,7 +1701,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * Does nothing special anymore.
      * @param self self
      * @param type the type of events to capture
-     * @see Document#captureEvents(String)
+     * @see Document2#captureEvents(String)
      */
     @Function
     public static void captureEvents(final Object self, final String type) {
