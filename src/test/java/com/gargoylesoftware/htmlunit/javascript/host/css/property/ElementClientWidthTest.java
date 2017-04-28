@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
 
 import org.junit.Test;
@@ -187,8 +188,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "240")
-    @NotYetImplemented(FF)
+            FF45 = "240")
+    @NotYetImplemented(FF45)
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
