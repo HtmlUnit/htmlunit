@@ -1066,12 +1066,20 @@ public class KeyboardEvent extends UIEvent {
      */
     @JsxGetter
     public String getKey() {
-        switch (getKeyCode()) {
+        int code = getKeyCode();
+        if (code == 0) {
+            code = getCharCode();
+        }
+        switch (code) {
             case DOM_VK_SHIFT:
                 return "Shift";
+            case DOM_VK_PERIOD:
+                return ".";
+            case DOM_VK_RETURN:
+                return "Enter";
 
             default:
-                return String.valueOf(isShiftKey() ? Character.toUpperCase((char) which_) : (char) which_);
+                return String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
         }
     }
 
@@ -1080,8 +1088,22 @@ public class KeyboardEvent extends UIEvent {
      * @return the value of a key or keys pressed by the user
      */
     @JsxGetter(IE)
-    public int getChar() {
-        return charCode_;
+    public String getChar() {
+        int code = getKeyCode();
+        if (code == 0) {
+            code = getCharCode();
+        }
+        switch (code) {
+            case DOM_VK_SHIFT:
+                return "";
+            case DOM_VK_RETURN:
+                return "\n";
+            case DOM_VK_PERIOD:
+                return ".";
+
+            default:
+                return String.valueOf(isShiftKey() ? (char) which_ : Character.toLowerCase((char) which_));
+        }
     }
 
     /**
@@ -1090,12 +1112,21 @@ public class KeyboardEvent extends UIEvent {
      */
     @JsxGetter({CHROME, FF})
     public String getCode() {
-        switch (getKeyCode()) {
+        int code = getKeyCode();
+        if (code == 0) {
+            code = getCharCode();
+        }
+        switch (code) {
             case DOM_VK_SHIFT:
                 return "ShiftLeft";
+            case DOM_VK_PERIOD:
+            case '.':
+                return "Period";
+            case DOM_VK_RETURN:
+                return "Enter";
 
             default:
-                return "Key" + (isShiftKey() ? Character.toUpperCase((char) which_) : (char) which_);
+                return "Key" + Character.toUpperCase((char) which_);
         }
     }
 

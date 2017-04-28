@@ -26,7 +26,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -371,11 +370,10 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keyup:190,0,190,.,.,undefined,false",
                     "keydown:13,0,13,Enter,\n,undefined,false",
                     "keypress:13,13,13,Enter,\n,undefined,false",
-                    "keyup:13,0,13,Enter,\n,undefined"}
+                    "keyup:13,0,13,Enter,\n,undefined,false"}
             )
     // https://github.com/SeleniumHQ/selenium/issues/2531
     @BuggyWebDriver
-    @NotYetImplemented
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -385,7 +383,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "  e = e ? e : window.event;\n"
             + "  document.getElementById('myTextarea').value "
             + "+= e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
-            + "+ e.key + ',' + e.char + ',' + e.code + ',' + e.shiftKey + '\\n';\n"
+            + "+ e.key + ',' + e.char + ',' + e.code + ',' + e.shiftKey + '\\r\\n';\n"
             + "}\n"
             + "document.getElementById('keyId').onkeyup = handler;\n"
             + "document.getElementById('keyId').onkeydown = handler;\n"
@@ -398,7 +396,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("keyId")).sendKeys(keysToSend);
 
-        final String[] actual = driver.findElement(By.id("myTextarea")).getAttribute("value").split("\r\n|\n");
+        final String[] actual = driver.findElement(By.id("myTextarea")).getAttribute("value").split("\r\n");
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(actual).toString());
     }
 

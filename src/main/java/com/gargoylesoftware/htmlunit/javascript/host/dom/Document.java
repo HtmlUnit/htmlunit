@@ -1019,7 +1019,7 @@ public class Document extends EventNode {
                 // if in prototype no domNode is set -> use start
                 document = ((DocumentProxy) start).getDelegee();
             }
-            else {
+            else if (start instanceof HTMLDocument) {
                 final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
                 if (page != null) {
                     document = (Document) page.getScriptableObject();

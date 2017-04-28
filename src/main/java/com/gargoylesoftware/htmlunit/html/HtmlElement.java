@@ -563,12 +563,12 @@ public abstract class HtmlElement extends DomElement {
             }
 
             final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
-                    shiftPressed_, ctrlPressed_, altPressed_);
+                    shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
             final ScriptResult keyDownResult = fireEvent(keyDown);
 
             if (!keyDown.isAborted(keyDownResult)) {
                 final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
-                        shiftPressed_, ctrlPressed_, altPressed_);
+                        shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
                 final ScriptResult keyPressResult = fireEvent(keyPress);
 
                 if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
@@ -582,10 +582,10 @@ public abstract class HtmlElement extends DomElement {
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput) {
-            fireKeyboardEvent(nashorn, Event2.TYPE_INPUT, c);
+            fireKeyboardEvent(nashorn, Event2.TYPE_INPUT, c, shiftPressed_ | isShiftNeeded);
         }
 
-        fireKeyboardEvent(nashorn, Event.TYPE_KEY_UP, c);
+        fireKeyboardEvent(nashorn, Event.TYPE_KEY_UP, c, shiftPressed_ | isShiftNeeded);
 
         if (isShiftNeeded) {
             if (nashorn) {
@@ -612,12 +612,12 @@ public abstract class HtmlElement extends DomElement {
         return webClient.getCurrentWindow().getEnclosedPage();
     }
 
-    private void fireKeyboardEvent(final boolean nashorn, final String eventType, final char c) {
+    private void fireKeyboardEvent(final boolean nashorn, final String eventType, final char c, final boolean shift) {
         if (nashorn) {
-            fireEvent(new KeyboardEvent2(this, eventType, c, shiftPressed_, ctrlPressed_, altPressed_));
+            fireEvent(new KeyboardEvent2(this, eventType, c, shift, ctrlPressed_, altPressed_));
         }
         else {
-            fireEvent(new KeyboardEvent(this, eventType, c, shiftPressed_, ctrlPressed_, altPressed_));
+            fireEvent(new KeyboardEvent(this, eventType, c, shift, ctrlPressed_, altPressed_));
         }
     }
 
