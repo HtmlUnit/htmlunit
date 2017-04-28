@@ -44,11 +44,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -57,9 +55,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.CSSException;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.DocumentType;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -84,8 +80,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -99,7 +93,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeIterator;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
@@ -170,17 +163,6 @@ public class HTMLDocument extends Document {
     /** Contains all supported vendor specific events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
-    // all as lowercase for performance
-    private static final Set<String> EXECUTE_CMDS_IE = new HashSet<>();
-    /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
-    private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
-    private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
-
-    /**
-     * Static counter for {@link #uniqueID_}.
-     */
-    private static int UniqueID_Counter_ = 1;
-
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
     private HTMLElement activeElement_;
@@ -189,10 +171,7 @@ public class HTMLDocument extends Document {
     private final StringBuilder writeBuilder_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
     private String domain_;
-    private String uniqueID_;
     private String lastModified_;
-    private String compatMode_;
-    private int documentMode_ = -1;
 
     private boolean closePostponedAction_;
 
@@ -226,66 +205,6 @@ public class HTMLDocument extends Document {
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
 
-        // commands
-        List<String> cmds = Arrays.asList(
-            "2D-Position", "AbsolutePosition",
-            "BlockDirLTR", "BlockDirRTL", "BrowseMode",
-            "ClearAuthenticationCache", "CreateBookmark", "Copy", "Cut",
-            "DirLTR", "DirRTL",
-            "EditMode",
-            "InlineDirLTR", "InlineDirRTL", "InsertButton", "InsertFieldset",
-            "InsertIFrame", "InsertInputButton", "InsertInputCheckbox",
-            "InsertInputFileUpload", "InsertInputHidden", "InsertInputImage", "InsertInputPassword", "InsertInputRadio",
-            "InsertInputReset", "InsertInputSubmit", "InsertInputText", "InsertMarquee",
-            "InsertSelectDropdown", "InsertSelectListbox", "InsertTextArea",
-            "LiveResize", "MultipleSelection", "Open",
-            "OverWrite", "PlayImage",
-            "Refresh", "RemoveParaFormat", "SaveAs",
-            "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
-            "UnBookmark",
-            "Paste"
-        );
-        for (final String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
-        }
-
-        cmds = Arrays.asList(
-            "BackColor", "BackgroundImageCache" /* Undocumented */,
-            "Bold",
-            "CreateLink", "Delete",
-            "FontName", "FontSize", "ForeColor", "FormatBlock",
-            "Indent", "InsertHorizontalRule", "InsertImage",
-            "InsertOrderedList", "InsertParagraph", "InsertUnorderedList",
-            "Italic", "JustifyCenter", "JustifyFull", "JustifyLeft", "JustifyNone",
-            "JustifyRight",
-            "Outdent",
-            "Print",
-            "Redo", "RemoveFormat",
-            "SelectAll", "StrikeThrough", "Subscript", "Superscript",
-            "Underline", "Undo", "Unlink", "Unselect"
-        );
-        for (final String cmd : cmds) {
-            EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
-            if (!"Bold".equals(cmd)) {
-                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
-            }
-        }
-
-        cmds = Arrays.asList(
-            "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
-            "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
-            "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
-            "insertParagraph", "italic",
-            "justifyCenter", "JustifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
-            "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
-            "useCSS", "styleWithCSS"
-        );
-        for (final String cmd : cmds) {
-            EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
-            if (!"bold".equals(cmd)) {
-                EXECUTE_CMDS_CHROME.add(cmd.toLowerCase(Locale.ROOT));
-            }
-        }
     }
 
     /**
@@ -718,81 +637,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the {@code compatMode} property.
-     * @return the {@code compatMode} property
-     */
-    @JsxGetter
-    public String getCompatMode() {
-        // initialize the modes
-        getDocumentMode();
-        return compatMode_;
-    }
-
-    /**
-     * Returns the {@code documentMode} property.
-     * @return the {@code documentMode} property
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public int getDocumentMode() {
-        if (documentMode_ != -1) {
-            return documentMode_;
-        }
-
-        compatMode_ = "CSS1Compat";
-
-        final BrowserVersion browserVersion = getBrowserVersion();
-        if (isQuirksDocType()) {
-            compatMode_ = "BackCompat";
-        }
-
-        final float version = browserVersion.getBrowserVersionNumeric();
-        documentMode_ = (int) Math.floor(version);
-        return documentMode_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Called from the HTMLParser if a 'X-UA-Compatible' meta tag found.
-     * @param documentMode the mode forced by the meta tag
-     */
-    public void forceDocumentMode(final int documentMode) {
-        documentMode_ = documentMode;
-        compatMode_ = documentMode == 5 ? "BackCompat" : "CSS1Compat";
-    }
-
-    private boolean isQuirksDocType() {
-        final DocumentType docType = getPage().getDoctype();
-        if (docType != null) {
-            final String systemId = docType.getSystemId();
-            if (systemId != null) {
-                if ("http://www.w3.org/TR/html4/strict.dtd".equals(systemId)) {
-                    return false;
-                }
-
-                if ("http://www.w3.org/TR/html4/loose.dtd".equals(systemId)) {
-                    final String publicId = docType.getPublicId();
-                    if ("-//W3C//DTD HTML 4.01 Transitional//EN".equals(publicId)) {
-                        return false;
-                    }
-                }
-
-                if ("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd".equals(systemId)
-                    || "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd".equals(systemId)) {
-                    return false;
-                }
-            }
-            else if (docType.getPublicId() == null) {
-                if (docType.getName() != null) {
-                    return false;
-                }
-                return true;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Adds a cookie, as long as cookies are enabled.
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533693.aspx">MSDN documentation</a>
      * @param newCookie in the format "name=value[;expires=date][;domain=domainname][;path=path][;secure]
@@ -839,19 +683,6 @@ public class HTMLDocument extends Document {
     @JsxGetter(propertyName = "URL")
     public String getURL() {
         return getPage().getUrl().toExternalForm();
-    }
-
-    /**
-     * Retrieves an auto-generated, unique identifier for the object.
-     * <b>Note</b> The unique ID generated is not guaranteed to be the same every time the page is loaded.
-     * @return an auto-generated, unique identifier for the object
-     */
-    @JsxGetter(@WebBrowser(IE))
-    public String getUniqueID() {
-        if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_++;
-        }
-        return uniqueID_;
     }
 
     /**
@@ -912,14 +743,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * JavaScript function "close".
-     *
-     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
-     * a good description of the semantics of open(), write(), writeln() and close().
-     *
-     * @throws IOException if an IO problem occurs
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
     public void close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -1126,21 +952,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns this document's {@code body} element.
-     * @return this document's {@code body} element
-     */
-    @JsxGetter
-    @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
-    public HTMLElement getBody() {
-        final HtmlPage page = getPage();
-        final HtmlElement body = page.getBody();
-        if (body != null) {
-            return (HTMLElement) body.getScriptableObject();
-        }
-        return null;
-    }
-
-    /**
      * Returns this document's {@code head} element.
      * @return this document's {@code head} element
      */
@@ -1151,6 +962,15 @@ public class HTMLDocument extends Document {
             return (HTMLElement) head.getScriptableObject();
         }
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(@WebBrowser(FF))
+    public HTMLElement getBody() {
+        return super.getBody();
     }
 
     /**
@@ -1602,60 +1422,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Indicates if the command is supported.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536681.aspx">MSDN documentation</a>
-     * @param cmd the command identifier
-     * @return {@code true} if the command is supported
-     */
-    @JsxFunction
-    public boolean queryCommandSupported(final String cmd) {
-        return hasCommand(cmd, true);
-    }
-
-    private boolean hasCommand(final String cmd, final boolean includeBold) {
-        if (null == cmd) {
-            return false;
-        }
-
-        final String cmdLC = cmd.toLowerCase(Locale.ROOT);
-        if (getBrowserVersion().isIE()) {
-            return EXECUTE_CMDS_IE.contains(cmdLC);
-        }
-        if (getBrowserVersion().isChrome()) {
-            return EXECUTE_CMDS_CHROME.contains(cmdLC) || (includeBold && "bold".equalsIgnoreCase(cmd));
-        }
-        return EXECUTE_CMDS_FF.contains(cmdLC);
-    }
-
-    /**
-     * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
-     * the current state of the document.
-     * @param cmd the command identifier
-     * @return {@code true} if the command can be successfully executed
-     */
-    @JsxFunction
-    public boolean queryCommandEnabled(final String cmd) {
-        return hasCommand(cmd, true);
-    }
-
-    /**
-     * Executes a command.
-     * @see <a href="http://msdn2.microsoft.com/en-us/library/ms536419.aspx">MSDN documentation</a>
-     * @param cmd the command identifier
-     * @param userInterface display a user interface if the command supports one
-     * @param value the string, number, or other value to assign (possible values depend on the command)
-     * @return {@code true} if the command was successful, {@code false} otherwise
-     */
-    @JsxFunction
-    public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
-        if (!hasCommand(cmd, false)) {
-            return false;
-        }
-        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
-        return true;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -1720,44 +1486,6 @@ public class HTMLDocument extends Document {
         event.setTarget(this);
         final ScriptResult result = fireEvent(event);
         return !event.isAborted(result);
-    }
-
-    /**
-     * Retrieves all element nodes from descendants of the starting element node that match any selector
-     * within the supplied selector strings.
-     * The NodeList object returned by the querySelectorAll() method must be static, not live.
-     * @param selectors the selectors
-     * @return the static node list
-     */
-    @JsxFunction
-    public NodeList querySelectorAll(final String selectors) {
-        try {
-            return NodeList.staticNodeList(this, getDomNodeOrDie().querySelectorAll(selectors));
-        }
-        catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
-        }
-    }
-
-    /**
-     * Returns the first element within the document that matches the specified group of selectors.
-     * @param selectors the selectors
-     * @return null if no matches are found; otherwise, it returns the first matching element
-     */
-    @JsxFunction
-    public Node querySelector(final String selectors) {
-        try {
-            final DomNode node = getDomNodeOrDie().querySelector(selectors);
-            if (node != null) {
-                return (Node) node.getScriptableObject();
-            }
-            return null;
-        }
-        catch (final CSSException e) {
-            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
-                    + selectors + "' error: " + e.getMessage() + ").");
-        }
     }
 
     /**
