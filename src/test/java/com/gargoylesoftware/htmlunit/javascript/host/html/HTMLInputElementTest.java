@@ -1407,8 +1407,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "0", "2", "7"},
-            FF52 = {"9", "9", "2", "7"})
+    @Alerts({"0", "0", "2", "7"})
     public void selectionRange() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
