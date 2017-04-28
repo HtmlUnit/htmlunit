@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Natasha Lazarova
  */
 @RunWith(BrowserRunner.class)
 public class NativeObjectTest extends WebDriverTestCase {
@@ -121,6 +122,75 @@ public class NativeObjectTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {})
+    public void assignUndefined2() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  if (Object.assign) {\n"
+                + "    var obj = { a: 1 };\n"
+                + "    var copy = Object.assign({}, undefined, undefined);\n"
+                + "    alert(copy.a);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {})
+    @NotYetImplemented({CHROME, FF})
+    public void assignNull() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  if (Object.assign) {\n"
+                + "    var obj = { a: 1 };\n"
+                + "    var copy = Object.assign({}, null);\n"
+                + "    alert(copy.a);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = {})
+    @NotYetImplemented({CHROME, FF})
+    public void assignNull2() throws Exception {
+        final String html
+                = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  if (Object.assign) {\n"
+                + "    var obj = { a: 1 };\n"
+                + "    var copy = Object.assign({}, null, null);\n"
+                + "    alert(copy.a);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 
     /**
      * @throws Exception if the test fails
