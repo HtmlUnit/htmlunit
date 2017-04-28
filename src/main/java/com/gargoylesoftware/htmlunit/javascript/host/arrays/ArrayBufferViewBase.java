@@ -69,7 +69,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
             }
             super.constructor(array, (int) dbByteOffset, (int) dbLength);
         }
-        else if (getBrowserVersion().hasFeature(JS_TYPED_ARRAYS_NULL)) {
+        else if (object == Undefined.instance || getBrowserVersion().hasFeature(JS_TYPED_ARRAYS_NULL)) {
             constructor(0);
         }
         else {
