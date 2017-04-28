@@ -980,4 +980,22 @@ public class Document extends EventNode {
         return uniqueID_;
     }
 
+    /**
+     * Returns the value of the {@code URL} property.
+     * @return the value of the {@code URL} property
+     */
+    @JsxGetter(propertyName = "URL")
+    public String getURL() {
+        return getPage().getUrl().toExternalForm();
+    }
+
+    /**
+     * Returns the value of the {@code URLUnencoded} property.
+     * @return the value of the {@code URLUnencoded} property
+     */
+    @JsxGetter(value = @WebBrowser(IE), propertyName = "URLUnencoded")
+    public String getURLUnencoded() {
+        return getURL();
+    }
+
 }

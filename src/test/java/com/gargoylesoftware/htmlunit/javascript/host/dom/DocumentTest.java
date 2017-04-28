@@ -2335,4 +2335,32 @@ public class DocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"§§URL§§", "undefined"},
+            IE = {"§§URL§§", "§§URL§§"})
+    public void urlUnencoded() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.URL);\n"
+            + "      alert(document.URLUnencoded);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final URL url = new URL(URL_FIRST, "abc%20def");
+        expandExpectedAlertsVariables(url);
+
+        final WebDriver driver = loadPage2(html, url);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
 }
