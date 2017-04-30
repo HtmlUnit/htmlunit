@@ -80,12 +80,12 @@ public class MessagePort extends EventTarget {
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
-        return getEventListenersContainer().getEventHandlerProp(eventName);
+        return getEventListenersContainer().getEventHandler(eventName);
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
         if (handler == null || handler instanceof Function) {
-            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+            getEventListenersContainer().setEventHandler(eventName, handler);
         }
         // Otherwise, fail silently.
     }

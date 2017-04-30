@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
@@ -339,7 +340,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
         if (handler == null || handler instanceof ScriptFunction) {
-            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+            getEventListenersContainer().setEventHandler(eventName, handler);
         }
         // Otherwise, fail silently.
     }
@@ -827,7 +828,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     @Setter
     public static void setOnload(final Object self, final Object onload) {
-        getWindow(self).getEventListenersContainer().setEventHandlerProp("load", onload);
+        getWindow(self).getEventListenersContainer().setEventHandler(Event2.TYPE_LOAD, onload);
     }
 
     /**
@@ -837,7 +838,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     @Getter
     public static Object getOnclick(final Object self) {
-        return getWindow(self).getHandlerForJavaScript("click");
+        return getWindow(self).getHandlerForJavaScript(MouseEvent2.TYPE_CLICK);
     }
 
     /**
@@ -847,7 +848,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     @Setter
     public static void setOnclick(final Object self, final Object onclick) {
-        getWindow(self).setHandlerForJavaScript("click", onclick);
+        getWindow(self).setHandlerForJavaScript(MouseEvent2.TYPE_CLICK, onclick);
     }
 
     /**
@@ -857,7 +858,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     @Getter
     public static Object getOndblclick(final Object self) {
-        return getWindow(self).getHandlerForJavaScript("dblclick");
+        return getWindow(self).getHandlerForJavaScript(MouseEvent2.TYPE_DBL_CLICK);
     }
 
     /**
@@ -867,7 +868,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      */
     @Setter
     public static void setOndblclick(final Object self, final Object ondblclick) {
-        getWindow(self).setHandlerForJavaScript("dblclick", ondblclick);
+        getWindow(self).setHandlerForJavaScript(MouseEvent2.TYPE_DBL_CLICK, ondblclick);
     }
 
     /**

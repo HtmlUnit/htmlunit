@@ -206,7 +206,7 @@ public class EventListenersContainer2 implements Serializable {
      * @param eventName the event name (like "click")
      * @param value the new property
      */
-    public void setEventHandlerProp(final String eventName, final Object value) {
+    public void setEventHandler(final String eventName, final Object value) {
         Object handler = value;
         if (handler == Undefined.getUndefined()) {
             handler = null;

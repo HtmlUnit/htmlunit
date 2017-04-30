@@ -347,7 +347,7 @@ public class EventTarget2 extends SimpleScriptObject {
         else {
             container = getEventListenersContainer();
         }
-        container.setEventHandlerProp(
+        container.setEventHandler(
                 StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2), value);
     }
 

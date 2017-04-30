@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -94,7 +95,7 @@ public class Worker extends EventTarget {
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
-        getEventListenersContainer().setEventHandlerProp("message", onmessage);
+        getEventListenersContainer().setEventHandler(Event.TYPE_MESSAGE, onmessage);
     }
 
     /**
@@ -103,6 +104,6 @@ public class Worker extends EventTarget {
      */
     @JsxGetter
     public Object getOnmessage() {
-        return getEventListenersContainer().getEventHandlerProp("message");
+        return getEventListenersContainer().getEventHandler(Event.TYPE_MESSAGE);
     }
 }

@@ -246,7 +246,7 @@ public class EventTarget extends SimpleScriptable {
         }
 
         final String name = StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2);
-        return eventListenersContainer_.getEventHandlerProp(name);
+        return eventListenersContainer_.getEventHandler(name);
     }
 
     /**
@@ -303,7 +303,7 @@ public class EventTarget extends SimpleScriptable {
         else {
             container = getEventListenersContainer();
         }
-        container.setEventHandlerProp(
+        container.setEventHandler(
                 StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2), value);
     }
 

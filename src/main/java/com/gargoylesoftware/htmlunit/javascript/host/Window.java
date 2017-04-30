@@ -109,6 +109,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DataTransfer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -1117,7 +1118,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnload(final Object onload) {
-        getEventListenersContainer().setEventHandlerProp("load", onload);
+        getEventListenersContainer().setEventHandler(Event.TYPE_LOAD, onload);
     }
 
     /**
@@ -1126,7 +1127,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Object getOnclick() {
-        return getHandlerForJavaScript("click");
+        return getHandlerForJavaScript(Event.TYPE_LOAD);
     }
 
     /**
@@ -1135,7 +1136,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnclick(final Object onclick) {
-        setHandlerForJavaScript("click", onclick);
+        setHandlerForJavaScript(MouseEvent.TYPE_CLICK, onclick);
     }
 
     /**
@@ -1144,7 +1145,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Object getOndblclick() {
-        return getHandlerForJavaScript("dblclick");
+        return getHandlerForJavaScript(MouseEvent.TYPE_DBL_CLICK);
     }
 
     /**
@@ -1153,7 +1154,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndblclick(final Object ondblclick) {
-        setHandlerForJavaScript("dblclick", ondblclick);
+        setHandlerForJavaScript(MouseEvent.TYPE_DBL_CLICK, ondblclick);
     }
 
     /**
@@ -1265,12 +1266,12 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     private Object getHandlerForJavaScript(final String eventName) {
-        return getEventListenersContainer().getEventHandlerProp(eventName);
+        return getEventListenersContainer().getEventHandler(eventName);
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
         if (handler == null || handler instanceof Function) {
-            getEventListenersContainer().setEventHandlerProp(eventName, handler);
+            getEventListenersContainer().setEventHandler(eventName, handler);
         }
         // Otherwise, fail silently.
     }
