@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

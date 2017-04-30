@@ -25,9 +25,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;

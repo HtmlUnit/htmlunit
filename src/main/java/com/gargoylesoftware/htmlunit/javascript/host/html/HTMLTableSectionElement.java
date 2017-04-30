@@ -15,10 +15,10 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_VALIGN_SUPPORTS_IE_VALUES;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
 import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;

@@ -31,7 +31,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -430,21 +430,21 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     private void initDefaultFeatures() {
-        final WebBrowser expectedBrowser;
+        final SupportedBrowser expectedBrowser;
         if (isChrome()) {
-            expectedBrowser = WebBrowser.CHROME;
+            expectedBrowser = SupportedBrowser.CHROME;
         }
         else if (isFirefox()) {
-            expectedBrowser = WebBrowser.FF45;
+            expectedBrowser = SupportedBrowser.FF45;
         }
         else if (this == FIREFOX_52) {
-            expectedBrowser = WebBrowser.FF52;
+            expectedBrowser = SupportedBrowser.FF52;
         }
         else if (isIE()) {
-            expectedBrowser = WebBrowser.IE;
+            expectedBrowser = SupportedBrowser.IE;
         }
         else {
-            expectedBrowser = WebBrowser.EDGE;
+            expectedBrowser = SupportedBrowser.EDGE;
         }
 
         for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
@@ -452,7 +452,7 @@ public class BrowserVersion implements Serializable, Cloneable {
                 final Field field = BrowserVersionFeatures.class.getField(features.name());
                 final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
                 if (browserFeature != null) {
-                    for (final WebBrowser browser : browserFeature.value()) {
+                    for (final SupportedBrowser browser : browserFeature.value()) {
                         if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowser, browser)) {
                             features_.add(features);
                         }

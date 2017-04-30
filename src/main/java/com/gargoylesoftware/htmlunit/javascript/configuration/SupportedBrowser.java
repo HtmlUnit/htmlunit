@@ -15,11 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 /**
- * An annotation to specify a browser.
+ * An annotation to specify a supported browser.
  *
  * @author Ahmed Ashour
  */
-public enum WebBrowser {
+public enum SupportedBrowser {
 
     /** Latest version of Chrome. */
     CHROME,

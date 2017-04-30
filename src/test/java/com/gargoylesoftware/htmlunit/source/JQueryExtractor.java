@@ -39,7 +39,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
@@ -134,10 +134,10 @@ public final class JQueryExtractor {
      */
     public static void generateTestCases(final Class<? extends WebDriverTestCase> testClass,
             final File dir) throws Exception {
-        final Browser[] browsers = Browser.values();
+        final TestedBrowser[] browsers = TestedBrowser.values();
         // main browsers regardless of version e.g. "FF"
         final List<String> mainNames = new ArrayList<>();
-        for (final Browser b : browsers) {
+        for (final TestedBrowser b : browsers) {
             final String name = b.name();
             if (!"NONE".equals(name) && Character.isLetter(name.charAt(name.length() - 1))) {
                 mainNames.add(name);
@@ -145,7 +145,7 @@ public final class JQueryExtractor {
         }
 
         final Map<String, List<String>> browserVersions = new HashMap<>();
-        for (final Browser b : browsers) {
+        for (final TestedBrowser b : browsers) {
             final String name = b.name();
             for (final String mainName : mainNames) {
                 if (!name.equals(mainName) && name.startsWith(mainName)) {
@@ -161,7 +161,7 @@ public final class JQueryExtractor {
         final Map<String, Expectations> browserExpectations = new HashMap<>();
         for (final File file : dir.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
-                for (final Browser b : browsers) {
+                for (final TestedBrowser b : browsers) {
                     final String browserName = b.name();
                     if (file.getName().equalsIgnoreCase("results." + browserName.replace('_', '.') + ".txt")) {
                         browserExpectations.put(browserName, Expectations.readExpectations(file));
@@ -230,10 +230,10 @@ public final class JQueryExtractor {
                 final Method method = testClass.getMethod(methodName);
                 final NotYetImplemented notYetImplemented = method.getAnnotation(NotYetImplemented.class);
                 if (null != notYetImplemented) {
-                    final Browser[] notYetImplementedBrowsers = notYetImplemented.value();
+                    final TestedBrowser[] notYetImplementedBrowsers = notYetImplemented.value();
                     if (notYetImplementedBrowsers.length > 0) {
                         final List<String> browserNames = new ArrayList<>(notYetImplementedBrowsers.length);
-                        for (Browser browser : notYetImplementedBrowsers) {
+                        for (TestedBrowser browser : notYetImplementedBrowsers) {
                             browserNames.add(browser.name());
                         }
                         Collections.sort(browserNames);

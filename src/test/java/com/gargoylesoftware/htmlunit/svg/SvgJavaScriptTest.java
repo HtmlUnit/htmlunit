@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import org.junit.Test;

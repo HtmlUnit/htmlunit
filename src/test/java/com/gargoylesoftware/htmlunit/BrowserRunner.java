@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -154,9 +154,10 @@ public class BrowserRunner extends Suite {
     public static final String EMPTY_DEFAULT = "~InTerNal_To_BrowSeRRunNer#@$";
 
     /**
-     * Browser.
+     * Browser under test.
      */
-    public enum Browser {
+    public enum TestedBrowser {
+
         /** Latest version of Chrome. */
         CHROME,
 
@@ -300,7 +301,7 @@ public class BrowserRunner extends Suite {
      * Marks a test as not yet working for a particular browser (default value is all).
      * This will cause a failure to be considered as success and a success as failure forcing
      * us to remove this annotation when a feature has been implemented even unintentionally.
-     * @see Browser
+     * @see TestedBrowser
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
@@ -310,14 +311,14 @@ public class BrowserRunner extends Suite {
          * The browsers with which the case is not yet implemented.
          * @return the browsers
          */
-        Browser[] value() default {
+        TestedBrowser[] value() default {
             IE, FF, CHROME, EDGE
         };
     }
 
     /**
      * Indicates that the test runs manually in a real browser but not when using WebDriver to drive the browser.
-     * @see Browser
+     * @see TestedBrowser
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
@@ -327,7 +328,7 @@ public class BrowserRunner extends Suite {
          * The browsers with which the case is failing.
          * @return the browsers
          */
-        Browser[] value() default {
+        TestedBrowser[] value() default {
             IE, FF, CHROME, EDGE
         };
     }

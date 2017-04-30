@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.*;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -95,21 +95,21 @@ public abstract class AbstractJavaScriptConfiguration {
     public static ClassConfiguration getClassConfiguration(final Class<? extends HtmlUnitScriptable> klass,
         final BrowserVersion browser) {
         if (browser != null) {
-            final WebBrowser expectedBrowser;
+            final SupportedBrowser expectedBrowser;
             if (browser.equals(BrowserVersion.CHROME)) {
-                expectedBrowser = WebBrowser.CHROME;
+                expectedBrowser = SupportedBrowser.CHROME;
             }
             else if (browser.equals(BrowserVersion.INTERNET_EXPLORER)) {
-                expectedBrowser = WebBrowser.IE;
+                expectedBrowser = SupportedBrowser.IE;
             }
             else if (browser.equals(BrowserVersion.FIREFOX_45)) {
-                expectedBrowser = WebBrowser.FF45;
+                expectedBrowser = SupportedBrowser.FF45;
             }
             else if (browser.equals(BrowserVersion.FIREFOX_52)) {
-                expectedBrowser = WebBrowser.FF52;
+                expectedBrowser = SupportedBrowser.FF52;
             }
             else {
-                expectedBrowser = WebBrowser.EDGE;
+                expectedBrowser = SupportedBrowser.EDGE;
             }
 
             final String hostClassName = klass.getName();
@@ -175,7 +175,7 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     private static void process(final ClassConfiguration classConfiguration,
-            final String hostClassName, final WebBrowser expectedBrowser) {
+            final String hostClassName, final SupportedBrowser expectedBrowser) {
         final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
 
         CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
@@ -273,8 +273,8 @@ public abstract class AbstractJavaScriptConfiguration {
         }
     }
 
-    private static boolean isSupported(final WebBrowser[] browsers, final WebBrowser expectedBrowser) {
-        for (final WebBrowser browser : browsers) {
+    private static boolean isSupported(final SupportedBrowser[] browsers, final SupportedBrowser expectedBrowser) {
+        for (final SupportedBrowser browser : browsers) {
             if (isCompatible(browser, expectedBrowser)) {
                 return true;
             }
@@ -283,12 +283,12 @@ public abstract class AbstractJavaScriptConfiguration {
     }
 
     /**
-     * Returns whether the two {@link WebBrowser} are compatible or not.
-     * @param browser1 the first {@link WebBrowser}
-     * @param browser2 the second {@link WebBrowser}
-     * @return whether the two {@link WebBrowser} are compatible or not
+     * Returns whether the two {@link SupportedBrowser} are compatible or not.
+     * @param browser1 the first {@link SupportedBrowser}
+     * @param browser2 the second {@link SupportedBrowser}
+     * @return whether the two {@link SupportedBrowser} are compatible or not
      */
-    public static boolean isCompatible(final WebBrowser browser1, final WebBrowser browser2) {
+    public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
         return (browser1 == browser2)
                 || (browser1 == FF && (browser2 == FF45 || browser2 == FF52))
                 || (browser2 == FF && (browser1 == FF45 || browser1 == FF52));

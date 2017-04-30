@@ -40,7 +40,7 @@ import org.junit.runners.model.TestClass;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 
 /**
- * The runner for test methods that run with a specific browser ({@link BrowserRunner.Browser}).
+ * The runner for test methods that run with a specific browser ({@link BrowserRunner.TestedBrowser}).
  *
  * @author Ahmed Ashour
  * @author Frank Danek
@@ -255,8 +255,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     /**
      * Returns true if current {@link #browserVersion_} is contained in the specific <tt>browsers</tt>.
      */
-    private boolean isDefinedIn(final Browser[] browsers) {
-        for (final Browser browser : browsers) {
+    private boolean isDefinedIn(final TestedBrowser[] browsers) {
+        for (final TestedBrowser browser : browsers) {
             switch (browser) {
                 case IE:
                     if (browserVersion_.isIE()) {

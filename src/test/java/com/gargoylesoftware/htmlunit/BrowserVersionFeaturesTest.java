@@ -31,7 +31,7 @@ import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
-import com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser;
+import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.
@@ -88,7 +88,7 @@ public class BrowserVersionFeaturesTest  {
             final BrowserFeature browserFeature = field.getAnnotation(BrowserFeature.class);
 
             if (browserFeature != null) {
-                for (final WebBrowser annotatedBrowser : browserFeature.value()) {
+                for (final SupportedBrowser annotatedBrowser : browserFeature.value()) {
                     boolean inUse = false;
                     for (BrowserVersion supportedBrowser : browsers) {
                         if (AbstractJavaScriptConfiguration.isCompatible(expectedBrowserName(supportedBrowser),
@@ -105,21 +105,21 @@ public class BrowserVersionFeaturesTest  {
         }
     }
 
-    private static WebBrowser expectedBrowserName(final BrowserVersion browser) {
+    private static SupportedBrowser expectedBrowserName(final BrowserVersion browser) {
         if (browser == BrowserVersion.CHROME) {
-            return WebBrowser.CHROME;
+            return SupportedBrowser.CHROME;
         }
         if (browser == BrowserVersion.INTERNET_EXPLORER) {
-            return WebBrowser.IE;
+            return SupportedBrowser.IE;
         }
         if (browser == BrowserVersion.FIREFOX_45) {
-            return WebBrowser.FF45;
+            return SupportedBrowser.FF45;
         }
         if (browser == BrowserVersion.FIREFOX_52) {
-            return WebBrowser.FF52;
+            return SupportedBrowser.FF52;
         }
 
-        return WebBrowser.EDGE;
+        return SupportedBrowser.EDGE;
     }
 
     /**

@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.WebBrowser.IE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -54,10 +54,10 @@ public @interface JsxClass {
     String className() default "";
 
     /**
-     * The {@link WebBrowser}s supported by this constant.
-     * @return the {@link WebBrowser}s
+     * The {@link SupportedBrowser}s supported by this constant.
+     * @return the {@link SupportedBrowser}s
      */
-    WebBrowser[] browsers() default {
+    SupportedBrowser[] browsers() default {
         CHROME,
         FF,
         IE,

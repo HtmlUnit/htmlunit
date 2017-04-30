@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.Browser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Browser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -184,7 +184,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
             FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
-    @BuggyWebDriver(Browser.FF)
+    @BuggyWebDriver(FF)
     public void shiftKeys() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function appendMessage(message) {\n"
