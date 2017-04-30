@@ -2032,7 +2032,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnchange(final Object onchange) {
-        setEventHandlerProp("onchange", onchange);
+        setEventHandler("onchange", onchange);
     }
 
     /**
@@ -2059,7 +2059,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
-        setEventHandlerProp("onsubmit", onsubmit);
+        setEventHandler("onsubmit", onsubmit);
     }
 
     /**

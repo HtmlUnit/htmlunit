@@ -148,7 +148,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxSetter(IE)
     public void setOnreadystatechange(final Object handler) {
-        setEventHandlerProp("onreadystatechange", handler);
+        setEventHandler("onreadystatechange", handler);
     }
 
     /**
@@ -166,7 +166,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnload(final Object handler) {
-        setEventHandlerProp("onload", handler);
+        setEventHandler("onload", handler);
     }
 
     /**

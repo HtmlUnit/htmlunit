@@ -113,7 +113,7 @@ public class HTMLFrameElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnload(final Object eventHandler) {
-        setEventHandlerProp("onload", eventHandler);
+        setEventHandler("onload", eventHandler);
     }
 
     /**

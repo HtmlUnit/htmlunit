@@ -120,7 +120,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnload(final Object eventHandler) {
-        setEventHandlerProp("onload", eventHandler);
+        setEventHandler("onload", eventHandler);
         isAttachedToPageDuringOnload_ = getDomNodeOrDie().isAttachedToPage();
     }
 

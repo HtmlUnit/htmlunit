@@ -40,7 +40,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnclick(final Object handler) {
-        setEventHandlerProp("onclick", handler);
+        setEventHandler("onclick", handler);
     }
 
     /**
@@ -58,7 +58,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOndblclick(final Object handler) {
-        setEventHandlerProp("ondblclick", handler);
+        setEventHandler("ondblclick", handler);
     }
 
     /**
@@ -76,7 +76,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnblur(final Object handler) {
-        setEventHandlerProp("onblur", handler);
+        setEventHandler("onblur", handler);
     }
 
     /**
@@ -94,7 +94,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnfocus(final Object handler) {
-        setEventHandlerProp("onfocus", handler);
+        setEventHandler("onfocus", handler);
     }
 
     /**
@@ -112,7 +112,7 @@ public class EventNode extends Node {
      */
     @JsxSetter(IE)
     public void setOnfocusin(final Object handler) {
-        setEventHandlerProp("onfocusin", handler);
+        setEventHandler("onfocusin", handler);
     }
 
     /**
@@ -130,7 +130,7 @@ public class EventNode extends Node {
      */
     @JsxSetter(IE)
     public void setOnfocusout(final Object handler) {
-        setEventHandlerProp("onfocusout", handler);
+        setEventHandler("onfocusout", handler);
     }
 
     /**
@@ -148,7 +148,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnkeydown(final Object handler) {
-        setEventHandlerProp("onkeydown", handler);
+        setEventHandler("onkeydown", handler);
     }
 
     /**
@@ -166,7 +166,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnkeypress(final Object handler) {
-        setEventHandlerProp("onkeypress", handler);
+        setEventHandler("onkeypress", handler);
     }
 
     /**
@@ -184,7 +184,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnkeyup(final Object handler) {
-        setEventHandlerProp("onkeyup", handler);
+        setEventHandler("onkeyup", handler);
     }
 
     /**
@@ -202,7 +202,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnmousedown(final Object handler) {
-        setEventHandlerProp("onmousedown", handler);
+        setEventHandler("onmousedown", handler);
     }
 
     /**
@@ -220,7 +220,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnmousemove(final Object handler) {
-        setEventHandlerProp("onmousemove", handler);
+        setEventHandler("onmousemove", handler);
     }
 
     /**
@@ -238,7 +238,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnmouseout(final Object handler) {
-        setEventHandlerProp("onmouseout", handler);
+        setEventHandler("onmouseout", handler);
     }
 
     /**
@@ -256,7 +256,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnmouseover(final Object handler) {
-        setEventHandlerProp("onmouseover", handler);
+        setEventHandler("onmouseover", handler);
     }
 
     /**
@@ -274,7 +274,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnmouseup(final Object handler) {
-        setEventHandlerProp("onmouseup", handler);
+        setEventHandler("onmouseup", handler);
     }
 
     /**
@@ -292,7 +292,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOncontextmenu(final Object handler) {
-        setEventHandlerProp("oncontextmenu", handler);
+        setEventHandler("oncontextmenu", handler);
     }
 
     /**
@@ -310,7 +310,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnresize(final Object handler) {
-        setEventHandlerProp("onresize", handler);
+        setEventHandler("onresize", handler);
     }
 
     /**
@@ -328,7 +328,7 @@ public class EventNode extends Node {
      */
     @JsxSetter(IE)
     public void setOnpropertychange(final Object handler) {
-        setEventHandlerProp("onpropertychange", handler);
+        setEventHandler("onpropertychange", handler);
     }
 
     /**
@@ -346,7 +346,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOnerror(final Object handler) {
-        setEventHandlerProp("onerror", handler);
+        setEventHandler("onerror", handler);
     }
 
     /**
@@ -373,7 +373,7 @@ public class EventNode extends Node {
      */
     @JsxSetter
     public void setOninput(final Object onchange) {
-        setEventHandlerProp("oninput", onchange);
+        setEventHandler("oninput", onchange);
     }
 
 }

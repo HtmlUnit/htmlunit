@@ -295,7 +295,7 @@ public class EventTarget extends SimpleScriptable {
      * @param eventName the event name (e.g. "onclick")
      * @param value the property ({@code null} to reset it)
      */
-    protected void setEventHandlerProp(final String eventName, final Object value) {
+    public void setEventHandler(final String eventName, final Object value) {
         final EventListenersContainer container;
         if (isEventHandlerOnWindow()) {
             container = getWindow().getEventListenersContainer();
@@ -313,15 +313,6 @@ public class EventTarget extends SimpleScriptable {
      */
     protected boolean isEventHandlerOnWindow() {
         return false;
-    }
-
-    /**
-     * Defines an event handler.
-     * @param eventName the event name (e.g. "onclick")
-     * @param eventHandler the handler ({@code null} to reset it)
-     */
-    public void setEventHandler(final String eventName, final Function eventHandler) {
-        setEventHandlerProp(eventName, eventHandler);
     }
 
     /**
