@@ -255,7 +255,7 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF45 = "false")
     public void _WebGLContextEvent_WebGLContextEvent() throws Exception {
         test("WebGLContextEvent", "WebGLContextEvent");
     }
@@ -328,7 +328,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF52 = "true")
     public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix", "WebKitCSSMatrix");
     }
@@ -529,7 +530,8 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF52 = "true")
     public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
