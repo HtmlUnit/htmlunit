@@ -65,7 +65,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGAltGlyphElement_SVGAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement", "SVGAltGlyphElement");
     }
@@ -661,7 +661,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGTextContentElement_SVGAltGlyphElement() throws Exception {
         test("SVGTextContentElement", "SVGAltGlyphElement");
     }
@@ -689,7 +689,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGTextPositioningElement_SVGAltGlyphElement() throws Exception {
         test("SVGTextPositioningElement", "SVGAltGlyphElement");
     }
@@ -789,7 +789,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGElement_SVGAltGlyphElement() throws Exception {
         test("SVGElement", "SVGAltGlyphElement");
     }
@@ -1608,7 +1608,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGDocument_SVGDocument() throws Exception {
         test("SVGDocument", "SVGDocument");
     }
@@ -1752,7 +1752,8 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF52 = "true")
     public void _SpeechSynthesisUtterance_SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
     }
@@ -2417,7 +2418,18 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            FF52 = "true")
+    public void _SpeechSynthesis_SpeechSynthesis() throws Exception {
+        test("SpeechSynthesis", "SpeechSynthesis");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
     public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
     }
@@ -2530,7 +2542,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _SVGGraphicsElement_SVGAltGlyphElement() throws Exception {
         test("SVGGraphicsElement", "SVGAltGlyphElement");
     }

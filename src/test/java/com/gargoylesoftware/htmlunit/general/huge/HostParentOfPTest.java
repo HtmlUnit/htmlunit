@@ -462,6 +462,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _PermissionStatus_PermissionStatus() throws Exception {
         test("PermissionStatus", "PermissionStatus");
@@ -473,6 +474,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _Permissions_Permissions() throws Exception {
         test("Permissions", "Permissions");

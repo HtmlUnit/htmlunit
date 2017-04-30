@@ -331,7 +331,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF52 = "true")
     public void _IIRFilterNode_IIRFilterNode() throws Exception {
         test("IIRFilterNode", "IIRFilterNode");
     }
@@ -371,7 +372,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF52 = "true")
     public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
     }

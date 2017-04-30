@@ -272,6 +272,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _HTMLDetailsElement_HTMLDetailsElement() throws Exception {
         test("HTMLDetailsElement", "HTMLDetailsElement");
@@ -1040,6 +1041,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _HTMLElement_HTMLDetailsElement() throws Exception {
         test("HTMLElement", "HTMLDetailsElement");
@@ -1685,6 +1687,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _HTMLElement_HTMLShadowElement() throws Exception {
         test("HTMLElement", "HTMLShadowElement");
@@ -1695,6 +1698,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _HTMLShadowElement_HTMLShadowElement() throws Exception {
         test("HTMLShadowElement", "HTMLShadowElement");
@@ -1705,6 +1709,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _HTMLContentElement_HTMLContentElement() throws Exception {
         test("HTMLContentElement", "HTMLContentElement");
@@ -1715,6 +1720,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _HTMLElement_HTMLContentElement() throws Exception {
         test("HTMLElement", "HTMLContentElement");

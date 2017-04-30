@@ -461,6 +461,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true",
             CHROME = "true")
     public void _Node_HTMLDetailsElement() throws Exception {
         test("Node", "HTMLDetailsElement");
@@ -1164,7 +1165,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _Node_SVGAltGlyphElement() throws Exception {
         test("Node", "SVGAltGlyphElement");
     }
@@ -1821,7 +1822,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _Node_SVGDocument() throws Exception {
         test("Node", "SVGDocument");
     }
@@ -1862,6 +1863,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _Node_HTMLShadowElement() throws Exception {
         test("Node", "HTMLShadowElement");
@@ -1950,6 +1952,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            FF52 = "false",
             IE = "false")
     public void _Node_HTMLContentElement() throws Exception {
         test("Node", "HTMLContentElement");
@@ -2240,7 +2243,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent", "MozContactChangeEvent");
     }
@@ -2251,7 +2254,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
         test("MozSettingsEvent", "MozSettingsEvent");
     }
@@ -2556,7 +2559,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _MozPowerManager_MozPowerManager() throws Exception {
         test("MozPowerManager", "MozPowerManager");
     }
@@ -2656,7 +2659,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF45 = "true")
     public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
     }
