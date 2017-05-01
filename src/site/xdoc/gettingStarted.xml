@@ -112,6 +112,26 @@ public void xpath() throws Exception {
         final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@name='John']").get(0);
     }
 }]]></source>
+
+            <p>
+                You can also use CSS selectors
+            </p>
+            <source><![CDATA[
+@Test
+public void xpath() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+
+        //get list of all divs
+        final DomNodeList<DomNode> divs = page.querySelectorAll("div");
+        for (DomNode div : divs) {
+            ....
+        }
+
+        //get div which has the id 'breadcrumbs'
+        final DomNode div = page.querySelector("div#breadcrumbs");
+    }
+}]]></source>
         </section>
 
         <section name="Using a proxy server">
