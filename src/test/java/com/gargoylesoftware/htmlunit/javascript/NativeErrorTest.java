@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeErrorTest extends WebDriverTestCase {
@@ -36,10 +37,65 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"string", "true"})
+    public void stack() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    null.method();\n"
+            + "  } catch (e) {\n"
+            + "    if (e.stack) {\n"
+            + "      var s = e.stack;\n"
+            + "      alert(typeof s);\n"
+            + "      alert(s.length > 0);\n"
+            + "    }\n"
+            + "    else\n"
+            + "      alert('undefined');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "true"})
+    @NotYetImplemented
+    public void stackNewError() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    throw new Error();\n"
+            + "  } catch (e) {\n"
+            + "    if (e.stack) {\n"
+            + "      var s = e.stack;\n"
+            + "      alert(typeof s);\n"
+            + "      alert(s.length > 0);\n"
+            + "    }\n"
+            + "    else\n"
+            + "      alert('undefined');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
     @NotYetImplemented
-    public void stack() throws Exception {
+    public void stackContent() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
@@ -75,7 +131,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
     @NotYetImplemented
-    public void stackNewError() throws Exception {
+    public void stackContentNewError() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
@@ -104,6 +160,37 @@ public class NativeErrorTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "kcats"})
+    public void stackOverwrite() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    null.method();\n"
+            + "  } catch (e) {\n"
+            + "    if (e.stack) {\n"
+            + "      var s = e.stack;\n"
+            + "      alert(s.length > 10);\n"
+
+            + "      e.stack = 'kcats';\n"
+            + "      var s = e.stack;\n"
+            + "      alert(s);\n"
+            + "    }\n"
+            + "    else\n"
+            + "      alert('undefined');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -121,5 +208,4 @@ public class NativeErrorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
-
 }
