@@ -121,6 +121,26 @@ public class NativeErrorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    @NotYetImplemented({FF, CHROME})
+    public void stackInNewError() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var e = new Error();\n"
+            + "  alert('stack' in e);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url")
     @NotYetImplemented
