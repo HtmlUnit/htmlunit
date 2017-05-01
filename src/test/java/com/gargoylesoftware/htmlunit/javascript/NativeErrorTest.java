@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -81,6 +84,32 @@ public class NativeErrorTest extends WebDriverTestCase {
             + "    else\n"
             + "      alert('undefined');\n"
             + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"string", "true"},
+            IE = {"undefined"})
+    @NotYetImplemented({FF, CHROME})
+    public void stackNewErrorWithoutThrow() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var e = new Error();\n"
+            + "  if (e.stack) {\n"
+            + "    var s = e.stack;\n"
+            + "    alert(typeof s);\n"
+            + "    alert(s.length > 0);\n"
+            + "  }\n"
+            + "  else\n"
+            + "    alert('undefined');\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
