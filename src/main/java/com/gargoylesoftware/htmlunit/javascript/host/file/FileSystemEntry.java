@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code Animation}.
+ * A JavaScript object for {@code FileSystemEntry}.
  *
  * @author Ronald Brill
  */
