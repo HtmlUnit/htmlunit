@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.Animation;
 import com.gargoylesoftware.htmlunit.javascript.host.AppBannerPromptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
@@ -279,6 +280,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.file.DataTransferItemList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileReader;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileSystem;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileSystemDirectoryEntry;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileSystemDirectoryReader;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileSystemEntry;
+import com.gargoylesoftware.htmlunit.javascript.host.file.FileSystemFileEntry;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Position;
@@ -413,7 +419,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
-        AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class, AnimationEvent.class,
+        AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
+        Animation.class, AnimationEvent.class,
         AppBannerPromptResult.class, ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
         ArrayBufferView.class, ArrayBufferViewBase.class, Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
@@ -444,8 +451,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DragEvent.class, DynamicsCompressorNode.class,
         Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
         EventTarget.class, EXT_texture_filter_anisotropic.class, External.class, FederatedCredential.class,
-        File.class, FileList.class,
-        FileReader.class, Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
+        File.class, FileList.class, FileReader.class,
+        FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,
+        FileSystemEntry.class, FileSystemFileEntry.class,
+        Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
         FontFaceSet.class, FormData.class, FormField.class, GainNode.class, Gamepad.class,
         GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
