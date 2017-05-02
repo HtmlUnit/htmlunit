@@ -434,10 +434,10 @@ public class BrowserVersion implements Serializable, Cloneable {
         if (isChrome()) {
             expectedBrowser = SupportedBrowser.CHROME;
         }
-        else if (isFirefox()) {
+        else if (this == FIREFOX_45) {
             expectedBrowser = SupportedBrowser.FF45;
         }
-        else if (this == FIREFOX_52) {
+        else if (isFirefox()) {
             expectedBrowser = SupportedBrowser.FF52;
         }
         else if (isIE()) {
