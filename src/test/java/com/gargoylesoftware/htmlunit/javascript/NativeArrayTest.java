@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
@@ -182,6 +183,8 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     public void comparisonMethodViolatesContract2() throws Exception {
+        final Properties props = System.getProperties();
+        props.list(System.out);
         final int[] results = {1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1,
                 -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, -1,
                 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 0, -1, -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
