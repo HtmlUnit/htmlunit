@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -68,7 +65,6 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"string", "true"})
-    @NotYetImplemented
     public void stackNewError() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -97,7 +93,6 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string", "true"},
             IE = {"undefined"})
-    @NotYetImplemented({FF, CHROME})
     public void stackNewErrorWithoutThrow() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -123,7 +118,6 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({FF, CHROME})
     public void stackInNewError() throws Exception {
         final String html
             = "<html><head><script>\n"
