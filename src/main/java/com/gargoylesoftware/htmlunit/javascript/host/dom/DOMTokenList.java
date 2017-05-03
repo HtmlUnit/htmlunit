@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
@@ -109,8 +110,15 @@ public class DOMTokenList extends SimpleScriptable {
      */
     @JsxFunction
     public void add(final String token) {
-        if (!contains(token)) {
-            String value = getDefaultValue(null);
+        if (StringUtils.isEmpty(token)) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
+        }
+        if (StringUtils.containsAny(token, whitespaceChars())) {
+            throw Context.reportRuntimeError("Empty imput not allowed");
+        }
+
+        String value = getDefaultValue(null);
+        if (position(value, token) < 0) {
             if (value.length() != 0 && !isWhitespache(value.charAt(value.length() - 1))) {
                 value = value + " ";
             }
@@ -131,6 +139,7 @@ public class DOMTokenList extends SimpleScriptable {
         if (StringUtils.containsAny(token, whitespaceChars())) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }
+
         String value = getDefaultValue(null);
         int pos = position(value, token);
         while (pos != -1) {
@@ -186,6 +195,11 @@ public class DOMTokenList extends SimpleScriptable {
      */
     @JsxFunction
     public boolean contains(final String token) {
+        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK)
+                && StringUtils.isBlank(token)) {
+            return false;
+        }
+
         if (StringUtils.isEmpty(token)) {
             throw Context.reportRuntimeError("Empty imput not allowed");
         }

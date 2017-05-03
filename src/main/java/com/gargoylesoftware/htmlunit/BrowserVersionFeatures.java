@@ -792,6 +792,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
+    /** DOMTokenList returns false instead of throwing an exception when receiver is blank. */
+    @BrowserFeature(FF52)
+    JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK,
+
     /** DOMTokenList uses an enhanced set of whitespace chars. */
     @BrowserFeature(IE)
     JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS,

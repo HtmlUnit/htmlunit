@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -680,6 +683,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  "},
             FF52 = {" \t \n  ", "0", "0", ""})
+    @NotYetImplemented(FF52)
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
@@ -735,6 +739,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d e"},
             FF45 = {"a \t c \n d  e", "4", "3", "a d  e"})
+    @NotYetImplemented(FF52)
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }
