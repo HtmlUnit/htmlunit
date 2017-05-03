@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
@@ -29,9 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -43,20 +34,15 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.DOMException;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -90,29 +76,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeIterator;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Range;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker;
-import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
-import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -148,20 +116,6 @@ public class HTMLDocument extends Document {
     /** The format to use for the <tt>lastModified</tt> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
-    /**
-     * Map<String, Class> which maps strings a caller may use when calling into
-     * {@link #createEvent(String)} to the associated event class. To support a new
-     * event creation type, the event type and associated class need to be added into this map in
-     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
-     * have a no-arg constructor.
-     */
-    /** Contains all supported DOM level 2 events. */
-    private static final Map<String, Class<? extends Event>> SUPPORTED_DOM2_EVENT_TYPE_MAP;
-    /** Contains all supported DOM level 3 events. DOM level 2 events are not included. */
-    private static final Map<String, Class<? extends Event>> SUPPORTED_DOM3_EVENT_TYPE_MAP;
-    /** Contains all supported vendor specific events. */
-    private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
-
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
     private HTMLElement activeElement_;
@@ -169,41 +123,9 @@ public class HTMLDocument extends Document {
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuilder_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
-    private String domain_;
     private String lastModified_;
 
     private boolean closePostponedAction_;
-
-    /** Initializes the supported event type map. */
-    static {
-        final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
-        dom2EventMap.put("HTMLEvents", Event.class);
-        dom2EventMap.put("MouseEvents", MouseEvent.class);
-        dom2EventMap.put("MutationEvents", MutationEvent.class);
-        dom2EventMap.put("UIEvents", UIEvent.class);
-        SUPPORTED_DOM2_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom2EventMap);
-
-        final Map<String, Class<? extends Event>> dom3EventMap = new HashMap<>();
-        dom3EventMap.put("Event", Event.class);
-        dom3EventMap.put("KeyboardEvent", KeyboardEvent.class);
-        dom3EventMap.put("MouseEvent", MouseEvent.class);
-        dom3EventMap.put("MessageEvent", MessageEvent.class);
-        dom3EventMap.put("MutationEvent", MutationEvent.class);
-        dom3EventMap.put("UIEvent", UIEvent.class);
-        dom3EventMap.put("CustomEvent", CustomEvent.class);
-        dom3EventMap.put("CloseEvent", CloseEvent.class);
-        SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
-
-        final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
-        additionalEventMap.put("BeforeUnloadEvent", BeforeUnloadEvent.class);
-        additionalEventMap.put("Events", Event.class);
-        additionalEventMap.put("HashChangeEvent", HashChangeEvent.class);
-        additionalEventMap.put("KeyEvents", KeyboardEvent.class);
-        additionalEventMap.put("PointerEvent", PointerEvent.class);
-        additionalEventMap.put("PopStateEvent", PopStateEvent.class);
-        additionalEventMap.put("ProgressEvent", ProgressEvent.class);
-        SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
-    }
 
     /**
      * The constructor.
@@ -606,9 +528,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the {@code cookie} property.
-     * @return the {@code cookie} property
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public String getCookie() {
         final HtmlPage page = getPage();
@@ -1129,90 +1051,21 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the domain name of the server that served the document, or {@code null} if the server
-     * cannot be identified by a domain name.
-     * @return the domain name of the server that served the document
-     * @see <a href="http://www.w3.org/TR/2000/WD-DOM-Level-1-20000929/level-one-html.html#ID-2250147">
-     * W3C documentation</a>
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(FF)
     public String getDomain() {
-        if (domain_ == null) {
-            URL url = getPage().getUrl();
-            if (url == WebClient.URL_ABOUT_BLANK) {
-                final WebWindow w = getWindow().getWebWindow();
-                if (w instanceof FrameWindow) {
-                    url = ((FrameWindow) w).getEnclosingPage().getUrl();
-                }
-                else {
-                    return null;
-                }
-            }
-            domain_ = url.getHost().toLowerCase(Locale.ROOT);
-        }
-
-        return domain_;
+        return super.getDomain();
     }
 
     /**
-     * Sets the domain of this document.
-     *
-     * Domains can only be set to suffixes of the existing domain
-     * with the exception of setting the domain to itself.
-     * <p>
-     * The domain will be set according to the following rules:
-     * <ol>
-     * <li>If the newDomain.equalsIgnoreCase(currentDomain) the method returns with no error.</li>
-     * <li>If the browser version is netscape, the newDomain is downshifted.</li>
-     * <li>The change will take place if and only if the suffixes of the
-     *       current domain and the new domain match AND there are at least
-     *       two domain qualifiers e.g. the following transformations are legal
-     *       d1.d2.d3.gargoylesoftware.com may be transformed to itself or:
-     *          d2.d3.gargoylesoftware.com
-     *             d3.gargoylesoftware.com
-     *                gargoylesoftware.com
-     *
-     *        transformation to:        com
-     *        will fail
-     * </li>
-     * </ol>
-     * <p>
-     * TODO This code could be modified to understand country domain suffixes.
-     * The domain www.bbc.co.uk should be trimmable only down to bbc.co.uk
-     * trimming to co.uk should not be possible.
-     * @param newDomain the new domain to set
+     * {@inheritDoc}
      */
-    @JsxSetter
-    public void setDomain(String newDomain) {
-        final BrowserVersion browserVersion = getBrowserVersion();
-
-        // IE (at least 6) doesn't allow to set domain of about:blank
-        if (WebClient.URL_ABOUT_BLANK == getPage().getUrl()
-            && browserVersion.hasFeature(JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK)) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from \""
-                    + WebClient.URL_ABOUT_BLANK + "\" to: \""
-                    + newDomain + "\".");
-        }
-
-        newDomain = newDomain.toLowerCase(Locale.ROOT);
-
-        final String currentDomain = getDomain();
-        if (currentDomain.equalsIgnoreCase(newDomain)) {
-            return;
-        }
-
-        if (newDomain.indexOf('.') == -1) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
-                    + currentDomain + "\" to: \"" + newDomain + "\" (new domain has to contain a dot).");
-        }
-
-        if (currentDomain.indexOf('.') > -1
-                && !currentDomain.toLowerCase(Locale.ROOT).endsWith("." + newDomain.toLowerCase(Locale.ROOT))) {
-            throw Context.reportRuntimeError("Illegal domain value, cannot set domain from: \""
-                    + currentDomain + "\" to: \"" + newDomain + "\"");
-        }
-
-        domain_ = newDomain;
+    @Override
+    @JsxSetter(FF)
+    public void setDomain(final String newDomain) {
+        super.setDomain(newDomain);
     }
 
     /**
@@ -1252,64 +1105,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Implementation of the {@link org.w3c.dom.events.DocumentEvent} interface's
-     * {@link org.w3c.dom.events.DocumentEvent#createEvent(String)} method. The method creates an
-     * uninitialized event of the specified type.
-     *
-     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-DocumentEvent">DocumentEvent</a>
-     * @param eventType the event type to create
-     * @return an event object for the specified type
-     * @throws DOMException if the event type is not supported (will have a type of
-     *         DOMException.NOT_SUPPORTED_ERR)
-     */
-    @JsxFunction
-    public Event createEvent(final String eventType) throws DOMException {
-        Class<? extends Event> clazz = null;
-        clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
-        if (clazz == null) {
-            clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
-            if (CloseEvent.class == clazz
-                    && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
-                clazz = null;
-            }
-        }
-        if (clazz == null
-                && ("Events".equals(eventType)
-                || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
-                || "HashChangeEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
-                || "BeforeUnloadEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
-                || "PointerEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
-                || "PopStateEvent".equals(eventType)
-                || "ProgressEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT))) {
-            clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
-        }
-        if (clazz == null) {
-            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
-                "Event Type is not supported: " + eventType));
-            return null; // to stop eclipse warning
-        }
-        try {
-            final Event event = clazz.newInstance();
-            event.setParentScope(getWindow());
-            event.setPrototype(getPrototype(clazz));
-            event.eventCreated();
-            return event;
-        }
-        catch (final InstantiationException e) {
-            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
-                            + "' for event type of '" + eventType + "': " + e.getMessage());
-        }
-        catch (final IllegalAccessException e) {
-            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
-                            + "' for event type of '" + eventType + "': " + e.getMessage());
-        }
-    }
-
-    /**
      * Returns the element for the specified x coordinate and the specified y coordinate.
      * The current implementation always returns the &lt;body&gt; element.
      *
@@ -1321,94 +1116,6 @@ public class HTMLDocument extends Document {
     public Object elementFromPoint(final int x, final int y) {
         final HtmlElement element = getPage().getElementFromPoint(x, y);
         return element == null ? null : element.getScriptableObject();
-    }
-
-    /**
-     * Creates and returns a new range.
-     * @return a new range
-     * @see <a href="http://www.xulplanet.com/references/objref/HTMLDocument.html#method_createRange">XUL Planet</a>
-     */
-    @JsxFunction
-    public Range createRange() {
-        final Range r = new Range(this);
-        r.setParentScope(getWindow());
-        r.setPrototype(getPrototype(Range.class));
-        return r;
-    }
-
-    /**
-     * Creates and returns a new TreeWalker. The following JavaScript parameters are passed into this method:
-     * <ul>
-     *   <li>JavaScript param 1: The root node of the TreeWalker. Must not be {@code null}.</li>
-     *   <li>JavaScript param 2: Flag specifying which types of nodes appear in the logical view of the TreeWalker.
-     *       See {@link NodeFilter} for the set of possible Show_ values.</li>
-     *   <li>JavaScript param 3: The {@link NodeFilter} to be used with this TreeWalker, or {@code null}
-     *       to indicate no filter.</li>
-     *   <li>JavaScript param 4: If {@code false}, the contents of EntityReference nodes are not present
-     *       in the logical view.</li>
-     * </ul>
-     *
-     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">DOM-Level-2-Traversal-Range</a>
-     * @param root the node which will serve as the root for the TreeWalker
-     * @param whatToShow specifies which node types may appear in the logical view of the tree presented
-     * @param filter the NodeFilter to be used with this TreeWalker, or null to indicate no filter
-     * @param expandEntityReferences If false,
-     *        the contents of EntityReference nodes are not presented in the logical view
-     * @throws DOMException on attempt to create a TreeWalker with a root that is {@code null}
-     * @return a new TreeWalker
-     */
-    @JsxFunction
-    public Object createTreeWalker(final Node root, final double whatToShow, final Scriptable filter,
-            boolean expandEntityReferences) throws DOMException {
-
-        // seems that Rhino doesn't like long as parameter type
-        final int whatToShowI = (int) Double.valueOf(whatToShow).longValue();
-
-        if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
-            expandEntityReferences = false;
-        }
-
-        final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
-        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, filterFunctionOnly);
-        final TreeWalker t = new TreeWalker(getPage(), root, whatToShowI, filterWrapper, expandEntityReferences);
-        t.setParentScope(getWindow(this));
-        t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
-        return t;
-    }
-
-    private static org.w3c.dom.traversal.NodeFilter createFilterWrapper(final Scriptable filter,
-            final boolean filterFunctionOnly) {
-        org.w3c.dom.traversal.NodeFilter filterWrapper = null;
-        if (filter != null) {
-            filterWrapper = new org.w3c.dom.traversal.NodeFilter() {
-                @Override
-                public short acceptNode(final org.w3c.dom.Node n) {
-                    final Object[] args = new Object[] {((DomNode) n).getScriptableObject()};
-                    final Object response;
-                    if (filter instanceof Callable) {
-                        response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
-                    }
-                    else {
-                        if (filterFunctionOnly) {
-                            throw Context.reportRuntimeError("only a function is allowed as filter");
-                        }
-                        response = ScriptableObject.callMethod(filter, "acceptNode", args);
-                    }
-                    return (short) Context.toNumber(response);
-                }
-            };
-        }
-        return filterWrapper;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static Scriptable staticGetPrototype(final Window window,
-            final Class<? extends SimpleScriptable> javaScriptClass) {
-        final Scriptable prototype = window.getPrototype(javaScriptClass);
-        if (prototype == null && javaScriptClass != SimpleScriptable.class) {
-            return staticGetPrototype(window, (Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
-        }
-        return prototype;
     }
 
     /**
@@ -1515,24 +1222,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns a new NodeIterator object.
-     *
-     * @param root The root node at which to begin the NodeIterator's traversal.
-     * @param whatToShow an optional long representing a bitmask created by combining
-     * the constant properties of {@link NodeFilter}
-     * @param filter an object implementing the {@link NodeFilter} interface
-     * @return a new NodeIterator object
-     */
-    @JsxFunction
-    public NodeIterator createNodeIterator(final Node root, final int whatToShow, final Scriptable filter) {
-        final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
-        final NodeIterator iterator = new NodeIterator(getPage(), root, whatToShow, filterWrapper);
-        iterator.setParentScope(getParentScope());
-        iterator.setPrototype(getPrototype(iterator.getClass()));
-        return iterator;
-    }
-
-    /**
      * Creates a new HTML attribute with the specified name.
      *
      * @param attributeName the name of the attribute to create
@@ -1583,7 +1272,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(CHROME)
+    @JsxGetter(FF)
     public String getDesignMode() {
         return super.getDesignMode();
     }
