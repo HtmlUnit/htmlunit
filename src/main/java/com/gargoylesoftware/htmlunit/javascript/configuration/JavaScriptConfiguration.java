@@ -388,7 +388,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.security.FederatedCredentia
 import com.gargoylesoftware.htmlunit.javascript.host.security.PasswordCredential;
 import com.gargoylesoftware.htmlunit.javascript.host.security.SiteBoundCredential;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammar;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammarList;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
@@ -534,8 +536,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
         SharedWorker.class, SimpleArray.class, SiteBoundCredential.class, SourceBuffer.class, SourceBufferList.class,
-        SpeechSynthesis.class, SpeechSynthesisEvent.class,
-        SpeechSynthesisUtterance.class, StereoPannerNode.class, Storage.class, StorageEvent.class, StorageManager.class,
+        SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
+        SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
+        StereoPannerNode.class, Storage.class, StorageEvent.class, StorageManager.class,
         StyleMedia.class, StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
         SVGAElement.class, SVGAltGlyphElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
