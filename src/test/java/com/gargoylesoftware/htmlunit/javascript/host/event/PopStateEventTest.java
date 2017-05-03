@@ -154,7 +154,7 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('PopStateEvent');\n"
             + "      dispatchEvent(event);\n"
             + "      alert('dispatched');\n"
-            + "    } catch (e) { alert('exception' +e) }\n"
+            + "    } catch (e) { alert('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  try {\n"
