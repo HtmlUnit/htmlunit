@@ -157,10 +157,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
-    /** Chrome maintains a separate state for this. */
-    @BrowserFeature(CHROME)
-    EVENT_CANCEL_BUBBLE,
-
     /** Event false result. */
     @BrowserFeature(IE)
     EVENT_FALSE_RESULT,

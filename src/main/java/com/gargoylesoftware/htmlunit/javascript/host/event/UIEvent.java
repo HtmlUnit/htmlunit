@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_CANCEL_BUBBLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -52,9 +51,6 @@ public class UIEvent extends Event {
 
     /** Whether or not the "meta" key was pressed during the firing of the event. */
     private boolean metaKey_;
-
-    /** Chrome seems to maintain this */
-    private boolean cancelBubble_;
 
     /**
      * Creates a new UI event instance.
@@ -109,9 +105,6 @@ public class UIEvent extends Event {
     @Override
     @JsxGetter
     public boolean isCancelBubble() {
-        if (getBrowserVersion().hasFeature(EVENT_CANCEL_BUBBLE)) {
-            return cancelBubble_;
-        }
         return super.isCancelBubble();
     }
 
@@ -122,7 +115,6 @@ public class UIEvent extends Event {
     @JsxSetter
     public void setCancelBubble(final boolean newValue) {
         super.setCancelBubble(newValue);
-        cancelBubble_ = newValue;
     }
 
     /**

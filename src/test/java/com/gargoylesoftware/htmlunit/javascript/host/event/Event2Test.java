@@ -698,10 +698,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                "true"},
-            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                "false"})
+    @Alerts({"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"})
     public void stopPropagation() throws Exception {
         stopPropagation("stopPropagation()");
     }
@@ -809,10 +807,8 @@ public class Event2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                "true"},
-            CHROME = {"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
-                "false"})
+    @Alerts({"window capturing", "div capturing", "span capturing", "div", "window capturing", "false",
+                "true"})
     public void stopImmediatePropagation() throws Exception {
         stopPropagation("stopImmediatePropagation()");
     }
