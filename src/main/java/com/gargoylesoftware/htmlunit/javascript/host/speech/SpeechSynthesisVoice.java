@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -22,18 +21,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code SpeechSynthesis}.
+ * A JavaScript object for {@code SpeechSynthesisErrorEvent}.
  *
- * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, browsers = CHROME)
 @JsxClass(browsers = FF52)
-public class SpeechSynthesis extends EventTarget {
+public class SpeechSynthesisVoice extends EventTarget {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public SpeechSynthesis() {
+    public SpeechSynthesisVoice() {
     }
 }
