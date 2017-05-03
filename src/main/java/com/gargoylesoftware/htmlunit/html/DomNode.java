@@ -2031,4 +2031,33 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     public boolean handles(final Event2 event) {
         return true;
     }
+
+    /**
+     * Returns the previous sibling element node of this element.
+     * null if this element has no element sibling nodes that come before this one in the document tree.
+     * @return the previous sibling element node of this element.
+     * null if this element has no element sibling nodes that come before this one in the document tree
+     */
+    public DomElement getPreviousElementSibling() {
+        DomNode node = getPreviousSibling();
+        while (node != null && !(node instanceof DomElement)) {
+            node = node.getPreviousSibling();
+        }
+        return (DomElement) node;
+    }
+
+    /**
+     * Returns the next sibling element node of this element.
+     * null if this element has no element sibling nodes that come after this one in the document tree.
+     * @return the next sibling element node of this element.
+     * null if this element has no element sibling nodes that come after this one in the document tree
+     */
+    public DomElement getNextElementSibling() {
+        DomNode node = getNextSibling();
+        while (node != null && !(node instanceof DomElement)) {
+            node = node.getNextSibling();
+        }
+        return (DomElement) node;
+    }
+
 }

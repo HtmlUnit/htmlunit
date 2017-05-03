@@ -719,34 +719,6 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * Returns the previous sibling element node of this element.
-     * null if this element has no element sibling nodes that come before this one in the document tree.
-     * @return the previous sibling element node of this element.
-     * null if this element has no element sibling nodes that come before this one in the document tree
-     */
-    public DomElement getPreviousElementSibling() {
-        DomNode node = getPreviousSibling();
-        while (node != null && !(node instanceof DomElement)) {
-            node = node.getPreviousSibling();
-        }
-        return (DomElement) node;
-    }
-
-    /**
-     * Returns the next sibling element node of this element.
-     * null if this element has no element sibling nodes that come after this one in the document tree.
-     * @return the next sibling element node of this element.
-     * null if this element has no element sibling nodes that come after this one in the document tree
-     */
-    public DomElement getNextElementSibling() {
-        DomNode node = getNextSibling();
-        while (node != null && !(node instanceof DomElement)) {
-            node = node.getNextSibling();
-        }
-        return (DomElement) node;
-    }
-
-    /**
      * Returns the current number of element nodes that are children of this element.
      * 0 if this element has no child nodes that are of nodeType 1.
      * @return the current number of element nodes that are children of this element.

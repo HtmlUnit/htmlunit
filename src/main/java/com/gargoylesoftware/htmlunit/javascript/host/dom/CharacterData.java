@@ -20,11 +20,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -33,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author David K. Taylor
  * @author Chris Erskine
+ * @author Ahmed Ashour
  */
 @JsxClass
 public class CharacterData extends Node {
@@ -50,8 +53,7 @@ public class CharacterData extends Node {
      */
     @JsxGetter
     public Object getData() {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        return domCharacterData.getData();
+        return getDomNodeOrDie().getData();
     }
 
     /**
@@ -60,8 +62,7 @@ public class CharacterData extends Node {
      */
     @JsxSetter
     public void setData(final String newValue) {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        domCharacterData.setData(newValue);
+        getDomNodeOrDie().setData(newValue);
     }
 
     /**
@@ -70,8 +71,7 @@ public class CharacterData extends Node {
      */
     @JsxGetter
     public int getLength() {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        return domCharacterData.getLength();
+        return getDomNodeOrDie().getLength();
     }
 
     /**
@@ -80,8 +80,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void appendData(final String arg) {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        domCharacterData.appendData(arg);
+        getDomNodeOrDie().appendData(arg);
     }
 
     /**
@@ -104,7 +103,7 @@ public class CharacterData extends Node {
             }
         }
 
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
+        final DomCharacterData domCharacterData = getDomNodeOrDie();
         if (offset > domCharacterData.getLength()) {
             throw Context.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
         }
@@ -120,8 +119,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void insertData(final int offset, final String arg) {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        domCharacterData.insertData(offset, arg);
+        getDomNodeOrDie().insertData(offset, arg);
     }
 
     /**
@@ -134,8 +132,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void replaceData(final int offset, final int count, final String arg) {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        domCharacterData.replaceData(offset, count, arg);
+        getDomNodeOrDie().replaceData(offset, count, arg);
     }
 
     /**
@@ -147,7 +144,41 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public String substringData(final int offset, final int count) {
-        final DomCharacterData domCharacterData = (DomCharacterData) getDomNodeOrDie();
-        return domCharacterData.substringData(offset, count);
+        return getDomNodeOrDie().substringData(offset, count);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomCharacterData getDomNodeOrDie() {
+        return (DomCharacterData) super.getDomNodeOrDie();
+    }
+
+    /**
+     * Returns the next element sibling.
+     * @return the next element sibling
+     */
+    @JsxGetter({CHROME, FF})
+    public Element getNextElementSibling() {
+        final DomElement child = getDomNodeOrDie().getNextElementSibling();
+        if (child != null) {
+            return (Element) child.getScriptableObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns the previous element sibling.
+     * @return the previous element sibling
+     */
+    @JsxGetter({CHROME, FF})
+    public Element getPreviousElementSibling() {
+        final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
+        if (child != null) {
+            return (Element) child.getScriptableObject();
+        }
+        return null;
+    }
+
 }

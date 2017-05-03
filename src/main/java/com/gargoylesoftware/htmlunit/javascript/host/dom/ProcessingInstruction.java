@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = DomProcessingInstruction.class)
-public class ProcessingInstruction extends CharacterData {
+public class ProcessingInstruction extends Node {
 
     /**
      * Creates an instance.
@@ -52,7 +52,6 @@ public class ProcessingInstruction extends CharacterData {
      * Returns the {@code data} attribute.
      * @return the data
      */
-    @Override
     @JsxGetter
     public String getData() {
         return ((DomProcessingInstruction) getDomNodeOrDie()).getData();
@@ -62,7 +61,6 @@ public class ProcessingInstruction extends CharacterData {
      * Sets the {@code data} attribute.
      * @param data the data
      */
-    @Override
     @JsxSetter
     public void setData(final String data) {
         ((DomProcessingInstruction) getDomNodeOrDie()).setData(data);
