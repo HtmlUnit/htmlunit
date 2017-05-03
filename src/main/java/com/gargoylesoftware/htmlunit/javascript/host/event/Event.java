@@ -172,7 +172,7 @@ public class Event extends SimpleScriptable {
     private EventTarget target_;       // W3C standard read-only equivalent of srcElement.
     private Scriptable currentTarget_; // Changes during event capturing and bubbling.
     private String type_ = "";         // The event type.
-    private int keyCode_;           // Key code for a keypress
+    private int keyCode_;              // Key code for a keypress
     private boolean shiftKey_;         // Exposed here in IE, only in mouse events in FF.
     private boolean ctrlKey_;          // Exposed here in IE, only in mouse events in FF.
     private boolean altKey_;           // Exposed here in IE, only in mouse events in FF.
