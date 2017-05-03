@@ -49,6 +49,9 @@ public class Keyboard {
      * @param ch the character
      */
     public void type(final char ch) {
+        if (ch < ' ') {
+            throw new IllegalArgumentException("Use press(int) and release(int) instead");
+        }
         keys_.add(new Object[] {ch});
     }
 
