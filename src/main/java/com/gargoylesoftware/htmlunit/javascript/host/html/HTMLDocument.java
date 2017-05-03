@@ -1281,7 +1281,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(CHROME)
+    @JsxSetter(FF)
     public void setDesignMode(final String mode) {
         super.setDesignMode(mode);
     }
