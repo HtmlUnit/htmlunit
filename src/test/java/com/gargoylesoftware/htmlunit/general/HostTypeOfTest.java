@@ -7495,6 +7495,66 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void animation() throws Exception {
+        test("Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystem() throws Exception {
+        test("FileSystem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemDirectoryEntry() throws Exception {
+        test("FileSystemDirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemDirectoryReader() throws Exception {
+        test("FileSystemDirectoryReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemEntry() throws Exception {
+        test("FileSystemEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemFileEntry() throws Exception {
+        test("FileSystemFileEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void audioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode");
