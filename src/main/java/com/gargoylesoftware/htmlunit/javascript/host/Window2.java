@@ -19,9 +19,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;

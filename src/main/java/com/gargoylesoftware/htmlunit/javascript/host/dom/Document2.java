@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;

@@ -61,9 +61,9 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.RIGHT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.TOP;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.WIDTH;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.awt.Color;
 import java.io.Serializable;

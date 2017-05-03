@@ -15,9 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

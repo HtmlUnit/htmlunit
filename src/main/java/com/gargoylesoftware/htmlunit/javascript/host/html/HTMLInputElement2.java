@@ -19,8 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

@@ -18,9 +18,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

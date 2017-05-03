@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Setter;

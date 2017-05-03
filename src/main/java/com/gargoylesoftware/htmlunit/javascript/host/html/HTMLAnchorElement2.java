@@ -20,9 +20,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;

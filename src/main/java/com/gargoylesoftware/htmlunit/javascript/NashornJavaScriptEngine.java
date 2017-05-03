@@ -86,7 +86,7 @@ import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Browser;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ClassConstructor;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.ScriptClass;
-import com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser;
+import com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Property;
 import com.gargoylesoftware.js.nashorn.internal.runtime.PropertyMap;
@@ -182,24 +182,24 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         holdPostponedActions_ = false;
     }
 
-    private static WebBrowser getBrowser(final BrowserVersion version) {
-        final WebBrowser browser;
+    private static SupportedBrowser getBrowser(final BrowserVersion version) {
+        final SupportedBrowser browser;
         if (version.isFirefox()) {
-            browser = WebBrowser.FF;
+            browser = SupportedBrowser.FF;
         }
         else if (version.isIE()) {
-            browser = WebBrowser.IE;
+            browser = SupportedBrowser.IE;
         }
         else if (version.isEdge()) {
-            browser = WebBrowser.EDGE;
+            browser = SupportedBrowser.EDGE;
         }
         else {
-            browser = WebBrowser.CHROME;
+            browser = SupportedBrowser.CHROME;
         }
         return browser;
     }
 
-    private static void initGlobal(final WebWindow webWindow, final WebBrowser browser) {
+    private static void initGlobal(final WebWindow webWindow, final SupportedBrowser browser) {
         Browser.setCurrent(browser);
         final Global global = getGlobal(webWindow);
         final Global oldGlobal = Context.getGlobal();
@@ -291,9 +291,9 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         return superClass.getName();
     }
 
-    private static boolean isSupported(final ClassConstructor constructor, final WebBrowser browser) {
+    private static boolean isSupported(final ClassConstructor constructor, final SupportedBrowser browser) {
         if (constructor != null) {
-            for (final WebBrowser webBrowser : constructor.value()) {
+            for (final SupportedBrowser webBrowser : constructor.value()) {
                 if (isCompatible(webBrowser, browser)) {
                     return true;
                 }
@@ -302,10 +302,10 @@ public class NashornJavaScriptEngine implements AbstractJavaScriptEngine<ScriptF
         return false;
     }
 
-    private static boolean isCompatible(final WebBrowser browser1, final WebBrowser browser2) {
+    private static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
         return (browser1 == browser2)
-                || (browser1 == WebBrowser.FF && (browser2 == WebBrowser.FF45 || browser2 == WebBrowser.FF52))
-                || (browser2 == WebBrowser.FF && (browser1 == WebBrowser.FF45 || browser1 == WebBrowser.FF52));
+                || (browser1 == SupportedBrowser.FF && (browser2 == SupportedBrowser.FF45 || browser2 == SupportedBrowser.FF52))
+                || (browser2 == SupportedBrowser.FF && (browser1 == SupportedBrowser.FF45 || browser1 == SupportedBrowser.FF52));
     }
 
     private static boolean isNullProto(final Class<?> enclosingClass) {

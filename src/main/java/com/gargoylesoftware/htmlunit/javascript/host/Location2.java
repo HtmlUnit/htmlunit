@@ -20,9 +20,9 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_H
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.IE;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.IE;
 
 import java.io.IOException;
 import java.lang.invoke.MethodHandle;

@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.CHROME;
-import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.WebBrowser.FF;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.js.nashorn.internal.objects.annotations.SupportedBrowser.FF;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
