@@ -416,13 +416,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
-    /** HTMLInputElement: type {@code file} selectionSart/End are null. */
-    @BrowserFeature({CHROME, FF52})
-    HTMLINPUT_FILE_SELECTION_START_END_NULL,
-
     /** HTMLInputElement: {@code files} to be {@code undefined}. */
     @BrowserFeature(IE)
     HTMLINPUT_FILES_UNDEFINED,
+
+    /** HTMLInputElement: type {@code file} selectionSart/End are null. */
+    @BrowserFeature({CHROME, FF52})
+    HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
     /** HTMLInputElement: type {@code file} value to be {@code fakepath}. */
     @BrowserFeature(CHROME)
