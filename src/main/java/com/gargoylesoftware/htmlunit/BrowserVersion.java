@@ -285,7 +285,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_52.registerUploadMimeType("opus", "audio/ogg");
         FIREFOX_52.registerUploadMimeType("webm", "video/webm");
         FIREFOX_52.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_52.registerUploadMimeType("flac", "audio/x-flac");
         FIREFOX_52.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_52.registerUploadMimeType("xht", "application/xhtml+xml");
         FIREFOX_52.registerUploadMimeType("txt", "text/plain");
