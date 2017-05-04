@@ -3141,4 +3141,30 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         testString("document.createAttribute('some_attrib'), window.performance");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "compareBoundaryPoints(),comparePoint(),createContextualFragment(),deleteContents(),detach(),"
+                + "END_TO_END,END_TO_START,endContainer,endOffset,expand(),extractContents(),getBoundingClientRect(),"
+                + "getClientRects(),insertNode(),intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),"
+                + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,"
+                + "START_TO_START,startContainer,startOffset,surroundContents()",
+            IE = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
+                + "createContextualFragment(),deleteContents(),detach(),END_TO_END,END_TO_START,endContainer,endOffset,"
+                + "extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),"
+                + "selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),"
+                + "setStartBefore(),START_TO_END,START_TO_START,startContainer,startOffset,surroundContents()",
+            FF = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
+                + "comparePoint(),createContextualFragment(),deleteContents(),detach(),END_TO_END,END_TO_START,"
+                + "endContainer,endOffset,extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),"
+                + "intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
+                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
+                + "startContainer,startOffset,surroundContents()")
+    @NotYetImplemented
+    public void range() throws Exception {
+        testString("document.createRange(), window.performance");
+    }
+
 }
