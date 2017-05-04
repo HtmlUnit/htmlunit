@@ -247,7 +247,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "    <option>foo</option>\n"
             + "  </select>\n"
             + "  <select multiple='multiple' name='select2'>\n"
-            + "    <option>foo</option>\n"
+            + "    <option>boo</option>\n"
             + "  </select>\n"
             + "  <input type='password' name='password1'/>\n"
             + "  <input type='radio' name='radio1'/>\n"

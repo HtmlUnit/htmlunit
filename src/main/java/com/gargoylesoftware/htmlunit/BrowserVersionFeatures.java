@@ -448,6 +448,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, IE})
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
 
+    /** If the single select has exact one option, this options gets never deselected. */
+    @BrowserFeature(FF45)
+    HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED,
+
     /** */
     @BrowserFeature(IE)
     HTMLOPTION_PREVENT_DISABLED,

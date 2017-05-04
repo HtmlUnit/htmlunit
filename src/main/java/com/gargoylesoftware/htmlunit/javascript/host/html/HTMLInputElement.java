@@ -28,6 +28,7 @@ import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.File;
@@ -424,7 +425,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code minLength}.
      * @return the {@code minLength}
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, FF52})
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
         return NumberUtils.toInt(attrValue, -1);
@@ -434,7 +435,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
-    @JsxSetter(CHROME)
+    @JsxSetter({CHROME, FF52})
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
     }
