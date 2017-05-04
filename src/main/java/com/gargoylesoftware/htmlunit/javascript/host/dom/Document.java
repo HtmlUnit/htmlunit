@@ -1725,4 +1725,13 @@ public class Document extends Node {
         setEventHandler("oninput", onchange);
     }
 
+    /**
+     * Returns the {@code hidden} property.
+     * @return the {@code hidden} property
+     */
+    @JsxGetter
+    public boolean getHidden() {
+        return false;
+    }
+
 }

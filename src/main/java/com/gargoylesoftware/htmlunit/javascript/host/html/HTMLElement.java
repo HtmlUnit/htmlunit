@@ -2517,4 +2517,27 @@ public class HTMLElement extends Element {
     public boolean contains(final Object element) {
         return super.contains(element);
     }
+
+    /**
+     * Returns the {@code hidden} property.
+     * @return the {@code hidden} property
+     */
+    @JsxGetter
+    public boolean isHidden() {
+        return getDomNodeOrDie().hasAttribute("hidden");
+    }
+
+    /**
+     * Sets the {@code hidden} property.
+     * @param hidden the {@code hidden} value
+     */
+    @JsxGetter
+    public void setHidden(final boolean hidden) {
+        if (hidden) {
+            getDomNodeOrDie().setAttribute("hidden", "hidden");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("hidden");
+        }
+    }
 }

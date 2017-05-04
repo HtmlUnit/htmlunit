@@ -268,7 +268,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public void alert(final Object message) {
-// System.out.println(message);
         // use Object as parameter and perform String conversion by ourself
         // this allows to place breakpoint here and "see" the message object and its properties
         final String stringMessage = Context.toString(message);
