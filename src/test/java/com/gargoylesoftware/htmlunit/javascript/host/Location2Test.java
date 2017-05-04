@@ -542,7 +542,7 @@ public class Location2Test extends WebDriverTestCase {
             "<html><head><script>\n"
             + "function test() {\n"
             + "  document.title += ' 1';\n"
-            + "  self.frames['frame1'].document.location.href='" + URL_SECOND + "';\n"
+            + "  self.frames['frame1'].document.location.href = '" + URL_SECOND + "';\n"
             + "  document.title += ' 2';\n"
             + "}\n"
             + "</script></head>\n"

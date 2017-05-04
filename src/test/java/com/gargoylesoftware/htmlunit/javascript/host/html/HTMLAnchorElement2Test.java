@@ -215,7 +215,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  function doTest(anchorElement) {\n"
             + "    alert(anchorElement.href);\n"
             + "    alert(anchorElement.getAttribute('href'));\n"
-            + "    anchorElement.href='testsite2.html';\n"
+            + "    anchorElement.href = 'testsite2.html';\n"
             + "    alert(anchorElement.href);\n"
             + "    alert(anchorElement.getAttribute('href'));\n"
             + "    alert(anchorElement.getAttribute('id'));\n"

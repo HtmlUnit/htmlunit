@@ -220,7 +220,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
      */
     @Test
     public void scriptCanSetJsPropertyOnCell() {
-        final String cmd = "document.getElementById('cell').a='original';document.getElementById('cell')";
+        final String cmd = "document.getElementById('cell').a = 'original'; document.getElementById('cell')";
         final Object object = page_.executeJavaScript(cmd).getJavaScriptResult();
 
         final HTMLElement jselement = (HTMLElement) object;
@@ -235,7 +235,7 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
     @Test
     @NotYetImplemented({CHROME, FF})
     public void cloneScriptCanSetDisabledOnCell() {
-        final String cmd = "document.getElementById('cell').disabled='true'";
+        final String cmd = "document.getElementById('cell').disabled = 'true'";
         page_.executeJavaScript(cmd);
         assertEquals("disabled", cell_.getAttribute("disabled"));
     }

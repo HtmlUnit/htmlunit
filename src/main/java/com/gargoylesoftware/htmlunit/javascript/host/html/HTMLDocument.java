@@ -1313,4 +1313,18 @@ public class HTMLDocument extends Document {
     public void setDesignMode(final String mode) {
         super.setDesignMode(mode);
     }
+
+    /**
+     * Returns the current number of child elements.
+     * @return the child element count
+     */
+    @JsxGetter
+    public int getChildElementCount() {
+        int counter = 0;
+        if (getPage().getDocumentElement() != null) {
+            counter++;
+        }
+        return counter;
+    }
+
 }

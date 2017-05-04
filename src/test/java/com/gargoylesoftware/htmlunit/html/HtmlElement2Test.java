@@ -119,13 +119,13 @@ public class HtmlElement2Test extends WebDriverTestCase {
     public void clonedNodeAttributes() throws Exception {
         final String html = "<html><body id='a' title='b'><script>\n"
             + "var x = document.body.cloneNode(true);\n"
-            + "alert(document.body==x);\n"
-            + "alert(document.getElementById('a')==document.body);\n"
+            + "alert(document.body == x);\n"
+            + "alert(document.getElementById('a') == document.body);\n"
             + "alert(document.body.id);\n"
             + "alert(x.id);\n"
             + "alert(document.body.title);\n"
             + "alert(x.title);\n"
-            + "x.title='c';\n"
+            + "x.title = 'c';\n"
             + "alert(document.body.title);\n"
             + "alert(x.title);\n"
             + "</script></body></html>";

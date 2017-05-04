@@ -56,12 +56,12 @@ public class HTMLDataElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "  var dat = document.getElementById('d1');\n"
             + "  alert(dat.value);\n"
-            + "  dat.value='#12o';\n"
+            + "  dat.value = '#12o';\n"
             + "  alert(dat.value);\n"
 
             + "  dat = document.getElementById('d2');\n"
             + "  alert(dat.value);\n"
-            + "  dat.value='#12o';\n"
+            + "  dat.value = '#12o';\n"
             + "  alert(dat.value);\n"
             + "</script></body></html>";
         loadPageWithAlerts2(html);

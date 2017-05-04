@@ -503,10 +503,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tabr1');\n"
             + "  alert(node.borderColor);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColor);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColor);\n"
 
             + "  var node = document.getElementById('tabr2');\n"
@@ -538,10 +538,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tabr1');\n"
             + "  alert(node.borderColorDark);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColorDark);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColorDark);\n"
 
             + "  var node = document.getElementById('tabr2');\n"
@@ -573,10 +573,10 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tabr1');\n"
             + "  alert(node.borderColorLight);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColorLight);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColorLight);\n"
 
             + "  var node = document.getElementById('tabr2');\n"

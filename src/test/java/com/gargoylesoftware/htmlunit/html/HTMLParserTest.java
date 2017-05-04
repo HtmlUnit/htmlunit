@@ -93,7 +93,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
     public void emptyStack() throws Exception {
         final String html =
               "<html>\n"
-            + "  <body onload='document.getElementById(\"s\").innerHTML="
+            + "  <body onload='document.getElementById(\"s\").innerHTML = "
             + "    \"<h1><span><span></span></span><span><span></span></span></h1>\";'>\n"
             + "    <div>\n"
             + "      <div>\n"

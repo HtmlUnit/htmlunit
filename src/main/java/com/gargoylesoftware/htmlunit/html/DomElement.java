@@ -720,15 +720,11 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * Returns the current number of element nodes that are children of this element.
-     * 0 if this element has no child nodes that are of nodeType 1.
      * @return the current number of element nodes that are children of this element.
-     * 0 if this element has no child nodes that are of nodeType 1
      */
     public int getChildElementCount() {
         int counter = 0;
-        final Iterator<DomElement> i = getChildElements().iterator();
-        while (i.hasNext()) {
-            i.next();
+        for (final Iterator<DomElement> i = getChildElements().iterator(); i.hasNext(); i.next()) {
             counter++;
         }
         return counter;

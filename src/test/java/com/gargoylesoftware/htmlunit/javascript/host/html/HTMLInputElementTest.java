@@ -59,7 +59,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  alert(document.form1.textfield1.type);\n"
             + "  alert(document.form1.textfield1.name);\n"
             + "  alert(document.form1.textfield1.form.name);\n"
-            + "  document.form1.textfield1.value='cat';\n"
+            + "  document.form1.textfield1.value = 'cat';\n"
             + "  alert(document.form1.textfield1.value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"

@@ -55,7 +55,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function doTest() {\n"
             + "      alert(document.form1.textarea1.value);\n"
-            + "      document.form1.textarea1.value='PoohBear';\n"
+            + "      document.form1.textarea1.value = 'PoohBear';\n"
             + "      alert(document.form1.textarea1.value);\n"
             + "    }\n"
             + "  </script>\n"

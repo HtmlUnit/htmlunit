@@ -1582,13 +1582,13 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='a';\n"
+            + "      document.cookie = 'a';\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='';\n"
+            + "      document.cookie = '';\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='b';\n"
+            + "      document.cookie = 'b';\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='';\n"
+            + "      document.cookie = '';\n"
             + "      alert(document.cookie);\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1609,9 +1609,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='a';\n"
+            + "      document.cookie = 'a';\n"
             + "      alert(document.cookie);\n"
-            + "      document.cookie='=b';\n"
+            + "      document.cookie = '=b';\n"
             + "      alert(document.cookie);\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -2535,6 +2535,26 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         actual.add(driver.findElement(By.id("myTextarea")).getAttribute("value"));
 
         assertEquals(getExpectedAlerts(), actual);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void childElementCount() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.childElementCount);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div/>"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 
 }

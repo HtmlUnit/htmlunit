@@ -248,7 +248,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<span id='A'></span>\n"
             + "<script>\n"
             + "  var frame='<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>';\n"
-            + "  document.getElementById('A').innerHTML=frame;\n"
+            + "  document.getElementById('A').innerHTML = frame;\n"
             + "</script>\n"
             + "</body></html>";
         final String html2 = "<html><body>iframe content</body></html>";
@@ -291,7 +291,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
             + "<script>\n"
             + "  function createIframe() {\n"
             + "    var frame='<iframe id=\"f\" src=\"" + URL_SECOND + "\"></iframe>';\n"
-            + "    document.getElementById('A').innerHTML=frame;\n"
+            + "    document.getElementById('A').innerHTML = frame;\n"
             + "  }\n"
             + "  setTimeout('createIframe()', 100);\n"
             + "</script>\n"

@@ -153,7 +153,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
         final String html
             = "<html><head><title>first</title></head>\n"
             + "<body onload='document.forms[0].testSelect.selectedIndex = -1; "
-            + "document.forms[0].testSelect.options[0].selected=true;'>\n"
+            + "  document.forms[0].testSelect.options[0].selected = true;'>\n"
             + "<form>\n"
             + "<select name='testSelect'>\n"
             + "<option value='testValue'>value</option>\n"

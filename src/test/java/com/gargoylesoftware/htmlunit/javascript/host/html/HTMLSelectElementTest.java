@@ -385,7 +385,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function doTest() {\n"
             + "      var option1 = document.f1.elements['select'][0];\n"
-            + "      alert(option1!=null);\n"
+            + "      alert(option1 != null);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

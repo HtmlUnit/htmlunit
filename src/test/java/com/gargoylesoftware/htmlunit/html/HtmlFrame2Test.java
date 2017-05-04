@@ -211,7 +211,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             + "<script type='text/javascript'>\n"
             + "function writeForm(frame) {\n"
             + "  var div=frame.document.getElementById('div');\n"
-            + "  div.innerHTML=\"<form id='myForm'><input type='text' id='myInput' name='myInputName'/></form>\";\n"
+            + "  div.innerHTML = \"<form id='myForm'><input type='text' id='myInput' name='myInputName'/></form>\";\n"
             + "}\n"
 
             + "function writeFrame(frame) {\n"

@@ -41,7 +41,7 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
             + "<head><title>Test 1</title></head>\n"
             + "<body>\n"
             + "<script type='text/javascript'>\n"
-            + "  document.location.href='" + URL_SECOND + "';\n"
+            + "  document.location.href = '" + URL_SECOND + "';\n"
             + "</script>\n"
             + "<p>Second Page<p>\n"
             + "</body></html>";

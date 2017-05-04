@@ -37,7 +37,7 @@ public final class WaitingRefreshHandlerTest extends SimpleWebTestCase {
             + "<head><title>First Page</title>\n"
             + "<script>\n"
             + "function doRedirect() {\n"
-            + "  window.location.href='" + URL_SECOND + "';\n"
+            + "  window.location.href = '" + URL_SECOND + "';\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

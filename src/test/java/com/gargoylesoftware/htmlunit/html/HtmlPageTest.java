@@ -491,7 +491,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
     public void onLoadHandler_BodyName() throws Exception {
         final String htmlContent = "<html><head><title>foo</title>\n"
             + "<script type='text/javascript'>\n"
-            + "window.onload=function() {alert('foo')}</script>\n"
+            + "  window.onload = function() {alert('foo')}</script>\n"
             + "</head><body></body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
@@ -1283,7 +1283,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "<div id='myId'>Hello there!</div>\n"
             + "<script>\n"
             + "  var x = document.all;\n"
-            + "  window.onload=function() {alert('foo')};\n"
+            + "  window.onload = function() {alert('foo')};\n"
 
             // this tests 3103703
             // we don't store the jobs are pending at the moment of serialization
@@ -1593,7 +1593,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "  function test() {\n"
             + "    var table = document.createElement('table');\n"
             + "    var tr = document.createElement('tr');\n"
-            + "    tr.id='myTR';\n"
+            + "    tr.id = 'myTR';\n"
             + "    table.appendChild(tr);\n"
             + "    document.body.appendChild(table);\n"
             + "    document.body.removeChild(table);\n"
@@ -1616,7 +1616,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "  function test() {\n"
             + "    var table = document.createElement('table');\n"
             + "    var tr = document.createElement('tr');\n"
-            + "    tr.id='myTR';\n"
+            + "    tr.id = 'myTR';\n"
             + "    table.appendChild(tr);\n"
             + "    alert(document.getElementById('myTR'));\n"
             + "  }\n"

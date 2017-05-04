@@ -84,7 +84,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     public void setJavascriptEnabled_false() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
-            + "document.form1.textfield1='blue'"
+            + "  document.form1.textfield1 = 'blue'"
             + "</script></head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -110,7 +110,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final String content
             = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
-            + "  document.form1.textfield1.value='blue'"
+            + "  document.form1.textfield1.value = 'blue'"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"

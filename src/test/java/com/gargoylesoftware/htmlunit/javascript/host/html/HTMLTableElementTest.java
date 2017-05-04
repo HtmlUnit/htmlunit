@@ -785,10 +785,10 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tab1');\n"
             + "  alert(node.borderColor);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColor);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColor);\n"
 
             + "  var node = document.getElementById('tab2');\n"
@@ -820,10 +820,10 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tab1');\n"
             + "  alert(node.borderColorDark);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColorDark);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColorDark);\n"
 
             + "  var node = document.getElementById('tab2');\n"
@@ -855,10 +855,10 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tab1');\n"
             + "  alert(node.borderColorLight);\n"
 
-            + "  node.borderColor='#667788';\n"
+            + "  node.borderColor = '#667788';\n"
             + "  alert(node.borderColorLight);\n"
 
-            + "  node.borderColor='unknown';\n"
+            + "  node.borderColor = 'unknown';\n"
             + "  alert(node.borderColorLight);\n"
 
             + "  var node = document.getElementById('tab2');\n"
@@ -887,13 +887,13 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "  var node = document.getElementById('tab1');\n"
             + "  alert(node.summary);\n"
 
-            + "  node.summary='hello';\n"
+            + "  node.summary = 'hello';\n"
             + "  alert(node.summary);\n"
 
-            + "  node.summary='unknown';\n"
+            + "  node.summary = 'unknown';\n"
             + "  alert(node.summary);\n"
 
-            + "  try { node.summary=unknown; } catch(e) { alert('exception') }\n"
+            + "  try { node.summary = unknown; } catch(e) { alert('exception') }\n"
 
             + "  var node = document.getElementById('tab2');\n"
             + "  alert(node.summary);\n"

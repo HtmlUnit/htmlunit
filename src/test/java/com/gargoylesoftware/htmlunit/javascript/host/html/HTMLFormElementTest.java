@@ -373,7 +373,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html><head><title>foo</title><script>\n"
             + "function go() {\n"
             + "  alert(document.simple_form." + name + ".value);\n"
-            + "  document.simple_form." + name + ".value='foo';\n"
+            + "  document.simple_form." + name + ".value = 'foo';\n"
             + "  alert(document.simple_form." + name + ".value);\n"
             + "}</script></head>\n"
             + "<body onload='go()'>\n"
@@ -429,7 +429,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<p>hello world</p><table><tr><td>\n"
             + "<form action='login.jsp' name='simple_form'>\n"
             + "  <input name='msg' type='hidden' value='0'>\n"
-            + "  <script>document.simple_form.msg.value=1</script>\n"
+            + "  <script>document.simple_form.msg.value = 1</script>\n"
             + "  <input name='login' size='17' value='foo'>\n"
             + "</form></td></tr></table>\n"
             + "</body></html>";
