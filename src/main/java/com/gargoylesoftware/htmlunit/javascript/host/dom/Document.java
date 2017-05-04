@@ -877,16 +877,15 @@ public class Document extends Node {
     }
 
     /**
-     * JavaScript function "close".
+     * JavaScript function {@code close}.
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
      * @throws IOException if an IO problem occurs
      */
-    @JsxFunction
+    @JsxFunction({CHROME, IE})
     public void close() throws IOException {
-        // overridden
     }
 
     /**
@@ -1008,7 +1007,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command is supported
      */
-    @JsxFunction
+    @JsxFunction({CHROME, IE})
     public boolean queryCommandSupported(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1034,7 +1033,7 @@ public class Document extends Node {
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed
      */
-    @JsxFunction
+    @JsxFunction({CHROME, IE})
     public boolean queryCommandEnabled(final String cmd) {
         return hasCommand(cmd, true);
     }
@@ -1047,7 +1046,7 @@ public class Document extends Node {
      * @param value the string, number, or other value to assign (possible values depend on the command)
      * @return {@code true} if the command was successful, {@code false} otherwise
      */
-    @JsxFunction
+    @JsxFunction({CHROME, IE})
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         if (!hasCommand(cmd, false)) {
             return false;

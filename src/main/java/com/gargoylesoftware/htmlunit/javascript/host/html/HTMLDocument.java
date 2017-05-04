@@ -657,6 +657,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
+    @JsxFunction(FF)
     public void close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -673,6 +674,33 @@ public class HTMLDocument extends Document {
             final WebWindow window = page.getEnclosingWindow();
             webClient.loadWebResponseInto(webResponse, window);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(FF)
+    public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
+        return super.execCommand(cmd, userInterface, value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(FF)
+    public boolean queryCommandEnabled(final String cmd) {
+        return super.queryCommandEnabled(cmd);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(FF)
+    public boolean queryCommandSupported(final String cmd) {
+        return super.queryCommandSupported(cmd);
     }
 
     /**
