@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_MOZ_PAINT_COUNT_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -267,6 +268,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public void alert(final Object message) {
+// System.out.println(message);
         // use Object as parameter and perform String conversion by ourself
         // this allows to place breakpoint here and "see" the message object and its properties
         final String stringMessage = Context.toString(message);
@@ -1783,7 +1785,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public int getMozPaintCount() {
-        return 0;
+        if (getBrowserVersion().hasFeature(JS_WINDOW_MOZ_PAINT_COUNT_ZERO)) {
+            return 0;
+        }
+        return 8;
     }
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
