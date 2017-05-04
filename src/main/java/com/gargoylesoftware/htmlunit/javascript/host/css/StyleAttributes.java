@@ -3130,6 +3130,9 @@ public final class StyleAttributes {
         /** The style property {@code WebkitJustifyContent}. */
         WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ff52up("normal")),
 
+        /** The style property {@code -webkit-justify-content}. */
+        WEBKIT_JUSTIFY_CONTENT__("-webkit-justify-content", "webkit-justify-content", ff52up("normal")),
+
         /** The style property {@code webkitLineBreak}. */
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chrome("auto")),
 
@@ -3246,6 +3249,9 @@ public final class StyleAttributes {
         /** The style property {@code WebkitOrder}. */
         WEBKIT_ORDER_("WebkitOrder", "webkit-order", ff52up("0")),
 
+        /** The style property {@code -webkit-order}. */
+        WEBKIT_ORDER__("-webkit-order", "webkit-order", ff52up("0")),
+
         /** The style property {@code webkitPaddingAfter}. */
         WEBKIT_PADDING_AFTER("webkitPaddingAfter", "webkit-padding-after", chrome("0px")),
 
@@ -3264,11 +3270,17 @@ public final class StyleAttributes {
         /** The style property {@code WebkitPerspective}. */
         WEBKIT_PERSPECTIVE_("WebkitPerspective", "webkit-perspective", ff52up("none")),
 
+        /** The style property {@code -webkit-perspective}. */
+        WEBKIT_PERSPECTIVE__("-webkit-perspective", "webkit-perspective", ff52up("none")),
+
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
+
+        /** The style property {@code -webkit-perspective-origin}. */
+        WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin", ff52up("625px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chrome("")),
@@ -3319,6 +3331,10 @@ public final class StyleAttributes {
         WEBKIT_TEXT_FILL_COLOR_("WebkitTextFillColor", "webkit-text-fill-color",
                 ff52up("rgb(0, 0, 0)")),
 
+        /** The style property {@code -webkit-text-fill-color}. */
+        WEBKIT_TEXT_FILL_COLOR__("-webkit-text-fill-color", "webkit-text-fill-color",
+                ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code webkitTextOrientation}. */
         WEBKIT_TEXT_ORIENTATION("webkitTextOrientation", "webkit-text-orientation", chrome("vertical-right")),
 
@@ -3331,11 +3347,17 @@ public final class StyleAttributes {
         /** The style property {@code WebkitTextSizeAdjust}. */
         WEBKIT_TEXT_SIZE_ADJUST_("WebkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
 
+        /** The style property {@code -webkit-text-size-adjust}. */
+        WEBKIT_TEXT_SIZE_ADJUST__("-webkit-text-size-adjust", "webkit-text-size-adjust", ff52up("auto")),
+
         /** The style property {@code webkitTextStroke}. */
         WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chrome(""), ff52up("")),
 
         /** The style property {@code WebkitTextStroke}. */
         WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff52up("")),
+
+        /** The style property {@code -webkit-text-stroke}. */
+        WEBKIT_TEXT_STROKE__("-webkit-text-stroke", "webkit-text-stroke", ff52up("")),
 
         /** The style property {@code webkitTextStrokeColor}. */
         WEBKIT_TEXT_STROKE_COLOR("webkitTextStrokeColor", "webkit-text-stroke-color",
@@ -3345,11 +3367,18 @@ public final class StyleAttributes {
         WEBKIT_TEXT_STROKE_COLOR_("WebkitTextStrokeColor", "webkit-text-stroke-color",
                 ff52up("rgb(0, 0, 0)")),
 
+        /** The style property {@code -webkit-text-stroke-color}. */
+        WEBKIT_TEXT_STROKE_COLOR__("-webkit-text-stroke-color", "webkit-text-stroke-color",
+                ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code webkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff52up("0px")),
 
         /** The style property {@code WebkitTextStrokeWidth}. */
         WEBKIT_TEXT_STROKE_WIDTH_("WebkitTextStrokeWidth", "webkit-text-stroke-width", ff52up("0px")),
+
+        /** The style property {@code -webkit-text-stroke-width}. */
+        WEBKIT_TEXT_STROKE_WIDTH__("-webkit-text-stroke-width", "webkit-text-stroke-width", ff52up("0px")),
 
         /** The style property {@code webkitTransform}. */
         WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff52up("none")),
