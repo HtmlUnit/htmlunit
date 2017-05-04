@@ -703,7 +703,7 @@ public class Element extends Node {
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction
-    public Object getClientRects() {
+    public ClientRectList getClientRects() {
         final ClientRectList rectList = new ClientRectList();
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));

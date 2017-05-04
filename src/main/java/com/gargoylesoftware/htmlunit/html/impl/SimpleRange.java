@@ -235,7 +235,9 @@ public class SimpleRange implements Range, Serializable {
         if (isOffsetChars(startContainer_)) {
             start = (DomNode) startContainer_;
             String text = getText(start);
-            text = text.substring(0, startOffset_);
+            if (startOffset_ < text.length()) {
+                text = text.substring(0, startOffset_);
+            }
             setText(start, text);
         }
         else if (startContainer_.getChildNodes().getLength() > startOffset_) {
@@ -247,7 +249,9 @@ public class SimpleRange implements Range, Serializable {
         if (isOffsetChars(endContainer_)) {
             end = (DomNode) endContainer_;
             String text = getText(end);
-            text = text.substring(endOffset_);
+            if (endOffset_ < text.length()) {
+                text = text.substring(endOffset_);
+            }
             setText(end, text);
         }
         else if (endContainer_.getChildNodes().getLength() > endOffset_) {

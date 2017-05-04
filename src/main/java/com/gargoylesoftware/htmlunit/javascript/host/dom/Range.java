@@ -491,7 +491,7 @@ public class Range extends SimpleScriptable {
      * @return a collection of rectangles that describes the layout of the contents
      */
     @JsxFunction
-    public Object getClientRects() {
+    public ClientRectList getClientRects() {
         final ClientRectList rectList = new ClientRectList();
         rectList.setParentScope(getWindow());
         rectList.setPrototype(getPrototype(rectList.getClass()));
@@ -509,5 +509,32 @@ public class Range extends SimpleScriptable {
         }
 
         return rectList;
+    }
+
+    /**
+     * Returns an object that bounds the contents of the range.
+     * this a rectangle enclosing the union of the bounding rectangles for all the elements in the range.
+     * @return an object the bounds the contents of the range
+     */
+    @JsxFunction
+    public ClientRect getBoundingClientRect() {
+        final ClientRect rect = new ClientRect();
+        rect.setParentScope(getWindow());
+        rect.setPrototype(getPrototype(rect.getClass()));
+
+        // simple impl for now
+        final DomDocumentFragment fragment = (DomDocumentFragment) toW3C().extractContents();
+        for (DomNode node : fragment.getDescendants()) {
+            final ScriptableObject scriptable = node.getScriptableObject();
+            if (scriptable instanceof HTMLElement) {
+                final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
+                rect.setTop(Math.min(rect.getTop(), childRect.getTop()));
+                rect.setLeft(Math.min(rect.getLeft(), childRect.getLeft()));
+                rect.setRight(Math.max(rect.getRight(), childRect.getRight()));
+                rect.setBottom(Math.max(rect.getBottom(), childRect.getBottom()));
+            }
+        }
+
+        return rect;
     }
 }
