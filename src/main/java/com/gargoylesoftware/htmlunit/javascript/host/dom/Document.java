@@ -1304,7 +1304,7 @@ public class Document extends EventNode {
      */
     @JsxGetter({CHROME, IE})
     public String getDomain() {
-        if (domain_ == null) {
+        if (domain_ == null && getPage().getWebResponse() != null) {
             URL url = getPage().getUrl();
             if (url == WebClient.URL_ABOUT_BLANK) {
                 final WebWindow w = getWindow().getWebWindow();
