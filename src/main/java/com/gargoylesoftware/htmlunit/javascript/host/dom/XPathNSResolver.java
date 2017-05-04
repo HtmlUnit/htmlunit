@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 @JsxClass(isJSObject = false, value = CHROME)
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
-    private Object element_;
+    private Node element_;
 
     /**
      * Default constructor.
@@ -61,7 +61,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
      */
     @JsxFunction
     public String lookupNamespaceURI(final String prefix) {
-        return XmlUtil.lookupNamespaceURI((DomElement) ((SimpleScriptable) element_).getDomNodeOrDie(), prefix);
+        return XmlUtil.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), prefix);
     }
 
     /**
@@ -69,7 +69,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
      */
     @Override
     public String getBaseIdentifier() {
-        return XmlUtil.lookupNamespaceURI((DomElement) ((SimpleScriptable) element_).getDomNodeOrDie(), "");
+        return XmlUtil.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), "");
     }
 
     /**
