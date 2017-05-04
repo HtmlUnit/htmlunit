@@ -48,8 +48,6 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
  * all the tests, then select all visible text and copy it to a local file.
  *
- * In IE8 raw file, test outputs should be manually separated in a new line.
- *
  * Steps to generate the tests:
  * <ol>
  *   <li>Call {@link #extractExpectations(File, File)}, where <tt>input</tt> is the raw file from the browser</li>

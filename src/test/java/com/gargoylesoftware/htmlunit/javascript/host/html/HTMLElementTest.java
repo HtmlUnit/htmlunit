@@ -3788,7 +3788,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void appendChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -3814,7 +3813,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void appendChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -3866,7 +3864,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void insertBeforeExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -3892,7 +3889,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void insertBeforeExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -3944,7 +3940,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void replaceChildExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -3970,7 +3965,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("executed")
-    // IE8 does not support appendChild for script elements
     public void replaceChildExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4199,10 +4193,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    var newnode = document.createElement('script');\n"
-            // IE8 does not support appendChild for script elements
-            + "    try {\n"
-            + "      newnode.appendChild(document.createTextNode('alerter();'));\n"
-            + "    } catch(e) { alert('exception-append'); return }\n"
+            + "    newnode.appendChild(document.createTextNode('alerter();'));\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
             + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"
@@ -4230,10 +4221,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "    var newnode = document.createElement('div');\n"
             + "    var newscript = document.createElement('script');\n"
             + "    newnode.appendChild(newscript);\n"
-            // IE8 does not support appendChild for script elements
-            + "    try {\n"
-            + "      newscript.appendChild(document.createTextNode('alerter();'));\n"
-            + "    } catch(e) { alert('exception-append'); return }\n"
+            + "    newscript.appendChild(document.createTextNode('alerter();'));\n"
 
             + "    var outernode = document.getElementById('myNode');\n"
             + "    if (!outernode.insertAdjacentElement) { alert('insertAdjacentElement not available'); return }\n"

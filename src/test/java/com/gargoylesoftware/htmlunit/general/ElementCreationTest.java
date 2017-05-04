@@ -1481,10 +1481,6 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts("[object HTMLTitleElement]")
     public void title() throws Exception {
-        // there seems to be a bug in ie8
-        // document.createElement('title') creates a text element
-        // instead of a title. But if you use the title html tag
-        // you end with a title element.
         test("title");
     }
 

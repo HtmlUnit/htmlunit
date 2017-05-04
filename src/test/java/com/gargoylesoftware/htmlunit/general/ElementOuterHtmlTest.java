@@ -40,8 +40,6 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
                 + "      while (value && (value.charAt(0) == '\\r' || value.charAt(0) == '\\n')) {\n"
                 + "        value = value.substring(1);\n"
                 + "      }\n"
-                // IE8 inserts a fancy namespace declaration if the tag is unknown
-                // and of course IE10 is different
                 + "      value = value.replace('<?XML:NAMESPACE PREFIX = PUBLIC NS = \"URN:COMPONENT\" />', '');\n"
                 + "      value = value.replace('<?XML:NAMESPACE PREFIX = \"PUBLIC\" NS = \"URN:COMPONENT\" />', '');\n"
                 + "      alert(value);\n"

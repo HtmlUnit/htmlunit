@@ -2531,7 +2531,7 @@ public class HTMLElement extends Element {
      * Sets the {@code hidden} property.
      * @param hidden the {@code hidden} value
      */
-    @JsxGetter
+    @JsxSetter
     public void setHidden(final boolean hidden) {
         if (hidden) {
             getDomNodeOrDie().setAttribute("hidden", "hidden");

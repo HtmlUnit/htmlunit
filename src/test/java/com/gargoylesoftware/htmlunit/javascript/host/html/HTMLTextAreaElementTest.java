@@ -600,8 +600,8 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-1", /* "null", */ "32", "32", "-1", "ms"},
-            IE = {"2147483647", /* "null", */ "32", "32", "2147483647", "ms"})
+    @Alerts(DEFAULT = {"-1", "null", "32", "32", "-1", "ms"},
+            IE = {"2147483647", "null", "32", "32", "2147483647", "ms"})
     public void getMaxLength() throws Exception {
         final String html
             = "<html>\n"
@@ -609,7 +609,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      alert(document.form1.textarea1.maxLength);\n"
-            // + "      alert(document.form1.textarea1.getAttribute('maxLength'));\n"
+            + "      alert(document.form1.textarea1.getAttribute('maxLength'));\n"
             + "      alert(document.form1.textarea2.maxLength);\n"
             + "      alert(document.form1.textarea2.getAttribute('maxLength'));\n"
             + "      alert(document.form1.textarea3.maxLength);\n"
@@ -622,31 +622,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "    <textarea name='textarea1'></textarea>\n"
             + "    <textarea name='textarea2' maxLength='32'></textarea>\n"
             + "    <textarea name='textarea3' maxLength='ms'></textarea>\n"
-            + "  </form>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Separated from the above testcase; can be merged back if fixed.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void getMaxLength_IE8Failing() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      alert(document.form1.textarea1.getAttribute('maxLength'));\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form name='form1' method='post' >\n"
-            + "    <textarea name='textarea1'></textarea>\n"
             + "  </form>\n"
             + "</body></html>";
 

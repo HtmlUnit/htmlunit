@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Test for IE weird JavaScript syntax (supported by IE8).
+ * Test for IE weird JavaScript syntax.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

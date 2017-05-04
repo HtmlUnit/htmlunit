@@ -357,8 +357,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div>Z</a>
     // CHROME and IE generate:
     // <a id="outerA">V</a><div id="innerDiv"><a id="outerA">W</a><a id="innerA">X</a>Y</div>Z
-    // IE8 generates (total mess):
-    // <a id="outerA">V<div id="innerDiv">W<a id="innerA">X</a>Y</div></a><a id="innerA">X</a>YZ</a/>
     // HtmlUnit generates:
     // <a id="outerA">V<div id="innerDiv">W</div></a><a id="innerA">X</a>YZ
     public void nestedAnchorInDivision() throws Exception {

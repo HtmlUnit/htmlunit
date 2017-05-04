@@ -414,8 +414,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
 
     /**
      * Test for a case where complete HTML page is present inside DIV tag.
-     * IE8 ignores the HTML tag, BODY tag and complete HEAD along with content inside HEAD.
-     * Others ignores only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
+     * Browsers ignore only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
      * the current node (DIV tag in test case).
      *
      * @throws Exception failure
@@ -473,8 +472,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
 
     /**
      * Test for a case where complete HTML page is added using document.write() inside DIV tag.
-     * IE8 ignores the HTML tag, BODY tag and complete HEAD along with content inside HEAD.
-     * Others ignores only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
+     * Browsers ignore only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
      * the current node (DIV tag in test case).
      *
      * @throws Exception failure
@@ -531,8 +529,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     /**
      * Test for a case where complete HTML page is set in innerHTML of DIV tag.
      * Behavior is same for any TAG inside body including BODY tag.
-     * IE8 ignores the HTML tag, BODY tag and complete HEAD along with content inside HEAD.
-     * Others ignores only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
+     * Browsers ignore only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
      * the current node (DIV tag in test case).
      *
      * @throws Exception failure

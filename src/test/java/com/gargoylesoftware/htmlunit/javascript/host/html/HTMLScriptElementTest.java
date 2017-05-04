@@ -202,7 +202,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void createElementWithCreateTextNode() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
@@ -227,7 +226,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
@@ -346,7 +344,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceSelfWithCreateTextNode() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
@@ -416,7 +413,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "executed", "end"})
     public void replaceWithCreateTextNodeEmpty() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script id='js1'></script>\n"
@@ -441,7 +437,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"start", "end"})
     public void replaceWithCreateTextNodeBlank() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script id='js1'> </script>\n"
@@ -466,7 +461,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"script", "start", "end"})
     public void replaceWithCreateTextNodeScript() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script id='js1'>\n"
@@ -874,7 +868,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void appendChild_UnexpectedCall() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.appendChild(source)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
@@ -897,7 +890,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     public void insertBeforeUnexpectedCall() throws Exception {
-        // IE (at least IE6 and IE8) does not support script.insertBefore(source, null)
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"

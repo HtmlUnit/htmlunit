@@ -69,7 +69,6 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    //TODO: fails with IE8 with WebDriver, but succeeds manually
     public void simple4() throws Exception {
         final String script = "/*@cc_on alert(1) @*/\n"
             + "/*@if (@_win32)\n"
