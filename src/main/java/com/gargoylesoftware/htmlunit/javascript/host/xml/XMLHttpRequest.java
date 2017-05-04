@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
@@ -796,7 +797,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         public Charset getContentCharset() {
                             if (charsetNameFinal.isEmpty()
                                     || (charsetFinal == null && getBrowserVersion()
-                                                .hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION))) {
+                                                .hasFeature(XHR_USE_CONTENT_CHARSET))) {
                                 return super.getContentCharset();
                             }
                             return charsetFinal;

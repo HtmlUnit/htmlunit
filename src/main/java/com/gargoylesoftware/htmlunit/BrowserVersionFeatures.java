@@ -1555,6 +1555,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF52, IE})
     XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND,
 
+    /** Indicates that the content charset is used for response parsing. */
+    @BrowserFeature(FF)
+    XHR_USE_CONTENT_CHARSET,
+
     /** Indicates that the request uses the charset from the requesting page. */
     @BrowserFeature(CHROME)
     XHR_USE_DEFAULT_CHARSET_FROM_PAGE,
