@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAnimateTransform;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgAnimateTransform.class, browsers = {FF, CHROME})
+@JsxClass(domClass = SvgAnimateTransform.class, value = {FF, CHROME})
 public class SVGAnimateTransformElement extends SVGAnimationElement {
 
     /**

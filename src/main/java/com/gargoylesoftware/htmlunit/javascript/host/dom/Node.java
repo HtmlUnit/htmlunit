@@ -373,7 +373,7 @@ public class Node extends EventTarget {
      * Removes the DOM node from its parent.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
      */
-    @JsxFunction({FF, CHROME, EDGE})
+    @JsxFunction({CHROME, FF, EDGE})
     public void remove() {
         getDomNodeOrDie().remove();
     }
@@ -683,7 +683,7 @@ public class Node extends EventTarget {
      * @return the parent element
      * @see #getParentNode()
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public Element getParentElement() {
         final Node parent = getParent();
         if (!(parent instanceof Element)) {

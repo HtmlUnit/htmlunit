@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {FF, CHROME})
+@JsxClass({CHROME, FF})
 public class BlobEvent extends Event {
 
     /**

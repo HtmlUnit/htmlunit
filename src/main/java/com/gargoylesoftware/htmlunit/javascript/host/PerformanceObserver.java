@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class PerformanceObserver extends SimpleScriptable {
 
     /**

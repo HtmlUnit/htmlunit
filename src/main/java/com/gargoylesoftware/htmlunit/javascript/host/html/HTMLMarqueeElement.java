@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, browsers = {CHROME, IE, EDGE})
+@JsxClass(domClass = HtmlMarquee.class, value = {CHROME, IE, EDGE})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**

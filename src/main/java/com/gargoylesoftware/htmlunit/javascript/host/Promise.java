@@ -41,7 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class Promise extends SimpleScriptable {
 
     private Object value_;

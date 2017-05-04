@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {IE, EDGE})
+@JsxClass({IE, EDGE})
 public class Coordinates extends SimpleScriptable {
 
     private double latitude_;

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMenuItem.class, browsers = FF)
+@JsxClass(domClass = HtmlMenuItem.class, value = FF)
 public class HTMLMenuItemElement extends HTMLElement {
 
     /**

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, IE, EDGE})
+@JsxClass({CHROME, IE, EDGE})
 public class TextEvent extends UIEvent {
 
     /** Constant for {@code DOM_INPUT_METHOD_UNKNOWN}. */

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class WEBGL_compressed_texture_s3tc extends SimpleScriptable {
 
     /** The constant {@code COMPRESSED_RGBA_S3TC_DXT1_EXT}. */

@@ -174,7 +174,7 @@ public class MessageEvent extends Event {
      * Retrieves the identifier of the last event.
      * @return the identified of the last event
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public String getLastEventId() {
         return lastEventId_;
     }

@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class WeakSet extends SimpleScriptable {
 
     private transient java.util.Set<Object> set_ = Collections.newSetFromMap(new WeakHashMap<Object, Boolean>());

@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = CHROME)
-@JsxClass(isJSObject = false, browsers = {FF})
+@JsxClass(CHROME)
+@JsxClass(isJSObject = false, value = FF)
 public class BaseAudioContext extends EventTarget {
 
     /**

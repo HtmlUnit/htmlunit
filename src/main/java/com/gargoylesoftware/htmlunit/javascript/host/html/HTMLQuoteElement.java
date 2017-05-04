@@ -32,8 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, browsers = {FF, CHROME, EDGE})
-@JsxClass(domClass = HtmlBlockQuote.class, browsers = {FF, CHROME, EDGE})
+@JsxClass(domClass = HtmlInlineQuotation.class, value = {FF, CHROME, EDGE})
+@JsxClass(domClass = HtmlBlockQuote.class, value = {FF, CHROME, EDGE})
 public class HTMLQuoteElement extends HTMLElement {
 
     /**

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.AudioNode;
  *
  * @author Ronald Brill
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class AudioScheduledSourceNode extends AudioNode {
 
     /**

@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomDocumentType.class, browsers = IE)
+@JsxClass(domClass = DomDocumentType.class, value = IE)
 public class XMLDOMDocumentType extends XMLDOMNode {
 
     private XMLDOMNamedNodeMap attributes_;

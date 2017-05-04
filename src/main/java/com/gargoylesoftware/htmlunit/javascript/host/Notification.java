@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF})
+@JsxClass({CHROME, FF})
 public class Notification extends EventTarget {
 
     /**

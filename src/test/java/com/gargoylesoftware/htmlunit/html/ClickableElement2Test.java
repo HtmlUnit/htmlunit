@@ -64,7 +64,7 @@ public class ClickableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("click click dblclick ")
-    @BuggyWebDriver({FF, CHROME})
+    @BuggyWebDriver({CHROME, FF})
     public void dblClick() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

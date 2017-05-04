@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class WEBGL_debug_renderer_info extends SimpleScriptable {
 
     /** The constant {@code UNMASKED_RENDERER_WEBGL}. */

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class MouseScrollEvent extends MouseEvent {
 
     /** Constant for {@code HORIZONTAL_AXIS}. */

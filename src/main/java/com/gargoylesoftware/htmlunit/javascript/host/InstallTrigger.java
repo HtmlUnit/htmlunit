@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class InstallTrigger extends SimpleScriptable {
 
     /** Constant. */

@@ -290,7 +290,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code vendorSub} property.
      * @return the {@code vendorSub} property
      */
-    @JsxGetter({FF, CHROME, EDGE})
+    @JsxGetter({CHROME, FF, EDGE})
     public String getVendorSub() {
         return "";
     }

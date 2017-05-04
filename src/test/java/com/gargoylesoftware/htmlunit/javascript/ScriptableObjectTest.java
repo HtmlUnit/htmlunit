@@ -70,7 +70,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"},
             IE = "not defined")
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class MSGestureEvent extends Event {
 
     /** The constant {@code MSGESTURE_FLAG_BEGIN}. */

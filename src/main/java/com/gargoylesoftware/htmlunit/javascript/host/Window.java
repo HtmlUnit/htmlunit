@@ -1999,7 +1999,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code scrollX} property.
      * @return the value of {@code scrollX} property
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public int getScrollX() {
         return 0;
     }
@@ -2008,7 +2008,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the value of {@code scrollY} property.
      * @return the value of {@code scrollY} property
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public int getScrollY() {
         return 0;
     }

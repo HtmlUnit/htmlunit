@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author Frank Danek
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class HashChangeEvent extends Event {
 
     private String oldURL_ = "";

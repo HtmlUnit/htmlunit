@@ -57,7 +57,7 @@ public @interface JsxClass {
      * The {@link SupportedBrowser}s supported by this constant.
      * @return the {@link SupportedBrowser}s
      */
-    SupportedBrowser[] browsers() default {
+    SupportedBrowser[] value() default {
         CHROME,
         FF,
         IE,

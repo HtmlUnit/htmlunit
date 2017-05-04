@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class ANGLE_instanced_arrays extends SimpleScriptable {
 
     /** The constant {@code VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE}. */

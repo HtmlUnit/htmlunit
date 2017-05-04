@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class CSSCounterStyleRule extends CSSRule {
 
 }

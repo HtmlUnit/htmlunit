@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMParseError extends MSXMLScriptable {
 
     private int errorCode_;

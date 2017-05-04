@@ -2096,7 +2096,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "-",
             EDGE = "-")
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void output() throws Exception {
         test("output");
     }

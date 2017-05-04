@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class AudioBuffer extends SimpleScriptable {
 
     /**

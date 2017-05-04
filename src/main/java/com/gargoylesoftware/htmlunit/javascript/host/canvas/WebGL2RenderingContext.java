@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF52})
+@JsxClass({CHROME, FF52})
 public class WebGL2RenderingContext extends SimpleScriptable {
 
     /** The constant {@code ACTIVE_ATTRIBUTES}. */

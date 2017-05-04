@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, IE, EDGE})
+@JsxClass({CHROME, IE, EDGE})
 public class PointerEvent extends MouseEvent {
 
     private int pointerId_;

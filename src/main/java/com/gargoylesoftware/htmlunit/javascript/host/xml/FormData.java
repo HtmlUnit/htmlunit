@@ -117,7 +117,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public String get(final String name) {
         if (StringUtils.isEmpty(name)) {
             return null;
@@ -137,7 +137,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return the first value found for the give name
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public Scriptable getAll(final String name) {
         if (StringUtils.isEmpty(name)) {
             return Context.getCurrentContext().newArray(this, 0);
@@ -160,7 +160,7 @@ public class FormData extends SimpleScriptable {
      * @param name the name of the field to check
      * @return true if the name exists
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public boolean has(final String name) {
         if (StringUtils.isEmpty(name)) {
             return false;
@@ -183,7 +183,7 @@ public class FormData extends SimpleScriptable {
      * @param value the field's value
      * @param filename the filename reported to the server (optional)
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public void set(final String name, final Object value, final Object filename) {
         if (StringUtils.isEmpty(name)) {
             return;

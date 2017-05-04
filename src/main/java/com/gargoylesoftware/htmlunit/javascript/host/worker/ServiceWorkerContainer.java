@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class ServiceWorkerContainer extends EventTarget {
 
     /**

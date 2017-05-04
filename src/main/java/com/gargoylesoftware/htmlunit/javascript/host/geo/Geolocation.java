@@ -50,8 +50,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {IE, EDGE})
-@JsxClass(isJSObject = false, browsers = {FF, CHROME})
+@JsxClass({IE, EDGE})
+@JsxClass(isJSObject = false, value = {CHROME, FF})
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);

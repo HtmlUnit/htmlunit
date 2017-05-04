@@ -442,7 +442,7 @@ public class Document2 extends EventNode2 {
      * @param result the result object which may be reused and returned by this method
      * @return the result of the evaluation of the XPath expression
      */
-    @Function({FF, CHROME})
+    @Function({CHROME, FF})
     public XPathResult2 evaluate(final String expression, final Node2 contextNode,
             final Object resolver, final int type, final Object result) {
         XPathResult2 xPathResult = (XPathResult2) result;

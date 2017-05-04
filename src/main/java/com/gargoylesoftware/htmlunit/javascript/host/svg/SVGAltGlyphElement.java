@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgAltGlyph;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgAltGlyph.class, browsers = FF45)
+@JsxClass(domClass = SvgAltGlyph.class, value = FF45)
 public class SVGAltGlyphElement extends SVGTextPositioningElement {
 
     /**

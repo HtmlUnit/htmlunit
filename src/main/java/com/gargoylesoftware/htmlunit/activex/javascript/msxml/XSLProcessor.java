@@ -53,7 +53,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XSLProcessor extends MSXMLScriptable {
 
     private XMLDOMNode style_;

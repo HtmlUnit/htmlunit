@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {CHROME, FF52, IE, EDGE})
+@JsxClass({CHROME, FF52, IE, EDGE})
 public class CSSKeyframesRule extends CSSRule {
 
     /**

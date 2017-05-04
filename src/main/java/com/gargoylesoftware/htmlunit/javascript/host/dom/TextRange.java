@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author David Gileadi
  */
-@JsxClass(browsers = {IE})
+@JsxClass(IE)
 public class TextRange extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(TextRange.class);

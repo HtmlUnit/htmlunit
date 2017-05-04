@@ -61,8 +61,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {CHROME, FF})
-@JsxClass(isJSObject = false, browsers = IE)
+@JsxClass({CHROME, FF})
+@JsxClass(isJSObject = false, value = IE)
 public class HTMLOptionsCollection extends SimpleScriptable {
 
     private HtmlSelect htmlSelect_;

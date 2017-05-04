@@ -116,7 +116,7 @@ public class HTMLDocument extends Document {
     /** The format to use for the <tt>lastModified</tt> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
-    private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+    private enum ParsingStatus {OUTSIDE, START, IN_NAME, INSIDE, IN_STRING}
 
     private HTMLElement activeElement_;
 

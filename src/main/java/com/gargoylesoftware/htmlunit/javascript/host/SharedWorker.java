@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF})
+@JsxClass({CHROME, FF})
 public class SharedWorker extends EventTarget {
 
     /**

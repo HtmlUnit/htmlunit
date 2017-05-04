@@ -27,8 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
-@JsxClass(isJSObject = false, browsers = IE)
+@JsxClass({CHROME, FF, EDGE})
+@JsxClass(isJSObject = false, value = IE)
 public class CSSGroupingRule extends CSSRule {
 
     /**

@@ -64,7 +64,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chuck Dumont
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMDocument extends XMLDOMNode {
 
     private static final Log LOG = LogFactory.getLog(XMLDOMDocument.class);

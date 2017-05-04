@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class OES_element_index_uint extends SimpleScriptable {
 
     /**

@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XSLTemplate extends MSXMLScriptable {
 
     private XMLDOMNode stylesheet_;

@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class CSS extends SimpleScriptable {
 
     /**

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {IE, EDGE})
+@JsxClass({IE, EDGE})
 public class PositionError extends SimpleScriptable {
 
     /** The constant for {@code PERMISSION_DENIED}. */

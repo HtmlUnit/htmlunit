@@ -44,7 +44,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";
@@ -150,7 +150,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code match} static property
      */
-    @JsxStaticGetter({FF, CHROME})
+    @JsxStaticGetter({CHROME, FF})
     public static Symbol getMatch(final Scriptable thisObj) {
         return getSymbol(thisObj, "match");
     }
@@ -200,7 +200,7 @@ public class Symbol extends SimpleScriptable {
      * @param thisObj the scriptable
      * @return the {@code species} static property
      */
-    @JsxStaticGetter({FF, CHROME})
+    @JsxStaticGetter({CHROME, FF})
     public static Symbol getSpecies(final Scriptable thisObj) {
         return getSymbol(thisObj, "species");
     }

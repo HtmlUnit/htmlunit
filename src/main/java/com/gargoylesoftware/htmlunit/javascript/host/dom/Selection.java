@@ -270,7 +270,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the node within which the focus will be moved
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public void extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {

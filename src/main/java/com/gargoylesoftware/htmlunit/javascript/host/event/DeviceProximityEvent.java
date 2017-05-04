@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class DeviceProximityEvent extends Event {
 
     /**

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, browsers = {IE})
+@JsxClass(domClass = HtmlInlineQuotation.class, value = IE)
 public class HTMLInlineQuotationElement extends HTMLElement {
 
     /**

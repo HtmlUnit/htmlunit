@@ -28,7 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMImplementation extends MSXMLScriptable {
 
     /**

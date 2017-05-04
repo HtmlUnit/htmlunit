@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF})
+@JsxClass({CHROME, FF})
 public class FontFace extends SimpleScriptable {
 
     /**

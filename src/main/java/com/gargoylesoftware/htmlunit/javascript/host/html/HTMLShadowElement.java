@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF45})
+@JsxClass({CHROME, FF45})
 public class HTMLShadowElement extends HTMLElement {
 
     /**

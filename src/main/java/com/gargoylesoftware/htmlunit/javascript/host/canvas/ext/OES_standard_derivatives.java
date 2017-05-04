@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class OES_standard_derivatives extends SimpleScriptable {
 
     /** The constant {@code FRAGMENT_SHADER_DERIVATIVE_HINT_OES}. */

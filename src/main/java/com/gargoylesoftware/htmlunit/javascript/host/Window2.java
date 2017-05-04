@@ -634,7 +634,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param showDialog if true, specifies a show Dialog.
      * @return false
      */
-    @Function({ CHROME, FF })
+    @Function({CHROME, FF})
     public static boolean find(final Object self, final String search, final boolean caseSensitive,
             final boolean backwards, final boolean wrapAround,
             final boolean wholeWord, final boolean searchInFrames, final boolean showDialog) {
@@ -1144,7 +1144,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code scrollX} property
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public static int getScrollX(final Object self) {
         return 0;
     }
@@ -1154,7 +1154,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param self this object
      * @return the value of {@code scrollY} property
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public static int getScrollY(final Object self) {
         return 0;
     }

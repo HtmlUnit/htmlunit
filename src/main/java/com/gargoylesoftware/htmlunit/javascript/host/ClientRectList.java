@@ -39,8 +39,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, browsers = FF)
-@JsxClass(browsers = {CHROME, IE, EDGE})
+@JsxClass(isJSObject = false, value = FF)
+@JsxClass({CHROME, IE, EDGE})
 public class ClientRectList extends SimpleScriptable {
 
     private final List<ClientRect> clientRects_;

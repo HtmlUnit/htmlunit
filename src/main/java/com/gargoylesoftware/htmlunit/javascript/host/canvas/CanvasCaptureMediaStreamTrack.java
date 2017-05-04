@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStreamTrack;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class CanvasCaptureMediaStreamTrack extends MediaStreamTrack {
 
     /**

@@ -34,7 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = DomText.class, browsers = IE)
+@JsxClass(domClass = DomText.class, value = IE)
 public class XMLDOMText extends XMLDOMCharacterData {
 
     /**

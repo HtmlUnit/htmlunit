@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class EXT_texture_filter_anisotropic extends SimpleScriptable {
 
     /** The constant {@code MAX_TEXTURE_MAX_ANISOTROPY_EXT}. */

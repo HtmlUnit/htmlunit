@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomDocumentFragment.class, browsers = IE)
+@JsxClass(domClass = DomDocumentFragment.class, value = IE)
 public class XMLDOMDocumentFragment extends XMLDOMNode {
 
     /**

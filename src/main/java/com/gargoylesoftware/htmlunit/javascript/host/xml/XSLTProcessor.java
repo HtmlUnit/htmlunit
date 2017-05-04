@@ -55,7 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;

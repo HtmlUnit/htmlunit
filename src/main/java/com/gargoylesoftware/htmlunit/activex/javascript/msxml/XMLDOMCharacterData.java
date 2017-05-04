@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Chris Erskine
  * @author Frank Danek
  */
-@JsxClass(domClass = DomCharacterData.class, browsers = IE)
+@JsxClass(domClass = DomCharacterData.class, value = IE)
 public class XMLDOMCharacterData extends XMLDOMNode {
 
     /**

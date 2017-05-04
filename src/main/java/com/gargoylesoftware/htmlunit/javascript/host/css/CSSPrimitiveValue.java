@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @see org.w3c.dom.css.CSSPrimitiveValue
  * @author Marc Guillemot
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class CSSPrimitiveValue extends CSSValue {
 
     /**

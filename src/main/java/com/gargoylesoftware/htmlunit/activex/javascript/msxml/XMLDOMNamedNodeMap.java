@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMNamedNodeMap extends MSXMLScriptable {
 
     private final org.w3c.dom.NamedNodeMap attributes_;

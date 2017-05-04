@@ -70,7 +70,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public int getAvailLeft() {
         return 0;
     }
@@ -79,7 +79,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @JsxSetter({FF, CHROME})
+    @JsxSetter({CHROME, FF})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -88,7 +88,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @JsxGetter({FF, CHROME})
+    @JsxGetter({CHROME, FF})
     public int getAvailTop() {
         return 0;
     }
@@ -97,7 +97,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @JsxSetter({FF, CHROME})
+    @JsxSetter({CHROME, FF})
     public void setAvailTop(final int availTop) {
         // ignore
     }

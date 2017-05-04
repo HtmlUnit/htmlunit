@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomComment.class, browsers = IE)
+@JsxClass(domClass = DomComment.class, value = IE)
 public final class XMLDOMComment extends XMLDOMCharacterData {
 
     /**

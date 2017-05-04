@@ -32,8 +32,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClass(browsers = EDGE)
-@JsxClass(isJSObject = false, browsers = CHROME)
+@JsxClass(EDGE)
+@JsxClass(isJSObject = false, value = CHROME)
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Object element_;

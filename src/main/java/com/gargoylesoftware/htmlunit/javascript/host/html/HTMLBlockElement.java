@@ -36,12 +36,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlAddress.class, browsers = IE)
-@JsxClass(domClass = HtmlBlockQuote.class, browsers = IE)
-@JsxClass(domClass = HtmlCenter.class, browsers = IE)
-@JsxClass(domClass = HtmlExample.class, browsers = IE)
-@JsxClass(domClass = HtmlListing.class, browsers = IE)
-@JsxClass(domClass = HtmlPlainText.class, browsers = IE)
+@JsxClass(domClass = HtmlAddress.class, value = IE)
+@JsxClass(domClass = HtmlBlockQuote.class, value = IE)
+@JsxClass(domClass = HtmlCenter.class, value = IE)
+@JsxClass(domClass = HtmlExample.class, value = IE)
+@JsxClass(domClass = HtmlListing.class, value = IE)
+@JsxClass(domClass = HtmlPlainText.class, value = IE)
 public class HTMLBlockElement extends HTMLElement {
 
     /**

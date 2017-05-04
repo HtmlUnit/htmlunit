@@ -26,7 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class WebKitMutationObserver extends MutationObserver {
 
     /**

@@ -161,7 +161,7 @@ public class HTMLDocument2 extends Document2 {
      */
     private static int UniqueID_Counter_ = 1;
 
-    private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
+    private enum ParsingStatus {OUTSIDE, START, IN_NAME, INSIDE, IN_STRING}
 
     private HTMLElement2 activeElement_;
 

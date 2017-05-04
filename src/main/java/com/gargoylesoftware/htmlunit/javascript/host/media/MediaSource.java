@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
+@JsxClass({CHROME, FF, EDGE})
 public class MediaSource extends EventTarget {
 
     /**

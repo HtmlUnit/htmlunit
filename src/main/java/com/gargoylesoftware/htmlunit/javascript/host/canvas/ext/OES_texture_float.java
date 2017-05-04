@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class OES_texture_float extends SimpleScriptable {
 
     /**

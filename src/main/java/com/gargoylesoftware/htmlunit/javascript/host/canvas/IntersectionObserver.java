@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class IntersectionObserver extends SimpleScriptable {
 
     /**

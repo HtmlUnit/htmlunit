@@ -54,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMNode extends MSXMLScriptable {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */

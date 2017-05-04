@@ -27,6 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomCDataSection.class, browsers = IE)
+@JsxClass(domClass = DomCDataSection.class, value = IE)
 public final class XMLDOMCDATASection extends XMLDOMText {
 }

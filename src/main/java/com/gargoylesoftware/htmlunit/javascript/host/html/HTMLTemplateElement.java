@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlTemplate.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlTemplate.class, value = {CHROME, FF})
 public class HTMLTemplateElement extends HTMLElement {
 
     /**

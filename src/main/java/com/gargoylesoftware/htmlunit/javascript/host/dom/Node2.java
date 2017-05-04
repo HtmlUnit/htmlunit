@@ -101,7 +101,7 @@ public class Node2 extends EventTarget2 {
      * @return the parent element
      * @see #getParentNode()
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public Element2 getParentElement() {
         final Node2 parent = getParent();
         if (!(parent instanceof Element2)) {

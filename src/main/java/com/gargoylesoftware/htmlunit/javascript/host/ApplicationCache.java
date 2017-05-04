@@ -44,8 +44,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass(browsers = {CHROME, IE, EDGE})
-@JsxClass(className = "OfflineResourceList", browsers = FF)
+@JsxClass({CHROME, IE, EDGE})
+@JsxClass(className = "OfflineResourceList", value = FF)
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */

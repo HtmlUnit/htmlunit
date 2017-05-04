@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlIsIndex.class, browsers = {IE})
+@JsxClass(domClass = HtmlIsIndex.class, value = IE)
 public class HTMLIsIndexElement extends HTMLElement {
 
     /**

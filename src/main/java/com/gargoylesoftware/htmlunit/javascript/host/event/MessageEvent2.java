@@ -138,7 +138,7 @@ public class MessageEvent2 extends Event2 {
      * Retrieves the identifier of the last event.
      * @return the identified of the last event
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public String getLastEventId() {
         return lastEventId_;
     }

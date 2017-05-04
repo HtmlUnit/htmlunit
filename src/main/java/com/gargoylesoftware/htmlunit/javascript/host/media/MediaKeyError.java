@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class MediaKeyError extends Event {
 
     /**

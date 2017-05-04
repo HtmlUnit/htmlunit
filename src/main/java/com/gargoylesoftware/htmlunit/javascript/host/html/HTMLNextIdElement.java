@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlNextId.class, browsers = {IE})
+@JsxClass(domClass = HtmlNextId.class, value = IE)
 public class HTMLNextIdElement extends HTMLElement {
 
     /**

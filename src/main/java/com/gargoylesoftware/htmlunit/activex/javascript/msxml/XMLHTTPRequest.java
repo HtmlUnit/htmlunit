@@ -77,7 +77,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Jake Cobb
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLHTTPRequest extends MSXMLScriptable {
 
     private static final Log LOG = LogFactory.getLog(XMLHTTPRequest.class);

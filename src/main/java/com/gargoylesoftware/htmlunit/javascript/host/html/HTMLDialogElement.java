@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDialog.class, browsers = CHROME)
+@JsxClass(domClass = HtmlDialog.class, value = CHROME)
 public class HTMLDialogElement extends HTMLElement {
 
     /**

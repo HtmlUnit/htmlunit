@@ -31,7 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @see <a href="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx">MSDN Documentation</a>
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class Enumerator extends SimpleScriptable {
 
     private int index_;

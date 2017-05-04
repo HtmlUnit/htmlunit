@@ -54,8 +54,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  */
-@JsxClass(browsers = {FF, CHROME})
-@JsxClass(className = "WorkerGlobalScope", browsers = IE)
+@JsxClass({CHROME, FF})
+@JsxClass(className = "WorkerGlobalScope", value = IE)
 public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(DedicatedWorkerGlobalScope.class);

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlData.class, browsers = FF)
+@JsxClass(domClass = HtmlData.class, value = FF)
 public class HTMLDataElement extends HTMLElement {
 
     /**

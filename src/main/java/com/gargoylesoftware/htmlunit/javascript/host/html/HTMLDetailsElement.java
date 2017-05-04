@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDetails.class, browsers = {CHROME, FF52})
+@JsxClass(domClass = HtmlDetails.class, value = {CHROME, FF52})
 public class HTMLDetailsElement extends HTMLElement {
 
     /**

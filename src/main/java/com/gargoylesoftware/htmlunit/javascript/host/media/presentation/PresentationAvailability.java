@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(browsers = CHROME)
+@JsxClass(CHROME)
 public class PresentationAvailability extends EventTarget {
 
     /**

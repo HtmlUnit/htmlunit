@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {FF45, IE, EDGE})
+@JsxClass({FF45, IE, EDGE})
 public class DOMSettableTokenList extends DOMTokenList {
 
     /**

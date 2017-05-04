@@ -33,8 +33,8 @@ import com.steadystate.css.dom.MediaListImpl;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, browsers = CHROME)
-@JsxClass(browsers = {IE, EDGE})
+@JsxClass(isJSObject = false, value = CHROME)
+@JsxClass({IE, EDGE})
 public class StyleMedia extends SimpleScriptable {
 
     /**

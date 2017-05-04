@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlOutput.class, browsers = {FF, CHROME})
+@JsxClass(domClass = HtmlOutput.class, value = {FF, CHROME})
 public class HTMLOutputElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */

@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF})
-@JsxClass(isJSObject = false, browsers = IE)
+@JsxClass({CHROME, FF})
+@JsxClass(isJSObject = false, value = IE)
 public class SVGGraphicsElement extends SVGElement {
 
     /**

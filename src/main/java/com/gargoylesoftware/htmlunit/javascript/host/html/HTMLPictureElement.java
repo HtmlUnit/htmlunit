@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlPicture.class, browsers = {CHROME, FF})
+@JsxClass(domClass = HtmlPicture.class, value = {CHROME, FF})
 public class HTMLPictureElement extends HTMLElement {
 
     /**

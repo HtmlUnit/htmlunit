@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlTime.class, browsers = FF)
+@JsxClass(domClass = HtmlTime.class, value = FF)
 public class HTMLTimeElement extends HTMLElement {
 
     /**

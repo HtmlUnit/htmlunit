@@ -108,7 +108,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
             IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void vAlign_thead() throws Exception {
         vAlign("th");
     }
@@ -119,7 +119,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
             IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void vAlign_tbody() throws Exception {
         vAlign("tb");
     }
@@ -130,7 +130,7 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"top", "baseline", "3", "middle", "8", "BOTtom"},
             IE = {"top", "baseline", "top", "error", "middle", "baseline", "bottom"})
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void vAlign_tfoot() throws Exception {
         vAlign("tf");
     }

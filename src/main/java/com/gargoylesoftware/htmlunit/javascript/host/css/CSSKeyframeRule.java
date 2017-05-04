@@ -27,8 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF52,
-        IE, EDGE})
+@JsxClass({CHROME, FF52, IE, EDGE})
 public class CSSKeyframeRule extends CSSRule {
 
     /**

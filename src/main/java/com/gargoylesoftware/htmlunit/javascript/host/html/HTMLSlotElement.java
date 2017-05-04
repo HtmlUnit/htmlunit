@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlSlot.class, browsers = CHROME)
+@JsxClass(domClass = HtmlSlot.class, value = CHROME)
 public class HTMLSlotElement extends HTMLElement {
 
     /**

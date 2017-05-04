@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgMPath;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgMPath.class, browsers = {FF, CHROME})
+@JsxClass(domClass = SvgMPath.class, value = {FF, CHROME})
 public class SVGMPathElement extends SVGElement {
 
     /**

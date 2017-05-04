@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlBackgroundSound.class, browsers = {IE})
-@JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, browsers = FF)
+@JsxClass(domClass = HtmlBackgroundSound.class, value = IE)
+@JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, value = FF)
 public class HTMLBGSoundElement extends HTMLElement {
 
     /**

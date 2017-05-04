@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlContent.class, browsers = {CHROME, FF45})
+@JsxClass(domClass = HtmlContent.class, value = {CHROME, FF45})
 public class HTMLContentElement extends HTMLElement {
 
     /**

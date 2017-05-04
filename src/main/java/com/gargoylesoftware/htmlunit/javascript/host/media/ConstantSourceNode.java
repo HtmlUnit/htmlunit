@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = { CHROME, FF52 })
+@JsxClass({CHROME, FF52})
 public class ConstantSourceNode extends AudioScheduledSourceNode {
 
     /**

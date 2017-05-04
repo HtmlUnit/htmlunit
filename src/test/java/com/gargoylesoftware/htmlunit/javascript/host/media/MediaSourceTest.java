@@ -63,7 +63,7 @@ public class MediaSourceTest extends WebDriverTestCase {
     @Alerts(DEFAULT = { "true", "true", "false" },
             CHROME = { "true", "false", "false" },
             IE = "MediaSource not available")
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented({CHROME, FF})
     public void isTypeSypported() throws Exception {
         final String html
             = "<html>\n"

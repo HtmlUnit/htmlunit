@@ -26,8 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlTableHeaderCell.class, browsers = {IE,
-        EDGE})
+@JsxClass(domClass = HtmlTableHeaderCell.class, value = {IE, EDGE})
 public class HTMLTableHeaderCellElement extends HTMLTableCellElement {
 
     /**

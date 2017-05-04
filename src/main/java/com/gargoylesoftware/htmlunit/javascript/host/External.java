@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 @JsxClass(isJSObject = false)
 public class External extends SimpleScriptable {
 

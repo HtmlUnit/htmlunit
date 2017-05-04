@@ -75,7 +75,7 @@ public enum BrowserVersionFeatures {
     CSS_DISPLAY_BLOCK,
 
     /** Is display style 'block'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     CSS_DISPLAY_BLOCK2,
 
     /** {@code CSSFontFaceRule.cssText} uses {@code \r\n} to break lines. */
@@ -174,7 +174,7 @@ public enum BrowserVersionFeatures {
     EVENT_MOUSE_ON_DISABLED,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     EVENT_ONCHANGE_AFTER_ONCLICK,
 
     /** Triggers "onclick" event handler for the select only, not for the clicked option. */
@@ -258,11 +258,11 @@ public enum BrowserVersionFeatures {
     FOCUS_BODY_ELEMENT_AT_START,
 
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
 
     /** Indicates if a form field is directly reachable by its original name once this has been changed. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     FORMFIELD_REACHABLE_BY_ORIGINAL_NAME,
 
     /** Form elements are able to refer to the for by using the from attribute. */
@@ -310,7 +310,7 @@ public enum BrowserVersionFeatures {
     HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
@@ -381,7 +381,7 @@ public enum BrowserVersionFeatures {
     HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS,
 
     /** Allows invalid 'align' values. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLELEMENT_ALIGN_INVALID,
 
     /** Removing the active element from the dom tree triggers the onblur event. */
@@ -401,7 +401,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
     /** Mark the image as invisible if no src attribute defined. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLIMAGE_INVISIBLE_NO_SRC,
 
     /** Clicking an image input submits the value as param if defined. */
@@ -445,15 +445,15 @@ public enum BrowserVersionFeatures {
     HTMLOPTION_PREVENT_DISABLED,
 
     /** Removing the selected attribute, de selects the option. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
     /** Trims the value of the type attribute before to verify it. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLSCRIPT_TRIM_TYPE,
 
     /** Setting defaultValue updates the value also. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
     /** When calculation the value of an text area ie uses a recursive approach. */
@@ -465,7 +465,7 @@ public enum BrowserVersionFeatures {
     HTMLTRACK_END_TAG_FORBIDDEN,
 
     /** HTML attributes are always lower case. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTML_ATTRIBUTE_LOWER_CASE,
 
     /** Expand #0 to #000000. */
@@ -506,15 +506,15 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Supports redirect via 308 code. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     HTTP_REDIRECT_308,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_ALIGN_ACCEPTS_ARBITRARY_VALUES,
 
     /** Setting the property align of an input element ignores the value
@@ -656,7 +656,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
     /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({FF, CHROME,
+    @BrowserFeature({CHROME, FF,
         IE})
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
@@ -685,43 +685,43 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
 
     /** If document.implementation.hasFeature() supports 'Core 1.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CORE_3,
 
     /** If document.implementation.hasFeature() supports 'CSS2 1.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_1,
 
     /** If document.implementation.hasFeature() supports 'CSS2 3.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS2_3,
 
     /** If document.implementation.hasFeature() supports 'CSS3 1.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_1,
 
     /** If document.implementation.hasFeature() supports 'CSS3 2.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_2,
 
     /** If document.implementation.hasFeature() supports 'CSS3 3.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS3_3,
 
     /** If document.implementation.hasFeature() supports 'CSS 1.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_1,
 
     /** If document.implementation.hasFeature() supports 'CSS 2.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_2,
 
     /** If document.implementation.hasFeature() supports 'CSS 3.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_CSS_3,
 
     /** If document.implementation.hasFeature() supports 'Events 1.0'. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_EVENTS_1,
 
     /** If document.implementation.hasFeature() supports 'KeyboardEvents'. */
@@ -825,7 +825,7 @@ public enum BrowserVersionFeatures {
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
 
     /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({FF, CHROME,
+    @BrowserFeature({CHROME, FF,
         IE})
     JS_ENUM_NUMBERS_FIRST,
 
@@ -882,11 +882,11 @@ public enum BrowserVersionFeatures {
     JS_GET_PROTOTYPE_OF_STRING,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
 
     /** Executes the {@code onload} handler, regardless of the whether the element was already attached to the page. */
@@ -901,7 +901,7 @@ public enum BrowserVersionFeatures {
      * The complete property returns also true, if the image download was failing
      * or if there was no src at all.
      */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
@@ -1270,7 +1270,7 @@ public enum BrowserVersionFeatures {
     JS_TEXT_AREA_SET_VALUE_NULL,
 
     /** Indicates that <code>TreeWalker.expandEntityReferences</code> is always {@code false}. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE,
 
     /**
@@ -1285,7 +1285,7 @@ public enum BrowserVersionFeatures {
     JS_TYPED_ARRAYS_NULL,
 
     /** Setting the property align to arbitrary values is allowed. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
     /** WeakMap supports the argument constructor. */
@@ -1298,7 +1298,7 @@ public enum BrowserVersionFeatures {
     JS_WEBGL_CONTEXT_EVENT_CONSTANTS,
 
     /** Setting the property width/height to arbitrary values is allowed. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES,
 
     /**
@@ -1351,7 +1351,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_TOP_WRITABLE,
 
     /** Supports XML. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_XML,
 
     /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
@@ -1359,7 +1359,7 @@ public enum BrowserVersionFeatures {
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT,
 
     /** Indicates that new XMLSerializer().serializeToString(..) inserts a blank before self-closing a tag. */
@@ -1439,19 +1439,19 @@ public enum BrowserVersionFeatures {
     STRING_CONTAINS,
 
     /** Indicates that string.includes() is supported. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     STRING_INCLUDES,
 
     /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     STRING_REPEAT,
 
     /** Indicates that string.startsWith() and .endWith() are supported. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     STRING_STARTS_ENDS_WITH,
 
     /** Indicates that string.trimLeft() and .trimRight() are supported. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     STRING_TRIM_LEFT_RIGHT,
 
     /**
@@ -1487,7 +1487,7 @@ public enum BrowserVersionFeatures {
      * Indicates, that the browser supports username and password as
      * part of the url (e.g. http://john.smith:secret@localhost).
      */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     URL_AUTH_CREDENTIALS,
 
     /** Replace only ' ' with %20 when encode the query part of an url. */
@@ -1495,7 +1495,7 @@ public enum BrowserVersionFeatures {
     URL_MINIMAL_QUERY_ENCODING,
 
     /** */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     URL_MISSING_SLASHES,
 
     /** Execute window events. */
@@ -1528,7 +1528,7 @@ public enum BrowserVersionFeatures {
     XHR_NO_CROSS_ORIGIN_TO_ABOUT,
 
     /** Indicates if an empty url is allowed as url param for the open method. */
-    @BrowserFeature({FF, CHROME})
+    @BrowserFeature({CHROME, FF})
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates that open() throws an exception in sync mode if 'withCredentials' is set to true. */

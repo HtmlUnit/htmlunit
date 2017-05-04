@@ -49,8 +49,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  *
  * @author Andrea Martino
  */
-@JsxClass(isJSObject = false, browsers = {FF, CHROME})
-@JsxClass(browsers = {IE, EDGE})
+@JsxClass(isJSObject = false, value = {FF, CHROME})
+@JsxClass({IE, EDGE})
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
@@ -277,7 +277,7 @@ public class Console extends SimpleScriptable {
      * Because there is no timeline in HtmlUnit this does nothing.
      * @param label the label
      */
-    @JsxFunction({FF, CHROME})
+    @JsxFunction({CHROME, FF})
     public void timeStamp(final String label) {
     }
 

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {FF, IE, EDGE})
+@JsxClass(value = {FF, IE, EDGE})
 public class SVGPathSegList extends SimpleScriptable {
 
     /**

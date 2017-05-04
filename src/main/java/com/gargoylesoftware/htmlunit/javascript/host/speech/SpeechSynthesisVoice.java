@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ronald Brill
  */
-@JsxClass(browsers = FF52)
+@JsxClass(FF52)
 public class SpeechSynthesisVoice extends EventTarget {
 
     /**

@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF45)
+@JsxClass(FF45)
 public class MozPowerManager extends SimpleScriptable {
 
     /**

@@ -81,7 +81,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public int getAvailLeft() {
         return 0;
     }
@@ -90,7 +90,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @Setter({FF, CHROME})
+    @Setter({CHROME, FF})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -99,7 +99,7 @@ public class Screen2 extends SimpleScriptObject {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @Getter({FF, CHROME})
+    @Getter({CHROME, FF})
     public int getAvailTop() {
         return 0;
     }
@@ -108,7 +108,7 @@ public class Screen2 extends SimpleScriptObject {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @Setter({FF, CHROME})
+    @Setter({CHROME, FF})
     public void setAvailTop(final int availTop) {
         // ignore
     }

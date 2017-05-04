@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = DomProcessingInstruction.class, browsers = IE)
+@JsxClass(domClass = DomProcessingInstruction.class, value = IE)
 public final class XMLDOMProcessingInstruction extends XMLDOMNode {
 
     private static final String XML_DECLARATION_TARGET = "xml";

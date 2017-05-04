@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(isJSObject = false, browsers = CHROME)
-@JsxClass(browsers = FF52)
+@JsxClass(isJSObject = false, value = CHROME)
+@JsxClass(FF52)
 public class SpeechSynthesis extends EventTarget {
 
     /**

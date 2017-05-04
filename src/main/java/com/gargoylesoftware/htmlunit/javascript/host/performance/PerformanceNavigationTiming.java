@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, IE})
+@JsxClass({CHROME, IE})
 public class PerformanceNavigationTiming extends SimpleScriptable {
 
     /**

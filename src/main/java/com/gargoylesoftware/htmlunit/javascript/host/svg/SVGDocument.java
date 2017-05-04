@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF45)
+@JsxClass(FF45)
 public class SVGDocument extends Document {
 
     /**

@@ -31,8 +31,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
-@JsxClass(browsers = {CHROME, IE, EDGE})
-@JsxClass(className = "DOMRect", browsers = {FF})
+@JsxClass({CHROME, IE, EDGE})
+@JsxClass(className = "DOMRect", value = FF)
 public class ClientRect extends SimpleScriptable {
 
     private int bottom_;

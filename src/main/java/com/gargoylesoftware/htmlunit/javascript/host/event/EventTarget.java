@@ -49,8 +49,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF, EDGE})
-@JsxClass(isJSObject = false, browsers = {IE})
+@JsxClass({CHROME, FF, EDGE})
+@JsxClass(isJSObject = false, value = IE)
 public class EventTarget extends SimpleScriptable {
 
     private EventListenersContainer eventListenersContainer_;

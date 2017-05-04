@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlDivision.class)
-@JsxClass(domClass = HtmlMarquee.class, browsers = FF)
+@JsxClass(domClass = HtmlMarquee.class, value = FF)
 public class HTMLDivElement extends HTMLElement {
 
     /**

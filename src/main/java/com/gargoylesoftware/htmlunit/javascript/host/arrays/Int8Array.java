@@ -49,7 +49,7 @@ public class Int8Array extends ArrayBufferViewBase {
      */
     @Override
     protected byte[] toArray(final Number number) {
-        return new byte[] {number != null ? number.byteValue() : 0 };
+        return new byte[] {number != null ? number.byteValue() : 0};
     }
 
     /**

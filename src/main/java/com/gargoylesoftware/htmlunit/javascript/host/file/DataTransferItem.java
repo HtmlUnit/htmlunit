@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF52, EDGE})
+@JsxClass({CHROME, FF52, EDGE})
 public class DataTransferItem extends SimpleScriptable {
 
     /**

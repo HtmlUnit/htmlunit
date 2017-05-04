@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, EDGE, FF52})
+@JsxClass({CHROME, EDGE, FF52})
 public class WebKitCSSMatrix extends SimpleScriptable {
 
     /**

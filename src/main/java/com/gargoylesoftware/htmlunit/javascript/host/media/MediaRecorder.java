@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {FF, CHROME})
+@JsxClass({CHROME, FF})
 public class MediaRecorder extends EventTarget {
 
     /**

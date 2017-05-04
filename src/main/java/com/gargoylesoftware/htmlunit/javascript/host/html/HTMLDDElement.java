@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlDefinitionDescription.class, browsers = IE)
+@JsxClass(domClass = HtmlDefinitionDescription.class, value = IE)
 public class HTMLDDElement extends HTMLElement {
 
     /**

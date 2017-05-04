@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgForeignObject;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgForeignObject.class, browsers = {FF, CHROME, EDGE})
+@JsxClass(domClass = SvgForeignObject.class, value = {FF, CHROME, EDGE})
 public class SVGForeignObjectElement extends SVGGraphicsElement {
 
     /**

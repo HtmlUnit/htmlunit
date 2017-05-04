@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Ronald Brill
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c.dom.NodeList {
 
     /**

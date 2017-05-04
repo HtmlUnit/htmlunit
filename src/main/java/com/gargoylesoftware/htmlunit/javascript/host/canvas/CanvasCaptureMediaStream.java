@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = FF)
+@JsxClass(FF)
 public class CanvasCaptureMediaStream extends MediaStream {
 
     /**

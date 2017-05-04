@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass(browsers = FF52)
+@JsxClass(FF52)
 public class FileSystemFileEntry extends SimpleScriptable {
 
     /**

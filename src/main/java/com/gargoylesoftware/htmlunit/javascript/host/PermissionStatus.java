@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(browsers = {CHROME, FF52})
+@JsxClass({CHROME, FF52})
 public class PermissionStatus extends EventTarget {
 
     /**

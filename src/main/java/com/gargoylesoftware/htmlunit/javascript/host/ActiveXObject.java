@@ -50,7 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(browsers = IE)
+@JsxClass(IE)
 public class ActiveXObject extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);
