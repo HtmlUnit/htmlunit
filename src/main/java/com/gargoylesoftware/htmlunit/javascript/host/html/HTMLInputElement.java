@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_NO_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
@@ -325,7 +326,7 @@ public class HTMLInputElement extends FormField {
             return ((SelectableTextInput) dom).getSelectionStart();
         }
 
-        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
             return null;
         }
         throw Context.reportRuntimeError("Failed to read the 'selectionStart' property from 'HTMLInputElement': "
@@ -371,7 +372,7 @@ public class HTMLInputElement extends FormField {
             return ((SelectableTextInput) dom).getSelectionEnd();
         }
 
-        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
+        if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_SELECTION_START_END_NULL)) {
             return null;
         }
         throw Context.reportRuntimeError("Failed to read the 'selectionEnd' property from 'HTMLInputElement': "

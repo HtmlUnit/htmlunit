@@ -873,9 +873,9 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "0",
-            FF52 = "0")
+    @Alerts(DEFAULT = {"ex start", "ex end", "exception"},
+            CHROME = {"null", "null", "0"},
+            FF52 = {"null", "null", "0"})
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -886,6 +886,12 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "    }\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
+            + "    try {\n"
+            + "      alert(element.selectionStart);\n"
+            + "    } catch(e) { alert('ex start'); }\n"
+            + "    try {\n"
+            + "      alert(element.selectionEnd);\n"
+            + "    } catch(e) { alert('ex end'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
             + "    } catch(e) { alert('exception'); }\n"
