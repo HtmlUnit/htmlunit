@@ -1361,36 +1361,55 @@ public final class StyleAttributes {
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
 
         /** The style property {@code MozAnimationDelay}. */
-        MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay",
-                ff("0s")),
+        MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay", ff("0s")),
+
+        /** The style property {@code -moz-animation-delay}. */
+        MOZ_ANIMATION_DELAY__("-moz-animation-delay", "-moz-animation-delay", ff52up("0s")),
 
         /** The style property {@code MozAnimationDirection}. */
         MOZ_ANIMATION_DIRECTION("MozAnimationDirection", "-moz-animation-direction", ff("normal")),
 
+        /** The style property {@code -moz-animation-direction}. */
+        MOZ_ANIMATION_DIRECTION__("-moz-animation-direction", "-moz-animation-direction", ff52up("normal")),
+
         /** The style property {@code MozAnimationDuration}. */
-        MOZ_ANIMATION_DURATION("MozAnimationDuration",
-                "-moz-animation-duration", ff("0s")),
+        MOZ_ANIMATION_DURATION("MozAnimationDuration", "-moz-animation-duration", ff("0s")),
+
+        /** The style property {@code -moz-animation-duration}. */
+        MOZ_ANIMATION_DURATION__("-moz-animation-duration", "-moz-animation-duration", ff52up("0s")),
 
         /** The style property {@code MozAnimationFillMode}. */
-        MOZ_ANIMATION_FILL_MODE("MozAnimationFillMode",
-                "moz-animation-fill-mode", ff("none")),
+        MOZ_ANIMATION_FILL_MODE("MozAnimationFillMode", "-moz-animation-fill-mode", ff("none")),
+
+        /** The style property {@code -moz-animation-fill-mode}. */
+        MOZ_ANIMATION_FILL_MODE__("-moz-animation-fill-mode", "-moz-animation-fill-mode", ff52up("none")),
 
         /** The style property {@code MozAnimationIterationCount}. */
-        MOZ_ANIMATION_ITERATION_COUNT("MozAnimationIterationCount",
-                "-moz-animation-iteration-count", ff("1")),
+        MOZ_ANIMATION_ITERATION_COUNT("MozAnimationIterationCount", "-moz-animation-iteration-count", ff("1")),
+
+        /** The style property {@code -moz-animation-iteration-count}. */
+        MOZ_ANIMATION_ITERATION_COUNT__("-moz-animation-iteration-count", "-moz-animation-iteration-count",
+                ff52up("1")),
 
         /** The style property {@code MozAnimationName}. */
-        MOZ_ANIMATION_NAME("MozAnimationName", "moz-annimation-name",
-                ff("none")),
+        MOZ_ANIMATION_NAME("MozAnimationName", "-moz-animation-name", ff("none")),
+
+        /** The style property {@code -moz-animation-name}. */
+        MOZ_ANIMATION_NAME__("-moz-animation-name", "-moz-animation-name", ff52up("none")),
 
         /** The style property {@code MozAnimationPlayState}. */
-        MOZ_ANIMATION_PLAY_STATE("MozAnimationPlayState",
-                "moz-annimation-play-state", ff("running")),
+        MOZ_ANIMATION_PLAY_STATE("MozAnimationPlayState", "-moz-animation-play-state", ff("running")),
+
+        /** The style property {@code -moz-animation-play-state}. */
+        MOZ_ANIMATION_PLAY_STATE__("-moz-animation-play-state", "-moz-animation-play-state", ff52up("running")),
 
         /** The style property {@code MozAnimationTimingFunction}. */
-        MOZ_ANIMATION_TIMING_FUNCTION("MozAnimationTimingFunction",
-                "moz-annimation-timing-function",
+        MOZ_ANIMATION_TIMING_FUNCTION("MozAnimationTimingFunction", "-moz-animation-timing-function",
                 ff("ease")),
+
+        /** The style property {@code -moz-animation-timing-function}. */
+        MOZ_ANIMATION_TIMING_FUNCTION__("-moz-animation-timing-function", "-moz-animation-timing-function",
+                ff52up("ease")),
 
         /** The style property {@code MozAppearance}. */
         MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ff("none")),
@@ -3386,6 +3405,9 @@ public final class StyleAttributes {
         /** The style property {@code WebkitTransform}. */
         WEBKIT_TRANSFORM_("WebkitTransform", "webkit-transform", ff52up("none")),
 
+        /** The style property {@code -webkit-transform}. */
+        WEBKIT_TRANSFORM__("-webkit-transform", "webkit-transform", ff52up("none")),
+
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
 
@@ -3410,11 +3432,17 @@ public final class StyleAttributes {
         /** The style property {@code WebkitTransformStyle}. */
         WEBKIT_TRANSFORM_STYLE_("WebkitTransformStyle", "webkit-transform-style", ff52up("flat")),
 
+        /** The style property {@code -webkit-transform-style}. */
+        WEBKIT_TRANSFORM_STYLE__("-webkit-transform-style", "webkit-transform-style", ff52up("flat")),
+
         /** The style property {@code webkitTransition}. */
         WEBKIT_TRANSITION("webkitTransition", "webkit-transition", ff52up("")),
 
         /** The style property {@code WebkitTransition}. */
         WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ff52up("")),
+
+        /** The style property {@code -webkit-transition}. */
+        WEBKIT_TRANSITION__("-webkit-transition", "webkit-transition", ff52up("")),
 
         /** The style property {@code webkitTransitionDelay}. */
         WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
@@ -3422,11 +3450,17 @@ public final class StyleAttributes {
         /** The style property {@code WebkitTransitionDelay}. */
         WEBKIT_TRANSITION_DELAY_("WebkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
 
+        /** The style property {@code -webkit-transition-delay}. */
+        WEBKIT_TRANSITION_DELAY__("-webkit-transition-delay", "webkit-transition-delay", ff52up("0s")),
+
         /** The style property {@code webkitTransitionDuration}. */
         WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
 
         /** The style property {@code WebkitTransitionDuration}. */
         WEBKIT_TRANSITION_DURATION_("WebkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
+
+        /** The style property {@code -webkit-transition-duration}. */
+        WEBKIT_TRANSITION_DURATION__("-webkit-transition-duration", "webkit-transition-duration", ff52up("0s")),
 
         /** The style property {@code webkitTransitionProperty}. */
         WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff52up("all")),
@@ -3434,12 +3468,19 @@ public final class StyleAttributes {
         /** The style property {@code WebkitTransitionProperty}. */
         WEBKIT_TRANSITION_PROPERTY_("WebkitTransitionProperty", "webkit-transition-property", ff52up("all")),
 
+        /** The style property {@code -webkit-transition-property}. */
+        WEBKIT_TRANSITION_PROPERTY__("-webkit-transition-property", "webkit-transition-property", ff52up("all")),
+
         /** The style property {@code webkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION("webkitTransitionTimingFunction", "webkit-transition-timing-function",
                 ff52up("ease")),
 
         /** The style property {@code WebkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION_("WebkitTransitionTimingFunction", "webkit-transition-timing-function",
+                ff52up("ease")),
+
+        /** The style property {@code -webkit-transition-timing-function}. */
+        WEBKIT_TRANSITION_TIMING_FUNCTION__("-webkit-transition-timing-function", "webkit-transition-timing-function",
                 ff52up("ease")),
 
         /** The style property {@code webkitUserDrag}. */
@@ -3453,6 +3494,9 @@ public final class StyleAttributes {
 
         /** The style property {@code WebkitUserSelect}. */
         WEBKIT_USER_SELECT_("WebkitUserSelect", "webkit-user-select", ff52up("auto")),
+
+        /** The style property {@code -webkit-user-select}. */
+        WEBKIT_USER_SELECT__("-webkit-user-select", "webkit-user-select", ff52up("auto")),
 
         /** The style property {@code webkitWritingMode}. */
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),
