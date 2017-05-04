@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="asashour" issue="1877">
+                JavaScript: MouseEvent to support .pageX and .pageY for all browsers.
+            </action>
             <action type="fix" dev="asashour" issue="1875">
                 JavaScript: fix Object.assign().
             </action>

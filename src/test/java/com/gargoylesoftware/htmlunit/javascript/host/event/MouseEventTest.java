@@ -64,7 +64,6 @@ public class MouseEventTest extends WebDriverTestCase {
     @Alerts({"click", "true", "true", "true", "1", "2", "3", "4", "true", "true", "true", "true"})
     public void initMouseEvent() throws Exception {
         final String html = "<html><body><script>\n"
-            + "try {\n"
             + "  var e = document.createEvent('MouseEvents');\n"
             + "  e.initMouseEvent('click', true, true, window, 0, 1, 2, 3, 4, true, true, true, true, 0, null);\n"
             + "  alert(e.type);\n"
@@ -79,7 +78,6 @@ public class MouseEventTest extends WebDriverTestCase {
             + "  alert(e.altKey);\n"
             + "  alert(e.shiftKey);\n"
             + "  alert(e.metaKey);\n"
-            + "} catch(e) { alert('exception') }\n"
             + "</script></body></html>";
 
         loadPageWithAlerts2(html);
@@ -239,4 +237,20 @@ public class MouseEventTest extends WebDriverTestCase {
         driver.findElement(By.id(id)).click();
         assertEquals(expected[0], textarea.getAttribute("value").trim());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void pageX() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "  var e = document.createEvent('MouseEvents');\n"
+            + "  alert(e.pageX);\n"
+            + "  alert(e.pageY);\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

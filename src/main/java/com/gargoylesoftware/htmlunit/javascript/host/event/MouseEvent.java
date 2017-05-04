@@ -190,7 +190,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #getScreenX()})
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageX">Mozilla doc</a>
      */
-    @JsxGetter(FF)
+    @JsxGetter
     public int getPageX() {
         return getScreenX();
     }
@@ -237,7 +237,7 @@ public class MouseEvent extends UIEvent {
      * @return the horizontal coordinate (currently the same as {@link #getScreenY()})
      * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/event.pageY">Mozilla doc</a>
      */
-    @JsxGetter(FF)
+    @JsxGetter
     public int getPageY() {
         return getScreenY();
     }
