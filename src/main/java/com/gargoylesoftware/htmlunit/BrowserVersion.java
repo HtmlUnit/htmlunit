@@ -65,7 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
            numeric = 11;
        }
        else if (isEdge) {
-           numeric = 13;
+           numeric = 14;
        }
        else if (isChrome) {
            numeric = 58;

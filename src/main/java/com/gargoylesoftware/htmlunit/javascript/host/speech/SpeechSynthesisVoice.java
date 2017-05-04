@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code SpeechSynthesisErrorEvent}.
+ * A JavaScript object for {@code SpeechSynthesisVoice}.
  *
  * @author Ronald Brill
  */
