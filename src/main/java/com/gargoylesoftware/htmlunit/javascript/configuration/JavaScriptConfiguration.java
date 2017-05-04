@@ -183,7 +183,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentType;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.IdleDeadline;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
@@ -451,7 +450,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         DOMPointReadOnly.class, DOMRectReadOnly.class, DOMRequest.class,
         DOMSettableTokenList.class, DOMStringList.class, DOMStringMap.class, DOMTokenList.class,
         DragEvent.class, DynamicsCompressorNode.class,
-        Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventNode.class, EventSource.class,
+        Element.class, Enumerator.class, ErrorEvent.class, Event.class, EventSource.class,
         EventTarget.class, EXT_texture_filter_anisotropic.class, External.class, FederatedCredential.class,
         File.class, FileList.class, FileReader.class,
         FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,

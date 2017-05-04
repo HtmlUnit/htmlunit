@@ -61,7 +61,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclara
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
@@ -88,7 +87,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Frank Danek
  */
 @JsxClass(domClass = DomElement.class)
-public class Element extends EventNode {
+public class Element extends Node {
 
     static final String POSITION_BEFORE_BEGIN = "beforebegin";
     static final String POSITION_AFTER_BEGIN = "afterbegin";
@@ -303,12 +302,12 @@ public class Element extends EventNode {
     }
 
     /**
-     * Returns true when the current element has any attributes or not.
-     * @return true if an attribute is specified on this element
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction({CHROME, FF})
     public boolean hasAttributes() {
-        return getDomNodeOrDie().hasAttributes();
+        return super.hasAttributes();
     }
 
     /**
@@ -1114,12 +1113,12 @@ public class Element extends EventNode {
     }
 
     /**
-     * Returns the element ID.
-     * @return the ID of this element
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getId() {
-        return getDomNodeOrDie().getId();
+        return super.getId();
     }
 
     /**

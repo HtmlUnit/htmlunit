@@ -744,4 +744,23 @@ public class Node extends EventTarget {
         }
         return getDomNodeOrDie().getPage().getUrl().toExternalForm();
     }
+
+    /**
+     * Returns true when the current element has any attributes or not.
+     * @return true if an attribute is specified on this element
+     */
+    @JsxFunction(IE)
+    public boolean hasAttributes() {
+        return getDomNodeOrDie().hasAttributes();
+    }
+
+    /**
+     * Returns the element ID.
+     * @return the ID of this element
+     */
+    @JsxGetter(IE)
+    public String getId() {
+        return "";
+    }
+
 }

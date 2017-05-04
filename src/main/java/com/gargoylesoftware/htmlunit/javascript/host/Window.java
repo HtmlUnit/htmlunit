@@ -1131,6 +1131,24 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * Sets the value of the {@code onblur} event handler.
+     * @param onblur the new handler
+     */
+    @JsxSetter
+    public void setOnblur(final Object onblur) {
+        getEventListenersContainer().setEventHandler(Event.TYPE_BLUR, onblur);
+    }
+
+    /**
+     * Returns the {@code onblur} property (not necessary a function if something else has been set).
+     * @return the {@code onblur} property
+     */
+    @JsxGetter
+    public Object getOnblur() {
+        return getHandlerForJavaScript(Event.TYPE_BLUR);
+    }
+
+    /**
      * Sets the value of the {@code onclick} event handler.
      * @param onclick the new handler
      */
@@ -2336,4 +2354,5 @@ class HTMLCollectionFrames extends HTMLCollection {
             }
         }
     }
+
 }
