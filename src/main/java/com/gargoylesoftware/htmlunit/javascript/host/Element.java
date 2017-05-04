@@ -1258,4 +1258,31 @@ public class Element extends Node {
     @JsxFunction({CHROME, FF})
     public void scrollIntoViewIfNeeded() { /* do nothing at the moment */ }
 
+    /**
+     * Returns the namespace prefix.
+     * @return the namespace prefix
+     */
+    @JsxGetter
+    public Object getPrefix() {
+        return getDomNodeOrDie().getPrefix();
+    }
+
+    /**
+     * Returns the local name of this element.
+     * @return the local name of this element
+     */
+    @JsxGetter
+    public Object getLocalName() {
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
+     * Returns the URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    @JsxGetter
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
+    }
+
 }

@@ -597,34 +597,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns the namespace prefix.
-     * @return the namespace prefix
-     */
-    @JsxGetter
-    public Object getPrefix() {
-        final DomNode domNode = getDomNodeOrDie();
-        return domNode.getPrefix();
-    }
-
-    /**
-     * Returns the local name of this element.
-     * @return the local name of this element
-     */
-    @JsxGetter
-    public Object getLocalName() {
-        return getDomNodeOrDie().getLocalName();
-    }
-
-    /**
-     * Returns The URI that identifies an XML namespace.
-     * @return the URI that identifies an XML namespace
-     */
-    @JsxGetter
-    public Object getNamespaceURI() {
-        return getDomNodeOrDie().getNamespaceURI();
-    }
-
-    /**
      * Compares the positions of this node and the provided node within the document.
      * @param node node object that specifies the node to check
      * @return how the node is positioned relatively to the reference node.

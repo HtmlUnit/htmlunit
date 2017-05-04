@@ -14,12 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOCTYPE_PREFIX_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_ENTITIES_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NOTATIONS_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -134,41 +134,30 @@ public class DocumentType extends Node {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the namespace prefix.
+     * @return the namespace prefix
      */
-    @Override
+    @JsxGetter({FF45, IE})
     public Object getPrefix() {
-        final Object prefix = super.getPrefix();
-
-        if (prefix == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
-            return Undefined.instance;
-        }
-        return prefix;
+        return getDomNodeOrDie().getPrefix();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the local name of this element.
+     * @return the local name of this element
      */
-    @Override
+    @JsxGetter({FF45, IE})
     public Object getLocalName() {
-        final Object localName = super.getLocalName();
-
-        if (localName == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
-            return Undefined.instance;
-        }
-        return localName;
+        return getDomNodeOrDie().getLocalName();
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
      */
-    @Override
+    @JsxGetter({FF45, IE})
     public Object getNamespaceURI() {
-        final Object namespaceURI = super.getNamespaceURI();
-
-        if (namespaceURI == null && getBrowserVersion().hasFeature(DOCTYPE_PREFIX_UNDEFINED)) {
-            return Undefined.instance;
-        }
-        return namespaceURI;
+        return getDomNodeOrDie().getNamespaceURI();
     }
+
 }

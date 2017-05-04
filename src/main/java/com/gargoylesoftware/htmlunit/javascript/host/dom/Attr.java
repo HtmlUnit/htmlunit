@@ -174,4 +174,31 @@ public class Attr extends Node {
         return (DomAttr) super.getDomNodeOrDie();
     }
 
+    /**
+     * Returns the namespace prefix.
+     * @return the namespace prefix
+     */
+    @JsxGetter
+    public Object getPrefix() {
+        return getDomNodeOrDie().getPrefix();
+    }
+
+    /**
+     * Returns the local name of this attribute.
+     * @return the local name of this attribute
+     */
+    @JsxGetter
+    public Object getLocalName() {
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
+     * Returns the URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    @JsxGetter
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
+    }
+
 }
