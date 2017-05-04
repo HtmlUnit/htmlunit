@@ -1118,7 +1118,7 @@ public class Element extends Node {
     @Override
     @JsxGetter({CHROME, FF})
     public String getId() {
-        return super.getId();
+        return getDomNodeOrDie().getId();
     }
 
     /**
