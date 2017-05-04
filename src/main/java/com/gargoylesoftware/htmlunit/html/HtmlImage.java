@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
@@ -661,7 +662,8 @@ public class HtmlImage extends HtmlElement {
         final String src = getSrcAttribute();
         if (hasFeature(HTMLIMAGE_INVISIBLE_NO_SRC)
                 && (ATTRIBUTE_NOT_DEFINED == src
-                    || (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src)))) {
+                    || (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))
+                    || (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src)))) {
             return false;
         }
         return super.isDisplayed();
