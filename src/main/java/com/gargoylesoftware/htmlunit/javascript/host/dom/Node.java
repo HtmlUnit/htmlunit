@@ -26,8 +26,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -586,17 +584,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Allows the removal of event listeners on the event target.
-     * @param type the event type to listen for (like "onclick")
-     * @param listener the event listener
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536411.aspx">MSDN documentation</a>
-     */
-    @JsxFunction(IE)
-    public void detachEvent(final String type, final Function listener) {
-        removeEventListener(StringUtils.substring(type, 2), listener, false);
-    }
-
-    /**
      * Returns the owner document.
      * @return the document
      */
@@ -707,7 +694,7 @@ public class Node extends EventTarget {
      * @param element element object that specifies the element to check
      * @return true if the element is contained within this object
      */
-    @JsxFunction
+    @JsxFunction({CHROME, FF})
     public boolean contains(final Object element) {
         if (!(element instanceof Node)) {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {

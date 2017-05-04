@@ -1019,7 +1019,6 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug 1596926.
      * @throws Exception if the test fails
      */
     @Test

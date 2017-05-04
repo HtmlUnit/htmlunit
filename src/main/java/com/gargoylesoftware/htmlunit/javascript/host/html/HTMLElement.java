@@ -2509,4 +2509,12 @@ public class HTMLElement extends Element {
         setEventHandler("oninput", onchange);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction(IE)
+    public boolean contains(final Object element) {
+        return super.contains(element);
+    }
 }
