@@ -750,4 +750,12 @@ public class Node extends EventTarget {
         return "";
     }
 
+    /**
+     * Sets the identifier this element.
+     * @param newId the new identifier of this element
+     */
+    @JsxSetter
+    public void setId(final String newId) {
+    }
+
 }

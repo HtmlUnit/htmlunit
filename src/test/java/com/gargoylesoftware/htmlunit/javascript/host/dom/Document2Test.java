@@ -462,8 +462,8 @@ public class Document2Test extends WebDriverTestCase {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"
-            + "  var input1=top.document.getElementById('input1');\n"
-            + "  input1.id='newId';\n"
+            + "  var input1 = top.document.getElementById('input1');\n"
+            + "  input1.id = 'newId';\n"
             + "  alert(top.document.getElementById('newId').value);\n"
             + "  alert(top.document.getElementById('input1'));\n"
             + "}\n"

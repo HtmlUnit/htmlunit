@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(value = {CHROME, FF})
+@JsxClass({CHROME, FF})
 public class RTCPeerConnection extends EventTarget {
 
     /**

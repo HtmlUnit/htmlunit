@@ -1122,10 +1122,10 @@ public class Element extends Node {
     }
 
     /**
-     * Sets the identifier this element.
-     * @param newId the new identifier of this element
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
     }
