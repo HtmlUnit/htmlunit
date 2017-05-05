@@ -701,7 +701,7 @@ public class Node extends EventTarget {
         if ("Element".equals(getClass().getSimpleName()) && getBrowserVersion().hasFeature(JS_ELEMENT_BASE_URL_NULL)) {
             return null;
         }
-        return getDomNodeOrDie().getPage().getUrl().toExternalForm();
+        return getDomNodeOrDie().getBaseURI();
     }
 
     /**

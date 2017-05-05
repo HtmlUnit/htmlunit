@@ -505,11 +505,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public String getBaseURI() {
-        throw new UnsupportedOperationException("DomNode.getBaseURI is not yet implemented.");
+        return getPage().getUrl().toExternalForm();
     }
 
     /**
