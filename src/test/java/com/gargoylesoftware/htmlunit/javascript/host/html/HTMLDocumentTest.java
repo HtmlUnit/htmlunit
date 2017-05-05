@@ -2552,7 +2552,81 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='test()'><div/>"
+            + "<body onload='test()'>\n"
+            + "  <div/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLEmbedElement]")
+    public void embeds() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "     alert(document.embeds(0));\n"
+            + "    } catch(e) {alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <embed>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "exception"},
+            IE = {"1", "[object HTMLEmbedElement]"})
+    public void plugins() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "     alert(document.plugins.length);\n"
+            + "     alert(document.plugins(0));\n"
+            + "    } catch(e) {alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <embed>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = "[object HTMLImageElement]")
+    public void images() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "     alert(document.images(0));\n"
+            + "    } catch(e) {alert('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

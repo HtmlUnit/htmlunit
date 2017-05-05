@@ -390,4 +390,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
             final boolean entityReferenceExpansion) throws DOMException {
         return new DomNodeIterator((DomNode) root, whatToShow, filter, entityReferenceExpansion);
     }
+
+    /**
+     * Returns the content type of this page.
+     * @return the content type of this page
+     */
+    public abstract String getContentType();
 }

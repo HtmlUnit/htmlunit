@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
@@ -42,6 +43,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -73,8 +75,11 @@ import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -95,6 +100,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
@@ -1760,12 +1766,141 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the value of the JavaScript property {@code forms}.
-     * @return the value of the JavaScript property {@code forms}
+     * Returns the value of the {@code forms} property.
+     * @return the value of the {@code forms} property
      */
     @JsxGetter({CHROME, IE})
     public Object getForms() {
-        return null;
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlForm && node.getPrefix() == null;
+            }
+
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+                    return super.call(cx, scope, thisObj, args);
+                }
+                throw Context.reportRuntimeError("TypeError: document.forms is not a function");
+            }
+        };
+    }
+
+    /**
+     * Returns the value of the {@code embeds} property.
+     * @return the value of the {@code embeds} property
+     */
+    @JsxGetter({CHROME, IE})
+    public Object getEmbeds() {
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlEmbed;
+            }
+
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+                    return super.call(cx, scope, thisObj, args);
+                }
+                throw Context.reportRuntimeError("TypeError: document.embeds is not a function");
+            }
+        };
+    }
+
+    /**
+     * Returns the value of the {@code embeds} property.
+     * @return the value of the {@code embeds} property
+     */
+    @JsxGetter({CHROME, IE})
+    public Object getImages() {
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlImage;
+            }
+
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+                    return super.call(cx, scope, thisObj, args);
+                }
+                throw Context.reportRuntimeError("TypeError: document.images is not a function");
+            }
+        };
+    }
+
+    /**
+     * Returns the value of the {@code scripts} property.
+     * @return the value of the {@code scripts} property
+     */
+    @JsxGetter({CHROME, IE})
+    public Object getScripts() {
+        return new HTMLCollection(getDomNodeOrDie(), false) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return node instanceof HtmlScript;
+            }
+
+            @Override
+            public Object call(final Context cx, final Scriptable scope,
+                    final Scriptable thisObj, final Object[] args) {
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+                    return super.call(cx, scope, thisObj, args);
+                }
+                throw Context.reportRuntimeError("TypeError: document.scripts is not a function");
+            }
+        };
+    }
+
+    /**
+     * Retrieves a collection of stylesheet objects representing the style sheets that correspond
+     * to each instance of a Link or
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration} object in the document.
+     *
+     * @return styleSheet collection
+     */
+    @JsxGetter
+    public StyleSheetList getStyleSheets() {
+        return new StyleSheetList(this);
+    }
+
+    /**
+     * Returns the value of the {@code plugins} property.
+     * @return the value of the {@code plugins} property
+     */
+    @JsxGetter({CHROME, IE})
+    public Object getPlugins() {
+        return getEmbeds();
+    }
+
+    /**
+     * Returns the value of the JavaScript property {@code links}. Refer also to the
+     * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
+     * @return the value of this property
+     */
+    @JsxGetter
+    public Object getLinks() {
+        return new HTMLCollection(getDomNodeOrDie(), true) {
+            @Override
+            protected boolean isMatching(final DomNode node) {
+                return (node instanceof HtmlAnchor || node instanceof HtmlArea)
+                        && ((HtmlElement) node).hasAttribute("href");
+            }
+
+            @Override
+            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
+                final HtmlElement node = event.getHtmlElement();
+                if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                    return EffectOnCache.RESET;
+                }
+                return EffectOnCache.NONE;
+            }
+        };
     }
 
     /**
@@ -1818,6 +1953,56 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setTitle(final String title) {
+    }
+
+    /**
+     * Gets the children of the current node.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
+     * @return the child at the given position
+     */
+    @JsxGetter({CHROME, FF})
+    public HTMLCollection getChildren() {
+        final DomNode node = getPage();
+        final HTMLCollection collection = new HTMLCollection(node, false) {
+            @Override
+            protected List<DomNode> computeElements() {
+                final List<DomNode> children = new LinkedList<>();
+                for (DomNode domNode : node.getChildNodes()) {
+                    if (domNode instanceof DomElement) {
+                        children.add(domNode);
+                    }
+                }
+                return children;
+            }
+        };
+        return collection;
+    }
+
+    /**
+     * Returns the {@code contentType} property.
+     * @return the {@code contentType} property
+     */
+    @JsxGetter({CHROME, FF})
+    public String getContentType() {
+        return getPage().getContentType();
+    }
+
+    /**
+     * Returns the current selection.
+     * @return the current selection
+     */
+    @JsxFunction(CHROME)
+    public Selection getSelection() {
+        return null;
+    }
+
+    /**
+     * Returns this document's {@code head} element.
+     * @return this document's {@code head} element
+     */
+    @JsxGetter({CHROME, IE})
+    public Object getHead() {
+        return null;
     }
 
 }

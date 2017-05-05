@@ -535,6 +535,14 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public String getContentType() {
+        return getWebResponse().getContentType();
+    }
+
+    /**
+     * {@inheritDoc}
      * Not yet implemented.
      */
     @Override

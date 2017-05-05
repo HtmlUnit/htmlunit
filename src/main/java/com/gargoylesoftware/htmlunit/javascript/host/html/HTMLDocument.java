@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_PREFERS_STANDARD_FUNCTIONS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -52,9 +51,7 @@ import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
-import com.gargoylesoftware.htmlunit.html.HtmlArea;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -73,7 +70,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
@@ -162,46 +158,34 @@ public class HTMLDocument extends Document {
     @Override
     @JsxGetter(FF)
     public Object getForms() {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return node instanceof HtmlForm && node.getPrefix() == null;
-            }
-
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
-                throw Context.reportRuntimeError("TypeError: document.forms is not a function");
-            }
-        };
+        return super.getForms();
     }
 
     /**
-     * Returns the value of the JavaScript property {@code links}. Refer also to the
-     * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
-     * @return the value of this property
+     * {@inheritDoc}
      */
-    @JsxGetter
-    public Object getLinks() {
-        return new HTMLCollection(getDomNodeOrDie(), true) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return (node instanceof HtmlAnchor || node instanceof HtmlArea)
-                        && ((HtmlElement) node).hasAttribute("href");
-            }
+    @Override
+    @JsxGetter(FF)
+    public Object getEmbeds() {
+        return super.getEmbeds();
+    }
 
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final HtmlElement node = event.getHtmlElement();
-                if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
-        };
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(FF)
+    public Object getPlugins() {
+        return super.getPlugins();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(FF)
+    public Object getLinks() {
+        return super.getLinks();
     }
 
     /**
@@ -570,17 +554,12 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code images} property.
-     * @return the value of the {@code images} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(FF)
     public Object getImages() {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return node instanceof HtmlImage;
-            }
-        };
+        return super.getImages();
     }
 
     /**
@@ -883,9 +862,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns this document's {@code head} element.
-     * @return this document's {@code head} element
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public HTMLElement getHead() {
         final HtmlElement head = getPage().getHead();
@@ -1087,17 +1066,12 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code scripts} property.
-     * @return the value of the {@code scripts} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(FF)
     public Object getScripts() {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return node instanceof HtmlScript;
-            }
-        };
+        return super.getScripts();
     }
 
     /**
@@ -1108,18 +1082,6 @@ public class HTMLDocument extends Document {
     @JsxGetter(IE)
     public Object getFrames() {
         return getWindow().getFrames_js();
-    }
-
-    /**
-     * Retrieves a collection of stylesheet objects representing the style sheets that correspond
-     * to each instance of a Link or
-     * {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration} object in the document.
-     *
-     * @return styleSheet collection
-     */
-    @JsxGetter
-    public StyleSheetList getStyleSheets() {
-        return new StyleSheetList(this);
     }
 
     /**
@@ -1206,9 +1168,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the current selection.
-     * @return the current selection
+     * {@inheritDoc}
      */
+    @Override
     @JsxFunction
     public Selection getSelection() {
         return getWindow().getSelectionImpl();

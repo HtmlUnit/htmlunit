@@ -2363,4 +2363,62 @@ public class DocumentTest extends WebDriverTestCase {
         verifyAlerts(driver, getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLHtmlElement]"},
+            IE = "not found")
+    public void children() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (document.children) {\n"
+            + "        alert(document.children.length);\n"
+            + "        alert(document.children.item(0));\n"
+            + "      }\n"
+            + "      else {\n"
+            + "        alert('not found');\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        final URL url = new URL(URL_FIRST, "abc%20def");
+        expandExpectedAlertsVariables(url);
+
+        final WebDriver driver = loadPage2(html, url);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"application/xml", "text/html"},
+            IE = {"undefined", "undefined"})
+    public void contentType() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+            + "      alert(xmlDocument.contentType);\n"
+            + "      alert(document.contentType);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        final URL url = new URL(URL_FIRST, "abc%20def");
+        expandExpectedAlertsVariables(url);
+
+        final WebDriver driver = loadPage2(html, url);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
 }

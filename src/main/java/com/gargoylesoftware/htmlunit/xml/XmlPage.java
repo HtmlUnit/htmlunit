@@ -370,6 +370,14 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
+    public String getContentType() {
+        return "application/xml";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
     }
