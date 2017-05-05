@@ -713,4 +713,31 @@ public class Node extends EventTarget {
         return getDomNodeOrDie().hasAttributes();
     }
 
+    /**
+     * Returns the namespace prefix.
+     * @return the namespace prefix
+     */
+    @JsxGetter(IE)
+    public Object getPrefix() {
+        return getDomNodeOrDie().getPrefix();
+    }
+
+    /**
+     * Returns the local name of this attribute.
+     * @return the local name of this attribute
+     */
+    @JsxGetter(IE)
+    public Object getLocalName() {
+        return getDomNodeOrDie().getLocalName();
+    }
+
+    /**
+     * Returns the URI that identifies an XML namespace.
+     * @return the URI that identifies an XML namespace
+     */
+    @JsxGetter(IE)
+    public Object getNamespaceURI() {
+        return getDomNodeOrDie().getNamespaceURI();
+    }
+
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -72,4 +73,21 @@ public class SVGElement extends Element {
         super.setStyle(style);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(IE)
+    public String getId() {
+        return super.getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(IE)
+    public void setId(final String newId) {
+        super.setId(newId);
+    }
 }

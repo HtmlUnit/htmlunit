@@ -137,27 +137,30 @@ public class DocumentType extends Node {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter({FF45, IE})
+    @Override
+    @JsxGetter(FF45)
     public Object getPrefix() {
-        return getDomNodeOrDie().getPrefix();
+        return super.getPrefix();
     }
 
     /**
      * Returns the local name of this element.
      * @return the local name of this element
      */
-    @JsxGetter({FF45, IE})
+    @Override
+    @JsxGetter(FF45)
     public Object getLocalName() {
-        return getDomNodeOrDie().getLocalName();
+        return super.getLocalName();
     }
 
     /**
      * Returns the URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter({FF45, IE})
+    @Override
+    @JsxGetter(IE)
     public Object getNamespaceURI() {
-        return getDomNodeOrDie().getNamespaceURI();
+        return super.getNamespaceURI();
     }
 
 }

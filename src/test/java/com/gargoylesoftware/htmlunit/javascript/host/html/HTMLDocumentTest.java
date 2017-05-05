@@ -2541,7 +2541,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE = "undefined")
     public void childElementCount() throws Exception {
         final String html = ""
             + "<html><head>\n"

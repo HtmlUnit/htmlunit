@@ -1258,30 +1258,30 @@ public class Element extends Node {
     public void scrollIntoViewIfNeeded() { /* do nothing at the moment */ }
 
     /**
-     * Returns the namespace prefix.
-     * @return the namespace prefix
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public Object getPrefix() {
-        return getDomNodeOrDie().getPrefix();
+        return super.getPrefix();
     }
 
     /**
-     * Returns the local name of this element.
-     * @return the local name of this element
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public Object getLocalName() {
-        return getDomNodeOrDie().getLocalName();
+        return super.getLocalName();
     }
 
     /**
-     * Returns the URI that identifies an XML namespace.
-     * @return the URI that identifies an XML namespace
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public Object getNamespaceURI() {
-        return getDomNodeOrDie().getNamespaceURI();
+        return super.getNamespaceURI();
     }
 
 }
