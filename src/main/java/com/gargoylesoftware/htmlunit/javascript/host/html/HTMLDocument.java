@@ -157,10 +157,10 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the JavaScript property {@code forms}.
-     * @return the value of the JavaScript property {@code forms}
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter(FF)
     public Object getForms() {
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
@@ -767,26 +767,18 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns all the descendant elements with the specified class name.
-     * @param className the name to search for
-     * @return all the descendant elements with the specified class name
-     * @see <a href="https://developer.mozilla.org/en/DOM/document.getElementsByClassName">Mozilla doc</a>
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
     public HTMLCollection getElementsByClassName(final String className) {
         return ((HTMLElement) getDocumentElement()).getElementsByClassName(className);
     }
 
     /**
-     * Returns all HTML elements that have a {@code name} attribute with the specified value.
-     *
-     * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
-     * The DOM spec</a> for details.
-     *
-     * @param elementName - value of the {@code name} attribute to look for
-     * @return all HTML elements that have a {@code name} attribute with the specified value
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction(FF)
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         if ("null".equals(elementName)) {
@@ -914,19 +906,17 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns this document's title.
-     * @return this document's title
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
     public String getTitle() {
         return getPage().getTitleText();
     }
 
     /**
-     * Sets this document's title.
-     * @param title the new title
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
     public void setTitle(final String title) {
         getPage().setTitleText(title);
     }
@@ -1133,20 +1123,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the element for the specified x coordinate and the specified y coordinate.
-     * The current implementation always returns the &lt;body&gt; element.
-     *
-     * @param x the x offset, in pixels
-     * @param y the y offset, in pixels
-     * @return the element for the specified x coordinate and the specified y coordinate
-     */
-    @JsxFunction
-    public Object elementFromPoint(final int x, final int y) {
-        final HtmlElement element = getPage().getElementFromPoint(x, y);
-        return element == null ? null : element.getScriptableObject();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -1162,11 +1138,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns {@code false} if the active element in the document has no focus;
-     * {@code true} if the active element in the document has focus.
-     * @return whether the active element in the document has focus or not
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
     public boolean hasFocus() {
         return activeElement_ != null && getPage().getFocusedElement() == activeElement_.getDomNodeOrDie();
     }
@@ -1315,16 +1289,11 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the current number of child elements.
-     * @return the child element count
+     * {@inheritDoc}
      */
-    @JsxGetter
-    public int getChildElementCount() {
-        int counter = 0;
-        if (getPage().getDocumentElement() != null) {
-            counter++;
-        }
-        return counter;
-    }
-
+    @Override
+    public Object elementFromPoint(final int x, final int y) {
+        final HtmlElement element = getPage().getElementFromPoint(x, y);
+        return element == null ? null : element.getScriptableObject();
+    };
 }

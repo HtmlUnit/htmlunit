@@ -714,15 +714,6 @@ public class Node extends EventTarget {
     }
 
     /**
-     * Returns the element ID.
-     * @return the ID of this element
-     */
-    @JsxGetter(IE)
-    public Object getId() {
-        return Undefined.instance;
-    }
-
-    /**
      * Sets the identifier this element.
      * @param newId the new identifier of this element
      */

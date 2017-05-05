@@ -2540,4 +2540,13 @@ public class HTMLElement extends Element {
             getDomNodeOrDie().removeAttribute("hidden");
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(IE)
+    public String getId() {
+        return super.getId();
+    }
 }

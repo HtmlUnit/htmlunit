@@ -1113,9 +1113,9 @@ public class Element extends Node {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the element ID.
+     * @return the ID of this element
      */
-    @Override
     @JsxGetter({CHROME, FF})
     public String getId() {
         return getDomNodeOrDie().getId();
