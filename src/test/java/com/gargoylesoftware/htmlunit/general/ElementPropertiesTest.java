@@ -3162,7 +3162,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
                 + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
                 + "startContainer,startOffset,surroundContents()")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void range() throws Exception {
         testString("document.createRange(), window.performance");
     }

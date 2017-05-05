@@ -149,10 +149,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     DIALOGWINDOW_REFERER,
 
-    /** DOCTYPE has undefined value for 'prefix'. */
-    @BrowserFeature({CHROME, FF52})
-    DOCTYPE_PREFIX_UNDEFINED,
-
     /** IE removes all child text nodes, but FF preserves the first. */
     @BrowserFeature(IE)
     DOM_NORMALIZE_REMOVE_CHILDREN,
