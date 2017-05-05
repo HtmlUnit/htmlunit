@@ -981,21 +981,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the ready state of the document. This is an IE-only property.
-     * @return the ready state of the document
-     * @see DomNode#READY_STATE_UNINITIALIZED
-     * @see DomNode#READY_STATE_LOADING
-     * @see DomNode#READY_STATE_LOADED
-     * @see DomNode#READY_STATE_INTERACTIVE
-     * @see DomNode#READY_STATE_COMPLETE
-     */
-    @JsxGetter
-    public String getReadyState() {
-        final DomNode node = getDomNodeOrDie();
-        return node.getReadyState();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -1125,15 +1110,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Mock for the moment.
-     * @return true for success
-     */
-    @JsxFunction({FF, IE})
-    public boolean releaseCapture() {
-        return true;
-    }
-
-    /**
      * Creates a new HTML attribute with the specified name.
      *
      * @param attributeName the name of the attribute to create
@@ -1159,23 +1135,19 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Does nothing special anymore.
-     *
-     * @param type the type of events to capture
-     * @see Window#captureEvents(String)
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction({CHROME, FF})
     public void captureEvents(final String type) {
         // Empty.
     }
 
     /**
-     * Does nothing special anymore.
-     *
-     * @param type the type of events to capture
-     * @see Window#releaseEvents(String)
+     * {@inheritDoc}
      */
-    @JsxFunction
+    @Override
+    @JsxFunction({CHROME, FF})
     public void releaseEvents(final String type) {
         // Empty.
     }

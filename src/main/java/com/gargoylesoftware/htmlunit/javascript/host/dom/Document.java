@@ -2058,4 +2058,50 @@ public class Document extends Node {
         return date;
     }
 
+    /**
+     * Mock for the moment.
+     * @return true for success
+     */
+    @JsxFunction({FF, IE})
+    public boolean releaseCapture() {
+        return true;
+    }
+
+    /**
+     * Returns the ready state of the document.
+     * @return the ready state of the document
+     *
+     * @see DomNode#READY_STATE_UNINITIALIZED
+     * @see DomNode#READY_STATE_LOADING
+     * @see DomNode#READY_STATE_LOADED
+     * @see DomNode#READY_STATE_INTERACTIVE
+     * @see DomNode#READY_STATE_COMPLETE
+     */
+    @JsxGetter
+    public String getReadyState() {
+        return getDomNodeOrDie().getReadyState();
+    }
+
+    /**
+     * Does nothing special anymore.
+     *
+     * @param type the type of events to capture
+     * @see Window#captureEvents(String)
+     */
+    @JsxFunction(IE)
+    public void captureEvents(final String type) {
+        // Empty.
+    }
+
+    /**
+     * Does nothing special anymore.
+     *
+     * @param type the type of events to capture
+     * @see Window#releaseEvents(String)
+     */
+    @JsxFunction(IE)
+    public void releaseEvents(final String type) {
+        // Empty.
+    }
+
 }
