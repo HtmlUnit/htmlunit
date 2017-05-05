@@ -2549,4 +2549,13 @@ public class HTMLElement extends Element {
     public String getId() {
         return super.getId();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(IE)
+    public void setId(final String newId) {
+        super.setId(newId);
+    }
 }

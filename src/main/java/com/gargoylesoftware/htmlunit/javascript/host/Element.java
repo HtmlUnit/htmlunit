@@ -1124,7 +1124,6 @@ public class Element extends Node {
     /**
      * {@inheritDoc}
      */
-    @Override
     @JsxSetter({CHROME, FF})
     public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
