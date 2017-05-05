@@ -134,8 +134,7 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the namespace prefix.
-     * @return the namespace prefix
+     * {@inheritDoc}
      */
     @Override
     @JsxGetter(FF45)
@@ -144,8 +143,7 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the local name of this element.
-     * @return the local name of this element
+     * {@inheritDoc}
      */
     @Override
     @JsxGetter(FF45)
@@ -154,11 +152,10 @@ public class DocumentType extends Node {
     }
 
     /**
-     * Returns the URI that identifies an XML namespace.
-     * @return the URI that identifies an XML namespace
+     * {@inheritDoc}
      */
     @Override
-    @JsxGetter(IE)
+    @JsxGetter(FF45)
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
