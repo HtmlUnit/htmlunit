@@ -1360,6 +1360,9 @@ public final class StyleAttributes {
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
 
+        /** The style property {@code -moz-animation}. */
+        MOZ_ANIMATION__("-moz-animation", "-moz-animation", ff52up("")),
+
         /** The style property {@code MozAnimationDelay}. */
         MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay", ff("0s")),
 
@@ -1414,9 +1417,14 @@ public final class StyleAttributes {
         /** The style property {@code MozAppearance}. */
         MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ff("none")),
 
+        /** The style property {@code -moz-appearance}. */
+        MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ff52up("none")),
+
         /** The style property {@code MozBackfaceVisibility}. */
-        MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility",
-                "-moz-backface-visibility", ff("visible")),
+        MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility", ff("visible")),
+
+        /** The style property {@code -moz-backface-visibility}. */
+        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility", ff52up("visible")),
 
         /** The style property {@code MozBackgroundClip}. */
         MOZ_BACKGROUND_CLIP("MozBackgroundClip", "-moz-background-clip"),
@@ -1430,27 +1438,51 @@ public final class StyleAttributes {
         /** The style property {@code MozBinding}. */
         MOZ_BINDING("MozBinding", "-moz-binding", ff("none")),
 
+        /** The style property {@code -moz-binding}. */
+        MOZ_BINDING__("-moz-binding", "-moz-binding", ff52up("none")),
+
         /** The style property {@code MozBorderBottomColors}. */
-        MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors",
-                "-moz-border-bottom-colors", ff("none")),
+        MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors", ff("none")),
+
+        /** The style property {@code -moz-border-bottom-colors}. */
+        MOZ_BORDER_BOTTOM_COLORS__("-moz-border-bottom-colors", "-moz-border-bottom-colors",
+                ff52up("none")),
 
         /** The style property {@code MozBorderEnd}. */
         MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ff("")),
 
+        /** The style property {@code -moz-border-end}. */
+        MOZ_BORDER_END__("-moz-border-end", "-moz-border-end", ff52up("")),
+
         /** The style property {@code MozBorderEndColor}. */
         MOZ_BORDER_END_COLOR("MozBorderEndColor", "-moz-border-end-color", ff("")),
+
+        /** The style property {@code -moz-border-end-color}. */
+        MOZ_BORDER_END_COLOR__("-moz-border-end-color", "-moz-border-end-color", ff52up("")),
 
         /** The style property {@code MozBorderEndStyle}. */
         MOZ_BORDER_END_STYLE("MozBorderEndStyle", "-moz-border-end-style", ff("")),
 
+        /** The style property {@code -moz-border-end-style}. */
+        MOZ_BORDER_END_STYLE__("-moz-border-end-style", "-moz-border-end-style", ff52up("")),
+
         /** The style property {@code MozBorderEndWidth}. */
         MOZ_BORDER_END_WIDTH("MozBorderEndWidth", "-moz-border-end-width", ff("")),
+
+        /** The style property {@code -moz-border-end-width}. */
+        MOZ_BORDER_END_WIDTH__("-moz-border-end-width", "-moz-border-end-width", ff52up("")),
 
         /** The style property {@code MozBorderImage}. */
         MOZ_BORDER_IMAGE("MozBorderImage", "-moz-border-image", ff("")),
 
+        /** The style property {@code -moz-border-image}. */
+        MOZ_BORDER_IMAGE__("-moz-border-image", "-moz-border-image", ff52up("")),
+
         /** The style property {@code MozBorderLeftColors}. */
         MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors", ff("none")),
+
+        /** The style property {@code -moz-border-left-colors}. */
+        MOZ_BORDER_LEFT_COLORS__("-moz-border-left-colors", "-moz-border-left-colors", ff52up("none")),
 
         /** The style property {@code MozBorderRadius}. */
         MOZ_BORDER_RADIUS("MozBorderRadius", "-moz-border-radius"),
@@ -1470,38 +1502,74 @@ public final class StyleAttributes {
         /** The style property {@code MozBorderRightColors}. */
         MOZ_BORDER_RIGHT_COLORS("MozBorderRightColors", "-moz-border-right-colors", ff("none")),
 
+        /** The style property {@code -moz-border-right-colors}. */
+        MOZ_BORDER_RIGHT_COLORS__("-moz-border-right-colors", "-moz-border-right-colors", ff52up("none")),
+
         /** The style property {@code MozBorderStart}. */
         MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ff("")),
+
+        /** The style property {@code -moz-border-start}. */
+        MOZ_BORDER_START__("-moz-border-start", "-moz-border-start", ff52up("")),
 
         /** The style property {@code MozBorderStartColor}. */
         MOZ_BORDER_START_COLOR("MozBorderStartColor", "-moz-border-start-color", ff("")),
 
+        /** The style property {@code -moz-border-start-color}. */
+        MOZ_BORDER_START_COLOR__("-moz-border-start-color", "-moz-border-start-color", ff52up("")),
+
         /** The style property {@code MozBorderStartStyle}. */
         MOZ_BORDER_START_STYLE("MozBorderStartStyle", "-moz-border-start-style", ff("")),
+
+        /** The style property {@code -moz-border-start-style}. */
+        MOZ_BORDER_START_STYLE__("-moz-border-start-style", "-moz-border-start-style", ff52up("")),
 
         /** The style property {@code MozBorderStartWidth}. */
         MOZ_BORDER_START_WIDTH("MozBorderStartWidth", "-moz-border-start-width", ff("")),
 
+        /** The style property {@code -moz-border-start-width}. */
+        MOZ_BORDER_START_WIDTH__("-moz-border-start-width", "-moz-border-start-width", ff52up("")),
+
         /** The style property {@code MozBorderTopColors}. */
         MOZ_BORDER_TOP_COLORS("MozBorderTopColors", "-moz-border-top-colors", ff("none")),
+
+        /** The style property {@code -moz-border-top-colors}. */
+        MOZ_BORDER_TOP_COLORS__("-moz-border-top-colors", "-moz-border-top-colors", ff52up("none")),
 
         /** The style property {@code MozBoxAlign}. */
         MOZ_BOX_ALIGN("MozBoxAlign", "-moz-box-align", ff("stretch")),
 
+        /** The style property {@code -moz-box-align}. */
+        MOZ_BOX_ALIGN__("-moz-box-align", "-moz-box-align", ff52up("stretch")),
+
         /** The style property {@code MozBoxDirection}. */
         MOZ_BOX_DIRECTION("MozBoxDirection", "-moz-box-direction", ff("normal")),
+
+        /** The style property {@code -moz-box-direction}. */
+        MOZ_BOX_DIRECTION__("-moz-box-direction", "-moz-box-direction", ff52up("normal")),
 
         /** The style property {@code MozBoxFlex}. */
         MOZ_BOX_FLEX("MozBoxFlex", "-moz-box-flex", ff("0")),
 
+        /** The style property {@code -moz-box-flex}. */
+        MOZ_BOX_FLEX__("-moz-box-flex", "-moz-box-flex", ff52up("0")),
+
         /** The style property {@code MozBoxOrdinalGroup}. */
         MOZ_BOX_ORDINAL_GROUP("MozBoxOrdinalGroup", "-moz-box-ordinal-group", ff("1")),
+
+        /** The style property {@code -moz-box-ordinal-group}. */
+        MOZ_BOX_ORDINAL_GROUP__("-moz-box-ordinal-group", "-moz-box-ordinal-group", ff52up("1")),
 
         /** The style property {@code MozBoxOrient}. */
         MOZ_BOX_ORIENT("MozBoxOrient", "-moz-box-orient", ff("horizontal")),
 
+        /** The style property {@code -moz-box-orient}. */
+        MOZ_BOX_ORIENT__("-moz-box-orient", "-moz-box-orient", ff52up("horizontal")),
+
         /** The style property {@code MozBoxPack}. */
         MOZ_BOX_PACK("MozBoxPack", "-moz-box-pack", ff("start")),
+
+        /** The style property {@code -moz-box-pack}. */
+        MOZ_BOX_PACK__("-moz-box-pack", "-moz-box-pack", ff52up("start")),
 
         /** The style property {@code MozBoxShadow}. */
         MOZ_BOX_SHADOW("MozBoxShadow", "-moz-box-shadow"),
@@ -1509,68 +1577,131 @@ public final class StyleAttributes {
         /** The style property {@code MozBoxSizing}. */
         MOZ_BOX_SIZING("MozBoxSizing", "-moz-box-sizing", ff("content-box")),
 
+        /** The style property {@code -moz-box-sizing}. */
+        MOZ_BOX_SIZING__("-moz-box-sizing", "-moz-box-sizing", ff52up("content-box")),
+
         /** The style property {@code MozColumnCount}. */
         MOZ_COLUMN_COUNT("MozColumnCount", "-moz-column-count", ff("auto")),
+
+        /** The style property {@code -moz-column-count}. */
+        MOZ_COLUMN_COUNT__("-moz-column-count", "-moz-column-count", ff52up("auto")),
 
         /** The style property {@code MozColumnFill}. */
         MOZ_COLUMN_FILL("MozColumnFill", "-moz-column-fill", ff("balance")),
 
+        /** The style property {@code -moz-column-fill}. */
+        MOZ_COLUMN_FILL__("-moz-column-fill", "-moz-column-fill", ff52up("balance")),
+
         /** The style property {@code MozColumnGap}. */
         MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("16px")),
 
+        /** The style property {@code -moz-column-gap}. */
+        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ff52up("16px")),
+
         /** The style property {@code MozColumnRule}. */
         MOZ_COLUMN_RULE("MozColumnRule", "-moz-column-rule", ff("")),
+
+        /** The style property {@code -moz-column-rule}. */
+        MOZ_COLUMN_RULE__("-moz-column-rule", "-moz-column-rule", ff52up("")),
 
         /** The style property {@code MozColumnRuleColor}. */
         MOZ_COLUMN_RULE_COLOR("MozColumnRuleColor", "-moz-column-rule-color",
                 ff("rgb(0, 0, 0)")),
 
+        /** The style property {@code -moz-column-rule-color}. */
+        MOZ_COLUMN_RULE_COLOR__("-moz-column-rule-color", "-moz-column-rule-color",
+                ff52up("rgb(0, 0, 0)")),
+
         /** The style property {@code MozColumnRuleStyle}. */
         MOZ_COLUMN_RULE_STYLE("MozColumnRuleStyle", "-moz-column-rule-style",
                 ff("none")),
+
+        /** The style property {@code -moz-column-rule-style}. */
+        MOZ_COLUMN_RULE_STYLE__("-moz-column-rule-style", "-moz-column-rule-style",
+                ff52up("none")),
 
         /** The style property {@code MozColumnRuleWidth}. */
         MOZ_COLUMN_RULE_WIDTH("MozColumnRuleWidth", "-moz-column-rule-width",
                 ff("0px")),
 
+        /** The style property {@code -moz-column-rule-width}. */
+        MOZ_COLUMN_RULE_WIDTH__("-moz-column-rule-width", "-moz-column-rule-width",
+                ff52up("0px")),
+
         /** The style property {@code MozColumnWidth}. */
         MOZ_COLUMN_WIDTH("MozColumnWidth", "-moz-column-width", ff("auto")),
+
+        /** The style property {@code -moz-column-width}. */
+        MOZ_COLUMN_WIDTH__("-moz-column-width", "-moz-column-width", ff52up("auto")),
 
         /** The style property {@code MozColumns}. */
         MOZ_COLUMNS("MozColumns", "-moz-columns", ff("")),
 
+        /** The style property {@code -moz-columns}. */
+        MOZ_COLUMNS__("-moz-columns", "-moz-columns", ff52up("")),
+
         /** The style property {@code MozFloatEdge}. */
         MOZ_FLOAT_EDGE("MozFloatEdge", "-moz-float-edge", ff("content-box")),
 
+        /** The style property {@code -moz-float-edge}. */
+        MOZ_FLOAT_EDGE__("-moz-float-edge", "-moz-float-edge", ff52up("content-box")),
+
         /** The style property {@code MozFontFeatureSettings}. */
-        MOZ_FONT_FEATURE_SETTINGS("MozFontFeatureSettings",
-                "-moz-font-feature-settings", ff("normal")),
+        MOZ_FONT_FEATURE_SETTINGS("MozFontFeatureSettings", "-moz-font-feature-settings",
+                ff("normal")),
+
+        /** The style property {@code -moz-font-feature-settings}. */
+        MOZ_FONT_FEATURE_SETTINGS__("-moz-font-feature-settings", "-moz-font-feature-settings",
+                ff52up("normal")),
 
         /** The style property {@code MozFontLanguageOverride}. */
-        MOZ_FONT_LANGUAGE_OVERRIDE("MozFontLanguageOverride",
-                "-moz-font-language-override", ff("normal")),
+        MOZ_FONT_LANGUAGE_OVERRIDE("MozFontLanguageOverride", "-moz-font-language-override",
+                ff("normal")),
+
+        /** The style property {@code -moz-font-language-override}. */
+        MOZ_FONT_LANGUAGE_OVERRIDE__("-moz-font-language-override", "-moz-font-language-override",
+                ff52up("normal")),
 
         /** The style property {@code MozForceBrokenImageIcon}. */
-        MOZ_FORCE_BROKEN_IMAGE_ICON("MozForceBrokenImageIcon",
-                "-moz-force-broken-image-icon", ff("0")),
+        MOZ_FORCE_BROKEN_IMAGE_ICON("MozForceBrokenImageIcon", "-moz-force-broken-image-icon",
+                ff("0")),
+
+        /** The style property {@code -moz-force-broken-image-icon}. */
+        MOZ_FORCE_BROKEN_IMAGE_ICON__("-moz-force-broken-image-icon", "-moz-force-broken-image-icon",
+                ff52up("0")),
 
         /** The style property {@code MozHyphens}. */
         MOZ_HYPHENS("MozHyphens", "-moz-hyphens", ff("manual")),
 
+        /** The style property {@code -moz-hyphens}. */
+        MOZ_HYPHENS__("-moz-hyphens", "-moz-hyphens", ff52up("manual")),
+
         /** The style property {@code MozImageRegion}. */
         MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ff("auto")),
+
+        /** The style property {@code -moz-image-region}. */
+        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ff52up("auto")),
 
         /** The style property {@code MozMarginEnd}. */
         MOZ_MARGIN_END("MozMarginEnd", "-moz-margin-end", ff("")),
 
+        /** The style property {@code -moz-margin-end}. */
+        MOZ_MARGIN_END__("-moz-margin-end", "-moz-margin-end", ff52up("")),
+
         /** The style property {@code MozMarginStart}. */
         MOZ_MARGIN_START("MozMarginStart", "-moz-margin-start", ff("")),
+
+        /** The style property {@code -moz-margin-start}. */
+        MOZ_MARGIN_START__("-moz-margin-start", "-moz-margin-start", ff52up("")),
 
         /** The style property {@code MozOpacity}. */
         MOZ_OPACITY("MozOpacity", "-moz-opacity"),
 
         /** The style property {@code MozOrient}. */
         MOZ_ORIENT("MozOrient", "-moz-orient", ff("inline")),
+
+        /** The style property {@code -moz-orient}. */
+        MOZ_ORIENT__("-moz-orient", "-moz-orient", ff52up("inline")),
 
         /** The style property {@code MozOutline}. */
         MOZ_OUTLINE("MozOutline", "-moz-outline"),
@@ -1582,23 +1713,42 @@ public final class StyleAttributes {
         MOZ_OUTLINE_OFFSET("MozOutlineOffset", "-moz-outline-offset"),
 
         /** The style property {@code MozOutlineRadius}. */
-        MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-mz-outline-radius", ff("")),
+        MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-moz-outline-radius", ff("")),
+
+        /** The style property {@code -moz-outline-radius}. */
+        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff52up("")),
 
         /** The style property {@code MozOutlineRadiusBottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT("MozOutlineRadiusBottomleft",
                 "-moz-outline-radius-bottomleft", ff("0px")),
 
+        /** The style property {@code -moz-outline-radius-bottomleft}. */
+        MOZ_OUTLINE_RADIUS_BOTTOMLEFT__("-moz-outline-radius-bottomleft",
+                "-moz-outline-radius-bottomleft", ff52up("0px")),
+
         /** The style property {@code MozOutlineRadiusBottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT("MozOutlineRadiusBottomright",
                 "-moz-outline-radius-bottomright", ff("0px")),
+
+        /** The style property {@code -moz-outline-radius-bottomright}. */
+        MOZ_OUTLINE_RADIUS_BOTTOMRIGHT__("-moz-outline-radius-bottomright",
+                "-moz-outline-radius-bottomright", ff52up("0px")),
 
         /** The style property {@code MozOutlineRadiusTopleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT("MozOutlineRadiusTopleft",
                 "-moz-outline-radius-topleft", ff("0px")),
 
+        /** The style property {@code -moz-outline-radius-topleft}. */
+        MOZ_OUTLINE_RADIUS_TOPLEFT__("-moz-outline-radius-topleft",
+                "-moz-outline-radius-topleft", ff52up("0px")),
+
         /** The style property {@code MozOutlineRadiusTopright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT("MozOutlineRadiusTopright",
                 "-moz-outline-radius-topright", ff("0px")),
+
+        /** The style property {@code -moz-outline-radius-topright}. */
+        MOZ_OUTLINE_RADIUS_TOPRIGHT__("-moz-outline-radius-topright",
+                "-moz-outline-radius-topright", ff52up("0px")),
 
         /** The style property {@code MozOutlineStyle}. */
         MOZ_OUTLINE_STYLE("MozOutlineStyle", "-moz-outline-style"),
@@ -1609,76 +1759,146 @@ public final class StyleAttributes {
         /** The style property {@code MozPaddingEnd}. */
         MOZ_PADDING_END("MozPaddingEnd", "-moz-padding-end", ff("")),
 
+        /** The style property {@code -moz-padding-end}. */
+        MOZ_PADDING_END__("-moz-padding-end", "-moz-padding-end", ff52up("")),
+
         /** The style property {@code MozPaddingStart}. */
         MOZ_PADDING_START("MozPaddingStart", "-moz-padding-start", ff("")),
 
+        /** The style property {@code -moz-padding-start}. */
+        MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff52up("")),
+
         /** The style property {@code MozPerspective}. */
         MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ff("none")),
+
+        /** The style property {@code -moz-perspective}. */
+        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ff52up("none")),
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
                 "-moz-perspective-origin", ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
+        /** The style property {@code -moz-perspective-origin}. */
+        MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
+                "-moz-perspective-origin", ff52up("625px 172.5px")),
+
         /** The style property {@code MozStackSizing}. */
-        MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing",
-                ff("stretch-to-fit")),
+        MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing", ff("stretch-to-fit")),
+
+        /** The style property {@code -moz-stack-sizing}. */
+        MOZ_STACK_SIZING__("-moz-stack-sizing", "-moz-stack-sizing", ff52up("stretch-to-fit")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
+
+        /** The style property {@code -moz-tab-size}. */
+        MOZ_TAB_SIZE__("-moz-tab-size", "-moz-tab-size", ff52up("8")),
 
         /** The style property {@code MozTextAlignLast}. */
         MOZ_TEXT_ALIGN_LAST("MozTextAlignLast", "-moz-text-align-last",
                 ff("auto")),
 
+        /** The style property {@code -moz-text-align-last}. */
+        MOZ_TEXT_ALIGN_LAST__("-moz-text-align-last", "-moz-text-align-last",
+                ff52up("auto")),
+
         /** The style property {@code MozTextSizeAdjust}. */
         MOZ_TEXT_SIZE_ADJUST("MozTextSizeAdjust", "-moz-text-size-adjust",
                 ff("auto")),
 
+        /** The style property {@code -moz-text-size-adjust}. */
+        MOZ_TEXT_SIZE_ADJUST__("-moz-text-size-adjust", "-moz-text-size-adjust",
+                ff52up("auto")),
+
         /** The style property {@code MozTransform}. */
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
+
+        /** The style property {@code -moz-transform}. */
+        MOZ_TRANSFORM__("-moz-transform", "-moz-transform", ff52up("none")),
 
         /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
                 ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
 
+        /** The style property {@code -moz-transform-origin}. */
+        MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin",
+                ff52up("625px 172.5px")),
+
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
                 ff("flat")),
 
+        /** The style property {@code -moz-transform-style}. */
+        MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style",
+                ff52up("flat")),
+
         /** The style property {@code MozTransition}. */
         MOZ_TRANSITION("MozTransition", "-moz-transition", ff("")),
+
+        /** The style property {@code -moz-transition}. */
+        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ff52up("")),
 
         /** The style property {@code MozTransitionDelay}. */
         MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay",
                 ff("0s")),
 
+        /** The style property {@code -moz-transition-delay}. */
+        MOZ_TRANSITION_DELAY__("-moz-transition-delay", "-moz-transition-delay",
+                ff52up("0s")),
+
         /** The style property {@code MozTransitionDuration}. */
-        MOZ_TRANSITION_DURATION("MozTransitionDuration",
-                "-moz-transition-duration", ff("0s")),
+        MOZ_TRANSITION_DURATION("MozTransitionDuration", "-moz-transition-duration",
+                ff("0s")),
+
+        /** The style property {@code -moz-transition-duration}. */
+        MOZ_TRANSITION_DURATION__("-moz-transition-duration", "-moz-transition-duration",
+                ff52up("0s")),
 
         /** The style property {@code MozTransitionProperty}. */
-        MOZ_TRANSITION_PROPERTY("MozTransitionProperty",
-                "-moz-transition-property", ff("all")),
+        MOZ_TRANSITION_PROPERTY("MozTransitionProperty", "-moz-transition-property",
+                ff("all")),
+
+        /** The style property {@code -moz-transition-property}. */
+        MOZ_TRANSITION_PROPERTY__("-moz-transition-property", "-moz-transition-property",
+                ff52up("all")),
 
         /** The style property {@code MozTransitionTimingFunction}. */
         MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction",
-                "-moz-transition-timing-function",
-                ff("ease")),
+                "-moz-transition-timing-function", ff("ease")),
+
+        /** The style property {@code -moz-transition-timing-function}. */
+        MOZ_TRANSITION_TIMING_FUNCTION__("-moz-transition-timing-function",
+                "-moz-transition-timing-function", ff52up("ease")),
 
         /** The style property {@code MozUserFocus}. */
         MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ff("none")),
 
+        /** The style property {@code -moz-user-focus}. */
+        MOZ_USER_FOCUS__("-moz-user-focus", "-moz-user-focus", ff52up("none")),
+
         /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ff("auto")),
+
+        /** The style property {@code -moz-user-input}. */
+        MOZ_USER_INPUT__("-moz-user-input", "-moz-user-input", ff52up("auto")),
 
         /** The style property {@code MozUserModify}. */
         MOZ_USER_MODIFY("MozUserModify", "-moz-user-modify", ff("read-only")),
 
+        /** The style property {@code -moz-user-modify}. */
+        MOZ_USER_MODIFY__("-moz-user-modify", "-moz-user-modify", ff52up("read-only")),
+
         /** The style property {@code MozUserSelect}. */
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
+        /** The style property {@code -moz-user-select}. */
+        MOZ_USER_SELECT__("-moz-user-select", "-moz-user-select", ff52up("auto")),
+
         /** The style property {@code MozWindowDragging}. */
         MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ffBelow52("no-drag"), ff52up("default")),
+
+        /** The style property {@code -moz-window-dragging}. */
+        MOZ_WINDOW_DRAGGING__("-moz-window-dragging", "-moz-window-dragging", ff52up("default")),
 
         /** The style property {@code msAnimation}. */
         MS_ANIMATION("msAnimation", "-ms-animation", ie("")),
