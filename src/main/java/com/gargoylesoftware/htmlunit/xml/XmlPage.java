@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -359,11 +360,10 @@ public class XmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public Charset getCharset() {
-        throw new UnsupportedOperationException("XmlPage.getCharset is not yet implemented.");
+        return UTF_8;
     }
 
     /**

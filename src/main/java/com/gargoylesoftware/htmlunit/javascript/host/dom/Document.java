@@ -2034,11 +2034,17 @@ public class Document extends Node {
     public String getLastModified() {
         if (lastModified_ == null) {
             final WebResponse webResponse = getPage().getWebResponse();
-            String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
-            if (stringDate == null) {
-                stringDate = webResponse.getResponseHeaderValue("Date");
+            final Date lastModified;
+            if (webResponse != null) {
+                String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
+                if (stringDate == null) {
+                    stringDate = webResponse.getResponseHeaderValue("Date");
+                }
+                lastModified = parseDateOrNow(stringDate);
             }
-            final Date lastModified = parseDateOrNow(stringDate);
+            else {
+                lastModified = new Date();
+            }
             lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT, Locale.ROOT).format(lastModified);
         }
         return lastModified_;

@@ -1254,7 +1254,7 @@ public class Element extends Node {
      * Implement the {@code scrollIntoViewIfNeeded()} JavaScript function but don't actually do
      * anything.
      */
-    @JsxFunction({CHROME, FF})
+    @JsxFunction(CHROME)
     public void scrollIntoViewIfNeeded() { /* do nothing at the moment */ }
 
     /**
