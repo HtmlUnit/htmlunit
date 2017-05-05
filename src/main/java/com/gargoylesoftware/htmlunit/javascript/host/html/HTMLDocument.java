@@ -1295,5 +1295,5 @@ public class HTMLDocument extends Document {
     public Object elementFromPoint(final int x, final int y) {
         final HtmlElement element = getPage().getElementFromPoint(x, y);
         return element == null ? null : element.getScriptableObject();
-    };
+    }
 }

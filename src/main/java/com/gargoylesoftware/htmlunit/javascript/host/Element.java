@@ -1261,7 +1261,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF52})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1270,7 +1270,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF52})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1279,7 +1279,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF52})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
