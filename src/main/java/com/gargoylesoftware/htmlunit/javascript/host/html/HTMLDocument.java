@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
@@ -26,16 +25,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
-import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +39,6 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -75,7 +68,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.Cookie;
-import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -109,9 +101,6 @@ public class HTMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
 
-    /** The format to use for the <tt>lastModified</tt> attribute. */
-    private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
-
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
 
     private HTMLElement activeElement_;
@@ -119,7 +108,6 @@ public class HTMLDocument extends Document {
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuilder_ = new StringBuilder();
     private boolean writeInCurrentDocument_ = true;
-    private String lastModified_;
 
     private boolean closePostponedAction_;
 
@@ -186,33 +174,6 @@ public class HTMLDocument extends Document {
     @JsxGetter(FF)
     public Object getLinks() {
         return super.getLinks();
-    }
-
-    /**
-     * Returns the last modification date of the document.
-     * @see <a href="https://developer.mozilla.org/en/DOM/document.lastModified">Mozilla documentation</a>
-     * @return the date as string
-     */
-    @JsxGetter
-    public String getLastModified() {
-        if (lastModified_ == null) {
-            final WebResponse webResponse = getPage().getWebResponse();
-            String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
-            if (stringDate == null) {
-                stringDate = webResponse.getResponseHeaderValue("Date");
-            }
-            final Date lastModified = parseDateOrNow(stringDate);
-            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT, Locale.ROOT).format(lastModified);
-        }
-        return lastModified_;
-    }
-
-    private static Date parseDateOrNow(final String stringDate) {
-        final Date date = parseHttpDate(stringDate);
-        if (date == null) {
-            return new Date();
-        }
-        return date;
     }
 
     /**
@@ -560,19 +521,6 @@ public class HTMLDocument extends Document {
     @JsxGetter(FF)
     public Object getImages() {
         return super.getImages();
-    }
-
-    /**
-     * Returns a string representing the encoding under which the document was parsed.
-     * @return a string representing the encoding under which the document was parsed
-     */
-    @JsxGetter
-    public String getInputEncoding() {
-        final Charset encoding = getPage().getCharset();
-        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
-            return encoding.name();
-        }
-        return EncodingSniffer.translateEncodingLabel(encoding);
     }
 
     /**

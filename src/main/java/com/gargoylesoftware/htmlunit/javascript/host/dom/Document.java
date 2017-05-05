@@ -35,12 +35,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
+import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -160,6 +163,9 @@ public class Document extends Node {
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
+    /** The format to use for the <tt>lastModified</tt> attribute. */
+    private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
+
     /**
      * Map<String, Class> which maps strings a caller may use when calling into
      * {@link #createEvent(String)} to the associated event class. To support a new
@@ -217,6 +223,7 @@ public class Document extends Node {
     private int documentMode_ = -1;
     private String uniqueID_;
     private String domain_;
+    private String lastModified_;
 
     static {
         // commands
@@ -2003,6 +2010,46 @@ public class Document extends Node {
     @JsxGetter({CHROME, IE})
     public Object getHead() {
         return null;
+    }
+
+    /**
+     * Returns a string representing the encoding under which the document was parsed.
+     * @return a string representing the encoding under which the document was parsed
+     */
+    @JsxGetter
+    public String getInputEncoding() {
+        final Charset encoding = getPage().getCharset();
+        if (getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            return encoding.name();
+        }
+        return EncodingSniffer.translateEncodingLabel(encoding);
+    }
+
+    /**
+     * Returns the last modification date of the document.
+     * @see <a href="https://developer.mozilla.org/en/DOM/document.lastModified">Mozilla documentation</a>
+     * @return the date as string
+     */
+    @JsxGetter
+    public String getLastModified() {
+        if (lastModified_ == null) {
+            final WebResponse webResponse = getPage().getWebResponse();
+            String stringDate = webResponse.getResponseHeaderValue("Last-Modified");
+            if (stringDate == null) {
+                stringDate = webResponse.getResponseHeaderValue("Date");
+            }
+            final Date lastModified = parseDateOrNow(stringDate);
+            lastModified_ = new SimpleDateFormat(LAST_MODIFIED_DATE_FORMAT, Locale.ROOT).format(lastModified);
+        }
+        return lastModified_;
+    }
+
+    private static Date parseDateOrNow(final String stringDate) {
+        final Date date = parseHttpDate(stringDate);
+        if (date == null) {
+            return new Date();
+        }
+        return date;
     }
 
 }
