@@ -1742,7 +1742,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
     public void createEvent_overridden() throws Exception {
         final String html =
               "<html>\n"

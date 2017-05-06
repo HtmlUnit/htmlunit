@@ -1450,4 +1450,159 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnclick() throws Exception {
+        eventHandlerSetterGetterTest("onclick");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOndblclick() throws Exception {
+        eventHandlerSetterGetterTest("ondblclick");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnblur() throws Exception {
+        eventHandlerSetterGetterTest("onblur");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnfocus() throws Exception {
+        eventHandlerSetterGetterTest("onfocus");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnkeydown() throws Exception {
+        eventHandlerSetterGetterTest("onkeydown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnkeypress() throws Exception {
+        eventHandlerSetterGetterTest("onkeypress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnkeyup() throws Exception {
+        eventHandlerSetterGetterTest("onkeyup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnmousedown() throws Exception {
+        eventHandlerSetterGetterTest("onmousedown");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnmouseup() throws Exception {
+        eventHandlerSetterGetterTest("onmouseup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnmouseover() throws Exception {
+        eventHandlerSetterGetterTest("onmouseover");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnmouseout() throws Exception {
+        eventHandlerSetterGetterTest("onmouseout");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnmousemove() throws Exception {
+        eventHandlerSetterGetterTest("onmousemove");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnresize() throws Exception {
+        eventHandlerSetterGetterTest("onresize");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("success")
+    public void setOnerror() throws Exception {
+        eventHandlerSetterGetterTest("onerror");
+    }
+
+    /**
+     * @param eventName the name of the event
+     * @throws Exception if the test fails
+     */
+    private void eventHandlerSetterGetterTest(final String eventName) throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function handler(event) {}\n"
+            + "function test() {\n"
+            + "  var oDiv = document.getElementById('myDiv');\n"
+            + "  oDiv." + eventName + " = handler;\n"
+            + "  if (oDiv." + eventName + " == handler) {\n"
+            + "    alert('success');\n"
+            + "  } else {\n"
+            + "    alert('fail');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'><br/><div><span>test</span></div></div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
