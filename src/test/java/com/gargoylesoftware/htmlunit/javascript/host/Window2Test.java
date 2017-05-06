@@ -684,9 +684,9 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"675", "1256", "658", "1239"},
+    @Alerts(CHROME = {"636", "1256", "619", "1239"},
             FF45 = {"674", "1258", "657", "1241"},
-            FF52 = {"851", "1266", "834", "1249"},
+            FF52 = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -720,8 +720,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF45 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"},
-            FF52 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1592"})
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"})
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -809,16 +808,32 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
-            FF45 = {"11", "91", "0"},
-            FF52 = {"11", "91", "8"})
-    public void mozInnerScreenX() throws Exception {
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            FF45 = {"11", "91"},
+            FF52 = {"11", "91"})
+    public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
             + "function test() {\n"
             + "  alert(window.mozInnerScreenX);\n"
             + "  alert(window.mozInnerScreenY);\n"
-            + "  alert(window.mozPaintCount);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "number")
+    public void mozPaintCount() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(typeof window.mozPaintCount);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";

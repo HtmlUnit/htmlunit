@@ -1332,10 +1332,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
-    /** <code>window.mozPaintCount</code> returns 0 instead of 8. */
-    @BrowserFeature(FF45)
-    JS_WINDOW_MOZ_PAINT_COUNT_ZERO,
-
     /**
      * Difference of window.outer/inner height is 63.
      */

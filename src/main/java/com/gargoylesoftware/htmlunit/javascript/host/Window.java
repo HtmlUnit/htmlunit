@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_MOZ_PAINT_COUNT_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -1784,10 +1783,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public int getMozPaintCount() {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_MOZ_PAINT_COUNT_ZERO)) {
-            return 0;
-        }
-        return 8;
+        return 0;
     }
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
