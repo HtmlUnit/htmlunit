@@ -279,29 +279,26 @@ public class XmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public String getXmlEncoding() {
-        throw new UnsupportedOperationException("XmlPage.getXmlEncoding is not yet implemented.");
+        return null;
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public boolean getXmlStandalone() {
-        throw new UnsupportedOperationException("XmlPage.getXmlStandalone is not yet implemented.");
+        return false;
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public String getXmlVersion() {
-        throw new UnsupportedOperationException("XmlPage.getXmlVersion is not yet implemented.");
+        return "1.0";
     }
 
     /**

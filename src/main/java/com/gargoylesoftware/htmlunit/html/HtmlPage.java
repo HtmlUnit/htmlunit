@@ -415,20 +415,18 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public String getXmlEncoding() {
-        throw new UnsupportedOperationException("HtmlPage.getXmlEncoding is not yet implemented.");
+        return null;
     }
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public boolean getXmlStandalone() {
-        throw new UnsupportedOperationException("HtmlPage.getXmlStandalone is not yet implemented.");
+        return false;
     }
 
     /**
@@ -442,11 +440,10 @@ public class HtmlPage extends SgmlPage {
 
     /**
      * {@inheritDoc}
-     * Not yet implemented.
      */
     @Override
     public String getXmlVersion() {
-        throw new UnsupportedOperationException("HtmlPage.getXmlVersion is not yet implemented.");
+        return null;
     }
 
     /**

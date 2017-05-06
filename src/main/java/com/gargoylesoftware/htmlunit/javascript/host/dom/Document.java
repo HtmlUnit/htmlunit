@@ -1096,6 +1096,15 @@ public class Document extends Node {
     }
 
     /**
+     * Returns the value of the {@code documentURI} property.
+     * @return the value of the {@code documentURI} property
+     */
+    @JsxGetter({CHROME, FF})
+    public String getDocumentURI() {
+        return getURL();
+    }
+
+    /**
      * Returns the value of the {@code URLUnencoded} property.
      * @return the value of the {@code URLUnencoded} property
      */
@@ -2205,4 +2214,38 @@ public class Document extends Node {
         return getPage().getFirstChild().getScriptableObject();
     }
 
+    /**
+     * Returns the {@code xmlEncoding} property.
+     * @return the {@code xmlEncoding} property
+     */
+    @JsxGetter({CHROME, IE})
+    public String getXmlEncoding() {
+        String encoding = getPage().getXmlEncoding();
+        if (encoding == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            encoding = "";
+        }
+        return encoding;
+    }
+
+    /**
+     * Returns the {@code xmlStandalone} property.
+     * @return the {@code xmlStandalone} property
+     */
+    @JsxGetter({CHROME, IE})
+    public boolean isXmlStandalone() {
+        return getPage().getXmlStandalone();
+    }
+
+    /**
+     * Returns the {@code xmlVersion} property.
+     * @return the {@code xmlVersion} property
+     */
+    @JsxGetter({CHROME, IE})
+    public String getXmlVersion() {
+        String version = getPage().getXmlVersion();
+        if (version == null && getBrowserVersion().hasFeature(HTMLDOCUMENT_CHARSET_LOWERCASE)) {
+            version = "";
+        }
+        return version;
+    }
 }

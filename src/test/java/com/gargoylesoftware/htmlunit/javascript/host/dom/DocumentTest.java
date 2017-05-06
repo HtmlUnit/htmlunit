@@ -2414,11 +2414,78 @@ public class DocumentTest extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        final URL url = new URL(URL_FIRST, "abc%20def");
-        expandExpectedAlertsVariables(url);
+        loadPageWithAlerts2(html);
+    }
 
-        final WebDriver driver = loadPage2(html, url);
-        verifyAlerts(driver, getExpectedAlerts());
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"null", "null"},
+            IE = {"", ""},
+            FF = {"undefined", "undefined"})
+    public void xmlEncoding() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+            + "      alert(xmlDocument.xmlEncoding);\n"
+            + "      alert(document.xmlEncoding);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false"},
+            FF = {"undefined", "undefined"})
+    public void xmlStandalone() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+            + "      alert(xmlDocument.xmlStandalone);\n"
+            + "      alert(document.xmlStandalone);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1.0", "null"},
+            FF = {"undefined", "undefined"},
+            IE = {"1.0", ""})
+    public void xmlVersion() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+            + "      alert(xmlDocument.xmlVersion);\n"
+            + "      alert(document.xmlVersion);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 
 }
