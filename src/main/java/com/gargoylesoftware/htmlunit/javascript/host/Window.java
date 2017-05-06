@@ -1122,15 +1122,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Returns the {@code onclick} property (not necessary a function if something else has been set).
-     * @return the {@code onclick} property
-     */
-    @JsxGetter
-    public Object getOnclick() {
-        return getHandlerForJavaScript(Event.TYPE_LOAD);
-    }
-
-    /**
      * Sets the value of the {@code onblur} event handler.
      * @param onblur the new handler
      */
@@ -2292,6 +2283,2059 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public void setParentScope(final Scriptable parent) {
         // nothing as the window is the top level scope and its parent scope should stay null
     }
+
+    /**
+     * Returns the {@code onfocusin} event handler.
+     * @return the {@code onfocusin} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnfocusin() {
+        return getEventHandler("onfocusin");
+    }
+
+    /**
+     * Sets the {@code onfocusin} event handler.
+     * @param onfocusin the {@code onfocusin} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnfocusin(final Object onfocusin) {
+        setEventHandler("onfocusin", onfocusin);
+    }
+
+    /**
+     * Returns the {@code onfocus} event handler.
+     * @return the {@code onfocus} event handler
+     */
+    @JsxGetter
+    public Function getOnfocus() {
+        return getEventHandler("onfocus");
+    }
+
+    /**
+     * Sets the {@code onfocus} event handler.
+     * @param onfocus the {@code onfocus} event handler
+     */
+    @JsxSetter
+    public void setOnfocus(final Object onfocus) {
+        setEventHandler("onfocus", onfocus);
+    }
+
+    /**
+     * Returns the {@code ondragend} event handler.
+     * @return the {@code ondragend} event handler
+     */
+    @JsxGetter
+    public Function getOndragend() {
+        return getEventHandler("ondragend");
+    }
+
+    /**
+     * Sets the {@code ondragend} event handler.
+     * @param ondragend the {@code ondragend} event handler
+     */
+    @JsxSetter
+    public void setOndragend(final Object ondragend) {
+        setEventHandler("ondragend", ondragend);
+    }
+
+    /**
+     * Returns the {@code oninvalid} event handler.
+     * @return the {@code oninvalid} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOninvalid() {
+        return getEventHandler("oninvalid");
+    }
+
+    /**
+     * Sets the {@code oninvalid} event handler.
+     * @param oninvalid the {@code oninvalid} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOninvalid(final Object oninvalid) {
+        setEventHandler("oninvalid", oninvalid);
+    }
+
+    /**
+     * Returns the {@code onpointerout} event handler.
+     * @return the {@code onpointerout} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerout() {
+        return getEventHandler("onpointerout");
+    }
+
+    /**
+     * Sets the {@code onpointerout} event handler.
+     * @param onpointerout the {@code onpointerout} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerout(final Object onpointerout) {
+        setEventHandler("onpointerout", onpointerout);
+    }
+
+    /**
+     * Returns the {@code onhelp} event handler.
+     * @return the {@code onhelp} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnhelp() {
+        return getEventHandler("onhelp");
+    }
+
+    /**
+     * Sets the {@code onhelp} event handler.
+     * @param onhelp the {@code onhelp} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnhelp(final Object onhelp) {
+        setEventHandler("onhelp", onhelp);
+    }
+
+    /**
+     * Returns the {@code onratechange} event handler.
+     * @return the {@code onratechange} event handler
+     */
+    @JsxGetter
+    public Function getOnratechange() {
+        return getEventHandler("onratechange");
+    }
+
+    /**
+     * Sets the {@code onratechange} event handler.
+     * @param onratechange the {@code onratechange} event handler
+     */
+    @JsxSetter
+    public void setOnratechange(final Object onratechange) {
+        setEventHandler("onratechange", onratechange);
+    }
+
+    /**
+     * Returns the {@code onanimationiteration} event handler.
+     * @return the {@code onanimationiteration} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnanimationiteration() {
+        return getEventHandler("onanimationiteration");
+    }
+
+    /**
+     * Sets the {@code onanimationiteration} event handler.
+     * @param onanimationiteration the {@code onanimationiteration} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnanimationiteration(final Object onanimationiteration) {
+        setEventHandler("onanimationiteration", onanimationiteration);
+    }
+
+    /**
+     * Returns the {@code oncanplaythrough} event handler.
+     * @return the {@code oncanplaythrough} event handler
+     */
+    @JsxGetter
+    public Function getOncanplaythrough() {
+        return getEventHandler("oncanplaythrough");
+    }
+
+    /**
+     * Sets the {@code oncanplaythrough} event handler.
+     * @param oncanplaythrough the {@code oncanplaythrough} event handler
+     */
+    @JsxSetter
+    public void setOncanplaythrough(final Object oncanplaythrough) {
+        setEventHandler("oncanplaythrough", oncanplaythrough);
+    }
+
+    /**
+     * Returns the {@code oncancel} event handler.
+     * @return the {@code oncancel} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOncancel() {
+        return getEventHandler("oncancel");
+    }
+
+    /**
+     * Sets the {@code oncancel} event handler.
+     * @param oncancel the {@code oncancel} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOncancel(final Object oncancel) {
+        setEventHandler("oncancel", oncancel);
+    }
+
+    /**
+     * Returns the {@code onpointerenter} event handler.
+     * @return the {@code onpointerenter} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerenter() {
+        return getEventHandler("onpointerenter");
+    }
+
+    /**
+     * Sets the {@code onpointerenter} event handler.
+     * @param onpointerenter the {@code onpointerenter} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerenter(final Object onpointerenter) {
+        setEventHandler("onpointerenter", onpointerenter);
+    }
+
+    /**
+     * Returns the {@code onselect} event handler.
+     * @return the {@code onselect} event handler
+     */
+    @JsxGetter
+    public Function getOnselect() {
+        return getEventHandler("onselect");
+    }
+
+    /**
+     * Sets the {@code onselect} event handler.
+     * @param onselect the {@code onselect} event handler
+     */
+    @JsxSetter
+    public void setOnselect(final Object onselect) {
+        setEventHandler("onselect", onselect);
+    }
+
+    /**
+     * Returns the {@code onauxclick} event handler.
+     * @return the {@code onauxclick} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnauxclick() {
+        return getEventHandler("onauxclick");
+    }
+
+    /**
+     * Sets the {@code onauxclick} event handler.
+     * @param onauxclick the {@code onauxclick} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnauxclick(final Object onauxclick) {
+        setEventHandler("onauxclick", onauxclick);
+    }
+
+    /**
+     * Returns the {@code onscroll} event handler.
+     * @return the {@code onscroll} event handler
+     */
+    @JsxGetter
+    public Function getOnscroll() {
+        return getEventHandler("onscroll");
+    }
+
+    /**
+     * Sets the {@code onscroll} event handler.
+     * @param onscroll the {@code onscroll} event handler
+     */
+    @JsxSetter
+    public void setOnscroll(final Object onscroll) {
+        setEventHandler("onscroll", onscroll);
+    }
+
+    /**
+     * Returns the {@code onkeydown} event handler.
+     * @return the {@code onkeydown} event handler
+     */
+    @JsxGetter
+    public Function getOnkeydown() {
+        return getEventHandler("onkeydown");
+    }
+
+    /**
+     * Sets the {@code onkeydown} event handler.
+     * @param onkeydown the {@code onkeydown} event handler
+     */
+    @JsxSetter
+    public void setOnkeydown(final Object onkeydown) {
+        setEventHandler("onkeydown", onkeydown);
+    }
+
+    /**
+     * Returns the {@code onmspointerleave} event handler.
+     * @return the {@code onmspointerleave} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerleave() {
+        return getEventHandler("onmspointerleave");
+    }
+
+    /**
+     * Sets the {@code onmspointerleave} event handler.
+     * @param onmspointerleave the {@code onmspointerleave} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerleave(final Object onmspointerleave) {
+        setEventHandler("onmspointerleave", onmspointerleave);
+    }
+
+    /**
+     * Returns the {@code onmozpointerlockchange} event handler.
+     * @return the {@code onmozpointerlockchange} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnmozpointerlockchange() {
+        return getEventHandler("onmozpointerlockchange");
+    }
+
+    /**
+     * Sets the {@code onmozpointerlockchange} event handler.
+     * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
+        setEventHandler("onmozpointerlockchange", onmozpointerlockchange);
+    }
+
+    /**
+     * Returns the {@code onwebkitanimationstart} event handler.
+     * @return the {@code onwebkitanimationstart} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnwebkitanimationstart() {
+        return getEventHandler("onwebkitanimationstart");
+    }
+
+    /**
+     * Sets the {@code onwebkitanimationstart} event handler.
+     * @param onwebkitanimationstart the {@code onwebkitanimationstart} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnwebkitanimationstart(final Object onwebkitanimationstart) {
+        setEventHandler("onwebkitanimationstart", onwebkitanimationstart);
+    }
+
+    /**
+     * Returns the {@code onkeyup} event handler.
+     * @return the {@code onkeyup} event handler
+     */
+    @JsxGetter
+    public Function getOnkeyup() {
+        return getEventHandler("onkeyup");
+    }
+
+    /**
+     * Sets the {@code onkeyup} event handler.
+     * @param onkeyup the {@code onkeyup} event handler
+     */
+    @JsxSetter
+    public void setOnkeyup(final Object onkeyup) {
+        setEventHandler("onkeyup", onkeyup);
+    }
+
+    /**
+     * Returns the {@code onmsgesturestart} event handler.
+     * @return the {@code onmsgesturestart} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgesturestart() {
+        return getEventHandler("onmsgesturestart");
+    }
+
+    /**
+     * Sets the {@code onmsgesturestart} event handler.
+     * @param onmsgesturestart the {@code onmsgesturestart} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgesturestart(final Object onmsgesturestart) {
+        setEventHandler("onmsgesturestart", onmsgesturestart);
+    }
+
+    /**
+     * Returns the {@code ondeviceproximity} event handler.
+     * @return the {@code ondeviceproximity} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOndeviceproximity() {
+        return getEventHandler("ondeviceproximity");
+    }
+
+    /**
+     * Sets the {@code ondeviceproximity} event handler.
+     * @param ondeviceproximity the {@code ondeviceproximity} event handler
+     */
+    @JsxSetter(FF)
+    public void setOndeviceproximity(final Object ondeviceproximity) {
+        setEventHandler("ondeviceproximity", ondeviceproximity);
+    }
+
+    /**
+     * Returns the {@code onreset} event handler.
+     * @return the {@code onreset} event handler
+     */
+    @JsxGetter
+    public Function getOnreset() {
+        return getEventHandler("onreset");
+    }
+
+    /**
+     * Sets the {@code onreset} event handler.
+     * @param onreset the {@code onreset} event handler
+     */
+    @JsxSetter
+    public void setOnreset(final Object onreset) {
+        setEventHandler("onreset", onreset);
+    }
+
+    /**
+     * Returns the {@code onkeypress} event handler.
+     * @return the {@code onkeypress} event handler
+     */
+    @JsxGetter
+    public Function getOnkeypress() {
+        return getEventHandler("onkeypress");
+    }
+
+    /**
+     * Sets the {@code onkeypress} event handler.
+     * @param onkeypress the {@code onkeypress} event handler
+     */
+    @JsxSetter
+    public void setOnkeypress(final Object onkeypress) {
+        setEventHandler("onkeypress", onkeypress);
+    }
+
+    /**
+     * Returns the {@code ondrag} event handler.
+     * @return the {@code ondrag} event handler
+     */
+    @JsxGetter
+    public Function getOndrag() {
+        return getEventHandler("ondrag");
+    }
+
+    /**
+     * Sets the {@code ondrag} event handler.
+     * @param ondrag the {@code ondrag} event handler
+     */
+    @JsxSetter
+    public void setOndrag(final Object ondrag) {
+        setEventHandler("ondrag", ondrag);
+    }
+
+    /**
+     * Returns the {@code onfocusout} event handler.
+     * @return the {@code onfocusout} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnfocusout() {
+        return getEventHandler("onfocusout");
+    }
+
+    /**
+     * Sets the {@code onfocusout} event handler.
+     * @param onfocusout the {@code onfocusout} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnfocusout(final Object onfocusout) {
+        setEventHandler("onfocusout", onfocusout);
+    }
+
+    /**
+     * Returns the {@code onseeked} event handler.
+     * @return the {@code onseeked} event handler
+     */
+    @JsxGetter
+    public Function getOnseeked() {
+        return getEventHandler("onseeked");
+    }
+
+    /**
+     * Sets the {@code onseeked} event handler.
+     * @param onseeked the {@code onseeked} event handler
+     */
+    @JsxSetter
+    public void setOnseeked(final Object onseeked) {
+        setEventHandler("onseeked", onseeked);
+    }
+
+    /**
+     * Returns the {@code onoffline} event handler.
+     * @return the {@code onoffline} event handler
+     */
+    @JsxGetter
+    public Function getOnoffline() {
+        return getEventHandler("onoffline");
+    }
+
+    /**
+     * Sets the {@code onoffline} event handler.
+     * @param onoffline the {@code onoffline} event handler
+     */
+    @JsxSetter
+    public void setOnoffline(final Object onoffline) {
+        setEventHandler("onoffline", onoffline);
+    }
+
+    /**
+     * Returns the {@code ondeviceorientation} event handler.
+     * @return the {@code ondeviceorientation} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOndeviceorientation() {
+        return getEventHandler("ondeviceorientation");
+    }
+
+    /**
+     * Sets the {@code ondeviceorientation} event handler.
+     * @param ondeviceorientation the {@code ondeviceorientation} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOndeviceorientation(final Object ondeviceorientation) {
+        setEventHandler("ondeviceorientation", ondeviceorientation);
+    }
+
+    /**
+     * Returns the {@code ontoggle} event handler.
+     * @return the {@code ontoggle} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOntoggle() {
+        return getEventHandler("ontoggle");
+    }
+
+    /**
+     * Sets the {@code ontoggle} event handler.
+     * @param ontoggle the {@code ontoggle} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOntoggle(final Object ontoggle) {
+        setEventHandler("ontoggle", ontoggle);
+    }
+
+    /**
+     * Returns the {@code onplay} event handler.
+     * @return the {@code onplay} event handler
+     */
+    @JsxGetter
+    public Function getOnplay() {
+        return getEventHandler("onplay");
+    }
+
+    /**
+     * Sets the {@code onplay} event handler.
+     * @param onplay the {@code onplay} event handler
+     */
+    @JsxSetter
+    public void setOnplay(final Object onplay) {
+        setEventHandler("onplay", onplay);
+    }
+
+    /**
+     * Returns the {@code oncontextmenu} event handler.
+     * @return the {@code oncontextmenu} event handler
+     */
+    @JsxGetter
+    public Function getOncontextmenu() {
+        return getEventHandler("oncontextmenu");
+    }
+
+    /**
+     * Sets the {@code oncontextmenu} event handler.
+     * @param oncontextmenu the {@code oncontextmenu} event handler
+     */
+    @JsxSetter
+    public void setOncontextmenu(final Object oncontextmenu) {
+        setEventHandler("oncontextmenu", oncontextmenu);
+    }
+
+    /**
+     * Returns the {@code onmousemove} event handler.
+     * @return the {@code onmousemove} event handler
+     */
+    @JsxGetter
+    public Function getOnmousemove() {
+        return getEventHandler("onmousemove");
+    }
+
+    /**
+     * Sets the {@code onmousemove} event handler.
+     * @param onmousemove the {@code onmousemove} event handler
+     */
+    @JsxSetter
+    public void setOnmousemove(final Object onmousemove) {
+        setEventHandler("onmousemove", onmousemove);
+    }
+
+    /**
+     * Returns the {@code onreadystatechange} event handler.
+     * @return the {@code onreadystatechange} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnreadystatechange() {
+        return getEventHandler("onreadystatechange");
+    }
+
+    /**
+     * Sets the {@code onreadystatechange} event handler.
+     * @param onreadystatechange the {@code onreadystatechange} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnreadystatechange(final Object onreadystatechange) {
+        setEventHandler("onreadystatechange", onreadystatechange);
+    }
+
+    /**
+     * Returns the {@code onmspointerover} event handler.
+     * @return the {@code onmspointerover} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerover() {
+        return getEventHandler("onmspointerover");
+    }
+
+    /**
+     * Sets the {@code onmspointerover} event handler.
+     * @param onmspointerover the {@code onmspointerover} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerover(final Object onmspointerover) {
+        setEventHandler("onmspointerover", onmspointerover);
+    }
+
+    /**
+     * Returns the {@code onpointermove} event handler.
+     * @return the {@code onpointermove} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointermove() {
+        return getEventHandler("onpointermove");
+    }
+
+    /**
+     * Sets the {@code onpointermove} event handler.
+     * @param onpointermove the {@code onpointermove} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointermove(final Object onpointermove) {
+        setEventHandler("onpointermove", onpointermove);
+    }
+
+    /**
+     * Returns the {@code onmspointermove} event handler.
+     * @return the {@code onmspointermove} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointermove() {
+        return getEventHandler("onmspointermove");
+    }
+
+    /**
+     * Sets the {@code onmspointermove} event handler.
+     * @param onmspointermove the {@code onmspointermove} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointermove(final Object onmspointermove) {
+        setEventHandler("onmspointermove", onmspointermove);
+    }
+
+    /**
+     * Returns the {@code onmouseover} event handler.
+     * @return the {@code onmouseover} event handler
+     */
+    @JsxGetter
+    public Function getOnmouseover() {
+        return getEventHandler("onmouseover");
+    }
+
+    /**
+     * Sets the {@code onmouseover} event handler.
+     * @param onmouseover the {@code onmouseover} event handler
+     */
+    @JsxSetter
+    public void setOnmouseover(final Object onmouseover) {
+        setEventHandler("onmouseover", onmouseover);
+    }
+
+    /**
+     * Returns the {@code onuserproximity} event handler.
+     * @return the {@code onuserproximity} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnuserproximity() {
+        return getEventHandler("onuserproximity");
+    }
+
+    /**
+     * Sets the {@code onuserproximity} event handler.
+     * @param onuserproximity the {@code onuserproximity} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnuserproximity(final Object onuserproximity) {
+        setEventHandler("onuserproximity", onuserproximity);
+    }
+
+    /**
+     * Returns the {@code onlostpointercapture} event handler.
+     * @return the {@code onlostpointercapture} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnlostpointercapture() {
+        return getEventHandler("onlostpointercapture");
+    }
+
+    /**
+     * Sets the {@code onlostpointercapture} event handler.
+     * @param onlostpointercapture the {@code onlostpointercapture} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnlostpointercapture(final Object onlostpointercapture) {
+        setEventHandler("onlostpointercapture", onlostpointercapture);
+    }
+
+    /**
+     * Returns the {@code onpointerover} event handler.
+     * @return the {@code onpointerover} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerover() {
+        return getEventHandler("onpointerover");
+    }
+
+    /**
+     * Sets the {@code onpointerover} event handler.
+     * @param onpointerover the {@code onpointerover} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerover(final Object onpointerover) {
+        setEventHandler("onpointerover", onpointerover);
+    }
+
+    /**
+     * Returns the {@code onclose} event handler.
+     * @return the {@code onclose} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnclose() {
+        return getEventHandler("onclose");
+    }
+
+    /**
+     * Sets the {@code onclose} event handler.
+     * @param onclose the {@code onclose} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnclose(final Object onclose) {
+        setEventHandler("onclose", onclose);
+    }
+
+    /**
+     * Returns the {@code onanimationend} event handler.
+     * @return the {@code onanimationend} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnanimationend() {
+        return getEventHandler("onanimationend");
+    }
+
+    /**
+     * Sets the {@code onanimationend} event handler.
+     * @param onanimationend the {@code onanimationend} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnanimationend(final Object onanimationend) {
+        setEventHandler("onanimationend", onanimationend);
+    }
+
+    /**
+     * Returns the {@code ondragenter} event handler.
+     * @return the {@code ondragenter} event handler
+     */
+    @JsxGetter
+    public Function getOndragenter() {
+        return getEventHandler("ondragenter");
+    }
+
+    /**
+     * Sets the {@code ondragenter} event handler.
+     * @param ondragenter the {@code ondragenter} event handler
+     */
+    @JsxSetter
+    public void setOndragenter(final Object ondragenter) {
+        setEventHandler("ondragenter", ondragenter);
+    }
+
+    /**
+     * Returns the {@code onafterprint} event handler.
+     * @return the {@code onafterprint} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnafterprint() {
+        return getEventHandler("onafterprint");
+    }
+
+    /**
+     * Sets the {@code onafterprint} event handler.
+     * @param onafterprint the {@code onafterprint} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnafterprint(final Object onafterprint) {
+        setEventHandler("onafterprint", onafterprint);
+    }
+
+    /**
+     * Returns the {@code onmozfullscreenerror} event handler.
+     * @return the {@code onmozfullscreenerror} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnmozfullscreenerror() {
+        return getEventHandler("onmozfullscreenerror");
+    }
+
+    /**
+     * Sets the {@code onmozfullscreenerror} event handler.
+     * @param onmozfullscreenerror the {@code onmozfullscreenerror} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
+        setEventHandler("onmozfullscreenerror", onmozfullscreenerror);
+    }
+
+    /**
+     * Returns the {@code onmouseleave} event handler.
+     * @return the {@code onmouseleave} event handler
+     */
+    @JsxGetter
+    public Function getOnmouseleave() {
+        return getEventHandler("onmouseleave");
+    }
+
+    /**
+     * Sets the {@code onmouseleave} event handler.
+     * @param onmouseleave the {@code onmouseleave} event handler
+     */
+    @JsxSetter
+    public void setOnmouseleave(final Object onmouseleave) {
+        setEventHandler("onmouseleave", onmouseleave);
+    }
+
+    /**
+     * Returns the {@code onmousewheel} event handler.
+     * @return the {@code onmousewheel} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnmousewheel() {
+        return getEventHandler("onmousewheel");
+    }
+
+    /**
+     * Sets the {@code onmousewheel} event handler.
+     * @param onmousewheel the {@code onmousewheel} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnmousewheel(final Object onmousewheel) {
+        setEventHandler("onmousewheel", onmousewheel);
+    }
+
+    /**
+     * Returns the {@code onseeking} event handler.
+     * @return the {@code onseeking} event handler
+     */
+    @JsxGetter
+    public Function getOnseeking() {
+        return getEventHandler("onseeking");
+    }
+
+    /**
+     * Sets the {@code onseeking} event handler.
+     * @param onseeking the {@code onseeking} event handler
+     */
+    @JsxSetter
+    public void setOnseeking(final Object onseeking) {
+        setEventHandler("onseeking", onseeking);
+    }
+
+    /**
+     * Returns the {@code oncuechange} event handler.
+     * @return the {@code oncuechange} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOncuechange() {
+        return getEventHandler("oncuechange");
+    }
+
+    /**
+     * Sets the {@code oncuechange} event handler.
+     * @param oncuechange the {@code oncuechange} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOncuechange(final Object oncuechange) {
+        setEventHandler("oncuechange", oncuechange);
+    }
+
+    /**
+     * Returns the {@code onpageshow} event handler.
+     * @return the {@code onpageshow} event handler
+     */
+    @JsxGetter
+    public Function getOnpageshow() {
+        return getEventHandler("onpageshow");
+    }
+
+    /**
+     * Sets the {@code onpageshow} event handler.
+     * @param onpageshow the {@code onpageshow} event handler
+     */
+    @JsxSetter
+    public void setOnpageshow(final Object onpageshow) {
+        setEventHandler("onpageshow", onpageshow);
+    }
+
+    /**
+     * Returns the {@code onmspointerenter} event handler.
+     * @return the {@code onmspointerenter} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerenter() {
+        return getEventHandler("onmspointerenter");
+    }
+
+    /**
+     * Sets the {@code onmspointerenter} event handler.
+     * @param onmspointerenter the {@code onmspointerenter} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerenter(final Object onmspointerenter) {
+        setEventHandler("onmspointerenter", onmspointerenter);
+    }
+
+    /**
+     * Returns the {@code onmozfullscreenchange} event handler.
+     * @return the {@code onmozfullscreenchange} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnmozfullscreenchange() {
+        return getEventHandler("onmozfullscreenchange");
+    }
+
+    /**
+     * Sets the {@code onmozfullscreenchange} event handler.
+     * @param onmozfullscreenchange the {@code onmozfullscreenchange} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
+        setEventHandler("onmozfullscreenchange", onmozfullscreenchange);
+    }
+
+    /**
+     * Returns the {@code ondurationchange} event handler.
+     * @return the {@code ondurationchange} event handler
+     */
+    @JsxGetter
+    public Function getOndurationchange() {
+        return getEventHandler("ondurationchange");
+    }
+
+    /**
+     * Sets the {@code ondurationchange} event handler.
+     * @param ondurationchange the {@code ondurationchange} event handler
+     */
+    @JsxSetter
+    public void setOndurationchange(final Object ondurationchange) {
+        setEventHandler("ondurationchange", ondurationchange);
+    }
+
+    /**
+     * Returns the {@code onplaying} event handler.
+     * @return the {@code onplaying} event handler
+     */
+    @JsxGetter
+    public Function getOnplaying() {
+        return getEventHandler("onplaying");
+    }
+
+    /**
+     * Sets the {@code onplaying} event handler.
+     * @param onplaying the {@code onplaying} event handler
+     */
+    @JsxSetter
+    public void setOnplaying(final Object onplaying) {
+        setEventHandler("onplaying", onplaying);
+    }
+
+    /**
+     * Returns the {@code onended} event handler.
+     * @return the {@code onended} event handler
+     */
+    @JsxGetter
+    public Function getOnended() {
+        return getEventHandler("onended");
+    }
+
+    /**
+     * Sets the {@code onended} event handler.
+     * @param onended the {@code onended} event handler
+     */
+    @JsxSetter
+    public void setOnended(final Object onended) {
+        setEventHandler("onended", onended);
+    }
+
+    /**
+     * Returns the {@code onloadeddata} event handler.
+     * @return the {@code onloadeddata} event handler
+     */
+    @JsxGetter
+    public Function getOnloadeddata() {
+        return getEventHandler("onloadeddata");
+    }
+
+    /**
+     * Sets the {@code onloadeddata} event handler.
+     * @param onloadeddata the {@code onloadeddata} event handler
+     */
+    @JsxSetter
+    public void setOnloadeddata(final Object onloadeddata) {
+        setEventHandler("onloadeddata", onloadeddata);
+    }
+
+    /**
+     * Returns the {@code onunhandledrejection} event handler.
+     * @return the {@code onunhandledrejection} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnunhandledrejection() {
+        return getEventHandler("onunhandledrejection");
+    }
+
+    /**
+     * Sets the {@code onunhandledrejection} event handler.
+     * @param onunhandledrejection the {@code onunhandledrejection} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnunhandledrejection(final Object onunhandledrejection) {
+        setEventHandler("onunhandledrejection", onunhandledrejection);
+    }
+
+    /**
+     * Returns the {@code onmouseout} event handler.
+     * @return the {@code onmouseout} event handler
+     */
+    @JsxGetter
+    public Function getOnmouseout() {
+        return getEventHandler("onmouseout");
+    }
+
+    /**
+     * Sets the {@code onmouseout} event handler.
+     * @param onmouseout the {@code onmouseout} event handler
+     */
+    @JsxSetter
+    public void setOnmouseout(final Object onmouseout) {
+        setEventHandler("onmouseout", onmouseout);
+    }
+
+    /**
+     * Returns the {@code onsuspend} event handler.
+     * @return the {@code onsuspend} event handler
+     */
+    @JsxGetter
+    public Function getOnsuspend() {
+        return getEventHandler("onsuspend");
+    }
+
+    /**
+     * Sets the {@code onsuspend} event handler.
+     * @param onsuspend the {@code onsuspend} event handler
+     */
+    @JsxSetter
+    public void setOnsuspend(final Object onsuspend) {
+        setEventHandler("onsuspend", onsuspend);
+    }
+
+    /**
+     * Returns the {@code onwaiting} event handler.
+     * @return the {@code onwaiting} event handler
+     */
+    @JsxGetter
+    public Function getOnwaiting() {
+        return getEventHandler("onwaiting");
+    }
+
+    /**
+     * Sets the {@code onwaiting} event handler.
+     * @param onwaiting the {@code onwaiting} event handler
+     */
+    @JsxSetter
+    public void setOnwaiting(final Object onwaiting) {
+        setEventHandler("onwaiting", onwaiting);
+    }
+
+    /**
+     * Returns the {@code oncanplay} event handler.
+     * @return the {@code oncanplay} event handler
+     */
+    @JsxGetter
+    public Function getOncanplay() {
+        return getEventHandler("oncanplay");
+    }
+
+    /**
+     * Sets the {@code oncanplay} event handler.
+     * @param oncanplay the {@code oncanplay} event handler
+     */
+    @JsxSetter
+    public void setOncanplay(final Object oncanplay) {
+        setEventHandler("oncanplay", oncanplay);
+    }
+
+    /**
+     * Returns the {@code onmousedown} event handler.
+     * @return the {@code onmousedown} event handler
+     */
+    @JsxGetter
+    public Function getOnmousedown() {
+        return getEventHandler("onmousedown");
+    }
+
+    /**
+     * Sets the {@code onmousedown} event handler.
+     * @param onmousedown the {@code onmousedown} event handler
+     */
+    @JsxSetter
+    public void setOnmousedown(final Object onmousedown) {
+        setEventHandler("onmousedown", onmousedown);
+    }
+
+    /**
+     * Returns the {@code onlanguagechange} event handler.
+     * @return the {@code onlanguagechange} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOnlanguagechange() {
+        return getEventHandler("onlanguagechange");
+    }
+
+    /**
+     * Sets the {@code onlanguagechange} event handler.
+     * @param onlanguagechange the {@code onlanguagechange} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOnlanguagechange(final Object onlanguagechange) {
+        setEventHandler("onlanguagechange", onlanguagechange);
+    }
+
+    /**
+     * Returns the {@code onemptied} event handler.
+     * @return the {@code onemptied} event handler
+     */
+    @JsxGetter
+    public Function getOnemptied() {
+        return getEventHandler("onemptied");
+    }
+
+    /**
+     * Sets the {@code onemptied} event handler.
+     * @param onemptied the {@code onemptied} event handler
+     */
+    @JsxSetter
+    public void setOnemptied(final Object onemptied) {
+        setEventHandler("onemptied", onemptied);
+    }
+
+    /**
+     * Returns the {@code onrejectionhandled} event handler.
+     * @return the {@code onrejectionhandled} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnrejectionhandled() {
+        return getEventHandler("onrejectionhandled");
+    }
+
+    /**
+     * Sets the {@code onrejectionhandled} event handler.
+     * @param onrejectionhandled the {@code onrejectionhandled} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnrejectionhandled(final Object onrejectionhandled) {
+        setEventHandler("onrejectionhandled", onrejectionhandled);
+    }
+
+    /**
+     * Returns the {@code onpointercancel} event handler.
+     * @return the {@code onpointercancel} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointercancel() {
+        return getEventHandler("onpointercancel");
+    }
+
+    /**
+     * Sets the {@code onpointercancel} event handler.
+     * @param onpointercancel the {@code onpointercancel} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointercancel(final Object onpointercancel) {
+        setEventHandler("onpointercancel", onpointercancel);
+    }
+
+    /**
+     * Returns the {@code onmsgestureend} event handler.
+     * @return the {@code onmsgestureend} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgestureend() {
+        return getEventHandler("onmsgestureend");
+    }
+
+    /**
+     * Sets the {@code onmsgestureend} event handler.
+     * @param onmsgestureend the {@code onmsgestureend} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgestureend(final Object onmsgestureend) {
+        setEventHandler("onmsgestureend", onmsgestureend);
+    }
+
+    /**
+     * Returns the {@code onresize} event handler.
+     * @return the {@code onresize} event handler
+     */
+    @JsxGetter
+    public Function getOnresize() {
+        return getEventHandler("onresize");
+    }
+
+    /**
+     * Sets the {@code onresize} event handler.
+     * @param onresize the {@code onresize} event handler
+     */
+    @JsxSetter
+    public void setOnresize(final Object onresize) {
+        setEventHandler("onresize", onresize);
+    }
+
+    /**
+     * Returns the {@code onpause} event handler.
+     * @return the {@code onpause} event handler
+     */
+    @JsxGetter
+    public Function getOnpause() {
+        return getEventHandler("onpause");
+    }
+
+    /**
+     * Sets the {@code onpause} event handler.
+     * @param onpause the {@code onpause} event handler
+     */
+    @JsxSetter
+    public void setOnpause(final Object onpause) {
+        setEventHandler("onpause", onpause);
+    }
+
+    /**
+     * Returns the {@code onloadstart} event handler.
+     * @return the {@code onloadstart} event handler
+     */
+    @JsxGetter
+    public Function getOnloadstart() {
+        return getEventHandler("onloadstart");
+    }
+
+    /**
+     * Sets the {@code onloadstart} event handler.
+     * @param onloadstart the {@code onloadstart} event handler
+     */
+    @JsxSetter
+    public void setOnloadstart(final Object onloadstart) {
+        setEventHandler("onloadstart", onloadstart);
+    }
+
+    /**
+     * Returns the {@code onprogress} event handler.
+     * @return the {@code onprogress} event handler
+     */
+    @JsxGetter
+    public Function getOnprogress() {
+        return getEventHandler("onprogress");
+    }
+
+    /**
+     * Sets the {@code onprogress} event handler.
+     * @param onprogress the {@code onprogress} event handler
+     */
+    @JsxSetter
+    public void setOnprogress(final Object onprogress) {
+        setEventHandler("onprogress", onprogress);
+    }
+
+    /**
+     * Returns the {@code onpointerup} event handler.
+     * @return the {@code onpointerup} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerup() {
+        return getEventHandler("onpointerup");
+    }
+
+    /**
+     * Sets the {@code onpointerup} event handler.
+     * @param onpointerup the {@code onpointerup} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerup(final Object onpointerup) {
+        setEventHandler("onpointerup", onpointerup);
+    }
+
+    /**
+     * Returns the {@code onwheel} event handler.
+     * @return the {@code onwheel} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOnwheel() {
+        return getEventHandler("onwheel");
+    }
+
+    /**
+     * Sets the {@code onwheel} event handler.
+     * @param onwheel the {@code onwheel} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOnwheel(final Object onwheel) {
+        setEventHandler("onwheel", onwheel);
+    }
+
+    /**
+     * Returns the {@code onmspointerdown} event handler.
+     * @return the {@code onmspointerdown} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerdown() {
+        return getEventHandler("onmspointerdown");
+    }
+
+    /**
+     * Sets the {@code onmspointerdown} event handler.
+     * @param onmspointerdown the {@code onmspointerdown} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerdown(final Object onmspointerdown) {
+        setEventHandler("onmspointerdown", onmspointerdown);
+    }
+
+    /**
+     * Returns the {@code onpointerleave} event handler.
+     * @return the {@code onpointerleave} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerleave() {
+        return getEventHandler("onpointerleave");
+    }
+
+    /**
+     * Sets the {@code onpointerleave} event handler.
+     * @param onpointerleave the {@code onpointerleave} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerleave(final Object onpointerleave) {
+        setEventHandler("onpointerleave", onpointerleave);
+    }
+
+    /**
+     * Returns the {@code onbeforeprint} event handler.
+     * @return the {@code onbeforeprint} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnbeforeprint() {
+        return getEventHandler("onbeforeprint");
+    }
+
+    /**
+     * Sets the {@code onbeforeprint} event handler.
+     * @param onbeforeprint the {@code onbeforeprint} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnbeforeprint(final Object onbeforeprint) {
+        setEventHandler("onbeforeprint", onbeforeprint);
+    }
+
+    /**
+     * Returns the {@code onstorage} event handler.
+     * @return the {@code onstorage} event handler
+     */
+    @JsxGetter
+    public Function getOnstorage() {
+        return getEventHandler("onstorage");
+    }
+
+    /**
+     * Sets the {@code onstorage} event handler.
+     * @param onstorage the {@code onstorage} event handler
+     */
+    @JsxSetter
+    public void setOnstorage(final Object onstorage) {
+        setEventHandler("onstorage", onstorage);
+    }
+
+    /**
+     * Returns the {@code ondevicelight} event handler.
+     * @return the {@code ondevicelight} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOndevicelight() {
+        return getEventHandler("ondevicelight");
+    }
+
+    /**
+     * Sets the {@code ondevicelight} event handler.
+     * @param ondevicelight the {@code ondevicelight} event handler
+     */
+    @JsxSetter(FF)
+    public void setOndevicelight(final Object ondevicelight) {
+        setEventHandler("ondevicelight", ondevicelight);
+    }
+
+    /**
+     * Returns the {@code onanimationstart} event handler.
+     * @return the {@code onanimationstart} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnanimationstart() {
+        return getEventHandler("onanimationstart");
+    }
+
+    /**
+     * Sets the {@code onanimationstart} event handler.
+     * @param onanimationstart the {@code onanimationstart} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnanimationstart(final Object onanimationstart) {
+        setEventHandler("onanimationstart", onanimationstart);
+    }
+
+    /**
+     * Returns the {@code onmspointercancel} event handler.
+     * @return the {@code onmspointercancel} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointercancel() {
+        return getEventHandler("onmspointercancel");
+    }
+
+    /**
+     * Sets the {@code onmspointercancel} event handler.
+     * @param onmspointercancel the {@code onmspointercancel} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointercancel(final Object onmspointercancel) {
+        setEventHandler("onmspointercancel", onmspointercancel);
+    }
+
+    /**
+     * Returns the {@code ontimeupdate} event handler.
+     * @return the {@code ontimeupdate} event handler
+     */
+    @JsxGetter
+    public Function getOntimeupdate() {
+        return getEventHandler("ontimeupdate");
+    }
+
+    /**
+     * Sets the {@code ontimeupdate} event handler.
+     * @param ontimeupdate the {@code ontimeupdate} event handler
+     */
+    @JsxSetter
+    public void setOntimeupdate(final Object ontimeupdate) {
+        setEventHandler("ontimeupdate", ontimeupdate);
+    }
+
+    /**
+     * Returns the {@code onpagehide} event handler.
+     * @return the {@code onpagehide} event handler
+     */
+    @JsxGetter
+    public Function getOnpagehide() {
+        return getEventHandler("onpagehide");
+    }
+
+    /**
+     * Sets the {@code onpagehide} event handler.
+     * @param onpagehide the {@code onpagehide} event handler
+     */
+    @JsxSetter
+    public void setOnpagehide(final Object onpagehide) {
+        setEventHandler("onpagehide", onpagehide);
+    }
+
+    /**
+     * Returns the {@code onwebkitanimationiteration} event handler.
+     * @return the {@code onwebkitanimationiteration} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnwebkitanimationiteration() {
+        return getEventHandler("onwebkitanimationiteration");
+    }
+
+    /**
+     * Sets the {@code onwebkitanimationiteration} event handler.
+     * @param onwebkitanimationiteration the {@code onwebkitanimationiteration} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnwebkitanimationiteration(final Object onwebkitanimationiteration) {
+        setEventHandler("onwebkitanimationiteration", onwebkitanimationiteration);
+    }
+
+    /**
+     * Returns the {@code onmspointerup} event handler.
+     * @return the {@code onmspointerup} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerup() {
+        return getEventHandler("onmspointerup");
+    }
+
+    /**
+     * Sets the {@code onmspointerup} event handler.
+     * @param onmspointerup the {@code onmspointerup} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerup(final Object onmspointerup) {
+        setEventHandler("onmspointerup", onmspointerup);
+    }
+
+    /**
+     * Returns the {@code onabort} event handler.
+     * @return the {@code onabort} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOnabort() {
+        return getEventHandler("onabort");
+    }
+
+    /**
+     * Sets the {@code onabort} event handler.
+     * @param onabort the {@code onabort} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOnabort(final Object onabort) {
+        setEventHandler("onabort", onabort);
+    }
+
+    /**
+     * Returns the {@code onloadedmetadata} event handler.
+     * @return the {@code onloadedmetadata} event handler
+     */
+    @JsxGetter
+    public Function getOnloadedmetadata() {
+        return getEventHandler("onloadedmetadata");
+    }
+
+    /**
+     * Sets the {@code onloadedmetadata} event handler.
+     * @param onloadedmetadata the {@code onloadedmetadata} event handler
+     */
+    @JsxSetter
+    public void setOnloadedmetadata(final Object onloadedmetadata) {
+        setEventHandler("onloadedmetadata", onloadedmetadata);
+    }
+
+    /**
+     * Returns the {@code onmsinertiastart} event handler.
+     * @return the {@code onmsinertiastart} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsinertiastart() {
+        return getEventHandler("onmsinertiastart");
+    }
+
+    /**
+     * Sets the {@code onmsinertiastart} event handler.
+     * @param onmsinertiastart the {@code onmsinertiastart} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsinertiastart(final Object onmsinertiastart) {
+        setEventHandler("onmsinertiastart", onmsinertiastart);
+    }
+
+    /**
+     * Returns the {@code onmouseup} event handler.
+     * @return the {@code onmouseup} event handler
+     */
+    @JsxGetter
+    public Function getOnmouseup() {
+        return getEventHandler("onmouseup");
+    }
+
+    /**
+     * Sets the {@code onmouseup} event handler.
+     * @param onmouseup the {@code onmouseup} event handler
+     */
+    @JsxSetter
+    public void setOnmouseup(final Object onmouseup) {
+        setEventHandler("onmouseup", onmouseup);
+    }
+
+    /**
+     * Returns the {@code onmsgesturetap} event handler.
+     * @return the {@code onmsgesturetap} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgesturetap() {
+        return getEventHandler("onmsgesturetap");
+    }
+
+    /**
+     * Sets the {@code onmsgesturetap} event handler.
+     * @param onmsgesturetap the {@code onmsgesturetap} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgesturetap(final Object onmsgesturetap) {
+        setEventHandler("onmsgesturetap", onmsgesturetap);
+    }
+
+    /**
+     * Returns the {@code ondragover} event handler.
+     * @return the {@code ondragover} event handler
+     */
+    @JsxGetter
+    public Function getOndragover() {
+        return getEventHandler("ondragover");
+    }
+
+    /**
+     * Sets the {@code ondragover} event handler.
+     * @param ondragover the {@code ondragover} event handler
+     */
+    @JsxSetter
+    public void setOndragover(final Object ondragover) {
+        setEventHandler("ondragover", ondragover);
+    }
+
+    /**
+     * Returns the {@code ononline} event handler.
+     * @return the {@code ononline} event handler
+     */
+    @JsxGetter
+    public Function getOnonline() {
+        return getEventHandler("ononline");
+    }
+
+    /**
+     * Sets the {@code ononline} event handler.
+     * @param ononline the {@code ononline} event handler
+     */
+    @JsxSetter
+    public void setOnonline(final Object ononline) {
+        setEventHandler("ononline", ononline);
+    }
+
+    /**
+     * Returns the {@code onmsgesturedoubletap} event handler.
+     * @return the {@code onmsgesturedoubletap} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgesturedoubletap() {
+        return getEventHandler("onmsgesturedoubletap");
+    }
+
+    /**
+     * Sets the {@code onmsgesturedoubletap} event handler.
+     * @param onmsgesturedoubletap the {@code onmsgesturedoubletap} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgesturedoubletap(final Object onmsgesturedoubletap) {
+        setEventHandler("onmsgesturedoubletap", onmsgesturedoubletap);
+    }
+
+    /**
+     * Returns the {@code onsearch} event handler.
+     * @return the {@code onsearch} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnsearch() {
+        return getEventHandler("onsearch");
+    }
+
+    /**
+     * Sets the {@code onsearch} event handler.
+     * @param onsearch the {@code onsearch} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnsearch(final Object onsearch) {
+        setEventHandler("onsearch", onsearch);
+    }
+
+    /**
+     * Returns the {@code oninput} event handler.
+     * @return the {@code oninput} event handler
+     */
+    @JsxGetter
+    public Function getOninput() {
+        return getEventHandler("oninput");
+    }
+
+    /**
+     * Sets the {@code oninput} event handler.
+     * @param oninput the {@code oninput} event handler
+     */
+    @JsxSetter
+    public void setOninput(final Object oninput) {
+        setEventHandler("oninput", oninput);
+    }
+
+    /**
+     * Returns the {@code onmozpointerlockerror} event handler.
+     * @return the {@code onmozpointerlockerror} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOnmozpointerlockerror() {
+        return getEventHandler("onmozpointerlockerror");
+    }
+
+    /**
+     * Sets the {@code onmozpointerlockerror} event handler.
+     * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler
+     */
+    @JsxSetter(FF)
+    public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
+        setEventHandler("onmozpointerlockerror", onmozpointerlockerror);
+    }
+
+    /**
+     * Returns the {@code onwebkittransitionend} event handler.
+     * @return the {@code onwebkittransitionend} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnwebkittransitionend() {
+        return getEventHandler("onwebkittransitionend");
+    }
+
+    /**
+     * Sets the {@code onwebkittransitionend} event handler.
+     * @param onwebkittransitionend the {@code onwebkittransitionend} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnwebkittransitionend(final Object onwebkittransitionend) {
+        setEventHandler("onwebkittransitionend", onwebkittransitionend);
+    }
+
+    /**
+     * Returns the {@code onmspointerout} event handler.
+     * @return the {@code onmspointerout} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmspointerout() {
+        return getEventHandler("onmspointerout");
+    }
+
+    /**
+     * Sets the {@code onmspointerout} event handler.
+     * @param onmspointerout the {@code onmspointerout} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmspointerout(final Object onmspointerout) {
+        setEventHandler("onmspointerout", onmspointerout);
+    }
+
+    /**
+     * Returns the {@code ondevicemotion} event handler.
+     * @return the {@code ondevicemotion} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOndevicemotion() {
+        return getEventHandler("ondevicemotion");
+    }
+
+    /**
+     * Sets the {@code ondevicemotion} event handler.
+     * @param ondevicemotion the {@code ondevicemotion} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOndevicemotion(final Object ondevicemotion) {
+        setEventHandler("ondevicemotion", ondevicemotion);
+    }
+
+    /**
+     * Returns the {@code onstalled} event handler.
+     * @return the {@code onstalled} event handler
+     */
+    @JsxGetter
+    public Function getOnstalled() {
+        return getEventHandler("onstalled");
+    }
+
+    /**
+     * Sets the {@code onstalled} event handler.
+     * @param onstalled the {@code onstalled} event handler
+     */
+    @JsxSetter
+    public void setOnstalled(final Object onstalled) {
+        setEventHandler("onstalled", onstalled);
+    }
+
+    /**
+     * Returns the {@code onmouseenter} event handler.
+     * @return the {@code onmouseenter} event handler
+     */
+    @JsxGetter
+    public Function getOnmouseenter() {
+        return getEventHandler("onmouseenter");
+    }
+
+    /**
+     * Sets the {@code onmouseenter} event handler.
+     * @param onmouseenter the {@code onmouseenter} event handler
+     */
+    @JsxSetter
+    public void setOnmouseenter(final Object onmouseenter) {
+        setEventHandler("onmouseenter", onmouseenter);
+    }
+
+    /**
+     * Returns the {@code ondragleave} event handler.
+     * @return the {@code ondragleave} event handler
+     */
+    @JsxGetter
+    public Function getOndragleave() {
+        return getEventHandler("ondragleave");
+    }
+
+    /**
+     * Sets the {@code ondragleave} event handler.
+     * @param ondragleave the {@code ondragleave} event handler
+     */
+    @JsxSetter
+    public void setOndragleave(final Object ondragleave) {
+        setEventHandler("ondragleave", ondragleave);
+    }
+
+    /**
+     * Returns the {@code onpointerdown} event handler.
+     * @return the {@code onpointerdown} event handler
+     */
+    @JsxGetter({CHROME, IE})
+    public Function getOnpointerdown() {
+        return getEventHandler("onpointerdown");
+    }
+
+    /**
+     * Sets the {@code onpointerdown} event handler.
+     * @param onpointerdown the {@code onpointerdown} event handler
+     */
+    @JsxSetter({CHROME, IE})
+    public void setOnpointerdown(final Object onpointerdown) {
+        setEventHandler("onpointerdown", onpointerdown);
+    }
+
+    /**
+     * Returns the {@code ondrop} event handler.
+     * @return the {@code ondrop} event handler
+     */
+    @JsxGetter
+    public Function getOndrop() {
+        return getEventHandler("ondrop");
+    }
+
+    /**
+     * Sets the {@code ondrop} event handler.
+     * @param ondrop the {@code ondrop} event handler
+     */
+    @JsxSetter
+    public void setOndrop(final Object ondrop) {
+        setEventHandler("ondrop", ondrop);
+    }
+
+    /**
+     * Returns the {@code onunload} event handler.
+     * @return the {@code onunload} event handler
+     */
+    @JsxGetter
+    public Function getOnunload() {
+        return getEventHandler("onunload");
+    }
+
+    /**
+     * Sets the {@code onunload} event handler.
+     * @param onunload the {@code onunload} event handler
+     */
+    @JsxSetter
+    public void setOnunload(final Object onunload) {
+        setEventHandler("onunload", onunload);
+    }
+
+    /**
+     * Returns the {@code onwebkitanimationend} event handler.
+     * @return the {@code onwebkitanimationend} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOnwebkitanimationend() {
+        return getEventHandler("onwebkitanimationend");
+    }
+
+    /**
+     * Sets the {@code onwebkitanimationend} event handler.
+     * @param onwebkitanimationend the {@code onwebkitanimationend} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOnwebkitanimationend(final Object onwebkitanimationend) {
+        setEventHandler("onwebkitanimationend", onwebkitanimationend);
+    }
+
+    /**
+     * Returns the {@code ondragstart} event handler.
+     * @return the {@code ondragstart} event handler
+     */
+    @JsxGetter
+    public Function getOndragstart() {
+        return getEventHandler("ondragstart");
+    }
+
+    /**
+     * Sets the {@code ondragstart} event handler.
+     * @param ondragstart the {@code ondragstart} event handler
+     */
+    @JsxSetter
+    public void setOndragstart(final Object ondragstart) {
+        setEventHandler("ondragstart", ondragstart);
+    }
+
+    /**
+     * Returns the {@code ontransitionend} event handler.
+     * @return the {@code ontransitionend} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOntransitionend() {
+        return getEventHandler("ontransitionend");
+    }
+
+    /**
+     * Sets the {@code ontransitionend} event handler.
+     * @param ontransitionend the {@code ontransitionend} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOntransitionend(final Object ontransitionend) {
+        setEventHandler("ontransitionend", ontransitionend);
+    }
+
+    /**
+     * Returns the {@code onmsgesturehold} event handler.
+     * @return the {@code onmsgesturehold} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgesturehold() {
+        return getEventHandler("onmsgesturehold");
+    }
+
+    /**
+     * Sets the {@code onmsgesturehold} event handler.
+     * @param onmsgesturehold the {@code onmsgesturehold} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgesturehold(final Object onmsgesturehold) {
+        setEventHandler("onmsgesturehold", onmsgesturehold);
+    }
+
+    /**
+     * Returns the {@code ondeviceorientationabsolute} event handler.
+     * @return the {@code ondeviceorientationabsolute} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOndeviceorientationabsolute() {
+        return getEventHandler("ondeviceorientationabsolute");
+    }
+
+    /**
+     * Sets the {@code ondeviceorientationabsolute} event handler.
+     * @param ondeviceorientationabsolute the {@code ondeviceorientationabsolute} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOndeviceorientationabsolute(final Object ondeviceorientationabsolute) {
+        setEventHandler("ondeviceorientationabsolute", ondeviceorientationabsolute);
+    }
+
+    /**
+     * Returns the {@code onshow} event handler.
+     * @return the {@code onshow} event handler
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOnshow() {
+        return getEventHandler("onshow");
+    }
+
+    /**
+     * Sets the {@code onshow} event handler.
+     * @param onshow the {@code onshow} event handler
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOnshow(final Object onshow) {
+        setEventHandler("onshow", onshow);
+    }
+
+    /**
+     * Returns the {@code onvolumechange} event handler.
+     * @return the {@code onvolumechange} event handler
+     */
+    @JsxGetter
+    public Function getOnvolumechange() {
+        return getEventHandler("onvolumechange");
+    }
+
+    /**
+     * Sets the {@code onvolumechange} event handler.
+     * @param onvolumechange the {@code onvolumechange} event handler
+     */
+    @JsxSetter
+    public void setOnvolumechange(final Object onvolumechange) {
+        setEventHandler("onvolumechange", onvolumechange);
+    }
+
+    /**
+     * Returns the {@code onmsgesturechange} event handler.
+     * @return the {@code onmsgesturechange} event handler
+     */
+    @JsxGetter(IE)
+    public Function getOnmsgesturechange() {
+        return getEventHandler("onmsgesturechange");
+    }
+
+    /**
+     * Sets the {@code onmsgesturechange} event handler.
+     * @param onmsgesturechange the {@code onmsgesturechange} event handler
+     */
+    @JsxSetter(IE)
+    public void setOnmsgesturechange(final Object onmsgesturechange) {
+        setEventHandler("onmsgesturechange", onmsgesturechange);
+    }
+
+    /**
+     * Returns the {@code ongotpointercapture} event handler.
+     * @return the {@code ongotpointercapture} event handler
+     */
+    @JsxGetter(CHROME)
+    public Function getOngotpointercapture() {
+        return getEventHandler("ongotpointercapture");
+    }
+
+    /**
+     * Sets the {@code ongotpointercapture} event handler.
+     * @param ongotpointercapture the {@code ongotpointercapture} event handler
+     */
+    @JsxSetter(CHROME)
+    public void setOngotpointercapture(final Object ongotpointercapture) {
+        setEventHandler("ongotpointercapture", ongotpointercapture);
+    }
+
+    /**
+     * Returns the {@code onpopstate} event handler.
+     * @return the {@code onpopstate} event handler
+     */
+    @JsxGetter
+    public Function getOnpopstate() {
+        return getEventHandler("onpopstate");
+    }
+
+    /**
+     * Sets the {@code onpopstate} event handler.
+     * @param onpopstate the {@code onpopstate} event handler
+     */
+    @JsxSetter
+    public void setOnpopstate(final Object onpopstate) {
+        setEventHandler("onpopstate", onpopstate);
+    }
+
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

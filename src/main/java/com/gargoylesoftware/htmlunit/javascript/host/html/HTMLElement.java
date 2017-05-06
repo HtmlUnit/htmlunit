@@ -2851,6 +2851,7 @@ public class HTMLElement extends Element {
      * Returns the {@code ongotpointercapture} event handler for this element.
      * @return the {@code ongotpointercapture} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOngotpointercapture() {
         return getEventHandler("ongotpointercapture");
@@ -2860,6 +2861,7 @@ public class HTMLElement extends Element {
      * Sets the {@code ongotpointercapture} event handler for this element.
      * @param ongotpointercapture the {@code ongotpointercapture} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOngotpointercapture(final Object ongotpointercapture) {
         setEventHandler("ongotpointercapture", ongotpointercapture);
@@ -2959,6 +2961,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onlostpointercapture} event handler for this element.
      * @return the {@code onlostpointercapture} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnlostpointercapture() {
         return getEventHandler("onlostpointercapture");
@@ -2968,6 +2971,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onlostpointercapture} event handler for this element.
      * @param onlostpointercapture the {@code onlostpointercapture} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnlostpointercapture(final Object onlostpointercapture) {
         setEventHandler("onlostpointercapture", onlostpointercapture);
@@ -3085,6 +3089,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointercancel} event handler for this element.
      * @return the {@code onpointercancel} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointercancel() {
         return getEventHandler("onpointercancel");
@@ -3094,6 +3099,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointercancel} event handler for this element.
      * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointercancel(final Object onpointercancel) {
         setEventHandler("onpointercancel", onpointercancel);
@@ -3103,6 +3109,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerdown} event handler for this element.
      * @return the {@code onpointerdown} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerdown() {
         return getEventHandler("onpointerdown");
@@ -3112,6 +3119,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerdown} event handler for this element.
      * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerdown(final Object onpointerdown) {
         setEventHandler("onpointerdown", onpointerdown);
@@ -3121,6 +3129,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerenter} event handler for this element.
      * @return the {@code onpointerenter} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerenter() {
         return getEventHandler("onpointerenter");
@@ -3130,6 +3139,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerenter} event handler for this element.
      * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerenter(final Object onpointerenter) {
         setEventHandler("onpointerenter", onpointerenter);
@@ -3139,6 +3149,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerleave} event handler for this element.
      * @return the {@code onpointerleave} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerleave() {
         return getEventHandler("onpointerleave");
@@ -3148,6 +3159,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerleave} event handler for this element.
      * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerleave(final Object onpointerleave) {
         setEventHandler("onpointerleave", onpointerleave);
@@ -3157,6 +3169,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointermove} event handler for this element.
      * @return the {@code onpointermove} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointermove() {
         return getEventHandler("onpointermove");
@@ -3166,6 +3179,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointermove} event handler for this element.
      * @param onpointermove the {@code onpointermove} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointermove(final Object onpointermove) {
         setEventHandler("onpointermove", onpointermove);
@@ -3175,6 +3189,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerout} event handler for this element.
      * @return the {@code onpointerout} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerout() {
         return getEventHandler("onpointerout");
@@ -3184,6 +3199,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerout} event handler for this element.
      * @param onpointerout the {@code onpointerout} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerout(final Object onpointerout) {
         setEventHandler("onpointerout", onpointerout);
@@ -3193,6 +3209,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerover} event handler for this element.
      * @return the {@code onpointerover} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerover() {
         return getEventHandler("onpointerover");
@@ -3202,6 +3219,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerover} event handler for this element.
      * @param onpointerover the {@code onpointerover} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerover(final Object onpointerover) {
         setEventHandler("onpointerover", onpointerover);
@@ -3211,6 +3229,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpointerup} event handler for this element.
      * @return the {@code onpointerup} event handler for this element
      */
+    @Override
     @JsxGetter(CHROME)
     public Function getOnpointerup() {
         return getEventHandler("onpointerup");
@@ -3220,6 +3239,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpointerup} event handler for this element.
      * @param onpointerup the {@code onpointerup} event handler for this element
      */
+    @Override
     @JsxSetter(CHROME)
     public void setOnpointerup(final Object onpointerup) {
         setEventHandler("onpointerup", onpointerup);
@@ -3481,6 +3501,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncopy} event handler for this element.
      * @return the {@code oncopy} event handler for this element
      */
+    @Override
     @JsxGetter({FF, IE})
     public Function getOncopy() {
         return getEventHandler("oncopy");
@@ -3490,6 +3511,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncopy} event handler for this element.
      * @param oncopy the {@code oncopy} event handler for this element
      */
+    @Override
     @JsxSetter({FF, IE})
     public void setOncopy(final Object oncopy) {
         setEventHandler("oncopy", oncopy);
@@ -3499,6 +3521,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oncut} event handler for this element.
      * @return the {@code oncut} event handler for this element
      */
+    @Override
     @JsxGetter({FF, IE})
     public Function getOncut() {
         return getEventHandler("oncut");
@@ -3508,6 +3531,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oncut} event handler for this element.
      * @param oncut the {@code oncut} event handler for this element
      */
+    @Override
     @JsxSetter({FF, IE})
     public void setOncut(final Object oncut) {
         setEventHandler("oncut", oncut);
@@ -3517,6 +3541,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onpaste} event handler for this element.
      * @return the {@code onpaste} event handler for this element
      */
+    @Override
     @JsxGetter({FF, IE})
     public Function getOnpaste() {
         return getEventHandler("onpaste");
@@ -3526,6 +3551,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onpaste} event handler for this element.
      * @param onpaste the {@code onpaste} event handler for this element
      */
+    @Override
     @JsxSetter({FF, IE})
     public void setOnpaste(final Object onpaste) {
         setEventHandler("onpaste", onpaste);
@@ -3643,6 +3669,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onbeforecopy} event handler for this element.
      * @return the {@code onbeforecopy} event handler for this element
      */
+    @Override
     @JsxGetter(IE)
     public Function getOnbeforecopy() {
         return getEventHandler("onbeforecopy");
@@ -3652,6 +3679,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onbeforecopy} event handler for this element.
      * @param onbeforecopy the {@code onbeforecopy} event handler for this element
      */
+    @Override
     @JsxSetter(IE)
     public void setOnbeforecopy(final Object onbeforecopy) {
         setEventHandler("onbeforecopy", onbeforecopy);
@@ -3661,6 +3689,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onbeforecut} event handler for this element.
      * @return the {@code onbeforecut} event handler for this element
      */
+    @Override
     @JsxGetter(IE)
     public Function getOnbeforecut() {
         return getEventHandler("onbeforecut");
@@ -3670,6 +3699,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onbeforecut} event handler for this element.
      * @param onbeforecut the {@code onbeforecut} event handler for this element
      */
+    @Override
     @JsxSetter(IE)
     public void setOnbeforecut(final Object onbeforecut) {
         setEventHandler("onbeforecut", onbeforecut);
@@ -3697,6 +3727,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onbeforepaste} event handler for this element.
      * @return the {@code onbeforepaste} event handler for this element
      */
+    @Override
     @JsxGetter(IE)
     public Function getOnbeforepaste() {
         return getEventHandler("onbeforepaste");
@@ -3706,6 +3737,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onbeforepaste} event handler for this element.
      * @param onbeforepaste the {@code onbeforepaste} event handler for this element
      */
+    @Override
     @JsxSetter(IE)
     public void setOnbeforepaste(final Object onbeforepaste) {
         setEventHandler("onbeforepaste", onbeforepaste);
@@ -3787,6 +3819,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
+    @Override
     @JsxGetter(IE)
     public Function getOnselectstart() {
         return getEventHandler("onselectstart");
@@ -3796,6 +3829,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
+    @Override
     @JsxSetter(IE)
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler("onselectstart", onselectstart);
