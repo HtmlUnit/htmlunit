@@ -179,7 +179,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF52
         FIREFOX_52.initDefaultFeatures();
         FIREFOX_52.setVendor("");
-        FIREFOX_52.buildId_ = "20170417065206";
+        FIREFOX_52.buildId_ = "20170504112025";
         FIREFOX_52.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
         FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
