@@ -139,7 +139,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public Object getOnreadystatechange() {
-        return getEventHandlerProp("onreadystatechange");
+        return getEventHandler("onreadystatechange");
     }
 
     /**
@@ -157,7 +157,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxGetter
     public Object getOnload() {
-        return getEventHandlerProp("onload");
+        return getEventHandler("onload");
     }
 
     /**

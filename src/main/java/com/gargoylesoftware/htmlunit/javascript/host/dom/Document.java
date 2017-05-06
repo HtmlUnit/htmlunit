@@ -1420,7 +1420,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnclick() {
-        return getEventHandlerProp("onclick");
+        return getEventHandler("onclick");
     }
 
     /**
@@ -1438,7 +1438,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOndblclick() {
-        return getEventHandlerProp("ondblclick");
+        return getEventHandler("ondblclick");
     }
 
     /**
@@ -1456,7 +1456,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnblur() {
-        return getEventHandlerProp("onblur");
+        return getEventHandler("onblur");
     }
 
     /**
@@ -1474,7 +1474,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnfocus() {
-        return getEventHandlerProp("onfocus");
+        return getEventHandler("onfocus");
     }
 
     /**
@@ -1492,7 +1492,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Object getOnfocusin() {
-        return getEventHandlerProp("onfocusin");
+        return getEventHandler("onfocusin");
     }
 
     /**
@@ -1510,7 +1510,7 @@ public class Document extends Node {
      */
     @JsxGetter(IE)
     public Object getOnfocusout() {
-        return getEventHandlerProp("onfocusout");
+        return getEventHandler("onfocusout");
     }
 
     /**
@@ -1528,7 +1528,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnkeydown() {
-        return getEventHandlerProp("onkeydown");
+        return getEventHandler("onkeydown");
     }
 
     /**
@@ -1546,7 +1546,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnkeypress() {
-        return getEventHandlerProp("onkeypress");
+        return getEventHandler("onkeypress");
     }
 
     /**
@@ -1564,7 +1564,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnkeyup() {
-        return getEventHandlerProp("onkeyup");
+        return getEventHandler("onkeyup");
     }
 
     /**
@@ -1582,7 +1582,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnmousedown() {
-        return getEventHandlerProp("onmousedown");
+        return getEventHandler("onmousedown");
     }
 
     /**
@@ -1600,7 +1600,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnmousemove() {
-        return getEventHandlerProp("onmousemove");
+        return getEventHandler("onmousemove");
     }
 
     /**
@@ -1618,7 +1618,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnmouseout() {
-        return getEventHandlerProp("onmouseout");
+        return getEventHandler("onmouseout");
     }
 
     /**
@@ -1636,7 +1636,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnmouseover() {
-        return getEventHandlerProp("onmouseover");
+        return getEventHandler("onmouseover");
     }
 
     /**
@@ -1654,7 +1654,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnmouseup() {
-        return getEventHandlerProp("onmouseup");
+        return getEventHandler("onmouseup");
     }
 
     /**
@@ -1672,7 +1672,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOncontextmenu() {
-        return getEventHandlerProp("oncontextmenu");
+        return getEventHandler("oncontextmenu");
     }
 
     /**
@@ -1690,7 +1690,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, FF})
     public Object getOnresize() {
-        return getEventHandlerProp("onresize");
+        return getEventHandler("onresize");
     }
 
     /**
@@ -1708,7 +1708,7 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getOnerror() {
-        return getEventHandlerProp("onerror");
+        return getEventHandler("onerror");
     }
 
     /**

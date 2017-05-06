@@ -130,7 +130,7 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @JsxGetter
     public Object getOnload() {
-        return getEventHandlerProp("onload");
+        return getEventHandler("onload");
     }
 
     /**

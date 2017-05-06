@@ -236,20 +236,6 @@ public class EventTarget extends SimpleScriptable {
     }
 
     /**
-     * Gets the property defined as event handler (not necessary a Function if something else has been set).
-     * @param eventName the event name (e.g. "onclick")
-     * @return the property
-     */
-    protected Object getEventHandlerProp(final String eventName) {
-        if (eventListenersContainer_ == null) {
-            return null;
-        }
-
-        final String name = StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2);
-        return eventListenersContainer_.getEventHandler(name);
-    }
-
-    /**
      * Dispatches an event into the event system (standards-conformant browsers only). See
      * <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent">the Gecko
      * DOM reference</a> for more information.

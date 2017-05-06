@@ -2050,7 +2050,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnsubmit() {
-        return getEventHandlerProp("onsubmit");
+        return getEventHandler("onsubmit");
     }
 
     /**
@@ -2182,7 +2182,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnclick() {
-        return getEventHandlerProp("onclick");
+        return getEventHandler("onclick");
     }
 
     /**
@@ -2200,7 +2200,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOndblclick() {
-        return getEventHandlerProp("ondblclick");
+        return getEventHandler("ondblclick");
     }
 
     /**
@@ -2218,7 +2218,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnblur() {
-        return getEventHandlerProp("onblur");
+        return getEventHandler("onblur");
     }
 
     /**
@@ -2236,7 +2236,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnfocus() {
-        return getEventHandlerProp("onfocus");
+        return getEventHandler("onfocus");
     }
 
     /**
@@ -2254,7 +2254,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public Object getOnfocusin() {
-        return getEventHandlerProp("onfocusin");
+        return getEventHandler("onfocusin");
     }
 
     /**
@@ -2272,7 +2272,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public Object getOnfocusout() {
-        return getEventHandlerProp("onfocusout");
+        return getEventHandler("onfocusout");
     }
 
     /**
@@ -2290,7 +2290,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeydown() {
-        return getEventHandlerProp("onkeydown");
+        return getEventHandler("onkeydown");
     }
 
     /**
@@ -2308,7 +2308,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeypress() {
-        return getEventHandlerProp("onkeypress");
+        return getEventHandler("onkeypress");
     }
 
     /**
@@ -2326,7 +2326,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeyup() {
-        return getEventHandlerProp("onkeyup");
+        return getEventHandler("onkeyup");
     }
 
     /**
@@ -2344,7 +2344,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmousedown() {
-        return getEventHandlerProp("onmousedown");
+        return getEventHandler("onmousedown");
     }
 
     /**
@@ -2362,7 +2362,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmousemove() {
-        return getEventHandlerProp("onmousemove");
+        return getEventHandler("onmousemove");
     }
 
     /**
@@ -2380,7 +2380,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseout() {
-        return getEventHandlerProp("onmouseout");
+        return getEventHandler("onmouseout");
     }
 
     /**
@@ -2398,7 +2398,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseover() {
-        return getEventHandlerProp("onmouseover");
+        return getEventHandler("onmouseover");
     }
 
     /**
@@ -2416,7 +2416,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseup() {
-        return getEventHandlerProp("onmouseup");
+        return getEventHandler("onmouseup");
     }
 
     /**
@@ -2434,7 +2434,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOncontextmenu() {
-        return getEventHandlerProp("oncontextmenu");
+        return getEventHandler("oncontextmenu");
     }
 
     /**
@@ -2452,7 +2452,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnresize() {
-        return getEventHandlerProp("onresize");
+        return getEventHandler("onresize");
     }
 
     /**
@@ -2470,7 +2470,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnerror() {
-        return getEventHandlerProp("onerror");
+        return getEventHandler("onerror");
     }
 
     /**
