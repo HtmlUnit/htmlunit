@@ -849,11 +849,10 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the value of the {@code bgColor} property.
-     * @return the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getBgColor() {
         String color = getPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -866,21 +865,20 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the value of the {@code bgColor} property.
-     * @param color the value of the {@code bgColor} property
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setBgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setBgColor(color);
     }
 
     /**
-     * Returns the value of the {@code alinkColor} property.
-     * @return the value of the {@code alinkColor} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getAlinkColor() {
         String color = getPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -893,20 +891,20 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the value of the {@code alinkColor} property.
-     * @param color the value of the {@code alinkColor} property
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setAlinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setALink(color);
     }
 
     /**
-     * Returns the value of the {@code linkColor} property.
-     * @return the value of the {@code linkColor} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getLinkColor() {
         String color = getPage().getBody().getAttribute("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -919,20 +917,20 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the value of the {@code linkColor} property.
-     * @param color the value of the {@code linkColor} property
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setLinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setLink(color);
     }
 
     /**
-     * Returns the value of the {@code vlinkColor} property.
-     * @return the value of the {@code vlinkColor} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getVlinkColor() {
         String color = getPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -945,20 +943,20 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the value of the {@code vlinkColor} property.
-     * @param color the value of the {@code vlinkColor} property
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setVlinkColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setVLink(color);
     }
 
     /**
-     * Returns the value of the {@code fgColor} property.
-     * @return the value of the {@code fgColor} property
+     * {@inheritDoc}
      */
-    @JsxGetter
+    @Override
+    @JsxGetter({CHROME, FF})
     public String getFgColor() {
         String color = getPage().getBody().getAttribute("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -971,10 +969,10 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the value of the {@code fgColor} property.
-     * @param color the value of the {@code fgColor} property
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
+    @JsxSetter({CHROME, FF})
     public void setFgColor(final String color) {
         final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
         body.setText(color);
@@ -1005,16 +1003,6 @@ public class HTMLDocument extends Document {
     @JsxGetter(FF)
     public Object getScripts() {
         return super.getScripts();
-    }
-
-    /**
-     * Returns the value of the {@code frames} property.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
-     * @return the live collection of frames contained by this document
-     */
-    @JsxGetter(IE)
-    public Object getFrames() {
-        return getWindow().getFrames_js();
     }
 
     /**

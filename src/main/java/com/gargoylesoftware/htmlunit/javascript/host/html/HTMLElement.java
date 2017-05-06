@@ -2456,24 +2456,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Sets the {@code onpropertychange} event handler for this element.
-     * @param handler the {@code onpropertychange} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnpropertychange(final Object handler) {
-        setEventHandler("onpropertychange", handler);
-    }
-
-    /**
-     * Returns the {@code onpropertychange} event handler for this element.
-     * @return the {@code onpropertychange} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnpropertychange() {
-        return getEventHandlerProp("onpropertychange");
-    }
-
-    /**
      * Sets the {@code onerror} event handler for this element.
      * @param handler the {@code onerror} event handler for this element
      */

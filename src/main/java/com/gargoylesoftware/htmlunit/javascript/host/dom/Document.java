@@ -129,6 +129,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -1669,7 +1670,7 @@ public class Document extends Node {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter
+    @JsxSetter({CHROME, FF})
     public void setOnresize(final Object handler) {
         setEventHandler("onresize", handler);
     }
@@ -1678,27 +1679,9 @@ public class Document extends Node {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter
+    @JsxGetter({CHROME, FF})
     public Object getOnresize() {
         return getEventHandlerProp("onresize");
-    }
-
-    /**
-     * Sets the {@code onpropertychange} event handler for this element.
-     * @param handler the {@code onpropertychange} event handler for this element
-     */
-    @JsxSetter(IE)
-    public void setOnpropertychange(final Object handler) {
-        setEventHandler("onpropertychange", handler);
-    }
-
-    /**
-     * Returns the {@code onpropertychange} event handler for this element.
-     * @return the {@code onpropertychange} event handler for this element
-     */
-    @JsxGetter(IE)
-    public Object getOnpropertychange() {
-        return getEventHandlerProp("onpropertychange");
     }
 
     /**
@@ -1890,7 +1873,7 @@ public class Document extends Node {
      * <a href="http://msdn.microsoft.com/en-us/library/ms537465.aspx">MSDN documentation</a>.
      * @return the value of this property
      */
-    @JsxGetter
+    @JsxGetter({CHROME, IE})
     public Object getLinks() {
         return new HTMLCollection(getDomNodeOrDie(), true) {
             @Override
@@ -2102,6 +2085,106 @@ public class Document extends Node {
     @JsxFunction(IE)
     public void releaseEvents(final String type) {
         // Empty.
+    }
+
+    /**
+     * Returns the value of the {@code alinkColor} property.
+     * @return the value of the {@code alinkColor} property
+     */
+    @JsxGetter(IE)
+    public String getAlinkColor() {
+        return "#0000ff";
+    }
+
+    /**
+     * Sets the value of the {@code alinkColor} property.
+     * @param color the value of the {@code alinkColor} property
+     */
+    @JsxSetter(IE)
+    public void setAlinkColor(final String color) {
+    }
+
+    /**
+     * Returns the value of the {@code bgColor} property.
+     * @return the value of the {@code bgColor} property
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    @JsxGetter(IE)
+    public String getBgColor() {
+        return "#ffffff";
+    }
+
+    /**
+     * Sets the value of the {@code bgColor} property.
+     * @param color the value of the {@code bgColor} property
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533505.aspx">MSDN Documentation</a>
+     */
+    @JsxSetter(IE)
+    public void setBgColor(final String color) {
+    }
+
+    /**
+     * Returns the value of the {@code fgColor} property.
+     * @return the value of the {@code fgColor} property
+     */
+    @JsxGetter(IE)
+    public String getFgColor() {
+        return "#000000";
+    }
+
+    /**
+     * Sets the value of the {@code fgColor} property.
+     * @param color the value of the {@code fgColor} property
+     */
+    @JsxSetter(IE)
+    public void setFgColor(final String color) {
+    }
+
+    /**
+     * Returns the value of the {@code linkColor} property.
+     * @return the value of the {@code linkColor} property
+     */
+    @JsxGetter(IE)
+    public String getLinkColor() {
+        return "#0000ff";
+    }
+
+    /**
+     * Sets the value of the {@code linkColor} property.
+     * @param color the value of the {@code linkColor} property
+     */
+    @JsxSetter(IE)
+    public void setLinkColor(final String color) {
+    }
+
+    /**
+     * Returns the value of the {@code vlinkColor} property.
+     * @return the value of the {@code vlinkColor} property
+     */
+    @JsxGetter(IE)
+    public String getVlinkColor() {
+        return "#800080";
+    }
+
+    /**
+     * Sets the value of the {@code vlinkColor} property.
+     * @param color the value of the {@code vlinkColor} property
+     */
+    @JsxSetter(IE)
+    public void setVlinkColor(final String color) {
+    }
+
+    /**
+     * Returns the value of the {@code frames} property.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537459.aspx">MSDN documentation</a>
+     * @return the live collection of frames contained by this document
+     */
+    @JsxGetter(IE)
+    public Object getFrames() {
+        if (ScriptableObject.getTopLevelScope(this) == null) {
+            throw ScriptRuntime.constructError("Error", "Not implemented");
+        }
+        return getWindow().getFrames_js();
     }
 
 }
