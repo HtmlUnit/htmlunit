@@ -126,6 +126,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
             CHROME = "Accept: image/webp,image/*,*/*;q=0.8",
+            FF52 = "Accept: */*",
             IE = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html
@@ -352,7 +353,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+            FF45 = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderXMLHttpRequest() throws Exception {
         final String html =
               "<html>\n"
