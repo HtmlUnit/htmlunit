@@ -2187,4 +2187,22 @@ public class Document extends Node {
         return getWindow().getFrames_js();
     }
 
+    /**
+     * Returns the last element child.
+     * @return the last element child
+     */
+    @JsxGetter({CHROME, FF})
+    public Element getLastElementChild() {
+        return getPage().getLastChild().getScriptableObject();
+    }
+
+    /**
+     * Returns the first element child.
+     * @return the first element child
+     */
+    @JsxGetter({CHROME, FF})
+    public Element getFirstElementChild() {
+        return getPage().getFirstChild().getScriptableObject();
+    }
+
 }
