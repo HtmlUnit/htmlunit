@@ -1048,7 +1048,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onpopstate,onresize,onstorage,"
                 + "onunload,text,"
                 + "vLink")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void body() throws Exception {
         test("body");
     }

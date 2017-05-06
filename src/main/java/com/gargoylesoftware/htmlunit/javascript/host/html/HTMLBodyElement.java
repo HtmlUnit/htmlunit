@@ -32,6 +32,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+
 /**
  * The JavaScript object {@code HTMLBodyElement}.
  *
@@ -233,4 +235,293 @@ public class HTMLBodyElement extends HTMLElement {
     public TextRange createTextRange() {
         return super.createTextRange();
     }
+
+    /**
+     * Returns the {@code onbeforeunload} event handler for this element.
+     * @return the {@code onbeforeunload} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnbeforeunload() {
+        return getEventHandler("onbeforeunload");
+    }
+
+    /**
+     * Sets the {@code onbeforeunload} event handler for this element.
+     * @param onchange the {@code onbeforeunload} event handler for this element
+     */
+    @JsxSetter
+    public void setOnbeforeunload(final Object onbeforeunload) {
+        setEventHandler("onbeforeunload", onbeforeunload);
+    }
+
+    /**
+     * Returns the {@code onhashchange} event handler for this element.
+     * @return the {@code onhashchange} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnhashchange() {
+        return getEventHandler("onhashchange");
+    }
+
+    /**
+     * Sets the {@code onhashchange} event handler for this element.
+     * @param onchange the {@code onhashchange} event handler for this element
+     */
+    @JsxSetter
+    public void setOnhashchange(final Object onhashchange) {
+        setEventHandler("onhashchange", onhashchange);
+    }
+
+    /**
+     * Returns the {@code onlanguagechange} event handler for this element.
+     * @return the {@code onlanguagechange} event handler for this element
+     */
+    @JsxGetter({CHROME, FF})
+    public Function getOnlanguagechange() {
+        return getEventHandler("onlanguagechange");
+    }
+
+    /**
+     * Sets the {@code onlanguagechange} event handler for this element.
+     * @param onchange the {@code onlanguagechange} event handler for this element
+     */
+    @JsxSetter({CHROME, FF})
+    public void setOnlanguagechange(final Object onlanguagechange) {
+        setEventHandler("onlanguagechange", onlanguagechange);
+    }
+
+    /**
+     * Returns the {@code onmessage} event handler for this element.
+     * @return the {@code onmessage} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnmessage() {
+        return getEventHandler("onmessage");
+    }
+
+    /**
+     * Sets the {@code onmessage} event handler for this element.
+     * @param onchange the {@code onmessage} event handler for this element
+     */
+    @JsxSetter
+    public void setOnmessage(final Object onmessage) {
+        setEventHandler("onmessage", onmessage);
+    }
+
+    /**
+     * Returns the {@code onoffline} event handler for this element.
+     * @return the {@code onoffline} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnoffline() {
+        return getEventHandler("onoffline");
+    }
+
+    /**
+     * Sets the {@code onoffline} event handler for this element.
+     * @param onchange the {@code onoffline} event handler for this element
+     */
+    @JsxSetter
+    public void setOnoffline(final Object onoffline) {
+        setEventHandler("onoffline", onoffline);
+    }
+
+    /**
+     * Returns the {@code ononline} event handler for this element.
+     * @return the {@code ononline} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnonline() {
+        return getEventHandler("ononline");
+    }
+
+    /**
+     * Sets the {@code ononline} event handler for this element.
+     * @param onchange the {@code ononline} event handler for this element
+     */
+    @JsxSetter
+    public void setOnonline(final Object ononline) {
+        setEventHandler("ononline", ononline);
+    }
+
+    /**
+     * Returns the {@code onpagehide} event handler for this element.
+     * @return the {@code onpagehide} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnpagehide() {
+        return getEventHandler("onpagehide");
+    }
+
+    /**
+     * Sets the {@code onpagehide} event handler for this element.
+     * @param onchange the {@code onpagehide} event handler for this element
+     */
+    @JsxSetter
+    public void setOnpagehide(final Object onpagehide) {
+        setEventHandler("onpagehide", onpagehide);
+    }
+
+    /**
+     * Returns the {@code onpageshow} event handler for this element.
+     * @return the {@code onpageshow} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnpageshow() {
+        return getEventHandler("onpageshow");
+    }
+
+    /**
+     * Sets the {@code onpageshow} event handler for this element.
+     * @param onchange the {@code onpageshow} event handler for this element
+     */
+    @JsxSetter
+    public void setOnpageshow(final Object onpageshow) {
+        setEventHandler("onpageshow", onpageshow);
+    }
+
+    /**
+     * Returns the {@code onpopstate} event handler for this element.
+     * @return the {@code onpopstate} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnpopstate() {
+        return getEventHandler("onpopstate");
+    }
+
+    /**
+     * Sets the {@code onpopstate} event handler for this element.
+     * @param onchange the {@code onpopstate} event handler for this element
+     */
+    @JsxSetter
+    public void setOnpopstate(final Object onpopstate) {
+        setEventHandler("onpopstate", onpopstate);
+    }
+
+    /**
+     * Returns the {@code onrejectionhandled} event handler for this element.
+     * @return the {@code onrejectionhandled} event handler for this element
+     */
+    @JsxGetter(CHROME)
+    public Function getOnrejectionhandled() {
+        return getEventHandler("onrejectionhandled");
+    }
+
+    /**
+     * Sets the {@code onrejectionhandled} event handler for this element.
+     * @param onchange the {@code onrejectionhandled} event handler for this element
+     */
+    @JsxSetter(CHROME)
+    public void setOnrejectionhandled(final Object onrejectionhandled) {
+        setEventHandler("onrejectionhandled", onrejectionhandled);
+    }
+
+    /**
+     * Returns the {@code onstorage} event handler for this element.
+     * @return the {@code onstorage} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnstorage() {
+        return getEventHandler("onstorage");
+    }
+
+    /**
+     * Sets the {@code onstorage} event handler for this element.
+     * @param onchange the {@code onstorage} event handler for this element
+     */
+    @JsxSetter
+    public void setOnstorage(final Object onstorage) {
+        setEventHandler("onstorage", onstorage);
+    }
+
+    /**
+     * Returns the {@code onunhandledrejection} event handler for this element.
+     * @return the {@code onunhandledrejection} event handler for this element
+     */
+    @JsxGetter(CHROME)
+    public Function getOnunhandledrejection() {
+        return getEventHandler("onunhandledrejection");
+    }
+
+    /**
+     * Sets the {@code onunhandledrejection} event handler for this element.
+     * @param onchange the {@code onunhandledrejection} event handler for this element
+     */
+    @JsxSetter(CHROME)
+    public void setOnunhandledrejection(final Object onunhandledrejection) {
+        setEventHandler("onunhandledrejection", onunhandledrejection);
+    }
+
+    /**
+     * Returns the {@code onunload} event handler for this element.
+     * @return the {@code onunload} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnunload() {
+        return getEventHandler("onunload");
+    }
+
+    /**
+     * Sets the {@code onunload} event handler for this element.
+     * @param onchange the {@code onunload} event handler for this element
+     */
+    @JsxSetter
+    public void setOnunload(final Object onunload) {
+        setEventHandler("onunload", onunload);
+    }
+
+    /**
+     * Returns the {@code onafterprint} event handler for this element.
+     * @return the {@code onafterprint} event handler for this element
+     */
+    @JsxGetter({FF, IE})
+    public Function getOnafterprint() {
+        return getEventHandler("onafterprint");
+    }
+
+    /**
+     * Sets the {@code onafterprint} event handler for this element.
+     * @param onchange the {@code onafterprint} event handler for this element
+     */
+    @JsxSetter({FF, IE})
+    public void setOnafterprint(final Object onafterprint) {
+        setEventHandler("onafterprint", onafterprint);
+    }
+
+    /**
+     * Returns the {@code onbeforeprint} event handler for this element.
+     * @return the {@code onbeforeprint} event handler for this element
+     */
+    @JsxGetter({FF, IE})
+    public Function getOnbeforeprint() {
+        return getEventHandler("onbeforeprint");
+    }
+
+    /**
+     * Sets the {@code onbeforeprint} event handler for this element.
+     * @param onchange the {@code onbeforeprint} event handler for this element
+     */
+    @JsxSetter({FF, IE})
+    public void setOnbeforeprint(final Object onbeforeprint) {
+        setEventHandler("onbeforeprint", onbeforeprint);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter(IE)
+    public Function getOnresize() {
+        return super.getOnresize();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxSetter(IE)
+    public void setOnresize(final Object onresize) {
+        super.setOnresize(onresize);
+    }
+
 }

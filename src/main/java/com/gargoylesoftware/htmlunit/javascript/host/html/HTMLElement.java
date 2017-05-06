@@ -2441,7 +2441,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter
+    @JsxSetter({CHROME, FF})
     public void setOnresize(final Object handler) {
         setEventHandler("onresize", handler);
     }
@@ -2450,8 +2450,8 @@ public class HTMLElement extends Element {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter
-    public Object getOnresize() {
+    @JsxGetter({CHROME, FF})
+    public Function getOnresize() {
         return getEventHandler("onresize");
     }
 
