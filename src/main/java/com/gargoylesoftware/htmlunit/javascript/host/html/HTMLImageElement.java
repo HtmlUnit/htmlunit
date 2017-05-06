@@ -130,7 +130,7 @@ public class HTMLImageElement extends HTMLElement {
 
     /**
      * Sets the {@code onload} event handler for this element.
-     * @param onloadHandler the {@code onload} event handler for this element
+     * @param onload the {@code onload} event handler for this element
      */
     @Override
     public void setOnload(final Object onload) {

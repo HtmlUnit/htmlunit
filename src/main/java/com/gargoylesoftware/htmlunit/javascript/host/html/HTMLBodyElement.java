@@ -247,7 +247,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onbeforeunload} event handler for this element.
-     * @param onchange the {@code onbeforeunload} event handler for this element
+     * @param onbeforeunload the {@code onbeforeunload} event handler for this element
      */
     @JsxSetter
     public void setOnbeforeunload(final Object onbeforeunload) {
@@ -265,7 +265,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onhashchange} event handler for this element.
-     * @param onchange the {@code onhashchange} event handler for this element
+     * @param onhashchange the {@code onhashchange} event handler for this element
      */
     @JsxSetter
     public void setOnhashchange(final Object onhashchange) {
@@ -283,7 +283,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onlanguagechange} event handler for this element.
-     * @param onchange the {@code onlanguagechange} event handler for this element
+     * @param onlanguagechange the {@code onlanguagechange} event handler for this element
      */
     @JsxSetter({CHROME, FF})
     public void setOnlanguagechange(final Object onlanguagechange) {
@@ -301,7 +301,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onmessage} event handler for this element.
-     * @param onchange the {@code onmessage} event handler for this element
+     * @param onmessage the {@code onmessage} event handler for this element
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
@@ -319,7 +319,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onoffline} event handler for this element.
-     * @param onchange the {@code onoffline} event handler for this element
+     * @param onoffline the {@code onoffline} event handler for this element
      */
     @JsxSetter
     public void setOnoffline(final Object onoffline) {
@@ -337,7 +337,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code ononline} event handler for this element.
-     * @param onchange the {@code ononline} event handler for this element
+     * @param ononline the {@code ononline} event handler for this element
      */
     @JsxSetter
     public void setOnonline(final Object ononline) {
@@ -355,7 +355,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onpagehide} event handler for this element.
-     * @param onchange the {@code onpagehide} event handler for this element
+     * @param onpagehide the {@code onpagehide} event handler for this element
      */
     @JsxSetter
     public void setOnpagehide(final Object onpagehide) {
@@ -373,7 +373,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onpageshow} event handler for this element.
-     * @param onchange the {@code onpageshow} event handler for this element
+     * @param onpageshow the {@code onpageshow} event handler for this element
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
@@ -391,7 +391,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onpopstate} event handler for this element.
-     * @param onchange the {@code onpopstate} event handler for this element
+     * @param onpopstate the {@code onpopstate} event handler for this element
      */
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
@@ -409,7 +409,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onrejectionhandled} event handler for this element.
-     * @param onchange the {@code onrejectionhandled} event handler for this element
+     * @param onrejectionhandled the {@code onrejectionhandled} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnrejectionhandled(final Object onrejectionhandled) {
@@ -427,7 +427,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onstorage} event handler for this element.
-     * @param onchange the {@code onstorage} event handler for this element
+     * @param onstorage the {@code onstorage} event handler for this element
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
@@ -445,7 +445,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onunhandledrejection} event handler for this element.
-     * @param onchange the {@code onunhandledrejection} event handler for this element
+     * @param onunhandledrejection the {@code onunhandledrejection} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnunhandledrejection(final Object onunhandledrejection) {
@@ -463,7 +463,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onunload} event handler for this element.
-     * @param onchange the {@code onunload} event handler for this element
+     * @param onunload the {@code onunload} event handler for this element
      */
     @JsxSetter
     public void setOnunload(final Object onunload) {
@@ -481,7 +481,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onafterprint} event handler for this element.
-     * @param onchange the {@code onafterprint} event handler for this element
+     * @param onafterprint the {@code onafterprint} event handler for this element
      */
     @JsxSetter({FF, IE})
     public void setOnafterprint(final Object onafterprint) {
@@ -499,7 +499,7 @@ public class HTMLBodyElement extends HTMLElement {
 
     /**
      * Sets the {@code onbeforeprint} event handler for this element.
-     * @param onchange the {@code onbeforeprint} event handler for this element
+     * @param onbeforeprint the {@code onbeforeprint} event handler for this element
      */
     @JsxSetter({FF, IE})
     public void setOnbeforeprint(final Object onbeforeprint) {

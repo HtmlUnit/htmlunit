@@ -2484,11 +2484,11 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oninput} event handler for this element.
-     * @param onchange the {@code oninput} event handler for this element
+     * @param oninput the {@code oninput} event handler for this element
      */
     @JsxSetter
-    public void setOninput(final Object onchange) {
-        setEventHandler("oninput", onchange);
+    public void setOninput(final Object oninput) {
+        setEventHandler("oninput", oninput);
     }
 
     /**
@@ -2552,7 +2552,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onabort} event handler for this element.
-     * @param onchange the {@code onabort} event handler for this element
+     * @param onabort the {@code onabort} event handler for this element
      */
     @JsxSetter
     public void setOnabort(final Object onabort) {
@@ -2570,7 +2570,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onauxclick} event handler for this element.
-     * @param onchange the {@code onauxclick} event handler for this element
+     * @param onauxclick the {@code onauxclick} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnauxclick(final Object onauxclick) {
@@ -2588,7 +2588,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncancel} event handler for this element.
-     * @param onchange the {@code oncancel} event handler for this element
+     * @param oncancel the {@code oncancel} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOncancel(final Object oncancel) {
@@ -2606,7 +2606,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncanplay} event handler for this element.
-     * @param onchange the {@code oncanplay} event handler for this element
+     * @param oncanplay the {@code oncanplay} event handler for this element
      */
     @JsxSetter
     public void setOncanplay(final Object oncanplay) {
@@ -2624,7 +2624,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncanplaythrough} event handler for this element.
-     * @param onchange the {@code oncanplaythrough} event handler for this element
+     * @param oncanplaythrough the {@code oncanplaythrough} event handler for this element
      */
     @JsxSetter
     public void setOncanplaythrough(final Object oncanplaythrough) {
@@ -2642,7 +2642,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onclose} event handler for this element.
-     * @param onchange the {@code onclose} event handler for this element
+     * @param onclose the {@code onclose} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnclose(final Object onclose) {
@@ -2660,7 +2660,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncuechange} event handler for this element.
-     * @param onchange the {@code oncuechange} event handler for this element
+     * @param oncuechange the {@code oncuechange} event handler for this element
      */
     @JsxSetter({CHROME, IE})
     public void setOncuechange(final Object oncuechange) {
@@ -2678,7 +2678,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondrag} event handler for this element.
-     * @param onchange the {@code ondrag} event handler for this element
+     * @param ondrag the {@code ondrag} event handler for this element
      */
     @JsxSetter
     public void setOndrag(final Object ondrag) {
@@ -2696,7 +2696,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondragend} event handler for this element.
-     * @param onchange the {@code ondragend} event handler for this element
+     * @param ondragend the {@code ondragend} event handler for this element
      */
     @JsxSetter
     public void setOndragend(final Object ondragend) {
@@ -2714,7 +2714,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondragenter} event handler for this element.
-     * @param onchange the {@code ondragenter} event handler for this element
+     * @param ondragenter the {@code ondragenter} event handler for this element
      */
     @JsxSetter
     public void setOndragenter(final Object ondragenter) {
@@ -2732,7 +2732,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondragleave} event handler for this element.
-     * @param onchange the {@code ondragleave} event handler for this element
+     * @param ondragleave the {@code ondragleave} event handler for this element
      */
     @JsxSetter
     public void setOndragleave(final Object ondragleave) {
@@ -2750,7 +2750,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondragover} event handler for this element.
-     * @param onchange the {@code ondragover} event handler for this element
+     * @param ondragover the {@code ondragover} event handler for this element
      */
     @JsxSetter
     public void setOndragover(final Object ondragover) {
@@ -2768,7 +2768,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondragstart} event handler for this element.
-     * @param onchange the {@code ondragstart} event handler for this element
+     * @param ondragstart the {@code ondragstart} event handler for this element
      */
     @JsxSetter
     public void setOndragstart(final Object ondragstart) {
@@ -2786,7 +2786,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondrop} event handler for this element.
-     * @param onchange the {@code ondrop} event handler for this element
+     * @param ondrop the {@code ondrop} event handler for this element
      */
     @JsxSetter
     public void setOndrop(final Object ondrop) {
@@ -2804,7 +2804,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ondurationchange} event handler for this element.
-     * @param onchange the {@code ondurationchange} event handler for this element
+     * @param ondurationchange the {@code ondurationchange} event handler for this element
      */
     @JsxSetter
     public void setOndurationchange(final Object ondurationchange) {
@@ -2822,7 +2822,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onemptied} event handler for this element.
-     * @param onchange the {@code onemptied} event handler for this element
+     * @param onemptied the {@code onemptied} event handler for this element
      */
     @JsxSetter
     public void setOnemptied(final Object onemptied) {
@@ -2840,7 +2840,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onended} event handler for this element.
-     * @param onchange the {@code onended} event handler for this element
+     * @param onended the {@code onended} event handler for this element
      */
     @JsxSetter
     public void setOnended(final Object onended) {
@@ -2858,7 +2858,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ongotpointercapture} event handler for this element.
-     * @param onchange the {@code ongotpointercapture} event handler for this element
+     * @param ongotpointercapture the {@code ongotpointercapture} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOngotpointercapture(final Object ongotpointercapture) {
@@ -2876,7 +2876,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oninvalid} event handler for this element.
-     * @param onchange the {@code oninvalid} event handler for this element
+     * @param oninvalid the {@code oninvalid} event handler for this element
      */
     @JsxSetter({CHROME, FF})
     public void setOninvalid(final Object oninvalid) {
@@ -2894,7 +2894,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onload} event handler for this element.
-     * @param onchange the {@code onload} event handler for this element
+     * @param onload the {@code onload} event handler for this element
      */
     @JsxSetter
     public void setOnload(final Object onload) {
@@ -2912,7 +2912,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onloadeddata} event handler for this element.
-     * @param onchange the {@code onloadeddata} event handler for this element
+     * @param onloadeddata the {@code onloadeddata} event handler for this element
      */
     @JsxSetter
     public void setOnloadeddata(final Object onloadeddata) {
@@ -2930,7 +2930,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onloadedmetadata} event handler for this element.
-     * @param onchange the {@code onloadedmetadata} event handler for this element
+     * @param onloadedmetadata the {@code onloadedmetadata} event handler for this element
      */
     @JsxSetter
     public void setOnloadedmetadata(final Object onloadedmetadata) {
@@ -2948,7 +2948,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onloadstart} event handler for this element.
-     * @param onchange the {@code onloadstart} event handler for this element
+     * @param onloadstart the {@code onloadstart} event handler for this element
      */
     @JsxSetter
     public void setOnloadstart(final Object onloadstart) {
@@ -2966,7 +2966,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onlostpointercapture} event handler for this element.
-     * @param onchange the {@code onlostpointercapture} event handler for this element
+     * @param onlostpointercapture the {@code onlostpointercapture} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnlostpointercapture(final Object onlostpointercapture) {
@@ -2984,7 +2984,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmouseenter} event handler for this element.
-     * @param onchange the {@code onmouseenter} event handler for this element
+     * @param onmouseenter the {@code onmouseenter} event handler for this element
      */
     @JsxSetter
     public void setOnmouseenter(final Object onmouseenter) {
@@ -3002,7 +3002,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmouseleave} event handler for this element.
-     * @param onchange the {@code onmouseleave} event handler for this element
+     * @param onmouseleave the {@code onmouseleave} event handler for this element
      */
     @JsxSetter
     public void setOnmouseleave(final Object onmouseleave) {
@@ -3020,7 +3020,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmousewheel} event handler for this element.
-     * @param onchange the {@code onmousewheel} event handler for this element
+     * @param onmousewheel the {@code onmousewheel} event handler for this element
      */
     @JsxSetter({CHROME, IE})
     public void setOnmousewheel(final Object onmousewheel) {
@@ -3038,7 +3038,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpause} event handler for this element.
-     * @param onchange the {@code onpause} event handler for this element
+     * @param onpause the {@code onpause} event handler for this element
      */
     @JsxSetter
     public void setOnpause(final Object onpause) {
@@ -3056,7 +3056,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onplay} event handler for this element.
-     * @param onchange the {@code onplay} event handler for this element
+     * @param onplay the {@code onplay} event handler for this element
      */
     @JsxSetter
     public void setOnplay(final Object onplay) {
@@ -3074,7 +3074,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onplaying} event handler for this element.
-     * @param onchange the {@code onplaying} event handler for this element
+     * @param onplaying the {@code onplaying} event handler for this element
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
@@ -3092,7 +3092,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointercancel} event handler for this element.
-     * @param onchange the {@code onpointercancel} event handler for this element
+     * @param onpointercancel the {@code onpointercancel} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointercancel(final Object onpointercancel) {
@@ -3110,7 +3110,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerdown} event handler for this element.
-     * @param onchange the {@code onpointerdown} event handler for this element
+     * @param onpointerdown the {@code onpointerdown} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerdown(final Object onpointerdown) {
@@ -3128,7 +3128,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerenter} event handler for this element.
-     * @param onchange the {@code onpointerenter} event handler for this element
+     * @param onpointerenter the {@code onpointerenter} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerenter(final Object onpointerenter) {
@@ -3146,7 +3146,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerleave} event handler for this element.
-     * @param onchange the {@code onpointerleave} event handler for this element
+     * @param onpointerleave the {@code onpointerleave} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerleave(final Object onpointerleave) {
@@ -3164,7 +3164,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointermove} event handler for this element.
-     * @param onchange the {@code onpointermove} event handler for this element
+     * @param onpointermove the {@code onpointermove} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointermove(final Object onpointermove) {
@@ -3182,7 +3182,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerout} event handler for this element.
-     * @param onchange the {@code onpointerout} event handler for this element
+     * @param onpointerout the {@code onpointerout} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerout(final Object onpointerout) {
@@ -3200,7 +3200,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerover} event handler for this element.
-     * @param onchange the {@code onpointerover} event handler for this element
+     * @param onpointerover the {@code onpointerover} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerover(final Object onpointerover) {
@@ -3218,7 +3218,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpointerup} event handler for this element.
-     * @param onchange the {@code onpointerup} event handler for this element
+     * @param onpointerup the {@code onpointerup} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOnpointerup(final Object onpointerup) {
@@ -3236,7 +3236,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onprogress} event handler for this element.
-     * @param onchange the {@code onprogress} event handler for this element
+     * @param onprogress the {@code onprogress} event handler for this element
      */
     @JsxSetter
     public void setOnprogress(final Object onprogress) {
@@ -3254,7 +3254,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onratechange} event handler for this element.
-     * @param onchange the {@code onratechange} event handler for this element
+     * @param onratechange the {@code onratechange} event handler for this element
      */
     @JsxSetter
     public void setOnratechange(final Object onratechange) {
@@ -3272,7 +3272,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onreset} event handler for this element.
-     * @param onchange the {@code onreset} event handler for this element
+     * @param onreset the {@code onreset} event handler for this element
      */
     @JsxSetter
     public void setOnreset(final Object onreset) {
@@ -3290,7 +3290,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onscroll} event handler for this element.
-     * @param onchange the {@code onscroll} event handler for this element
+     * @param onscroll the {@code onscroll} event handler for this element
      */
     @JsxSetter
     public void setOnscroll(final Object onscroll) {
@@ -3308,7 +3308,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onseeked} event handler for this element.
-     * @param onchange the {@code onseeked} event handler for this element
+     * @param onseeked the {@code onseeked} event handler for this element
      */
     @JsxSetter
     public void setOnseeked(final Object onseeked) {
@@ -3326,7 +3326,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onseeking} event handler for this element.
-     * @param onchange the {@code onseeking} event handler for this element
+     * @param onseeking the {@code onseeking} event handler for this element
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
@@ -3344,7 +3344,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onselect} event handler for this element.
-     * @param onchange the {@code onselect} event handler for this element
+     * @param onselect the {@code onselect} event handler for this element
      */
     @JsxSetter
     public void setOnselect(final Object onselect) {
@@ -3362,7 +3362,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onshow} event handler for this element.
-     * @param onchange the {@code onshow} event handler for this element
+     * @param onshow the {@code onshow} event handler for this element
      */
     @JsxSetter({CHROME, FF})
     public void setOnshow(final Object onshow) {
@@ -3380,7 +3380,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onstalled} event handler for this element.
-     * @param onchange the {@code onstalled} event handler for this element
+     * @param onstalled the {@code onstalled} event handler for this element
      */
     @JsxSetter
     public void setOnstalled(final Object onstalled) {
@@ -3398,7 +3398,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onsuspend} event handler for this element.
-     * @param onchange the {@code onsuspend} event handler for this element
+     * @param onsuspend the {@code onsuspend} event handler for this element
      */
     @JsxSetter
     public void setOnsuspend(final Object onsuspend) {
@@ -3416,7 +3416,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ontimeupdate} event handler for this element.
-     * @param onchange the {@code ontimeupdate} event handler for this element
+     * @param ontimeupdate the {@code ontimeupdate} event handler for this element
      */
     @JsxSetter
     public void setOntimeupdate(final Object ontimeupdate) {
@@ -3434,7 +3434,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code ontoggle} event handler for this element.
-     * @param onchange the {@code ontoggle} event handler for this element
+     * @param ontoggle the {@code ontoggle} event handler for this element
      */
     @JsxSetter(CHROME)
     public void setOntoggle(final Object ontoggle) {
@@ -3452,7 +3452,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onvolumechange} event handler for this element.
-     * @param onchange the {@code onvolumechange} event handler for this element
+     * @param onvolumechange the {@code onvolumechange} event handler for this element
      */
     @JsxSetter
     public void setOnvolumechange(final Object onvolumechange) {
@@ -3470,7 +3470,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onwaiting} event handler for this element.
-     * @param onchange the {@code onwaiting} event handler for this element
+     * @param onwaiting the {@code onwaiting} event handler for this element
      */
     @JsxSetter
     public void setOnwaiting(final Object onwaiting) {
@@ -3488,7 +3488,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncopy} event handler for this element.
-     * @param onchange the {@code oncopy} event handler for this element
+     * @param oncopy the {@code oncopy} event handler for this element
      */
     @JsxSetter({FF, IE})
     public void setOncopy(final Object oncopy) {
@@ -3506,7 +3506,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code oncut} event handler for this element.
-     * @param onchange the {@code oncut} event handler for this element
+     * @param oncut the {@code oncut} event handler for this element
      */
     @JsxSetter({FF, IE})
     public void setOncut(final Object oncut) {
@@ -3524,7 +3524,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onpaste} event handler for this element.
-     * @param onchange the {@code onpaste} event handler for this element
+     * @param onpaste the {@code onpaste} event handler for this element
      */
     @JsxSetter({FF, IE})
     public void setOnpaste(final Object onpaste) {
@@ -3542,7 +3542,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmozfullscreenchange} event handler for this element.
-     * @param onchange the {@code onmozfullscreenchange} event handler for this element
+     * @param onmozfullscreenchange the {@code onmozfullscreenchange} event handler for this element
      */
     @JsxSetter(FF)
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
@@ -3560,7 +3560,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmozfullscreenerror} event handler for this element.
-     * @param onchange the {@code onmozfullscreenerror} event handler for this element
+     * @param onmozfullscreenerror the {@code onmozfullscreenerror} event handler for this element
      */
     @JsxSetter(FF)
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
@@ -3578,7 +3578,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmozpointerlockchange} event handler for this element.
-     * @param onchange the {@code onmozpointerlockchange} event handler for this element
+     * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler for this element
      */
     @JsxSetter(FF)
     public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
@@ -3596,7 +3596,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the {@code onmozpointerlockerror} event handler for this element.
-     * @param onchange the {@code onmozpointerlockerror} event handler for this element
+     * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler for this element
      */
     @JsxSetter(FF)
     public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
