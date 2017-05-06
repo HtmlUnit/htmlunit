@@ -115,22 +115,12 @@ public class HTMLIFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onload} event handler for this element.
-     * @param eventHandler the {@code onload} event handler for this element
+     * {@inheritDoc}
      */
-    @JsxSetter
+    @Override
     public void setOnload(final Object eventHandler) {
-        setEventHandler("onload", eventHandler);
+        super.setOnload(eventHandler);
         isAttachedToPageDuringOnload_ = getDomNodeOrDie().isAttachedToPage();
-    }
-
-    /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
-     */
-    @JsxGetter
-    public Object getOnload() {
-        return getEventHandler("onload");
     }
 
     /**

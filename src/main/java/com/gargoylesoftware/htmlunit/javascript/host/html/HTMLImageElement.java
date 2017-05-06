@@ -132,22 +132,13 @@ public class HTMLImageElement extends HTMLElement {
      * Sets the {@code onload} event handler for this element.
      * @param onloadHandler the {@code onload} event handler for this element
      */
-    @JsxSetter
-    public void setOnload(final Object onloadHandler) {
-        setEventHandler("onload", onloadHandler);
+    @Override
+    public void setOnload(final Object onload) {
+        super.setOnload(onload);
 
         // maybe the onload handler was not called so far
         final HtmlImage img = (HtmlImage) getDomNodeOrDie();
         img.doOnLoad();
-    }
-
-    /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
-     */
-    @JsxGetter
-    public Object getOnload() {
-        return getEventHandler("onload");
     }
 
     /**

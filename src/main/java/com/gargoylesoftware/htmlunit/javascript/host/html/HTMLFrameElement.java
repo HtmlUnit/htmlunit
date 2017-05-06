@@ -108,24 +108,6 @@ public class HTMLFrameElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code onload} event handler for this element.
-     * @param eventHandler the {@code onload} event handler for this element
-     */
-    @JsxSetter
-    public void setOnload(final Object eventHandler) {
-        setEventHandler("onload", eventHandler);
-    }
-
-    /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
-     */
-    @JsxGetter
-    public Object getOnload() {
-        return getEventHandler("onload");
-    }
-
-    /**
      * Gets the {@code border} attribute.
      * @return the {@code border} attribute
      */
