@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.speech;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -27,6 +28,38 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  */
 @JsxClass(FF52)
 public class SpeechSynthesisErrorEvent extends EventTarget {
+
+    /** Constant. */
+    @JsxConstant(FF52)
+    public static final int ALT_MASK = 0x1;
+
+    /** Constant. */
+    @JsxConstant(FF52)
+    public static final int CONTROL_MASK = 0x2;
+
+    /** Constant. */
+    @JsxConstant(FF52)
+    public static final int SHIFT_MASK = 0x4;
+
+    /** Constant. */
+    @JsxConstant(FF52)
+    public static final int META_MASK = 0x8;
+
+    /** The first event phase: the capturing phase. */
+    @JsxConstant(FF52)
+    public static final short CAPTURING_PHASE = 1;
+
+    /** The second event phase: at the event target. */
+    @JsxConstant(FF52)
+    public static final short AT_TARGET = 2;
+
+    /** The third (and final) event phase: the bubbling phase. */
+    @JsxConstant(FF52)
+    public static final short BUBBLING_PHASE = 3;
+
+    /** No event phase. */
+    @JsxConstant(FF52)
+    public static final short NONE = 0;
 
     /**
      * Creates a new instance.
