@@ -228,10 +228,7 @@ public class EventTarget extends SimpleScriptable {
      * @return the handler function, or {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventType) {
-        if (eventListenersContainer_ == null) {
-            return null;
-        }
-        return eventListenersContainer_.getEventHandler(eventType);
+        return getEventListenersContainer().getEventHandler(eventType);
     }
 
     /**
