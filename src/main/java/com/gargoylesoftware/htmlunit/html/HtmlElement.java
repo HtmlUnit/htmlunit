@@ -26,8 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -49,7 +47,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -58,7 +55,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
@@ -133,8 +129,6 @@ public abstract class HtmlElement extends DomElement {
             return value_;
         }
     }
-
-    private static final Log LOG = LogFactory.getLog(HtmlElement.class);
 
     /**
      * Constant indicating that a tab index value is out of bounds (less than <tt>0</tt> or greater
@@ -985,32 +979,6 @@ public abstract class HtmlElement extends DomElement {
     public final void setEventHandler(final String eventName, final Function eventHandler) {
         final HTMLElement jsObj = (HTMLElement) getScriptableObject();
         jsObj.setEventHandler(eventName, eventHandler);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * Register a snippet of JavaScript code as an event handler. The JavaScript code will
-     * be wrapped inside a unique function declaration which provides one argument named
-     * "event"
-     * @param eventName Name of event such as "onclick" or "onblur", etc
-     * @param jsSnippet executable JavaScript code
-     */
-    public final void setEventHandler(final String eventName, final String jsSnippet) {
-        final BaseFunction function = new EventHandler(this, eventName, jsSnippet);
-        setEventHandler(eventName, function);
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Created event handler " + function.getFunctionName()
-                    + " for " + eventName + " on " + this);
-        }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * Removes the specified event handler.
-     * @param eventName Name of the event such as "onclick" or "onblur", etc
-     */
-    public final void removeEventHandler(final String eventName) {
-        setEventHandler(eventName, (Function) null);
     }
 
     /**
