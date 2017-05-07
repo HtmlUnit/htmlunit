@@ -55,8 +55,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-
 /**
  * An abstract wrapper for HTML elements.
  *
@@ -968,17 +966,6 @@ public abstract class HtmlElement extends DomElement {
             return ((HTMLElement) jsObj).hasEventHandlers(eventName);
         }
         return ((HTMLElement2) jsObj).hasEventHandlers(eventName);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * Registers a JavaScript function as an event handler.
-     * @param eventName the name of the event, such as "onclick" or "onblur", etc
-     * @param eventHandler a Rhino JavaScript function
-     */
-    public final void setEventHandler(final String eventName, final Function eventHandler) {
-        final HTMLElement jsObj = (HTMLElement) getScriptableObject();
-        jsObj.setEventHandler(eventName, eventHandler);
     }
 
     /**
