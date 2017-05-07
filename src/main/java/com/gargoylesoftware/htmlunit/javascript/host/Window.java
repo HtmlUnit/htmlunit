@@ -2290,7 +2290,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnfocusin() {
-        return getEventHandler("onfocusin");
+        return getEventHandler("focusin");
     }
 
     /**
@@ -2299,7 +2299,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnfocusin(final Object onfocusin) {
-        setEventHandler("onfocusin", onfocusin);
+        setEventHandler("focusin", onfocusin);
     }
 
     /**
@@ -2308,7 +2308,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnfocus() {
-        return getEventHandler("onfocus");
+        return getEventHandler("focus");
     }
 
     /**
@@ -2317,7 +2317,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnfocus(final Object onfocus) {
-        setEventHandler("onfocus", onfocus);
+        setEventHandler("focus", onfocus);
     }
 
     /**
@@ -2326,7 +2326,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndragend() {
-        return getEventHandler("ondragend");
+        return getEventHandler("dragend");
     }
 
     /**
@@ -2335,7 +2335,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndragend(final Object ondragend) {
-        setEventHandler("ondragend", ondragend);
+        setEventHandler("dragend", ondragend);
     }
 
     /**
@@ -2344,7 +2344,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOninvalid() {
-        return getEventHandler("oninvalid");
+        return getEventHandler("invalid");
     }
 
     /**
@@ -2353,7 +2353,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOninvalid(final Object oninvalid) {
-        setEventHandler("oninvalid", oninvalid);
+        setEventHandler("invalid", oninvalid);
     }
 
     /**
@@ -2362,7 +2362,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerout() {
-        return getEventHandler("onpointerout");
+        return getEventHandler("pointerout");
     }
 
     /**
@@ -2371,7 +2371,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerout(final Object onpointerout) {
-        setEventHandler("onpointerout", onpointerout);
+        setEventHandler("pointerout", onpointerout);
     }
 
     /**
@@ -2380,7 +2380,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnhelp() {
-        return getEventHandler("onhelp");
+        return getEventHandler("help");
     }
 
     /**
@@ -2389,7 +2389,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnhelp(final Object onhelp) {
-        setEventHandler("onhelp", onhelp);
+        setEventHandler("help", onhelp);
     }
 
     /**
@@ -2398,7 +2398,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnratechange() {
-        return getEventHandler("onratechange");
+        return getEventHandler("ratechange");
     }
 
     /**
@@ -2407,7 +2407,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnratechange(final Object onratechange) {
-        setEventHandler("onratechange", onratechange);
+        setEventHandler("ratechange", onratechange);
     }
 
     /**
@@ -2416,7 +2416,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnanimationiteration() {
-        return getEventHandler("onanimationiteration");
+        return getEventHandler("animationiteration");
     }
 
     /**
@@ -2425,7 +2425,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnanimationiteration(final Object onanimationiteration) {
-        setEventHandler("onanimationiteration", onanimationiteration);
+        setEventHandler("animationiteration", onanimationiteration);
     }
 
     /**
@@ -2434,7 +2434,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOncanplaythrough() {
-        return getEventHandler("oncanplaythrough");
+        return getEventHandler("canplaythrough");
     }
 
     /**
@@ -2443,7 +2443,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOncanplaythrough(final Object oncanplaythrough) {
-        setEventHandler("oncanplaythrough", oncanplaythrough);
+        setEventHandler("canplaythrough", oncanplaythrough);
     }
 
     /**
@@ -2452,7 +2452,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOncancel() {
-        return getEventHandler("oncancel");
+        return getEventHandler("cancel");
     }
 
     /**
@@ -2461,7 +2461,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOncancel(final Object oncancel) {
-        setEventHandler("oncancel", oncancel);
+        setEventHandler("cancel", oncancel);
     }
 
     /**
@@ -2470,7 +2470,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerenter() {
-        return getEventHandler("onpointerenter");
+        return getEventHandler("pointerenter");
     }
 
     /**
@@ -2479,7 +2479,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerenter(final Object onpointerenter) {
-        setEventHandler("onpointerenter", onpointerenter);
+        setEventHandler("pointerenter", onpointerenter);
     }
 
     /**
@@ -2488,7 +2488,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnselect() {
-        return getEventHandler("onselect");
+        return getEventHandler("select");
     }
 
     /**
@@ -2497,7 +2497,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnselect(final Object onselect) {
-        setEventHandler("onselect", onselect);
+        setEventHandler("select", onselect);
     }
 
     /**
@@ -2506,7 +2506,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnauxclick() {
-        return getEventHandler("onauxclick");
+        return getEventHandler("auxclick");
     }
 
     /**
@@ -2515,7 +2515,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnauxclick(final Object onauxclick) {
-        setEventHandler("onauxclick", onauxclick);
+        setEventHandler("auxclick", onauxclick);
     }
 
     /**
@@ -2524,7 +2524,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnscroll() {
-        return getEventHandler("onscroll");
+        return getEventHandler("scroll");
     }
 
     /**
@@ -2533,7 +2533,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnscroll(final Object onscroll) {
-        setEventHandler("onscroll", onscroll);
+        setEventHandler("scroll", onscroll);
     }
 
     /**
@@ -2542,7 +2542,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeydown() {
-        return getEventHandler("onkeydown");
+        return getEventHandler("keydown");
     }
 
     /**
@@ -2551,7 +2551,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeydown(final Object onkeydown) {
-        setEventHandler("onkeydown", onkeydown);
+        setEventHandler("keydown", onkeydown);
     }
 
     /**
@@ -2560,7 +2560,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerleave() {
-        return getEventHandler("onmspointerleave");
+        return getEventHandler("mspointerleave");
     }
 
     /**
@@ -2569,7 +2569,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerleave(final Object onmspointerleave) {
-        setEventHandler("onmspointerleave", onmspointerleave);
+        setEventHandler("mspointerleave", onmspointerleave);
     }
 
     /**
@@ -2578,7 +2578,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnmozpointerlockchange() {
-        return getEventHandler("onmozpointerlockchange");
+        return getEventHandler("mozpointerlockchange");
     }
 
     /**
@@ -2587,7 +2587,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
-        setEventHandler("onmozpointerlockchange", onmozpointerlockchange);
+        setEventHandler("mozpointerlockchange", onmozpointerlockchange);
     }
 
     /**
@@ -2596,7 +2596,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnwebkitanimationstart() {
-        return getEventHandler("onwebkitanimationstart");
+        return getEventHandler("webkitanimationstart");
     }
 
     /**
@@ -2605,7 +2605,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnwebkitanimationstart(final Object onwebkitanimationstart) {
-        setEventHandler("onwebkitanimationstart", onwebkitanimationstart);
+        setEventHandler("webkitanimationstart", onwebkitanimationstart);
     }
 
     /**
@@ -2614,7 +2614,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeyup() {
-        return getEventHandler("onkeyup");
+        return getEventHandler("keyup");
     }
 
     /**
@@ -2623,7 +2623,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeyup(final Object onkeyup) {
-        setEventHandler("onkeyup", onkeyup);
+        setEventHandler("keyup", onkeyup);
     }
 
     /**
@@ -2632,7 +2632,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturestart() {
-        return getEventHandler("onmsgesturestart");
+        return getEventHandler("msgesturestart");
     }
 
     /**
@@ -2641,7 +2641,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgesturestart(final Object onmsgesturestart) {
-        setEventHandler("onmsgesturestart", onmsgesturestart);
+        setEventHandler("msgesturestart", onmsgesturestart);
     }
 
     /**
@@ -2650,7 +2650,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOndeviceproximity() {
-        return getEventHandler("ondeviceproximity");
+        return getEventHandler("deviceproximity");
     }
 
     /**
@@ -2659,7 +2659,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOndeviceproximity(final Object ondeviceproximity) {
-        setEventHandler("ondeviceproximity", ondeviceproximity);
+        setEventHandler("deviceproximity", ondeviceproximity);
     }
 
     /**
@@ -2668,7 +2668,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnreset() {
-        return getEventHandler("onreset");
+        return getEventHandler("reset");
     }
 
     /**
@@ -2677,7 +2677,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnreset(final Object onreset) {
-        setEventHandler("onreset", onreset);
+        setEventHandler("reset", onreset);
     }
 
     /**
@@ -2686,7 +2686,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeypress() {
-        return getEventHandler("onkeypress");
+        return getEventHandler("keypress");
     }
 
     /**
@@ -2695,7 +2695,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeypress(final Object onkeypress) {
-        setEventHandler("onkeypress", onkeypress);
+        setEventHandler("keypress", onkeypress);
     }
 
     /**
@@ -2704,7 +2704,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndrag() {
-        return getEventHandler("ondrag");
+        return getEventHandler("drag");
     }
 
     /**
@@ -2713,7 +2713,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndrag(final Object ondrag) {
-        setEventHandler("ondrag", ondrag);
+        setEventHandler("drag", ondrag);
     }
 
     /**
@@ -2722,7 +2722,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnfocusout() {
-        return getEventHandler("onfocusout");
+        return getEventHandler("focusout");
     }
 
     /**
@@ -2731,7 +2731,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnfocusout(final Object onfocusout) {
-        setEventHandler("onfocusout", onfocusout);
+        setEventHandler("focusout", onfocusout);
     }
 
     /**
@@ -2740,7 +2740,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnseeked() {
-        return getEventHandler("onseeked");
+        return getEventHandler("seeked");
     }
 
     /**
@@ -2749,7 +2749,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnseeked(final Object onseeked) {
-        setEventHandler("onseeked", onseeked);
+        setEventHandler("seeked", onseeked);
     }
 
     /**
@@ -2758,7 +2758,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("onoffline");
+        return getEventHandler("offline");
     }
 
     /**
@@ -2767,7 +2767,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnoffline(final Object onoffline) {
-        setEventHandler("onoffline", onoffline);
+        setEventHandler("offline", onoffline);
     }
 
     /**
@@ -2776,7 +2776,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOndeviceorientation() {
-        return getEventHandler("ondeviceorientation");
+        return getEventHandler("deviceorientation");
     }
 
     /**
@@ -2785,7 +2785,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOndeviceorientation(final Object ondeviceorientation) {
-        setEventHandler("ondeviceorientation", ondeviceorientation);
+        setEventHandler("deviceorientation", ondeviceorientation);
     }
 
     /**
@@ -2794,7 +2794,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOntoggle() {
-        return getEventHandler("ontoggle");
+        return getEventHandler("toggle");
     }
 
     /**
@@ -2803,7 +2803,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOntoggle(final Object ontoggle) {
-        setEventHandler("ontoggle", ontoggle);
+        setEventHandler("toggle", ontoggle);
     }
 
     /**
@@ -2812,7 +2812,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnplay() {
-        return getEventHandler("onplay");
+        return getEventHandler("play");
     }
 
     /**
@@ -2821,7 +2821,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnplay(final Object onplay) {
-        setEventHandler("onplay", onplay);
+        setEventHandler("play", onplay);
     }
 
     /**
@@ -2830,7 +2830,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOncontextmenu() {
-        return getEventHandler("oncontextmenu");
+        return getEventHandler("contextmenu");
     }
 
     /**
@@ -2839,7 +2839,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOncontextmenu(final Object oncontextmenu) {
-        setEventHandler("oncontextmenu", oncontextmenu);
+        setEventHandler("contextmenu", oncontextmenu);
     }
 
     /**
@@ -2848,7 +2848,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmousemove() {
-        return getEventHandler("onmousemove");
+        return getEventHandler("mousemove");
     }
 
     /**
@@ -2857,7 +2857,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmousemove(final Object onmousemove) {
-        setEventHandler("onmousemove", onmousemove);
+        setEventHandler("mousemove", onmousemove);
     }
 
     /**
@@ -2866,7 +2866,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnreadystatechange() {
-        return getEventHandler("onreadystatechange");
+        return getEventHandler("readystatechange");
     }
 
     /**
@@ -2875,7 +2875,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnreadystatechange(final Object onreadystatechange) {
-        setEventHandler("onreadystatechange", onreadystatechange);
+        setEventHandler("readystatechange", onreadystatechange);
     }
 
     /**
@@ -2884,7 +2884,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerover() {
-        return getEventHandler("onmspointerover");
+        return getEventHandler("mspointerover");
     }
 
     /**
@@ -2893,7 +2893,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerover(final Object onmspointerover) {
-        setEventHandler("onmspointerover", onmspointerover);
+        setEventHandler("mspointerover", onmspointerover);
     }
 
     /**
@@ -2902,7 +2902,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointermove() {
-        return getEventHandler("onpointermove");
+        return getEventHandler("pointermove");
     }
 
     /**
@@ -2911,7 +2911,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointermove(final Object onpointermove) {
-        setEventHandler("onpointermove", onpointermove);
+        setEventHandler("pointermove", onpointermove);
     }
 
     /**
@@ -2920,7 +2920,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointermove() {
-        return getEventHandler("onmspointermove");
+        return getEventHandler("mspointermove");
     }
 
     /**
@@ -2929,7 +2929,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointermove(final Object onmspointermove) {
-        setEventHandler("onmspointermove", onmspointermove);
+        setEventHandler("mspointermove", onmspointermove);
     }
 
     /**
@@ -2938,7 +2938,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseover() {
-        return getEventHandler("onmouseover");
+        return getEventHandler("mouseover");
     }
 
     /**
@@ -2947,7 +2947,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseover(final Object onmouseover) {
-        setEventHandler("onmouseover", onmouseover);
+        setEventHandler("mouseover", onmouseover);
     }
 
     /**
@@ -2956,7 +2956,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnuserproximity() {
-        return getEventHandler("onuserproximity");
+        return getEventHandler("userproximity");
     }
 
     /**
@@ -2965,7 +2965,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnuserproximity(final Object onuserproximity) {
-        setEventHandler("onuserproximity", onuserproximity);
+        setEventHandler("userproximity", onuserproximity);
     }
 
     /**
@@ -2974,7 +2974,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnlostpointercapture() {
-        return getEventHandler("onlostpointercapture");
+        return getEventHandler("lostpointercapture");
     }
 
     /**
@@ -2983,7 +2983,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnlostpointercapture(final Object onlostpointercapture) {
-        setEventHandler("onlostpointercapture", onlostpointercapture);
+        setEventHandler("lostpointercapture", onlostpointercapture);
     }
 
     /**
@@ -2992,7 +2992,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerover() {
-        return getEventHandler("onpointerover");
+        return getEventHandler("pointerover");
     }
 
     /**
@@ -3001,7 +3001,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerover(final Object onpointerover) {
-        setEventHandler("onpointerover", onpointerover);
+        setEventHandler("pointerover", onpointerover);
     }
 
     /**
@@ -3010,7 +3010,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnclose() {
-        return getEventHandler("onclose");
+        return getEventHandler("close");
     }
 
     /**
@@ -3019,7 +3019,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnclose(final Object onclose) {
-        setEventHandler("onclose", onclose);
+        setEventHandler("close", onclose);
     }
 
     /**
@@ -3028,7 +3028,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnanimationend() {
-        return getEventHandler("onanimationend");
+        return getEventHandler("animationend");
     }
 
     /**
@@ -3037,7 +3037,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnanimationend(final Object onanimationend) {
-        setEventHandler("onanimationend", onanimationend);
+        setEventHandler("animationend", onanimationend);
     }
 
     /**
@@ -3046,7 +3046,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndragenter() {
-        return getEventHandler("ondragenter");
+        return getEventHandler("dragenter");
     }
 
     /**
@@ -3055,7 +3055,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndragenter(final Object ondragenter) {
-        setEventHandler("ondragenter", ondragenter);
+        setEventHandler("dragenter", ondragenter);
     }
 
     /**
@@ -3064,7 +3064,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnafterprint() {
-        return getEventHandler("onafterprint");
+        return getEventHandler("afterprint");
     }
 
     /**
@@ -3073,7 +3073,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnafterprint(final Object onafterprint) {
-        setEventHandler("onafterprint", onafterprint);
+        setEventHandler("afterprint", onafterprint);
     }
 
     /**
@@ -3082,7 +3082,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnmozfullscreenerror() {
-        return getEventHandler("onmozfullscreenerror");
+        return getEventHandler("mozfullscreenerror");
     }
 
     /**
@@ -3091,7 +3091,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
-        setEventHandler("onmozfullscreenerror", onmozfullscreenerror);
+        setEventHandler("mozfullscreenerror", onmozfullscreenerror);
     }
 
     /**
@@ -3100,7 +3100,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseleave() {
-        return getEventHandler("onmouseleave");
+        return getEventHandler("mouseleave");
     }
 
     /**
@@ -3109,7 +3109,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseleave(final Object onmouseleave) {
-        setEventHandler("onmouseleave", onmouseleave);
+        setEventHandler("mouseleave", onmouseleave);
     }
 
     /**
@@ -3118,7 +3118,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnmousewheel() {
-        return getEventHandler("onmousewheel");
+        return getEventHandler("mousewheel");
     }
 
     /**
@@ -3127,7 +3127,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnmousewheel(final Object onmousewheel) {
-        setEventHandler("onmousewheel", onmousewheel);
+        setEventHandler("mousewheel", onmousewheel);
     }
 
     /**
@@ -3136,7 +3136,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnseeking() {
-        return getEventHandler("onseeking");
+        return getEventHandler("seeking");
     }
 
     /**
@@ -3145,7 +3145,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnseeking(final Object onseeking) {
-        setEventHandler("onseeking", onseeking);
+        setEventHandler("seeking", onseeking);
     }
 
     /**
@@ -3154,7 +3154,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOncuechange() {
-        return getEventHandler("oncuechange");
+        return getEventHandler("cuechange");
     }
 
     /**
@@ -3163,7 +3163,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOncuechange(final Object oncuechange) {
-        setEventHandler("oncuechange", oncuechange);
+        setEventHandler("cuechange", oncuechange);
     }
 
     /**
@@ -3172,7 +3172,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("onpageshow");
+        return getEventHandler("pageshow");
     }
 
     /**
@@ -3181,7 +3181,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
-        setEventHandler("onpageshow", onpageshow);
+        setEventHandler("pageshow", onpageshow);
     }
 
     /**
@@ -3190,7 +3190,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerenter() {
-        return getEventHandler("onmspointerenter");
+        return getEventHandler("mspointerenter");
     }
 
     /**
@@ -3199,7 +3199,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerenter(final Object onmspointerenter) {
-        setEventHandler("onmspointerenter", onmspointerenter);
+        setEventHandler("mspointerenter", onmspointerenter);
     }
 
     /**
@@ -3208,7 +3208,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnmozfullscreenchange() {
-        return getEventHandler("onmozfullscreenchange");
+        return getEventHandler("mozfullscreenchange");
     }
 
     /**
@@ -3217,7 +3217,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
-        setEventHandler("onmozfullscreenchange", onmozfullscreenchange);
+        setEventHandler("mozfullscreenchange", onmozfullscreenchange);
     }
 
     /**
@@ -3226,7 +3226,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndurationchange() {
-        return getEventHandler("ondurationchange");
+        return getEventHandler("durationchange");
     }
 
     /**
@@ -3235,7 +3235,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndurationchange(final Object ondurationchange) {
-        setEventHandler("ondurationchange", ondurationchange);
+        setEventHandler("durationchange", ondurationchange);
     }
 
     /**
@@ -3244,7 +3244,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnplaying() {
-        return getEventHandler("onplaying");
+        return getEventHandler("playing");
     }
 
     /**
@@ -3253,7 +3253,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnplaying(final Object onplaying) {
-        setEventHandler("onplaying", onplaying);
+        setEventHandler("playing", onplaying);
     }
 
     /**
@@ -3262,7 +3262,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnended() {
-        return getEventHandler("onended");
+        return getEventHandler("ended");
     }
 
     /**
@@ -3271,7 +3271,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnended(final Object onended) {
-        setEventHandler("onended", onended);
+        setEventHandler("ended", onended);
     }
 
     /**
@@ -3280,7 +3280,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnloadeddata() {
-        return getEventHandler("onloadeddata");
+        return getEventHandler("loadeddata");
     }
 
     /**
@@ -3289,7 +3289,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnloadeddata(final Object onloadeddata) {
-        setEventHandler("onloadeddata", onloadeddata);
+        setEventHandler("loadeddata", onloadeddata);
     }
 
     /**
@@ -3298,7 +3298,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnunhandledrejection() {
-        return getEventHandler("onunhandledrejection");
+        return getEventHandler("unhandledrejection");
     }
 
     /**
@@ -3307,7 +3307,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnunhandledrejection(final Object onunhandledrejection) {
-        setEventHandler("onunhandledrejection", onunhandledrejection);
+        setEventHandler("unhandledrejection", onunhandledrejection);
     }
 
     /**
@@ -3316,7 +3316,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseout() {
-        return getEventHandler("onmouseout");
+        return getEventHandler("mouseout");
     }
 
     /**
@@ -3325,7 +3325,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseout(final Object onmouseout) {
-        setEventHandler("onmouseout", onmouseout);
+        setEventHandler("mouseout", onmouseout);
     }
 
     /**
@@ -3334,7 +3334,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnsuspend() {
-        return getEventHandler("onsuspend");
+        return getEventHandler("suspend");
     }
 
     /**
@@ -3343,7 +3343,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnsuspend(final Object onsuspend) {
-        setEventHandler("onsuspend", onsuspend);
+        setEventHandler("suspend", onsuspend);
     }
 
     /**
@@ -3352,7 +3352,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnwaiting() {
-        return getEventHandler("onwaiting");
+        return getEventHandler("waiting");
     }
 
     /**
@@ -3361,7 +3361,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnwaiting(final Object onwaiting) {
-        setEventHandler("onwaiting", onwaiting);
+        setEventHandler("waiting", onwaiting);
     }
 
     /**
@@ -3370,7 +3370,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOncanplay() {
-        return getEventHandler("oncanplay");
+        return getEventHandler("canplay");
     }
 
     /**
@@ -3379,7 +3379,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOncanplay(final Object oncanplay) {
-        setEventHandler("oncanplay", oncanplay);
+        setEventHandler("canplay", oncanplay);
     }
 
     /**
@@ -3388,7 +3388,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmousedown() {
-        return getEventHandler("onmousedown");
+        return getEventHandler("mousedown");
     }
 
     /**
@@ -3397,7 +3397,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmousedown(final Object onmousedown) {
-        setEventHandler("onmousedown", onmousedown);
+        setEventHandler("mousedown", onmousedown);
     }
 
     /**
@@ -3406,7 +3406,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnlanguagechange() {
-        return getEventHandler("onlanguagechange");
+        return getEventHandler("languagechange");
     }
 
     /**
@@ -3415,7 +3415,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOnlanguagechange(final Object onlanguagechange) {
-        setEventHandler("onlanguagechange", onlanguagechange);
+        setEventHandler("languagechange", onlanguagechange);
     }
 
     /**
@@ -3424,7 +3424,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnemptied() {
-        return getEventHandler("onemptied");
+        return getEventHandler("emptied");
     }
 
     /**
@@ -3433,7 +3433,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnemptied(final Object onemptied) {
-        setEventHandler("onemptied", onemptied);
+        setEventHandler("emptied", onemptied);
     }
 
     /**
@@ -3442,7 +3442,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnrejectionhandled() {
-        return getEventHandler("onrejectionhandled");
+        return getEventHandler("rejectionhandled");
     }
 
     /**
@@ -3451,7 +3451,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnrejectionhandled(final Object onrejectionhandled) {
-        setEventHandler("onrejectionhandled", onrejectionhandled);
+        setEventHandler("rejectionhandled", onrejectionhandled);
     }
 
     /**
@@ -3460,7 +3460,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointercancel() {
-        return getEventHandler("onpointercancel");
+        return getEventHandler("pointercancel");
     }
 
     /**
@@ -3469,7 +3469,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointercancel(final Object onpointercancel) {
-        setEventHandler("onpointercancel", onpointercancel);
+        setEventHandler("pointercancel", onpointercancel);
     }
 
     /**
@@ -3478,7 +3478,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgestureend() {
-        return getEventHandler("onmsgestureend");
+        return getEventHandler("msgestureend");
     }
 
     /**
@@ -3487,7 +3487,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgestureend(final Object onmsgestureend) {
-        setEventHandler("onmsgestureend", onmsgestureend);
+        setEventHandler("msgestureend", onmsgestureend);
     }
 
     /**
@@ -3496,7 +3496,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnresize() {
-        return getEventHandler("onresize");
+        return getEventHandler("resize");
     }
 
     /**
@@ -3505,7 +3505,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnresize(final Object onresize) {
-        setEventHandler("onresize", onresize);
+        setEventHandler("resize", onresize);
     }
 
     /**
@@ -3514,7 +3514,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnpause() {
-        return getEventHandler("onpause");
+        return getEventHandler("pause");
     }
 
     /**
@@ -3523,7 +3523,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnpause(final Object onpause) {
-        setEventHandler("onpause", onpause);
+        setEventHandler("pause", onpause);
     }
 
     /**
@@ -3532,7 +3532,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnloadstart() {
-        return getEventHandler("onloadstart");
+        return getEventHandler("loadstart");
     }
 
     /**
@@ -3541,7 +3541,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnloadstart(final Object onloadstart) {
-        setEventHandler("onloadstart", onloadstart);
+        setEventHandler("loadstart", onloadstart);
     }
 
     /**
@@ -3550,7 +3550,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnprogress() {
-        return getEventHandler("onprogress");
+        return getEventHandler("progress");
     }
 
     /**
@@ -3559,7 +3559,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnprogress(final Object onprogress) {
-        setEventHandler("onprogress", onprogress);
+        setEventHandler("progress", onprogress);
     }
 
     /**
@@ -3568,7 +3568,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerup() {
-        return getEventHandler("onpointerup");
+        return getEventHandler("pointerup");
     }
 
     /**
@@ -3577,7 +3577,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerup(final Object onpointerup) {
-        setEventHandler("onpointerup", onpointerup);
+        setEventHandler("pointerup", onpointerup);
     }
 
     /**
@@ -3586,7 +3586,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnwheel() {
-        return getEventHandler("onwheel");
+        return getEventHandler("wheel");
     }
 
     /**
@@ -3595,7 +3595,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOnwheel(final Object onwheel) {
-        setEventHandler("onwheel", onwheel);
+        setEventHandler("wheel", onwheel);
     }
 
     /**
@@ -3604,7 +3604,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerdown() {
-        return getEventHandler("onmspointerdown");
+        return getEventHandler("mspointerdown");
     }
 
     /**
@@ -3613,7 +3613,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerdown(final Object onmspointerdown) {
-        setEventHandler("onmspointerdown", onmspointerdown);
+        setEventHandler("mspointerdown", onmspointerdown);
     }
 
     /**
@@ -3622,7 +3622,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerleave() {
-        return getEventHandler("onpointerleave");
+        return getEventHandler("pointerleave");
     }
 
     /**
@@ -3631,7 +3631,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerleave(final Object onpointerleave) {
-        setEventHandler("onpointerleave", onpointerleave);
+        setEventHandler("pointerleave", onpointerleave);
     }
 
     /**
@@ -3640,7 +3640,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnbeforeprint() {
-        return getEventHandler("onbeforeprint");
+        return getEventHandler("beforeprint");
     }
 
     /**
@@ -3649,7 +3649,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnbeforeprint(final Object onbeforeprint) {
-        setEventHandler("onbeforeprint", onbeforeprint);
+        setEventHandler("beforeprint", onbeforeprint);
     }
 
     /**
@@ -3658,7 +3658,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("onstorage");
+        return getEventHandler("storage");
     }
 
     /**
@@ -3667,7 +3667,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
-        setEventHandler("onstorage", onstorage);
+        setEventHandler("storage", onstorage);
     }
 
     /**
@@ -3676,7 +3676,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOndevicelight() {
-        return getEventHandler("ondevicelight");
+        return getEventHandler("devicelight");
     }
 
     /**
@@ -3685,7 +3685,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOndevicelight(final Object ondevicelight) {
-        setEventHandler("ondevicelight", ondevicelight);
+        setEventHandler("devicelight", ondevicelight);
     }
 
     /**
@@ -3694,7 +3694,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnanimationstart() {
-        return getEventHandler("onanimationstart");
+        return getEventHandler("animationstart");
     }
 
     /**
@@ -3703,7 +3703,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnanimationstart(final Object onanimationstart) {
-        setEventHandler("onanimationstart", onanimationstart);
+        setEventHandler("animationstart", onanimationstart);
     }
 
     /**
@@ -3712,7 +3712,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointercancel() {
-        return getEventHandler("onmspointercancel");
+        return getEventHandler("mspointercancel");
     }
 
     /**
@@ -3721,7 +3721,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointercancel(final Object onmspointercancel) {
-        setEventHandler("onmspointercancel", onmspointercancel);
+        setEventHandler("mspointercancel", onmspointercancel);
     }
 
     /**
@@ -3730,7 +3730,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOntimeupdate() {
-        return getEventHandler("ontimeupdate");
+        return getEventHandler("timeupdate");
     }
 
     /**
@@ -3739,7 +3739,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOntimeupdate(final Object ontimeupdate) {
-        setEventHandler("ontimeupdate", ontimeupdate);
+        setEventHandler("timeupdate", ontimeupdate);
     }
 
     /**
@@ -3748,7 +3748,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("onpagehide");
+        return getEventHandler("pagehide");
     }
 
     /**
@@ -3757,7 +3757,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnpagehide(final Object onpagehide) {
-        setEventHandler("onpagehide", onpagehide);
+        setEventHandler("pagehide", onpagehide);
     }
 
     /**
@@ -3766,7 +3766,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnwebkitanimationiteration() {
-        return getEventHandler("onwebkitanimationiteration");
+        return getEventHandler("webkitanimationiteration");
     }
 
     /**
@@ -3775,7 +3775,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnwebkitanimationiteration(final Object onwebkitanimationiteration) {
-        setEventHandler("onwebkitanimationiteration", onwebkitanimationiteration);
+        setEventHandler("webkitanimationiteration", onwebkitanimationiteration);
     }
 
     /**
@@ -3784,7 +3784,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerup() {
-        return getEventHandler("onmspointerup");
+        return getEventHandler("mspointerup");
     }
 
     /**
@@ -3793,7 +3793,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerup(final Object onmspointerup) {
-        setEventHandler("onmspointerup", onmspointerup);
+        setEventHandler("mspointerup", onmspointerup);
     }
 
     /**
@@ -3802,7 +3802,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnabort() {
-        return getEventHandler("onabort");
+        return getEventHandler("abort");
     }
 
     /**
@@ -3811,7 +3811,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOnabort(final Object onabort) {
-        setEventHandler("onabort", onabort);
+        setEventHandler("abort", onabort);
     }
 
     /**
@@ -3820,7 +3820,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnloadedmetadata() {
-        return getEventHandler("onloadedmetadata");
+        return getEventHandler("loadedmetadata");
     }
 
     /**
@@ -3829,7 +3829,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnloadedmetadata(final Object onloadedmetadata) {
-        setEventHandler("onloadedmetadata", onloadedmetadata);
+        setEventHandler("loadedmetadata", onloadedmetadata);
     }
 
     /**
@@ -3838,7 +3838,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsinertiastart() {
-        return getEventHandler("onmsinertiastart");
+        return getEventHandler("msinertiastart");
     }
 
     /**
@@ -3847,7 +3847,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsinertiastart(final Object onmsinertiastart) {
-        setEventHandler("onmsinertiastart", onmsinertiastart);
+        setEventHandler("msinertiastart", onmsinertiastart);
     }
 
     /**
@@ -3856,7 +3856,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseup() {
-        return getEventHandler("onmouseup");
+        return getEventHandler("mouseup");
     }
 
     /**
@@ -3865,7 +3865,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseup(final Object onmouseup) {
-        setEventHandler("onmouseup", onmouseup);
+        setEventHandler("mouseup", onmouseup);
     }
 
     /**
@@ -3874,7 +3874,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturetap() {
-        return getEventHandler("onmsgesturetap");
+        return getEventHandler("msgesturetap");
     }
 
     /**
@@ -3883,7 +3883,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgesturetap(final Object onmsgesturetap) {
-        setEventHandler("onmsgesturetap", onmsgesturetap);
+        setEventHandler("msgesturetap", onmsgesturetap);
     }
 
     /**
@@ -3892,7 +3892,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndragover() {
-        return getEventHandler("ondragover");
+        return getEventHandler("dragover");
     }
 
     /**
@@ -3901,7 +3901,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndragover(final Object ondragover) {
-        setEventHandler("ondragover", ondragover);
+        setEventHandler("dragover", ondragover);
     }
 
     /**
@@ -3910,7 +3910,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("ononline");
+        return getEventHandler("online");
     }
 
     /**
@@ -3919,7 +3919,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnonline(final Object ononline) {
-        setEventHandler("ononline", ononline);
+        setEventHandler("online", ononline);
     }
 
     /**
@@ -3928,7 +3928,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturedoubletap() {
-        return getEventHandler("onmsgesturedoubletap");
+        return getEventHandler("msgesturedoubletap");
     }
 
     /**
@@ -3937,7 +3937,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgesturedoubletap(final Object onmsgesturedoubletap) {
-        setEventHandler("onmsgesturedoubletap", onmsgesturedoubletap);
+        setEventHandler("msgesturedoubletap", onmsgesturedoubletap);
     }
 
     /**
@@ -3946,7 +3946,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnsearch() {
-        return getEventHandler("onsearch");
+        return getEventHandler("search");
     }
 
     /**
@@ -3955,7 +3955,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnsearch(final Object onsearch) {
-        setEventHandler("onsearch", onsearch);
+        setEventHandler("search", onsearch);
     }
 
     /**
@@ -3964,7 +3964,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOninput() {
-        return getEventHandler("oninput");
+        return getEventHandler("input");
     }
 
     /**
@@ -3973,7 +3973,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOninput(final Object oninput) {
-        setEventHandler("oninput", oninput);
+        setEventHandler("input", oninput);
     }
 
     /**
@@ -3982,7 +3982,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public Function getOnmozpointerlockerror() {
-        return getEventHandler("onmozpointerlockerror");
+        return getEventHandler("mozpointerlockerror");
     }
 
     /**
@@ -3991,7 +3991,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(FF)
     public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
-        setEventHandler("onmozpointerlockerror", onmozpointerlockerror);
+        setEventHandler("mozpointerlockerror", onmozpointerlockerror);
     }
 
     /**
@@ -4000,7 +4000,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnwebkittransitionend() {
-        return getEventHandler("onwebkittransitionend");
+        return getEventHandler("webkittransitionend");
     }
 
     /**
@@ -4009,7 +4009,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnwebkittransitionend(final Object onwebkittransitionend) {
-        setEventHandler("onwebkittransitionend", onwebkittransitionend);
+        setEventHandler("webkittransitionend", onwebkittransitionend);
     }
 
     /**
@@ -4018,7 +4018,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmspointerout() {
-        return getEventHandler("onmspointerout");
+        return getEventHandler("mspointerout");
     }
 
     /**
@@ -4027,7 +4027,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmspointerout(final Object onmspointerout) {
-        setEventHandler("onmspointerout", onmspointerout);
+        setEventHandler("mspointerout", onmspointerout);
     }
 
     /**
@@ -4036,7 +4036,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOndevicemotion() {
-        return getEventHandler("ondevicemotion");
+        return getEventHandler("devicemotion");
     }
 
     /**
@@ -4045,7 +4045,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOndevicemotion(final Object ondevicemotion) {
-        setEventHandler("ondevicemotion", ondevicemotion);
+        setEventHandler("devicemotion", ondevicemotion);
     }
 
     /**
@@ -4054,7 +4054,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnstalled() {
-        return getEventHandler("onstalled");
+        return getEventHandler("stalled");
     }
 
     /**
@@ -4063,7 +4063,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnstalled(final Object onstalled) {
-        setEventHandler("onstalled", onstalled);
+        setEventHandler("stalled", onstalled);
     }
 
     /**
@@ -4072,7 +4072,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseenter() {
-        return getEventHandler("onmouseenter");
+        return getEventHandler("mouseenter");
     }
 
     /**
@@ -4081,7 +4081,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseenter(final Object onmouseenter) {
-        setEventHandler("onmouseenter", onmouseenter);
+        setEventHandler("mouseenter", onmouseenter);
     }
 
     /**
@@ -4090,7 +4090,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndragleave() {
-        return getEventHandler("ondragleave");
+        return getEventHandler("dragleave");
     }
 
     /**
@@ -4099,7 +4099,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndragleave(final Object ondragleave) {
-        setEventHandler("ondragleave", ondragleave);
+        setEventHandler("dragleave", ondragleave);
     }
 
     /**
@@ -4108,7 +4108,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, IE})
     public Function getOnpointerdown() {
-        return getEventHandler("onpointerdown");
+        return getEventHandler("pointerdown");
     }
 
     /**
@@ -4117,7 +4117,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, IE})
     public void setOnpointerdown(final Object onpointerdown) {
-        setEventHandler("onpointerdown", onpointerdown);
+        setEventHandler("pointerdown", onpointerdown);
     }
 
     /**
@@ -4126,7 +4126,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndrop() {
-        return getEventHandler("ondrop");
+        return getEventHandler("drop");
     }
 
     /**
@@ -4135,7 +4135,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndrop(final Object ondrop) {
-        setEventHandler("ondrop", ondrop);
+        setEventHandler("drop", ondrop);
     }
 
     /**
@@ -4144,7 +4144,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnunload() {
-        return getEventHandler("onunload");
+        return getEventHandler("unload");
     }
 
     /**
@@ -4153,7 +4153,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnunload(final Object onunload) {
-        setEventHandler("onunload", onunload);
+        setEventHandler("unload", onunload);
     }
 
     /**
@@ -4162,7 +4162,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnwebkitanimationend() {
-        return getEventHandler("onwebkitanimationend");
+        return getEventHandler("webkitanimationend");
     }
 
     /**
@@ -4171,7 +4171,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnwebkitanimationend(final Object onwebkitanimationend) {
-        setEventHandler("onwebkitanimationend", onwebkitanimationend);
+        setEventHandler("webkitanimationend", onwebkitanimationend);
     }
 
     /**
@@ -4180,7 +4180,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOndragstart() {
-        return getEventHandler("ondragstart");
+        return getEventHandler("dragstart");
     }
 
     /**
@@ -4189,7 +4189,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOndragstart(final Object ondragstart) {
-        setEventHandler("ondragstart", ondragstart);
+        setEventHandler("dragstart", ondragstart);
     }
 
     /**
@@ -4198,7 +4198,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOntransitionend() {
-        return getEventHandler("ontransitionend");
+        return getEventHandler("transitionend");
     }
 
     /**
@@ -4207,7 +4207,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOntransitionend(final Object ontransitionend) {
-        setEventHandler("ontransitionend", ontransitionend);
+        setEventHandler("transitionend", ontransitionend);
     }
 
     /**
@@ -4216,7 +4216,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturehold() {
-        return getEventHandler("onmsgesturehold");
+        return getEventHandler("msgesturehold");
     }
 
     /**
@@ -4225,7 +4225,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgesturehold(final Object onmsgesturehold) {
-        setEventHandler("onmsgesturehold", onmsgesturehold);
+        setEventHandler("msgesturehold", onmsgesturehold);
     }
 
     /**
@@ -4234,7 +4234,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOndeviceorientationabsolute() {
-        return getEventHandler("ondeviceorientationabsolute");
+        return getEventHandler("deviceorientationabsolute");
     }
 
     /**
@@ -4243,7 +4243,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOndeviceorientationabsolute(final Object ondeviceorientationabsolute) {
-        setEventHandler("ondeviceorientationabsolute", ondeviceorientationabsolute);
+        setEventHandler("deviceorientationabsolute", ondeviceorientationabsolute);
     }
 
     /**
@@ -4252,7 +4252,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnshow() {
-        return getEventHandler("onshow");
+        return getEventHandler("show");
     }
 
     /**
@@ -4261,7 +4261,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter({CHROME, FF})
     public void setOnshow(final Object onshow) {
-        setEventHandler("onshow", onshow);
+        setEventHandler("show", onshow);
     }
 
     /**
@@ -4270,7 +4270,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnvolumechange() {
-        return getEventHandler("onvolumechange");
+        return getEventHandler("volumechange");
     }
 
     /**
@@ -4279,7 +4279,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnvolumechange(final Object onvolumechange) {
-        setEventHandler("onvolumechange", onvolumechange);
+        setEventHandler("volumechange", onvolumechange);
     }
 
     /**
@@ -4288,7 +4288,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnmsgesturechange() {
-        return getEventHandler("onmsgesturechange");
+        return getEventHandler("msgesturechange");
     }
 
     /**
@@ -4297,7 +4297,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnmsgesturechange(final Object onmsgesturechange) {
-        setEventHandler("onmsgesturechange", onmsgesturechange);
+        setEventHandler("msgesturechange", onmsgesturechange);
     }
 
     /**
@@ -4306,7 +4306,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOngotpointercapture() {
-        return getEventHandler("ongotpointercapture");
+        return getEventHandler("gotpointercapture");
     }
 
     /**
@@ -4315,7 +4315,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOngotpointercapture(final Object ongotpointercapture) {
-        setEventHandler("ongotpointercapture", ongotpointercapture);
+        setEventHandler("gotpointercapture", ongotpointercapture);
     }
 
     /**
@@ -4324,7 +4324,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnpopstate() {
-        return getEventHandler("onpopstate");
+        return getEventHandler("popstate");
     }
 
     /**
@@ -4333,7 +4333,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
-        setEventHandler("onpopstate", onpopstate);
+        setEventHandler("popstate", onpopstate);
     }
 
 }

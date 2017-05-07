@@ -157,7 +157,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      */
     @Setter(IE)
     public void setOnreadystatechange(final Object handler) {
-        setEventHandler("onreadystatechange", handler);
+        setEventHandler("readystatechange", handler);
     }
 
     /**
@@ -175,7 +175,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      */
     @Setter
     public void setOnload(final Object handler) {
-        setEventHandler("onload", handler);
+        setEventHandler("load", handler);
     }
 
     /**

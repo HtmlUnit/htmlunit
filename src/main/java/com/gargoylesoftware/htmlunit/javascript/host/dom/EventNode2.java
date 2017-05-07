@@ -36,7 +36,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnclick(final Object handler) {
-        setEventHandler("onclick", handler);
+        setEventHandler("click", handler);
     }
 
     /**
@@ -54,7 +54,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOndblclick(final Object handler) {
-        setEventHandler("ondblclick", handler);
+        setEventHandler("dblclick", handler);
     }
 
     /**
@@ -72,7 +72,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnblur(final Object handler) {
-        setEventHandler("onblur", handler);
+        setEventHandler("blur", handler);
     }
 
     /**
@@ -90,7 +90,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnfocus(final Object handler) {
-        setEventHandler("onfocus", handler);
+        setEventHandler("focus", handler);
     }
 
     /**
@@ -108,7 +108,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter(IE)
     public void setOnfocusin(final Object handler) {
-        setEventHandler("onfocusin", handler);
+        setEventHandler("focusin", handler);
     }
 
     /**
@@ -126,7 +126,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter(IE)
     public void setOnfocusout(final Object handler) {
-        setEventHandler("onfocusout", handler);
+        setEventHandler("focusout", handler);
     }
 
     /**
@@ -144,7 +144,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnkeydown(final Object handler) {
-        setEventHandler("onkeydown", handler);
+        setEventHandler("keydown", handler);
     }
 
     /**
@@ -162,7 +162,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnkeypress(final Object handler) {
-        setEventHandler("onkeypress", handler);
+        setEventHandler("keypress", handler);
     }
 
     /**
@@ -180,7 +180,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnkeyup(final Object handler) {
-        setEventHandler("onkeyup", handler);
+        setEventHandler("keyup", handler);
     }
 
     /**
@@ -198,7 +198,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnmousedown(final Object handler) {
-        setEventHandler("onmousedown", handler);
+        setEventHandler("mousedown", handler);
     }
 
     /**
@@ -216,7 +216,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnmousemove(final Object handler) {
-        setEventHandler("onmousemove", handler);
+        setEventHandler("mousemove", handler);
     }
 
     /**
@@ -234,7 +234,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnmouseout(final Object handler) {
-        setEventHandler("onmouseout", handler);
+        setEventHandler("mouseout", handler);
     }
 
     /**
@@ -252,7 +252,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnmouseover(final Object handler) {
-        setEventHandler("onmouseover", handler);
+        setEventHandler("mouseover", handler);
     }
 
     /**
@@ -270,7 +270,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnmouseup(final Object handler) {
-        setEventHandler("onmouseup", handler);
+        setEventHandler("mouseup", handler);
     }
 
     /**
@@ -288,7 +288,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOncontextmenu(final Object handler) {
-        setEventHandler("oncontextmenu", handler);
+        setEventHandler("contextmenu", handler);
     }
 
     /**
@@ -306,7 +306,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnresize(final Object handler) {
-        setEventHandler("onresize", handler);
+        setEventHandler("resize", handler);
     }
 
     /**
@@ -324,7 +324,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter(IE)
     public void setOnpropertychange(final Object handler) {
-        setEventHandler("onpropertychange", handler);
+        setEventHandler("propertychange", handler);
     }
 
     /**
@@ -342,7 +342,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOnerror(final Object handler) {
-        setEventHandler("onerror", handler);
+        setEventHandler("error", handler);
     }
 
     /**
@@ -360,7 +360,7 @@ public class EventNode2 extends Node2 {
      */
     @Setter
     public void setOninput(final Object onchange) {
-        setEventHandler("oninput", onchange);
+        setEventHandler("input", onchange);
     }
 
     /**
@@ -369,6 +369,6 @@ public class EventNode2 extends Node2 {
      */
     @Getter
     public Object getOninput() {
-        return getEventHandler("oninput");
+        return getEventHandler("input");
     }
 }

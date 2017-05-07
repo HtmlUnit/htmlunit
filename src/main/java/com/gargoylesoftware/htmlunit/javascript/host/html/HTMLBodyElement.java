@@ -61,7 +61,7 @@ public class HTMLBodyElement extends HTMLElement {
         // when many body tags are found while parsing, attributes of
         // different tags are added and should create an event handler when needed
         if (attributeName.toLowerCase(Locale.ROOT).startsWith("on")) {
-            createEventHandler(attributeName, value);
+            createEventHandler(attributeName.substring(2), value);
         }
     }
 
@@ -242,7 +242,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeunload() {
-        return getEventHandler("onbeforeunload");
+        return getEventHandler("beforeunload");
     }
 
     /**
@@ -251,7 +251,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeunload(final Object onbeforeunload) {
-        setEventHandler("onbeforeunload", onbeforeunload);
+        setEventHandler("beforeunload", onbeforeunload);
     }
 
     /**
@@ -260,7 +260,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnhashchange() {
-        return getEventHandler("onhashchange");
+        return getEventHandler("hashchange");
     }
 
     /**
@@ -269,7 +269,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnhashchange(final Object onhashchange) {
-        setEventHandler("onhashchange", onhashchange);
+        setEventHandler("hashchange", onhashchange);
     }
 
     /**
@@ -278,7 +278,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnlanguagechange() {
-        return getEventHandler("onlanguagechange");
+        return getEventHandler("languagechange");
     }
 
     /**
@@ -287,7 +287,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({CHROME, FF})
     public void setOnlanguagechange(final Object onlanguagechange) {
-        setEventHandler("onlanguagechange", onlanguagechange);
+        setEventHandler("languagechange", onlanguagechange);
     }
 
     /**
@@ -296,7 +296,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnmessage() {
-        return getEventHandler("onmessage");
+        return getEventHandler("message");
     }
 
     /**
@@ -305,7 +305,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
-        setEventHandler("onmessage", onmessage);
+        setEventHandler("message", onmessage);
     }
 
     /**
@@ -314,7 +314,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnoffline() {
-        return getEventHandler("onoffline");
+        return getEventHandler("offline");
     }
 
     /**
@@ -323,7 +323,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnoffline(final Object onoffline) {
-        setEventHandler("onoffline", onoffline);
+        setEventHandler("offline", onoffline);
     }
 
     /**
@@ -332,7 +332,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnonline() {
-        return getEventHandler("ononline");
+        return getEventHandler("online");
     }
 
     /**
@@ -341,7 +341,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnonline(final Object ononline) {
-        setEventHandler("ononline", ononline);
+        setEventHandler("online", ononline);
     }
 
     /**
@@ -350,7 +350,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpagehide() {
-        return getEventHandler("onpagehide");
+        return getEventHandler("pagehide");
     }
 
     /**
@@ -359,7 +359,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpagehide(final Object onpagehide) {
-        setEventHandler("onpagehide", onpagehide);
+        setEventHandler("pagehide", onpagehide);
     }
 
     /**
@@ -368,7 +368,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpageshow() {
-        return getEventHandler("onpageshow");
+        return getEventHandler("pageshow");
     }
 
     /**
@@ -377,7 +377,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpageshow(final Object onpageshow) {
-        setEventHandler("onpageshow", onpageshow);
+        setEventHandler("pageshow", onpageshow);
     }
 
     /**
@@ -386,7 +386,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpopstate() {
-        return getEventHandler("onpopstate");
+        return getEventHandler("popstate");
     }
 
     /**
@@ -395,7 +395,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
-        setEventHandler("onpopstate", onpopstate);
+        setEventHandler("popstate", onpopstate);
     }
 
     /**
@@ -404,7 +404,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter(CHROME)
     public Function getOnrejectionhandled() {
-        return getEventHandler("onrejectionhandled");
+        return getEventHandler("rejectionhandled");
     }
 
     /**
@@ -413,7 +413,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter(CHROME)
     public void setOnrejectionhandled(final Object onrejectionhandled) {
-        setEventHandler("onrejectionhandled", onrejectionhandled);
+        setEventHandler("rejectionhandled", onrejectionhandled);
     }
 
     /**
@@ -422,7 +422,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnstorage() {
-        return getEventHandler("onstorage");
+        return getEventHandler("storage");
     }
 
     /**
@@ -431,7 +431,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
-        setEventHandler("onstorage", onstorage);
+        setEventHandler("storage", onstorage);
     }
 
     /**
@@ -440,7 +440,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter(CHROME)
     public Function getOnunhandledrejection() {
-        return getEventHandler("onunhandledrejection");
+        return getEventHandler("unhandledrejection");
     }
 
     /**
@@ -449,7 +449,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter(CHROME)
     public void setOnunhandledrejection(final Object onunhandledrejection) {
-        setEventHandler("onunhandledrejection", onunhandledrejection);
+        setEventHandler("unhandledrejection", onunhandledrejection);
     }
 
     /**
@@ -458,7 +458,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnunload() {
-        return getEventHandler("onunload");
+        return getEventHandler("unload");
     }
 
     /**
@@ -467,7 +467,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnunload(final Object onunload) {
-        setEventHandler("onunload", onunload);
+        setEventHandler("unload", onunload);
     }
 
     /**
@@ -476,7 +476,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({FF, IE})
     public Function getOnafterprint() {
-        return getEventHandler("onafterprint");
+        return getEventHandler("afterprint");
     }
 
     /**
@@ -485,7 +485,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({FF, IE})
     public void setOnafterprint(final Object onafterprint) {
-        setEventHandler("onafterprint", onafterprint);
+        setEventHandler("afterprint", onafterprint);
     }
 
     /**
@@ -494,7 +494,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter({FF, IE})
     public Function getOnbeforeprint() {
-        return getEventHandler("onbeforeprint");
+        return getEventHandler("beforeprint");
     }
 
     /**
@@ -503,7 +503,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter({FF, IE})
     public void setOnbeforeprint(final Object onbeforeprint) {
-        setEventHandler("onbeforeprint", onbeforeprint);
+        setEventHandler("beforeprint", onbeforeprint);
     }
 
     /**

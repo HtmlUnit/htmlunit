@@ -204,16 +204,16 @@ public class EventListenersContainer implements Serializable {
 
     /**
      * Sets the handler property (with a handler or something else).
-     * @param eventName the event name (like "click")
+     * @param eventType the event type (like "click")
      * @param value the new property
      */
-    public void setEventHandler(final String eventName, final Object value) {
+    public void setEventHandler(final String eventType, final Object value) {
         Object handler = value;
         if (handler == Undefined.instance) {
             handler = null;
         }
 
-        final TypeContainer container = getTypeContainer(eventName);
+        final TypeContainer container = getTypeContainer(eventType);
         container.handler_ = handler;
     }
 
@@ -332,11 +332,11 @@ public class EventListenersContainer implements Serializable {
 
     /**
      * Returns an event handler.
-     * @param eventName the event name (e.g. "click")
+     * @param eventType the event name (e.g. "click")
      * @return the handler function, {@code null} if the property is null or not a function
      */
-    public Function getEventHandler(final String eventName) {
-        final TypeContainer container = typeContainers_.get(eventName.toLowerCase(Locale.ROOT));
+    public Function getEventHandler(final String eventType) {
+        final TypeContainer container = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
         if (container == null) {
             return null;
         }

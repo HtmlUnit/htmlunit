@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
@@ -225,14 +224,14 @@ public class EventTarget extends SimpleScriptable {
 
     /**
      * Returns the specified event handler.
-     * @param eventName the event name (e.g. "onclick")
+     * @param eventType the event type (e.g. "click")
      * @return the handler function, or {@code null} if the property is null or not a function
      */
-    public Function getEventHandler(final String eventName) {
+    public Function getEventHandler(final String eventType) {
         if (eventListenersContainer_ == null) {
             return null;
         }
-        return eventListenersContainer_.getEventHandler(StringUtils.substring(eventName, 2));
+        return eventListenersContainer_.getEventHandler(eventType);
     }
 
     /**
@@ -278,7 +277,7 @@ public class EventTarget extends SimpleScriptable {
 
     /**
      * Defines an event handler (or maybe any other object).
-     * @param eventName the event name (e.g. "onclick")
+     * @param eventName the event name (e.g. "click")
      * @param value the property ({@code null} to reset it)
      */
     public void setEventHandler(final String eventName, final Object value) {
@@ -289,8 +288,7 @@ public class EventTarget extends SimpleScriptable {
         else {
             container = getEventListenersContainer();
         }
-        container.setEventHandler(
-                StringUtils.substring(eventName.toLowerCase(Locale.ROOT), 2), value);
+        container.setEventHandler(eventName, value);
     }
 
     /**
