@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
             FF45 = {"1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
-    @NotYetImplemented({FF45, IE})
+    @NotYetImplemented({FF, IE})
     public void sort() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
