@@ -5202,7 +5202,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-            FF45 = "0, 1, 1")
+            FF = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -7613,7 +7613,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 1, 1",
-            CHROME = "0, 2, 2")
+            CHROME = "0, 2, 2",
+            FF52 = "0, 2, 2")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
