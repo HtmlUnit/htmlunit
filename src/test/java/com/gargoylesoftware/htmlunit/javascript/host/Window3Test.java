@@ -1218,6 +1218,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123", "captured"})
+    @NotYetImplemented
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title>\n"
