@@ -3597,7 +3597,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozpointerlockchange} event handler for this element.
      * @return the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxGetter(FF)
+    @JsxGetter(FF45)
     public Function getOnmozpointerlockchange() {
         return getEventHandler("mozpointerlockchange");
     }
@@ -3606,7 +3606,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozpointerlockchange} event handler for this element.
      * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxSetter(FF)
+    @JsxSetter(FF45)
     public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
         setEventHandler("mozpointerlockchange", onmozpointerlockchange);
     }
@@ -3615,7 +3615,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozpointerlockerror} event handler for this element.
      * @return the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxGetter(FF)
+    @JsxGetter(FF45)
     public Function getOnmozpointerlockerror() {
         return getEventHandler("mozpointerlockerror");
     }
@@ -3624,7 +3624,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozpointerlockerror} event handler for this element.
      * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxSetter(FF)
+    @JsxSetter(FF45)
     public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
         setEventHandler("mozpointerlockerror", onmozpointerlockerror);
     }
