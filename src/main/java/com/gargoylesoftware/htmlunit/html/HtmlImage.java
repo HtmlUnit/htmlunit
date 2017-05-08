@@ -595,7 +595,7 @@ public class HtmlImage extends HtmlElement {
      * of objects which could all be garbage collected without impacting the ImageReader it is better to
      * wrap it in another class.
      */
-    private static final class ImageData implements AutoCloseable {
+    static final class ImageData implements AutoCloseable {
 
         private final ImageReader imageReader_;
 

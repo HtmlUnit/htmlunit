@@ -14,16 +14,27 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLANK_SRC_AS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAME_VALUE_PARAMS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebRequest;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.HtmlImage.ImageData;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -45,6 +56,9 @@ public class HtmlImageInput extends HtmlInput {
     private boolean wasPositionSpecified_;
     private int xPosition_;
     private int yPosition_;
+    private WebResponse imageWebResponse_;
+    private transient ImageData imageData_;
+    private boolean downloaded_;
 
     /**
      * Creates an instance.
@@ -184,4 +198,52 @@ public class HtmlImageInput extends HtmlInput {
     protected boolean isRequiredSupported() {
         return false;
     }
+
+    /**
+     * <p>Downloads the image contained by this image element.</p>
+     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
+     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
+     *
+     * @throws IOException if an error occurs while downloading the image
+     */
+    private void downloadImageIfNeeded() throws IOException {
+        if (!downloaded_) {
+            // HTMLIMAGE_BLANK_SRC_AS_EMPTY
+            final String src = getSrcAttribute();
+            if (!"".equals(src)
+                    && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
+                final HtmlPage page = (HtmlPage) getPage();
+                final WebClient webclient = page.getWebClient();
+
+                final URL url = page.getFullyQualifiedUrl(src);
+                final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
+                final WebRequest request = new WebRequest(url, accept);
+                request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+                imageWebResponse_ = webclient.loadWebResponse(request);
+            }
+
+            if (imageData_ != null) {
+                imageData_.close();
+                imageData_ = null;
+            }
+            downloaded_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+                    || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
+        }
+    }
+
+    /**
+     * Saves this image as the specified file.
+     * @param file the file to save to
+     * @throws IOException if an IO error occurs
+     */
+    public void saveAs(final File file) throws IOException {
+        downloadImageIfNeeded();
+        if (null != imageWebResponse_) {
+            try (InputStream inputStream = imageWebResponse_.getContentAsStream();
+                FileOutputStream fileOut = new FileOutputStream(file)) {
+                IOUtils.copy(imageWebResponse_.getContentAsStream(), fileOut);
+            }
+        }
+    }
+
 }

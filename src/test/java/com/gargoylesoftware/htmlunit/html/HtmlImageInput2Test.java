@@ -14,10 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -96,4 +102,32 @@ public class HtmlImageInput2Test extends SimpleWebTestCase {
 
         assertEquals(expectedPairs, webConnection.getLastParameters());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void saveAs() throws Exception {
+        try (InputStream is = getClass().getClassLoader().
+                getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='image' src='img.jpg' >\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+
+        final HtmlImageInput input = page.querySelector("input");
+        final File tempFile = File.createTempFile("img", ".tmp");
+        input.saveAs(tempFile);
+        FileUtils.deleteQuietly(tempFile);
+    }
+
 }

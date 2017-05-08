@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="add" dev="asashour" issue="43854916" system="stackoverflow">
+                HtmlImageInput: add .saveAs().
+            </action>
             <action type="fix" dev="asashour" issue="1877">
                 JavaScript: MouseEvent to support .pageX and .pageY for all browsers.
             </action>
