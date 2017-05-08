@@ -132,7 +132,7 @@ public class Element extends Node {
          */
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
-            final String eventName = attr.getName();
+            final String eventName = attr.getName().toLowerCase(Locale.ROOT);
             if (eventName.startsWith("on")) {
                 createEventHandler(eventName.substring(2), attr.getValue());
             }
