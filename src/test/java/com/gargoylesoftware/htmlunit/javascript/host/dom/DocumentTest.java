@@ -2487,4 +2487,27 @@ public class DocumentTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"null", "null"},
+            FF45 = {"undefined", "undefined"})
+    public void rootElement() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var xmlDocument = document.implementation.createDocument('', '', null);\n"
+            + "      alert(xmlDocument.rootElement);\n"
+            + "      alert(document.rootElement);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

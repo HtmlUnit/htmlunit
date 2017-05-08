@@ -104,12 +104,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
     /** Helper. */
     public static final String SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION = ""
             + "  function " + SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    if (window.XMLSerializer) {\n"
-            + "      serializer = new XMLSerializer();\n"
-            + "      return serializer.serializeToString(doc);\n"
-            + "    } else {\n"
-            + "      return doc.xml;\n"
-            + "    }\n"
+            + "    return new XMLSerializer().serializeToString(doc);\n"
             + "  }\n";
 
     /** Helper. */
@@ -965,9 +960,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    ifr.onload = function() {\n"
             + "      var xml = ifr.contentWindow.document;\n"
             + "      alert(xml);\n"
-            + "      if(xml.getElementsByTagName) {\n"
-            + "        alert(xml.getElementsByTagName('status')[0].textContent);\n"
-            + "      }\n"
+            + "      alert(xml.getElementsByTagName('status')[0].textContent);\n"
             + "    };\n"
             + "    ifr.src = '" + URL_SECOND + "';\n"
             + "  }\n"
@@ -1042,15 +1035,6 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  <div id='tester'></div>\n"
             + "</body></html>";
 
-        final String xml
-            = "<books>\n"
-            + "  <book>\n"
-            + "    <title>Immortality</title>\n"
-            + "    <author>John Smith</author>\n"
-            + "  </book>\n"
-            + "</books>";
-
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
         loadPageWithAlerts2(html);
     }
 }
