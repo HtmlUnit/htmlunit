@@ -45,7 +45,7 @@ public class EventHandler extends BaseFunction {
         node_ = node;
         eventName_ = eventName;
 
-        jsSnippet_ = "function " + eventName + "(event) {" + jsSnippet + "\n}";
+        jsSnippet_ = "function on" + eventName + "(event) {" + jsSnippet + "\n}";
 
         final ScriptableObject w = node.getPage().getEnclosingWindow().getScriptableObject();
         final Scriptable function = (Scriptable) w.get("Function", w);
