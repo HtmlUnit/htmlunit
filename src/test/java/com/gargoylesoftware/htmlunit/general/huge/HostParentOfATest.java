@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
 
@@ -347,6 +348,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF52 = "true")
+    @NotYetImplemented(FF52)
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
     }
@@ -1306,6 +1308,7 @@ public class HostParentOfATest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF52 = "true",
             CHROME = "true")
+    @NotYetImplemented(FF52)
     public void _AudioNode_ConstantSourceNode() throws Exception {
         test("AudioNode", "ConstantSourceNode");
     }

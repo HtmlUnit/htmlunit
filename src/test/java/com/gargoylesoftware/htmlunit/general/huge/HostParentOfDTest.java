@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
 
@@ -3697,6 +3699,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF52 = "true")
+    @NotYetImplemented(FF52)
     public void _EventTarget_Screen() throws Exception {
         test("EventTarget", "Screen");
     }
@@ -4112,6 +4115,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "true",
             FF52 = "false",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _EventTarget_MediaQueryList() throws Exception {
         test("EventTarget", "MediaQueryList");
     }
@@ -4220,6 +4224,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "true",
             FF52 = "false",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _EventTarget_Performance() throws Exception {
         test("EventTarget", "Performance");
     }
@@ -4287,6 +4292,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF45 = "true")
+    @NotYetImplemented(FF45)
     public void _DOMRequest_DOMCursor() throws Exception {
         test("DOMRequest", "DOMCursor");
     }
@@ -4388,7 +4394,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF52})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
     }
@@ -4458,6 +4464,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF52 = "true")
+    @NotYetImplemented(FF52)
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
     }
@@ -4468,6 +4475,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF52 = "true")
+    @NotYetImplemented(FF52)
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
     }
@@ -5273,6 +5281,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
+    @NotYetImplemented(FF52)
     public void _EventTarget_ConstantSourceNode() throws Exception {
         test("EventTarget", "ConstantSourceNode");
     }
