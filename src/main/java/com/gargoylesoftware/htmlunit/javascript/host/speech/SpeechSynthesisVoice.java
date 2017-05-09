@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code SpeechSynthesisVoice}.
@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  */
 @JsxClass(FF52)
-public class SpeechSynthesisVoice extends EventTarget {
+public class SpeechSynthesisVoice extends SimpleScriptable {
 
     /**
      * Creates a new instance.
