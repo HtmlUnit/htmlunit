@@ -63,6 +63,7 @@ import com.steadystate.css.dom.MediaListImpl;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @ScriptClass
 public class StyleSheetList2 extends SimpleScriptObject {
@@ -208,7 +209,9 @@ public class StyleSheetList2 extends SimpleScriptObject {
      */
     @Override
     protected boolean equivalentValues(final Object value) {
-        return getClass() == value.getClass() && getDomNodeOrNull() == ((StyleSheetList2) value).getDomNodeOrNull();
+        return  value != null
+                && getClass() == value.getClass()
+                && getDomNodeOrNull() == ((StyleSheetList2) value).getDomNodeOrNull();
     }
 
     private static MethodHandle staticHandle(final String name, final Class<?> rtype, final Class<?>... ptypes) {

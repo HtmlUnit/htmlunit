@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @RunWith(BrowserRunner.class)
 public class StyleSheetListTest extends WebDriverTestCase {
@@ -291,6 +292,34 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body onload='test()'>abc</body>\n"
             + "</html>";
+
+        final String css = "div {color:red}";
+        getMockWebConnection().setDefaultResponse(css, "text/css");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "false"})
+    public void equivalentValues() throws Exception {
+        final String html =
+                "<html>\n"
+              + "  <head>\n"
+              + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
+              + "    <script>\n"
+              + "      function test() {\n"
+              + "        var sheets = document.styleSheets;\n"
+              + "        alert(sheets == document.styleSheets);\n"
+              + "        alert(sheets == null);\n"
+              + "        alert(null == sheets);\n"
+              + "      }\n"
+              + "    </script>\n"
+              + "  </head>\n"
+              + "  <body onload='test()'>abc</body>\n"
+              + "</html>";
 
         final String css = "div {color:red}";
         getMockWebConnection().setDefaultResponse(css, "text/css");

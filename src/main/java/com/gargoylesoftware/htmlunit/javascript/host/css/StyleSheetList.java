@@ -57,6 +57,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Carsten Steul
  */
 @JsxClass
 public class StyleSheetList extends SimpleScriptable {
@@ -200,6 +201,8 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @Override
     protected Object equivalentValues(final Object value) {
-        return getClass() == value.getClass() && getDomNodeOrNull() == ((StyleSheetList) value).getDomNodeOrNull();
+        return value != null
+                && getClass() == value.getClass()
+                && getDomNodeOrNull() == ((StyleSheetList) value).getDomNodeOrNull();
     }
 }
