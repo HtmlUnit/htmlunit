@@ -7570,6 +7570,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void webGLQuery() throws Exception {
         test("WebGLQuery");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -7580,6 +7581,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void WebGLSampler() throws Exception {
         test("WebGLSampler");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -7590,6 +7592,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void webGLSync() throws Exception {
         test("WebGLSync");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -7600,6 +7603,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     public void webGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
+
     /**
      * @throws Exception if the test fails
      */
