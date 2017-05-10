@@ -112,12 +112,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLActiveInfo;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLFramebuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLProgram;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLQuery;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderbuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLRenderingContext;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLSampler;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLShader;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLShaderPrecisionFormat;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLSync;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLTexture;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLTransformFeedback;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLUniformLocation;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.WebGLVertexArrayObject;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.ANGLE_instanced_arrays;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.EXT_texture_filter_anisotropic;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ext.OES_element_index_uint;
@@ -584,9 +589,14 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
         VTTCue.class, WaveShaperNode.class, WeakMap.class, WeakSet.class, WebGL2RenderingContext.class,
         WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
-        WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class, WebGLRenderbuffer.class,
-        WebGLRenderingContext.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLTexture.class,
-        WebGLUniformLocation.class, WebKitAnimationEvent.class,
+        WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class,
+        WebGLQuery.class,
+        WebGLRenderbuffer.class,
+        WebGLRenderingContext.class,
+        WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class,
+        WebGLTransformFeedback.class, WebGLTexture.class,
+        WebGLUniformLocation.class, WebGLVertexArrayObject.class,
+        WebKitAnimationEvent.class,
         WebKitCSSMatrix.class, webkitMediaStream.class, WebKitMutationObserver.class,
         webkitRTCPeerConnection.class, webkitSpeechGrammar.class,
         webkitSpeechGrammarList.class, webkitSpeechRecognition.class, webkitSpeechRecognitionError.class,

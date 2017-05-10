@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -10352,7 +10351,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLSync() { [native code] }",
             FF52 = "function WebGLSync() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF52})
     public void webGLSync() throws Exception {
         test("WebGLSync");
     }
@@ -10440,7 +10438,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLTransformFeedback() { [native code] }",
             FF52 = "function WebGLTransformFeedback() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF52})
     public void webGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
@@ -10452,7 +10449,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLQuery() { [native code] }",
             FF52 = "function WebGLQuery() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF52})
     public void webGLQuery() throws Exception {
         test("WebGLQuery");
     }
@@ -10539,7 +10535,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLVertexArrayObject() { [native code] }",
             FF52 = "function WebGLVertexArrayObject() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF52})
     public void webGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject");
     }
@@ -10570,7 +10565,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLSampler() { [native code] }",
             FF52 = "function WebGLSampler() {\n    [native code]\n}")
-    @NotYetImplemented({CHROME, FF52})
     public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
