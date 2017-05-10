@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass(FF52)
+@JsxClass(isJSObject = false, value = FF52)
 public class SpeechSynthesisErrorEvent extends SimpleScriptable {
 
     /** Constant. */
