@@ -1858,14 +1858,24 @@ public class WebClient implements Serializable, AutoCloseable {
         final List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
-                topWindow.close();
+                try {
+                    topWindow.close();
+                }
+                catch (final Exception e) {
+                    LOG.error("Exception while closing a topLevelWindow", e);
+                }
             }
         }
 
         // do this after closing the windows, otherwise some unload event might
         // start a new window that will start the thread again
         if (scriptEngine_ != null) {
-            scriptEngine_.shutdown();
+            try {
+                scriptEngine_.shutdown();
+            }
+            catch (final Exception e) {
+                LOG.error("Exception while shutdown the scriptEngine", e);
+            }
         }
 
         try {
