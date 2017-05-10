@@ -594,7 +594,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLRenderbuffer.class,
         WebGLRenderingContext.class,
         WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class,
-        WebGLTransformFeedback.class, WebGLTexture.class,
+        WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
         WebKitAnimationEvent.class,
         WebKitCSSMatrix.class, webkitMediaStream.class, WebKitMutationObserver.class,
