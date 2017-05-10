@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
@@ -30,7 +28,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -500,7 +497,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented(CHROME)
     public void selection() throws Exception {
         final String html =
               "<html><head>\n"
@@ -533,7 +529,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF52 = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "3,3", "3,10"})
-    @NotYetImplemented({CHROME, FF52})
     public void selection2_1() throws Exception {
         selection2(3, 10);
     }
@@ -548,7 +543,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF52 = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
-    @NotYetImplemented({CHROME, FF52})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
     }
@@ -563,7 +557,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             FF52 = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "10,10", "5,5"})
-    @NotYetImplemented({CHROME, FF52})
     public void selection2_3() throws Exception {
         selection2(10, 5);
     }
@@ -611,7 +604,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             CHROME = {"null,null", "exception"},
             FF52 = {"null,null", "exception"},
             IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
-    @NotYetImplemented({CHROME, FF52})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
