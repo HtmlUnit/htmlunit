@@ -53,7 +53,7 @@ public class CharacterData extends Node {
      */
     @JsxGetter
     public Object getData() {
-        return getDomNodeOrDie().getData();
+        return getDomCharacterDataOrDie().getData();
     }
 
     /**
@@ -62,7 +62,7 @@ public class CharacterData extends Node {
      */
     @JsxSetter
     public void setData(final String newValue) {
-        getDomNodeOrDie().setData(newValue);
+        getDomCharacterDataOrDie().setData(newValue);
     }
 
     /**
@@ -71,7 +71,7 @@ public class CharacterData extends Node {
      */
     @JsxGetter
     public int getLength() {
-        return getDomNodeOrDie().getLength();
+        return getDomCharacterDataOrDie().getLength();
     }
 
     /**
@@ -80,7 +80,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void appendData(final String arg) {
-        getDomNodeOrDie().appendData(arg);
+        getDomCharacterDataOrDie().appendData(arg);
     }
 
     /**
@@ -103,7 +103,7 @@ public class CharacterData extends Node {
             }
         }
 
-        final DomCharacterData domCharacterData = getDomNodeOrDie();
+        final DomCharacterData domCharacterData = getDomCharacterDataOrDie();
         if (offset > domCharacterData.getLength()) {
             throw Context.reportRuntimeError("Provided offset: " + offset + " is greater than length.");
         }
@@ -119,7 +119,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void insertData(final int offset, final String arg) {
-        getDomNodeOrDie().insertData(offset, arg);
+        getDomCharacterDataOrDie().insertData(offset, arg);
     }
 
     /**
@@ -132,7 +132,7 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public void replaceData(final int offset, final int count, final String arg) {
-        getDomNodeOrDie().replaceData(offset, count, arg);
+        getDomCharacterDataOrDie().replaceData(offset, count, arg);
     }
 
     /**
@@ -144,14 +144,10 @@ public class CharacterData extends Node {
      */
     @JsxFunction
     public String substringData(final int offset, final int count) {
-        return getDomNodeOrDie().substringData(offset, count);
+        return getDomCharacterDataOrDie().substringData(offset, count);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomCharacterData getDomNodeOrDie() {
+    private DomCharacterData getDomCharacterDataOrDie() {
         return (DomCharacterData) super.getDomNodeOrDie();
     }
 
