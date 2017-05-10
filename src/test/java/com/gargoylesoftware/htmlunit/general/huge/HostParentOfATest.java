@@ -887,15 +887,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    public void _AnimationEvent_AnimationEvent() throws Exception {
-        test("AnimationEvent", "AnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _CSSConditionRule_CSSConditionRule() throws Exception {
@@ -1198,6 +1189,16 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
         test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _Animation_Animation() throws Exception {
+        test("Animation", "Animation");
     }
 
     /**
