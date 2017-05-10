@@ -7560,4 +7560,54 @@ public class HostTypeOfTest extends WebDriverTestCase {
         test("AudioScheduledSourceNode");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLQuery() throws Exception {
+        test("WebGLQuery");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void WebGLSampler() throws Exception {
+        test("WebGLSampler");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLSync() throws Exception {
+        test("WebGLSync");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLTransformFeedback() throws Exception {
+        test("WebGLTransformFeedback");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLVertexArrayObject() throws Exception {
+        test("WebGLVertexArrayObject");
+    }
 }
