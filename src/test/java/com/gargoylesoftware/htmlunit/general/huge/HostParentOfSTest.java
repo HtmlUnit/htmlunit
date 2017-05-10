@@ -2428,10 +2428,30 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _SpeechSynthesisErrorEvent_SpeechSynthesisErrorEvent() throws Exception {
+        test("SpeechSynthesisErrorEvent", "SpeechSynthesisErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
     public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _SpeechSynthesisVoice_SpeechSynthesisVoice() throws Exception {
+        test("SpeechSynthesisVoice", "SpeechSynthesisVoice");
     }
 
     /**
