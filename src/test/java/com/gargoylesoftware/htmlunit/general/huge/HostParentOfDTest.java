@@ -4281,6 +4281,56 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _FileSystem_FileSystem() throws Exception {
+        test("FileSystem", "FileSystem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _FileSystemDirectoryEntry_FileSystemDirectoryEntry() throws Exception {
+        test("FileSystemDirectoryEntry", "FileSystemDirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _FileSystemDirectoryReader_FileSystemDirectoryReader() throws Exception {
+        test("FileSystemDirectoryReader", "FileSystemDirectoryReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _FileSystemEntry_FileSystemEntry() throws Exception {
+        test("FileSystemEntry", "FileSystemEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _FileSystemFileEntry_FileSystemFileEntry() throws Exception {
+        test("FileSystemFileEntry", "FileSystemFileEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _File_File() throws Exception {
         test("File", "File");
