@@ -535,4 +535,59 @@ public class HostParentOfWTest extends HostParentOf {
     public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLQuery_WebGLQuery() throws Exception {
+        test("WebGLQuery", "WebGLQuery");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLSampler_WebGLSampler() throws Exception {
+        test("WebGLSampler", "WebGLSampler");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLSync_WebGLSync() throws Exception {
+        test("WebGLSync", "WebGLSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
+        test("WebGLTransformFeedback", "WebGLTransformFeedback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
+        test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
+    }
 }
