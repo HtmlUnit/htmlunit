@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -151,9 +150,6 @@ class DefaultElementFactory implements ElementFactory {
                 final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
                 if (browserVersion.hasFeature(HTMLABBREVIATED)) {
                     element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
-                }
-                else if (browserVersion.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
-                    element = new HtmlSpan(qualifiedName, page, attributeMap);
                 }
                 else {
                     element = new HtmlUnknownElement(page, qualifiedName, attributeMap);
