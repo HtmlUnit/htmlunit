@@ -1205,6 +1205,15 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void _AnimationEvent_AnimationEvent() throws Exception {
+        test("AnimationEvent", "AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
