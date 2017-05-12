@@ -1394,6 +1394,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,
 
+    /** Handle {@code <keygen>} as {@code <block>}. */
+    @BrowserFeature(IE)
+    KEYGEN_AS_BLOCK,
+
     /** Handle {@code <keygen>} as {@code <select>}. */
     @BrowserFeature(FF)
     KEYGEN_AS_SELECT,

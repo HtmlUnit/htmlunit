@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLABBREVIATED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLOCK;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -148,7 +148,7 @@ class DefaultElementFactory implements ElementFactory {
         switch (tagName) {
             case KEYGEN_:
                 final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-                if (browserVersion.hasFeature(HTMLABBREVIATED)) {
+                if (browserVersion.hasFeature(KEYGEN_AS_BLOCK)) {
                     element = new HtmlBlockQuote(qualifiedName, page, attributeMap);
                 }
                 else {
