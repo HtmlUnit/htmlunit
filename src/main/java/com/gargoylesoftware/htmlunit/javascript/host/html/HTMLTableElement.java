@@ -196,6 +196,18 @@ public class HTMLTableElement extends RowContainer {
     }
 
     /**
+     * If this table does not have a tbody element, this method creates an empty tbody
+     * element, adds it to the table and then returns it. If this table already has a
+     * tbody element, this method returns the existing tbody element.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536402.aspx">MSDN Documentation</a>
+     * @return a newly added caption if no caption exists, or the first existing caption
+     */
+    @JsxFunction
+    public Object createTBody() {
+        return getScriptableFor(getDomNodeOrDie().appendChildIfNoneExists("tbody"));
+    }
+
+    /**
      * If this table does not have a thead element, this method creates an empty
      * thead element, adds it to the table and then returns it. If this table
      * already has a thead element, this method returns the existing thead element.
