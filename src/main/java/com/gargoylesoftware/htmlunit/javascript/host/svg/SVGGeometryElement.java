@@ -44,7 +44,7 @@ public class SVGGeometryElement extends SVGGraphicsElement {
      */
     @Override
     @JsxFunction
-    protected SVGRect getBBox() {
+    public SVGRect getBBox() {
         return super.getBBox();
     }
 }

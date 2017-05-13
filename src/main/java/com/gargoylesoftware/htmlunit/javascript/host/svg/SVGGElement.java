@@ -43,7 +43,7 @@ public class SVGGElement extends SVGGraphicsElement {
      */
     @Override
     @JsxFunction
-    protected SVGRect getBBox() {
+    public SVGRect getBBox() {
         return super.getBBox();
     }
 }
