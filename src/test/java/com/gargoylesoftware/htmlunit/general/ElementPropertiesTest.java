@@ -1456,7 +1456,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "border,borderColor,cols,frameBorder,frameSpacing,name,onafterprint,onbeforeprint,onbeforeunload,"
                 + "onhashchange,onmessage,onoffline,ononline,onpagehide,onpageshow,onresize,onstorage,onunload,"
                 + "rows")
-    @NotYetImplemented
+    @NotYetImplemented(IE)
     public void frameset() throws Exception {
         test("frameset");
     }
