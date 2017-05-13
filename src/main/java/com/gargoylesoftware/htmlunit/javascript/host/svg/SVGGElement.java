@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.svg.SvgGroup;
 
 /**
@@ -35,5 +36,14 @@ public class SVGGElement extends SVGGraphicsElement {
      */
     @JsxConstructor({CHROME, FF, EDGE})
     public SVGGElement() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction
+    protected SVGRect getBBox() {
+        return super.getBBox();
     }
 }

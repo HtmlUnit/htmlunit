@@ -47,6 +47,17 @@ public class SVGElement extends Element {
     }
 
     /**
+     * Returns the bounding box, in current user space, of the geometry of all contained graphics elements.
+     * @return the bounding box
+     */
+    protected SVGRect getBBox() {
+        final SVGRect rect = new SVGRect();
+        rect.setParentScope(getParentScope());
+        rect.setPrototype(getPrototype(rect.getClass()));
+        return rect;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
