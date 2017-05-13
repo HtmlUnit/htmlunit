@@ -105,4 +105,14 @@ public class HTMLButtonElement extends FormField {
     public TextRange createTextRange() {
         return super.createTextRange();
     }
+
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
+    }
+
 }

@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlFieldSet;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -90,4 +91,14 @@ public class HTMLFieldSetElement extends HTMLElement {
         }
         return (HTMLFormElement) getScriptableFor(form);
     }
+
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
+    }
+
 }

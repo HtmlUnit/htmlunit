@@ -1353,4 +1353,21 @@ public abstract class HtmlElement extends DomElement {
     public boolean isAltPressed() {
         return altPressed_;
     }
+
+    /**
+     * Returns whether this element satisfies all form validation constraints set.
+     * @return whether this element satisfies all form validation constraints set
+     */
+    public boolean isValid() {
+        return !isRequiredSupported() || getAttribute("required") == ATTRIBUTE_NOT_DEFINED
+                || !getAttribute("value").isEmpty();
+    }
+
+    /**
+     * Returns whether this {@link HtmlInput} supports the {@code required} constraint.
+     * @return whether this {@link HtmlInput} supports the {@code required} constraint
+     */
+    protected boolean isRequiredSupported() {
+        return false;
+    }
 }

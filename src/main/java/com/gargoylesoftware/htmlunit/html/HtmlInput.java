@@ -767,18 +767,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * Returns whether this element satisfies all form validation constraints set.
-     * @return whether this element satisfies all form validation constraints set
+     * {@inheritDoc}
      */
-    public boolean isValid() {
-        return !isRequiredSupported() || getAttribute("required") == ATTRIBUTE_NOT_DEFINED
-                || !getValueAttribute().isEmpty();
-    }
-
-    /**
-     * Returns whether this {@link HtmlInput} supports the {@code required} constraint.
-     * @return whether this {@link HtmlInput} supports the {@code required} constraint
-     */
+    @Override
     protected boolean isRequiredSupported() {
         return true;
     }

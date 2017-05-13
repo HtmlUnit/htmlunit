@@ -108,4 +108,23 @@ public class HTMLAreaElement extends HTMLElement {
             area.focus();
         }
     }
+
+    /**
+     * Returns the {@code coords} attribute.
+     * @return the {@code coords} attribute
+     */
+    @JsxGetter
+    public String getCoords() {
+        return getDomNodeOrDie().getAttribute("coords");
+    }
+
+    /**
+     * Sets the {@code coords} attribute.
+     * @param coords {@code coords} attribute
+     */
+    @JsxSetter
+    public void setCoords(final String coords) {
+        getDomNodeOrDie().setAttribute("coords", coords);
+    }
+
 }

@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -4664,6 +4665,24 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<body>\n"
+            + "  <div id='div1' hidden>\n"
+            + "    <div id='child' />\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement element = driver.findElement(By.id("child"));
+        assertFalse(element.isDisplayed());
     }
 
 }

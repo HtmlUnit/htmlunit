@@ -808,7 +808,7 @@ public class WebClient implements Serializable, AutoCloseable {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
                 }
-                else if (jsWindow instanceof Window2) {
+                else if (jsWindow != null) {
                     final HTMLElement2 activeElement =
                             ((HTMLDocument2) Window2.getDocument(jsWindow)).getActiveElement();
                     if (activeElement != null) {

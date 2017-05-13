@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.html.HtmlOutput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
@@ -71,6 +72,15 @@ public class HTMLOutputElement extends HTMLElement {
             labels_ = new LabelsHelper(getDomNodeOrDie());
         }
         return labels_;
+    }
+
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
     }
 
 }
