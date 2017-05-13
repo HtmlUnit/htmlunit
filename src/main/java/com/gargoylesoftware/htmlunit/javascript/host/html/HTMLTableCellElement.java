@@ -394,4 +394,40 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setBorderColorLight(final String borderColor) {
         // ignore
     }
+
+    /**
+     * Returns the {@code headers} attribute.
+     * @return the {@code headers} attribute
+     */
+    @JsxGetter
+    public String getHeaders() {
+        return getDomNodeOrDie().getAttribute("headers");
+    }
+
+    /**
+     * Sets the {@code headers} attribute.
+     * @param headers the new attribute
+     */
+    @JsxSetter
+    public void setHeaders(final String headers) {
+        getDomNodeOrDie().setAttribute("headers", headers);
+    }
+
+    /**
+     * Returns the {@code scope} attribute.
+     * @return the {@code scope} attribute
+     */
+    @JsxGetter
+    public String getScope() {
+        return getDomNodeOrDie().getAttribute("scope");
+    }
+
+    /**
+     * Sets the {@code scope} attribute.
+     * @param scope the new attribute
+     */
+    @JsxSetter
+    public void setScope(final String scope) {
+        getDomNodeOrDie().setAttribute("scope", scope);
+    }
 }

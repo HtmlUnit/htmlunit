@@ -2463,7 +2463,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,"
                 + "chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
                 + "width")
-    @NotYetImplemented
     public void td() throws Exception {
         test("td");
     }
@@ -2479,7 +2478,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "abbr,align,axis,background,bgColor,borderColor,borderColorDark,borderColorLight,cellIndex,ch,"
                 + "chOff,colSpan,headers,height,noWrap,rowSpan,scope,vAlign,"
                 + "width")
-    @NotYetImplemented
     public void th() throws Exception {
         test("th");
     }
