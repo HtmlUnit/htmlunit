@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -45,18 +44,6 @@ public class SVGElement extends Element {
      */
     @JsxConstructor({CHROME, FF, EDGE})
     public SVGElement() {
-    }
-
-    /**
-     * Returns the bounding box, in current user space, of the geometry of all contained graphics elements.
-     * @return the bounding box
-     */
-    @JsxFunction
-    public SVGRect getBBox() {
-        final SVGRect rect = new SVGRect();
-        rect.setParentScope(getParentScope());
-        rect.setPrototype(getPrototype(rect.getClass()));
-        return rect;
     }
 
     /**
