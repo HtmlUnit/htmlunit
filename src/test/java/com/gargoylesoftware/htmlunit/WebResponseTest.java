@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_16BE;
-import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
@@ -35,14 +33,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -54,31 +49,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebResponseTest extends WebServerTestCase {
-
-    /**
-     * Verifies that when no encoding header is provided, encoding may be recognized with its Byte Order Mark.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("\u6211\u662F\u6211\u7684 \u064A\u0627 \u0623\u0647\u0644\u0627\u064B")
-    public void recognizeBOM() throws Exception {
-        recognizeBOM(UTF_8,  ByteOrderMark.UTF_8.getBytes());
-        recognizeBOM(UTF_16BE, ByteOrderMark.UTF_16BE.getBytes());
-        recognizeBOM(UTF_16LE, ByteOrderMark.UTF_16LE.getBytes());
-    }
-
-    private void recognizeBOM(final Charset encoding, final byte[] markerBytes) throws Exception {
-        final String html = "<html><head><script src='foo.js'></script></head><body></body></html>";
-
-        // see http://en.wikipedia.org/wiki/Byte_Order_Mark
-        final byte[] script = ("alert('" + getExpectedAlerts()[0]  + "');").getBytes(encoding);
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(ArrayUtils.addAll(markerBytes, script), 200, "OK", "text/javascript");
-        webConnection.setResponse(URL_FIRST, html);
-
-        loadPageWithAlerts(html, URL_FIRST);
-    }
 
     /**
      * @throws Exception if the test fails
