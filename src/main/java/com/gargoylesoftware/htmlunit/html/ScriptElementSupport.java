@@ -19,6 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
+import java.nio.charset.Charset;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -137,7 +140,8 @@ public final class ScriptElementSupport {
                 try {
                     final ScriptElement scriptElement = (ScriptElement) element;
                     scriptElement.setExecuted(true);
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src);
+                    final Charset charset = EncodingSniffer.toCharset(scriptElement.getCharsetAttribute());
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(element, Event.TYPE_LOAD);
                     }

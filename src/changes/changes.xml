@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, Bugfixes">
+            <action type="fix" dev="rbri">
+                Various fixes for javascript encoding detection.
+            </action>
             <action type="fix" dev="rbri" issue="1881" due-to="Carsten Steul">
-                NPE in StyleSheetList.equivalentValues()
+                NPE in StyleSheetList.equivalentValues().
             </action>
             <action type="add" dev="asashour" issue="43854916" system="stackoverflow">
                 HtmlImageInput: add .saveAs().

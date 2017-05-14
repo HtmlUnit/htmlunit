@@ -614,7 +614,7 @@ public final class EncodingSniffer {
      * @return the encoding sniffed from the specified HTTP headers, or {@code null} if the encoding
      *         could not be determined
      */
-    static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
+    public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
         Charset encoding = null;
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();

@@ -371,7 +371,8 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 }
                 try {
                     executed_ = true;
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src);
+                    final Charset charset = EncodingSniffer.toCharset(getCharsetAttribute());
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(Event.TYPE_LOAD);
                     }

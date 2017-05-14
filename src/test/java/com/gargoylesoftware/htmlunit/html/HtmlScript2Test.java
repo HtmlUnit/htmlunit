@@ -21,10 +21,12 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -416,9 +418,9 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("أهلاً")
-    public void isoCharsetWithUtfBom() throws Exception {
-        charsetWithBom(ISO_8859_1, ByteOrderMark.UTF_8);
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_null_null_null() throws Exception {
+        charset(null, "", null, null);
     }
 
     /**
@@ -426,8 +428,25 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("أهلاً")
-    public void utfCharsetWithoutBom() throws Exception {
-        charsetWithBom(UTF_8, null);
+    public void null_null_null_UTF_8() throws Exception {
+        charset(null, "", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_null_null_UTF_16BE() throws Exception {
+        charset(null, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_null_UTF_8_null() throws Exception {
+        charset(null, "", UTF_8, null);
     }
 
     /**
@@ -435,22 +454,741 @@ public class HtmlScript2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("أهلاً")
-    public void isoCharsetWithoutBom() throws Exception {
-        charsetWithBom(ISO_8859_1, null);
+    public void null_null_UTF_8_UTF_8() throws Exception {
+        charset(null, "", UTF_8, ByteOrderMark.UTF_8);
     }
 
-    private void charsetWithBom(final Charset charsetAttribute, final ByteOrderMark bom) throws Exception {
-        final String html
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_null_UTF_8_UTF_16BE() throws Exception {
+        charset(null, "", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_null_ISO_8859_1_null() throws Exception {
+        charset(null, "", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_null_ISO_8859_1_UTF_8() throws Exception {
+        charset(null, "", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_null_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(null, "", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void null_UTF_8_null_null() throws Exception {
+        charset(null, "; charset=utf-8", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void null_UTF_8_null_UTF_8() throws Exception {
+        charset(null, "; charset=utf-8", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_UTF_8_null_UTF_16BE() throws Exception {
+        charset(null, "; charset=utf-8", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void null_UTF_8_UTF_8_null() throws Exception {
+        charset(null, "; charset=utf-8", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void null_UTF_8_UTF_8_UTF_8() throws Exception {
+        charset(null, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_UTF_8_UTF_8_UTF_16BE() throws Exception {
+        charset(null, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_UTF_8_ISO_8859_1_null() throws Exception {
+        charset(null, "; charset=utf-8", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_UTF_8_ISO_8859_1_UTF_8() throws Exception {
+        charset(null, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_UTF_8_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(null, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_ISO_8859_1_null_null() throws Exception {
+        charset(null, "; charset=iso-8859-1", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_ISO_8859_1_null_UTF_8() throws Exception {
+        charset(null, "; charset=iso-8859-1", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_ISO_8859_1_null_UTF_16BE() throws Exception {
+        charset(null, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_ISO_8859_1_UTF_8_null() throws Exception {
+        charset(null, "; charset=iso-8859-1", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void null_ISO_8859_1_UTF_8_UTF_8() throws Exception {
+        charset(null, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void null_ISO_8859_1_UTF_8_UTF_16BE() throws Exception {
+        charset(null, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_ISO_8859_1_ISO_8859_1_null() throws Exception {
+        charset(null, "; charset=iso-8859-1", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void null_ISO_8859_1_ISO_8859_1_UTF_8() throws Exception {
+        charset(null, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "?????")
+    public void null_ISO_8859_1_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(null, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_null_null_null() throws Exception {
+        charset(UTF_8, "", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_null_null_UTF_8() throws Exception {
+        charset(UTF_8, "", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void UTF_8_null_null_UTF_16BE() throws Exception {
+        charset(UTF_8, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_null_UTF_8_null() throws Exception {
+        charset(UTF_8, "", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_null_UTF_8_UTF_8() throws Exception {
+        charset(UTF_8, "", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void UTF_8_null_UTF_8_UTF_16BE() throws Exception {
+        charset(UTF_8, "", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_null_ISO_8859_1_null() throws Exception {
+        charset(UTF_8, "", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_null_ISO_8859_1_UTF_8() throws Exception {
+        charset(UTF_8, "", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void UTF_8_null_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(UTF_8, "", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_UTF_8_null_null() throws Exception {
+        charset(UTF_8, "; charset=utf-8", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_UTF_8_null_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=utf-8", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "أهلاً")
+    public void UTF_8_UTF_8_null_UTF_16BE() throws Exception {
+        charset(UTF_8, "; charset=utf-8", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_UTF_8_UTF_8_null() throws Exception {
+        charset(UTF_8, "; charset=utf-8", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void UTF_8_UTF_8_UTF_8_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "أهلاً")
+    public void UTF_8_UTF_8_UTF_8_UTF_16BE() throws Exception {
+        charset(UTF_8, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_UTF_8_ISO_8859_1_null() throws Exception {
+        charset(UTF_8, "; charset=utf-8", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_UTF_8_ISO_8859_1_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "?????")
+    public void UTF_8_UTF_8_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(UTF_8, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void UTF_8_ISO_8859_1_null_null() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void UTF_8_ISO_8859_1_null_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void UTF_8_ISO_8859_1_null_UTF_16BE() throws Exception {
+        charset(UTF_8, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void UTF_8_ISO_8859_1_UTF_8_null() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void UTF_8_ISO_8859_1_UTF_8_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void UTF_8_ISO_8859_1_UTF_8_UTF_16BE() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_ISO_8859_1_ISO_8859_1_null() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void UTF_8_ISO_8859_1_ISO_8859_1_UTF_8() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "?????")
+    public void UTF_8_ISO_8859_1_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(UTF_8, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_null_null_null() throws Exception {
+        charset(ISO_8859_1, "", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_null_null_UTF_8() throws Exception {
+        charset(ISO_8859_1, "", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void ISO_8859_1_null_null_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_null_UTF_8_null() throws Exception {
+        charset(ISO_8859_1, "", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_null_UTF_8_UTF_8() throws Exception {
+        charset(ISO_8859_1, "", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void ISO_8859_1_null_UTF_8_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_null_ISO_8859_1_null() throws Exception {
+        charset(ISO_8859_1, "", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_null_ISO_8859_1_UTF_8() throws Exception {
+        charset(ISO_8859_1, "", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void ISO_8859_1_null_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_UTF_8_null_null() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_UTF_8_null_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "أهلاً")
+    public void ISO_8859_1_UTF_8_null_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_UTF_8_UTF_8_null() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("أهلاً")
+    public void ISO_8859_1_UTF_8_UTF_8_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "أهلاً")
+    public void ISO_8859_1_UTF_8_UTF_8_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_UTF_8_ISO_8859_1_null() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_UTF_8_ISO_8859_1_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "?????")
+    public void ISO_8859_1_UTF_8_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "; charset=utf-8", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_ISO_8859_1_null_null() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", null, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_ISO_8859_1_null_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", null, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void ISO_8859_1_ISO_8859_1_null_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "", null, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_ISO_8859_1_UTF_8_null() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", UTF_8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "أهلاً",
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_ISO_8859_1_UTF_8_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "Ø£Ù‡Ù„Ø§Ù‹")
+    public void ISO_8859_1_ISO_8859_1_UTF_8_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", UTF_8, ByteOrderMark.UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_ISO_8859_1_ISO_8859_1_null() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", ISO_8859_1, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void ISO_8859_1_ISO_8859_1_ISO_8859_1_UTF_8() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {},
+            IE = "?????")
+    public void ISO_8859_1_ISO_8859_1_ISO_8859_1_UTF_16BE() throws Exception {
+        charset(ISO_8859_1, "; charset=iso-8859-1", ISO_8859_1, ByteOrderMark.UTF_16BE);
+    }
+
+    private void charset(final Charset charsetAttribute,
+            final String charsetResponseHeader,
+            final Charset charsetResponseEncoding,
+            final ByteOrderMark bom) throws Exception {
+
+        // use always a different url to avoid caching effects
+        final URL cssUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+
+        String html
             = "<html><head>\n"
-            + "  <script src='" + URL_SECOND + "' charset='" + charsetAttribute + "'></script>\n"
+            + "  <script src='" + cssUrl + "'";
+        if (charsetAttribute != null) {
+            html = html + " charset='" + charsetAttribute + "'";
+        }
+        html = html + "></script>\n"
             + "</head>\n"
             + "<body></body>\n"
             + "</html>";
 
-        final String script =
-                (bom == null ? "" : new String(bom.getBytes()))
-                + "alert('أهلاً');";
-        getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
-        loadPageWithAlerts2(html);
+        final String js = "alert('أهلاً');";
+        byte[] script = null;
+        if (charsetResponseEncoding == null) {
+            script = js.getBytes(UTF_8);
+        }
+        else {
+            script = js.getBytes(charsetResponseEncoding);
+        }
+        if (bom == null) {
+            getMockWebConnection().setResponse(cssUrl, script, 200, "OK",
+                    "application/javascript" + charsetResponseHeader, null);
+        }
+        else {
+            script = ArrayUtils.addAll(bom.getBytes(), script);
+            getMockWebConnection().setResponse(cssUrl, script, 200, "OK",
+                    "application/javascript" + charsetResponseHeader, null);
+        }
+
+        try {
+            loadPageWithAlerts2(html);
+        }
+        catch (final WebDriverException e) {
+            if (!e.getCause().getMessage().contains("illegal character")
+                && !e.getCause().getMessage().contains("is not defined.")) {
+                throw e;
+            }
+        }
     }
 }

@@ -92,6 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
@@ -944,12 +945,13 @@ public class HtmlPage extends SgmlPage {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param srcAttribute the source attribute from the script tag
+     * @param scriptCharset the charset from the script tag
      * @return the result of loading the specified external JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute)
+    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final Charset scriptCharset)
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
@@ -979,7 +981,7 @@ public class HtmlPage extends SgmlPage {
 
         final Object script;
         try {
-            script = loadJavaScriptFromUrl(scriptURL);
+            script = loadJavaScriptFromUrl(scriptURL, scriptCharset);
         }
         catch (final IOException e) {
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1005,16 +1007,16 @@ public class HtmlPage extends SgmlPage {
      * there is a problem loading the code from the specified URL.
      *
      * @param url the URL of the script
+     * @param scriptCharset the charset from the script tag
      * @return the content of the file, or {@code null} if we ran into a compile error
      * @throws IOException if there is a problem downloading the JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Object loadJavaScriptFromUrl(final URL url) throws IOException,
+    private Object loadJavaScriptFromUrl(final URL url, final Charset scriptCharset) throws IOException,
         FailingHttpStatusCodeException {
 
-        final Charset pageEncoding = getCharset();
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
@@ -1066,16 +1068,16 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        final Charset scriptEncoding;
-        final Charset contentCharset = response.getContentCharset();
-        if (!contentCharset.equals(ISO_8859_1)) {
+        Charset scriptEncoding = Charset.forName("windows-1252");
+        final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
+        if (contentCharset == null) {
+            // use info from script tag or fall back to utf-8
+            if (scriptCharset != null && scriptCharset != ISO_8859_1) {
+                scriptEncoding = scriptCharset;
+            }
+        }
+        else if (contentCharset != ISO_8859_1) {
             scriptEncoding = contentCharset;
-        }
-        else if (!pageEncoding.equals(ISO_8859_1)) {
-            scriptEncoding = pageEncoding;
-        }
-        else {
-            scriptEncoding = ISO_8859_1;
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding);
