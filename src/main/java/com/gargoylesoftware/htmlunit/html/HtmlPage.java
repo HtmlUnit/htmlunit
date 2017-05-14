@@ -944,13 +944,12 @@ public class HtmlPage extends SgmlPage {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param srcAttribute the source attribute from the script tag
-     * @param charset the charset from the script tag
      * @return the result of loading the specified external JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute, final Charset charset)
+    JavaScriptLoadResult loadExternalJavaScriptFile(final String srcAttribute)
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
@@ -980,7 +979,7 @@ public class HtmlPage extends SgmlPage {
 
         final Object script;
         try {
-            script = loadJavaScriptFromUrl(scriptURL, charset);
+            script = loadJavaScriptFromUrl(scriptURL);
         }
         catch (final IOException e) {
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1006,17 +1005,15 @@ public class HtmlPage extends SgmlPage {
      * there is a problem loading the code from the specified URL.
      *
      * @param url the URL of the script
-     * @param charset the charset to use to read the text
      * @return the content of the file, or {@code null} if we ran into a compile error
      * @throws IOException if there is a problem downloading the JavaScript file
      * @throws FailingHttpStatusCodeException if the request's status code indicates a request
      *         failure and the {@link WebClient} was configured to throw exceptions on failing
      *         HTTP status codes
      */
-    private Object loadJavaScriptFromUrl(final URL url, final Charset charset) throws IOException,
+    private Object loadJavaScriptFromUrl(final URL url) throws IOException,
         FailingHttpStatusCodeException {
 
-        Charset scriptEncoding = charset;
         final Charset pageEncoding = getCharset();
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
@@ -1069,17 +1066,16 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        if (scriptEncoding == null) {
-            final Charset contentCharset = response.getContentCharset();
-            if (!contentCharset.equals(ISO_8859_1)) {
-                scriptEncoding = contentCharset;
-            }
-            else if (!pageEncoding.equals(ISO_8859_1)) {
-                scriptEncoding = pageEncoding;
-            }
-            else {
-                scriptEncoding = ISO_8859_1;
-            }
+        final Charset scriptEncoding;
+        final Charset contentCharset = response.getContentCharset();
+        if (!contentCharset.equals(ISO_8859_1)) {
+            scriptEncoding = contentCharset;
+        }
+        else if (!pageEncoding.equals(ISO_8859_1)) {
+            scriptEncoding = pageEncoding;
+        }
+        else {
+            scriptEncoding = ISO_8859_1;
         }
 
         final String scriptCode = response.getContentAsString(scriptEncoding);

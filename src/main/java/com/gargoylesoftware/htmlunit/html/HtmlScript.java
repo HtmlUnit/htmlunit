@@ -371,7 +371,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 }
                 try {
                     executed_ = true;
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, null);
+                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src);
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(Event.TYPE_LOAD);
                     }
