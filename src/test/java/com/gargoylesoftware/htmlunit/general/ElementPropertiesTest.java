@@ -608,7 +608,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "close(),closed,confirm(),"
                 + "console,createImageBitmap(),crypto,customElements,defaultstatus,defaultStatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
-                + "getMatchedCSSRules(),getSelection(),history,ieMethods,"
+                + "getMatchedCSSRules(),getSelection(),history,"
                 + "indexedDB,innerHeight,innerWidth,isSecureContext,length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
