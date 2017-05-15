@@ -140,7 +140,10 @@ public final class ScriptElementSupport {
                 try {
                     final ScriptElement scriptElement = (ScriptElement) element;
                     scriptElement.setExecuted(true);
-                    final Charset charset = EncodingSniffer.toCharset(scriptElement.getCharsetAttribute());
+                    Charset charset = EncodingSniffer.toCharset(scriptElement.getCharsetAttribute());
+                    if (charset == null) {
+                        charset = page.getCharset();
+                    }
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(element, Event.TYPE_LOAD);
