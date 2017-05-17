@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
+ * @author Natasha Lazarova
  */
 @RunWith(BrowserRunner.class)
 public class SVGSVGElementTest extends WebDriverTestCase {
@@ -46,6 +48,42 @@ public class SVGSVGElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void getInnerTextOfSvg() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>\n"
+                + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'></svg>\n"
+                + "  <script>\n"
+                + "    var svg =  document.getElementById('myId');\n"
+                + "    alert(svg.innerText);\n"
+                + "  </script>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getInnerTextOfElementContainingSvg() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>\n"
+                + "  <div id='myDivId'><svg xmlns='http://www.w3.org/2000/svg' version='1.1'></svg></div>\n"
+                + "  <script>\n"
+                + "    var div = document.getElementById('myDivId');\n"
+                + "    alert(div.innerText);\n"
+                + "  </script>\n"
+                + "</body></html>";
 
         loadPageWithAlerts2(html);
     }

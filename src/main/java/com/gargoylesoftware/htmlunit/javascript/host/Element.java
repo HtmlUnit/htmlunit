@@ -72,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement.ProxyDomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.svg.SvgElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1048,6 +1049,9 @@ public class Element extends Node {
                 s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
             }
             builder.append(s);
+        }
+        else if (node instanceof SvgElement) {
+            // nothing to do for the moment
         }
         else if (html) {
             final DomElement element = (DomElement) node;
