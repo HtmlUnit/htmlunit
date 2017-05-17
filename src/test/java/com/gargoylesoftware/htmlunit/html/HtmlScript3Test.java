@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
@@ -78,16 +79,20 @@ public class HtmlScript3Test extends WebDriverTestCase {
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
 
+        final TestCharset[] charsetHtmlResponseHeader =
+                new TestCharset[] {/* null, TestCharset.UTF8, */ TestCharset.ISO88591};
         final TestCharset[] charsetAttribute = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final TestCharset[] charsetResponseHeader = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final TestCharset[] charsetResponseEncoding = new TestCharset[] {null, TestCharset.UTF8, TestCharset.ISO88591};
         final String[] bom = new String[] {null, BOM_UTF_8, BOM_UTF_16BE};
 
-        for (final Object attribute : charsetAttribute) {
-            for (final Object responseHeader : charsetResponseHeader) {
-                for (final Object responseEncoding : charsetResponseEncoding) {
-                    for (final Object b : bom) {
-                        list.add(new Object[] {attribute, responseHeader, responseEncoding, b});
+        for (final Object charsetHtml : charsetHtmlResponseHeader) {
+            for (final Object attribute : charsetAttribute) {
+                for (final Object responseHeader : charsetResponseHeader) {
+                    for (final Object responseEncoding : charsetResponseEncoding) {
+                        for (final Object b : bom) {
+                            list.add(new Object[] {charsetHtml, attribute, responseHeader, responseEncoding, b});
+                        }
                     }
                 }
             }
@@ -96,27 +101,33 @@ public class HtmlScript3Test extends WebDriverTestCase {
     }
 
     /**
-     * The charsetAttribute.
+     * The charsetHtmlResponseHeader.
      */
     @Parameter
+    public TestCharset charsetHtmlResponseHeader_;
+
+    /**
+     * The charsetAttribute.
+     */
+    @Parameter(1)
     public TestCharset charsetAttribute_;
 
     /**
      * The charsetResponseHeader.
      */
-    @Parameter(1)
+    @Parameter(2)
     public TestCharset charsetResponseHeader_;
 
     /**
      * The charsetResponseEncoding.
      */
-    @Parameter(2)
+    @Parameter(3)
     public TestCharset charsetResponseEncoding_;
 
     /**
      * The bom.
      */
-    @Parameter(3)
+    @Parameter(4)
     public String bom_;
 
     /**
@@ -127,10 +138,12 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Alerts("أهلاً")
     @Default
     public void charset() throws Exception {
-        charset(charsetAttribute_, charsetResponseHeader_, charsetResponseEncoding_, bom_);
+        charset(TestCharset.ISO88591, charsetAttribute_, charsetResponseHeader_, charsetResponseEncoding_, bom_);
     }
 
-    private void charset(final TestCharset charsetAttribute,
+    private void charset(
+            final TestCharset charsetHtmlResponse,
+            final TestCharset charsetAttribute,
             final TestCharset charsetResponseHeader,
             final TestCharset charsetResponseEncoding,
             final String bom) throws Exception {
@@ -149,9 +162,10 @@ public class HtmlScript3Test extends WebDriverTestCase {
             + "<body></body>\n"
             + "</html>";
 
-        String contentType = "application/javascript";
+        String scriptContentType = "application/javascript";
         if (charsetResponseHeader != null) {
-            contentType = contentType + "; charset=" + charsetResponseHeader.getCharset().name().toLowerCase();
+            scriptContentType = scriptContentType + "; charset="
+                                    + charsetResponseHeader.getCharset().name().toLowerCase();
         }
         final String js = "alert('أهلاً');";
 
@@ -169,10 +183,20 @@ public class HtmlScript3Test extends WebDriverTestCase {
         else if (BOM_UTF_16BE.equals(bom)) {
             script = ArrayUtils.addAll(ByteOrderMark.UTF_16BE.getBytes(), script);
         }
-        getMockWebConnection().setResponse(cssUrl, script, 200, "OK", contentType, null);
+        getMockWebConnection().setResponse(cssUrl, script, 200, "OK", scriptContentType, null);
 
+        String htmlContentType = "text/html";
+        if (charsetHtmlResponse != null) {
+            htmlContentType = htmlContentType + "; charset=" + charsetHtmlResponse.getCharset().name();
+        }
         try {
-            loadPageWithAlerts2(html);
+            expandExpectedAlertsVariables(URL_FIRST);
+            final String[] expectedAlerts = getExpectedAlerts();
+
+            final WebDriver driver = loadPage2(html, URL_FIRST,
+                                        htmlContentType, charsetHtmlResponse.getCharset(), null);
+
+            verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
         }
         catch (final WebDriverException e) {
             if (!e.getCause().getMessage().contains("illegal character")
@@ -187,101 +211,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void ____() throws Exception {
-        charset(null, null, null, null);
+    public void _ISO88591____() throws Exception {
+        charset(TestCharset.ISO88591, null, null, null, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void ____BOMUTF16BE() throws Exception {
-        charset(null, null, null, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void ___UTF8_() throws Exception {
-        charset(null, null, TestCharset.UTF8, null);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void ___UTF8_BOMUTF16BE() throws Exception {
-        charset(null, null, TestCharset.UTF8, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void ___ISO88591_() throws Exception {
-        charset(null, null, TestCharset.ISO88591, null);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void ___ISO88591_BOMUTF8() throws Exception {
-        charset(null, null, TestCharset.ISO88591, BOM_UTF_8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void ___ISO88591_BOMUTF16BE() throws Exception {
-        charset(null, null, TestCharset.ISO88591, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void __UTF8__BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, null, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void __UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void __UTF8_ISO88591_() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, null);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void __UTF8_ISO88591_BOMUTF8() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void __UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591____BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -289,8 +228,93 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void __ISO88591__() throws Exception {
-        charset(null, TestCharset.ISO88591, null, null);
+    public void _ISO88591___UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.UTF8, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591___UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.UTF8, BOM_UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void _ISO88591___ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void _ISO88591___ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.ISO88591, BOM_UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591___ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, null, TestCharset.ISO88591, BOM_UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591__UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, null, BOM_UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591__UTF8_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void _ISO88591__UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void _ISO88591__UTF8_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591__UTF8_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
+    public void _ISO88591__ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -299,16 +323,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void __ISO88591__BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _ISO88591__ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void __ISO88591__BOMUTF16BE() throws Exception {
-        charset(null, null, null, BOM_UTF_16BE);
+    public void _ISO88591__ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -316,8 +340,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void __ISO88591_UTF8_() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _ISO88591__ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
     /**
@@ -326,25 +350,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void __ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _ISO88591__ISO88591_UTF8_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void __ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void __ISO88591_ISO88591_() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _ISO88591__ISO88591_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -352,8 +367,17 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void __ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591__ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("?????")
+    public void _ISO88591__ISO88591_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
 
     /**
@@ -362,33 +386,24 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "?????")
-    public void __ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591__ISO88591_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _UTF8___BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, null, null, BOM_UTF_16BE);
+    public void _ISO88591_UTF8___BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _UTF8__UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.UTF8, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void _UTF8__ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, null);
+    public void _ISO88591_UTF8__UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -396,16 +411,25 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _UTF8__ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_UTF8__ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.ISO88591, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _UTF8__ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, null, TestCharset.ISO88591, BOM_UTF_16BE);
+    @Alerts("?????")
+    public void _ISO88591_UTF8__ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.ISO88591, BOM_UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591_UTF8__ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
@@ -414,8 +438,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "أهلاً")
-    public void _UTF8_UTF8__BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -424,8 +448,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "أهلاً")
-    public void _UTF8_UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_UTF8_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -433,8 +457,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _UTF8_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void _ISO88591_UTF8_UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
     /**
@@ -442,8 +466,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _UTF8_UTF8_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_UTF8_UTF8_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
     }
 
     /**
@@ -452,8 +476,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "?????")
-    public void _UTF8_UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_UTF8_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
@@ -461,8 +485,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _UTF8_ISO88591__() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, null);
+    public void _ISO88591_UTF8_ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -471,16 +495,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _UTF8_ISO88591__BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _ISO88591_UTF8_ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _UTF8_ISO88591__BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, null, null, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -488,8 +512,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _UTF8_ISO88591_UTF8_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _ISO88591_UTF8_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
     /**
@@ -498,8 +522,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _UTF8_ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
 
     /**
@@ -508,8 +532,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _UTF8_ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_ISO88591_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -517,8 +541,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _UTF8_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _ISO88591_UTF8_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
     /**
@@ -526,8 +550,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _UTF8_ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
 
     /**
@@ -536,8 +560,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "?????")
-    public void _UTF8_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_UTF8_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
@@ -545,16 +569,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591___() throws Exception {
-        charset(TestCharset.ISO88591, null, null, null);
+    public void _ISO88591_ISO88591___() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _ISO88591___BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, null, null, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591___BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null, BOM_UTF_16BE);
     }
 
     /**
@@ -562,25 +586,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591__UTF8_() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.UTF8, null);
+    public void _ISO88591_ISO88591__UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.UTF8, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _ISO88591__UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.UTF8, BOM_UTF_16BE);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("?????")
-    public void _ISO88591__ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, null);
+    public void _ISO88591_ISO88591__UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -588,16 +603,25 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _ISO88591__ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_ISO88591__ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.ISO88591, null);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _ISO88591__ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, null, TestCharset.ISO88591, BOM_UTF_16BE);
+    @Alerts("?????")
+    public void _ISO88591_ISO88591__ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.ISO88591, BOM_UTF_8);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void _ISO88591_ISO88591__ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
@@ -606,8 +630,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "أهلاً")
-    public void _ISO88591_UTF8__BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_UTF8__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null, BOM_UTF_16BE);
     }
 
     /**
@@ -616,8 +640,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "أهلاً")
-    public void _ISO88591_UTF8_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_UTF8_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -625,8 +649,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _ISO88591_UTF8_ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
+    public void _ISO88591_ISO88591_UTF8_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, null);
     }
 
     /**
@@ -634,8 +658,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _ISO88591_UTF8_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_ISO88591_UTF8_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_8);
     }
 
     /**
@@ -644,8 +668,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "?????")
-    public void _ISO88591_UTF8_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_UTF8_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 
     /**
@@ -653,8 +677,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591_ISO88591__() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, null);
+    public void _ISO88591_ISO88591_ISO88591__() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, null);
     }
 
     /**
@@ -663,16 +687,16 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591_ISO88591__BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
+    public void _ISO88591_ISO88591_ISO88591__BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_8);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void _ISO88591_ISO88591__BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_ISO88591__BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null, BOM_UTF_16BE);
     }
 
     /**
@@ -680,8 +704,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591_ISO88591_UTF8_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
+    public void _ISO88591_ISO88591_ISO88591_UTF8_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, null);
     }
 
     /**
@@ -690,8 +714,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "أهلاً",
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591_ISO88591_UTF8_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
+    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_8);
     }
 
     /**
@@ -700,8 +724,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "Ø£Ù‡Ù„Ø§Ù‹")
-    public void _ISO88591_ISO88591_UTF8_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_ISO88591_UTF8_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.UTF8, BOM_UTF_16BE);
     }
 
     /**
@@ -709,8 +733,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _ISO88591_ISO88591_ISO88591_() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
+    public void _ISO88591_ISO88591_ISO88591_ISO88591_() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, null);
     }
 
     /**
@@ -718,8 +742,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("?????")
-    public void _ISO88591_ISO88591_ISO88591_BOMUTF8() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
+    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF8() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_8);
     }
 
     /**
@@ -728,7 +752,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             IE = "?????")
-    public void _ISO88591_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
-        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
+    public void _ISO88591_ISO88591_ISO88591_ISO88591_BOMUTF16BE() throws Exception {
+        charset(TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, TestCharset.ISO88591, BOM_UTF_16BE);
     }
 }
