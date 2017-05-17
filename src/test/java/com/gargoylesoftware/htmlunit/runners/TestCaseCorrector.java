@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.runners;
 
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ final class TestCaseCorrector {
         final String testRoot = "src/test/java/";
         final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
-        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+        final List<String> lines = FileUtils.readLines(file, UTF_8);
         final String methodLine = "    public void " + method.getName() + "()";
         if (realBrowser) {
             String defaultExpectation = null;
