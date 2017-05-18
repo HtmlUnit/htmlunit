@@ -72,7 +72,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement.ProxyDomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-import com.gargoylesoftware.htmlunit.svg.SvgElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1050,9 +1049,6 @@ public class Element extends Node {
             }
             builder.append(s);
         }
-        else if (node instanceof SvgElement) {
-            // nothing to do for the moment
-        }
         else if (html) {
             final DomElement element = (DomElement) node;
             final Element scriptObject = (Element) node.getScriptableObject();
@@ -1087,22 +1083,24 @@ public class Element extends Node {
             }
         }
         else {
-            final HtmlElement element = (HtmlElement) node;
-            if ("p".equals(element.getTagName())) {
-                if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
-                    builder.append("\r\n"); // \r\n because it's to implement something IE specific
-                }
-                else {
-                    int i = builder.length() - 1;
-                    while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
-                        i--;
+            if (node instanceof HtmlElement) {
+                final HtmlElement element = (HtmlElement) node;
+                if ("p".equals(element.getTagName())) {
+                    if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
+                        builder.append("\r\n"); // \r\n because it's to implement something IE specific
                     }
-                    builder.setLength(i + 1);
-                    builder.append("\n");
+                    else {
+                        int i = builder.length() - 1;
+                        while (i >= 0 && Character.isWhitespace(builder.charAt(i))) {
+                            i--;
+                        }
+                        builder.setLength(i + 1);
+                        builder.append("\n");
+                    }
                 }
-            }
-            if (!"script".equals(element.getTagName())) {
-                printChildren(builder, node, html);
+                if (!"script".equals(element.getTagName())) {
+                    printChildren(builder, node, html);
+                }
             }
         }
     }
