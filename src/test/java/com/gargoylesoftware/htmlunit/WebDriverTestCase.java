@@ -705,6 +705,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 webRequest.setRequestParameters(requestParameters);
             }
 
+            // check content type if it is multipart enctype
+            if (request.getContentType() != null
+                        && request.getContentType().startsWith(FormEncodingType.MULTIPART.getName())) {
+                webRequest.setEncodingType(FormEncodingType.MULTIPART);
+            }
+
             final RawResponseData resp = MockConnection_.getRawResponse(webRequest);
 
             // write WebResponse to HttpServletResponse

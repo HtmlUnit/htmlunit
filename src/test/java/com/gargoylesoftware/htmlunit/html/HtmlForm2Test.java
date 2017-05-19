@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.entity.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -41,6 +42,8 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -402,6 +405,67 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, servlets);
         driver.findElement(By.id("mySubmit")).click();
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void formMultipartEncodingTypeTest() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                    + "' method='" + HttpMethod.POST
+                    + "' enctype='" + FormEncodingType.MULTIPART.getName()
+                    + "'>\n"
+            + "    <input type='file' value='file1'>\n"
+            + "    <button id='myButton' type='submit'>Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent, ContentType.MULTIPART_FORM_DATA.getMimeType());
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(FormEncodingType.MULTIPART, getMockWebConnection().getLastWebRequest().getEncodingType());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void formUrlEncodedEncodingTypeTest() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head><title>first</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                        + "' method='" + HttpMethod.POST
+                        + "' enctype='" + FormEncodingType.URL_ENCODED.getName()
+                        + "'>\n"
+            + "    <button id='myButton' type='submit'>Submit</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(FormEncodingType.URL_ENCODED, getMockWebConnection().getLastWebRequest().getEncodingType());
     }
 
     /**
