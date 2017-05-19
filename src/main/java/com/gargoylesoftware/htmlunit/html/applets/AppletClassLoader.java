@@ -46,6 +46,12 @@ public class AppletClassLoader extends URLClassLoader {
     public AppletClassLoader(final Window window) {
         super(new URL[0]);
 
+        if (window.getWebWindow().getWebClient().getOptions().isUseInsecureSSL()) {
+            LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."
+                    + "If you like to load applet archives from a SSL/HTTPS connection you have to configure"
+                    + "your jvm to accept untrusted certificate for SSL/HTTPS connections also.");
+        }
+
         try {
             loadOurNetscapeStuff("netscape.javascript.JSException");
             final Class<?> jsObjectClass = loadOurNetscapeStuff("netscape.javascript.JSObject");
