@@ -773,9 +773,6 @@ public final class HTMLParser {
                 if ("head".equals(tagLower)) {
                     parsingInnerHead_ = false;
                 }
-                if ("head".equals(tagLower)) {
-                    return;
-                }
             }
 
             // Need to reset this at each closing form tag because a valid form could start afterwards.
