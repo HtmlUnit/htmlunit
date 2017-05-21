@@ -235,7 +235,7 @@ public class SimpleRange implements Range, Serializable {
         if (isOffsetChars(startContainer_)) {
             start = (DomNode) startContainer_;
             String text = getText(start);
-            if (startOffset_ < text.length()) {
+            if (startOffset_ > -1 && startOffset_ < text.length()) {
                 text = text.substring(0, startOffset_);
             }
             setText(start, text);
@@ -249,7 +249,7 @@ public class SimpleRange implements Range, Serializable {
         if (isOffsetChars(endContainer_)) {
             end = (DomNode) endContainer_;
             String text = getText(end);
-            if (endOffset_ < text.length()) {
+            if (endOffset_ > -1 && endOffset_ < text.length()) {
                 text = text.substring(endOffset_);
             }
             setText(end, text);
@@ -367,10 +367,14 @@ public class SimpleRange implements Range, Serializable {
         if (isOffsetChars(startContainer_)) {
             final Node split = startContainer_.cloneNode(false);
             String text = getText(startContainer_);
-            text = text.substring(0, startOffset_);
+            if (startOffset_ > -1 && startOffset_ < text.length()) {
+                text = text.substring(0, startOffset_);
+            }
             setText(startContainer_, text);
             text = getText(split);
-            text = text.substring(startOffset_);
+            if (startOffset_ > -1 && startOffset_ < text.length()) {
+                text = text.substring(startOffset_);
+            }
             setText(split, text);
             insertNodeOrDocFragment(startContainer_.getParentNode(), split, startContainer_.getNextSibling());
             insertNodeOrDocFragment(startContainer_.getParentNode(), newNode, split);
@@ -543,7 +547,7 @@ public class SimpleRange implements Range, Serializable {
     private static void deleteBefore(final DomNode node, int offset) {
         if (isOffsetChars(node)) {
             String text = getText(node);
-            if (offset < text.length()) {
+            if (offset > -1 && offset < text.length()) {
                 text = text.substring(offset);
             }
             else {
@@ -565,7 +569,7 @@ public class SimpleRange implements Range, Serializable {
     private static void deleteAfter(final DomNode node, final int offset) {
         if (isOffsetChars(node)) {
             String text = getText(node);
-            if (offset < text.length()) {
+            if (offset > -1 && offset < text.length()) {
                 text = text.substring(0, offset);
                 setText(node, text);
             }
