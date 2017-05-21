@@ -203,6 +203,28 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
+    @Alerts("<html><head><title>foo</title></head>"
+            + "<body><script>alert(document.documentElement.outerHTML);</script></body></html>")
+    public void badlyFormedHTML_duplicateHeadStructure() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>"
+            + "<head>"
+            + "<head>"
+            + "<title>foo</title>"
+            + "</head>"
+            + "</head>"
+            + "<body>"
+            + "<script>alert(document.documentElement.outerHTML);</script>"
+            + "</body>"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
     @Alerts("<p title=\"Nimbus\ufffd X\">Nimbus\ufffd X</p>")
     public void badlyFormedHTML_invalidNumericCharacterReference() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

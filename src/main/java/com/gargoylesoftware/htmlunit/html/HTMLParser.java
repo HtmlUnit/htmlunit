@@ -403,7 +403,6 @@ public final class HTMLParser {
         private DomNode currentNode_;
         private StringBuilder characters_;
         private HeadParsed headParsed_ = HeadParsed.NO;
-        private boolean parsingInnerHead_ = false;
         private HtmlElement body_;
         private boolean lastTagWasSynthesized_;
         private HtmlForm formWaitingForLostChildren_;
@@ -549,7 +548,6 @@ public final class HTMLParser {
             }
             if ("head".equals(tagLower)) {
                 if (headParsed_ == HeadParsed.YES || page_.isParsingHtmlSnippet()) {
-                    parsingInnerHead_ = true;
                     return;
                 }
 
@@ -769,12 +767,6 @@ public final class HTMLParser {
                 }
             }
 
-            if (parsingInnerHead_) {
-                if ("head".equals(tagLower)) {
-                    parsingInnerHead_ = false;
-                }
-            }
-
             // Need to reset this at each closing form tag because a valid form could start afterwards.
             if ("form".equals(tagLower)) {
                 formWaitingForLostChildren_ = null;
@@ -953,10 +945,6 @@ public final class HTMLParser {
             if ("form".equals(element.localpart)) {
                 formWaitingForLostChildren_ = null;
             }
-
-            if (parsingInnerHead_ && "head".equalsIgnoreCase(element.localpart)) {
-                parsingInnerHead_ = false;
-            }
         }
 
         /**
@@ -971,10 +959,6 @@ public final class HTMLParser {
             }
             if (body_ != null && "html".equalsIgnoreCase(elem.localpart) && attrs != null) {
                 copyAttributes((DomElement) body_.getParentNode(), attrs);
-            }
-
-            if (headParsed_ == HeadParsed.YES && "head".equalsIgnoreCase(elem.localpart)) {
-                parsingInnerHead_ = true;
             }
         }
 
