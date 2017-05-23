@@ -385,4 +385,32 @@ public class MapTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"value1", "undefined", "[object Map]", "[object Window]",
+            "[object Object]", "key2", "[object Map]", "[object Window]"},
+            IE = {})
+    public void forEach_withElision() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value, key, m) {\n"
+            + "  alert(value);\n"
+            + "  alert(key);\n"
+            + "  alert(m);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "try {"
+            + "  var myMap = new Map([[, 'value1'], ['key2', {}]]);\n"
+            + "  myMap.forEach(logElement);\n"
+             + "}catch(e){alert(e)}"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

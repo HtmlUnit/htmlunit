@@ -145,6 +145,9 @@ public class Map extends SimpleScriptable {
         if (key instanceof Delegator) {
             key = ((Delegator) key).getDelegee();
         }
+        if (key == NOT_FOUND) {
+            key = Undefined.instance;
+        }
         map_.put(key, value);
         return this;
     }

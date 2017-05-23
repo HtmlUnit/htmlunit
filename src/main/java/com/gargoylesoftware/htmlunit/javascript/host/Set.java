@@ -124,6 +124,9 @@ public class Set extends SimpleScriptable {
         if (value instanceof Delegator) {
             value = ((Delegator) value).getDelegee();
         }
+        if (value == NOT_FOUND) {
+            value = Undefined.instance;
+        }
         set_.add(value);
         return this;
     }

@@ -302,4 +302,27 @@ public class SetTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test case for Bug #1886.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "0"},
+            IE = {})
+    public void forEach_withElision() throws Exception {
+        final String html
+                = "<html><head><title>foo</title><script>\n"
+                + "function logElement(value) {\n"
+                + "  alert(value);\n"
+                + "}\n"
+                + "function test() {\n"
+                + "  var mySet = new Set([, 0]);\n"
+                + "  mySet.forEach(logElement);\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
