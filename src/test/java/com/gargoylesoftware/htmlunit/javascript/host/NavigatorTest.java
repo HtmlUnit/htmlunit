@@ -210,7 +210,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.148", "NPSWF32_25_0_0_148.dll"},
+    @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.171", "NPSWF32_25_0_0_171.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
             IE = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.148", "Flash32_25_0_0_148.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
@@ -375,7 +375,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF45 = "20170411115307",
-            FF52 = "20170504112025")
+            FF52 = "20170517122419")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
