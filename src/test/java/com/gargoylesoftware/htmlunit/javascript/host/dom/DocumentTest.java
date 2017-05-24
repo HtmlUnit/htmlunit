@@ -221,6 +221,207 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests for <tt>document.anchors</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void anchorsEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.anchors;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.anchors.length);\n"
+            + "  alert(document.anchors == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.applets</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "3", "3", "true"},
+            CHROME = {"0", "0", "0", "true"})
+    public void applets() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.applets;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.applets.length);\n"
+            + "  alert(document.applets == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<applet id='firstApplet'></applet>\n"
+            + "<applet name='end'></applet>\n"
+            + "<applet id='endId'></applet>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.applets</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void appletsEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.applets;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.applets.length);\n"
+            + "  alert(document.applets == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.embeds</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "3", "3", "true", "firstEmbed"})
+    public void embeds() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.embeds;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.embeds.length);\n"
+            + "  alert(document.embeds == oCol);\n"
+            + "  alert(document.embeds[0].id);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<embed id='firstEmbed' />\n"
+            + "<embed name='end' />\n"
+            + "<embed id='endId'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.embeds</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void embedsEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.embeds;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.embeds.length);\n"
+            + "  alert(document.embeds == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.embeds</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "3", "3", "true", "firstEmbed"})
+    public void plugins() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.plugins;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.plugins.length);\n"
+            + "  alert(document.plugins == oCol);\n"
+            + "  alert(document.embeds[0].id);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<embed id='firstEmbed' />\n"
+            + "<embed name='end' />\n"
+            + "<embed id='endId'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.embeds</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void pluginsEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.plugins;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.plugins.length);\n"
+            + "  alert(document.plugins == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Tests for <tt>document.links</tt>.
      * @throws Exception if the test fails
      */
@@ -246,6 +447,34 @@ public class DocumentTest extends WebDriverTestCase {
             + "<a href='foo2.html'>foo2</a>\n"
             + "<a name='end'/>\n"
             + "<a href=''>null2</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.links</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void linksEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.links;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.links.length);\n"
+            + "  alert(document.links == oCol);\n"
+            + "  alert(document.links[0].id);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
@@ -1312,12 +1541,70 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests for <tt>document.images</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "3", "3", "true", "firstImage"})
+    public void images() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.images;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.images.length);\n"
+            + "  alert(document.images == oCol);\n"
+            + "  alert(document.images[0].id);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<img id='firstImage' />\n"
+            + "<img name='end' />\n"
+            + "<img id='endId'/>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests for <tt>document.embeds</tt>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0", "0", "true"})
+    public void imagesEmpty() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "var oCol = document.images;\n"
+            + "alert(oCol.length);\n"
+            + "function test() {\n"
+            + "  alert(oCol.length);\n"
+            + "  alert(document.images.length);\n"
+            + "  alert(document.images == oCol);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test the access to the images value. This should return the 2 images in the document
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"1", "2", "2", "true"})
-    public void images() throws Exception {
+    public void allImages() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

@@ -39,12 +39,15 @@ public class HtmlEmbedTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLEmbedElement]")
+    @Alerts({"[object HTMLEmbedElement]", "[object HTMLCollection]", "1", "[object HTMLEmbedElement]"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('myId'));\n"
+            + "    alert(document.embeds);\n"
+            + "    alert(document.embeds.length);\n"
+            + "    alert(document.embeds[0]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
