@@ -314,7 +314,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 25.0 r0", "25.0.0.148", "NPSWF32_25_0_0_148.dll");
+                "Shockwave Flash 25.0 r0", "25.0.0.171", "NPSWF32_25_0_0_171.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
@@ -326,7 +326,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_52.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 25.0 r0", "25.0.0.148", "Flash32_25_0_0_148.ocx");
+                "Shockwave Flash 25.0 r0", "25.0.0.171", "Flash32_25_0_0_171.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);
