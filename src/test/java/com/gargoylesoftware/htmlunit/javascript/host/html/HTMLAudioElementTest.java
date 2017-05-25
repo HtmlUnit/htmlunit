@@ -135,4 +135,23 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
         parentOf("HTMLAudioElement", "Audio");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void doNotRetrieveStream() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <audio controls>\n"
+            + "    <source src='horse.ogg' type='audio/ogg'>\n"
+            + "    <source src='horse.mp3' type='audio/mpeg'>\n"
+            + "    Your browser does not support the audio element.\n"
+            + "  </audio>\n"
+            + "</body></html>";
+
+        loadPage2(html);
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
 }
