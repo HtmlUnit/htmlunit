@@ -16,6 +16,9 @@ package netscape.javascript;
 
 import java.applet.Applet;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -29,11 +32,11 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * Stub for the JSException. This is part of the Applet
  * LiveConnect simulation.
  *
- * TODO: we have to evaluate if it is possible to use plugin.jar from jdk
- *
  * @author Ronald Brill
  */
 public class JSObject {
+
+    private static final Log LOG = LogFactory.getLog(JSObject.class);
 
     private static Window Window_;
     private ScriptableObject scriptableObject_;
@@ -48,102 +51,131 @@ public class JSObject {
     }
 
     /**
-     * Empty stub.
+     * Calls a JavaScript method.
+     * Equivalent to "this.methodName(args[0], args[1], ...)" in JavaScript.
      *
-     * @param paramString the paramString
-     * @param paramArrayOfObject the paramArrayOfObject
-     * @return result Object
+     * @param methodName the name of the JavaScript method to be invoked
+     * @param args an array of Java object to be passed as arguments to the method
+     * @return result result of the method
      * @throws JSException in case or error
      */
-    public Object call(final String paramString, final Object[] paramArrayOfObject) throws JSException {
+    public Object call(final String methodName, final Object[] args) throws JSException {
+        if (LOG.isInfoEnabled()) {
+            LOG.info("JSObject call '" + methodName + "(" + args + ")'");
+        }
+
         throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.call(String, Object[])).");
     }
 
     /**
-     * Empty stub.
+     * Evaluates a JavaScript expression.
+     * The expression is a string of JavaScript source code which will be evaluated in the context given by "this".
      *
-     * @param paramString the paramString
+     * @param expression the JavaScript expression
      * @return result Object
      * @throws JSException in case or error
      */
-    public Object eval(final String paramString) throws JSException {
+    public Object eval(final String expression) throws JSException {
+        if (LOG.isInfoEnabled()) {
+            LOG.info("JSObject eval '" + expression + "'");
+        }
+
         final Page page = Window_.getWebWindow().getEnclosedPage();
         if (page instanceof HtmlPage) {
             final HtmlPage htmlPage = (HtmlPage) page;
-            final ScriptResult result = htmlPage.executeJavaScript(paramString);
-            if (result.getJavaScriptResult() instanceof ScriptableObject) {
-                return new JSObject((ScriptableObject) result.getJavaScriptResult());
+            final ScriptResult result = htmlPage.executeJavaScript(expression);
+            final Object jsResult = result.getJavaScriptResult();
+            if (jsResult instanceof ScriptableObject) {
+                return new JSObject((ScriptableObject) jsResult);
             }
-            if (result.getJavaScriptResult() instanceof ConsString) {
-                return ((ConsString) result.getJavaScriptResult()).toString();
+            if (jsResult instanceof ConsString) {
+                return ((ConsString) jsResult).toString();
             }
-            return result.getJavaScriptResult();
+            return jsResult;
         }
         return null;
     }
 
     /**
-     * Empty stub.
+     * Retrieves a named member of a JavaScript object.
+     * Equivalent to "this.name" in JavaScript.
      *
-     * @param paramString the paramString
+     * @param name the name of the JavaScript property to be accessed
      * @return result Object
      * @throws JSException in case or error
      */
-    public Object getMember(final String paramString) throws JSException {
-        if (scriptableObject_ instanceof Element) {
-            return  ((Element) scriptableObject_).getAttribute(paramString, null);
+    public Object getMember(final String name) throws JSException {
+        if (LOG.isInfoEnabled()) {
+            LOG.info("JSObject getMember '" + name + "'");
         }
-        return scriptableObject_.get(paramString, scriptableObject_);
+
+        if (scriptableObject_ instanceof Element) {
+            return  ((Element) scriptableObject_).getAttribute(name, null);
+        }
+        return scriptableObject_.get(name, scriptableObject_);
     }
 
     /**
-     * Empty stub.
+     * Sets a named member of a JavaScript object.
+     * Equivalent to "this.name = value" in JavaScript.
      *
-     * @param paramString the paramString
-     * @param paramObject the paramObject
+     * @param name the name of the JavaScript property to be accessed
+     * @param value the value of the property
      * @throws JSException in case or error
      */
-    public void setMember(final String paramString, final Object paramObject) throws JSException {
+    public void setMember(final String name, final Object value) throws JSException {
+        if (LOG.isInfoEnabled()) {
+            LOG.info("JSObject setMember '" + name + "'");
+        }
+
         if (scriptableObject_ instanceof Element) {
-            ((Element) scriptableObject_).setAttribute(paramString, paramObject.toString());
+            ((Element) scriptableObject_).setAttribute(name, value.toString());
             return;
         }
-        scriptableObject_.put(paramString, scriptableObject_, paramObject);
+        scriptableObject_.put(name, scriptableObject_, value);
     }
 
     /**
-     * Empty stub.
+     * Removes a named member of a JavaScript object.
+     * Equivalent to "delete this.name" in JavaScript.
      *
-     * @param paramString the paramString
+     * @param name the name of the JavaScript property to be accessed
      * @throws JSException in case or error
      */
-    public void removeMember(final String paramString) throws JSException {
+    public void removeMember(final String name) throws JSException {
+        LOG.error("Not yet implemented (netscape.javascript.JSObject.removeMember(String)).");
         throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.removeMember(String)).");
     }
 
     /**
-     * Empty stub.
+     * Retrieves an indexed member of a JavaScript object.
+     * Equivalent to "this[index]" in JavaScript.
      *
-     * @param paramInt the paramInt
-     * @return result Object
+     * @param index the index of the array to be accessed
+     * @return result the value of the indexed member
      * @throws JSException in case or error
      */
-    public Object getSlot(final int paramInt) throws JSException {
+    public Object getSlot(final int index) throws JSException {
+        LOG.error("Not yet implemented (netscape.javascript.JSObject.getSlot(int)).");
         throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.getSlot(int)).");
     }
 
     /**
-     * Empty stub.
+     * Sets an indexed member of a JavaScript object.
+     * Equivalent to "this[index] = value" in JavaScript.
      *
-     * @param paramInt the paramInt
-     * @param paramObject the paramObject
+     * @param index the index of the array to be accessed
+     * @param value the value of the property
      * @throws JSException in case or error
      */
-    public void setSlot(final int paramInt, final Object paramObject) throws JSException {
+    public void setSlot(final int index, final Object value) throws JSException {
+        LOG.error("Not yet implemented (netscape.javascript.JSObject.setSlot(int, Object)).");
         throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.setSlot(int, Object)).");
     }
 
     /**
+     * Returns a JSObject for the window containing the given applet.
+     *
      * @param paramApplet the paramApplet
      * @return result Object
      * @throws JSException in case or error
