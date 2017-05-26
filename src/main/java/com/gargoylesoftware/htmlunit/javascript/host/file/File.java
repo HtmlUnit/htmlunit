@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import org.apache.commons.lang3.time.FastDateFormat;
 
@@ -73,13 +74,14 @@ public class File extends Blob {
         final Date date = new Date(getLastModified());
         final BrowserVersion browser = getBrowserVersion();
         final Locale locale = new Locale(browser.getSystemLanguage());
+        final TimeZone timezone = TimeZone.getTimeZone(browser.getSystemTimezone());
 
         if (browser.hasFeature(JS_FILE_SHORT_DATE_FORMAT)) {
-            final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, locale);
+            final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, timezone, locale);
             return format.format(date);
         }
 
-        final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, locale);
+        final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, timezone, locale);
         return format.format(date);
     }
 

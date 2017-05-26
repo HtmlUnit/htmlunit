@@ -42,14 +42,14 @@ public class FileTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"1", "ScriptExceptionTest1.txt",
-                            "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
+                            "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
                             "1437920507000", "", "14", "text/plain"},
-            FF45 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
+            FF45 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 10:21:47 GMT-0400",
                             "1437920507000", "undefined", "14", "text/plain"},
-            FF52 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 16:21:47 GMT+0200",
+            FF52 = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 10:21:47 GMT-0400",
                             "1437920507000", "", "14", "text/plain"},
             IE = {"1", "ScriptExceptionTest1.txt",
-                            "Sun Jul 26 2015 16:21:47 GMT+0200 (Central European Summer Time)",
+                            "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
                             "undefined", "undefined", "14", "text/plain"})
     public void properties() throws Exception {
         final String html

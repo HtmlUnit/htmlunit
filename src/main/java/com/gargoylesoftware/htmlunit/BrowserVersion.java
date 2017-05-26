@@ -107,6 +107,11 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String LANGUAGE_ENGLISH_US = "en-US";
 
     /**
+     * United States .
+     */
+    private static final String TIMEZONE_NEW_YORK = "America/New_York";
+
+    /**
      * The X86 CPU class.
      */
     private static final String CPU_CLASS_X86 = "x86";
@@ -349,6 +354,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
+    private String systemTimezone_ = TIMEZONE_NEW_YORK;
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private int browserVersionNumeric_;
@@ -614,6 +620,15 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * Returns the system timezone, for example "America/New_York".
+     * Default value is {@link #TIMEZONE_NEW_YORK} if not explicitly configured.
+     * @return the system timezone
+     */
+    public String getSystemTimezone() {
+        return systemTimezone_;
+    }
+
+    /**
      * Returns the user agent string, for example "Mozilla/4.0 (compatible; MSIE 6.0b; Windows 98)".
      * @return the user agent string
      */
@@ -743,6 +758,13 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public void setSystemLanguage(final String systemLanguage) {
         systemLanguage_ = systemLanguage;
+    }
+
+    /**
+     * @param systemTimezone the systemTimezone to set
+     */
+    public void setSystemTimezone(final String systemTimezone) {
+        systemTimezone_ = systemTimezone;
     }
 
     /**
