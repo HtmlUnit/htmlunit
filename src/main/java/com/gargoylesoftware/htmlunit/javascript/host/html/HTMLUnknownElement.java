@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLMENUITEM_END_TAG_FORBIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_HYPHEN_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_RUBY_ELEMENT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -100,7 +101,9 @@ public class HTMLUnknownElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        if ("IMAGE".equals(getNodeName())) {
+        if ("BGSOUND".equals(getNodeName())
+                || (getBrowserVersion().hasFeature(HTMLMENUITEM_END_TAG_FORBIDDEN)
+                        && "MENUITEM".equals(getNodeName()))) {
             return true;
         }
         return super.isEndTagForbidden();
