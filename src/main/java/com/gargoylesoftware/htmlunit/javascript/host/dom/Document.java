@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRp;
 import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -664,7 +665,7 @@ public class Document extends Node {
             }
 
             final SgmlPage page = getPage();
-            final org.w3c.dom.Node element = page.createElement(tagName);
+            org.w3c.dom.Node element = page.createElement(tagName);
 
             if (element instanceof BaseFrameElement) {
                 ((BaseFrameElement) element).markAsCreatedByJavascript();
@@ -686,6 +687,9 @@ public class Document extends Node {
             }
             else if (element instanceof HtmlUnknownElement) {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();
+            }
+            else if (element instanceof HtmlSvg) {
+                element = page.createElement("unknown");
             }
             final Object jsElement = getScriptableFor(element);
 

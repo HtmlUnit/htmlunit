@@ -1327,6 +1327,17 @@ public class ElementCreationTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object HTMLUnknownElement]")
+    public void svg() throws Exception {
+        test("svg");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if an error occurs
