@@ -71,7 +71,7 @@ public final class UnknownElementFactory implements ElementFactory {
     @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
-        final Map<String, DomAttr> attributeMap = DefaultElementFactory.setAttributes(page, attributes);
+        final Map<String, DomAttr> attributeMap = DefaultElementFactory.toMap(page, attributes);
         return new HtmlUnknownElement(page, qualifiedName, attributeMap);
     }
 }
