@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 class DefaultElementFactory implements ElementFactory {
 
     private static final String KEYGEN_ = "keygen";
+
     /*
      * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements
      */
@@ -134,7 +135,7 @@ class DefaultElementFactory implements ElementFactory {
     @Override
     public HtmlElement createElementNS(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final Attributes attributes, final boolean checkBrowserCompatibility) {
-        final Map<String, DomAttr> attributeMap = setAttributes(page, attributes);
+        final Map<String, DomAttr> attributeMap = toMap(page, attributes);
 
         final HtmlElement element;
         final String tagName;
@@ -744,7 +745,7 @@ class DefaultElementFactory implements ElementFactory {
      * @param attributes the SAX attributes
      * @return the map of attribute values for {@link HtmlElement}s
      */
-    static Map<String, DomAttr> setAttributes(final SgmlPage page, final Attributes attributes) {
+    static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
             attributeMap = new LinkedHashMap<>(attributes.getLength());
