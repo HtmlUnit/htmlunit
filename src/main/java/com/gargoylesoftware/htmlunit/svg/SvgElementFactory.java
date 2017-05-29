@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG_UNKNOWN_A
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -59,7 +60,7 @@ public class SvgElementFactory implements ElementFactory {
     static {
         try {
             for (Class<?> klass : CLASSES_) {
-                ELEMENTS_.put(klass.getField("TAG_NAME").get(null).toString().toLowerCase(), klass);
+                ELEMENTS_.put(klass.getField("TAG_NAME").get(null).toString().toLowerCase(Locale.ROOT), klass);
             }
         }
         catch (final Exception e) {
@@ -88,22 +89,22 @@ public class SvgElementFactory implements ElementFactory {
      * {@inheritDoc}
      */
     @Override
-    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, String qualifiedName,
+    public DomElement createElementNS(final SgmlPage page, final String namespaceURI, String qualifiedNameLC,
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        qualifiedName = qualifiedName.toLowerCase();
-        String tagName = qualifiedName;
-        if (tagName.indexOf(':') != -1) {
-            tagName = tagName.substring(tagName.indexOf(':') + 1);
+        qualifiedNameLC = qualifiedNameLC.toLowerCase(Locale.ROOT);
+        String tagNameLC = qualifiedNameLC;
+        if (tagNameLC.indexOf(':') != -1) {
+            tagNameLC = tagNameLC.substring(tagNameLC.indexOf(':') + 1);
         }
         DomElement element = null;
 
-        final Class<?> klass = ELEMENTS_.get(tagName.toLowerCase());
+        final Class<?> klass = ELEMENTS_.get(tagNameLC);
         if (klass != null) {
             try {
                 element = (DomElement) klass.getDeclaredConstructors()[0]
-                        .newInstance(namespaceURI, qualifiedName, page, attributeMap);
+                        .newInstance(namespaceURI, qualifiedNameLC, page, attributeMap);
             }
             catch (final Exception e) {
                 throw new IllegalStateException(e);
@@ -111,10 +112,10 @@ public class SvgElementFactory implements ElementFactory {
         }
         if (element == null) {
             if (page.getWebClient().getBrowserVersion().hasFeature(SVG_UNKNOWN_ARE_DOM)) {
-                element = new DomElement(namespaceURI, qualifiedName, page, attributeMap);
+                element = new DomElement(namespaceURI, qualifiedNameLC, page, attributeMap);
             }
             else {
-                element = new SvgElement(namespaceURI, qualifiedName, page, attributeMap);
+                element = new SvgElement(namespaceURI, qualifiedNameLC, page, attributeMap);
             }
         }
         return element;

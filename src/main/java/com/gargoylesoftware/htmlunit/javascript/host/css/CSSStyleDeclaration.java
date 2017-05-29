@@ -2441,7 +2441,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (position.isEmpty() || "static".equalsIgnoreCase(position) || "absolute".equalsIgnoreCase(position)
                 || "fixed".equalsIgnoreCase(position) || "relative".equalsIgnoreCase(position)
                 || "initial".equalsIgnoreCase(position) || "inherit".equalsIgnoreCase(position)) {
-            setStyleAttribute(POSITION.getAttributeName(), position.toLowerCase());
+            setStyleAttribute(POSITION.getAttributeName(), position.toLowerCase(Locale.ROOT));
         }
     }
 

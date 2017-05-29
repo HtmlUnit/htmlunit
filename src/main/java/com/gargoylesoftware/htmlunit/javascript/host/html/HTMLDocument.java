@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1108,7 +1109,7 @@ public class HTMLDocument extends Document {
         String name = attributeName;
         if (StringUtils.isNotEmpty(name)
                 && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE)) {
-            name = name.toLowerCase();
+            name = name.toLowerCase(Locale.ROOT);
         }
 
         return super.createAttribute(name);

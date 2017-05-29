@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -1230,20 +1231,21 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return "application/octet-stream" if nothing could be guessed
      */
     public String guessContentType(final File file) {
-        if (file.getName().endsWith(".xhtml")) {
+        final String fileName = file.getName();
+        if (fileName.endsWith(".xhtml")) {
             // Java's mime type map returns application/xml in JDK8.
             return "application/xhtml+xml";
         }
 
         // Java's mime type map does not know these in JDK8.
-        if (file.getName().endsWith(".js")) {
+        if (fileName.endsWith(".js")) {
             return "text/javascript";
         }
-        if (file.getName().toLowerCase().endsWith(".css")) {
+        if (fileName.toLowerCase(Locale.ROOT).endsWith(".css")) {
             return "text/css";
         }
 
-        String contentType = URLConnection.guessContentTypeFromName(file.getName());
+        String contentType = URLConnection.guessContentTypeFromName(fileName);
         if (contentType == null) {
             try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
