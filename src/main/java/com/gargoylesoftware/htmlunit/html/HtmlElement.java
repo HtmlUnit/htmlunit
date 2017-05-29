@@ -158,6 +158,7 @@ public abstract class HtmlElement extends DomElement {
             final Map<String, DomAttr> attributes) {
         this(HTMLParser.XHTML_NAMESPACE, qualifiedName, page, attributes);
     }
+
     /**
      * Creates an instance of a DOM element that can have a namespace.
      *
