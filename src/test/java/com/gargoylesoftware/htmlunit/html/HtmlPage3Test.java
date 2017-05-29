@@ -28,7 +28,6 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -388,6 +387,36 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"[object SVGSVGElement]", "http://www.w3.org/2000/svg",
+            "[object SVGRectElement]", "http://www.w3.org/2000/svg"})
+    public void htmlPageEmbeddedSvgWithoutNamespace() throws Exception {
+        final String content
+            = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+            + "<head>\n"
+            + "<title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('mySvg'));\n"
+            + "    alert(document.getElementById('mySvg').namespaceURI);\n"
+            + "    alert(document.getElementById('myRect'));\n"
+            + "    alert(document.getElementById('myRect').namespaceURI);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <svg id='mySvg'>\n"
+            + "    <rect id='myRect' />\n"
+            + "  </svg>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("HTML")
     public void htmlPage() throws Exception {
         final String content
@@ -414,7 +443,6 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHtmlElement]")
-    @NotYetImplemented
     public void htmlSvgPage() throws Exception {
         final String content
             = "<html xmlns=\"http://www.w3.org/2000/svg\">\n"

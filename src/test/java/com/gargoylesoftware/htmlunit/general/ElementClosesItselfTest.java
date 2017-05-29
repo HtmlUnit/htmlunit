@@ -1393,6 +1393,17 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void svg() throws Exception {
+        loadPageWithAlerts2(test("svg"));
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails

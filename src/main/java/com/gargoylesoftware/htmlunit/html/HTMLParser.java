@@ -352,16 +352,15 @@ public final class HTMLParser {
      * @param namespaceURI the namespace URI
      * @param qualifiedName the qualified name
      * @param insideHtml is the node inside HTML or not
+     * @param insideSvg is the node inside an SVG node or not
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
-            final String qualifiedName, final boolean insideHtml) {
-        final String qualifiedNameLower = qualifiedName.toLowerCase(Locale.ROOT);
-        if (SVG_NAMESPACE.equals(namespaceURI)
-                || (SVG_FACTORY.isSupported(qualifiedNameLower))
-                && !ELEMENT_FACTORIES.containsKey(qualifiedNameLower)) {
+            final String qualifiedName, final boolean insideHtml, final boolean insideSvg) {
+        if (insideSvg) {
             return SVG_FACTORY;
         }
+
         if (namespaceURI == null || namespaceURI.isEmpty()
             || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
 
@@ -406,6 +405,8 @@ public final class HTMLParser {
         private HtmlElement body_;
         private boolean lastTagWasSynthesized_;
         private HtmlForm formWaitingForLostChildren_;
+        private boolean insideSvg_;
+
         private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
         private static final String FEATURE_PARSE_NOSCRIPT
             = "http://cyberneko.org/html/features/parse-noscript-content";
@@ -555,7 +556,7 @@ public final class HTMLParser {
             }
             // add a head if none was there
             else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", true);
+                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", true, insideSvg_);
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = HeadParsed.SYNTHESIZED;
@@ -584,7 +585,8 @@ public final class HTMLParser {
                 tagLower = "select";
                 qName = "select";
             }
-            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, isInsideHtml());
+
+            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, isInsideHtml(), insideSvg_);
             if (factory == SVG_FACTORY) {
                 namespaceURI = SVG_NAMESPACE;
             }
@@ -593,6 +595,10 @@ public final class HTMLParser {
 
             // parse can't replace everything as it does not buffer elements while parsing
             addNodeToRightParent(currentNode_, newElement);
+
+            if ("svg".equals(tagLower)) {
+                insideSvg_ = true;
+            }
 
             // If we had an old synthetic body and we just added a real body element, quietly
             // remove the old body and move its children to the real body element we just added.
@@ -765,6 +771,10 @@ public final class HTMLParser {
                     snippetStartNodeOverwritten_ = true;
                     return;
                 }
+            }
+
+            if ("svg".equals(tagLower)) {
+                insideSvg_ = false;
             }
 
             // Need to reset this at each closing form tag because a valid form could start afterwards.

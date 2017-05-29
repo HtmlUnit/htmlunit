@@ -1330,6 +1330,17 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"3", "2", "2", "3", "2", "2"})
+    public void svg() throws Exception {
+        loadPageWithAlerts2(test("svg"));
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails

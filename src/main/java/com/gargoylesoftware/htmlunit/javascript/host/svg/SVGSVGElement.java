@@ -18,18 +18,18 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 
 /**
  * A JavaScript object for {@code SVGSVGElement}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = SvgSvg.class)
+@JsxClass(domClass = HtmlSvg.class)
 public class SVGSVGElement extends SVGGraphicsElement {
 
     /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */

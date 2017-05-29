@@ -12,19 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.svg;
+package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.DomAttr;
 
 /**
  * Wrapper for the SVG element {@code svg}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class SvgSvg extends SvgElement {
+public class HtmlSvg extends HtmlElement {
 
     /** The tag represented by this element. */
     public static final String TAG_NAME = "svg";
@@ -37,8 +37,8 @@ public class SvgSvg extends SvgElement {
      * @param page the page that contains this element
      * @param attributes the initial attributes
      */
-    SvgSvg(final String namespaceURI, final String qualifiedName, final SgmlPage page,
+    HtmlSvg(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(namespaceURI, qualifiedName, page, attributes);
+        super(HTMLParser.SVG_NAMESPACE, qualifiedName, page, attributes);
     }
 }

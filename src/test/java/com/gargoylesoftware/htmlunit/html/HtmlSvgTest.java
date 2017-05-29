@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.svg;
+package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,17 +22,15 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link SvgSvg}.
+ * Tests for {@link HtmlSvg}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SvgSvgTest extends WebDriverTestCase {
+public class HtmlSvgTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -55,7 +53,7 @@ public class SvgSvgTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(SvgSvg.class.isInstance(page.getElementById("myId")));
+            assertTrue(HtmlSvg.class.isInstance(page.getElementById("myId")));
         }
     }
 

@@ -92,6 +92,7 @@ class DefaultElementFactory implements ElementFactory {
             HtmlSource.TAG_NAME, HtmlSpan.TAG_NAME,
             HtmlStrike.TAG_NAME, HtmlStrong.TAG_NAME, HtmlStyle.TAG_NAME,
             HtmlSubscript.TAG_NAME, HtmlSummary.TAG_NAME, HtmlSuperscript.TAG_NAME,
+            HtmlSvg.TAG_NAME,
             HtmlTable.TAG_NAME, HtmlTableColumn.TAG_NAME, HtmlTableColumnGroup.TAG_NAME,
             HtmlTableBody.TAG_NAME, HtmlTableDataCell.TAG_NAME, HtmlTableHeaderCell.TAG_NAME,
             HtmlTableRow.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlTableFooter.TAG_NAME,
@@ -644,6 +645,10 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlSuperscript.TAG_NAME:
                 element = new HtmlSuperscript(qualifiedName, page, attributeMap);
+                break;
+
+            case HtmlSvg.TAG_NAME:
+                element = new HtmlSvg(qualifiedName, page, attributeMap);
                 break;
 
             case HtmlTable.TAG_NAME:

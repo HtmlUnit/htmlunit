@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTeletype;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
+import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.javascript.host.Element2;
 import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr2;
@@ -80,7 +81,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement2;
-import com.gargoylesoftware.htmlunit.svg.SvgSvg;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 
@@ -295,7 +295,7 @@ public class SimpleScriptObject extends ScriptObject implements Serializable {
             host = HTMLStyleElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
-        else if (domNode instanceof SvgSvg) {
+        else if (domNode instanceof HtmlSvg) {
             host = SVGSVGElement2.constructor(true, global);
             host.setDomNode(domNode);
         }
