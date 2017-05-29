@@ -419,15 +419,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String content
             = "<html xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "  <rect id='rect' width='50' height='50' fill='green' />\n"
-            + "<head>\n"
-            + "<title>foo</title>\n"
+            + "<body>\n"
             + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.documentElement);\n"
-            + "  }\n"
+            + "  alert(document.documentElement);\n"
             + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
 
