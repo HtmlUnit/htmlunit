@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -392,17 +393,44 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String content
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
             + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
-            + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\""
-            + " onclick=\"alert(document.getElementById('rect'))\"/>\n"
-            + "<head><title>foo</title><script>\n"
+            + "  <rect id='rect' width='50' height='50' fill='green' />\n"
+            + "<head>\n"
+            + "<title>foo</title>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.documentElement.tagName);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body>\n"
             + "</svg>";
 
         loadPageWithAlerts2(content);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLHtmlElement]")
+    @NotYetImplemented
+    public void htmlSvgPage() throws Exception {
+        final String content
+            = "<html xmlns=\"http://www.w3.org/2000/svg\">\n"
+            + "  <rect id='rect' width='50' height='50' fill='green' />\n"
+            + "<head>\n"
+            + "<title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.documentElement);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(content);
+    }
 }
