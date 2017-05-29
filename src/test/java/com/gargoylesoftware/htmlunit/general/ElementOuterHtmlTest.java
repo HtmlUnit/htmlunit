@@ -1117,6 +1117,15 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("<svg></svg>")
+    public void svg() throws Exception {
+        loadPageWithAlerts2(test("svg"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("<table></table>")
     public void table() throws Exception {
         loadPageWithAlerts2(test("table"));

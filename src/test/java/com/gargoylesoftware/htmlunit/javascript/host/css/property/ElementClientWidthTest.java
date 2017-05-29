@@ -1460,6 +1460,19 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSvg}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "300",
+            FF = "0")
+    @NotYetImplemented
+    public void svg() throws Exception {
+        loadPageWithAlerts2(test("svg"));
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails

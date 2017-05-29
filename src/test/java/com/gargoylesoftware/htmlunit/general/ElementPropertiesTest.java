@@ -2395,6 +2395,17 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSvg}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("-")
+    public void svg() throws Exception {
+        test("svg");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails

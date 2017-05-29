@@ -93,6 +93,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlRt;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
+import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
@@ -689,7 +690,8 @@ public class Document extends Node {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlSvg) {
-                element = page.createElement("unknown");
+                element = UnknownElementFactory.instance.createElementNS(page, "", "svg", null);
+                ((HtmlUnknownElement) element).markAsCreatedByJavascript();
             }
             final Object jsElement = getScriptableFor(element);
 

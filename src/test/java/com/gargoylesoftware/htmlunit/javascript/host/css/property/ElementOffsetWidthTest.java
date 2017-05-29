@@ -1461,6 +1461,17 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSvg}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("NaN")
+    public void svg() throws Exception {
+        loadPageWithAlerts2(test("svg"));
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails
