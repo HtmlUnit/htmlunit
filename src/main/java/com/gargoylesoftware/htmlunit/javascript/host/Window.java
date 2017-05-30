@@ -3069,7 +3069,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onafterprint} event handler.
      * @return the {@code onafterprint} event handler
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, IE})
     public Function getOnafterprint() {
         return getEventHandler("afterprint");
     }
@@ -3078,7 +3078,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onafterprint} event handler.
      * @param onafterprint the {@code onafterprint} event handler
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF, IE})
     public void setOnafterprint(final Object onafterprint) {
         setHandlerForJavaScript("afterprint", onafterprint);
     }
@@ -3645,7 +3645,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onbeforeprint} event handler.
      * @return the {@code onbeforeprint} event handler
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, IE})
     public Function getOnbeforeprint() {
         return getEventHandler("beforeprint");
     }
@@ -3654,7 +3654,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onbeforeprint} event handler.
      * @param onbeforeprint the {@code onbeforeprint} event handler
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF, IE})
     public void setOnbeforeprint(final Object onbeforeprint) {
         setHandlerForJavaScript("beforeprint", onbeforeprint);
     }
@@ -3807,7 +3807,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onabort} event handler.
      * @return the {@code onabort} event handler
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter
     public Function getOnabort() {
         return getEventHandler("abort");
     }
@@ -3816,7 +3816,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onabort} event handler.
      * @param onabort the {@code onabort} event handler
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter
     public void setOnabort(final Object onabort) {
         setHandlerForJavaScript("abort", onabort);
     }
