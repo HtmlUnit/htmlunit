@@ -27,7 +27,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -151,8 +150,6 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     }
 
     /**
-     * Test if replace() and test() do not change {@link SubString#emptySubString}.
-     *
      * @throws Exception if the test fails
      */
     @Test
