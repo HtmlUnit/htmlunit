@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * {@link net.sourceforge.htmlunit.cyberneko.HTMLElements}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class ElementClosesElementTest extends WebDriverTestCase {
@@ -54,10 +55,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = new ArrayList<>(HtmlPageTest.HTML_TAGS_);
         for (final String parent : strings) {
-            list.add(new Object[] {parent, "svg"});
-        }
-        for (final String child : strings) {
-            list.add(new Object[] {"svg", child});
+            for (final String child : strings) {
+                list.add(new Object[] {parent, child});
+            }
         }
         return list;
     }
