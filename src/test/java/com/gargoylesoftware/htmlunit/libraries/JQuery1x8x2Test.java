@@ -2237,7 +2237,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented
     public void event__Delegated_events_in_SVG___10791_() throws Exception {
         runTest("event: Delegated events in SVG (#10791)");
     }
