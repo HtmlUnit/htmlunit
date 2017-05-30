@@ -776,4 +776,12 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         }
         return 0;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return true;
+    }
 }

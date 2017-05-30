@@ -329,4 +329,22 @@ public class HTMLSelectElement extends FormField {
         return getDomNodeOrDie().isValid();
     }
 
+    /**
+     * Returns the {@code required} property.
+     * @return the {@code required} property
+     */
+    @JsxGetter
+    public boolean isRequired() {
+        return getDomNodeOrDie().isRequired();
+    }
+
+    /**
+     * Sets the {@code required} property.
+     * @param required the new value
+     */
+    @JsxSetter
+    public void setRequired(final boolean required) {
+        getDomNodeOrDie().setRequired(required);
+    }
+
 }

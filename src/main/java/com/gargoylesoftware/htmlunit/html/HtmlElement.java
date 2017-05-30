@@ -1378,10 +1378,34 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
-     * Returns whether this {@link HtmlInput} supports the {@code required} constraint.
-     * @return whether this {@link HtmlInput} supports the {@code required} constraint
+     * Returns whether this element supports the {@code required} constraint.
+     * @return whether this element supports the {@code required} constraint
      */
     protected boolean isRequiredSupported() {
         return false;
     }
+
+    /**
+     * Returns the {@code required} attribute.
+     * @return the {@code required} attribute
+     */
+    public boolean isRequired() {
+        return isRequiredSupported() && hasAttribute("required");
+    }
+
+    /**
+     * Sets the {@code required} attribute.
+     * @param required the new attribute value
+     */
+    public void setRequired(final boolean required) {
+        if (isRequiredSupported()) {
+            if (required) {
+                setAttribute("required", "required");
+            }
+            else {
+                removeAttribute("required");
+            }
+        }
+    }
+
 }

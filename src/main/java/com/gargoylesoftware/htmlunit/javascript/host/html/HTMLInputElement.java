@@ -650,8 +650,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Returns the {@code required} attribute.
-     * @return the {@code required} attribute
+     * Returns the {@code required} property.
+     * @return the {@code required} property
      */
     @JsxGetter
     public boolean isRequired() {
@@ -659,8 +659,8 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * Sets the {@code required} attribute.
-     * @param required the new attribute value
+     * Sets the {@code required} property.
+     * @param required the new value
      */
     @JsxSetter
     public void setRequired(final boolean required) {

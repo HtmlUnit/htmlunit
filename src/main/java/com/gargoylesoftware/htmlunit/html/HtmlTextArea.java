@@ -619,4 +619,11 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         setAttribute("placeholder", placeholder);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isRequiredSupported() {
+        return true;
+    }
 }
