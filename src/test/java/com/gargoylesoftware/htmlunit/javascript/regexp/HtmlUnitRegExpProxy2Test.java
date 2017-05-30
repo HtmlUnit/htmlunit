@@ -159,9 +159,6 @@ public class HtmlUnitRegExpProxy2Test extends SimpleWebTestCase {
     public void emptySubStringChanged() throws Exception {
         final String html = "<html></html>";
         final HtmlPage page = loadPage(html);
-
-        assertTrue(SubString.emptySubString.toString().isEmpty());
         page.executeJavaScript("'alpha'.replace(/alpha/, '');/beta/.test('abc beta def');");
-        assertTrue(SubString.emptySubString.toString().isEmpty());
     }
 }
