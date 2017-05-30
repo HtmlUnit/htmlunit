@@ -54,9 +54,10 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         final List<Object[]> list = new ArrayList<>();
         final List<String> strings = new ArrayList<>(HtmlPageTest.HTML_TAGS_);
         for (final String parent : strings) {
-            for (final String child : strings) {
-                list.add(new Object[] {parent, child});
-            }
+            list.add(new Object[] {parent, "svg"});
+        }
+        for (final String child : strings) {
+            list.add(new Object[] {"svg", child});
         }
         return list;
     }
@@ -275,16 +276,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _a_plaintext() throws Exception {
-        test("a", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _a_script() throws Exception {
         test("a", "script");
@@ -462,16 +453,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _abbr_param() throws Exception {
         test("abbr", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _abbr_plaintext() throws Exception {
-        test("abbr", "plaintext");
     }
 
     /**
@@ -661,16 +642,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _acronym_plaintext() throws Exception {
-        test("acronym", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _acronym_script() throws Exception {
         test("acronym", "script");
@@ -854,16 +825,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _address_plaintext() throws Exception {
-        test("address", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _address_script() throws Exception {
         test("address", "script");
@@ -1041,16 +1002,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _applet_param() throws Exception {
         test("applet", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _applet_plaintext() throws Exception {
-        test("applet", "plaintext");
     }
 
     /**
@@ -2500,16 +2451,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _article_plaintext() throws Exception {
-        test("article", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _article_script() throws Exception {
         test("article", "script");
@@ -2687,16 +2628,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _aside_param() throws Exception {
         test("aside", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _aside_plaintext() throws Exception {
-        test("aside", "plaintext");
     }
 
     /**
@@ -2886,16 +2817,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _audio_plaintext() throws Exception {
-        test("audio", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _audio_script() throws Exception {
         test("audio", "script");
@@ -3073,16 +2994,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _b_param() throws Exception {
         test("b", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _b_plaintext() throws Exception {
-        test("b", "plaintext");
     }
 
     /**
@@ -5792,16 +5703,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _bdi_plaintext() throws Exception {
-        test("bdi", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _bdi_script() throws Exception {
         test("bdi", "script");
@@ -5979,16 +5880,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _bdo_param() throws Exception {
         test("bdo", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _bdo_plaintext() throws Exception {
-        test("bdo", "plaintext");
     }
 
     /**
@@ -7438,16 +7329,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _big_plaintext() throws Exception {
-        test("big", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _big_script() throws Exception {
         test("big", "script");
@@ -7631,16 +7512,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _blink_plaintext() throws Exception {
-        test("blink", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _blink_script() throws Exception {
         test("blink", "script");
@@ -7818,16 +7689,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _blockquote_param() throws Exception {
         test("blockquote", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _blockquote_plaintext() throws Exception {
-        test("blockquote", "plaintext");
     }
 
     /**
@@ -10341,7 +10202,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void _button_form() throws Exception {
         test("button", "form");
     }
@@ -10427,16 +10287,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _button_param() throws Exception {
         test("button", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _button_plaintext() throws Exception {
-        test("button", "plaintext");
     }
 
     /**
@@ -10620,16 +10470,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _canvas_param() throws Exception {
         test("canvas", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _canvas_plaintext() throws Exception {
-        test("canvas", "plaintext");
     }
 
     /**
@@ -12080,16 +11920,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _center_plaintext() throws Exception {
-        test("center", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _center_script() throws Exception {
         test("center", "script");
@@ -12273,16 +12103,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _cite_plaintext() throws Exception {
-        test("cite", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _cite_script() throws Exception {
         test("cite", "script");
@@ -12460,16 +12280,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _code_param() throws Exception {
         test("code", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _code_plaintext() throws Exception {
-        test("code", "plaintext");
     }
 
     /**
@@ -16037,7 +15847,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1")
-    @NotYetImplemented({FF, EDGE})
+    @NotYetImplemented(EDGE)
     public void _command_plaintext() throws Exception {
         test("command", "plaintext");
     }
@@ -16583,16 +16393,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _content_plaintext() throws Exception {
-        test("content", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _content_script() throws Exception {
         test("content", "script");
@@ -16776,16 +16576,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _data_plaintext() throws Exception {
-        test("data", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _data_script() throws Exception {
         test("data", "script");
@@ -16963,16 +16753,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _datalist_param() throws Exception {
         test("datalist", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _datalist_plaintext() throws Exception {
-        test("datalist", "plaintext");
     }
 
     /**
@@ -17180,16 +16960,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dd_plaintext() throws Exception {
-        test("dd", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _dd_script() throws Exception {
         test("dd", "script");
@@ -17367,16 +17137,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _del_param() throws Exception {
         test("del", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _del_plaintext() throws Exception {
-        test("del", "plaintext");
     }
 
     /**
@@ -17566,16 +17326,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _details_plaintext() throws Exception {
-        test("details", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _details_script() throws Exception {
         test("details", "script");
@@ -17753,16 +17503,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _dfn_param() throws Exception {
         test("dfn", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dfn_plaintext() throws Exception {
-        test("dfn", "plaintext");
     }
 
     /**
@@ -17952,16 +17692,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dialog_plaintext() throws Exception {
-        test("dialog", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _dialog_script() throws Exception {
         test("dialog", "script");
@@ -18139,16 +17869,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _dir_param() throws Exception {
         test("dir", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dir_plaintext() throws Exception {
-        test("dir", "plaintext");
     }
 
     /**
@@ -18338,16 +18058,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _div_plaintext() throws Exception {
-        test("div", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _div_script() throws Exception {
         test("div", "script");
@@ -18525,16 +18235,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _dl_param() throws Exception {
         test("dl", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dl_plaintext() throws Exception {
-        test("dl", "plaintext");
     }
 
     /**
@@ -18742,16 +18442,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _dt_plaintext() throws Exception {
-        test("dt", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _dt_script() throws Exception {
         test("dt", "script");
@@ -18929,16 +18619,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _em_param() throws Exception {
         test("em", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _em_plaintext() throws Exception {
-        test("em", "plaintext");
     }
 
     /**
@@ -20389,16 +20069,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _fieldset_plaintext() throws Exception {
-        test("fieldset", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _fieldset_script() throws Exception {
         test("fieldset", "script");
@@ -20576,16 +20246,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _figcaption_param() throws Exception {
         test("figcaption", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _figcaption_plaintext() throws Exception {
-        test("figcaption", "plaintext");
     }
 
     /**
@@ -20775,16 +20435,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _figure_plaintext() throws Exception {
-        test("figure", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _figure_script() throws Exception {
         test("figure", "script");
@@ -20962,16 +20612,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _font_param() throws Exception {
         test("font", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _font_plaintext() throws Exception {
-        test("font", "plaintext");
     }
 
     /**
@@ -21161,16 +20801,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _footer_plaintext() throws Exception {
-        test("footer", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _footer_script() throws Exception {
         test("footer", "script");
@@ -21337,16 +20967,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _form_param() throws Exception {
         test("form", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _form_plaintext() throws Exception {
-        test("form", "plaintext");
     }
 
     /**
@@ -24112,16 +23732,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h1_plaintext() throws Exception {
-        test("h1", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _h1_script() throws Exception {
         test("h1", "script");
@@ -24353,16 +23963,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _h2_param() throws Exception {
         test("h2", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h2_plaintext() throws Exception {
-        test("h2", "plaintext");
     }
 
     /**
@@ -24606,16 +24206,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h3_plaintext() throws Exception {
-        test("h3", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _h3_script() throws Exception {
         test("h3", "script");
@@ -24847,16 +24437,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _h4_param() throws Exception {
         test("h4", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h4_plaintext() throws Exception {
-        test("h4", "plaintext");
     }
 
     /**
@@ -25100,16 +24680,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h5_plaintext() throws Exception {
-        test("h5", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _h5_script() throws Exception {
         test("h5", "script");
@@ -25341,16 +24911,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _h6_param() throws Exception {
         test("h6", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _h6_plaintext() throws Exception {
-        test("h6", "plaintext");
     }
 
     /**
@@ -26795,16 +26355,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _header_param() throws Exception {
         test("header", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _header_plaintext() throws Exception {
-        test("header", "plaintext");
     }
 
     /**
@@ -29510,16 +29060,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _i_param() throws Exception {
         test("i", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _i_plaintext() throws Exception {
-        test("i", "plaintext");
     }
 
     /**
@@ -33492,16 +33032,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _ins_plaintext() throws Exception {
-        test("ins", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _ins_script() throws Exception {
         test("ins", "script");
@@ -34639,7 +34169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({FF, IE})
     public void _isindex_plaintext() throws Exception {
         test("isindex", "plaintext");
     }
@@ -35229,16 +34759,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _kbd_param() throws Exception {
         test("kbd", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _kbd_plaintext() throws Exception {
-        test("kbd", "plaintext");
     }
 
     /**
@@ -36829,16 +36349,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _label_plaintext() throws Exception {
-        test("label", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _label_script() throws Exception {
         test("label", "script");
@@ -37022,16 +36532,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _layer_plaintext() throws Exception {
-        test("layer", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _layer_script() throws Exception {
         test("layer", "script");
@@ -37209,16 +36709,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _legend_param() throws Exception {
         test("legend", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _legend_plaintext() throws Exception {
-        test("legend", "plaintext");
     }
 
     /**
@@ -37411,16 +36901,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _li_param() throws Exception {
         test("li", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _li_plaintext() throws Exception {
-        test("li", "plaintext");
     }
 
     /**
@@ -38871,16 +38351,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _listing_plaintext() throws Exception {
-        test("listing", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _listing_script() throws Exception {
         test("listing", "script");
@@ -39058,16 +38528,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _main_param() throws Exception {
         test("main", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _main_plaintext() throws Exception {
-        test("main", "plaintext");
     }
 
     /**
@@ -39257,16 +38717,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _map_plaintext() throws Exception {
-        test("map", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _map_script() throws Exception {
         test("map", "script");
@@ -39444,16 +38894,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _mark_param() throws Exception {
         test("mark", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _mark_plaintext() throws Exception {
-        test("mark", "plaintext");
     }
 
     /**
@@ -39643,16 +39083,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _marquee_plaintext() throws Exception {
-        test("marquee", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _marquee_script() throws Exception {
         test("marquee", "script");
@@ -39836,16 +39266,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _menu_plaintext() throws Exception {
-        test("menu", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _menu_script() throws Exception {
         test("menu", "script");
@@ -40023,16 +39443,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _menuitem_param() throws Exception {
         test("menuitem", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _menuitem_plaintext() throws Exception {
-        test("menuitem", "plaintext");
     }
 
     /**
@@ -41483,16 +40893,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _meter_plaintext() throws Exception {
-        test("meter", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _meter_script() throws Exception {
         test("meter", "script");
@@ -41670,16 +41070,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _multicol_param() throws Exception {
         test("multicol", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _multicol_plaintext() throws Exception {
-        test("multicol", "plaintext");
     }
 
     /**
@@ -41869,16 +41259,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _nav_plaintext() throws Exception {
-        test("nav", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _nav_script() throws Exception {
         test("nav", "script");
@@ -42056,16 +41436,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _nextid_param() throws Exception {
         test("nextid", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _nextid_plaintext() throws Exception {
-        test("nextid", "plaintext");
     }
 
     /**
@@ -42264,16 +41634,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _nobr_plaintext() throws Exception {
-        test("nobr", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _nobr_script() throws Exception {
         test("nobr", "script");
@@ -42454,16 +41814,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void _noembed_param() throws Exception {
         test("noembed", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _noembed_plaintext() throws Exception {
-        test("noembed", "plaintext");
     }
 
     /**
@@ -42657,16 +42007,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _nolayer_plaintext() throws Exception {
-        test("nolayer", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _nolayer_script() throws Exception {
         test("nolayer", "script");
@@ -42844,16 +42184,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _object_param() throws Exception {
         test("object", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _object_plaintext() throws Exception {
-        test("object", "plaintext");
     }
 
     /**
@@ -43043,16 +42373,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _ol_plaintext() throws Exception {
-        test("ol", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _ol_script() throws Exception {
         test("ol", "script");
@@ -43230,16 +42550,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _optgroup_param() throws Exception {
         test("optgroup", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _optgroup_plaintext() throws Exception {
-        test("optgroup", "plaintext");
     }
 
     /**
@@ -43447,16 +42757,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _option_plaintext() throws Exception {
-        test("option", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _option_script() throws Exception {
         test("option", "script");
@@ -43634,16 +42934,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _output_param() throws Exception {
         test("output", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _output_plaintext() throws Exception {
-        test("output", "plaintext");
     }
 
     /**
@@ -45604,16 +44894,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _picture_plaintext() throws Exception {
-        test("picture", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _picture_script() throws Exception {
         test("picture", "script");
@@ -45792,16 +45072,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _pre_param() throws Exception {
         test("pre", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _pre_plaintext() throws Exception {
-        test("pre", "plaintext");
     }
 
     /**
@@ -45992,16 +45262,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _progress_plaintext() throws Exception {
-        test("progress", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _progress_script() throws Exception {
         test("progress", "script");
@@ -46186,16 +45446,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _q_plaintext() throws Exception {
-        test("q", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _q_script() throws Exception {
         test("q", "script");
@@ -46374,16 +45624,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _rp_param() throws Exception {
         test("rp", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _rp_plaintext() throws Exception {
-        test("rp", "plaintext");
     }
 
     /**
@@ -46584,16 +45824,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _rt_plaintext() throws Exception {
-        test("rt", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _rt_script() throws Exception {
         test("rt", "script");
@@ -46772,16 +46002,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _ruby_param() throws Exception {
         test("ruby", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _ruby_plaintext() throws Exception {
-        test("ruby", "plaintext");
     }
 
     /**
@@ -46972,16 +46192,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _s_plaintext() throws Exception {
-        test("s", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _s_script() throws Exception {
         test("s", "script");
@@ -47160,16 +46370,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _samp_param() throws Exception {
         test("samp", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _samp_plaintext() throws Exception {
-        test("samp", "plaintext");
     }
 
     /**
@@ -47380,16 +46580,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _section_plaintext() throws Exception {
-        test("section", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _section_script() throws Exception {
         test("section", "script");
@@ -47570,16 +46760,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void _select_param() throws Exception {
         test("select", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _select_plaintext() throws Exception {
-        test("select", "plaintext");
     }
 
     /**
@@ -47796,16 +46976,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _small_param() throws Exception {
         test("small", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _small_plaintext() throws Exception {
-        test("small", "plaintext");
     }
 
     /**
@@ -49257,16 +48427,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _span_plaintext() throws Exception {
-        test("span", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _span_script() throws Exception {
         test("span", "script");
@@ -49445,16 +48605,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _strike_param() throws Exception {
         test("strike", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _strike_plaintext() throws Exception {
-        test("strike", "plaintext");
     }
 
     /**
@@ -49645,16 +48795,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _strong_plaintext() throws Exception {
-        test("strong", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _strong_script() throws Exception {
         test("strong", "script");
@@ -49833,16 +48973,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _sub_param() throws Exception {
         test("sub", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _sub_plaintext() throws Exception {
-        test("sub", "plaintext");
     }
 
     /**
@@ -50033,16 +49163,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _summary_plaintext() throws Exception {
-        test("summary", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _summary_script() throws Exception {
         test("summary", "script");
@@ -50221,16 +49341,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _sup_param() throws Exception {
         test("sup", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _sup_plaintext() throws Exception {
-        test("sup", "plaintext");
     }
 
     /**
@@ -54822,7 +53932,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "1")
-    @NotYetImplemented(IE)
     public void _template_plaintext() throws Exception {
         test("template", "plaintext");
     }
@@ -59157,16 +58266,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _time_plaintext() throws Exception {
-        test("time", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _time_script() throws Exception {
         test("time", "script");
@@ -59347,16 +58446,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @NotYetImplemented
     public void _title_param() throws Exception {
         test("title", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _title_plaintext() throws Exception {
-        test("title", "plaintext");
     }
 
     /**
@@ -62084,16 +61173,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _tt_plaintext() throws Exception {
-        test("tt", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _tt_script() throws Exception {
         test("tt", "script");
@@ -62272,16 +61351,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _u_param() throws Exception {
         test("u", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _u_plaintext() throws Exception {
-        test("u", "plaintext");
     }
 
     /**
@@ -62472,16 +61541,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _ul_plaintext() throws Exception {
-        test("ul", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _ul_script() throws Exception {
         test("ul", "script");
@@ -62666,16 +61725,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _var_plaintext() throws Exception {
-        test("var", "plaintext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("2")
     public void _var_script() throws Exception {
         test("var", "script");
@@ -62854,16 +61903,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _video_param() throws Exception {
         test("video", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _video_plaintext() throws Exception {
-        test("video", "plaintext");
     }
 
     /**
@@ -64650,10 +63689,728 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void _slot_plaintext() throws Exception {
-        test("slot", "plaintext");
+    @Alerts("0")
+    public void _area_svg() throws Exception {
+        test("area", "svg");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_svg() throws Exception {
+        test("base", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _basefont_svg() throws Exception {
+        test("basefont", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_svg() throws Exception {
+        test("bgsound", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _body_svg() throws Exception {
+        test("body", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_svg() throws Exception {
+        test("br", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _caption_svg() throws Exception {
+        test("caption", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _col_svg() throws Exception {
+        test("col", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _colgroup_svg() throws Exception {
+        test("colgroup", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "1")
+    public void _command_svg() throws Exception {
+        test("command", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_svg() throws Exception {
+        test("embed", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _frame_svg() throws Exception {
+        test("frame", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _frameset_svg() throws Exception {
+        test("frameset", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_svg() throws Exception {
+        test("head", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_svg() throws Exception {
+        test("hr", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _html_svg() throws Exception {
+        test("html", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _image_svg() throws Exception {
+        test("image", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_svg() throws Exception {
+        test("img", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_svg() throws Exception {
+        test("input", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            CHROME = "1")
+    public void _isindex_svg() throws Exception {
+        test("isindex", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "2")
+    public void _keygen_svg() throws Exception {
+        test("keygen", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_svg() throws Exception {
+        test("link", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_svg() throws Exception {
+        test("meta", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_svg() throws Exception {
+        test("param", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _source_svg() throws Exception {
+        test("source", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_b() throws Exception {
+        test("svg", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_big() throws Exception {
+        test("svg", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_blockquote() throws Exception {
+        test("svg", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_body() throws Exception {
+        test("svg", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_br() throws Exception {
+        test("svg", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_center() throws Exception {
+        test("svg", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_code() throws Exception {
+        test("svg", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dd() throws Exception {
+        test("svg", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_div() throws Exception {
+        test("svg", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dl() throws Exception {
+        test("svg", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dt() throws Exception {
+        test("svg", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_em() throws Exception {
+        test("svg", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_embed() throws Exception {
+        test("svg", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h1() throws Exception {
+        test("svg", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h2() throws Exception {
+        test("svg", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h3() throws Exception {
+        test("svg", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h4() throws Exception {
+        test("svg", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h5() throws Exception {
+        test("svg", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h6() throws Exception {
+        test("svg", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_head() throws Exception {
+        test("svg", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_hr() throws Exception {
+        test("svg", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_i() throws Exception {
+        test("svg", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_img() throws Exception {
+        test("svg", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_li() throws Exception {
+        test("svg", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_listing() throws Exception {
+        test("svg", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_menu() throws Exception {
+        test("svg", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented(IE)
+    public void _svg_meta() throws Exception {
+        test("svg", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_nobr() throws Exception {
+        test("svg", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ol() throws Exception {
+        test("svg", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_p() throws Exception {
+        test("svg", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_pre() throws Exception {
+        test("svg", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ruby() throws Exception {
+        test("svg", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_s() throws Exception {
+        test("svg", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _svg_script() throws Exception {
+        test("svg", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_small() throws Exception {
+        test("svg", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_span() throws Exception {
+        test("svg", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_strike() throws Exception {
+        test("svg", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_strong() throws Exception {
+        test("svg", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_sub() throws Exception {
+        test("svg", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_sup() throws Exception {
+        test("svg", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_table() throws Exception {
+        test("svg", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_tt() throws Exception {
+        test("svg", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_u() throws Exception {
+        test("svg", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ul() throws Exception {
+        test("svg", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_var() throws Exception {
+        test("svg", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _table_svg() throws Exception {
+        test("table", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tbody_svg() throws Exception {
+        test("tbody", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _td_svg() throws Exception {
+        test("td", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "1")
+    public void _template_svg() throws Exception {
+        test("template", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tfoot_svg() throws Exception {
+        test("tfoot", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _th_svg() throws Exception {
+        test("th", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _thead_svg() throws Exception {
+        test("thead", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tr_svg() throws Exception {
+        test("tr", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _track_svg() throws Exception {
+        test("track", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_svg() throws Exception {
+        test("wbr", "svg");
+    }
 }
