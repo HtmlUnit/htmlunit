@@ -1147,7 +1147,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Object getOnclick() {
-        return getEventHandler(Event.TYPE_LOAD);
+        return getEventHandler(MouseEvent.TYPE_CLICK);
     }
 
     /**
