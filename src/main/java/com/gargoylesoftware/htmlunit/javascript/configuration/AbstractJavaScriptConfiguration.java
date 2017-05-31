@@ -152,7 +152,6 @@ public abstract class AbstractJavaScriptConfiguration {
                         if (jsxClass.extendedClass() != Object.class) {
                             extendedClassName = jsxClass.extendedClass().getSimpleName();
                         }
-                        break;
                     }
                 }
 
