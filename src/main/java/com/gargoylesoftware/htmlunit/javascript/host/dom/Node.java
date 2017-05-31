@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -794,5 +795,84 @@ public class Node extends EventTarget {
             }
         };
         return collection;
+    }
+
+    /**
+     * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
+     * just after this ChildNode.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void after(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final DomNode parentNode = thisDomNode.getParentNode();
+        final DomNode nextSibling = thisDomNode.getNextSibling();
+        for (Object arg : args) {
+            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final DomNode newNode = node.getDomNodeOrDie();
+            if (nextSibling != null) {
+                nextSibling.insertBefore(newNode);
+            }
+            else {
+                parentNode.appendChild(newNode);
+            }
+        }
+    }
+
+    private static Node toNodeOrTextNode(final Node thisObj, final Object obj) {
+        if (obj instanceof Node) {
+            return (Node) obj;
+        }
+        return (Node)
+                ((HTMLDocument) thisObj.getOwnerDocument()).createTextNode(Context.toString(obj));
+    }
+
+    /**
+     * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
+     * just before this ChildNode.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void before(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        for (Object arg : args) {
+            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            ((Node) thisObj).getDomNodeOrDie().insertBefore(node.getDomNodeOrDie());
+        }
+    }
+
+    /**
+     * Replaces this ChildNode in the children list of its parent with a set of Node or DOMString objects.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final DomNode parentNode = thisDomNode.getParentNode();
+        final DomNode nextSibling = thisDomNode.getNextSibling();
+        boolean isFirst = true;
+        for (Object arg : args) {
+            final DomNode newNode = toNodeOrTextNode((Node) thisObj, arg).getDomNodeOrDie();
+            if (isFirst) {
+                isFirst = false;
+                thisDomNode.replace(newNode);
+            }
+            else {
+                if (nextSibling != null) {
+                    nextSibling.insertBefore(newNode);
+                }
+                else {
+                    parentNode.appendChild(newNode);
+                }
+            }
+        }
     }
 }

@@ -1089,7 +1089,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * This should be always 0, if {@link #isWebClientCached()} is {@code false}.
      */
     @Before
-    public void before() {
+    public void beforeTest() {
         if (!isWebClientCached()) {
             assertTrue(getJavaScriptThreads().isEmpty());
         }

@@ -31,7 +31,7 @@ public class SeleniumTest extends WebDriverTestCase {
      */
     @Override
     @Before
-    public void before() {
+    public void beforeTest() {
         try {
             startWebServer("src/test/resources/selenium", null, null);
         }

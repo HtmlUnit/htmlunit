@@ -31,6 +31,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -170,4 +173,44 @@ public class DocumentType extends Node {
         super.remove();
     }
 
+    /**
+     * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
+     * just before this ChildNode.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, FF})
+    public static void before(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        Node.before(context, thisObj, args, function);
+    }
+
+    /**
+     * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
+     * just after this ChildNode.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, FF})
+    public static void after(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        Node.after(context, thisObj, args, function);
+    }
+
+    /**
+     * Replaces the node wit a set of Node or DOMString objects.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, FF})
+    public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        Node.replaceWith(context, thisObj, args, function);
+    }
 }

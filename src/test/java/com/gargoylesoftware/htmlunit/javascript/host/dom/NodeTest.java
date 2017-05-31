@@ -1185,4 +1185,88 @@ public class NodeTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "<div><span></span>nullundefinedhello<p></p></div>",
+            IE = "<div><p></p></div>")
+    public void before() throws Exception {
+        final String html =
+              "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var parent = document.createElement('div');\n"
+            + "      var child = document.createElement('p');\n"
+            + "      parent.appendChild(child);\n"
+            + "      var span = document.createElement('span');\n"
+            + "      if (child.before) {"
+            + "        child.before(span, null, undefined, 'hello');\n"
+            + "      }\n"
+            + "      alert(parent.outerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "<div><p></p><span></span>nullundefinedhello</div>",
+            IE = "<div><p></p></div>")
+    public void after() throws Exception {
+        final String html =
+              "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var parent = document.createElement('div');\n"
+            + "      var child = document.createElement('p');\n"
+            + "      parent.appendChild(child);\n"
+            + "      var span = document.createElement('span');\n"
+            + "      if (child.after) {"
+            + "        child.after(span, null, undefined, 'hello');\n"
+            + "      }\n"
+            + "      alert(parent.outerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "<div><span></span>nullundefinedhello</div>",
+            IE = "<div><p></p></div>")
+    public void replaceWith() throws Exception {
+        final String html =
+              "<html><head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var parent = document.createElement('div');\n"
+            + "      var child = document.createElement('p');\n"
+            + "      parent.appendChild(child);\n"
+            + "      var span = document.createElement('span');\n"
+            + "      if (child.replaceWith) {"
+            + "        child.replaceWith(span, null, undefined, 'hello');\n"
+            + "      }\n"
+            + "      alert(parent.outerHTML);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
