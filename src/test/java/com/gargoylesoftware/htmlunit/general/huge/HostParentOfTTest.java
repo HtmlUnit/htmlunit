@@ -51,8 +51,56 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Text_CDATASection() throws Exception {
+        test("Text", "CDATASection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Text_Text() throws Exception {
         test("Text", "Text");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _TextDecoder_TextDecoder() throws Exception {
+        test("TextDecoder", "TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _TextEncoder_TextEncoder() throws Exception {
+        test("TextEncoder", "TextEncoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _TextEvent_TextEvent() throws Exception {
+        test("TextEvent", "TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TextMetrics_TextMetrics() throws Exception {
+        test("TextMetrics", "TextMetrics");
     }
 
     /**
@@ -70,8 +118,158 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _TextTrack_TextTrack() throws Exception {
+        test("TextTrack", "TextTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TextTrackCue_TextTrackCue() throws Exception {
+        test("TextTrackCue", "TextTrackCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _TextTrackCue_VTTCue() throws Exception {
+        test("TextTrackCue", "VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TextTrackCueList_TextTrackCueList() throws Exception {
+        test("TextTrackCueList", "TextTrackCueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TextTrackList_TextTrackList() throws Exception {
+        test("TextTrackList", "TextTrackList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _TimeEvent_TimeEvent() throws Exception {
+        test("TimeEvent", "TimeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TimeRanges_TimeRanges() throws Exception {
+        test("TimeRanges", "TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Touch_Touch() throws Exception {
+        test("Touch", "Touch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TouchEvent_TouchEvent() throws Exception {
+        test("TouchEvent", "TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TouchList_TouchList() throws Exception {
+        test("TouchList", "TouchList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TrackEvent_TrackEvent() throws Exception {
+        test("TrackEvent", "TrackEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _TransitionEvent_TransitionEvent() throws Exception {
+        test("TransitionEvent", "TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("TransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _TreeWalker_TreeWalker() throws Exception {
         test("TreeWalker", "TreeWalker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _UIEvent_CompositionEvent() throws Exception {
+        test("UIEvent", "CompositionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _UIEvent_DragEvent() throws Exception {
+        test("UIEvent", "DragEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _UIEvent_FocusEvent() throws Exception {
+        test("UIEvent", "FocusEvent");
     }
 
     /**
@@ -89,8 +287,95 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _UIEvent_KeyboardEvent() throws Exception {
+        test("UIEvent", "KeyboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _UIEvent_MouseEvent() throws Exception {
+        test("UIEvent", "MouseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _UIEvent_MouseScrollEvent() throws Exception {
+        test("UIEvent", "MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _UIEvent_MouseWheelEvent() throws Exception {
+        test("UIEvent", "MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _UIEvent_PointerEvent() throws Exception {
+        test("UIEvent", "PointerEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void _UIEvent_SVGZoomEvent() throws Exception {
+        test("UIEvent", "SVGZoomEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _UIEvent_TextEvent() throws Exception {
+        test("UIEvent", "TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _UIEvent_TouchEvent() throws Exception {
+        test("UIEvent", "TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _UIEvent_UIEvent() throws Exception {
         test("UIEvent", "UIEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _UIEvent_WheelEvent() throws Exception {
+        test("UIEvent", "WheelEvent");
     }
 
     /**
@@ -134,8 +419,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Text_CDATASection() throws Exception {
-        test("Text", "CDATASection");
+    public void _URIError_URIError() throws Exception {
+        test("URIError", "URIError");
     }
 
     /**
@@ -143,27 +428,18 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _UIEvent_KeyboardEvent() throws Exception {
-        test("UIEvent", "KeyboardEvent");
+    public void _URL_URL() throws Exception {
+        test("URL", "URL");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    public void _UIEvent_MouseEvent() throws Exception {
-        test("UIEvent", "MouseEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _UIEvent_PointerEvent() throws Exception {
-        test("UIEvent", "PointerEvent");
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _URL_webkitURL() throws Exception {
+        test("URL", "webkitURL");
     }
 
     /**
@@ -181,180 +457,9 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _TouchEvent_TouchEvent() throws Exception {
-        test("TouchEvent", "TouchEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _TouchList_TouchList() throws Exception {
-        test("TouchList", "TouchList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Touch_Touch() throws Exception {
-        test("Touch", "Touch");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TransitionEvent_TransitionEvent() throws Exception {
-        test("TransitionEvent", "TransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _UIEvent_CompositionEvent() throws Exception {
-        test("UIEvent", "CompositionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _UIEvent_FocusEvent() throws Exception {
-        test("UIEvent", "FocusEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _UIEvent_TouchEvent() throws Exception {
-        test("UIEvent", "TouchEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _UIEvent_WheelEvent() throws Exception {
-        test("UIEvent", "WheelEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _TimeEvent_TimeEvent() throws Exception {
-        test("TimeEvent", "TimeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _UIEvent_DragEvent() throws Exception {
-        test("UIEvent", "DragEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _UIEvent_MouseScrollEvent() throws Exception {
-        test("UIEvent", "MouseScrollEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _UserProximityEvent_UserProximityEvent() throws Exception {
         test("UserProximityEvent", "UserProximityEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _UIEvent_MouseWheelEvent() throws Exception {
-        test("UIEvent", "MouseWheelEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _TextDecoder_TextDecoder() throws Exception {
-        test("TextDecoder", "TextDecoder");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _TextEncoder_TextEncoder() throws Exception {
-        test("TextEncoder", "TextEncoder");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TextMetrics_TextMetrics() throws Exception {
-        test("TextMetrics", "TextMetrics");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _URL_URL() throws Exception {
-        test("URL", "URL");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TimeRanges_TimeRanges() throws Exception {
-        test("TimeRanges", "TimeRanges");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _URIError_URIError() throws Exception {
-        test("URIError", "URIError");
     }
 
     /**
@@ -370,85 +475,10 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _TextEvent_TextEvent() throws Exception {
-        test("TextEvent", "TextEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TextTrackCueList_TextTrackCueList() throws Exception {
-        test("TextTrackCueList", "TextTrackCueList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TextTrackCue_TextTrackCue() throws Exception {
-        test("TextTrackCue", "TextTrackCue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _TextTrackCue_VTTCue() throws Exception {
-        test("TextTrackCue", "VTTCue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TextTrackList_TextTrackList() throws Exception {
-        test("TextTrackList", "TextTrackList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TextTrack_TextTrack() throws Exception {
-        test("TextTrack", "TextTrack");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _TrackEvent_TrackEvent() throws Exception {
-        test("TrackEvent", "TrackEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
-    public void _UIEvent_SVGZoomEvent() throws Exception {
-        test("UIEvent", "SVGZoomEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _UIEvent_TextEvent() throws Exception {
-        test("UIEvent", "TextEvent");
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
 
     /**
@@ -459,35 +489,5 @@ public class HostParentOfTTest extends HostParentOf {
             IE = "false")
     public void _VTTCue_VTTCue() throws Exception {
         test("VTTCue", "VTTCue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("TransitionEvent", "WebKitTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _URL_webkitURL() throws Exception {
-        test("URL", "webkitURL");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _VideoPlaybackQuality_VideoPlaybackQuality() throws Exception {
-        test("VideoPlaybackQuality", "VideoPlaybackQuality");
     }
 }

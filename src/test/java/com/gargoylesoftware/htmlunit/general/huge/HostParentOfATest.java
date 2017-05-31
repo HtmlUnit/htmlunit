@@ -54,6 +54,95 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _ActiveXObject_ActiveXObject() throws Exception {
+        test("ActiveXObject", "ActiveXObject");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AnalyserNode_AnalyserNode() throws Exception {
+        test("AnalyserNode", "AnalyserNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _ANGLE_instanced_arrays_ANGLE_instanced_arrays() throws Exception {
+        test("ANGLE_instanced_arrays", "ANGLE_instanced_arrays");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
+    public void _Animation_Animation() throws Exception {
+        test("Animation", "Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _AnimationEvent_AnimationEvent() throws Exception {
+        test("AnimationEvent", "AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
+        test("AnimationEvent", "WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _AppBannerPromptResult_AppBannerPromptResult() throws Exception {
+        test("AppBannerPromptResult", "AppBannerPromptResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _ApplicationCache_ApplicationCache() throws Exception {
+        test("ApplicationCache", "ApplicationCache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
+        test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _ArrayBuffer_ArrayBuffer() throws Exception {
         test("ArrayBuffer", "ArrayBuffer");
@@ -72,274 +161,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _ActiveXObject_ActiveXObject() throws Exception {
-        test("ActiveXObject", "ActiveXObject");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _ApplicationCache_ApplicationCache() throws Exception {
-        test("ApplicationCache", "ApplicationCache");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
-    public void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
-        test("BeforeUnloadEvent", "BeforeUnloadEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CDATASection_CDATASection() throws Exception {
-        test("CDATASection", "CDATASection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSS2Properties_CSS2Properties() throws Exception {
-        test("CSS2Properties", "CSS2Properties");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSFontFaceRule_CSSFontFaceRule() throws Exception {
-        test("CSSFontFaceRule", "CSSFontFaceRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSImportRule_CSSImportRule() throws Exception {
-        test("CSSImportRule", "CSSImportRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSMediaRule_CSSMediaRule() throws Exception {
-        test("CSSMediaRule", "CSSMediaRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSPrimitiveValue_CSSPrimitiveValue() throws Exception {
-        test("CSSPrimitiveValue", "CSSPrimitiveValue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSRule() throws Exception {
-        test("CSSRule", "CSSRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRuleList_CSSRuleList() throws Exception {
-        test("CSSRuleList", "CSSRuleList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSStyleDeclaration_CSSStyleDeclaration() throws Exception {
-        test("CSSStyleDeclaration", "CSSStyleDeclaration");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSStyleRule_CSSStyleRule() throws Exception {
-        test("CSSStyleRule", "CSSStyleRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSStyleSheet_CSSStyleSheet() throws Exception {
-        test("CSSStyleSheet", "CSSStyleSheet");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSValue_CSSValue() throws Exception {
-        test("CSSValue", "CSSValue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CanvasRenderingContext2D_CanvasRenderingContext2D() throws Exception {
-        test("CanvasRenderingContext2D", "CanvasRenderingContext2D");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _ClientRect_ClientRect() throws Exception {
-        test("ClientRect", "ClientRect");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Comment_Comment() throws Exception {
-        test("Comment", "Comment");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _Console_Console() throws Exception {
-        test("Console", "Console");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _Coordinates_Coordinates() throws Exception {
-        test("Coordinates", "Coordinates");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSFontFaceRule() throws Exception {
-        test("CSSRule", "CSSFontFaceRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSImportRule() throws Exception {
-        test("CSSRule", "CSSImportRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSMediaRule() throws Exception {
-        test("CSSRule", "CSSMediaRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSStyleRule() throws Exception {
-        test("CSSRule", "CSSStyleRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSStyleDeclaration_CSS2Properties() throws Exception {
-        test("CSSStyleDeclaration", "CSS2Properties");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSValue_CSSPrimitiveValue() throws Exception {
-        test("CSSValue", "CSSPrimitiveValue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AnalyserNode_AnalyserNode() throws Exception {
-        test("AnalyserNode", "AnalyserNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioParam_AudioParam() throws Exception {
-        test("AudioParam", "AudioParam");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _ChannelMergerNode_ChannelMergerNode() throws Exception {
-        test("ChannelMergerNode", "ChannelMergerNode");
+    public void _Audio_Audio() throws Exception {
+        test("Audio", "Audio");
     }
 
     /**
@@ -351,15 +175,6 @@ public class HostParentOfATest extends HostParentOf {
     @NotYetImplemented(FF52)
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Audio_Audio() throws Exception {
-        test("Audio", "Audio");
     }
 
     /**
@@ -507,6 +322,18 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true",
+            CHROME = "true")
+    @NotYetImplemented(FF52)
+    public void _AudioNode_ConstantSourceNode() throws Exception {
+        test("AudioNode", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _AudioNode_ConvolverNode() throws Exception {
@@ -521,6 +348,127 @@ public class HostParentOfATest extends HostParentOf {
             IE = "false")
     public void _AudioNode_DelayNode() throws Exception {
         test("AudioNode", "DelayNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_DynamicsCompressorNode() throws Exception {
+        test("AudioNode", "DynamicsCompressorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_GainNode() throws Exception {
+        test("AudioNode", "GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true",
+            CHROME = "true")
+    public void _AudioNode_IIRFilterNode() throws Exception {
+        test("AudioNode", "IIRFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_MediaElementAudioSourceNode() throws Exception {
+        test("AudioNode", "MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_MediaStreamAudioDestinationNode() throws Exception {
+        test("AudioNode", "MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_MediaStreamAudioSourceNode() throws Exception {
+        test("AudioNode", "MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_OscillatorNode() throws Exception {
+        test("AudioNode", "OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_PannerNode() throws Exception {
+        test("AudioNode", "PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_ScriptProcessorNode() throws Exception {
+        test("AudioNode", "ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_StereoPannerNode() throws Exception {
+        test("AudioNode", "StereoPannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioNode_WaveShaperNode() throws Exception {
+        test("AudioNode", "WaveShaperNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _AudioParam_AudioParam() throws Exception {
+        test("AudioParam", "AudioParam");
     }
 
     /**
@@ -581,8 +529,211 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    public void _BarProp_BarProp() throws Exception {
+        test("BarProp", "BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_AudioContext() throws Exception {
+        test("BaseAudioContext", "AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_BaseAudioContext() throws Exception {
+        test("BaseAudioContext", "BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BaseAudioContext_OfflineAudioContext() throws Exception {
+        test("BaseAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _BatteryManager_BatteryManager() throws Exception {
+        test("BatteryManager", "BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _BeforeUnloadEvent_BeforeUnloadEvent() throws Exception {
+        test("BeforeUnloadEvent", "BeforeUnloadEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _BiquadFilterNode_BiquadFilterNode() throws Exception {
         test("BiquadFilterNode", "BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Blob_Blob() throws Exception {
+        test("Blob", "Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Blob_File() throws Exception {
+        test("Blob", "File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _BlobEvent_BlobEvent() throws Exception {
+        test("BlobEvent", "BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _BroadcastChannel_BroadcastChannel() throws Exception {
+        test("BroadcastChannel", "BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Cache_Cache() throws Exception {
+        test("Cache", "Cache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _CacheStorage_CacheStorage() throws Exception {
+        test("CacheStorage", "CacheStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream", "CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CanvasCaptureMediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack", "CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CanvasGradient_CanvasGradient() throws Exception {
+        test("CanvasGradient", "CanvasGradient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CanvasPattern_CanvasPattern() throws Exception {
+        test("CanvasPattern", "CanvasPattern");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CanvasRenderingContext2D_CanvasRenderingContext2D() throws Exception {
+        test("CanvasRenderingContext2D", "CanvasRenderingContext2D");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CaretPosition_CaretPosition() throws Exception {
+        test("CaretPosition", "CaretPosition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CDATASection_CDATASection() throws Exception {
+        test("CDATASection", "CDATASection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ChannelMergerNode_ChannelMergerNode() throws Exception {
+        test("ChannelMergerNode", "ChannelMergerNode");
     }
 
     /**
@@ -593,124 +744,6 @@ public class HostParentOfATest extends HostParentOf {
             IE = "false")
     public void _ChannelSplitterNode_ChannelSplitterNode() throws Exception {
         test("ChannelSplitterNode", "ChannelSplitterNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _ConvolverNode_ConvolverNode() throws Exception {
-        test("ConvolverNode", "ConvolverNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSPageRule_CSSPageRule() throws Exception {
-        test("CSSPageRule", "CSSPageRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CSSRule_CSSPageRule() throws Exception {
-        test("CSSRule", "CSSPageRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _ClientRectList_ClientRectList() throws Exception {
-        test("ClientRectList", "ClientRectList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_DynamicsCompressorNode() throws Exception {
-        test("AudioNode", "DynamicsCompressorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_GainNode() throws Exception {
-        test("AudioNode", "GainNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_MediaStreamAudioDestinationNode() throws Exception {
-        test("AudioNode", "MediaStreamAudioDestinationNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_MediaStreamAudioSourceNode() throws Exception {
-        test("AudioNode", "MediaStreamAudioSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_OscillatorNode() throws Exception {
-        test("AudioNode", "OscillatorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_PannerNode() throws Exception {
-        test("AudioNode", "PannerNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_ScriptProcessorNode() throws Exception {
-        test("AudioNode", "ScriptProcessorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_WaveShaperNode() throws Exception {
-        test("AudioNode", "WaveShaperNode");
     }
 
     /**
@@ -763,9 +796,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_MediaElementAudioSourceNode() throws Exception {
-        test("AudioNode", "MediaElementAudioSourceNode");
+            FF = "false")
+    public void _ClientRect_ClientRect() throws Exception {
+        test("ClientRect", "ClientRect");
     }
 
     /**
@@ -773,77 +806,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
-    public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
-        test("CSSKeyframeRule", "CSSKeyframeRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
-    public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
-        test("CSSKeyframesRule", "CSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
-    public void _CSSRule_CSSKeyframeRule() throws Exception {
-        test("CSSRule", "CSSKeyframeRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
-    public void _CSSRule_CSSKeyframesRule() throws Exception {
-        test("CSSRule", "CSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CSSRule_CSSSupportsRule() throws Exception {
-        test("CSSRule", "CSSSupportsRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CSSSupportsRule_CSSSupportsRule() throws Exception {
-        test("CSSSupportsRule", "CSSSupportsRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CanvasGradient_CanvasGradient() throws Exception {
-        test("CanvasGradient", "CanvasGradient");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _CanvasPattern_CanvasPattern() throws Exception {
-        test("CanvasPattern", "CanvasPattern");
+            FF = "false")
+    public void _ClientRectList_ClientRectList() throws Exception {
+        test("ClientRectList", "ClientRectList");
     }
 
     /**
@@ -870,6 +835,15 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Comment_Comment() throws Exception {
+        test("Comment", "Comment");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _CompositionEvent_CompositionEvent() throws Exception {
         test("CompositionEvent", "CompositionEvent");
     }
@@ -878,9 +852,131 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _Console_Console() throws Exception {
+        test("Console", "Console");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF52 = "true",
+            CHROME = "true")
+    public void _ConstantSourceNode_ConstantSourceNode() throws Exception {
+        test("ConstantSourceNode", "ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _ConvolverNode_ConvolverNode() throws Exception {
+        test("ConvolverNode", "ConvolverNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _Coordinates_Coordinates() throws Exception {
+        test("Coordinates", "Coordinates");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_Credential() throws Exception {
+        test("Credential", "Credential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_FederatedCredential() throws Exception {
+        test("Credential", "FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_PasswordCredential() throws Exception {
+        test("Credential", "PasswordCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Credential_SiteBoundCredential() throws Exception {
+        test("Credential", "SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CredentialsContainer_CredentialsContainer() throws Exception {
+        test("CredentialsContainer", "CredentialsContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
-    public void _CustomEvent_CustomEvent() throws Exception {
-        test("CustomEvent", "CustomEvent");
+    public void _Crypto_Crypto() throws Exception {
+        test("Crypto", "Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _CryptoKey_CryptoKey() throws Exception {
+        test("CryptoKey", "CryptoKey");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _CSS_CSS() throws Exception {
+        test("CSS", "CSS");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSS2Properties_CSS2Properties() throws Exception {
+        test("CSS2Properties", "CSS2Properties");
     }
 
     /**
@@ -911,6 +1007,25 @@ public class HostParentOfATest extends HostParentOf {
             IE = "false")
     public void _CSSConditionRule_CSSSupportsRule() throws Exception {
         test("CSSConditionRule", "CSSSupportsRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule", "CSSCounterStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSFontFaceRule_CSSFontFaceRule() throws Exception {
+        test("CSSFontFaceRule", "CSSFontFaceRule");
     }
 
     /**
@@ -957,10 +1072,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CSSRule_CSSConditionRule() throws Exception {
-        test("CSSRule", "CSSConditionRule");
+    @Alerts("true")
+    public void _CSSImportRule_CSSImportRule() throws Exception {
+        test("CSSImportRule", "CSSImportRule");
     }
 
     /**
@@ -968,9 +1082,28 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CSSRule_CSSGroupingRule() throws Exception {
-        test("CSSRule", "CSSGroupingRule");
+            FF45 = "false")
+    public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
+        test("CSSKeyframeRule", "CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF45 = "false")
+    public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
+        test("CSSKeyframesRule", "CSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSMediaRule_CSSMediaRule() throws Exception {
+        test("CSSMediaRule", "CSSMediaRule");
     }
 
     /**
@@ -987,68 +1120,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _CSSRule_CSSNamespaceRule() throws Exception {
-        test("CSSRule", "CSSNamespaceRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _CSS_CSS() throws Exception {
-        test("CSS", "CSS");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
-    public void _Blob_Blob() throws Exception {
-        test("Blob", "Blob");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Blob_File() throws Exception {
-        test("Blob", "File");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CryptoKey_CryptoKey() throws Exception {
-        test("CryptoKey", "CryptoKey");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Crypto_Crypto() throws Exception {
-        test("Crypto", "Crypto");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _BlobEvent_BlobEvent() throws Exception {
-        test("BlobEvent", "BlobEvent");
+    public void _CSSPageRule_CSSPageRule() throws Exception {
+        test("CSSPageRule", "CSSPageRule");
     }
 
     /**
@@ -1057,8 +1131,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
-    public void _CaretPosition_CaretPosition() throws Exception {
-        test("CaretPosition", "CaretPosition");
+    public void _CSSPrimitiveValue_CSSPrimitiveValue() throws Exception {
+        test("CSSPrimitiveValue", "CSSPrimitiveValue");
     }
 
     /**
@@ -1067,38 +1141,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    public void _BatteryManager_BatteryManager() throws Exception {
-        test("BatteryManager", "BatteryManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _AudioNode_StereoPannerNode() throws Exception {
-        test("AudioNode", "StereoPannerNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _BroadcastChannel_BroadcastChannel() throws Exception {
-        test("BroadcastChannel", "BroadcastChannel");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSCounterStyleRule_CSSCounterStyleRule() throws Exception {
-        test("CSSCounterStyleRule", "CSSCounterStyleRule");
+    public void _CSSRule_CSSConditionRule() throws Exception {
+        test("CSSRule", "CSSConditionRule");
     }
 
     /**
@@ -1115,20 +1159,104 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _BarProp_BarProp() throws Exception {
-        test("BarProp", "BarProp");
+    @Alerts("true")
+    public void _CSSRule_CSSFontFaceRule() throws Exception {
+        test("CSSRule", "CSSFontFaceRule");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _ApplicationCacheErrorEvent_ApplicationCacheErrorEvent() throws Exception {
-        test("ApplicationCacheErrorEvent", "ApplicationCacheErrorEvent");
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _CSSRule_CSSGroupingRule() throws Exception {
+        test("CSSRule", "CSSGroupingRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSRule_CSSImportRule() throws Exception {
+        test("CSSRule", "CSSImportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF45 = "false")
+    public void _CSSRule_CSSKeyframeRule() throws Exception {
+        test("CSSRule", "CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF45 = "false")
+    public void _CSSRule_CSSKeyframesRule() throws Exception {
+        test("CSSRule", "CSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSRule_CSSMediaRule() throws Exception {
+        test("CSSRule", "CSSMediaRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _CSSRule_CSSNamespaceRule() throws Exception {
+        test("CSSRule", "CSSNamespaceRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSRule_CSSPageRule() throws Exception {
+        test("CSSRule", "CSSPageRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSRule_CSSRule() throws Exception {
+        test("CSSRule", "CSSRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSRule_CSSStyleRule() throws Exception {
+        test("CSSRule", "CSSStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _CSSRule_CSSSupportsRule() throws Exception {
+        test("CSSRule", "CSSSupportsRule");
     }
 
     /**
@@ -1146,156 +1274,6 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _CSSViewportRule_CSSViewportRule() throws Exception {
-        test("CSSViewportRule", "CSSViewportRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _CacheStorage_CacheStorage() throws Exception {
-        test("CacheStorage", "CacheStorage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Cache_Cache() throws Exception {
-        test("Cache", "Cache");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _AppBannerPromptResult_AppBannerPromptResult() throws Exception {
-        test("AppBannerPromptResult", "AppBannerPromptResult");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BeforeInstallPromptEvent_BeforeInstallPromptEvent() throws Exception {
-        test("BeforeInstallPromptEvent", "BeforeInstallPromptEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF52 = "true")
-    public void _Animation_Animation() throws Exception {
-        test("Animation", "Animation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _AnimationEvent_AnimationEvent() throws Exception {
-        test("AnimationEvent", "AnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
-        test("AnimationEvent", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF52 = "true",
-            CHROME = "true")
-    public void _AudioNode_IIRFilterNode() throws Exception {
-        test("AudioNode", "IIRFilterNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CanvasCaptureMediaStream_CanvasCaptureMediaStream() throws Exception {
-        test("CanvasCaptureMediaStream", "CanvasCaptureMediaStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _CanvasCaptureMediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
-        test("CanvasCaptureMediaStreamTrack", "CanvasCaptureMediaStreamTrack");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Credential_Credential() throws Exception {
-        test("Credential", "Credential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Credential_FederatedCredential() throws Exception {
-        test("Credential", "FederatedCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Credential_PasswordCredential() throws Exception {
-        test("Credential", "PasswordCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _CredentialsContainer_CredentialsContainer() throws Exception {
-        test("CredentialsContainer", "CredentialsContainer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
             FF45 = "true")
     public void _CSSRule_MozCSSKeyframesRule() throws Exception {
         test("CSSRule", "MozCSSKeyframesRule");
@@ -1305,10 +1283,9 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _ANGLE_instanced_arrays_ANGLE_instanced_arrays() throws Exception {
-        test("ANGLE_instanced_arrays", "ANGLE_instanced_arrays");
+    @Alerts("true")
+    public void _CSSRuleList_CSSRuleList() throws Exception {
+        test("CSSRuleList", "CSSRuleList");
     }
 
     /**
@@ -1316,11 +1293,46 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true",
-            CHROME = "true")
-    @NotYetImplemented(FF52)
-    public void _AudioNode_ConstantSourceNode() throws Exception {
-        test("AudioNode", "ConstantSourceNode");
+            FF = "true")
+    public void _CSSStyleDeclaration_CSS2Properties() throws Exception {
+        test("CSSStyleDeclaration", "CSS2Properties");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSStyleDeclaration_CSSStyleDeclaration() throws Exception {
+        test("CSSStyleDeclaration", "CSSStyleDeclaration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSStyleRule_CSSStyleRule() throws Exception {
+        test("CSSStyleRule", "CSSStyleRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CSSStyleSheet_CSSStyleSheet() throws Exception {
+        test("CSSStyleSheet", "CSSStyleSheet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _CSSSupportsRule_CSSSupportsRule() throws Exception {
+        test("CSSSupportsRule", "CSSSupportsRule");
     }
 
     /**
@@ -1328,9 +1340,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BaseAudioContext_AudioContext() throws Exception {
-        test("BaseAudioContext", "AudioContext");
+            FF = "true")
+    public void _CSSValue_CSSPrimitiveValue() throws Exception {
+        test("CSSValue", "CSSPrimitiveValue");
     }
 
     /**
@@ -1338,9 +1350,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BaseAudioContext_BaseAudioContext() throws Exception {
-        test("BaseAudioContext", "BaseAudioContext");
+            FF = "true")
+    public void _CSSValue_CSSValue() throws Exception {
+        test("CSSValue", "CSSValue");
     }
 
     /**
@@ -1348,40 +1360,9 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _BaseAudioContext_OfflineAudioContext() throws Exception {
-        test("BaseAudioContext", "OfflineAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF52 = "true",
-            CHROME = "true")
-    public void _ConstantSourceNode_ConstantSourceNode() throws Exception {
-        test("ConstantSourceNode", "ConstantSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Credential_SiteBoundCredential() throws Exception {
-        test("Credential", "SiteBoundCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
-        test("CustomElementRegistry", "CustomElementRegistry");
+            FF = "true")
+    public void _CSSValue_CSSValueList() throws Exception {
+        test("CSSValue", "CSSValueList");
     }
 
     /**
@@ -1399,8 +1380,27 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _CSSValue_CSSValueList() throws Exception {
-        test("CSSValue", "CSSValueList");
+            CHROME = "true")
+    public void _CSSViewportRule_CSSViewportRule() throws Exception {
+        test("CSSViewportRule", "CSSViewportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
+        test("CustomElementRegistry", "CustomElementRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _CustomEvent_CustomEvent() throws Exception {
+        test("CustomEvent", "CustomEvent");
     }
 }

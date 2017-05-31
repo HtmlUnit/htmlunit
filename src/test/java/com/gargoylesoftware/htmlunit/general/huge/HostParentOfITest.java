@@ -56,110 +56,6 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
-    public void _Image_HTMLImageElement() throws Exception {
-        // although Image != HTMLImageElement, they seem to be synonyms!!!
-        test("Image", "HTMLImageElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Image_Image() throws Exception {
-        test("Image", "Image");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Int16Array_Int16Array() throws Exception {
-        test("Int16Array", "Int16Array");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Int32Array_Int32Array() throws Exception {
-        test("Int32Array", "Int32Array");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Int8Array_Int8Array() throws Exception {
-        test("Int8Array", "Int8Array");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _KeyboardEvent_KeyboardEvent() throws Exception {
-        test("KeyboardEvent", "KeyboardEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Location_Location() throws Exception {
-        test("Location", "Location");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _LocalMediaStream_LocalMediaStream() throws Exception {
-        test("LocalMediaStream", "LocalMediaStream");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _InputEvent_InputEvent() throws Exception {
-        test("InputEvent", "InputEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
-        test("IDBCursorWithValue", "IDBCursorWithValue");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _IDBCursor_IDBCursor() throws Exception {
         test("IDBCursor", "IDBCursor");
@@ -173,6 +69,16 @@ public class HostParentOfITest extends HostParentOf {
     @Alerts("true")
     public void _IDBCursor_IDBCursorWithValue() throws Exception {
         test("IDBCursor", "IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _IDBCursorWithValue_IDBCursorWithValue() throws Exception {
+        test("IDBCursorWithValue", "IDBCursorWithValue");
     }
 
     /**
@@ -213,6 +119,16 @@ public class HostParentOfITest extends HostParentOf {
     @Alerts("true")
     public void _IDBKeyRange_IDBKeyRange() throws Exception {
         test("IDBKeyRange", "IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _IDBMutableFile_IDBMutableFile() throws Exception {
+        test("IDBMutableFile", "IDBMutableFile");
     }
 
     /**
@@ -276,13 +192,46 @@ public class HostParentOfITest extends HostParentOf {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IdleDeadline_IdleDeadline() throws Exception {
+        test("IdleDeadline", "IdleDeadline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _IIRFilterNode_IIRFilterNode() throws Exception {
+        test("IIRFilterNode", "IIRFilterNode");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void _Image_HTMLImageElement() throws Exception {
+        // although Image != HTMLImageElement, they seem to be synonyms!!!
+        test("Image", "HTMLImageElement");
+    }
+
+    /**
      * @throws Exception
      *             if the test fails
      */
     @Test
     @Alerts("true")
-    public void _ImageData_ImageData() throws Exception {
-        test("ImageData", "ImageData");
+    public void _Image_Image() throws Exception {
+        test("Image", "Image");
     }
 
     /**
@@ -301,9 +250,20 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _IdleDeadline_IdleDeadline() throws Exception {
-        test("IdleDeadline", "IdleDeadline");
+            CHROME = "true",
+            FF52 = "true")
+    public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
+        test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _ImageData_ImageData() throws Exception {
+        test("ImageData", "ImageData");
     }
 
     /**
@@ -317,34 +277,54 @@ public class HostParentOfITest extends HostParentOf {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception
+     *             if the test fails
      */
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
-    public void _IDBMutableFile_IDBMutableFile() throws Exception {
-        test("IDBMutableFile", "IDBMutableFile");
+    public void _InputEvent_InputEvent() throws Exception {
+        test("InputEvent", "InputEvent");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _IIRFilterNode_IIRFilterNode() throws Exception {
-        test("IIRFilterNode", "IIRFilterNode");
+    @Alerts("false")
+    @NotYetImplemented(FF)
+    public void _InstallTrigger_InstallTrigger() throws Exception {
+        test("InstallTrigger", "InstallTrigger");
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception
+     *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
-        test("IntersectionObserverEntry", "IntersectionObserverEntry");
+    @Alerts("true")
+    public void _Int16Array_Int16Array() throws Exception {
+        test("Int16Array", "Int16Array");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Int32Array_Int32Array() throws Exception {
+        test("Int32Array", "Int32Array");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Int8Array_Int8Array() throws Exception {
+        test("Int8Array", "Int8Array");
     }
 
     /**
@@ -361,31 +341,51 @@ public class HostParentOfITest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry", "IntersectionObserverEntry");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _KeyboardEvent_KeyboardEvent() throws Exception {
+        test("KeyboardEvent", "KeyboardEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _LocalMediaStream_LocalMediaStream() throws Exception {
+        test("LocalMediaStream", "LocalMediaStream");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Location_Location() throws Exception {
+        test("Location", "Location");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _RTCStatsReport_RTCStatsReport() throws Exception {
         test("RTCStatsReport", "RTCStatsReport");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _ImageBitmapRenderingContext_ImageBitmapRenderingContext() throws Exception {
-        test("ImageBitmapRenderingContext", "ImageBitmapRenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    @NotYetImplemented(FF)
-    public void _InstallTrigger_InstallTrigger() throws Exception {
-        test("InstallTrigger", "InstallTrigger");
     }
 
 }

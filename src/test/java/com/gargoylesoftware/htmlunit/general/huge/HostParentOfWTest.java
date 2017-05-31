@@ -54,112 +54,10 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
-    public void _WebSocket_WebSocket() throws Exception {
-        test("WebSocket", "WebSocket");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Window_Window() throws Exception {
-        test("Window", "Window");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _XMLDocument_XMLDocument() throws Exception {
-        test("XMLDocument", "XMLDocument");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _XMLHttpRequest_XMLHttpRequest() throws Exception {
-        test("XMLHttpRequest", "XMLHttpRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _XMLSerializer_XMLSerializer() throws Exception {
-        test("XMLSerializer", "XMLSerializer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XPathEvaluator_XPathEvaluator() throws Exception {
-        test("XPathEvaluator", "XPathEvaluator");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XPathResult_XPathResult() throws Exception {
-        test("XPathResult", "XPathResult");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XSLTProcessor_XSLTProcessor() throws Exception {
-        test("XSLTProcessor", "XSLTProcessor");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Worker_Worker() throws Exception {
-        test("Worker", "Worker");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _WebGLRenderingContext_WebGLRenderingContext() throws Exception {
-        test("WebGLRenderingContext", "WebGLRenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _WaveShaperNode_WaveShaperNode() throws Exception {
         test("WaveShaperNode", "WaveShaperNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _WheelEvent_WheelEvent() throws Exception {
-        test("WheelEvent", "WheelEvent");
     }
 
     /**
@@ -186,10 +84,9 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
-        test("webkitRTCPeerConnection", "RTCPeerConnection");
+            IE = "true")
+    public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
     }
 
     /**
@@ -197,29 +94,9 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
-        test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    @NotYetImplemented(IE)
-    public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
-        test("XMLHttpRequestEventTarget", "XMLHttpRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
-        test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
+            IE = "true")
+    public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
     }
 
     /**
@@ -227,9 +104,10 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
-        test("webkitSpeechRecognition", "webkitSpeechRecognition");
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
+        test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
 
     /**
@@ -282,6 +160,17 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLQuery_WebGLQuery() throws Exception {
+        test("WebGLQuery", "WebGLQuery");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _WebGLRenderbuffer_WebGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer", "WebGLRenderbuffer");
@@ -292,8 +181,19 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _WebGLShaderPrecisionFormat_WebGLShaderPrecisionFormat() throws Exception {
-        test("WebGLShaderPrecisionFormat", "WebGLShaderPrecisionFormat");
+    public void _WebGLRenderingContext_WebGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext", "WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLSampler_WebGLSampler() throws Exception {
+        test("WebGLSampler", "WebGLSampler");
     }
 
     /**
@@ -310,8 +210,39 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _WebGLShaderPrecisionFormat_WebGLShaderPrecisionFormat() throws Exception {
+        test("WebGLShaderPrecisionFormat", "WebGLShaderPrecisionFormat");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLSync_WebGLSync() throws Exception {
+        test("WebGLSync", "WebGLSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _WebGLTexture_WebGLTexture() throws Exception {
         test("WebGLTexture", "WebGLTexture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
+        test("WebGLTransformFeedback", "WebGLTransformFeedback");
     }
 
     /**
@@ -330,38 +261,8 @@ public class HostParentOfWTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
-    public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
-        test("WebKitCSSMatrix", "WebKitCSSMatrix");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
-        test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {
-        test("XMLHttpRequestUpload", "XMLHttpRequestUpload");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _XPathExpression_XPathExpression() throws Exception {
-        test("XPathExpression", "XPathExpression");
+    public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
+        test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
     }
 
     /**
@@ -389,39 +290,10 @@ public class HostParentOfWTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitMutationObserver_MutationObserver() throws Exception {
-        test("WebKitMutationObserver", "MutationObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitMutationObserver_WebKitMutationObserver() throws Exception {
-        test("WebKitMutationObserver", "WebKitMutationObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "TransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "WebKitTransitionEvent");
+            CHROME = "true",
+            FF52 = "true")
+    public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
+        test("WebKitCSSMatrix", "WebKitCSSMatrix");
     }
 
     /**
@@ -451,8 +323,39 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
-        test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
+    public void _WebKitMutationObserver_MutationObserver() throws Exception {
+        test("WebKitMutationObserver", "MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitMutationObserver_WebKitMutationObserver() throws Exception {
+        test("WebKitMutationObserver", "WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _webkitRTCPeerConnection_RTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection", "RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitRTCPeerConnection_webkitRTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection", "webkitRTCPeerConnection");
     }
 
     /**
@@ -463,6 +366,26 @@ public class HostParentOfWTest extends HostParentOf {
             CHROME = "true")
     public void _webkitSpeechGrammar_webkitSpeechGrammar() throws Exception {
         test("webkitSpeechGrammar", "webkitSpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechGrammarList_webkitSpeechGrammarList() throws Exception {
+        test("webkitSpeechGrammarList", "webkitSpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _webkitSpeechRecognition_webkitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition", "webkitSpeechRecognition");
     }
 
     /**
@@ -491,6 +414,26 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "TransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent", "WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _webkitURL_URL() throws Exception {
         test("webkitURL", "URL");
     }
@@ -509,85 +452,142 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _WEBGL_compressed_texture_s3tc_WEBGL_compressed_texture_s3tc() throws Exception {
-        test("WEBGL_compressed_texture_s3tc", "WEBGL_compressed_texture_s3tc");
+    @Alerts("true")
+    public void _WebSocket_WebSocket() throws Exception {
+        test("WebSocket", "WebSocket");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _WEBGL_debug_renderer_info_WEBGL_debug_renderer_info() throws Exception {
-        test("WEBGL_debug_renderer_info", "WEBGL_debug_renderer_info");
+    @Alerts("true")
+    public void _WheelEvent_WheelEvent() throws Exception {
+        test("WheelEvent", "WheelEvent");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
-        test("WebGL2RenderingContext", "WebGL2RenderingContext");
+    @Alerts("true")
+    public void _Window_Window() throws Exception {
+        test("Window", "Window");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGLQuery_WebGLQuery() throws Exception {
-        test("WebGLQuery", "WebGLQuery");
+    @Alerts("true")
+    public void _Worker_Worker() throws Exception {
+        test("Worker", "Worker");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGLSampler_WebGLSampler() throws Exception {
-        test("WebGLSampler", "WebGLSampler");
+    @Alerts("true")
+    public void _XMLDocument_XMLDocument() throws Exception {
+        test("XMLDocument", "XMLDocument");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGLSync_WebGLSync() throws Exception {
-        test("WebGLSync", "WebGLSync");
+    @Alerts("true")
+    public void _XMLHttpRequest_XMLHttpRequest() throws Exception {
+        test("XMLHttpRequest", "XMLHttpRequest");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
-        test("WebGLTransformFeedback", "WebGLTransformFeedback");
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    @NotYetImplemented(IE)
+    public void _XMLHttpRequestEventTarget_XMLHttpRequest() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequest");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
-    public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
-        test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
+    @Alerts("true")
+    public void _XMLHttpRequestEventTarget_XMLHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequestEventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XMLHttpRequestEventTarget_XMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestEventTarget", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XMLHttpRequestUpload_XMLHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestUpload", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _XMLSerializer_XMLSerializer() throws Exception {
+        test("XMLSerializer", "XMLSerializer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XPathEvaluator_XPathEvaluator() throws Exception {
+        test("XPathEvaluator", "XPathEvaluator");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XPathExpression_XPathExpression() throws Exception {
+        test("XPathExpression", "XPathExpression");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XPathResult_XPathResult() throws Exception {
+        test("XPathResult", "XPathResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _XSLTProcessor_XSLTProcessor() throws Exception {
+        test("XSLTProcessor", "XSLTProcessor");
     }
 }

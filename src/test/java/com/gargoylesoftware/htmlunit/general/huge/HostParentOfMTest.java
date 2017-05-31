@@ -58,11 +58,127 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts("true")
+    public void _Map_Map() throws Exception {
+        test("Map", "Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
-    public void _Option_HTMLOptionElement() throws Exception {
-        // although Option != HTMLOptionElement, they seem to be synonyms!!!
-        test("Option", "HTMLOptionElement");
+            IE = "false")
+    public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
+        test("MediaDeviceInfo", "MediaDeviceInfo");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaDevices_MediaDevices() throws Exception {
+        test("MediaDevices", "MediaDevices");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaElementAudioSourceNode_MediaElementAudioSourceNode() throws Exception {
+        test("MediaElementAudioSourceNode", "MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
+        test("MediaEncryptedEvent", "MediaEncryptedEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MediaError_MediaError() throws Exception {
+        test("MediaError", "MediaError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MediaKeyError_MediaKeyError() throws Exception {
+        test("MediaKeyError", "MediaKeyError");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaKeys_MediaKeys() throws Exception {
+        test("MediaKeys", "MediaKeys");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaKeySession_MediaKeySession() throws Exception {
+        test("MediaKeySession", "MediaKeySession");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap", "MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess", "MediaKeySystemAccess");
     }
 
     /**
@@ -73,6 +189,59 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _MediaList_MediaList() throws Exception {
         test("MediaList", "MediaList");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MediaQueryList_MediaQueryList() throws Exception {
+        test("MediaQueryList", "MediaQueryList");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
+        test("MediaQueryListEvent", "MediaQueryListEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaRecorder_MediaRecorder() throws Exception {
+        test("MediaRecorder", "MediaRecorder");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaSource_MediaSource() throws Exception {
+        test("MediaSource", "MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
+        test("MediaStream", "CanvasCaptureMediaStream");
     }
 
     /**
@@ -91,9 +260,226 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStream_MediaStream() throws Exception {
+        test("MediaStream", "MediaStream");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _MediaStream_webkitMediaStream() throws Exception {
+        test("MediaStream", "webkitMediaStream");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamAudioDestinationNode_MediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode", "MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamAudioSourceNode_MediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode", "MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamEvent_MediaStreamEvent() throws Exception {
+        test("MediaStreamEvent", "MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
+        test("MediaStreamTrack", "CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamTrack_MediaStreamTrack() throws Exception {
+        test("MediaStreamTrack", "MediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _MediaStreamTrackEvent_MediaStreamTrackEvent() throws Exception {
+        test("MediaStreamTrackEvent", "MediaStreamTrackEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MessageChannel_MessageChannel() throws Exception {
+        test("MessageChannel", "MessageChannel");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _MessageEvent_MessageEvent() throws Exception {
         test("MessageEvent", "MessageEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MessagePort_MessagePort() throws Exception {
+        test("MessagePort", "MessagePort");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIAccess_MIDIAccess() throws Exception {
+        test("MIDIAccess", "MIDIAccess");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIConnectionEvent_MIDIConnectionEvent() throws Exception {
+        test("MIDIConnectionEvent", "MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIInput_MIDIInput() throws Exception {
+        test("MIDIInput", "MIDIInput");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIInputMap_MIDIInputMap() throws Exception {
+        test("MIDIInputMap", "MIDIInputMap");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIMessageEvent_MIDIMessageEvent() throws Exception {
+        test("MIDIMessageEvent", "MIDIMessageEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIOutput_MIDIOutput() throws Exception {
+        test("MIDIOutput", "MIDIOutput");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIOutputMap_MIDIOutputMap() throws Exception {
+        test("MIDIOutputMap", "MIDIOutputMap");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIInput() throws Exception {
+        test("MIDIPort", "MIDIInput");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIOutput() throws Exception {
+        test("MIDIPort", "MIDIOutput");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MIDIPort_MIDIPort() throws Exception {
+        test("MIDIPort", "MIDIPort");
     }
 
     /**
@@ -122,8 +508,170 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _MouseEvent_DragEvent() throws Exception {
+        test("MouseEvent", "DragEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _MouseEvent_MouseEvent() throws Exception {
         test("MouseEvent", "MouseEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MouseEvent_MouseScrollEvent() throws Exception {
+        test("MouseEvent", "MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    @NotYetImplemented(IE)
+    public void _MouseEvent_MouseWheelEvent() throws Exception {
+        test("MouseEvent", "MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF = "false")
+    public void _MouseEvent_PointerEvent() throws Exception {
+        test("MouseEvent", "PointerEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MouseEvent_WheelEvent() throws Exception {
+        test("MouseEvent", "WheelEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _MouseScrollEvent_MouseScrollEvent() throws Exception {
+        test("MouseScrollEvent", "MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _MouseWheelEvent_MouseWheelEvent() throws Exception {
+        test("MouseWheelEvent", "MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent", "MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
+        test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MozPowerManager_MozPowerManager() throws Exception {
+        test("MozPowerManager", "MozPowerManager");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _mozRTCIceCandidate_mozRTCIceCandidate() throws Exception {
+        test("mozRTCIceCandidate", "mozRTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _mozRTCPeerConnection_mozRTCPeerConnection() throws Exception {
+        test("mozRTCPeerConnection", "mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
+        test("mozRTCSessionDescription", "mozRTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
+        test("MozSettingsEvent", "MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _MSGestureEvent_MSGestureEvent() throws Exception {
+        test("MSGestureEvent", "MSGestureEvent");
     }
 
     /**
@@ -134,6 +682,37 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _MutationEvent_MutationEvent() throws Exception {
         test("MutationEvent", "MutationEvent");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MutationObserver_MutationObserver() throws Exception {
+        test("MutationObserver", "MutationObserver");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _MutationObserver_WebKitMutationObserver() throws Exception {
+        test("MutationObserver", "WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _MutationRecord_MutationRecord() throws Exception {
+        test("MutationRecord", "MutationRecord");
     }
 
     /**
@@ -154,70 +733,6 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Navigator_Navigator() throws Exception {
         test("Navigator", "Navigator");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_Node() throws Exception {
-        test("Node", "Node");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented({FF, IE})
-    public void _NodeFilter_NodeFilter() throws Exception {
-        test("NodeFilter", "NodeFilter");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _NodeList_NodeList() throws Exception {
-        test("NodeList", "NodeList");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Notification_Notification() throws Exception {
-        test("Notification", "Notification");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Option_Option() throws Exception {
-        test("Option", "Option");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
-    public void _MouseEvent_PointerEvent() throws Exception {
-        test("MouseEvent", "PointerEvent");
     }
 
     /**
@@ -248,6 +763,16 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_CDATASection() throws Exception {
         test("Node", "CDATASection");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Node_CharacterData() throws Exception {
+        test("Node", "CharacterData");
     }
 
     /**
@@ -346,27 +871,6 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _Node_HTMLBGSoundElement() throws Exception {
-        test("Node", "HTMLBGSoundElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_HTMLBRElement() throws Exception {
-        test("Node", "HTMLBRElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Node_HTMLBaseElement() throws Exception {
         test("Node", "HTMLBaseElement");
@@ -390,6 +894,17 @@ public class HostParentOfMTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
+    public void _Node_HTMLBGSoundElement() throws Exception {
+        test("Node", "HTMLBGSoundElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _Node_HTMLBlockElement() throws Exception {
         test("Node", "HTMLBlockElement");
     }
@@ -400,8 +915,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLQuoteElement() throws Exception {
-        test("Node", "HTMLQuoteElement");
+    public void _Node_HTMLBodyElement() throws Exception {
+        test("Node", "HTMLBodyElement");
     }
 
     /**
@@ -410,8 +925,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLBodyElement() throws Exception {
-        test("Node", "HTMLBodyElement");
+    public void _Node_HTMLBRElement() throws Exception {
+        test("Node", "HTMLBRElement");
     }
 
     /**
@@ -432,6 +947,29 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLCanvasElement() throws Exception {
         test("Node", "HTMLCanvasElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF52 = "false",
+            IE = "false")
+    public void _Node_HTMLContentElement() throws Exception {
+        test("Node", "HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "true")
+    public void _Node_HTMLDataElement() throws Exception {
+        test("Node", "HTMLDataElement");
     }
 
     /**
@@ -483,27 +1021,6 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _Node_HTMLDTElement() throws Exception {
-        test("Node", "HTMLDTElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_HTMLDListElement() throws Exception {
-        test("Node", "HTMLDListElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Node_HTMLDirectoryElement() throws Exception {
         test("Node", "HTMLDirectoryElement");
@@ -525,8 +1042,29 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_HTMLDListElement() throws Exception {
+        test("Node", "HTMLDListElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_HTMLDocument() throws Exception {
         test("Node", "HTMLDocument");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _Node_HTMLDTElement() throws Exception {
+        test("Node", "HTMLDTElement");
     }
 
     /**
@@ -605,16 +1143,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLHRElement() throws Exception {
-        test("Node", "HTMLHRElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
     public void _Node_HTMLHeadElement() throws Exception {
         test("Node", "HTMLHeadElement");
     }
@@ -627,6 +1155,16 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLHeadingElement() throws Exception {
         test("Node", "HTMLHeadingElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Node_HTMLHRElement() throws Exception {
+        test("Node", "HTMLHRElement");
     }
 
     /**
@@ -686,16 +1224,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLLIElement() throws Exception {
-        test("Node", "HTMLLIElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
     public void _Node_HTMLLabelElement() throws Exception {
         test("Node", "HTMLLabelElement");
     }
@@ -708,6 +1236,16 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLLegendElement() throws Exception {
         test("Node", "HTMLLegendElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Node_HTMLLIElement() throws Exception {
+        test("Node", "HTMLLIElement");
     }
 
     /**
@@ -820,8 +1358,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLOListElement() throws Exception {
-        test("Node", "HTMLOListElement");
+    public void _Node_HTMLObjectElement() throws Exception {
+        test("Node", "HTMLObjectElement");
     }
 
     /**
@@ -830,8 +1368,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_HTMLObjectElement() throws Exception {
-        test("Node", "HTMLObjectElement");
+    public void _Node_HTMLOListElement() throws Exception {
+        test("Node", "HTMLOListElement");
     }
 
     /**
@@ -901,6 +1439,17 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_HTMLPictureElement() throws Exception {
+        test("Node", "HTMLPictureElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Node_HTMLPreElement() throws Exception {
         test("Node", "HTMLPreElement");
@@ -922,6 +1471,16 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_HTMLQuoteElement() throws Exception {
+        test("Node", "HTMLQuoteElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_HTMLScriptElement() throws Exception {
         test("Node", "HTMLScriptElement");
     }
@@ -934,6 +1493,28 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_HTMLSelectElement() throws Exception {
         test("Node", "HTMLSelectElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF52 = "false",
+            IE = "false")
+    public void _Node_HTMLShadowElement() throws Exception {
+        test("Node", "HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_HTMLSlotElement() throws Exception {
+        test("Node", "HTMLSlotElement");
     }
 
     /**
@@ -1053,6 +1634,17 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_HTMLTemplateElement() throws Exception {
+        test("Node", "HTMLTemplateElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Node_HTMLTextAreaElement() throws Exception {
         test("Node", "HTMLTextAreaElement");
@@ -1135,6 +1727,16 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_Node() throws Exception {
+        test("Node", "Node");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_Option() throws Exception {
         test("Node", "Option");
     }
@@ -1147,6 +1749,17 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_ProcessingInstruction() throws Exception {
         test("Node", "ProcessingInstruction");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_ShadowRoot() throws Exception {
+        test("Node", "ShadowRoot");
     }
 
     /**
@@ -1208,6 +1821,17 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_SVGAnimationElement() throws Exception {
+        test("Node", "SVGAnimationElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Node_SVGCircleElement() throws Exception {
         test("Node", "SVGCircleElement");
@@ -1229,6 +1853,16 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_SVGComponentTransferFunctionElement() throws Exception {
+        test("Node", "SVGComponentTransferFunctionElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_SVGDefsElement() throws Exception {
         test("Node", "SVGDefsElement");
     }
@@ -1241,6 +1875,28 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_SVGDescElement() throws Exception {
         test("Node", "SVGDescElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_SVGDiscardElement() throws Exception {
+        test("Node", "SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF45 = "true")
+    public void _Node_SVGDocument() throws Exception {
+        test("Node", "SVGDocument");
     }
 
     /**
@@ -1341,6 +1997,17 @@ public class HostParentOfMTest extends HostParentOf {
     @Alerts("true")
     public void _Node_SVGFEDistantLightElement() throws Exception {
         test("Node", "SVGFEDistantLightElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_SVGFEDropShadowElement() throws Exception {
+        test("Node", "SVGFEDropShadowElement");
     }
 
     /**
@@ -1539,6 +2206,38 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _Node_SVGGeometryElement() throws Exception {
+        test("Node", "SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Node_SVGGradientElement() throws Exception {
+        test("Node", "SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Node_SVGGraphicsElement() throws Exception {
+        test("Node", "SVGGraphicsElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Node_SVGImageElement() throws Exception {
         test("Node", "SVGImageElement");
@@ -1550,8 +2249,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_SVGLineElement() throws Exception {
-        test("Node", "SVGLineElement");
+    public void _Node_SVGLinearGradientElement() throws Exception {
+        test("Node", "SVGLinearGradientElement");
     }
 
     /**
@@ -1560,8 +2259,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_SVGLinearGradientElement() throws Exception {
-        test("Node", "SVGLinearGradientElement");
+    public void _Node_SVGLineElement() throws Exception {
+        test("Node", "SVGLineElement");
     }
 
     /**
@@ -1671,16 +2370,6 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_SVGSVGElement() throws Exception {
-        test("Node", "SVGSVGElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
     public void _Node_SVGScriptElement() throws Exception {
         test("Node", "SVGScriptElement");
     }
@@ -1722,6 +2411,16 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_SVGSVGElement() throws Exception {
+        test("Node", "SVGSVGElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_SVGSwitchElement() throws Exception {
         test("Node", "SVGSwitchElement");
     }
@@ -1742,8 +2441,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _Node_SVGTSpanElement() throws Exception {
-        test("Node", "SVGTSpanElement");
+    public void _Node_SVGTextContentElement() throws Exception {
+        test("Node", "SVGTextContentElement");
     }
 
     /**
@@ -1772,8 +2471,28 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    public void _Node_SVGTextPositioningElement() throws Exception {
+        test("Node", "SVGTextPositioningElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
     public void _Node_SVGTitleElement() throws Exception {
         test("Node", "SVGTitleElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Node_SVGTSpanElement() throws Exception {
+        test("Node", "SVGTSpanElement");
     }
 
     /**
@@ -1822,9 +2541,10 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _Node_SVGDocument() throws Exception {
-        test("Node", "SVGDocument");
+            CHROME = "true")
+    @NotYetImplemented({FF, IE})
+    public void _NodeFilter_NodeFilter() throws Exception {
+        test("NodeFilter", "NodeFilter");
     }
 
     /**
@@ -1833,8 +2553,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _MessageChannel_MessageChannel() throws Exception {
-        test("MessageChannel", "MessageChannel");
+    public void _NodeIterator_NodeIterator() throws Exception {
+        test("NodeIterator", "NodeIterator");
     }
 
     /**
@@ -1843,18 +2563,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    public void _MessagePort_MessagePort() throws Exception {
-        test("MessagePort", "MessagePort");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_SVGGradientElement() throws Exception {
-        test("Node", "SVGGradientElement");
+    public void _NodeList_NodeList() throws Exception {
+        test("NodeList", "NodeList");
     }
 
     /**
@@ -1863,54 +2573,60 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
             IE = "false")
-    public void _Node_HTMLShadowElement() throws Exception {
-        test("Node", "HTMLShadowElement");
+    public void _NodeList_RadioNodeList() throws Exception {
+        test("NodeList", "RadioNodeList");
     }
 
     /**
      * @throws Exception
      *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _Notification_Notification() throws Exception {
+        test("Notification", "Notification");
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Node_ShadowRoot() throws Exception {
-        test("Node", "ShadowRoot");
+            IE = "true")
+    public void _OES_element_index_uint_OES_element_index_uint() throws Exception {
+        test("OES_element_index_uint", "OES_element_index_uint");
     }
 
     /**
-     * @throws Exception
-     *             if the test fails
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStreamAudioDestinationNode_MediaStreamAudioDestinationNode() throws Exception {
-        test("MediaStreamAudioDestinationNode", "MediaStreamAudioDestinationNode");
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_standard_derivatives_OES_standard_derivatives() throws Exception {
+        test("OES_standard_derivatives", "OES_standard_derivatives");
     }
 
     /**
-     * @throws Exception
-     *             if the test fails
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStreamAudioSourceNode_MediaStreamAudioSourceNode() throws Exception {
-        test("MediaStreamAudioSourceNode", "MediaStreamAudioSourceNode");
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_texture_float_linear_OES_texture_float_linear() throws Exception {
+        test("OES_texture_float_linear", "OES_texture_float_linear");
     }
 
     /**
-     * @throws Exception
-     *             if the test fails
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStreamEvent_MediaStreamEvent() throws Exception {
-        test("MediaStreamEvent", "MediaStreamEvent");
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    public void _OES_texture_float_OES_texture_float() throws Exception {
+        test("OES_texture_float", "OES_texture_float");
     }
 
     /**
@@ -1941,747 +2657,31 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void _Option_HTMLOptionElement() throws Exception {
+        // although Option != HTMLOptionElement, they seem to be synonyms!!!
+        test("Option", "HTMLOptionElement");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _Option_Option() throws Exception {
+        test("Option", "Option");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
             IE = "false")
     public void _OscillatorNode_OscillatorNode() throws Exception {
         test("OscillatorNode", "OscillatorNode");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false",
-            IE = "false")
-    public void _Node_HTMLContentElement() throws Exception {
-        test("Node", "HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _Node_HTMLDataElement() throws Exception {
-        test("Node", "HTMLDataElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_CharacterData() throws Exception {
-        test("Node", "CharacterData");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaElementAudioSourceNode_MediaElementAudioSourceNode() throws Exception {
-        test("MediaElementAudioSourceNode", "MediaElementAudioSourceNode");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStreamTrack_MediaStreamTrack() throws Exception {
-        test("MediaStreamTrack", "MediaStreamTrack");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStream_MediaStream() throws Exception {
-        test("MediaStream", "MediaStream");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented(CHROME)
-    public void _MediaStream_webkitMediaStream() throws Exception {
-        test("MediaStream", "webkitMediaStream");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MouseEvent_WheelEvent() throws Exception {
-        test("MouseEvent", "WheelEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MouseEvent_DragEvent() throws Exception {
-        test("MouseEvent", "DragEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _MouseEvent_MouseScrollEvent() throws Exception {
-        test("MouseEvent", "MouseScrollEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _MouseScrollEvent_MouseScrollEvent() throws Exception {
-        test("MouseScrollEvent", "MouseScrollEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    @NotYetImplemented(IE)
-    public void _MouseEvent_MouseWheelEvent() throws Exception {
-        test("MouseEvent", "MouseWheelEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _MouseWheelEvent_MouseWheelEvent() throws Exception {
-        test("MouseWheelEvent", "MouseWheelEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Node_SVGAnimationElement() throws Exception {
-        test("Node", "SVGAnimationElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_SVGTextPositioningElement() throws Exception {
-        test("Node", "SVGTextPositioningElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Node_HTMLPictureElement() throws Exception {
-        test("Node", "HTMLPictureElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Map_Map() throws Exception {
-        test("Map", "Map");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MediaQueryList_MediaQueryList() throws Exception {
-        test("MediaQueryList", "MediaQueryList");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaSource_MediaSource() throws Exception {
-        test("MediaSource", "MediaSource");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaRecorder_MediaRecorder() throws Exception {
-        test("MediaRecorder", "MediaRecorder");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _mozRTCPeerConnection_mozRTCPeerConnection() throws Exception {
-        test("mozRTCPeerConnection", "mozRTCPeerConnection");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
-        test("mozRTCSessionDescription", "mozRTCSessionDescription");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _mozRTCIceCandidate_mozRTCIceCandidate() throws Exception {
-        test("mozRTCIceCandidate", "mozRTCIceCandidate");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MutationObserver_MutationObserver() throws Exception {
-        test("MutationObserver", "MutationObserver");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MutationRecord_MutationRecord() throws Exception {
-        test("MutationRecord", "MutationRecord");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _NodeIterator_NodeIterator() throws Exception {
-        test("NodeIterator", "NodeIterator");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _NodeList_RadioNodeList() throws Exception {
-        test("NodeList", "RadioNodeList");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
-        test("MozContactChangeEvent", "MozContactChangeEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
-        test("MozSettingsEvent", "MozSettingsEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaKeyMessageEvent_MediaKeyMessageEvent() throws Exception {
-        test("MediaKeyMessageEvent", "MediaKeyMessageEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaKeySession_MediaKeySession() throws Exception {
-        test("MediaKeySession", "MediaKeySession");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaKeyStatusMap_MediaKeyStatusMap() throws Exception {
-        test("MediaKeyStatusMap", "MediaKeyStatusMap");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaKeySystemAccess_MediaKeySystemAccess() throws Exception {
-        test("MediaKeySystemAccess", "MediaKeySystemAccess");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaKeys_MediaKeys() throws Exception {
-        test("MediaKeys", "MediaKeys");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaDevices_MediaDevices() throws Exception {
-        test("MediaDevices", "MediaDevices");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _MediaError_MediaError() throws Exception {
-        test("MediaError", "MediaError");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Node_HTMLTemplateElement() throws Exception {
-        test("Node", "HTMLTemplateElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_SVGComponentTransferFunctionElement() throws Exception {
-        test("Node", "SVGComponentTransferFunctionElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Node_SVGFEDropShadowElement() throws Exception {
-        test("Node", "SVGFEDropShadowElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _Node_SVGGraphicsElement() throws Exception {
-        test("Node", "SVGGraphicsElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("true")
-    public void _Node_SVGTextContentElement() throws Exception {
-        test("Node", "SVGTextContentElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaEncryptedEvent_MediaEncryptedEvent() throws Exception {
-        test("MediaEncryptedEvent", "MediaEncryptedEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
-        test("MediaQueryListEvent", "MediaQueryListEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Node_SVGDiscardElement() throws Exception {
-        test("Node", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Node_SVGGeometryElement() throws Exception {
-        test("Node", "SVGGeometryElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIAccess_MIDIAccess() throws Exception {
-        test("MIDIAccess", "MIDIAccess");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIConnectionEvent_MIDIConnectionEvent() throws Exception {
-        test("MIDIConnectionEvent", "MIDIConnectionEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIInputMap_MIDIInputMap() throws Exception {
-        test("MIDIInputMap", "MIDIInputMap");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIInput_MIDIInput() throws Exception {
-        test("MIDIInput", "MIDIInput");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIMessageEvent_MIDIMessageEvent() throws Exception {
-        test("MIDIMessageEvent", "MIDIMessageEvent");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIOutputMap_MIDIOutputMap() throws Exception {
-        test("MIDIOutputMap", "MIDIOutputMap");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIOutput_MIDIOutput() throws Exception {
-        test("MIDIOutput", "MIDIOutput");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIPort_MIDIInput() throws Exception {
-        test("MIDIPort", "MIDIInput");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIPort_MIDIOutput() throws Exception {
-        test("MIDIPort", "MIDIOutput");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MIDIPort_MIDIPort() throws Exception {
-        test("MIDIPort", "MIDIPort");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MutationObserver_WebKitMutationObserver() throws Exception {
-        test("MutationObserver", "WebKitMutationObserver");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _MozPowerManager_MozPowerManager() throws Exception {
-        test("MozPowerManager", "MozPowerManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _MSGestureEvent_MSGestureEvent() throws Exception {
-        test("MSGestureEvent", "MSGestureEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _OES_texture_float_linear_OES_texture_float_linear() throws Exception {
-        test("OES_texture_float_linear", "OES_texture_float_linear");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _OES_standard_derivatives_OES_standard_derivatives() throws Exception {
-        test("OES_standard_derivatives", "OES_standard_derivatives");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _OES_element_index_uint_OES_element_index_uint() throws Exception {
-        test("OES_element_index_uint", "OES_element_index_uint");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            IE = "true")
-    public void _OES_texture_float_OES_texture_float() throws Exception {
-        test("OES_texture_float", "OES_texture_float");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaDeviceInfo_MediaDeviceInfo() throws Exception {
-        test("MediaDeviceInfo", "MediaDeviceInfo");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _MediaKeyError_MediaKeyError() throws Exception {
-        test("MediaKeyError", "MediaKeyError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
-    public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
-        test("MediaStream", "CanvasCaptureMediaStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _MediaStreamTrack_CanvasCaptureMediaStreamTrack() throws Exception {
-        test("MediaStreamTrack", "CanvasCaptureMediaStreamTrack");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
-        test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false")
-    public void _MediaStreamTrackEvent_MediaStreamTrackEvent() throws Exception {
-        test("MediaStreamTrackEvent", "MediaStreamTrackEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Node_HTMLSlotElement() throws Exception {
-        test("Node", "HTMLSlotElement");
     }
 
 }
