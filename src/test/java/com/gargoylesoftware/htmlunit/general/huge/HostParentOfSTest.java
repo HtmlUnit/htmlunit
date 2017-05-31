@@ -232,9 +232,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
     }
@@ -243,9 +243,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _SpeechSynthesisUtterance_SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
     }

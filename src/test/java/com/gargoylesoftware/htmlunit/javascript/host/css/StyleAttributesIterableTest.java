@@ -104,9 +104,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BACKGROUND_CLIP() throws Exception {
         test("webkitBackgroundClip");
     }
@@ -115,9 +115,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BACKGROUND_ORIGIN() throws Exception {
         test("webkitBackgroundOrigin");
     }
@@ -126,9 +126,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BORDER_IMAGE() throws Exception {
         test("webkitBorderImage");
     }
@@ -137,9 +137,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_ALIGN() throws Exception {
         test("webkitBoxAlign");
     }
@@ -148,9 +148,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_DIRECTION() throws Exception {
         test("webkitBoxDirection");
     }
@@ -159,9 +159,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_FLEX() throws Exception {
         test("webkitBoxFlex");
     }
@@ -170,9 +170,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_ORDINAL_GROUP() throws Exception {
         test("webkitBoxOrdinalGroup");
     }
@@ -181,9 +181,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_ORIENT() throws Exception {
         test("webkitBoxOrient");
     }
@@ -192,9 +192,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_BOX_PACK() throws Exception {
         test("webkitBoxPack");
     }
@@ -203,9 +203,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_TEXT_FILL_COLOR() throws Exception {
         test("webkitTextFillColor");
     }
@@ -214,9 +214,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_TEXT_STROKE() throws Exception {
         test("webkitTextStroke");
     }
@@ -225,9 +225,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_TEXT_STROKE_COLOR() throws Exception {
         test("webkitTextStrokeColor");
     }
@@ -236,9 +236,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WEBKIT_TEXT_STROKE_WIDTH() throws Exception {
         test("webkitTextStrokeWidth");
     }
@@ -399,9 +399,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID() throws Exception {
         test("grid");
     }
@@ -410,9 +410,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_AREA() throws Exception {
         test("gridArea");
     }
@@ -421,9 +421,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_AUTO_COLUMNS() throws Exception {
         test("gridAutoColumns");
     }
@@ -432,9 +432,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_AUTO_FLOW() throws Exception {
         test("gridAutoFlow");
     }
@@ -443,9 +443,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_AUTO_ROWS() throws Exception {
         test("gridAutoRows");
     }
@@ -454,9 +454,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_COLUMN() throws Exception {
         test("gridColumn");
     }
@@ -465,9 +465,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_COLUMN_END() throws Exception {
         test("gridColumnEnd");
     }
@@ -476,9 +476,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_COLUMN_GAP() throws Exception {
         test("gridColumnGap");
     }
@@ -487,9 +487,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_COLUMN_START() throws Exception {
         test("gridColumnStart");
     }
@@ -498,9 +498,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_GAP() throws Exception {
         test("gridGap");
     }
@@ -509,9 +509,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_ROW() throws Exception {
         test("gridRow");
     }
@@ -520,9 +520,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_ROW_END() throws Exception {
         test("gridRowEnd");
     }
@@ -531,9 +531,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_ROW_GAP() throws Exception {
         test("gridRowGap");
     }
@@ -542,9 +542,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_ROW_START() throws Exception {
         test("gridRowStart");
     }
@@ -553,9 +553,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_TEMPLATE() throws Exception {
         test("gridTemplate");
     }
@@ -564,9 +564,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_TEMPLATE_AREAS() throws Exception {
         test("gridTemplateAreas");
     }
@@ -575,9 +575,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_TEMPLATE_COLUMNS() throws Exception {
         test("gridTemplateColumns");
     }
@@ -586,9 +586,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _GRID_TEMPLATE_ROWS() throws Exception {
         test("gridTemplateRows");
     }
@@ -687,9 +687,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _OVERFLOW_WRAP() throws Exception {
         test("overflowWrap");
     }
@@ -828,9 +828,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _TEXT_COMBINE_UPRIGHT() throws Exception {
         test("textCombineUpright");
     }

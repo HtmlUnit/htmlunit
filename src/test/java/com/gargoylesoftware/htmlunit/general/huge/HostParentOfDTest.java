@@ -64,9 +64,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _DataTransferItem_DataTransferItem() throws Exception {
         test("DataTransferItem", "DataTransferItem");
     }
@@ -75,9 +75,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _DataTransferItemList_DataTransferItemList() throws Exception {
         test("DataTransferItemList", "DataTransferItemList");
     }
@@ -608,9 +608,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _Element_HTMLDetailsElement() throws Exception {
         test("Element", "HTMLDetailsElement");
     }
@@ -1945,9 +1945,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     @NotYetImplemented({CHROME, FF52})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
@@ -2458,9 +2458,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _Event_SpeechSynthesisEvent() throws Exception {
         test("Event", "SpeechSynthesisEvent");
     }
@@ -2824,9 +2824,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     @NotYetImplemented(FF52)
     public void _EventTarget_ConstantSourceNode() throws Exception {
         test("EventTarget", "ConstantSourceNode");
@@ -3097,9 +3097,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _EventTarget_HTMLDetailsElement() throws Exception {
         test("EventTarget", "HTMLDetailsElement");
     }
@@ -3789,9 +3789,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _EventTarget_IIRFilterNode() throws Exception {
         test("EventTarget", "IIRFilterNode");
     }
@@ -4054,9 +4054,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _EventTarget_PermissionStatus() throws Exception {
         test("EventTarget", "PermissionStatus");
     }
@@ -4236,9 +4236,9 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _EventTarget_SpeechSynthesisUtterance() throws Exception {
         test("EventTarget", "SpeechSynthesisUtterance");
     }

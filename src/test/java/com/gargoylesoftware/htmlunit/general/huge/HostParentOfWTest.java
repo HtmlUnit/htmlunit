@@ -103,9 +103,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGL2RenderingContext_WebGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext", "WebGL2RenderingContext");
     }
@@ -160,9 +160,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGLQuery_WebGLQuery() throws Exception {
         test("WebGLQuery", "WebGLQuery");
     }
@@ -189,9 +189,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGLSampler_WebGLSampler() throws Exception {
         test("WebGLSampler", "WebGLSampler");
     }
@@ -218,9 +218,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGLSync_WebGLSync() throws Exception {
         test("WebGLSync", "WebGLSync");
     }
@@ -238,9 +238,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGLTransformFeedback_WebGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback", "WebGLTransformFeedback");
     }
@@ -258,9 +258,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebGLVertexArrayObject_WebGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject", "WebGLVertexArrayObject");
     }
@@ -289,9 +289,9 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF52 = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false",
+            FF45 = "false")
     public void _WebKitCSSMatrix_WebKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix", "WebKitCSSMatrix");
     }
