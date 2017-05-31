@@ -31,8 +31,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -346,38 +344,30 @@ public class Element extends Node {
     }
 
     /**
-     * Returns the current number of child elements.
-     * @return the child element count
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public int getChildElementCount() {
         return getDomNodeOrDie().getChildElementCount();
     }
 
     /**
-     * Returns the first element child.
-     * @return the first element child
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public Element getFirstElementChild() {
-        final DomElement child = getDomNodeOrDie().getFirstElementChild();
-        if (child != null) {
-            return (Element) child.getScriptableObject();
-        }
-        return null;
+        return super.getFirstElementChild();
     }
 
     /**
-     * Returns the last element child.
-     * @return the last element child
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter
     public Element getLastElementChild() {
-        final DomElement child = getDomNodeOrDie().getLastElementChild();
-        if (child != null) {
-            return (Element) child.getScriptableObject();
-        }
-        return null;
+        return super.getLastElementChild();
     }
 
     /**
@@ -433,26 +423,12 @@ public class Element extends Node {
     }
 
     /**
-     * Gets the children of the current node.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
-     * @return the child at the given position
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
-        final DomElement node = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(node, false) {
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomNode> children = new LinkedList<>();
-                for (DomNode domNode : node.getChildNodes()) {
-                    if (domNode instanceof DomElement) {
-                        children.add(domNode);
-                    }
-                }
-                return children;
-            }
-        };
-        return collection;
+        return super.getChildren();
     }
 
     /**

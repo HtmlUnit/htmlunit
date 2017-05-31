@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -40,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -740,4 +742,57 @@ public class Node extends EventTarget {
         return getDomNodeOrDie().getNamespaceURI();
     }
 
+    /**
+     * Returns the current number of child elements.
+     * @return the child element count
+     */
+    protected int getChildElementCount() {
+        return ((DomElement) getDomNodeOrDie()).getChildElementCount();
+    }
+
+    /**
+     * Returns the first element child.
+     * @return the first element child
+     */
+    protected Element getFirstElementChild() {
+        final DomElement child = ((DomElement) getDomNodeOrDie()).getFirstElementChild();
+        if (child != null) {
+            return (Element) child.getScriptableObject();
+        }
+        return null;
+    }
+
+    /**
+     * Returns the last element child.
+     * @return the last element child
+     */
+    protected Element getLastElementChild() {
+        final DomElement child = ((DomElement) getDomNodeOrDie()).getLastElementChild();
+        if (child != null) {
+            return (Element) child.getScriptableObject();
+        }
+        return null;
+    }
+
+    /**
+     * Gets the children of the current node.
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
+     * @return the child at the given position
+     */
+    protected HTMLCollection getChildren() {
+        final DomNode node = getDomNodeOrDie();
+        final HTMLCollection collection = new HTMLCollection(node, false) {
+            @Override
+            protected List<DomNode> computeElements() {
+                final List<DomNode> children = new LinkedList<>();
+                for (DomNode domNode : node.getChildNodes()) {
+                    if (domNode instanceof DomElement) {
+                        children.add(domNode);
+                    }
+                }
+                return children;
+            }
+        };
+        return collection;
+    }
 }

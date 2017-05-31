@@ -48,7 +48,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -1756,9 +1755,9 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the current number of child elements.
-     * @return the child element count
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter({CHROME, FF})
     public int getChildElementCount() {
         int counter = 0;
@@ -1972,26 +1971,12 @@ public class Document extends Node {
     }
 
     /**
-     * Gets the children of the current node.
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms537446.aspx">MSDN documentation</a>
-     * @return the child at the given position
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
-        final DomNode node = getPage();
-        final HTMLCollection collection = new HTMLCollection(node, false) {
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomNode> children = new LinkedList<>();
-                for (DomNode domNode : node.getChildNodes()) {
-                    if (domNode instanceof DomElement) {
-                        children.add(domNode);
-                    }
-                }
-                return children;
-            }
-        };
-        return collection;
+        return super.getChildren();
     }
 
     /**
@@ -2214,23 +2199,21 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the last element child.
-     * @return the last element child
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter({CHROME, FF})
     public Element getLastElementChild() {
-        final DomNode child = getPage().getLastChild();
-        return child == null ? null : child.getScriptableObject();
+        return super.getLastElementChild();
     }
 
     /**
-     * Returns the first element child.
-     * @return the first element child
+     * {@inheritDoc}
      */
+    @Override
     @JsxGetter({CHROME, FF})
     public Element getFirstElementChild() {
-        final DomNode child = getPage().getFirstChild();
-        return child == null ? null : child.getScriptableObject();
+        return super.getFirstElementChild();
     }
 
     /**

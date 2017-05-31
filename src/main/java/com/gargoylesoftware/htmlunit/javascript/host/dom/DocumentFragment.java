@@ -25,6 +25,9 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -95,4 +98,41 @@ public class DocumentFragment extends Node {
         }
         return super.getDefaultValue(hint);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public int getChildElementCount() {
+        return super.getChildElementCount();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public Element getFirstElementChild() {
+        return super.getFirstElementChild();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public Element getLastElementChild() {
+        return super.getLastElementChild();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public HTMLCollection getChildren() {
+        return super.getChildren();
+    }
+
 }
