@@ -562,7 +562,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,"
+    @Alerts(CHROME = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),createShadowRoot(),getAttribute(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getDestinationInsertionPoints(),getElementsByClassName(),getElementsByTagName(),"
@@ -575,6 +575,18 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
                 + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
+            FF45 = "attributes,classList,className,clientHeight,clientLeft,clientTop,"
+                + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "innerHTML,insertAdjacentHTML(),matches(),"
+                + "mozMatchesSelector(),mozRequestFullScreen(),mozRequestPointerLock(),nextElementSibling,"
+                + "onwheel,outerHTML,"
+                + "previousElementSibling,releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),scroll(),scrollBy(),scrollHeight,"
+                + "scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,"
+                + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),tagName,"
+                + "webkitMatchesSelector()",
             FF52 = "after(),animate(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
