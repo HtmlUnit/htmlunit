@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -107,7 +108,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String LANGUAGE_ENGLISH_US = "en-US";
 
     /**
-     * United States .
+     * United States.
      */
     private static final String TIMEZONE_NEW_YORK = "America/New_York";
 
@@ -354,7 +355,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
-    private String systemTimezone_ = TIMEZONE_NEW_YORK;
+    private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private int browserVersionNumeric_;
@@ -620,11 +621,11 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Returns the system timezone, for example "America/New_York".
-     * Default value is {@link #TIMEZONE_NEW_YORK} if not explicitly configured.
-     * @return the system timezone
+     * Returns the system {@link TimeZone}.
+     * Default value is {@code America/New_York} if not explicitly configured.
+     * @return the system {@link TimeZone}
      */
-    public String getSystemTimezone() {
+    public TimeZone getSystemTimezone() {
         return systemTimezone_;
     }
 
@@ -763,7 +764,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     /**
      * @param systemTimezone the systemTimezone to set
      */
-    public void setSystemTimezone(final String systemTimezone) {
+    public void setSystemTimezone(final TimeZone systemTimezone) {
         systemTimezone_ = systemTimezone;
     }
 

@@ -74,7 +74,7 @@ public class File extends Blob {
         final Date date = new Date(getLastModified());
         final BrowserVersion browser = getBrowserVersion();
         final Locale locale = new Locale(browser.getSystemLanguage());
-        final TimeZone timezone = TimeZone.getTimeZone(browser.getSystemTimezone());
+        final TimeZone timezone = browser.getSystemTimezone();
 
         if (browser.hasFeature(JS_FILE_SHORT_DATE_FORMAT)) {
             final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT_FF, timezone, locale);
