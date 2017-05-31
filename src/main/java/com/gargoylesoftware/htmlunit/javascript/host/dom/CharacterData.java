@@ -177,4 +177,13 @@ public class CharacterData extends Node {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({CHROME, FF, EDGE})
+    public void remove() {
+        super.remove();
+    }
+
 }

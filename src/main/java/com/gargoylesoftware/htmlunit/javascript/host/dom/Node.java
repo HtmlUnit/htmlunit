@@ -372,8 +372,7 @@ public class Node extends EventTarget {
      * Removes the DOM node from its parent.
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove">MDN documentation</a>
      */
-    @JsxFunction({CHROME, FF, EDGE})
-    public void remove() {
+    protected void remove() {
         getDomNodeOrDie().remove();
     }
 

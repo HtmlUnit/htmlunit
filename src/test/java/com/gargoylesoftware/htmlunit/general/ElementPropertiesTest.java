@@ -557,6 +557,54 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,"
+                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),createShadowRoot(),getAttribute(),"
+                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "getDestinationInsertionPoints(),getElementsByClassName(),getElementsByTagName(),"
+                + "getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,"
+                + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),localName,matches(),"
+                + "namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,oncopy,oncut,onpaste,"
+                + "onsearch,onselectstart,onwebkitfullscreenchange,onwebkitfullscreenerror,onwheel,outerHTML,prefix,"
+                + "previousElementSibling,releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),replaceWith(),requestPointerLock(),scrollHeight,scrollIntoView(),"
+                + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
+                + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
+                + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
+            FF52 = "after(),animate(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
+                + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),localName,matches(),"
+                + "mozMatchesSelector(),mozRequestFullScreen(),namespaceURI,nextElementSibling,onwheel,outerHTML,"
+                + "prefix,previousElementSibling,releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),replaceWith(),requestPointerLock(),scroll(),scrollBy(),scrollHeight,"
+                + "scrollIntoView(),scrollLeft,scrollLeftMax,scrollTo(),scrollTop,scrollTopMax,scrollWidth,"
+                + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setCapture(),tagName,"
+                + "webkitMatchesSelector()",
+            IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
+                + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),lastElementChild,"
+                + "msContentZoomFactor,msGetRegionContent(),msGetUntransformedBounds(),msMatchesSelector(),"
+                + "msRegionOverflow,msReleasePointerCapture(),msRequestFullscreen(),msSetPointerCapture(),"
+                + "nextElementSibling,ongotpointercapture,onlostpointercapture,onmsgesturechange,onmsgesturedoubletap,"
+                + "onmsgestureend,onmsgesturehold,onmsgesturestart,onmsgesturetap,onmsgotpointercapture,"
+                + "onmsinertiastart,onmslostpointercapture,onmspointercancel,onmspointerdown,onmspointerenter,"
+                + "onmspointerleave,onmspointermove,onmspointerout,onmspointerover,onmspointerup,onpointercancel,"
+                + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
+                + "previousElementSibling,releasePointerCapture(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
+                + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),tagName")
+    @NotYetImplemented
+    public void element2() throws Exception {
+        testString("element, document.createDocumentFragment()");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

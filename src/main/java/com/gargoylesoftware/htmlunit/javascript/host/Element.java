@@ -1970,4 +1970,13 @@ public class Element extends Node {
         setEventHandler("pointerup", onpointerup);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({CHROME, FF, EDGE})
+    public void remove() {
+        super.remove();
+    }
+
 }

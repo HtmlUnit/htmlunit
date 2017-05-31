@@ -28,6 +28,7 @@ import org.w3c.dom.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.html.DomDocumentType;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -158,6 +159,15 @@ public class DocumentType extends Node {
     @JsxGetter(FF45)
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @JsxFunction({CHROME, FF, EDGE})
+    public void remove() {
+        super.remove();
     }
 
 }
