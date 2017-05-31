@@ -124,12 +124,13 @@ public class JSObject {
      * @throws JSException in case or error
      */
     public void setMember(final String name, final Object value) throws JSException {
+        final String stringValue = value.toString();
         if (LOG.isInfoEnabled()) {
-            LOG.info("JSObject setMember '" + name + "'");
+            LOG.info("JSObject setMember '" + name + "' to '" + stringValue + "'");
         }
 
         if (scriptableObject_ instanceof Element) {
-            ((Element) scriptableObject_).setAttribute(name, value.toString());
+            ((Element) scriptableObject_).setAttribute(name, stringValue);
             return;
         }
         scriptableObject_.put(name, scriptableObject_, value);
