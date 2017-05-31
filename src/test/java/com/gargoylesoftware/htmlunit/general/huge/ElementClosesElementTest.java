@@ -64,10 +64,13 @@ public class ElementClosesElementTest extends WebDriverTestCase {
 
     private void test(final String parent, final String child) throws Exception {
         String parentString = "<" + parent + " id='outer'>";
-        String suffix = "";
+        String suffix = "\n";
         if ("script".equals(parent)) {
             parentString += "//";
-            suffix = "\n</script>";
+            suffix = "\n</script>\n";
+        }
+        if ("svg".equals(parent)) {
+            suffix = "";
         }
         String childString = "<" + child + ">";
         if ("script".equals(child)) {
@@ -81,7 +84,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
-                + parentString + childString + suffix + '\n'
+                + parentString + childString + suffix
                 + "</body></html>");
     }
 
@@ -63863,6 +63866,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1")
+    @NotYetImplemented({FF, IE})
     public void _isindex_svg() throws Exception {
         test("isindex", "svg");
     }
@@ -64152,7 +64156,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @NotYetImplemented(IE)
     public void _svg_meta() throws Exception {
         test("svg", "meta");
     }
@@ -64209,15 +64212,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _svg_s() throws Exception {
         test("svg", "s");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _svg_script() throws Exception {
-        test("svg", "script");
     }
 
     /**
