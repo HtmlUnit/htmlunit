@@ -328,12 +328,19 @@ public class HtmlAppletTest extends SimpleWebTestCase {
 
         final HtmlPage page = webClient.getPage(url);
 
-        final HtmlButton button = page.getHtmlElementById("execJs7");
+        HtmlButton button = page.getHtmlElementById("execJs7");
         button.click();
 
         assertEquals(2, collectedStatus.size());
         assertEquals("execJS: '7'", collectedStatus.get(0));
         assertEquals("  '7.0'", collectedStatus.get(1));
+
+        button = page.getHtmlElementById("execJsOuterHtml");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("execJS: 'document.getElementById('myInput').outerHTML'", collectedStatus.get(2));
+        assertEquals("  '<input type=\"text\" id=\"myInput\">'", collectedStatus.get(3));
     }
 
     /**
