@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -64,14 +63,7 @@ public final class ClassConfiguration {
      * @param className the class name, can be null
      */
     public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
-            final boolean jsObject, final String className) {
-        final Class<?> superClass = hostClass.getSuperclass();
-        if (superClass != SimpleScriptable.class) {
-            extendedClassName_ = superClass.getSimpleName();
-        }
-        else {
-            extendedClassName_ = "";
-        }
+            final boolean jsObject, final String className, final String extendedClassName) {
         hostClass_ = hostClass;
         hostClassSimpleName_ = hostClass_.getSimpleName();
         jsObject_ = jsObject;
@@ -82,6 +74,7 @@ public final class ClassConfiguration {
         else {
             className_ = className;
         }
+        extendedClassName_ = extendedClassName;
     }
 
     void setJSConstructor(final Member jsConstructor) {

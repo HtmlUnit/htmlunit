@@ -128,6 +128,16 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 boolean isJsObject = false;
                 String className = null;
+                String extendedClassName = "";
+
+                final Class<?> superClass = klass.getSuperclass();
+                if (superClass != SimpleScriptable.class) {
+                    extendedClassName = superClass.getSimpleName();
+                }
+                else {
+                    extendedClassName = "";
+                }
+
                 for (int i = 0; i < jsxClassValues.length; i++) {
                     final JsxClass jsxClass = jsxClassValues[i];
 
@@ -139,12 +149,16 @@ public abstract class AbstractJavaScriptConfiguration {
                         if (!jsxClass.className().isEmpty()) {
                             className = jsxClass.className();
                         }
+                        if (jsxClass.extendedClass() != Object.class) {
+                            extendedClassName = jsxClass.extendedClass().getSimpleName();
+                        }
+                        break;
                     }
                 }
 
                 final ClassConfiguration classConfiguration =
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
-                                className);
+                                className, extendedClassName);
 
                 process(classConfiguration, hostClassName, expectedBrowser);
                 return classConfiguration;
@@ -163,9 +177,22 @@ public abstract class AbstractJavaScriptConfiguration {
                 if (className.isEmpty()) {
                     className = null;
                 }
+                String extendedClassName = "";
+
+                final Class<?> superClass = klass.getSuperclass();
+                if (superClass != SimpleScriptable.class) {
+                    extendedClassName = superClass.getSimpleName();
+                }
+                else {
+                    extendedClassName = "";
+                }
+                if (jsxClass.extendedClass() != Object.class) {
+                    extendedClassName = jsxClass.extendedClass().getSimpleName();
+                }
+
                 final ClassConfiguration classConfiguration
                     = new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), jsxClass.isJSObject(),
-                            className);
+                            className, extendedClassName);
 
                 process(classConfiguration, hostClassName, expectedBrowser);
                 return classConfiguration;

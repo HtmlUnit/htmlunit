@@ -54,6 +54,12 @@ public @interface JsxClass {
     String className() default "";
 
     /**
+     * The extended (super) class.
+     * @return the extended (super) class
+     */
+    Class<?> extendedClass() default Object.class;
+
+    /**
      * The {@link SupportedBrowser}s supported by this constant.
      * @return the {@link SupportedBrowser}s
      */
