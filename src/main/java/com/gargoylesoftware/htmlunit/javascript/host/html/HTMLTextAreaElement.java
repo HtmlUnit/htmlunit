@@ -313,7 +313,42 @@ public class HTMLTextAreaElement extends FormField {
         }
         catch (final NumberFormatException e) {
             getDomNodeOrDie().setAttribute("maxLength", "0");
-            return;
+        }
+    }
+
+    /**
+     * Returns the minimum number of characters in this text area.
+     * @return the minimum number of characters in this text area
+     */
+    @JsxGetter({CHROME, FF})
+    public Object getMinLength() {
+        final String minLength = getDomNodeOrDie().getAttribute("minLength");
+
+        try {
+            return Integer.parseInt(minLength);
+        }
+        catch (final NumberFormatException e) {
+            return -1;
+        }
+    }
+
+    /**
+     * Sets minimum number of characters in this text area.
+     * @param minLength minimum number of characters in this text area.
+     */
+    @JsxSetter({CHROME, FF})
+    public void setMinLength(final String minLength) {
+        try {
+            final int i = Integer.parseInt(minLength);
+
+            if (i < 0 ) {
+                throw Context.throwAsScriptRuntimeEx(
+                    new NumberFormatException("New value for minLength '" + minLength + "' is smaller than zero."));
+            }
+            getDomNodeOrDie().setAttribute("minLength", minLength);
+        }
+        catch (final NumberFormatException e) {
+            getDomNodeOrDie().setAttribute("minLength", "0");
         }
     }
 

@@ -602,7 +602,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"-1", "null", "32", "32", "-1", "ms"},
             IE = {"2147483647", "null", "32", "32", "2147483647", "ms"})
-    public void getMaxLength() throws Exception {
+    public void maxLength() throws Exception {
         final String html
             = "<html>\n"
             + "<head><title>foo</title>\n"
@@ -618,10 +618,42 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <form name='form1' method='post' >\n"
+            + "  <form name='form1' method='post'>\n"
             + "    <textarea name='textarea1'></textarea>\n"
             + "    <textarea name='textarea2' maxLength='32'></textarea>\n"
             + "    <textarea name='textarea3' maxLength='ms'></textarea>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"-1", "null", "32", "32", "-1", "ms"},
+            IE = {"undefined", "null", "undefined", "32", "undefined", "ms"})
+    public void minLength() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert(document.form1.textarea1.minLength);\n"
+            + "      alert(document.form1.textarea1.getAttribute('minLength'));\n"
+            + "      alert(document.form1.textarea2.minLength);\n"
+            + "      alert(document.form1.textarea2.getAttribute('minLength'));\n"
+            + "      alert(document.form1.textarea3.minLength);\n"
+            + "      alert(document.form1.textarea3.getAttribute('minLength'));\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form name='form1' method='post'>\n"
+            + "    <textarea name='textarea1'></textarea>\n"
+            + "    <textarea name='textarea2' minLength='32'></textarea>\n"
+            + "    <textarea name='textarea3' minLength='ms'></textarea>\n"
             + "  </form>\n"
             + "</body></html>";
 
