@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.w3c.css.sac.CSSException;
 
@@ -26,7 +25,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -42,62 +40,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(domClass = DomDocumentFragment.class)
 public class DocumentFragment extends Node {
 
-    //TODO: seems that in IE, DocumentFragment extends HTMLDocument
-
     /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, FF, EDGE})
     public DocumentFragment() {
-    }
-
-    /**
-     * Creates a new HTML attribute with the specified name.
-     *
-     * @param attributeName the name of the attribute to create
-     * @return an attribute with the specified name
-     */
-    @JsxFunction(IE)
-    public Object createAttribute(final String attributeName) {
-        return getDocument().createAttribute(attributeName);
-    }
-
-    /**
-     * Returns HTML document.
-     * @return HTML document
-     */
-    protected HTMLDocument getDocument() {
-        return (HTMLDocument) getDomNodeOrDie().getPage().getScriptableObject();
-    }
-
-    /**
-     * Creates a new Comment.
-     * @param comment the comment text
-     * @return the new Comment
-     */
-    @JsxFunction(IE)
-    public Object createComment(final String comment) {
-        return getDocument().createComment(comment);
-    }
-
-    /**
-     * Creates a new document fragment.
-     * @return a newly created document fragment
-     */
-    @JsxFunction(IE)
-    public Object createDocumentFragment() {
-        return getDocument().createDocumentFragment();
-    }
-
-    /**
-     * Create a new DOM text node with the given data.
-     *
-     * @param newData the string value for the text node
-     * @return the new text node or NOT_FOUND if there is an error
-     */
-    @JsxFunction(IE)
-    public Object createTextNode(final String newData) {
-        return getDocument().createTextNode(newData);
     }
 
     /**
