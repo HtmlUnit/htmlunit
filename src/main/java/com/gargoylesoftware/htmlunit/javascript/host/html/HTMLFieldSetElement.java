@@ -101,4 +101,22 @@ public class HTMLFieldSetElement extends HTMLElement {
         return getDomNodeOrDie().isValid();
     }
 
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
 }

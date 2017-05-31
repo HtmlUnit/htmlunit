@@ -43,8 +43,8 @@ public class HTMLFontElement extends HTMLElement {
     }
 
     /**
-     * Gets the {@code color} attribute.
-     * @return the {@code color} attribute
+     * Gets the {@code color} property.
+     * @return the {@code color} property
      */
     @JsxGetter
     public String getColor() {
@@ -52,8 +52,8 @@ public class HTMLFontElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code color} attribute.
-     * @param color the {@code color} attribute
+     * Sets the {@code color} property.
+     * @param color the {@code color} property
      */
     @JsxSetter
     public void setColor(final String color) {

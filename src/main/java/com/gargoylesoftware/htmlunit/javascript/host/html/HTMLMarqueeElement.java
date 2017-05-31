@@ -88,4 +88,22 @@ public class HTMLMarqueeElement extends HTMLElement {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }
 
+    /**
+     * Returns the value of the {@code bgColor} property.
+     * @return the value of the {@code bgColor} property
+     */
+    @JsxGetter({CHROME, IE})
+    public String getBgColor() {
+        return getDomNodeOrDie().getAttribute("bgColor");
+    }
+
+    /**
+     * Sets the value of the {@code bgColor} property.
+     * @param bgColor the value of the {@code bgColor} property
+     */
+    @JsxSetter({CHROME, IE})
+    public void setBgColor(final String bgColor) {
+        setColorAttribute("bgColor", bgColor);
+    }
+
 }

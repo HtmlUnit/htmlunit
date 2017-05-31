@@ -83,4 +83,22 @@ public class HTMLHRElement extends HTMLElement {
         setAlign(align, false);
     }
 
+    /**
+     * Gets the {@code color} property.
+     * @return the {@code color} property
+     */
+    @JsxGetter
+    public String getColor() {
+        return getDomNodeOrDie().getAttribute("color");
+    }
+
+    /**
+     * Sets the {@code color} property.
+     * @param color the {@code color} property
+     */
+    @JsxSetter
+    public void setColor(final String color) {
+        getDomNodeOrDie().setAttribute("color", color);
+    }
+
 }

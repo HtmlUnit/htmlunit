@@ -162,4 +162,23 @@ public class HTMLLinkElement extends HTMLElement {
     public DOMTokenList getRelList() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
 }
