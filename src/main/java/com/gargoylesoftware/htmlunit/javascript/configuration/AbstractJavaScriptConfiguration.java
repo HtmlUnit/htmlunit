@@ -131,11 +131,11 @@ public abstract class AbstractJavaScriptConfiguration {
                 String extendedClassName = "";
 
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass != SimpleScriptable.class) {
-                    extendedClassName = superClass.getSimpleName();
+                if (superClass == SimpleScriptable.class) {
+                    extendedClassName = "";
                 }
                 else {
-                    extendedClassName = "";
+                    extendedClassName = superClass.getSimpleName();
                 }
 
                 for (int i = 0; i < jsxClassValues.length; i++) {
@@ -150,7 +150,12 @@ public abstract class AbstractJavaScriptConfiguration {
                             className = jsxClass.className();
                         }
                         if (jsxClass.extendedClass() != Object.class) {
-                            extendedClassName = jsxClass.extendedClass().getSimpleName();
+                            if (jsxClass.extendedClass() == SimpleScriptable.class) {
+                                extendedClassName = "";
+                            }
+                            else {
+                                extendedClassName = jsxClass.extendedClass().getSimpleName();
+                            }
                         }
                     }
                 }
