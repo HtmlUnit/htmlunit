@@ -2003,7 +2003,13 @@ public class Element extends Node {
      */
     @JsxFunction({CHROME, FF})
     public boolean matches(final String selectorString) {
-        return getDomNodeOrDie().matches(selectorString);
+        try {
+            return getDomNodeOrDie().matches(selectorString);
+        }
+        catch (final CSSException e) {
+            throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
+                    + selectorString + "' error: " + e.getMessage() + ").");
+        }
     }
 
     /**
