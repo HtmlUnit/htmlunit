@@ -36,6 +36,9 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
@@ -43,6 +46,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -54,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -1599,6 +1604,30 @@ public class DomElement extends DomNamespaceNode implements Element {
         return false;
     }
 
+    /**
+     * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @param selectorString the selector to test
+     * @return true if the element would be selected by the specified selector string; otherwise, returns false.
+     */
+    public boolean matches(final String selectorString) {
+        try {
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+            final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
+
+            if (selectorList != null) {
+                for (int i = 0; i < selectorList.getLength(); i++) {
+                    final Selector selector = selectorList.item(i);
+                    if (CSSStyleSheet.selects(browserVersion, selector, this, null, true)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        catch (final IOException e) {
+            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
+        }
+    }
 }
 
 /**
@@ -1830,4 +1859,5 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public Collection<DomAttr> values() {
         return map_.values();
     }
+
 }

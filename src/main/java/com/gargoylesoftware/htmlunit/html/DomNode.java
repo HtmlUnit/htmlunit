@@ -1898,29 +1898,11 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public DomNodeList<DomNode> querySelectorAll(final String selectors) {
         try {
-            final WebClient webClient = getPage().getWebClient();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
-            final CheckErrorHandler errorHandler = new CheckErrorHandler();
-            parser.setErrorHandler(errorHandler);
-
-            final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-            // in case of error parseSelectors returns null
-            if (errorHandler.errorDetected()) {
-                throw new CSSException("Invalid selectors: " + selectors);
-            }
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+            final SelectorList selectorList = getSelectorList(selectors, browserVersion);
 
             final List<DomNode> elements = new ArrayList<>();
             if (selectorList != null) {
-                final BrowserVersion browserVersion = webClient.getBrowserVersion();
-                int documentMode = 9;
-                if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-                    final Object sobj = getPage().getScriptableObject();
-                    if (sobj instanceof HTMLDocument) {
-                        documentMode = ((HTMLDocument) sobj).getDocumentMode();
-                    }
-                }
-                CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
-
                 for (final DomElement child : getDomElementDescendants()) {
                     for (int i = 0; i < selectorList.getLength(); i++) {
                         final Selector selector = selectorList.item(i);
@@ -1936,6 +1918,39 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         catch (final IOException e) {
             throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
         }
+    }
+
+    /**
+     * Returns the {@link SelectorList}.
+     * @param selectors the selectors
+     * @param browserVersion the {@link BrowserVersion}
+     * @return the {@link SelectorList}
+     * @throws IOException if an error occurs
+     */
+    protected SelectorList getSelectorList(final String selectors, final BrowserVersion browserVersion)
+            throws IOException {
+        final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+        final CheckErrorHandler errorHandler = new CheckErrorHandler();
+        parser.setErrorHandler(errorHandler);
+
+        final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+        // in case of error parseSelectors returns null
+        if (errorHandler.errorDetected()) {
+            throw new CSSException("Invalid selectors: " + selectors);
+        }
+
+        if (selectorList != null) {
+            int documentMode = 9;
+            if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
+                final Object sobj = getPage().getScriptableObject();
+                if (sobj instanceof HTMLDocument) {
+                    documentMode = ((HTMLDocument) sobj).getDocumentMode();
+                }
+            }
+            CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
+
+        }
+        return selectorList;
     }
 
     /**

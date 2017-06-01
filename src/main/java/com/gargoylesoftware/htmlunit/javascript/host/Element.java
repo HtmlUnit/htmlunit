@@ -1995,4 +1995,44 @@ public class Element extends Node {
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);
     }
+
+    /**
+     * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @param selectorString the selector to test
+     * @return the value
+     */
+    @JsxFunction({CHROME, FF})
+    public boolean matches(final String selectorString) {
+        return getDomNodeOrDie().matches(selectorString);
+    }
+
+    /**
+     * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @param selectorString the selector to test
+     * @return the value
+     */
+    @JsxFunction(FF)
+    public boolean mozMatchesSelector(final String selectorString) {
+        return matches(selectorString);
+    }
+
+    /**
+     * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @param selectorString the selector to test
+     * @return the value
+     */
+    @JsxFunction({CHROME, FF})
+    public boolean webkitMatchesSelector(final String selectorString) {
+        return matches(selectorString);
+    }
+
+    /**
+     * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @param selectorString the selector to test
+     * @return the value
+     */
+    @JsxFunction(IE)
+    public boolean msMatchesSelector(final String selectorString) {
+        return matches(selectorString);
+    }
 }

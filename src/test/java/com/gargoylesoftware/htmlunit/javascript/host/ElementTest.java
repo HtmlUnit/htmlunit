@@ -1265,4 +1265,39 @@ public class ElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "Philippine eagle",
+            IE = "not found")
+    public void matches() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var birds = document.getElementsByTagName('li');\n"
+            + "    var found = false;"
+            + "    for (var i = 0; i < birds.length; i++) {\n"
+            + "      if (birds[i].matches && birds[i].matches('.endangered')) {\n"
+            + "        alert(birds[i].textContent);\n"
+            + "        found = true;"
+            + "      }\n"
+            + "    }\n"
+            + "    if (!found) {\n"
+            + "      alert('not found');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='birds'>\n"
+            + "    <li>Orange-winged parrot</li>\n"
+            + "    <li class='endangered'>Philippine eagle</li>\n"
+            + "    <li>Great white pelican</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

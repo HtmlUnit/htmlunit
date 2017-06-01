@@ -61,6 +61,7 @@ public final class ClassConfiguration {
      * @param domClasses the DOM classes that this object supports
      * @param jsObject boolean flag for if this object is a JavaScript object
      * @param className the class name, can be null
+     * @param extendedClassName the extended class name
      */
     public ClassConfiguration(final Class<? extends HtmlUnitScriptable> hostClass, final Class<?>[] domClasses,
             final boolean jsObject, final String className, final String extendedClassName) {

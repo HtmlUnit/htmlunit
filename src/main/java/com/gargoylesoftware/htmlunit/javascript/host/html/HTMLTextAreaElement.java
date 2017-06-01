@@ -341,7 +341,7 @@ public class HTMLTextAreaElement extends FormField {
         try {
             final int i = Integer.parseInt(minLength);
 
-            if (i < 0 ) {
+            if (i < 0) {
                 throw Context.throwAsScriptRuntimeEx(
                     new NumberFormatException("New value for minLength '" + minLength + "' is smaller than zero."));
             }

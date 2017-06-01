@@ -9,6 +9,9 @@
     <body>
         <release version="2.27" date="???" description="GAE broken, FF52, Bugfixes">
             <action type="add" dev="asashour">
+                JavaScript: implement Element.matches().
+            </action>
+            <action type="add" dev="asashour">
                 JavaScript: implement .before(), .after() and .replaceWith().
             </action>
             <action type="fix" dev="rbri" issue="1827">
