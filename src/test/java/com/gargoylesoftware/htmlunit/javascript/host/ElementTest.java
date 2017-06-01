@@ -1300,4 +1300,36 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"exception", "done"},
+            IE = "done")
+    public void matchesInvalidSelector() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var birds = document.getElementsByTagName('li');\n"
+            + "    try {\n"
+            + "      for (var i = 0; i < birds.length; i++) {\n"
+            + "        if (birds[i].matches && birds[i].matches('invalidSelector!=:::x')) {\n"
+            + "          alert(birds[i].textContent);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    } catch (e) { alert('exception'); }\n"
+            + "    alert('done');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='birds'>\n"
+            + "    <li>Great white pelican</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
