@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.27" date="???" description="GAE broken, FF52, Bugfixes">
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.23.
+            </action>
             <action type="add" dev="asashour">
                 JavaScript: implement Element.matches().
             </action>
