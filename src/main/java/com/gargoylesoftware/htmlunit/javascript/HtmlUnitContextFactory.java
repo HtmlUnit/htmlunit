@@ -162,17 +162,46 @@ public class HtmlUnitContextFactory extends ContextFactory {
 
             // Remove HTML comments around the source if needed
             if (!isWindowEval) {
-                final String sourceCodeTrimmed = source.trim();
-                if (sourceCodeTrimmed.startsWith("<!--")) {
+
+                // **** Memory Optimization ****
+                // final String sourceCodeTrimmed = source.trim();
+                // if (sourceCodeTrimmed.startsWith("<!--")) {
+                // **** Memory Optimization ****
+                // do not trim because this will create a copy of the
+                // whole string (usually large for libs like jQuery
+                // if there is whitespace to trim (e.g. cr at end)
+                final int length = source.length();
+                int start = 0;
+                while ((start < length) && (source.charAt(start) <= ' ')) {
+                    start++;
+                }
+                if (start + 3 < length
+                        && source.charAt(start++) == '<'
+                        && source.charAt(start++) == '!'
+                        && source.charAt(start++) == '-'
+                        && source.charAt(start++) == '-') {
                     source = source.replaceFirst("<!--", "// <!--");
                 }
+
                 // IE ignores the last line containing uncommented -->
-                if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
-                        && sourceCodeTrimmed.endsWith("-->")) {
-                    final int lastDoubleSlash = source.lastIndexOf("//");
-                    final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
-                    if (lastNewLine > lastDoubleSlash) {
-                        source = source.substring(0, lastNewLine);
+                // if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)
+                //         && sourceCodeTrimmed.endsWith("-->")) {
+                // **** Memory Optimization ****
+                // see above
+                if (browserVersion_.hasFeature(JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED)) {
+                    int end = source.length() - 1;
+                    while ((end > -1) && (source.charAt(end) <= ' ')) {
+                        end--;
+                    }
+                    if (1 < end
+                            && source.charAt(end--) == '>'
+                            && source.charAt(end--) == '-'
+                            && source.charAt(end--) == '-') {
+                        final int lastDoubleSlash = source.lastIndexOf("//");
+                        final int lastNewLine = Math.max(source.lastIndexOf('\n'), source.lastIndexOf('\r'));
+                        if (lastNewLine > lastDoubleSlash) {
+                            source = source.substring(0, lastNewLine);
+                        }
                     }
                 }
             }
