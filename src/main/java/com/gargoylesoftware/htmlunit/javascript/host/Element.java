@@ -2004,7 +2004,8 @@ public class Element extends Node {
     @JsxFunction({CHROME, FF})
     public boolean matches(final String selectorString) {
         try {
-            return getDomNodeOrDie().matches(selectorString);
+            final DomNode domNode = getDomNodeOrNull();
+            return domNode != null && ((DomElement) domNode).matches(selectorString);
         }
         catch (final CSSException e) {
             throw Context.reportRuntimeError("An invalid or illegal selector was specified (selector: '"
