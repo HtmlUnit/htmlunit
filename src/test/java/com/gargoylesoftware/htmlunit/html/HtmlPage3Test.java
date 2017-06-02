@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.util.List;
 
@@ -455,5 +456,35 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "error",
+            CHROME = "Something")
+    public void shouldBeAbleToFindElementByXPathInXmlDocument() throws Exception {
+        final String html = "<?xml version='1.0' encoding='UTF-8'?>\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml'\n"
+            + "      xmlns:svg='http://www.w3.org/2000/svg'\n"
+            + "      xmlns:xlink='http://www.w3.org/1999/xlink'>\n"
+            + "<body>\n"
+            + "  <svg:svg id='chart_container' height='220' width='400'>\n"
+            + "    <svg:text y='16' x='200' text-anchor='middle'>Something</svg:text>\n"
+            + "  </svg:svg>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", ISO_8859_1, null);
+        String actual;
+        try {
+            WebElement element = driver.findElement(By.xpath("//svg:svg//svg:text"));
+            actual = element.getText();
+        }
+        catch (final Exception e) {
+            actual = "error";
+        }
+        assertEquals(getExpectedAlerts()[0], actual);
     }
 }

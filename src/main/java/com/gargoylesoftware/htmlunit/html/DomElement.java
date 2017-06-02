@@ -1308,7 +1308,6 @@ public class DomElement extends DomNamespaceNode implements Element {
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
 
-
         final ScriptResult scriptResult;
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)

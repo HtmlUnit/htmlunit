@@ -2488,7 +2488,7 @@ public class HtmlPage extends SgmlPage {
      * @return a ScriptResult which will contain both the current page (which may be different than
      *        the previous page and a JavaScript result object.
      */
-    public ScriptResult executeJavaScriptFunction(Object function, final Object thisObject,
+    public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
             return new ScriptResult(null, this);
