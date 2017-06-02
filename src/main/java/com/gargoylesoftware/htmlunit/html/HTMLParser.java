@@ -362,7 +362,9 @@ public final class HTMLParser {
         }
 
         if (namespaceURI == null || namespaceURI.isEmpty()
-            || !qualifiedName.contains(":") || namespaceURI.equals(XHTML_NAMESPACE)) {
+            || !qualifiedName.contains(":")
+            || namespaceURI.equals(XHTML_NAMESPACE)
+            || namespaceURI.equals(SVG_NAMESPACE)) {
 
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
