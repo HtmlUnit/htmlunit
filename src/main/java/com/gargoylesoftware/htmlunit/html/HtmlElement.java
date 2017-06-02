@@ -46,14 +46,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 /**
  * An abstract wrapper for HTML elements.
@@ -526,84 +521,47 @@ public abstract class HtmlElement extends DomElement {
         }
         final boolean isShiftNeeded = KeyboardEvent.isShiftNeeded(c, shiftPressed_);
 
-        final boolean nashorn = getPage().getEnclosingWindow().getScriptableObject() instanceof Global;
-        if (nashorn) {
-            final Event2 shiftDown;
-            final ScriptResult shiftDownResult;
-            if (isShiftNeeded) {
-                shiftDown = new KeyboardEvent2(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
-                        true, ctrlPressed_, altPressed_);
-                shiftDownResult = fireEvent(shiftDown);
-            }
-            else {
-                shiftDown = null;
-                shiftDownResult = null;
-            }
-
-            final Event2 keyDown = new KeyboardEvent2(this, Event.TYPE_KEY_DOWN, c,
-                    shiftPressed_, ctrlPressed_, altPressed_);
-            final ScriptResult keyDownResult = fireEvent(keyDown);
-
-            if (!keyDown.isAborted(keyDownResult)) {
-                final Event2 keyPress = new KeyboardEvent2(this, Event.TYPE_KEY_PRESS, c,
-                        shiftPressed_, ctrlPressed_, altPressed_);
-                final ScriptResult keyPressResult = fireEvent(keyPress);
-
-                if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
-                        && !keyPress.isAborted(keyPressResult)) {
-                    doType(c, startAtEnd, lastType);
-                }
-            }
+        final Event shiftDown;
+        final ScriptResult shiftDownResult;
+        if (isShiftNeeded) {
+            shiftDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
+                    true, ctrlPressed_, altPressed_);
+            shiftDownResult = fireEvent(shiftDown);
         }
         else {
-            final Event shiftDown;
-            final ScriptResult shiftDownResult;
-            if (isShiftNeeded) {
-                shiftDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, KeyboardEvent.DOM_VK_SHIFT,
-                        true, ctrlPressed_, altPressed_);
-                shiftDownResult = fireEvent(shiftDown);
-            }
-            else {
-                shiftDown = null;
-                shiftDownResult = null;
-            }
+            shiftDown = null;
+            shiftDownResult = null;
+        }
 
-            final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
+        final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
+                shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
+        final ScriptResult keyDownResult = fireEvent(keyDown);
+
+        if (!keyDown.isAborted(keyDownResult)) {
+            final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
                     shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
-            final ScriptResult keyDownResult = fireEvent(keyDown);
+            final ScriptResult keyPressResult = fireEvent(keyPress);
 
-            if (!keyDown.isAborted(keyDownResult)) {
-                final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
-                        shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
-                final ScriptResult keyPressResult = fireEvent(keyPress);
-
-                if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
-                        && !keyPress.isAborted(keyPressResult)) {
-                    doType(c, startAtEnd, lastType);
-                }
+            if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
+                    && !keyPress.isAborted(keyPressResult)) {
+                doType(c, startAtEnd, lastType);
             }
         }
 
+        final boolean nashorn = false;
         final WebClient webClient = page.getWebClient();
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
             || this instanceof HtmlPasswordInput) {
-            fireKeyboardEvent(nashorn, Event2.TYPE_INPUT, c, shiftPressed_ | isShiftNeeded);
+            fireKeyboardEvent(nashorn, Event.TYPE_INPUT, c, shiftPressed_ | isShiftNeeded);
         }
 
         fireKeyboardEvent(nashorn, Event.TYPE_KEY_UP, c, shiftPressed_ | isShiftNeeded);
 
         if (isShiftNeeded) {
-            if (nashorn) {
-                final Event2 shiftUp = new KeyboardEvent2(this, Event2.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
-                        false, ctrlPressed_, altPressed_);
-                fireEvent(shiftUp);
-            }
-            else {
-                final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
-                        false, ctrlPressed_, altPressed_);
-                fireEvent(shiftUp);
-            }
+            final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
+                    false, ctrlPressed_, altPressed_);
+            fireEvent(shiftUp);
         }
 
         final HtmlForm form = getEnclosingForm();
@@ -619,12 +577,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     private void fireKeyboardEvent(final boolean nashorn, final String eventType, final char c, final boolean shift) {
-        if (nashorn) {
-            fireEvent(new KeyboardEvent2(this, eventType, c, shift, ctrlPressed_, altPressed_));
-        }
-        else {
-            fireEvent(new KeyboardEvent(this, eventType, c, shift, ctrlPressed_, altPressed_));
-        }
+        fireEvent(new KeyboardEvent(this, eventType, c, shift, ctrlPressed_, altPressed_));
     }
 
     /**
@@ -976,10 +929,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public final boolean hasEventHandlers(final String eventName) {
         final Object jsObj = getScriptableObject();
-        if (jsObj instanceof HTMLElement) {
-            return ((HTMLElement) jsObj).hasEventHandlers(eventName);
-        }
-        return ((HTMLElement2) jsObj).hasEventHandlers(eventName);
+        return ((HTMLElement) jsObj).hasEventHandlers(eventName);
     }
 
     /**
@@ -1269,35 +1219,6 @@ public abstract class HtmlElement extends DomElement {
 
         if (document instanceof HTMLDocument) {
             final HTMLDocument doc = (HTMLDocument) document;
-            final Object activeElement = doc.getActiveElement();
-
-            if (activeElement == getScriptableObject()) {
-                doc.setActiveElement(null);
-                if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                    ((HtmlPage) getPage()).setFocusedElement(null);
-                }
-                else {
-                    ((HtmlPage) getPage()).setElementWithFocus(null);
-                }
-            }
-            else {
-                for (DomNode child : getChildNodes()) {
-                    if (activeElement == child.getScriptableObject()) {
-                        doc.setActiveElement(null);
-                        if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                            ((HtmlPage) getPage()).setFocusedElement(null);
-                        }
-                        else {
-                            ((HtmlPage) getPage()).setElementWithFocus(null);
-                        }
-
-                        break;
-                    }
-                }
-            }
-        }
-        else if (document instanceof HTMLDocument2) {
-            final HTMLDocument2 doc = (HTMLDocument2) document;
             final Object activeElement = doc.getActiveElement();
 
             if (activeElement == getScriptableObject()) {

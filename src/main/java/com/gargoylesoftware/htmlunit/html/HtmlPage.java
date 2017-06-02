@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -83,22 +82,13 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import com.gargoylesoftware.js.nashorn.api.scripting.ScriptObjectMirror;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptRuntime;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -1035,7 +1025,7 @@ public class HtmlPage extends SgmlPage {
         // now we can look into the cache with the fixed request for
         // a cached script
         final Object cachedScript = cache.getCachedObject(request);
-        if (cachedScript instanceof Script || cachedScript instanceof ScriptFunction) {
+        if (cachedScript instanceof Script) {
             return cachedScript;
         }
 
@@ -1220,23 +1210,6 @@ public class HtmlPage extends SgmlPage {
                 return false;
             }
         }
-        if (window.getScriptableObject() instanceof Global) {
-            final HtmlElement element = getDocumentElement();
-            if (element == null) { // happens for instance if document.documentElement has been removed from parent
-                return true;
-            }
-            final Event2 event;
-            if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
-                event = new BeforeUnloadEvent2(element, eventType);
-            }
-            else {
-                event = new Event2(element, eventType);
-            }
-            final ScriptResult result = element.fireEvent(event);
-            if (!isOnbeforeunloadAccepted(this, event, result)) {
-                return false;
-            }
-        }
 
         // If this page was loaded in a frame, execute the version of the event specified on the frame tag.
         if (window instanceof FrameWindow) {
@@ -1261,19 +1234,6 @@ public class HtmlPage extends SgmlPage {
                         event = new Event(frame, eventType);
                     }
                     final ScriptResult result = ((Node) frame.getScriptableObject()).executeEventLocally(event);
-                    if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event, result)) {
-                        return false;
-                    }
-                }
-                else {
-                    final Event2 event;
-                    if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
-                        event = new BeforeUnloadEvent2(frame, eventType);
-                    }
-                    else {
-                        event = new Event2(frame, eventType);
-                    }
-                    final ScriptResult result = ((Node2) frame.getScriptableObject()).executeEventLocally(event);
                     if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event, result)) {
                         return false;
                     }
@@ -1311,24 +1271,6 @@ public class HtmlPage extends SgmlPage {
         return true;
     }
 
-    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event2 event, final ScriptResult result) {
-        if (event.getType().equals(Event.TYPE_BEFORE_UNLOAD)) {
-            final boolean ie = hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-            final String message = getBeforeUnloadMessage(event, result, ie);
-            if (message != null) {
-                final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
-                if (handler == null) {
-                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
-                            + " but no onbeforeunload handler installed.");
-                }
-                else {
-                    return handler.handleEvent(page, message);
-                }
-            }
-        }
-        return true;
-    }
-
     private static String getBeforeUnloadMessage(final Event event, final ScriptResult result, final boolean ie) {
         String message = null;
         if (event.getReturnValue() != Undefined.instance) {
@@ -1347,30 +1289,6 @@ public class HtmlPage extends SgmlPage {
                 else if (result.getJavaScriptResult() != null
                         && result.getJavaScriptResult() != Undefined.instance) {
                     message = Context.toString(result.getJavaScriptResult());
-                }
-            }
-        }
-        return message;
-    }
-
-    private static String getBeforeUnloadMessage(final Event2 event, final ScriptResult result, final boolean ie) {
-        String message = null;
-        if (event.getReturnValue() != null) {
-            if (!ie || event.getReturnValue() != null || result == null || result.getJavaScriptResult() == null
-                    || result.getJavaScriptResult() == ScriptRuntime.UNDEFINED) {
-                message = ScriptRuntime.safeToString(event.getReturnValue());
-            }
-        }
-        else {
-            if (result != null) {
-                if (ie) {
-                    if (result.getJavaScriptResult() != ScriptRuntime.UNDEFINED) {
-                        message = ScriptRuntime.safeToString(result.getJavaScriptResult());
-                    }
-                }
-                else if (result.getJavaScriptResult() != null
-                        && result.getJavaScriptResult() != ScriptRuntime.UNDEFINED) {
-                    message = ScriptRuntime.safeToString(result.getJavaScriptResult());
                 }
             }
         }
@@ -1873,15 +1791,6 @@ public class HtmlPage extends SgmlPage {
                 if (scriptObject.has(attribute, scriptObject)) {
                     final Object jsValue = scriptObject.get(attribute, scriptObject);
                     if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
-                        value = (String) jsValue;
-                    }
-                }
-            }
-            else {
-                final ScriptObject scriptObject = (ScriptObject) o;
-                if (scriptObject.has(attribute)) {
-                    final Object jsValue = scriptObject.get(attribute);
-                    if (jsValue != null /*&& jsValue != Scriptable.NOT_FOUND*/ && jsValue instanceof String) {
                         value = (String) jsValue;
                     }
                 }
@@ -2585,13 +2494,7 @@ public class HtmlPage extends SgmlPage {
             return new ScriptResult(null, this);
         }
 
-        if (function instanceof Function) {
-            return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
-        }
-        if (function instanceof ScriptObjectMirror) {
-            function = get(function, "sobj");
-        }
-        return executeJavaScriptFunction((ScriptFunction) function, (ScriptObject) thisObject, args, htmlElementScope);
+        return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
     }
 
     private ScriptResult executeJavaScriptFunction(final Function function, final Scriptable thisObject,
@@ -2601,54 +2504,6 @@ public class HtmlPage extends SgmlPage {
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
         return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
-    }
-
-    private ScriptResult executeJavaScriptFunction(final ScriptFunction function,
-            ScriptObject thisObject, final Object[] args, final DomNode htmlElementScope) {
-
-        if (thisObject instanceof Window2) {
-            thisObject = ((Window2) thisObject).getGlobal();
-        }
-        final ScriptFunction functionToCall;
-        if (":program".equals(function.getName()) && args.length != 0) {
-            ScriptRuntime.apply(function, thisObject);
-            functionToCall = (ScriptFunction) thisObject.get("on" + ((Event2) args[0]).getType());
-        }
-        else {
-            functionToCall = function;
-        }
-
-        final Global global = htmlElementScope.getPage().getEnclosingWindow().getScriptableObject();
-        final Global oldGlobal = com.gargoylesoftware.js.nashorn.internal.runtime.Context.getGlobal();
-        final boolean globalChanged = oldGlobal != global;
-        try {
-            if (globalChanged) {
-                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(global);
-            }
-            if (!(thisObject instanceof Global)) {
-                thisObject.addBoundProperties(global);
-            }
-            final Object result = ScriptRuntime.apply(functionToCall, thisObject, args);
-            getWebClient().getJavaScriptEngine().processPostponedActions();
-            return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
-        }
-        finally {
-            if (globalChanged) {
-                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(oldGlobal);
-            }
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T> T get(final Object o, final String fieldName) {
-        try {
-            final Field field = o.getClass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return (T) field.get(o);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {

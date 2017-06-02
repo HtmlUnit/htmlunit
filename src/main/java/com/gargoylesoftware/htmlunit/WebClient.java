@@ -79,25 +79,19 @@ import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
-import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -809,13 +803,6 @@ public class WebClient implements Serializable, AutoCloseable {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
                 }
-                else if (jsWindow != null) {
-                    final HTMLElement2 activeElement =
-                            ((HTMLDocument2) Window2.getDocument(jsWindow)).getActiveElement();
-                    if (activeElement != null) {
-                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
-                    }
-                }
             }
         }
     }
@@ -1088,10 +1075,6 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebWindow webWindow = newPage.getEnclosingWindow();
         if (webWindow.getScriptableObject() instanceof Window) {
             ((Window) webWindow.getScriptableObject()).initialize(newPage);
-        }
-        else {
-            final Global global = NashornJavaScriptEngine.getGlobal(newPage.getEnclosingWindow());
-            global.<Window2>getWindow().initialize(newPage);
         }
     }
 
@@ -1813,20 +1796,11 @@ public class WebClient implements Serializable, AutoCloseable {
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (frameElement.isDisplayed()) {
                     final Object element = frameElement.getScriptableObject();
-                    if (element instanceof HTMLElement2) {
-                        final HTMLElement2 htmlElement = (HTMLElement2) element;
-                        final ComputedCSSStyleDeclaration2 style =
-                                Window2.getComputedStyle(htmlElement.getWindow(), htmlElement, null);
-                        use = style.getCalculatedWidth(false, false) != 0
-                                && style.getCalculatedHeight(false, false) != 0;
-                    }
-                    else {
-                        final HTMLElement htmlElement = (HTMLElement) element;
-                        final ComputedCSSStyleDeclaration style =
-                                htmlElement.getWindow().getComputedStyle(htmlElement, null);
-                        use = style.getCalculatedWidth(false, false) != 0
-                                && style.getCalculatedHeight(false, false) != 0;
-                    }
+                    final HTMLElement htmlElement = (HTMLElement) element;
+                    final ComputedCSSStyleDeclaration style =
+                            htmlElement.getWindow().getComputedStyle(htmlElement, null);
+                    use = style.getCalculatedWidth(false, false) != 0
+                            && style.getCalculatedHeight(false, false) != 0;
                 }
             }
             if (use) {

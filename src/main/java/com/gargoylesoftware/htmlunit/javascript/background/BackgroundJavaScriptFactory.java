@@ -19,8 +19,6 @@ import java.net.URL;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.gae.GAEUtils;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -86,22 +84,6 @@ public class BackgroundJavaScriptFactory {
     }
 
     /**
-     * Creates a new JavaScript execution job, where the JavaScript code to execute is a function.
-     * @param initialDelay the initial amount of time to wait before executing this job
-     * @param period the amount of time to wait between executions of this job (may be {@code null})
-     * @param label the label for the job
-     * @param window the window to which the job belongs
-     * @param function the JavaScript code to execute
-     *
-     * @return JavaScriptJob the created job
-     */
-    public JavaScriptFunctionJob2 createJavaScriptJob(final int initialDelay,
-            final Integer period, final String label,
-            final WebWindow window, final ScriptFunction function) {
-        return new JavaScriptFunctionJob2(initialDelay, period, label, window, function);
-    }
-
-    /**
      * Creates a new job for XMLHttpRequestProcessing.
      * @param contextFactory the ContextFactory
      * @param action the action
@@ -111,18 +93,6 @@ public class BackgroundJavaScriptFactory {
     public JavaScriptJob createJavascriptXMLHttpRequestJob(final ContextFactory contextFactory,
             final ContextAction action) {
         return new JavascriptXMLHttpRequestJob(contextFactory, action);
-    }
-
-    /**
-     * Creates a new job for XMLHttpRequestProcessing.
-     * @param global the {@link Global}
-     * @param action the action
-     *
-     * @return JavaScriptJob the created job
-     */
-    public JavaScriptJob createJavascriptXMLHttpRequestJob(final Global global,
-            final GlobalAction action) {
-        return new JavascriptXMLHttpRequestJob2(global, action);
     }
 
     /**
