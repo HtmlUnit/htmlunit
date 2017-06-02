@@ -626,7 +626,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public final void removeFocus() {
         super.removeFocus();
 
-        if (!valueAtFocus_.equals(getInternalValue())) {
+        if (valueAtFocus_ != null && !valueAtFocus_.equals(getInternalValue())) {
             handleFocusLostValueChanged();
         }
         valueAtFocus_ = null;
