@@ -479,7 +479,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, URL_FIRST, "application/xhtml+xml", ISO_8859_1, null);
         String actual;
         try {
-            WebElement element = driver.findElement(By.xpath("//svg:svg//svg:text"));
+            final WebElement element = driver.findElement(By.xpath("//svg:svg//svg:text"));
             actual = element.getText();
         }
         catch (final Exception e) {
