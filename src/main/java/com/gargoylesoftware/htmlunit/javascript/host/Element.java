@@ -1999,7 +1999,10 @@ public class Element extends Node {
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
-     * @param selectorString the selector to test
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the value
      */
     @JsxFunction({CHROME, FF})
@@ -2022,7 +2025,10 @@ public class Element extends Node {
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
-     * @param selectorString the selector to test
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the value
      */
     @JsxFunction(FF)
@@ -2033,7 +2039,10 @@ public class Element extends Node {
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
-     * @param selectorString the selector to test
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the value
      */
     @JsxFunction({CHROME, FF})
@@ -2044,7 +2053,10 @@ public class Element extends Node {
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
-     * @param selectorString the selector to test
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the value
      */
     @JsxFunction(IE)

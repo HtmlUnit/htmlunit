@@ -50,7 +50,7 @@ public final class ArrayCustom {
             final Scriptable scriptable = (Scriptable) arrayLike;
             final Object length = scriptable.get("length", scriptable);
             if (length != Scriptable.NOT_FOUND) {
-                int size = (int) length;
+                final int size = (int) length;
                 array = new Object[(int) size];
                 for (int i = 0; i < size; i++) {
                     array[i] = scriptable.get(i, scriptable);
