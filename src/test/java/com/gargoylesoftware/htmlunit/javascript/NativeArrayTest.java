@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeArrayTest extends WebDriverTestCase {
@@ -259,6 +260,92 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var shifted = myFish.shift();\n"
             + "  alert(myFish);\n"
             + "  alert(shifted);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "a", "b", "c"},
+            IE = "not supported")
+    public void from() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var arr = Array.from('abc');\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "abc", "[object Window]"},
+            IE = "not supported")
+    public void fromSet() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var s = new Set(['abc', window]);\n"
+            + "    var arr = Array.from(s);\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "1,2", "3,4", "5,6"},
+            IE = "not supported")
+    public void fromMap() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var m = new Map([[1, 2], [3, 4], [5, 6]]);\n"
+            + "    var arr = Array.from(m);\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"

@@ -166,7 +166,7 @@ public class Set extends SimpleScriptable {
     public Object get(final String name, final Scriptable start) {
         // A hack to handle Rhino not supporting "get(Object object, Scriptable start)"
         if (name.equals(Symbol.ITERATOR_STRING)) {
-            return super.get("values", start);
+            return ScriptableObject.getProperty(start, "values");
         }
         return super.get(name, start);
     }

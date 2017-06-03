@@ -63,7 +63,7 @@ public class Iterator extends SimpleScriptable {
      * Returns the next object.
      * @return the next object
      */
-    public Object next() {
+    public SimpleScriptable next() {
         final SimpleScriptable object = new SimpleScriptable();
         object.setParentScope(getParentScope());
         final Object value;
