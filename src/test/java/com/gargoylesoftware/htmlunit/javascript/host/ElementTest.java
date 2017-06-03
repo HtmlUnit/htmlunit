@@ -1305,7 +1305,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "done"},
+    @Alerts(DEFAULT = {"SyntaxError", "done"},
             IE = "done")
     public void matchesInvalidSelector() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1319,7 +1319,7 @@ public class ElementTest extends WebDriverTestCase {
             + "          alert(birds[i].textContent);\n"
             + "        }\n"
             + "      }\n"
-            + "    } catch (e) { alert('exception'); }\n"
+            + "    } catch (e) { alert(e.name); }\n"
             + "    alert('done');\n"
             + "  }\n"
             + "</script>\n"
@@ -1332,4 +1332,5 @@ public class ElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
 }
