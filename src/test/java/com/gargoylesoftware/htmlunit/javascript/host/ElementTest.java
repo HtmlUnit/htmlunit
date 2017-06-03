@@ -1333,4 +1333,36 @@ public class ElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * Test is based on a problem we had with jQuery 1.1.2 test suite.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"TypeError", "done"})
+    @NotYetImplemented
+    public void matchesJQuery() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var docElem = document.documentElement;\n"
+            + "    var matches = docElem.matchesSelector\n"
+            + "         || docElem.mozMatchesSelector\n"
+            + "         || docElem.webkitMatchesSelector\n"
+            + "         || docElem.msMatchesSelector;\n"
+            + "    try {\n"
+            + "      matches.call(window, ':visible')\n"
+            + "    } catch (e) { alert(e.name); }\n"
+            + "    alert('done');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <ul id='birds'>\n"
+            + "    <li>Great white pelican</li>\n"
+            + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
