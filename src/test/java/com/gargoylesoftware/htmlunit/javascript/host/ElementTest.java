@@ -1334,13 +1334,11 @@ public class ElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test is based on a problem we had with jQuery 1.1.2 test suite.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts({"TypeError", "done"})
-    @NotYetImplemented
-    public void matchesJQuery() throws Exception {
+    public void matchesWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"

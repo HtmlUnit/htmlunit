@@ -2003,9 +2003,14 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction({CHROME, FF})
-    public boolean matches(final String selectorString) {
+    public static boolean matches(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        final String selectorString = (String) args[0];
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
         try {
-            final DomNode domNode = getDomNodeOrNull();
+            final DomNode domNode = ((Element) thisObj).getDomNodeOrNull();
             return domNode != null && ((DomElement) domNode).matches(selectorString);
         }
         catch (final CSSException e) {
@@ -2021,8 +2026,9 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction(FF)
-    public boolean mozMatchesSelector(final String selectorString) {
-        return matches(selectorString);
+    public static boolean mozMatchesSelector(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, thisObj, args, function);
     }
 
     /**
@@ -2031,8 +2037,9 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction({CHROME, FF})
-    public boolean webkitMatchesSelector(final String selectorString) {
-        return matches(selectorString);
+    public static boolean webkitMatchesSelector(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, thisObj, args, function);
     }
 
     /**
@@ -2041,7 +2048,8 @@ public class Element extends Node {
      * @return the value
      */
     @JsxFunction(IE)
-    public boolean msMatchesSelector(final String selectorString) {
-        return matches(selectorString);
+    public static boolean msMatchesSelector(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, thisObj, args, function);
     }
 }
