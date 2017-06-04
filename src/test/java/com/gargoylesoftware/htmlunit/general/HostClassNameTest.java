@@ -598,8 +598,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.EventNode}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
