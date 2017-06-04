@@ -1569,4 +1569,132 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            FF52 = {"[object Object]", "undefined", "undefined",
+                        "function get onreadystatechange() {\n    [native code]\n}",
+                        "function set onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            CHROME = {"[object Object]", "undefined", "undefined",
+                        "function () { [native code] }",
+                        "function () { [native code] }",
+                        "true", "true"},
+            IE = {"[object Object]", "undefined", "undefined",
+                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                    "true", "true"})
+    @NotYetImplemented
+    public void getOwnPropertyDescriptor() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
+            + "        alert(desc);\n"
+            + "        alert(desc.value);\n"
+            + "        alert(desc.writable);\n"
+            + "        alert(desc.get);\n"
+            + "        alert(desc.set);\n"
+            + "        alert(desc.configurable);\n"
+            + "        alert(desc.enumerable);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+                        "function () { return !0 }",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            FF52 = {"[object Object]", "undefined", "undefined",
+                        "function () { return !0 }",
+                        "function set onreadystatechange() {\n    [native code]\n}",
+                        "true", "true"},
+            CHROME = {"[object Object]", "undefined", "undefined",
+                        "function () { return !0 }",
+                        "function () { [native code] }",
+                        "true", "true"},
+            IE = {"[object Object]", "undefined", "undefined",
+                    "function() { return !0 }",
+                    "\nfunction onreadystatechange() {\n    [native code]\n}\n",
+                    "true", "true"})
+    @NotYetImplemented
+    public void defineProperty() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', {\n"
+            + "                                 enumerable: !0,\n"
+            + "                                 configurable: !0,\n"
+            + "                                 get: function() { return !0 }\n"
+            + "                             });\n"
+            + "        var desc = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
+            + "        alert(desc);\n"
+            + "        alert(desc.value);\n"
+            + "        alert(desc.writable);\n"
+            + "        alert(desc.get);\n"
+            + "        alert(desc.set);\n"
+            + "        alert(desc.configurable);\n"
+            + "        alert(desc.enumerable);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test case for https://stackoverflow.com/questions/44349339/htmlunit-ecmaerror-typeerror.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object XMLHttpRequestPrototype]",
+            CHROME = "[object XMLHttpRequest]")
+    @NotYetImplemented
+    public void defineProperty2() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <title>XMLHttpRequest Test</title>\n"
+            + "    <script>\n"
+            + "      var request;\n"
+            + "      function test() {\n"
+            + "        var t = Object.getOwnPropertyDescriptor(XMLHttpRequest.prototype, 'onreadystatechange');\n"
+            + "        var res = Object.defineProperty(XMLHttpRequest.prototype, 'onreadystatechange', t);\n"
+            + "        alert(res);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
