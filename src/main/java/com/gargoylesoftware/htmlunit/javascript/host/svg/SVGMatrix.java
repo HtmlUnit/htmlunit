@@ -18,6 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -26,25 +29,27 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * A JavaScript object for {@code SVGMatrix}.
  * @see <a href="https://developer.mozilla.org/en-US/docs/DOM/SVGMatrix">MDN doc</a>
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass
 public class SVGMatrix extends SimpleScriptable {
-    private double fieldA_ = 1;
-    private double fieldB_ = 0;
-    private double fieldC_ = 0;
-    private double fieldD_ = 1;
-    private double fieldE_ = 0;
-    private double fieldF_ = 0;
+    private static final AffineTransform FLIP_X_TRANSFORM = new AffineTransform(-1, 0, 0, 1, 0, 0);
+    private static final AffineTransform FLIP_Y_TRANSFORM = new AffineTransform(1, 0, 0, -1, 0, 0);
+
+    private AffineTransform affineTransform_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, FF, EDGE})
     public SVGMatrix() {
+        affineTransform_ = new AffineTransform();
     }
 
     /**
@@ -52,6 +57,7 @@ public class SVGMatrix extends SimpleScriptable {
      * @param scope the parent scope
      */
     public SVGMatrix(final Window scope) {
+        this();
         setParentScope(scope);
         setPrototype(getPrototype(getClass()));
     }
@@ -62,7 +68,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getA() {
-        return fieldA_;
+        return affineTransform_.getScaleX();
     }
 
     /**
@@ -71,7 +77,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getB() {
-        return fieldB_;
+        return affineTransform_.getShearY();
     }
 
     /**
@@ -80,7 +86,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getC() {
-        return fieldC_;
+        return affineTransform_.getShearX();
     }
 
     /**
@@ -89,7 +95,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getD() {
-        return fieldD_;
+        return affineTransform_.getScaleY();
     }
 
     /**
@@ -98,7 +104,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getE() {
-        return fieldE_;
+        return affineTransform_.getTranslateX();
     }
 
     /**
@@ -107,7 +113,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getF() {
-        return fieldF_;
+        return affineTransform_.getTranslateY();
     }
 
     /**
@@ -116,7 +122,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setA(final double newValue) {
-        fieldA_ = newValue;
+        affineTransform_.setTransform(
+                newValue,
+                affineTransform_.getShearY(),
+                affineTransform_.getShearX(),
+                affineTransform_.getScaleY(),
+                affineTransform_.getTranslateX(),
+                affineTransform_.getTranslateY());
     }
 
     /**
@@ -125,7 +137,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setB(final double newValue) {
-        fieldB_ = newValue;
+        affineTransform_.setTransform(
+                affineTransform_.getScaleX(),
+                newValue,
+                affineTransform_.getShearX(),
+                affineTransform_.getScaleY(),
+                affineTransform_.getTranslateX(),
+                affineTransform_.getTranslateY());
     }
 
     /**
@@ -134,7 +152,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setC(final double newValue) {
-        fieldC_ = newValue;
+        affineTransform_.setTransform(
+                affineTransform_.getScaleX(),
+                affineTransform_.getShearY(),
+                newValue,
+                affineTransform_.getScaleY(),
+                affineTransform_.getTranslateX(),
+                affineTransform_.getTranslateY());
     }
 
     /**
@@ -143,7 +167,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setD(final double newValue) {
-        fieldD_ = newValue;
+        affineTransform_.setTransform(
+                affineTransform_.getScaleX(),
+                affineTransform_.getShearY(),
+                affineTransform_.getShearX(),
+                newValue,
+                affineTransform_.getTranslateX(),
+                affineTransform_.getTranslateY());
     }
 
     /**
@@ -152,7 +182,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setE(final double newValue) {
-        fieldE_ = newValue;
+        affineTransform_.setTransform(
+                affineTransform_.getScaleX(),
+                affineTransform_.getShearY(),
+                affineTransform_.getShearX(),
+                affineTransform_.getScaleY(),
+                newValue,
+                affineTransform_.getTranslateY());
     }
 
     /**
@@ -161,7 +197,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setF(final double newValue) {
-        fieldF_ = newValue;
+        affineTransform_.setTransform(
+                affineTransform_.getScaleX(),
+                affineTransform_.getShearY(),
+                affineTransform_.getShearX(),
+                affineTransform_.getScaleY(),
+                affineTransform_.getTranslateX(),
+                newValue);
     }
 
     /**
@@ -172,12 +214,9 @@ public class SVGMatrix extends SimpleScriptable {
     public SVGMatrix flipX() {
         final SVGMatrix result = new SVGMatrix(getWindow());
 
-        result.setA(fieldA_ * -1);
-        result.setB(fieldB_ * -1);
-        result.setC(fieldC_);
-        result.setD(fieldD_);
-        result.setE(fieldE_);
-        result.setF(fieldF_);
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.concatenate(FLIP_X_TRANSFORM);
+        result.affineTransform_ = tr;
 
         return result;
     }
@@ -190,12 +229,9 @@ public class SVGMatrix extends SimpleScriptable {
     public SVGMatrix flipY() {
         final SVGMatrix result = new SVGMatrix(getWindow());
 
-        result.setA(fieldA_);
-        result.setB(fieldB_);
-        result.setC(fieldC_ * -1);
-        result.setD(fieldD_ * -1);
-        result.setE(fieldE_);
-        result.setF(fieldF_);
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.concatenate(FLIP_Y_TRANSFORM);
+        result.affineTransform_ = tr;
 
         return result;
     }
@@ -206,7 +242,17 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix inverse() {
-        return new SVGMatrix(getWindow());
+        try {
+            final SVGMatrix result = new SVGMatrix(getWindow());
+
+            result.affineTransform_ = affineTransform_.createInverse();
+
+            return result;
+        }
+        catch (final NoninvertibleTransformException e) {
+            throw ScriptRuntime.constructError("Error",
+                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.");
+        }
     }
 
     /**
@@ -216,7 +262,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix multiply(final SVGMatrix by) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.concatenate(by.affineTransform_);
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -226,7 +278,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix rotate(final double angle) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.rotate(Math.toRadians(angle));
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -237,7 +295,18 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix rotateFromVector(final double x, final double y) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        if (x == 0 || y == 0) {
+            throw ScriptRuntime.constructError("Error",
+                    "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.");
+        }
+
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.rotate(Math.atan2(y, x));
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -249,12 +318,9 @@ public class SVGMatrix extends SimpleScriptable {
     public SVGMatrix scale(final double factor) {
         final SVGMatrix result = new SVGMatrix(getWindow());
 
-        result.setA(fieldA_ * factor);
-        result.setB(fieldB_ * factor);
-        result.setC(fieldC_ * factor);
-        result.setD(fieldD_ * factor);
-        result.setE(fieldE_);
-        result.setF(fieldF_);
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.scale(factor, factor);
+        result.affineTransform_ = tr;
 
         return result;
     }
@@ -267,7 +333,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix scaleNonUniform(final double factorX, final double factorY) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.scale(factorX, factorY);
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -277,7 +349,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix skewX(final double angle) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.concatenate(AffineTransform.getShearInstance(Math.tan(Math.toRadians(angle)), 0));
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -287,7 +365,13 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix skewY(final double angle) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.concatenate(AffineTransform.getShearInstance(0, Math.tan(Math.toRadians(angle))));
+        result.affineTransform_ = tr;
+
+        return result;
     }
 
     /**
@@ -298,6 +382,12 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix translate(final double x, final double y) {
-        return new SVGMatrix(getWindow()); // TODO: this is wrong, compute it!
+        final SVGMatrix result = new SVGMatrix(getWindow());
+
+        final AffineTransform tr = (AffineTransform) affineTransform_.clone();
+        tr.translate(x, y);
+        result.affineTransform_ = tr;
+
+        return result;
     }
 }

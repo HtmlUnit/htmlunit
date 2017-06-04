@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="add" dev="rbri" >
+                JavaScript: SVGMatrix operations (flipX, flipY, inverse, multiply, rotate, rotateFromVector,
+                            scale, scaleNonUniform, skewX, skewY, translate) implemented.
+            </action>
         </release>
         <release version="2.27" date="June 4, 2017" description="FF52, Bugfixes">
             <action type="add" dev="asashour" issue="44336828" system="stackoverflow">
