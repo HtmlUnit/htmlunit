@@ -55,14 +55,17 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
 import com.steadystate.css.parser.CSSOMParser;
 import com.steadystate.css.parser.SACParserCSS3;
 
@@ -941,8 +944,46 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (o instanceof SimpleScriptable) {
                 scriptObject_ = ((SimpleScriptable) o).makeScriptableFor(this);
             }
+            else {
+                scriptObject_ = ((SimpleScriptObject) o).makeScriptableFor(this);
+            }
         }
         return (T) scriptObject_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
+     *
+     * The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * a DOM node's JavaScript object should not have to check if they should create it first.
+     *
+     * @return the JavaScript object that corresponds to this node
+     */
+    public ScriptObject getScriptObject2() {
+        if (scriptObject_ == null) {
+            final SgmlPage page = getPage();
+            if (this == page) {
+                final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
+                // because this is a strange case we like to provide as many info as possible
+                msg.append(" class: '");
+                msg.append(page.getClass().getName());
+                msg.append("'");
+                try {
+                    msg.append(" url: '").append(page.getUrl()).append('\'');
+                    msg.append(" content: ");
+                    msg.append(page.getWebResponse().getContentAsString());
+                }
+                catch (final Exception e) {
+                    // ok bad luck with detail
+                    msg.append(" no details: '").append(e).append('\'');
+                }
+                throw new IllegalStateException(msg.toString());
+            }
+            scriptObject_ = ((SimpleScriptObject) page.getScriptObject2()).makeScriptableFor(this);
+        }
+        return (ScriptObject) scriptObject_;
     }
 
     /**
@@ -1995,6 +2036,16 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return {@code false} if the event can't be applied
      */
     public boolean handles(final Event event) {
+        return true;
+    }
+
+    /**
+     * Indicates if the provided event can be applied to this node.
+     * Overwrite this.
+     * @param event the event
+     * @return {@code false} if the event can't be applied
+     */
+    public boolean handles(final Event2 event) {
         return true;
     }
 

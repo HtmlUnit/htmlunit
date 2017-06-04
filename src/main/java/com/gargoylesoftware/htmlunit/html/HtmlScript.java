@@ -34,11 +34,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement2;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -242,6 +246,11 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
                 }
+                else {
+                    jsDoc = (HTMLDocument2) Window2.getDocument(getPage().getEnclosingWindow().getScriptableObject());
+                    ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
+                            && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
+                }
 
                 try {
                     executeScriptIfNeeded();
@@ -249,6 +258,9 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 finally {
                     if (jsDoc instanceof HTMLDocument) {
                         ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(false);
+                    }
+                    else if (jsDoc instanceof HTMLDocument2) {
+                        ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(false);
                     }
                 }
             }
@@ -389,9 +401,16 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     private void executeEvent(final String type) {
         final Object scriptable = getScriptableObject();
-        final HTMLScriptElement script = (HTMLScriptElement) scriptable;
-        final Event event = new Event(this, type);
-        script.executeEventLocally(event);
+        if (scriptable instanceof HTMLScriptElement2) {
+            final HTMLScriptElement2 script = (HTMLScriptElement2) scriptable;
+            final Event2 event = new Event2(this, type);
+            script.executeEventLocally(event);
+        }
+        else {
+            final HTMLScriptElement script = (HTMLScriptElement) scriptable;
+            final Event event = new Event(this, type);
+            script.executeEventLocally(event);
+        }
     }
 
     /**
