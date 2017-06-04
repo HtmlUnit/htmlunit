@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.ArrayCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.ObjectCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
@@ -493,6 +494,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (browserVersion.hasFeature(STRING_INCLUDES)) {
             ((ScriptableObject) objectPrototype).defineFunctionProperties(new String[] {"getOwnPropertySymbols"},
                     ObjectCustom.class, ScriptableObject.DONTENUM);
+
+            final ScriptableObject arrayPrototype = (ScriptableObject) ScriptRuntime.name(context, window, "Array");
+            ((ScriptableObject) arrayPrototype).defineFunctionProperties(new String[] {"from"},
+                    ArrayCustom.class, ScriptableObject.DONTENUM);
         }
 
         window.setPrototypes(prototypes, prototypesPerJSName);
