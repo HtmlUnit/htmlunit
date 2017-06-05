@@ -537,14 +537,16 @@ public class AbstractList extends SimpleScriptable implements Function {
     protected void addElementIds(final List<String> idList, final List<DomNode> elements) {
         int index = 0;
         for (final DomNode next : elements) {
-            final DomElement element = (DomElement) next;
-            final String name = element.getAttribute("name");
-            if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                idList.add(name);
-            }
-            final String id = element.getId();
-            if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
-                idList.add(id);
+            if (next instanceof DomElement) {
+                final DomElement element = (DomElement) next;
+                final String name = element.getAttribute("name");
+                if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
+                    idList.add(name);
+                }
+                final String id = element.getId();
+                if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
+                    idList.add(id);
+                }
             }
             if (!getBrowserVersion().hasFeature(JS_NODE_LIST_ENUMERATE_FUNCTIONS)) {
                 idList.add(Integer.toString(index));
