@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>7.7</checkstyle.version>
+        <checkstyle.version>7.8.1</checkstyle.version>
     </properties>
 
     <build>
