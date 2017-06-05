@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STAC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_PROTOTYPE_OF_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
@@ -358,6 +360,10 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
             case Context.FEATURE_HTMLUNIT_GET_PROTOTYPE_OF_STRING:
                 return browserVersion_.hasFeature(JS_GET_PROTOTYPE_OF_STRING);
+            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
+                return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
+            case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:
+                return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NEW_LINE);
             default:
                 return super.hasFeature(cx, featureIndex);
         }

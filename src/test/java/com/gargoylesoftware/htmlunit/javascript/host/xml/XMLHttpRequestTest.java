@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -1589,7 +1590,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "true", "true"})
-    @NotYetImplemented
+    @NotYetImplemented(FF52)
     public void getOwnPropertyDescriptor() throws Exception {
         final String html =
               "<html>\n"
@@ -1636,7 +1637,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                     "function() { return !0 }",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "true", "true"})
-    @NotYetImplemented
     public void defineProperty() throws Exception {
         final String html =
               "<html>\n"
@@ -1676,7 +1676,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object XMLHttpRequestPrototype]",
             CHROME = "[object XMLHttpRequest]")
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void defineProperty2() throws Exception {
         final String html =
               "<html>\n"
