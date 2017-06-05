@@ -1114,7 +1114,7 @@ public enum BrowserVersionFeatures {
     /** Indicates that the {@code pre.width} is string. */
     @BrowserFeature(IE)
     JS_PRE_WIDTH_STRING,
-    
+
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, IE})
     JS_PROPERTY_DESCRIPTOR_NAME,
