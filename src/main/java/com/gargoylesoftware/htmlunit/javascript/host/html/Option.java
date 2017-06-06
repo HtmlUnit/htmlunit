@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -48,16 +46,5 @@ public class Option extends HTMLOptionElement {
             return "[object " + getClassName() + "]";
         }
         return super.getDefaultValue(hint);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getClassName() {
-        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_OPTION_HTML_OPTION_ELEMENT)) {
-            return "HTMLOptionElement";
-        }
-        return super.getClassName();
     }
 }

@@ -917,13 +917,6 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
-     * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
-     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
-     */
-    @BrowserFeature(CHROME)
-    JS_IMAGE_HTML_IMAGE_ELEMENT,
-
-    /**
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
      * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
      */
@@ -1075,13 +1068,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
     @BrowserFeature({CHROME, IE})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
-
-    /**
-     * Is class name of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
-     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
-     */
-    @BrowserFeature(CHROME)
-    JS_OPTION_HTML_OPTION_ELEMENT,
 
     /**
      * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
