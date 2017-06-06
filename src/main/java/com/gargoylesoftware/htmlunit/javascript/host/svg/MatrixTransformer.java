@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
+import java.io.Serializable;
+
 /**
  * Interface redirection to support GAE also.
  *
@@ -124,7 +126,7 @@ public interface MatrixTransformer {
      * Matrix value object.
      *
      */
-    final class SvgMatrix {
+    final class SvgMatrix implements Serializable {
         private double shearX_;
         private double shearY_;
         private double scaleX_;
