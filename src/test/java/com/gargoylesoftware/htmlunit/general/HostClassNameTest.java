@@ -136,7 +136,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(CHROME = "function Audio() { [native code] }",
             IE = "\nfunction Audio() {\n    [native code]\n}\n",
             FF = "function Audio() {\n    [native code]\n}")
-    @NotYetImplemented(CHROME)
     public void audio() throws Exception {
         test("Audio");
     }
