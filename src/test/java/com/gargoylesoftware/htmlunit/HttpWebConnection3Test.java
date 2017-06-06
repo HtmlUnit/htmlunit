@@ -44,7 +44,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Host", "Connection", "Accept", "User-Agent", "Accept-Encoding", "Accept-Language"},
+    @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
+                        "Accept", "Accept-Encoding", "Accept-Language"},
             FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection"},
             IE = {"Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection"})
     @NotYetImplemented(IE)
@@ -84,12 +85,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language",
-                "Cookie"},
+    @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
+                        "Accept", "Referer", "Accept-Encoding", "Accept-Language",
+                        "Cookie"},
             FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
-                "Connection"},
+                        "Connection"},
             IE = {"Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
-                "Cookie"})
+                        "Cookie"})
     @NotYetImplemented(IE)
     public void headers_cookie_referer() throws Exception {
         final String htmlResponse = "<a href='2.html'>Click me</a>";
