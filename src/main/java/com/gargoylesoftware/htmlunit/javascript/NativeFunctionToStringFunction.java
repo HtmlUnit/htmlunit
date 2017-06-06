@@ -67,12 +67,19 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final String s = (String) super.call(cx, scope, thisObj, args);
-
         if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
             return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
-        return s;
+
+        final int start = s.indexOf('{') + 1;
+        final int end = s.lastIndexOf('}');
+        String body = s.substring(start, end).trim();
+        if (body.endsWith(";")) {
+            body = body.substring(0, body.length() - 1);
+        }
+        
+        return s.substring(0,  start).replace(" ()", "()") + ' ' + body + " }";
     }
 
     static class NativeFunctionToStringFunctionChrome extends FunctionWrapper {
@@ -88,11 +95,13 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
-            if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
-                final String functionName = ((BaseFunction) thisObj).getFunctionName();
-                return "function " + functionName + "() { [native code] }";
+            final int start = s.indexOf('{') + 1;
+            final int end = s.lastIndexOf('}');
+            String body = s.substring(start, end).trim();
+            if (body.endsWith(";")) {
+                body = body.substring(0, body.length() - 1);
             }
-            return s;
+            return s.substring(0,  start) + ' ' + body + " }";
         }
     }
 }
