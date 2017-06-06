@@ -18,7 +18,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 
 /**
- * {@link MatrixTransformer} that uses awt {@link AffineTransform}.
+ * {@link MatrixTransformer} that uses AWT {@link AffineTransform}.
  *
  * @author Ronald Brill
  */
@@ -32,7 +32,7 @@ public class AwtMatrixTransformer implements MatrixTransformer {
     public AwtMatrixTransformer() {
     }
 
-    private AffineTransform toAffineTransform(final SvgMatrix svgMatrix) {
+    private static AffineTransform toAffineTransform(final SvgMatrix svgMatrix) {
         return new AffineTransform(
                 svgMatrix.getScaleX(),
                 svgMatrix.getShearY(),
@@ -40,10 +40,9 @@ public class AwtMatrixTransformer implements MatrixTransformer {
                 svgMatrix.getScaleY(),
                 svgMatrix.getTranslateX(),
                 svgMatrix.getTranslateY());
-
     }
 
-    private SvgMatrix toSvgMatrix(final AffineTransform affineTransform) {
+    private static SvgMatrix toSvgMatrix(final AffineTransform affineTransform) {
         return new SvgMatrix(
                 affineTransform.getShearX(),
                 affineTransform.getShearY(),
