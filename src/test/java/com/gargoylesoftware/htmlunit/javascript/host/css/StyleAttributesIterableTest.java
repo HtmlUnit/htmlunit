@@ -749,6 +749,36 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PLACE_CONTENT() throws Exception {
+        test("placeContent");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PLACE_ITEMS() throws Exception {
+        test("placeItems");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _PLACE_SELF() throws Exception {
+        test("placeSelf");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             IE = "true")
     public void _PIXEL_WIDTH() throws Exception {
         test("pixelWidth");

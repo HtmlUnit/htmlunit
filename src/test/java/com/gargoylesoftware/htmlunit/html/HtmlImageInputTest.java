@@ -50,7 +50,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§?button.x=0&button.y=0",
-            CHROME = "§§URL§§?button.x=9&button.y=7&button=foo",
+            CHROME = "§§URL§§?button.x=8&button.y=7&button=foo",
             IE = "§§URL§§?button.x=14&button.y=15")
     @NotYetImplemented({CHROME, IE})
     public void click_NoPosition() throws Exception {

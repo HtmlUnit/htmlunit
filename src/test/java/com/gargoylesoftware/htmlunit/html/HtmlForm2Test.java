@@ -339,7 +339,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    @Alerts(CHROME = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "text/html, application/xhtml+xml, */*")
     public void acceptHeader() throws Exception {
@@ -388,7 +388,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "gzip, deflate",
-            CHROME = "gzip, deflate, sdch, br")
+            CHROME = "gzip, deflate, br")
     @NotYetImplemented(CHROME)
     public void acceptEncodingHeader() throws Exception {
         final String html
