@@ -133,7 +133,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function HTMLAudioElement() { [native code] }",
+    @Alerts(CHROME = "function Audio() { [native code] }",
             IE = "\nfunction Audio() {\n    [native code]\n}\n",
             FF = "function Audio() {\n    [native code]\n}")
     @NotYetImplemented(CHROME)
@@ -1191,7 +1191,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "function HTMLImageElement() { [native code] }",
+    @Alerts(CHROME = "function Image() { [native code] }",
             EDGE = "function Image() { [native code] }",
             FF = "function Image() {\n    [native code]\n}",
             IE = "\nfunction Image() {\n    [native code]\n}\n")
@@ -1477,7 +1477,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function HTMLOptionElement() { [native code] }",
+    @Alerts(CHROME = "function Option() { [native code] }",
             EDGE = "function Option() { [native code] }",
             FF = "function Option() {\n    [native code]\n}",
             IE = "\nfunction Option() {\n    [native code]\n}\n")
@@ -10877,7 +10877,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationConnectionList() { [native code] }")
     public void presentationConnectionList() throws Exception {
         test("PresentationConnectionList");
     }
@@ -11105,7 +11106,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PresentationReceiver() { [native code] }")
     public void presentationReceiver() throws Exception {
         test("PresentationReceiver");
     }

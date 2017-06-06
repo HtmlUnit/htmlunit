@@ -689,7 +689,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onunhandledrejection,"
                 + "onunload,onvolumechange,onwaiting,"
                 + "onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,"
-                + "onwheel,open(),openDatabase(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,"
+                + "onwheel,open(),openDatabase(),opener,origin,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,"
                 + "performance,PERSISTENT,personalbar,postMessage(),print(),process(),prompt(),releaseEvents(),"
                 + "removeEventListener(),requestAnimationFrame(),requestIdleCallback(),"
                 + "resizeBy(),resizeTo(),screen,screenLeft,screenTop,"
