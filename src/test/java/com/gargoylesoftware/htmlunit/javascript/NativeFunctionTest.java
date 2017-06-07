@@ -109,9 +109,6 @@ public class NativeFunctionTest extends WebDriverTestCase {
     }
 
     /**
-     * For the first test of this kind, we take a special case to have
-     * correct expectations for IE as IE (at least IE6) seems to just return
-     * the original string.
      * @throws Exception if the test fails
      */
     @Test

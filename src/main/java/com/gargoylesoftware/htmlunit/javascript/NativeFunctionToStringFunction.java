@@ -72,6 +72,10 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
             return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
 
+        if (s.startsWith("function anonymous()")) {
+            return s;
+        }
+
         final int start = s.indexOf('{') + 1;
         final int end = s.lastIndexOf('}');
         String body = s.substring(start, end).trim();
@@ -95,6 +99,9 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
+            if (s.startsWith("function anonymous()")) {
+                return s;
+            }
             final int start = s.indexOf('{') + 1;
             final int end = s.lastIndexOf('}');
             String body = s.substring(start, end).trim();
