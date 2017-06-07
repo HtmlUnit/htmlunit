@@ -246,7 +246,7 @@ public enum BrowserVersionFeatures {
     EVENT_TYPE_POINTEREVENT,
 
     /** Supports event type 'ProgressEvent'. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature(IE)
     EVENT_TYPE_PROGRESSEVENT,
 
     /** For new pages the focus points to the body node. */
