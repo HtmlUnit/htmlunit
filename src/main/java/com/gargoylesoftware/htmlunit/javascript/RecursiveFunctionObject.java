@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_HTML_IMAGE_ELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_HTML_OPTION_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
 import java.lang.reflect.Member;
@@ -109,18 +107,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     public String getFunctionName() {
         final String functionName = super.getFunctionName();
         switch (functionName) {
-            case "Image":
-                if (getBrowserVersion().hasFeature(JS_IMAGE_HTML_IMAGE_ELEMENT)) {
-                    return "HTMLImageElement";
-                }
-                break;
-
-            case "Option":
-                if (getBrowserVersion().hasFeature(JS_OPTION_HTML_OPTION_ELEMENT)) {
-                    return "HTMLOptionElement";
-                }
-                break;
-
             case "V8BreakIterator":
                 return "v8BreakIterator";
 
