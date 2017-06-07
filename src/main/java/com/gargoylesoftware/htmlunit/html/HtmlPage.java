@@ -853,7 +853,7 @@ public class HtmlPage extends SgmlPage {
      *
      * The HTML specification seems to indicate that one accesskey cannot be used
      * for multiple elements however Internet Explorer does seem to support this.
-     * It's worth noting that Mozilla does not support multiple elements with one
+     * It's worth noting that Firefox does not support multiple elements with one
      * access key so you are making your HTML browser specific if you rely on this
      * feature.<p>
      *

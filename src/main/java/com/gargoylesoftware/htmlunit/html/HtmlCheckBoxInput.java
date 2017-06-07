@@ -51,7 +51,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
 
     /**
      * Creates an instance.
-     * If no value is specified, it is set to "on" as browsers do (e.g. IE6 and Mozilla 1.7)
+     * If no value is specified, it is set to "on" as browsers do
      * even if spec says that it is not allowed
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
      *
@@ -61,7 +61,6 @@ public class HtmlCheckBoxInput extends HtmlInput {
      */
     HtmlCheckBoxInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         // fix the default value in case we have set it
@@ -167,8 +166,7 @@ public class HtmlCheckBoxInput extends HtmlInput {
     }
 
     /**
-     * Both IE and Mozilla will first update the internal state of checkbox
-     * and then handle "onclick" event.
+     * First update the internal state of checkbox and then handle "onclick" event.
      * {@inheritDoc}
      */
     @Override

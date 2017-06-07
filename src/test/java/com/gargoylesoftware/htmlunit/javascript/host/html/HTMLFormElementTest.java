@@ -835,7 +835,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPageWithAlerts2(html);
         driver.findElement(By.id("x")).click();
-        // caution: IE7 doesn't put a trailing "?"
         assertEquals(URL_FIRST + expectedFile, driver.getCurrentUrl().replaceAll("\\?", ""));
     }
 
@@ -1136,7 +1135,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
     /**
      * Ensure that Multipart form text fields are correctly encoded.
-     * This was a regression introduced in 2.12-SNAPSHOT after upgrading to HttpClient to 4.3.
      * @throws Exception if the test fails
      */
     @Test

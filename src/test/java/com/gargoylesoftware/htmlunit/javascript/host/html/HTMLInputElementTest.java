@@ -875,7 +875,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
     /**
      * Inputs have properties not only from there own type.
-     * Works with Mozilla, Firefox and IE... but not with HtmlUnit now.
      * @throws Exception if the test fails
      */
     @Test

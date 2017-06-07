@@ -945,7 +945,6 @@ public class EventTest extends WebDriverTestCase {
 
     /**
      * Test that the function open resolves to document.open within a handler defined by an attribute.
-     * This was wrong (even in unit tests) up to HtmlUnit-2.12.
      * @throws Exception if the test fails
      */
     @Test

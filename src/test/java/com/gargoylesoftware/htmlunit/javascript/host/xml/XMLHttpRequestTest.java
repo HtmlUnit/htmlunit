@@ -108,7 +108,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests Mozilla and IE style object creation.
+     * Tests style object creation.
      * @throws Exception if the test fails
      */
     @Test

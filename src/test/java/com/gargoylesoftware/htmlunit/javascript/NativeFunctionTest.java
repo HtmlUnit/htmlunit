@@ -144,7 +144,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
     }
 
     /**
-     * Function properties "arguments" and "caller" were wrongly enumerated as of HtmlUnit-2.11.
+     * Function properties "arguments" and "caller" were wrongly enumerated.
      * @throws Exception if the test fails
      */
     @Test

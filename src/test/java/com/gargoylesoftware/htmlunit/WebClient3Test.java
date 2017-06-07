@@ -115,8 +115,7 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     /**
-     * Was causing a "java.net.URISyntaxException: Malformed escape pair"
-     * as of HtmlUnit-2.12-SNAPSHOT on Nov. 29, 2012.
+     * Was causing a "java.net.URISyntaxException: Malformed escape pair".
      * HtmlUnit now escapes the "%%" to "%25%25" to build a valid URL but FF doesn't care
      * and sends the invalid "%%" sequence as it.
      * This will be quite difficult to simulate FF here as HttpClient's HttpRequestBase
@@ -135,8 +134,7 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     /**
-     * Was causing a "java.net.URISyntaxException: Malformed escape pair"
-     * as of HtmlUnit-2.12-SNAPSHOT on Nov. 29, 2012.
+     * Was causing a "java.net.URISyntaxException: Malformed escape pair".
      * This is a simplified version of {@link #escapeRequestQuery2a()} only testing
      * that no exception is thrown. The request performed is not fully correct.
      * This test can be removed once {@link #escapeRequestQuery2a()} runs correctly.
@@ -402,7 +400,6 @@ public class WebClient3Test extends WebDriverTestCase {
 
     /**
      * Test "deflate" encoding without ZLIB header and checksum fields.
-     * This was failing as of HtmlUnit-2.10.
      * @throws Exception if the test fails
      */
     @Test

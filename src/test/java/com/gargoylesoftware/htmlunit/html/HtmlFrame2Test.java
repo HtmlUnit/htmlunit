@@ -238,7 +238,6 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     }
 
     /**
-     * Was failing as of HtmlUnit-2.11.
      * @see <a href="sourceforge.net/p/htmlunit/bugs/1443/">Bug #1443</a>
      * @throws Exception if the test fails
      */

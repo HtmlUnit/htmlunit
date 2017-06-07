@@ -1130,8 +1130,6 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * This was causing HtmlUnit to hang as of HtmlUnit-2.12 snapshot from 24.01.2013 and probably since a very long
-     * time.
      * The reason was that "top" evaluate to WindowProxy and "Object(top)" was setting the top scope as parentScope
      * of the WindowProxy which was setting it on the Window where it should always be null.
      * @throws Exception if the test fails
@@ -1186,7 +1184,7 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * As of 2.12-SNAPSHOT on 19.02.2013, a task started by setTimeout in an event handler could be executed before
+     * As of 19.02.2013, a task started by setTimeout in an event handler could be executed before
      * all events handlers have been executed due to a missing synchronization.
      * @throws Exception if the test fails
      */

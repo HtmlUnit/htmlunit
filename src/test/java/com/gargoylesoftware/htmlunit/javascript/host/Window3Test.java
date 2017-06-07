@@ -1065,12 +1065,12 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
-     * Tests Mozilla viewport properties.
+     * Tests viewport properties.
      * @throws Exception if the test fails
      */
     @Test
     @Alerts({"number", "number", "number", "number"})
-    public void mozillaViewport() throws Exception {
+    public void viewport() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head></head>\n"

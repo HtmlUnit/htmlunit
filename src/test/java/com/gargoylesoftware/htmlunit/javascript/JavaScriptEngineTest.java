@@ -169,9 +169,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     /**
      * If a reference has been hold on a page and the page is not
      * anymore the one contained in "its" window, JavaScript should not be executed.
-     * Up to HtmlUnit-2.10 it could work a little bit without any guarantee but this
-     * has been removed to fix a problem where background JS tasks were still executed
-     * once a page has been unloaded
      * (see {@link com.gargoylesoftware.htmlunit.javascript.host.WindowConcurrencyTest#cleanSetTimeout}).
      * @throws Exception if the test fails
      */
@@ -242,9 +239,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     /**
      * An odd case, if two external scripts are referenced and the &lt;script&gt; element
      * of the first contain a comment which contain an apostrophe, then the second script
-     * is ignored.
-     * https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1990198&group_id=47038
-     * This works fine in IE6 and FF 2.0.  Remove the apostrophe from "shouldn't" to make it work here.
+     * is ignored. Bug #632.
      * @throws Exception if the test fails
      */
     @Test

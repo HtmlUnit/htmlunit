@@ -516,7 +516,7 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test Mozilla DOMContentLoaded event.
+     * Test DOMContentLoaded event.
      * @throws Exception if the test fails
      */
     @Test

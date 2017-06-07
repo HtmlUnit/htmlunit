@@ -3146,7 +3146,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function test() {\n"
             + "  var div1 = document.getElementById('div1');\n"
-            + "  var defined = typeof(div1.filters) != 'undefined';\n" // "unknown" for IE6!!!
+            + "  var defined = typeof(div1.filters) != 'undefined';\n"
             + "  alert(defined ? 'defined' : 'undefined');\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"

@@ -53,7 +53,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
 
     /**
      * Creates an instance.
-     * If no value is specified, it is set to "on" as browsers do (eg IE6 and Mozilla 1.7)
+     * If no value is specified, it is set to "on" as browsers do
      * even if spec says that it is not allowed
      * (<a href="http://www.w3.org/TR/REC-html40/interact/forms.html#adef-value-INPUT">W3C</a>).
      *
@@ -63,7 +63,6 @@ public class HtmlRadioButtonInput extends HtmlInput {
      */
     HtmlRadioButtonInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        // default value for both IE6 and Mozilla 1.7 even if spec says it is unspecified
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         // fix the default value in case we have set it

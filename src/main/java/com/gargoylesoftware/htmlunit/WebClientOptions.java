@@ -244,10 +244,9 @@ public class WebClientOptions implements Serializable {
     /**
      * Enables/disables Applet support. By default, this property is disabled.<br>
      * <p>
-     * Note: as of HtmlUnit-2.4, Applet support is experimental and minimal
+     * Note: Applet support is experimental and minimal
      * </p>
      * @param enabled {@code true} to enable Applet support
-     * @since HtmlUnit-2.4
      */
     public void setAppletEnabled(final boolean enabled) {
         appletEnabled_ = enabled;
@@ -447,7 +446,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Gets the timeout value for the {@link WebConnection}.
-     * The default timeout is 90 seconds (it was 0 up to HtmlUnit-2.11).
+     * The default timeout is 90 seconds.
      * @return the timeout value in milliseconds
      * @see WebClientOptions#setTimeout(int)
      */

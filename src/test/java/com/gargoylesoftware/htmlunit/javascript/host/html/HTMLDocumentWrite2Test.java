@@ -337,8 +337,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     }
 
     /**
-     * This was causing a StackOverflowError in HtmlUnit-2.10-SNAPSHOT when simulating IE as of 14.10.2011
-     * and probably in release 2.9 as well.
+     * This was causing a StackOverflowError.
+     *
      * @throws Exception if an error occurs
      */
     @Test

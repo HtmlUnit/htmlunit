@@ -1526,7 +1526,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns the current refresh handler.
-     * The default refresh handler is a {@link NiceRefreshHandler NiceRefreshHandler(2)} (since HtmlUnit-2.12).
+     * The default refresh handler is a {@link NiceRefreshHandler NiceRefreshHandler(2)}.
      * @return the current RefreshHandler
      */
     public RefreshHandler getRefreshHandler() {

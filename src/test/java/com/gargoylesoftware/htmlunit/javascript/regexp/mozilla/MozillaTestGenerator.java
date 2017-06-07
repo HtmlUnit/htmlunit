@@ -23,7 +23,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Utility for automatically transforming Moalla JavaScript tests to WebDriver test cases.
+ * Utility for automatically transforming Mozilla JavaScript tests to WebDriver test cases.
  *
  * @author Ahmed Ashour
  */

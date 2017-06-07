@@ -197,7 +197,6 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "write" may accept a variable number of arguments.
-     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
@@ -226,7 +225,6 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "writeln" may accept a variable number of arguments.
-     * It's not documented by W3C, Mozilla or MSDN but works with Mozilla and IE.
      * @param context the JavaScript context
      * @param thisObj the scriptable
      * @param args the arguments passed into the method

@@ -601,7 +601,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
 
     /**
      * Test for a case where complete HTML page is set in innerHTML of HTML tag.
-     * IE8 throws JavaScript error as innerHTML of HTML is read only.
      * Others replace the current content of the HTML node by the new one.
      *
      * @throws Exception failure

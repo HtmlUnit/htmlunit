@@ -48,11 +48,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class JavaScriptEngine2Test extends WebDriverTestCase {
 
     /**
-     * All browsers except Opera seem to have a single JS execution thread for all windows,
-     * but it is not the case of HtmlUnit-2.6!
-     * Tested browsers (21.09.09):
-     * - single JS thread: FF2, FF3.1, FF3.5, IE6 (and for info: Konqueror 4.2.2, Chrome Linux dev build)
-     * - multiple JS threads: none of HtmlUnit's simulated browsers (for info Opera 10.00)
+     * All browsers except Opera seem to have a single JS execution thread for all windows.
      * @throws Exception if the test fails
      */
     @Test

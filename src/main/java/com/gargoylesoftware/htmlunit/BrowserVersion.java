@@ -410,7 +410,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF3", "IE6", ...)
+     * @param nickname the short name of the browser (like "FF52", "IE", ...)
      * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,

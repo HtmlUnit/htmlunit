@@ -29,8 +29,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * {@link com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler)}. When
  * no attachment handler has been registered with the <tt>WebClient</tt>, the semantics described
  * above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
- * are not registered with new <tt>WebClient</tt> instances, in order to maintain backwards
- * compatibility with HtmlUnit 2.1 and earlier. This will likely change in the future.</p>
+ * are not registered with new <tt>WebClient</tt> instances.</p>
  *
  * @author Bruce Chapman
  * @author Sudhan Moghe

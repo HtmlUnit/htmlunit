@@ -91,7 +91,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
 
     /**
      * Ensures that Content-Encoding headers are removed when JavaScript is uncompressed.
-     * (was causing java.io.IOException: Not in GZIP format as of HtmlUnit-2.10).
+     * (was causing java.io.IOException: Not in GZIP format).
      * @throws Exception if the test fails
      */
     @Test

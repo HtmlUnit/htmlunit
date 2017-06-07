@@ -1451,7 +1451,7 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts({"10", "20", "30", "40"})
-    public void mozillaViewportSetters() throws Exception {
+    public void viewportSetters() throws Exception {
         final String html = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
