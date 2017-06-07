@@ -889,6 +889,7 @@ public class HttpWebConnection implements WebConnection {
             request.setHeader("Accept-Language", value_);
         }
     }
+
     private static final class UpgradeInsecureRequestHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
         private String value_;
 
