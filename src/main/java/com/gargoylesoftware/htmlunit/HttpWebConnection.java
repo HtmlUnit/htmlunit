@@ -802,6 +802,9 @@ public class HttpWebConnection implements WebConnection {
                 else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
                     list.add(new AcceptEncodingHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
+                else if ("Upgrade-Insecure-Requests".equals(header) && requestHeaders.get(header) != null) {
+                    list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                }
                 else if ("Referer".equals(header) && requestHeaders.get(header) != null) {
                     list.add(new RefererHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
@@ -884,6 +887,18 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader("Accept-Language", value_);
+        }
+    }
+    private static final class UpgradeInsecureRequestHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private String value_;
+
+        UpgradeInsecureRequestHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader("Upgrade-Insecure-Requests", value_);
         }
     }
 

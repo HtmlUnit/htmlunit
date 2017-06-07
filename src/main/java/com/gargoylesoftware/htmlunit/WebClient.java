@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
@@ -1467,6 +1468,10 @@ public class WebClient implements Serializable, AutoCloseable {
         // Add standard HtmlUnit headers.
         if (!wrs.isAdditionalHeader("Accept-Language")) {
             wrs.setAdditionalHeader("Accept-Language", getBrowserVersion().getBrowserLanguage());
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
+                && !wrs.isAdditionalHeader("Upgrade-Insecure-Requests")) {
+            wrs.setAdditionalHeader("Upgrade-Insecure-Requests", "1");
         }
         // Add user-specified headers last so that they can override HtmlUnit defaults.
         wrs.getAdditionalHeaders().putAll(requestHeaders_);

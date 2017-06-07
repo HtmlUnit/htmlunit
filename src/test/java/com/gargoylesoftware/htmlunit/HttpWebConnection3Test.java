@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * Tests using the {@link PrimitiveWebServer}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnection3Test extends WebDriverTestCase {
@@ -46,7 +47,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
                         "Accept", "Accept-Encoding", "Accept-Language"},
-            FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection"},
+            FF45 = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection"},
+            FF52 = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding",
+                        "Connection", "Upgrade-Insecure-Requests"},
             IE = {"Accept", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection"})
     @NotYetImplemented(IE)
     public void headers() throws Exception {
@@ -88,8 +91,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
                         "Accept", "Referer", "Accept-Encoding", "Accept-Language",
                         "Cookie"},
-            FF = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
+            FF45 = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
                         "Connection"},
+            FF52 = {"Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie",
+                        "Connection", "Upgrade-Insecure-Requests"},
             IE = {"Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
                         "Cookie"})
     @NotYetImplemented(IE)

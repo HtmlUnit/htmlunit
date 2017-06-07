@@ -187,7 +187,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_52.setVendor("");
         FIREFOX_52.buildId_ = "20170517122419";
         FIREFOX_52.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"});
         FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         FIREFOX_52.setCssAcceptHeader("text/css,*/*;q=0.1");
 
@@ -213,7 +213,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.setPlatform("MacIntel");
         CHROME.setCpuClass(null);
         CHROME.setHeaderNamesOrdered(new String[] {
-            "Host", "Connection", "Accept", "User-Agent", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
+            "Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent", "Accept", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
         CHROME.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
         CHROME.setImgAcceptHeader("image/webp,image/apng,image/*,*/*;q=0.8");
         CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");
