@@ -10878,6 +10878,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationConnectionList() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void presentationConnectionList() throws Exception {
         test("PresentationConnectionList");
     }
@@ -11107,6 +11108,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PresentationReceiver() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void presentationReceiver() throws Exception {
         test("PresentationReceiver");
     }
