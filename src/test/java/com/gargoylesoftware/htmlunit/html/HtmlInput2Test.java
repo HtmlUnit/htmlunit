@@ -76,6 +76,30 @@ public final class HtmlInput2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function handler() {}", "null"})
+    public void onchangeNull() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + "  function handler() {}\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('myInput');\n"
+            + "    elem.onchange = handler;\n"
+            + "    alert(elem.onchange);\n"
+            + "    elem.onchange = null;\n"
+            + "    alert(elem.onchange);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<body onload=test()>\n"
+            + "  <input id='myInput'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test for the right event sequence when clicking.
      *
      * @throws Exception if the test fails

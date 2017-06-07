@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -234,30 +233,6 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
         loadPage(htmlContent, collectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"function handler() {\n}", "null"})
-    public void onchangeNull() throws Exception {
-        final String html =
-            "<html><head>\n"
-            + "<script>\n"
-            + "  function handler() {}\n"
-            + "  function test() {\n"
-            + "    var elem = document.getElementById('myInput');\n"
-            + "    elem.onchange = handler;\n"
-            + "    alert(elem.onchange);\n"
-            + "    elem.onchange = null;\n"
-            + "    alert(elem.onchange);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "<body onload=test()>\n"
-            + "  <input id='myInput'>\n"
-            + "</body></html>";
-        loadPageWithAlerts(html);
     }
 
     /**
