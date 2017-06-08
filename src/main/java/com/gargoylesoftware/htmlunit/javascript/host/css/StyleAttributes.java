@@ -2399,19 +2399,19 @@ public final class StyleAttributes {
         PIXEL_WIDTH("pixelWidth", "pixel-width", ie("").setIteratable(false)),
 
         /** The style property {@code placeContent}. */
-        PLACE_CONTENT("placeContent", "place-content", chrome("normal normal"), ff52up("").setIteratable(false)),
+        PLACE_CONTENT("placeContent", "place-content", chrome("normal normal"), ff52up("")),
 
         /** The style property {@code place-content}. */
         PLACE_CONTENT_("place-content", "place-content", ff52up("")),
 
         /** The style property {@code placeItems}. */
-        PLACE_ITEMS("placeItems", "place-items", chrome("normal normal"), ff52up("").setIteratable(false)),
+        PLACE_ITEMS("placeItems", "place-items", chrome("normal normal"), ff52up("")),
 
         /** The style property {@code place-items}. */
         PLACE_ITEMS_("place-items", "place-items", ff52up("")),
 
         /** The style property {@code placeSelf}. */
-        PLACE_SELF("placeSelf", "place-self", chrome("normal normal"), ff52up("").setIteratable(false)),
+        PLACE_SELF("placeSelf", "place-self", chrome("normal normal"), ff52up("")),
 
         /** The style property {@code place-self}. */
         PLACE_SELF_("place-self", "place-self", ff52up("")),

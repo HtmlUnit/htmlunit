@@ -748,8 +748,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF45 = "false",
+            IE = "false")
     public void _PLACE_CONTENT() throws Exception {
         test("placeContent");
     }
@@ -758,8 +759,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF45 = "false",
+            IE = "false")
     public void _PLACE_ITEMS() throws Exception {
         test("placeItems");
     }
@@ -768,8 +770,9 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF45 = "false",
+            IE = "false")
     public void _PLACE_SELF() throws Exception {
         test("placeSelf");
     }
