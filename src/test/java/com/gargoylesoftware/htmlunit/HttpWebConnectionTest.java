@@ -51,7 +51,6 @@ import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -556,77 +555,23 @@ public class HttpWebConnectionTest extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Ignore
     public void contentLengthLargerThanContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
-        startWebServer("./", null, servlets);
+        final String response = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2000\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "<html><body><p>visible text</p></body></html>";
 
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthLargerThanContent");
-        assertEquals("visible text", page.asText());
-    }
+        final PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(PORT, response.getBytes());
+        try {
+            primitiveWebServer.start();
 
-    /**
-     * Servlet for {@link #contentLengthLargerThanContent()}.
-     */
-    public static class ContentLengthLargerThanContentServlet extends ServletContentWrapper {
-
-        /** Constructor. */
-        public ContentLengthLargerThanContentServlet() {
-            super("<html>\n"
-                + "<body>\n"
-                + "  <p>visible text</p>\n"
-                + "</body>\n"
-                + "</html>");
+            final WebClient client = getWebClient();
+            final HtmlPage page = client.getPage("http://localhost:" + PORT);
+            assertEquals("visible text", page.asText());
         }
-
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException, ServletException {
-            response.setContentLength(getContentLength() + 42);
-            super.doGet(request, response);
-        }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Ignore
-    public void contentLengthLargerThanContentLargeContent() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/contentLengthLargerThanContent", ContentLengthLargerThanContentServlet.class);
-        startWebServer("./", null, servlets);
-
-        final WebClient client = getWebClient();
-        final HtmlPage page = client.getPage(URL_FIRST + "contentLengthLargerThanContent");
-        assertEquals("visible text", page.asText());
-    }
-
-    /**
-     * Servlet for {@link #contentLengthLargerThanContentLargeContent()}.
-     */
-    public static class ContentLengthLargerThanContentLargeContentServlet extends ServletContentWrapper {
-
-        /** Constructor. */
-        public ContentLengthLargerThanContentLargeContentServlet() {
-            super("<html>\n"
-                    + "<body>\n"
-                    + "  <p>"
-                    + StringUtils.repeat("HtmlUnit  ", 1024 * 1024)
-                    + "</p>\n"
-                    + "  <p>visible text</p>\n"
-                    + "  <p>missing text</p>\n"
-                    + "</body>\n"
-                    + "</html>");
-        }
-
-        @Override
-        protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
-            throws IOException, ServletException {
-            response.setContentLength(getContentLength() + 2000);
-            super.doGet(request, response);
+        finally {
+            primitiveWebServer.stop();
         }
     }
 
