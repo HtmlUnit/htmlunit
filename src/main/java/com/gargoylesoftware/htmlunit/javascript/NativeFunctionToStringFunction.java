@@ -82,7 +82,7 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
         if (body.endsWith(";")) {
             body = body.substring(0, body.length() - 1);
         }
-        
+
         return s.substring(0,  start).replace(" ()", "()") + ' ' + body + " }";
     }
 
