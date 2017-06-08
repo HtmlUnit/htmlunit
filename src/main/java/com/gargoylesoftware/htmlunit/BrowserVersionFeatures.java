@@ -1335,16 +1335,16 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /**
-     * Difference of window.outer/inner height is 63.
-     */
-    @BrowserFeature(IE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
-
-    /**
      * Difference of window.outer/inner height is 89.
      */
     @BrowserFeature(CHROME)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
+
+    /**
+     * Difference of window.outer/inner height is 63.
+     */
+    @BrowserFeature(IE)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
 
     /**
      * Difference of window.outer/inner height is 94.
