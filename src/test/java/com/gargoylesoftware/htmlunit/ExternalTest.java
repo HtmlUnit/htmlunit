@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "2.29";
+    static String CHROME_DRIVER_ = "2.30";
 
     private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm", Locale.ROOT);
 
