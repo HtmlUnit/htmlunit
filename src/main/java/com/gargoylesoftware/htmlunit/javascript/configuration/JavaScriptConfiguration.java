@@ -626,7 +626,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
      */
     public static synchronized JavaScriptConfiguration getInstance(final BrowserVersion browserVersion) {
         if (browserVersion == null) {
-            throw new IllegalStateException("BrowserVersion must be defined");
+            throw new IllegalArgumentException("BrowserVersion must be provided");
         }
         JavaScriptConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion);
 
