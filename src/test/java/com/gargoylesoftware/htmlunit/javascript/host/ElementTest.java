@@ -873,7 +873,6 @@ public class ElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"§§URL§§", "§§URL§§"},
-            CHROME = {"null", "§§URL§§"},
             IE = {"undefined", "undefined"})
     public void baseURI() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><title>foo</title><script>\n"

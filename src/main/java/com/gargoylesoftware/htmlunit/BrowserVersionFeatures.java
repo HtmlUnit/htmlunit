@@ -828,10 +828,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT,
 
-    /** Element.baseURI is null for XML element. */
-    @BrowserFeature(CHROME)
-    JS_ELEMENT_BASE_URL_NULL,
-
     /** Indicates that attributeNS returns an empty string instead of null if not found. */
     @BrowserFeature(IE)
     JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
