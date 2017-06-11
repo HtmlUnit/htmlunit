@@ -442,7 +442,8 @@ public final class HTMLParser {
          * @param url the page's URL
          */
         private HtmlUnitDOMBuilder(final DomNode node, final URL url, final String htmlContent) {
-            super(createConfiguration(node.getPage().getWebClient()));
+            super(createConfiguration(node.getPage().getWebClient().getBrowserVersion()));
+
             page_ = (HtmlPage) node.getPage();
 
             currentNode_ = node;
@@ -452,13 +453,9 @@ public final class HTMLParser {
 
             final WebClient webClient = page_.getWebClient();
             final HTMLParserListener listener = webClient.getHTMLParserListener();
-            final boolean reportErrors;
-            if (listener != null) {
-                reportErrors = true;
+            final boolean reportErrors = listener != null;
+            if (reportErrors) {
                 fConfiguration.setErrorHandler(new HTMLErrorHandler(listener, url, htmlContent));
-            }
-            else {
-                reportErrors = false;
             }
 
             try {
@@ -485,9 +482,8 @@ public final class HTMLParser {
          * @param webClient the current WebClient
          * @return the configuration
          */
-        private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
+        private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
             final HTMLConfiguration configuration = new HTMLConfiguration();
-            final BrowserVersion browserVersion = webClient.getBrowserVersion();
             if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
                         HTMLElements.Element.EMPTY, HTMLElements.BODY, null));
@@ -547,9 +543,6 @@ public final class HTMLParser {
                 return;
             }
 
-            if (namespaceURI != null) {
-                namespaceURI = namespaceURI.trim();
-            }
             if ("head".equals(tagLower)) {
                 if (headParsed_ == HeadParsed.YES || page_.isParsingHtmlSnippet()) {
                     return;
@@ -557,6 +550,11 @@ public final class HTMLParser {
 
                 headParsed_ = lastTagWasSynthesized_ ? HeadParsed.SYNTHESIZED : HeadParsed.YES;
             }
+
+            if (namespaceURI != null) {
+                namespaceURI = namespaceURI.trim();
+            }
+
             // add a head if none was there
             else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
                 final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", true, insideSvg_);
