@@ -96,20 +96,25 @@ public abstract class AbstractJavaScriptConfiguration {
         final BrowserVersion browser) {
         if (browser != null) {
             final SupportedBrowser expectedBrowser;
-            if (browser.equals(BrowserVersion.CHROME)) {
+            if (browser.isChrome()) {
                 expectedBrowser = SupportedBrowser.CHROME;
             }
-            else if (browser.equals(BrowserVersion.INTERNET_EXPLORER)) {
+            else if (browser.isIE()) {
                 expectedBrowser = SupportedBrowser.IE;
             }
-            else if (browser.equals(BrowserVersion.FIREFOX_45)) {
-                expectedBrowser = SupportedBrowser.FF45;
+            else if (browser.isEdge()) {
+                expectedBrowser = SupportedBrowser.EDGE;
             }
-            else if (browser.equals(BrowserVersion.FIREFOX_52)) {
-                expectedBrowser = SupportedBrowser.FF52;
+            else if (browser.isFirefox()) {
+                if (browser.getBrowserVersionNumeric() < 52) {
+                    expectedBrowser = SupportedBrowser.FF45;
+                }
+                else {
+                    expectedBrowser = SupportedBrowser.FF52;
+                }
             }
             else {
-                expectedBrowser = SupportedBrowser.EDGE;
+                expectedBrowser = SupportedBrowser.CHROME;  // our current fallback
             }
 
             final String hostClassName = klass.getName();

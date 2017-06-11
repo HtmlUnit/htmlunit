@@ -42,7 +42,9 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
@@ -54,6 +56,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGloba
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
@@ -275,6 +278,53 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                     + name + "' should be before '" + lastClassName + "'");
             }
             lastClassName = name;
+        }
+    }
+
+    /**
+     * see issue 1890.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void original() throws Exception {
+        final BrowserVersion browserVersion = BrowserVersion.CHROME;
+
+        test(browserVersion);
+    }
+
+    /**
+     * see issue 1890.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cloned() throws Exception {
+        final BrowserVersion browserVersion = BrowserVersion.FIREFOX_45.clone();
+
+        test(browserVersion);
+    }
+
+    /**
+     * see issue 1890.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clonedAndModified() throws Exception {
+        final BrowserVersion browserVersion = BrowserVersion.FIREFOX_45.clone();
+        browserVersion.setUserAgent("foo");
+
+        test(browserVersion);
+    }
+
+    private void test(final BrowserVersion browserVersion) throws IOException {
+        try (WebClient webClient = new WebClient(browserVersion)) {
+            final MockWebConnection conn = new MockWebConnection();
+            conn.setDefaultResponse("<html><body onload='document.body.firstChild'></body></html>");
+            webClient.setWebConnection(conn);
+
+            webClient.getPage("http://localhost/");
         }
     }
 
