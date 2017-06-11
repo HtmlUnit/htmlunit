@@ -484,8 +484,6 @@ public final class HTMLParser {
          */
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
             final HTMLConfiguration configuration = new HTMLConfiguration();
-            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.AREA, "AREA",
-                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
             if (browserVersion.isChrome()) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
