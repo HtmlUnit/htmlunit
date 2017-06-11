@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ISINDEX_TAG;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_MAIN_TAG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.META_X_UA_COMPATIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_WAIT_LOAD_BEFORE_BODY;
@@ -485,15 +488,15 @@ public final class HTMLParser {
         private static XMLParserConfiguration createConfiguration(final WebClient webClient) {
             final HTMLConfiguration configuration = new HTMLConfiguration();
             final BrowserVersion browserVersion = webClient.getBrowserVersion();
-            if (browserVersion.isChrome()) {
+            if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
-                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+                        HTMLElements.Element.EMPTY, HTMLElements.BODY, null));
+            }
+            if (browserVersion.hasFeature(HTML_ISINDEX_TAG)) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
                         HTMLElements.Element.INLINE, HTMLElements.BODY, null));
             }
-            else if (browserVersion.isIE()) {
-                configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
-                        HTMLElements.Element.EMPTY, HTMLElements.HEAD, null));
+            if (browserVersion.hasFeature(HTML_MAIN_TAG)) {
                 configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
                         HTMLElements.Element.INLINE, HTMLElements.BODY, null));
             }

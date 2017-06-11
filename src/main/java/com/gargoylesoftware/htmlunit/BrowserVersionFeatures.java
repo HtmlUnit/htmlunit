@@ -492,6 +492,18 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTML_COLOR_TO_LOWER,
 
+    /** HTML parser supports the 'command' tag. */
+    @BrowserFeature({CHROME, IE})
+    HTML_COMMAND_TAG,
+
+    /** HTML parser supports the 'isindex' tag. */
+    @BrowserFeature(CHROME)
+    HTML_ISINDEX_TAG,
+
+    /** HTML parser supports the 'main' tag. */
+    @BrowserFeature(IE)
+    HTML_MAIN_TAG,
+
     /** Supports &lt;object&gt; {@code classid} attribute. */
     @BrowserFeature(IE)
     HTML_OBJECT_CLASSID,
