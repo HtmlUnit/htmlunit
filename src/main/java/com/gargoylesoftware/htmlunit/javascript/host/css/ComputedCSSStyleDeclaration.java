@@ -1231,7 +1231,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = !super.getHeight().isEmpty();
 
         int defaultHeight;
-        if (node instanceof HtmlDivision && node.getTextContent().trim().isEmpty()) {
+        if (node instanceof HtmlDivision && StringUtils.isBlank(node.getTextContent())) {
             defaultHeight = 0;
         }
         else if (elem.getFirstChild() == null) {

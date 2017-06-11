@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -226,7 +227,7 @@ public class Geolocation extends SimpleScriptable {
                                 }
                             }
                         }
-                        if (line.trim().isEmpty()) {
+                        if (StringUtils.isBlank(line)) {
                             break;
                         }
                     }

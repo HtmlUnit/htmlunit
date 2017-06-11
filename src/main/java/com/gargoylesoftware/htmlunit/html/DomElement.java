@@ -280,6 +280,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             return styleMap_;
         }
 
+        // TODO this should be done by using cssparser also
         for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
             final int index = token.indexOf(":");
             if (index != -1) {
