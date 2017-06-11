@@ -282,7 +282,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     /**
-     * see issue 1890.
+     * See issue 1890.
      *
      * @throws Exception if the test fails
      */
@@ -294,7 +294,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     /**
-     * see issue 1890.
+     * See issue 1890.
      *
      * @throws Exception if the test fails
      */
@@ -306,7 +306,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     }
 
     /**
-     * see issue 1890.
+     * See issue 1890.
      *
      * @throws Exception if the test fails
      */
