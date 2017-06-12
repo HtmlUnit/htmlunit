@@ -49,6 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Interpreter;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -294,6 +295,11 @@ public class Node extends EventTarget {
      * @return the newly added child node
      */
     protected Object insertBeforeImpl(final Object[] args) {
+        if (args.length < 1) {
+            throw ScriptRuntime.constructError("TypeError",
+                    "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 0 present.");
+        }
+
         final Object newChildObject = args[0];
         final Object refChildObject;
         if (args.length > 1) {
@@ -310,17 +316,15 @@ public class Node extends EventTarget {
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
-                throw asJavaScriptException(
-                    new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                        DOMException.HIERARCHY_REQUEST_ERR));
+                throw ScriptRuntime.constructError("ReferenceError",
+                        "Node cannot be inserted at the specified point in the hierarchy");
             }
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
                     if (!isNodeInsertable((Node) child.getScriptableObject())) {
-                        throw asJavaScriptException(
-                            new DOMException("Node cannot be inserted at the specified point in the hierarchy",
-                                DOMException.HIERARCHY_REQUEST_ERR));
+                        throw ScriptRuntime.constructError("ReferenceError",
+                                "Node cannot be inserted at the specified point in the hierarchy");
                     }
                 }
             }
@@ -332,7 +336,8 @@ public class Node extends EventTarget {
                     refChildNode = null;
                 }
                 else {
-                    throw Context.reportRuntimeError("insertBefore: not enough arguments");
+                    throw ScriptRuntime.typeError(
+                            "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 1 present.");
                 }
             }
             else if (refChildObject != null) {
@@ -348,9 +353,7 @@ public class Node extends EventTarget {
                 domNode.insertBefore(newChildNode, refChildNode);
             }
             catch (final org.w3c.dom.DOMException e) {
-                throw asJavaScriptException(
-                        new DOMException(e.getMessage(),
-                            DOMException.HIERARCHY_REQUEST_ERR));
+                throw ScriptRuntime.constructError("ReferenceError", e.getMessage());
             }
             insertedChild = newChild;
         }

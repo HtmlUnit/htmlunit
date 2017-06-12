@@ -762,6 +762,17 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("exception")
+    public void insertBefore_noArgs() throws Exception {
+        insertBefore("aNode.insertBefore();");
+    }
+
+    /**
+     * Regression test to verify that insertBefore correctly appends
+     * the new child object when the reference child object is null.
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception",
             IE = {"3", "SPAN"})
     public void insertBefore_noSecondArg() throws Exception {
