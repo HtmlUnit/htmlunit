@@ -27,6 +27,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -80,6 +81,7 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function handler() {}", "null"})
+    @NotYetImplemented
     public void onchangeNull() throws Exception {
         final String html =
             "<html><head>\n"
