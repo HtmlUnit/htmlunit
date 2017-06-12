@@ -296,7 +296,7 @@ public class Node extends EventTarget {
      */
     protected Object insertBeforeImpl(final Object[] args) {
         if (args.length < 1) {
-            throw ScriptRuntime.constructError("TypeError",
+            throw ScriptRuntime.typeError(
                     "Failed to execute 'insertBefore' on 'Node': 2 arguments required, but only 0 present.");
         }
 
