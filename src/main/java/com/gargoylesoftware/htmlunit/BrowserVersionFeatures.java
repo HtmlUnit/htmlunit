@@ -1081,13 +1081,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, IE})
     JS_OFFSET_PARENT_NULL_IF_FIXED,
 
-    /**
-     * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Option} the same as
-     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
-     */
-    @BrowserFeature({FF, IE})
-    JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION,
-
     /** element.outerHTML handles null value as string "null". */
     @BrowserFeature(IE)
     JS_OUTER_HTML_NULL_AS_STRING,

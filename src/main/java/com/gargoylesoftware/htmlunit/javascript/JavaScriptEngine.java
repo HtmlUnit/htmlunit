@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STAC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
@@ -283,8 +282,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
             }
-            if ("Option".equals(hostClassSimpleName)
-                    && browserVersion.hasFeature(JS_OPTION_PROTOTYPE_SAME_AS_HTML_OPTION)) {
+            if ("Option".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
 
