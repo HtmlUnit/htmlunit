@@ -1638,7 +1638,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                     "function() { return !0 }",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
                     "true", "true"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented
     public void defineProperty() throws Exception {
         final String html =
               "<html>\n"
