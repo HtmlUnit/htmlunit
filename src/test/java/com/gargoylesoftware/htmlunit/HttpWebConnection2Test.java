@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -37,6 +40,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HttpWebConnection2Test extends WebDriverTestCase {
@@ -46,6 +50,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @NotYetImplemented({CHROME, IE})
     public void post() throws Exception {
         final String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -65,14 +70,50 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(null, lastRequest.getProxyHost());
         assertEquals(null, lastRequest.getRequestBody());
         assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
-        final String expectedHeaders = ""
-            + "Connection: keep-alive\n"
-            + "Content-Length: 48\n"
-            + "Content-Type: application/x-www-form-urlencoded\n"
-            + "Host: localhost:" + PORT + "\n"
-            + "Referer: http://localhost:" + PORT + "/\n"
-            + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+
+        String expectedHeaders = "";
+        if (getBrowserVersion().isChrome() || getBrowserVersion().isFirefox()) {
+            expectedHeaders = "Cache-Control: max-age=0\n"
+                                + "Connection: keep-alive\n"
+                                + "Content-Length: 48\n"
+                                + "Content-Type: application/x-www-form-urlencoded\n"
+                                + "Host: localhost:" + PORT + "\n"
+                                + "Origin: http://localhost:" + PORT + "\n"
+                                + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Upgrade-Insecure-Requests: 1\n"
+                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+        }
+        if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().getBrowserVersionNumeric() < 52) {
+                expectedHeaders = "Connection: keep-alive\n"
+                                    + "Content-Length: 48\n"
+                                    + "Content-Type: application/x-www-form-urlencoded\n"
+                                    + "Host: localhost:" + PORT + "\n"
+                                    + "Referer: http://localhost:" + PORT + "/\n"
+                                    + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+            }
+            else {
+                expectedHeaders = "Connection: keep-alive\n"
+                        + "Content-Length: 48\n"
+                        + "Content-Type: application/x-www-form-urlencoded\n"
+                        + "Host: localhost:" + PORT + "\n"
+                        + "Referer: http://localhost:" + PORT + "/\n"
+                        + "Upgrade-Insecure-Requests: 1\n"
+                        + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+            }
+        }
+        if (getBrowserVersion().isIE()) {
+            expectedHeaders = "Cache-Control: no-cache\n"
+                                + "Connection: keep-alive\n"
+                                + "Content-Length: 48\n"
+                                + "Content-Type: application/x-www-form-urlencoded\n"
+                                + "DNT: 1\n"
+                                + "Host: localhost:" + PORT + "\n"
+                                + "Referer: http://localhost:" + PORT + "/\n"
+                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+        }
         assertEquals(expectedHeaders, headersToString(lastRequest));
+
         assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
         assertEquals(HttpMethod.POST, lastRequest.getHttpMethod());
         assertEquals(0, lastRequest.getProxyPort());
