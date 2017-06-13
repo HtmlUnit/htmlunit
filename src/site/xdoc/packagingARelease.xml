@@ -56,7 +56,7 @@
                 <ol>
                     <li>
                     <source>
-mvn -Dmaven.test.skip=true deploy
+mvn clean deploy -Dmaven.test.skip=true
 </source>
                     </li>
                 </ol>
@@ -80,7 +80,7 @@ mvn -Dmaven.test.skip=true deploy
                         Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
                     </li>
                     <li>
-                        Build the zip files
+                        Build the zip files, (clean avoids duplicated pom.xml because of Maven/Eclipse conflicts)
                         <source>mvn -up clean site package</source>
                     </li>
                     <li>
