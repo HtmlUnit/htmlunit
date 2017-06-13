@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
 
 import java.net.MalformedURLException;
@@ -237,8 +240,20 @@ public class HtmlForm extends HtmlElement {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
         request.setCharset(getSubmitCharset());
-        request.setAdditionalHeader("Referer", htmlPage.getUrl()
-                .toExternalForm());
+
+        String referer = htmlPage.getUrl().toExternalForm();
+        request.setAdditionalHeader("Referer", referer);
+        if (browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
+            referer = StringUtils.stripEnd(referer, "/");
+            request.setAdditionalHeader("Origin", referer);
+        }
+        if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
+            request.setAdditionalHeader("Cache-Control", "max-age=0");
+        }
+        if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
+            request.setAdditionalHeader("Cache-Control", "no-cache");
+        }
+
         return request;
     }
 
