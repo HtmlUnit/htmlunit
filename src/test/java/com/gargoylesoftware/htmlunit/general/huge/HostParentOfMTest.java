@@ -2656,8 +2656,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts(DEFAULT = "true")
     public void _Option_HTMLOptionElement() throws Exception {
         // although Option != HTMLOptionElement, they seem to be synonyms!!!
         test("Option", "HTMLOptionElement");
