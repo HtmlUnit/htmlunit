@@ -308,6 +308,48 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void checkAppletCall() throws Exception {
+        if (getBrowserVersion().isChrome()) {
+            return;
+        }
+
+        final URL url = getClass().getResource("/applets/simpleAppletDoIt.html");
+
+        final WebClient webClient = getWebClient();
+        final List<String> collectedStatus = new ArrayList<>();
+        final StatusHandler statusHandler = new StatusHandler() {
+            @Override
+            public void statusMessageChanged(final Page page, final String message) {
+                collectedStatus.add(message);
+            }
+        };
+        webClient.setStatusHandler(statusHandler);
+        webClient.getOptions().setAppletEnabled(true);
+
+        final HtmlPage page = webClient.getPage(url);
+
+        final HtmlTextInput input = page.getHtmlElementById("myInput");
+
+        HtmlButton button = page.getHtmlElementById("callWithoutParams");
+        button.click();
+
+        assertEquals(2, collectedStatus.size());
+        assertEquals("call: 'callSample'", collectedStatus.get(0));
+        assertEquals("  'done'", collectedStatus.get(1));
+        assertEquals("undefined", input.asText());
+
+        button = page.getHtmlElementById("callWithStringParam");
+        button.click();
+
+        assertEquals(4, collectedStatus.size());
+        assertEquals("call: 'callSample'", collectedStatus.get(2));
+        assertEquals("HtmlUnit", input.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void checkAppletExecJs() throws Exception {
         if (getBrowserVersion().isChrome()) {
             return;

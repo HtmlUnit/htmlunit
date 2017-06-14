@@ -64,7 +64,14 @@ public class JSObject {
             LOG.info("JSObject call '" + methodName + "(" + args + ")'");
         }
 
-        throw new RuntimeException("Not yet implemented (netscape.javascript.JSObject.call(String, Object[])).");
+        final Object jsResult = ScriptableObject.callMethod(scriptableObject_, methodName, args);
+        if (jsResult instanceof ScriptableObject) {
+            return new JSObject((ScriptableObject) jsResult);
+        }
+        if (jsResult instanceof ConsString) {
+            return ((ConsString) jsResult).toString();
+        }
+        return jsResult;
     }
 
     /**
