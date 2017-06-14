@@ -50,7 +50,80 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
      */
     @Test
     @NotYetImplemented(IE)
-    public void post() throws Exception {
+    public void formGet() throws Exception {
+        final String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
+            + "<input name='text1' value='me &amp;amp; you'>\n"
+            + "<textarea name='text2'>Hello\nworld!</textarea>\n"
+            + "<input type='submit' id='submit'>\n"
+            + "</form></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(By.id("submit")).click();
+
+        // better would be to look at the HTTP traffic directly
+        // rather than to examine a request that has been rebuilt but...
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+
+        assertSame(ISO_8859_1, lastRequest.getCharset());
+        assertEquals(null, lastRequest.getProxyHost());
+        assertEquals(null, lastRequest.getRequestBody());
+        assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
+
+        String expectedHeaders = "";
+        if (getBrowserVersion().isChrome()) {
+            expectedHeaders = "Connection: keep-alive\n"
+                                + "Host: localhost:" + PORT + "\n"
+                                + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Upgrade-Insecure-Requests: 1\n"
+                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+        }
+        if (getBrowserVersion().isFirefox()) {
+            if (getBrowserVersion().getBrowserVersionNumeric() < 52) {
+                expectedHeaders = "Connection: keep-alive\n"
+                                    + "Host: localhost:" + PORT + "\n"
+                                    + "Referer: http://localhost:" + PORT + "/\n"
+                                    + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+            }
+            else {
+                expectedHeaders = "Connection: keep-alive\n"
+                        + "Host: localhost:" + PORT + "\n"
+                        + "Referer: http://localhost:" + PORT + "/\n"
+                        + "Upgrade-Insecure-Requests: 1\n"
+                        + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+            }
+        }
+        if (getBrowserVersion().isIE()) {
+            expectedHeaders = "Connection: keep-alive\n"
+                                + "DNT: 1\n"
+                                + "Host: localhost:" + PORT + "\n"
+                                + "Referer: http://localhost:" + PORT + "/\n"
+                                + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+        }
+        assertEquals(expectedHeaders, headersToString(lastRequest));
+
+        assertEquals(FormEncodingType.URL_ENCODED, lastRequest.getEncodingType());
+        assertEquals(HttpMethod.GET, lastRequest.getHttpMethod());
+        assertEquals(0, lastRequest.getProxyPort());
+        final List<NameValuePair> parameters = lastRequest.getRequestParameters();
+        assertEquals(2, parameters.size());
+        for (final NameValuePair pair : parameters) {
+            if ("text1".equals(pair.getName())) {
+                assertEquals("me &amp; you", pair.getValue());
+            }
+            else {
+                assertEquals("Hello\r\nworld!", pair.getValue());
+            }
+        }
+    }
+
+    /**
+     * Tests a simple POST request.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @NotYetImplemented(IE)
+    public void formPost() throws Exception {
         final String html = "<html><body><form action='foo' method='post' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
             + "<textarea name='text2'>Hello\nworld!</textarea>\n"
@@ -71,7 +144,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
 
         String expectedHeaders = "";
-        if (getBrowserVersion().isChrome() || getBrowserVersion().isFirefox()) {
+        if (getBrowserVersion().isChrome()) {
             expectedHeaders = "Cache-Control: max-age=0\n"
                                 + "Connection: keep-alive\n"
                                 + "Content-Length: 48\n"

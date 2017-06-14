@@ -243,11 +243,14 @@ public class HtmlForm extends HtmlElement {
 
         String referer = htmlPage.getUrl().toExternalForm();
         request.setAdditionalHeader("Referer", referer);
-        if (browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
+
+        if (HttpMethod.POST == method
+                && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
             referer = StringUtils.stripEnd(referer, "/");
             request.setAdditionalHeader("Origin", referer);
         }
-        if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
+        if (HttpMethod.POST == method
+                && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
             request.setAdditionalHeader("Cache-Control", "max-age=0");
         }
         if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
