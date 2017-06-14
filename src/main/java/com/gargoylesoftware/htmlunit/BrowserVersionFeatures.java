@@ -265,6 +265,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
+    /** Form submit forces an real request also if only the hash was changed. */
+    @BrowserFeature(CHROME)
+    FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
+
     /** Form submit includes the Cache-Control: max-age=0 header. */
     @BrowserFeature(CHROME)
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
@@ -272,10 +276,6 @@ public enum BrowserVersionFeatures {
     /** Form submit includes the Cache-Control: cn-cache header. */
     @BrowserFeature(IE)
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
-
-    /** Form submit forces an real request also if only the hash was changed. */
-    @BrowserFeature(CHROME)
-    FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
     /** Form submit includes the origin header. */
     @BrowserFeature(CHROME)
