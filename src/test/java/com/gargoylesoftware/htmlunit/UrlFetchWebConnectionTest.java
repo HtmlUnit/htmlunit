@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,9 +43,40 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @author Marc Guillemot
  * @author Pieter Herroelen
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class UrlFetchWebConnectionTest extends WebServerTestCase {
+
+    private static final String allowRestrictedHeaders = System.getProperty("sun.net.http.allowRestrictedHeaders");
+
+    /**
+     * Setup jdk / HttpURLConnection
+     * to support all headers (Origin in this case).
+     *
+     * see https://stackoverflow.com/questions/8335501/does-httpurlconnection-censor-some-headers-notably-origin
+     * see https://stackoverflow.com/questions/13255051/
+     * setting-origin-and-access-control-request-method-headers-with-jersey-client
+     */
+    @BeforeClass
+    public static void beforeClass() {
+        System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
+    }
+
+    /**
+     * Saves HTML and PNG files.
+     *
+     * @throws IOException if an error occurs
+     */
+    @AfterClass
+    public static void saveAll() throws IOException {
+        if (allowRestrictedHeaders == null) {
+            System.setProperty("sun.net.http.allowRestrictedHeaders", "false");
+        }
+        else {
+            System.setProperty("sun.net.http.allowRestrictedHeaders", allowRestrictedHeaders);
+        }
+    }
 
     /**
      * Tests a simple GET.
@@ -148,11 +182,14 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
         assertEquals(referenceRequest.getCharset(), newRequest.getCharset());
         assertEquals(referenceRequest.getProxyHost(), newRequest.getProxyHost());
         assertEquals(referenceRequest.getUrl(), newRequest.getUrl());
-        assertEquals(headersToString(referenceRequest), headersToString(newRequest));
         assertEquals(referenceRequest.getEncodingType(), newRequest.getEncodingType());
         assertEquals(referenceRequest.getHttpMethod(), newRequest.getHttpMethod());
         assertEquals(referenceRequest.getProxyPort(), newRequest.getProxyPort());
         assertEquals(referenceRequest.getRequestParameters().toString(), newRequest.getRequestParameters().toString());
+
+        // java U
+        // https://stackoverflow.com/questions/8335501/does-httpurlconnection-censor-some-headers-notably-origin
+        assertEquals(headersToString(referenceRequest), headersToString(newRequest));
     }
 
     private static String headersToString(final WebRequest request) {

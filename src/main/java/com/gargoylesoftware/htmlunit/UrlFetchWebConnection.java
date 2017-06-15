@@ -42,10 +42,15 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Note: this class is experimental and not mature like {@link HttpWebConnection}.
  * It doesn't currently support multipart POST.
  * </p>
+ * <p>This might not use all headers because the JDK ignores/censors some headers (at lease Origin).
+ * You can disable this censorship by setting 'sun.net.http.allowRestrictedHeaders' to true
+ * </p>
  *
  * @author Amit Manjhi
  * @author Marc Guillemot
  * @author Pieter Herroelen
+ * @author Ronald Brill
+ *
  * @since HtmlUnit 2.8
  * @see "http://code.google.com/p/googleappengine/issues/detail?id=3379"
  */
@@ -94,6 +99,9 @@ public class UrlFetchWebConnection implements WebConnection {
             connection.setInstanceFollowRedirects(false);
 
             // copy the headers from WebRequestSettings
+            // this might not copy all headers because the JDK ignores/censors some headers
+            // you can disable this by setting sun.net.http.allowRestrictedHeaders to true
+            // see UrlFetchWebConnectionTest for some links
             for (final Entry<String, String> header : webRequest.getAdditionalHeaders().entrySet()) {
                 connection.addRequestProperty(header.getKey(), header.getValue());
             }
