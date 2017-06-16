@@ -81,6 +81,7 @@ public class NativeNumberTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
