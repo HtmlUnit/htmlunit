@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ArrayCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
+import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.ObjectCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
@@ -497,6 +498,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             ((ScriptableObject) arrayPrototype).defineFunctionProperties(new String[] {"from"},
                     ArrayCustom.class, ScriptableObject.DONTENUM);
         }
+
+        final ScriptableObject numberPrototype
+            = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Number");
+        ((ScriptableObject) numberPrototype).defineFunctionProperties(new String[] {"toLocaleString"},
+                NumberCustom.class, ScriptableObject.DONTENUM);
 
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow);

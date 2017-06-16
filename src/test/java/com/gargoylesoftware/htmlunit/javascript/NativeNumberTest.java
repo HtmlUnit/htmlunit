@@ -22,11 +22,10 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Number is a native JavaScript object and therefore provided by Rhino but some tests are needed here
- * to be sure that we have the expected results (for instance EcmaScript 5 adds methods that are not
- * available in FF2 or FF3).
+ * Number is a native JavaScript object.
  *
  * @author Marc Guillemot
+ * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
 public class NativeNumberTest extends WebDriverTestCase {
@@ -65,6 +64,31 @@ public class NativeNumberTest extends WebDriverTestCase {
     public void toStringRhinoBug538172() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "alert(2.274341322658976E-309);\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12,345")
+    public void toLocaleString() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert((12345).toLocaleString('en'));\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12.345")
+    public void toLocaleStringDe() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert((12345).toLocaleString('de'));\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

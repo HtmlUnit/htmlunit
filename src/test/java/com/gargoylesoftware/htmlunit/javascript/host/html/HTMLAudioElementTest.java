@@ -170,4 +170,5 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
-    }}
+    }
+}
