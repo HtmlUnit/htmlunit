@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeNumberTest extends WebDriverTestCase {
@@ -90,6 +91,36 @@ public class NativeNumberTest extends WebDriverTestCase {
     public void toLocaleStringDe() throws Exception {
         final String html = "<html><head><script>\n"
             + "  alert((12345).toLocaleString('de'));\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12,345")
+    public void toLocaleStringNoParam() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  try {\n"
+            + "    alert((12345).toLocaleString());\n"
+            + "  } catch(e) { alert(e); }\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void toLocaleStringHintertupfingen() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  try {\n"
+            + "    alert((12345).toLocaleString('Hintertupfingen'));\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);

@@ -17,14 +17,20 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import org.apache.commons.lang3.LocaleUtils;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Contains some missing features of Rhino NativeNumber.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class NumberCustom {
 
@@ -40,11 +46,19 @@ public final class NumberCustom {
      */
     public static String toLocaleString(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        String string = thisObj.toString();
         if (args.length != 0 && args[0] instanceof String) {
-            final Locale locale = Locale.forLanguageTag((String) args[0]);
-            string = NumberFormat.getInstance(locale).format(Double.parseDouble(string));
+            final String localeStr = (String) args[0];
+            try {
+                final Locale locale = LocaleUtils.toLocale(localeStr);
+                return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));
+            }
+            catch (final IllegalArgumentException e) {
+                throw ScriptRuntime.rangeError("Invalid language tag: " + localeStr);
+            }
         }
-        return string;
+
+        final BrowserVersion browserVersion = ((Window) thisObj.getParentScope()).getBrowserVersion();
+        final Locale locale = Locale.forLanguageTag(browserVersion.getBrowserLanguage());
+        return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));
     }
 }
