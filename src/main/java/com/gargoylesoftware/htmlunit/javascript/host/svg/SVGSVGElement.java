@@ -23,14 +23,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * A JavaScript object for {@code SVGSVGElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlSvg.class)
-public class SVGSVGElement extends SVGGraphicsElement {
+public class SVGSVGElement extends HTMLElement {
 
     /** The constant {@code SVG_ZOOMANDPAN_UNKNOWN}. */
     @JsxConstant
