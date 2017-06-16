@@ -96,7 +96,11 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public String canPlayType(final String type) {
-        return ((HtmlMedia) getDomNodeOrDie()).canPlayType(type);
+        final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
+        if (element == null) {
+            return "maybe";
+        }
+        return element.canPlayType(type);
     }
 
     /**

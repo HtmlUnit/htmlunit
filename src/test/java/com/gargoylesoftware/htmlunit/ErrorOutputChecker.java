@@ -38,7 +38,7 @@ public class ErrorOutputChecker implements TestRule {
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
             Pattern.compile("Starting ChromeDriver " + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
-                    + "\\.461591 ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
+                    + "\\.[0-9]+ ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n"),
             Pattern.compile(".*FirefoxOptions toCapabilities\r?\n"),
             Pattern.compile(".*Preferring the firefox binary in these options \\(.*\\)\r?\n"),

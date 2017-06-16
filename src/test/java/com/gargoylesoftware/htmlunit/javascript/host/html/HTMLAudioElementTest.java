@@ -148,4 +148,26 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
         loadPage2(html);
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
-}
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "maybe", "done"})
+    public void nullConstructor() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio(null);\n"
+            + "    alert(a);\n"
+            + "    alert(a.canPlayType('audio/ogg'));\n"
+            + "    alert('done');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }}
