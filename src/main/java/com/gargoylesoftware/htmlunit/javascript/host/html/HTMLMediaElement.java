@@ -110,4 +110,11 @@ public class HTMLMediaElement extends HTMLElement {
         final Promise promise = new Promise(getWindow());
         return promise;
     }
+
+    /**
+     * Pauses playback of the media.
+     */
+    @JsxFunction
+    public void pause() {
+    }
 }

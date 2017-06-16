@@ -48,4 +48,26 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "done"})
+    public void pause() throws Exception {
+        final String html = ""
+                + "<html><head><title>foo</title>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var a = new Audio('1.mp3');\n"
+                + "    alert(a);\n"
+                + "    a.pause();\n"
+                + "    alert('done');\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
