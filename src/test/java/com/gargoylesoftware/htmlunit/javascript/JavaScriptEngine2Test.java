@@ -789,4 +789,25 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         verifyAlerts(driver, getExpectedAlerts());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"t=undefined", "inside"})
+    @NotYetImplemented
+    public void functionHasNameOfVar() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert('t=' + t);\n"
+                + "    var t = 42;\n"
+                + "    ! function t() { alert('inside'); } ();\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
