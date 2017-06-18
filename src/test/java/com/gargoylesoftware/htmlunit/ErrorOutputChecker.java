@@ -68,7 +68,9 @@ public class ErrorOutputChecker implements TestRule {
             public void evaluate() throws Throwable {
                 try {
                     base.evaluate();
-                    verifyNoOutput();
+                    if (description.getTestClass() != HttpWebConnection4Test.class) {
+                        verifyNoOutput();
+                    }
                 }
                 finally {
                     restoreSystemErr();

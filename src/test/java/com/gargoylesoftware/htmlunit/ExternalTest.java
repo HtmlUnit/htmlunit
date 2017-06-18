@@ -220,10 +220,12 @@ public class ExternalTest {
     }
 
     private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
-        return groupId.startsWith("org.tmatesoft.svnkit")
+        return (groupId.startsWith("org.tmatesoft.svnkit")
                 // 1.8.13: missing many dependencies
                 // 1.8.14: https://issues.tmatesoft.com/issue/SVNKIT-692
-                && (version.startsWith("1.8.13") || version.startsWith("1.8.14"));
+                && ("1.8.13".equals(version) || "1.8.14".equals(version)))
+                // 8.5.15 seems to be corrupted, and gives compilation errors in eclipse
+                || ("org.apache.tomcat.embed".equals(groupId) && "8.5.15".equals(version));
     }
 
     private static String getValue(final String line) {
