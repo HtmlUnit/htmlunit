@@ -81,6 +81,7 @@ public class HttpWebConnection4Test extends WebDriverTestCase {
     public void stopServer() throws Exception {
         if (tomcat_ != null) {
             tomcat_.stop();
+            tomcat_.destroy();
         }
     }
 }
