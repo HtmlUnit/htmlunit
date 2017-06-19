@@ -794,7 +794,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"t=undefined", "inside"})
-    @NotYetImplemented
     public void functionHasNameOfVar() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
