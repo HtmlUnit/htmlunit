@@ -73,9 +73,16 @@ public class PopStateEvent extends Event {
         if (state instanceof NativeObject && getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_CLONE_STATE)) {
             final NativeObject old = (NativeObject) state;
             final NativeObject newState = new NativeObject();
-            for (final Object o : ScriptableObject.getPropertyIds(old)) {
-                final String property = Context.toString(o);
-                newState.defineProperty(property, ScriptableObject.getProperty(old, property), ScriptableObject.EMPTY);
+            Context.enter();
+            try {
+                for (final Object o : ScriptableObject.getPropertyIds(old)) {
+                    final String property = Context.toString(o);
+                    newState.defineProperty(property, ScriptableObject.getProperty(old, property),
+                            ScriptableObject.EMPTY);
+                }
+            }
+            finally {
+                Context.exit();
             }
             state_ = newState;
         }
