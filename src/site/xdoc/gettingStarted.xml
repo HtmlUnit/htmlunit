@@ -118,7 +118,7 @@ public void xpath() throws Exception {
             </p>
             <source><![CDATA[
 @Test
-public void xpath() throws Exception {
+public void cssSelector() throws Exception {
     try (final WebClient webClient = new WebClient()) {
         final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
 
