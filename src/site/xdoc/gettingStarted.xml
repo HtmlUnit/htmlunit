@@ -68,12 +68,13 @@ public void homePage_Firefox() throws Exception {
         <section name="Finding a specific element">
             <p>
                 Once you have a reference to an HtmlPage, you can search for a specific HtmlElement by one of
-                'get' methods, or by using XPath.
+                'get' methods, or by using XPath or CSS selectors.
             </p>
-            <p>
-                Below is an example of finding a 'div' by an ID, and getting an anchor by name:
-            </p>
-            <source><![CDATA[
+            <subsection name="Traversing the DOM tree">
+                <p>
+                    Below is an example of finding a 'div' by an ID, and getting an anchor by name:
+                </p>
+                <source><![CDATA[
 @Test
 public void getElements() throws Exception {
     try (final WebClient webClient = new WebClient()) {
@@ -82,24 +83,49 @@ public void getElements() throws Exception {
         final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
     }
 }]]></source>
-            <p>
-                A simple way for finding elements might be to find all elements of a specific type.
-            </p>
-            <source><![CDATA[
-@Test
-public void getElements() throws Exception {
-    try (final WebClient webClient = new WebClient()) {
-        final HtmlPage page = webClient.getPage("http://some_url");
-        NodeList inputs = page.getElementsByTagName("input");
-        final Iterator<E> nodesIterator = nodes.iterator();
-        // now iterate
-    }
-}]]></source>
-            <p>
-                XPath is the suggested way for more complex searches, a brief tutorial can be found in
-                <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
-            </p>
-            <source><![CDATA[
+                <p>
+                    A simple way for finding elements might be to find all elements of a specific type.
+                </p>
+                <source><![CDATA[
+ @Test
+ public void getElements() throws Exception {
+     try (final WebClient webClient = new WebClient()) {
+         final HtmlPage page = webClient.getPage("http://some_url");
+         NodeList inputs = page.getElementsByTagName("input");
+         final Iterator<E> nodesIterator = nodes.iterator();
+         // now iterate
+     }
+ }]]></source>
+                <p>
+                    There is rich set of methods usable to locate page elements e.g.
+                </p>
+                <ul>
+                    <li>HtmlPage.getAnchors(); HtmlPage.getAnchorByHref(String); HtmlPage.getAnchorByName(String); HtmlPage.getAnchorByText(String)</li>
+                    <li>HtmlPage.getElementById(String); HtmlPage.getElementsById(String); HtmlPage.getElementsByIdAndOrName(String);</li>
+                    <li>HtmlPage.getElementByName(String); HtmlPage.getElementsByName(String)</li>
+                    <li>HtmlPage.getFormByName(String); HtmlPage.getForms()</li>
+                    <li>HtmlPage.getFrameByName(String); HtmlPage.getFrames()</li>
+                </ul>
+                <p>
+                    You can also start searching from the document element (HtmlPage.getDocumentElement()) and then traverse the dom tree
+                </p>
+                <ul>
+                    <li>HtmlElement.getElementsByAttribute(String, String, String)</li>
+                    <li>DomElement.getElementsByTagName(String); DomElement.getElementsByTagNameNS(String, String)</li>
+                    <li>DomElement.getChildElements(); DomElement.getChildElementCount()</li>
+                    <li>DomElement.getFirstElementChild(); DomElement.getLastElementChild()</li>
+                    <li>HtmlElement.getEnclosingElement(String); HtmlElement.getEnclosingForm()</li>
+                    <li>DomNode.getChildNodes(); DomNode.getChildren(); DomNode.getDescendants(); DomNode.getDomElementDescendants(); DomNode.getFirstChild(); DomNode.getHtmlElementDescendants()
+                        DomNode.getLastChild(); DomNode.getNextElementSibling(); DomNode.getNextSibling(); DomNode.getPreviousElementSibling(); getPreviousSibling()</li>
+                </ul>
+            </subsection>
+
+            <subsection name="XPath queries">
+                <p>
+                    XPath is the suggested way for more complex searches, a brief tutorial can be found in
+                    <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
+                </p>
+                <source><![CDATA[
 @Test
 public void xpath() throws Exception {
     try (final WebClient webClient = new WebClient()) {
@@ -112,11 +138,13 @@ public void xpath() throws Exception {
         final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@name='John']").get(0);
     }
 }]]></source>
+            </subsection>
 
-            <p>
-                You can also use CSS selectors
-            </p>
-            <source><![CDATA[
+            <subsection name="CSS Selectors">
+                <p>
+                    You can also use CSS selectors
+                </p>
+                <source><![CDATA[
 @Test
 public void cssSelector() throws Exception {
     try (final WebClient webClient = new WebClient()) {
@@ -132,6 +160,7 @@ public void cssSelector() throws Exception {
         final DomNode div = page.querySelector("div#breadcrumbs");
     }
 }]]></source>
+            </subsection>
         </section>
 
         <section name="Using a proxy server">
