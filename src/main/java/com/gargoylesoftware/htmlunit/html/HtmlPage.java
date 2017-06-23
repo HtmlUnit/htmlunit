@@ -61,6 +61,7 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -1020,9 +1021,8 @@ public class HtmlPage extends SgmlPage {
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
-        final Cache cache = client.getCache();
-
-        final WebRequest request = new WebRequest(url, getWebClient().getBrowserVersion().getScriptAcceptHeader());
+        final BrowserVersion browser = client.getBrowserVersion();
+        final WebRequest request = new WebRequest(url, browser.getScriptAcceptHeader());
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
         request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
@@ -1034,6 +1034,7 @@ public class HtmlPage extends SgmlPage {
 
         // now we can look into the cache with the fixed request for
         // a cached script
+        final Cache cache = client.getCache();
         final Object cachedScript = cache.getCachedObject(request);
         if (cachedScript instanceof Script || cachedScript instanceof ScriptFunction) {
             return cachedScript;

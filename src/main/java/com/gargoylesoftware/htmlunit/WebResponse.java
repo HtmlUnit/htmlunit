@@ -22,9 +22,12 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -45,6 +48,10 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponse implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
+    private static final ByteOrderMark[] BOM_HEADERS = new ByteOrderMark[] {
+        ByteOrderMark.UTF_8,
+        ByteOrderMark.UTF_16LE,
+        ByteOrderMark.UTF_16BE};
 
     private long loadTime_;
     private WebResponseData responseData_;
@@ -238,6 +245,7 @@ public class WebResponse implements Serializable {
     /**
      * Returns the response content as a string, using the specified charset,
      * rather than the charset/encoding specified in the server response.
+     * If there is a bom header the charset parameter will be overwritten by the bom.
      * @param encoding the charset/encoding to use to convert the response content into a string
      * @return the response content as a string or null if the content retrieval was failing
      */
@@ -245,7 +253,22 @@ public class WebResponse implements Serializable {
         if (responseData_ != null) {
             try (InputStream in = responseData_.getInputStream()) {
                 if (in != null) {
-                    return IOUtils.toString(in, encoding);
+                    try (BOMInputStream bomIn = new BOMInputStream(in, BOM_HEADERS)) {
+                        // there seems to be a bug in BOMInputStream
+                        // we have to call this before hasBOM(ByteOrderMark)
+                        if (bomIn.hasBOM()) {
+                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
+                                return IOUtils.toString(bomIn, StandardCharsets.UTF_8);
+                            }
+                            if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
+                                return IOUtils.toString(bomIn, StandardCharsets.UTF_16BE);
+                            }
+                            if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
+                                return IOUtils.toString(bomIn, StandardCharsets.UTF_16LE);
+                            }
+                        }
+                        return IOUtils.toString(bomIn, encoding);
+                    }
                 }
             }
             catch (final IOException e) {
