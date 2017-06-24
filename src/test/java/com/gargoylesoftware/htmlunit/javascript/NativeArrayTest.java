@@ -353,4 +353,31 @@ public class NativeArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1: 20,17", "TypeError"},
+            FF = {"1: 20,17", "2: 20,17"})
+    @NotYetImplemented
+    public void filter() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  alert('1: ' + arr.filter(isBig));\n"
+            + "  try {\n"
+            + "    alert('2: ' + Array.filter(arr, isBig));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
