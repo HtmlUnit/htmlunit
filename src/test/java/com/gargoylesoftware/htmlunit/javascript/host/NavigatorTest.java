@@ -154,8 +154,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void userAgent() throws Exception {
         attribute("userAgent", getBrowserVersion().getUserAgent(),
-                "WOW64; ", "; WOW64", "; Win64", "; x64", "SLCC2; ",
-                ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 
