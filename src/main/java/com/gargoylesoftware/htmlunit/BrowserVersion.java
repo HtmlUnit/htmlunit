@@ -142,7 +142,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public static final BrowserVersion FIREFOX_52 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0",
         52, "FF52", null);
 
     /** Internet Explorer 11. */
@@ -154,7 +154,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion CHROME = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/59.0.3071.109 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/59.0.3071.109 Safari/537.36",
         59, "Chrome", null);
 
