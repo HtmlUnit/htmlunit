@@ -74,8 +74,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     public void appVersion() throws Exception {
         attribute("appVersion", getBrowserVersion().getApplicationVersion(),
-                "WOW64; ", "; WOW64", "; Win64", "; x64", "SLCC2; ",
-                ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
+                "SLCC2; ", ".NET CLR 2.0.50727; ", ".NET CLR 3.5.30729; ", ".NET CLR 3.0.30729; ",
                 "Media Center PC 6.0; ", ".NET4.0C; ", ".NET4.0E; ");
     }
 
@@ -210,9 +209,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.171", "NPSWF32_25_0_0_171.dll"},
+    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF32_26_0_0_131.dll"},
+            FF52 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF64_26_0_0_131.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
-            IE = {"Shockwave Flash", "Shockwave Flash 25.0 r0", "25.0.0.171", "Flash32_25_0_0_171.ocx"},
+            IE = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "Flash32_26_0_0_131.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
@@ -375,7 +375,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF45 = "20170411115307",
-            FF52 = "20170517122419")
+            FF52 = "20170607123825")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

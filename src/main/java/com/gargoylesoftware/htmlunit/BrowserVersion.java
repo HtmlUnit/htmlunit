@@ -123,6 +123,11 @@ public class BrowserVersion implements Serializable, Cloneable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /**
+     * The WIN64 platform.
+     */
+    private static final String PLATFORM_WIN64 = "Win64";
+
+    /**
      * Firefox 45 ESR.
      * @since 2.21
      */
@@ -142,15 +147,15 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
+        NETSCAPE, "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
         "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36",
+        NETSCAPE, "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
+        + " (KHTML, like Gecko) Chrome/59.0.3071.109 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36",
+        + " (KHTML, like Gecko) Chrome/59.0.3071.109 Safari/537.36",
         59, "Chrome", null);
 
     /** Microsoft Edge. Work In Progress!!! */
@@ -174,6 +179,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF45
         FIREFOX_45.initDefaultFeatures();
         FIREFOX_45.setVendor("");
+        FIREFOX_45.setPlatform(PLATFORM_WIN32);
         FIREFOX_45.buildId_ = "20170411115307";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
@@ -185,7 +191,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // FF52
         FIREFOX_52.initDefaultFeatures();
         FIREFOX_52.setVendor("");
-        FIREFOX_52.buildId_ = "20170517122419";
+        FIREFOX_52.buildId_ = "20170607123825";
         FIREFOX_52.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"});
         FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -194,6 +200,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         // IE
         INTERNET_EXPLORER.initDefaultFeatures();
         INTERNET_EXPLORER.setVendor("");
+        INTERNET_EXPLORER.setPlatform(PLATFORM_WIN32);
         INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
             "Cookie"});
@@ -210,7 +217,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");
-        CHROME.setPlatform("MacIntel");
+        CHROME.setPlatform(PLATFORM_WIN32);
         CHROME.setCpuClass(null);
         CHROME.setHeaderNamesOrdered(new String[] {
             "Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent", "Accept", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
@@ -320,19 +327,19 @@ public class BrowserVersion implements Serializable, Cloneable {
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 25.0 r0", "25.0.0.171", "NPSWF32_25_0_0_171.dll");
+                "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF32_26_0_0_131.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 25.0 r0", "25.0.0.171", "NPSWF32_25_0_0_171.dll");
+                "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF64_26_0_0_131.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 25.0 r0", "25.0.0.171", "Flash32_25_0_0_171.ocx");
+                "Shockwave Flash 26.0 r0", "26.0.0.131", "Flash32_26_0_0_131.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);
@@ -353,7 +360,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
-    private String platform_ = PLATFORM_WIN32;
+    private String platform_ = PLATFORM_WIN64;
     private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
