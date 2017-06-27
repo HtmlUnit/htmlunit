@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
@@ -1608,7 +1609,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * that of <tt>element.style</tt>, but the value returned by this method is read-only.
      *
      * @param element the element
-     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});
+     * e.g. ':before'
      * @return the computed style
      */
     @JsxFunction
@@ -1617,10 +1619,20 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
         }
         final Element e = (Element) element;
+
+        String normalizedPseudo = pseudoElement;
+        if (normalizedPseudo != null && normalizedPseudo.startsWith("::")) {
+            normalizedPseudo = normalizedPseudo.substring(1);
+        }
+        if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
+                && !normalizedPseudo.startsWith(":")) {
+            normalizedPseudo = ":" + normalizedPseudo;
+        }
+
         synchronized (computedStyles_) {
             final Map<String, CSS2Properties> elementMap = computedStyles_.get(e);
             if (elementMap != null) {
-                final CSS2Properties style = elementMap.get(pseudoElement);
+                final CSS2Properties style = elementMap.get(normalizedPseudo);
                 if (style != null) {
                     return style;
                 }
@@ -1639,7 +1651,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                     if (trace) {
                         LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
                     }
-                    sheet.modifyIfNecessary(style, e, pseudoElement);
+                    sheet.modifyIfNecessary(style, e, normalizedPseudo);
                 }
             }
 
@@ -1649,7 +1661,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                     elementMap = new WeakHashMap<>();
                     computedStyles_.put(e, elementMap);
                 }
-                elementMap.put(pseudoElement, style);
+                elementMap.put(normalizedPseudo, style);
             }
         }
         return style;

@@ -1335,6 +1335,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT,
 
+    /** window.getComputedStyle works with pseudo selectors without colon in front. */
+    @BrowserFeature(CHROME)
+    JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON,
+
     /** <code>window.name</code> returns also form fields (e.g. input, textarea). */
     @BrowserFeature(IE)
     JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME,

@@ -2060,4 +2060,46 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
               + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"\"@\"", "none", "\"@\"", "\"#\"", "none", "\"#\""},
+            CHROME = {"\"@\"", "\"@\"", "\"@\"", "\"#\"", "\"#\"", "\"#\""},
+            IE = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""})
+    public void pseudoBefore() throws Exception {
+        final String html = "<html><head>\n"
+                + "<style type='text/css'>\n"
+                + "  /* <![CDATA[ */\n"
+                + "  #myDiv:before { content: '@' }\n"
+                + "  #myDiv2::before { content: '#' }\n"
+                + "  /* ]]> */\n"
+                + "</style>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var node = document.getElementById('myDiv');\n"
+              + "    var style = window.getComputedStyle(node, ':before');\n"
+              + "    alert(style.content);\n"
+              + "    var style = window.getComputedStyle(node, 'before');\n"
+              + "    alert(style.content);\n"
+              + "    var style = window.getComputedStyle(node, '::before');\n"
+              + "    alert(style.content);\n"
+
+              + "    node = document.getElementById('myDiv2');\n"
+              + "    var style = window.getComputedStyle(node, ':before');\n"
+              + "    alert(style.content);\n"
+              + "    var style = window.getComputedStyle(node, 'before');\n"
+              + "    alert(style.content);\n"
+              + "    var style = window.getComputedStyle(node, '::before');\n"
+              + "    alert(style.content);\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body onload='test()'>\n"
+              + "  <div id='myDiv' >Test</div>\n"
+              + "  <div id='myDiv2' >Test</div>\n"
+              + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

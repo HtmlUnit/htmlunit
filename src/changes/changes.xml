@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: fix window.getComputedStyle() pseudo handling if pseudo param starts with double colon.
+            </action>
             <action type="update" dev="rbri">
                 We are simulating the 64 bit version of Firefox 52 ESR and CHROME now.
             </action>
