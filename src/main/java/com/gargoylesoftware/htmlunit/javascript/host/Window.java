@@ -1621,12 +1621,14 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final Element e = (Element) element;
 
         String normalizedPseudo = pseudoElement;
-        if (normalizedPseudo != null && normalizedPseudo.startsWith("::")) {
-            normalizedPseudo = normalizedPseudo.substring(1);
-        }
-        if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
-                && !normalizedPseudo.startsWith(":")) {
-            normalizedPseudo = ":" + normalizedPseudo;
+        if (normalizedPseudo != null) {
+            if (normalizedPseudo.startsWith("::")) {
+                normalizedPseudo = normalizedPseudo.substring(1);
+            }
+            else if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
+                    && !normalizedPseudo.startsWith(":")) {
+                normalizedPseudo = ":" + normalizedPseudo;
+            }
         }
 
         synchronized (computedStyles_) {
