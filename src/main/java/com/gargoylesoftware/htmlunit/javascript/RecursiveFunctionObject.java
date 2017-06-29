@@ -125,38 +125,8 @@ public class RecursiveFunctionObject extends FunctionObject {
             case "WebKitTransitionEvent":
                 return "TransitionEvent";
 
-            case "webkitAudioContext":
-                return "AudioContext";
-
-            case "webkitIDBCursor":
-                return "IDBCursor";
-
-            case "webkitIDBDatabase":
-                return "IDBDatabase";
-
-            case "webkitIDBFactory":
-                return "IDBFactory";
-
-            case "webkitIDBIndex":
-                return "IDBIndex";
-
-            case "webkitIDBKeyRange":
-                return "IDBKeyRange";
-
-            case "webkitIDBObjectStore":
-                return "IDBObjectStore";
-
-            case "webkitIDBRequest":
-                return "IDBRequest";
-
-            case "webkitIDBTransaction":
-                return "IDBTransaction";
-
             case "webkitMediaStream":
                 return "MediaStream";
-
-            case "webkitOfflineAudioContext":
-                return "OfflineAudioContext";
 
             case "webkitSpeechGrammar":
                 return "SpeechGrammar";

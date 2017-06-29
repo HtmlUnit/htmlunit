@@ -279,6 +279,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
+
             if ("Image".equals(hostClassSimpleName)
                     && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
@@ -298,46 +299,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                 case "WebKitTransitionEvent":
                     prototype = prototypesPerJSName.get("TransitionEvent");
-                    break;
-
-                case "webkitAudioContext":
-                    prototype = prototypesPerJSName.get("AudioContext");
-                    break;
-
-                case "webkitIDBCursor":
-                    prototype = prototypesPerJSName.get("IDBCursor");
-                    break;
-
-                case "webkitIDBDatabase":
-                    prototype = prototypesPerJSName.get("IDBDatabase");
-                    break;
-
-                case "webkitIDBFactory":
-                    prototype = prototypesPerJSName.get("IDBFactory");
-                    break;
-
-                case "webkitIDBIndex":
-                    prototype = prototypesPerJSName.get("IDBIndex");
-                    break;
-
-                case "webkitIDBKeyRange":
-                    prototype = prototypesPerJSName.get("IDBKeyRange");
-                    break;
-
-                case "webkitIDBObjectStore":
-                    prototype = prototypesPerJSName.get("IDBObjectStore");
-                    break;
-
-                case "webkitIDBRequest":
-                    prototype = prototypesPerJSName.get("IDBRequest");
-                    break;
-
-                case "webkitIDBTransaction":
-                    prototype = prototypesPerJSName.get("IDBTransaction");
-                    break;
-
-                case "webkitOfflineAudioContext":
-                    prototype = prototypesPerJSName.get("OfflineAudioContext");
                     break;
 
                 case "webkitURL":
@@ -371,16 +332,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     if ("WebKitAnimationEvent".equals(hostClassSimpleName)
                             || "WebKitMutationObserver".equals(hostClassSimpleName)
                             || "WebKitTransitionEvent".equals(hostClassSimpleName)
-                            || "webkitAudioContext".equals(hostClassSimpleName)
-                            || "webkitIDBCursor".equals(hostClassSimpleName)
-                            || "webkitIDBDatabase".equals(hostClassSimpleName)
-                            || "webkitIDBFactory".equals(hostClassSimpleName)
-                            || "webkitIDBIndex".equals(hostClassSimpleName)
-                            || "webkitIDBKeyRange".equals(hostClassSimpleName)
-                            || "webkitIDBObjectStore".equals(hostClassSimpleName)
-                            || "webkitIDBRequest".equals(hostClassSimpleName)
-                            || "webkitIDBTransaction".equals(hostClassSimpleName)
-                            || "webkitOfflineAudioContext".equals(hostClassSimpleName)
                             || "webkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
