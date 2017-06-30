@@ -192,6 +192,29 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
+     * Tests getHtmlElement() for all elements that can be loaded.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getAnchorByText() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <a href='http://www.foo.com' id='anchor1'>anchor text</a>\n"
+            + "  <a href='http://www.foo.com' id='anchor2'><span>anchor text inside span</span></a>\n"
+            + "  <a href='http://www.foo.com' id='anchor3'>"
+                + "<svg><rect x='1' y='11' width='8' height='8'/></svg>"
+                + "<span>complex</span>"
+                + "</a>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        assertSame("anchor1", page.getElementById("anchor1"), page.getAnchorByText("anchor text"));
+        assertSame("anchor2", page.getElementById("anchor2"), page.getAnchorByText("anchor text inside span"));
+        assertSame("anchor3", page.getElementById("anchor3"), page.getAnchorByText("complex"));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
