@@ -47,12 +47,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 /**
@@ -976,10 +977,13 @@ public abstract class HtmlElement extends DomElement {
      */
     public final boolean hasEventHandlers(final String eventName) {
         final Object jsObj = getScriptableObject();
-        if (jsObj instanceof HTMLElement) {
-            return ((HTMLElement) jsObj).hasEventHandlers(eventName);
+        if (jsObj instanceof EventTarget) {
+            return ((EventTarget) jsObj).hasEventHandlers(eventName);
         }
-        return ((HTMLElement2) jsObj).hasEventHandlers(eventName);
+        if (jsObj instanceof EventTarget2) {
+            return ((EventTarget2) jsObj).hasEventHandlers(eventName);
+        }
+        return false;
     }
 
     /**
