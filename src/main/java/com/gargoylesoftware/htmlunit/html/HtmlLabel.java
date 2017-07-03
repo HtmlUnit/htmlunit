@@ -158,7 +158,7 @@ public class HtmlLabel extends HtmlElement {
         // then the click on the referenced element
         final HtmlElement element = getReferencedElement();
         if (element != null) {
-            response = element.click(false, false, false, false);
+            response = element.click(false, false, false, false, false, false);
         }
         else {
             response = page;

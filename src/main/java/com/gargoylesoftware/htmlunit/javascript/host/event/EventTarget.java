@@ -186,9 +186,6 @@ public class EventTarget extends SimpleScriptable {
             final boolean processLabelAfterBubbling = event.processLabelAfterBubbling();
 
             while (eventTarget != null) {
-                if (label == null && processLabelAfterBubbling && eventTarget instanceof HTMLLabelElement) {
-                    label = (HtmlLabel) eventTarget.getDomNodeOrNull();
-                }
                 final EventTarget jsNode = eventTarget;
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null && !(jsNode instanceof Window) && (isAttached || !(jsNode instanceof HTMLElement))) {
@@ -204,6 +201,12 @@ public class EventTarget extends SimpleScriptable {
                     eventTarget = (EventTarget) domNode.getParentNode().getScriptableObject();
                 }
                 event.setEventPhase(Event.BUBBLING_PHASE);
+
+                if (eventTarget != null
+                        && label == null
+                        && processLabelAfterBubbling && eventTarget instanceof HTMLLabelElement) {
+                    label = (HtmlLabel) eventTarget.getDomNodeOrNull();
+                }
             }
 
             if (label != null) {
