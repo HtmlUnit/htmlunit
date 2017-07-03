@@ -338,7 +338,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
 
                         if (function instanceof FunctionObject) {
-                            ((FunctionObject) function).addAsConstructor(window, prototype);
+                            try {
+                                ((FunctionObject) function).addAsConstructor(window, prototype);
+                            }
+                            catch (final Exception e) {
+                                // TODO see issue #1897
+                                if (LOG.isWarnEnabled()) {
+                                    final String newline = System.lineSeparator();
+                                    LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                                            + e.getMessage() + newline
+                                            + "prototype: " + prototype.getClassName());
+                                }
+                            }
                         }
 
                         ScriptableObject.defineProperty(window, hostClassSimpleName, function,
@@ -358,7 +369,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
                     else {
                         if (function instanceof FunctionObject) {
-                            ((FunctionObject) function).addAsConstructor(window, prototype);
+                            try {
+                                ((FunctionObject) function).addAsConstructor(window, prototype);
+                            }
+                            catch (final Exception e) {
+                                // TODO see issue #1897
+                                if (LOG.isWarnEnabled()) {
+                                    final String newline = System.lineSeparator();
+                                    LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                                            + e.getMessage() + newline
+                                            + "prototype: " + prototype.getClassName());
+                                }
+                            }
                         }
                     }
 
