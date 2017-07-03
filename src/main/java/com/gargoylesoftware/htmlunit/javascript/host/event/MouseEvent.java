@@ -39,6 +39,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class MouseEvent extends UIEvent {
@@ -106,6 +107,9 @@ public class MouseEvent extends UIEvent {
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;
+
+    /** Switch to disable label handling if we already processing the event triggered from label processing */
+    private boolean processLabelAfterBubbling_ = true;
 
     /**
      * Used to build the prototype.
@@ -375,5 +379,20 @@ public class MouseEvent extends UIEvent {
     @JsxGetter
     public boolean isShiftKey() {
         return super.isShiftKey();
+    }
+
+    /**
+     * {@inheritDoc} Overridden take care of click events.
+     */
+    @Override
+    public boolean processLabelAfterBubbling() {
+        return MouseEvent.TYPE_CLICK  == getType() && processLabelAfterBubbling_;
+    }
+
+    /**
+     * Disable the lable processing if we are already processing one.
+     */
+    public void disableProcessLabelAfterBubbling() {
+        processLabelAfterBubbling_ = false;
     }
 }

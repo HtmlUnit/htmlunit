@@ -9,6 +9,9 @@
     <body>
         <release version="2.28" date="???" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Take care of label elements during event bubbling; they have to trigger a click event for the associated element.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: fix window.getComputedStyle() pseudo handling if pseudo param starts with double colon.
             </action>
             <action type="update" dev="rbri">

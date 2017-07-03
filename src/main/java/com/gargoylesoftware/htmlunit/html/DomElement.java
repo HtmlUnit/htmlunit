@@ -892,15 +892,40 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
-    protected <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+    public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents) throws IOException {
+        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, false, false);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Simulates clicking on this element, returning the page in the window that has the focus
+     * after the element has been clicked. Note that the returned page may or may not be the same
+     * as the original page, depending on the type of element being clicked, the presence of JavaScript
+     * action listeners, etc.
+     *
+     * @param shiftKey {@code true} if SHIFT is pressed during the click
+     * @param ctrlKey {@code true} if CTRL is pressed during the click
+     * @param altKey {@code true} if ALT is pressed during the click
+     * @param triggerMouseEvents if true trigger the mouse events also
+     * @param ignoreVisibility whether to ignore visibility or not
+     * @param disableProcessLabelAfterBubbling ignore label processing
+     * @param <P> the page type
+     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
+     * @exception IOException if an IO error occurs
+     */
+    @SuppressWarnings("unchecked")
+    public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final boolean triggerMouseEvents, final boolean ignoreVisibility,
+            final boolean disableProcessLabelAfterBubbling) throws IOException {
 
         // make enclosing window the current one
         final SgmlPage page = getPage();
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
-        if (!isDisplayed() || !(page instanceof HtmlPage)
+        if ((!ignoreVisibility && !isDisplayed())
+                || !(page instanceof HtmlPage)
                 || this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return (P) page;
         }
@@ -927,7 +952,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             }
 
             if (getPage().getWebClient().getJavaScriptEngine() instanceof NashornJavaScriptEngine) {
-                final Event2 event;
+                final MouseEvent2 event;
                 if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
                     event = new PointerEvent2(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                             ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
@@ -936,10 +961,14 @@ public class DomElement extends DomNamespaceNode implements Element {
                     event = new MouseEvent2(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                             ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
                 }
+
+                if (disableProcessLabelAfterBubbling) {
+                    event.disableProcessLabelAfterBubbling();
+                }
                 return (P) click(event, false);
             }
 
-            final Event event;
+            final MouseEvent event;
             if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
                 event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                         ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
@@ -948,7 +977,11 @@ public class DomElement extends DomNamespaceNode implements Element {
                 event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
                         ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
-            return (P) click(event, false);
+
+            if (disableProcessLabelAfterBubbling) {
+                event.disableProcessLabelAfterBubbling();
+            }
+            return (P) click(event, ignoreVisibility);
         }
     }
 

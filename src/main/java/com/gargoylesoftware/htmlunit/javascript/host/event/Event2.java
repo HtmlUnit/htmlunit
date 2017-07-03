@@ -1097,4 +1097,15 @@ public class Event2 extends SimpleScriptObject {
             return META_MASK;
         }
     }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * If we click on a label, we have to simulate a click on the element referenced by the 'for' attribute also.
+     * To support this for special events we have this method here.
+     * @return false in this default impl
+     */
+    public boolean processLabelAfterBubbling() {
+        return false;
+    }
 }
