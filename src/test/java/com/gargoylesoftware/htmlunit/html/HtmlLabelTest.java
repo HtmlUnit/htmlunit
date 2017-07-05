@@ -87,7 +87,39 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "  <li onclick='alert(\"click listItem1\")'>\n"
             + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>\n"
             + "      <span>\n"
-            + "        <input id='radio1' name='radios' value='1' type='radio'"
+            + "        <input id='radio1' name='radios' value='1' type='radio' "
+                            + "onclick='alert(\"click radio1\");'>\n"
+            + "        <span id='radio1Span' onclick='alert(\"click span1\")'>Radio 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Span")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click span1", "click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label",
+                "click listItem1", "click list"})
+    public void triggerRadioComplexCaseChecked() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>\n"
+            + "      <span>\n"
+            + "        <input id='radio1' name='radios' value='1' type='radio' checked "
                             + "onclick='alert(\"click radio1\");'>\n"
             + "        <span id='radio1Span' onclick='alert(\"click span1\")'>Radio 1</span>\n"
             + "      </span>\n"
@@ -119,7 +151,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "  <li onclick='alert(\"click listItem1\")'>\n"
             + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>\n"
             + "      <span>\n"
-            + "        <input id='radio1' name='radios' value='1' type='radio' style='display: none;'"
+            + "        <input id='radio1' name='radios' value='1' type='radio' style='display: none;' "
                             + "onclick='alert(\"click radio1\");'>\n"
             + "        <span id='radio1Span' onclick='alert(\"click span1\")'>Radio 1</span>\n"
             + "      </span>\n"
@@ -141,8 +173,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"click span1", "click radio1Label", "click listItem1", "click list",
-                "click radio1Label", "click listItem1", "click list"})
+    @Alerts({"click span1", "click radio1Label", "click listItem1", "click list"})
     public void triggerRadioComplexCaseDisabled() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -150,7 +181,7 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "  <li onclick='alert(\"click listItem1\")'>\n"
             + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>\n"
             + "      <span>\n"
-            + "        <input id='radio1' name='radios' value='1' type='radio' disabled"
+            + "        <input id='radio1' name='radios' value='1' type='radio' disabled "
                             + "onclick='alert(\"click radio1\");'>\n"
             + "        <span id='radio1Span' onclick='alert(\"click span1\")'>Radio 1</span>\n"
             + "      </span>\n"
@@ -162,6 +193,244 @@ public class HtmlLabelTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("radio1Span")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "false");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label",
+                "click listItem1", "click list"})
+    public void triggerRadioComplexCaseChildOfLabel() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>Label\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio'"
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1", "click radio1Label", "click listItem1", "click list"})
+    public void triggerRadioComplexCaseClickRadio() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>Label\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio'"
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click span1", "click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label",
+                "click listItem1", "click list"})
+    public void triggerCheckboxComplexCase() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>\n"
+            + "      <span>\n"
+            + "        <input id='check1' name='checks' value='1' type='checkbox' "
+                            + "onclick='alert(\"click check1\");'>\n"
+            + "        <span id='check1Span' onclick='alert(\"click span1\")'>Checkbox 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Span")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click span1", "click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label",
+                "click listItem1", "click list"})
+    public void triggerCheckboxComplexCaseChecked() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>\n"
+            + "      <span>\n"
+            + "        <input id='check1' name='checks' value='1' type='checkbox' checked "
+                            + "onclick='alert(\"click check1\");'>\n"
+            + "        <span id='check1Span' onclick='alert(\"click span1\")'>Checkbox 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Span")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "false");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click span1", "click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label",
+                "click listItem1", "click list"})
+    public void triggerCheckboxComplexCaseHidden() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>\n"
+            + "      <span>\n"
+            + "        <input id='check1' name='checks' value='1' type='checkbox' style='display: none;' "
+                            + "onclick='alert(\"click check1\");'>\n"
+            + "        <span id='check1Span' onclick='alert(\"click span1\")'>Checkbox 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Span")).click();
+        verifyAlerts(2000000, driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click span1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxComplexCaseDisabled() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>\n"
+            + "      <span>\n"
+            + "        <input id='check1' name='checks' value='1' type='checkbox' disabled "
+                            + "onclick='alert(\"click check1\");'>\n"
+            + "        <span id='check1Span' onclick='alert(\"click span1\")'>Checkbox 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Span")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "false");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label",
+                "click listItem1", "click list"})
+    public void triggerCheckboxComplexCaseChildOfLabel() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>Label\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox'"
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxComplexCaseClickCheckbox() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>Label\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox'"
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1")).click();
         verifyAlerts(driver, getExpectedAlerts());
 
         driver.findElement(By.id("check")).click();
