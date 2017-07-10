@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1899" due-to="Christian Rösch">
+                JavaScript: fix ClassCastException when calculating offsetHeight.
+            </action>
             <action type="fix" dev="rbri">
                 Take care of label elements during event bubbling; they have to trigger a click event for the associated element.
             </action>

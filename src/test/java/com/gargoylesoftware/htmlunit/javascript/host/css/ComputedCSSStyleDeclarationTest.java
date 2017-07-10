@@ -2102,4 +2102,22 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
               + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void calculateContentHeightAfterSVG() throws Exception {
+        final String html =
+                "<html><body>\n"
+                    + "<svg/>\n"
+                    + "<img />\n"
+                    + "<textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
+                    + "<script>\n"
+                    + "  alert(document.body.offsetHeight > 10);\n"
+                    + "</script>\n"
+                    + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

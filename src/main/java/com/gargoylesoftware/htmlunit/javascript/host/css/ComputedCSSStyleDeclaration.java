@@ -1386,7 +1386,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 boolean prevHadComputedTop = false;
                 while (prev != null && !prevHadComputedTop) {
                     if (prev instanceof HtmlElement) {
-                        final HTMLElement e = (HTMLElement) ((HtmlElement) prev).getScriptableObject();
+                        final Element e = prev.getScriptableObject();
                         final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                         int prevTop = 0;
                         if (style.top_ == null) {
