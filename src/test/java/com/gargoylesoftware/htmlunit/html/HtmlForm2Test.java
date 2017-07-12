@@ -772,8 +772,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <p>hello world</p>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "' target='_self'>\n"
-            + "    <button id='myButton' type='submit'"
-                                    + " formtarget='_blank'>Submit with different form target</button>\n"
+            + "    <button id='myButton' type='submit' "
+                                + "formtarget='_blank'>Submit with different form target</button>\n"
             + "  </form>\n"
             + "</body></html>";
         final String secondContent = "second content";
