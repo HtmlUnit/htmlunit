@@ -265,6 +265,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
+    /** Form formxxx parameters not supported for input type image. */
+    @BrowserFeature(IE)
+    FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
+
     /** Form submit forces an real request also if only the hash was changed. */
     @BrowserFeature(CHROME)
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,

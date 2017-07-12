@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
@@ -66,6 +67,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Philip Graf
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 public class HtmlForm extends HtmlElement {
 
@@ -139,6 +141,11 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
+        //html5 attribute's support
+        if (submitElement != null) {
+            updateHtml5Attributes(submitElement);
+        }
+
         final WebRequest request = getWebRequest(submitElement);
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
@@ -148,6 +155,61 @@ public class HtmlForm extends HtmlElement {
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
         webClient.download(webWindow, target, request, checkHash, false, "JS form.submit()");
         return htmlPage;
+    }
+
+    /**
+     * Check if element which cause submit contains new html5 attributes
+     * (formaction, formmethod, formtarget, formenctype)
+     * and override existing values
+     * @param submitElement
+     */
+    private void updateHtml5Attributes(final SubmittableElement submitElement) {
+        if (submitElement instanceof HtmlElement) {
+            final HtmlElement element = (HtmlElement) submitElement;
+
+            final String type = element.getAttribute("type");
+            boolean typeImage = false;
+            final boolean typeSubmit = "submit".equalsIgnoreCase(type);
+            final boolean isInput = HtmlInput.TAG_NAME.equals(element.getTagName());
+            if (isInput) {
+                typeImage = "image".equalsIgnoreCase(type);
+            }
+
+            // IE does not support formxxx attributes for input with 'image' types
+            final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
+            if (browser.hasFeature(FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE) && typeImage) {
+                return;
+            }
+
+            // could be excessive validation but support of html5 fromxxx
+            // attributes available for:
+            // - input with 'submit' and 'image' types
+            // - button with 'submit'
+            if (isInput && !typeSubmit && !typeImage) {
+                return;
+            }
+            else if (HtmlButton.TAG_NAME.equals(element.getTagName())
+                && !"submit".equalsIgnoreCase(type)) {
+                return;
+            }
+
+            final String formaction = element.getAttribute("formaction");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != formaction) {
+                setActionAttribute(formaction);
+            }
+            final String formmethod = element.getAttribute("formmethod");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != formmethod) {
+                setMethodAttribute(formmethod);
+            }
+            final String formtarget = element.getAttribute("formtarget");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != formtarget) {
+                setTargetAttribute(formtarget);
+            }
+            final String formenctype = element.getAttribute("formenctype");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED != formenctype) {
+                setEnctypeAttribute(formenctype);
+            }
+        }
     }
 
     private boolean areChildrenValid() {

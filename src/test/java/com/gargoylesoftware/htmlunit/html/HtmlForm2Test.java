@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -41,6 +42,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -53,6 +55,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HtmlForm2Test extends WebDriverTestCase {
@@ -413,7 +416,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     public void formMultipartEncodingTypeTest() throws Exception {
         final String html = "<!DOCTYPE html>\n"
-            + "<html><head><title>first</title></head><body>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
             + "  <p>hello world</p>\n"
             + "  <form id='myForm' action='" + URL_SECOND
                     + "' method='" + HttpMethod.POST
@@ -444,7 +448,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     public void formUrlEncodedEncodingTypeTest() throws Exception {
         final String html = "<!DOCTYPE html>\n"
-            + "<html><head><title>first</title></head><body>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
             + "  <p>hello world</p>\n"
             + "  <form id='myForm' action='" + URL_SECOND
                         + "' method='" + HttpMethod.POST
@@ -453,6 +458,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "    <button id='myButton' type='submit'>Submit</button>\n"
             + "  </form>\n"
             + "</body></html>";
+
         final String secondContent
             = "<html><head><title>second</title></head><body>\n"
             + "  <p>hello world</p>\n"
@@ -466,6 +472,422 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
         assertEquals(FormEncodingType.URL_ENCODED, getMockWebConnection().getLastWebRequest().getEncodingType());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "third"},
+            IE = {"1", "first"})
+    @NotYetImplemented(IE)
+    public void buttonWithFormAction() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myButton' type='submit' formaction='" + URL_THIRD
+                        + "'>Submit with different form action</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>second</title></head>\n"
+                + "<body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
+
+        final String thirdContent = "<html><head><title>third</title></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertTrue(driver.getPageSource().contains(getExpectedAlerts()[1]));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void buttonWithFormActionNegative() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myButton' type='reset' formaction='" + URL_THIRD
+            + "'>Submit with different form action</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        //no additional actions
+        assertEquals(1, getMockWebConnection().getRequestCount());
+        assertEquals(URL_FIRST.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "third/"},
+            IE = {"1", "/"})
+    @NotYetImplemented(IE)
+    public void inputTypeSubmitWithFormAction() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myButton' type='submit' formaction='" + URL_THIRD + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+        final String thirdContent = "third content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertTrue(getMockWebConnection().getLastWebRequest()
+                    .getUrl().toExternalForm().endsWith(getExpectedAlerts()[1]));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "third content",
+            IE = "second content")
+    public void inputTypeImageWithFormAction() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myButton' type='image' alt='Submit' formaction='" + URL_THIRD + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+        final String thirdContent = "third content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertTrue("Incorrect conent of new window", driver.getPageSource().contains(getExpectedAlerts()[0]));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void buttonSubmitWithFormMethod() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST + "'>\n"
+            + "    <button id='myButton' type='submit' formmethod='" + HttpMethod.GET
+                        + "'>Submit with different form method</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void inputTypeSubmitWithFormMethod() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST + "'>\n"
+            + "    <input id='myButton' type='submit' formmethod='" + HttpMethod.GET + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "GET",
+            IE = "POST")
+    public void inputTypeImageWithFormMethod() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST + "'>\n"
+            + "    <input id='myButton' type='image' alt='Submit' formmethod='" + HttpMethod.GET + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getHttpMethod().name());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void buttonWithFormEnctype() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST
+                                + "' enctype='" + FormEncodingType.URL_ENCODED.getName() + "'>\n"
+            + "    <input type='file' value='file1'>\n"
+            + "    <button id='myButton' type='submit' formenctype='" + FormEncodingType.MULTIPART.getName()
+            + "'>Submit with different form encoding type</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(FormEncodingType.MULTIPART, getMockWebConnection().getLastWebRequest().getEncodingType());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void inputTypeSubmitWithFormEnctype() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST
+                                + "' enctype='" + FormEncodingType.URL_ENCODED.getName()
+                                + "'>\n"
+            + "    <input type='file' value='file1'>\n"
+            + "    <input id='myButton' type='submit' formenctype='" + FormEncodingType.MULTIPART.getName() + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(FormEncodingType.MULTIPART, getMockWebConnection().getLastWebRequest().getEncodingType());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "application/x-www-form-urlencoded",
+            IE = "multipart/form-data")
+    public void inputTypeImageWithFormEnctype() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND
+                                + "' method='" + HttpMethod.POST
+                                + "' enctype='" + FormEncodingType.MULTIPART.getName() + "'>\n"
+            + "    <input id='myButton' type='image' formenctype='" + FormEncodingType.URL_ENCODED.getName() + "' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(getExpectedAlerts()[0],
+                    getMockWebConnection().getLastWebRequest().getEncodingType().getName());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver(IE)
+    public void buttonWithFormTarget() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "' target='_self'>\n"
+            + "    <button id='myButton' type='submit'"
+                                    + " formtarget='_blank'>Submit with different form target</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        // check that initially we have one window
+        assertEquals("Incorrect number of openned window", 1, driver.getWindowHandles().size());
+        final String firstWindowId = driver.getWindowHandle();
+
+        driver.findElement(By.id("myButton")).click();
+
+        // check that after submit we have a new window
+        assertEquals("Incorrect number of openned window", 2, driver.getWindowHandles().size());
+
+        String newWindowId = "";
+        for (String id : driver.getWindowHandles()) {
+            if (!firstWindowId.equals(id)) {
+                newWindowId = id;
+                break;
+            }
+        }
+        // switch to the new window and check its content
+        driver.switchTo().window(newWindowId);
+        assertTrue("Incorrect conent of new window", driver.getPageSource().contains(secondContent));
+        driver.close();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "second content",
+            IE = "hello world")
+    @NotYetImplemented(IE)
+    public void inputTypeSubmitWithFormTarget() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "' target='_self'>\n"
+            + "    <input id='myButton' type='submit' formtarget='_blank' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        // check that initially we have one window
+        assertEquals("Incorrect number of openned window", 1, driver.getWindowHandles().size());
+        final String firstWindowId = driver.getWindowHandle();
+
+        driver.findElement(By.id("myButton")).click();
+
+        // check that after submit we have a new window
+        assertEquals("Incorrect number of openned window", 2, driver.getWindowHandles().size());
+
+        String newWindowId = "";
+        for (String id : driver.getWindowHandles()) {
+            if (!firstWindowId.equals(id)) {
+                newWindowId = id;
+                break;
+            }
+        }
+        // switch to the new window and check its content
+        driver.switchTo().window(newWindowId);
+        assertTrue("Incorrect conent of new window", driver.getPageSource().contains(getExpectedAlerts()[0]));
+        driver.close();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE = "1")
+    @NotYetImplemented(IE)
+    public void inputTypeImageWithFormTarget() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "' target='_self'>\n"
+            + "    <input id='myButton' type='image' alt='Submit' formtarget='_blank' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        // check that initially we have one window
+        assertEquals("Incorrect number of openned window", 1, driver.getWindowHandles().size());
+        final String firstWindowId = driver.getWindowHandle();
+
+        driver.findElement(By.id("myButton")).click();
+
+        // check that after submit we have a new window
+        assertEquals("Incorrect number of openned window",
+                Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
+
+        String newWindowId = "";
+        for (String id : driver.getWindowHandles()) {
+            if (!firstWindowId.equals(id)) {
+                newWindowId = id;
+                break;
+            }
+        }
+        // switch to the new window and check its content
+        driver.switchTo().window(newWindowId);
+        assertTrue("Incorrect conent of new window", driver.getPageSource().contains(secondContent));
+        driver.close();
     }
 
     /**
