@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeArrayTest extends WebDriverTestCase {
@@ -274,13 +275,41 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "a", "b", "c"},
             IE = "not supported")
-    public void from() throws Exception {
+    public void fromString() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  if (Array.from) {\n"
             + "    var arr = Array.from('abc');\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "a", "b", "c"},
+            IE = "not supported")
+    public void fromArray() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var arr = Array.from(['a', 'b', 'c']);\n"
             + "    alert(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
             + "      alert(arr[i]);\n"

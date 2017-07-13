@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                JavaScript: fix ClassCastException in Array.from.
+            </action>
             <action type="add" dev="rbri" due-to="Anton Demydenko" issue="1884">
                 Support for form attributes formaction, formmethod, formtarget and formenctype added.
             </action>

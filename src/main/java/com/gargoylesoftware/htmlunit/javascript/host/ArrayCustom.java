@@ -29,6 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * Contains some missing features of Rhino NativeArray.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class ArrayCustom {
 
@@ -50,7 +51,7 @@ public final class ArrayCustom {
             final Scriptable scriptable = (Scriptable) arrayLike;
             final Object length = scriptable.get("length", scriptable);
             if (length != Scriptable.NOT_FOUND) {
-                final int size = (int) length;
+                final int size = (int) Context.toNumber(length);
                 array = new Object[(int) size];
                 for (int i = 0; i < size; i++) {
                     array[i] = scriptable.get(i, scriptable);
