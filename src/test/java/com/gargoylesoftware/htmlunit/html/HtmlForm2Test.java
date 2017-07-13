@@ -32,7 +32,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.entity.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -432,7 +431,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  <p>hello world</p>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, secondContent, ContentType.MULTIPART_FORM_DATA.getMimeType());
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(html, URL_FIRST);
         driver.findElement(By.id("myButton")).click();
@@ -478,9 +477,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "third"},
-            IE = {"1", "first"})
-    @NotYetImplemented(IE)
+    @Alerts({"2", "third"})
+    @BuggyWebDriver(IE)
     public void buttonWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head><title>first</title></head>\n"
