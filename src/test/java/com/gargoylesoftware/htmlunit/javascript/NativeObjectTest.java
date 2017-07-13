@@ -362,4 +362,37 @@ public class NativeObjectTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
+                        "[object Object]", "function"},
+            CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
+    @NotYetImplemented
+    public void getOwnPropertyDescriptor() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var input = document.getElementById('myInput');\n"
+            + "      alert(input);\n"
+            + "      var proto = input.constructor.prototype;\n"
+            + "      alert(proto);\n"
+            + "      var desc = Object.getOwnPropertyDescriptor(proto, 'value');\n"
+            + "      alert(desc);\n"
+
+            + "      alert(typeof desc.get);\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='myInput' value='some test'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }
