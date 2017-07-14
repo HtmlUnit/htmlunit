@@ -106,6 +106,62 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label", "click listItem1", "click list"})
+    public void triggerRadioInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' onclick='alert(\"click radio1Label\")'>Radio 1\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' "
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label", "click listItem1", "click list"})
+    public void triggerRadioForAndInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>Radio 1\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' "
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
                 "click radio1", "click listItem1", "click list"})
     public void triggerRadioChecked() throws Exception {
         final String html = "<html>\n"
@@ -115,6 +171,62 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>Radio 1</label>\n"
             + "    <input id='radio1' name='radios' value='1' type='radio' checked "
                         + "onclick='alert(\"click radio1\");'>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label", "click listItem1", "click list"})
+    public void triggerRadioCheckedInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' onclick='alert(\"click radio1Label\")'>Radio 1\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' checked "
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("radio1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click radio1Label", "click listItem1", "click list",
+                "click radio1", "click radio1Label", "click listItem1", "click list"})
+    public void triggerRadioCheckedForAndInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='radio1Label' for='radio1' onclick='alert(\"click radio1Label\")'>Radio 1\n"
+            + "      <input id='radio1' name='radios' value='1' type='radio' checked "
+                          + "onclick='alert(\"click radio1\");'>\n"
+            + "    </label>"
             + "  </li>\n"
             + "</ul>\n"
             + "<button id='check' onclick='alert(document.getElementById(\"radio1\").checked)'>Check</button>\n"
@@ -428,6 +540,62 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' onclick='alert(\"click check1Label\")'>Checkbox 1\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' "
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxForAndInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>Checkbox 1\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' "
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "true");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
                 "click check1", "click listItem1", "click list"})
     public void triggerCheckboxChecked() throws Exception {
         final String html = "<html>\n"
@@ -437,6 +605,62 @@ public class HtmlLabelTest extends WebDriverTestCase {
             + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>Checkbox 1</label>\n"
             + "    <input id='check1' name='checks' value='1' type='checkbox' checked "
                         + "onclick='alert(\"click check1\");'>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "false");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxCheckedInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' onclick='alert(\"click check1Label\")'>Checkbox 1\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' checked "
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("check1Label")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+
+        driver.findElement(By.id("check")).click();
+        verifyAlerts(driver, "false");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"click check1Label", "click listItem1", "click list",
+                "click check1", "click check1Label", "click listItem1", "click list"})
+    public void triggerCheckboxCheckedForAndInside() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul onclick='alert(\"click list\")'>\n"
+            + "  <li onclick='alert(\"click listItem1\")'>\n"
+            + "    <label id='check1Label' for='check1' onclick='alert(\"click check1Label\")'>Checkbox 1\n"
+            + "      <input id='check1' name='checks' value='1' type='checkbox' checked "
+                          + "onclick='alert(\"click check1\");'>\n"
+            + "    </label>\n"
             + "  </li>\n"
             + "</ul>\n"
             + "<button id='check' onclick='alert(document.getElementById(\"check1\").checked)'>Check</button>\n"
