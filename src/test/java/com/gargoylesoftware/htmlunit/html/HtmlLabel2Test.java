@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlLabel2Test extends SimpleWebTestCase {
@@ -78,5 +79,109 @@ public class HtmlLabel2Test extends SimpleWebTestCase {
         assertTrue(checkBox == label.getReferencedElement());
         final HtmlLabel label2 = page.getHtmlElementById("testLabel2");
         assertNull(label2.getReferencedElement());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void triggerRadio() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul>\n"
+            + "  <li>\n"
+            + "    <label id='radio1Label' for='radio1'>Radio 1</label>\n"
+            + "    <input id='radio1' name='radios' value='1' type='radio'>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertFalse(((HtmlRadioButtonInput) page.getElementById("radio1")).isChecked());
+
+        page.getElementById("radio1Label").click();
+
+        assertTrue(((HtmlRadioButtonInput) page.getElementById("radio1")).isChecked());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void triggerRadioComplexCase() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul>\n"
+            + "  <li>\n"
+            + "    <label id='radio1Label' for='radio1'>\n"
+            + "      <span>\n"
+            + "        <input id='radio1' name='radios' value='1' type='radio'>\n"
+            + "        <span id='radio1Span'>Radio 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertFalse(((HtmlRadioButtonInput) page.getElementById("radio1")).isChecked());
+
+        page.getElementById("radio1Label").click();
+
+        assertTrue(((HtmlRadioButtonInput) page.getElementById("radio1")).isChecked());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void triggerCheckbox() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul>\n"
+            + "  <li>\n"
+            + "    <label id='check1Label' for='check1'>Checkbox 1</label>\n"
+            + "    <input id='check1' name='checks' value='1' type='checkbox'>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertFalse(((HtmlCheckBoxInput) page.getElementById("check1")).isChecked());
+
+        page.getElementById("check1Label").click();
+
+        assertTrue(((HtmlCheckBoxInput) page.getElementById("check1")).isChecked());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void triggerCheckboxComplexCase() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul>\n"
+            + "  <li>\n"
+            + "    <label id='check1Label' for='check1'>\n"
+            + "      <span>\n"
+            + "        <input id='check1' name='checks' value='1' type='checkbox'>\n"
+            + "        <span id='check1Span'>Checkbox 1</span>\n"
+            + "      </span>\n"
+            + "    </label>\n"
+            + "  </li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        getWebClient().getOptions().setJavaScriptEnabled(false);
+        final HtmlPage page = loadPage(html);
+        assertFalse(((HtmlCheckBoxInput) page.getElementById("check1")).isChecked());
+
+        page.getElementById("check1Label").click();
+
+        assertTrue(((HtmlCheckBoxInput) page.getElementById("check1")).isChecked());
     }
 }
