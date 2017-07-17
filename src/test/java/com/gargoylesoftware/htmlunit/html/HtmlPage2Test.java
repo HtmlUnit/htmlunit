@@ -27,7 +27,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.text.RandomStringGenerator;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -485,7 +485,8 @@ public class HtmlPage2Test extends SimpleWebTestCase {
      */
     @Test
     public void saveShouldStripLongFileNames() throws Exception {
-        final String longName = RandomStringUtils.randomAlphabetic(500) + ".html";
+        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+        final String longName = generator.generate(500) + ".html";
         final String html = "<html><body><iframe src='" + longName + "'></iframe></body></html>";
 
         final WebClient webClient = getWebClient();
