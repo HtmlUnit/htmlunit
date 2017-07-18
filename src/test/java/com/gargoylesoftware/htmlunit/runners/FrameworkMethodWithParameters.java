@@ -44,8 +44,8 @@ public class FrameworkMethodWithParameters extends FrameworkMethod {
     public FrameworkMethodWithParameters(final TestClass testClass, final Method method,
             final List<Object> parameters) {
         super(method);
-        this.testClass_ = testClass;
-        this.parameters_ = parameters;
+        testClass_ = testClass;
+        parameters_ = parameters;
     }
 
     /**

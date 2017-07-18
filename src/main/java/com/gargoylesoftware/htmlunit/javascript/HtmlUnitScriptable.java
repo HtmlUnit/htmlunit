@@ -153,7 +153,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
         catch (final IllegalArgumentException e) {
             // is it the right place or should Rhino throw a RuntimeError instead of an IllegalArgumentException?
             throw Context.reportRuntimeError("'set "
-                + name + "' called on an object that does not implement interface " + this.getClassName());
+                + name + "' called on an object that does not implement interface " + getClassName());
         }
     }
 }

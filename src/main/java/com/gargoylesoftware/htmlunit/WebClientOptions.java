@@ -608,7 +608,7 @@ public class WebClientOptions implements Serializable {
      * @param localAddress the local address
      */
     public void setLocalAddress(final InetAddress localAddress) {
-        this.localAddress_ = localAddress;
+        localAddress_ = localAddress;
     }
 
     /**
@@ -616,7 +616,7 @@ public class WebClientOptions implements Serializable {
      * @param downloadImages whether to automatically download images by default, or not
      */
     public void setDownloadImages(final boolean downloadImages) {
-        this.downloadImages_ = downloadImages;
+        downloadImages_ = downloadImages;
     }
 
     /**
@@ -633,7 +633,7 @@ public class WebClientOptions implements Serializable {
      * @param screenWidth the screen width
      */
     public void setScreenWidth(final int screenWidth) {
-        this.screenWidth_ = screenWidth;
+        screenWidth_ = screenWidth;
     }
 
     /**
@@ -651,7 +651,7 @@ public class WebClientOptions implements Serializable {
      * @param screenHeight the screen height
      */
     public void setScreenHeight(final int screenHeight) {
-        this.screenHeight_ = screenHeight;
+        screenHeight_ = screenHeight;
     }
 
     /**

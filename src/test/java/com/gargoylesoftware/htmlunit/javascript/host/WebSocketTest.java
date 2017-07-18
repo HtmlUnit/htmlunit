@@ -211,7 +211,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
             @Override
             public void onWebSocketConnect(final Session session) {
-                this.session_ = session;
+                session_ = session;
                 webSockets_.add(this);
             }
 
@@ -328,7 +328,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
             @Override
             public void onWebSocketConnect(final Session session) {
-                this.session_ = session;
+                session_ = session;
                 webSockets_.add(this);
             }
 

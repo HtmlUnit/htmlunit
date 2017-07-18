@@ -268,7 +268,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
      * @param webWindow the {@link WebWindow}
      */
     public void setWebWindow(final WebWindow webWindow) {
-        this.webWindow_ = webWindow;
+        webWindow_ = webWindow;
     }
 
     /**

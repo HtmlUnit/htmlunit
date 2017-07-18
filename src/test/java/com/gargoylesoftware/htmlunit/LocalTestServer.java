@@ -36,7 +36,7 @@ public class LocalTestServer extends LocalServerTestBase {
     public LocalTestServer(final SSLContext sslContext) throws Exception {
         super(ProtocolScheme.https);
         super.setUp();
-        this.serverBootstrap.setSslContext(sslContext);
+        serverBootstrap.setSslContext(sslContext);
     }
 
     /**
@@ -45,7 +45,7 @@ public class LocalTestServer extends LocalServerTestBase {
      * @param handler the handler
      */
     public void register(final String pattern, final HttpRequestHandler handler) {
-        this.serverBootstrap.registerHandler(pattern, handler);
+        serverBootstrap.registerHandler(pattern, handler);
     }
 
     /**
@@ -53,6 +53,6 @@ public class LocalTestServer extends LocalServerTestBase {
      * @return the server
      */
     public HttpServer getServer() {
-        return this.server;
+        return server;
     }
 }
