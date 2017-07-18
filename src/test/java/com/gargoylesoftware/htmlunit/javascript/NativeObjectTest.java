@@ -369,7 +369,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
                         "[object Object]", "function"},
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
-    @NotYetImplemented
+    @NotYetImplemented({FF, IE})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
             + "<html><head>\n"
