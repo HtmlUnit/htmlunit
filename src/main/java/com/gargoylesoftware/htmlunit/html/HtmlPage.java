@@ -1873,7 +1873,7 @@ public class HtmlPage extends SgmlPage {
                 // just using get() may use e.g. getWithPreemption().
                 if (scriptObject.has(attribute, scriptObject)) {
                     final Object jsValue = scriptObject.get(attribute, scriptObject);
-                    if (jsValue != null && jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
+                    if (jsValue != Scriptable.NOT_FOUND && jsValue instanceof String) {
                         value = (String) jsValue;
                     }
                 }
@@ -1882,7 +1882,7 @@ public class HtmlPage extends SgmlPage {
                 final ScriptObject scriptObject = (ScriptObject) o;
                 if (scriptObject.has(attribute)) {
                     final Object jsValue = scriptObject.get(attribute);
-                    if (jsValue != null /*&& jsValue != Scriptable.NOT_FOUND*/ && jsValue instanceof String) {
+                    if (/*jsValue != Scriptable.NOT_FOUND &&*/ jsValue instanceof String) {
                         value = (String) jsValue;
                     }
                 }

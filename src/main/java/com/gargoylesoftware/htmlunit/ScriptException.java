@@ -135,7 +135,7 @@ public class ScriptException extends RuntimeException {
         }
 
         super.printStackTrace(printWriter);
-        if (getCause() != null && getCause() instanceof JavaScriptException) {
+        if (getCause() instanceof JavaScriptException) {
             final Object value = ((JavaScriptException) getCause()).getValue();
 
             printWriter.print("JavaScriptException value = ");
@@ -146,7 +146,7 @@ public class ScriptException extends RuntimeException {
                 printWriter.println(value);
             }
         }
-        else if (getCause() != null && getCause() instanceof WrappedException) {
+        else if (getCause() instanceof WrappedException) {
             final WrappedException wrappedException = (WrappedException) getCause();
             printWriter.print("WrappedException: ");
             wrappedException.printStackTrace(printWriter);

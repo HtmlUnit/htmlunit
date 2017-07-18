@@ -1152,8 +1152,7 @@ public class Document extends Node {
                     document = (Document) page.getScriptableObject();
                 }
             }
-            if (document != null && document instanceof HTMLDocument
-                && ((HTMLDocument) document).getDocumentMode() < 8) {
+            if (document instanceof HTMLDocument && ((HTMLDocument) document).getDocumentMode() < 8) {
                 return NOT_FOUND;
             }
         }

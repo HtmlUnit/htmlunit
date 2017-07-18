@@ -499,7 +499,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
      * @param content the content to send
      */
     private void prepareRequest(final Object content) {
-        if (content != null && !Undefined.instance.equals(content)) {
+        if (content != null && content != Undefined.instance) {
             if (!"".equals(content) && HttpMethod.GET == webRequest_.getHttpMethod()) {
                 webRequest_.setHttpMethod(HttpMethod.POST);
             }

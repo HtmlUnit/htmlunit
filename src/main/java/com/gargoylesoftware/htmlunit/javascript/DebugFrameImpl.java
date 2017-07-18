@@ -203,7 +203,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                             Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, false);
                             if (o == null) {
                                 o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, true);
-                                if (o != null && o instanceof Callable) {
+                                if (o instanceof Callable) {
                                     return "__defineSetter__ " + s;
                                 }
                             }

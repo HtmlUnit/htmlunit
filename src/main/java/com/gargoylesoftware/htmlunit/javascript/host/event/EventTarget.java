@@ -211,7 +211,7 @@ public class EventTarget extends SimpleScriptable {
 
             if (label != null) {
                 final HtmlElement element = label.getReferencedElement();
-                if (element != null && element != this.getDomNodeOrNull()) {
+                if (element != null && element != getDomNodeOrNull()) {
                     try {
                         element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), false, true, true);
                     }

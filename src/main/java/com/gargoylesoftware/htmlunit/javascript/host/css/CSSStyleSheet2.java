@@ -560,7 +560,7 @@ public class CSSStyleSheet2 extends StyleSheet2 {
             // a cached script
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
-            if (fromCache != null && fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
+            if (fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
                 uri = request.getUrl().toExternalForm();
                 sheet = new CSSStyleSheet2(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, uri);
             }

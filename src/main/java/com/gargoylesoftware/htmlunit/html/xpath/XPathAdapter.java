@@ -85,7 +85,7 @@ class XPathAdapter {
 
         mainExp_ = expr;
 
-        if (locator != null && locator instanceof ExpressionNode) {
+        if (locator instanceof ExpressionNode) {
             expr.exprSetParent((ExpressionNode) locator);
         }
     }
