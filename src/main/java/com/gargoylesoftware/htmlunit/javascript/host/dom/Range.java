@@ -497,7 +497,7 @@ public class Range extends SimpleScriptable {
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         // simple impl for now
-        final DomDocumentFragment fragment = (DomDocumentFragment) toW3C().extractContents();
+        final DomDocumentFragment fragment = toW3C().extractContents();
         for (DomNode node : fragment.getDescendants()) {
             final ScriptableObject scriptable = node.getScriptableObject();
             if (scriptable instanceof HTMLElement) {
@@ -523,7 +523,7 @@ public class Range extends SimpleScriptable {
         rect.setPrototype(getPrototype(rect.getClass()));
 
         // simple impl for now
-        final DomDocumentFragment fragment = (DomDocumentFragment) toW3C().extractContents();
+        final DomDocumentFragment fragment = toW3C().extractContents();
         for (DomNode node : fragment.getDescendants()) {
             final ScriptableObject scriptable = node.getScriptableObject();
             if (scriptable instanceof HTMLElement) {

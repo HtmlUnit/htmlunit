@@ -242,12 +242,12 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 Object jsDoc = null;
                 final Object window = getPage().getEnclosingWindow().getScriptableObject();
                 if (window instanceof Window) {
-                    jsDoc = (HTMLDocument) ((Window) window).getDocument();
+                    jsDoc = ((Window) window).getDocument();
                     ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
                 }
                 else {
-                    jsDoc = (HTMLDocument2) Window2.getDocument(getPage().getEnclosingWindow().getScriptableObject());
+                    jsDoc = Window2.getDocument(getPage().getEnclosingWindow().getScriptableObject());
                     ((HTMLDocument2) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
                 }

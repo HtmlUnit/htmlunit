@@ -468,13 +468,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     ObjectCustom.class, ScriptableObject.DONTENUM);
 
             final ScriptableObject arrayPrototype = (ScriptableObject) ScriptRuntime.name(context, window, "Array");
-            ((ScriptableObject) arrayPrototype).defineFunctionProperties(new String[] {"from"},
+            arrayPrototype.defineFunctionProperties(new String[] {"from"},
                     ArrayCustom.class, ScriptableObject.DONTENUM);
         }
 
         final ScriptableObject numberPrototype
             = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Number");
-        ((ScriptableObject) numberPrototype).defineFunctionProperties(new String[] {"toLocaleString"},
+        numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
 
         window.setPrototypes(prototypes, prototypesPerJSName);

@@ -52,7 +52,7 @@ public final class ArrayCustom {
             final Object length = scriptable.get("length", scriptable);
             if (length != Scriptable.NOT_FOUND) {
                 final int size = (int) Context.toNumber(length);
-                array = new Object[(int) size];
+                array = new Object[size];
                 for (int i = 0; i < size; i++) {
                     array[i] = scriptable.get(i, scriptable);
                 }

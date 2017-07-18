@@ -91,10 +91,10 @@ public class Set extends SimpleScriptable {
                 else if (iterable instanceof Map) {
                     final Iterator iterator = (Iterator) ((Map) iterable).entries();
 
-                    SimpleScriptable object = (SimpleScriptable) iterator.next();
+                    SimpleScriptable object = iterator.next();
                     while (Undefined.instance != object.get("value", null)) {
                         add(object);
-                        object = (SimpleScriptable) iterator.next();
+                        object = iterator.next();
                     }
                 }
                 else {

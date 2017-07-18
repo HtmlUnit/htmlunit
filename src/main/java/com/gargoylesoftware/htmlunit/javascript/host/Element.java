@@ -1033,7 +1033,7 @@ public class Element extends Node {
 
             Element htmlElement = null;
             if (scriptObject instanceof HTMLElement) {
-                htmlElement = (Element) scriptObject;
+                htmlElement = scriptObject;
             }
             builder.append("<").append(tag);
             // Add the attributes. IE does not use quotes, FF does.

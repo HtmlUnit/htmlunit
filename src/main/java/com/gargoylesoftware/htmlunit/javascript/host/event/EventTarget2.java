@@ -291,7 +291,7 @@ public class EventTarget2 extends SimpleScriptObject {
             eventTarget = (EventTarget2) self;
         }
         else {
-            final HTMLDocument2 document = (HTMLDocument2) Window2.getDocument((Global) self);
+            final HTMLDocument2 document = (HTMLDocument2) Window2.getDocument(self);
             eventTarget = document.getBody();
         }
         event.setTarget(eventTarget);
