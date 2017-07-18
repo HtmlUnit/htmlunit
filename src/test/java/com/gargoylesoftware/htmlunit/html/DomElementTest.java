@@ -19,11 +19,13 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -129,6 +131,74 @@ public final class DomElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).sendKeys("Hello");
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @NotYetImplemented
+    public void sendEnterKeyWithHiddenSubmit() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myText' type='text'>\n"
+            + "    <input id='myButton' type='submit' style='display: none;'>Submit</input>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myText")).sendKeys(Keys.ENTER);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    public void sendEnterKey() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myText' type='text'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myText")).sendKeys(Keys.ENTER);
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+        assertEquals(URL_SECOND, getMockWebConnection().getLastWebRequest().getUrl());
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test(expected = ElementNotInteractableException.class)
+    public void clickHiddenSubmit() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myButton' type='submit' style='display: none;'>Submit</input>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final String secondContent = "second content";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
     }
 
 }
