@@ -281,7 +281,7 @@ public class Event extends SimpleScriptable {
         boolean bubbles = false;
         boolean cancelable = false;
 
-        if (details != null && !Undefined.instance.equals(details)) {
+        if (details != null && details != Undefined.instance) {
             final Boolean detailBubbles = (Boolean) details.get("bubbles");
             if (detailBubbles != null) {
                 bubbles = detailBubbles.booleanValue();

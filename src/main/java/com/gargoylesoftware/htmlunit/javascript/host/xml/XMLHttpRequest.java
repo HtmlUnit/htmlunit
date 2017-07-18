@@ -686,7 +686,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
-            && !Undefined.instance.equals(content)) {
+            && content != Undefined.instance) {
             if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
             }

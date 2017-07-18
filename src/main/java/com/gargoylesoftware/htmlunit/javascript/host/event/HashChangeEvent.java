@@ -79,7 +79,7 @@ public class HashChangeEvent extends Event {
 
         String oldURL = "";
         String newURL = "";
-        if (details != null && !Undefined.instance.equals(details)) {
+        if (details != null && details != Undefined.instance) {
             oldURL = (String) details.get("oldURL");
             newURL = (String) details.get("newURL");
         }
