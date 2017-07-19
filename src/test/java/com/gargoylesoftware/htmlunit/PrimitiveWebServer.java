@@ -72,7 +72,7 @@ public class PrimitiveWebServer {
 
             @Override
             public void run() {
-            	boolean first = true;
+                boolean first = true;
                 try {
                     while (true) {
                         final Socket socket = server_.accept();
@@ -87,14 +87,14 @@ public class PrimitiveWebServer {
                         }
                         requests_.add(writer.toString());
                         try (OutputStream out = socket.getOutputStream()) {
-                        	final String response;
-                        	if (first || otherResponse_ == null) {
-                        		response = firstResponse_;
-                        	}
-                        	else {
-                        		response = otherResponse_;
-                        	}
-                        	first = false;
+                            final String response;
+                            if (first || otherResponse_ == null) {
+                                response = firstResponse_;
+                            }
+                            else {
+                                response = otherResponse_;
+                            }
+                            first = false;
                             out.write(response.getBytes(StandardCharsets.UTF_8));
                         }
                     }
