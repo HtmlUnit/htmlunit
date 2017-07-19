@@ -36,9 +36,9 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.text.RandomStringGenerator;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -90,12 +90,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void memoryLeak() throws Exception {
+        final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+
         long count = 0;
         while (count++ < 3000) {
             final BrowserVersion browserVersion = new BrowserVersion(
-                "App" + RandomStringUtils.randomAlphanumeric(20),
-                "Version" + RandomStringUtils.randomAlphanumeric(20),
-                "User Agent" + RandomStringUtils.randomAlphanumeric(20),
+                "App" + generator.generate(20),
+                "Version" + generator.generate(20),
+                "User Agent" + generator.generate(20),
                 1);
             JavaScriptConfiguration.getInstance(browserVersion);
             if (LOG.isInfoEnabled()) {
