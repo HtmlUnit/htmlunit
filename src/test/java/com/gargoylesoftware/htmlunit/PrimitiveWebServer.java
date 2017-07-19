@@ -34,18 +34,32 @@ import java.util.List;
 public class PrimitiveWebServer {
 
     private final int port_;
-    private final String defaultResponse_;
+    private final String firstResponse_;
+    private final String otherResponse_;
     private ServerSocket server_;
     private List<String> requests_ = new ArrayList<>();
 
     /**
      * Constructs a new SimpleWebServer.
+     *
      * @param port the port
      * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
      */
     public PrimitiveWebServer(final int port, final String defaultResponse) {
+        this(port, defaultResponse, null);
+    }
+
+    /**
+     * Constructs a new SimpleWebServer.
+     *
+     * @param port the port
+     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param otherResponse the sebsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     */
+    public PrimitiveWebServer(final int port, final String firstResponse, final String otherResponse) {
         port_ = port;
-        defaultResponse_ = defaultResponse;
+        firstResponse_ = firstResponse;
+        otherResponse_ = otherResponse;
     }
 
     /**
@@ -58,6 +72,7 @@ public class PrimitiveWebServer {
 
             @Override
             public void run() {
+            	boolean first = true;
                 try {
                     while (true) {
                         final Socket socket = server_.accept();
@@ -72,7 +87,15 @@ public class PrimitiveWebServer {
                         }
                         requests_.add(writer.toString());
                         try (OutputStream out = socket.getOutputStream()) {
-                            out.write(defaultResponse_.getBytes(StandardCharsets.UTF_8));
+                        	final String response;
+                        	if (first || otherResponse_ == null) {
+                        		response = firstResponse_;
+                        	}
+                        	else {
+                        		response = otherResponse_;
+                        	}
+                        	first = false;
+                            out.write(response.getBytes(StandardCharsets.UTF_8));
                         }
                     }
                 }
