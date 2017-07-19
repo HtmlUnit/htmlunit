@@ -157,28 +157,67 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("§§URL§§%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
+    // seems to work only when running alone
     public void locationUTF() throws Exception {
-    	final String response = "HTTP/1.1 302 Found\r\n"
-    			+ "Content-Length: 0\r\n"
-    			+ "Location: http://localhost:" + PORT + "/أهلاً" + "\r\n"
-    			+ "\r\n";
+        final String response = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Location: " +  URL_FIRST.toExternalForm() + "أهلاً" + "\r\n"
+                + "\r\n";
 
-    	final String response2 = "HTTP/1.1 200 OK\r\n"
-    			+ "Content-Length: 2\r\n"
-    			+ "Content-Type: text/html\r\n"
-    			+ "\r\n"
-    			+ "Hi";
+        final String response2 = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "Hi";
 
-    	primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
-    	primitiveWebServer_.start();
+        expandExpectedAlertsVariables(URL_FIRST);
 
-    	final WebDriver driver = getWebDriver();
-    	driver.get("http://localhost:" + PORT);
-    	assertEquals("http://localhost:" + PORT + "/%D8%A3%D9%87%D9%84%D8%A7%D9%8B", driver.getCurrentUrl());
-    	assertTrue(driver.getPageSource().contains("Hi"));
-    	final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
-    			.collect(Collectors.toList());
-    	assertEquals(2, requests.size());
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertTrue(driver.getPageSource().contains("Hi"));
+
+        final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
+                .collect(Collectors.toList());
+        assertEquals(2, requests.size());
     }
 
+    /**
+     * Test for bug #1898.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
+    // seems to work only when running alone
+    public void locationQueryUTF() throws Exception {
+        final String response = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Location: " +  URL_FIRST.toExternalForm() + "test?أهلاً" + "\r\n"
+                + "\r\n";
+
+        final String response2 = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "Hi";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertTrue(driver.getPageSource().contains("Hi"));
+
+        final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
+                .collect(Collectors.toList());
+        assertEquals(2, requests.size());
+    }
 }
