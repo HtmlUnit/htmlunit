@@ -850,7 +850,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
-                .singletonList(new NameValuePair("Refresh", "2;URL=" + URL_SECOND + "")));
+                .singletonList(new NameValuePair("Refresh", "2;URL=" + URL_SECOND)));
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
 

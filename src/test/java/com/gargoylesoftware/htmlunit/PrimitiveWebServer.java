@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,16 +34,16 @@ import java.util.List;
 public class PrimitiveWebServer {
 
     private final int port_;
-    private final byte[] defaultResponse_;
+    private final String defaultResponse_;
     private ServerSocket server_;
     private List<String> requests_ = new ArrayList<>();
 
     /**
      * Constructs a new SimpleWebServer.
      * @param port the port
-     * @param defaultResponse the default response, must contain all bytes (to start with "HTTP/1.1 200 OK")
+     * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
      */
-    public PrimitiveWebServer(final int port, final byte[] defaultResponse) {
+    public PrimitiveWebServer(final int port, final String defaultResponse) {
         port_ = port;
         defaultResponse_ = defaultResponse;
     }
@@ -71,7 +72,7 @@ public class PrimitiveWebServer {
                         }
                         requests_.add(writer.toString());
                         try (OutputStream out = socket.getOutputStream()) {
-                            out.write(defaultResponse_);
+                            out.write(defaultResponse_.getBytes(StandardCharsets.UTF_8));
                         }
                     }
                 }

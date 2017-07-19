@@ -59,11 +59,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + "Hi";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
         primitiveWebServer_.start();
         final WebDriver driver = getWebDriver();
 
-        driver.get("http://localhost:" + PORT + "");
+        driver.get("http://localhost:" + PORT);
         final String request = primitiveWebServer_.getRequests().get(0);
         final String[] headers = request.split("\\r\\n");
         final String[] result = new String[headers.length - 1];
@@ -107,11 +107,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + htmlResponse;
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
         primitiveWebServer_.start();
         final WebDriver driver = getWebDriver();
 
-        driver.get("http://localhost:" + PORT + "");
+        driver.get("http://localhost:" + PORT);
         driver.findElement(By.linkText("Click me")).click();
 
         final Wait<WebDriver> wait = new WebDriverWait(driver, 5);

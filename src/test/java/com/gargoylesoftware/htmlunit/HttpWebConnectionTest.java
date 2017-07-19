@@ -562,7 +562,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "\r\n"
                 + "<html><body><p>visible text</p></body></html>";
 
-        final PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(PORT, response.getBytes());
+        final PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(PORT, response);
         try {
             primitiveWebServer.start();
 

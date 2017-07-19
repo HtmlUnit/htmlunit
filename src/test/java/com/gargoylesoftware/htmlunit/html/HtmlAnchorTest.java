@@ -603,7 +603,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Alerts({"§§URL§§bug.html?h%C3%B6=G%C3%BCnter", "h\u00F6", "G\u00FCnter"})
     public void encoding() throws Exception {
         final String href = "bug.html?" + URLEncoder.encode("h\u00F6", "UTF-8")
-                + '=' + URLEncoder.encode("G\u00FCnter", "UTF-8") + "";
+                + '=' + URLEncoder.encode("G\u00FCnter", "UTF-8");
         final String html =
             "<html>\n"
             + "<head>\n"

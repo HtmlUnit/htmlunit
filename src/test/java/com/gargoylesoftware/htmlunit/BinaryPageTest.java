@@ -131,7 +131,7 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response.getBytes());
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
         primitiveWebServer_.start();
         final WebClient client = getWebClient();
 
