@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Test;
@@ -147,6 +149,38 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 return currentUrl != null && currentUrl.contains(url);
             }
         };
+    }
+
+    /**
+     * Test for bug #1898.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @NotYetImplemented
+    public void locationUTF() throws Exception {
+    	final String response = "HTTP/1.1 302 Found\r\n"
+    			+ "Content-Length: 0\r\n"
+    			+ "Location: http://localhost:" + PORT + "/أهلاً" + "\r\n"
+    			+ "\r\n"
+    			+ "<html><body><p>visible text</p></body></html>";
+
+    	final String response2 = "HTTP/1.1 200 OK\r\n"
+    			+ "Content-Length: 2\r\n"
+    			+ "Content-Type: text/html\r\n"
+    			+ "\r\n"
+    			+ "Hi";
+
+    	primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
+    	primitiveWebServer_.start();
+
+    	final WebDriver driver = getWebDriver();
+    	driver.get("http://localhost:" + PORT);
+    	assertEquals("http://localhost:" + PORT + "/%D8%A3%D9%87%D9%84%D8%A7%D9%8B", driver.getCurrentUrl());
+    	assertTrue(driver.getPageSource().contains("Hi"));
+    	final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
+    			.collect(Collectors.toList());
+    	assertEquals(2, requests.size());
     }
 
 }
