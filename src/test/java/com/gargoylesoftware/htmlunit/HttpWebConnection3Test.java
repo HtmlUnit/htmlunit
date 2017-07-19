@@ -162,8 +162,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     	final String response = "HTTP/1.1 302 Found\r\n"
     			+ "Content-Length: 0\r\n"
     			+ "Location: http://localhost:" + PORT + "/أهلاً" + "\r\n"
-    			+ "\r\n"
-    			+ "<html><body><p>visible text</p></body></html>";
+    			+ "\r\n";
 
     	final String response2 = "HTTP/1.1 200 OK\r\n"
     			+ "Content-Length: 2\r\n"
