@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
@@ -1419,6 +1420,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (locationString == null) {
                     return webResponse;
                 }
+                locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
                 newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {

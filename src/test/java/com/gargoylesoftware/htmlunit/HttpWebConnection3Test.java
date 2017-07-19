@@ -157,7 +157,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented
     public void locationUTF() throws Exception {
     	final String response = "HTTP/1.1 302 Found\r\n"
     			+ "Content-Length: 0\r\n"
