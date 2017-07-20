@@ -2594,9 +2594,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"undefined", "42"})
-    @NotYetImplemented
-    // works with Nashorn because we don't use DocumentProxy
-    // fails with Rhino because DocumentProxy is not ScriptableObject
     public void documentDefineProperty() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
