@@ -21,7 +21,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -146,21 +145,6 @@ public class HtmlFileInput extends HtmlInput {
     @Override
     public void setValueAttribute(final String newValue) {
         setFiles(new File(newValue));
-    }
-
-    /**
-     * Used to specify <code>multiple</code> paths to upload.
-     *
-     * The current implementation splits the value based on '§'.
-     * We may follow WebDriver solution, once made,
-     * see https://code.google.com/p/selenium/issues/detail?id=2239
-     * @param files the list of paths of the files to upload
-     * @deprecated as of 2.25, please use {@link #setFiles(File...)} instead
-     */
-    @Deprecated
-    public void setValueAttribute(final String[] files) {
-        final File[] array = Stream.of(files).map(p -> new File(p)).toArray(File[]::new);
-        setFiles(array);
     }
 
     /**

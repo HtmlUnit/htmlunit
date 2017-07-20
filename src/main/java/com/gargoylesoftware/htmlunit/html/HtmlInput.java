@@ -18,13 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DIS
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -483,26 +481,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public boolean isReadOnly() {
         return hasAttribute("readOnly");
-    }
-
-    /**
-     * Simulate clicking this input with a pointing device. The x and y coordinates
-     * of the pointing device will be sent to the server.
-     *
-     * @param <P> the page type
-     * @param x the x coordinate of the pointing device at the time of clicking
-     * @param y the y coordinate of the pointing device at the time of clicking
-     * @return the page that is loaded after the click has taken place
-     * @exception IOException If an IO error occurs
-     * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
-     * @deprecated as of 2.25, please use {@link #click()}
-     */
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    public <P extends Page> P click(final int x, final int y)
-        throws IOException, ElementNotFoundException {
-        // By default this is no different than a click without coordinates.
-        return (P) click();
     }
 
     /**

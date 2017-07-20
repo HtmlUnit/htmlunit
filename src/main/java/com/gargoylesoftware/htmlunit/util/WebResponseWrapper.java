@@ -69,25 +69,6 @@ public class WebResponseWrapper extends WebResponse {
 
     /**
      * {@inheritDoc}
-     * The default behavior of this method is to return getContentAsString(String) on the wrapped webResponse object.
-     */
-    @Override
-    @Deprecated
-    public String getContentAsString(final String encoding) {
-        return wrappedWebResponse_.getContentAsString(encoding);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @Deprecated
-    public String getContentAsString(final String encoding, final String defaultEncoding) {
-        return wrappedWebResponse_.getContentAsString(encoding, defaultEncoding);
-    }
-
-    /**
-     * {@inheritDoc}
      * The default behavior of this method is to return getContentAsString(Charset) on the wrapped webResponse object.
      */
     @Override

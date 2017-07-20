@@ -54,18 +54,6 @@ public class StringWebResponse extends WebResponse {
      * @param content the content to return
      * @param charset the charset used to convert the content
      * @param originatingURL the URL that this should be associated with
-     * @deprecated as of 2.25, please use {@link #StringWebResponse(String, Charset, URL)}
-     */
-    @Deprecated
-    public StringWebResponse(final String content, final String charset, final URL originatingURL) {
-        this(content, Charset.forName(charset), originatingURL);
-    }
-
-    /**
-     * Creates an instance associated with the specified originating URL.
-     * @param content the content to return
-     * @param charset the charset used to convert the content
-     * @param originatingURL the URL that this should be associated with
      */
     public StringWebResponse(final String content, final Charset charset, final URL originatingURL) {
         super(getWebResponseData(content, charset), buildWebRequest(originatingURL, charset), 0);

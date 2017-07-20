@@ -201,48 +201,6 @@ public class WebResponse implements Serializable {
     }
 
     /**
-     * Returns the response content as a string, using the specified charset/encoding,
-     * rather than the charset/encoding specified in the server response. If the specified
-     * charset/encoding is not supported then the default system encoding is used.
-     * @param encoding the charset/encoding to use to convert the response content into a string
-     * @return the response content as a string or null if the content retrieval was failing
-     * @deprecated as of 2.25, please use {@link #getContentAsString(Charset)} instead
-     */
-    @Deprecated
-    public String getContentAsString(final String encoding) {
-        return getContentAsString(encoding, null);
-    }
-
-    /**
-     * Returns the response content as a string, using the specified charset/encoding,
-     * rather than the charset/encoding specified in the server response. If the specified
-     * charset/encoding is not supported then the provided default encoding is used.
-     * @param encoding the charset/encoding to use to convert the response content into a string
-     * @param defaultEncoding the default encoding to use if the specified {@code encode} is not supported
-     * @return the response content as a string or null if the content retrieval was failing
-     * @deprecated as of 2.25, please use {@link #getContentAsString(Charset)} instead
-     */
-    @Deprecated
-    public String getContentAsString(final String encoding, final String defaultEncoding) {
-        Charset charset;
-        // first verify the charset because we can't read the
-        // input stream twice
-        try {
-            charset = Charset.forName(encoding);
-        }
-        catch (final Exception e) {
-            if (encoding.equals(defaultEncoding)) {
-                LOG.warn(e);
-                return "";
-            }
-            charset = defaultEncoding != null ? Charset.forName(defaultEncoding) : getContentCharset();
-            LOG.warn("Attempted to use unsupported encoding '"
-                    + encoding + "'; using default content charset ('" + charset + "').");
-        }
-        return getContentAsString(charset);
-    }
-
-    /**
      * Returns the response content as a string, using the specified charset,
      * rather than the charset/encoding specified in the server response.
      * If there is a bom header the charset parameter will be overwritten by the bom.

@@ -423,17 +423,6 @@ public class WebRequest implements Serializable {
     /**
      * Sets the character set to use to perform the request. The default value
      * is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
-     * @param charsetName the character set to use to perform the request
-     * @deprecated as of 2.25, please use {@link #setCharset(Charset)}
-     */
-    @Deprecated
-    public void setCharset(final String charsetName) {
-        charset_ = Charset.forName(charsetName);
-    }
-
-    /**
-     * Sets the character set to use to perform the request. The default value
-     * is {@link java.nio.charset.StandardCharsets#ISO_8859_1}.
      * @param charset the character set to use to perform the request
      */
     public void setCharset(final Charset charset) {

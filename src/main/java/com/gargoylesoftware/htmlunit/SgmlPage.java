@@ -194,17 +194,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     public abstract Element createElementNS(String namespaceURI, String qualifiedName);
 
     /**
-     * Returns the page encoding.
-     * @return the page encoding
-     * @deprecated as of 2.25, please use {@link #getCharset()} instead
-     */
-    @Deprecated
-    public String getPageEncoding() {
-        final Charset charset = getCharset();
-        return charset == null ? null : charset.name();
-    }
-
-    /**
      * Returns the encoding.
      * @return the encoding
      */

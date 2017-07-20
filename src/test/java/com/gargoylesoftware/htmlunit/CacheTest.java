@@ -436,11 +436,6 @@ class DummyWebResponse extends WebResponse {
     }
 
     @Override
-    public String getContentAsString(final String encoding) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
     public Charset getContentCharset() {
         throw new RuntimeException("not implemented");
     }

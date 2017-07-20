@@ -137,10 +137,7 @@ public class HtmlImageInput extends HtmlInput {
      * @return the page that is loaded after the click has taken place
      * @exception IOException If an IO error occurs
      * @exception ElementNotFoundException If a particular XML element could not be found in the DOM model
-     * @deprecated as of 2.25, please use {@link #click()}
      */
-    @Override
-    @Deprecated
     public <P extends Page> P click(final int x, final int y) throws IOException, ElementNotFoundException {
         wasPositionSpecified_ = true;
         xPosition_ = x;
