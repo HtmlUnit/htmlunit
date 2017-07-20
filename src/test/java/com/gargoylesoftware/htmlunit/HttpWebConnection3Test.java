@@ -193,7 +193,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
-    @NotYetImplemented
     // seems to work only when running alone
     public void locationQueryUTF() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
