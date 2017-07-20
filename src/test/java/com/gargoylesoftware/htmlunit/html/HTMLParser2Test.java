@@ -117,7 +117,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * This tests for an bug in NekoHTML.
+     * This tests for a bug in NekoHTML.
      * @throws Exception on test failure
      */
     @Test
@@ -145,7 +145,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
-     * This tests for an bug in NekoHTML.
+     * This tests for a bug in NekoHTML.
      * @throws Exception on test failure
      */
     @Test

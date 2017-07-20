@@ -1265,7 +1265,7 @@ public abstract class HtmlElement extends DomElement {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Detach this node from all relationships with other nodes.
-     * This is the first step of an move.
+     * This is the first step of a move.
      */
     @Override
     protected void detach() {

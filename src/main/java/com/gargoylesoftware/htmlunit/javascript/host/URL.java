@@ -41,7 +41,7 @@ public class URL extends SimpleScriptable {
     }
 
     /**
-     * The URL.createObjectURL() static method creates a DOMString containing an URL
+     * The URL.createObjectURL() static method creates a DOMString containing a URL
      * representing the object given in parameter.
      * The URL lifetime is tied to the document in the window on which it was created.
      * The new object URL represents the specified File object or Blob object.

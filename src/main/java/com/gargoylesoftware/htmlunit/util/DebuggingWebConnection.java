@@ -62,7 +62,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
  * In this example an overview page will be generated under the name myTest/index.html in the temp directory
  * and all received responses will be saved into the myTest folder.<br>
  * <br>
- * <em>This class is only intended as an help during the conception.</em>
+ * <em>This class is only intended as a help during the conception.</em>
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour

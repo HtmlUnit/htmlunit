@@ -181,7 +181,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that calling document.write() after document parsing has finished results in an whole
+     * Verifies that calling document.write() after document parsing has finished results in a whole
      * new page being loaded.
      * @throws Exception if an error occurs
      */

@@ -309,7 +309,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility to test external form of an URL.
+     * Facility to test external form of a URL.
      * @param expectedUrl the string representation of the expected URL
      * @param actualUrl the URL to test
      */
@@ -343,7 +343,7 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility to test external form of an URL.
+     * Facility to test external form of a URL.
      * @param message the message to display if assertion fails
      * @param expectedUrl the string representation of the expected URL
      * @param actualUrl the URL to test

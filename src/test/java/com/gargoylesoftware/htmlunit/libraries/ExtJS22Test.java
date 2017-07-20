@@ -210,7 +210,7 @@ public class ExtJS22Test extends WebDriverTestCase {
         final WebDriver driver = getPage("grid", "binding");
 
         // usually this need 1s but sometimes our build machine is slower
-        // this is not an performance test, we only like to ensure that all
+        // this is not a performance test, we only like to ensure that all
         // functionality is running
         Thread.sleep(2 * DEFAULT_WAIT_TIME);
 

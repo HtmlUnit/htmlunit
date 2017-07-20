@@ -245,7 +245,7 @@ public class WebSocketTest extends WebDriverTestCase {
         for (final Thread thread : Thread.getAllStackTraces().keySet()) {
             if (thread.getName().contains("WebSocket")) {
                 try {
-                    // ok found one but let's wait a bit an start a second check before
+                    // ok found one but let's wait a bit to start a second check before
                     // pressing the panic button
                     Thread.sleep(400);
                 }

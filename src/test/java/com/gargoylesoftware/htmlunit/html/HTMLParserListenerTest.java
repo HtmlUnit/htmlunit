@@ -172,7 +172,7 @@ public class HTMLParserListenerTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test parsing of an fragment.
+     * Test parsing of a fragment.
      * @exception Exception If the test fails
      */
     @Test

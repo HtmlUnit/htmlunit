@@ -309,7 +309,7 @@ public class WebClient3Test extends WebDriverTestCase {
     }
 
     /**
-     * Ensures, that a window opened by javascript and than filled by an form with target attribute
+     * Ensures, that a window opened by javascript and than filled by a form with target attribute
      * is attached to the javascript event loop.
      *
      * @throws Exception if an error occurs

@@ -55,7 +55,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test hasAttribute() on an element with the attribute but without an value.
+     * Test hasAttribute() on an element with the attribute but without a value.
      * @throws Exception if the test fails
      */
     @Test
@@ -121,7 +121,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test getAttribute() on an element with the attribute but without an value.
+     * Test getAttribute() on an element with the attribute but without a value.
      * @throws Exception if the test fails
      */
     @Test
@@ -135,7 +135,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test getAttribute() on an element with the attribute but without an value.
+     * Test getAttribute() on an element with the attribute but without a value.
      * @throws Exception if the test fails
      */
     @Test

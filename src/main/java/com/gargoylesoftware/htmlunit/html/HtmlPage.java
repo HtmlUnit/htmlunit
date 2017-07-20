@@ -1244,7 +1244,7 @@ public class HtmlPage extends SgmlPage {
             final FrameWindow fw = (FrameWindow) window;
             final BaseFrameElement frame = fw.getFrameElement();
 
-            // if part of an document fragment, then the load event is not triggered
+            // if part of a document fragment, then the load event is not triggered
             if (Event.TYPE_LOAD.equals(eventType) && frame.getParentNode() instanceof DomDocumentFragment) {
                 return true;
             }

@@ -303,7 +303,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Loads the stylesheet at the specified link or href.
      * @param window the current window
      * @param element the parent DOM element
-     * @param link the stylesheet's link (may be {@code null} if an <tt>url</tt> is specified)
+     * @param link the stylesheet's link (may be {@code null} if a <tt>url</tt> is specified)
      * @param url the stylesheet's url (may be {@code null} if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */

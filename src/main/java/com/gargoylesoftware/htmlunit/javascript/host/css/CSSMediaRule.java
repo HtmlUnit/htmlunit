@@ -64,8 +64,8 @@ public class CSSMediaRule extends CSSConditionRule {
     }
 
     /**
-     * Returns the wrapped rule, as an media rule.
-     * @return the wrapped rule, as an media rule
+     * Returns the wrapped rule, as a media rule.
+     * @return the wrapped rule, as a media rule
      */
     private org.w3c.dom.css.CSSMediaRule getMediaRule() {
         return (org.w3c.dom.css.CSSMediaRule) getRule();

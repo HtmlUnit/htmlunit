@@ -379,7 +379,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         if (webResponse_ instanceof NetworkErrorWebResponse) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("XMLHttpRequest.responseXML returns of an network error ("
+                LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
                         + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
             }
             return null;

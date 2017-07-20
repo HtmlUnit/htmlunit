@@ -66,8 +66,8 @@ public class Attr extends Node {
     }
 
     /**
-     * Returns {@code true} if the attribute is an custom property.
-     * @return {@code true} if the attribute is an custom property
+     * Returns {@code true} if the attribute is a custom property.
+     * @return {@code true} if the attribute is a custom property
      */
     @JsxGetter(IE)
     public boolean isExpando() {

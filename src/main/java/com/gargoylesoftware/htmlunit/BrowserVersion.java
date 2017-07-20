@@ -664,7 +664,7 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Returns the value used by the browser for the {@code Accept} header
-     * if requesting an script.
+     * if requesting a script.
      * @return the accept header string
      */
     public String getScriptAcceptHeader() {

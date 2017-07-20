@@ -270,7 +270,7 @@ class InsecureTrustManager2 implements X509TrustManager {
     @Override
     public X509Certificate[] getAcceptedIssuers() {
         // it seems to be OK for Java <= 6 to return an empty array but not for Java 7 (at least 1.7.0_04-b20):
-        // requesting an URL with a valid certificate (working without WebClient.setUseInsecureSSL(true)) throws a
+        // requesting a URL with a valid certificate (working without WebClient.setUseInsecureSSL(true)) throws a
         //  javax.net.ssl.SSLPeerUnverifiedException: peer not authenticated
         // when the array returned here is empty
         if (acceptedIssuers_.isEmpty()) {

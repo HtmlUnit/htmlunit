@@ -153,7 +153,7 @@ public class PerformanceTiming extends SimpleScriptable {
     }
 
     /**
-     * @return an redirectStart
+     * @return a redirectStart
      */
     @JsxGetter
     public long getRedirectStart() {
@@ -161,7 +161,7 @@ public class PerformanceTiming extends SimpleScriptable {
     }
 
     /**
-     * @return an redirectEnd
+     * @return a redirectEnd
      */
     @JsxGetter
     public long getRedirectEnd() {

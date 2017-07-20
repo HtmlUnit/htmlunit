@@ -246,7 +246,7 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
-     * If this rule is contained inside another rule (e.g. a style rule inside an @media block),
+     * If this rule is contained inside another rule (e.g. a style rule inside a @media block),
      * this is the containing rule. If this rule is not nested inside any other rules, this returns {@code null}.
      * @return the parent rule
      */

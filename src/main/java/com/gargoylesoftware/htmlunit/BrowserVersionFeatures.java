@@ -213,11 +213,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION,
 
-    /** FF triggers an mouseover event even if the option is disabled. */
+    /** FF triggers a mouseover event even if the option is disabled. */
     @BrowserFeature(FF)
     EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION,
 
-    /** IE never triggers an mouseover event for select options. */
+    /** IE never triggers a mouseover event for select options. */
     @BrowserFeature(IE)
     EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION,
 
@@ -269,7 +269,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
 
-    /** Form submit forces an real request also if only the hash was changed. */
+    /** Form submit forces a real request also if only the hash was changed. */
     @BrowserFeature(CHROME)
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
@@ -484,7 +484,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE,
 
-    /** When calculation the value of an text area ie uses a recursive approach. */
+    /** When calculation the value of a text area ie uses a recursive approach. */
     @BrowserFeature(IE)
     HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
 
@@ -1454,7 +1454,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     QUERYSELECTORALL_NO_TARGET,
 
-    /** IE throws a syntax error if a css3 pseudo selector is used on an detached node. */
+    /** IE throws a syntax error if a css3 pseudo selector is used on a detached node. */
     @BrowserFeature(IE)
     QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,
 
@@ -1525,11 +1525,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     URL_AUTH_CREDENTIALS,
 
-    /** Replace only ' ' with %20 when encode the query part of an url. */
+    /** Replace only ' ' with %20 when encode the query part of a url. */
     @BrowserFeature(IE)
     URL_MINIMAL_QUERY_ENCODING,
 
-    /** */
+    /** Handles missing slashes. */
     @BrowserFeature({CHROME, FF})
     URL_MISSING_SLASHES,
 

@@ -85,7 +85,7 @@ public class MooTools121Test extends WebDriverTestCase {
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("id('progress')[text() = '100']"));
         // usually this need 40s but sometimes our build machine is slower
-        // this is not an performance test, we only like to ensure that all
+        // this is not a performance test, we only like to ensure that all
         // functionality is running
 
         final List<WebElement> failed = driver.findElements(By.xpath("//li[@class = 'exception']/h4"));

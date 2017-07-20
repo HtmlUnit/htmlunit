@@ -438,7 +438,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Convenient method to build an URL and load it into the current WebWindow as it would be done
+     * Convenient method to build a URL and load it into the current WebWindow as it would be done
      * by {@link #getPage(WebWindow, WebRequest)}.
      * @param url the URL of the new content
      * @param <P> the page type
@@ -1226,7 +1226,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Tries to guess the content type of the file.<br>
-     * This utility could be located in an helper class but we can compare this functionality
+     * This utility could be located in a helper class but we can compare this functionality
      * for instance with the "Helper Applications" settings of Mozilla and therefore see it as a
      * property of the "browser".
      * @param file the file

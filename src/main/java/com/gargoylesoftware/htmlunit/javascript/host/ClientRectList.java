@@ -91,7 +91,7 @@ public class ClientRectList extends SimpleScriptable {
     }
 
     /**
-     * Add an rect.
+     * Add a rect.
      * @param clientRect the rect to add
      */
     public void add(final ClientRect clientRect) {

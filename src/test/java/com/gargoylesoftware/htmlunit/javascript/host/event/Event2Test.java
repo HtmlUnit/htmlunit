@@ -308,7 +308,7 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test event order for typing into an password field.
+     * Test event order for typing into a password field.
      * @throws Exception if the test fails
      */
     @Test
@@ -323,7 +323,7 @@ public class Event2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test event order for typing into an password field.
+     * Test event order for typing into a password field.
      * @throws Exception if the test fails
      */
     @Test

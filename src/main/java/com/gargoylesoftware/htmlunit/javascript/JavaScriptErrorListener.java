@@ -55,7 +55,7 @@ public interface JavaScriptErrorListener {
             MalformedURLException malformedURLException);
 
     /**
-     * Informs about an exception during load of an javascript file refereed from a page.
+     * Informs about an exception during load of a javascript file refereed from a page.
      *
      * @param page the page that causes the problem
      * @param scriptUrl the url to load the script from

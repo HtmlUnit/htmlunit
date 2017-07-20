@@ -232,7 +232,7 @@ public class Cookie implements Serializable {
     }
 
     /**
-     * Converts the specified collection of cookies into an collection of HttpClient cookies.
+     * Converts the specified collection of cookies into a collection of HttpClient cookies.
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
