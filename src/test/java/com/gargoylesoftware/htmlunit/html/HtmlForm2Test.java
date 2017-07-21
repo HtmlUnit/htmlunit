@@ -191,7 +191,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         else {
             linkSuffix = "bug.html?k%F6nig";
         }
-        assertEquals(URL_FIRST.toExternalForm() + linkSuffix, driver.getCurrentUrl());
+        assertEquals(URL_FIRST + linkSuffix, driver.getCurrentUrl());
     }
 
     /**

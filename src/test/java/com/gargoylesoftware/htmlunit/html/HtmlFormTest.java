@@ -1026,7 +1026,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         urlAfterSubmit("post", "foo?foo=12", "foo?foo=12");
         urlAfterSubmit("post", "", "");
         urlAfterSubmit("post", "?a=1&b=2", "?a=1&b=2");
-        final URL url = new URL(URL_FIRST.toExternalForm() + "?a=1&b=2");
+        final URL url = new URL(URL_FIRST + "?a=1&b=2");
         urlAfterSubmit(url, "post", "", url.toExternalForm());
     }
 

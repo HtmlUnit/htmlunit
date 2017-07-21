@@ -1225,7 +1225,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
-        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        conn.setResponse(new URL(URL_FIRST, "myDialog.html"), html2);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -1284,7 +1284,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
-        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        conn.setResponse(new URL(URL_FIRST, "myDialog.html"), html2);
         client.setWebConnection(conn);
 
         final HtmlPage page = getWebClient().getPage(URL_FIRST);
@@ -1334,7 +1334,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html1);
-        conn.setResponse(new URL(URL_FIRST.toExternalForm() + "myDialog.html"), html2);
+        conn.setResponse(new URL(URL_FIRST, "myDialog.html"), html2);
         client.setWebConnection(conn);
 
         final HtmlPage page = client.getPage(URL_FIRST);

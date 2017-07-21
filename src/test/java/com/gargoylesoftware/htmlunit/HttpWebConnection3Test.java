@@ -162,7 +162,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     public void locationUTF() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
-                + "Location: " +  URL_FIRST.toExternalForm() + "أهلاً" + "\r\n"
+                + "Location: " +  URL_FIRST + "أهلاً" + "\r\n"
                 + "\r\n";
 
         final String response2 = "HTTP/1.1 200 OK\r\n"
@@ -197,7 +197,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     public void locationQueryUTF() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
-                + "Location: " +  URL_FIRST.toExternalForm() + "test?أهلاً" + "\r\n"
+                + "Location: " +  URL_FIRST + "test?أهلاً" + "\r\n"
                 + "\r\n";
 
         final String response2 = "HTTP/1.1 200 OK\r\n"

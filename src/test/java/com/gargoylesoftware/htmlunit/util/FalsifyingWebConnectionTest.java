@@ -57,7 +57,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
         final MockWebConnection mockConnection = new MockWebConnection();
         mockConnection.setResponse(URL_FIRST, html);
-        mockConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "myJs.js"), "alert('hello');");
+        mockConnection.setResponse(new URL(URL_FIRST, "myJs.js"), "alert('hello');");
         webClient.setWebConnection(mockConnection);
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -98,7 +98,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
 
         final MockWebConnection mockConnection = new MockWebConnection();
         mockConnection.setResponse(URL_FIRST, html);
-        mockConnection.setResponse(new URL(URL_FIRST.toExternalForm() + "myJs.js"), "alert('hello');");
+        mockConnection.setResponse(new URL(URL_FIRST, "myJs.js"), "alert('hello');");
         webClient.setWebConnection(mockConnection);
 
         final List<String> collectedAlerts = new ArrayList<>();

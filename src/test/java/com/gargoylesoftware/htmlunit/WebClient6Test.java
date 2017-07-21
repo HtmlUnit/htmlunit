@@ -487,6 +487,6 @@ public class WebClient6Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
-        assertEquals(url.toString() + "?param=http%3A//somwhere.org", driver.getCurrentUrl());
+        assertEquals(url + "?param=http%3A//somwhere.org", driver.getCurrentUrl());
     }
 }

@@ -2096,7 +2096,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final String html = "<html><body onload='document.getElementById(\"f\").src=\"frame.html\";'>\n"
                 + "<iframe id='f'></iframe></body></html>";
         conn.setResponse(URL_FIRST, html);
-        final URL frameUrl = new URL(URL_FIRST.toExternalForm() + "frame.html");
+        final URL frameUrl = new URL(URL_FIRST, "frame.html");
         conn.setResponse(frameUrl, "<html><body></body></html>");
         conn.setResponse(URL_SECOND, "<html><body></body></html>");
         client.setWebConnection(conn);

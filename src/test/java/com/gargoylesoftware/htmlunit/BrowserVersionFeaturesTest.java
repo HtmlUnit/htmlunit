@@ -98,7 +98,7 @@ public class BrowserVersionFeaturesTest  {
                         }
                     }
                     assertTrue("BrowserVersionFeatures.java: Annotation '"
-                            + annotatedBrowser.toString() + "' of feature '"
+                            + annotatedBrowser + "' of feature '"
                             + feature.name() + "' in no longer in use.", inUse);
                 }
             }
