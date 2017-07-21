@@ -820,7 +820,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         private void setNextElement(final DomNode node) {
             DomNode next = node.getNextSibling();
-            while (next != null && !(next instanceof HtmlElement)) {
+            while (next != null && !(next instanceof DomElement)) {
                 next = next.getNextSibling();
             }
             nextElement_ = (DomElement) next;

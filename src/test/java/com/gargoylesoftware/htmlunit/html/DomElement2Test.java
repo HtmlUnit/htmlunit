@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Tests for {@link DomElement}.
@@ -79,5 +82,28 @@ public final class DomElement2Test extends SimpleWebTestCase {
         assertFalse(page.getElementById("d2").isMouseOver());
         assertFalse(page.getElementById("d3").isMouseOver());
         assertTrue(page.getElementById("d4").isMouseOver());
+    }
+
+    /**
+     * Test case for Bug #1905.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getChildElements() throws Exception {
+        final String xml = "<events>\n"
+                + "  <something/>\n"
+                + "</events>";
+        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getWebClient().setWebConnection(getMockWebConnection());
+        final XmlPage page = getWebClient().getPage(URL_FIRST);
+        final DomElement root = page.getDocumentElement();
+        final AtomicInteger count = new AtomicInteger(0);
+        root.getChildElements().forEach(e -> count.incrementAndGet());
+        assertEquals(1, count.get());
+
+        count.set(0);
+        root.getChildren().forEach(e -> count.incrementAndGet());
+        assertEquals(3, count.get());
     }
 }
