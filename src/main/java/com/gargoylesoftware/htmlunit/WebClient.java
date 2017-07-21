@@ -1421,7 +1421,9 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (locationString == null) {
                     return webResponse;
                 }
-                locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
+                if (!getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING)) {
+                	locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
+                }
                 newUrl = expandUrl(url, locationString);
             }
             catch (final MalformedURLException e) {
