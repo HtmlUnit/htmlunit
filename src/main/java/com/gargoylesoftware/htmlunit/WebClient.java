@@ -1314,7 +1314,8 @@ public class WebClient implements Serializable, AutoCloseable {
                 return makeWebResponseForDataUrl(webRequest);
 
             default:
-                return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL);
+                return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL,
+                		webRequest.getCharset());
         }
     }
 
@@ -1322,11 +1323,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * Loads a {@link WebResponse} from the server through the WebConnection.
      * @param webRequest the request
      * @param allowedRedirects the number of allowed redirects remaining
+     * @param charset the charset to use
      * @throws IOException if an IO problem occurs
      * @return the resultant {@link WebResponse}
      */
     private WebResponse loadWebResponseFromWebConnection(final WebRequest webRequest,
-        final int allowedRedirects) throws IOException {
+        final int allowedRedirects, final Charset charset) throws IOException {
 
         URL url = webRequest.getUrl();
         final HttpMethod method = webRequest.getHttpMethod();
@@ -1336,7 +1338,7 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("method", method);
         WebAssert.notNull("parameters", parameters);
 
-        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING), UTF_8);
+        url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING), charset);
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {
@@ -1445,7 +1447,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
-                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1, UTF_8);
             }
             else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
                         || status == 308) {
@@ -1454,7 +1456,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
-                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
+                return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1, UTF_8);
             }
         }
 
