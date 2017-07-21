@@ -242,11 +242,12 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
-        else if (browserVersion.isFirefox() && browserVersion.getBrowserVersionNumeric() > 45) {
-            formats = FF_52_FORMATS_;
+        else if (browserVersion.isFirefox()
+                && browserVersion.getBrowserVersionNumeric() < BrowserVersion.FIREFOX_52.getBrowserVersionNumeric()) {
+            formats = FF_45_FORMATS_;
         }
         else {
-            formats = FF_45_FORMATS_;
+            formats = FF_52_FORMATS_;
         }
 
         String locale = "";
