@@ -1315,7 +1315,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
             default:
                 return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL,
-                		webRequest.getCharset());
+                        webRequest.getCharset());
         }
     }
 
@@ -1422,7 +1422,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     return webResponse;
                 }
                 if (!getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING)) {
-                	locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
+                    locationString = new String(locationString.getBytes(ISO_8859_1), UTF_8);
                 }
                 newUrl = expandUrl(url, locationString);
             }
