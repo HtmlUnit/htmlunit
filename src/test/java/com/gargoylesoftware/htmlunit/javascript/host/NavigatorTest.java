@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -179,27 +180,32 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "<head>\n"
                 + "  <title>test</title>\n"
                 + "  <script>\n"
-                + "  function doTest() {\n"
-
-                + "    var names = [];"
-                + "    for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
-                + "      names[i] = window.navigator.plugins[i].name;\n"
+                + "    function log(text) {\n"
+                + "      var textarea = document.getElementById('myTextarea');\n"
+                + "      textarea.value += text + ',';\n"
                 + "    }\n"
+
+                + "    function doTest() {\n"
+                + "      var names = [];"
+                + "      for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
+                + "        names[i] = window.navigator.plugins[i].name;\n"
+                + "      }\n"
                 // there is no fixed order, sort for stable testing
                 + "    name = names.sort().join('; ');\n"
-                + "    alert(names);\n"
+                + "    log(names);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='doTest()'>\n"
+                + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-        final List<String> alerts = getCollectedAlerts(driver, 1);
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String alerts = driver.findElement(By.id("myTextarea")).getAttribute("value");
 
         for (PluginConfiguration plugin : getBrowserVersion().getPlugins()) {
-            assertTrue(plugin.getName() + " not found", alerts.get(0).contains(plugin.getName()));
+            assertTrue(plugin.getName() + " not found", alerts.contains(plugin.getName()));
         }
     }
 
@@ -208,10 +214,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF32_26_0_0_131.dll"},
-            FF52 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "NPSWF64_26_0_0_131.dll"},
+    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.137", "NPSWF32_26_0_0_137.dll"},
+            FF52 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.137", "NPSWF64_26_0_0_137.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
-            IE = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.131", "Flash32_26_0_0_131.ocx"},
+            IE = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.137", "Flash32_26_0_0_137.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
@@ -374,7 +380,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF45 = "20170411115307",
-            FF52 = "20170607123825")
+            FF52 = "20170627155318")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
