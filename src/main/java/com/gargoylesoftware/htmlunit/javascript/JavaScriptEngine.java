@@ -415,7 +415,18 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor",
                         Context.class, Object[].class, Function.class, boolean.class);
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
-                functionObject.addAsConstructor(window, prototype);
+                try {
+                    functionObject.addAsConstructor(window, prototype);
+                }
+                catch (final Exception e) {
+                    // TODO see issue #1897
+                    if (LOG.isWarnEnabled()) {
+                        final String newline = System.lineSeparator();
+                        LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                                + e.getMessage() + newline
+                                + "prototype: " + prototype.getClassName());
+                    }
+                }
             }
         }
 
@@ -484,10 +495,34 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static void defineConstructor(final Window window,
             final Scriptable prototype, final ScriptableObject constructor) {
         constructor.setParentScope(window);
-        ScriptableObject.defineProperty(prototype, "constructor", constructor,
-                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
-        ScriptableObject.defineProperty(constructor, "prototype", prototype,
-                ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        try {
+            ScriptableObject.defineProperty(prototype, "constructor", constructor,
+                    ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        }
+        catch (final Exception e) {
+            // TODO see issue #1897
+            if (LOG.isWarnEnabled()) {
+                final String newline = System.lineSeparator();
+                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                        + e.getMessage() + newline
+                        + "prototype: " + prototype.getClassName());
+            }
+        }
+
+        try {
+            ScriptableObject.defineProperty(constructor, "prototype", prototype,
+                    ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
+        }
+        catch (final Exception e) {
+            // TODO see issue #1897
+            if (LOG.isWarnEnabled()) {
+                final String newline = System.lineSeparator();
+                LOG.warn("Error during JavaScriptEngine.init(WebWindow, Context)" + newline
+                        + e.getMessage() + newline
+                        + "prototype: " + prototype.getClassName());
+            }
+        }
+
         window.defineProperty(constructor.getClassName(), constructor, ScriptableObject.DONTENUM);
     }
 

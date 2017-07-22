@@ -230,4 +230,29 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
+
+    /**
+     * See issue #1897.
+     * In the end the strict mode should not be used for the setup of
+     * the new window.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("IFRAME")
+    public void createIframeFromStrictFunction() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    'use strict';\n"
+                + "    var iFrame = document.createElement('iframe');\n"
+                + "    alert(iFrame.tagName);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
