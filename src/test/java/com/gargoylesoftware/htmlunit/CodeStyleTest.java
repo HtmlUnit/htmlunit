@@ -639,22 +639,39 @@ public class CodeStyleTest {
      */
     private void browserVersion_isIE(final List<String> lines, final String relativePath) {
         if (relativePath.replace('\\', '/').contains("src/main/java")
-                && !relativePath.contains("JavaScriptConfiguration")
-                && !relativePath.contains("BrowserVersionFeatures")
-                && !relativePath.contains("Document")
-                && !relativePath.contains("HTMLParser")
-                && !relativePath.contains("DateTimeFormat")
-                && !relativePath.contains("NashornJavaScriptEngine")) {
+                && !relativePath.contains("JavaScriptConfiguration.java")
+                && !relativePath.contains("BrowserVersionFeatures.java")
+                && !relativePath.contains("DateTimeFormat.java")
+                && !relativePath.contains("Document.java")
+                && !relativePath.contains("HTMLDocument2.java")
+                && !relativePath.contains("NashornJavaScriptEngine.java")) {
             int index = 1;
             for (final String line : lines) {
-                if (line.contains(".isIE()") || line.contains(".isFirefox()")) {
-                    addFailure(".isIE() and .isFirefox() should not be used, please use .hasFeature(): "
+                if (line.contains(".isIE()")) {
+                    addFailure(".isIE() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }
-                if (line.contains(".getBrowserVersionNumeric()")
-                        && !relativePath.contains("BrowserConfiguration")
-                        && !relativePath.contains("Window.java")
-                        && !relativePath.contains("Window2.java")) {
+                if (line.contains(".isFirefox()")) {
+                    addFailure(".isFirefox() should not be used, please use .hasFeature(): "
+                            + relativePath + ", line: " + index);
+                }
+                if (line.contains(".isChrome()")) {
+                    addFailure(".isChrome() should not be used, please use .hasFeature(): "
+                            + relativePath + ", line: " + index);
+                }
+                index++;
+            }
+        }
+        if (relativePath.replace('\\', '/').contains("src/main/java")
+                && !relativePath.contains("BrowserConfiguration.java")
+                && !relativePath.contains("BrowserVersion.java")
+                && !relativePath.contains("Document.java")
+                && !relativePath.contains("HTMLParser.java")
+                && !relativePath.contains("Window.java")
+                && !relativePath.contains("Window2.java")) {
+            int index = 1;
+            for (final String line : lines) {
+                if (line.contains(".getBrowserVersionNumeric()")) {
                     addFailure(".getBrowserVersionNumeric() should not be used, please use .hasFeature(): "
                             + relativePath + ", line: " + index);
                 }

@@ -79,17 +79,17 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                                 + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
         }
         if (getBrowserVersion().isFirefox()) {
-            if (getBrowserVersion().getBrowserVersionNumeric() < 52) {
+            if (getBrowserVersion().isFirefox52()) {
                 expectedHeaders = "Connection: keep-alive\n"
-                                    + "Host: localhost:" + PORT + "\n"
-                                    + "Referer: http://localhost:" + PORT + "/\n"
-                                    + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
+                        + "Host: localhost:" + PORT + "\n"
+                        + "Referer: http://localhost:" + PORT + "/\n"
+                        + "Upgrade-Insecure-Requests: 1\n"
+                        + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
             }
             else {
                 expectedHeaders = "Connection: keep-alive\n"
                         + "Host: localhost:" + PORT + "\n"
                         + "Referer: http://localhost:" + PORT + "/\n"
-                        + "Upgrade-Insecure-Requests: 1\n"
                         + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
             }
         }

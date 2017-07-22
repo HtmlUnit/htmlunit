@@ -941,12 +941,11 @@ public class Document extends Node {
 
         compatMode_ = "CSS1Compat";
 
-        final BrowserVersion browserVersion = getBrowserVersion();
         if (isQuirksDocType()) {
             compatMode_ = "BackCompat";
         }
 
-        final float version = browserVersion.getBrowserVersionNumeric();
+        final float version = getBrowserVersion().getBrowserVersionNumeric();
         documentMode_ = (int) Math.floor(version);
         return documentMode_;
     }

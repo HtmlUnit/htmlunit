@@ -105,13 +105,11 @@ public abstract class AbstractJavaScriptConfiguration {
             else if (browser.isEdge()) {
                 expectedBrowser = SupportedBrowser.EDGE;
             }
+            else if (browser.isFirefox52()) {
+                expectedBrowser = SupportedBrowser.FF52;
+            }
             else if (browser.isFirefox()) {
-                if (browser.getBrowserVersionNumeric() < 52) {
-                    expectedBrowser = SupportedBrowser.FF45;
-                }
-                else {
-                    expectedBrowser = SupportedBrowser.FF52;
-                }
+                expectedBrowser = SupportedBrowser.FF45;
             }
             else {
                 expectedBrowser = SupportedBrowser.CHROME;  // our current fallback

@@ -242,8 +242,7 @@ public class DateTimeFormat extends SimpleScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
-        else if (browserVersion.isFirefox()
-                && browserVersion.getBrowserVersionNumeric() < BrowserVersion.FIREFOX_52.getBrowserVersionNumeric()) {
+        else if (!browserVersion.isFirefox52()) {
             formats = FF_45_FORMATS_;
         }
         else {

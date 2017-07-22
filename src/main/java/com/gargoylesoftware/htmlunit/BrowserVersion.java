@@ -535,6 +535,14 @@ public class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * @return whether or not this version version 52 of a Firefox browser
+     */
+    public final boolean isFirefox52() {
+        return isFirefox() && getBrowserVersionNumeric() == 52;
+    }
+
+    /**
      * Returns the application code name, for example "Mozilla".
      * Default value is "Mozilla" if not explicitly configured.
      * @return the application code name
