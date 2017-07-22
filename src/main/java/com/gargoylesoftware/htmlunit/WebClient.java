@@ -1315,7 +1315,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
             default:
                 return loadWebResponseFromWebConnection(webRequest, ALLOWED_REDIRECTIONS_SAME_URL,
-                        webRequest.getCharset());
+                                                            webRequest.getCharset());
         }
     }
 
