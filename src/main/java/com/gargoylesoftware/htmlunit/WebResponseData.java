@@ -122,8 +122,8 @@ public class WebResponseData implements Serializable {
                 if (stream.markSupported()) { // should be always the case as the content is in a byte[] or in a file
                     stream.mark(2);
                     final byte[] buffer = new byte[2];
-                    stream.read(buffer, 0, 2);
-                    zlibHeader = (((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff)) == 0x789c;
+                    final int byteCount = stream.read(buffer, 0, 2);
+                    zlibHeader = byteCount == 2 && (((buffer[0] & 0xff) << 8) | (buffer[1] & 0xff)) == 0x789c;
                     stream.reset();
                 }
                 if (zlibHeader) {

@@ -274,7 +274,7 @@ public class HtmlApplet extends HtmlElement {
         }
 
         // check archive
-        archiveUrls_ = new LinkedList<>();
+        final List<URL> archiveUrls = new LinkedList<>();
         String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
         if (null != archives) {
             for (int i = 0; i < archives.length; i++) {
@@ -283,7 +283,7 @@ public class HtmlApplet extends HtmlElement {
                 final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                 appletClassLoader_.addArchiveToClassPath(archiveUrl);
-                archiveUrls_.add(archiveUrl);
+                archiveUrls.add(archiveUrl);
             }
         }
         archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
@@ -294,7 +294,7 @@ public class HtmlApplet extends HtmlElement {
                 final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                 appletClassLoader_.addArchiveToClassPath(archiveUrl);
-                archiveUrls_.add(archiveUrl);
+                archiveUrls.add(archiveUrl);
             }
         }
         archiveUrls_ = Collections.unmodifiableList(archiveUrls_);

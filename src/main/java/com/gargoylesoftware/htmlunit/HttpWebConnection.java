@@ -97,6 +97,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
@@ -191,13 +192,17 @@ public class HttpWebConnection implements WebConnection {
 
             HttpResponse httpResponse = null;
             try {
-                httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
+                try (CloseableHttpClient httpClient = builder.build()) {
+                    httpResponse = httpClient.execute(hostConfiguration, httpMethod, httpContext);
+                }
             }
             catch (final SSLPeerUnverifiedException s) {
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
-                    httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
+                    try (CloseableHttpClient httpClient = builder.build()) {
+                        httpResponse = httpClient.execute(hostConfiguration, httpMethod, httpContext);
+                    }
                 }
                 else {
                     throw s;
