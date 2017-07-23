@@ -195,7 +195,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
-    	    IE = "§§URL§§test?Ø£Ù‡Ù„Ø§Ù‹")
+            IE = "§§URL§§test?Ø£Ù‡Ù„Ø§Ù‹")
     @NotYetImplemented(IE)
     // seems to work only when running alone
     public void locationQueryUTF() throws Exception {
