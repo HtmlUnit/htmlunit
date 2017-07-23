@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
@@ -474,10 +476,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
 
-        if (browserVersion.hasFeature(STRING_INCLUDES)) {
+        if (browserVersion.hasFeature(JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS)) {
             ((ScriptableObject) objectPrototype).defineFunctionProperties(new String[] {"getOwnPropertySymbols"},
                     ObjectCustom.class, ScriptableObject.DONTENUM);
+        }
 
+        if (browserVersion.hasFeature(JS_ARRAY_FROM)) {
             final ScriptableObject arrayPrototype = (ScriptableObject) ScriptRuntime.name(context, window, "Array");
             arrayPrototype.defineFunctionProperties(new String[] {"from"},
                     ArrayCustom.class, ScriptableObject.DONTENUM);

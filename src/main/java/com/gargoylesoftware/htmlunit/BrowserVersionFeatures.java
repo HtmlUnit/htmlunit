@@ -603,6 +603,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
+    /** Indicates that Array.from() is supported. */
+    @BrowserFeature({CHROME, FF})
+    JS_ARRAY_FROM,
+
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({CHROME, FF})
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,
@@ -1092,6 +1096,10 @@ public enum BrowserVersionFeatures {
     /** Functions are enumerated. */
     @BrowserFeature({CHROME, FF})
     JS_NODE_LIST_ENUMERATE_FUNCTIONS,
+
+    /** Indicates that Object.getOwnPropertySymbols() is supported. */
+    @BrowserFeature({CHROME, FF})
+    JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS,
 
     /** Indicates that someObj.offsetParent returns null, it someObj has fixed style. */
     @BrowserFeature({CHROME, IE})
