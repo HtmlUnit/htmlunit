@@ -387,9 +387,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1: 20,17", "TypeError"},
-            FF = {"1: 20,17", "2: 20,17"})
-    @NotYetImplemented
+    @Alerts(DEFAULT = {"function filter() { [native code] }", "20,17"},
+            FF = {"function filter() {\n    [native code]\n}", "20,17"},
+            IE = {"\nfunction filter() {\n    [native code]\n}\n", "20,17"})
     public void filter() throws Exception {
         final String html
             = "<html>\n"
@@ -398,9 +398,34 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert('1: ' + arr.filter(isBig));\n"
+            + "  alert(arr.filter);\n"
+            + "  alert(arr.filter(isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function filter() {\n    [native code]\n}", "20,17"})
+    @NotYetImplemented
+    public void filterPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  alert(Array.filter);\n"
+            + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
-            + "    alert('2: ' + Array.filter(arr, isBig));\n"
+            + "    alert(Array.filter(arr, isBig));\n"
             + "  } catch(e) { alert('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
