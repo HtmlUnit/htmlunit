@@ -334,28 +334,12 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return true;
             case Context.FEATURE_NON_ECMA_GET_YEAR:
                 return false;
-            case Context.FEATURE_HTMLUNIT_ASK_OBJECT_TO_WRITE_READONLY:
-                return true;
-            case Context.FEATURE_HTMLUNIT_JS_CATCH_JAVA_EXCEPTION:
-                return false;
-            case Context.FEATURE_HTMLUNIT_ARGUMENTS_IS_OBJECT:
-                return false;
-            case Context.FEATURE_HTMLUNIT_FUNCTION_NULL_SETTER:
-                return true;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
                 return browserVersion_.hasFeature(JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION);
-            case Context.FEATURE_HTMLUNIT_EVAL_LOCAL_SCOPE:
-                return false;
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
-            case Context.FEATURE_HTMLUNIT_CONSTRUCTOR:
-                return true;
-            case Context.FEATURE_HTMLUNIT_FUNCTION_OBJECT_METHOD:
-                return false;
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return browserVersion_.hasFeature(JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
-            case Context.FEATURE_HTMLUNIT_PARSE_INT_RADIX_10:
-                return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
                 return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
             case Context.FEATURE_HTMLUNIT_GET_PROTOTYPE_OF_STRING:
