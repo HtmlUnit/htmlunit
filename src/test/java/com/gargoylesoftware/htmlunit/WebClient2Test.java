@@ -301,7 +301,7 @@ public class WebClient2Test extends SimpleWebTestCase {
               "toto", "foo", "/myPath", true, null);
 
         // Check that we are able to parse and set the expiration date correctly
-        final String dateString = "Fri, 21 Jul 2017 20:47:11 UTC";
+        final String dateString = "Fri, 21 Jul 2023 20:47:11 UTC";
         final Date date = DateUtils.parseDate(dateString, "EEE, dd MMM yyyy HH:mm:ss z");
         checkCookie("toto=foo; expires=" + dateString, "toto", "foo", "/", false, date);
     }
