@@ -607,8 +607,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         XPathNSResolver.class, XPathResult.class, XSLTProcessor.class};
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static final Map<BrowserVersion, JavaScriptConfiguration> CONFIGURATION_MAP_ =
-        new WeakHashMap<>();
+    private static final Map<String, JavaScriptConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
 
     /**
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
@@ -628,11 +627,11 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         if (browserVersion == null) {
             throw new IllegalArgumentException("BrowserVersion must be provided");
         }
-        JavaScriptConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion);
+        JavaScriptConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion.getNickname());
 
         if (configuration == null) {
             configuration = new JavaScriptConfiguration(browserVersion);
-            CONFIGURATION_MAP_.put(browserVersion, configuration);
+            CONFIGURATION_MAP_.put(browserVersion.getNickname(), configuration);
         }
         return configuration;
     }

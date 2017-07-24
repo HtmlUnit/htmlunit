@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -43,12 +44,13 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code Symbol}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
 public class Symbol extends SimpleScriptable {
 
     static final String ITERATOR_STRING = "Symbol(Symbol.iterator)";
-    private static java.util.Map<BrowserVersion, java.util.Map<String, Symbol>> SYMBOL_MAP_ = new HashMap<>();
+    private static Map<String, Map<String, Symbol>> SYMBOL_MAP_ = new HashMap<>();
 
     private Object name_;
 
@@ -87,10 +89,10 @@ public class Symbol extends SimpleScriptable {
         final SimpleScriptable scope = (SimpleScriptable) thisObj.getParentScope();
         final BrowserVersion browserVersion = scope.getBrowserVersion();
 
-        java.util.Map<String, Symbol> map = SYMBOL_MAP_.get(browserVersion);
+        Map<String, Symbol> map = SYMBOL_MAP_.get(browserVersion.getNickname());
         if (map == null) {
             map = new HashMap<>();
-            SYMBOL_MAP_.put(browserVersion, map);
+            SYMBOL_MAP_.put(browserVersion.getNickname(), map);
         }
 
         Symbol symbol = map.get(name);
@@ -282,7 +284,7 @@ public class Symbol extends SimpleScriptable {
      * @param window the window
      */
     public static void remove(final Window window) {
-        for (final java.util.Map<String, Symbol> symbols : SYMBOL_MAP_.values()) {
+        for (final Map<String, Symbol> symbols : SYMBOL_MAP_.values()) {
             for (final java.util.Iterator<Symbol> it = symbols.values().iterator(); it.hasNext();) {
                 if (it.next().getParentScope() == window) {
                     it.remove();

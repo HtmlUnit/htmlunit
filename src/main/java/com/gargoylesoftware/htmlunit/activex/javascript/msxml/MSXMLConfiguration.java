@@ -41,7 +41,7 @@ public final class MSXMLConfiguration extends AbstractJavaScriptConfiguration {
     };
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
-    private static final Map<BrowserVersion, MSXMLConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
+    private static final Map<String, MSXMLConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
 
     /**
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
@@ -61,11 +61,11 @@ public final class MSXMLConfiguration extends AbstractJavaScriptConfiguration {
         if (browserVersion == null) {
             throw new IllegalStateException("BrowserVersion must be defined");
         }
-        MSXMLConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion);
+        MSXMLConfiguration configuration = CONFIGURATION_MAP_.get(browserVersion.getNickname());
 
         if (configuration == null) {
             configuration = new MSXMLConfiguration(browserVersion);
-            CONFIGURATION_MAP_.put(browserVersion, configuration);
+            CONFIGURATION_MAP_.put(browserVersion.getNickname(), configuration);
         }
         return configuration;
     }
