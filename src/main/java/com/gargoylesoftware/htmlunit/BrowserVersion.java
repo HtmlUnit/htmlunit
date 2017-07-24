@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -134,7 +133,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
-        45, "FF45", null);
+        45, "FF45");
 
     /**
      * Firefox 52 ESR.
@@ -143,12 +142,12 @@ public class BrowserVersion implements Serializable, Cloneable {
     public static final BrowserVersion FIREFOX_52 = new BrowserVersion(
         NETSCAPE, "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0",
-        52, "FF52", null);
+        52, "FF52");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
         NETSCAPE, "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE", null);
+        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
@@ -156,7 +155,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
-        59, "Chrome", null);
+        59, "Chrome");
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
@@ -164,7 +163,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
         "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
         + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
-        14, "Edge", null);
+        14, "Edge");
 
     /**
      * The best supported browser version at the moment.
@@ -177,8 +176,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     /** Register plugins for the browser versions. */
     static {
         // FF45
-        FIREFOX_45.initDefaultFeatures();
-        FIREFOX_45.setVendor("");
         FIREFOX_45.setPlatform(PLATFORM_WIN32);
         FIREFOX_45.buildId_ = "20170411115307";
         FIREFOX_45.setHeaderNamesOrdered(new String[] {
@@ -189,8 +186,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_45.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         // FF52
-        FIREFOX_52.initDefaultFeatures();
-        FIREFOX_52.setVendor("");
         FIREFOX_52.buildId_ = "20170627155318";
         FIREFOX_52.setHeaderNamesOrdered(new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"});
@@ -198,8 +193,6 @@ public class BrowserVersion implements Serializable, Cloneable {
         FIREFOX_52.setCssAcceptHeader("text/css,*/*;q=0.1");
 
         // IE
-        INTERNET_EXPLORER.initDefaultFeatures();
-        INTERNET_EXPLORER.setVendor("");
         INTERNET_EXPLORER.setPlatform(PLATFORM_WIN32);
         INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
@@ -210,11 +203,8 @@ public class BrowserVersion implements Serializable, Cloneable {
         INTERNET_EXPLORER.setScriptAcceptHeader("application/javascript, */*;q=0.8");
 
         // EDGE
-        EDGE.initDefaultFeatures();
-        EDGE.setVendor("");
 
         // CHROME
-        CHROME.initDefaultFeatures();
         CHROME.setApplicationCodeName("Mozilla");
         CHROME.setVendor("Google Inc.");
         CHROME.setPlatform(PLATFORM_WIN32);
@@ -356,7 +346,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String applicationName_;
     private String applicationVersion_;
     private String buildId_;
-    private String vendor_;
+    private String vendor_ = "";
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
@@ -389,24 +379,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         final String userAgent, final int browserVersionNumeric) {
 
         this(applicationName, applicationVersion, userAgent,
-                browserVersionNumeric, applicationName + browserVersionNumeric, null);
-    }
-
-    /**
-     * Instantiates one.
-     *
-     * @param applicationName the name of the application
-     * @param applicationVersion the version string of the application
-     * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the number version of the browser
-     * @param features the browser features
-     */
-    public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final int browserVersionNumeric,
-        final BrowserVersionFeatures[] features) {
-
-        this(applicationName, applicationVersion, userAgent,
-                browserVersionNumeric, applicationName + browserVersionNumeric, features);
+                browserVersionNumeric, applicationName + browserVersionNumeric);
     }
 
     /**
@@ -418,11 +391,10 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
      * @param nickname the short name of the browser (like "FF52", "IE", ...)
-     * @param features the browser features
      */
     private BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final int browserVersionNumeric,
-        final String nickname, final BrowserVersionFeatures[] features) {
+        final String nickname) {
 
         applicationName_ = applicationName;
         setApplicationVersion(applicationVersion);
@@ -435,9 +407,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
 
-        if (features != null) {
-            features_.addAll(Arrays.asList(features));
-        }
+        initDefaultFeatures();
     }
 
     private void initDefaultFeatures() {
@@ -959,7 +929,7 @@ public class BrowserVersion implements Serializable, Cloneable {
     @Override
     public BrowserVersion clone() {
         final BrowserVersion clone = new BrowserVersion(getApplicationName(), getApplicationVersion(),
-                getUserAgent(), getBrowserVersionNumeric(), getNickname(), null);
+                getUserAgent(), getBrowserVersionNumeric(), getNickname());
 
         clone.setApplicationCodeName(getApplicationCodeName());
         clone.setApplicationMinorVersion(getApplicationMinorVersion());

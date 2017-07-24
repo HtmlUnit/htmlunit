@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Support for BrowserVersionFeatures parameter of the BrowserVersion constructor
+                has been removed.
+            </action>
             <action type="fix" dev="asashour" issue="1905">
                 DomElement: Fix .getChildElements().
             </action>
