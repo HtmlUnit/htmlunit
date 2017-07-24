@@ -297,7 +297,7 @@ public class HtmlApplet extends HtmlElement {
                 archiveUrls.add(archiveUrl);
             }
         }
-        archiveUrls_ = Collections.unmodifiableList(archiveUrls_);
+        archiveUrls_ = Collections.unmodifiableList(archiveUrls);
 
         // no archive attribute, single class
         if (archiveUrls_.isEmpty()) {
