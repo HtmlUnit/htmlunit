@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                BrowserVersion.clone now copies the system-timezone attribute.
+            </action>
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: Support for BrowserVersionFeatures parameter of the BrowserVersion constructor
                 has been removed.

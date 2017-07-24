@@ -939,6 +939,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         clone.setOnLine(isOnLine());
         clone.setPlatform(getPlatform());
         clone.setSystemLanguage(getSystemLanguage());
+        clone.setSystemTimezone(getSystemTimezone());
         clone.setUserLanguage(getUserLanguage());
 
         clone.buildId_ = getBuildId();
