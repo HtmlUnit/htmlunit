@@ -374,7 +374,6 @@ public final class BrowserVersion implements Serializable, Cloneable {
      * @param nickname the short name of the browser (like "FF52", "IE", ...) - has to be unique
      */
     private BrowserVersion(final int browserVersionNumeric, final String nickname) {
-
         applicationName_ = NETSCAPE;
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
