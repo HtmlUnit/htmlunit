@@ -142,7 +142,9 @@ public abstract class WebTestCase {
     private MockWebConnection mockWebConnection_;
 
     /** To be documented. */
-    protected static final BrowserVersion FLAG_ALL_BROWSERS = new BrowserVersion("", "", "", 0);
+    protected static final BrowserVersion FLAG_ALL_BROWSERS
+        = BrowserVersion.BEST_SUPPORTED.clone().setApplicationName("FLAG_ALL_BROWSERS");
+
     /** To be documented. */
     protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<>();
     private String generateTest_content_;
