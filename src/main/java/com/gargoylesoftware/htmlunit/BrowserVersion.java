@@ -374,19 +374,20 @@ public final class BrowserVersion implements Serializable, Cloneable {
      * @param nickname the short name of the browser (like "FF52", "IE", ...) - has to be unique
      */
     private BrowserVersion(final int browserVersionNumeric, final String nickname) {
-        applicationName_ = NETSCAPE;
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
+
+        applicationName_ = NETSCAPE;
         htmlAcceptHeader_ = "*/*";
         imgAcceptHeader_ = "*/*";
         cssAcceptHeader_ = "*/*";
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
 
-        initDefaultFeatures();
+        initFeatures();
     }
 
-    private void initDefaultFeatures() {
+    private void initFeatures() {
         final SupportedBrowser expectedBrowser;
         if (isChrome()) {
             expectedBrowser = SupportedBrowser.CHROME;
@@ -479,6 +480,14 @@ public final class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * @return whether or not this version version 52 of a Firefox browser
+     */
+    public boolean isFirefox52() {
+        return isFirefox() && getBrowserVersionNumeric() == 52;
+    }
+
+    /**
      * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
      *
      * @return the short name (if any)
@@ -492,14 +501,6 @@ public final class BrowserVersion implements Serializable, Cloneable {
      */
     public int getBrowserVersionNumeric() {
         return browserVersionNumeric_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether or not this version version 52 of a Firefox browser
-     */
-    public boolean isFirefox52() {
-        return isFirefox() && getBrowserVersionNumeric() == 52;
     }
 
     /**
@@ -917,20 +918,19 @@ public final class BrowserVersion implements Serializable, Cloneable {
     public BrowserVersion clone() {
         final BrowserVersion clone = new BrowserVersion(getBrowserVersionNumeric(), getNickname());
 
-        clone.setApplicationVersion(getApplicationVersion());
-        clone.setUserAgent(getUserAgent());
-
-        clone.setApplicationName(getApplicationName());
-        clone.setApplicationCodeName(getApplicationCodeName());
-        clone.setApplicationMinorVersion(getApplicationMinorVersion());
-        clone.setVendor(getVendor());
-        clone.setBrowserLanguage(getBrowserLanguage());
-        clone.setCpuClass(getCpuClass());
-        clone.setOnLine(isOnLine());
-        clone.setPlatform(getPlatform());
-        clone.setSystemLanguage(getSystemLanguage());
-        clone.setSystemTimezone(getSystemTimezone());
-        clone.setUserLanguage(getUserLanguage());
+        clone.setApplicationVersion(getApplicationVersion())
+            .setUserAgent(getUserAgent())
+            .setApplicationName(getApplicationName())
+            .setApplicationCodeName(getApplicationCodeName())
+            .setApplicationMinorVersion(getApplicationMinorVersion())
+            .setVendor(getVendor())
+            .setBrowserLanguage(getBrowserLanguage())
+            .setCpuClass(getCpuClass())
+            .setOnLine(isOnLine())
+            .setPlatform(getPlatform())
+            .setSystemLanguage(getSystemLanguage())
+            .setSystemTimezone(getSystemTimezone())
+            .setUserLanguage(getUserLanguage());
 
         clone.buildId_ = getBuildId();
         clone.htmlAcceptHeader_ = getHtmlAcceptHeader();
