@@ -131,39 +131,45 @@ public class BrowserVersion implements Serializable, Cloneable {
      * @since 2.21
      */
     public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
+        "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
-        45, "FF45");
+        45,
+        "FF45");
 
     /**
      * Firefox 52 ESR.
      * @since 2.26
      */
     public static final BrowserVersion FIREFOX_52 = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows)",
+        "5.0 (Windows)",
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0",
-        52, "FF52");
+        52,
+        "FF52");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko", 11, "IE");
+        "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
+        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
+        11,
+        "IE");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
+        "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
+                + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
-        59, "Chrome");
+                + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
+        59,
+        "Chrome");
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(
-        NETSCAPE, "5.0 (Windows NT 10.0) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
+        "5.0 (Windows NT 10.0) AppleWebKit/537.36"
+                + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
         "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
-        + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
-        14, "Edge");
+                + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
+        14,
+        "Edge");
 
     /**
      * The best supported browser version at the moment.
@@ -378,25 +384,24 @@ public class BrowserVersion implements Serializable, Cloneable {
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final int browserVersionNumeric) {
 
-        this(applicationName, applicationVersion, userAgent,
-                browserVersionNumeric, applicationName + browserVersionNumeric);
+        this(applicationVersion, userAgent, browserVersionNumeric, applicationName + browserVersionNumeric);
+        setApplicationName(applicationName);
     }
 
     /**
      * Creates a new browser version instance.
      *
-     * @param applicationName the name of the application
      * @param applicationVersion the version string of the application
      * @param userAgent the user agent string that will be sent to the server
      * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF52", "IE", ...)
+     * @param nickname the short name of the browser (like "FF52", "IE", ...) - has to be unique
      */
-    private BrowserVersion(final String applicationName, final String applicationVersion,
+    private BrowserVersion(final String applicationVersion,
         final String userAgent, final int browserVersionNumeric,
         final String nickname) {
 
-        applicationName_ = applicationName;
+        applicationName_ = NETSCAPE;
         setApplicationVersion(applicationVersion);
         userAgent_ = userAgent;
         browserVersionNumeric_ = browserVersionNumeric;
@@ -926,9 +931,10 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     @Override
     public BrowserVersion clone() {
-        final BrowserVersion clone = new BrowserVersion(getApplicationName(), getApplicationVersion(),
+        final BrowserVersion clone = new BrowserVersion(getApplicationVersion(),
                 getUserAgent(), getBrowserVersionNumeric(), getNickname());
 
+        clone.setApplicationName(getApplicationName());
         clone.setApplicationCodeName(getApplicationCodeName());
         clone.setApplicationMinorVersion(getApplicationMinorVersion());
         clone.setVendor(getVendor());

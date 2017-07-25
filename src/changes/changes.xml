@@ -11,7 +11,7 @@
             <action type="fix" dev="rbri">
                 BrowserVersion.clone now copies the system-timezone attribute.
             </action>
-            <action type="remove" dev="rbri">
+            <action type="remove" dev="rbri" issue="1890">
                 INCOMPATIBLE CHANGE: Support for BrowserVersionFeatures parameter of the BrowserVersion constructor
                 has been removed.
             </action>
