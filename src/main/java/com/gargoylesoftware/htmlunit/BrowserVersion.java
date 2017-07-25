@@ -128,46 +128,41 @@ public class BrowserVersion implements Serializable, Cloneable {
      * Firefox 45 ESR.
      * @since 2.21
      */
-    public static final BrowserVersion FIREFOX_45 = new BrowserVersion(
-        "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0",
-        45,
-        "FF45");
+    public static final BrowserVersion FIREFOX_45
+        = new BrowserVersion(45, "FF45")
+            .setApplicationVersion("5.0 (Windows)")
+            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0");
 
     /**
      * Firefox 52 ESR.
      * @since 2.26
      */
-    public static final BrowserVersion FIREFOX_52 = new BrowserVersion(
-        "5.0 (Windows)",
-        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0",
-        52,
-        "FF52");
+    public static final BrowserVersion FIREFOX_52
+        = new BrowserVersion(52, "FF52")
+            .setApplicationVersion("5.0 (Windows)")
+            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0");
 
     /** Internet Explorer 11. */
-    public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(
-        "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-        "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
-        11,
-        "IE");
+    public static final BrowserVersion INTERNET_EXPLORER
+        = new BrowserVersion(11, "IE")
+            .setApplicationVersion("5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko")
+            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(
-        "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-                + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
-        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-                + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
-        59,
-        "Chrome");
+    public static final BrowserVersion CHROME
+        = new BrowserVersion(59, "Chrome")
+            .setApplicationVersion("5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
+                                    + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36")
+            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
+                                    + " (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36");
 
     /** Microsoft Edge. Work In Progress!!! */
-    public static final BrowserVersion EDGE = new BrowserVersion(
-        "5.0 (Windows NT 10.0) AppleWebKit/537.36"
-                + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
-        "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
-                + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393",
-        14,
-        "Edge");
+    public static final BrowserVersion EDGE
+        = new BrowserVersion(14, "Edge")
+            .setApplicationVersion("5.0 (Windows NT 10.0) AppleWebKit/537.36"
+                                    + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393")
+            .setUserAgent("Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
+                                    + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
 
     /**
      * The best supported browser version at the moment.
@@ -345,6 +340,9 @@ public class BrowserVersion implements Serializable, Cloneable {
         EDGE.getPlugins().add(flash);
     }
 
+    private int browserVersionNumeric_;
+    private final String nickname_;
+
     private String applicationCodeName_ = "Mozilla";
     private String applicationMinorVersion_ = "0";
     private String applicationName_;
@@ -359,10 +357,8 @@ public class BrowserVersion implements Serializable, Cloneable {
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private int browserVersionNumeric_;
     private final Set<PluginConfiguration> plugins_ = new HashSet<>();
     private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
-    private final String nickname_;
     private String htmlAcceptHeader_;
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
@@ -382,26 +378,22 @@ public class BrowserVersion implements Serializable, Cloneable {
     public BrowserVersion(final String applicationName, final String applicationVersion,
         final String userAgent, final int browserVersionNumeric) {
 
-        this(applicationVersion, userAgent, browserVersionNumeric, applicationName + browserVersionNumeric);
-        setApplicationName(applicationName);
+        this(browserVersionNumeric, applicationName + browserVersionNumeric);
+
+        setApplicationName(applicationName)
+            .setApplicationVersion(applicationVersion)
+            .setUserAgent(userAgent);
     }
 
     /**
      * Creates a new browser version instance.
      *
-     * @param applicationVersion the version string of the application
-     * @param userAgent the user agent string that will be sent to the server
-     * @param javaScriptVersion the version of JavaScript
      * @param browserVersionNumeric the floating number version of the browser
      * @param nickname the short name of the browser (like "FF52", "IE", ...) - has to be unique
      */
-    private BrowserVersion(final String applicationVersion,
-        final String userAgent, final int browserVersionNumeric,
-        final String nickname) {
+    private BrowserVersion(final int browserVersionNumeric, final String nickname) {
 
         applicationName_ = NETSCAPE;
-        setApplicationVersion(applicationVersion);
-        userAgent_ = userAgent;
         browserVersionNumeric_ = browserVersionNumeric;
         nickname_ = nickname;
         htmlAcceptHeader_ = "*/*";
@@ -503,6 +495,22 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public final boolean isFirefox() {
         return getNickname().startsWith("FF");
+    }
+
+    /**
+     * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
+     *
+     * @return the short name (if any)
+     */
+    public String getNickname() {
+        return nickname_;
+    }
+
+    /**
+     * @return the browserVersionNumeric
+     */
+    public int getBrowserVersionNumeric() {
+        return browserVersionNumeric_;
     }
 
     /**
@@ -681,143 +689,165 @@ public class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * @param applicationCodeName the applicationCodeName to set
+     * @return this for fluent use
      */
-    public void setApplicationCodeName(final String applicationCodeName) {
+    public BrowserVersion setApplicationCodeName(final String applicationCodeName) {
         applicationCodeName_ = applicationCodeName;
+        return this;
     }
 
     /**
      * @param applicationMinorVersion the applicationMinorVersion to set
+     * @return this for fluent use
      */
-    public void setApplicationMinorVersion(final String applicationMinorVersion) {
+    public BrowserVersion setApplicationMinorVersion(final String applicationMinorVersion) {
         applicationMinorVersion_ = applicationMinorVersion;
+        return this;
     }
 
     /**
      * @param applicationName the applicationName to set
+     * @return this for fluent use
      */
-    public void setApplicationName(final String applicationName) {
+    public BrowserVersion setApplicationName(final String applicationName) {
         applicationName_ = applicationName;
+        return this;
     }
 
     /**
      * @param applicationVersion the applicationVersion to set
+     * @return this for fluent use
      */
-    public void setApplicationVersion(final String applicationVersion) {
+    public BrowserVersion setApplicationVersion(final String applicationVersion) {
         applicationVersion_ = applicationVersion;
+        return this;
     }
 
     /**
      * @param vendor the vendor to set
+     * @return this for fluent use
      */
-    public void setVendor(final String vendor) {
+    public BrowserVersion setVendor(final String vendor) {
         vendor_ = vendor;
+        return this;
     }
 
     /**
      * @param browserLanguage the browserLanguage to set
+     * @return this for fluent use
      */
-    public void setBrowserLanguage(final String browserLanguage) {
+    public BrowserVersion setBrowserLanguage(final String browserLanguage) {
         browserLanguage_ = browserLanguage;
+        return this;
     }
 
     /**
      * @param cpuClass the cpuClass to set
+     * @return this for fluent use
      */
-    public void setCpuClass(final String cpuClass) {
+    public BrowserVersion setCpuClass(final String cpuClass) {
         cpuClass_ = cpuClass;
+        return this;
     }
 
     /**
      * @param onLine the onLine to set
+     * @return this for fluent use
      */
-    public void setOnLine(final boolean onLine) {
+    public BrowserVersion setOnLine(final boolean onLine) {
         onLine_ = onLine;
+        return this;
     }
 
     /**
      * @param platform the platform to set
+     * @return this for fluent use
      */
-    public void setPlatform(final String platform) {
+    public BrowserVersion setPlatform(final String platform) {
         platform_ = platform;
+        return this;
     }
 
     /**
      * @param systemLanguage the systemLanguage to set
+     * @return this for fluent use
      */
-    public void setSystemLanguage(final String systemLanguage) {
+    public BrowserVersion setSystemLanguage(final String systemLanguage) {
         systemLanguage_ = systemLanguage;
+        return this;
     }
 
     /**
      * @param systemTimezone the systemTimezone to set
+     * @return this for fluent use
      */
-    public void setSystemTimezone(final TimeZone systemTimezone) {
+    public BrowserVersion setSystemTimezone(final TimeZone systemTimezone) {
         systemTimezone_ = systemTimezone;
+        return this;
     }
 
     /**
      * @param userAgent the userAgent to set
+     * @return this for fluent use
      */
-    public void setUserAgent(final String userAgent) {
+    public BrowserVersion setUserAgent(final String userAgent) {
         userAgent_ = userAgent;
+        return this;
     }
 
     /**
      * @param userLanguage the userLanguage to set
+     * @return this for fluent use
      */
-    public void setUserLanguage(final String userLanguage) {
+    public BrowserVersion setUserLanguage(final String userLanguage) {
         userLanguage_ = userLanguage;
-    }
-
-    /**
-     * @param browserVersion the browserVersion to set
-     */
-    public void setBrowserVersion(final int browserVersion) {
-        browserVersionNumeric_ = browserVersion;
+        return this;
     }
 
     /**
      * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
+     * @return this for fluent use
      */
-    public void setHtmlAcceptHeader(final String htmlAcceptHeader) {
+    public BrowserVersion setHtmlAcceptHeader(final String htmlAcceptHeader) {
         htmlAcceptHeader_ = htmlAcceptHeader;
+        return this;
     }
 
     /**
      * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
+     * @return this for fluent use
      */
-    public void setImgAcceptHeader(final String imgAcceptHeader) {
+    public BrowserVersion setImgAcceptHeader(final String imgAcceptHeader) {
         imgAcceptHeader_ = imgAcceptHeader;
+        return this;
     }
 
     /**
      * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
+     * @return this for fluent use
      */
-    public void setCssAcceptHeader(final String cssAcceptHeader) {
+    public BrowserVersion setCssAcceptHeader(final String cssAcceptHeader) {
         cssAcceptHeader_ = cssAcceptHeader;
+        return this;
     }
 
     /**
      * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
+     * @return this for fluent use
      */
-    public void setScriptAcceptHeader(final String scriptAcceptHeader) {
+    public BrowserVersion setScriptAcceptHeader(final String scriptAcceptHeader) {
         scriptAcceptHeader_ = scriptAcceptHeader;
+        return this;
     }
 
     /**
      * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
      * performing XMLHttpRequests
+     * @return this for fluent use
      */
-    public void setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
+    public BrowserVersion setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
         xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
-    }
-
-    /**
-     * @return the browserVersionNumeric
-     */
-    public int getBrowserVersionNumeric() {
-        return browserVersionNumeric_;
+        return this;
     }
 
     /**
@@ -836,15 +866,6 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     public boolean hasFeature(final BrowserVersionFeatures property) {
         return features_.contains(property);
-    }
-
-    /**
-     * Returns the short name of the browser like {@code FF3}, {@code IE}, etc.
-     *
-     * @return the short name (if any)
-     */
-    public String getNickname() {
-        return nickname_;
     }
 
     /**
@@ -913,8 +934,10 @@ public class BrowserVersion implements Serializable, Cloneable {
      */
     @Override
     public BrowserVersion clone() {
-        final BrowserVersion clone = new BrowserVersion(getApplicationVersion(),
-                getUserAgent(), getBrowserVersionNumeric(), getNickname());
+        final BrowserVersion clone = new BrowserVersion(getBrowserVersionNumeric(), getNickname());
+
+        clone.setApplicationVersion(getApplicationVersion());
+        clone.setUserAgent(getUserAgent());
 
         clone.setApplicationName(getApplicationName());
         clone.setApplicationCodeName(getApplicationCodeName());
