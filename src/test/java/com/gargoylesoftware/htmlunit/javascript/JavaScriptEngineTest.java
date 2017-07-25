@@ -34,7 +34,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -1295,12 +1294,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void nonStandardBrowserVersion() throws Exception {
-        final BrowserVersion browser = new BrowserVersion("Mozilla", "5.0", "Mozilla/5.0", 11) {
-            @Override
-            public boolean hasFeature(final BrowserVersionFeatures feature) {
-                return BrowserVersion.INTERNET_EXPLORER.hasFeature(feature);
-            }
-        };
+        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER.clone()
+                .setApplicationName("Mozilla")
+                .setApplicationVersion("5.0");
 
         try (WebClient client = new WebClient(browser)) {
             client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");

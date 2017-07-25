@@ -12,8 +12,11 @@
                 BrowserVersion.clone now copies the system-timezone attribute.
             </action>
             <action type="remove" dev="rbri" issue="1890">
-                INCOMPATIBLE CHANGE: Support for BrowserVersionFeatures parameter of the BrowserVersion constructor
-                has been removed.
+                INCOMPATIBLE CHANGE: BrowserVersion is final now and all constructors are removed.
+                The only way to create new customizes Browser versions is to clone one of the predefined.
+            </action>
+            <action type="change" dev="rbri" issue="1890">
+                BrowserVersion setter methods are fluent now.
             </action>
             <action type="fix" dev="asashour" issue="1905">
                 DomElement: Fix .getChildElements().

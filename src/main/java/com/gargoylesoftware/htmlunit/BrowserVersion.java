@@ -35,21 +35,21 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
  * Objects of this class represent one specific version of a given browser. Predefined
  * constants are provided for common browser versions.
  *
- * <p>You can change the constants by something like:
+ * <p>You can create a different browser setup by simply clone from the predefined ones.
  * <pre id='htmlUnitCode'>
  *      String applicationName = "APPNAME";
  *      String applicationVersion = "APPVERSION";
  *      String userAgent = "USERAGENT";
  *      int browserVersionNumeric = NUMERIC;
  *
- *      BrowserVersion browser = new BrowserVersion(applicationName, applicationVersion, userAgent, browserVersionNumeric) {
- *          public boolean hasFeature(BrowserVersionFeatures property) {
- *
- *              // change features here
- *              return BrowserVersion.BROWSER.hasFeature(property);
- *          }
- *      };
+ *      BrowserVersion browser = BrowserVersion.FF52.clone()
+ *          .setApplicationName(applicationName)
+ *          .setApplicationVersion(applicationVersion)
+ *          .setUserAgent(userAgent);
  * </pre>
+ * <p>But keep in mind that this still behaves like a FF52, only the stuff reported to the
+ * outside is changed. This is more or less the same you can do with real browsers installing
+ * plugins like UserAgentSwitcher.
  * <script>
        var pre = document.getElementById('htmlUnitCode');
        pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
@@ -92,7 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class BrowserVersion implements Serializable, Cloneable {
+public final class BrowserVersion implements Serializable, Cloneable {
 
     /**
      * Application name the Netscape navigator series of browsers.
@@ -340,7 +340,7 @@ public class BrowserVersion implements Serializable, Cloneable {
         EDGE.getPlugins().add(flash);
     }
 
-    private int browserVersionNumeric_;
+    private final int browserVersionNumeric_;
     private final String nickname_;
 
     private String applicationCodeName_ = "Mozilla";
@@ -366,24 +366,6 @@ public class BrowserVersion implements Serializable, Cloneable {
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
     private Map<String, String> uploadMimeTypes_ = new HashMap<>();
-
-    /**
-     * Instantiates one.
-     *
-     * @param applicationName the name of the application
-     * @param applicationVersion the version string of the application
-     * @param userAgent the user agent string that will be sent to the server
-     * @param browserVersionNumeric the number version of the browser
-     */
-    public BrowserVersion(final String applicationName, final String applicationVersion,
-        final String userAgent, final int browserVersionNumeric) {
-
-        this(browserVersionNumeric, applicationName + browserVersionNumeric);
-
-        setApplicationName(applicationName)
-            .setApplicationVersion(applicationVersion)
-            .setUserAgent(userAgent);
-    }
 
     /**
      * Creates a new browser version instance.
@@ -465,7 +447,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * version of Internet Explorer.
      * @return whether or not this version is a version of IE
      */
-    public final boolean isIE() {
+    public boolean isIE() {
         return getNickname().startsWith("IE");
     }
 
@@ -475,7 +457,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * in the application name, we have to look in the nickname.
      * @return whether or not this version is a version of a Chrome browser
      */
-    public final boolean isChrome() {
+    public boolean isChrome() {
         return getNickname().startsWith("Chrome");
     }
 
@@ -484,7 +466,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * version of Microsoft Edge.
      * @return whether or not this version is a version of an Edge browser
      */
-    public final boolean isEdge() {
+    public boolean isEdge() {
         return getNickname().startsWith("Edge");
     }
 
@@ -493,7 +475,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * version of Firefox.
      * @return whether or not this version is a version of a Firefox browser
      */
-    public final boolean isFirefox() {
+    public boolean isFirefox() {
         return getNickname().startsWith("FF");
     }
 
@@ -517,7 +499,7 @@ public class BrowserVersion implements Serializable, Cloneable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * @return whether or not this version version 52 of a Firefox browser
      */
-    public final boolean isFirefox52() {
+    public boolean isFirefox52() {
         return isFirefox() && getBrowserVersionNumeric() == 52;
     }
 
