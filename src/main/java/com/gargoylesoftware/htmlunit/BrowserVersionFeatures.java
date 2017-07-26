@@ -456,10 +456,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
 
-    /** No end tag for menu item. */
-    @BrowserFeature(CHROME)
-    HTMLMENUITEM_END_TAG_FORBIDDEN,
-
     /** */
     @BrowserFeature({FF, IE})
     HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,

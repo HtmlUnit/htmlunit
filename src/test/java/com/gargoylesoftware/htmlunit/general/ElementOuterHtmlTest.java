@@ -791,8 +791,7 @@ public class ElementOuterHtmlTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "<menuitem></menuitem>",
-            CHROME = "<menuitem>")
+    @Alerts("<menuitem></menuitem>")
     public void menuitem() throws Exception {
         loadPageWithAlerts2(test("menuitem"));
     }
