@@ -19,9 +19,13 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -167,11 +171,19 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      */
     @Test
     public void clickNestedImageElement() throws Exception {
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().
+                getResourceAsStream("testfiles/not_supported_type.jpg")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String html =
               "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
-            + "    <img id='theImage' src='test.png' />\n"
+            + "    <img id='theImage' src='" + urlImage + "' />\n"
             + "  </a>\n"
             + "</body></html>";
 
