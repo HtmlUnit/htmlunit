@@ -721,8 +721,8 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "0"},
-            FF = {"0", "1", "0", "1"})
+    @Alerts(DEFAULT = {"0", "1", "0", "1"},
+            IE = {"1", "0"})
     public void getElementsByTagNameWithNamespace() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
