@@ -44,7 +44,7 @@ public class BrowserVersionTest extends WebTestCase {
     @Test
     public void testClone() {
         final BrowserVersion ff = BrowserVersion.FIREFOX_52;
-        final BrowserVersion clone = ff.clone();
+        final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups
         assertTrue(ff.getNickname().equals(clone.getNickname()));

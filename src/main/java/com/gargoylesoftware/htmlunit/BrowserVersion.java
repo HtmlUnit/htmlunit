@@ -35,19 +35,20 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
  * Objects of this class represent one specific version of a given browser. Predefined
  * constants are provided for common browser versions.
  *
- * <p>You can create a different browser setup by simply clone from the predefined ones.
+ * <p>You can create a different browser setup by using the BrowserVersionFactory.
  * <pre id='htmlUnitCode'>
  *      String applicationName = "APPNAME";
  *      String applicationVersion = "APPVERSION";
  *      String userAgent = "USERAGENT";
  *      int browserVersionNumeric = NUMERIC;
  *
- *      BrowserVersion browser = BrowserVersion.FF52.clone()
+ *      BrowserVersion browser = new BrowserVersion.BrowserVersionFactory(FF52)
  *          .setApplicationName(applicationName)
  *          .setApplicationVersion(applicationVersion)
- *          .setUserAgent(userAgent);
+ *          .setUserAgent(userAgent)
+ *          .build();
  * </pre>
- * <p>But keep in mind that this still behaves like a FF52, only the stuff reported to the
+ * <p>But keep in mind this now one still behaves like a FF52, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  * <script>
@@ -92,7 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public final class BrowserVersion implements Serializable, Cloneable {
+public final class BrowserVersion implements Serializable {
 
     /**
      * Application name the Netscape navigator series of browsers.
@@ -128,41 +129,22 @@ public final class BrowserVersion implements Serializable, Cloneable {
      * Firefox 45 ESR.
      * @since 2.21
      */
-    public static final BrowserVersion FIREFOX_45
-        = new BrowserVersion(45, "FF45")
-            .setApplicationVersion("5.0 (Windows)")
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0");
+    public static final BrowserVersion FIREFOX_45 = new BrowserVersion(45, "FF45");
 
     /**
      * Firefox 52 ESR.
      * @since 2.26
      */
-    public static final BrowserVersion FIREFOX_52
-        = new BrowserVersion(52, "FF52")
-            .setApplicationVersion("5.0 (Windows)")
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0");
+    public static final BrowserVersion FIREFOX_52 = new BrowserVersion(52, "FF52");
 
     /** Internet Explorer 11. */
-    public static final BrowserVersion INTERNET_EXPLORER
-        = new BrowserVersion(11, "IE")
-            .setApplicationVersion("5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko")
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
+    public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME
-        = new BrowserVersion(60, "Chrome")
-            .setApplicationVersion("5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-                                    + " (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36")
-            .setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36"
-                                    + " (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36");
+    public static final BrowserVersion CHROME = new BrowserVersion(60, "Chrome");
 
     /** Microsoft Edge. Work In Progress!!! */
-    public static final BrowserVersion EDGE
-        = new BrowserVersion(14, "Edge")
-            .setApplicationVersion("5.0 (Windows NT 10.0) AppleWebKit/537.36"
-                                    + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393")
-            .setUserAgent("Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36"
-                                    + " (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393");
+    public static final BrowserVersion EDGE = new BrowserVersion(14, "Edge");
 
     /**
      * The best supported browser version at the moment.
@@ -175,45 +157,56 @@ public final class BrowserVersion implements Serializable, Cloneable {
     /** Register plugins for the browser versions. */
     static {
         // FF45
-        FIREFOX_45.setPlatform(PLATFORM_WIN32);
+        FIREFOX_45.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX_45.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
+        FIREFOX_45.platform_ = PLATFORM_WIN32;
         FIREFOX_45.buildId_ = "20170411115307";
-        FIREFOX_45.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"});
-        FIREFOX_45.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_45.setXmlHttpRequestAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_45.setImgAcceptHeader("image/png,image/*;q=0.8,*/*;q=0.5");
-        FIREFOX_45.setCssAcceptHeader("text/css,*/*;q=0.1");
+        FIREFOX_45.headerNamesOrdered_ = new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"};
+        FIREFOX_45.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_45.xmlHttpRequestAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_45.imgAcceptHeader_ = "image/png,image/*;q=0.8,*/*;q=0.5";
+        FIREFOX_45.cssAcceptHeader_ = "text/css,*/*;q=0.1";
 
         // FF52
+        FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX_52.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
         FIREFOX_52.buildId_ = "20170627155318";
-        FIREFOX_52.setHeaderNamesOrdered(new String[] {
-            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"});
-        FIREFOX_52.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-        FIREFOX_52.setCssAcceptHeader("text/css,*/*;q=0.1");
+        FIREFOX_52.headerNamesOrdered_ = new String[] {
+            "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"};
+        FIREFOX_52.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_52.cssAcceptHeader_ = "text/css,*/*;q=0.1";
 
         // IE
-        INTERNET_EXPLORER.setPlatform(PLATFORM_WIN32);
-        INTERNET_EXPLORER.setHeaderNamesOrdered(new String[] {
+        INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+        INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
+        INTERNET_EXPLORER.platform_ = PLATFORM_WIN32;
+        INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
             "Accept", "Referer", "Accept-Language", "User-Agent", "Accept-Encoding", "Host", "DNT", "Connection",
-            "Cookie"});
-        INTERNET_EXPLORER.setHtmlAcceptHeader("text/html, application/xhtml+xml, */*");
-        INTERNET_EXPLORER.setImgAcceptHeader("image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5");
-        INTERNET_EXPLORER.setCssAcceptHeader("text/css, */*");
-        INTERNET_EXPLORER.setScriptAcceptHeader("application/javascript, */*;q=0.8");
+            "Cookie"};
+        INTERNET_EXPLORER.htmlAcceptHeader_ = "text/html, application/xhtml+xml, */*";
+        INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
+        INTERNET_EXPLORER.cssAcceptHeader_ = "text/css, */*";
+        INTERNET_EXPLORER.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
 
         // EDGE
+        EDGE.applicationVersion_ = "5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
         // CHROME
-        CHROME.setApplicationCodeName("Mozilla");
-        CHROME.setVendor("Google Inc.");
-        CHROME.setPlatform(PLATFORM_WIN32);
-        CHROME.setCpuClass(null);
-        CHROME.setHeaderNamesOrdered(new String[] {
-            "Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent", "Accept", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"});
-        CHROME.setHtmlAcceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
-        CHROME.setImgAcceptHeader("image/webp,image/apng,image/*,*/*;q=0.8");
-        CHROME.setCssAcceptHeader("text/css,*/*;q=0.1");
-        CHROME.setScriptAcceptHeader("*/*");
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36";
+
+        CHROME.applicationCodeName_ = "Mozilla";
+        CHROME.vendor_ = "Google Inc.";
+        CHROME.platform_ = PLATFORM_WIN32;
+        CHROME.cpuClass_ = null;
+        CHROME.headerNamesOrdered_ = new String[] {
+            "Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent", "Accept", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"};
+        CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+        CHROME.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
+        CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        CHROME.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.
 
         // default file upload mime types
@@ -670,169 +663,6 @@ public final class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * @param applicationCodeName the applicationCodeName to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setApplicationCodeName(final String applicationCodeName) {
-        applicationCodeName_ = applicationCodeName;
-        return this;
-    }
-
-    /**
-     * @param applicationMinorVersion the applicationMinorVersion to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setApplicationMinorVersion(final String applicationMinorVersion) {
-        applicationMinorVersion_ = applicationMinorVersion;
-        return this;
-    }
-
-    /**
-     * @param applicationName the applicationName to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setApplicationName(final String applicationName) {
-        applicationName_ = applicationName;
-        return this;
-    }
-
-    /**
-     * @param applicationVersion the applicationVersion to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setApplicationVersion(final String applicationVersion) {
-        applicationVersion_ = applicationVersion;
-        return this;
-    }
-
-    /**
-     * @param vendor the vendor to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setVendor(final String vendor) {
-        vendor_ = vendor;
-        return this;
-    }
-
-    /**
-     * @param browserLanguage the browserLanguage to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setBrowserLanguage(final String browserLanguage) {
-        browserLanguage_ = browserLanguage;
-        return this;
-    }
-
-    /**
-     * @param cpuClass the cpuClass to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setCpuClass(final String cpuClass) {
-        cpuClass_ = cpuClass;
-        return this;
-    }
-
-    /**
-     * @param onLine the onLine to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setOnLine(final boolean onLine) {
-        onLine_ = onLine;
-        return this;
-    }
-
-    /**
-     * @param platform the platform to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setPlatform(final String platform) {
-        platform_ = platform;
-        return this;
-    }
-
-    /**
-     * @param systemLanguage the systemLanguage to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setSystemLanguage(final String systemLanguage) {
-        systemLanguage_ = systemLanguage;
-        return this;
-    }
-
-    /**
-     * @param systemTimezone the systemTimezone to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setSystemTimezone(final TimeZone systemTimezone) {
-        systemTimezone_ = systemTimezone;
-        return this;
-    }
-
-    /**
-     * @param userAgent the userAgent to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setUserAgent(final String userAgent) {
-        userAgent_ = userAgent;
-        return this;
-    }
-
-    /**
-     * @param userLanguage the userLanguage to set
-     * @return this for fluent use
-     */
-    public BrowserVersion setUserLanguage(final String userLanguage) {
-        userLanguage_ = userLanguage;
-        return this;
-    }
-
-    /**
-     * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
-     * @return this for fluent use
-     */
-    public BrowserVersion setHtmlAcceptHeader(final String htmlAcceptHeader) {
-        htmlAcceptHeader_ = htmlAcceptHeader;
-        return this;
-    }
-
-    /**
-     * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
-     * @return this for fluent use
-     */
-    public BrowserVersion setImgAcceptHeader(final String imgAcceptHeader) {
-        imgAcceptHeader_ = imgAcceptHeader;
-        return this;
-    }
-
-    /**
-     * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
-     * @return this for fluent use
-     */
-    public BrowserVersion setCssAcceptHeader(final String cssAcceptHeader) {
-        cssAcceptHeader_ = cssAcceptHeader;
-        return this;
-    }
-
-    /**
-     * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
-     * @return this for fluent use
-     */
-    public BrowserVersion setScriptAcceptHeader(final String scriptAcceptHeader) {
-        scriptAcceptHeader_ = scriptAcceptHeader;
-        return this;
-    }
-
-    /**
-     * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
-     * performing XMLHttpRequests
-     * @return this for fluent use
-     */
-    public BrowserVersion setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
-        xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
-        return this;
-    }
-
-    /**
      * Returns the available plugins. This makes only sense for Firefox as only this
      * browser makes this kind of information available via JavaScript.
      * @return the available plugins
@@ -864,14 +694,6 @@ public final class BrowserVersion implements Serializable, Cloneable {
      */
     public String[] getHeaderNamesOrdered() {
         return headerNamesOrdered_;
-    }
-
-    /**
-     * Sets the headers names, so they are sent in the given order (if included in the request).
-     * @param headerNames the header names in ordered manner
-     */
-    public void setHeaderNamesOrdered(final String[] headerNames) {
-        headerNamesOrdered_ = headerNames;
     }
 
     /**
@@ -910,43 +732,218 @@ public final class BrowserVersion implements Serializable, Cloneable {
     }
 
     /**
-     * Creates and return a copy of this object. Current instance and cloned
-     * object can be modified independently.
-     * @return a clone of this instance.
+     * Because BrowserVersion is immutable we need a builder
+     * for this complex object setup.
      */
-    @Override
-    public BrowserVersion clone() {
-        final BrowserVersion clone = new BrowserVersion(getBrowserVersionNumeric(), getNickname());
+    public static class BrowserVersionBuilder {
+        private final BrowserVersion workPiece_;
 
-        clone.setApplicationVersion(getApplicationVersion())
-            .setUserAgent(getUserAgent())
-            .setApplicationName(getApplicationName())
-            .setApplicationCodeName(getApplicationCodeName())
-            .setApplicationMinorVersion(getApplicationMinorVersion())
-            .setVendor(getVendor())
-            .setBrowserLanguage(getBrowserLanguage())
-            .setCpuClass(getCpuClass())
-            .setOnLine(isOnLine())
-            .setPlatform(getPlatform())
-            .setSystemLanguage(getSystemLanguage())
-            .setSystemTimezone(getSystemTimezone())
-            .setUserLanguage(getUserLanguage());
+        /**
+         * Creates a new BrowserVersionBuilder using the given browser version
+         * as template for the browser to be constructed.
+         * @param version the blueprint
+         */
+        public BrowserVersionBuilder(final BrowserVersion version) {
+            workPiece_ = new BrowserVersion(version.getBrowserVersionNumeric(), version.getNickname());
 
-        clone.buildId_ = getBuildId();
-        clone.htmlAcceptHeader_ = getHtmlAcceptHeader();
-        clone.imgAcceptHeader_ = getImgAcceptHeader();
-        clone.cssAcceptHeader_ = getCssAcceptHeader();
-        clone.scriptAcceptHeader_ = getScriptAcceptHeader();
-        clone.xmlHttpRequestAcceptHeader_ = getXmlHttpRequestAcceptHeader();
-        clone.headerNamesOrdered_ = getHeaderNamesOrdered();
+            setApplicationVersion(version.getApplicationVersion())
+                .setUserAgent(version.getUserAgent())
+                .setApplicationName(version.getApplicationName())
+                .setApplicationCodeName(version.getApplicationCodeName())
+                .setApplicationMinorVersion(version.getApplicationMinorVersion())
+                .setVendor(version.getVendor())
+                .setBrowserLanguage(version.getBrowserLanguage())
+                .setCpuClass(version.getCpuClass())
+                .setOnLine(version.isOnLine())
+                .setPlatform(version.getPlatform())
+                .setSystemLanguage(version.getSystemLanguage())
+                .setSystemTimezone(version.getSystemTimezone())
+                .setUserLanguage(version.getUserLanguage());
 
-        for (final PluginConfiguration pluginConf : getPlugins()) {
-            clone.getPlugins().add(pluginConf.clone());
+            workPiece_.buildId_ = version.getBuildId();
+            workPiece_.htmlAcceptHeader_ = version.getHtmlAcceptHeader();
+            workPiece_.imgAcceptHeader_ = version.getImgAcceptHeader();
+            workPiece_.cssAcceptHeader_ = version.getCssAcceptHeader();
+            workPiece_.scriptAcceptHeader_ = version.getScriptAcceptHeader();
+            workPiece_.xmlHttpRequestAcceptHeader_ = version.getXmlHttpRequestAcceptHeader();
+            workPiece_.headerNamesOrdered_ = version.getHeaderNamesOrdered();
+
+            for (final PluginConfiguration pluginConf : version.getPlugins()) {
+                workPiece_.getPlugins().add(pluginConf.clone());
+            }
+
+            workPiece_.features_.addAll(version.features_);
+            workPiece_.uploadMimeTypes_.putAll(version.uploadMimeTypes_);
         }
 
-        clone.features_.addAll(features_);
-        clone.uploadMimeTypes_.putAll(uploadMimeTypes_);
+        /**
+         * @return the new immutable browser version
+         */
+        public BrowserVersion build() {
+            return workPiece_;
+        }
 
-        return clone;
+        /**
+         * @param applicationMinorVersion the applicationMinorVersion to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setApplicationMinorVersion(final String applicationMinorVersion) {
+            workPiece_.applicationMinorVersion_ = applicationMinorVersion;
+            return this;
+        }
+
+        /**
+         * @param applicationName the applicationName to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setApplicationName(final String applicationName) {
+            workPiece_.applicationName_ = applicationName;
+            return this;
+        }
+
+        /**
+         * @param applicationVersion the applicationVersion to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setApplicationVersion(final String applicationVersion) {
+            workPiece_.applicationVersion_ = applicationVersion;
+            return this;
+        }
+
+        /**
+         * @param vendor the vendor to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setVendor(final String vendor) {
+            workPiece_.vendor_ = vendor;
+            return this;
+        }
+
+        /**
+         * @param applicationCodeName the applicationCodeName to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setApplicationCodeName(final String applicationCodeName) {
+            workPiece_.applicationCodeName_ = applicationCodeName;
+            return this;
+        }
+
+        /**
+         * @param browserLanguage the browserLanguage to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setBrowserLanguage(final String browserLanguage) {
+            workPiece_.browserLanguage_ = browserLanguage;
+            return this;
+        }
+
+        /**
+         * @param cpuClass the cpuClass to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setCpuClass(final String cpuClass) {
+            workPiece_.cpuClass_ = cpuClass;
+            return this;
+        }
+
+        /**
+         * @param onLine the onLine to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setOnLine(final boolean onLine) {
+            workPiece_.onLine_ = onLine;
+            return this;
+        }
+
+        /**
+         * @param platform the platform to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setPlatform(final String platform) {
+            workPiece_.platform_ = platform;
+            return this;
+        }
+
+        /**
+         * @param systemLanguage the systemLanguage to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSystemLanguage(final String systemLanguage) {
+            workPiece_.systemLanguage_ = systemLanguage;
+            return this;
+        }
+
+        /**
+         * @param systemTimezone the systemTimezone to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSystemTimezone(final TimeZone systemTimezone) {
+            workPiece_.systemTimezone_ = systemTimezone;
+            return this;
+        }
+
+        /**
+         * @param userAgent the userAgent to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setUserAgent(final String userAgent) {
+            workPiece_.userAgent_ = userAgent;
+            return this;
+        }
+
+        /**
+         * @param userLanguage the userLanguage to set
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setUserLanguage(final String userLanguage) {
+            workPiece_.userLanguage_ = userLanguage;
+            return this;
+        }
+
+        /**
+         * @param htmlAcceptHeader the {@code Accept} header to be used when retrieving pages
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setHtmlAcceptHeader(final String htmlAcceptHeader) {
+            workPiece_.htmlAcceptHeader_ = htmlAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param imgAcceptHeader the {@code Accept} header to be used when retrieving images
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setImgAcceptHeader(final String imgAcceptHeader) {
+            workPiece_.imgAcceptHeader_ = imgAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param cssAcceptHeader the {@code Accept} header to be used when retrieving pages
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setCssAcceptHeader(final String cssAcceptHeader) {
+            workPiece_.cssAcceptHeader_ = cssAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param scriptAcceptHeader the {@code Accept} header to be used when retrieving scripts
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setScriptAcceptHeader(final String scriptAcceptHeader) {
+            workPiece_.scriptAcceptHeader_ = scriptAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param xmlHttpRequestAcceptHeader the {@code Accept} header to be used when
+         * performing XMLHttpRequests
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
+            workPiece_.xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
+            return this;
+        }
     }
 }

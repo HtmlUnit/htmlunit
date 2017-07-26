@@ -77,16 +77,18 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         leakyMap.clear();
         final int knownBrowsers = leakyMap.size();
 
-        BrowserVersion browserVersion = BrowserVersion.FIREFOX_52.clone()
+        BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
                                                 .setApplicationVersion("App")
                                                 .setApplicationVersion("Version")
-                                                .setUserAgent("User agent");
+                                                .setUserAgent("User agent")
+                                                .build();
         JavaScriptConfiguration.getInstance(browserVersion);
 
-        browserVersion = BrowserVersion.FIREFOX_52.clone()
+        browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
                             .setApplicationVersion("App2")
                             .setApplicationVersion("Version2")
-                            .setUserAgent("User agent2");
+                            .setUserAgent("User agent2")
+                            .build();
         JavaScriptConfiguration.getInstance(browserVersion);
 
         assertEquals(knownBrowsers + 1, leakyMap.size());
@@ -103,10 +105,11 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
         long count = 0;
         while (count++ < 3000) {
-            final BrowserVersion browserVersion = BrowserVersion.FIREFOX_52.clone()
+            final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
                                                     .setApplicationVersion("App" + generator.generate(20))
                                                     .setApplicationVersion("Version" + generator.generate(20))
-                                                    .setUserAgent("User Agent" + generator.generate(20));
+                                                    .setUserAgent("User Agent" + generator.generate(20))
+                                                    .build();
             JavaScriptConfiguration.getInstance(browserVersion);
             if (LOG.isInfoEnabled()) {
                 LOG.info("count: " + count + "; memory stats: " + getMemoryStats());
@@ -310,7 +313,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void cloned() throws Exception {
-        final BrowserVersion browserVersion = BrowserVersion.FIREFOX_45.clone();
+        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_45)
+                                                    .build();
 
         test(browserVersion);
     }
@@ -322,8 +326,9 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void clonedAndModified() throws Exception {
-        final BrowserVersion browserVersion = BrowserVersion.FIREFOX_45.clone();
-        browserVersion.setUserAgent("foo");
+        final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_45)
+                                                    .setUserAgent("foo")
+                                                    .build();
 
         test(browserVersion);
     }

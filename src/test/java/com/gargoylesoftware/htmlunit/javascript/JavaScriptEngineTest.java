@@ -1294,9 +1294,10 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      */
     @Test
     public void nonStandardBrowserVersion() throws Exception {
-        final BrowserVersion browser = BrowserVersion.INTERNET_EXPLORER.clone()
+        final BrowserVersion browser = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.INTERNET_EXPLORER)
                 .setApplicationName("Mozilla")
-                .setApplicationVersion("5.0");
+                .setApplicationVersion("5.0")
+                .build();
 
         try (WebClient client = new WebClient(browser)) {
             client.openWindow(WebClient.URL_ABOUT_BLANK, "TestWindow");
