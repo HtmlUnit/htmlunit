@@ -143,7 +143,9 @@ public abstract class WebTestCase {
 
     /** To be documented. */
     protected static final BrowserVersion FLAG_ALL_BROWSERS
-        = BrowserVersion.BEST_SUPPORTED.clone().setApplicationName("FLAG_ALL_BROWSERS");
+        = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.BEST_SUPPORTED)
+                    .setApplicationName("FLAG_ALL_BROWSERS")
+                    .build();
 
     /** To be documented. */
     protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<>();

@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  * Tests for {@link WebClient} that run with BrowserRunner.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebClient2Test extends SimpleWebTestCase {
@@ -243,22 +244,30 @@ public class WebClient2Test extends SimpleWebTestCase {
     @Test
     public void acceptLanguage() throws Exception {
         final String html = "<html><body></body></html>";
-        final HtmlPage p = loadPageWithAlerts(html);
+        loadPageWithAlerts(html);
         // browsers are using different casing, but this is not relevant for this test
         assertEquals("en-us",
                 getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase(Locale.ROOT));
+    }
 
-        final WebClient client = p.getWebClient();
-        final String lang = client.getBrowserVersion().getBrowserLanguage();
-        try {
-            client.getBrowserVersion().setBrowserLanguage("fr");
-            client.getPage(URL_FIRST);
-            assertEquals("fr", getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language"));
-        }
-        finally {
-            // Restore original language.
-            client.getBrowserVersion().setBrowserLanguage(lang);
-        }
+    /**
+     * Regression test for bug 2812769.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void acceptLanguageFr() throws Exception {
+        final String html = "<html><body></body></html>";
+
+        final BrowserVersion frBrowser =
+                new BrowserVersion.BrowserVersionBuilder(getBrowserVersion())
+                        .setBrowserLanguage("fr")
+                        .build();
+
+        setBrowserVersion(frBrowser);
+        loadPageWithAlerts(html);
+        // browsers are using different casing, but this is not relevant for this test
+        assertEquals("fr",
+                getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase(Locale.ROOT));
     }
 
     /**
