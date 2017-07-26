@@ -96,22 +96,10 @@ public class CSSRule extends SimpleScriptable {
     public static final short MOZ_KEYFRAMES_RULE        = 7;
 
     /**
-     * The rule is a {@code CSSKeyframesRule}.
-     */
-    @JsxConstant(CHROME)
-    public static final short WEBKIT_KEYFRAMES_RULE     = 7;
-
-    /**
      * The rule is a {@code CSSKeyframeRule}.
      */
     @JsxConstant
     public static final short KEYFRAME_RULE             = 8;
-
-    /**
-     * The rule is a {@code CSSKeyframeRule}.
-     */
-    @JsxConstant(CHROME)
-    public static final short WEBKIT_KEYFRAME_RULE      = 8;
 
     /**
      * The rule is a {@code CSSKeyframeRule}.

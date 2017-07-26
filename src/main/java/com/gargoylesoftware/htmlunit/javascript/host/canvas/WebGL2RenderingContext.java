@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -1643,7 +1645,7 @@ public class WebGL2RenderingContext extends SimpleScriptable {
     public static final long STENCIL_FUNC = 2962L;
 
     /** The constant {@code STENCIL_INDEX}. */
-    @JsxConstant
+    @JsxConstant({FF52, FF45, IE})
     public static final long STENCIL_INDEX = 6401L;
 
     /** The constant {@code STENCIL_INDEX8}. */
