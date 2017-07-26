@@ -823,10 +823,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 + "Transfer-Encoding: chunked\r\n"
                 + "Server: Jetty(XXX)\r\n\r\n"},
             CHROME = {"", "",
-                "Date XYZ GMT\r\n"
-                + "Server: Jetty(XXX)\r\n"
-                + "Transfer-Encoding: chunked\r\n"
-                + "Content-Type: text/xml;charset=iso-8859-1\r\n"})
+                "date XYZ GMT\r\n"
+                + "server: Jetty(XXX)\r\n"
+                + "transfer-encoding: chunked\r\n"
+                + "content-type: text/xml;charset=iso-8859-1\r\n"})
     @NotYetImplemented(CHROME)
     public void getAllResponseHeaders() throws Exception {
         final String html =
@@ -849,7 +849,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "        request.send();\n"
                         + "        try {\n"
                         + "          alert(request.getAllResponseHeaders().replace(/Jetty\\(.*\\)/, 'Jetty(XXX)')"
-                        + "        .replace(/Date.*GMT/, 'Date XYZ GMT'));\n"
+                        + "             .replace(/Date.*GMT/, 'Date XYZ GMT').replace(/date.*GMT/, 'date XYZ GMT'));\n"
                         + "        } catch(e) { alert('exception-sent'); }\n"
                         + "      }\n"
                         + "    </script>\n"
