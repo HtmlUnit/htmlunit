@@ -666,7 +666,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(CHROME = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),chrome,clearInterval(),clearTimeout(),clientInformation,"
                 + "close(),closed,confirm(),"
-                + "console,createImageBitmap(),crypto,customElements,defaultstatus,defaultStatus,devicePixelRatio,"
+                + "createImageBitmap(),crypto,customElements,defaultStatus,defaultstatus,devicePixelRatio,"
                 + "dispatchEvent(),document,external,fetch(),find(),focus(),frameElement,frames,getComputedStyle(),"
                 + "getMatchedCSSRules(),getSelection(),history,"
                 + "indexedDB,innerHeight,innerWidth,isSecureContext,length,"
@@ -678,7 +678,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ondurationchange,onemptied,onended,onerror,onfocus,ongotpointercapture,"
                 + "onhashchange,oninput,oninvalid,onkeydown,onkeypress,onkeyup,"
                 + "onlanguagechange,onload(),onloadeddata,onloadedmetadata,onloadstart,onlostpointercapture,onmessage,"
-                + "onmousedown,"
+                + "onmessageerror,onmousedown,"
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onoffline,"
                 + "ononline,onpagehide,onpageshow,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
@@ -1092,8 +1092,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "aLink,background,bgColor,link,onbeforeunload,onhashchange,onlanguagechange,onmessage,onoffline,"
-                + "ononline,onpagehide,onpageshow,onpopstate,"
+    @Alerts(CHROME = "aLink,background,bgColor,link,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
+                + "onmessageerror,onoffline,ononline,onpagehide,onpageshow,onpopstate,"
                 + "onrejectionhandled,onstorage,onunhandledrejection,onunload,"
                 + "text,vLink",
             FF = "aLink,background,bgColor,link,onafterprint,onbeforeprint,onbeforeunload,onhashchange,"
@@ -1503,7 +1503,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "cols,onbeforeunload,onhashchange,onlanguagechange,onmessage,onoffline,ononline,onpagehide,"
+    @Alerts(CHROME = "cols,onbeforeunload,onhashchange,onlanguagechange,onmessage,onmessageerror,"
+                + "onoffline,ononline,onpagehide,"
                 + "onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,"
                 + "rows",
             FF = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
@@ -1653,7 +1654,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF52 = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
-            CHROME = "align,allowFullscreen,contentDocument,contentWindow,frameBorder,getSVGDocument(),height,"
+            CHROME = "align,allow,allowFullscreen,allowPaymentRequest,contentDocument,contentWindow,"
+                + "frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"

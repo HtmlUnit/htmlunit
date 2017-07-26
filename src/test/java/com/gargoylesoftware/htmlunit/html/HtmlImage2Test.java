@@ -155,7 +155,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
     public void isDisplayedInvalidSource() throws Exception {
         isDisplayed("src='unknown.gif'");
     }

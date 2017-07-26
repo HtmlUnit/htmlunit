@@ -118,6 +118,7 @@ float
 floodColor
 floodOpacity
 font
+fontDisplay
 fontFamily
 fontFeatureSettings
 fontKerning
@@ -186,14 +187,12 @@ minInlineSize
 minWidth
 minZoom
 mixBlendMode
-motion
 objectFit
 objectPosition
 offset
 offsetDistance
 offsetPath
 offsetRotate
-offsetRotation
 opacity
 order
 orientation
