@@ -16,6 +16,12 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -31,6 +37,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HTMLInputElement} and buttons.
@@ -996,6 +1003,14 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     public void onChangeCallsFormSubmit() throws Exception {
+        final URL urlImage = new URL(URL_SECOND, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1003,7 +1018,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <form name='test' action='foo'>\n"
             + "    <input name='field1' onchange='submit()'>\n"
-            + "    <img src='unknown.gif'>\n"
+            + "    <img src='" + urlImage + "'>\n"
             + "  </form>\n"
             + "</body></html>";
 
