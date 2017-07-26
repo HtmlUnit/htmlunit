@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -239,18 +240,27 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("IFRAME")
+    @Alerts(DEFAULT = {"false", "false", "true", "false"},
+            IE = {"false", "false", "false", "false"})
+    @BuggyWebDriver(CHROME)
+    @NotYetImplemented
     public void createIframeFromStrictFunction() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  function test() {\n"
                 + "    'use strict';\n"
-                + "    var iFrame = document.createElement('iframe');\n"
-                + "    alert(iFrame.tagName);\n"
+                + "    var iframe = document.createElement('iframe');\n"
+                + "    alert(!this);\n"
+                + "    alert(!iframe);\n"
+                + "  }\n"
+                + "  function test2() {\n"
+                + "    var iframe = document.createElement('iframe');\n"
+                + "    alert(!this);\n"
+                + "    alert(!iframe);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body onload='test();test2()'>\n"
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
