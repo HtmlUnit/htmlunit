@@ -6921,6 +6921,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function InputEvent() { [native code] }",
             FF = "function InputEvent() {\n    [native code]\n}")
     public void inputEvent() throws Exception {
         test("InputEvent");
@@ -10250,7 +10251,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SharedArrayBuffer() { [native code] }")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }
@@ -10278,7 +10280,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "[object Atomics]")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -10709,8 +10712,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SiteBoundCredential() { [native code] }")
+    @Alerts("exception")
     public void siteBoundCredential() throws Exception {
         test("SiteBoundCredential");
     }
@@ -10831,7 +10833,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function BudgetService() { [native code] }")
     public void budgetService() throws Exception {
         test("BudgetService");
     }
@@ -10840,7 +10843,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PaymentResponse() { [native code] }")
     public void paymentResponse() throws Exception {
         test("PaymentResponse");
     }
@@ -11144,7 +11148,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PaymentAddress() { [native code] }")
     public void paymentAddress() throws Exception {
         test("PaymentAddress");
     }
@@ -11171,7 +11176,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function PaymentRequest() { [native code] }")
     public void paymentRequest() throws Exception {
         test("PaymentRequest");
     }
