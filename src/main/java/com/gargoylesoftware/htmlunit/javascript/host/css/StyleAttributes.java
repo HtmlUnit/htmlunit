@@ -866,7 +866,7 @@ public final class StyleAttributes {
         /** The style property {@code font}. */
         FONT("font", "font", chrome("normal normal normal normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
 
-        /** The style property {@code fontFamily}. */
+        /** The style property {@code fontDisplay}. */
         FONT_DISPLAY("fontDisplay", "font-display", chrome("")),
 
         /** The style property {@code fontFamily}. */
