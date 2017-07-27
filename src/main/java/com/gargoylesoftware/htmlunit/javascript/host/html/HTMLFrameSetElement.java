@@ -204,6 +204,24 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
+     * Returns the {@code onmessageerror} event handler for this element.
+     * @return the {@code onmessageerror} event handler for this element
+     */
+    @JsxGetter(CHROME)
+    public Function getOnmessageerror() {
+        return getEventHandler("onmessageerror");
+    }
+
+    /**
+     * Sets the {@code onmessageerror} event handler for this element.
+     * @param onmessageerror the {@code onmessageerror} event handler for this element
+     */
+    @JsxSetter(CHROME)
+    public void setOnmessageerror(final Object onmessageerror) {
+        setEventHandler("onmessageerror", onmessageerror);
+    }
+
+    /**
      * Returns the {@code onoffline} event handler.
      * @return the {@code onoffline} event handler
      */
