@@ -17,11 +17,14 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+
+import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -79,7 +82,15 @@ public class DOMTokenList extends SimpleScriptable {
     @JsxGetter
     public int getLength() {
         final String value = getDefaultValue(null);
-        return StringUtils.split(value, whitespaceChars()).length;
+        final String[] parts = StringUtils.split(value, whitespaceChars());
+        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
+            final HashSet<String> elements = new HashSet<>(parts.length);
+            for (int i = 0; i < parts.length; i++) {
+                elements.add(parts[i]);
+            }
+            return elements.size();
+        }
+        return parts.length;
     }
 
     /**

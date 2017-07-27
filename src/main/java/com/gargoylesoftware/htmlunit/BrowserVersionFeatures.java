@@ -833,7 +833,7 @@ public enum BrowserVersionFeatures {
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
     /** DOMTokenList returns false instead of throwing an exception when receiver is blank. */
-    @BrowserFeature(FF52)
+    @BrowserFeature({CHROME, FF52})
     JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK,
 
     /** DOMTokenList uses an enhanced set of whitespace chars. */
@@ -844,8 +844,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
 
+    /** DOMTokenList ignores duplicates when determining the length. */
+    @BrowserFeature(CHROME)
+    JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES,
+
     /** DOMTokenList removed all whitespace chars during edit. */
-    @BrowserFeature(IE)
+    @BrowserFeature({CHROME, IE})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
     /** DOMTokenList removed all whitespace chars during remove. */
