@@ -1394,7 +1394,7 @@ public enum BrowserVersionFeatures {
     JS_XML,
 
     /** XMLDocument: .getElementsByTagName() to search the nodes by their local name. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature(IE)
     JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL,
 
     /** XMLDocument: .getElementById() to return any element, not HTML specifically. */
