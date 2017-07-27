@@ -687,8 +687,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts("false")
     public void _MOTION() throws Exception {
         test("motion");
     }
@@ -697,8 +696,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts("false")
     public void _OFFSET_ROTATION() throws Exception {
         test("offsetRotation");
     }
