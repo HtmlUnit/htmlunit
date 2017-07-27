@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -249,11 +248,8 @@ public class HTMLImageElement extends HTMLElement {
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 28;
                 }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    if (StringUtils.isBlank(src)) {
-                        return 0;
-                    }
-                    return 20;
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
+                    return 0;
                 }
                 return 24;
             }
@@ -263,8 +259,8 @@ public class HTMLImageElement extends HTMLElement {
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 28;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)
+                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
             return 0;
         }
         return 24;
@@ -308,11 +304,8 @@ public class HTMLImageElement extends HTMLElement {
                 if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                     return 30;
                 }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)) {
-                    if (StringUtils.isBlank(src)) {
-                        return 0;
-                    }
-                    return 20;
+                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
+                    return 0;
                 }
                 return 24;
             }
@@ -322,8 +315,8 @@ public class HTMLImageElement extends HTMLElement {
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
             return 30;
         }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)
+                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
             return 0;
         }
         return 24;

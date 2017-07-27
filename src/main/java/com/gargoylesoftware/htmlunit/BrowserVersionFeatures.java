@@ -959,15 +959,15 @@ public enum BrowserVersionFeatures {
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature(CHROME)
     JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 18x20;
      * for invalid values returns 1.
      */
-    @BrowserFeature(CHROME)
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_18x20_0x0,
+    @BrowserFeature(FF)
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 28x30;
