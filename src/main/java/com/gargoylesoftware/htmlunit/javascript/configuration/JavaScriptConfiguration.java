@@ -92,6 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.SharedArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
@@ -539,6 +540,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
+        SharedArrayBuffer.class,
         SharedWorker.class, SimpleArray.class, SiteBoundCredential.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
