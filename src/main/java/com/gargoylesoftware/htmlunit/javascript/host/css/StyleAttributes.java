@@ -867,6 +867,9 @@ public final class StyleAttributes {
         FONT("font", "font", chrome("normal normal normal normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
 
         /** The style property {@code fontFamily}. */
+        FONT_DISPLAY("fontDisplay", "font-display", chrome("")),
+
+        /** The style property {@code fontFamily}. */
         FONT_FAMILY("fontFamily", "font-family", chrome("\"Times New Roman\""), ie("Times New Roman"), ff("serif")),
 
         /** The style property {@code font-family}. */
@@ -1353,9 +1356,6 @@ public final class StyleAttributes {
 
         /** The style property {@code mix-blend-mode}. */
         MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff("normal")),
-
-        /** The style property {@code motion}. */
-        MOTION("motion", "motion", chrome("none 0px auto 0deg")),
 
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
@@ -2208,9 +2208,6 @@ public final class StyleAttributes {
 
         /** The style property {@code offsetRotate}. */
         OFFSET_ROTATE("offsetRotate", "offsetRotate", chrome("auto 0deg")),
-
-        /** The style property {@code offsetRotation}. */
-        OFFSET_ROTATION("offsetRotation", "offsetRotation", chrome("auto 0deg")),
 
         /** The style property {@code opacity}. */
         OPACITY("opacity", "opacity", chrome("1"), ff(""), ie("")),
