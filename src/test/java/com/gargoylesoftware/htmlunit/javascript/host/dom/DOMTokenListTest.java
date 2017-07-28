@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
@@ -693,7 +694,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  "},
             CHROME = {" \t \n  ", "0", "0", ""},
             FF52 = {" \t \n  ", "0", "0", ""})
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({CHROME, FF52})
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }

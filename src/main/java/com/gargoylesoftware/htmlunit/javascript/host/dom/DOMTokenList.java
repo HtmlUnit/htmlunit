@@ -136,6 +136,10 @@ public class DOMTokenList extends SimpleScriptable {
             value = value + token;
             updateAttribute(value);
         }
+        else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
+            value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+            updateAttribute(value);
+        }
     }
 
     /**
