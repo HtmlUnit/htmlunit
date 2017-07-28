@@ -144,6 +144,16 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    public void _SharedArrayBuffer_SharedArrayBuffer() throws Exception {
+        test("SharedArrayBuffer", "SharedArrayBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _ShadowRoot_ShadowRoot() throws Exception {
         test("ShadowRoot", "ShadowRoot");
     }
@@ -156,36 +166,6 @@ public class HostParentOfSTest extends HostParentOf {
             IE = "false")
     public void _SharedWorker_SharedWorker() throws Exception {
         test("SharedWorker", "SharedWorker");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SiteBoundCredential_FederatedCredential() throws Exception {
-        test("SiteBoundCredential", "FederatedCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SiteBoundCredential_PasswordCredential() throws Exception {
-        test("SiteBoundCredential", "PasswordCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _SiteBoundCredential_SiteBoundCredential() throws Exception {
-        test("SiteBoundCredential", "SiteBoundCredential");
     }
 
     /**
