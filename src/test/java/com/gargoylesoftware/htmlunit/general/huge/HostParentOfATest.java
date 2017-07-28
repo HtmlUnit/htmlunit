@@ -171,6 +171,7 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF52 = "true")
     @NotYetImplemented(FF52)
     public void _Audio_HTMLAudioElement() throws Exception {
@@ -917,16 +918,6 @@ public class HostParentOfATest extends HostParentOf {
             CHROME = "true")
     public void _Credential_PasswordCredential() throws Exception {
         test("Credential", "PasswordCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Credential_SiteBoundCredential() throws Exception {
-        test("Credential", "SiteBoundCredential");
     }
 
     /**
