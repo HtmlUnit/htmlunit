@@ -23,9 +23,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code FederatedCredential}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(CHROME)
-public class FederatedCredential extends SiteBoundCredential {
+public class FederatedCredential extends Credential {
 
     /**
      * Default constructor.

@@ -391,7 +391,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.security.Credential;
 import com.gargoylesoftware.htmlunit.javascript.host.security.CredentialsContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.security.FederatedCredential;
 import com.gargoylesoftware.htmlunit.javascript.host.security.PasswordCredential;
-import com.gargoylesoftware.htmlunit.javascript.host.security.SiteBoundCredential;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
@@ -541,7 +540,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
         SharedArrayBuffer.class,
-        SharedWorker.class, SimpleArray.class, SiteBoundCredential.class, SourceBuffer.class, SourceBufferList.class,
+        SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
         StereoPannerNode.class, Storage.class, StorageEvent.class, StorageManager.class,

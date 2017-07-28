@@ -23,9 +23,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code PasswordCredential}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(CHROME)
-public class PasswordCredential extends SiteBoundCredential {
+public class PasswordCredential extends Credential {
 
     /**
      * Default constructor.
