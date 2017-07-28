@@ -276,8 +276,8 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _UIEvent_InputEvent() throws Exception {
         test("UIEvent", "InputEvent");
     }
