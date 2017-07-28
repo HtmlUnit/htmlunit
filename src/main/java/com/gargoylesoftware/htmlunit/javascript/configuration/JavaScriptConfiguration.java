@@ -97,6 +97,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
+import com.gargoylesoftware.htmlunit.javascript.host.budget.BudgetService;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
@@ -379,6 +380,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnect
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozPowerManager;
+import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentAddress;
+import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentRequest;
+import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentResponse;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceEntry;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceMark;
@@ -433,7 +437,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
         BarProp.class, BaseAudioContext.class,
         BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
-        Blob.class, BlobEvent.class, BroadcastChannel.class, Cache.class, CacheStorage.class,
+        Blob.class, BlobEvent.class, BroadcastChannel.class,
+        BudgetService.class,
+        Cache.class, CacheStorage.class,
         CanvasCaptureMediaStream.class, CanvasCaptureMediaStreamTrack.class,
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
@@ -522,7 +528,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         OES_texture_float.class, OES_texture_float_linear.class, OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,
         PasswordCredential.class,
-        Path2D.class, Performance.class, PerformanceEntry.class, PerformanceMark.class,
+        Path2D.class, Performance.class,
+        PaymentAddress.class, PaymentRequest.class, PaymentResponse.class,
+        PerformanceEntry.class, PerformanceMark.class,
         PerformanceMeasure.class, PerformanceNavigation.class, PerformanceNavigationTiming.class,
         PerformanceObserver.class, PerformanceObserverEntryList.class,
         PerformanceResourceTiming.class, PerformanceTiming.class,
