@@ -3789,6 +3789,36 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentAddress() throws Exception {
+        test("PaymentAddress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentRequest() throws Exception {
+        test("PaymentRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentResponse() throws Exception {
+        test("PaymentResponse");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
     public void performance() throws Exception {
@@ -6424,6 +6454,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void budgetService() throws Exception {
+        test("BudgetService");
     }
 
     /**
