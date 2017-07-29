@@ -201,7 +201,7 @@ public class Promise extends SimpleScriptable {
         final Promise promise = new Promise(window);
         final Promise thisPromise = this;
 
-        PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
+        final PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
 
             @Override
             public void execute() throws Exception {
