@@ -86,6 +86,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Atomics;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
@@ -432,7 +433,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         AppBannerPromptResult.class, ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
-        ArrayBufferView.class, ArrayBufferViewBase.class, Attr.class, Audio.class, AudioBuffer.class,
+        ArrayBufferView.class, ArrayBufferViewBase.class,
+        Atomics.class, Attr.class,
+        Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
         BarProp.class, BaseAudioContext.class,
