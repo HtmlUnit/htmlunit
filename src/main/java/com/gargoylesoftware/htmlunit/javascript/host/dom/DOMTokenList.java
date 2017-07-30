@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_ENHANCED_WHITESPACE_CHARS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -129,15 +130,20 @@ public class DOMTokenList extends SimpleScriptable {
         }
 
         String value = getDefaultValue(null);
+        boolean changed = false;
         if (position(value, token) < 0) {
             if (value.length() != 0 && !isWhitespache(value.charAt(value.length() - 1))) {
                 value = value + " ";
             }
             value = value + token;
-            updateAttribute(value);
+            changed = true;
         }
-        else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
+        else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD)) {
             value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+            changed = true;
+        }
+
+        if (changed) {
             updateAttribute(value);
         }
     }
@@ -156,6 +162,7 @@ public class DOMTokenList extends SimpleScriptable {
         }
 
         String value = getDefaultValue(null);
+        boolean changed = false;
         int pos = position(value, token);
         while (pos != -1) {
             int from = pos;
@@ -176,15 +183,19 @@ public class DOMTokenList extends SimpleScriptable {
                 }
             }
             result.append(value, to, value.length());
-
             value = result.toString();
-
-            if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
-                value = String.join(" ", StringUtils.split(value, whitespaceChars()));
-            }
-            updateAttribute(value);
+            changed = true;
 
             pos = position(value, token);
+        }
+
+        if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE)) {
+            value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+            changed = true;
+        }
+
+        if (changed) {
+            updateAttribute(value);
         }
     }
 

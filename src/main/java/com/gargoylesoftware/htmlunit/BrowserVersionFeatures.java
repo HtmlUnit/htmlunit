@@ -852,8 +852,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, IE})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
-    /** DOMTokenList removed all whitespace chars during remove. */
+    /** DOMTokenList removed all whitespace chars during add. */
     @BrowserFeature(CHROME)
+    JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
+
+    /** DOMTokenList removed all whitespace chars during remove. */
+    @BrowserFeature({CHROME, FF52})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE,
 
     /** Javascript property function {@code delete} throws an exception if the given count is negative. */
