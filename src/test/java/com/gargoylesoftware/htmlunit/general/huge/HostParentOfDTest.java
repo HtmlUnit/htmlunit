@@ -2175,8 +2175,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Event_InputEvent() throws Exception {
         test("Event", "InputEvent");
     }
@@ -4036,6 +4036,16 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_PannerNode() throws Exception {
         test("EventTarget", "PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_PaymentRequest() throws Exception {
+        test("EventTarget", "PaymentRequest");
     }
 
     /**

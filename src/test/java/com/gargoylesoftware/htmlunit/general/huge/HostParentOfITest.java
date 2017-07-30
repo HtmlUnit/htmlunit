@@ -217,8 +217,7 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts("true")
     public void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");
@@ -281,8 +280,8 @@ public class HostParentOfITest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _InputEvent_InputEvent() throws Exception {
         test("InputEvent", "InputEvent");
     }

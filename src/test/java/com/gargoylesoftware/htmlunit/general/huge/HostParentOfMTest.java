@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
@@ -2540,9 +2539,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    @NotYetImplemented({FF, IE})
+    @Alerts("false")
+    @NotYetImplemented
     public void _NodeFilter_NodeFilter() throws Exception {
         test("NodeFilter", "NodeFilter");
     }

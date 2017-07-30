@@ -99,6 +99,42 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _PaymentAddress_PaymentAddress() throws Exception {
+        test("PaymentAddress", "PaymentAddress");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _PaymentRequest_PaymentRequest() throws Exception {
+        test("PaymentRequest", "PaymentRequest");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    @NotYetImplemented(CHROME)
+    public void _PaymentResponse_PaymentResponse() throws Exception {
+        test("PaymentResponse", "PaymentResponse");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Performance_Performance() throws Exception {
         test("Performance", "Performance");
