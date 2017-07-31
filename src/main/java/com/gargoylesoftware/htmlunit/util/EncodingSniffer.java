@@ -615,21 +615,19 @@ public final class EncodingSniffer {
      *         could not be determined
      */
     public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
-        Charset encoding = null;
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
             if ("content-type".equalsIgnoreCase(name)) {
-                final String value = pair.getValue();
-                encoding = extractEncodingFromContentType(value);
+                final Charset encoding = extractEncodingFromContentType(pair.getValue());
                 if (encoding != null) {
-                    break;
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Encoding found in HTTP headers: '" + encoding + "'.");
+                    }
+                    return encoding;
                 }
             }
         }
-        if (encoding != null && LOG.isDebugEnabled()) {
-            LOG.debug("Encoding found in HTTP headers: '" + encoding + "'.");
-        }
-        return encoding;
+        return null;
     }
 
     /**
