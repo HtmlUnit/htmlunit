@@ -224,4 +224,26 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 .collect(Collectors.toList());
         assertEquals(2, requests.size());
     }
+
+    /**
+     * Test case for Bug #1882.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+//    @NotYetImplemented
+    public void queryString() throws Exception {
+        final String response = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "\r\n";
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+
+        driver.get("http://localhost:" + PORT + "?para=%u65E5");
+        assertTrue(primitiveWebServer_.getRequests().get(0),
+                    primitiveWebServer_.getRequests().get(0).contains("para=%u65E5"));
+    }
 }
