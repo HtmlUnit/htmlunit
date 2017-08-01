@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NOT_AVAILABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
@@ -78,6 +79,7 @@ public class HtmlImage extends HtmlElement {
     private int width_ = -1;
     private int height_ = -1;
     private boolean downloaded_;
+    private boolean isComplete_;
     private boolean onloadInvoked_;
     private boolean createdByJavascript_;
 
@@ -137,6 +139,7 @@ public class HtmlImage extends HtmlElement {
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
                 onloadInvoked_ = false;
                 downloaded_ = false;
+                isComplete_ = false;
                 width_ = -1;
                 height_ = -1;
                 if (imageData_ != null) {
@@ -467,7 +470,8 @@ public class HtmlImage extends HtmlElement {
                 imageData_.close();
                 imageData_ = null;
             }
-            downloaded_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+            downloaded_ = true;
+            isComplete_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
                     || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
 
             width_ = -1;
@@ -639,10 +643,9 @@ public class HtmlImage extends HtmlElement {
      * @return true if the image was successfully downloaded
      */
     public boolean isComplete() {
-        return downloaded_
-                || (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
-                ? ATTRIBUTE_NOT_DEFINED == getSrcAttribute()
-                : imageData_ != null);
+        return isComplete_ || (hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
+                                ? ATTRIBUTE_NOT_DEFINED == getSrcAttribute()
+                                : imageData_ != null);
     }
 
     /**
@@ -665,6 +668,18 @@ public class HtmlImage extends HtmlElement {
                     || (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))
                     || (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src)))) {
             return false;
+        }
+
+        if (hasFeature(HTMLIMAGE_INVISIBLE_NOT_AVAILABLE)) {
+            try {
+                downloadImageIfNeeded();
+                if (imageWebResponse_ == null || !imageWebResponse_.getContentType().contains("image")) {
+                    return false;
+                }
+            }
+            catch (final IOException e) {
+                return false;
+            }
         }
         return super.isDisplayed();
     }

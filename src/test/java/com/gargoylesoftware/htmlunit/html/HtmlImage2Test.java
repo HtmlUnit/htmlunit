@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -28,6 +30,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -85,6 +88,17 @@ public class HtmlImage2Test extends WebDriverTestCase {
         loadImage("src='unknown'");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE = "1")
+    @NotYetImplemented(IE)
+    public void loadImageWrongType() throws Exception {
+        loadImage("src='" + URL_FIRST + "'");
+    }
+
     private void loadImage(final String src) throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -97,6 +111,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
+            + "    img.width + img.width;\n"
+            + "    img.height + img.height;\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -159,6 +175,16 @@ public class HtmlImage2Test extends WebDriverTestCase {
             CHROME = "false")
     public void isDisplayedInvalidSource() throws Exception {
         isDisplayed("src='unknown.gif'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void isDisplayedWrongType() throws Exception {
+        isDisplayed("src='" + URL_FIRST + "'");
     }
 
     private void isDisplayed(final String src) throws Exception {
