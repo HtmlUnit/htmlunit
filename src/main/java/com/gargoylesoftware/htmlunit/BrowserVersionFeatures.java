@@ -848,13 +848,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES,
 
-    /** DOMTokenList removed all whitespace chars during edit. */
-    @BrowserFeature({CHROME, IE})
-    JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
-
     /** DOMTokenList removed all whitespace chars during add. */
     @BrowserFeature(CHROME)
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
+
+    /** DOMTokenList removed all whitespace chars during edit. */
+    @BrowserFeature({CHROME, IE})
+    JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
     /** DOMTokenList removed all whitespace chars during remove. */
     @BrowserFeature({CHROME, FF52})
@@ -944,6 +944,10 @@ public enum BrowserVersionFeatures {
     /** Ignore the last line containing uncommented. */
     @BrowserFeature(IE)
     JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED,
+
+    /** Ignore the UTF8 BOM header when loading external js in some situations. */
+    @BrowserFeature(IE)
+    JS_IGNORES_UTF8_BOM_SOMETIMES,
 
     /**
      * The complete property returns also true, if the image download was failing

@@ -208,6 +208,20 @@ public class WebResponse implements Serializable {
      * @return the response content as a string or null if the content retrieval was failing
      */
     public String getContentAsString(final Charset encoding) {
+        return getContentAsString(encoding, false);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Returns the response content as a string, using the specified charset,
+     * rather than the charset/encoding specified in the server response.
+     * If there is a bom header the charset parameter will be overwritten by the bom.
+     * @param encoding the charset/encoding to use to convert the response content into a string
+     * @param ignoreUtf8Bom if true utf8 bom header will be ignored
+     * @return the response content as a string or null if the content retrieval was failing
+     */
+    public String getContentAsString(final Charset encoding, final boolean ignoreUtf8Bom) {
         if (responseData_ != null) {
             try (InputStream in = responseData_.getInputStream()) {
                 if (in != null) {
@@ -215,7 +229,7 @@ public class WebResponse implements Serializable {
                         // there seems to be a bug in BOMInputStream
                         // we have to call this before hasBOM(ByteOrderMark)
                         if (bomIn.hasBOM()) {
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
+                            if (!ignoreUtf8Bom && bomIn.hasBOM(ByteOrderMark.UTF_8)) {
                                 return IOUtils.toString(bomIn, StandardCharsets.UTF_8);
                             }
                             if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {

@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_I
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MISSING_SLASHES;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
@@ -1070,18 +1071,29 @@ public class HtmlPage extends SgmlPage {
         }
 
         Charset scriptEncoding = Charset.forName("windows-1252");
+        boolean ignoreBom = false;
         final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
         if (contentCharset == null) {
             // use info from script tag or fall back to utf-8
-            if (scriptCharset != null && scriptCharset != ISO_8859_1) {
+            if (scriptCharset != null && ISO_8859_1 != scriptCharset) {
+                ignoreBom = true;
                 scriptEncoding = scriptCharset;
             }
+            else {
+                ignoreBom = ISO_8859_1 != scriptCharset;
+            }
         }
-        else if (contentCharset != ISO_8859_1) {
+        else if (ISO_8859_1 != contentCharset) {
+            ignoreBom = true;
             scriptEncoding = contentCharset;
         }
+        else {
+            ignoreBom = true;
+        }
 
-        final String scriptCode = response.getContentAsString(scriptEncoding);
+        final String scriptCode = response.getContentAsString(scriptEncoding,
+                                ignoreBom
+                                && getWebClient().getBrowserVersion().hasFeature(JS_IGNORES_UTF8_BOM_SOMETIMES));
         if (null != scriptCode) {
             final AbstractJavaScriptEngine<?> javaScriptEngine = client.getJavaScriptEngine();
             final Object script = javaScriptEngine.compile(this, scriptCode, url.toExternalForm(), 1);
