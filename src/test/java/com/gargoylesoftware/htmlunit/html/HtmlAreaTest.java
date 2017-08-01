@@ -43,10 +43,17 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class HtmlAreaTest extends WebDriverTestCase {
 
     private WebDriver createWebClient(final String onClick) throws Exception {
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String firstContent
             = "<html><head><title>first</title></head>\n"
             + "<body>\n"
-            + "  <img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
+            + "  <img src='" + urlImage + "' width='145' height='126' usemap='#planetmap'>\n"
             + "  <map id='planetmap' name='planetmap'>\n"
             + "    <area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
                         + "href='" + URL_SECOND + "'>\n"

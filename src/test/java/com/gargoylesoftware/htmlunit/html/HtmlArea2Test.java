@@ -14,10 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,6 +30,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlArea}.
@@ -33,14 +38,24 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author David K. Taylor
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlArea2Test extends SimpleWebTestCase {
 
-    private WebClient createWebClient(final String onClick) {
+    private WebClient createWebClient(final String onClick) throws IOException {
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            webConnection.setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String firstContent
             = "<html><head><title>first</title></head><body>\n"
-            + "<img src='/images/planets.gif' width='145' height='126' usemap='#planetmap'>\n"
+            + "<img src='" + urlImage + "' width='145' height='126' usemap='#planetmap'>\n"
             + "<map id='planetmap' name='planetmap'>\n"
             + "<area shape='rect' onClick=\"" + onClick + "\" coords='0,0,82,126' id='second' "
             + "href='" + URL_SECOND + "'>\n"
@@ -48,14 +63,15 @@ public class HtmlArea2Test extends SimpleWebTestCase {
             + "</map></body></html>";
         final String secondContent = "<html><head><title>second</title></head><body></body></html>";
         final String thirdContent = "<html><head><title>third</title></head><body></body></html>";
+
         final WebClient client = getWebClient();
 
-        final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, firstContent);
         webConnection.setResponse(URL_SECOND, secondContent);
         webConnection.setResponse(URL_THIRD, thirdContent);
 
         client.setWebConnection(webConnection);
+
         return client;
     }
 

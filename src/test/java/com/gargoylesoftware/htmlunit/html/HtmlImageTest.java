@@ -54,16 +54,23 @@ public class HtmlImageTest extends SimpleWebTestCase {
     private void isMapClick(final String imgId, final Boolean samePage,
             final String urlSuffixClick, final String urlSuffixClickXY) throws Exception {
 
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
             + "  <a href='http://server/foo'>\n"
-            + "    <img id='img1' src='foo.png' ismap>\n"
-            + "    <img id='img2' src='foo.png'>\n"
+            + "    <img id='img1' src='" + urlImage + "' ismap>\n"
+            + "    <img id='img2' src='" + urlImage + "'>\n"
             + "  </a>\n"
-            + "  <img id='img3' src='foo.png' ismap>\n"
-            + "  <img id='img4' src='foo.png'>\n"
+            + "  <img id='img3' src='" + urlImage + "' ismap>\n"
+            + "  <img id='img4' src='" + urlImage + "'>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
@@ -98,11 +105,19 @@ public class HtmlImageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     private void useMapClick(final int x, final int y, final String urlSuffix) throws Exception {
+
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
             + "<body>\n"
-            + "  <img id='myImg' src='foo.png' usemap='#map1'>\n"
+            + "  <img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
             + "  <map name='map1'>\n"
             + "    <area href='a.html' shape='rect' coords='5,5,20,20'>\n"
             + "    <area href='b.html' shape='circle' coords='25,10,10'>\n"
@@ -124,9 +139,17 @@ public class HtmlImageTest extends SimpleWebTestCase {
     @Test
     @NotYetImplemented
     public void useMapClick_CircleRadiusPercentage() throws Exception {
+
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='myImg' src='foo.png' usemap='#map1'>\n"
+            + "<img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
             + "<map name='map1'>\n"
             + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
             + "<area href='b.html' shape='circle' coords='25,10,10%'>\n"
