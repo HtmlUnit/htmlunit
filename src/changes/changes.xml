@@ -13,7 +13,7 @@
             </action>
             <action type="remove" dev="rbri" issue="1890">
                 INCOMPATIBLE CHANGE: BrowserVersion is final now and all constructors are removed.
-                The only way to create new customizes Browser versions is to clone one of the predefined.
+                The only way to create new customized Browser versions is by using the BrowserVersionBuilder.
             </action>
             <action type="change" dev="rbri" issue="1890">
                 BrowserVersion setter methods are fluent now.
