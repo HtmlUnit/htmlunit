@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.28" date="???" description="Bugfixes">
+        <release version="2.28" date="???" description="Bugfixes, Chrome 60">
             <action type="fix" dev="rbri">
                 BrowserVersion.clone now copies the system-timezone attribute.
             </action>
