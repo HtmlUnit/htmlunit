@@ -105,7 +105,6 @@ public class HtmlImageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     private void useMapClick(final int x, final int y, final String urlSuffix) throws Exception {
-
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -139,7 +138,6 @@ public class HtmlImageTest extends SimpleWebTestCase {
     @Test
     @NotYetImplemented
     public void useMapClick_CircleRadiusPercentage() throws Exception {
-
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

@@ -231,7 +231,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-//    @NotYetImplemented
+    @NotYetImplemented
     public void queryString() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
