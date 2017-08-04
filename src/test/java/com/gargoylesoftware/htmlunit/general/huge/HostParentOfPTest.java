@@ -101,7 +101,6 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(CHROME)
     public void _PaymentAddress_PaymentAddress() throws Exception {
         test("PaymentAddress", "PaymentAddress");
     }
@@ -113,7 +112,6 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(CHROME)
     public void _PaymentRequest_PaymentRequest() throws Exception {
         test("PaymentRequest", "PaymentRequest");
     }
@@ -125,7 +123,6 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    @NotYetImplemented(CHROME)
     public void _PaymentResponse_PaymentResponse() throws Exception {
         test("PaymentResponse", "PaymentResponse");
     }
