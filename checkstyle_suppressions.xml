@@ -50,7 +50,10 @@
 
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
     <suppress checks="MethodName" files="HostParentOfATest.java"/>
+    <suppress checks="MethodName" files="HostParentOfBTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfCTest.java"/>
     <suppress checks="MethodName" files="HostParentOfDTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfFTest.java"/>
     <suppress checks="MethodName" files="HostParentOfHTest.java"/>
     <suppress checks="MethodName" files="HostParentOfITest.java"/>
     <suppress checks="MethodName" files="HostParentOfMTest.java"/>
