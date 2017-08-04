@@ -152,6 +152,16 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("false")
+    @NotYetImplemented(CHROME)
+    public void _Atomics_Atomics() throws Exception {
+        test("Atomics", "Atomics");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Attr_Attr() throws Exception {
         test("Attr", "Attr");
