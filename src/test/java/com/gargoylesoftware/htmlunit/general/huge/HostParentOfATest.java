@@ -183,7 +183,7 @@ public class HostParentOfATest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({CHROME, FF52})
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
     }
