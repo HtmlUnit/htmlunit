@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -387,6 +388,160 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"function find() { [native code] }", "20"},
+            FF = {"function find() {\n    [native code]\n}", "20"},
+            IE = {"\nfunction find() {\n    [native code]\n}\n", "20"})
+    public void find() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  alert(arr.find);\n"
+            + "  alert(arr.find(isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function find() { [native code] }", "20"},
+            FF = {"function find() {\n    [native code]\n}", "20"},
+            IE = {"\nfunction find() {\n    [native code]\n}\n", "20"})
+    public void findPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  var find = Array.prototype.find;\n"
+            + "  alert(find);\n"
+            + "  alert(find.call(arr, isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "TypeError"})
+    @NotYetImplemented
+    public void findStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  alert(Array.find);\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  try {\n"
+            + "    alert(Array.find(arr, isBig));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function findIndex() { [native code] }", "1"},
+            FF = {"function findIndex() {\n    [native code]\n}", "1"},
+            IE = {"\nfunction findIndex() {\n    [native code]\n}\n", "1"})
+    public void findIndex() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  alert(arr.findIndex);\n"
+            + "  alert(arr.findIndex(isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function findIndex() { [native code] }", "1"},
+            FF = {"function findIndex() {\n    [native code]\n}", "1"},
+            IE = {"\nfunction findIndex() {\n    [native code]\n}\n", "1"})
+    public void findIndexPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  var findIndex = Array.prototype.findIndex;\n"
+            + "  alert(findIndex);\n"
+            + "  alert(findIndex.call(arr, isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "TypeError"})
+    @NotYetImplemented
+    public void findIndexStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  alert(Array.findIndex);\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  try {\n"
+            + "    alert(Array.findIndex(arr, isBig));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"function filter() { [native code] }", "20,17"},
             FF = {"function filter() {\n    [native code]\n}", "20,17"},
             IE = {"\nfunction filter() {\n    [native code]\n}\n", "20,17"})
@@ -412,10 +567,36 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"function filter() { [native code] }", "20,17"},
+            FF = {"function filter() {\n    [native code]\n}", "20,17"},
+            IE = {"\nfunction filter() {\n    [native code]\n}\n", "20,17"})
+    public void filterPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isBig(n) { return n >= 10; }\n"
+            + "\n"
+            + "  var arr = [1, 20, 7, 17];\n"
+            + "  var filter = Array.prototype.filter;\n"
+            + "  alert(filter);\n"
+            + "  alert(filter.call(arr, isBig));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
             FF = {"function filter() {\n    [native code]\n}", "20,17"})
     @NotYetImplemented
-    public void filterPrototype() throws Exception {
+    public void filterStatic() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
@@ -432,6 +613,462 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<body>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function map() { [native code] }", "1,2,3,4"},
+            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"},
+            IE = {"\nfunction map() {\n    [native code]\n}\n", "1,2,3,4"})
+    public void map() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(arr.map);\n"
+            + "  alert(arr.map(Math.sqrt));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function map() { [native code] }", "1,2,3,4"},
+            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"},
+            IE = {"\nfunction map() {\n    [native code]\n}\n", "1,2,3,4"})
+    public void mapPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var map = Array.prototype.map;\n"
+            + "  alert(map);\n"
+            + "  alert(map.call(arr, Math.sqrt));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"})
+    @NotYetImplemented
+    public void mapStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(Array.map);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.map(arr, Math.sqrt));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function every() { [native code] }", "false"},
+            FF = {"function every() {\n    [native code]\n}", "false"},
+            IE = {"\nfunction every() {\n    [native code]\n}\n", "false"})
+    public void every() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(arr.every);\n"
+            + "  alert(arr.every(isSmall));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function every() { [native code] }", "false"},
+            FF = {"function every() {\n    [native code]\n}", "false"},
+            IE = {"\nfunction every() {\n    [native code]\n}\n", "false"})
+    public void everyPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var every = Array.prototype.every;\n"
+            + "  alert(every);\n"
+            + "  alert(every.call(arr, isSmall));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function every() {\n    [native code]\n}", "false"})
+    @NotYetImplemented
+    public void everyStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  alert(Array.every);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.every(arr, isSmall));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function some() { [native code] }", "true"},
+            FF = {"function some() {\n    [native code]\n}", "true"},
+            IE = {"\nfunction some() {\n    [native code]\n}\n", "true"})
+    public void some() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(arr.some);\n"
+            + "  alert(arr.some(isSmall));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function some() { [native code] }", "true"},
+            FF = {"function some() {\n    [native code]\n}", "true"},
+            IE = {"\nfunction some() {\n    [native code]\n}\n", "true"})
+    public void somePrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var some = Array.prototype.some;\n"
+            + "  alert(some);\n"
+            + "  alert(some.call(arr, isSmall));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function some() {\n    [native code]\n}", "true"})
+    @NotYetImplemented
+    public void someStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function isSmall(n) { return n < 10; }\n"
+            + "\n"
+            + "  alert(Array.some);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.some(arr, isSmall));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function forEach() { [native code] }", "4", "7"},
+            FF = {"function forEach() {\n    [native code]\n}", "4", "7"},
+            IE = {"\nfunction forEach() {\n    [native code]\n}\n", "4", "7"})
+    public void forEach() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [4, 7];\n"
+            + "  alert(arr.forEach);\n"
+            + "  arr.forEach(function(elem) { alert(elem) });\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function forEach() { [native code] }", "4", "7"},
+            FF = {"function forEach() {\n    [native code]\n}", "4", "7"},
+            IE = {"\nfunction forEach() {\n    [native code]\n}\n", "4", "7"})
+    public void forEachPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [4, 7];\n"
+            + "  var forEach = Array.prototype.forEach;\n"
+            + "  alert(forEach);\n"
+            + "  forEach.call(arr, function(elem) { alert(elem) });\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function forEach() {\n    [native code]\n}", "4", "7"})
+    @NotYetImplemented({CHROME, IE})
+    public void forEachStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(Array.forEach);\n"
+            + "  var arr = [4, 7];\n"
+            + "  try {\n"
+            + "    Array.forEach(arr, function(elem) { alert(elem) });\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function reduce() { [native code] }", "30"},
+            FF = {"function reduce() {\n    [native code]\n}", "30"},
+            IE = {"\nfunction reduce() {\n    [native code]\n}\n", "30"})
+    public void reduce() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function sum(acc, val) { return acc + val; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(arr.reduce);\n"
+            + "  alert(arr.reduce(sum));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function reduce() { [native code] }", "30"},
+            FF = {"function reduce() {\n    [native code]\n}", "30"},
+            IE = {"\nfunction reduce() {\n    [native code]\n}\n", "30"})
+    public void reducePrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function sum(acc, val) { return acc + val; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var reduce = Array.prototype.reduce;\n"
+            + "  alert(reduce);\n"
+            + "  alert(reduce.call(arr, sum));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function reduce() {\n    [native code]\n}", "30"})
+    @NotYetImplemented({CHROME, IE})
+    public void reduceStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function sum(acc, val) { return acc + val; }\n"
+            + "\n"
+            + "  alert(Array.reduce);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.reduce(arr, sum));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function reduceRight() { [native code] }", "2"},
+            FF = {"function reduceRight() {\n    [native code]\n}", "2"},
+            IE = {"\nfunction reduceRight() {\n    [native code]\n}\n", "2"})
+    public void reduceRight() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function diff(acc, val) { return acc - val; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(arr.reduceRight);\n"
+            + "  alert(arr.reduceRight(diff));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function reduceRight() { [native code] }", "2"},
+            FF = {"function reduceRight() {\n    [native code]\n}", "2"},
+            IE = {"\nfunction reduceRight() {\n    [native code]\n}\n", "2"})
+    public void reduceRightPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function diff(acc, val) { return acc - val; }\n"
+            + "\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var reduceRight = Array.prototype.reduceRight;\n"
+            + "  alert(reduceRight);\n"
+            + "  alert(reduceRight.call(arr, diff));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function reduceRight() {\n    [native code]\n}", "2"})
+    @NotYetImplemented({CHROME, IE})
+    public void reduceRightStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function diff(acc, val) { return acc - val; }\n"
+            + "\n"
+            + "  alert(Array.reduceRight);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.reduceRight(arr, diff));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
 }
