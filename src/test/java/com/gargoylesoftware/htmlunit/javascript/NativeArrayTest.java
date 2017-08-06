@@ -51,7 +51,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             FF45 = {"1<>5", "5<>2", "1<>2", "1<>9", "5<>1", "1<>1", "2<>1", "2<>9", "5<>9"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
     @NotYetImplemented({FF45, IE})
-    public void sort() throws Exception {
+    public void sortSteps() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function compare(x, y) {\n"
@@ -196,30 +196,6 @@ public class NativeArrayTest extends WebDriverTestCase {
         final Integer[] arr = new Integer[37];
         final AtomicInteger index = new AtomicInteger();
         Arrays.sort(arr, (e1, e2) -> results[index.incrementAndGet()]);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"angel,clown,mandarin", "clown,mandarin", "angel"})
-    public void shift() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + "  var myFish = ['angel', 'clown', 'mandarin' ];\n"
-            + "  alert(myFish);\n"
-
-            + "  var shifted = myFish.shift();\n"
-            + "  alert(myFish);\n"
-            + "  alert(shifted);\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
     }
 
     /**
@@ -1027,6 +1003,494 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.reduceRight(arr, diff));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,4,9,16"})
+    public void join() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.join);\n"
+            + "  alert(arr.join());\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,4,9,16"})
+    public void joinPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var join = Array.prototype.join;\n"
+            + "  alert(typeof join);\n"
+            + "  alert(join.call(arr));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void joinStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.join);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.join(arr));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "16,9,4,1"})
+    public void reverse() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.reverse);\n"
+            + "  alert(arr.reverse());\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "16,9,4,1"})
+    public void reversePrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var reverse = Array.prototype.reverse;\n"
+            + "  alert(typeof reverse);\n"
+            + "  alert(reverse.call(arr));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "16,9,4,1"})
+    @NotYetImplemented({CHROME, IE})
+    public void reverseStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.reverse);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.reverse(arr));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,16,4,9"})
+    public void sort() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.sort);\n"
+            + "  alert(arr.sort());\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,16,4,9"})
+    public void sortPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var sort = Array.prototype.sort;\n"
+            + "  alert(typeof sort);\n"
+            + "  alert(sort.call(arr));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "1,16,4,9"})
+    @NotYetImplemented({CHROME, IE})
+    public void sortStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.sort);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.sort(arr));\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "6", "1,4,9,16,3,7"})
+    public void push() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.push);\n"
+            + "  alert(arr.push(3, 7));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "6", "1,4,9,16,3,7"})
+    public void pushPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var push = Array.prototype.push;\n"
+            + "  alert(typeof push);\n"
+            + "  alert(push.call(arr, 3, 7));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "6", "1,4,9,16,3,7"})
+    @NotYetImplemented({CHROME, IE})
+    public void pushStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.push);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.push(arr, 3, 7));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "16", "1,4,9"})
+    public void pop() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.pop);\n"
+            + "  alert(arr.pop());\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "16", "1,4,9"})
+    public void popPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var pop = Array.prototype.pop;\n"
+            + "  alert(typeof pop);\n"
+            + "  alert(pop.call(arr));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "16", "1,4,9"})
+    @NotYetImplemented({CHROME, IE})
+    public void popStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.pop);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.pop(arr));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1", "4,9,16"})
+    public void shift() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.shift);\n"
+            + "  alert(arr.shift());\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1", "4,9,16"})
+    public void shiftPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var shift = Array.prototype.shift;\n"
+            + "  alert(typeof shift);\n"
+            + "  alert(shift.call(arr));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "1", "4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void shiftStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.shift);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.shift(arr));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "6", "3,7,1,4,9,16"})
+    public void unshift() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.unshift);\n"
+            + "  alert(arr.unshift(3, 7));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "6", "3,7,1,4,9,16"})
+    public void unshiftPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var unshift = Array.prototype.unshift;\n"
+            + "  alert(typeof unshift);\n"
+            + "  alert(unshift.call(arr, 3, 7));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "6", "3,7,1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void unshiftStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.unshift);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.unshift(arr, 3, 7));\n"
+            + "    alert(arr);\n"
             + "  } catch(e) { alert('TypeError'); }\n"
             + "</script>\n"
             + "</head>\n"
