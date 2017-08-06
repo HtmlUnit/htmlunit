@@ -388,9 +388,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function find() { [native code] }", "20"},
-            FF = {"function find() {\n    [native code]\n}", "20"},
-            IE = {"\nfunction find() {\n    [native code]\n}\n", "20"})
+    @Alerts({"function", "20"})
     public void find() throws Exception {
         final String html
             = "<html>\n"
@@ -399,7 +397,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(arr.find);\n"
+            + "  alert(typeof arr.find);\n"
             + "  alert(arr.find(isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -413,9 +411,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function find() { [native code] }", "20"},
-            FF = {"function find() {\n    [native code]\n}", "20"},
-            IE = {"\nfunction find() {\n    [native code]\n}\n", "20"})
+    @Alerts({"function", "20"})
     public void findPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -425,7 +421,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var find = Array.prototype.find;\n"
-            + "  alert(find);\n"
+            + "  alert(typeof find);\n"
             + "  alert(find.call(arr, isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -448,7 +444,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(Array.find);\n"
+            + "  alert(typeof Array.find);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
             + "    alert(Array.find(arr, isBig));\n"
@@ -465,9 +461,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function findIndex() { [native code] }", "1"},
-            FF = {"function findIndex() {\n    [native code]\n}", "1"},
-            IE = {"\nfunction findIndex() {\n    [native code]\n}\n", "1"})
+    @Alerts({"function", "1"})
     public void findIndex() throws Exception {
         final String html
             = "<html>\n"
@@ -476,7 +470,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(arr.findIndex);\n"
+            + "  alert(typeof arr.findIndex);\n"
             + "  alert(arr.findIndex(isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -490,9 +484,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function findIndex() { [native code] }", "1"},
-            FF = {"function findIndex() {\n    [native code]\n}", "1"},
-            IE = {"\nfunction findIndex() {\n    [native code]\n}\n", "1"})
+    @Alerts({"function", "1"})
     public void findIndexPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -502,7 +494,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var findIndex = Array.prototype.findIndex;\n"
-            + "  alert(findIndex);\n"
+            + "  alert(typeof findIndex);\n"
             + "  alert(findIndex.call(arr, isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -525,7 +517,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(Array.findIndex);\n"
+            + "  alert(typeof Array.findIndex);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
             + "    alert(Array.findIndex(arr, isBig));\n"
@@ -542,9 +534,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function filter() { [native code] }", "20,17"},
-            FF = {"function filter() {\n    [native code]\n}", "20,17"},
-            IE = {"\nfunction filter() {\n    [native code]\n}\n", "20,17"})
+    @Alerts({"function", "20,17"})
     public void filter() throws Exception {
         final String html
             = "<html>\n"
@@ -553,7 +543,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
-            + "  alert(arr.filter);\n"
+            + "  alert(typeof arr.filter);\n"
             + "  alert(arr.filter(isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -567,9 +557,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function filter() { [native code] }", "20,17"},
-            FF = {"function filter() {\n    [native code]\n}", "20,17"},
-            IE = {"\nfunction filter() {\n    [native code]\n}\n", "20,17"})
+    @Alerts({"function", "20,17"})
     public void filterPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -579,7 +567,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var filter = Array.prototype.filter;\n"
-            + "  alert(filter);\n"
+            + "  alert(typeof filter);\n"
             + "  alert(filter.call(arr, isBig));\n"
             + "</script>\n"
             + "</head>\n"
@@ -594,7 +582,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function filter() {\n    [native code]\n}", "20,17"})
+            FF = {"function", "20,17"})
     @NotYetImplemented
     public void filterStatic() throws Exception {
         final String html
@@ -603,7 +591,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function isBig(n) { return n >= 10; }\n"
             + "\n"
-            + "  alert(Array.filter);\n"
+            + "  alert(typeof Array.filter);\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  try {\n"
             + "    alert(Array.filter(arr, isBig));\n"
@@ -620,16 +608,14 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function map() { [native code] }", "1,2,3,4"},
-            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"},
-            IE = {"\nfunction map() {\n    [native code]\n}\n", "1,2,3,4"})
+    @Alerts({"function", "1,2,3,4"})
     public void map() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(arr.map);\n"
+            + "  alert(typeof arr.map);\n"
             + "  alert(arr.map(Math.sqrt));\n"
             + "</script>\n"
             + "</head>\n"
@@ -643,9 +629,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function map() { [native code] }", "1,2,3,4"},
-            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"},
-            IE = {"\nfunction map() {\n    [native code]\n}\n", "1,2,3,4"})
+    @Alerts({"function", "1,2,3,4"})
     public void mapPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -653,7 +637,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var map = Array.prototype.map;\n"
-            + "  alert(map);\n"
+            + "  alert(typeof map);\n"
             + "  alert(map.call(arr, Math.sqrt));\n"
             + "</script>\n"
             + "</head>\n"
@@ -668,14 +652,14 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function map() {\n    [native code]\n}", "1,2,3,4"})
+            FF = {"function", "1,2,3,4"})
     @NotYetImplemented
     public void mapStatic() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(Array.map);\n"
+            + "  alert(typeof Array.map);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.map(arr, Math.sqrt));\n"
@@ -692,9 +676,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function every() { [native code] }", "false"},
-            FF = {"function every() {\n    [native code]\n}", "false"},
-            IE = {"\nfunction every() {\n    [native code]\n}\n", "false"})
+    @Alerts({"function", "false"})
     public void every() throws Exception {
         final String html
             = "<html>\n"
@@ -703,7 +685,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(arr.every);\n"
+            + "  alert(typeof arr.every);\n"
             + "  alert(arr.every(isSmall));\n"
             + "</script>\n"
             + "</head>\n"
@@ -717,9 +699,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function every() { [native code] }", "false"},
-            FF = {"function every() {\n    [native code]\n}", "false"},
-            IE = {"\nfunction every() {\n    [native code]\n}\n", "false"})
+    @Alerts({"function", "false"})
     public void everyPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -729,7 +709,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var every = Array.prototype.every;\n"
-            + "  alert(every);\n"
+            + "  alert(typeof every);\n"
             + "  alert(every.call(arr, isSmall));\n"
             + "</script>\n"
             + "</head>\n"
@@ -744,7 +724,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function every() {\n    [native code]\n}", "false"})
+            FF = {"function", "false"})
     @NotYetImplemented
     public void everyStatic() throws Exception {
         final String html
@@ -753,7 +733,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
-            + "  alert(Array.every);\n"
+            + "  alert(typeof Array.every);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.every(arr, isSmall));\n"
@@ -770,9 +750,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function some() { [native code] }", "true"},
-            FF = {"function some() {\n    [native code]\n}", "true"},
-            IE = {"\nfunction some() {\n    [native code]\n}\n", "true"})
+    @Alerts({"function", "true"})
     public void some() throws Exception {
         final String html
             = "<html>\n"
@@ -781,7 +759,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(arr.some);\n"
+            + "  alert(typeof arr.some);\n"
             + "  alert(arr.some(isSmall));\n"
             + "</script>\n"
             + "</head>\n"
@@ -795,9 +773,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function some() { [native code] }", "true"},
-            FF = {"function some() {\n    [native code]\n}", "true"},
-            IE = {"\nfunction some() {\n    [native code]\n}\n", "true"})
+    @Alerts({"function", "true"})
     public void somePrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -807,7 +783,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var some = Array.prototype.some;\n"
-            + "  alert(some);\n"
+            + "  alert(typeof some);\n"
             + "  alert(some.call(arr, isSmall));\n"
             + "</script>\n"
             + "</head>\n"
@@ -822,7 +798,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function some() {\n    [native code]\n}", "true"})
+            FF = {"function", "true"})
     @NotYetImplemented
     public void someStatic() throws Exception {
         final String html
@@ -831,7 +807,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function isSmall(n) { return n < 10; }\n"
             + "\n"
-            + "  alert(Array.some);\n"
+            + "  alert(typeof Array.some);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.some(arr, isSmall));\n"
@@ -848,16 +824,14 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function forEach() { [native code] }", "4", "7"},
-            FF = {"function forEach() {\n    [native code]\n}", "4", "7"},
-            IE = {"\nfunction forEach() {\n    [native code]\n}\n", "4", "7"})
+    @Alerts({"function", "4", "7"})
     public void forEach() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  var arr = [4, 7];\n"
-            + "  alert(arr.forEach);\n"
+            + "  alert(typeof arr.forEach);\n"
             + "  arr.forEach(function(elem) { alert(elem) });\n"
             + "</script>\n"
             + "</head>\n"
@@ -871,9 +845,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function forEach() { [native code] }", "4", "7"},
-            FF = {"function forEach() {\n    [native code]\n}", "4", "7"},
-            IE = {"\nfunction forEach() {\n    [native code]\n}\n", "4", "7"})
+    @Alerts({"function", "4", "7"})
     public void forEachPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -881,7 +853,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  var arr = [4, 7];\n"
             + "  var forEach = Array.prototype.forEach;\n"
-            + "  alert(forEach);\n"
+            + "  alert(typeof forEach);\n"
             + "  forEach.call(arr, function(elem) { alert(elem) });\n"
             + "</script>\n"
             + "</head>\n"
@@ -896,14 +868,14 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function forEach() {\n    [native code]\n}", "4", "7"})
+            FF = {"function", "4", "7"})
     @NotYetImplemented({CHROME, IE})
     public void forEachStatic() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + "  alert(Array.forEach);\n"
+            + "  alert(typeof Array.forEach);\n"
             + "  var arr = [4, 7];\n"
             + "  try {\n"
             + "    Array.forEach(arr, function(elem) { alert(elem) });\n"
@@ -920,9 +892,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function reduce() { [native code] }", "30"},
-            FF = {"function reduce() {\n    [native code]\n}", "30"},
-            IE = {"\nfunction reduce() {\n    [native code]\n}\n", "30"})
+    @Alerts({"function", "30"})
     public void reduce() throws Exception {
         final String html
             = "<html>\n"
@@ -931,7 +901,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function sum(acc, val) { return acc + val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(arr.reduce);\n"
+            + "  alert(typeof arr.reduce);\n"
             + "  alert(arr.reduce(sum));\n"
             + "</script>\n"
             + "</head>\n"
@@ -945,9 +915,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function reduce() { [native code] }", "30"},
-            FF = {"function reduce() {\n    [native code]\n}", "30"},
-            IE = {"\nfunction reduce() {\n    [native code]\n}\n", "30"})
+    @Alerts({"function", "30"})
     public void reducePrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -957,7 +925,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var reduce = Array.prototype.reduce;\n"
-            + "  alert(reduce);\n"
+            + "  alert(typeof reduce);\n"
             + "  alert(reduce.call(arr, sum));\n"
             + "</script>\n"
             + "</head>\n"
@@ -972,7 +940,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function reduce() {\n    [native code]\n}", "30"})
+            FF = {"function", "30"})
     @NotYetImplemented({CHROME, IE})
     public void reduceStatic() throws Exception {
         final String html
@@ -981,7 +949,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function sum(acc, val) { return acc + val; }\n"
             + "\n"
-            + "  alert(Array.reduce);\n"
+            + "  alert(typeof Array.reduce);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.reduce(arr, sum));\n"
@@ -998,9 +966,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function reduceRight() { [native code] }", "2"},
-            FF = {"function reduceRight() {\n    [native code]\n}", "2"},
-            IE = {"\nfunction reduceRight() {\n    [native code]\n}\n", "2"})
+    @Alerts({"function", "2"})
     public void reduceRight() throws Exception {
         final String html
             = "<html>\n"
@@ -1009,7 +975,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  function diff(acc, val) { return acc - val; }\n"
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
-            + "  alert(arr.reduceRight);\n"
+            + "  alert(typeof arr.reduceRight);\n"
             + "  alert(arr.reduceRight(diff));\n"
             + "</script>\n"
             + "</head>\n"
@@ -1023,9 +989,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function reduceRight() { [native code] }", "2"},
-            FF = {"function reduceRight() {\n    [native code]\n}", "2"},
-            IE = {"\nfunction reduceRight() {\n    [native code]\n}\n", "2"})
+    @Alerts({"function", "2"})
     public void reduceRightPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -1035,7 +999,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  var reduceRight = Array.prototype.reduceRight;\n"
-            + "  alert(reduceRight);\n"
+            + "  alert(typeof reduceRight);\n"
             + "  alert(reduceRight.call(arr, diff));\n"
             + "</script>\n"
             + "</head>\n"
@@ -1050,7 +1014,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "TypeError"},
-            FF = {"function reduceRight() {\n    [native code]\n}", "2"})
+            FF = {"function", "2"})
     @NotYetImplemented({CHROME, IE})
     public void reduceRightStatic() throws Exception {
         final String html
@@ -1059,7 +1023,7 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function diff(acc, val) { return acc - val; }\n"
             + "\n"
-            + "  alert(Array.reduceRight);\n"
+            + "  alert(typeof Array.reduceRight);\n"
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.reduceRight(arr, diff));\n"
