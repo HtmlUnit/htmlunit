@@ -364,6 +364,38 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"true", "true", "true", "true", "false", "false", "false",
+                "false", "false", "false", "false", "false", "false"})
+    public void isArray() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(Array.isArray([]));\n"
+            + "  alert(Array.isArray([1]));\n"
+            + "  alert(Array.isArray( new Array() ));\n"
+            + "  alert(Array.isArray( Array.prototype ));\n"
+            + "  alert(Array.isArray());\n"
+            + "  alert(Array.isArray({}));\n"
+            + "  alert(Array.isArray(null));\n"
+            + "  alert(Array.isArray(undefined));\n"
+            + "  alert(Array.isArray(17));\n"
+            + "  alert(Array.isArray('Array'));\n"
+            + "  alert(Array.isArray(true));\n"
+            + "  alert(Array.isArray(false));\n"
+            + "  alert(Array.isArray({ __proto__ : Array.prototype }));\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"function", "20"})
     public void find() throws Exception {
         final String html
@@ -1490,6 +1522,361 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var arr = [1, 4, 9, 16];\n"
             + "  try {\n"
             + "    alert(Array.unshift(arr, 3, 7));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "4,9", "1,16"})
+    public void splice() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.splice);\n"
+            + "  alert(arr.splice(1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "4,9", "1,16"})
+    public void splicePrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var splice = Array.prototype.splice;\n"
+            + "  alert(typeof splice);\n"
+            + "  alert(splice.call(arr, 1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "4,9", "1,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void spliceStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.splice);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.splice(arr, 1, 2));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,4,9,16,1,2", "1,4,9,16"})
+    public void concat() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.concat);\n"
+            + "  alert(arr.concat(1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "1,4,9,16,1,2", "1,4,9,16"})
+    public void concatPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var concat = Array.prototype.concat;\n"
+            + "  alert(typeof concat);\n"
+            + "  alert(concat.call(arr, 1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "1,4,9,16,1,2", "1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void concatStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.concat);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.concat(arr, 1, 2));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "4", "1,4,9,16"})
+    public void slice() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.slice);\n"
+            + "  alert(arr.slice(1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "4", "1,4,9,16"})
+    public void slicePrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var slice = Array.prototype.slice;\n"
+            + "  alert(typeof slice);\n"
+            + "  alert(slice.call(arr, 1, 2));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "4", "1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void sliceStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.concat);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.slice(arr, 1, 2));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "2", "1,4,9,16"})
+    public void indexOf() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.indexOf);\n"
+            + "  alert(arr.indexOf(9));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "2", "1,4,9,16"})
+    public void indexOfPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var indexOf = Array.prototype.indexOf;\n"
+            + "  alert(typeof indexOf);\n"
+            + "  alert(indexOf.call(arr, 9));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "2", "1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void indexOfStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.indexOf);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.indexOf(arr, 9));\n"
+            + "    alert(arr);\n"
+            + "  } catch(e) { alert('TypeError'); }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "2", "1,4,9,16"})
+    public void lastIndexOf() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  alert(typeof arr.lastIndexOf);\n"
+            + "  alert(arr.lastIndexOf(9));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "2", "1,4,9,16"})
+    public void lastIndexOfPrototype() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  var lastIndexOf = Array.prototype.lastIndexOf;\n"
+            + "  alert(typeof lastIndexOf);\n"
+            + "  alert(lastIndexOf.call(arr, 9));\n"
+            + "  alert(arr);\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "TypeError"},
+            FF = {"function", "2", "1,4,9,16"})
+    @NotYetImplemented({CHROME, IE})
+    public void lastIndexOfStatic() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  alert(typeof Array.lastIndexOf);\n"
+            + "  var arr = [1, 4, 9, 16];\n"
+            + "  try {\n"
+            + "    alert(Array.lastIndexOf(arr, 9));\n"
             + "    alert(arr);\n"
             + "  } catch(e) { alert('TypeError'); }\n"
             + "</script>\n"
