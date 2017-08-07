@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
@@ -47,6 +46,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebRequest;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -402,66 +402,32 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     }
 
     /**
-     * Prints request content to the response.
-     */
-    public static class PrintRequestServlet extends HttpServlet {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
-            request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            final BufferedReader reader = request.getReader();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                writer.write(line);
-            }
-        }
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
     public void contentTypeHeader() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", ContentTypeHeaderUpload2Servlet.class);
-        startWebServer("./", new String[0], servlets);
+        final String htmlContent
+            = "<html>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form>\n"
+                + "</body></html>\n";
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST + "upload1");
+        final WebDriver driver = loadPage2(htmlContent);
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
         if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
         }
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
-        final String source = driver.getPageSource();
-        assertTrue(source.contains("CONTENT_TYPE:"));
-        assertFalse(source.contains("charset"));
-    }
 
-    /**
-     * Servlet for '/upload2'.
-     */
-    public static class ContentTypeHeaderUpload2Servlet extends HttpServlet {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
-            request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            writer.write("CONTENT_TYPE:" + request.getContentType());
-        }
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        final String contentType = request.getAdditionalHeaders().get("Content-Type");
+        assertTrue(StringUtils.isNotBlank(contentType));
+        assertFalse(StringUtils.containsIgnoreCase(contentType, "charset"));
     }
 
     /**
@@ -470,23 +436,20 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"\"")
     public void empty() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", PrintRequestServlet.class);
-        startWebServer("./", new String[0], servlets);
+        final String htmlContent
+            = "<html>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form>\n"
+                + "</body></html>\n";
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST + "upload1");
+        final WebDriver driver = loadPage2(htmlContent);
         driver.findElement(By.id("mySubmit")).click();
 
-        String pageSource = driver.getPageSource();
-        // hack for selenium
-        int count = 0;
-        while (count < 100 && StringUtils.isEmpty(pageSource)) {
-            pageSource = driver.getPageSource();
-            count++;
-        }
-
+        final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
         final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
         assertTrue(pageSource, matcher.find());
     }
@@ -499,13 +462,18 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             IE = "Content-Disposition: form-data; name=\"myInput\";"
                         + " filename=\".*test-classes[\\\\/]realm\\.properties\"")
     public void realFile() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", PrintRequestServlet.class);
-        startWebServer("./", new String[0], servlets);
+        final String htmlContent
+            = "<html>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form>\n"
+                + "</body></html>\n";
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST + "upload1");
+        final WebDriver driver = loadPage2(htmlContent);
+
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
         if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
             path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
@@ -513,14 +481,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 
-        String pageSource = driver.getPageSource();
-        // hack for selenium
-        int count = 0;
-        while (count < 100 && StringUtils.isEmpty(pageSource)) {
-            pageSource = driver.getPageSource();
-            count++;
-        }
-
+        final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
         final Matcher matcher = Pattern.compile(getExpectedAlerts()[0]).matcher(pageSource);
         assertTrue(pageSource, matcher.find());
     }
@@ -530,32 +491,22 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     public void chunked() throws Exception {
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload1", Upload1Servlet.class);
-        servlets.put("/upload2", ChunkedUpload2Servlet.class);
-        startWebServer("./", new String[0], servlets);
+        final String htmlContent
+            = "<html>\n"
+                + "<body>\n"
+                + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
+                + "Name: <input name='myInput' type='file'><br>\n"
+                + "Name 2 (should stay empty): <input name='myInput2' type='file'><br>\n"
+                + "<input type='submit' value='Upload' id='mySubmit'>\n"
+                + "</form>\n"
+                + "</body></html>\n";
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST + "upload1");
+        final WebDriver driver = loadPage2(htmlContent);
+
         driver.findElement(By.id("mySubmit")).click();
-        assertFalse(driver.getPageSource().contains("chunked"));
-    }
 
-    /**
-     * Servlet for '/upload2'.
-     */
-    public static class ChunkedUpload2Servlet extends HttpServlet {
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
-            request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            writer.write("TRANSFER_ENCODING:" + request.getHeader("TRANSFER-ENCODING"));
-        }
+        final String pageSource = getMockWebConnection().getLastWebRequest().getRequestBody();
+        assertFalse(pageSource.contains("chunked"));
     }
 
     /**

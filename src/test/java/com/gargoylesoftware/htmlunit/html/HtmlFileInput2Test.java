@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -494,7 +495,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     public void mutiple() throws Exception {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload1", Multiple1Servlet.class);
-        servlets.put("/upload2", HtmlFileInputTest.PrintRequestServlet.class);
+        servlets.put("/upload2", PrintRequestServlet.class);
         startWebServer("./", null, servlets);
 
         final String filename1 = "HtmlFileInputTest_one.txt";
@@ -543,6 +544,28 @@ public class HtmlFileInput2Test extends WebServerTestCase {
                 + "Name: <input name='myInput' type='file' multiple><br>\n"
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
                 + "</form></body></html>\n");
+        }
+    }
+
+    /**
+     * Prints request content to the response.
+     */
+    public static class PrintRequestServlet extends HttpServlet {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+            throws ServletException, IOException {
+            request.setCharacterEncoding(UTF_8.name());
+            response.setContentType("text/html");
+            final Writer writer = response.getWriter();
+            final BufferedReader reader = request.getReader();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+            }
         }
     }
 
