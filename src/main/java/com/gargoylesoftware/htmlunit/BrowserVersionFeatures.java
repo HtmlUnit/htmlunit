@@ -291,10 +291,6 @@ public enum BrowserVersionFeatures {
 
     /** */
     @BrowserFeature(IE)
-    HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH,
-
-    /** */
-    @BrowserFeature(IE)
     HTMLABBREVIATED,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
@@ -445,12 +441,8 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
     /** HTMLInputElement: type {@code file} value to be {@code fakepath}. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, IE})
     HTMLINPUT_FILE_VALUE_FAKEPATH,
-
-    /** HTMLInputElement: type {@code file} value to be only the file name. */
-    @BrowserFeature(FF)
-    HTMLINPUT_FILE_VALUE_NO_PATH,
 
     /** Should the HTMLElement of {@code keygen} have no end tag. */
     @BrowserFeature(IE)

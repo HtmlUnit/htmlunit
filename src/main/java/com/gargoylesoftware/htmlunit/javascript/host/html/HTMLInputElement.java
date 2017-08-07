@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_NO_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
@@ -591,10 +590,7 @@ public class HTMLInputElement extends FormField {
             if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_FAKEPATH)) {
                 return "C:\\fakepath\\" + name;
             }
-            else if (getBrowserVersion().hasFeature(HTMLINPUT_FILE_VALUE_NO_PATH)) {
-                return name;
-            }
-            return first.getAbsolutePath();
+            return name;
         }
         return super.getValue();
     }

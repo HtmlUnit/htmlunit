@@ -458,9 +458,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"",
-            IE = "Content-Disposition: form-data; name=\"myInput\";"
-                        + " filename=\".*test-classes[\\\\/]realm\\.properties\"")
+    @Alerts("Content-Disposition: form-data; name=\"myInput\"; filename=\"realm.properties\"")
+    // since 2.28
+    // there is an option for IE, for local and trusted sites IE includes the file path
+    // because we do not support any IE specific setting we do not send the filename as
+    // done by the other browsers
     public void realFile() throws Exception {
         final String htmlContent
             = "<html>\n"
@@ -1030,8 +1032,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
-            FF = "pom.xml--null",
-            IE = "§§PATH§§--null")
+            FF = "pom.xml--null")
+    // since 2.28
+    // there is an option for IE, for local and trusted sites IE includes the file path
+    // because we do not support any IE specific setting we do not send the filename as
+    // done by the other browsers
     public void value2() throws Exception {
         final String html =
               "<html>\n"
@@ -1054,9 +1059,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", absolutePath);
-        assertEquals(expectedAlerts, getCollectedAlerts(driver));
+        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
     }
 
     /**
@@ -1111,8 +1114,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml",
-            FF = "pom.xml",
-            IE = "§§PATH§§")
+            FF = "pom.xml")
+    // since 2.28
+    // there is an option for IE, for local and trusted sites IE includes the file path
+    // because we do not support any IE specific setting we do not send the filename as
+    // done by the other browsers
     public void getAttribute() throws Exception {
         final String html =
               "<html><body>\n"
@@ -1124,9 +1130,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement e = driver.findElement(By.id("f"));
         e.sendKeys(absolutePath);
-        final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[0] = expectedAlerts[0].replace("§§PATH§§", absolutePath);
-        assertEquals(expectedAlerts[0], e.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], e.getAttribute("value"));
     }
-
 }

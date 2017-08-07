@@ -598,12 +598,10 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"C:\\fakepath\\pom.xml-Hello world-Hello world",
-        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
-            FF = {"pom.xml-Hello world-Hello world",
-        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
-            IE = {"§§PATH§§-Hello world-Hello world",
-        "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
+    @Alerts(DEFAULT = {"pom.xml-Hello world-Hello world",
+                    "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
+            CHROME = {"C:\\fakepath\\pom.xml-Hello world-Hello world",
+                    "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void value() throws Exception {
         final String html =
               "<html>\n"

@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 60">
+            <action type="fix" dev="rbri" issue="1908">
+                There is an option for IE that enables/disables the sending of the
+                complete file path when uploading a file. Starting with this version
+                we simulate this in disabled state like the default setting for the
+                internet zone.
+            </action>
             <action type="fix" dev="rbri">
                 BrowserVersion.clone now copies the system-timezone attribute.
             </action>

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
 
 import java.io.ByteArrayInputStream;
@@ -428,9 +427,6 @@ public class HttpWebConnection implements WebConnection {
             else if (pairWithFile.getFileName() != null) {
                 filename = pairWithFile.getFileName();
             }
-            else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-                filename = file.getAbsolutePath();
-            }
             else {
                 filename = file.getName();
             }
@@ -458,9 +454,6 @@ public class HttpWebConnection implements WebConnection {
         }
         else if (pairWithFile.getFileName() != null) {
             filename = pairWithFile.getFileName();
-        }
-        else if (webClient_.getBrowserVersion().hasFeature(HEADER_CONTENT_DISPOSITION_ABSOLUTE_PATH)) {
-            filename = pairWithFile.getFile().getAbsolutePath();
         }
         else {
             filename = pairWithFile.getFile().getName();
