@@ -30,8 +30,6 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -208,17 +206,8 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
             httpEntity.writeTo(out);
 
-            if (getBrowserVersion().isIE()) {
-                final Pattern pattern = Pattern
-                        .compile("Content-Disposition: form-data; name=\"image\";"
-                                + " filename=\".*testfiles[\\\\/]tiny-png\\.img\"");
-                final Matcher matcher = pattern.matcher(out.toString());
-                assertTrue(matcher.find());
-            }
-            else {
-                assertTrue(out.toString()
-                        .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
-            }
+            assertTrue(out.toString()
+                    .contains("Content-Disposition: form-data; name=\"image\"; filename=\"tiny-png.img\""));
         }
     }
 
@@ -598,9 +587,9 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"pom.xml-Hello world-Hello world",
+    @Alerts(DEFAULT = {"C:\\fakepath\\pom.xml-Hello world-Hello world",
                     "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"},
-            CHROME = {"C:\\fakepath\\pom.xml-Hello world-Hello world",
+            FF = {"pom.xml-Hello world-Hello world",
                     "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
     public void value() throws Exception {
         final String html =
