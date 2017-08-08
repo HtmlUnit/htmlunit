@@ -19,9 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
-import java.net.URL;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -33,7 +30,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -704,89 +700,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         driver.findElement(By.id("myId")).click();
         verifyAlerts(driver, expectedAlerts);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("\u8868")
-    // Test should be corrected
-    // It doesn't work with real browsers after migrating to WebDriverTestCase
-    @Ignore
-    public void externalScriptEncoding() throws Exception {
-        final MockWebConnection webConnection = getMockWebConnection();
-        /*
-         * this page has meta element , and script tag has no charset attribute
-         */
-        final String htmlContent
-            = "<html><head>\n"
-            + "<meta http-equiv='content-type' content='text/html; charset=Shift_JIS'>\n"
-            + "<title>foo</title>\n"
-            + "<script src='/foo.js' id='script1'></script>\n"
-            + "</head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form name='form1'>\n"
-            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        /*
-         * this page has no meta element , and script tag has charset attribute
-         */
-        final String htmlContent2
-            = "<html><head>\n"
-            + "<title>foo</title>\n"
-            + "<script src='/foo2.js' charset='Shift_JIS' id='script2'></script>\n"
-            + "</head><body>\n"
-            + "<p>hello world</p>\n"
-            + "<form name='form1'>\n"
-            + "  <input type='text' name='textfield1' id='textfield1' value='foo' />\n"
-            + "  <input type='text' name='textfield2' id='textfield2'/>\n"
-            + "</form>\n"
-            + "</body></html>";
-
-        /*
-         * the corresponding SJIS char of '\u8868' has '\' in second byte.
-         * if encoding is misspecificated,
-         * this cause 'unterminated string reteral error'
-         */
-        final String jsContent = "alert('\u8868');\n";
-
-        webConnection.setResponse(
-            new URL(URL_FIRST, "hidden"),
-            htmlContent2);
-
-        webConnection.setResponse(
-            new URL(URL_FIRST, "foo.js"),
-            // make SJIS bytes as response body
-            new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
-
-        /*
-         * foo2.js is same with foo.js
-         */
-        webConnection.setResponse(
-            new URL(URL_FIRST, "foo2.js"),
-            // make SJIS bytes as response body
-            new String(jsContent.getBytes("SJIS"), "8859_1"), "text/javascript");
-
-        /*
-         * detect encoding from meta tag
-         */
-        final WebDriver driver = loadPageWithAlerts2(htmlContent);
-        final WebElement htmlScript = driver.findElement(By.id("script1"));
-
-        assertNotNull(htmlScript);
-
-        /*
-         * detect encoding from charset attribute of script tag
-         */
-        driver.get(URL_FIRST + "hidden");
-        final WebElement htmlScript2 = driver.findElement(By.id("script2"));
-
-        assertNotNull(htmlScript2);
-        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
