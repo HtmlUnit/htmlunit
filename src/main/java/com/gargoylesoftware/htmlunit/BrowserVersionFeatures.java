@@ -595,13 +595,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION,
 
-    /** Indicates that Array.from() is supported. */
-    @BrowserFeature({CHROME, FF})
-    JS_ARRAY_FROM,
-
     /** Indicates that the {@code Array} supports construction properties. */
     @BrowserFeature(FF)
     JS_ARRAY_CONSTRUCTION_PROPERTIES,
+
+    /** Indicates that Array.from() is supported. */
+    @BrowserFeature({CHROME, FF})
+    JS_ARRAY_FROM,
 
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({CHROME, FF})
