@@ -301,6 +301,24 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
 
+        EDGE.registerUploadMimeType("html", "text/html");
+        EDGE.registerUploadMimeType("htm", "text/html");
+        EDGE.registerUploadMimeType("css", "text/css");
+        EDGE.registerUploadMimeType("xml", "text/xml");
+        EDGE.registerUploadMimeType("gif", "image/gif");
+        EDGE.registerUploadMimeType("jpeg", "image/jpeg");
+        EDGE.registerUploadMimeType("jpg", "image/jpeg");
+        EDGE.registerUploadMimeType("mp4", "video/mp4");
+        EDGE.registerUploadMimeType("m4v", "video/mp4");
+        EDGE.registerUploadMimeType("m4a", "audio/mp4");
+        EDGE.registerUploadMimeType("mp3", "audio/mpeg");
+        EDGE.registerUploadMimeType("ogm", "video/x-ogm");
+        EDGE.registerUploadMimeType("ogg", "application/ogg");
+        EDGE.registerUploadMimeType("wav", "audio/wav");
+        EDGE.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        EDGE.registerUploadMimeType("xht", "application/xhtml+xml");
+        EDGE.registerUploadMimeType("txt", "text/plain");
+
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present");
