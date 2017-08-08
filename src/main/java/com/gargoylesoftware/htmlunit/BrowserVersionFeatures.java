@@ -599,6 +599,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_ARRAY_FROM,
 
+    /** Indicates that the {@code Array} supports construction properties. */
+    @BrowserFeature(FF)
+    JS_ARRAY_CONSTRUCTION_PROPERTIES,
+
     /** firstChild and lastChild returns null for Attr (like IE does). */
     @BrowserFeature({CHROME, FF})
     JS_ATTR_FIRST_LAST_CHILD_RETURNS_NULL,

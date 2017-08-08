@@ -829,7 +829,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 if (ScriptRuntime.hasTopCall(cx)) {
                     return function.call(cx, scope, thisObject, args);
                 }
-                return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args);
+                return ScriptRuntime.doTopCall(function, cx, scope, thisObject, args, cx.isStrictMode());
             }
             @Override
             protected String getSourceCode(final Context cx) {
