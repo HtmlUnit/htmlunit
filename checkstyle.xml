@@ -57,6 +57,16 @@
         <property name="message" value="Two empty contiguous lines"/>
     </module>
 
+    <module name="RegexpMultiline">
+        <property name="format" value="package .*\r?\nimport"/>
+        <property name="message" value="Package declaration should be followed by an empty line"/>
+    </module>
+
+    <module name="RegexpMultiline">
+        <property name="format" value="\r?\n\r?\npackage"/>
+        <property name="message" value="Package declaration should not be preceeded by an empty line"/>
+    </module>
+
     <module name="RegexpSingleline">
         <property name="format" value="@JsxFunction\(\)|@JsxGetter\(\)|@JsxSetter\(\)|@JsxConstructor\(\)|@Alerts\(\)$"/>
         <property name="message" value="No need to specify parentheses"/>
