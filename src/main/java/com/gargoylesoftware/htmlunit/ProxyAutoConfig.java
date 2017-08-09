@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit;
+
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.URL;
@@ -20,7 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.regex.Pattern;
+
+import org.apache.commons.net.util.SubnetUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
@@ -37,8 +39,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  */
 public final class ProxyAutoConfig {
-
-    private static final Pattern DOT_SPLIT_PATTERN = Pattern.compile("\\.");
 
     private ProxyAutoConfig() {
     }
@@ -146,15 +146,8 @@ public final class ProxyAutoConfig {
             return false;
         }
 
-        final String[] hostTokens = DOT_SPLIT_PATTERN.split(dnsResolve(host));
-        final String[] patternTokens = DOT_SPLIT_PATTERN.split(pattern);
-        final String[] maskTokens = DOT_SPLIT_PATTERN.split(mask);
-        for (int i = 0; i < hostTokens.length; i++) {
-            if (Integer.parseInt(maskTokens[i]) != 0 && !hostTokens[i].equals(patternTokens[i])) {
-                return false;
-            }
-        }
-        return true;
+        final SubnetUtils subnetUtils = new SubnetUtils(pattern, mask);
+        return subnetUtils.getInfo().isInRange(dnsResolve);
     }
 
     /**
