@@ -24,9 +24,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
@@ -41,8 +41,34 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:;base64,SHRtbFVuaXQ=",
-            FF = "data:application/octet-stream;base64,SHRtbFVuaXQ=")
+    @Alerts("0")
+    public void ctorReadyState() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var reader = new FileReader();\n"
+            + "      alert(reader.readyState);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("testBtn")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:text/plain;base64,SHRtbFVuaXQ=")
     @NotYetImplemented
     public void readAsDataURL() throws Exception {
         final String html
@@ -51,12 +77,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<head>\n"
             + "  <script>\n"
             + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
             + "        var dataURL = reader.result;\n"
             + "        alert(dataURL);\n"
             + "      };\n"
-            + "      var files = document.testForm.fileupload.files;\n"
             + "      reader.readAsDataURL(files[0]);\n"
             + "    }\n"
             + "  </script>\n"

@@ -17,12 +17,18 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code FileReader}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class FileReader extends EventTarget {
@@ -39,11 +45,66 @@ public class FileReader extends EventTarget {
     @JsxConstant
     public static final short DONE = 2;
 
+    private int readyState_;
+
     /**
      * Creates an instance.
      */
     @JsxConstructor
     public FileReader() {
+        readyState_ = EMPTY;
     }
 
+    /**
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
+     */
+    @JsxGetter
+    public int getReadyState() {
+        return readyState_;
+    }
+
+    /**
+     * Returns the {@code onload} event handler for this element.
+     * @return the {@code onload} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnload() {
+        return getEventHandler("load");
+    }
+
+    /**
+     * Sets the {@code onload} event handler for this element.
+     * @param onload the {@code onload} event handler for this element
+     */
+    @JsxSetter
+    public void setOnload(final Object onload) {
+        setEventHandler("load", onload);
+    }
+
+    /**
+     * Returns the {@code onerror} event handler for this element.
+     * @return the {@code onerror} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnerror() {
+        return getEventHandler("error");
+    }
+
+    /**
+     * Sets the {@code onerror} event handler for this element.
+     * @param onerror the {@code onerror} event handler for this element
+     */
+    @JsxSetter
+    public void setOnerror(final Object onerror) {
+        setEventHandler("error", onerror);
+    }
+
+    /**
+     * Function readAsDataURL.
+     * @param file the file
+     */
+    @JsxFunction
+    public void readAsDataURL(final File file) {
+    }
 }
