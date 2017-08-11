@@ -46,7 +46,7 @@ public class FormField extends HTMLElement {
 
         final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
         if (form != null) {
-            setParentScope(getScriptableFor(form));
+            setParentScope(getScriptableFor(form).getParentScope());
         }
     }
 

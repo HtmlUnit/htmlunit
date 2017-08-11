@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.annotations.BuildServerDiscrepancy;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -184,6 +185,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuildServerDiscrepancy
     public void comparisonMethodViolatesContract2() throws Exception {
         final Properties props = System.getProperties();
         props.list(System.out);
