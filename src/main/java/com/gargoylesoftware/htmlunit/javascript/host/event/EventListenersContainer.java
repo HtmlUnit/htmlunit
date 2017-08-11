@@ -229,8 +229,15 @@ public class EventListenersContainer implements Serializable {
         final List<Scriptable> listeners = getListeners(event.getType(), useCapture);
         if (listeners != null && !listeners.isEmpty()) {
             event.setCurrentTarget(jsNode_);
-            
-            final HtmlPage page = (HtmlPage) ((Window) jsNode_.getParentScope()).getDomNodeOrDie();
+
+            final Window window;
+            if (jsNode_ instanceof Window) {
+                window = (Window) jsNode_;
+            }
+            else {
+                window = (Window) jsNode_.getParentScope();
+            }
+            final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
 
             // no need for a copy, listeners are copy on write
             for (final Scriptable listener : listeners) {

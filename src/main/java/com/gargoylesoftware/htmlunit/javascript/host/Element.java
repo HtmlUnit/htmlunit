@@ -123,7 +123,7 @@ public class Element extends Node {
 
         style_ = new CSSStyleDeclaration(this);
 
-        setParentScope(getWindow().getDocument());
+        setParentScope(getWindow());
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.
