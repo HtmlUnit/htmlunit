@@ -377,7 +377,7 @@ public class HTMLDocument2 extends Document2 {
     }
 
     /**
-     * JavaScript function "close".
+     * JavaScript function {@code close}.
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().

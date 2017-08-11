@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.js.nashorn.ScriptUtils;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.objects.annotations.Getter;
@@ -157,7 +159,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      */
     @Setter(IE)
     public void setOnreadystatechange(final Object handler) {
-        setEventHandler("readystatechange", handler);
+        setEventHandler(Event.TYPE_READY_STATE_CHANGE, handler);
     }
 
     /**
@@ -175,7 +177,7 @@ public class HTMLScriptElement2 extends HTMLElement2 {
      */
     @Setter
     public void setOnload(final Object handler) {
-        setEventHandler("load", handler);
+        setEventHandler(Event2.TYPE_LOAD, handler);
     }
 
     /**

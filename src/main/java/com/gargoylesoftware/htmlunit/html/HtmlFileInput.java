@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -162,7 +163,7 @@ public class HtmlFileInput extends HtmlInput {
             files[i] = normalizeFile(files[i]);
         }
         files_ = files;
-        fireEvent("change");
+        fireEvent(Event.TYPE_CHANGE);
     }
 
     /**

@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -137,7 +138,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeunload() {
-        return getEventHandler("beforeunload");
+        return getEventHandler(Event.TYPE_BEFORE_UNLOAD);
     }
 
     /**
@@ -146,7 +147,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeunload(final Object beforeunload) {
-        setEventHandler("beforeunload", beforeunload);
+        setEventHandler(Event.TYPE_BEFORE_UNLOAD, beforeunload);
     }
 
     /**
@@ -155,7 +156,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnhashchange() {
-        return getEventHandler("hashchange");
+        return getEventHandler(Event.TYPE_HASH_CHANGE);
     }
 
     /**
@@ -164,7 +165,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnhashchange(final Object hashchange) {
-        setEventHandler("hashchange", hashchange);
+        setEventHandler(Event.TYPE_HASH_CHANGE, hashchange);
     }
 
     /**
@@ -191,7 +192,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnmessage() {
-        return getEventHandler("message");
+        return getEventHandler(Event.TYPE_MESSAGE);
     }
 
     /**
@@ -200,7 +201,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnmessage(final Object message) {
-        setEventHandler("message", message);
+        setEventHandler(Event.TYPE_MESSAGE, message);
     }
 
     /**
@@ -299,7 +300,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnpopstate() {
-        return getEventHandler("popstate");
+        return getEventHandler(Event.TYPE_POPSTATE);
     }
 
     /**
@@ -308,7 +309,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter({CHROME, FF})
     public void setOnpopstate(final Object popstate) {
-        setEventHandler("popstate", popstate);
+        setEventHandler(Event.TYPE_POPSTATE, popstate);
     }
 
     /**
@@ -371,7 +372,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnunload() {
-        return getEventHandler("unload");
+        return getEventHandler(Event.TYPE_UNLOAD);
     }
 
     /**
@@ -380,7 +381,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnunload(final Object unload) {
-        setEventHandler("unload", unload);
+        setEventHandler(Event.TYPE_UNLOAD, unload);
     }
 
     /**

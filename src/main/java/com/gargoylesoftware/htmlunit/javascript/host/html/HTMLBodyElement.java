@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -242,7 +243,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnbeforeunload() {
-        return getEventHandler("beforeunload");
+        return getEventHandler(Event.TYPE_BEFORE_UNLOAD);
     }
 
     /**
@@ -251,7 +252,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnbeforeunload(final Object onbeforeunload) {
-        setEventHandler("beforeunload", onbeforeunload);
+        setEventHandler(Event.TYPE_BEFORE_UNLOAD, onbeforeunload);
     }
 
     /**
@@ -260,7 +261,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnhashchange() {
-        return getEventHandler("hashchange");
+        return getEventHandler(Event.TYPE_HASH_CHANGE);
     }
 
     /**
@@ -269,7 +270,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnhashchange(final Object onhashchange) {
-        setEventHandler("hashchange", onhashchange);
+        setEventHandler(Event.TYPE_HASH_CHANGE, onhashchange);
     }
 
     /**
@@ -296,7 +297,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnmessage() {
-        return getEventHandler("message");
+        return getEventHandler(Event.TYPE_MESSAGE);
     }
 
     /**
@@ -305,7 +306,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnmessage(final Object onmessage) {
-        setEventHandler("message", onmessage);
+        setEventHandler(Event.TYPE_MESSAGE, onmessage);
     }
 
     /**
@@ -386,7 +387,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnpopstate() {
-        return getEventHandler("popstate");
+        return getEventHandler(Event.TYPE_POPSTATE);
     }
 
     /**
@@ -395,7 +396,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
-        setEventHandler("popstate", onpopstate);
+        setEventHandler(Event.TYPE_POPSTATE, onpopstate);
     }
 
     /**
@@ -458,7 +459,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public Function getOnunload() {
-        return getEventHandler("unload");
+        return getEventHandler(Event.TYPE_UNLOAD);
     }
 
     /**
@@ -467,7 +468,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxSetter
     public void setOnunload(final Object onunload) {
-        setEventHandler("unload", onunload);
+        setEventHandler(Event.TYPE_UNLOAD, onunload);
     }
 
     /**

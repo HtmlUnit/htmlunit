@@ -27,6 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.svg.SvgElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -99,7 +101,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnfocus() {
-        return getEventHandler("focus");
+        return getEventHandler(Event.TYPE_FOCUS);
     }
 
     /**
@@ -108,7 +110,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnfocus(final Object focus) {
-        setEventHandler("focus", focus);
+        setEventHandler(Event.TYPE_FOCUS, focus);
     }
 
     /**
@@ -405,7 +407,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnkeydown() {
-        return getEventHandler("keydown");
+        return getEventHandler(Event.TYPE_KEY_DOWN);
     }
 
     /**
@@ -414,7 +416,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnkeydown(final Object keydown) {
-        setEventHandler("keydown", keydown);
+        setEventHandler(Event.TYPE_KEY_DOWN, keydown);
     }
 
     /**
@@ -459,7 +461,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnclick() {
-        return getEventHandler("click");
+        return getEventHandler(MouseEvent.TYPE_CLICK);
     }
 
     /**
@@ -468,7 +470,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnclick(final Object click) {
-        setEventHandler("click", click);
+        setEventHandler(MouseEvent.TYPE_CLICK, click);
     }
 
     /**
@@ -477,7 +479,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnkeyup() {
-        return getEventHandler("keyup");
+        return getEventHandler(Event.TYPE_KEY_UP);
     }
 
     /**
@@ -486,7 +488,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnkeyup(final Object keyup) {
-        setEventHandler("keyup", keyup);
+        setEventHandler(Event.TYPE_KEY_UP, keyup);
     }
 
     /**
@@ -495,7 +497,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnchange() {
-        return getEventHandler("change");
+        return getEventHandler(Event.TYPE_CHANGE);
     }
 
     /**
@@ -504,7 +506,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnchange(final Object change) {
-        setEventHandler("change", change);
+        setEventHandler(Event.TYPE_CHANGE, change);
     }
 
     /**
@@ -513,7 +515,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnreset() {
-        return getEventHandler("reset");
+        return getEventHandler(Event.TYPE_RESET);
     }
 
     /**
@@ -522,7 +524,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnreset(final Object reset) {
-        setEventHandler("reset", reset);
+        setEventHandler(Event.TYPE_RESET, reset);
     }
 
     /**
@@ -531,7 +533,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnkeypress() {
-        return getEventHandler("keypress");
+        return getEventHandler(Event.TYPE_KEY_PRESS);
     }
 
     /**
@@ -540,7 +542,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnkeypress(final Object keypress) {
-        setEventHandler("keypress", keypress);
+        setEventHandler(Event.TYPE_KEY_PRESS, keypress);
     }
 
     /**
@@ -567,7 +569,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOndblclick() {
-        return getEventHandler("dblclick");
+        return getEventHandler(MouseEvent.TYPE_DBL_CLICK);
     }
 
     /**
@@ -576,7 +578,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOndblclick(final Object dblclick) {
-        setEventHandler("dblclick", dblclick);
+        setEventHandler(MouseEvent.TYPE_DBL_CLICK, dblclick);
     }
 
     /**
@@ -693,7 +695,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOncontextmenu() {
-        return getEventHandler("contextmenu");
+        return getEventHandler(MouseEvent.TYPE_CONTEXT_MENU);
     }
 
     /**
@@ -702,7 +704,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOncontextmenu(final Object contextmenu) {
-        setEventHandler("contextmenu", contextmenu);
+        setEventHandler(MouseEvent.TYPE_CONTEXT_MENU, contextmenu);
     }
 
     /**
@@ -711,7 +713,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnmousemove() {
-        return getEventHandler("mousemove");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_MOVE);
     }
 
     /**
@@ -720,7 +722,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnmousemove(final Object mousemove) {
-        setEventHandler("mousemove", mousemove);
+        setEventHandler(MouseEvent.TYPE_MOUSE_MOVE, mousemove);
     }
 
     /**
@@ -729,7 +731,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnerror() {
-        return getEventHandler("error");
+        return getEventHandler(Event.TYPE_ERROR);
     }
 
     /**
@@ -738,7 +740,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnerror(final Object error) {
-        setEventHandler("error", error);
+        setEventHandler(Event.TYPE_ERROR, error);
     }
 
     /**
@@ -747,7 +749,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnmouseup() {
-        return getEventHandler("mouseup");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_UP);
     }
 
     /**
@@ -756,7 +758,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnmouseup(final Object mouseup) {
-        setEventHandler("mouseup", mouseup);
+        setEventHandler(MouseEvent.TYPE_MOUSE_UP, mouseup);
     }
 
     /**
@@ -819,7 +821,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnmouseover() {
-        return getEventHandler("mouseover");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OVER);
     }
 
     /**
@@ -828,7 +830,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnmouseover(final Object mouseover) {
-        setEventHandler("mouseover", mouseover);
+        setEventHandler(MouseEvent.TYPE_MOUSE_OVER, mouseover);
     }
 
     /**
@@ -837,7 +839,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOninput() {
-        return getEventHandler("input");
+        return getEventHandler(Event.TYPE_INPUT);
     }
 
     /**
@@ -846,7 +848,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOninput(final Object input) {
-        setEventHandler("input", input);
+        setEventHandler(Event.TYPE_INPUT, input);
     }
 
     /**
@@ -927,7 +929,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter(CHROME)
     public Function getOnclose() {
-        return getEventHandler("close");
+        return getEventHandler(Event.TYPE_CLOSE);
     }
 
     /**
@@ -936,7 +938,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter(CHROME)
     public void setOnclose(final Object close) {
-        setEventHandler("close", close);
+        setEventHandler(Event.TYPE_CLOSE, close);
     }
 
     /**
@@ -981,7 +983,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnsubmit() {
-        return getEventHandler("submit");
+        return getEventHandler(Event.TYPE_SUBMIT);
     }
 
     /**
@@ -990,7 +992,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnsubmit(final Object submit) {
-        setEventHandler("submit", submit);
+        setEventHandler(Event.TYPE_SUBMIT, submit);
     }
 
     /**
@@ -1107,7 +1109,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnblur() {
-        return getEventHandler("blur");
+        return getEventHandler(Event.TYPE_BLUR);
     }
 
     /**
@@ -1116,7 +1118,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnblur(final Object blur) {
-        setEventHandler("blur", blur);
+        setEventHandler(Event.TYPE_BLUR, blur);
     }
 
     /**
@@ -1233,7 +1235,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnload() {
-        return getEventHandler("load");
+        return getEventHandler(Event.TYPE_LOAD);
     }
 
     /**
@@ -1242,7 +1244,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnload(final Object load) {
-        setEventHandler("load", load);
+        setEventHandler(Event.TYPE_LOAD, load);
     }
 
     /**
@@ -1341,7 +1343,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnmouseout() {
-        return getEventHandler("mouseout");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OUT);
     }
 
     /**
@@ -1350,7 +1352,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnmouseout(final Object mouseout) {
-        setEventHandler("mouseout", mouseout);
+        setEventHandler(MouseEvent.TYPE_MOUSE_OUT, mouseout);
     }
 
     /**
@@ -1431,7 +1433,7 @@ public class SVGElement extends Element {
      */
     @JsxGetter({CHROME, FF})
     public Function getOnmousedown() {
-        return getEventHandler("mousedown");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_DOWN);
     }
 
     /**
@@ -1440,7 +1442,7 @@ public class SVGElement extends Element {
      */
     @JsxSetter({CHROME, FF})
     public void setOnmousedown(final Object mousedown) {
-        setEventHandler("mousedown", mousedown);
+        setEventHandler(MouseEvent.TYPE_MOUSE_DOWN, mousedown);
     }
 
     /**

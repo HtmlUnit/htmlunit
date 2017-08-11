@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -139,7 +140,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public Object getOnreadystatechange() {
-        return getEventHandler("readystatechange");
+        return getEventHandler(Event.TYPE_READY_STATE_CHANGE);
     }
 
     /**
@@ -148,7 +149,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxSetter(IE)
     public void setOnreadystatechange(final Object handler) {
-        setEventHandler("readystatechange", handler);
+        setEventHandler(Event.TYPE_READY_STATE_CHANGE, handler);
     }
 
     /**

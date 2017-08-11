@@ -353,7 +353,7 @@ public class Window2 extends EventTarget2 implements AutoCloseable {
     @Getter
     public static Object getOnload(final Object self) {
         final Window2 window = getWindow(self);
-        final Object onload = window.getHandlerForJavaScript("load");
+        final Object onload = window.getHandlerForJavaScript(Event2.TYPE_LOAD);
         if (onload == null) {
             final HtmlPage page = (HtmlPage) window.getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();

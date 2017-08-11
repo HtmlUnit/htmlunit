@@ -127,6 +127,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventHandler;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
@@ -2032,7 +2033,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnchange(final Object onchange) {
-        setEventHandler("change", onchange);
+        setEventHandler(Event.TYPE_CHANGE, onchange);
     }
 
     /**
@@ -2041,7 +2042,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnchange() {
-        return getEventHandler("change");
+        return getEventHandler(Event.TYPE_CHANGE);
     }
 
     /**
@@ -2050,7 +2051,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnsubmit() {
-        return getEventHandler("submit");
+        return getEventHandler(Event.TYPE_SUBMIT);
     }
 
     /**
@@ -2059,7 +2060,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
-        setEventHandler("submit", onsubmit);
+        setEventHandler(Event.TYPE_SUBMIT, onsubmit);
     }
 
     /**
@@ -2173,7 +2174,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnclick(final Object handler) {
-        setEventHandler("click", handler);
+        setEventHandler(MouseEvent.TYPE_CLICK, handler);
     }
 
     /**
@@ -2182,7 +2183,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnclick() {
-        return getEventHandler("click");
+        return getEventHandler(MouseEvent.TYPE_CLICK);
     }
 
     /**
@@ -2191,7 +2192,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOndblclick(final Object handler) {
-        setEventHandler("dblclick", handler);
+        setEventHandler(MouseEvent.TYPE_DBL_CLICK, handler);
     }
 
     /**
@@ -2200,7 +2201,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOndblclick() {
-        return getEventHandler("dblclick");
+        return getEventHandler(MouseEvent.TYPE_DBL_CLICK);
     }
 
     /**
@@ -2209,7 +2210,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnblur(final Object handler) {
-        setEventHandler("blur", handler);
+        setEventHandler(Event.TYPE_BLUR, handler);
     }
 
     /**
@@ -2218,7 +2219,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnblur() {
-        return getEventHandler("blur");
+        return getEventHandler(Event.TYPE_BLUR);
     }
 
     /**
@@ -2227,7 +2228,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnfocus(final Object handler) {
-        setEventHandler("focus", handler);
+        setEventHandler(Event.TYPE_FOCUS, handler);
     }
 
     /**
@@ -2236,7 +2237,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnfocus() {
-        return getEventHandler("focus");
+        return getEventHandler(Event.TYPE_FOCUS);
     }
 
     /**
@@ -2245,7 +2246,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter(IE)
     public void setOnfocusin(final Object handler) {
-        setEventHandler("focusin", handler);
+        setEventHandler(Event.TYPE_FOCUS_IN, handler);
     }
 
     /**
@@ -2254,7 +2255,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public Object getOnfocusin() {
-        return getEventHandler("focusin");
+        return getEventHandler(Event.TYPE_FOCUS_IN);
     }
 
     /**
@@ -2263,7 +2264,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter(IE)
     public void setOnfocusout(final Object handler) {
-        setEventHandler("focusout", handler);
+        setEventHandler(Event.TYPE_FOCUS_OUT, handler);
     }
 
     /**
@@ -2272,7 +2273,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public Object getOnfocusout() {
-        return getEventHandler("focusout");
+        return getEventHandler(Event.TYPE_FOCUS_OUT);
     }
 
     /**
@@ -2281,7 +2282,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnkeydown(final Object handler) {
-        setEventHandler("keydown", handler);
+        setEventHandler(Event.TYPE_KEY_DOWN, handler);
     }
 
     /**
@@ -2290,7 +2291,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeydown() {
-        return getEventHandler("keydown");
+        return getEventHandler(Event.TYPE_KEY_DOWN);
     }
 
     /**
@@ -2299,7 +2300,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnkeypress(final Object handler) {
-        setEventHandler("keypress", handler);
+        setEventHandler(Event.TYPE_KEY_PRESS, handler);
     }
 
     /**
@@ -2308,7 +2309,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeypress() {
-        return getEventHandler("keypress");
+        return getEventHandler(Event.TYPE_KEY_PRESS);
     }
 
     /**
@@ -2317,7 +2318,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnkeyup(final Object handler) {
-        setEventHandler("keyup", handler);
+        setEventHandler(Event.TYPE_KEY_UP, handler);
     }
 
     /**
@@ -2326,7 +2327,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnkeyup() {
-        return getEventHandler("keyup");
+        return getEventHandler(Event.TYPE_KEY_UP);
     }
 
     /**
@@ -2335,7 +2336,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmousedown(final Object handler) {
-        setEventHandler("mousedown", handler);
+        setEventHandler(MouseEvent.TYPE_MOUSE_DOWN, handler);
     }
 
     /**
@@ -2344,7 +2345,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmousedown() {
-        return getEventHandler("mousedown");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_DOWN);
     }
 
     /**
@@ -2353,7 +2354,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmousemove(final Object handler) {
-        setEventHandler("mousemove", handler);
+        setEventHandler(MouseEvent.TYPE_MOUSE_MOVE, handler);
     }
 
     /**
@@ -2362,7 +2363,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmousemove() {
-        return getEventHandler("mousemove");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_MOVE);
     }
 
     /**
@@ -2371,7 +2372,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmouseout(final Object handler) {
-        setEventHandler("mouseout", handler);
+        setEventHandler(MouseEvent.TYPE_MOUSE_OUT, handler);
     }
 
     /**
@@ -2380,7 +2381,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseout() {
-        return getEventHandler("mouseout");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OUT);
     }
 
     /**
@@ -2389,7 +2390,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmouseover(final Object handler) {
-        setEventHandler("mouseover", handler);
+        setEventHandler(MouseEvent.TYPE_MOUSE_OVER, handler);
     }
 
     /**
@@ -2398,7 +2399,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseover() {
-        return getEventHandler("mouseover");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OVER);
     }
 
     /**
@@ -2407,7 +2408,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnmouseup(final Object handler) {
-        setEventHandler("mouseup", handler);
+        setEventHandler(MouseEvent.TYPE_MOUSE_UP, handler);
     }
 
     /**
@@ -2416,7 +2417,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnmouseup() {
-        return getEventHandler("mouseup");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_UP);
     }
 
     /**
@@ -2425,7 +2426,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOncontextmenu(final Object handler) {
-        setEventHandler("contextmenu", handler);
+        setEventHandler(MouseEvent.TYPE_CONTEXT_MENU, handler);
     }
 
     /**
@@ -2434,7 +2435,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOncontextmenu() {
-        return getEventHandler("contextmenu");
+        return getEventHandler(MouseEvent.TYPE_CONTEXT_MENU);
     }
 
     /**
@@ -2461,7 +2462,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnerror(final Object handler) {
-        setEventHandler("error", handler);
+        setEventHandler(Event.TYPE_ERROR, handler);
     }
 
     /**
@@ -2470,7 +2471,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Object getOnerror() {
-        return getEventHandler("error");
+        return getEventHandler(Event.TYPE_ERROR);
     }
 
     /**
@@ -2479,7 +2480,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOninput() {
-        return getEventHandler("input");
+        return getEventHandler(Event.TYPE_INPUT);
     }
 
     /**
@@ -2488,7 +2489,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOninput(final Object oninput) {
-        setEventHandler("input", oninput);
+        setEventHandler(Event.TYPE_INPUT, oninput);
     }
 
     /**
@@ -2637,7 +2638,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(CHROME)
     public Function getOnclose() {
-        return getEventHandler("close");
+        return getEventHandler(Event.TYPE_CLOSE);
     }
 
     /**
@@ -2646,7 +2647,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter(CHROME)
     public void setOnclose(final Object onclose) {
-        setEventHandler("close", onclose);
+        setEventHandler(Event.TYPE_CLOSE, onclose);
     }
 
     /**
@@ -2891,7 +2892,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnload() {
-        return getEventHandler("load");
+        return getEventHandler(Event.TYPE_LOAD);
     }
 
     /**
@@ -2900,7 +2901,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnload(final Object onload) {
-        setEventHandler("load", onload);
+        setEventHandler(Event.TYPE_LOAD, onload);
     }
 
     /**
@@ -3287,7 +3288,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public Function getOnreset() {
-        return getEventHandler("reset");
+        return getEventHandler(Event.TYPE_RESET);
     }
 
     /**
@@ -3296,7 +3297,7 @@ public class HTMLElement extends Element {
      */
     @JsxSetter
     public void setOnreset(final Object onreset) {
-        setEventHandler("reset", onreset);
+        setEventHandler(Event.TYPE_RESET, onreset);
     }
 
     /**

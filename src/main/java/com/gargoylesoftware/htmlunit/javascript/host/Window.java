@@ -1102,7 +1102,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Object getOnload() {
-        final Object onload = getEventHandler("load");
+        final Object onload = getEventHandler(Event.TYPE_LOAD);
         if (onload == null) {
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
@@ -2311,7 +2311,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnfocusin() {
-        return getEventHandler("focusin");
+        return getEventHandler(Event.TYPE_FOCUS_IN);
     }
 
     /**
@@ -2320,7 +2320,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnfocusin(final Object onfocusin) {
-        setHandlerForJavaScript("focusin", onfocusin);
+        setHandlerForJavaScript(Event.TYPE_FOCUS_IN, onfocusin);
     }
 
     /**
@@ -2329,7 +2329,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnfocus() {
-        return getEventHandler("focus");
+        return getEventHandler(Event.TYPE_FOCUS);
     }
 
     /**
@@ -2338,7 +2338,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnfocus(final Object onfocus) {
-        setHandlerForJavaScript("focus", onfocus);
+        setHandlerForJavaScript(Event.TYPE_FOCUS, onfocus);
     }
 
     /**
@@ -2563,7 +2563,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeydown() {
-        return getEventHandler("keydown");
+        return getEventHandler(Event.TYPE_KEY_DOWN);
     }
 
     /**
@@ -2572,7 +2572,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeydown(final Object onkeydown) {
-        setHandlerForJavaScript("keydown", onkeydown);
+        setHandlerForJavaScript(Event.TYPE_KEY_DOWN, onkeydown);
     }
 
     /**
@@ -2635,7 +2635,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeyup() {
-        return getEventHandler("keyup");
+        return getEventHandler(Event.TYPE_KEY_UP);
     }
 
     /**
@@ -2644,7 +2644,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeyup(final Object onkeyup) {
-        setHandlerForJavaScript("keyup", onkeyup);
+        setHandlerForJavaScript(Event.TYPE_KEY_UP, onkeyup);
     }
 
     /**
@@ -2689,7 +2689,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnreset() {
-        return getEventHandler("reset");
+        return getEventHandler(Event.TYPE_RESET);
     }
 
     /**
@@ -2698,7 +2698,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnreset(final Object onreset) {
-        setHandlerForJavaScript("reset", onreset);
+        setHandlerForJavaScript(Event.TYPE_RESET, onreset);
     }
 
     /**
@@ -2707,7 +2707,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnkeypress() {
-        return getEventHandler("keypress");
+        return getEventHandler(Event.TYPE_KEY_PRESS);
     }
 
     /**
@@ -2716,7 +2716,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnkeypress(final Object onkeypress) {
-        setHandlerForJavaScript("keypress", onkeypress);
+        setHandlerForJavaScript(Event.TYPE_KEY_PRESS, onkeypress);
     }
 
     /**
@@ -2743,7 +2743,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnfocusout() {
-        return getEventHandler("focusout");
+        return getEventHandler(Event.TYPE_FOCUS_OUT);
     }
 
     /**
@@ -2752,7 +2752,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnfocusout(final Object onfocusout) {
-        setHandlerForJavaScript("focusout", onfocusout);
+        setHandlerForJavaScript(Event.TYPE_FOCUS_OUT, onfocusout);
     }
 
     /**
@@ -2851,7 +2851,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOncontextmenu() {
-        return getEventHandler("contextmenu");
+        return getEventHandler(MouseEvent.TYPE_CONTEXT_MENU);
     }
 
     /**
@@ -2860,7 +2860,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOncontextmenu(final Object oncontextmenu) {
-        setHandlerForJavaScript("contextmenu", oncontextmenu);
+        setHandlerForJavaScript(MouseEvent.TYPE_CONTEXT_MENU, oncontextmenu);
     }
 
     /**
@@ -2869,7 +2869,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmousemove() {
-        return getEventHandler("mousemove");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_MOVE);
     }
 
     /**
@@ -2878,7 +2878,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmousemove(final Object onmousemove) {
-        setHandlerForJavaScript("mousemove", onmousemove);
+        setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_MOVE, onmousemove);
     }
 
     /**
@@ -2887,7 +2887,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(IE)
     public Function getOnreadystatechange() {
-        return getEventHandler("readystatechange");
+        return getEventHandler(Event.TYPE_READY_STATE_CHANGE);
     }
 
     /**
@@ -2896,7 +2896,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(IE)
     public void setOnreadystatechange(final Object onreadystatechange) {
-        setHandlerForJavaScript("readystatechange", onreadystatechange);
+        setHandlerForJavaScript(Event.TYPE_READY_STATE_CHANGE, onreadystatechange);
     }
 
     /**
@@ -2959,7 +2959,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseover() {
-        return getEventHandler("mouseover");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OVER);
     }
 
     /**
@@ -2968,7 +2968,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseover(final Object onmouseover) {
-        setHandlerForJavaScript("mouseover", onmouseover);
+        setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_OVER, onmouseover);
     }
 
     /**
@@ -3031,7 +3031,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(CHROME)
     public Function getOnclose() {
-        return getEventHandler("close");
+        return getEventHandler(Event.TYPE_CLOSE);
     }
 
     /**
@@ -3040,7 +3040,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter(CHROME)
     public void setOnclose(final Object onclose) {
-        setHandlerForJavaScript("close", onclose);
+        setHandlerForJavaScript(Event.TYPE_CLOSE, onclose);
     }
 
     /**
@@ -3337,7 +3337,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseout() {
-        return getEventHandler("mouseout");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_OUT);
     }
 
     /**
@@ -3346,7 +3346,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseout(final Object onmouseout) {
-        setHandlerForJavaScript("mouseout", onmouseout);
+        setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_OUT, onmouseout);
     }
 
     /**
@@ -3409,7 +3409,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmousedown() {
-        return getEventHandler("mousedown");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_DOWN);
     }
 
     /**
@@ -3418,7 +3418,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmousedown(final Object onmousedown) {
-        setHandlerForJavaScript("mousedown", onmousedown);
+        setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_DOWN, onmousedown);
     }
 
     /**
@@ -3877,7 +3877,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnmouseup() {
-        return getEventHandler("mouseup");
+        return getEventHandler(MouseEvent.TYPE_MOUSE_UP);
     }
 
     /**
@@ -3886,7 +3886,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnmouseup(final Object onmouseup) {
-        setHandlerForJavaScript("mouseup", onmouseup);
+        setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_UP, onmouseup);
     }
 
     /**
@@ -3985,7 +3985,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOninput() {
-        return getEventHandler("input");
+        return getEventHandler(Event.TYPE_INPUT);
     }
 
     /**
@@ -3994,7 +3994,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOninput(final Object oninput) {
-        setHandlerForJavaScript("input", oninput);
+        setHandlerForJavaScript(Event.TYPE_INPUT, oninput);
     }
 
     /**
@@ -4165,7 +4165,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnunload() {
-        return getEventHandler("unload");
+        return getEventHandler(Event.TYPE_UNLOAD);
     }
 
     /**
@@ -4174,7 +4174,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnunload(final Object onunload) {
-        setHandlerForJavaScript("unload", onunload);
+        setHandlerForJavaScript(Event.TYPE_UNLOAD, onunload);
     }
 
     /**
@@ -4345,7 +4345,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public Function getOnpopstate() {
-        return getEventHandler("popstate");
+        return getEventHandler(Event.TYPE_POPSTATE);
     }
 
     /**
@@ -4354,7 +4354,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
-        setHandlerForJavaScript("popstate", onpopstate);
+        setHandlerForJavaScript(Event.TYPE_POPSTATE, onpopstate);
     }
 
     /**

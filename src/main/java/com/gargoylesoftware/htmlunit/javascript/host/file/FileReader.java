@@ -89,6 +89,7 @@ public class FileReader extends EventTarget {
     /**
      * Reads the contents of the specified {@link Blob} or {@link File}.
      * @param object the {@link Blob} or {@link File} from which to read
+     * @throws IOException if an error occurs
      */
     @JsxFunction
     public void readAsDataURL(final Object object) throws IOException {
