@@ -20,7 +20,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An annotation to denote a test which behaves on the build server differnt than locally.
+ * An annotation to denote a test which behaves on the build server different than locally.
  *
  * @author Ahmed Ashour
  */

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
@@ -230,14 +231,19 @@ public class EventListenersContainer implements Serializable {
         if (listeners != null && !listeners.isEmpty()) {
             event.setCurrentTarget(jsNode_);
 
-            final Window window;
+            final HtmlPage page;
             if (jsNode_ instanceof Window) {
-                window = (Window) jsNode_;
+                page = (HtmlPage) ((Window) jsNode_).getDomNodeOrDie();
             }
             else {
-                window = (Window) jsNode_.getParentScope();
+                final Scriptable parentScope = jsNode_.getParentScope();
+                if (parentScope instanceof HTMLDocument) {
+                    page = ((HTMLDocument) parentScope).getPage();
+                }
+                else {
+                    page = (HtmlPage) ((Window) parentScope).getDomNodeOrDie();
+                }
             }
-            final HtmlPage page = (HtmlPage) window.getDomNodeOrDie();
 
             // no need for a copy, listeners are copy on write
             for (final Scriptable listener : listeners) {
