@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
@@ -237,11 +238,14 @@ public class EventListenersContainer implements Serializable {
             }
             else {
                 final Scriptable parentScope = jsNode_.getParentScope();
-                if (parentScope instanceof HTMLDocument) {
+                if (parentScope instanceof Window) {
+                    page = (HtmlPage) ((Window) parentScope).getDomNodeOrDie();
+                }
+                else if (parentScope instanceof HTMLDocument) {
                     page = ((HTMLDocument) parentScope).getPage();
                 }
                 else {
-                    page = (HtmlPage) ((Window) parentScope).getDomNodeOrDie();
+                    page = ((HTMLElement) parentScope).getDomNodeOrDie().getHtmlPageOrNull();
                 }
             }
 
