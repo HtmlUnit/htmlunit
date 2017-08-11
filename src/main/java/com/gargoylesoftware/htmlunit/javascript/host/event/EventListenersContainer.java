@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
@@ -220,7 +221,7 @@ public class EventListenersContainer implements Serializable {
     private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
-        if (node == null || !node.handles(event)) {
+        if (node != null && !node.handles(event)) {
             return null;
         }
 
@@ -228,7 +229,8 @@ public class EventListenersContainer implements Serializable {
         final List<Scriptable> listeners = getListeners(event.getType(), useCapture);
         if (listeners != null && !listeners.isEmpty()) {
             event.setCurrentTarget(jsNode_);
-            final HtmlPage page = (HtmlPage) node.getPage();
+            
+            final HtmlPage page = (HtmlPage) ((Window) jsNode_.getParentScope()).getDomNodeOrDie();
 
             // no need for a copy, listeners are copy on write
             for (final Scriptable listener : listeners) {

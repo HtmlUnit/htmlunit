@@ -25,7 +25,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -69,7 +68,6 @@ public class FileReaderTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("data:text/plain;base64,SHRtbFVuaXQ=")
-    @NotYetImplemented
     public void readAsDataURL() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -14,12 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -45,19 +53,20 @@ public class FileReader extends EventTarget {
     @JsxConstant
     public static final short DONE = 2;
 
-    private int readyState_;
+    private int readyState_ = EMPTY;
+    private Object result_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
     public FileReader() {
-        readyState_ = EMPTY;
     }
 
     /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
+     * Returns the current state of the reading operation.
+     *
+     * @return {@value #EMPTY}, {@value #LOADING}, or {@value #DONE}
      */
     @JsxGetter
     public int getReadyState() {
@@ -65,46 +74,71 @@ public class FileReader extends EventTarget {
     }
 
     /**
-     * Returns the {@code onload} event handler for this element.
-     * @return the {@code onload} event handler for this element
+     * Returns the file's contents.
+     * @return the file's contents
+     */
+    @JsxGetter
+    public Object getResult() {
+        return result_;
+    }
+
+    /**
+     * Reads the contents of the specified {@link Blob} or {@link File}.
+     * @param object the {@link Blob} or {@link File} from which to read
+     */
+    @JsxFunction
+    public void readAsDataURL(final Object object) throws IOException {
+        setResult(object);
+        final Event event = new Event(this, Event.TYPE_LOAD);
+        fireEvent(event);
+    }
+
+    private void setResult(final Object object) throws IOException {
+        readyState_ = LOADING;
+        final java.io.File file = ((File) object).getFile();
+        final String contentType = Files.probeContentType(file.toPath());
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            FileUtils.copyFile(file, bos);
+
+            final byte[] bytes = bos.toByteArray();
+            result_ = "data:" + contentType + ";base64," + new String(new Base64().encode(bytes));
+        }
+        readyState_ = DONE;
+    }
+
+    /**
+     * Returns the {@code onload} event handler for this {@link FileReader}.
+     * @return the {@code onload} event handler for this {@link FileReader}
      */
     @JsxGetter
     public Function getOnload() {
-        return getEventHandler("load");
+        return getEventHandler(Event.TYPE_LOAD);
     }
 
     /**
-     * Sets the {@code onload} event handler for this element.
-     * @param onload the {@code onload} event handler for this element
+     * Sets the {@code onload} event handler for this {@link FileReader}.
+     * @param onload the {@code onload} event handler for this {@link FileReader}
      */
     @JsxSetter
     public void setOnload(final Object onload) {
-        setEventHandler("load", onload);
+        setEventHandler(Event.TYPE_LOAD, onload);
     }
 
     /**
-     * Returns the {@code onerror} event handler for this element.
-     * @return the {@code onerror} event handler for this element
+     * Returns the {@code onerror} event handler for this {@link FileReader}.
+     * @return the {@code onerror} event handler for this {@link FileReader}
      */
     @JsxGetter
     public Function getOnerror() {
-        return getEventHandler("error");
+        return getEventHandler(Event.TYPE_ERROR);
     }
 
     /**
-     * Sets the {@code onerror} event handler for this element.
-     * @param onerror the {@code onerror} event handler for this element
+     * Sets the {@code onerror} event handler for this {@link FileReader}.
+     * @param onerror the {@code onerror} event handler for this {@link FileReader}
      */
     @JsxSetter
     public void setOnerror(final Object onerror) {
-        setEventHandler("error", onerror);
-    }
-
-    /**
-     * Function readAsDataURL.
-     * @param file the file
-     */
-    @JsxFunction
-    public void readAsDataURL(final File file) {
+        setEventHandler(Event.TYPE_ERROR, onerror);
     }
 }
