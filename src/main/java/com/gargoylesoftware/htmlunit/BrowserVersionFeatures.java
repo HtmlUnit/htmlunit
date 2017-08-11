@@ -893,10 +893,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     JS_EVENT_WINDOW_EXECUTE_IF_DITACHED,
 
-    /** FF uses a different date format for file.lastModifiedDate. */
-    @BrowserFeature(FF)
-    JS_FILE_SHORT_DATE_FORMAT,
-
     /** Whether {@code FileReader} includes content type or not. */
     @BrowserFeature(FF)
     JS_FILEREADER_CONTENT_TYPE,
@@ -904,6 +900,10 @@ public enum BrowserVersionFeatures {
     /** Whether {@code FileReader} includes {@code base64} for empty content or not. */
     @BrowserFeature(IE)
     JS_FILEREADER_EMPTY_NULL,
+
+    /** FF uses a different date format for file.lastModifiedDate. */
+    @BrowserFeature(FF)
+    JS_FILE_SHORT_DATE_FORMAT,
 
     /** Indicates that the action property will not be expanded if defined as empty string. */
     @BrowserFeature(FF)
