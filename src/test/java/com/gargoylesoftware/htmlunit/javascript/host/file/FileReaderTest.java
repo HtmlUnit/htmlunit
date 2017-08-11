@@ -110,4 +110,82 @@ public class FileReaderTest extends WebDriverTestCase {
             FileUtils.deleteQuietly(tstFile);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAADjghFsAAAAGXRFWHRTb2"
+                + "Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASUVORK5CYII=",
+            FF = "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAAD"
+                + "jghFsAAAAGXRFWHRTb2Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASU"
+                + "VORK5CYII=")
+    public void readAsDataURLUnknown() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function previewFile() {\n"
+            + "    var file = document.querySelector('input[type=file]').files[0];\n"
+            + "    var reader = new FileReader();\n"
+            + "    reader.addEventListener('load', function () {\n"
+            + "      alert(reader.result);\n"
+            + "    }, false);\n"
+            + "\n"
+            + "    if (file) {\n"
+            + "      reader.readAsDataURL(file);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='file' onchange='previewFile()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String path = new File("src/test/resources/testfiles/tiny-png.img").getCanonicalPath();
+        driver.findElement(By.tagName("input")).sendKeys(path);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:",
+            FF = "data:image/png;base64,",
+            IE = "null")
+    public void readAsDataURLEmptyImage() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function previewFile() {\n"
+            + "    var file = document.querySelector('input[type=file]').files[0];\n"
+            + "    var reader = new FileReader();\n"
+            + "    reader.addEventListener('load', function () {\n"
+            + "      alert(reader.result);\n"
+            + "    }, false);\n"
+            + "\n"
+            + "    if (file) {\n"
+            + "      reader.readAsDataURL(file);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='file' onchange='previewFile()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String path = new File("src/test/resources/testfiles/empty.png").getCanonicalPath();
+        driver.findElement(By.tagName("input")).sendKeys(path);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
 }

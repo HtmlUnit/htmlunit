@@ -897,6 +897,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     JS_FILE_SHORT_DATE_FORMAT,
 
+    /** Whether {@link FileReader} includes content type or not. */
+    @BrowserFeature(FF)
+    JS_FILEREADER_CONTENT_TYPE,
+
+    /** Whether {@link FileReader} includes {@code base64} for empty content or not. */
+    @BrowserFeature(IE)
+    JS_FILEREADER_EMPTY_NULL,
+
     /** Indicates that the action property will not be expanded if defined as empty string. */
     @BrowserFeature(FF)
     JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY,

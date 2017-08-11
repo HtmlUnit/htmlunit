@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER_CONTENT_TYPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER_EMPTY_NULL;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,6 +24,7 @@ import java.nio.file.Files;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -96,12 +100,30 @@ public class FileReader extends EventTarget {
     private void setResult(final Object object) throws IOException {
         readyState_ = LOADING;
         final java.io.File file = ((File) object).getFile();
-        final String contentType = Files.probeContentType(file.toPath());
+        String contentType = Files.probeContentType(file.toPath());
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             FileUtils.copyFile(file, bos);
 
             final byte[] bytes = bos.toByteArray();
-            result_ = "data:" + contentType + ";base64," + new String(new Base64().encode(bytes));
+            final String value = new String(new Base64().encode(bytes));
+            final BrowserVersion browserVersion = getBrowserVersion();
+
+            result_ = "data:";
+            final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
+            if (!value.isEmpty() || includeConentType) {
+                if (contentType == null) {
+                    if (includeConentType) {
+                        contentType = "application/octet-stream";
+                    }
+                    else {
+                        contentType = "";
+                    }
+                }
+                result_ += contentType + ";base64," + value;
+            }
+            if (value.isEmpty() && getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
+                result_ = "null";
+            }
         }
         readyState_ = DONE;
     }
