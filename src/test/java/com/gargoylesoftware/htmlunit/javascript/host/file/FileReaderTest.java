@@ -193,4 +193,126 @@ public class FileReaderTest extends WebDriverTestCase {
         driver.findElement(By.tagName("input")).sendKeys(path);
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object ArrayBuffer]", "8"})
+    public void readAsArrayBuffer() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "        alert(reader.result.byteLength);\n"
+            + "      };\n"
+            + "      reader.readAsArrayBuffer(files[0]);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsArrayBufferTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "HtmlUnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object ArrayBuffer]", "128"})
+    public void readAsArrayBufferUnknown() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function previewFile() {\n"
+            + "    var file = document.querySelector('input[type=file]').files[0];\n"
+            + "    var reader = new FileReader();\n"
+            + "    reader.addEventListener('load', function () {\n"
+            + "      alert(reader.result);\n"
+            + "      alert(reader.result.byteLength);\n"
+            + "    }, false);\n"
+            + "\n"
+            + "    if (file) {\n"
+            + "      reader.readAsArrayBuffer(file);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='file' onchange='previewFile()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String path = new File("src/test/resources/testfiles/tiny-png.img").getCanonicalPath();
+        driver.findElement(By.tagName("input")).sendKeys(path);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object ArrayBuffer]", "0"})
+    public void readAsArrayBufferEmptyImage() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function previewFile() {\n"
+            + "    var file = document.querySelector('input[type=file]').files[0];\n"
+            + "    var reader = new FileReader();\n"
+            + "    reader.addEventListener('load', function () {\n"
+            + "      alert(reader.result);\n"
+            + "      alert(reader.result.byteLength);\n"
+            + "    }, false);\n"
+            + "\n"
+            + "    if (file) {\n"
+            + "      reader.readAsArrayBuffer(file);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input type='file' onchange='previewFile()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String path = new File("src/test/resources/testfiles/empty.png").getCanonicalPath();
+        driver.findElement(By.tagName("input")).sendKeys(path);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
 }

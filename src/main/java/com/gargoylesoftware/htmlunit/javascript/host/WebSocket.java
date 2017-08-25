@@ -457,12 +457,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             }
             super.onWebSocketBinary(data, offset, length);
 
-            final ArrayBuffer buffer = new ArrayBuffer();
+            final ArrayBuffer buffer = new ArrayBuffer(Arrays.copyOfRange(data, offset, length));
             buffer.setParentScope(getParentScope());
             buffer.setPrototype(getPrototype(buffer.getClass()));
-
-            buffer.constructor(length);
-            buffer.setBytes(0, Arrays.copyOfRange(data, offset, length));
 
             final MessageEvent msgEvent = new MessageEvent(buffer);
             msgEvent.setOrigin(getUrl());

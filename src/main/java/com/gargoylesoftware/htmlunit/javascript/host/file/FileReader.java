@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
@@ -93,12 +94,6 @@ public class FileReader extends EventTarget {
      */
     @JsxFunction
     public void readAsDataURL(final Object object) throws IOException {
-        setResult(object);
-        final Event event = new Event(this, Event.TYPE_LOAD);
-        fireEvent(event);
-    }
-
-    private void setResult(final Object object) throws IOException {
         readyState_ = LOADING;
         final java.io.File file = ((File) object).getFile();
         String contentType = Files.probeContentType(file.toPath());
@@ -127,6 +122,34 @@ public class FileReader extends EventTarget {
             }
         }
         readyState_ = DONE;
+
+        final Event event = new Event(this, Event.TYPE_LOAD);
+        fireEvent(event);
+    }
+
+    /**
+     * Reads the contents of the specified {@link Blob} or {@link File}.
+     * @param object the {@link Blob} or {@link File} from which to read
+     * @throws IOException if an error occurs
+     */
+    @JsxFunction
+    public void readAsArrayBuffer(final Object object) throws IOException {
+        readyState_ = LOADING;
+        final java.io.File file = ((File) object).getFile();
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            FileUtils.copyFile(file, bos);
+
+            final byte[] bytes = bos.toByteArray();
+
+            final ArrayBuffer buffer = new ArrayBuffer(bytes);
+            buffer.setParentScope(getParentScope());
+            buffer.setPrototype(getPrototype(buffer.getClass()));
+            result_ = buffer;
+        }
+        readyState_ = DONE;
+
+        final Event event = new Event(this, Event.TYPE_LOAD);
+        fireEvent(event);
     }
 
     /**
