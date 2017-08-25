@@ -281,7 +281,7 @@
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
                             </excludes>
-                            <argLine>-Xms128m -Xmx512m</argLine>
+                            <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
