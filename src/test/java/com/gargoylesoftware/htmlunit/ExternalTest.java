@@ -223,7 +223,7 @@ public class ExternalTest {
         return groupId.startsWith("org.tmatesoft.svnkit")
                 // 1.8.13: missing many dependencies
                 // 1.8.14: https://issues.tmatesoft.com/issue/SVNKIT-692
-                && ("1.8.13".equals(version) || "1.8.14".equals(version) || "1.9.0".equals(version));
+                && ("1.8.13".equals(version) || "1.8.14".equals(version));
     }
 
     private static String getValue(final String line) {
