@@ -266,11 +266,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public void applyStyleFromSelector(final org.w3c.dom.css.CSSStyleDeclaration declaration, final Selector selector) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = new SelectorSpecificity(selector);
-        for (int k = 0; k < declaration.getLength(); k++) {
-            final String name = declaration.item(k);
-            final String value = declaration.getPropertyValue(name);
-            final String priority = declaration.getPropertyPriority(name);
-            if (!"z-index".equals(name) || !browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+        for (int i = 0; i < declaration.getLength(); i++) {
+            final String name = declaration.item(i);
+            if (!browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX) || !"z-index".equals(name)) {
+                final String value = declaration.getPropertyValue(name);
+                final String priority = declaration.getPropertyPriority(name);
                 applyLocalStyleAttribute(name, value, priority, specificity);
             }
         }
