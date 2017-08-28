@@ -413,10 +413,14 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             if (element1 == null) {
                 value = element2.getValue();
             }
-            else if (element1.getIndex() > element2.getIndex()) {
-                return element1.getValue();
-            }
             else {
+                final int comp = element1.getSpecificity().compareTo(element2.getSpecificity());
+                if (comp > 0) {
+                    return element1.getValue();
+                }
+                if (comp == 0 && element1.getIndex() > element2.getIndex()) {
+                    return element1.getValue();
+                }
                 value = element2.getValue();
             }
         }

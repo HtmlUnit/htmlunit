@@ -2120,4 +2120,30 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                     + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("131")
+    public void combineStyles() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<style type='text/css'>\n"
+            + "  div { margin: 10px 20px 30px 40px; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var div = document.getElementById('div1');\n"
+            + "    var left = div.style.marginLeft;\n" // force the resolution
+            + "    alert(div.offsetLeft);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='margin-left: 123px'></div>\n"
+            + "</body></html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
