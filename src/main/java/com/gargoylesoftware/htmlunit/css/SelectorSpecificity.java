@@ -44,6 +44,10 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
      * The specificity for declarations made in the style attributes of an element.
      */
     public static final SelectorSpecificity FROM_STYLE_ATTRIBUTE = new SelectorSpecificity(1, 0, 0, 0);
+    /**
+     * The specificity for browser defaults.
+     */
+    public static final SelectorSpecificity DEFAULT_STYLE_ATTRIBUTE = new SelectorSpecificity(0, 0, 0, 0);
 
     private int fieldA_;
     private int fieldB_;

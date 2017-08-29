@@ -302,7 +302,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param newValue the value of the style attribute to set
      */
     public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
-        final StyleElement element = new StyleElement(name, newValue);
+        final StyleElement element = new StyleElement(name, newValue, "", SelectorSpecificity.DEFAULT_STYLE_ATTRIBUTE);
         localModifications_.put(name, element);
     }
 

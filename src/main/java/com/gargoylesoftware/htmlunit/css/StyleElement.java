@@ -75,15 +75,6 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     }
 
     /**
-     * Creates a new instance.
-     * @param name the style element's name
-     * @param value the style element's value
-     */
-    public StyleElement(final String name, final String value) {
-        this(name, value, "", SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-    }
-
-    /**
      * Returns the style element's name.
      * @return the style element's name
      */
