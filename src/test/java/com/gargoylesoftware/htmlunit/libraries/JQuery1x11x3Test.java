@@ -7828,7 +7828,6 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 80, 80")
-    @NotYetImplemented(IE)
     public void offset__static() throws Exception {
         runTest("offset: static");
     }

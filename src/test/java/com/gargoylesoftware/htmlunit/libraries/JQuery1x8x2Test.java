@@ -6264,7 +6264,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 80, 80")
-    @NotYetImplemented(IE)
     public void offset__static() throws Exception {
         runTest("offset: static");
     }
@@ -6307,7 +6306,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts("0, 2, 2")
-    @NotYetImplemented(IE)
     public void offset__body() throws Exception {
         runTest("offset: body");
     }

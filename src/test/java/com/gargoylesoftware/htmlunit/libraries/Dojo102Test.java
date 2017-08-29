@@ -123,7 +123,6 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @NotYetImplemented(IE)
     public void tests_basehtml() throws Exception {
         test("tests._base.html");
         // tests._base.html_rtl
