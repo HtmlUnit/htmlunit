@@ -28,15 +28,15 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window2;
 
 /**
  * Utility to handle conversion from HTML code to string.
- * TODO: simplify it (it is just copied from what was available in DomNode and subclasses).
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Rob Kodey
  */
-class HtmlSerializer {
+public class HtmlSerializer {
     private final StringBuilder builder_ = new StringBuilder();
+
     /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
     protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
     private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
@@ -69,13 +69,17 @@ class HtmlSerializer {
         return cleanUp(response);
     }
 
+    /**
+     * Reduce the whitespace and do some more cleanup.
+     * @param text the text to clean up
+     * @return the new text
+     */
     protected String cleanUp(String text) {
         // ignore <br/> at the end of a block
         text = reduceWhitespace(text);
         text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
         final String ls = System.lineSeparator();
         text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        // text = CLEAN_UP_PATTERN.matcher(text).replaceAll(ls); // many block sep => 1 new line
         text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);
         text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
 
@@ -200,18 +204,35 @@ class HtmlSerializer {
         return result.toString();
     }
 
+    /**
+     * Iterate over all Children and call appendNode() for every.
+     *
+     * @param node the node to process
+     */
+    protected void appendChildren(final DomNode node) {
+        for (final DomNode child : node.getChildren()) {
+            appendNode(child);
+        }
+    }
+
+    /**
+     * The core distribution method call the different appendXXX
+     * methods depending on the type of the given node.
+     *
+     * @param node the node to process
+     */
     protected void appendNode(final DomNode node) {
         if (node instanceof DomText) {
             appendText((DomText) node);
         }
         else if (node instanceof DomComment) {
-            // nothing to do
+            appendComment((DomComment) node);
         }
         else if (node instanceof HtmlApplet && appletEnabled_) {
-            // nothing
+            appendApplet((HtmlApplet) node);
         }
         else if (node instanceof HtmlBreak) {
-            doAppendNewLine();
+            appendBreak((HtmlBreak) node);
         }
         else if (node instanceof HtmlHiddenInput
                 || node instanceof HtmlScript
@@ -232,33 +253,19 @@ class HtmlSerializer {
             appendHtmlSelect((HtmlSelect) node);
         }
         else if (node instanceof HtmlSubmitInput) {
-            doAppend(((HtmlSubmitInput) node).asText());
+            doAppendString(((HtmlSubmitInput) node).asText());
         }
         else if (node instanceof HtmlResetInput) {
-            doAppend(((HtmlResetInput) node).asText());
+            doAppendString(((HtmlResetInput) node).asText());
         }
         else if (node instanceof HtmlCheckBoxInput) {
-            final String str;
-            if (((HtmlCheckBoxInput) node).isChecked()) {
-                str = "checked";
-            }
-            else {
-                str = "unchecked";
-            }
-            doAppend(str);
+            doAppendCheckBoxInput((HtmlCheckBoxInput) node);
         }
         else if (node instanceof HtmlRadioButtonInput) {
-            final String str;
-            if (((HtmlRadioButtonInput) node).isChecked()) {
-                str = "checked";
-            }
-            else {
-                str = "unchecked";
-            }
-            doAppend(str);
+            doAppendRadioButtonInput((HtmlRadioButtonInput) node);
         }
         else if (node instanceof HtmlInput) {
-            doAppend(((HtmlInput) node).getValueAttribute());
+            doAppendString(((HtmlInput) node).getValueAttribute());
         }
         else if (node instanceof HtmlTable) {
             appendHtmlTable((HtmlTable) node);
@@ -276,7 +283,7 @@ class HtmlSerializer {
             appendHtmlInlineFrame((HtmlInlineFrame) node);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-            return;
+            // nothing
         }
         else {
             final boolean block;
@@ -308,23 +315,40 @@ class HtmlSerializer {
         }
     }
 
-    private void doAppendBlockSeparator() {
+    /**
+     * Helper appending AS_TEXT_BLOCK_SEPARATOR to the result.
+     */
+    protected void doAppendBlockSeparator() {
         builder_.append(AS_TEXT_BLOCK_SEPARATOR);
     }
 
-    private void doAppend(final String str) {
+    /**
+     * Helper appending the given string to the result.
+     * @param str the string to append
+     */
+    protected void doAppendString(final String str) {
         builder_.append(str);
     }
 
-    private void doAppendNewLine() {
+    /**
+     * Helper appending AS_TEXT_NEW_LINE to the result.
+     */
+    protected void doAppendNewLine() {
         builder_.append(AS_TEXT_NEW_LINE);
     }
 
-    private void doAppendTab() {
+    /**
+     * Helper appending AS_TEXT_TAB to the result.
+     */
+    protected void doAppendTab() {
         builder_.append(AS_TEXT_TAB);
     }
 
-    private void appendHtmlUnorderedList(final HtmlUnorderedList htmlUnorderedList) {
+    /**
+     * Process {@link HtmlUnorderedList}.
+     * @param htmlUnorderedList the target to process
+     */
+    protected void appendHtmlUnorderedList(final HtmlUnorderedList htmlUnorderedList) {
         doAppendBlockSeparator();
         boolean first = true;
         for (final DomNode item : htmlUnorderedList.getChildren()) {
@@ -337,26 +361,27 @@ class HtmlSerializer {
         doAppendBlockSeparator();
     }
 
-    private void appendHtmlTitle(final HtmlTitle htmlTitle) {
+    /**
+     * Process {@link HtmlTitle}.
+     * @param htmlTitle the target to process
+     */
+    protected void appendHtmlTitle(final HtmlTitle htmlTitle) {
         // optimized version
         // for the title there is no need to check the visibility
         // of the containing dom text;
         // this optimization defers the load of the style sheets
         final DomNode child = htmlTitle.getFirstChild();
         if (child instanceof DomText) {
-            doAppend(((DomText) child).getData());
+            doAppendString(((DomText) child).getData());
             doAppendBlockSeparator();
-            return;
         }
     }
 
-    private void appendChildren(final DomNode node) {
-        for (final DomNode child : node.getChildren()) {
-            appendNode(child);
-        }
-    }
-
-    private void appendHtmlTableRow(final HtmlTableRow htmlTableRow) {
+    /**
+     * Process {@link HtmlTableRow}.
+     * @param htmlTableRow the target to process
+     */
+    protected void appendHtmlTableRow(final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
             if (!first) {
@@ -369,22 +394,30 @@ class HtmlSerializer {
         }
     }
 
-    private void appendHtmlTextArea(final HtmlTextArea htmlTextArea) {
+    /**
+     * Process {@link HtmlTextArea}.
+     * @param htmlTextArea the target to process
+     */
+    protected void appendHtmlTextArea(final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
             text = StringUtils.stripEnd(text, null);
             text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            doAppend(text);
+            doAppendString(text);
         }
     }
 
-    private void appendHtmlTable(final HtmlTable htmlTable) {
+    /**
+     * Process {@link HtmlTable}.
+     * @param htmlTable the target to process
+     */
+    protected void appendHtmlTable(final HtmlTable htmlTable) {
         doAppendBlockSeparator();
         final String caption = htmlTable.getCaptionText();
         if (caption != null) {
-            doAppend(caption);
+            doAppendString(caption);
             doAppendBlockSeparator();
         }
 
@@ -413,7 +446,15 @@ class HtmlSerializer {
         doAppendBlockSeparator();
     }
 
-    private boolean appendHtmlTableRows(final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
+    /**
+     * Process {@link HtmlTableRow}.
+     * @param rows the rows
+     * @param first if true this is the first one
+     * @param skipParent1 skip row if the parent is this
+     * @param skipParent2 skip row if the parent is this
+     * @return true if this was the first one
+     */
+    protected boolean appendHtmlTableRows(final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
             final TableRowGroup skipParent2) {
         for (final HtmlTableRow row : rows) {
             if (row.getParentNode() == skipParent1 || row.getParentNode() == skipParent2) {
@@ -429,9 +470,10 @@ class HtmlSerializer {
     }
 
     /**
-     * @param htmlSelect
+     * Process {@link HtmlSelect}.
+     * @param htmlSelect the target to process
      */
-    private void appendHtmlSelect(final HtmlSelect htmlSelect) {
+    protected void appendHtmlSelect(final HtmlSelect htmlSelect) {
         final List<HtmlOption> options;
         if (htmlSelect.isMultipleSelectEnabled()) {
             options = htmlSelect.getOptions();
@@ -450,10 +492,10 @@ class HtmlSerializer {
     }
 
     /**
-     * Appends a {@code <ol>} taking care to numerate it.
+     * Process {@link HtmlOrderedList} taking care to numerate it.
      * @param htmlOrderedList the OL element
      */
-    private void appendHtmlOrderedList(final HtmlOrderedList htmlOrderedList) {
+    protected void appendHtmlOrderedList(final HtmlOrderedList htmlOrderedList) {
         doAppendBlockSeparator();
         boolean first = true;
         int i = 1;
@@ -463,8 +505,8 @@ class HtmlSerializer {
             }
             first = false;
             if (item instanceof HtmlListItem) {
-                doAppend(Integer.toString(i++));
-                doAppend(". ");
+                doAppendString(Integer.toString(i++));
+                doAppendString(". ");
                 appendChildren(item);
             }
             else {
@@ -474,7 +516,11 @@ class HtmlSerializer {
         doAppendBlockSeparator();
     }
 
-    private void appendHtmlPreformattedText(final HtmlPreformattedText htmlPreformattedText) {
+    /**
+     * Process {@link HtmlPreformattedText}.
+     * @param htmlPreformattedText the target to process
+     */
+    protected void appendHtmlPreformattedText(final HtmlPreformattedText htmlPreformattedText) {
         if (isVisible(htmlPreformattedText)) {
             doAppendBlockSeparator();
             String text = htmlPreformattedText.getTextContent();
@@ -482,26 +528,84 @@ class HtmlSerializer {
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
             text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-            doAppend(text);
+            doAppendString(text);
             doAppendBlockSeparator();
         }
     }
 
-    private void appendHtmlInlineFrame(final HtmlInlineFrame htmlInlineFrame) {
+    /**
+     * Process {@link HtmlInlineFrame}.
+     * @param htmlInlineFrame the target to process
+     */
+    protected void appendHtmlInlineFrame(final HtmlInlineFrame htmlInlineFrame) {
         if (isVisible(htmlInlineFrame)) {
             doAppendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
-                doAppend(((SgmlPage) page).asText());
+                doAppendString(((SgmlPage) page).asText());
             }
             doAppendBlockSeparator();
         }
     }
 
-    private void appendText(final DomText domText) {
+    /**
+     * Process {@link DomText}.
+     * @param domText the target to process
+     */
+    protected void appendText(final DomText domText) {
         final DomNode parent = domText.getParentNode();
         if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
-            append(domText.getData());
+            doAppendString(domText.getData());
+        }
+    }
+
+    /**
+     * Process {@link DomComment}.
+     * @param domComment the target to process
+     */
+    protected void appendComment(final DomComment domComment) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlApplet}.
+     * @param htmlApplet the target to process
+     */
+    protected void appendApplet(final HtmlApplet htmlApplet) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlBreak}.
+     * @param htmlBreak the target to process
+     */
+    protected void appendBreak(final HtmlBreak htmlBreak) {
+        doAppendNewLine();
+    }
+
+    /**
+     * Process {@link HtmlCheckBoxInput}.
+     * @param htmlCheckBoxInput the target to process
+     */
+    protected void doAppendCheckBoxInput(final HtmlCheckBoxInput htmlCheckBoxInput) {
+        if (htmlCheckBoxInput.isChecked()) {
+            doAppendString("checked");
+        }
+        else {
+            doAppendString("unchecked");
+        }
+    }
+
+    /**
+     * Process {@link HtmlRadioButtonInput}.
+     * @param htmlRadioButtonInput the target to process
+     */
+    protected void doAppendRadioButtonInput(final HtmlRadioButtonInput htmlRadioButtonInput) {
+        if (htmlRadioButtonInput.isChecked()) {
+            doAppendString("checked");
+        }
+        else {
+            doAppendString("unchecked");
         }
     }
 
@@ -516,9 +620,5 @@ class HtmlSerializer {
      */
     public void setIgnoreMaskedElements(final boolean ignore) {
         ignoreMaskedElements_ = ignore;
-    }
-
-    private void append(final String text) {
-        doAppend(text);
     }
 }
