@@ -99,6 +99,13 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     }
 
     /**
+     * @return true if priority is 'important'
+     */
+    public boolean isImportant() {
+        return StyleElement.PRIORITY_IMPORTANT.equals(getPriority());
+    }
+
+    /**
      * Returns the specificity of the rule specifying this element.
      * @return the specificity
      */
@@ -127,11 +134,25 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      */
     @Override
     public int compareTo(final StyleElement e) {
-        if (e != null) {
-            final long styleIndex = e.index_;
-            // avoid conversion to long
-            return Long.compare(index_, styleIndex);
+        if (e == null) {
+            return 1;
         }
-        return 1;
+
+        if (isImportant()) {
+            if (!e.isImportant()) {
+                return 1;
+            }
+        }
+        else {
+            if (e.isImportant()) {
+                return -1;
+            }
+        }
+
+        final int comp = getSpecificity().compareTo(e.getSpecificity());
+        if (comp == 0) {
+            return Long.compare(getIndex(), e.getIndex());
+        }
+        return comp;
     }
 }
