@@ -234,29 +234,35 @@ public class HtmlSerializer {
         else if (node instanceof HtmlBreak) {
             appendBreak(builder, (HtmlBreak) node);
         }
-        else if (node instanceof HtmlHiddenInput
-                || node instanceof HtmlScript
-                || node instanceof HtmlStyle
-                || node instanceof HtmlNoFrames) {
-            // nothing
+        else if (node instanceof HtmlHiddenInput) {
+            appendHiddenInput(builder, (HtmlHiddenInput) node);
+        }
+        else if (node instanceof HtmlScript) {
+            appendScript(builder, (HtmlScript) node);
+        }
+        else if (node instanceof HtmlStyle) {
+            appendStyle(builder, (HtmlStyle) node);
+        }
+        else if (node instanceof HtmlNoFrames) {
+            appendNoFrames(builder, (HtmlNoFrames) node);
         }
         else if (node instanceof HtmlTextArea) {
-            appendHtmlTextArea(builder, (HtmlTextArea) node);
+            appendTextArea(builder, (HtmlTextArea) node);
         }
         else if (node instanceof HtmlTitle) {
-            appendHtmlTitle(builder, (HtmlTitle) node);
+            appendTitle(builder, (HtmlTitle) node);
         }
         else if (node instanceof HtmlTableRow) {
-            appendHtmlTableRow(builder, (HtmlTableRow) node);
+            appendTableRow(builder, (HtmlTableRow) node);
         }
         else if (node instanceof HtmlSelect) {
-            appendHtmlSelect(builder, (HtmlSelect) node);
+            appendSelect(builder, (HtmlSelect) node);
         }
         else if (node instanceof HtmlSubmitInput) {
-            builder.append(((HtmlSubmitInput) node).asText());
+            appendSubmitInput(builder, (HtmlSubmitInput) node);
         }
         else if (node instanceof HtmlResetInput) {
-            builder.append(((HtmlResetInput) node).asText());
+            appendResetInput(builder, (HtmlResetInput) node);
         }
         else if (node instanceof HtmlCheckBoxInput) {
             doAppendCheckBoxInput(builder, (HtmlCheckBoxInput) node);
@@ -265,22 +271,22 @@ public class HtmlSerializer {
             doAppendRadioButtonInput(builder, (HtmlRadioButtonInput) node);
         }
         else if (node instanceof HtmlInput) {
-            builder.append(((HtmlInput) node).getValueAttribute());
+            appendInput(builder, (HtmlInput) node);
         }
         else if (node instanceof HtmlTable) {
-            appendHtmlTable(builder, (HtmlTable) node);
+            appendTable(builder, (HtmlTable) node);
         }
         else if (node instanceof HtmlOrderedList) {
-            appendHtmlOrderedList(builder, (HtmlOrderedList) node);
+            appendOrderedList(builder, (HtmlOrderedList) node);
         }
         else if (node instanceof HtmlUnorderedList) {
-            appendHtmlUnorderedList(builder, (HtmlUnorderedList) node);
+            appendUnorderedList(builder, (HtmlUnorderedList) node);
         }
         else if (node instanceof HtmlPreformattedText) {
-            appendHtmlPreformattedText(builder, (HtmlPreformattedText) node);
+            appendPreformattedText(builder, (HtmlPreformattedText) node);
         }
         else if (node instanceof HtmlInlineFrame) {
-            appendHtmlInlineFrame(builder, (HtmlInlineFrame) node);
+            appendInlineFrame(builder, (HtmlInlineFrame) node);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             // nothing
@@ -316,11 +322,81 @@ public class HtmlSerializer {
     }
 
     /**
+     * Process {@link HtmlHiddenInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlHiddenInput the target to process
+     */
+    protected void appendHiddenInput(final StringBuilder builder, final HtmlHiddenInput htmlHiddenInput) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlScript}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlScript the target to process
+     */
+    protected void appendScript(final StringBuilder builder, final HtmlScript htmlScript) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlStyle}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlStyle the target to process
+     */
+    protected void appendStyle(final StringBuilder builder, final HtmlStyle htmlStyle) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlNoFrames}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlNoFrames the target to process
+     */
+    protected void appendNoFrames(final StringBuilder builder, final HtmlNoFrames htmlNoFrames) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlSubmitInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlSubmitInput the target to process
+     */
+    protected void appendSubmitInput(final StringBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
+        builder.append(htmlSubmitInput.asText());
+    }
+
+    /**
+     * Process {@link HtmlInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlInput the target to process
+     */
+    protected void appendInput(final StringBuilder builder, final HtmlInput htmlInput) {
+        builder.append(htmlInput.getValueAttribute());
+    }
+
+    /**
+     * Process {@link HtmlResetInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlResetInput the target to process
+     */
+    protected void appendResetInput(final StringBuilder builder, final HtmlResetInput htmlResetInput) {
+        builder.append(htmlResetInput.asText());
+    }
+
+    /**
      * Process {@link HtmlUnorderedList}.
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
      */
-    protected void appendHtmlUnorderedList(final StringBuilder builder, final HtmlUnorderedList htmlUnorderedList) {
+    protected void appendUnorderedList(final StringBuilder builder, final HtmlUnorderedList htmlUnorderedList) {
         builder.append(AS_TEXT_BLOCK_SEPARATOR);
         boolean first = true;
         for (final DomNode item : htmlUnorderedList.getChildren()) {
@@ -338,7 +414,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
      */
-    protected void appendHtmlTitle(final StringBuilder builder, final HtmlTitle htmlTitle) {
+    protected void appendTitle(final StringBuilder builder, final HtmlTitle htmlTitle) {
         // optimized version
         // for the title there is no need to check the visibility
         // of the containing dom text;
@@ -356,7 +432,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTableRow the target to process
      */
-    protected void appendHtmlTableRow(final StringBuilder builder, final HtmlTableRow htmlTableRow) {
+    protected void appendTableRow(final StringBuilder builder, final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
             if (!first) {
@@ -375,7 +451,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTextArea the target to process
      */
-    protected void appendHtmlTextArea(final StringBuilder builder, final HtmlTextArea htmlTextArea) {
+    protected void appendTextArea(final StringBuilder builder, final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
             text = StringUtils.stripEnd(text, null);
@@ -392,7 +468,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTable the target to process
      */
-    protected void appendHtmlTable(final StringBuilder builder, final HtmlTable htmlTable) {
+    protected void appendTable(final StringBuilder builder, final HtmlTable htmlTable) {
         builder.append(AS_TEXT_BLOCK_SEPARATOR);
         final String caption = htmlTable.getCaptionText();
         if (caption != null) {
@@ -446,7 +522,7 @@ public class HtmlSerializer {
                 builder.append(AS_TEXT_BLOCK_SEPARATOR);
             }
             first = false;
-            appendHtmlTableRow(builder, row);
+            appendTableRow(builder, row);
         }
         return first;
     }
@@ -457,7 +533,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlSelect the target to process
      */
-    protected void appendHtmlSelect(final StringBuilder builder, final HtmlSelect htmlSelect) {
+    protected void appendSelect(final StringBuilder builder, final HtmlSelect htmlSelect) {
         final List<HtmlOption> options;
         if (htmlSelect.isMultipleSelectEnabled()) {
             options = htmlSelect.getOptions();
@@ -481,7 +557,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlOrderedList the OL element
      */
-    protected void appendHtmlOrderedList(final StringBuilder builder, final HtmlOrderedList htmlOrderedList) {
+    protected void appendOrderedList(final StringBuilder builder, final HtmlOrderedList htmlOrderedList) {
         builder.append(AS_TEXT_BLOCK_SEPARATOR);
         boolean first = true;
         int i = 1;
@@ -508,7 +584,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlPreformattedText the target to process
      */
-    protected void appendHtmlPreformattedText(final StringBuilder builder,
+    protected void appendPreformattedText(final StringBuilder builder,
             final HtmlPreformattedText htmlPreformattedText) {
         if (isVisible(htmlPreformattedText)) {
             builder.append(AS_TEXT_BLOCK_SEPARATOR);
@@ -528,7 +604,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlInlineFrame the target to process
      */
-    protected void appendHtmlInlineFrame(final StringBuilder builder,
+    protected void appendInlineFrame(final StringBuilder builder,
             final HtmlInlineFrame htmlInlineFrame) {
         if (isVisible(htmlInlineFrame)) {
             builder.append(AS_TEXT_BLOCK_SEPARATOR);
