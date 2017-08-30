@@ -289,35 +289,45 @@ public class HtmlSerializer {
             appendInlineFrame(builder, (HtmlInlineFrame) node);
         }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
-            // nothing
+            appendNoScript(builder, (HtmlNoScript) node);
         }
         else {
-            final boolean block;
-            final Object scriptableObject = node.getScriptableObject();
-            if (node instanceof HtmlBody) {
-                block = false;
-            }
-            else if (scriptableObject instanceof Element) {
-                final Element element = (Element) scriptableObject;
-                final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
-                block = "block".equals(display);
-            }
-            else if (scriptableObject instanceof Element2) {
-                final Element2 element = (Element2) scriptableObject;
-                final String display = Window2.getComputedStyle(element.getWindow(), element, null).getDisplay(true);
-                block = "block".equals(display);
-            }
-            else {
-                block = false;
-            }
+            appendDomNode(builder, node);
+        }
+    }
 
-            if (block) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
-            }
-            appendChildren(builder, node);
-            if (block) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
-            }
+    /**
+     * Process {@link HtmlHiddenInput}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param domNode the target to process
+     */
+    protected void appendDomNode(final StringBuilder builder, final DomNode domNode) {
+        final boolean block;
+        final Object scriptableObject = domNode.getScriptableObject();
+        if (domNode instanceof HtmlBody) {
+            block = false;
+        }
+        else if (scriptableObject instanceof Element) {
+            final Element element = (Element) scriptableObject;
+            final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+            block = "block".equals(display);
+        }
+        else if (scriptableObject instanceof Element2) {
+            final Element2 element = (Element2) scriptableObject;
+            final String display = Window2.getComputedStyle(element.getWindow(), element, null).getDisplay(true);
+            block = "block".equals(display);
+        }
+        else {
+            block = false;
+        }
+
+        if (block) {
+            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+        }
+        appendChildren(builder, domNode);
+        if (block) {
+            builder.append(AS_TEXT_BLOCK_SEPARATOR);
         }
     }
 
@@ -348,6 +358,16 @@ public class HtmlSerializer {
      * @param htmlStyle the target to process
      */
     protected void appendStyle(final StringBuilder builder, final HtmlStyle htmlStyle) {
+        // nothing to do
+    }
+
+    /**
+     * Process {@link HtmlNoScript}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlNoScript the target to process
+     */
+    protected void appendNoScript(final StringBuilder builder, final HtmlNoScript htmlNoScript) {
         // nothing to do
     }
 
@@ -481,15 +501,15 @@ public class HtmlSerializer {
         // first thead has to be displayed first and first tfoot has to be displayed last
         final HtmlTableHeader tableHeader = htmlTable.getHeader();
         if (tableHeader != null) {
-            first = appendHtmlTableRows(builder, tableHeader.getRows(), true, null, null);
+            first = appendTableRows(builder, tableHeader.getRows(), true, null, null);
         }
         final HtmlTableFooter tableFooter = htmlTable.getFooter();
 
         final List<HtmlTableRow> tableRows = htmlTable.getRows();
-        first = appendHtmlTableRows(builder, tableRows, first, tableHeader, tableFooter);
+        first = appendTableRows(builder, tableRows, first, tableHeader, tableFooter);
 
         if (tableFooter != null) {
-            first = appendHtmlTableRows(builder, tableFooter.getRows(), first, null, null);
+            first = appendTableRows(builder, tableFooter.getRows(), first, null, null);
         }
         else if (tableRows.isEmpty()) {
             final DomNode firstChild = htmlTable.getFirstChild();
@@ -511,7 +531,7 @@ public class HtmlSerializer {
      * @param skipParent2 skip row if the parent is this
      * @return true if this was the first one
      */
-    protected boolean appendHtmlTableRows(final StringBuilder builder,
+    protected boolean appendTableRows(final StringBuilder builder,
             final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
             final TableRowGroup skipParent2) {
         for (final HtmlTableRow row : rows) {
