@@ -319,8 +319,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF = "20\u200F/12\u200F/2012",
+    @Alerts(DEFAULT = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     public void format_ar_dz() throws Exception {
         test("new Intl.DateTimeFormat('ar-DZ').format(date)");
@@ -380,8 +379,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF = "20\u200F/12\u200F/2012",
+    @Alerts(DEFAULT = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F/\u200F12\u200F/\u200F2012")
     public void format_ar_ly() throws Exception {
         test("new Intl.DateTimeFormat('ar-LY').format(date)");
@@ -391,8 +389,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF = "20\u200F/12\u200F/2012",
+    @Alerts(DEFAULT = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     public void format_ar_ma() throws Exception {
         test("new Intl.DateTimeFormat('ar-MA').format(date)");
@@ -422,9 +419,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664",
-            FF = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640")
+    @Alerts(DEFAULT = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640",
+            IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }
@@ -453,8 +449,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
-            FF = "20\u200F/12\u200F/2012",
+    @Alerts(DEFAULT = "20\u200F/12\u200F/2012",
             IE = "\u200F20\u200F-\u200F12\u200F-\u200F2012")
     public void format_ar_tn() throws Exception {
         test("new Intl.DateTimeFormat('ar-TN').format(date)");
@@ -749,8 +744,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "12/20/2012",
-            FF = "20/12/2012",
+    @Alerts(DEFAULT = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_en_sg() throws Exception {
         test("new Intl.DateTimeFormat('en-SG').format(date)");
@@ -810,8 +804,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20/12/2012",
-            FF = "20-12-2012",
+    @Alerts(DEFAULT = "20-12-2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_es_cl() throws Exception {
         test("new Intl.DateTimeFormat('es-CL').format(date)");
@@ -911,8 +904,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20/12/2012",
-            FF = "12/20/2012",
+    @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     public void format_es_pa() throws Exception {
         test("new Intl.DateTimeFormat('es-PA').format(date)");
@@ -932,8 +924,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20/12/2012",
-            FF = "12/20/2012",
+    @Alerts(DEFAULT = "12/20/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_es_pr() throws Exception {
         test("new Intl.DateTimeFormat('es-PR').format(date)");

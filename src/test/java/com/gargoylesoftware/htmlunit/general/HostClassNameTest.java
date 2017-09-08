@@ -373,9 +373,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function ClientRect() { [native code] }",
-            IE = "[object ClientRect]",
-            FF = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object ClientRect]")
     public void clientRect() throws Exception {
         test("ClientRect");
     }
@@ -3391,6 +3390,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMRect() { [native code] }",
             FF = "function DOMRect() {\n    [native code]\n}")
     public void domRect() throws Exception {
         test("DOMRect");
@@ -3439,8 +3439,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function ClientRectList() { [native code] }",
-            FF = "exception",
+    @Alerts(DEFAULT = "exception",
             IE = "[object ClientRectList]")
     public void clientRectList() throws Exception {
         test("ClientRectList");
@@ -4487,6 +4486,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMMatrixReadOnly() { [native code] }",
             FF = "function DOMMatrixReadOnly() {\n    [native code]\n}")
     public void domMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly");
@@ -4741,7 +4741,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function NetworkInformation() { [native code] }")
     public void networkInformation() throws Exception {
         test("NetworkInformation");
     }
@@ -5889,6 +5890,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMMatrix() { [native code] }",
             FF = "function DOMMatrix() {\n    [native code]\n}")
     public void domMatrix() throws Exception {
         test("DOMMatrix");
@@ -8215,6 +8217,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMPointReadOnly() { [native code] }",
             FF = "function DOMPointReadOnly() {\n    [native code]\n}")
     public void domPointReadOnly() throws Exception {
         test("DOMPointReadOnly");
@@ -8245,6 +8248,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMPoint() { [native code] }",
             FF = "function DOMPoint() {\n    [native code]\n}")
     public void domPoint() throws Exception {
         test("DOMPoint");
@@ -8283,6 +8287,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function DOMRectReadOnly() { [native code] }",
             FF = "function DOMRectReadOnly() {\n    [native code]\n}")
     public void domRectReadOnly() throws Exception {
         test("DOMRectReadOnly");
@@ -9070,7 +9075,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function WebKitCSSMatrix() { [native code] }",
+            CHROME = "function DOMMatrix() { [native code] }",
             EDGE = "function WebKitCSSMatrix() { [native code] }",
             FF52 = "function WebKitCSSMatrix() {\n    [native code]\n}")
     public void webKitCSSMatrix() throws Exception {
