@@ -2395,8 +2395,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object ClientRect]",
-            FF = "[object DOMRect]")
+    @Alerts(DEFAULT = "[object DOMRect]",
+            IE = "[object ClientRect]")
     public void getBoundingClientRect() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='div1'>hello</div><script>\n"
@@ -2465,8 +2465,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ClientRect]", "0", "0"},
-            FF = {"[object DOMRect]", "0", "0"},
+    @Alerts(DEFAULT = {"[object DOMRect]", "0", "0"},
             IE = "exception")
     public void getBoundingClientRectDisconnected() throws Exception {
         final String html = "<html>\n"
@@ -2491,8 +2490,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ClientRectList]", "1"},
-            FF = {"[object DOMRect]", "1"})
+    @Alerts(DEFAULT = {"[object DOMRect]", "1"},
+            CHROME = {"[object DOMRectList]", "1"},
+            IE = {"[object ClientRectList]", "1"})
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
@@ -2513,6 +2513,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object ClientRectList]", "0"},
+            CHROME = {"[object DOMRectList]", "0"},
             FF = {"", "0"})
     public void getClientRectsDisconnected() throws Exception {
         final String html =
@@ -2533,6 +2534,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"},
+            CHROME = {"[object DOMRectList]", "0", "[object DOMRectList]", "0"},
             FF = {"", "0", "", "0"})
     public void getClientRectsDisplayNone() throws Exception {
         final String html =

@@ -917,9 +917,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "8",
-            FF = "-16")
-    @NotYetImplemented({CHROME, IE})
+    @Alerts(DEFAULT = "-16",
+            IE = "8")
+    @NotYetImplemented(IE)
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
