@@ -160,6 +160,7 @@ left
 length
 letterSpacing
 lightingColor
+lineBreak
 lineHeight
 listStyle
 listStyleImage
@@ -230,6 +231,7 @@ resize
 right
 rx
 ry
+scrollBehavior
 shapeImageThreshold
 shapeMargin
 shapeOutside

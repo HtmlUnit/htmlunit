@@ -150,7 +150,7 @@ public class YuiTest extends WebDriverTestCase {
             FF = {"test_createlink"},
             CHROME = {"test_blank_image", "test_insertimage", "test_image_props",
                         "test_close_window",
-                        "test_regex", "test_createlink", "test_selected_element", "test_dom_path"},
+                        "test_createlink", "test_selected_element", "test_dom_path"},
             IE = {"test_bold", "test_createlink"})
     @NotYetImplemented
     public void editor() throws Exception {

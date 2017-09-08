@@ -628,6 +628,16 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _LINE_BREAK() throws Exception {
+        test("lineBreak");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             FF45 = "true")
     public void _MARKER_OFFSET() throws Exception {
         test("markerOffset");
@@ -863,6 +873,16 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             IE = "true")
     public void _POS_WIDTH() throws Exception {
         test("posWidth");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _SCROLL_BEHAVIOR() throws Exception {
+        test("scrollBehavior");
     }
 
     /**
