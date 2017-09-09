@@ -154,10 +154,6 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("en-CA", yyyyDash);
         CHROME_FORMATS_.put("en-IE", mmSlash);
         CHROME_FORMATS_.put("en-MT", mmSlash);
-        CHROME_FORMATS_.put("en-SG", mmSlash);
-        CHROME_FORMATS_.put("es-CL", ddSlash);
-        CHROME_FORMATS_.put("es-PA", ddSlash);
-        CHROME_FORMATS_.put("es-PR", ddSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
         CHROME_FORMATS_.put("fr", ddSlash);
         CHROME_FORMATS_.put("fr-CH", ddDot);

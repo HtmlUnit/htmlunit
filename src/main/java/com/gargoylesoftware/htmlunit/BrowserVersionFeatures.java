@@ -671,10 +671,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF45)
     JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
 
-    /** {@link DateTimeFormat} uses the Ascii digits for {@code ar-DZ} locale. */
-    @BrowserFeature({FF, IE})
-    JS_DATE_AR_DZ_ASCII_DIGITS,
-
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({CHROME, FF})
     JS_DATE_LOCALE_DATE_SHORT,

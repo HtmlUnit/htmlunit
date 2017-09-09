@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ_ASCII_DIGITS;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -39,11 +37,10 @@ class GAEDateTimeFormatter implements AbstractDateTimeFormatter {
     GAEDateTimeFormatter(final String locale, final BrowserVersion browserVersion, final String pattern) {
         format_ = new SimpleDateFormat(pattern);
         if (locale.startsWith("ar")
-                && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
-                        || (!"ar-DZ".equals(locale)
-                                && !"ar-LY".equals(locale)
-                                && !"ar-MA".equals(locale)
-                                && !"ar-TN".equals(locale)))) {
+                && (!"ar-DZ".equals(locale)
+                        && !"ar-LY".equals(locale)
+                        && !"ar-MA".equals(locale)
+                        && !"ar-TN".equals(locale))) {
             setZeroDigit('\u0660');
         }
     }

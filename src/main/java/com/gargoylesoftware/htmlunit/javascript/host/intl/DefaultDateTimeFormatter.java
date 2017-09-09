@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_AR_DZ_ASCII_DIGITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.time.ZoneId;
@@ -42,11 +41,10 @@ class DefaultDateTimeFormatter implements AbstractDateTimeFormatter {
     DefaultDateTimeFormatter(final String locale, final BrowserVersion browserVersion, final String pattern) {
         formatter_ = DateTimeFormatter.ofPattern(pattern);
         if (locale.startsWith("ar")
-                && (!browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)
-                        || (!"ar-DZ".equals(locale)
+                && (!"ar-DZ".equals(locale)
                                 && !"ar-LY".equals(locale)
                                 && !"ar-MA".equals(locale)
-                                && !"ar-TN".equals(locale)))) {
+                                && !"ar-TN".equals(locale))) {
             final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
             formatter_ = formatter_.withDecimalStyle(decimalStyle);
         }
@@ -63,9 +61,7 @@ class DefaultDateTimeFormatter implements AbstractDateTimeFormatter {
                 break;
 
             case "ar-SA":
-                if (browserVersion.hasFeature(JS_DATE_AR_DZ_ASCII_DIGITS)) {
-                    chronology_ = HijrahChronology.INSTANCE;
-                }
+                chronology_ = HijrahChronology.INSTANCE;
                 break;
 
             case "ar-SD":

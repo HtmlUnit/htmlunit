@@ -421,6 +421,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0667\u200F/\u0662\u200F/\u0661\u0664\u0663\u0664 \u0647\u0640",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
+    @NotYetImplemented(CHROME)
     public void format_ar_sa() throws Exception {
         test("new Intl.DateTimeFormat('ar-SA').format(date)");
     }
