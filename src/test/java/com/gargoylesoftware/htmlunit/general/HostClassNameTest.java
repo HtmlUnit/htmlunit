@@ -496,7 +496,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF = "function DOMRectList() {\n    [native code]\n}")
     public void domRectList() throws Exception {
         test("DOMRectList");
     }

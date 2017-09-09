@@ -29,10 +29,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * Specifies a rectangle that contains a line of text in either an element or a TextRange object.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
-@JsxClass({CHROME, IE, EDGE})
-@JsxClass(className = "DOMRect", value = FF)
+@JsxClass({IE, EDGE})
+@JsxClass(className = "DOMRect", value = {CHROME, FF})
 public class ClientRect extends SimpleScriptable {
 
     private int bottom_;

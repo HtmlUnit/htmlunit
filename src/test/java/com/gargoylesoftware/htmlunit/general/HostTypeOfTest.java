@@ -6439,7 +6439,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF = "undefined")
+            IE = "undefined")
     public void domPoint() throws Exception {
         test("DOMPoint");
     }

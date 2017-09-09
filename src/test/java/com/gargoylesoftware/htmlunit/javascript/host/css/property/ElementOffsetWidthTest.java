@@ -918,7 +918,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-16",
             IE = "8")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented(IE)
     public void legend() throws Exception {
         loadPageWithAlerts2(test("legend"));
     }
