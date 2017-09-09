@@ -108,7 +108,7 @@ public final class StyleAttributes {
 
         /** The style property {@code alignSelf}. */
         ALIGN_SELF("alignSelf", "align-self", ffBelow52("start"), ff52up("auto"),
-                ie("auto"), chrome("normal")),
+                ie("auto"), chrome("auto")),
 
         /** The style property {@code align-self}. */
         ALIGN_SELF_("align-self", "align-self", ffBelow52("start"), ff52up("auto")),
@@ -1134,7 +1134,7 @@ public final class StyleAttributes {
         JUSTIFY_ITEMS_("justify-items", "justify-items", ffBelow52("start"), ff52up("normal")),
 
         /** The style property {@code justifySelf}. */
-        JUSTIFY_SELF("justifySelf", "justify-self", ffBelow52("start"), ff52up("auto"), chrome("normal")),
+        JUSTIFY_SELF("justifySelf", "justify-self", ffBelow52("start"), ff52up("auto"), chrome("auto")),
 
         /** The style property {@code justify-self}. */
         JUSTIFY_SELF_("justify-self", "justify-self", ffBelow52("start"), ff52up("auto")),
@@ -1177,7 +1177,7 @@ public final class StyleAttributes {
         LIGHTING_COLOR_("lighting-color", "lighting-color", ff("rgb(255, 255, 255)")),
 
         /** The style property {@code lineBreak}. */
-        LINE_BREAK("lineBreak", "line-break", ie("undefined")),
+        LINE_BREAK("lineBreak", "line-break", ie("undefined"), chrome("auto")),
 
         /** The style property {@code lineHeight}. */
         LINE_HEIGHT("lineHeight", "line-height", ff("20px"), ie("normal"), chrome("normal")),
@@ -2408,7 +2408,7 @@ public final class StyleAttributes {
         PLACE_ITEMS_("place-items", "place-items", ff52up("")),
 
         /** The style property {@code placeSelf}. */
-        PLACE_SELF("placeSelf", "place-self", chrome("normal normal"), ff52up("")),
+        PLACE_SELF("placeSelf", "place-self", chrome("auto auto"), ff52up("")),
 
         /** The style property {@code place-self}. */
         PLACE_SELF_("place-self", "place-self", ff52up("")),
@@ -2477,7 +2477,7 @@ public final class StyleAttributes {
         RY("ry", "ry", chrome("auto")),
 
         /** The style property {@code scrollBehavior}. */
-        SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff("auto")),
+        SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff("auto"), chrome("auto")),
 
         /** The style property {@code scroll-behavior}. */
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff("auto")),
