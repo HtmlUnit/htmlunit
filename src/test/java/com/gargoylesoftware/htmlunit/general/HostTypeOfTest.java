@@ -449,6 +449,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domRect() throws Exception {
+        test("DOMRect");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -3136,18 +3148,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "object")
     public void stopIteration() throws Exception {
         test("StopIteration");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domRect() throws Exception {
-        test("DOMRect");
     }
 
     /**

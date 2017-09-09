@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.28" date="???" description="Bugfixes, Chrome 60">
+        <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+            <action type="add" dev="rbri">
+                JavaScript: support NetworkInformation (Chrome only at the moment).
+            </action>
             <action type="add" dev="rbri" issue="1913">
                 JavaScript: support FileReader.readAsArrayBuffer().
             </action>
