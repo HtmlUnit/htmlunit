@@ -381,6 +381,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnect
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.moz.MozPowerManager;
+import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentAddress;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentResponse;
@@ -526,7 +527,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
         MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
-        NamespaceCollection.class, Navigator.class, Node.class, NodeFilter.class, NodeIterator.class,
+        NamespaceCollection.class,
+        Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,
         NodeList.class, Notification.class, OES_element_index_uint.class, OES_standard_derivatives.class,
         OES_texture_float.class, OES_texture_float_linear.class, OfflineAudioCompletionEvent.class,
         OfflineAudioContext.class, Option.class, OscillatorNode.class, PageTransitionEvent.class, PannerNode.class,

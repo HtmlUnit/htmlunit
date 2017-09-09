@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
+import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
 
 /**
  * A JavaScript object for {@code Navigator}.
@@ -314,5 +315,17 @@ public class Navigator extends SimpleScriptable {
     @JsxGetter(FF)
     public String getOscpu() {
         return "Windows NT 6.1";
+    }
+
+    /**
+     * Returns the {@code connection} property.
+     * @return the {@code connection} property
+     */
+    @JsxGetter(CHROME)
+    public NetworkInformation getConnection() {
+        final NetworkInformation networkInformation = new NetworkInformation();
+        networkInformation.setPrototype(getPrototype(networkInformation.getClass()));
+        networkInformation.setParentScope(getParentScope());
+        return networkInformation;
     }
 }

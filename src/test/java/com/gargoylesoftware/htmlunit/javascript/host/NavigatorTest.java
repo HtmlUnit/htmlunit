@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -434,6 +435,28 @@ public class NavigatorTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'></body>\n"
             + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined"},
+            CHROME = {"[object NetworkInformation]", "undefined", "undefined"})
+    public void connection() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(navigator.connection);\n"
+            + "    alert(navigator.mozConnection);\n"
+            + "    alert(navigator.webkitConnection);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
 
         loadPageWithAlerts2(html);
     }
