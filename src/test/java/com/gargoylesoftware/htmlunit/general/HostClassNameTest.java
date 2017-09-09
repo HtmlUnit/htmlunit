@@ -493,6 +493,15 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void domRectList() throws Exception {
+        test("DOMRectList");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap}.
      *
      * @throws Exception if an error occurs
