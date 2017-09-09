@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
  * Tests for iterability of CSS style attributes defined in {@link StyleAttributes}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 @ToRunWithRealBrowsers
@@ -627,8 +628,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            FF = "false")
     public void _LINE_BREAK() throws Exception {
         test("lineBreak");
     }
@@ -879,8 +880,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SCROLL_BEHAVIOR() throws Exception {
         test("scrollBehavior");
     }
