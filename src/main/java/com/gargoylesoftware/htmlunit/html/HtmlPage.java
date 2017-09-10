@@ -363,7 +363,7 @@ public class HtmlPage extends SgmlPage {
      * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or {@code null} if it does not yet exist
      */
     public HtmlElement getBody() {
-        final HtmlElement doc = getDocumentElement();
+        final DomElement doc = getDocumentElement();
         if (doc != null) {
             for (final DomNode node : doc.getChildren()) {
                 if (node instanceof HtmlBody || node instanceof HtmlFrameSet) {
@@ -379,7 +379,7 @@ public class HtmlPage extends SgmlPage {
      * @return the head element
      */
     public HtmlElement getHead() {
-        final HtmlElement doc = getDocumentElement();
+        final DomElement doc = getDocumentElement();
         if (doc != null) {
             for (final DomNode node : doc.getChildren()) {
                 if (node instanceof HtmlHead) {
@@ -1217,7 +1217,7 @@ public class HtmlPage extends SgmlPage {
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
         if (window.getScriptableObject() instanceof Window) {
-            final HtmlElement element = getDocumentElement();
+            final DomElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
             }
@@ -1234,7 +1234,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
         if (window.getScriptableObject() instanceof Global) {
-            final HtmlElement element = getDocumentElement();
+            final DomElement element = getDocumentElement();
             if (element == null) { // happens for instance if document.documentElement has been removed from parent
                 return true;
             }
@@ -1503,7 +1503,7 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         if (hasFeature(JS_DEFERRED)) {
-            final HtmlElement doc = getDocumentElement();
+            final DomElement doc = getDocumentElement();
             final List<HtmlElement> elements = doc.getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {

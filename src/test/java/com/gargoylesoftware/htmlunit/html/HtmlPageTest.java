@@ -886,7 +886,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlElement root = page.getDocumentElement();
+        final DomElement root = page.getDocumentElement();
 
         assertNotNull(root);
         assertEquals("html", root.getTagName());
@@ -904,7 +904,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
 
-        final HtmlElement root = page.getDocumentElement();
+        final DomElement root = page.getDocumentElement();
 
         assertEquals(org.w3c.dom.Node.DOCUMENT_NODE, page.getNodeType());
         assertEquals(org.w3c.dom.Node.ELEMENT_NODE, root.getNodeType());
@@ -1393,8 +1393,8 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content);
         final HtmlPage clone = page.cloneNode(true);
         assertTrue(page != clone);
-        final HtmlElement doc = page.getDocumentElement();
-        final HtmlElement docclone = clone.getDocumentElement();
+        final DomElement doc = page.getDocumentElement();
+        final DomElement docclone = clone.getDocumentElement();
         assertTrue(doc != docclone);
     }
 

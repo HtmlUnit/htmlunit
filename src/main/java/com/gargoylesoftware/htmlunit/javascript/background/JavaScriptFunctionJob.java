@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -47,7 +47,7 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     /** {@inheritDoc} */
     @Override
     protected void runJavaScript(final HtmlPage page) {
-        final HtmlElement doc = page.getDocumentElement();
+        final DomElement doc = page.getDocumentElement();
         final Scriptable scriptable = page.getEnclosingWindow().getScriptableObject();
         page.executeJavaScriptFunction(function_, scriptable, new Object[0], doc);
     }

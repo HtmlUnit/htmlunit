@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.background;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 import com.gargoylesoftware.js.nashorn.internal.runtime.Context;
@@ -51,7 +51,7 @@ class JavaScriptFunctionJob2 extends JavaScriptExecutionJob {
     /** {@inheritDoc} */
     @Override
     protected void runJavaScript(final HtmlPage page) {
-        final HtmlElement doc = page.getDocumentElement();
+        final DomElement doc = page.getDocumentElement();
         final Global oldGlobal = Context.getGlobal();
         final Global global = page.getEnclosingWindow().getScriptableObject();
         try {
