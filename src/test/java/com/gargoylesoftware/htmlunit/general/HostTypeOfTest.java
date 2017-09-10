@@ -46,6 +46,112 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void abstractList() throws Exception {
+        test("AbstractList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void activeXObject() throws Exception {
+        test("ActiveXObject");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void analyserNode() throws Exception {
+        test("AnalyserNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void angle_instanced_arrays() throws Exception {
+        test("ANGLE_instanced_arrays");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void animation() throws Exception {
+        test("Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void animationEvent() throws Exception {
+        test("AnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void appBannerPromptResult() throws Exception {
+        test("AppBannerPromptResult");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            CHROME = "function",
+            FF = "undefined")
+    public void applicationCache() throws Exception {
+        test("ApplicationCache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void applicationCacheErrorEvent() throws Exception {
+        test("ApplicationCacheErrorEvent");
+    }
+
+    /**
+     * Test {@code net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("object")
+    public void arguments() throws Exception {
+        test("arguments");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer}.
      *
      * @throws Exception if an error occurs
@@ -79,6 +185,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object")
+    public void atomics() throws Exception {
+        test("Atomics");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Attr}.
      *
      * @throws Exception if an error occurs
@@ -91,39 +207,153 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
-    public void activeXObject() throws Exception {
-        test("ActiveXObject");
+    @Alerts("function")
+    public void audio() throws Exception {
+        test("Audio");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function",
-            FF = "undefined")
-    public void applicationCache() throws Exception {
-        test("ApplicationCache");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioBuffer() throws Exception {
+        test("AudioBuffer");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioBufferSourceNode() throws Exception {
+        test("AudioBufferSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioContext() throws Exception {
+        test("AudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioDestinationNode() throws Exception {
+        test("AudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioListener() throws Exception {
+        test("AudioListener");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioNode() throws Exception {
+        test("AudioNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AudioParam}.
      *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioParam() throws Exception {
+        test("AudioParam");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void audioProcessingEvent() throws Exception {
+        test("AudioProcessingEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void offlineResourceList() throws Exception {
-        test("OfflineResourceList");
+            CHROME = "function")
+    public void audioScheduledSourceNode() throws Exception {
+        test("AudioScheduledSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void autocompleteErrorEvent() throws Exception {
+        test("AutocompleteErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void barProp() throws Exception {
+        test("BarProp");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void baseAudioContext() throws Exception {
+        test("BaseAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void batteryManager() throws Exception {
+        test("BatteryManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void beforeInstallPromptEvent() throws Exception {
+        test("BeforeInstallPromptEvent");
     }
 
     /**
@@ -139,12 +369,170 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void biquadFilterNode() throws Exception {
+        test("BiquadFilterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void blob() throws Exception {
+        test("Blob");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void blobEvent() throws Exception {
+        test("BlobEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetooth() throws Exception {
+        test("Bluetooth");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetoothRemoteGATTCharacteristic() throws Exception {
+        test("BluetoothRemoteGATTCharacteristic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void bluetoothRemoteGATTServer() throws Exception {
+        test("BluetoothRemoteGATTServer");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("undefined")
     public void boxObject() throws Exception {
         test("BoxObject");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void broadcastChannel() throws Exception {
+        test("BroadcastChannel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void budgetService() throws Exception {
+        test("BudgetService");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void cache() throws Exception {
+        test("Cache");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void cacheStorage() throws Exception {
+        test("CacheStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void canvasCaptureMediaStream() throws Exception {
+        test("CanvasCaptureMediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void canvasCaptureMediaStreamTrack() throws Exception {
+        test("CanvasCaptureMediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void canvasGradient() throws Exception {
+        test("CanvasGradient");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void canvasPattern() throws Exception {
+        test("CanvasPattern");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void canvasRenderingContext2D() throws Exception {
+        test("CanvasRenderingContext2D");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void caretPosition() throws Exception {
+        test("CaretPosition");
     }
 
     /**
@@ -160,6 +548,71 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void channelMergerNode() throws Exception {
+        test("ChannelMergerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void channelSplitterNode() throws Exception {
+        test("ChannelSplitterNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void characterData() throws Exception {
+        test("CharacterData");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void characterDataImpl() throws Exception {
+        test("CharacterDataImpl");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void clientRect() throws Exception {
+        test("ClientRect");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void clientRectList() throws Exception {
+        test("ClientRectList");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -169,12 +622,193 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void clipboardEvent() throws Exception {
+        test("ClipboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void closeEvent() throws Exception {
+        test("CloseEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void comment() throws Exception {
+        test("Comment");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void compositionEvent() throws Exception {
+        test("CompositionEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void computedCSSStyleDeclaration() throws Exception {
+        test("ComputedCSSStyleDeclaration");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Console}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void console() throws Exception {
+        test("Console");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void constantSourceNode() throws Exception {
+        test("ConstantSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void convolverNode() throws Exception {
+        test("ConvolverNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void coordinates() throws Exception {
+        test("Coordinates");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void credential() throws Exception {
+        test("Credential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void credentialsContainer() throws Exception {
+        test("CredentialsContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void crypto() throws Exception {
+        test("Crypto");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void cryptoKey() throws Exception {
+        test("CryptoKey");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void css() throws Exception {
+        test("CSS");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void css2Properties() throws Exception {
+        test("CSS2Properties");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("undefined")
     public void cssCharsetRule() throws Exception {
         test("CSSCharsetRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "object")
+    public void cssConditionRule() throws Exception {
+        test("CSSConditionRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
+    public void cssCounterStyleRule() throws Exception {
+        test("CSSCounterStyleRule");
     }
 
     /**
@@ -190,6 +824,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "object")
+    public void cssGroupingRule() throws Exception {
+        test("CSSGroupingRule");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule}.
      *
      * @throws Exception if an error occurs
@@ -202,6 +847,30 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "object",
+            IE = "object")
+    public void cssKeyframeRule() throws Exception {
+        test("CSSKeyframeRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "object",
+            IE = "object")
+    public void cssKeyframesRule() throws Exception {
+        test("CSSKeyframesRule");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule}.
      *
      * @throws Exception if an error occurs
@@ -211,6 +880,27 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void cssMediaRule() throws Exception {
         test("CSSMediaRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object",
+            CHROME = "function")
+    public void cssNamespaceRule() throws Exception {
+        test("CSSNamespaceRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            CHROME = "function")
+    public void cssPageRule() throws Exception {
+        test("CSSPageRule");
     }
 
     /**
@@ -262,18 +952,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void css2Properties() throws Exception {
-        test("CSS2Properties");
-    }
-
-    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
      *
      * @throws Exception if an error occurs
@@ -298,6 +976,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF = "object")
+    public void cssSupportsRule() throws Exception {
+        test("CSSSupportsRule");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue}.
      *
      * @throws Exception if an error occurs
@@ -310,96 +999,75 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void cssValueList() throws Exception {
+        test("CSSValueList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void cssViewportRule() throws Exception {
+        test("CSSViewportRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void customElementRegistry() throws Exception {
+        test("CustomElementRegistry");
+    }
+
+    /**
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void canvasRenderingContext2D() throws Exception {
-        test("CanvasRenderingContext2D");
+    public void customEvent() throws Exception {
+        test("CustomEvent");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void characterDataImpl() throws Exception {
-        test("CharacterDataImpl");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void clientRect() throws Exception {
-        test("ClientRect");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void comment() throws Exception {
-        test("Comment");
+    public void dataTransfer() throws Exception {
+        test("DataTransfer");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void htmlCommentElement() throws Exception {
-        test("HTMLCommentElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void computedCSSStyleDeclaration() throws Exception {
-        test("ComputedCSSStyleDeclaration");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Console}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void console() throws Exception {
-        test("Console");
+            FF52 = "function",
+            CHROME = "function")
+    public void dataTransferItem() throws Exception {
+        test("DataTransferItem");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void coordinates() throws Exception {
-        test("Coordinates");
+            FF52 = "function",
+            CHROME = "function")
+    public void dataTransferItemList() throws Exception {
+        test("DataTransferItemList");
     }
 
     /**
@@ -414,84 +1082,71 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domException() throws Exception {
-        test("DOMException");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domImplementation() throws Exception {
-        test("DOMImplementation");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void domParser() throws Exception {
-        test("DOMParser");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    public void domRect() throws Exception {
-        test("DOMRect");
+    public void delayNode() throws Exception {
+        test("DelayNode");
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
-    public void domRectList() throws Exception {
-        test("DOMRectList");
+    public void deviceLightEvent() throws Exception {
+        test("DeviceLightEvent");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domStringMap() throws Exception {
-        test("DOMStringMap");
+            IE = "undefined")
+    public void deviceMotionEvent() throws Exception {
+        test("DeviceMotionEvent");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domTokenList() throws Exception {
-        test("DOMTokenList");
+            IE = "undefined")
+    public void deviceOrientationEvent() throws Exception {
+        test("DeviceOrientationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void deviceProximityEvent() throws Exception {
+        test("DeviceProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void deviceStorage() throws Exception {
+        test("DeviceStorage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void deviceStorageChangeEvent() throws Exception {
+        test("DeviceStorageChangeEvent");
     }
 
     /**
@@ -531,6 +1186,211 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void domCursor() throws Exception {
+        test("DOMCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domError() throws Exception {
+        test("DOMError");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domException() throws Exception {
+        test("DOMException");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domImplementation() throws Exception {
+        test("DOMImplementation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domMatrix() throws Exception {
+        test("DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domMatrixReadOnly() throws Exception {
+        test("DOMMatrixReadOnly");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void domParser() throws Exception {
+        test("DOMParser");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domPoint() throws Exception {
+        test("DOMPoint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domPointReadOnly() throws Exception {
+        test("DOMPointReadOnly");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domRect() throws Exception {
+        test("DOMRect");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void domRectList() throws Exception {
+        test("DOMRectList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void domRectReadOnly() throws Exception {
+        test("DOMRectReadOnly");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void domRequest() throws Exception {
+        test("DOMRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object",
+            CHROME = "undefined",
+            FF52 = "undefined")
+    public void domSettableTokenList() throws Exception {
+        test("DOMSettableTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domStringList() throws Exception {
+        test("DOMStringList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domStringMap() throws Exception {
+        test("DOMStringMap");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void domTokenList() throws Exception {
+        test("DOMTokenList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void dragEvent() throws Exception {
+        test("DragEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void dynamicsCompressorNode() throws Exception {
+        test("DynamicsCompressorNode");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
      *
      * @throws Exception if an error occurs
@@ -555,6 +1415,25 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void error() throws Exception {
+        test("Error");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void errorEvent() throws Exception {
+        test("ErrorEvent");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
      *
      * @throws Exception if an error occurs
@@ -576,6 +1455,54 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void eventSource() throws Exception {
+        test("EventSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void eventTarget() throws Exception {
+        test("EventTarget");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void ext_color_buffer_half_float() throws Exception {
+        test("EXT_color_buffer_half_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void ext_texture_filter_anisotropic() throws Exception {
+        test("EXT_texture_filter_anisotropic");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void extendableMessageEvent() throws Exception {
+        test("ExtendableMessageEvent");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.External}.
      *
      * @throws Exception if an error occurs
@@ -585,6 +1512,122 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF = "function")
     public void external() throws Exception {
         test("External");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void federatedCredential() throws Exception {
+        test("FederatedCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void file() throws Exception {
+        test("File");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void fileError() throws Exception {
+        test("FileError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void fileHandle() throws Exception {
+        test("FileHandle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void fileList() throws Exception {
+        test("FileList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void fileReader() throws Exception {
+        test("FileReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void fileRequest() throws Exception {
+        test("FileRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystem() throws Exception {
+        test("FileSystem");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemDirectoryEntry() throws Exception {
+        test("FileSystemDirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemDirectoryReader() throws Exception {
+        test("FileSystemDirectoryReader");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemEntry() throws Exception {
+        test("FileSystemEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void fileSystemFileEntry() throws Exception {
+        test("FileSystemFileEntry");
     }
 
     /**
@@ -610,6 +1653,36 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void focusEvent() throws Exception {
+        test("FocusEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void fontFace() throws Exception {
+        test("FontFace");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void fontFaceSet() throws Exception {
+        test("FontFaceSet");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -619,12 +1692,63 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void formData() throws Exception {
+        test("FormData");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("undefined")
     public void formField() throws Exception {
         test("FormField");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gainNode() throws Exception {
+        test("GainNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gamepad() throws Exception {
+        test("Gamepad");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gamepadButton() throws Exception {
+        test("GamepadButton");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void gamepadEvent() throws Exception {
+        test("GamepadEvent");
     }
 
     /**
@@ -640,6 +1764,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void gestureEvent() throws Exception {
+        test("GestureEvent");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent}.
      *
      * @throws Exception if an error occurs
@@ -652,6 +1785,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void headers() throws Exception {
+        test("Headers");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.History}.
      *
      * @throws Exception if an error occurs
@@ -661,6 +1804,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void history() throws Exception {
         test("History");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlAllCollection() throws Exception {
+        test("HTMLAllCollection");
     }
 
     /**
@@ -713,30 +1868,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void htmlBGSoundElement() throws Exception {
-        test("HTMLBGSoundElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlBRElement() throws Exception {
-        test("HTMLBRElement");
-    }
-
-    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement}.
      *
      * @throws Exception if an error occurs
@@ -758,6 +1889,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlBaseFontElement() throws Exception {
         test("HTMLBaseFontElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void htmlBGSoundElement() throws Exception {
+        test("HTMLBGSoundElement");
     }
 
     /**
@@ -791,20 +1934,20 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void htmlQuoteElement() throws Exception {
-        test("HTMLQuoteElement");
+    public void htmlBodyElement() throws Exception {
+        test("HTMLBodyElement");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void htmlBodyElement() throws Exception {
-        test("HTMLBodyElement");
+    public void htmlBRElement() throws Exception {
+        test("HTMLBRElement");
     }
 
     /**
@@ -844,15 +1987,35 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
      *
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("undefined")
+    public void htmlCommentElement() throws Exception {
+        test("HTMLCommentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlAllCollection() throws Exception {
-        test("HTMLAllCollection");
+            FF52 = "undefined",
+            IE = "undefined")
+    public void htmlContentElement() throws Exception {
+        test("HTMLContentElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void htmlDataElement() throws Exception {
+        test("HTMLDataElement");
     }
 
     /**
@@ -873,9 +2036,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("undefined")
-    public void htmlDefinitionDescriptionElement() throws Exception {
-        test("HTMLDefinitionDescriptionElement");
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void htmlDDElement() throws Exception {
+        test("HTMLDDElement");
     }
 
     /**
@@ -884,10 +2048,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void htmlDDElement() throws Exception {
-        test("HTMLDDElement");
+    @Alerts("undefined")
+    public void htmlDefinitionDescriptionElement() throws Exception {
+        test("HTMLDefinitionDescriptionElement");
     }
 
     /**
@@ -902,27 +2065,28 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void htmlDTElement() throws Exception {
-        test("HTMLDTElement");
+            FF52 = "function",
+            CHROME = "function")
+    public void htmlDetailsElement() throws Exception {
+        test("HTMLDetailsElement");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlDListElement() throws Exception {
-        test("HTMLDListElement");
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void htmlDialogElement() throws Exception {
+        test("HTMLDialogElement");
     }
 
     /**
@@ -950,6 +2114,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlDListElement() throws Exception {
+        test("HTMLDListElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument}.
      *
      * @throws Exception if an error occurs
@@ -959,6 +2135,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlDocument() throws Exception {
         test("HTMLDocument");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void htmlDTElement() throws Exception {
+        test("HTMLDTElement");
     }
 
     /**
@@ -1010,6 +2198,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlFormControlsCollection() throws Exception {
+        test("HTMLFormControlsCollection");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement}.
      *
      * @throws Exception if an error occurs
@@ -1046,15 +2244,14 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlHRElement() throws Exception {
-        test("HTMLHRElement");
+    @Alerts("undefined")
+    public void htmlGenericElement() throws Exception {
+        test("HTMLGenericElement");
     }
 
     /**
@@ -1082,6 +2279,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlHRElement() throws Exception {
+        test("HTMLHRElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement}.
      *
      * @throws Exception if an error occurs
@@ -1091,6 +2300,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlHtmlElement() throws Exception {
         test("HTMLHtmlElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void htmlHyperlinkElementUtils() throws Exception {
+        test("HTMLHyperlinkElementUtils");
     }
 
     /**
@@ -1115,17 +2333,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlImageElement() throws Exception {
         test("HTMLImageElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void image() throws Exception {
-        test("Image");
     }
 
     /**
@@ -1173,18 +2380,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlLIElement() throws Exception {
-        test("HTMLLIElement");
-    }
-
-    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement}.
      *
      * @throws Exception if an error occurs
@@ -1206,6 +2401,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlLegendElement() throws Exception {
         test("HTMLLegendElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlLIElement() throws Exception {
+        test("HTMLLIElement");
     }
 
     /**
@@ -1281,6 +2488,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void htmlMenuItemElement() throws Exception {
+        test("HTMLMenuItemElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement}.
      *
      * @throws Exception if an error occurs
@@ -1317,15 +2536,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void htmlNoShowElement() throws Exception {
-        test("HTMLNoShowElement");
-    }
-
-    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNextIdElement}.
      *
      * @throws Exception if an error occurs
@@ -1338,15 +2548,12 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlOListElement() throws Exception {
-        test("HTMLOListElement");
+    @Alerts("undefined")
+    public void htmlNoShowElement() throws Exception {
+        test("HTMLNoShowElement");
     }
 
     /**
@@ -1359,6 +2566,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlObjectElement() throws Exception {
         test("HTMLObjectElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlOListElement() throws Exception {
+        test("HTMLOListElement");
     }
 
     /**
@@ -1383,17 +2602,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlOptionElement() throws Exception {
         test("HTMLOptionElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void option() throws Exception {
-        test("Option");
     }
 
     /**
@@ -1457,6 +2665,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlPictureElement() throws Exception {
+        test("HTMLPictureElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement}.
      *
      * @throws Exception if an error occurs
@@ -1481,6 +2699,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlQuoteElement() throws Exception {
+        test("HTMLQuoteElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement}.
      *
      * @throws Exception if an error occurs
@@ -1502,6 +2732,29 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlSelectElement() throws Exception {
         test("HTMLSelectElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            FF52 = "undefined",
+            IE = "undefined")
+    public void htmlShadowElement() throws Exception {
+        test("HTMLShadowElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void htmlSlotElement() throws Exception {
+        test("HTMLSlotElement");
     }
 
     /**
@@ -1648,12 +2901,13 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
-    public void htmlTextElement() throws Exception {
-        test("HTMLTextElement");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void htmlTemplateElement() throws Exception {
+        test("HTMLTemplateElement");
     }
 
     /**
@@ -1666,6 +2920,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void htmlTextAreaElement() throws Exception {
         test("HTMLTextAreaElement");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void htmlTextElement() throws Exception {
+        test("HTMLTextElement");
     }
 
     /**
@@ -1693,6 +2956,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlTrackElement() throws Exception {
+        test("HTMLTrackElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement}.
      *
      * @throws Exception if an error occurs
@@ -1717,14 +2992,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement}.
      *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("undefined")
-    public void htmlGenericElement() throws Exception {
-        test("HTMLGenericElement");
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void htmlVideoElement() throws Exception {
+        test("HTMLVideoElement");
     }
 
     /**
@@ -1737,15 +3013,225 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void htmlVideoElement() throws Exception {
-        test("HTMLVideoElement");
+    public void idbCursor() throws Exception {
+        test("IDBCursor");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbCursorWithValue() throws Exception {
+        test("IDBCursorWithValue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbDatabase() throws Exception {
+        test("IDBDatabase");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbFactory() throws Exception {
+        test("IDBFactory");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbIndex() throws Exception {
+        test("IDBIndex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbKeyRange() throws Exception {
+        test("IDBKeyRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void idbMutableFile() throws Exception {
+        test("IDBMutableFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbObjectStore() throws Exception {
+        test("IDBObjectStore");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbOpenDBRequest() throws Exception {
+        test("IDBOpenDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbRequest() throws Exception {
+        test("IDBRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbTransaction() throws Exception {
+        test("IDBTransaction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void idbVersionChangeEvent() throws Exception {
+        test("IDBVersionChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void idleDeadline() throws Exception {
+        test("IdleDeadline");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void iirFilterNode() throws Exception {
+        test("IIRFilterNode");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void image() throws Exception {
+        test("Image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void imageBitmap() throws Exception {
+        test("ImageBitmap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void imageBitmapRenderingContext() throws Exception {
+        test("ImageBitmapRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void imageData() throws Exception {
+        test("ImageData");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void inputDeviceCapabilities() throws Exception {
+        test("InputDeviceCapabilities");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void inputEvent() throws Exception {
+        test("InputEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
+    public void installTrigger() throws Exception {
+        test("InstallTrigger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void installTriggerImpl() throws Exception {
+        test("InstallTriggerImpl");
     }
 
     /**
@@ -1782,6 +3268,46 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void intersectionObserver() throws Exception {
+        test("IntersectionObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void intersectionObserverEntry() throws Exception {
+        test("IntersectionObserverEntry");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.intl.Intl}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("object")
+    public void intl() throws Exception {
+        test("Intl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("object")
+    public void json() throws Exception {
+        test("JSON");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
@@ -1791,6 +3317,27 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void keyboardEvent() throws Exception {
         test("KeyboardEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void keyframeEffect() throws Exception {
+        test("KeyframeEffect");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void localMediaStream() throws Exception {
+        test("LocalMediaStream");
     }
 
     /**
@@ -1806,6 +3353,152 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void lockedFile() throws Exception {
+        test("LockedFile");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void map() throws Exception {
+        test("Map");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("object")
+    public void math() throws Exception {
+        test("Math");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaDeviceInfo() throws Exception {
+        test("MediaDeviceInfo");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaDevices() throws Exception {
+        test("MediaDevices");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaElementAudioSourceNode() throws Exception {
+        test("MediaElementAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaEncryptedEvent() throws Exception {
+        test("MediaEncryptedEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void mediaError() throws Exception {
+        test("MediaError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mediaKeyError() throws Exception {
+        test("MediaKeyError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mediaKeyEvent() throws Exception {
+        test("MediaKeyEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaKeyMessageEvent() throws Exception {
+        test("MediaKeyMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaKeys() throws Exception {
+        test("MediaKeys");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaKeySession() throws Exception {
+        test("MediaKeySession");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaKeyStatusMap() throws Exception {
+        test("MediaKeyStatusMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaKeySystemAccess() throws Exception {
+        test("MediaKeySystemAccess");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList}.
      *
      * @throws Exception if an error occurs
@@ -1818,6 +3511,117 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void mediaQueryList() throws Exception {
+        test("MediaQueryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void mediaQueryListEvent() throws Exception {
+        test("MediaQueryListEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaRecorder() throws Exception {
+        test("MediaRecorder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaSource() throws Exception {
+        test("MediaSource");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStream() throws Exception {
+        test("MediaStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamAudioDestinationNode() throws Exception {
+        test("MediaStreamAudioDestinationNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamAudioSourceNode() throws Exception {
+        test("MediaStreamAudioSourceNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamEvent() throws Exception {
+        test("MediaStreamEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamTrack() throws Exception {
+        test("MediaStreamTrack");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void mediaStreamTrackEvent() throws Exception {
+        test("MediaStreamTrackEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageChannel}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void messageChannel() throws Exception {
+        test("MessageChannel");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent}.
      *
      * @throws Exception if an error occurs
@@ -1827,6 +3631,98 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void messageEvent() throws Exception {
         test("MessageEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessagePort}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void messagePort() throws Exception {
+        test("MessagePort");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiAccess() throws Exception {
+        test("MIDIAccess");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiConnectionEvent() throws Exception {
+        test("MIDIConnectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiInput() throws Exception {
+        test("MIDIInput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiInputMap() throws Exception {
+        test("MIDIInputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiMessageEvent() throws Exception {
+        test("MIDIMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiOutput() throws Exception {
+        test("MIDIOutput");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiOutputMap() throws Exception {
+        test("MIDIOutputMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void midiPort() throws Exception {
+        test("MIDIPort");
     }
 
     /**
@@ -1866,6 +3762,204 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mouseScrollEvent() throws Exception {
+        test("MouseScrollEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void mouseWheelEvent() throws Exception {
+        test("MouseWheelEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void mozContactChangeEvent() throws Exception {
+        test("MozContactChangeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "object")
+    public void mozCSSKeyframesRule() throws Exception {
+        test("MozCSSKeyframesRule");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozMmsEvent() throws Exception {
+        test("MozMmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozMmsMessage() throws Exception {
+        test("MozMmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozMobileMessageManager() throws Exception {
+        test("MozMobileMessageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozMobileMessageThread() throws Exception {
+        test("MozMobileMessageThread");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void mozPowerManager() throws Exception {
+        test("MozPowerManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mozRTCIceCandidate() throws Exception {
+        test("mozRTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mozRTCPeerConnection() throws Exception {
+        test("mozRTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void mozRTCSessionDescription() throws Exception {
+        test("mozRTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void mozSettingsEvent() throws Exception {
+        test("MozSettingsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozSmsEvent() throws Exception {
+        test("MozSmsEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozSmsFilter() throws Exception {
+        test("MozSmsFilter");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozSmsMessage() throws Exception {
+        test("MozSmsMessage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void mozSmsSegmentInfo() throws Exception {
+        test("MozSmsSegmentInfo");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void msCurrentStyleCSSProperties() throws Exception {
+        test("MSCurrentStyleCSSProperties");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void mSGestureEvent() throws Exception {
+        test("MSGestureEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    @NotYetImplemented(IE)
+    public void msStyleCSSProperties() throws Exception {
+        test("MSStyleCSSProperties");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent}.
      *
      * @throws Exception if an error occurs
@@ -1875,6 +3969,25 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void mutationEvent() throws Exception {
         test("MutationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void mutationObserver() throws Exception {
+        test("MutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void mutationRecord() throws Exception {
+        test("MutationRecord");
     }
 
     /**
@@ -1924,6 +4037,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void networkInformation() throws Exception {
+        test("NetworkInformation");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Node}.
      *
      * @throws Exception if an error occurs
@@ -1948,6 +4073,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void nodeIterator() throws Exception {
+        test("NodeIterator");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList}.
      *
      * @throws Exception if an error occurs
@@ -1957,6 +4092,361 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void nodeList() throws Exception {
         test("NodeList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Notification}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void notification() throws Exception {
+        test("Notification");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void object() throws Exception {
+        test("Object");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oes_element_index_uint() throws Exception {
+        test("OES_element_index_uint");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oes_standard_derivatives() throws Exception {
+        test("OES_standard_derivatives");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oes_texture_float() throws Exception {
+        test("OES_texture_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void oes_texture_float_linear() throws Exception {
+        test("OES_texture_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void oes_texture_half_float() throws Exception {
+        test("OES_texture_half_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void oes_texture_half_float_linear() throws Exception {
+        test("OES_texture_half_float_linear");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void offlineAudioCompletionEvent() throws Exception {
+        test("OfflineAudioCompletionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void offlineAudioContext() throws Exception {
+        test("OfflineAudioContext");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void offlineResourceList() throws Exception {
+        test("OfflineResourceList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void offscreenCanvas() throws Exception {
+        test("OffscreenCanvas");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void option() throws Exception {
+        test("Option");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void oscillatorNode() throws Exception {
+        test("OscillatorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void pageTransitionEvent() throws Exception {
+        test("PageTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void pannerNode() throws Exception {
+        test("PannerNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void passwordCredential() throws Exception {
+        test("PasswordCredential");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void path2D() throws Exception {
+        test("Path2D");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentAddress() throws Exception {
+        test("PaymentAddress");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentRequest() throws Exception {
+        test("PaymentRequest");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void paymentResponse() throws Exception {
+        test("PaymentResponse");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performance() throws Exception {
+        test("Performance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceEntry() throws Exception {
+        test("PerformanceEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void performanceFrameTiming() throws Exception {
+        test("PerformanceFrameTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceMark() throws Exception {
+        test("PerformanceMark");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceMeasure() throws Exception {
+        test("PerformanceMeasure");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceNavigation() throws Exception {
+        test("PerformanceNavigation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            IE = "object")
+    public void performanceNavigationTiming() throws Exception {
+        test("PerformanceNavigationTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void performanceObserver() throws Exception {
+        test("PerformanceObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void performanceObserverEntryList() throws Exception {
+        test("PerformanceObserverEntryList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceResourceTiming() throws Exception {
+        test("PerformanceResourceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void performanceTiming() throws Exception {
+        test("PerformanceTiming");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void periodicWave() throws Exception {
+        test("PeriodicWave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void permissions() throws Exception {
+        test("Permissions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void permissionStatus() throws Exception {
+        test("PermissionStatus");
     }
 
     /**
@@ -1997,6 +4487,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void popStateEvent() throws Exception {
+        test("PopStateEvent");
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -2018,6 +4518,76 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void positionError() throws Exception {
+        test("PositionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentation() throws Exception {
+        test("Presentation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationAvailability() throws Exception {
+        test("PresentationAvailability");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationConnection() throws Exception {
+        test("PresentationConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationConnectionAvailableEvent() throws Exception {
+        test("PresentationConnectionAvailableEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationConnectionCloseEvent() throws Exception {
+        test("PresentationConnectionCloseEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void presentationRequest() throws Exception {
+        test("PresentationRequest");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ProcessingInstruction}.
      *
      * @throws Exception if an error occurs
@@ -2027,6 +4597,88 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void processingInstruction() throws Exception {
         test("ProcessingInstruction");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void progressEvent() throws Exception {
+        test("ProgressEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Promise}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void promise() throws Exception {
+        test("Promise");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void promiseRejectionEvent() throws Exception {
+        test("PromiseRejectionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void proxy() throws Exception {
+        test("Proxy");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushManager() throws Exception {
+        test("PushManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushSubscription() throws Exception {
+        test("PushSubscription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void pushSubscriptionOptions() throws Exception {
+        test("PushSubscriptionOptions");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void radioNodeList() throws Exception {
+        test("RadioNodeList");
     }
 
     /**
@@ -2042,6 +4694,65 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void readableByteStream() throws Exception {
+        test("ReadableByteStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void readableStream() throws Exception {
+        test("ReadableStream");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            IE = "undefined")
+    public void reflect() throws Exception {
+        test("Reflect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void remotePlayback() throws Exception {
+        test("RemotePlayback");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void request() throws Exception {
+        test("Request");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void response() throws Exception {
+        test("Response");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer}.
      *
      * @throws Exception if an error occurs
@@ -2050,6 +4761,490 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void rowContainer() throws Exception {
         test("RowContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcCertificate() throws Exception {
+        test("RTCCertificate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcDataChannelEvent() throws Exception {
+        test("RTCDataChannelEvent");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcIceCandidate() throws Exception {
+        test("RTCIceCandidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void rtcIdentityAssertion() throws Exception {
+        test("RTCIdentityAssertion");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcPeerConnection() throws Exception {
+        test("RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcPeerConnectionIceEvent() throws Exception {
+        test("RTCPeerConnectionIceEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcSessionDescription() throws Exception {
+        test("RTCSessionDescription");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void rtcStatsReport() throws Exception {
+        test("RTCStatsReport");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Screen}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void screen() throws Exception {
+        test("Screen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void screenOrientation() throws Exception {
+        test("ScreenOrientation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void scriptProcessorNode() throws Exception {
+        test("ScriptProcessorNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void securityPolicyViolationEvent() throws Exception {
+        test("SecurityPolicyViolationEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Selection}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void selection() throws Exception {
+        test("Selection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorker() throws Exception {
+        test("ServiceWorker");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorkerContainer() throws Exception {
+        test("ServiceWorkerContainer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void serviceWorkerMessageEvent() throws Exception {
+        test("ServiceWorkerMessageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void serviceWorkerRegistration() throws Exception {
+        test("ServiceWorkerRegistration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void serviceWorkerState() throws Exception {
+        test("ServiceWorkerState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void set() throws Exception {
+        test("Set");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void shadowRoot() throws Exception {
+        test("ShadowRoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void sharedArrayBuffer() throws Exception {
+        test("SharedArrayBuffer");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SharedWorker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void sharedWorker() throws Exception {
+        test("SharedWorker");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SimpleArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void simpleArray() throws Exception {
+        test("SimpleArray");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void siteBoundCredential() throws Exception {
+        test("SiteBoundCredential");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void sourceBuffer() throws Exception {
+        test("SourceBuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void sourceBufferList() throws Exception {
+        test("SourceBufferList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechGrammar() throws Exception {
+        test("SpeechGrammar");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechGrammarList() throws Exception {
+        test("SpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionAlternative() throws Exception {
+        test("SpeechRecognitionAlternative");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionError() throws Exception {
+        test("SpeechRecognitionError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionEvent() throws Exception {
+        test("SpeechRecognitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionResult() throws Exception {
+        test("SpeechRecognitionResult");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void speechRecognitionResultList() throws Exception {
+        test("SpeechRecognitionResultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void speechSynthesis() throws Exception {
+        test("SpeechSynthesis");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void speechSynthesisErrorEvent() throws Exception {
+        test("SpeechSynthesisErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void speechSynthesisEvent() throws Exception {
+        test("SpeechSynthesisEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void speechSynthesisUtterance() throws Exception {
+        test("SpeechSynthesisUtterance");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF52 = "function")
+    public void speechSynthesisVoice() throws Exception {
+        test("SpeechSynthesisVoice");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void staticNodeList() throws Exception {
+        test("StaticNodeList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void stereoPannerNode() throws Exception {
+        test("StereoPannerNode");
+    }
+
+    /**
+     * Test {@code net.sourceforge.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "object")
+    public void stopIteration() throws Exception {
+        test("StopIteration");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Storage}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void storage() throws Exception {
+        test("Storage");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void storageEvent() throws Exception {
+        test("StorageEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void storageManager() throws Exception {
+        test("StorageManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void styleMedia() throws Exception {
+        test("StyleMedia");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void styleSheet() throws Exception {
+        test("StyleSheet");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void styleSheetList() throws Exception {
+        test("StyleSheetList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void subtleCrypto() throws Exception {
+        test("SubtleCrypto");
     }
 
     /**
@@ -2089,6 +5284,126 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedAngle() throws Exception {
+        test("SVGAnimatedAngle");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedBoolean() throws Exception {
+        test("SVGAnimatedBoolean");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedEnumeration() throws Exception {
+        test("SVGAnimatedEnumeration");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedInteger() throws Exception {
+        test("SVGAnimatedInteger");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedLength() throws Exception {
+        test("SVGAnimatedLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedLengthList() throws Exception {
+        test("SVGAnimatedLengthList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedNumber() throws Exception {
+        test("SVGAnimatedNumber");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedNumberList() throws Exception {
+        test("SVGAnimatedNumberList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedPreserveAspectRatio() throws Exception {
+        test("SVGAnimatedPreserveAspectRatio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedRect() throws Exception {
+        test("SVGAnimatedRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedString() throws Exception {
+        test("SVGAnimatedString");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgAnimatedTransformList() throws Exception {
+        test("SVGAnimatedTransformList");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement}.
      *
      * @throws Exception if an error occurs
@@ -2125,6 +5440,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgAnimationElement() throws Exception {
+        test("SVGAnimationElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement}.
      *
      * @throws Exception if an error occurs
@@ -2146,6 +5471,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgClipPathElement() throws Exception {
         test("SVGClipPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgComponentTransferFunctionElement() throws Exception {
+        test("SVGComponentTransferFunctionElement");
     }
 
     /**
@@ -2179,6 +5514,26 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgDescElement() throws Exception {
         test("SVGDescElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void svgDiscardElement() throws Exception {
+        test("SVGDiscardElement");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF45 = "function")
+    public void svgDocument() throws Exception {
+        test("SVGDocument");
     }
 
     /**
@@ -2299,6 +5654,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgFEDistantLightElement() throws Exception {
         test("SVGFEDistantLightElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgFEDropShadowElement() throws Exception {
+        test("SVGFEDropShadowElement");
     }
 
     /**
@@ -2530,6 +5895,36 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void svgGeometryElement() throws Exception {
+        test("SVGGeometryElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgGradientElement() throws Exception {
+        test("SVGGradientElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgGraphicsElement() throws Exception {
+        test("SVGGraphicsElement");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGImageElement}.
      *
      * @throws Exception if an error occurs
@@ -2542,15 +5937,23 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement}.
-     *
-     * @throws Exception if an error occurs
+     * @throws Exception if the test fails
      */
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void svgLineElement() throws Exception {
-        test("SVGLineElement");
+    public void svgLength() throws Exception {
+        test("SVGLength");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgLengthList() throws Exception {
+        test("SVGLengthList");
     }
 
     /**
@@ -2563,6 +5966,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgLinearGradientElement() throws Exception {
         test("SVGLinearGradientElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgLineElement() throws Exception {
+        test("SVGLineElement");
     }
 
     /**
@@ -2626,1124 +6041,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPathElement() throws Exception {
-        test("SVGPathElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPatternElement() throws Exception {
-        test("SVGPatternElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPolygonElement() throws Exception {
-        test("SVGPolygonElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPolylineElement() throws Exception {
-        test("SVGPolylineElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgRadialGradientElement() throws Exception {
-        test("SVGRadialGradientElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRect}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgRect() throws Exception {
-        test("SVGRect");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgRectElement() throws Exception {
-        test("SVGRectElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgSVGElement() throws Exception {
-        test("SVGSVGElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgScriptElement() throws Exception {
-        test("SVGScriptElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSetElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void svgSetElement() throws Exception {
-        test("SVGSetElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStopElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgStopElement() throws Exception {
-        test("SVGStopElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStyleElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgStyleElement() throws Exception {
-        test("SVGStyleElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSwitchElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgSwitchElement() throws Exception {
-        test("SVGSwitchElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSymbolElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgSymbolElement() throws Exception {
-        test("SVGSymbolElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTSpanElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTSpanElement() throws Exception {
-        test("SVGTSpanElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTextElement() throws Exception {
-        test("SVGTextElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTextPathElement() throws Exception {
-        test("SVGTextPathElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTitleElement() throws Exception {
-        test("SVGTitleElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgUseElement() throws Exception {
-        test("SVGUseElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgViewElement() throws Exception {
-        test("SVGViewElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Screen}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void screen() throws Exception {
-        test("Screen");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Selection}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void selection() throws Exception {
-        test("Selection");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SimpleArray}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void simpleArray() throws Exception {
-        test("SimpleArray");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void staticNodeList() throws Exception {
-        test("StaticNodeList");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Storage}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void storage() throws Exception {
-        test("Storage");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void styleSheetList() throws Exception {
-        test("StyleSheetList");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Text}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void text() throws Exception {
-        test("Text");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void textRange() throws Exception {
-        test("TextRange");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void treeWalker() throws Exception {
-        test("TreeWalker");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void uIEvent() throws Exception {
-        test("UIEvent");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void uint16Array() throws Exception {
-        test("Uint16Array");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void uint32Array() throws Exception {
-        test("Uint32Array");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void uint8Array() throws Exception {
-        test("Uint8Array");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void uint8ClampedArray() throws Exception {
-        test("Uint8ClampedArray");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.WebSocket}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void webSocket() throws Exception {
-        test("WebSocket");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Window}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void window() throws Exception {
-        test("Window");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void xmlDocument() throws Exception {
-        test("XMLDocument");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void xmlHttpRequest() throws Exception {
-        test("XMLHttpRequest");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void xmlSerializer() throws Exception {
-        test("XMLSerializer");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void xPathEvaluator() throws Exception {
-        test("XPathEvaluator");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void xPathNSResolver() throws Exception {
-        test("XPathNSResolver");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void xPathResult() throws Exception {
-        test("XPathResult");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTProcessor}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void xsltProcessor() throws Exception {
-        test("XSLTProcessor");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void xsltemplate() throws Exception {
-        test("XSLTemplate");
-    }
-
-    /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "object")
-    public void stopIteration() throws Exception {
-        test("StopIteration");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    @NotYetImplemented(IE)
-    public void msStyleCSSProperties() throws Exception {
-        test("MSStyleCSSProperties");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    @NotYetImplemented(IE)
-    public void msCurrentStyleCSSProperties() throws Exception {
-        test("MSCurrentStyleCSSProperties");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void error() throws Exception {
-        test("Error");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void clientRectList() throws Exception {
-        test("ClientRectList");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
-    public void svgDocument() throws Exception {
-        test("SVGDocument");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void object() throws Exception {
-        test("Object");
-    }
-
-    /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.Arguments}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("object")
-    public void arguments() throws Exception {
-        test("arguments");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Notification}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void notification() throws Exception {
-        test("Notification");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function",
-            CHROME = "function")
-    public void htmlDetailsElement() throws Exception {
-        test("HTMLDetailsElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void htmlDialogElement() throws Exception {
-        test("HTMLDialogElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void htmlTrackElement() throws Exception {
-        test("HTMLTrackElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void htmlMenuItemElement() throws Exception {
-        test("HTMLMenuItemElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void urlSearchParams() throws Exception {
-        test("URLSearchParams");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.intl.Intl}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("object")
-    public void intl() throws Exception {
-        test("Intl");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void formData() throws Exception {
-        test("FormData");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageChannel}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void messageChannel() throws Exception {
-        test("MessageChannel");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessagePort}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void messagePort() throws Exception {
-        test("MessagePort");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Promise}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void promise() throws Exception {
-        test("Promise");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.worker.Worker}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("function")
-    public void worker() throws Exception {
-        test("Worker");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SharedWorker}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void sharedWorker() throws Exception {
-        test("SharedWorker");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedLengthList() throws Exception {
-        test("SVGAnimatedLengthList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("object")
-    public void math() throws Exception {
-        test("Math");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void pageTransitionEvent() throws Exception {
-        test("PageTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedNumber() throws Exception {
-        test("SVGAnimatedNumber");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "object",
-            CHROME = "function")
-    public void cssPageRule() throws Exception {
-        test("CSSPageRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTextPositioningElement() throws Exception {
-        test("SVGTextPositioningElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void validityState() throws Exception {
-        test("ValidityState");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozSmsSegmentInfo() throws Exception {
-        test("MozSmsSegmentInfo");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void closeEvent() throws Exception {
-        test("CloseEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozMobileMessageThread() throws Exception {
-        test("MozMobileMessageThread");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedRect() throws Exception {
-        test("SVGAnimatedRect");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void progressEvent() throws Exception {
-        test("ProgressEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedString() throws Exception {
-        test("SVGAnimatedString");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbDatabase() throws Exception {
-        test("IDBDatabase");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedEnumeration() throws Exception {
-        test("SVGAnimatedEnumeration");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void textMetrics() throws Exception {
-        test("TextMetrics");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbIndex() throws Exception {
-        test("IDBIndex");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void mouseWheelEvent() throws Exception {
-        test("MouseWheelEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void wheelEvent() throws Exception {
-        test("WheelEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void positionError() throws Exception {
-        test("PositionError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedNumberList() throws Exception {
-        test("SVGAnimatedNumberList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object",
-            CHROME = "function")
-    public void cssNamespaceRule() throws Exception {
-        test("CSSNamespaceRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbFactory() throws Exception {
-        test("IDBFactory");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgNumberList() throws Exception {
-        test("SVGNumberList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void customEvent() throws Exception {
-        test("CustomEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void errorEvent() throws Exception {
-        test("ErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void animationEvent() throws Exception {
-        test("AnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedBoolean() throws Exception {
-        test("SVGAnimatedBoolean");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedPreserveAspectRatio() throws Exception {
-        test("SVGAnimatedPreserveAspectRatio");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozMmsMessage() throws Exception {
-        test("MozMmsMessage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozSmsFilter() throws Exception {
-        test("MozSmsFilter");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void mediaQueryList() throws Exception {
-        test("MediaQueryList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void transitionEvent() throws Exception {
-        test("TransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void xDomainRequest() throws Exception {
-        test("XDomainRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void styleSheet() throws Exception {
-        test("StyleSheet");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPreserveAspectRatio() throws Exception {
-        test("SVGPreserveAspectRatio");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void characterData() throws Exception {
-        test("CharacterData");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -3759,1906 +6056,20 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
-    public void canvasGradient() throws Exception {
-        test("CanvasGradient");
+    public void svgNumberList() throws Exception {
+        test("SVGNumberList");
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void nodeIterator() throws Exception {
-        test("NodeIterator");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void timeRanges() throws Exception {
-        test("TimeRanges");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void xmlHttpRequestEventTarget() throws Exception {
-        test("XMLHttpRequestEventTarget");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void paymentAddress() throws Exception {
-        test("PaymentAddress");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void paymentRequest() throws Exception {
-        test("PaymentRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void paymentResponse() throws Exception {
-        test("PaymentResponse");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performance() throws Exception {
-        test("Performance");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void compositionEvent() throws Exception {
-        test("CompositionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedLength() throws Exception {
-        test("SVGAnimatedLength");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF = "object")
-    public void cssSupportsRule() throws Exception {
-        test("CSSSupportsRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbKeyRange() throws Exception {
-        test("IDBKeyRange");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgStringList() throws Exception {
-        test("SVGStringList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domError() throws Exception {
-        test("DOMError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedInteger() throws Exception {
-        test("SVGAnimatedInteger");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void webGLRenderingContext() throws Exception {
-        test("WebGLRenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void blob() throws Exception {
-        test("Blob");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedTransformList() throws Exception {
-        test("SVGAnimatedTransformList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceNavigation() throws Exception {
-        test("PerformanceNavigation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void svgAnimationElement() throws Exception {
-        test("SVGAnimationElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceTiming() throws Exception {
-        test("PerformanceTiming");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbObjectStore() throws Exception {
-        test("IDBObjectStore");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void url() throws Exception {
-        test("URL");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbTransaction() throws Exception {
-        test("IDBTransaction");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("object")
-    public void json() throws Exception {
-        test("JSON");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbRequest() throws Exception {
-        test("IDBRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "object",
-            IE = "object")
-    public void cssKeyframeRule() throws Exception {
-        test("CSSKeyframeRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbCursorWithValue() throws Exception {
-        test("IDBCursorWithValue");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void focusEvent() throws Exception {
-        test("FocusEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void domStringList() throws Exception {
-        test("DOMStringList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF = "object")
-    public void cssConditionRule() throws Exception {
-        test("CSSConditionRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgLengthList() throws Exception {
-        test("SVGLengthList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgGradientElement() throws Exception {
-        test("SVGGradientElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgLength() throws Exception {
-        test("SVGLength");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void storageEvent() throws Exception {
-        test("StorageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbCursor() throws Exception {
-        test("IDBCursor");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void crypto() throws Exception {
-        test("Crypto");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbOpenDBRequest() throws Exception {
-        test("IDBOpenDBRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF = "object")
-    public void cssGroupingRule() throws Exception {
-        test("CSSGroupingRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgPoint() throws Exception {
-        test("SVGPoint");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void css() throws Exception {
-        test("CSS");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void dataTransfer() throws Exception {
-        test("DataTransfer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTransformList() throws Exception {
-        test("SVGTransformList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void imageData() throws Exception {
-        test("ImageData");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void idbVersionChangeEvent() throws Exception {
-        test("IDBVersionChangeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void popStateEvent() throws Exception {
-        test("PopStateEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgAnimatedAngle() throws Exception {
-        test("SVGAnimatedAngle");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozMobileMessageManager() throws Exception {
-        test("MozMobileMessageManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void fileList() throws Exception {
-        test("FileList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "object",
-            IE = "object")
-    public void cssKeyframesRule() throws Exception {
-        test("CSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void file() throws Exception {
-        test("File");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void subtleCrypto() throws Exception {
-        test("SubtleCrypto");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozSmsMessage() throws Exception {
-        test("MozSmsMessage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void canvasPattern() throws Exception {
-        test("CanvasPattern");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void dragEvent() throws Exception {
-        test("DragEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgTransform() throws Exception {
-        test("SVGTransform");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement}.
      *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void analyserNode() throws Exception {
-        test("AnalyserNode");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AudioParam}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioParam() throws Exception {
-        test("AudioParam");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void channelMergerNode() throws Exception {
-        test("ChannelMergerNode");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMCursor}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void domCursor() throws Exception {
-        test("DOMCursor");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLShadowElement}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            FF52 = "undefined",
-            IE = "undefined")
-    public void htmlShadowElement() throws Exception {
-        test("HTMLShadowElement");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.LocalMediaStream}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void localMediaStream() throws Exception {
-        test("LocalMediaStream");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void path2D() throws Exception {
-        test("Path2D");
-    }
-
-    /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void shadowRoot() throws Exception {
-        test("ShadowRoot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void audio() throws Exception {
-        test("Audio");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioBuffer() throws Exception {
-        test("AudioBuffer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioBufferSourceNode() throws Exception {
-        test("AudioBufferSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioContext() throws Exception {
-        test("AudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioDestinationNode() throws Exception {
-        test("AudioDestinationNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioListener() throws Exception {
-        test("AudioListener");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioNode() throws Exception {
-        test("AudioNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void audioProcessingEvent() throws Exception {
-        test("AudioProcessingEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void biquadFilterNode() throws Exception {
-        test("BiquadFilterNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void channelSplitterNode() throws Exception {
-        test("ChannelSplitterNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void convolverNode() throws Exception {
-        test("ConvolverNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void delayNode() throws Exception {
-        test("DelayNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void dynamicsCompressorNode() throws Exception {
-        test("DynamicsCompressorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void gainNode() throws Exception {
-        test("GainNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaStreamAudioDestinationNode() throws Exception {
-        test("MediaStreamAudioDestinationNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaStreamAudioSourceNode() throws Exception {
-        test("MediaStreamAudioSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaStreamEvent() throws Exception {
-        test("MediaStreamEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void offlineAudioCompletionEvent() throws Exception {
-        test("OfflineAudioCompletionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void offlineAudioContext() throws Exception {
-        test("OfflineAudioContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void oscillatorNode() throws Exception {
-        test("OscillatorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void pannerNode() throws Exception {
-        test("PannerNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void periodicWave() throws Exception {
-        test("PeriodicWave");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void scriptProcessorNode() throws Exception {
-        test("ScriptProcessorNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void waveShaperNode() throws Exception {
-        test("WaveShaperNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            FF52 = "undefined",
-            IE = "undefined")
-    public void htmlContentElement() throws Exception {
-        test("HTMLContentElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void htmlDataElement() throws Exception {
-        test("HTMLDataElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void clipboardEvent() throws Exception {
-        test("ClipboardEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void deviceMotionEvent() throws Exception {
-        test("DeviceMotionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void deviceLightEvent() throws Exception {
-        test("DeviceLightEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void deviceOrientationEvent() throws Exception {
-        test("DeviceOrientationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void deviceStorageChangeEvent() throws Exception {
-        test("DeviceStorageChangeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void eventSource() throws Exception {
-        test("EventSource");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void eventTarget() throws Exception {
-        test("EventTarget");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void gamepadEvent() throws Exception {
-        test("GamepadEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaElementAudioSourceNode() throws Exception {
-        test("MediaElementAudioSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaStream() throws Exception {
-        test("MediaStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaStreamTrack() throws Exception {
-        test("MediaStreamTrack");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void mouseScrollEvent() throws Exception {
-        test("MouseScrollEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void timeEvent() throws Exception {
-        test("TimeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void touch() throws Exception {
-        test("Touch");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void touchEvent() throws Exception {
-        test("TouchEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void touchList() throws Exception {
-        test("TouchList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void userProximityEvent() throws Exception {
-        test("UserProximityEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void deviceProximityEvent() throws Exception {
-        test("DeviceProximityEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void inputEvent() throws Exception {
-        test("InputEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void htmlPictureElement() throws Exception {
-        test("HTMLPictureElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void mozRTCIceCandidate() throws Exception {
-        test("mozRTCIceCandidate");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void mozRTCPeerConnection() throws Exception {
-        test("mozRTCPeerConnection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void mozRTCSessionDescription() throws Exception {
-        test("mozRTCSessionDescription");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcDataChannelEvent() throws Exception {
-        test("RTCDataChannelEvent");
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcIceCandidate() throws Exception {
-        test("RTCIceCandidate");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcPeerConnectionIceEvent() throws Exception {
-        test("RTCPeerConnectionIceEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcSessionDescription() throws Exception {
-        test("RTCSessionDescription");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void webkitRTCPeerConnection() throws Exception {
-        test("webkitRTCPeerConnection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void map() throws Exception {
-        test("Map");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaRecorder() throws Exception {
-        test("MediaRecorder");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaSource() throws Exception {
-        test("MediaSource");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void set() throws Exception {
-        test("Set");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void textDecoder() throws Exception {
-        test("TextDecoder");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void textEncoder() throws Exception {
-        test("TextEncoder");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void weakMap() throws Exception {
-        test("WeakMap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void weakSet() throws Exception {
-        test("WeakSet");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void blobEvent() throws Exception {
-        test("BlobEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void caretPosition() throws Exception {
-        test("CaretPosition");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void cryptoKey() throws Exception {
-        test("CryptoKey");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void deviceStorage() throws Exception {
-        test("DeviceStorage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void domRequest() throws Exception {
-        test("DOMRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void fileError() throws Exception {
-        test("FileError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void fileHandle() throws Exception {
-        test("FileHandle");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void fileReader() throws Exception {
-        test("FileReader");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void htmlFormControlsCollection() throws Exception {
-        test("HTMLFormControlsCollection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void lockedFile() throws Exception {
-        test("LockedFile");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void mutationObserver() throws Exception {
-        test("MutationObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
             IE = "object")
-    public void mutationRecord() throws Exception {
-        test("MutationRecord");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void radioNodeList() throws Exception {
-        test("RadioNodeList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void serviceWorker() throws Exception {
-        test("ServiceWorker");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void serviceWorkerRegistration() throws Exception {
-        test("ServiceWorkerRegistration");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void symbol() throws Exception {
-        test("Symbol");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("function")
-    public void uriError() throws Exception {
-        test("URIError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void fileRequest() throws Exception {
-        test("FileRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void serviceWorkerContainer() throws Exception {
-        test("ServiceWorkerContainer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void abstractList() throws Exception {
-        test("AbstractList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void batteryManager() throws Exception {
-        test("BatteryManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void gamepadButton() throws Exception {
-        test("GamepadButton");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void gamepad() throws Exception {
-        test("Gamepad");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
-    public void mozContactChangeEvent() throws Exception {
-        test("MozContactChangeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozSmsEvent() throws Exception {
-        test("MozSmsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mozMmsEvent() throws Exception {
-        test("MozMmsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
-    public void mozSettingsEvent() throws Exception {
-        test("MozSettingsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void proxy() throws Exception {
-        test("Proxy");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void headers() throws Exception {
-        test("Headers");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaKeyMessageEvent() throws Exception {
-        test("MediaKeyMessageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaKeys() throws Exception {
-        test("MediaKeys");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaKeySession() throws Exception {
-        test("MediaKeySession");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaKeyStatusMap() throws Exception {
-        test("MediaKeyStatusMap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaKeySystemAccess() throws Exception {
-        test("MediaKeySystemAccess");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void pushManager() throws Exception {
-        test("PushManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void pushSubscription() throws Exception {
-        test("PushSubscription");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void request() throws Exception {
-        test("Request");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void response() throws Exception {
-        test("Response");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "object")
-    public void cssCounterStyleRule() throws Exception {
-        test("CSSCounterStyleRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void broadcastChannel() throws Exception {
-        test("BroadcastChannel");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domMatrix() throws Exception {
-        test("DOMMatrix");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domMatrixReadOnly() throws Exception {
-        test("DOMMatrixReadOnly");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaDevices() throws Exception {
-        test("MediaDevices");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void stereoPannerNode() throws Exception {
-        test("StereoPannerNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void barProp() throws Exception {
-        test("BarProp");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void speechSynthesis() throws Exception {
-        test("SpeechSynthesis");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void speechSynthesisUtterance() throws Exception {
-        test("SpeechSynthesisUtterance");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void styleMedia() throws Exception {
-        test("StyleMedia");
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void webkitSpeechRecognition() throws Exception {
-        test("webkitSpeechRecognition");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void autocompleteErrorEvent() throws Exception {
-        test("AutocompleteErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function",
-            CHROME = "function")
-    public void dataTransferItem() throws Exception {
-        test("DataTransferItem");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function",
-            CHROME = "function")
-    public void dataTransferItemList() throws Exception {
-        test("DataTransferItemList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object",
-            CHROME = "undefined",
-            FF52 = "undefined")
-    public void domSettableTokenList() throws Exception {
-        test("DOMSettableTokenList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void htmlTemplateElement() throws Exception {
-        test("HTMLTemplateElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void mediaError() throws Exception {
-        test("MediaError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void mediaKeyError() throws Exception {
-        test("MediaKeyError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void mediaKeyEvent() throws Exception {
-        test("MediaKeyEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceEntry() throws Exception {
-        test("PerformanceEntry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceMark() throws Exception {
-        test("PerformanceMark");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceMeasure() throws Exception {
-        test("PerformanceMeasure");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void performanceResourceTiming() throws Exception {
-        test("PerformanceResourceTiming");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void svgComponentTransferFunctionElement() throws Exception {
-        test("SVGComponentTransferFunctionElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void svgFEDropShadowElement() throws Exception {
-        test("SVGFEDropShadowElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void svgGraphicsElement() throws Exception {
-        test("SVGGraphicsElement");
+    public void svgPathElement() throws Exception {
+        test("SVGPathElement");
     }
 
     /**
@@ -5893,6 +6304,28 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgPatternElement() throws Exception {
+        test("SVGPatternElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgPoint() throws Exception {
+        test("SVGPoint");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -5900,6 +6333,170 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgPointList() throws Exception {
         test("SVGPointList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgPolygonElement() throws Exception {
+        test("SVGPolygonElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgPolylineElement() throws Exception {
+        test("SVGPolylineElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgPreserveAspectRatio() throws Exception {
+        test("SVGPreserveAspectRatio");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgRadialGradientElement() throws Exception {
+        test("SVGRadialGradientElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRect}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgRect() throws Exception {
+        test("SVGRect");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgRectElement() throws Exception {
+        test("SVGRectElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgScriptElement() throws Exception {
+        test("SVGScriptElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSetElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void svgSetElement() throws Exception {
+        test("SVGSetElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStopElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgStopElement() throws Exception {
+        test("SVGStopElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgStringList() throws Exception {
+        test("SVGStringList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStyleElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgStyleElement() throws Exception {
+        test("SVGStyleElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgSVGElement() throws Exception {
+        test("SVGSVGElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSwitchElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgSwitchElement() throws Exception {
+        test("SVGSwitchElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSymbolElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgSymbolElement() throws Exception {
+        test("SVGSymbolElement");
     }
 
     /**
@@ -5913,6 +6510,84 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTextElement() throws Exception {
+        test("SVGTextElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTextPathElement() throws Exception {
+        test("SVGTextPathElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTextPositioningElement() throws Exception {
+        test("SVGTextPositioningElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTitleElement() throws Exception {
+        test("SVGTitleElement");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTransform() throws Exception {
+        test("SVGTransform");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTransformList() throws Exception {
+        test("SVGTransformList");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTSpanElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgTSpanElement() throws Exception {
+        test("SVGTSpanElement");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -5920,6 +6595,30 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgUnitTypes() throws Exception {
         test("SVGUnitTypes");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgUseElement() throws Exception {
+        test("SVGUseElement");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void svgViewElement() throws Exception {
+        test("SVGViewElement");
     }
 
     /**
@@ -5946,10 +6645,10 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void securityPolicyViolationEvent() throws Exception {
-        test("SecurityPolicyViolationEvent");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void symbol() throws Exception {
+        test("Symbol");
     }
 
     /**
@@ -5957,10 +6656,41 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void speechSynthesisEvent() throws Exception {
-        test("SpeechSynthesisEvent");
+            CHROME = "function")
+    public void syncManager() throws Exception {
+        test("SyncManager");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Text}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void text() throws Exception {
+        test("Text");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void textDecoder() throws Exception {
+        test("TextDecoder");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void textEncoder() throws Exception {
+        test("TextEncoder");
     }
 
     /**
@@ -5972,6 +6702,28 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void textEvent() throws Exception {
         test("TextEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void textMetrics() throws Exception {
+        test("TextMetrics");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void textRange() throws Exception {
+        test("TextRange");
     }
 
     /**
@@ -6017,6 +6769,74 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void timeEvent() throws Exception {
+        test("TimeEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void timeRanges() throws Exception {
+        test("TimeRanges");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touch() throws Exception {
+        test("Touch");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touchEvent() throws Exception {
+        test("TouchEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void touchList() throws Exception {
+        test("TouchList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void trackDefault() throws Exception {
+        test("TrackDefault");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void trackDefaultList() throws Exception {
+        test("TrackDefaultList");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
     public void trackEvent() throws Exception {
@@ -6028,9 +6848,272 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void transitionEvent() throws Exception {
+        test("TransitionEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void treeWalker() throws Exception {
+        test("TreeWalker");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void uIEvent() throws Exception {
+        test("UIEvent");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void uint16Array() throws Exception {
+        test("Uint16Array");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void uint32Array() throws Exception {
+        test("Uint32Array");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void uint8Array() throws Exception {
+        test("Uint8Array");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void uint8ClampedArray() throws Exception {
+        test("Uint8ClampedArray");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void uriError() throws Exception {
+        test("URIError");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void url() throws Exception {
+        test("URL");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void urlSearchParams() throws Exception {
+        test("URLSearchParams");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function")
+    public void userProximityEvent() throws Exception {
+        test("UserProximityEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void validityState() throws Exception {
+        test("ValidityState");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "function",
+            EDGE = "function")
+    public void videoPlaybackQuality() throws Exception {
+        test("VideoPlaybackQuality");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
             IE = "undefined")
     public void vTTCue() throws Exception {
         test("VTTCue");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void waveShaperNode() throws Exception {
+        test("WaveShaperNode");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void weakMap() throws Exception {
+        test("WeakMap");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void weakSet() throws Exception {
+        test("WeakSet");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_color_buffer_float() throws Exception {
+        test("WEBGL_color_buffer_float");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_atc() throws Exception {
+        test("WEBGL_compressed_texture_atc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_es3() throws Exception {
+        test("WEBGL_compressed_texture_es3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_etc1() throws Exception {
+        test("WEBGL_compressed_texture_etc1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_compressed_texture_pvrtc() throws Exception {
+        test("WEBGL_compressed_texture_pvrtc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void webGL_compressed_texture_s3tc() throws Exception {
+        test("WEBGL_compressed_texture_s3tc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            IE = "object")
+    public void webGL_debug_renderer_info() throws Exception {
+        test("WEBGL_debug_renderer_info");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_debug_shaders() throws Exception {
+        test("WEBGL_debug_shaders");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webGL_depth_texture() throws Exception {
+        test("WEBGL_depth_texture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGL2RenderingContext() throws Exception {
+        test("WebGL2RenderingContext");
     }
 
     /**
@@ -6087,10 +7170,42 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLQuery() throws Exception {
+        test("WebGLQuery");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
     public void webGLRenderbuffer() throws Exception {
         test("WebGLRenderbuffer");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void webGLRenderingContext() throws Exception {
+        test("WebGLRenderingContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void WebGLSampler() throws Exception {
+        test("WebGLSampler");
     }
 
     /**
@@ -6117,10 +7232,32 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLSync() throws Exception {
+        test("WebGLSync");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function",
             IE = "object")
     public void webGLTexture() throws Exception {
         test("WebGLTexture");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLTransformFeedback() throws Exception {
+        test("WebGLTransformFeedback");
     }
 
     /**
@@ -6138,9 +7275,29 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            FF52 = "function")
+    public void webGLVertexArrayObject() throws Exception {
+        test("WebGLVertexArrayObject");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
             CHROME = "function")
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void webkitAudioContext() throws Exception {
+        test("webkitAudioContext");
     }
 
     /**
@@ -6152,145 +7309,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             FF52 = "function")
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void webKitTransitionEvent() throws Exception {
-        test("WebKitTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void xmlHttpRequestUpload() throws Exception {
-        test("XMLHttpRequestUpload");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void xPathExpression() throws Exception {
-        test("XPathExpression");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void applicationCacheErrorEvent() throws Exception {
-        test("ApplicationCacheErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void cssViewportRule() throws Exception {
-        test("CSSViewportRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void fontFace() throws Exception {
-        test("FontFace");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void imageBitmap() throws Exception {
-        test("ImageBitmap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaEncryptedEvent() throws Exception {
-        test("MediaEncryptedEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void mediaQueryListEvent() throws Exception {
-        test("MediaQueryListEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void svgDiscardElement() throws Exception {
-        test("SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void svgGeometryElement() throws Exception {
-        test("SVGGeometryElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void screenOrientation() throws Exception {
-        test("ScreenOrientation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void webKitMutationObserver() throws Exception {
-        test("WebKitMutationObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webkitAudioContext() throws Exception {
-        test("webkitAudioContext");
     }
 
     /**
@@ -6379,9 +7397,29 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webKitMutationObserver() throws Exception {
+        test("WebKitMutationObserver");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("undefined")
     public void webkitOfflineAudioContext() throws Exception {
         test("webkitOfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webkitRTCPeerConnection() throws Exception {
+        test("webkitRTCPeerConnection");
     }
 
     /**
@@ -6402,6 +7440,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
             CHROME = "function")
     public void webkitSpeechGrammarList() throws Exception {
         test("webkitSpeechGrammarList");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
+    public void webkitSpeechRecognition() throws Exception {
+        test("webkitSpeechRecognition");
     }
 
     /**
@@ -6430,18 +7478,29 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
+    public void webKitTransitionEvent() throws Exception {
+        test("WebKitTransitionEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void webkitURL() throws Exception {
         test("webkitURL");
     }
 
     /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.WebSocket}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domPoint() throws Exception {
-        test("DOMPoint");
+    @Alerts("function")
+    public void webSocket() throws Exception {
+        test("WebSocket");
     }
 
     /**
@@ -6449,983 +7508,21 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domPointReadOnly() throws Exception {
-        test("DOMPointReadOnly");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void domRectReadOnly() throws Exception {
-        test("DOMRectReadOnly");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void budgetService() throws Exception {
-        test("BudgetService");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void cache() throws Exception {
-        test("Cache");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void cacheStorage() throws Exception {
-        test("CacheStorage");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiAccess() throws Exception {
-        test("MIDIAccess");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiConnectionEvent() throws Exception {
-        test("MIDIConnectionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiInput() throws Exception {
-        test("MIDIInput");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiInputMap() throws Exception {
-        test("MIDIInputMap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiMessageEvent() throws Exception {
-        test("MIDIMessageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiOutput() throws Exception {
-        test("MIDIOutput");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiOutputMap() throws Exception {
-        test("MIDIOutputMap");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void midiPort() throws Exception {
-        test("MIDIPort");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void permissions() throws Exception {
-        test("Permissions");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void permissionStatus() throws Exception {
-        test("PermissionStatus");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void readableByteStream() throws Exception {
-        test("ReadableByteStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void readableStream() throws Exception {
-        test("ReadableStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void appBannerPromptResult() throws Exception {
-        test("AppBannerPromptResult");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void serviceWorkerMessageEvent() throws Exception {
-        test("ServiceWorkerMessageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void beforeInstallPromptEvent() throws Exception {
-        test("BeforeInstallPromptEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "object")
-    public void installTrigger() throws Exception {
-        test("InstallTrigger");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void installTriggerImpl() throws Exception {
-        test("InstallTriggerImpl");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
-    public void mozPowerManager() throws Exception {
-        test("MozPowerManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF45 = "object")
-    public void mozCSSKeyframesRule() throws Exception {
-        test("MozCSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void idleDeadline() throws Exception {
-        test("IdleDeadline");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void inputDeviceCapabilities() throws Exception {
-        test("InputDeviceCapabilities");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentation() throws Exception {
-        test("Presentation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentationAvailability() throws Exception {
-        test("PresentationAvailability");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentationConnection() throws Exception {
-        test("PresentationConnection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentationConnectionAvailableEvent() throws Exception {
-        test("PresentationConnectionAvailableEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentationConnectionCloseEvent() throws Exception {
-        test("PresentationConnectionCloseEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void presentationRequest() throws Exception {
-        test("PresentationRequest");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechRecognitionAlternative() throws Exception {
-        test("SpeechRecognitionAlternative");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void performanceObserverEntryList() throws Exception {
-        test("PerformanceObserverEntryList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_compressed_texture_pvrtc() throws Exception {
-        test("WEBGL_compressed_texture_pvrtc");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_compressed_texture_atc() throws Exception {
-        test("WEBGL_compressed_texture_atc");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void imageBitmapRenderingContext() throws Exception {
-        test("ImageBitmapRenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void sourceBufferList() throws Exception {
-        test("SourceBufferList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void htmlHyperlinkElementUtils() throws Exception {
-        test("HTMLHyperlinkElementUtils");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void bluetoothRemoteGATTServer() throws Exception {
-        test("BluetoothRemoteGATTServer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void extendableMessageEvent() throws Exception {
-        test("ExtendableMessageEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void performanceObserver() throws Exception {
-        test("PerformanceObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechGrammar() throws Exception {
-        test("SpeechGrammar");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void oes_texture_half_float_linear() throws Exception {
-        test("OES_texture_half_float_linear");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void trackDefault() throws Exception {
-        test("TrackDefault");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechRecognitionResult() throws Exception {
-        test("SpeechRecognitionResult");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechGrammarList() throws Exception {
-        test("SpeechGrammarList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void oes_texture_half_float() throws Exception {
-        test("OES_texture_half_float");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_compressed_texture_es3() throws Exception {
-        test("WEBGL_compressed_texture_es3");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void offscreenCanvas() throws Exception {
-        test("OffscreenCanvas");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_compressed_texture_etc1() throws Exception {
-        test("WEBGL_compressed_texture_etc1");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_color_buffer_float() throws Exception {
-        test("WEBGL_color_buffer_float");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
             IE = "object")
-    public void oes_texture_float() throws Exception {
-        test("OES_texture_float");
+    public void wheelEvent() throws Exception {
+        test("WheelEvent");
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void gestureEvent() throws Exception {
-        test("GestureEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechRecognitionError() throws Exception {
-        test("SpeechRecognitionError");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void keyframeEffect() throws Exception {
-        test("KeyframeEffect");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechRecognitionEvent() throws Exception {
-        test("SpeechRecognitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void webGL_debug_renderer_info() throws Exception {
-        test("WEBGL_debug_renderer_info");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            IE = "object")
-    public void performanceNavigationTiming() throws Exception {
-        test("PerformanceNavigationTiming");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void speechSynthesisVoice() throws Exception {
-        test("SpeechSynthesisVoice");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void oes_texture_float_linear() throws Exception {
-        test("OES_texture_float_linear");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void oes_element_index_uint() throws Exception {
-        test("OES_element_index_uint");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void bluetooth() throws Exception {
-        test("Bluetooth");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void trackDefaultList() throws Exception {
-        test("TrackDefaultList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void bluetoothRemoteGATTCharacteristic() throws Exception {
-        test("BluetoothRemoteGATTCharacteristic");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void ext_texture_filter_anisotropic() throws Exception {
-        test("EXT_texture_filter_anisotropic");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void serviceWorkerState() throws Exception {
-        test("ServiceWorkerState");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void webGL_compressed_texture_s3tc() throws Exception {
-        test("WEBGL_compressed_texture_s3tc");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void performanceFrameTiming() throws Exception {
-        test("PerformanceFrameTiming");
-    }
-
-    /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Window}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
     @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void sourceBuffer() throws Exception {
-        test("SourceBuffer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void speechRecognitionResultList() throws Exception {
-        test("SpeechRecognitionResultList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_debug_shaders() throws Exception {
-        test("WEBGL_debug_shaders");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void webGL2RenderingContext() throws Exception {
-        test("WebGL2RenderingContext");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void rtcIdentityAssertion() throws Exception {
-        test("RTCIdentityAssertion");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
             IE = "object")
-    public void mSGestureEvent() throws Exception {
-        test("MSGestureEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcCertificate() throws Exception {
-        test("RTCCertificate");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void speechSynthesisErrorEvent() throws Exception {
-        test("SpeechSynthesisErrorEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void sharedArrayBuffer() throws Exception {
-        test("SharedArrayBuffer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void idbMutableFile() throws Exception {
-        test("IDBMutableFile");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void webGL_depth_texture() throws Exception {
-        test("WEBGL_depth_texture");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "object")
-    public void atomics() throws Exception {
-        test("Atomics");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void ext_color_buffer_half_float() throws Exception {
-        test("EXT_color_buffer_half_float");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void iirFilterNode() throws Exception {
-        test("IIRFilterNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void promiseRejectionEvent() throws Exception {
-        test("PromiseRejectionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "object",
-            IE = "undefined")
-    public void reflect() throws Exception {
-        test("Reflect");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void syncManager() throws Exception {
-        test("SyncManager");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void canvasCaptureMediaStream() throws Exception {
-        test("CanvasCaptureMediaStream");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void fontFaceSet() throws Exception {
-        test("FontFaceSet");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void mediaDeviceInfo() throws Exception {
-        test("MediaDeviceInfo");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcPeerConnection() throws Exception {
-        test("RTCPeerConnection");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            EDGE = "function")
-    public void videoPlaybackQuality() throws Exception {
-        test("VideoPlaybackQuality");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void angle_instanced_arrays() throws Exception {
-        test("ANGLE_instanced_arrays");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            IE = "object")
-    public void oes_standard_derivatives() throws Exception {
-        test("OES_standard_derivatives");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void canvasCaptureMediaStreamTrack() throws Exception {
-        test("CanvasCaptureMediaStreamTrack");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void rtcStatsReport() throws Exception {
-        test("RTCStatsReport");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void passwordCredential() throws Exception {
-        test("PasswordCredential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void credential() throws Exception {
-        test("Credential");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void intersectionObserver() throws Exception {
-        test("IntersectionObserver");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void intersectionObserverEntry() throws Exception {
-        test("IntersectionObserverEntry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void credentialsContainer() throws Exception {
-        test("CredentialsContainer");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void federatedCredential() throws Exception {
-        test("FederatedCredential");
+    public void window() throws Exception {
+        test("Window");
     }
 
     /**
@@ -7438,44 +7535,56 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.worker.Worker}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void baseAudioContext() throws Exception {
-        test("BaseAudioContext");
+    @Alerts("function")
+    public void worker() throws Exception {
+        test("Worker");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void constantSourceNode() throws Exception {
-        test("ConstantSourceNode");
+    @Alerts("undefined")
+    public void xDomainRequest() throws Exception {
+        test("XDomainRequest");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void xmlDocument() throws Exception {
+        test("XMLDocument");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void xmlHttpRequest() throws Exception {
+        test("XMLHttpRequest");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void customElementRegistry() throws Exception {
-        test("CustomElementRegistry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void htmlSlotElement() throws Exception {
-        test("HTMLSlotElement");
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void xmlHttpRequestEventTarget() throws Exception {
+        test("XMLHttpRequestEventTarget");
     }
 
     /**
@@ -7484,181 +7593,84 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    public void mediaStreamTrackEvent() throws Exception {
-        test("MediaStreamTrackEvent");
+    public void xmlHttpRequestUpload() throws Exception {
+        test("XMLHttpRequestUpload");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("function")
+    public void xmlSerializer() throws Exception {
+        test("XMLSerializer");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xPathEvaluator() throws Exception {
+        test("XPathEvaluator");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void pushSubscriptionOptions() throws Exception {
-        test("PushSubscriptionOptions");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xPathExpression() throws Exception {
+        test("XPathExpression");
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void remotePlayback() throws Exception {
-        test("RemotePlayback");
-    }
-
-    /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
     @Alerts("undefined")
-    public void siteBoundCredential() throws Exception {
-        test("SiteBoundCredential");
+    public void xPathNSResolver() throws Exception {
+        test("XPathNSResolver");
     }
 
     /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void storageManager() throws Exception {
-        test("StorageManager");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xPathResult() throws Exception {
+        test("XPathResult");
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
-    public void cssValueList() throws Exception {
-        test("CSSValueList");
+    @Alerts("undefined")
+    public void xsltemplate() throws Exception {
+        test("XSLTemplate");
     }
 
     /**
-     * @throws Exception if the test fails
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTProcessor}.
+     *
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void animation() throws Exception {
-        test("Animation");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void fileSystem() throws Exception {
-        test("FileSystem");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void fileSystemDirectoryEntry() throws Exception {
-        test("FileSystemDirectoryEntry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void fileSystemDirectoryReader() throws Exception {
-        test("FileSystemDirectoryReader");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void fileSystemEntry() throws Exception {
-        test("FileSystemEntry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
-    public void fileSystemFileEntry() throws Exception {
-        test("FileSystemFileEntry");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
-    public void audioScheduledSourceNode() throws Exception {
-        test("AudioScheduledSourceNode");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void webGLQuery() throws Exception {
-        test("WebGLQuery");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void WebGLSampler() throws Exception {
-        test("WebGLSampler");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void webGLSync() throws Exception {
-        test("WebGLSync");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void webGLTransformFeedback() throws Exception {
-        test("WebGLTransformFeedback");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            FF52 = "function")
-    public void webGLVertexArrayObject() throws Exception {
-        test("WebGLVertexArrayObject");
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void xsltProcessor() throws Exception {
+        test("XSLTProcessor");
     }
 }
