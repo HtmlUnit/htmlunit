@@ -354,12 +354,12 @@ public final class HTMLParser {
      * @param page the page
      * @param namespaceURI the namespace URI
      * @param qualifiedName the qualified name
-     * @param insideHtml is the node inside HTML or not
      * @param insideSvg is the node inside an SVG node or not
+     * @param svgSupport true if called from javascript createElementNS
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
     static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
-            final String qualifiedName, final boolean insideHtml, final boolean insideSvg) {
+            final String qualifiedName, final boolean insideSvg, final boolean svgSupport) {
         if (insideSvg) {
             return SVG_FACTORY;
         }
@@ -378,7 +378,7 @@ public final class HTMLParser {
                 tagName = tagName.substring(index + 1);
             }
             final ElementFactory factory;
-            if (!"svg".equals(tagName) && SVG_NAMESPACE.equals(namespaceURI)) {
+            if (svgSupport && !"svg".equals(tagName) && SVG_NAMESPACE.equals(namespaceURI)) {
                 factory = SVG_FACTORY;
             }
             else {
@@ -563,7 +563,7 @@ public final class HTMLParser {
 
             // add a head if none was there
             else if (headParsed_ == HeadParsed.NO && ("body".equals(tagLower) || "frameset".equals(tagLower))) {
-                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", true, insideSvg_);
+                final ElementFactory factory = getElementFactory(page_, namespaceURI, "head", insideSvg_, false);
                 final DomElement newElement = factory.createElement(page_, "head", null);
                 currentNode_.appendChild(newElement);
                 headParsed_ = HeadParsed.SYNTHESIZED;
@@ -593,7 +593,7 @@ public final class HTMLParser {
                 qName = "select";
             }
 
-            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, isInsideHtml(), insideSvg_);
+            final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, insideSvg_, false);
             if (factory == SVG_FACTORY) {
                 namespaceURI = SVG_NAMESPACE;
             }
@@ -1012,16 +1012,6 @@ public final class HTMLParser {
             final HTMLEventInfo info = (augs == null) ? null
                     : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
             return info != null && info.isSynthesized();
-        }
-
-        private boolean isInsideHtml() {
-            boolean html = true;
-            for (DomNode node = currentNode_; node != null; node = node.getParentNode()) {
-                if (!(node instanceof HtmlElement)) {
-                    html = false;
-                }
-            }
-            return html;
         }
     }
 }
