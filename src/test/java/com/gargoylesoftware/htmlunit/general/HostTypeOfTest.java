@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -1300,6 +1301,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function")
+    @NotYetImplemented(FF)
     public void domRectList() throws Exception {
         test("DOMRectList");
     }

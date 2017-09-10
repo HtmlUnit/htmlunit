@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -2064,6 +2065,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function DOMRectList() {\n    [native code]\n}")
+    @NotYetImplemented(FF)
     public void domRectList() throws Exception {
         test("DOMRectList");
     }
@@ -10676,6 +10678,7 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function DOMMatrix() { [native code] }",
             EDGE = "function WebKitCSSMatrix() { [native code] }",
             FF52 = "function WebKitCSSMatrix() {\n    [native code]\n}")
+    @NotYetImplemented(CHROME)
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
     }
