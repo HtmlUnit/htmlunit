@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+            <action type="fix" dev="rbri">
+                JavaScript: document.createElementNS is now able to create svg elements also.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: support NetworkInformation (Chrome only at the moment).
             </action>

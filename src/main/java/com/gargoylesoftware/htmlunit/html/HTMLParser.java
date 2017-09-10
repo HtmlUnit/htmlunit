@@ -365,9 +365,9 @@ public final class HTMLParser {
         }
 
         if (namespaceURI == null || namespaceURI.isEmpty()
-            || !qualifiedName.contains(":")
-            || namespaceURI.equals(XHTML_NAMESPACE)
-            || namespaceURI.equals(SVG_NAMESPACE)) {
+            || XHTML_NAMESPACE.equals(namespaceURI)
+            || SVG_NAMESPACE.equals(namespaceURI)
+            || !qualifiedName.contains(":")) {
 
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
@@ -377,7 +377,13 @@ public final class HTMLParser {
             else {
                 tagName = tagName.substring(index + 1);
             }
-            final ElementFactory factory = ELEMENT_FACTORIES.get(tagName);
+            final ElementFactory factory;
+            if (!"svg".equals(tagName) && SVG_NAMESPACE.equals(namespaceURI)) {
+                factory = SVG_FACTORY;
+            }
+            else {
+                factory = ELEMENT_FACTORIES.get(tagName);
+            }
 
             if (factory != null) {
                 return factory;

@@ -350,6 +350,25 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("[object SVGRectElement]")
+    public void createElementNS() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.createElementNS('http://www.w3.org/2000/svg', 'rect'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
     public void createDocumentNS_xul() throws Exception {
         final String html = "<html><body>\n"
