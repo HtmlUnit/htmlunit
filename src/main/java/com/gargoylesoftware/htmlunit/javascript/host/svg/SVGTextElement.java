@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgText;
  * A JavaScript object for {@code SVGTextElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = SvgText.class)
 public class SVGTextElement extends SVGTextPositioningElement {

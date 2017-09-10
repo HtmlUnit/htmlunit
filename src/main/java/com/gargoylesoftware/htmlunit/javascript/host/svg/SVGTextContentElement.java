@@ -21,11 +21,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
  * A JavaScript object for {@code SVGTextContentElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class SVGTextContentElement extends SVGGraphicsElement {
@@ -47,4 +49,12 @@ public class SVGTextContentElement extends SVGGraphicsElement {
     public SVGTextContentElement() {
     }
 
+    /**
+     * @return the length of the text
+     */
+    @JsxFunction
+    public float getComputedTextLength() {
+        // just a fake for the moment
+        return 1.0f;
+    }
 }
