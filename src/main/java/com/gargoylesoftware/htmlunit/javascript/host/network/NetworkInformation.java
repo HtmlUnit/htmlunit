@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.network;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code NetworkInformation}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @author Ronald Brill
  */
 @JsxClass(CHROME)
-public class NetworkInformation extends SimpleScriptable {
+public class NetworkInformation extends EventTarget {
 
     /**
      * Creates an instance.

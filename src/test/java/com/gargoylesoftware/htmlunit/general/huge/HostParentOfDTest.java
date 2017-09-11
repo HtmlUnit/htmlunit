@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * This class handles all host names which starts by character 'D' to 'E'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfDTest extends HostParentOf {
@@ -247,8 +248,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMMatrix_DOMMatrix() throws Exception {
         test("DOMMatrix", "DOMMatrix");
     }
@@ -258,6 +259,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF52 = "true")
     @NotYetImplemented(FF52)
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
@@ -268,8 +270,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMMatrixReadOnly_DOMMatrix() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrix");
     }
@@ -278,8 +280,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMMatrixReadOnly_DOMMatrixReadOnly() throws Exception {
         test("DOMMatrixReadOnly", "DOMMatrixReadOnly");
     }
@@ -289,6 +291,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF52 = "true")
     @NotYetImplemented(FF52)
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
@@ -308,8 +311,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMPoint_DOMPoint() throws Exception {
         test("DOMPoint", "DOMPoint");
     }
@@ -318,8 +321,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMPointReadOnly_DOMPoint() throws Exception {
         test("DOMPointReadOnly", "DOMPoint");
     }
@@ -328,8 +331,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMPointReadOnly_DOMPointReadOnly() throws Exception {
         test("DOMPointReadOnly", "DOMPointReadOnly");
     }
@@ -338,8 +341,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
         test("DOMRectReadOnly", "DOMRectReadOnly");
     }
@@ -3982,6 +3985,16 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_NetworkInformation() throws Exception {
+        test("EventTarget", "NetworkInformation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_Node() throws Exception {
@@ -5182,5 +5195,4 @@ public class HostParentOfDTest extends HostParentOf {
     public void _External_External() throws Exception {
         test("External", "External");
     }
-
 }
