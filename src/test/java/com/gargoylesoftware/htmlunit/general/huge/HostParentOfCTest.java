@@ -204,8 +204,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _ClientRect_ClientRect() throws Exception {
         test("ClientRect", "ClientRect");
     }
@@ -214,8 +214,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _ClientRectList_ClientRectList() throws Exception {
         test("ClientRectList", "ClientRectList");
     }
