@@ -42,9 +42,10 @@ public class AppletClassLoader extends URLClassLoader {
     /**
      * The constructor.
      * @param window the window containing this applet
+     * @param parent the parent class loader for delegation
      */
-    public AppletClassLoader(final Window window) {
-        super(new URL[0]);
+    public AppletClassLoader(final Window window, final ClassLoader parent) {
+        super(new URL[0], parent);
 
         if (window.getWebWindow().getWebClient().getOptions().isUseInsecureSSL()) {
             LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."

@@ -374,7 +374,8 @@ public class HtmlObject extends HtmlElement {
             appletClassName = appletClassName.substring(0, appletClassName.length() - 6);
         }
 
-        appletClassLoader_ = new AppletClassLoader((Window) getPage().getEnclosingWindow().getScriptableObject());
+        appletClassLoader_ = new AppletClassLoader((Window) getPage().getEnclosingWindow().getScriptableObject(),
+                                            Thread.currentThread().getContextClassLoader());
 
         final String documentUrl = page.getUrl().toExternalForm();
         String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
