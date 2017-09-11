@@ -67,6 +67,7 @@ public class DateTimeFormat extends SimpleScriptable {
 
         FF_45_FORMATS_.put("", mmSlash);
         FF_45_FORMATS_.put("ar", "dd\u200F/MM\u200F/YYYY");
+        FF_45_FORMATS_.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         FF_45_FORMATS_.put("ban", ddDot);
         FF_45_FORMATS_.put("be", ddDot);
         FF_45_FORMATS_.put("bg", ddDot + "\u200E \u0433.");
@@ -131,7 +132,6 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.putAll(FF_45_FORMATS_);
         IE_FORMATS_.putAll(FF_45_FORMATS_);
 
-        FF_45_FORMATS_.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
         FF_45_FORMATS_.put("en-CA", yyyyDash);
         FF_45_FORMATS_.put("en-PH", ddSlash);
         FF_45_FORMATS_.put("es-US", ddSlash);
