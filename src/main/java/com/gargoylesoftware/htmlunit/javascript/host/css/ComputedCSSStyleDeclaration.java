@@ -147,9 +147,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /** Denotes a value which should be returned as is. */
     private static final String EMPTY_FINAL = new String("");
 
-    /** The number of (horizontal) pixels to assume that each character occupies. */
-    public static final int PIXELS_PER_CHAR = 10;
-
     /** The set of 'inheritable' definitions. */
     private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
         AZIMUTH,
@@ -1042,7 +1039,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if ("right".equals(cssFloat) || "left".equals(cssFloat)
                     || "absolute".equals(getStyleAttribute(POSITION, true))) {
                 // We're floating; simplistic approximation: text content * pixels per character.
-                width = node.getTextContent().length() * PIXELS_PER_CHAR;
+                width = node.getTextContent().length() * getBrowserVersion().getPixesPerChar();
             }
             else if ("block".equals(display)) {
                 if (element instanceof HTMLBodyElement) {
@@ -1063,7 +1060,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         || node instanceof HtmlFileInput) {
                 final String text = node.asText();
                 // default font for buttons is a bit smaller than the body font size
-                width = 10 + (int) (text.length() * PIXELS_PER_CHAR * 0.9);
+                width = 10 + (int) (text.length() * getBrowserVersion().getPixesPerChar() * 0.9);
             }
             else if (node instanceof HtmlTextInput || node instanceof HtmlPasswordInput) {
                 final BrowserVersion browserVersion = getBrowserVersion();
@@ -1133,7 +1130,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     width += child.getTextContent().length() * (int) (height / 1.8f);
                 }
                 else {
-                    width += child.getTextContent().length() * PIXELS_PER_CHAR;
+                    width += child.getTextContent().length() * getBrowserVersion().getPixesPerChar();
                 }
             }
         }
@@ -1523,7 +1520,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     }
                 }
                 else if (n.getScriptableObject() instanceof Text) {
-                    left += n.getTextContent().length() * PIXELS_PER_CHAR;
+                    left += n.getTextContent().length() * getBrowserVersion().getPixesPerChar();
                 }
                 if (n instanceof HtmlTableRow) {
                     break;

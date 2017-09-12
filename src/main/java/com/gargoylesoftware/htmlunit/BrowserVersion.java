@@ -772,6 +772,7 @@ public final class BrowserVersion implements Serializable {
         }
         return "";
     }
+
     /**
      * Returns the corresponding height of the specified {@code fontSize}
      * @param fontSize the font size
@@ -786,6 +787,13 @@ public final class BrowserVersion implements Serializable {
             return fontHeights_[fontSizeInt];
         }
         return (int) (fontSizeInt * 1.2);
+    }
+
+    /**
+     * @return the pixesPerChar based on the specified {@code fontSize}
+     */
+    public int getPixesPerChar() {
+        return 10;
     }
 
     @Override

@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * A JavaScript object for {@code SVGTextContentElement}.
@@ -56,6 +55,6 @@ public class SVGTextContentElement extends SVGGraphicsElement {
     @JsxFunction
     public float getComputedTextLength() {
         // simple estimation
-        return getDomNodeOrDie().getTextContent().length() * ComputedCSSStyleDeclaration.PIXELS_PER_CHAR;
+        return getDomNodeOrDie().getTextContent().length() * getBrowserVersion().getPixesPerChar();
     }
 }
