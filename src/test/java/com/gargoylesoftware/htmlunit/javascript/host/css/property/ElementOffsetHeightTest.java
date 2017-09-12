@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ahmed Ashour
  */
 @RunWith(BrowserRunner.class)
-public class ComputedHeightTest extends WebDriverTestCase {
+public class ElementOffsetHeightTest extends WebDriverTestCase {
 
     /**
      * Tests the relation between {@code fontSize} and {@code offsetHeight}.
@@ -52,7 +52,7 @@ public class ComputedHeightTest extends WebDriverTestCase {
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        final String expected = loadExpectation("ComputedHeightTest.properties", ".txt");
+        final String expected = loadExpectation("ElementOffsetHeightTest.properties", ".txt");
         final String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
         assertEquals(expected, actual);
     }
