@@ -1129,7 +1129,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (parent instanceof HtmlElement) {
                     final HTMLElement e = (HTMLElement) child.getParentNode().getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                    final int height = ComputedHeight.getHeight(getBrowserVersion(), style.getFontSize());
+                    final int height = getBrowserVersion().getFontHeight(style.getFontSize());
                     width += child.getTextContent().length() * (int) (height / 1.8f);
                 }
                 else {
@@ -1263,7 +1263,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         else {
-            defaultHeight = ComputedHeight.getHeight(getBrowserVersion(), getFontSize());
+            defaultHeight = getBrowserVersion().getFontHeight(getFontSize());
             if (node instanceof HtmlDivision) {
                 defaultHeight *= StringUtils.countMatches(node.asText(), '\n') + 1;
             }

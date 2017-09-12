@@ -167,6 +167,13 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_45.xmlHttpRequestAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_45.imgAcceptHeader_ = "image/png,image/*;q=0.8,*/*;q=0.5";
         FIREFOX_45.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX_45.fontHeights_ = new int[] {
+            0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+            30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 53, 55, 57, 58,
+            59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 84, 85, 86, 87, 88,
+            89, 90, 91, 93, 94, 95, 96, 96, 98, 99, 100, 101, 103, 104, 105, 106, 106, 108, 109, 111, 112, 113, 115,
+            116, 117, 118, 119, 120, 121, 122, 123, 125, 126, 127, 128, 129, 130, 131, 132, 133, 135, 136, 138, 139,
+            139, 141, 142, 143, 144, 146, 147, 148, 149};
 
         // FF52
         FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
@@ -176,6 +183,13 @@ public final class BrowserVersion implements Serializable {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"};
         FIREFOX_52.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_52.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX_52.fontHeights_ = new int[] {
+            0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
+            30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 53, 55, 57, 58,
+            59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 84, 85, 86, 87, 88,
+            89, 90, 91, 93, 94, 95, 96, 96, 98, 99, 100, 101, 103, 104, 105, 106, 106, 108, 109, 111, 112, 113, 115,
+            116, 117, 118, 119, 120, 121, 122, 123, 125, 126, 127, 128, 129, 130, 131, 132, 133, 135, 136, 138, 139,
+            139, 141, 142, 143, 144, 146, 147, 148, 149};
 
         // IE
         INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
@@ -188,6 +202,13 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
         INTERNET_EXPLORER.cssAcceptHeader_ = "text/css, */*";
         INTERNET_EXPLORER.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
+        INTERNET_EXPLORER.fontHeights_ = new int[] {
+            0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25, 26, 28,
+            29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 43, 44, 45, 46, 47, 48, 49, 51, 52, 53, 54, 55, 56, 58,
+            59, 60, 61, 62, 63, 64, 66, 67, 68, 69, 70, 71, 72, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87,
+            89, 90, 91, 92, 93, 94, 95, 97, 98, 99, 100, 101, 102, 103, 105, 106, 107, 108, 109, 110, 112, 113, 114,
+            115, 116, 117, 118, 120, 121, 122, 123, 124, 125, 126, 128, 129, 130, 131, 132, 133, 135, 136, 137, 138,
+            139, 140, 141, 143, 144, 145, 146, 147};
 
         // EDGE
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
@@ -208,6 +229,13 @@ public final class BrowserVersion implements Serializable {
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
         // there are other issues with Chrome; a different productSub, etc.
+        CHROME.fontHeights_ = new int[] {
+            0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
+            27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
+            58, 58, 59, 60, 62, 63, 64, 65, 67, 69, 69, 70, 71, 73, 74, 75, 76, 77, 79, 79, 80, 81, 83, 84, 85, 86,
+            87, 89, 90, 90, 91, 93, 94, 96, 97, 98, 100, 101, 101, 102, 103, 105, 106, 107, 108, 110, 111, 111, 112,
+            113, 115, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 136, 137,
+            138, 139, 140, 142, 142, 143, 144, 145, 147};
 
         // default file upload mime types
         CHROME.registerUploadMimeType("html", "text/html");
@@ -376,6 +404,7 @@ public final class BrowserVersion implements Serializable {
     private String scriptAcceptHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
+    private int[] fontHeights_;
     private Map<String, String> uploadMimeTypes_ = new HashMap<>();
 
     /**
@@ -743,6 +772,21 @@ public final class BrowserVersion implements Serializable {
         }
         return "";
     }
+    /**
+     * Returns the corresponding height of the specified {@code fontSize}
+     * @param fontSize the font size
+     * @return the corresponding height
+     */
+    public int getFontHeight(final String fontSize) {
+        if (fontHeights_ == null) {
+            return 18;
+        }
+        final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
+        if (fontSizeInt < fontHeights_.length) {
+            return fontHeights_[fontSizeInt];
+        }
+        return (int) (fontSizeInt * 1.2);
+    }
 
     @Override
     public String toString() {
@@ -785,6 +829,7 @@ public final class BrowserVersion implements Serializable {
             workPiece_.scriptAcceptHeader_ = version.getScriptAcceptHeader();
             workPiece_.xmlHttpRequestAcceptHeader_ = version.getXmlHttpRequestAcceptHeader();
             workPiece_.headerNamesOrdered_ = version.getHeaderNamesOrdered();
+            workPiece_.fontHeights_ = version.fontHeights_;
 
             for (final PluginConfiguration pluginConf : version.getPlugins()) {
                 workPiece_.getPlugins().add(pluginConf.clone());

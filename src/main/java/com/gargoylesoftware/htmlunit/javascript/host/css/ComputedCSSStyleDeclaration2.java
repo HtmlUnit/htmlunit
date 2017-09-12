@@ -842,7 +842,7 @@ public class ComputedCSSStyleDeclaration2 extends CSSStyleDeclaration2 {
             }
         }
         else {
-            defaultHeight = ComputedHeight.getHeight(getBrowserVersion(), getFontSize());
+            defaultHeight = getBrowserVersion().getFontHeight(getFontSize());
             if (node instanceof HtmlDivision) {
                 defaultHeight *= StringUtils.countMatches(node.asText(), '\n') + 1;
             }
