@@ -148,7 +148,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private static final String EMPTY_FINAL = new String("");
 
     /** The number of (horizontal) pixels to assume that each character occupies. */
-    private static final int PIXELS_PER_CHAR = 10;
+    public static final int PIXELS_PER_CHAR = 10;
 
     /** The set of 'inheritable' definitions. */
     private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
