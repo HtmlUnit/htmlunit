@@ -154,6 +154,59 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"true", "true"})
+    public void offsetWidth_spanWithDiffernetFontSize() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var myDefault = document.getElementById('myDefault');\n"
+            + "    var myLarge = document.getElementById('myLarge');\n"
+
+            + "    alert(myDefault.offsetWidth > 20);\n"
+            + "    alert(myLarge.offsetWidth > myDefault.offsetWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='myDefault'>1234567890</span>\n"
+            + "  <span id='myLarge' style='font-size: 10em'>1234567890</span>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    @NotYetImplemented
+    public void offsetWidth_spanWithDiffernetFonts() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var mySerif = document.getElementById('mySerif');\n"
+            + "    var mySans = document.getElementById('mySans');\n"
+
+            + "    alert(mySerif.offsetWidth > 20);\n"
+            + "    alert(mySans.offsetWidth > mySerif.offsetWidth);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <span id='mySerif' style='font-family: serif'>1234567890</span>\n"
+            + "  <span id='mySans' style='font-family: sans-serif'>1234567890</span>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"15", "15"})
     public void offsetTopAndLeft_Padding() throws Exception {
         final String html =
