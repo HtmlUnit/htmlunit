@@ -739,6 +739,17 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _NetworkInformation_NetworkInformation() throws Exception {
+        test("NetworkInformation", "NetworkInformation");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Node_Attr() throws Exception {
         test("Node", "Attr");
