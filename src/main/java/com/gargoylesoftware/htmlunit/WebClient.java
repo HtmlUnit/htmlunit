@@ -563,12 +563,14 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param webResponse the response whose content may be logged
      */
     public void printContentIfNecessary(final WebResponse webResponse) {
-        final String contentType = webResponse.getContentType();
-        final int statusCode = webResponse.getStatusCode();
-        final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-        if (getOptions().isPrintContentOnFailingStatusCode() && !successful) {
-            LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
-            LOG.info(webResponse.getContentAsString());
+        if (getOptions().isPrintContentOnFailingStatusCode()) {
+            final int statusCode = webResponse.getStatusCode();
+            final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
+            if (!successful) {
+                final String contentType = webResponse.getContentType();
+                LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
+                LOG.info(webResponse.getContentAsString());
+            }
         }
     }
 
