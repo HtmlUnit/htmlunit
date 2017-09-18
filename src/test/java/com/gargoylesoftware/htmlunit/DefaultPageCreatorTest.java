@@ -83,6 +83,7 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
               "<!DOCTYPE html PUBLIC\n"
             + "\"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n"
             + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
+
         /** {@inheritDoc} */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
