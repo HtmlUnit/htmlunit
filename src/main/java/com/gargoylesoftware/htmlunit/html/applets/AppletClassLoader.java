@@ -78,8 +78,10 @@ public class AppletClassLoader extends URLClassLoader {
      * @throws IOException in case of problem working with the response content
      */
     public void addClassToClassPath(final String className, final WebResponse webResponse) throws IOException {
-        final byte[] bytes = IOUtils.toByteArray(webResponse.getContentAsStream());
-        defineClass(className, bytes, 0, bytes.length);
+        try (InputStream content = webResponse.getContentAsStream()) {
+            final byte[] bytes = IOUtils.toByteArray(content);
+            defineClass(className, bytes, 0, bytes.length);
+        }
     }
 
     private Class<?> loadOurNetscapeStuff(final String classNane) throws IOException {
