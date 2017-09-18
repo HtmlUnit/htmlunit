@@ -161,6 +161,7 @@ public final class XmlUtil {
             }
         });
         try {
+            // this closes the input source/stream
             return builder.parse(source);
         }
         catch (final SAXException e) {

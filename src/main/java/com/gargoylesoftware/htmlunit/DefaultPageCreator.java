@@ -151,8 +151,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      */
     @Override
     public Page createPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        final String contentType = determineContentType(webResponse.getContentType().toLowerCase(Locale.ROOT),
-            webResponse.getContentAsStream());
+        final String contentType = determineContentType(webResponse);
 
         final PageType pageType = determinePageType(contentType);
         switch (pageType) {
@@ -182,19 +181,20 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * Tries to determine the content type.
      * TODO: implement a content type sniffer based on the
      * <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">Content-Type Processing Model</a>
-     * @param contentType the contentType header if any
-     * @param contentAsStream stream allowing to read the downloaded content
+     * @param webResponse the response from the server
      * @return the sniffed mime type
      * @exception IOException if an IO problem occurs
      */
-    protected String determineContentType(final String contentType, final InputStream contentAsStream)
+    private String determineContentType(final WebResponse webResponse)
         throws IOException {
 
-        try {
-            if (!StringUtils.isEmpty(contentType)) {
-                return contentType;
-            }
+        final String contentType = webResponse.getContentType();
+        if (!StringUtils.isEmpty(contentType)) {
+            return contentType.toLowerCase(Locale.ROOT);
+        }
 
+        final InputStream contentAsStream = webResponse.getContentAsStream();
+        try {
             final byte[] bytes = read(contentAsStream, 500);
             if (bytes.length == 0) {
                 return "text/plain";
