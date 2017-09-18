@@ -38,6 +38,44 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("0")
+    public void ctorLengthZero() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var buff = new ArrayBuffer(0);\n"
+            + "  alert(buff.byteLength);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception true")
+    public void ctorLengthNegative() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var buff = new ArrayBuffer(-1);\n"
+            + "    alert(buff.byteLength);\n"
+            + "  } catch(e) { alert('exception ' + (e instanceof RangeError)); }"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("5")
     public void byteLength() throws Exception {
         final String html

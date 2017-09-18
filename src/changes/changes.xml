@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+            <action type="fix" dev="rbri">
+                JavaScript: fix handling of negative buffer sizes for the ArrayBuffer ctor.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: getComputedTextLength() support added for svg text elements.
             </action>

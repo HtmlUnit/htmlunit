@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -55,6 +56,9 @@ public class ArrayBuffer extends SimpleScriptable {
      */
     @JsxConstructor
     public void constructor(final int length) {
+        if (length < 0) {
+            throw ScriptRuntime.rangeError("invalid array length '" + length + "'.");
+        }
         bytes_ = new byte[length];
     }
 
