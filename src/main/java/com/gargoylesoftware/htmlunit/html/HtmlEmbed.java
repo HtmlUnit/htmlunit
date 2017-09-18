@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
@@ -65,8 +66,9 @@ public class HtmlEmbed extends HtmlElement {
         request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            IOUtils.copy(webResponse.getContentAsStream(), fos);
+        try (FileOutputStream fos = new FileOutputStream(file);
+                InputStream content =  webResponse.getContentAsStream()) {
+            IOUtils.copy(content, fos);
         }
     }
 

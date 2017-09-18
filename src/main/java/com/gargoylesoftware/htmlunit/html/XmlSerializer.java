@@ -256,7 +256,10 @@ class XmlSerializer {
             final WebResponse response = image.getWebResponse(true);
 
             final File file = createFile(srcAttr.getValue(), "." + getSuffix(response));
-            FileUtils.copyInputStreamToFile(response.getContentAsStream(), file);
+            try (InputStream inputStream = response.getContentAsStream()) {
+                FileUtils.copyInputStreamToFile(inputStream, file);
+            }
+
             final String valueOnFileSystem = outputDir_.getName() + FILE_SEPARATOR + file.getName();
             srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
         }
