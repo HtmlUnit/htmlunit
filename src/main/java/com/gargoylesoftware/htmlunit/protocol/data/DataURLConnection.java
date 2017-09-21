@@ -21,43 +21,29 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.commons.codec.DecoderException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * A URLConnection for supporting data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class DataURLConnection extends URLConnection {
 
-    /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(DataURLConnection.class);
-
-    /** The JavaScript "URL" prefix. */
+    /** The "URL" prefix 'data:'. */
     public static final String DATA_PREFIX = "data:";
 
-    /** The JavaScript code. */
-    private final byte[] content_;
+    private final DataUrlDecoder dataUrlDecoder_;
 
     /**
      * Creates an instance.
      * @param url the data URL
+     * @throws UnsupportedEncodingException in case the encoding is not supported
+     * @throws DecoderException in all other cases
      */
-    public DataURLConnection(final URL url) {
+    public DataURLConnection(final URL url) throws UnsupportedEncodingException, DecoderException {
         super(url);
-
-        byte[] data = null;
-        try {
-            data = DataUrlDecoder.decode(url).getBytes();
-        }
-        catch (final UnsupportedEncodingException e) {
-            LOG.error("Exception decoding " + url, e);
-        }
-        catch (final DecoderException e) {
-            LOG.error("Exception decoding " + url, e);
-        }
-        content_ = data;
+        dataUrlDecoder_ = DataUrlDecoder.decode(url);
     }
 
     /**
@@ -74,7 +60,22 @@ public class DataURLConnection extends URLConnection {
      */
     @Override
     public InputStream getInputStream() {
-        return new ByteArrayInputStream(content_);
+        return new ByteArrayInputStream(dataUrlDecoder_.getBytes());
     }
 
+    /**
+     * Gets the charset information specified in the data URL.
+     * @return "US-ASCII" if the URL didn't contain any charset information
+     */
+    public String getCharset() {
+        return dataUrlDecoder_.getCharset();
+    }
+
+    /**
+     * Gets the media type information contained in the data URL.
+     * @return "text/plain" if the URL didn't contain any media type information
+     */
+    public String getMediaType() {
+        return dataUrlDecoder_.getMediaType();
+    }
 }

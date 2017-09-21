@@ -14,9 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Stream handler for data URLs.
@@ -25,6 +30,9 @@ import java.net.URLStreamHandler;
  */
 public class Handler extends URLStreamHandler {
 
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(Handler.class);
+
     /**
      * Returns a new URLConnection for this URL.
      * @param url the JavaScript URL
@@ -32,6 +40,15 @@ public class Handler extends URLStreamHandler {
      */
     @Override
     protected URLConnection openConnection(final URL url) {
-        return new DataURLConnection(url);
+        try {
+            return new DataURLConnection(url);
+        }
+        catch (final UnsupportedEncodingException e) {
+            LOG.error("Exception decoding " + url, e);
+        }
+        catch (final DecoderException e) {
+            LOG.error("Exception decoding " + url, e);
+        }
+        return null;
     }
 }

@@ -95,7 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
-import com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder;
+import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -1160,17 +1160,17 @@ public class WebClient implements Serializable, AutoCloseable {
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
         final List<NameValuePair> responseHeaders = new ArrayList<>();
-        final DataUrlDecoder decoder;
+        final DataURLConnection connection;
         try {
-            decoder = DataUrlDecoder.decode(url);
+            connection = new DataURLConnection(url);
         }
         catch (final DecoderException e) {
             throw new IOException(e.getMessage());
         }
         responseHeaders.add(new NameValuePair("content-type",
-            decoder.getMediaType() + ";charset=" + decoder.getCharset()));
+            connection.getMediaType() + ";charset=" + connection.getCharset()));
         final DownloadedContent downloadedContent =
-                HttpWebConnection.downloadContent(url.openStream(), getOptions().getMaxInMemory());
+                HttpWebConnection.downloadContent(connection.getInputStream(), getOptions().getMaxInMemory());
         final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
         return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
     }
