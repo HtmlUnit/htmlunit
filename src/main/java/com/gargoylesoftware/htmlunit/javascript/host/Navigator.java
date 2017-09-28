@@ -159,7 +159,7 @@ public class Navigator extends SimpleScriptable {
      */
     @JsxGetter({CHROME, FF, EDGE})
     public String getProductSub() {
-        return "20100215";
+        return getBrowserVersion().getProductSub();
     }
 
     /**

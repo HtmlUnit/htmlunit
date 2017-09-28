@@ -96,12 +96,13 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"string", "true"},
-            IE = {"undefined", "false"})
+    @Alerts(DEFAULT = {"string", "20100101"},
+            CHROME = {"string", "20030107"},
+            IE = {"undefined", "undefined"})
     public void productSub() throws Exception {
         final String html = "<html><head><script>\n"
             + "alert(typeof(navigator.productSub));\n"
-            + "alert(parseInt(navigator.productSub) > 20000101);\n"
+            + "alert(navigator.productSub);\n"
             + "</script>\n"
             + "</head><body></body>\n"
             + "</html>";
@@ -215,10 +216,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.151", "NPSWF32_26_0_0_151.dll"},
-            FF52 = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.151", "NPSWF64_26_0_0_151.dll"},
+    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.130", "NPSWF32_27_0_0_130.dll"},
+            FF52 = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.130", "NPSWF64_27_0_0_130.dll"},
             CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
-            IE = {"Shockwave Flash", "Shockwave Flash 26.0 r0", "26.0.0.151", "Flash32_26_0_0_151.ocx"},
+            IE = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.130", "Flash32_27_0_0_130.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"

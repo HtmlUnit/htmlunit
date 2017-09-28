@@ -161,6 +161,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_45.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
         FIREFOX_45.platform_ = PLATFORM_WIN32;
         FIREFOX_45.buildId_ = "20170411115307";
+        FIREFOX_45.productSub_ = "20100101";
         FIREFOX_45.headerNamesOrdered_ = new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection"};
         FIREFOX_45.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
@@ -179,6 +180,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_52.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
         FIREFOX_52.buildId_ = "20170802111520";
+        FIREFOX_52.productSub_ = "20100101";
         FIREFOX_52.headerNamesOrdered_ = new String[] {
             "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Referer", "Cookie", "Connection", "Upgrade-Insecure-Requests"};
         FIREFOX_52.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
@@ -215,13 +217,14 @@ public final class BrowserVersion implements Serializable {
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
         CHROME.platform_ = PLATFORM_WIN32;
         CHROME.cpuClass_ = null;
+        CHROME.productSub_ = "20030107";
         CHROME.headerNamesOrdered_ = new String[] {
             "Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent", "Accept", "Referer", "Accept-Encoding", "Accept-Language", "Cookie"};
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
@@ -355,19 +358,19 @@ public final class BrowserVersion implements Serializable {
         CHROME.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 26.0 r0", "26.0.0.151", "NPSWF32_26_0_0_151.dll");
+                "Shockwave Flash 27.0 r0", "27.0.0.130", "NPSWF32_27_0_0_130.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 26.0 r0", "26.0.0.151", "NPSWF64_26_0_0_151.dll");
+                "Shockwave Flash 27.0 r0", "27.0.0.130", "NPSWF64_27_0_0_130.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.getPlugins().add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 26.0 r0", "26.0.0.151", "Flash32_26_0_0_151.ocx");
+                "Shockwave Flash 27.0 r0", "27.0.0.130", "Flash32_27_0_0_130.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.getPlugins().add(flash);
@@ -387,6 +390,7 @@ public final class BrowserVersion implements Serializable {
     private String applicationName_;
     private String applicationVersion_;
     private String buildId_;
+    private String productSub_;
     private String vendor_ = "";
     private String browserLanguage_ = LANGUAGE_ENGLISH_US;
     private String cpuClass_ = CPU_CLASS_X86;
@@ -736,6 +740,14 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the productSub.
+     * @return the buildId
+     */
+    public String getProductSub() {
+        return productSub_;
+    }
+
+    /**
      * Gets the headers names, so they are sent in the given order (if included in the request).
      * @return headerNames the header names in ordered manner
      */
@@ -831,6 +843,7 @@ public final class BrowserVersion implements Serializable {
                 .setUserLanguage(version.getUserLanguage());
 
             workPiece_.buildId_ = version.getBuildId();
+            workPiece_.productSub_ = version.getProductSub();
             workPiece_.htmlAcceptHeader_ = version.getHtmlAcceptHeader();
             workPiece_.imgAcceptHeader_ = version.getImgAcceptHeader();
             workPiece_.cssAcceptHeader_ = version.getCssAcceptHeader();
