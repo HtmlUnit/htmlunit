@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.html.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -586,5 +588,67 @@ public class SimpleRange implements Range, Serializable {
 
     private static int getMaxOffset(final Node node) {
         return isOffsetChars(node) ? getText(node).length() : node.getChildNodes().getLength();
+    }
+
+    /**
+     * @return a list with all nodes contained in this range
+     */
+    public List<DomNode> containedNodes() {
+        final List<DomNode> nodes = new ArrayList<>();
+        final DomNode ancestor = (DomNode) getCommonAncestorContainer();
+        if (ancestor == null) {
+            return nodes;
+        }
+
+        final DomNode start;
+        final DomNode end;
+        if (isOffsetChars(startContainer_)) {
+            start = (DomNode) startContainer_;
+            String text = getText(start);
+            if (startOffset_ > -1 && startOffset_ < text.length()) {
+                text = text.substring(0, startOffset_);
+            }
+            setText(start, text);
+        }
+        else if (startContainer_.getChildNodes().getLength() > startOffset_) {
+            start = (DomNode) startContainer_.getChildNodes().item(startOffset_);
+        }
+        else {
+            start = (DomNode) startContainer_.getNextSibling();
+        }
+        if (isOffsetChars(endContainer_)) {
+            end = (DomNode) endContainer_;
+            String text = getText(end);
+            if (endOffset_ > -1 && endOffset_ < text.length()) {
+                text = text.substring(endOffset_);
+            }
+            setText(end, text);
+        }
+        else if (endContainer_.getChildNodes().getLength() > endOffset_) {
+            end = (DomNode) endContainer_.getChildNodes().item(endOffset_);
+        }
+        else {
+            end = (DomNode) endContainer_.getNextSibling();
+        }
+
+        boolean foundStart = false;
+        boolean started = false;
+        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
+        while (i.hasNext()) {
+            final DomNode n = i.next();
+            if (n == end) {
+                break;
+            }
+            if (n == start) {
+                foundStart = true;
+            }
+            if (foundStart && (n != start || !isOffsetChars(startContainer_))) {
+                started = true;
+            }
+            if (started && !n.isAncestorOf(end)) {
+                nodes.add(n);
+            }
+        }
+        return nodes;
     }
 }

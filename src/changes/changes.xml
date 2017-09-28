@@ -9,6 +9,10 @@
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
             <action type="fix" dev="rbri">
+                JavaScript: fix for a strange side effect in Range.getClientRects() and Range.getBoundingClientRect().
+                Both calls have removed all nodes inside the range from the document.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: fix handling of negative buffer sizes for the ArrayBuffer ctor.
             </action>
             <action type="add" dev="rbri">

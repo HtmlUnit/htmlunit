@@ -375,4 +375,62 @@ public class RangeTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test for a regression, getBoundingClientRect has detached
+     * all elements of the range from the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLBodyElement]")
+    public void getBoundingClientRectDoesNotChangeTheParent() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var range = document.createRange();\n"
+
+            + "  var elem = document.createElement('boundtest');\n"
+            + "  document.body.appendChild(elem);\n"
+
+            + "  range.selectNode(elem);\n"
+            + "  range.getBoundingClientRect();\n"
+
+            + "  alert(elem.parentNode);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test for a regression, getClientRects has detached
+     * all elements of the range from the document.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLBodyElement]")
+    public void getClientRectsDoesNotChangeTheParent() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function doTest() {\n"
+            + "  var range = document.createRange();\n"
+
+            + "  var elem = document.createElement('boundtest');\n"
+            + "  document.body.appendChild(elem);\n"
+
+            + "  range.selectNode(elem);\n"
+            + "  range.getClientRects();\n"
+
+            + "  alert(elem.parentNode);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
