@@ -155,7 +155,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"true", "true"})
-    public void offsetWidth_spanWithDiffernetFontSize() throws Exception {
+    public void offsetWidth_spanWithDifferentFontSize() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
@@ -182,7 +182,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     @NotYetImplemented
-    public void offsetWidth_spanWithDiffernetFonts() throws Exception {
+    public void offsetWidth_spanWithDifferentFonts() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"

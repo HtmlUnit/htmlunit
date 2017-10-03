@@ -203,7 +203,6 @@ public final class XmlUtil {
                         wasBlank_ = false;
                         break;
                     }
-
                 }
             }
             return result;
