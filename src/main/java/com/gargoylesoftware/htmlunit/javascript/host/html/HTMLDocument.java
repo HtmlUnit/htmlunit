@@ -598,6 +598,12 @@ public class HTMLDocument extends Document {
 
             final WebClient webClient = page.getWebClient();
             final WebWindow window = page.getEnclosingWindow();
+            // reset isAttachedToPageDuringOnload_ to trigger the onload event for chrome also
+            if (window instanceof FrameWindow) {
+                final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
+                final HTMLIFrameElement iFrameElement = (HTMLIFrameElement) frame.getScriptableObject();
+                iFrameElement.onRefresh();
+            }
             webClient.loadWebResponseInto(webResponse, window);
         }
     }

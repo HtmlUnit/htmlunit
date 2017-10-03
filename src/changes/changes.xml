@@ -9,6 +9,9 @@
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
             <action type="fix" dev="rbri">
+                JavaScript: writing to an iFrame triggers the onload event now for chrome also
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: navigator.productSub now returns the same value as simulated browsers
             </action>
             <action type="fix" dev="rbri">

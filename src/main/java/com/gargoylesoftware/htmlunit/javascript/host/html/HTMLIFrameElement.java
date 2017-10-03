@@ -201,7 +201,8 @@ public class HTMLIFrameElement extends HTMLElement {
      */
     @Override
     public ScriptResult executeEventLocally(final Event event) {
-        if (!isAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
+        if (Event.TYPE_LOAD != event.getType()
+                || !isAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
             return super.executeEventLocally(event);
         }
         return null;

@@ -566,6 +566,34 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("iframe onload")
+    public void writeTriggersOnload() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><title>First</title><script>\n"
+            + "function test() {\n"
+            + "  var iframe = document.createElement('iframe');\n"
+            + "  var content = 'something';\n"
+            + "  document.body.appendChild(iframe);\n"
+
+            + "  iframe.onload = function() {alert('iframe onload')};\n"
+            + "  iframe.contentWindow.document.open('text/html', 'replace');\n"
+            + "  iframe.contentWindow.document.write(content);\n"
+            + "  iframe.contentWindow.document.close();\n"
+            + "}\n</script></head>\n"
+            + "<body>\n"
+            + "  <button type='button' id='clickme' onClick='test();'>Click me</a>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("clickme")).click();
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"localhost", "localhost", "localhost", "localhost",
                 "true", "true", "true"})
     public void domain() throws Exception {
