@@ -601,8 +601,10 @@ public class HTMLDocument extends Document {
             // reset isAttachedToPageDuringOnload_ to trigger the onload event for chrome also
             if (window instanceof FrameWindow) {
                 final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                final HTMLIFrameElement iFrameElement = (HTMLIFrameElement) frame.getScriptableObject();
-                iFrameElement.onRefresh();
+                final ScriptableObject scriptable = frame.getScriptableObject();
+                if (scriptable instanceof HTMLIFrameElement) {
+                    ((HTMLIFrameElement) scriptable).onRefresh();
+                }
             }
             webClient.loadWebResponseInto(webResponse, window);
         }
