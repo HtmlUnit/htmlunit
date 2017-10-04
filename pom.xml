@@ -909,6 +909,12 @@
             <artifactId>mockito-core</artifactId>
             <version>2.10.0</version>
             <scope>test</scope>
+            <exclusions>
+            	<exclusion>
+            		<groupId>net.bytebuddy</groupId>
+            		<artifactId>byte-buddy</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
