@@ -910,10 +910,10 @@
             <version>2.10.0</version>
             <scope>test</scope>
             <exclusions>
-            	<exclusion>
-            		<groupId>net.bytebuddy</groupId>
-            		<artifactId>byte-buddy</artifactId>
-            	</exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
