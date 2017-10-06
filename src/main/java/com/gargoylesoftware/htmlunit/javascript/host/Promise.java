@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.FunctionWrapper;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -27,12 +26,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -40,15 +42,19 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
 public class Promise extends SimpleScriptable {
 
+    private enum PromiseState { PENDING, FULFILLED, REJECTED }
+    private PromiseState state_ = PromiseState.PENDING;
     private Object value_;
     /** To be set only by {@link #all(Context, Scriptable, Object[], Function)}. */
     private Promise[] all_;
-    private boolean resolve_ = true;
-    private String exceptionDetails_;
+
+    private PostponedAction thenAction_;
+    private Promise linkedPromise_;
 
     /**
      * Default constructor.
@@ -72,15 +78,39 @@ public class Promise extends SimpleScriptable {
      */
     @JsxConstructor
     public Promise(final Object object) {
-        if (object instanceof Promise) {
-            value_ = ((Promise) object).value_;
+        if (!(object instanceof Function)) {
+            throw ScriptRuntime.typeError("Promise resolver is not a function");
         }
-        else if (object instanceof NativeObject) {
-            final NativeObject nativeObject = (NativeObject) object;
-            value_ = nativeObject.get("then", nativeObject);
+
+        final Function fun = (Function) object;
+        final Window window = getWindow(fun);
+        this.setParentScope(window);
+        this.setPrototype(window.getPrototype(this.getClass()));
+        final Promise thisPromise = this;
+
+        final Function resolve = new BaseFunction(window, ScriptableObject.getFunctionPrototype(window)) {
+            @Override
+            public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
+                                        final Object[] args) {
+                thisPromise.update(PromiseState.FULFILLED, args.length != 0 ? args[0] : Undefined.instance);
+                return thisPromise;
+            }
+        };
+
+        final Function reject = new BaseFunction(window, ScriptableObject.getFunctionPrototype(window)) {
+            @Override
+            public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
+                                        final Object[] args) {
+                thisPromise.update(PromiseState.REJECTED, args.length != 0 ? args[0] : Undefined.instance);
+                return thisPromise;
+            }
+        };
+
+        try {
+            fun.call(Context.getCurrentContext(), window, window, new Object[] {resolve, reject});
         }
-        else {
-            value_ = object;
+        catch (final JavaScriptException e) {
+            thisPromise.update(PromiseState.REJECTED, e.getValue());
         }
     }
 
@@ -96,11 +126,7 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise resolve(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final Promise promise = new Promise(args.length != 0 ? args[0] : Undefined.instance);
-        promise.setResolve(true);
-        promise.setParentScope(thisObj.getParentScope());
-        promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
-        return promise;
+        return create(thisObj, args, PromiseState.FULFILLED);
     }
 
     /**
@@ -115,40 +141,60 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise reject(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final Promise promise = new Promise(args.length != 0 ? args[0] : Undefined.instance);
-        promise.setResolve(false);
+        return create(thisObj, args, PromiseState.REJECTED);
+    }
+
+    private static Promise create(final Scriptable thisObj, final Object[] args, final PromiseState state) {
+        if (args.length != 0 && args[0] instanceof Promise && state == PromiseState.FULFILLED) {
+            return (Promise) args[0];
+        }
+
+        final Promise promise;
+        if (args.length > 0) {
+            final Object arg = args[0];
+            if (arg instanceof NativeObject) {
+                final NativeObject nativeObject = (NativeObject) arg;
+                promise = new Promise(nativeObject.get("then", nativeObject));
+            }
+            else {
+                promise = new Promise();
+                promise.value_ = arg;
+                promise.state_ = state;
+            }
+        }
+        else {
+            promise = new Promise();
+            promise.value_ = Undefined.instance;
+            promise.state_ = state;
+        }
+
         promise.setParentScope(thisObj.getParentScope());
         promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
         return promise;
     }
 
-    private void setResolve(final boolean resolve) {
-        resolve_ = resolve;
-    }
-
-    /**
-     * Also sets the value of this promise.
-     */
-    private boolean isResolved(final Function onRejected) {
-        if (all_ != null) {
-            final Object[] values = new Object[all_.length];
-            for (int i = 0; i < all_.length; i++) {
-                final Promise p = all_[i];
-                if (!p.isResolved(onRejected)) {
-                    value_ = p.value_;
-                    return false;
-                }
-
-                if (p.value_ instanceof Function) {
-                    // TODO
-                }
-                else {
-                    values[i] = p.value_;
-                }
-            }
-            value_ = Context.getCurrentContext().newArray(getParentScope(), values);
+    private void update(final PromiseState newState, final Object newValue) {
+        if (state_ == newState || state_ != PromiseState.PENDING) {
+            return;
         }
-        return resolve_;
+
+        value_ = newValue;
+        state_ = newState;
+
+        if (thenAction_ != null) {
+            try {
+                thenAction_.execute();
+            }
+            catch (final Exception e) {
+                // ignore for now
+            }
+            thenAction_ = null;
+        }
+
+        if (linkedPromise_ != null) {
+            linkedPromise_.update(newState, newValue);
+            linkedPromise_ = null;
+        }
     }
 
     /**
@@ -165,7 +211,7 @@ public class Promise extends SimpleScriptable {
     public static Promise all(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         final Promise promise = new Promise();
-        promise.setResolve(true);
+        promise.state_ = PromiseState.FULFILLED;
         if (args.length == 0) {
             promise.all_ = new Promise[0];
         }
@@ -201,38 +247,44 @@ public class Promise extends SimpleScriptable {
         final Promise promise = new Promise(window);
         final Promise thisPromise = this;
 
-        final PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
+        thenAction_ = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
 
             @Override
             public void execute() throws Exception {
                 Context.enter();
                 try {
-                    Object newValue = null;
-                    final Function toExecute = isResolved(onRejected) ? onFulfilled : onRejected;
-                    if (value_ instanceof Function) {
-                        final WasCalledFunctionWrapper wrapper = new WasCalledFunctionWrapper(toExecute);
+                    Function toExecute = null;
+                    if (thisPromise.state_ == PromiseState.FULFILLED) {
+                        toExecute = onFulfilled;
+                    }
+                    else if (thisPromise.state_ == PromiseState.REJECTED) {
+                        toExecute = onRejected;
+                    }
+
+                    if (toExecute != null) {
                         try {
-                            ((Function) value_).call(Context.getCurrentContext(), window, thisPromise,
-                                    new Object[] {wrapper, onRejected});
-                            if (wrapper.wasCalled_) {
-                                newValue = wrapper.value_;
+                            final Object newValue = toExecute.call(Context.getCurrentContext(),
+                                    window, thisPromise, new Object[] {value_});
+                            if (newValue instanceof Promise) {
+                                final Promise callPromise = (Promise) newValue;
+                                if (callPromise.state_ == PromiseState.FULFILLED) {
+                                    promise.update(PromiseState.FULFILLED, callPromise.value_);
+                                }
+                                else if (callPromise.state_ == PromiseState.REJECTED) {
+                                    promise.update(PromiseState.REJECTED, callPromise.value_);
+                                }
+                                else {
+                                    callPromise.linkedPromise_ = promise;
+                                }
+                            }
+                            else {
+                                promise.update(PromiseState.FULFILLED, newValue);
                             }
                         }
                         catch (final JavaScriptException e) {
-                            if (onRejected == null) {
-                                promise.exceptionDetails_ = e.details();
-                            }
-                            else if (!wrapper.wasCalled_) {
-                                newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
-                                        new Object[] {e.getValue()});
-                            }
+                            promise.update(PromiseState.REJECTED, e.getValue());
                         }
                     }
-                    else {
-                        newValue = toExecute.call(Context.getCurrentContext(), window, thisPromise,
-                                new Object[] {value_});
-                    }
-                    promise.value_ = newValue;
                 }
                 finally {
                     Context.exit();
@@ -240,9 +292,15 @@ public class Promise extends SimpleScriptable {
             }
         };
 
-        final JavaScriptEngine jsEngine
-            = (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-        jsEngine.addPostponedAction(thenAction);
+        if (state_ != PromiseState.PENDING) {
+            final JavaScriptEngine jsEngine
+                = (JavaScriptEngine) getWindow(this).getWebWindow().getWebClient().getJavaScriptEngine();
+            jsEngine.addPostponedAction(thenAction_);
+            thenAction_ = null;
+        }
+        else {
+            thisPromise.linkedPromise_ = promise;
+        }
 
         return promise;
     }
@@ -255,49 +313,6 @@ public class Promise extends SimpleScriptable {
      */
     @JsxFunction(functionName = "catch")
     public Promise catch_js(final Function onRejected) {
-        final Window window = getWindow();
-        final Promise promise = new Promise(window);
-        final Promise thisPromise = this;
-
-        final PostponedAction thenAction = new PostponedAction(window.getDocument().getPage(), "Promise.catch") {
-
-            @Override
-            public void execute() throws Exception {
-                Context.enter();
-                try {
-                    final Object newValue = onRejected.call(Context.getCurrentContext(), window, thisPromise,
-                            new Object[] {exceptionDetails_});
-                    promise.value_ = newValue;
-                }
-                finally {
-                    Context.exit();
-                }
-            }
-        };
-
-        final JavaScriptEngine jsEngine
-            = (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-        jsEngine.addPostponedAction(thenAction);
-
-        return promise;
-    }
-
-    private static class WasCalledFunctionWrapper extends FunctionWrapper {
-        private boolean wasCalled_;
-        private Object value_;
-
-        WasCalledFunctionWrapper(final Function wrapped) {
-            super(wrapped);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-            wasCalled_ = true;
-            value_ = super.call(cx, scope, thisObj, args);
-            return value_;
-        }
+        return then(null, onRejected);
     }
 }
