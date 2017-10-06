@@ -63,6 +63,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
@@ -608,6 +609,15 @@ public class HTMLDocument extends Document {
             }
             webClient.loadWebResponseInto(webResponse, window);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public Element getDocumentElement() {
+        implicitCloseIfNecessary();
+        return super.getDocumentElement();
     }
 
     /**
