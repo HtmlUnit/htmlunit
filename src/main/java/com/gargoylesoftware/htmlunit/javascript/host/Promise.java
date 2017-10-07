@@ -18,9 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -53,8 +52,8 @@ public class Promise extends SimpleScriptable {
     /** To be set only by {@link #all(Context, Scriptable, Object[], Function)}. */
     private Promise[] all_;
 
-    private PostponedAction thenAction_;
-    private Promise linkedPromise_;
+    private BasicJavaScriptJob settledAction_;
+    private Promise dependentPromise_;
 
     /**
      * Default constructor.
@@ -92,7 +91,7 @@ public class Promise extends SimpleScriptable {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.update(PromiseState.FULFILLED, args.length != 0 ? args[0] : Undefined.instance);
+                thisPromise.settle(true, args.length != 0 ? args[0] : Undefined.instance, window);
                 return thisPromise;
             }
         };
@@ -101,7 +100,7 @@ public class Promise extends SimpleScriptable {
             @Override
             public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj,
                                         final Object[] args) {
-                thisPromise.update(PromiseState.REJECTED, args.length != 0 ? args[0] : Undefined.instance);
+                thisPromise.settle(false, args.length != 0 ? args[0] : Undefined.instance, window);
                 return thisPromise;
             }
         };
@@ -110,7 +109,7 @@ public class Promise extends SimpleScriptable {
             fun.call(Context.getCurrentContext(), window, window, new Object[] {resolve, reject});
         }
         catch (final JavaScriptException e) {
-            thisPromise.update(PromiseState.REJECTED, e.getValue());
+            thisPromise.settle(false, e.getValue(), window);
         }
     }
 
@@ -145,6 +144,7 @@ public class Promise extends SimpleScriptable {
     }
 
     private static Promise create(final Scriptable thisObj, final Object[] args, final PromiseState state) {
+        // fulfilled promises are returend
         if (args.length != 0 && args[0] instanceof Promise && state == PromiseState.FULFILLED) {
             return (Promise) args[0];
         }
@@ -173,27 +173,27 @@ public class Promise extends SimpleScriptable {
         return promise;
     }
 
-    private void update(final PromiseState newState, final Object newValue) {
-        if (state_ == newState || state_ != PromiseState.PENDING) {
+    private void settle(final boolean fulfilled, final Object newValue, final Window window) {
+        if (state_ != PromiseState.PENDING) {
             return;
         }
 
         value_ = newValue;
-        state_ = newState;
-
-        if (thenAction_ != null) {
-            try {
-                thenAction_.execute();
-            }
-            catch (final Exception e) {
-                // ignore for now
-            }
-            thenAction_ = null;
+        if (fulfilled) {
+            state_ = PromiseState.FULFILLED;
+        }
+        else {
+            state_ = PromiseState.REJECTED;
         }
 
-        if (linkedPromise_ != null) {
-            linkedPromise_.update(newState, newValue);
-            linkedPromise_ = null;
+        if (settledAction_ != null) {
+            window.getWebWindow().getJobManager().addJob(settledAction_, window.getDocument().getPage());
+            settledAction_ = null;
+        }
+
+        if (dependentPromise_ != null) {
+            dependentPromise_.settle(fulfilled, newValue, window);
+            dependentPromise_ = null;
         }
     }
 
@@ -244,13 +244,14 @@ public class Promise extends SimpleScriptable {
     @JsxFunction
     public Promise then(final Function onFulfilled, final Function onRejected) {
         final Window window = getWindow();
-        final Promise promise = new Promise(window);
+        final Promise returnPromise = new Promise(window);
+
         final Promise thisPromise = this;
 
-        thenAction_ = new PostponedAction(window.getDocument().getPage(), "Promise.then") {
+        settledAction_ = new BasicJavaScriptJob() {
 
             @Override
-            public void execute() throws Exception {
+            public void run() {
                 Context.enter();
                 try {
                     Function toExecute = null;
@@ -263,26 +264,26 @@ public class Promise extends SimpleScriptable {
 
                     if (toExecute != null) {
                         try {
-                            final Object newValue = toExecute.call(Context.getCurrentContext(),
+                            final Object callbackResult = toExecute.call(Context.getCurrentContext(),
                                     window, thisPromise, new Object[] {value_});
-                            if (newValue instanceof Promise) {
-                                final Promise callPromise = (Promise) newValue;
-                                if (callPromise.state_ == PromiseState.FULFILLED) {
-                                    promise.update(PromiseState.FULFILLED, callPromise.value_);
+                            if (callbackResult instanceof Promise) {
+                                final Promise resultPromise = (Promise) callbackResult;
+                                if (resultPromise.state_ == PromiseState.FULFILLED) {
+                                    returnPromise.settle(true, resultPromise.value_, window);
                                 }
-                                else if (callPromise.state_ == PromiseState.REJECTED) {
-                                    promise.update(PromiseState.REJECTED, callPromise.value_);
+                                else if (resultPromise.state_ == PromiseState.REJECTED) {
+                                    returnPromise.settle(false, resultPromise.value_, window);
                                 }
                                 else {
-                                    callPromise.linkedPromise_ = promise;
+                                    resultPromise.dependentPromise_ = returnPromise;
                                 }
                             }
                             else {
-                                promise.update(PromiseState.FULFILLED, newValue);
+                                returnPromise.settle(true, callbackResult, window);
                             }
                         }
                         catch (final JavaScriptException e) {
-                            promise.update(PromiseState.REJECTED, e.getValue());
+                            returnPromise.settle(false, e.getValue(), window);
                         }
                     }
                 }
@@ -290,19 +291,20 @@ public class Promise extends SimpleScriptable {
                     Context.exit();
                 }
             }
+
+            /** {@inheritDoc} */
+            @Override
+            public String toString() {
+                return super.toString() + " Promise.then";
+            }
         };
 
-        if (state_ != PromiseState.PENDING) {
-            final JavaScriptEngine jsEngine
-                = (JavaScriptEngine) getWindow(this).getWebWindow().getWebClient().getJavaScriptEngine();
-            jsEngine.addPostponedAction(thenAction_);
-            thenAction_ = null;
-        }
-        else {
-            thisPromise.linkedPromise_ = promise;
+        if (state_ == PromiseState.FULFILLED || state_ == PromiseState.REJECTED) {
+            window.getWebWindow().getJobManager().addJob(settledAction_, window.getDocument().getPage());
+            settledAction_ = null;
         }
 
-        return promise;
+        return returnPromise;
     }
 
     /**

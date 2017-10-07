@@ -75,6 +75,37 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "1",
+            IE = {})
+    public void length() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        log(Promise.length);\n"
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"done", "Resolved"},
             IE = {})
     public void resolve() throws Exception {
@@ -103,6 +134,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -139,6 +171,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -178,6 +211,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -214,6 +248,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -250,6 +285,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -286,6 +322,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -323,6 +360,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -392,6 +430,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -434,6 +473,7 @@ public class PromiseTest extends WebDriverTestCase {
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -469,6 +509,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -514,6 +555,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -550,7 +592,6 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("btn1")).click();
-
         Thread.sleep(200);
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
@@ -640,6 +681,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -683,6 +725,7 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
+
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
