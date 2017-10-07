@@ -18,6 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -52,7 +55,7 @@ public class Promise extends SimpleScriptable {
     /** To be set only by {@link #all(Context, Scriptable, Object[], Function)}. */
     private Promise[] all_;
 
-    private BasicJavaScriptJob settledAction_;
+    private List<BasicJavaScriptJob> settledJobs_;
     private Promise dependentPromise_;
 
     /**
@@ -186,9 +189,11 @@ public class Promise extends SimpleScriptable {
             state_ = PromiseState.REJECTED;
         }
 
-        if (settledAction_ != null) {
-            window.getWebWindow().getJobManager().addJob(settledAction_, window.getDocument().getPage());
-            settledAction_ = null;
+        if (settledJobs_ != null) {
+            for (BasicJavaScriptJob job : settledJobs_) {
+                window.getWebWindow().getJobManager().addJob(job, window.getDocument().getPage());
+            }
+            settledJobs_ = null;
         }
 
         if (dependentPromise_ != null) {
@@ -248,7 +253,7 @@ public class Promise extends SimpleScriptable {
 
         final Promise thisPromise = this;
 
-        settledAction_ = new BasicJavaScriptJob() {
+        final BasicJavaScriptJob job = new BasicJavaScriptJob() {
 
             @Override
             public void run() {
@@ -300,8 +305,13 @@ public class Promise extends SimpleScriptable {
         };
 
         if (state_ == PromiseState.FULFILLED || state_ == PromiseState.REJECTED) {
-            window.getWebWindow().getJobManager().addJob(settledAction_, window.getDocument().getPage());
-            settledAction_ = null;
+            window.getWebWindow().getJobManager().addJob(job, window.getDocument().getPage());
+        }
+        else {
+            if (settledJobs_ == null) {
+                settledJobs_ = new ArrayList<BasicJavaScriptJob>(2);
+            }
+            settledJobs_.add(job);
         }
 
         return returnPromise;
