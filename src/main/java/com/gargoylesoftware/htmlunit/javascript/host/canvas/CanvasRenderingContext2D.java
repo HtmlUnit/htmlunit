@@ -392,11 +392,14 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Dummy placeholder.
+     * Fills a given text at the given (x, y) position.
+     * @param text the text
+     * @param x the x
+     * @param y the y
      */
     @JsxFunction
-    public void fillText() {
-        //empty
+    public void fillText(final String text, final int x, final int y) {
+        getRenderingBackend().fillText(text, x, y);
     }
 
     /**

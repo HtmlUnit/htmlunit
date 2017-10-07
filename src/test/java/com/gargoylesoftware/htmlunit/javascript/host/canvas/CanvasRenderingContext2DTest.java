@@ -361,4 +361,46 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAABVUl"
+            + "EQVRYR+3UMS9lURTF8Z+vwBcQDZ1ESyWZMSPRUChQk1FNohPVRDeJaCRaodAoJRoVrZrOF1BrZct9yXW"
+            + "D916yzTT7Vveec/c6a//POmfE22cSizhoDa8172f4hjs8deq6n2P4hb/YwiUemp9ibh+7H+i0a8PPc9S"
+            + "ODGH0Ajs4+mKjbUu/e00OYzQETnGMc/zE90Z1G3tYwBzuByT6A0tYbXTatTe4xhXW3jMaJqY7pNfRJjq"
+            + "FDUTHM43JiEiMzzfUB9n6MDqBP5j9rHYYol2j44jc9haIxXoZPxmC6CNu+9X+C6PLLWqxUe3GYhe+xGj"
+            + "cBkHyEKMDEg1zUbfZxOk1c82B7Gc0Du9KZLhLtM+t8/+my2g2+yJaRLMJZOtVRotoNoFsvcpoEc0mkK1"
+            + "XGS2i2QSy9SqjRTSbQLZeZbSIZhPI1quMFtFsAtl6ldEimk0gW+8FX3djZf6IgMoAAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAn0lEQVR"
+            + "Yhe3S4Q2DIBCG4W+WzuEgTuIozOIw7kJ/FJLzehSpJibmfRJixOP8BKW9SVJyc6nMS9KiMdvBvr31X3o"
+            + "Nmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6QW24uhHSBUfv67bBeh80BfO"
+            + "3BJU+u/5y91GvS4L6f3Qk6Kz97zSfCQoAAAAAAAAAwMO9AbwlTKQXMPMUAAAAAElFTkSuQmCC",
+            IE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0I"
+            + "Ars4c6QAAAARnQU1BAACxjwv8YQUAAADvSURBVFhH7ZJBDsFAFIbLURrHwBJHwMqWA3AGDmBtxxGwsHE"
+            + "NbUTcg/+v92QibdKRWPm/5PNPTeZ15nWSD9pw/xq+mZtkbVmHhyXrsW6Iz1Xh80NYrG3yJ4Kp5a9pWE4"
+            + "sozbq3bxAnpTPPDnlqX3MubqwBjse1iFepw/PMC3bKCd9IV1CMrNsWfYgTz6CGxt3YBfGcIJeZ8w/jB0"
+            + "8QNbMyzbKSS50F7CMo+Ud+piklk5uGZJZkpsl61QSe0e/4QrDTvGT8vpEEbtRdiL2JSvILvtV2sIBrA"
+            + "O/RnFHiychhBBCCCGEEEIIIYQQ4l9Ikiccki+D/HzKtwAAAABJRU5ErkJggg==")
+    @NotYetImplemented
+    public void fillText() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var canvas = document.getElementById('myCanvas');\n"
+            + "        if (canvas.getContext){\n"
+            + "          var context = canvas.getContext('2d');\n"
+            + "          context.fillText('HtmlUnit', 3, 7);\n"
+            + "          alert(canvas.toDataURL());\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><canvas id='myCanvas' width='42' height='42'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

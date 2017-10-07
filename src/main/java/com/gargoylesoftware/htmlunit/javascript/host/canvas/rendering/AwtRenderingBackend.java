@@ -113,6 +113,14 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void fillText(final String text, final int x, final int y) {
+        graphics2D_.drawString(text, x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
         if (imageReader.getNumImages(true) != 0) {
             final BufferedImage img = imageReader.read(0);

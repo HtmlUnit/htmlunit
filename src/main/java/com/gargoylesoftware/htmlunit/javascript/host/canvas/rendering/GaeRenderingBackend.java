@@ -65,6 +65,13 @@ public class GaeRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void fillText(final String text, final int x, final int y) {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void drawImage(final ImageReader imageReader, final int dxI, final int dyI) throws IOException {
     }
 

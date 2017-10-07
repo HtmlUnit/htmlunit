@@ -61,6 +61,14 @@ public interface RenderingBackend {
     void strokeRect(int x, int y, int w, int h);
 
     /**
+     * Fills a given text at the given (x, y) position.
+     * @param text the text
+     * @param x the x
+     * @param y the y
+     */
+    void fillText(String text, int x, int y);
+
+    /**
      * Draws images onto the context.
      *
      * @param imageReader the reader to read the image from 8the first one)

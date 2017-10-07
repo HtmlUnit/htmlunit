@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+            <action type="add" dev="rbri">
+                JavaScript: simple impl for CanvasRenderingContext.fillText added.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: various fixes for the Promise implementation.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: writing to an iFrame triggers the onload event now for chrome also
             </action>
