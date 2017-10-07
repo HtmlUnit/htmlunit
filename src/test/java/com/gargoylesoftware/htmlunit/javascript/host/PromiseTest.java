@@ -491,7 +491,45 @@ public class PromiseTest extends WebDriverTestCase {
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = Promise.resolve(void 0);\n"
+                + "        p.then(function(value) {\n"
+                + "          log(value);\n"
+                + "        })\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
                 + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "undefined"},
+            IE = {})
+    public void thenAsync() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             resolve(void 0);\n"
+                + "           }, 20);\n"
+                + "        })\n"
                 + "        p.then(function(value) {\n"
                 + "          log(value);\n"
                 + "        })\n"
@@ -527,7 +565,6 @@ public class PromiseTest extends WebDriverTestCase {
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = Promise.resolve('yes');\n"
-                + "\n"
                 + "        p.then(function(value) {\n"
                 + "          log('1 ' + value);\n"
                 + "        })\n"
@@ -570,7 +607,6 @@ public class PromiseTest extends WebDriverTestCase {
                 + "             resolve('yes');\n"
                 + "           }, 20);\n"
                 + "        })\n"
-                + "\n"
                 + "        p.then(function(value) {\n"
                 + "          log('1 ' + value);\n"
                 + "        })\n"
@@ -612,6 +648,53 @@ public class PromiseTest extends WebDriverTestCase {
                 + "          resolve('Success');\n"
                 + "        });\n"
                 + "\n"
+                + "        p.then(function(value) {\n"
+                + "          log(value);\n"
+                + "          throw 'oh, no!';\n"
+                + "        }).catch(function(e) {\n"
+                + "          log(typeof e);\n"
+                + "          log(e);\n"
+                + "        }).then(function(e) {\n"
+                + "          log('after catch');\n"
+                + "        }, function() {\n"
+                + "          log('failure');\n"
+                + "        });\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"Success", "string", "oh, no!", "after catch"},
+            IE = {})
+    public void catchTestAsync() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             resolve('Success');\n"
+                + "           }, 20);\n"
+                + "        })\n"
                 + "        p.then(function(value) {\n"
                 + "          log(value);\n"
                 + "          throw 'oh, no!';\n"
