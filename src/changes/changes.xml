@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+            <action type="fix" dev="rbri">
+                JavaScript: throw a type error if the url property is requested from the WebSocket prototype.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: simple impl for CanvasRenderingContext.fillText added.
             </action>

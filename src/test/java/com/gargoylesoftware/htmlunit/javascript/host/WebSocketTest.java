@@ -519,4 +519,21 @@ public class WebSocketTest extends WebDriverTestCase {
         stopWebServers();
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void prototypeUrl() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var u = WebSocket.prototype.url;\n"
+            + "      alert(u);\n"
+            + "    } catch(e) { alert(e instanceof TypeError) }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

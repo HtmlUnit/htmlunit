@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -278,6 +279,9 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     @JsxGetter
     public String getUrl() {
+        if (url_ == null) {
+            throw ScriptRuntime.typeError("invalid call");
+        }
         return url_.toString();
     }
 
