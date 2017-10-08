@@ -97,6 +97,7 @@ public class PromiseTest extends WebDriverTestCase {
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
+
     /**
      * @throws Exception if an error occurs
      */
