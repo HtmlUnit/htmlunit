@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -181,7 +182,16 @@ public class Promise extends SimpleScriptable {
             return;
         }
 
+        if (all_ != null) {
+            settleAll(window);
+            return;
+        }
+        settleThis(fulfilled, newValue, window);
+    }
+
+    private void settleThis(final boolean fulfilled, final Object newValue, final Window window) {
         value_ = newValue;
+
         if (fulfilled) {
             state_ = PromiseState.FULFILLED;
         }
@@ -202,6 +212,24 @@ public class Promise extends SimpleScriptable {
         }
     }
 
+    private void settleAll(final Window window) {
+        final ArrayList<Object> values = new ArrayList<>(all_.length);
+        for (Promise promise : all_) {
+            if (promise.state_ == PromiseState.REJECTED) {
+                settleThis(false, promise.value_, window);
+                return;
+            }
+            else if (promise.state_ == PromiseState.PENDING) {
+                return;
+            }
+            values.add(promise.value_);
+        }
+
+        final NativeArray jsValues = new NativeArray(values.toArray());
+        ScriptRuntime.setBuiltinProtoAndParent(jsValues, window, TopLevel.Builtins.Array);
+        settleThis(true, jsValues, window);
+    }
+
     /**
      * Returns a {@link Promise} that resolves when all of the promises in the iterable argument have resolved,
      * or rejects with the reason of the first passed promise that rejects.
@@ -215,28 +243,33 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise all(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        final Promise promise = new Promise();
-        promise.state_ = PromiseState.FULFILLED;
+        final Window window = getWindow(thisObj);
+        final Promise returnPromise = new Promise(window);
+
         if (args.length == 0) {
-            promise.all_ = new Promise[0];
+            returnPromise.all_ = new Promise[0];
         }
-        else {
+        else if (args[0] instanceof NativeArray) {
             final NativeArray array = (NativeArray) args[0];
             final int length = (int) array.getLength();
-            promise.all_ = new Promise[length];
+            returnPromise.all_ = new Promise[length];
             for (int i = 0; i < length; i++) {
                 final Object o = array.get(i);
                 if (o instanceof Promise) {
-                    promise.all_[i] = (Promise) o;
+                    returnPromise.all_[i] = (Promise) o;
+                    returnPromise.all_[i].dependentPromise_ = returnPromise;
                 }
                 else {
-                    promise.all_[i] = resolve(null, thisObj, new Object[] {o}, null);
+                    returnPromise.all_[i] = create(thisObj, new Object[] {o}, PromiseState.FULFILLED);
                 }
             }
         }
-        promise.setParentScope(thisObj.getParentScope());
-        promise.setPrototype(getWindow(thisObj).getPrototype(promise.getClass()));
-        return promise;
+        else {
+            // TODO
+        }
+
+        returnPromise.settleAll(window);
+        return returnPromise;
     }
 
     /**

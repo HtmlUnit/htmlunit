@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -24,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -101,40 +97,92 @@ public class PromiseTest extends WebDriverTestCase {
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = { "function () { [native code] }",
+                        "function () { [native code] }",
+                        "[object Window]",
+                        "done", "resolved value"},
+            FF = { "function () {\n    [native code]\n}",
+                       "function () {\n    [native code]\n}",
+                       "[object Window]",
+                       "done", "resolved value"},
+            IE = {})
+    public void constructor() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "          log(resolve);\n"
+                + "          log(reject);\n"
+                + "          log(this);\n"
+                + "          resolve('resolved value');\n"
+                + "        });\n"
+                + "        p.then(function(value) {log(value);});\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "Resolved"},
+    @Alerts(DEFAULT = {"true", "true", "true"},
             IE = {})
-    public void resolve() throws Exception {
-        final String html =
-            "<html>\n"
-            + "<head>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      if (window.Promise) {\n"
-            + "        Promise.resolve('Resolved').then(function(value) {\n"
-            + "            log(value);\n"
-            + "        }, function(value) {\n"
-            + "            log('failure');\n"
-            + "        });\n"
-            + "        log('done');\n"
-            + "      }\n"
-            + "    }\n"
-            + "    function log(x) {\n"
-            + "      document.getElementById('log').value += x + '\\n';\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
-            + "</body>\n"
-            + "</html>";
+    public void constructorWithoutFunction() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        try{\n"
+                + "          var p = new Promise();\n"
+                + "          log('done');\n"
+                + "        } catch(e) { log(e instanceof TypeError); }\n"
+                + "        try{\n"
+                + "          var p = new Promise([1, 2, 4]);\n"
+                + "          log('done');\n"
+                + "        } catch(e) { log(e instanceof TypeError); }\n"
+                + "        try{\n"
+                + "          var original = Promise.resolve(42);\n"
+                + "          var p = new Promise(original);\n"
+                + "          log('done');\n"
+                + "        } catch(e) { log(e instanceof TypeError); }\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
+
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
@@ -198,6 +246,43 @@ public class PromiseTest extends WebDriverTestCase {
             + "        });\n"
             + "        log('done');\n"
             + "        log(original === cast);\n"
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Resolved"},
+            IE = {})
+    public void resolve() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        Promise.resolve('Resolved').then(function(value) {\n"
+            + "            log(value);\n"
+            + "        }, function(value) {\n"
+            + "            log('failure');\n"
+            + "        });\n"
+            + "        log('done');\n"
             + "      }\n"
             + "    }\n"
             + "    function log(x) {\n"
@@ -729,36 +814,42 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Success",
+    @Alerts(DEFAULT = {"done", "Success"},
             IE = "")
     public void thenInsideEventHandler() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
                 + "    function test() {\n"
-                + "      if(!window.Promise) {\n"
-                + "        return;\n"
+                + "      if (window.Promise) {\n"
+                + "        document.getElementById('btn1').onclick = function() {\n"
+                + "          new Promise(function(resolve, reject) {\n"
+                + "            window.setTimeout( function() {\n"
+                + "              resolve('Success');\n"
+                + "            }, 20);\n"
+                + "          }).then(function(value) {\n"
+                + "            log(value);\n"
+                + "          });\n"
+                + "          log('done');\n"
+                + "        };\n"
                 + "      }\n"
-                + "      document.getElementById('btn1').onclick = function() {\n"
-                + "        new Promise(function(resolve, reject) {\n"
-                + "           window.setTimeout( function() {\n"
-                + "             resolve('Success');\n"
-                + "           }, 0);\n"
-                + "        }).then(function(value) {\n"
-                + "          document.title += value;\n"
-                + "        });\n"
-                + "      };\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
-                + "<button id='btn1'>BTN1</button>\n"
+                + "  <button id='btn1'>BTN1</button>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
                 + "</body>\n"
-                + "</html>";
+                + "</html>\n";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("btn1")).click();
         Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
@@ -767,10 +858,9 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"object", "3", "3,1337,foo"},
+    @Alerts(DEFAULT = {"done", "object", "3", "3,1337,Success"},
             IE = {})
-    @NotYetImplemented({CHROME, FF})
-    public void all() throws Exception {
+    public void allAsync() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -779,14 +869,17 @@ public class PromiseTest extends WebDriverTestCase {
             + "        var p1 = Promise.resolve(3);\n"
             + "        var p2 = 1337;\n"
             + "        var p3 = new Promise(function(resolve, reject) {\n"
-            + "          setTimeout(resolve, 100, \"foo\");\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 20);\n"
             + "        });\n"
             + "\n"
-            + "        Promise.all([ p1, p2, p3 ]).then(function(values) {\n"
+            + "        Promise.all([p1, p2, p3]).then(function(values) {\n"
             + "          log(typeof values);\n"
             + "          log(values.length);\n"
             + "          log(values);\n"
             + "        });\n"
+            + "        log('done');\n"
             + "      }\n"
             + "    }\n"
             + "\n"
@@ -806,91 +899,48 @@ public class PromiseTest extends WebDriverTestCase {
     }
 
     /**
+     * Test for Bug #1780.
+     *
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = { "function () { [native code] }",
-                        "function () { [native code] }",
-                        "[object Window]",
-                        "done", "resolved value"},
-            FF = { "function () {\n    [native code]\n}",
-                       "function () {\n    [native code]\n}",
-                       "[object Window]",
-                       "done", "resolved value"},
+    @Alerts(DEFAULT = {"done", "string", "Failed"},
             IE = {})
-    public void constructor() throws Exception {
+    public void allRejectAsync() throws Exception {
         final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-                + "    function test() {\n"
-                + "      if (window.Promise) {\n"
-                + "        var p = new Promise(function(resolve, reject) {\n"
-                + "          log(resolve);\n"
-                + "          log(reject);\n"
-                + "          log(this);\n"
-                + "          resolve('resolved value');\n"
-                + "        });\n"
-                + "        p.then(function(value) {log(value);});\n"
-                + "        log('done');\n"
-                + "      }\n"
-                + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
-                + "  </script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
-                + "</body>\n"
-                + "</html>";
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = Promise.resolve(3);\n"
+            + "        var p2 = 1337;\n"
+            + "        var p3 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              reject('Failed');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.all([p1, p2, p3]).then(function(value) {\n"
+            + "            log('failure');\n"
+            + "        }, function(value) {\n"
+            + "          log(typeof value);\n"
+            + "          log(value);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = {"true", "true", "true"},
-            IE = {})
-    public void constructorWithoutFunction() throws Exception {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "  <script>\n"
-                + "    function test() {\n"
-                + "      if (window.Promise) {\n"
-                + "        try{\n"
-                + "          var p = new Promise();\n"
-                + "          log('done');\n"
-                + "        } catch(e) { log(e instanceof TypeError); }\n"
-                + "        try{\n"
-                + "          var p = new Promise([1, 2, 4]);\n"
-                + "          log('done');\n"
-                + "        } catch(e) { log(e instanceof TypeError); }\n"
-                + "        try{\n"
-                + "          var original = Promise.resolve(42);\n"
-                + "          var p = new Promise(original);\n"
-                + "          log('done');\n"
-                + "        } catch(e) { log(e instanceof TypeError); }\n"
-                + "      }\n"
-                + "    }\n"
-                + "\n"
-                + "    function log(x) {\n"
-                + "      document.getElementById('log').value += x + '\\n';\n"
-                + "    }\n"
-                + "  </script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
-                + "</body>\n"
-                + "</html>";
-
-        final WebDriver driver = loadPage2(html);
-
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
