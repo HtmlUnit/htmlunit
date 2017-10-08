@@ -149,7 +149,7 @@ public class Promise extends SimpleScriptable {
     }
 
     private static Promise create(final Scriptable thisObj, final Object[] args, final PromiseState state) {
-        // fulfilled promises are returend
+        // fulfilled promises are returned
         if (args.length != 0 && args[0] instanceof Promise && state == PromiseState.FULFILLED) {
             return (Promise) args[0];
         }
