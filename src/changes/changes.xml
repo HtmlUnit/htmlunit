@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.28" date="???" description="Bugfixes, Chrome 61">
+        <release version="2.28" date="???" description="Bugfixes, Chrome 61, improved Promise impl">
             <action type="fix" dev="rbri">
                 JavaScript: throw a type error if the url property is requested from the WebSocket prototype.
             </action>

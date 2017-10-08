@@ -53,7 +53,8 @@ public class Promise extends SimpleScriptable {
     private enum PromiseState { PENDING, FULFILLED, REJECTED }
     private PromiseState state_ = PromiseState.PENDING;
     private Object value_;
-    /** To be set only by {@link #all(Context, Scriptable, Object[], Function)}. */
+
+    private boolean race_;
     private Promise[] all_;
 
     private List<BasicJavaScriptJob> settledJobs_;
@@ -213,6 +214,20 @@ public class Promise extends SimpleScriptable {
     }
 
     private void settleAll(final Window window) {
+        if (race_) {
+            for (Promise promise : all_) {
+                if (promise.state_ == PromiseState.REJECTED) {
+                    settleThis(false, promise.value_, window);
+                    return;
+                }
+                else if (promise.state_ == PromiseState.FULFILLED) {
+                    settleThis(true, promise.value_, window);
+                    return;
+                }
+            }
+            return;
+        }
+
         final ArrayList<Object> values = new ArrayList<>(all_.length);
         for (Promise promise : all_) {
             if (promise.state_ == PromiseState.REJECTED) {
@@ -243,6 +258,26 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise all(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
+        return all(false, thisObj, args);
+    }
+
+    /**
+     * Returns a {@link Promise} that that resolves or rejects as soon as one of the promises
+     * in the iterable resolves or rejects, with the value or reason from that promise.
+     *
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     * @return a {@link Promise}
+     */
+    @JsxStaticFunction
+    public static Promise race(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        return all(true, thisObj, args);
+    }
+
+    private static Promise all(final boolean race, final Scriptable thisObj, final Object[] args) {
         final Window window = getWindow(thisObj);
         final Promise returnPromise = new Promise(window);
 
@@ -267,6 +302,7 @@ public class Promise extends SimpleScriptable {
         else {
             // TODO
         }
+        returnPromise.race_ = race;
 
         returnPromise.settleAll(window);
         return returnPromise;

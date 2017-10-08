@@ -853,8 +853,6 @@ public class PromiseTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for Bug #1780.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -899,8 +897,6 @@ public class PromiseTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for Bug #1780.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -924,6 +920,100 @@ public class PromiseTest extends WebDriverTestCase {
             + "            log('failure');\n"
             + "        }, function(value) {\n"
             + "          log(typeof value);\n"
+            + "          log(value);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Success 2"},
+            IE = {})
+    public void raceAsync() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 40);\n"
+            + "        });\n"
+            + "        var p2 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success 2');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log(value);\n"
+            + "        }, function(value) {\n"
+            + "          log('failure');\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Failed"},
+            IE = {})
+    public void raceRejectAsync() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 40);\n"
+            + "        });\n"
+            + "        var p2 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              reject('Failed');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log('failure');\n"
+            + "        }, function(value) {\n"
             + "          log(value);\n"
             + "        });\n"
             + "        log('done');\n"
