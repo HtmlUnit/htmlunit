@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Colin Alworth
  */
 @RunWith(BrowserRunner.class)
 public class Window2Test extends WebDriverTestCase {
@@ -1070,6 +1071,61 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({
+            "string string 7 number string",
+            "string string 8 number object",
+            "string string 9 number object",
+            "string string 1 number object"})
+    public void onErrorExceptionInstance() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<script>\n"
+                + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
+                + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
+                                + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
+                + "  };\n"
+                + "</script>\n"
+                + "<script>throw 'string';</script>\n"
+                + "<script>throw {'object':'property'};</script>\n"
+                + "<script>does.not.exist();</script>\n"
+                + "<script>eval('syntax[error');</script>\n"
+                + "</html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                    .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("success")
+    public void onErrorModifyObject() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<script>\n"
+                + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
+                + "    error.property = 'success'\n"
+                + "    alert(error.property);\n"
+                + "  };\n"
+                + "</script>\n"
+                + "<script>throw {};</script>\n"
+                + "</html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                    .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -1181,6 +1237,104 @@ public class Window2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"number", "done", "result"})
+    public void setTimeout() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var id = window.setTimeout( function() { log('result'); }, 20);\n"
+            + "      log(typeof id);\n"
+            + "      log('done');\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"number", "done", "42"})
+    @NotYetImplemented
+    public void setTimeoutWithParams() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var id = window.setTimeout( function(p1) { log(p1); }, 20, 42);\n"
+            + "      log(typeof id);\n"
+            + "      log('done');\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "done 2"})
+    @NotYetImplemented
+    public void setTimeoutWrongParams() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      try{\n"
+            + "        window.setTimeout();\n"
+            + "        log('done');\n"
+            + "      } catch(e) { log(e instanceof TypeError); }\n"
+            // TypeError: Failed to execute 'setTimeout' on 'Window': 1 argument required, but only 0 present.
+            + "      try{\n"
+            + "        window.setTimeout('100');\n"
+            + "        log('done 2');\n"
+            + "      } catch(e) { log(e); }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**

@@ -127,8 +127,10 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -151,6 +153,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Carsten Steul
+ * @author Colin Alworth
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
@@ -1276,12 +1279,29 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final Object o = getOnerror();
         if (o instanceof Function) {
             final Function f = (Function) o;
-            final String msg = e.getMessage();
+            String msg = e.getMessage();
             final String url = e.getPage().getUrl().toExternalForm();
-            final int line = e.getFailingLineNumber();
 
+            final int line = e.getFailingLineNumber();
             final int column = e.getFailingColumnNumber();
-            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), e};
+
+            Object jsError = e.getMessage();
+            if (e.getCause() instanceof JavaScriptException) {
+                msg = "uncaught exception: " + e.getCause().getMessage();
+                jsError = ((JavaScriptException) e.getCause()).getValue();
+            }
+            else if (e.getCause() instanceof EcmaError) {
+                msg = "uncaught " + e.getCause().getMessage();
+
+                final EcmaError ecmaError = (EcmaError) e.getCause();
+                final Scriptable err = Context.getCurrentContext().newObject(this, "Error");
+                ScriptableObject.putProperty(err, "message", ecmaError.getMessage());
+                ScriptableObject.putProperty(err, "fileName", ecmaError.sourceName());
+                ScriptableObject.putProperty(err, "lineNumber", Integer.valueOf(ecmaError.lineNumber()));
+                jsError = err;
+            }
+
+            final Object[] args = new Object[] {msg, url, Integer.valueOf(line), Integer.valueOf(column), jsError};
             f.call(Context.getCurrentContext(), this, this, args);
         }
     }

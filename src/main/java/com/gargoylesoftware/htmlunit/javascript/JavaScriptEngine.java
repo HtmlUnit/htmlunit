@@ -993,7 +993,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (triggerOnError && page != null) {
             final WebWindow window = page.getEnclosingWindow();
             if (window != null) {
-                final Window w = (Window) window.getScriptableObject();
+                final Window w = window.getScriptableObject();
                 if (w != null) {
                     try {
                         w.triggerOnError(scriptException);

@@ -789,6 +789,9 @@
         <contributor>
             <name>Anton Demydenko</name>
         </contributor>
+        <contributor>
+            <name>Colin Alworth</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>

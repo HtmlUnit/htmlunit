@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61, improved Promise impl">
+            <action type="fix" dev="rbri" issue="1924" due-to="Colin Alworth">
+                JavaScript: window.onerror provides now a valid error object.
+            </action>
             <action type="fix" dev="rbri">
                 JavaScript: throw a type error if the url property is requested from the WebSocket prototype.
             </action>
