@@ -78,6 +78,7 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
         assertTrue(specificy11.compareTo(specificy21) < 0);
         assertTrue(specificy11.compareTo(specificy100) < 0);
     }
+
     /**
      * @throws Exception if the test fails
      */
