@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
@@ -538,6 +539,15 @@ public class CSSStyleSheet2 extends StyleSheet2 {
             if (link != null) {
                 // Use link.
                 request = link.getWebRequest();
+
+                if (element.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
+                    final String type = link.getTypeAttribute();
+                    if (StringUtils.isNotBlank(type) && !"text/css".equals(type)) {
+                        final InputSource source = new InputSource(new StringReader(""));
+                        return new CSSStyleSheet2(element, source, uri);
+                    }
+                }
+
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
                 // AND also fixes the request url for the following cache lookups
@@ -665,20 +675,6 @@ public class CSSStyleSheet2 extends StyleSheet2 {
             final DomElement element, final String pseudoElement) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
-                if (selector instanceof GeneralAdjacentSelectorImpl) {
-                    final SiblingSelector ss = (SiblingSelector) selector;
-                    final Selector ssSelector = ss.getSelector();
-                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
-                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
-                        if (prev instanceof HtmlElement
-                            && selects(browserVersion, ssSelector, (HtmlElement) prev)
-                            && selects(browserVersion, ssSiblingSelector, element)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
                 return true;
             case Selector.SAC_CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
@@ -721,6 +717,20 @@ public class CSSStyleSheet2 extends StyleSheet2 {
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
+
+                if (selector instanceof GeneralAdjacentSelectorImpl) {
+                    final Selector ssSelector = ss.getSelector();
+                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
+                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
+                        if (prev instanceof HtmlElement
+                            && selects(browserVersion, ssSelector, (HtmlElement) prev)
+                            && selects(browserVersion, ssSiblingSelector, element)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
                 DomNode prev = element.getPreviousSibling();
                 while (prev != null && !(prev instanceof HtmlElement)) {
                     prev = prev.getPreviousSibling();
@@ -1136,11 +1146,6 @@ public class CSSStyleSheet2 extends StyleSheet2 {
                 return isValidSelector(ss.getSelector(), documentMode, domNode)
                         && isValidSelector(ss.getSiblingSelector(), documentMode, domNode);
             case Selector.SAC_ANY_NODE_SELECTOR:
-                if (selector instanceof SiblingSelector) {
-                    final SiblingSelector sibling = (SiblingSelector) selector;
-                    return isValidSelector(sibling.getSelector(), documentMode, domNode)
-                            && isValidSelector(sibling.getSiblingSelector(), documentMode, domNode);
-                }
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff

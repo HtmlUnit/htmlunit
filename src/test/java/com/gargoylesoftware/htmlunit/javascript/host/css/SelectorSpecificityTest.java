@@ -76,6 +76,13 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
         assertTrue(specificy11.compareTo(specificy21) < 0);
         assertTrue(specificy11.compareTo(specificy100) < 0);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void selectorSpecifitySiblingCombinator() throws Exception {
+        selectorSpecifity(".cls ~ p", "0,0,1,1");
+    }
 
     private SelectorSpecificity selectorSpecifity(final String selector, final String expectedSpecificity)
         throws Exception {

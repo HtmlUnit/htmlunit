@@ -417,22 +417,6 @@ public class CSSStyleSheet extends StyleSheet {
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
-                if (selector instanceof GeneralAdjacentSelectorImpl) {
-                    final SiblingSelector ss = (SiblingSelector) selector;
-                    final Selector ssSelector = ss.getSelector();
-                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
-                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
-                        if (prev instanceof HtmlElement
-                            && selects(browserVersion, ssSelector, (HtmlElement) prev,
-                                    pseudoElement, fromQuerySelectorAll)
-                            && selects(browserVersion, ssSiblingSelector, element,
-                                    pseudoElement, fromQuerySelectorAll)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
                 return true;
             case Selector.SAC_CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
@@ -478,6 +462,21 @@ public class CSSStyleSheet extends StyleSheet {
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
+
+                if (selector instanceof GeneralAdjacentSelectorImpl) {
+                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
+                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
+                        if (prev instanceof HtmlElement
+                            && selects(browserVersion, ss.getSelector(), (HtmlElement) prev,
+                                    pseudoElement, fromQuerySelectorAll)
+                            && selects(browserVersion, ssSiblingSelector, element,
+                                    pseudoElement, fromQuerySelectorAll)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
                 DomNode prev = element.getPreviousSibling();
                 while (prev != null && !(prev instanceof HtmlElement)) {
                     prev = prev.getPreviousSibling();
@@ -1482,11 +1481,6 @@ public class CSSStyleSheet extends StyleSheet {
                 return isValidSelector(ss.getSelector(), documentMode, domNode)
                         && isValidSelector(ss.getSiblingSelector(), documentMode, domNode);
             case Selector.SAC_ANY_NODE_SELECTOR:
-                if (selector instanceof SiblingSelector) {
-                    final SiblingSelector sibling = (SiblingSelector) selector;
-                    return isValidSelector(sibling.getSelector(), documentMode, domNode)
-                            && isValidSelector(sibling.getSiblingSelector(), documentMode, domNode);
-                }
             //$FALL-THROUGH$
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
