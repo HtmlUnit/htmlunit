@@ -52,6 +52,8 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
         final SelectorSpecificity specificy21 = selectorSpecifity("li.red.level", "0,0,2,1");
         final SelectorSpecificity specificy100 = selectorSpecifity("#x34y", "0,1,0,0");
 
+        selectorSpecifity("test#x34y", "0,1,0,1");
+
         assertEquals(0, specificy0.compareTo(specificy0));
         assertTrue(specificy0.compareTo(specificy1) < 0);
         assertTrue(specificy0.compareTo(specificy2a) < 0);
