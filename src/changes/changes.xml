@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61, improved Promise impl">
+            <action type="add" dev="rbri">
+                JavaScript: document.currentScript added.
+            </action>
             <action type="fix" dev="rbri" issue="1925">
                 Selector specificity calculation fixed for selectors using the general sibling combinator (~).
             </action>

@@ -375,7 +375,18 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     if (charset == null) {
                         charset = page.getCharset();
                     }
-                    final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
+
+                    JavaScriptLoadResult result = null;
+                    final Window win = page.getEnclosingWindow().getScriptableObject();
+                    final Document doc = win.getDocument();
+                    try {
+                        doc.setCurrentScript(getScriptableObject());
+                        result = page.loadExternalJavaScriptFile(src, charset);
+                    }
+                    finally {
+                        doc.setCurrentScript(null);
+                    }
+
                     if (result == JavaScriptLoadResult.SUCCESS) {
                         executeEvent(Event.TYPE_LOAD);
                     }
@@ -391,7 +402,15 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         }
         else if (getFirstChild() != null) {
             // <script>[code]</script>
-            executeInlineScriptIfNeeded();
+            final Window win = page.getEnclosingWindow().getScriptableObject();
+            final Document doc = win.getDocument();
+            try {
+                doc.setCurrentScript(getScriptableObject());
+                executeInlineScriptIfNeeded();
+            }
+            finally {
+                doc.setCurrentScript(null);
+            }
 
             if (hasFeature(EVENT_ONLOAD_INTERNAL_JAVASCRIPT)) {
                 executeEvent(Event.TYPE_LOAD);

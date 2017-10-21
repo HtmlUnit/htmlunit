@@ -410,4 +410,156 @@ public class HtmlScript2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoad() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "");
+        onLoadOnError("src='simple.js' type='text/javascript'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"onLoad", "body onLoad"},
+            IE = "body onLoad")
+    public void onLoadTypeWhitespace() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "");
+        onLoadOnError("src='simple.js' type='\t  text/javascript     '");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onError", "body onLoad"})
+    public void onError() throws Exception {
+        onLoadOnError("src='unknown.js' type='text/javascript'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onError", "body onLoad"})
+    public void onLoadOnErrorWithoutType() throws Exception {
+        onLoadOnError("src='unknown.js'");
+    }
+
+    private void onLoadOnError(final String attribs) throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script " + attribs
+                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'></script>\n"
+                + "</head>\n"
+                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"from script", "onLoad [object Event]"})
+    public void onLoadDynamic() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "log('from script');");
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var dynScript = document.createElement('script');\n"
+                + "      dynScript.type = 'text/javascript';\n"
+                + "      dynScript.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      document.head.appendChild(dynScript);\n"
+                + "      dynScript.src = 'simple.js';"
+                + "    }\n"
+
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLScriptElement]",
+            IE = "undefined")
+    public void currentScriptInline() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script id='tester'>\n"
+                + "    alert(document.currentScript);\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE = "undefined")
+    public void currentScriptFunction() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script id='tester'>\n"
+                + "    function test() {\n"
+                + "      alert(document.currentScript);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLScriptElement]",
+            IE = "undefined")
+    public void currentScriptExternal() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.js"), "alert(document.currentScript);");
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script id='tester' src='simple.js' type='text/javascript'></script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
