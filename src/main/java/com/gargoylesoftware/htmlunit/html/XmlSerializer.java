@@ -241,7 +241,7 @@ class XmlSerializer {
             final String protocol = link.getWebRequest().getUrl().getProtocol();
             if ("http".equals(protocol) || "https".equals(protocol)) {
                 final File file = createFile(hrefAttr.getValue(), ".css");
-                FileUtils.writeStringToFile(file, link.getWebResponse(true).getContentAsString(), ISO_8859_1);
+                FileUtils.writeStringToFile(file, link.getWebResponse(true, null).getContentAsString(), ISO_8859_1);
                 hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
             }
         }

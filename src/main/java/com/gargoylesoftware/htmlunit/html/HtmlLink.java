@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Ronald Brill
  */
 public class HtmlLink extends HtmlElement {
+    // private static final Log LOG = LogFactory.getLog(HtmlLink.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "link";
@@ -150,20 +151,6 @@ public class HtmlLink extends HtmlElement {
      */
     public final String getTargetAttribute() {
         return getAttribute("target");
-    }
-
-    /**
-     * <span style="color:red">POTENIAL PERFORMANCE KILLER - DOWNLOADS THE RESOURCE - USE AT YOUR OWN RISK.</span><br>
-     * If the linked content is not already downloaded it triggers a download. Then it stores the response
-     * for later use.<br>
-     *
-     * @param downloadIfNeeded indicates if a request should be performed this hasn't been done previously
-     * @return {@code null} if no download should be performed and when this wasn't already done; the response
-     * received when performing a request for the content referenced by this tag otherwise
-     * @throws IOException if an error occurs while downloading the content
-     */
-    public WebResponse getWebResponse(final boolean downloadIfNeeded) throws IOException {
-        return getWebResponse(downloadIfNeeded, null);
     }
 
     /**
