@@ -228,6 +228,7 @@ public class Document extends Node {
     private String uniqueID_;
     private String domain_;
     private String lastModified_;
+    private ScriptableObject currentScript_;
 
     static {
         // commands
@@ -4283,4 +4284,18 @@ public class Document extends Node {
         setEventHandler("webkittransitionend", webkittransitionend);
     }
 
+    /**
+     * @return the {@code currentScript}
+     */
+    @JsxGetter({CHROME, FF})
+    public ScriptableObject getCurrentScript() {
+        return currentScript_;
+    }
+
+    /**
+     * @param script the {@code currentScript}
+     */
+    public void setCurrentScript(final ScriptableObject script) {
+        currentScript_ = script;
+    }
 }
