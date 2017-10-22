@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.2</checkstyle.version>
+        <checkstyle.version>8.3</checkstyle.version>
     </properties>
 
     <build>
@@ -870,7 +870,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
@@ -910,7 +910,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.10.0</version>
+            <version>2.11.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
