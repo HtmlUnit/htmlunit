@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -93,5 +99,111 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(html);
         final boolean displayed = driver.findElement(By.id("l")).isDisplayed();
         assertFalse(displayed);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoad() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadRelCase() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='sTYLeSheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaScreen() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='screen'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    @NotYetImplemented(CHROME)
+    public void onLoadMediaPrint() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='print'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaQueryMatch() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='(min-width: 100px)'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    @NotYetImplemented(CHROME)
+    public void onLoadMediaQueryNotMatch() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='(max-width: 10px)'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadRelWhitespace() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='\t stylesheet     ' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"onError", "body onLoad"},
+            IE = {"onLoad", "body onLoad"})
+    @NotYetImplemented(IE)
+    public void onError() throws Exception {
+        onLoadOnError("rel='stylesheet' href='unknown.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("body onLoad")
+    public void onLoadOnErrorWithoutRel() throws Exception {
+        onLoadOnError("href='unknown.css'");
+    }
+
+    private void onLoadOnError(final String attribs) throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <link " + attribs
+                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
+                + "</head>\n"
+                + "<body onload='window.getComputedStyle(document.body); alert(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

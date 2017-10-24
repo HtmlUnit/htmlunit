@@ -74,8 +74,15 @@ public class StyleSheetList extends SimpleScriptable {
      * @return true if the provided node is a stylesheet link
      */
     public static boolean isStyleSheetLink(final DomNode domNode) {
-        return domNode instanceof HtmlLink
-                && "stylesheet".equalsIgnoreCase(((HtmlLink) domNode).getRelAttribute());
+        if (domNode instanceof HtmlLink) {
+            final HtmlLink link = (HtmlLink) domNode;
+            String rel = link.getRelAttribute();
+            if (rel != null) {
+                rel = rel.trim();
+            }
+            return "stylesheet".equalsIgnoreCase(rel);
+        }
+        return false;
     }
 
     /**
@@ -87,7 +94,11 @@ public class StyleSheetList extends SimpleScriptable {
     public boolean isActiveStyleSheetLink(final DomNode domNode) {
         if (domNode instanceof HtmlLink) {
             final HtmlLink link = (HtmlLink) domNode;
-            if ("stylesheet".equalsIgnoreCase(link.getRelAttribute())) {
+            String rel = link.getRelAttribute();
+            if (rel != null) {
+                rel = rel.trim();
+            }
+            if ("stylesheet".equalsIgnoreCase(rel)) {
                 final String media = link.getMediaAttribute();
                 if (StringUtils.isBlank(media)) {
                     return true;

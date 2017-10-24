@@ -21,10 +21,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.http.HttpStatus;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
 
 /**
  * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
@@ -165,14 +171,27 @@ public class HtmlLink extends HtmlElement {
      * received when performing a request for the content referenced by this tag otherwise
      * @throws IOException if an error occurs while downloading the content
      */
-    public WebResponse getWebResponse(final boolean downloadIfNeeded, final WebRequest request) throws IOException {
+    public WebResponse getWebResponse(final boolean downloadIfNeeded, WebRequest request) throws IOException {
         if (downloadIfNeeded && cachedWebResponse_ == null) {
             final WebClient webclient = getPage().getWebClient();
             if (null == request) {
-                cachedWebResponse_ = webclient.loadWebResponse(getWebRequest());
+                request = getWebRequest();
             }
-            else {
+            try {
                 cachedWebResponse_ = webclient.loadWebResponse(request);
+                final int statusCode = cachedWebResponse_.getStatusCode();
+                final boolean successful = statusCode >= HttpStatus.SC_OK
+                                                && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
+                if (successful) {
+                    executeEvent(Event.TYPE_LOAD);
+                }
+                else {
+                    executeEvent(Event.TYPE_ERROR);
+                }
+            }
+            catch (final IOException e) {
+                executeEvent(Event.TYPE_ERROR);
+                throw e;
             }
         }
         return cachedWebResponse_;
@@ -215,4 +234,53 @@ public class HtmlLink extends HtmlElement {
     public boolean mayBeDisplayed() {
         return false;
     }
+
+    private void executeEvent(final String type) {
+        final Object scriptable = getScriptableObject();
+        if (scriptable instanceof HTMLLinkElement2) {
+            final HTMLLinkElement2 script = (HTMLLinkElement2) scriptable;
+            final Event2 event = new Event2(this, type);
+            script.executeEventLocally(event);
+        }
+        else {
+            final HTMLLinkElement link = (HTMLLinkElement) scriptable;
+            final Event event = new Event(this, type);
+            link.executeEventLocally(event);
+        }
+    }
+
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void onAllChildrenAddedToPage(final boolean postponed) {
+//        if (getOwnerDocument() instanceof XmlPage) {
+//            return;
+//        }
+//        if (LOG.isDebugEnabled()) {
+//            LOG.debug("Link node added: " + asXml());
+//        }
+//
+//        final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
+//            @Override
+//            public void execute() {
+//            }
+//        };
+//
+//        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
+//        if (postponed) {
+//            engine.addPostponedAction(action);
+//        }
+//        else {
+//            try {
+//                action.execute();
+//            }
+//            catch (final RuntimeException e) {
+//                throw e;
+//            }
+//            catch (final Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//    }
 }
