@@ -69,6 +69,7 @@
                             <Url>${project.url}</Url>
                             <Build-Time>${maven.build.timestamp}</Build-Time>
                         </manifestEntries>
+                        <addMavenDescriptor>false</addMavenDescriptor>
                     </archive>
                 </configuration>
                 <executions>
