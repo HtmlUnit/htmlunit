@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61, improved Promise impl">
+            <action type="fix" dev="rbri" issue="1927">
+                The link tag now supports the onLoad and the onError handler.
+            </action>
+            <action type="fix" dev="rbri" issue="1927">
+                The link tags are now loaded at page initialization.
+            </action>
+            <action type="fix" dev="rbri" issue="1927">
+                Link tags added to the page from javascript are now resolved directly.
+            </action>
             <action type="update" dev="rbri">
                 CSS: cssparser updated to 0.9.24.
             </action>
