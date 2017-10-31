@@ -235,4 +235,49 @@ public class HtmlLink2Test extends WebDriverTestCase {
         final String text = driver.getTitle();
         assertEquals(String.join(";", getExpectedAlerts()), text);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad [object Event]", "onError [object Event]"})
+    public void onLoadDynamic() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'simple.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'unknown.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+                + "    }\n"
+
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
 }
