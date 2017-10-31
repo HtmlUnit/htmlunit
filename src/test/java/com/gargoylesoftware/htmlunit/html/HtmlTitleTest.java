@@ -115,7 +115,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asTextDontLoadCss() throws Exception {
+    public void getTitleTextDontLoadCss() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Title</title>\n"
@@ -128,9 +128,11 @@ public class HtmlTitleTest extends SimpleWebTestCase {
             + "</html>\n";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("Title", page.getTitleText());
         final MockWebConnection conn = (MockWebConnection) page.getWebClient().getWebConnection();
-        assertEquals(1, conn.getRequestCount());
+        assertEquals(2, conn.getRequestCount());
+
+        assertEquals("Title", page.getTitleText());
+        assertEquals(2, conn.getRequestCount());
     }
 
     /**
