@@ -102,7 +102,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -277,7 +276,7 @@ public class CSSStyleSheet extends StyleSheet {
                         final String uri = (uri_ != null) ? uri_ : e.getPage().getUrl().toExternalForm();
                         final String href = importRule.getHref();
                         final String url = UrlUtils.resolveUrl(uri, href);
-                        sheet = loadStylesheet(getWindow(), ownerNode_, null, url);
+                        sheet = loadStylesheet(ownerNode_, null, url);
                         imports_.put(importRule, sheet);
                     }
 
@@ -301,14 +300,12 @@ public class CSSStyleSheet extends StyleSheet {
 
     /**
      * Loads the stylesheet at the specified link or href.
-     * @param window the current window
      * @param element the parent DOM element
      * @param link the stylesheet's link (may be {@code null} if a <tt>url</tt> is specified)
      * @param url the stylesheet's url (may be {@code null} if a <tt>link</tt> is specified)
      * @return the loaded stylesheet
      */
-    public static CSSStyleSheet loadStylesheet(final Window window, final HTMLElement element,
-        final HtmlLink link, final String url) {
+    public static CSSStyleSheet loadStylesheet(final HTMLElement element, final HtmlLink link, final String url) {
         CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
         String uri = page.getUrl().toExternalForm(); // fallback uri for exceptions

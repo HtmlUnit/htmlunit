@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -136,7 +135,6 @@ public class HtmlLink2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"onLoad", "body onLoad"})
-    @NotYetImplemented(CHROME)
     public void onLoadMediaPrint() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         onLoadOnError("rel='stylesheet' href='simple.css' media='print'");
@@ -157,7 +155,6 @@ public class HtmlLink2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"onLoad", "body onLoad"})
-    @NotYetImplemented(CHROME)
     public void onLoadMediaQueryNotMatch() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         onLoadOnError("rel='stylesheet' href='simple.css' media='(max-width: 10px)'");
@@ -200,10 +197,42 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "  <link " + attribs
                         + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
                 + "</head>\n"
-                + "<body onload='window.getComputedStyle(document.body); alert(\"body onLoad\")'>\n"
+                + "<body onload='alert(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"})
+    public void onLoadOrder() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.js"), "var x=1;");
+
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function log(x) {\n"
+                + "      document.title += x + ';';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "  <link rel='stylesheet' href='simple1.css' onload='log(\"onLoad1\")'>\n"
+                + "  <script type='text/javascript' src='simple1.js' onload='log(\"onLoadJs1\")'></script>\n"
+                + "  <link rel='stylesheet' href='simple2.css' onload='log(\"onLoad2\")'>\n"
+                + "</head>\n"
+                + "<body onload='log(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.getTitle();
+        assertEquals(String.join(";", getExpectedAlerts()), text);
     }
 }

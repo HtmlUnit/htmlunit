@@ -21,16 +21,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Wrapper for the HTML element "link". <b>Note:</b> This is not a clickable link,
@@ -45,7 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
  * @author Ronald Brill
  */
 public class HtmlLink extends HtmlElement {
-    // private static final Log LOG = LogFactory.getLog(HtmlLink.class);
+    private static final Log LOG = LogFactory.getLog(HtmlLink.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "link";
@@ -249,38 +256,44 @@ public class HtmlLink extends HtmlElement {
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void onAllChildrenAddedToPage(final boolean postponed) {
-//        if (getOwnerDocument() instanceof XmlPage) {
-//            return;
-//        }
-//        if (LOG.isDebugEnabled()) {
-//            LOG.debug("Link node added: " + asXml());
-//        }
-//
-//        final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
-//            @Override
-//            public void execute() {
-//            }
-//        };
-//
-//        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
-//        if (postponed) {
-//            engine.addPostponedAction(action);
-//        }
-//        else {
-//            try {
-//                action.execute();
-//            }
-//            catch (final RuntimeException e) {
-//                throw e;
-//            }
-//            catch (final Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onAllChildrenAddedToPage(final boolean postponed) {
+        if (getOwnerDocument() instanceof XmlPage) {
+            return;
+        }
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Link node added: " + asXml());
+        }
+
+        if (!StyleSheetList.isStyleSheetLink(this)) {
+            return;
+        }
+
+        final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
+            @Override
+            public void execute() {
+                final HTMLLinkElement linkElem = HtmlLink.this.getScriptableObject();
+                CSSStyleSheet.loadStylesheet(linkElem, HtmlLink.this, null);
+            }
+        };
+
+        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
+        if (postponed) {
+            engine.addPostponedAction(action);
+        }
+        else {
+            try {
+                action.execute();
+            }
+            catch (final RuntimeException e) {
+                throw e;
+            }
+            catch (final Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
