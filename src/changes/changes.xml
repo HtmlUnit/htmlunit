@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.28" date="???" description="Bugfixes, Chrome 61, improved Promise impl">
+            <action type="update" dev="rbri">
+                CSS: cssparser updated to 0.9.24.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: document.currentScript added.
             </action>

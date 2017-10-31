@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.3</checkstyle.version>
+        <checkstyle.version>8.4</checkstyle.version>
     </properties>
 
     <build>
@@ -866,7 +866,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.24-SNAPSHOT</version>
+            <version>0.9.24</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
