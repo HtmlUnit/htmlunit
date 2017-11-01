@@ -242,12 +242,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("§§URL§§bar.gif")
+    @Alerts({"onLoad", "§§URL§§bar.gif"})
     public void setSrc_newImage() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function doTest() {\n"
             + "  var preloadImage = new Image();\n"
+            + "  preloadImage.onload = alert('onLoad');\n"
             + "  preloadImage.src = 'bar.gif';\n"
             + "  alert(preloadImage.src);\n"
             + "}\n"
