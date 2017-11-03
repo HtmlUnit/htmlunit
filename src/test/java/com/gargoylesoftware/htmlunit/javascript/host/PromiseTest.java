@@ -910,6 +910,140 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"done", "Success first"},
+            IE = {})
+    public void thenTestAsyncChainedResolve() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             resolve('first');\n"
+                + "           }, 20);\n"
+                + "        })\n"
+                + "        var p2 = p.then(undefined, function(value) {\n"
+                + "          log(value);\n"
+                + "        })\n"
+                + "        p2.then(function(value) {\n"
+                + "          log('Success ' + value);\n"
+                + "        },"
+                + "        function(value) {\n"
+                + "          log('Failure ' + value);\n"
+                + "        })\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Failure first"},
+            IE = {})
+    public void thenTestAsyncChainedReject() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             reject('first');\n"
+                + "           }, 20);\n"
+                + "        })\n"
+                + "        var p2 = p.then(function(value) {\n"
+                + "          log(value);\n"
+                + "        }, undefined)\n"
+                + "        p2.then(function(value) {\n"
+                + "          log('Success ' + value);\n"
+                + "        },"
+                + "        function(value) {\n"
+                + "          log('Failure ' + value);\n"
+                + "        })\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Success first"},
+            IE = {})
+    public void thenTestAsyncChainedNotAFunction() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             resolve('first');\n"
+                + "           }, 20);\n"
+                + "        })\n"
+                + "        var p2 = p.then(7);\n"
+                + "        var p3 = p2.then('test');\n"
+                + "        p3.then(function(value) {\n"
+                + "          log('Success ' + value);\n"
+                + "        },"
+                + "        function(value) {\n"
+                + "          log('Failure ' + value);\n"
+                + "        })\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"Success", "string", "oh, no!", "after catch"},
             IE = {})
     public void catchTest() throws Exception {
@@ -993,6 +1127,51 @@ public class PromiseTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "Success first"},
+            IE = {})
+    public void catchTestAsyncChained() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "           window.setTimeout( function() {\n"
+                + "             resolve('first');\n"
+                + "           }, 20);\n"
+                + "        })\n"
+                + "        var p2 = p.catch(function(value) {\n"
+                + "          log(value);\n"
+                + "        })\n"
+                + "        p2.then(function(value) {\n"
+                + "          log('Success ' + value);\n"
+                + "        },"
+                + "        function(value) {\n"
+                + "          log('Failure ' + value);\n"
+                + "        })\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");

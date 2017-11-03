@@ -321,7 +321,7 @@ public class Promise extends SimpleScriptable {
      * @return {@link Promise}
      */
     @JsxFunction
-    public Promise then(final Function onFulfilled, final Function onRejected) {
+    public Promise then(final Object onFulfilled, final Object onRejected) {
         final Window window = getWindow();
         final Promise returnPromise = new Promise(window);
 
@@ -334,39 +334,46 @@ public class Promise extends SimpleScriptable {
                 Context.enter();
                 try {
                     Function toExecute = null;
-                    if (thisPromise.state_ == PromiseState.FULFILLED) {
-                        toExecute = onFulfilled;
+                    if (thisPromise.state_ == PromiseState.FULFILLED && onFulfilled instanceof Function) {
+                        toExecute = (Function) onFulfilled;
                     }
-                    else if (thisPromise.state_ == PromiseState.REJECTED) {
-                        toExecute = onRejected;
+                    else if (thisPromise.state_ == PromiseState.REJECTED && onRejected instanceof Function) {
+                        toExecute = (Function) onRejected;
                     }
 
-                    if (toExecute != null) {
-                        try {
-                            final Object callbackResult = toExecute.call(Context.getCurrentContext(),
+                    try {
+                        final Object callbackResult;
+                        if (toExecute == null) {
+                            final Promise dummy = new Promise();
+                            dummy.state_ = thisPromise.state_;
+                            dummy.value_ = thisPromise.value_;
+                            callbackResult = dummy;
+                        }
+                        else {
+                            callbackResult = toExecute.call(Context.getCurrentContext(),
                                     window, thisPromise, new Object[] {value_});
-                            if (callbackResult instanceof Promise) {
-                                final Promise resultPromise = (Promise) callbackResult;
-                                if (resultPromise.state_ == PromiseState.FULFILLED) {
-                                    returnPromise.settle(true, resultPromise.value_, window);
-                                }
-                                else if (resultPromise.state_ == PromiseState.REJECTED) {
-                                    returnPromise.settle(false, resultPromise.value_, window);
-                                }
-                                else {
-                                    if (resultPromise.dependentPromises_ == null) {
-                                        resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
-                                    }
-                                    resultPromise.dependentPromises_.add(returnPromise);
-                                }
+                        }
+                        if (callbackResult instanceof Promise) {
+                            final Promise resultPromise = (Promise) callbackResult;
+                            if (resultPromise.state_ == PromiseState.FULFILLED) {
+                                returnPromise.settle(true, resultPromise.value_, window);
+                            }
+                            else if (resultPromise.state_ == PromiseState.REJECTED) {
+                                returnPromise.settle(false, resultPromise.value_, window);
                             }
                             else {
-                                returnPromise.settle(true, callbackResult, window);
+                                if (resultPromise.dependentPromises_ == null) {
+                                    resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
+                                }
+                                resultPromise.dependentPromises_.add(returnPromise);
                             }
                         }
-                        catch (final JavaScriptException e) {
-                            returnPromise.settle(false, e.getValue(), window);
+                        else {
+                            returnPromise.settle(true, callbackResult, window);
                         }
+                    }
+                    catch (final JavaScriptException e) {
+                        returnPromise.settle(false, e.getValue(), window);
                     }
                 }
                 finally {
@@ -401,7 +408,7 @@ public class Promise extends SimpleScriptable {
      * @return {@link Promise}
      */
     @JsxFunction(functionName = "catch")
-    public Promise catch_js(final Function onRejected) {
+    public Promise catch_js(final Object onRejected) {
         return then(null, onRejected);
     }
 }
