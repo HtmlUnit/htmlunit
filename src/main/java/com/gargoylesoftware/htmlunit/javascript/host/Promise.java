@@ -58,7 +58,7 @@ public class Promise extends SimpleScriptable {
     private Promise[] all_;
 
     private List<BasicJavaScriptJob> settledJobs_;
-    private Promise dependentPromise_;
+    private List<Promise> dependentPromises_;
 
     /**
      * Default constructor.
@@ -207,9 +207,11 @@ public class Promise extends SimpleScriptable {
             settledJobs_ = null;
         }
 
-        if (dependentPromise_ != null) {
-            dependentPromise_.settle(fulfilled, newValue, window);
-            dependentPromise_ = null;
+        if (dependentPromises_ != null) {
+            for (Promise promise : dependentPromises_) {
+                promise.settle(fulfilled, newValue, window);
+            }
+            dependentPromises_ = null;
         }
     }
 
@@ -292,7 +294,10 @@ public class Promise extends SimpleScriptable {
                 final Object o = array.get(i);
                 if (o instanceof Promise) {
                     returnPromise.all_[i] = (Promise) o;
-                    returnPromise.all_[i].dependentPromise_ = returnPromise;
+                    if (returnPromise.all_[i].dependentPromises_ == null) {
+                        returnPromise.all_[i].dependentPromises_ = new ArrayList<Promise>(2);
+                    }
+                    returnPromise.all_[i].dependentPromises_.add(returnPromise);
                 }
                 else {
                     returnPromise.all_[i] = create(thisObj, new Object[] {o}, PromiseState.FULFILLED);
@@ -349,7 +354,10 @@ public class Promise extends SimpleScriptable {
                                     returnPromise.settle(false, resultPromise.value_, window);
                                 }
                                 else {
-                                    resultPromise.dependentPromise_ = returnPromise;
+                                    if (resultPromise.dependentPromises_ == null) {
+                                        resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
+                                    }
+                                    resultPromise.dependentPromises_.add(returnPromise);
                                 }
                             }
                             else {

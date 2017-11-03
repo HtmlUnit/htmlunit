@@ -160,10 +160,12 @@ public class PromiseTest extends WebDriverTestCase {
                 + "          var p = new Promise();\n"
                 + "          log('done');\n"
                 + "        } catch(e) { log(e instanceof TypeError); }\n"
+
                 + "        try{\n"
                 + "          var p = new Promise([1, 2, 4]);\n"
                 + "          log('done');\n"
                 + "        } catch(e) { log(e instanceof TypeError); }\n"
+
                 + "        try{\n"
                 + "          var original = Promise.resolve(42);\n"
                 + "          var p = new Promise(original);\n"
@@ -901,6 +903,51 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"done", "first 3,1337,Success", "second 3,Success"},
+            IE = {})
+    public void allAsync2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = Promise.resolve(3);\n"
+            + "        var p2 = 1337;\n"
+            + "        var p3 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.all([p1, p2, p3]).then(function(values) {\n"
+            + "          log('first ' + values);\n"
+            + "        });\n"
+            + "        Promise.all([p1, p3]).then(function(values) {\n"
+            + "          log('second ' + values);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"done", "string", "Failed"},
             IE = {})
     public void allRejectAsync() throws Exception {
@@ -922,6 +969,55 @@ public class PromiseTest extends WebDriverTestCase {
             + "        }, function(value) {\n"
             + "          log(typeof value);\n"
             + "          log(value);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "first Failed", "second Failed"},
+            IE = {})
+    public void allRejectAsync2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = Promise.resolve(3);\n"
+            + "        var p2 = 1337;\n"
+            + "        var p3 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              reject('Failed');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.all([p1, p2, p3]).then(function(value) {\n"
+            + "            log('failure');\n"
+            + "        }, function(value) {\n"
+            + "          log('first ' + value);\n"
+            + "        });\n"
+            + "        Promise.all([p1, p3]).then(function(value) {\n"
+            + "            log('failure');\n"
+            + "        }, function(value) {\n"
+            + "          log('second ' + value);\n"
             + "        });\n"
             + "        log('done');\n"
             + "      }\n"
@@ -993,6 +1089,58 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"done", "first Success 2", "second Success 2"},
+            IE = {})
+    public void raceAsync2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 40);\n"
+            + "        });\n"
+            + "        var p2 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success 2');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log('first ' + value);\n"
+            + "        }, function(value) {\n"
+            + "          log('failure');\n"
+            + "        });\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log('second ' + value);\n"
+            + "        }, function(value) {\n"
+            + "          log('failure');\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"done", "Failed"},
             IE = {})
     public void raceRejectAsync() throws Exception {
@@ -1016,6 +1164,58 @@ public class PromiseTest extends WebDriverTestCase {
             + "          log('failure');\n"
             + "        }, function(value) {\n"
             + "          log(value);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "first Failed", "second Failed"},
+            IE = {})
+    public void raceRejectAsync2() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 40);\n"
+            + "        });\n"
+            + "        var p2 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              reject('Failed');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log('failure');\n"
+            + "        }, function(value) {\n"
+            + "          log('first ' + value);\n"
+            + "        });\n"
+            + "        Promise.race([p1, p2]).then(function(value) {\n"
+            + "          log('failure');\n"
+            + "        }, function(value) {\n"
+            + "          log('second ' + value);\n"
             + "        });\n"
             + "        log('done');\n"
             + "      }\n"
