@@ -433,6 +433,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
+                // disable the new marionette interface because it requires ff47 or more
+                System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
+
                 return createFirefoxDriver(FF52_BIN_);
             }
 
