@@ -1,0 +1,42 @@
+ 26 tests to run in 4 groups
+ ------------------------------------------------------------
+ GROUP "tests.date.util" has 3 tests to run
+ PASSED test: test_date_getDaysInMonth
+ PASSED test: test_date_isLeapYear
+ PASSED test: test_date_getTimezoneName
+ ------------------------------------------------------------
+ GROUP "tests.date.math" has 12 tests to run
+ PASSED test: test_date_compare
+ PASSED test: test_date_add
+ PASSED test: test_date_diff
+ PASSED test: test_date_add_diff_year
+ PASSED test: test_date_add_diff_quarter
+ PASSED test: test_date_add_diff_month
+ PASSED test: test_date_add_diff_week
+ PASSED test: test_date_add_diff_day
+ PASSED test: test_date_add_diff_weekday
+ PASSED test: test_date_add_diff_hour
+ PASSED test: test_date_add_diff_minute
+ PASSED test: test_date_add_diff_second
+ ------------------------------------------------------------
+ GROUP "tests.date.locale" has 9 tests to run
+ PASSED test: date.locale
+ PASSED test: isWeekend
+ PASSED test: format
+ PASSED test: parse_dates
+ PASSED test: parse_dates_neg
+ PASSED test: parse_datetimes
+ PASSED test: parse_times
+ PASSED test: day_of_year
+ PASSED test: week_of_year
+ ------------------------------------------------------------
+ GROUP "tests.date.stamp" has 2 tests to run
+ PASSED test: test_date_iso
+ PASSED test: test_date_iso_tz
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      26 tests in 4 groups
+      0 errors
+      0 failures

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Column]]></name>
+ <icon><![CDATA[icons/columnSeries.gif]]></icon>
+ <description><![CDATA[the series type for a column chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.ColumnSeries">
+   <dynamics/>
+   <variants usePrimaryX="1" usePrimaryY="1"/>
+   <strings jsxname="columnSeries" seriesName="Column Series" tooltipFunction="jsx3.chart.ColumnSeries.tooltip"/>
+  </object>
+</serialization>

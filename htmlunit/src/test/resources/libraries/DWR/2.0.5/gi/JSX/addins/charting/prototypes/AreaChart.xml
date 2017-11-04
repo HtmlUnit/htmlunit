@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Area]]></name>
+ <icon><![CDATA[icons/overlayArea.gif]]></icon>
+ <description><![CDATA[a sample area chart of type 'Overlay']]></description>,
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.AreaChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="areaChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record cat=&quot;03Q1&quot; y1=&quot;100000&quot;/&gt; &lt;record cat=&quot;03Q2&quot; y1=&quot;175000&quot;/&gt; &lt;record cat=&quot;03Q3&quot; y1=&quot;400000&quot;/&gt; &lt;record cat=&quot;03Q4&quot; y1=&quot;750000&quot;/&gt; &lt;record cat=&quot;04Q1&quot; y1=&quot;800000&quot; y2=&quot;250000&quot;/&gt; &lt;record cat=&quot;04Q2&quot; y1=&quot;900000&quot; y2=&quot;300000&quot;/&gt; &lt;record cat=&quot;04Q3&quot; y1=&quot;1050000&quot; y2=&quot;850000&quot;/&gt; &lt;record cat=&quot;04Q4&quot; y1=&quot;1300000&quot; y2=&quot;1700000&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="overlay"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Area Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" numCategories="8" numSeries="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="cat" jsxname="xAxis" labelPlacement="axis" labelStyle="font-family: Verdana; font-size: 8px;" minorTickPlacement="outside" minorTickStroke="#666666 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="xTitle" jsxtext="Quarter" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="20" horizontal="0" labelGap="3" minorTickDivisions="4" minorTickLength="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="function (x) { return x / 1000000; }" labelPlacement="axis" labelStyle="font-family: Verdana; font-size: 8px; text-align: right;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270" preferredWidth="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="ytitle" jsxtext="Units (millions)" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants horizontalAbove="1" inForeground="0" strokeMajorH="['#DDDDDD 1 1']" strokeMinorH="['#EEEEEE 1 1']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="grid"/>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#DDDDDD .5" form="segment" jsxname="series1" seriesName="iPod" stroke="#AAAAAA 2" tooltipFunction="jsx3.chart.AreaSeries.tooltip" yField="y1"/>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#FF3399 .5" form="segment" jsxname="series2" seriesName="iPod mini" stroke="#FF3399 2" tooltipFunction="jsx3.chart.AreaSeries.tooltip" yField="y2"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+  </object>
+</serialization>

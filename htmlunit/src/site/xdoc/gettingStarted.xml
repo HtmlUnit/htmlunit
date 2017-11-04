@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Getting Started with HtmlUnit</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need
+                to have in your classpath.
+            </p>
+            <p>
+                The class com.gargoylesoftware.htmlunit.WebClient is the
+                main starting point.  This simulates a web browser and will be used to execute
+                all of the tests.
+            </p>
+            <p>
+                Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
+                so all the examples here will assume that we are using that.
+            </p>
+            <p>
+                In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
+                We then verify that this page has the correct title.  Note that getPage() can return different types
+                of pages based on the content type of the returned data.  In this case we are expecting a content
+                type of text/html so we cast the result to an com.gargoylesoftware.htmlunit.html.HtmlPage.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+
+        final String pageAsXml = page.asXml();
+        Assert.assertTrue(pageAsXml.contains("<body class=\"composite\">"));
+
+        final String pageAsText = page.asText();
+        Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
+    }
+}]]></source>
+        </section>
+
+        <section name="Imitating a specific browser">
+            <p>
+                Often you will want to simulate a specific browser.  This is done by passing a
+                com.gargoylesoftware.htmlunit.BrowserVersion into the WebClient constructor.
+                Constants have been provided for some common browsers but you can create your own specific
+                version by instantiating a BrowserVersion.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_Firefox() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_52)) {
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
+                Specifying this BrowserVersion will change the user agent header that is sent up to the
+                server and will change the behavior of some of the JavaScript.
+            </p>
+        </section>
+
+        <section name="Finding a specific element">
+            <p>
+                Once you have a reference to an HtmlPage, you can search for a specific HtmlElement by one of
+                'get' methods, or by using XPath or CSS selectors.
+            </p>
+            <subsection name="Traversing the DOM tree">
+                <p>
+                    Below is an example of finding a 'div' by an ID, and getting an anchor by name:
+                </p>
+                <source><![CDATA[
+@Test
+public void getElements() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://some_url");
+        final HtmlDivision div = page.getHtmlElementById("some_div_id");
+        final HtmlAnchor anchor = page.getAnchorByName("anchor_name");
+    }
+}]]></source>
+                <p>
+                    A simple way for finding elements might be to find all elements of a specific type.
+                </p>
+                <source><![CDATA[
+ @Test
+ public void getElements() throws Exception {
+     try (final WebClient webClient = new WebClient()) {
+         final HtmlPage page = webClient.getPage("http://some_url");
+         NodeList inputs = page.getElementsByTagName("input");
+         final Iterator<E> nodesIterator = nodes.iterator();
+         // now iterate
+     }
+ }]]></source>
+                <p>
+                    There is rich set of methods usable to locate page elements e.g.
+                </p>
+                <ul>
+                    <li>HtmlPage.getAnchors(); HtmlPage.getAnchorByHref(String); HtmlPage.getAnchorByName(String); HtmlPage.getAnchorByText(String)</li>
+                    <li>HtmlPage.getElementById(String); HtmlPage.getElementsById(String); HtmlPage.getElementsByIdAndOrName(String);</li>
+                    <li>HtmlPage.getElementByName(String); HtmlPage.getElementsByName(String)</li>
+                    <li>HtmlPage.getFormByName(String); HtmlPage.getForms()</li>
+                    <li>HtmlPage.getFrameByName(String); HtmlPage.getFrames()</li>
+                </ul>
+                <p>
+                    You can also start searching from the document element (HtmlPage.getDocumentElement()) and then traverse the dom tree
+                </p>
+                <ul>
+                    <li>HtmlElement.getElementsByAttribute(String, String, String)</li>
+                    <li>DomElement.getElementsByTagName(String); DomElement.getElementsByTagNameNS(String, String)</li>
+                    <li>DomElement.getChildElements(); DomElement.getChildElementCount()</li>
+                    <li>DomElement.getFirstElementChild(); DomElement.getLastElementChild()</li>
+                    <li>HtmlElement.getEnclosingElement(String); HtmlElement.getEnclosingForm()</li>
+                    <li>DomNode.getChildNodes(); DomNode.getChildren(); DomNode.getDescendants(); DomNode.getDomElementDescendants(); DomNode.getFirstChild(); DomNode.getHtmlElementDescendants()
+                        DomNode.getLastChild(); DomNode.getNextElementSibling(); DomNode.getNextSibling(); DomNode.getPreviousElementSibling(); getPreviousSibling()</li>
+                </ul>
+            </subsection>
+
+            <subsection name="XPath queries">
+                <p>
+                    XPath is the suggested way for more complex searches, a brief tutorial can be found in
+                    <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
+                </p>
+                <source><![CDATA[
+@Test
+public void xpath() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+
+        //get list of all divs
+        final List<?> divs = page.getByXPath("//div");
+
+        //get div which has a 'name' attribute of 'John'
+        final HtmlDivision div = (HtmlDivision) page.getByXPath("//div[@name='John']").get(0);
+    }
+}]]></source>
+            </subsection>
+
+            <subsection name="CSS Selectors">
+                <p>
+                    You can also use CSS selectors
+                </p>
+                <source><![CDATA[
+@Test
+public void cssSelector() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+
+        //get list of all divs
+        final DomNodeList<DomNode> divs = page.querySelectorAll("div");
+        for (DomNode div : divs) {
+            ....
+        }
+
+        //get div which has the id 'breadcrumbs'
+        final DomNode div = page.querySelector("div#breadcrumbs");
+    }
+}]]></source>
+            </subsection>
+        </section>
+
+        <section name="Using a proxy server">
+            <p>
+                The last WebClient constructor allows you to specify proxy server information in those cases
+                where you need to connect through one.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_proxy() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX_52, "myproxyserver", myProxyPort)) {
+
+        //set proxy username and password 
+        final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
+        credentialsProvider.addCredentials("username", "password");
+
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
+                Specifying this BrowserVersion will change the user agent header that is sent up to the
+                server and will change the behavior of some of the JavaScript.
+            </p>
+        </section>
+
+        <section name="Submitting a form">
+            <p>
+                Frequently we want to change values in a form and submit the form back to the server.  The
+                following example shows how you might do this.
+            </p>
+            <source><![CDATA[
+@Test
+public void submittingForm() throws Exception {
+    try (final WebClient webClient = new WebClient()) {
+
+        // Get the first page
+        final HtmlPage page1 = webClient.getPage("http://some_url");
+
+        // Get the form that we are dealing with and within that form, 
+        // find the submit button and the field that we want to change.
+        final HtmlForm form = page1.getFormByName("myform");
+
+        final HtmlSubmitInput button = form.getInputByName("submitbutton");
+        final HtmlTextInput textField = form.getInputByName("userid");
+
+        // Change the value of the text field
+        textField.setValueAttribute("root");
+
+        // Now submit the form by clicking the button and get back the second page.
+        final HtmlPage page2 = button.click();
+    }
+}]]></source>
+
+        </section>
+    </body>
+</document>

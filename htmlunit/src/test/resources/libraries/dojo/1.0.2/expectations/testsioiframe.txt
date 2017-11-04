@@ -1,0 +1,18 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.io.iframe" has 1 test to run
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 4 tests to run
+ PASSED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetText
+ PASSED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJson
+ PASSED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetJavascript
+ PASSED test: ../../dojo/tests/io/iframe.html::t::ioIframeGetHtml
+ PASSED test: ../../dojo/tests/io/iframe.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 2 groups
+      0 errors
+      0 failures

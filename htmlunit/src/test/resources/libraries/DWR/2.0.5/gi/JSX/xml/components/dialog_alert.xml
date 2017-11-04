@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+	<name/>
+	<icon/>
+	<description/>
+	<onBeforeDeserialize/>
+	<onAfterDeserialize><![CDATA[objJSX.setMessage=function(a){this.getDescendantOfName("message").setText(a,true);};objJSX.onEnter=function(c){var H=this.getDescendantOfName("ok");if(H)H.doExecute(c);};objJSX.hideButton=function(){var oc=this.getDescendantOfName("button_block");this.getDescendantOfName("layout_horiz").setDimensionArray(["100%"],false);oc.getParent().removeChild(oc);};objJSX.registerHotKey("onEnter",13,false,false,false);]]></onAfterDeserialize>
+		<object type="jsx3.gui.Dialog">
+			<dynamics jsxbgcolor="@Solid Medium"/>
+			<variants jsxheight="145" jsxmodal="1" jsxresize="0" jsxwidth="300"/>
+			<strings jsxname="jsx_dialog_alert" jsxvisibility=""/>
+				<object type="jsx3.gui.WindowBar">
+					<variants/>
+					<strings jsxname="title" jsxtext="Alert"/>
+				</object>
+				<object type="jsx3.gui.LayoutGrid">
+					<dynamics jsxbgcolor="@Solid Disabled"/>
+					<variants jsxbestguess="1" jsxorientation="0" jsxoverflow="2" jsxrelativeposition="0" jsxrepeat="2" jsxsizearray="['*','32']"/>
+					<strings jsxheight="100%" jsxname="layout_horiz" jsxwidth="100%"/>
+            <object type="jsx3.gui.Block">
+              <dynamics/>
+              <variants jsxoverflow="1"/>
+              <strings jsxheight="100%" jsxname="message_cont" jsxwidth="100%"/>
+                <object type="jsx3.gui.Block">
+                  <dynamics/>
+                  <variants jsxoverflow="3"/>
+                  <strings jsxclassname="jsx30dialog_alert" jsxheight="100%" jsxname="message" jsxpadding="8 8 2 8" jsxtext="Alert text." jsxtextalign="left" jsxwidth="100%"/>
+                </object>
+            </object>
+            <object type="jsx3.gui.Block">
+							<dynamics/>
+							<variants jsxoverflow="2" jsxrelativeposition="1"/>
+							<strings jsxheight="100%" jsxname="button_block" jsxpadding="6 8 0 8" jsxtextalign="right" jsxwidth="100%"/>
+								<object type="jsx3.gui.Button">
+									<dynamics jsxbgcolor="@Solid Medium" jsxcolor="@Dark"/>
+									<variants/>
+									<strings jsxfontweight="bold" jsxname="ok" jsxtext="Ok" jsxtextalign="center"/>
+									<events jsxexecute="this.getAncestorOfType(jsx3.gui.Dialog).doClose();"/>
+								</object>
+						</object>
+				</object>
+		</object>
+</serialization>

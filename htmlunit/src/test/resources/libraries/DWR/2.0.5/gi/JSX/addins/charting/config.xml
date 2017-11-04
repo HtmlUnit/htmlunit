@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  -->
+<data jsxid="jsxroot">
+	<record jsxid="id" type="string">jsx3.chart</record>
+	<record jsxid="name" type="string">Charting</record>
+	<record jsxid="description" type="string">GI Charting Addin</record>
+  <record jsxid="long_description" type="string">Provides Bar, Column, Area, Line, Point, Bubble, Pie, and Doughnut chart prototypes.</record>
+  <record jsxid="addin" type="string">jsx3.chart.ADDIN</record>
+  <record jsxid="version" type="string">1.3</record>
+  <record jsxid="jsxversion" type="string">3.2</record>
+  <record jsxid="classpath" type="string">classes/:jsx3.chart.*</record>
+
+	<record jsxid="includes" type="array">		
+		<record jsxid="0" type="map">
+			<record jsxid="load" type="number">1</record>
+			<record jsxid="type" type="string">jss</record>
+			<record jsxid="src" type="string">properties/dynaprops.xml</record>
+		</record>
+
+    
+    
+    
+		
+		
+    
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    
+		
+		
+		
+		
+    
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+    <record jsxid="0" type="map">
+      <record jsxid="load" type="number">0</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/ColumnChart.js</record>
+    </record>
+    <record jsxid="0" type="map">
+      <record jsxid="load" type="number">0</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/ColumnSeries.js</record>
+    </record>
+		
+	<record jsxid="0" type="map">
+      <record jsxid="load" type="number">2</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/package_vml_full.js</record>
+    <record jsxid="browser" type="string">VML</record>
+</record>
+<record jsxid="0" type="map">
+      <record jsxid="load" type="number">3</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/package_vml.js</record>
+    <record jsxid="browser" type="string">VML</record>
+</record>
+<record jsxid="0" type="map">
+      <record jsxid="load" type="number">2</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/package_svg_full.js</record>
+    <record jsxid="browser" type="string">SVG</record>
+</record>
+<record jsxid="0" type="map">
+      <record jsxid="load" type="number">3</record>
+      <record jsxid="type" type="string">script</record>
+      <record jsxid="src" type="string">classes/jsx3/chart/package_svg.js</record>
+    <record jsxid="browser" type="string">SVG</record>
+</record>
+</record>
+</data>

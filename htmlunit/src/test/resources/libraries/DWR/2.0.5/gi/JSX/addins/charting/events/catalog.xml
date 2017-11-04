@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+  <record jsxid="jsx3.chart.Chart" jsxtext="events/Chart.xml"/>
+  <record jsxid="jsx3.chart.ChartComponent" jsxtext="events/Component.xml"/>
+  <record jsxid="jsx3.chart.Legend" jsxtext="events/Legend.xml"/>
+  <record jsxid="jsx3.chart.Series" jsxtext="events/Series.xml"/>
+</data>

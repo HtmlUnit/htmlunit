@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="series_none" include="master.xml">
+		<record docgetter="getField" docsetter="setField" eval="0" jsxexecute="objJSX.field=vntValue;objJSX.getChart().repaint();" jsxid="field" jsxmask="jsxtext" jsxtext="Field" jsxtip="Sets the attribute of the data provider containing the value used to determine the size of the slices." validate="^([_a-zA-Z]\w*|)$"/>
+		<record disallow="[^0-9]" docdefault="360" docgetter="getTotalAngle" docsetter="setTotalAngle" eval="1" jsxexecute="objJSX.setTotalAngle(vntValue);objJSX.getChart().repaint();" jsxid="totalAngle" jsxmask="jsxtext" jsxtext="Total Angle" jsxtip="Sets the total angle for this series. Overrides the value in PieChart."/>
+		<record disallow="[^0-9\-]" docdefault="0" docgetter="getStartAngle" docsetter="setStartAngle" eval="1" jsxexecute="objJSX.startAngle=vntValue;objJSX.getChart().repaint();" jsxid="startAngle" jsxmask="jsxtext" jsxtext="Start Angle" jsxtip="Sets the starting angle for this series. Overrides the value in PieChart."/>
+	</record>
+	
+	<record group="1" jsxid="piechart" jsxtext="By-Category">
+		<record docdefault="Default color scheme" docgetter="getColors" docsetter="setColors" eval="0" jsxexecute="objJSX.colors=jsx3.chart.o9(vntValue);objJSX.repaint();" jsxid="colors" jsxmask="jsxtext" jsxtext="Colors" jsxtip="Sets the colors for this series. Overrides the value in PieChart. Specify as: color1 alpha1, color2 alpha2,..."/>
+		<record docdefault="Empty" docgetter="getStroke" docsetter="setStroke" eval="0" jsxid="stroke" jsxmask="jsxtext" jsxtext="Stroke" jsxtip="Sets the stroke for this series. Overrides the value in PieChart."/>
+    <record children="1" group="colorFunction" include="master.xml"/>
+		<record docdefault="bottom (jsx3.chart.QBOTTOM)" docgetter="getLabelPlacement" docsetter="setLabelPlacement" eval="0" jsxid="labelPlacement" jsxmask="jsxselect" jsxtext="Label Placement" jsxtip="Sets the quadrant to place an optional ChartLabel child that displays the name of the series." nullable="0">
+			<enum jsxid="jsx3.chart.QTOP" jsxtext="top"/>
+			<enum jsxid="jsx3.chart.QRIGHT" jsxtext="right"/>
+			<enum jsxid="jsx3.chart.QBOTTOM" jsxtext="bottom"/>
+			<enum jsxid="jsx3.chart.QLEFT" jsxtext="left"/>
+		</record>
+		<record disallow="[^0-9\-]" docdefault="0" docgetter="getLabelOffset" docsetter="setLabelOffset" eval="1" jsxid="labelOffset" jsxmask="jsxtext" jsxtext="Label Offset" jsxtip="Sets the offset of the optional ChartLabel child in pixels."/>
+	</record>
+	
+	<record group="component" include="master.xml"/>
+	<record group="interaction" include="master.xml"/>
+</data>

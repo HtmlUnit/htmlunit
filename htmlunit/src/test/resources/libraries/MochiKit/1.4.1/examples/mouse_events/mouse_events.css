@@ -1,0 +1,17 @@
+h1 {
+    font-size: 2em;
+    color: #4B4545;
+    text-align: center;
+}
+
+div.scroll-box {
+    border  : 2px solid blue;
+    padding : 4ex 4em;
+    margin  : 4ex 4em;
+}
+
+div.padding {
+    padding : 4ex 4em;
+    margin  : 4ex 4em;
+    border  : 1px solid silver;
+}

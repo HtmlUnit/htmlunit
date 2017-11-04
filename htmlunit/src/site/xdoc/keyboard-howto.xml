@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Keyboard Navigation Tutorial</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                For a given WebClient, the focus can be on at most one element at any given time.  Focus
+                doesn't have to be on any element within the WebClient.
+            </p>
+            <p>
+                There are several ways to move the focus from one element to another.  The simplest is to call
+                HtmlPage.setFocusedElement(HtmlElement).
+                This method will remove focus from whatever element currently has it, if any, and will set
+                it to the new component.  Along the way, it will fire off any "onfocus" and "onblur" handlers
+                that have been defined.
+            </p>
+            <p>
+                The element currently owning the focus can be determined with a call to
+                HtmlPage.getFocusedElement().
+            </p>
+            <p>
+                To simulate keyboard navigation via the tab key, you can call
+                HtmlPage.tabToNextElement() and HtmlPage.tabToPreviousElement()
+                to cycle forward or backwards through the defined tab order.  This tab order is
+                defined by the
+                <a href="http://www.w3.org/TR/html401/interact/forms.html#adef-tabindex">tabindex</a>
+                attribute on the various elements as defined by the HTML specification.  You can query
+                the defined tab order with the method
+                HtmlPage.getTabbableElements()
+                which will return a list of all tabbable elements in defined tab order.
+            </p>
+            <p>
+                Access keys, often called keyboard mnemonics, can be simulated with the method
+                HtmlPage.pressAccessKey(char).
+            </p>
+            <p>
+                To use special keys, you can use htmlElement.type(int) with KeyboardEvent.DOM_VK_PAGE_DOWN.
+            </p>
+            <p>
+                Finally, there is an assertion for testing that will verify that every tabbable element
+                has a defined tabindex attribute.  This is done with
+                WebAssert.assertAllTabIndexAttributesSet().
+            </p>
+        </section>
+    </body>
+
+</document>
+

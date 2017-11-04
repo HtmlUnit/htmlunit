@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script>
+			var xhr;
+			function test() {
+				if (window.XMLHttpRequest)
+					xhr = new XMLHttpRequest();
+				else if (window.ActiveXObject)
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				xhr.onreadystatechange = onChange;
+				xhr.open("GET", "/test", true);
+				xhr.send("");
+			}
+			function onChange() {
+				if(xhr.readyState == 3) {
+					// interactive; partial data available in FF but not IE
+					var b = document.getElementById("b");
+					b.innerHTML += xhr.responseText + "<br>";
+				}
+			}
+		</script>
+	</head>
+	<body onload="test()" id="b"></body>
+</html>

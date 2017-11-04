@@ -1,0 +1,63 @@
+Passed: 61
+Failed: 0
+ok - truncToFixed truncate
+ok - truncToFixed trailing zeros
+ok - truncToFixed no round
+ok - truncToFixed zero (edge case)
+ok - truncToFixed 568.80, floating-point error
+ok - truncToFixed 1.23e+20
+ok - truncToFixed -1.23e+20
+ok - truncToFixed 1.23e-10
+ok - roundToFixed truncate
+ok - roundToFixed trailing zeros
+ok - roundToFixed round
+ok - roundToFixed zero (edge case)
+ok - roundToFixed 568.80, floating-point error
+ok - twoDigitFloat -0.1234 correct
+ok - twoDigitFloat -0.1 correct
+ok - twoDigitFloat -0 correct
+ok - twoDigitFloat 0 correct
+ok - twoDigitFloat 1 correct
+ok - twoDigitFloat 1.0 correct
+ok - twoDigitFloat 1.2 correct
+ok - twoDigitFloat 1.234 correct
+ok - twoDigitFloat 0.23 correct
+ok - twoDigitFloat 0.01 correct
+ok - twoDigitFloat, floating-point error
+ok - percentFormat 123 correct
+ok - percentFormat 123 correct
+ok - twoDigitAverage dbz correct
+ok - twoDigitAverage 1 correct
+ok - twoDigitAverage .1 correct
+ok - lstrip whitespace chars
+ok - rstrip whitespace chars
+ok - strip whitespace chars
+ok - lstrip custom chars
+ok - rstrip custom chars
+ok - strip custom chars
+ok - trailing zeros
+ok - two seps
+ok - shorter than sep
+ok - rounding
+ok - default neg
+ok - custom neg
+ok - leading and trailing
+ok - leading and trailing
+ok - no need for leading/trailing
+ok - default placeholder
+ok - custom placeholder
+ok - de_DE locale
+ok - trivial percent
+ok - percent
+ok - custom locale
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - large number format
+ok - test suite finished!

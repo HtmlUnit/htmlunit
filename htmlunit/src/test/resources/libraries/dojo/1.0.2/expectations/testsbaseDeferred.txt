@@ -1,0 +1,15 @@
+ 4 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.Deferred" has 4 tests to run
+ debug from dojo.Deferred callback
+ PASSED test: callback
+ PASSED test: errback
+ PASSED test: callbackTwice
+ PASSED test: addBoth
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      4 tests in 1 groups
+      0 errors
+      0 failures

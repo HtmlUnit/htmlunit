@@ -1,0 +1,72 @@
+<serialization xmlns="urn:tibco.com/v3.0" jsxversion="3.2">
+  <name/>
+  <icon/>
+  <description/>
+  <onBeforeDeserialize/>
+  <onAfterDeserialize/>
+
+  <object type="jsx3.gui.Block">
+
+    <variants jsxoverflow="1"/>
+    <strings jsxname="block" jsxwidth="100%" jsxheight="100%"/>
+
+    <object type="jsx3.gui.Matrix">
+
+      <variants jsxpagingmodel="1" jsxselectionmodel="0" jsxheaderheight="30" jsxrowheight="25"/>
+      <strings jsxname="matrix" jsxbodyborder="1px solid #dfdfef"
+          jsxheaderborder="1px solid #dfdfef" jsxbgcolor="#efefff"
+          jsxxml="&lt;data jsxid='jsxroot'&gt;  &lt;/data&gt;"
+          jsxsortpath="index" jsxsorttype="text" jsxsortdirection="ascending"/>
+      <xslparameters jsx_rowbg1="#ffffff" jsx_rowbg2="#ffffff"/>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="jsxidCol" jsxwidth="50" jsxtext="Symbol" jsxpadding="2" jsxcellpadding="3" jsxpath="jsxid"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="nameCol" jsxwidth="100" jsxtext="Company" jsxpadding="2" jsxcellpadding="3" jsxpath="name"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="lastCol" jsxwidth="80" jsxtext="Last" jsxpadding="2" jsxcellpadding="3" jsxpath="last"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="timeCol" jsxwidth="80" jsxtext="Time" jsxpadding="2" jsxcellpadding="2" jsxpath="time"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="changeCol" jsxwidth="80" jsxtext="Change" jsxpadding="2" jsxcellpadding="2" jsxpath="change"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="maxCol" jsxwidth="80" jsxtext="High" jsxpadding="2" jsxcellpadding="2" jsxpath="max"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="minCol" jsxwidth="80" jsxtext="Low" jsxpadding="2" jsxcellpadding="2" jsxpath="min"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+      <object type="jsx3.gui.Matrix.Column">
+        <variants/>
+        <strings jsxname="minCol" jsxwidth="80" jsxtext="" jsxpadding="2" jsxcellpadding="2" jsxpath="blank"/>
+        <dynamics jsxborder="@Outset" jsxbg="@Bevel TopDown" jsxbgcolor="@Solid Disabled"/>
+      </object>
+
+    </object>
+  </object>
+</serialization>

@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>HtmlUnit Coding Conventions</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                This page outlines the coding conventions used in HtmlUnit.  If you wish to contribute
+                code to this project then the code will be expected to follow these conventions.
+            </p>
+            <p>
+                The purpose of having common coding conventions is to make the code easier to understand
+                and therefore more easily maintained.  I have worked on far too many projects where over
+                time the code became brittle or difficult to maintain.  The conventions in this document
+                are the best practices that I have adopted over time to keep the code easily maintainable
+                and robust.
+            </p>
+            <p>
+                We use <a href="http://checkstyle.sourceforge.net">checkstyle</a> to check as many coding
+                conventions as possible.  Things covered by checkstyle are only documented below if we feel
+                that they require explanation.  You can run checkstyle with the following target:
+                <source>mvn checkstyle:checkstyle</source>
+            </p>
+        </section>
+
+        <section name="Unit tests">
+            <p>
+                All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
+                testing framework.  It is strongly suggested that you write the code test-first but it is fine
+                as long as there are full tests for everything.  Run the tests with the following target:
+                <source>mvn test</source>
+            </p>
+        </section>
+
+        <section name="Abbreviations">
+            <p>
+                Abbreviations obscure meaning and therefore they are not to be used in variable/method names.
+                If you saw the following code, would you have any idea what it was doing?
+            </p>
+            <source>cob.getTrh()</source>
+            <p>
+                I didn't either - this was code that I have had to maintain..
+            </p>
+            <p>
+                There are some abbreviations that are so common that it doesn't make sense to exclude them. The
+                following list contains all those abbreviations that are allowed.  If it isn't in this list,
+                it isn't allowed.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Abbreviation</td>
+                        <td>Description</td>
+                        <td>Comments</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Util</td>
+                        <td>Utility</td>
+                        <td>Used only in class names.  i.e. StringUtil</td>
+                    </tr>
+                    <tr>
+                        <td>e</td>
+                        <td>Exception</td>
+                        <td>Used only in catch blocks.  i.e. catch( MyException e )</td>
+                    </tr>
+                    <tr>
+                        <td>i</td>
+                        <td>Loop variable</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+                How do you add an abbreviation to the list?  Bring it up on the mailing list and if none of
+                the other maintainers object to it then it gets added.
+            </p>
+        </section>
+
+        <section name="The final keyword">
+            <p>
+                The final keyword should be used wherever possible.  It provides information to the
+                compiler about your intended use of the code.  This allows the compiler to generate
+                move efficient code and identify potential errors.
+            </p>
+
+            <p>
+                Declare a variable to be final to indicate that it will only be assigned a value once.
+                Final instance variables must have been given a value by the end of the last constructor.
+                Final static variables must have been given a value by the end of the last static block.
+                Final local variables must have been given a value before being used.
+                <source>private final int fooCount = 12;</source>
+            </p>
+
+            <p>
+                Declare method parameters method final to indicate that they will not be changed.
+                <source>public void setFooList(final List fooList) {</source>
+            </p>
+
+            <p>
+                Declare a method final to indicate that it may not be overridden
+                <source>public final int getFooCount() {</source>
+            </p>
+
+            <p>
+                Declare a class final to indicate that it may not be subclassed
+                <source>public final class FooCounter {</source>
+            </p>
+        </section>
+
+        <section name="Import statements">
+            <p>
+                Use fully qualified import statements not wildcards.  In other words, use
+            </p>
+            <source>
+import java.util.List;
+import java.util.ArrayList;
+            </source>
+            <p>
+            Instead of
+            </p>
+            <source>import java.util.*;</source>
+            <p>
+                Fully qualified import statements make it much easier to maintain the source.  When I'm
+                trying to learn someone else's code, one of the first things I do is expand all the .*
+                imports so that I can figure out what class came from where.  If they're already
+                expanded then it makes it much easier to understand the code.
+            </p>
+            <p>
+                A common complaint about this convention is "how will I know if an import isn't needed
+                anymore?".  The answer is, use a tool that warns you about this.  Eclipse and IDEA can
+                be configured to warn you about unused imports.  If your editor doesn't perform this
+                check then the maven build will check it for you.
+            </p>
+        </section>
+
+        <section name="Indenting">
+            <p>
+                Indent by using spaces, not tabs.  Indent four (4) spaces at a time.
+            </p>
+        </section>
+        
+        <section name="Deprecation">
+            <p>
+                From time to time code needs to be removed from public APIs. When possible we will
+                deprecate the existing API (using the javadoc @deprecated tag). Code deprecated in
+                this way should be left in the source for at least 6 months and at least 2 releases,
+                meaning the time could be longer than 6 months if there are not 2 releases in a
+                6 month period but never less than 6 months.
+                
+                When deprecation is not possible a <a href="changes-report.html">change log</a> message
+                containing "INCOMPATIBLE CHANGE" should be added to make these changes easy to find.
+            </p>
+        </section>        
+    </body>
+</document>
+

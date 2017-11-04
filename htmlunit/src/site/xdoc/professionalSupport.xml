@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Professional support</title>
+        <author email="mguillemot@yahoo.fr">Marc Guillemot</author>
+    </properties>
+
+    <body>
+        <section name="Looking for HtmlUnit Support?">
+            <p>
+                Some HtmlUnit committers provide professional support beyond the free support provided on a 
+                volunteer basis by users and project members on HtmlUnit's mailing lists.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marc Guillemot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Committer since</td>
+                        <td>2004</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td><a href="http://mguillem.wordpress.com">http://mguillem.wordpress.com</a></td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>Bornheim, Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Involvement in related projects</td>
+                        <td>committer to NekoHTML, contributor to Rhino</td>
+                    </tr>
+                    <tr>
+                        <td>Involvement in other Open Source projects</td>
+                        <td>committer to Groovy and Canoo WebTest</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Daniel Gredler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Committer since</td>
+                        <td>2006</td>
+                    </tr>
+                    <tr>
+                        <td>Contact</td>
+                        <td>sdanig at users.sourceforge.net</td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td>Atlanta, USA</td>
+                    </tr>
+                    <tr>
+                        <td>Involvement in related projects</td>
+                        <td>committer to CSSParser, contributor to Rhino</td>
+                    </tr>
+                    <tr>
+                        <td>Involvement in other Open Source projects</td>
+                        <td>committer to Tapestry</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </body>
+</document>
+

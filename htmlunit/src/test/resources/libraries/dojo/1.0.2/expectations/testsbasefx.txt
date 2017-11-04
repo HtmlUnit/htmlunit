@@ -1,0 +1,19 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.fx" has 1 test to run
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 5 tests to run
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeOut
+ PASSED test: ../../dojo/tests/_base/fx.html::t::fadeIn
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColor
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateColorBack
+ PASSED test: ../../dojo/tests/_base/fx.html::t::animateHeight
+ PASSED test: ../../dojo/tests/_base/fx.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      6 tests in 2 groups
+      0 errors
+      0 failures

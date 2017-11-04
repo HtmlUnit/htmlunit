@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+	<record group="object" include="master.xml"/>
+	
+	<record group="1" jsxid="position" jsxtext="Positioning">
+		<record disallow="[^0-9]" docdefault="&lt;code&gt;DEFAULT_WIDTH (jsx3.chart.Legend.DEFAULT_WIDTH)&lt;/code&gt;" docgetter="getPreferredWidth" docsetter="setPreferredWidth" eval="1" jsxexecute="objJSX.preferredWidth=vntValue;objJSX.onResize();" jsxid="preferredWidth" jsxmask="jsxtext" jsxtext="Width" jsxtip="Sets the preferred width of this component in pixels. If the legend placement is at left or right, only width is considered and height is ignored."/>
+		<record disallow="[^0-9]" docdefault="&lt;code&gt;DEFAULT_HEIGHT (jsx3.chart.Legend.DEFAULT_HEIGHT)&lt;/code&gt;" docgetter="getPreferredHeight" docsetter="setPreferredHeight" eval="1" jsxexecute="objJSX.preferredHeight=vntValue;objJSX.onResize();" jsxid="preferredHeight" jsxmask="jsxtext" jsxtext="Height" jsxtip="Sets the preferred height of this component in pixels.  If the legend placement is at top or bottom, only height is considered and width is ignored."/>
+	</record>
+	
+	<record group="1" jsxid="label" jsxtext="Label">
+		<record disallow="[^0-9]" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getBoxHeight" docsetter="setBoxHeight" eval="1" jsxid="boxHeight" jsxmask="jsxtext" jsxtext="Box Height" jsxtip="Sets the height of the colored series box."/>
+		<record disallow="[^0-9]" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getLineHeight" docsetter="setLineHeight" eval="1" jsxid="lineHeight" jsxmask="jsxtext" jsxtext="Line Height" jsxtip="Sets the height of each line in this legend."/>
+		<record disallow="'" docdefault="Empty" docgetter="getLabelClass" docsetter="setLabelClass" eval="0" jsxid="labelClass" jsxmask="jsxtext" jsxtext="Label CSS Class" jsxtip="Sets the CSS style class of the labels. Do not include the leading dot (.) when entering the name."/>
+		<record disallow="'" docdefault="Empty" docgetter="getLabelStyle" docsetter="setLabelStyle" eval="0" jsxid="labelStyle" jsxmask="jsxtext" jsxtext="Label CSS Styles" jsxtip="Sets the CSS style attributes for the labels."/>
+	</record>
+	
+	<record group="1" jsxid="box" jsxtext="Box">
+		<record disallow="'" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getPadding" docsetter="setPadding" eval="0" jsxid="jsxpadding" jsxmask="jsxtext" jsxtext="Padding" jsxtip="Sets the gap between legend border and legend content. Specified as one or four pixel values (top, right, bottom, and left). For example, &lt;code&gt;2&lt;/code&gt; or &lt;code&gt;4 2 4 2&lt;/code&gt;. CSS syntax is also supported but reduces performance."/>
+		<record disallow="'" docdefault="&lt;code&gt;0&lt;/code&gt;" docgetter="getMargin" docsetter="setMargin" eval="0" jsxid="jsxmargin" jsxmask="jsxtext" jsxtext="Margin" jsxtip="Sets the gap between legend border and bounding box. Specified as one or four pixel values (top, right, bottom, and left). For example, &lt;code&gt;2&lt;/code&gt; or &lt;code&gt;4 2 4 2&lt;/code&gt;. CSS syntax is also supported but reduces performance."/>
+		<record docdefault="Empty" docgetter="getBackgroundFill" docsetter="setBackgroundFill" eval="0" jsxid="backgroundFill" jsxmask="jsxtext" jsxtext="Background Fill" jsxtip="Sets the vector fill to use for the background of this legend box. Specified as &lt;i&gt;color alpha&lt;/i&gt;. For example, &lt;code&gt;black 1&lt;/code&gt;."/>
+		<record docdefault="Empty" docgetter="getBackgroundStroke" docsetter="setBackgroundStroke" eval="0" jsxid="backgroundStroke" jsxmask="jsxtext" jsxtext="Background Stroke" jsxtip="Sets the vector stroke to use for the background of the legend box. Specified as &lt;i&gt;color alpha&lt;/i&gt;. For example, &lt;code&gt;black 1 1&lt;/code&gt;."/>
+	</record>
+
+	<record group="component" include="master.xml"/>
+	<record group="interaction_menuonly" include="master.xml"/>
+</data>

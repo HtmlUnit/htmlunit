@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Area - Stacked 100%]]></name>
+ <icon><![CDATA[icons/stacked100Area.gif]]></icon>
+ <description><![CDATA[a sample area chart of type 'Stacked 100%']]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.AreaChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="stacked100AreaChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record month=&quot;J&quot; pro=&quot;35&quot; con=&quot;25&quot; und=&quot;40&quot;/&gt; &lt;record month=&quot;F&quot; pro=&quot;35&quot; con=&quot;28&quot; und=&quot;37&quot;/&gt; &lt;record month=&quot;M&quot; pro=&quot;33&quot; con=&quot;32&quot; und=&quot;35&quot;/&gt; &lt;record month=&quot;A&quot; pro=&quot;25&quot; con=&quot;40&quot; und=&quot;35&quot;/&gt; &lt;record month=&quot;M&quot; pro=&quot;33&quot; con=&quot;35&quot; und=&quot;32&quot;/&gt; &lt;record month=&quot;J&quot; pro=&quot;38&quot; con=&quot;32&quot; und=&quot;30&quot;/&gt; &lt;record month=&quot;J&quot; pro=&quot;43&quot; con=&quot;35&quot; und=&quot;22&quot;/&gt; &lt;record month=&quot;A&quot; pro=&quot;40&quot; con=&quot;45&quot; und=&quot;15&quot;/&gt; &lt;record month=&quot;S&quot; pro=&quot;37&quot; con=&quot;50&quot; und=&quot;13&quot;/&gt; &lt;record month=&quot;O&quot; pro=&quot;37&quot; con=&quot;52&quot; und=&quot;15&quot;/&gt; &lt;record month=&quot;N&quot; pro=&quot;40&quot; con=&quot;55&quot; und=&quot;5&quot;/&gt; &lt;record month=&quot;D&quot; pro=&quot;35&quot; con=&quot;60&quot; und=&quot;5&quot;/&gt; &lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="stacked100"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Stacked 100% Area Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" numCategories="12" numSeries="3" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="month" jsxname="xAxis" labelPlacement="axis" labelStyle="font-family: Verdana; font-size: 8px;" minorTickPlacement="none" minorTickStroke="#666666 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants alpha="1" jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="chartLabel" jsxtext="2004" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" displayWidth="25" horizontal="0" interval="25" labelGap="3" max="100" minorTickDivisions="5" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="yAxis" labelFunction="jsx3.chart.Axis.percent" labelPlacement="axis" labelStyle="font-family: Verdana; font-size: 8px; text-align: right;" minorTickPlacement="outside" minorTickStroke="#999999 1 1" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270" preferredWidth="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="ytitle" jsxtext="Opinion" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="0" pointRadius="3" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#3399FF" form="segment" jsxname="series1" seriesName="Pro" tooltipFunction="jsx3.chart.AreaSeries.tooltip" yField="pro"/>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="1" pointRadius="3" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#BBBBBB" form="segment" jsxname="series2" seriesName="Undecided" tooltipFunction="jsx3.chart.AreaSeries.tooltip" yField="und"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" preferredWidth="110" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.AreaSeries">
+     <dynamics/>
+     <variants index="2" interpolateValues="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#FF6666" form="segment" jsxname="series3" seriesName="Con" tooltipFunction="jsx3.chart.AreaSeries.tooltip" yField="con"/>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants horizontalAbove="1" inForeground="1" strokeMajorH="['#FFFFFF 1 .5']" strokeMinorH="['#FFFFFF 1 .25']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#AAAAAA" jsxname="fgGrid"/>
+    </object>
+  </object>
+</serialization>

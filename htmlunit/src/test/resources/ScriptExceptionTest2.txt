@@ -1,0 +1,4 @@
+TypeError: Cannot set property "bli" of undefined to "123" (script in http://www.gargoylesoftware.com/ from (4, 9) to (9, 10)#7)
+	at foo(script in http://www.gargoylesoftware.com/ from (4, 9) to (9, 10):7)
+	at bla(script in http://www.gargoylesoftware.com/ from (13, 9) to (19, 10):16)
+	at (script in http://www.gargoylesoftware.com/ from (13, 9) to (19, 10):18)

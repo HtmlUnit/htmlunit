@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Bar]]></name>
+ <icon><![CDATA[icons/clusteredBar.gif]]></icon>
+ <description><![CDATA[a sample bar chart of type 'Clustered']]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.BarChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" categoryCoverage="0.65" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1" seriesOverlap="0.3"/>
+   <strings borderColor="#999999" dataPadding="14 10 6 6" jsxbgcolor="#FFFFFF" jsxname="barChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record cat=&quot;Jan&quot; s1=&quot;5&quot; s2=&quot;10&quot; x=&quot;7&quot;/&gt;&lt;record cat=&quot;Feb&quot; s1=&quot;22&quot; s2=&quot;15&quot; x=&quot;4&quot;/&gt;&lt;record cat=&quot;Mar&quot; s1=&quot;17.5&quot; s2=&quot;20&quot; x=&quot;7&quot;/&gt;&lt;record cat=&quot;Apr&quot; s1=&quot;-7&quot; s2=&quot;25&quot; x=&quot;3&quot;/&gt;&lt;record cat=&quot;May&quot; s1=&quot;8&quot; s2=&quot;30&quot; x=&quot;7&quot;/&gt;&lt;/data&gt;" legendPlacement="right" titlePlacement="top" type="clustered"/>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+     <strings backgroundStroke="#AAAAAA" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-family: Verdana; font-weight: bold; font-size: 10px;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="lTitle" jsxtext="Legend" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Clustered Bar Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.LinearAxis">
+     <dynamics/>
+     <variants autoAdjust="1" baseAtZero="1" horizontal="1" labelGap="3" minorTickDivisions="4" minorTickLength="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" jsxname="xAxis" labelPlacement="axis" labelStyle="font-size: 8px; font-family: Verdana;" minorTickPlacement="outside" minorTickStroke="#666666 1" tickAlignment="aligned" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="xTitle" jsxtext="Productivity" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.CategoryAxis">
+     <dynamics/>
+     <variants displayWidth="20" horizontal="0" labelGap="3" minorTickDivisions="4" minorTickLength="3" numCategories="5" numSeries="2" primary="1" showAxis="1" showLabels="1" tickLength="3"/>
+     <strings axisStroke="#000000 1 1" categoryField="cat" jsxname="yAxis" labelPlacement="low" labelStyle="font-size: 8px; font-family: Verdana; text-align: right;" minorTickPlacement="none" minorTickStroke="#000000 1 1" tickAlignment="between" tickPlacement="outside" tickStroke="#000000 1 1"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="270" preferredWidth="14"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="yTitle" jsxtext="Month" jsxtextalign="center"/>
+      </object>
+    </object>
+    <object type="jsx3.chart.GridLines">
+     <dynamics/>
+     <variants fillV="['#E8E8E8 1']" horizontalAbove="1" strokeMajorV="['#FFFFFF 1 1']" strokeMinorV="['#EEEEEE 1 1']" useXPrimary="1" useYPrimary="1"/>
+     <strings borderStroke="#CCCCCC 1" jsxname="bgGrid"/>
+    </object>
+    <object type="jsx3.chart.BarSeries">
+     <dynamics/>
+     <variants index="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#3366FF .7" jsxname="series1" minField="m1" seriesName="Group A" stroke="#3366FF" tooltipFunction="jsx3.chart.BarSeries.tooltip" xField="s1" yField="y1"/>
+    </object>
+    <object type="jsx3.chart.BarSeries">
+     <dynamics/>
+     <variants index="1" usePrimaryX="1" usePrimaryY="1"/>
+     <strings fill="#FFCC00 .7" jsxname="series2" seriesName="Group B" stroke="#FFCC00" tooltipFunction="jsx3.chart.BarSeries.tooltip" xField="s2"/>
+    </object>
+  </object>
+</serialization>

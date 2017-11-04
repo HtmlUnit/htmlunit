@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Editable Table Demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+  <script type='text/javascript' src='../tabs/tabs.js'> </script>
+  <script type='text/javascript' src='../dwr/engine.js'> </script>
+  <script type='text/javascript' src='../dwr/util.js'> </script>
+  <script type='text/javascript' src='../dwr/interface/People.js'> </script>
+  <script type="text/javascript" src='index.js'> </script>
+  <script type="text/javascript" src='../generic.js'> </script>
+  <link rel="stylesheet" type="text/css" href="../tabs/tabs.css" />
+  <link rel="stylesheet" type="text/css" href="../generic.css" />
+</head>
+<body onload="init();">
+<div id="page-title">[
+  <a href="http://getahead.org/dwr/">DWR Website</a> |
+  <a href="..">Web Application Index</a>
+]</div>
+
+<h1>Dynamically Editing a Table</h1>
+
+<p>This demo allows you to edit a table of data</p>
+
+<ul id="tabList">
+  <li><a href="#" tabId="demoDiv">Demo</a></li>
+  <li><a href="#" tabId="explainDiv">How it works</a></li>
+  <li><a href="#" tabId="sourceDiv">Source</a></li>
+</ul>
+
+<div id="tabContents">
+
+  <div id="demoDiv">
+
+    <h3>All People</h3>
+    <table border="1" class="rowed grey">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Salary</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="peoplebody">
+        <tr id="pattern" style="display:none;">
+          <td>
+            <span id="tableName">Name</span><br/>
+            <small>&nbsp;&nbsp;<span id="tableAddress">Address</span></small>
+          </td>
+          <td>$<span id="tableSalary">Salary</span></td>
+          <td>
+            <input id="edit" type="button" value="Edit" onclick="editClicked(this.id)"/>
+            <input id="delete" type="button" value="Delete" onclick="deleteClicked(this.id)"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Edit Person</h3>
+    <table class="plain">
+      <tr>
+        <td>Name:</td>
+        <td><input id="name" type="text" size="30"/></td>
+      </tr>
+      <tr>
+        <td>Salary:</td>
+        <td>$<input id="salary" type="text" size="20"/></td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td><input type="text" id="address" size="40"/></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="right">
+          <small>(ID=<span id="id">-1</span>)</small>
+          <input type="button" value="Save" onclick="writePerson()"/>
+          <input type="button" value="Clear" onclick="clearPerson()"/>
+       </td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div id="explainDiv">
+    <h2>Creating the table</h2>
+    <p>This demo introduces a number of features, some of which are new to
+    DWR 2.0.</p>
+    <p>When the page first loads, the onload event calls the server-side
+    <code>People.getAllPeople()</code> function to return an array of people
+    objects.</p>
+    <p>A Person is just a POJO containing an name and address fields along with
+    a salary as a float and an id as an int. Full details of the Java source
+    are shown on the "Source" tab.</p>
+    <p>The Javascript uses the <code>cloneNode()</code> feature to create a row
+    in a table for each returned person. So for each person we do this:</p>
+
+<pre>
+dwr.util.cloneNode("pattern", { idSuffix:person.id });
+</pre>
+
+    <p>This creates a copy of the node with the id "pattern", and alters the ids
+    of any sub-nodes to have a suffix of the current persons id, so if pattern
+    looks like this:</p>
+
+<pre>&lt;div id="pattern"&gt;&lt;input id="edit"/&gt;&lt;/div&gt;</pre>
+
+    <p>Then after cloning using an idSuffix:42, you will have this:</p>
+
+<pre>&lt;div id="pattern"&gt;&lt;input id="edit"/&gt;&lt;/div&gt;
+&lt;div id="pattern42"&gt;&lt;input id="edit42"/&gt;&lt;/div&gt;</pre>
+
+    <p>After cloning we then fill in the blanks in the newly cloned row. This
+    uses the <code>setValue</code> that we looked at in the Dynamic Text demo:</p>
+
+<pre>
+dwr.util.setValue("tableName" + id, person.name);
+dwr.util.setValue("tableSalary" + id, person.salary);
+dwr.util.setValue("tableAddress" + id, person.address);
+</pre>
+
+    <p>We also need to ensure that the pattern row is not visible, but the
+    clones are. We do this by setting a style of display:none on the pattern
+    row in the HTML, and then setting the cloned row to have display:table-row
+    in the Javascript:</p>
+
+<pre>
+$("pattern" + id).style.display = "table-row";
+</pre>
+
+    <p>Finally thing we need to account for the fact that this could be a
+    re-draw rather than a draw on page-load, so we might need to remove old
+    rows. <code>dwr.util.removeAllRows()</code> as been around since 1.0, but
+    new in 2.0 is the options object which can contain a filter to be selective
+    about the rows we remove. In this case we want to remove everything but the
+    "pattern" row.</p>
+
+<pre>
+    // Delete all the rows except for the "pattern" row
+    dwr.util.removeAllRows("peoplebody", { filter:function(tr) {
+      return (tr.id != "pattern");
+    }});
+</pre>
+
+    <p>For the full Javascript or the HTML, see the source tab. The full
+    Javascript does 2 extra things - it caches the people, and sorts them.</p>
+
+    <h2>Populating the form</h2>
+    <p>When an 'edit' button is clicked, the <code>editClicked()</code> function
+    is called with the id of the button. We can work out the person id from this
+    easily because the button was created by the clone process, so the person id
+    is just the button id without the 'edit' prefix.</p>
+    <p>This makes the <code>editClicked()</code> function really simple:</p>
+
+<pre>
+function editClicked(eleid) {
+  // we were an id of the form "edit{id}", eg "edit42". We lookup the "42"
+  var person = peopleCache[eleid.substring(4)];
+  dwr.util.setValues(person);
+}
+</pre>
+
+    <p>The <code>dwr.util.setValues()</code> function finds form fields with the
+    same names as the properties of the object passed in.</p>
+
+    <h2>Updating the server</h2>
+    <p>There is a good use of <code>dwr.util.getValues()</code> in the code to
+    post changes back to the server:</p>
+
+<pre>
+function writePerson() {
+  var person = { id:viewed, name:null, address:null, salary:null };
+  dwr.util.getValues(person);
+
+  dwr.engine.beginBatch();
+  People.setPerson(person);
+  fillTable();
+  dwr.engine.endBatch();
+}
+</pre>
+
+    <p>First we create an object which is filled out by
+    <code>dwr.util.getValues()</code>. We then post the change to the server, and
+    update the table. We use a batch for the last 2 operations to ensure that we
+    only make a single round-trip to the server.</p>
+    <p>See the source tab for full source.</p>
+
+  </div>
+
+  <div id="sourceDiv">
+
+<h2>HTML source:</h2>
+<pre>
+&lt;h3&gt;All People&lt;/h3&gt;
+&lt;table border="1" class="rowed grey"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Person&lt;/th&gt;
+      &lt;th&gt;Salary&lt;/th&gt;
+      &lt;th&gt;Actions&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody id="peoplebody"&gt;
+    &lt;tr id="pattern" style="display:none;"&gt;
+      &lt;td&gt;
+        &lt;span id="tableName"&gt;Name&lt;/span&gt;&lt;br/&gt;
+        &lt;small&gt;&nbsp;&nbsp;&lt;span id="tableAddress"&gt;Address&lt;/span&gt;&lt;/small&gt;
+      &lt;/td&gt;
+      &lt;td&gt;$&lt;span id="tableSalary"&gt;Salary&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;
+        &lt;input id="edit" type="button" value="Edit" onclick="editClicked(this.id)"/&gt;
+        &lt;input id="delete" type="button" value="Delete" onclick="deleteClicked(this.id)"/&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;Edit Person&lt;/h3&gt;
+&lt;table class="plain"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Name:&lt;/td&gt;
+    &lt;td&gt;&lt;input id="name" type="text" size="30"/&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Salary:&lt;/td&gt;
+    &lt;td&gt;$&lt;input id="salary" type="text" size="20"/&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Address:&lt;/td&gt;
+    &lt;td&gt;&lt;input type="text" id="address" size="40"/&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td colspan="2" align="right"&gt;
+      &lt;small&gt;(ID=&lt;span id="id"&gt;-1&lt;/span&gt;)&lt;/small&gt;
+      &lt;input type="button" value="Save" onclick="writePerson()"/&gt;
+      &lt;input type="button" value="Clear" onclick="clearPerson()"/&gt;
+   &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<h2>Javascript source:</h2>
+<pre>
+
+function init() {
+  fillTable();
+}
+
+var peopleCache = { };
+var viewed = -1;
+
+function fillTable() {
+  People.getAllPeople(function(people) {
+    // Delete all the rows except for the "pattern" row
+    dwr.util.removeAllRows("peoplebody", { filter:function(tr) {
+      return (tr.id != "pattern");
+    }});
+    // Create a new set cloned from the pattern row
+    var person, id;
+    people.sort(function(p1, p2) { return p1.name.localeCompare(p2.name); });
+    for (var i = 0; i < people.length; i++) {
+      person = people[i];
+      id = person.id;
+      dwr.util.cloneNode("pattern", { idSuffix:id });
+      dwr.util.setValue("tableName" + id, person.name);
+      dwr.util.setValue("tableSalary" + id, person.salary);
+      dwr.util.setValue("tableAddress" + id, person.address);
+      $("pattern" + id).style.display = "table-row";
+      peopleCache[id] = person;
+    }
+  });
+}
+
+function editClicked(eleid) {
+  // we were an id of the form "edit{id}", eg "edit42". We lookup the "42"
+  var person = peopleCache[eleid.substring(4)];
+  dwr.util.setValues(person);
+}
+
+function deleteClicked(eleid) {
+  // we were an id of the form "delete{id}", eg "delete42". We lookup the "42"
+  var person = peopleCache[eleid.substring(6)];
+  if (confirm("Are you sure you want to delete " + person.name + "?")) {
+    dwr.engine.beginBatch();
+    People.deletePerson({ id:id });
+    fillTable();
+    dwr.engine.endBatch();
+  }
+}
+
+function writePerson() {
+  var person = { id:viewed, name:null, address:null, salary:null };
+  dwr.util.getValues(person);
+
+  dwr.engine.beginBatch();
+  People.setPerson(person);
+  fillTable();
+  dwr.engine.endBatch();
+}
+
+function clearPerson() {
+  viewed = -1;
+  dwr.util.setValues({ id:-1, name:null, address:null, salary:null });
+}
+</pre>
+
+<h2>Java source:</h2>
+<pre>
+public class People {
+    // Code to create a random set of people omitted
+
+    public Set getAllPeople() {
+        return people;
+    }
+
+    public void setPerson(Person person) {
+        if (person.getId() == -1) {
+            person.setId(getNextId());
+        }
+
+        people.remove(person);
+        people.add(person);
+    }
+
+    public void deletePerson(Person person) {
+        people.remove(person);
+    }
+
+    private Set people = new HashSet();
+}
+
+public class Person
+{
+    private int id;
+    private String name;
+    private String address;
+    private float salary;
+
+    // Getters, setters, equals and toString omitted
+}
+</pre>
+
+<h2>dwr.xml</h2>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+    "http://getahead.org/dwr/dwr20.dtd"&gt;
+
+&lt;dwr&gt;
+  &lt;allow&gt;
+    &lt;create creator="new" javascript="People" scope="script"&gt;
+      &lt;param name="class" value="org.getahead.dwrdemo.people.People"/&gt;
+    &lt;/create&gt;
+    &lt;convert match="org.getahead.dwrdemo.people.Person" converter="bean"/&gt;
+  &lt;/allow&gt;
+&lt;/dwr&gt;
+</pre>
+
+  </div>
+
+</div>
+
+</body>
+</html>

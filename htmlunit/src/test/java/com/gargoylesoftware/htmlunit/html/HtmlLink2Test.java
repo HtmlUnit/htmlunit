@@ -1,0 +1,283 @@
+/*
+ * Copyright (c) 2002-2017 Gargoyle Software Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.gargoylesoftware.htmlunit.html;
+
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
+import java.net.URL;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+
+/**
+ * Tests for {@link HtmlLink}.
+ *
+ * @author Ahmed Ashour
+ * @author Marc Guillemot
+ * @author Ronald Brill
+ */
+@RunWith(BrowserRunner.class)
+public class HtmlLink2Test extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object HTMLLinkElement]")
+    public void simpleScriptable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link id='myId' href='file1.css'>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myId'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void asText() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <link id='l' href='file1.css'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final String text = driver.findElement(By.id("l")).getText();
+        assertEquals("", text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isDisplayed() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <link id='l' href='file1.css'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final boolean displayed = driver.findElement(By.id("l")).isDisplayed();
+        assertFalse(displayed);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoad() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadRelCase() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='sTYLeSheet' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaScreen() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='screen'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaPrint() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='print'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaQueryMatch() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='(min-width: 100px)'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadMediaQueryNotMatch() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='stylesheet' href='simple.css' media='(max-width: 10px)'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad", "body onLoad"})
+    public void onLoadRelWhitespace() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        onLoadOnError("rel='\t stylesheet     ' href='simple.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"onError", "body onLoad"},
+            IE = {"onLoad", "body onLoad"})
+    @NotYetImplemented(IE)
+    public void onError() throws Exception {
+        onLoadOnError("rel='stylesheet' href='unknown.css'");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("body onLoad")
+    public void onLoadOnErrorWithoutRel() throws Exception {
+        onLoadOnError("href='unknown.css'");
+    }
+
+    private void onLoadOnError(final String attribs) throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <link " + attribs
+                        + " onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
+                + "</head>\n"
+                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"})
+    public void onLoadOrder() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.js"), "var x=1;");
+
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function log(x) {\n"
+                + "      document.title += x + ';';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "  <link rel='stylesheet' href='simple1.css' onload='log(\"onLoad1\")'>\n"
+                + "  <script type='text/javascript' src='simple1.js' onload='log(\"onLoadJs1\")'></script>\n"
+                + "  <link rel='stylesheet' href='simple2.css' onload='log(\"onLoad2\")'>\n"
+                + "</head>\n"
+                + "<body onload='log(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.getTitle();
+        assertEquals(String.join(";", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"onLoad [object Event]", "onError [object Event]"})
+    public void onLoadDynamic() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'simple.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'unknown.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+                + "    }\n"
+
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+}
