@@ -55,22 +55,14 @@ import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.NashornJavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptObject;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement2;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-import com.gargoylesoftware.js.nashorn.internal.objects.Global;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
@@ -951,23 +943,6 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            if (getPage().getWebClient().getJavaScriptEngine() instanceof NashornJavaScriptEngine) {
-                final MouseEvent2 event;
-                if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                    event = new PointerEvent2(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-                }
-                else {
-                    event = new MouseEvent2(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-                }
-
-                if (disableProcessLabelAfterBubbling) {
-                    event.disableProcessLabelAfterBubbling();
-                }
-                return (P) click(event, false);
-            }
-
             final MouseEvent event;
             if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
                 event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
@@ -1010,62 +985,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
-        final SgmlPage page = getPage();
-
-        if ((!ignoreVisibility && !isDisplayed())
-                || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
-            return (P) page;
-        }
-
-        // may be different from page when working with "orphaned pages"
-        // (ex: clicking a link in a page that is not active anymore)
-        final Page contentPage = page.getEnclosingWindow().getEnclosedPage();
-
-        boolean stateUpdated = false;
-        boolean changed = false;
-        if (isStateUpdateFirst()) {
-            changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
-            stateUpdated = true;
-        }
-
-        final AbstractJavaScriptEngine<?> jsEngine = page.getWebClient().getJavaScriptEngine();
-        jsEngine.holdPosponedActions();
-        try {
-            final ScriptResult scriptResult = doClickFireClickEvent(event);
-            final boolean eventIsAborted = event.isAborted(scriptResult);
-
-            final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
-            if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
-            }
-        }
-        finally {
-            jsEngine.processPostponedActions();
-        }
-
-        if (changed) {
-            doClickFireChangeEvent();
-        }
-
-        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Simulates clicking on this element, returning the page in the window that has the focus
-     * after the element has been clicked. Note that the returned page may or may not be the same
-     * as the original page, depending on the type of element being clicked, the presence of JavaScript
-     * action listeners, etc.
-     *
-     * @param event the click event used
-     * @param ignoreVisibility whether to ignore visibility or not
-     * @param <P> the page type
-     * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
-     * @exception IOException if an IO error occurs
-     */
-    @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event2 event, final boolean ignoreVisibility) throws IOException {
         final SgmlPage page = getPage();
 
         if ((!ignoreVisibility && !isDisplayed())
@@ -1156,15 +1075,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the script result
      */
     protected ScriptResult doClickFireClickEvent(final Event event) {
-        return fireEvent(event);
-    }
-
-    /**
-     * This method implements the control onclick handler call during the click action.
-     * @param event the click event used
-     * @return the script result
-     */
-    protected ScriptResult doClickFireClickEvent(final Event2 event) {
         return fireEvent(event);
     }
 
@@ -1428,31 +1338,17 @@ public class DomElement extends DomNamespaceNode implements Element {
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
 
-        final boolean nashron = page.getWebClient().getJavaScriptEngine() instanceof NashornJavaScriptEngine;
-
         final ScriptResult scriptResult;
-        if (nashron) {
-            final Event2 event;
-            if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
-                    && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent2(this, eventType, shiftKey, ctrlKey, altKey, button);
-            }
-            else {
-                event = new MouseEvent2(this, eventType, shiftKey, ctrlKey, altKey, button);
-            }
-            scriptResult = fireEvent(event);
+        final Event event;
+        if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
+                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
         }
         else {
-            final Event event;
-            if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
-                    && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
-            }
-            else {
-                event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
-            }
-            scriptResult = fireEvent(event);
+            event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
         }
+        scriptResult = fireEvent(event);
+
         final Page currentPage;
         if (scriptResult == null) {
             currentPage = page;
@@ -1465,14 +1361,8 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (mouseOver_ != mouseOver) {
             mouseOver_ = mouseOver;
 
-            if (nashron) {
-                final SimpleScriptObject scriptable = getScriptableObject();
-                scriptable.getWindow().clearComputedStyles();
-            }
-            else {
-                final SimpleScriptable scriptable = getScriptableObject();
-                scriptable.getWindow().clearComputedStyles();
-            }
+            final SimpleScriptable scriptable = getScriptableObject();
+            scriptable.getWindow().clearComputedStyles();
         }
 
         return currentPage;
@@ -1486,10 +1376,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        final boolean nashron = getPage().getWebClient().getJavaScriptEngine() instanceof NashornJavaScriptEngine;
-        if (nashron) {
-            return fireEvent(new Event2(this, eventType));
-        }
         return fireEvent(new Event(this, eventType));
     }
 
@@ -1530,48 +1416,6 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Fires the event on the element. Nothing is done if JavaScript is disabled.
-     * @param event the event to fire
-     * @return the execution result, or {@code null} if nothing is executed
-     */
-    public ScriptResult fireEvent(final Event2 event) {
-        final WebClient client = getPage().getWebClient();
-        if (!client.getOptions().isJavaScriptEnabled()) {
-            return null;
-        }
-
-        if (!handles(event)) {
-            return null;
-        }
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Firing " + event);
-        }
-        final EventTarget2 jsElt = (EventTarget2) getScriptObject2();
-        final Global global = NashornJavaScriptEngine.getGlobal(jsElt.getWindow().getWebWindow());
-        final Global oldGlobal = com.gargoylesoftware.js.nashorn.internal.runtime.Context.getGlobal();
-        final boolean globalChanged = oldGlobal != global;
-        try {
-            if (globalChanged) {
-                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(global);
-            }
-
-            final ScriptResult result = jsElt.fireEvent(event);
-            if (event.isAborted(result)) {
-                preventDefault();
-            }
-            return result;
-        }
-        finally {
-            if (globalChanged) {
-                com.gargoylesoftware.js.nashorn.internal.runtime.Context.setGlobal(oldGlobal);
-            }
-        }
-    }
-
-    /**
      * This method is called if the current fired event is canceled by <tt>preventDefault()</tt> in FireFox,
      * or by returning {@code false} in Internet Explorer.
      *
@@ -1590,9 +1434,6 @@ public class DomElement extends DomNamespaceNode implements Element {
         final Object o = getScriptableObject();
         if (o instanceof HTMLElement) {
             ((HTMLElement) o).setActive();
-        }
-        else {
-            ((HTMLElement2) o).setActive();
         }
     }
 

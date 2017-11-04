@@ -34,9 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.Event2;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement2;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -258,16 +256,9 @@ public class HtmlLink extends HtmlElement {
 
     private void executeEvent(final String type) {
         final Object scriptable = getScriptableObject();
-        if (scriptable instanceof HTMLLinkElement2) {
-            final HTMLLinkElement2 script = (HTMLLinkElement2) scriptable;
-            final Event2 event = new Event2(this, type);
-            script.executeEventLocally(event);
-        }
-        else {
-            final HTMLLinkElement link = (HTMLLinkElement) scriptable;
-            final Event event = new Event(this, type);
-            link.executeEventLocally(event);
-        }
+        final HTMLLinkElement link = (HTMLLinkElement) scriptable;
+        final Event event = new Event(this, type);
+        link.executeEventLocally(event);
     }
 
     /**

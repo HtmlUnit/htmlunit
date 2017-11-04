@@ -449,9 +449,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 @Override
                 protected WebClient newWebClient(final BrowserVersion version) {
                     final WebClient webClient = super.newWebClient(version);
-                    if (System.getProperty(NASHRON) != null) {
-                        webClient.getInternals().setUseNashorn();
-                    }
                     return webClient;
                 }
             };

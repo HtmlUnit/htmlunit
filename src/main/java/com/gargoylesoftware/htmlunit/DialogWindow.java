@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import com.gargoylesoftware.js.nashorn.internal.runtime.ScriptObject;
-
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -70,9 +68,6 @@ public class DialogWindow extends WebWindowImpl {
     public <T> void setScriptableObject(final T scriptObject) {
         if (scriptObject instanceof ScriptableObject) {
             ((ScriptableObject) scriptObject).put("dialogArguments", (ScriptableObject) scriptObject, arguments_);
-        }
-        if (scriptObject instanceof ScriptObject) {
-            ((ScriptObject) scriptObject).put("dialogArguments", arguments_, false);
         }
         super.setScriptableObject(scriptObject);
     }
