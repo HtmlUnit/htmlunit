@@ -550,6 +550,11 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final WebClient webClient = page.getWebClient();
+        if (this instanceof HtmlTextInput
+                || this instanceof HtmlTextArea
+                || this instanceof HtmlPasswordInput) {
+            fireKeyboardEvent(Event.TYPE_INPUT, c, shiftPressed_ | isShiftNeeded);
+        }
 
         fireKeyboardEvent(Event.TYPE_KEY_UP, c, shiftPressed_ | isShiftNeeded);
 
