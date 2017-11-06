@@ -696,8 +696,7 @@ public enum BrowserVersionFeatures {
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
     /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({CHROME, FF,
-        IE})
+    @BrowserFeature({CHROME, FF, IE})
     JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
     /** The browser supports the design mode 'Inherit'. */
