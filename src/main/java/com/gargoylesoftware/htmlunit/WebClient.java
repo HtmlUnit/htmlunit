@@ -1152,10 +1152,13 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         responseHeaders.add(new NameValuePair("content-type",
             connection.getMediaType() + ";charset=" + connection.getCharset()));
-        final DownloadedContent downloadedContent =
-                HttpWebConnection.downloadContent(connection.getInputStream(), getOptions().getMaxInMemory());
-        final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
-        return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
+
+        try (InputStream is = connection.getInputStream()) {
+            final DownloadedContent downloadedContent =
+                    HttpWebConnection.downloadContent(is, getOptions().getMaxInMemory());
+            final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
+            return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
+        }
     }
 
     private static WebResponse makeWebResponseForAboutUrl(final URL url) {

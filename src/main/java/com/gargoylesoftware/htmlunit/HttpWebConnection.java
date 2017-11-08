@@ -700,7 +700,9 @@ public class HttpWebConnection implements WebConnection {
             return new DownloadedContent.InMemory(null);
         }
 
-        return downloadContent(httpEntity.getContent(), webClient_.getOptions().getMaxInMemory());
+        try (InputStream is = httpEntity.getContent()) {
+            return downloadContent(is, webClient_.getOptions().getMaxInMemory());
+        }
     }
 
     /**
@@ -741,9 +743,6 @@ public class HttpWebConnection implements WebConnection {
             // this might happen with broken gzip content
             LOG.warn("EOFException while reading from stream.", e);
             return new DownloadedContent.InMemory(bos.toByteArray());
-        }
-        finally {
-            IOUtils.closeQuietly(is);
         }
 
         return new DownloadedContent.InMemory(bos.toByteArray());

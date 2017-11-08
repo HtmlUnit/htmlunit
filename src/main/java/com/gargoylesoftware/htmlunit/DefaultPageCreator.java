@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Locale;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -193,8 +192,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return contentType.toLowerCase(Locale.ROOT);
         }
 
-        final InputStream contentAsStream = webResponse.getContentAsStream();
-        try {
+        try (InputStream contentAsStream = webResponse.getContentAsStream()) {
             final byte[] bytes = read(contentAsStream, 500);
             if (bytes.length == 0) {
                 return "text/plain";
@@ -214,9 +212,6 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             else if (isBinary(bytes)) {
                 return "application/octet-stream";
             }
-        }
-        finally {
-            IOUtils.closeQuietly(contentAsStream);
         }
         return "text/plain";
     }
