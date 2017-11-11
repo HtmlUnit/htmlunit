@@ -78,7 +78,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
         final Keyboard keyboard = new Keyboard();
         if (ctrlKey) {
             keyboard.press(KeyboardEvent.DOM_VK_CONTROL);
@@ -131,7 +131,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         final HtmlButton button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = button.click(shiftKey, ctrlKey, altKey);
@@ -155,7 +155,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
         page.getHtmlElementById("textField").focus();
         page.getHtmlElementById("otherField").focus();
         final String[] expectedAlerts = {"true"};
@@ -190,7 +190,7 @@ public class Event3Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
         page.getHtmlElementById("theSpan").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);

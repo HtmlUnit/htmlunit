@@ -101,7 +101,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         page.getHtmlElementById("myInput").type('\n');
 
         assertEquals(getExpectedAlerts(), collectedAlerts);

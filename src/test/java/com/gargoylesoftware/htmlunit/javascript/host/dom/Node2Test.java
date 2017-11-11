@@ -83,7 +83,7 @@ public class Node2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
@@ -117,7 +117,7 @@ public class Node2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);
@@ -162,7 +162,7 @@ public class Node2Test extends SimpleWebTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlPage page2 = page.getHtmlElementById("myAnchor").click();
         //IE doesn't have specific order
         Collections.sort(collectedAlerts);

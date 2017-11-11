@@ -247,7 +247,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
     @Test
     public void typeLeftArrow() throws Exception {
         final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');
@@ -267,7 +267,7 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
     @Test
     public void typeDelKey() throws Exception {
         final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');

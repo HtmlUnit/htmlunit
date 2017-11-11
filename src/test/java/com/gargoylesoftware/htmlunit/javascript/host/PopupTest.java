@@ -54,7 +54,7 @@ public class PopupTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
         final HtmlElement button = page.getHtmlElementById("button");
 
         final HtmlPage secondPage = button.click();

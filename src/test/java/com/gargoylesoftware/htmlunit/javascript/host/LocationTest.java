@@ -354,7 +354,7 @@ public class LocationTest extends SimpleWebTestCase {
             + "  </body>\n"
             + "</html>";
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), content, null);
+        final HtmlPage page1 = loadPage(content);
         final HtmlAnchor link = page1.getHtmlElementById("link1");
         final HtmlPage page2 = link.click();
 

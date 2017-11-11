@@ -40,7 +40,7 @@ public class MalformedHtml2Test extends SimpleWebTestCase {
             + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlPage page2 = page.getAnchors().get(0).click();
 
         final String query;
