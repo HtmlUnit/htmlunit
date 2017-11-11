@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @author Marc Guillemot
  */
+@RunWith(BrowserRunner.class)
 public class MimeTypeTest extends SimpleWebTestCase {
 
     /**
@@ -55,7 +58,7 @@ public class MimeTypeTest extends SimpleWebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(BrowserVersion.FIREFOX_45, html, collectedAlerts);
+        loadPage(html, collectedAlerts);
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
@@ -79,9 +82,9 @@ public class MimeTypeTest extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
         final Set<PluginConfiguration> plugins = new HashSet<>(BrowserVersion.FIREFOX_45.getPlugins());
-        BrowserVersion.FIREFOX_45.getPlugins().clear();
+        getBrowserVersion().getPlugins().clear();
         try {
-            loadPage(BrowserVersion.FIREFOX_45, html, collectedAlerts);
+            loadPage(html, collectedAlerts);
             assertEquals(expectedAlerts, collectedAlerts);
         }
         finally {

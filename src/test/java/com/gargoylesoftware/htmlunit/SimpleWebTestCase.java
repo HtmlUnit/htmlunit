@@ -58,22 +58,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
     }
 
     /**
-     * Load a page with the specified HTML and collect alerts into the list.
-     * @param browserVersion the browser version to use
-     * @param html the HTML to use
-     * @param collectedAlerts the list to hold the alerts
-     * @return the new page
-     * @throws Exception if something goes wrong
-     */
-    public final HtmlPage loadPage(final BrowserVersion browserVersion,
-            final String html, final List<String> collectedAlerts) throws Exception {
-        if (generateTest_browserVersion_.get() == null) {
-            generateTest_browserVersion_.set(browserVersion);
-        }
-        return loadPage(browserVersion, html, collectedAlerts, URL_FIRST);
-    }
-
-    /**
      * User the default browser version to load a page with the specified HTML
      * and collect alerts into the list.
      * @param html the HTML to use
