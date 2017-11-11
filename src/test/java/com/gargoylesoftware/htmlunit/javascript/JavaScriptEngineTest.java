@@ -119,7 +119,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
         final List<String> collectedAlerts = null;
-        final HtmlPage page = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
@@ -452,7 +452,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final List<String> emptyList = Collections.emptyList();
         createTestPageForRealBrowserIfNeeded(htmlContent, emptyList);
-        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, null);
+        final HtmlPage page = loadPage(htmlContent, null);
 
         final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();
         final HtmlPage page2 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame2")).getEnclosedPage();
@@ -477,7 +477,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
              + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         page.getFormByName("form1").getInputByName("button1").click();
@@ -572,7 +572,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
 
-        final HtmlPage page = loadPage(getBrowserVersion(), htmlContent, collectedAlerts);
+        final HtmlPage page = loadPage(htmlContent, collectedAlerts);
         assertEquals("First", page.getTitleText());
 
         final HtmlForm form = page.getFormByName("form1");
@@ -643,7 +643,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     @Test
     public void activeXObjectNoMap() throws Exception {
         try {
-            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject()"), null);
+            loadPage(getJavaScriptContent("new ActiveXObject()"));
             fail("An exception should be thrown for zero argument constructor.");
         }
         catch (final ScriptException e) {
@@ -651,7 +651,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
 
         try {
-            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(1, '2', '3')"), null);
+            loadPage(getJavaScriptContent("new ActiveXObject(1, '2', '3')"));
             fail("An exception should be thrown for a three argument constructor.");
         }
         catch (final ScriptException e) {
@@ -659,7 +659,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
 
         try {
-            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(a)"), null);
+            loadPage(getJavaScriptContent("new ActiveXObject(a)"));
             fail("An exception should be thrown for an undefined parameter in the constructor.");
         }
         catch (final ScriptException e) {
@@ -667,7 +667,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
 
         try {
-            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject(10)"), null);
+            loadPage(getJavaScriptContent("new ActiveXObject(10)"));
             fail("An exception should be thrown for an integer parameter in the constructor.");
         }
         catch (final ScriptException e) {
@@ -675,7 +675,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         }
 
         try {
-            loadPage(getBrowserVersion(), getJavaScriptContent("new ActiveXObject('UnknownObject')"), null);
+            loadPage(getJavaScriptContent("new ActiveXObject('UnknownObject')"));
             fail("An exception should be thrown for a null map.");
         }
         catch (final ScriptException e) {
@@ -1188,7 +1188,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
 
         Thread.sleep(20);
         final List<Thread> jsThreads = getJavaScriptThreads();

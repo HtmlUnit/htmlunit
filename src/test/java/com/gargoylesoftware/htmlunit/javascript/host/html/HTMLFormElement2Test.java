@@ -86,7 +86,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page1 = loadPage(html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
@@ -110,7 +110,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page1 = loadPage(html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
@@ -134,7 +134,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
         final List<String> collectedAlerts = new ArrayList<>();
 
-        final HtmlPage page1 = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page1 = loadPage(html, collectedAlerts);
         final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
 
         assertEquals(page1, page2);
@@ -305,7 +305,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page1 = loadPage(getBrowserVersion(), content, collectedAlerts);
+        final HtmlPage page1 = loadPage(content, collectedAlerts);
         final Page page2 = page1.getHtmlElementById("theButton").click();
 
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -325,7 +325,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
         fileInput.focus();
         fileInput.setAttribute("value", "dummy.txt");

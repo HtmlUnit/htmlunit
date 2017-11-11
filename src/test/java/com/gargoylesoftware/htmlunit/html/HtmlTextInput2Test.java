@@ -44,7 +44,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     public void type() throws Exception {
         final String html = "<html><head></head><body><input id='t'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type("abc");
         assertEquals("abc", t.getValueAttribute());
@@ -85,7 +85,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "document.body.appendChild(c);\n"
             + "</script>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlElement t = page.getHtmlElementById("t2");
         t.type("abc");
         assertEquals("abc", t.asText());
@@ -97,7 +97,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input id='t' disabled='disabled'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type("abc");
         assertEquals("", t.getValueAttribute());
@@ -124,7 +124,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "<input id='text1'/>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput text1 = page.getHtmlElementById("text1");
         text1.type("abcd");
         assertEquals("abc", text1.getValueAttribute());
@@ -180,7 +180,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
 
         final List<String> alerts = new LinkedList<>();
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, alerts);
+        final HtmlPage page = loadPage(html, alerts);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         final HtmlButtonInput button = page.getHtmlElementById("myButton");
         page.setFocusedElement(input);
@@ -203,7 +203,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "<input id='myInput' value='Hello world'><br>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.select();
         input.type("Bye World");
@@ -221,7 +221,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "<input id='myInput' value='Hello world'><br>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.select();
         input.type("Bye World!");
@@ -255,7 +255,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
             + "<input id='lastKey'>\n"
             + "</form>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         final HtmlTextInput lastKey = page.getHtmlElementById("lastKey");
         t.type("abc");
@@ -286,7 +286,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     public void typeLeftArrow() throws Exception {
         final String html = "<html><head></head><body><input id='t'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');
@@ -306,7 +306,7 @@ public class HtmlTextInput2Test extends SimpleWebTestCase {
     @Test
     public void typeDelKey() throws Exception {
         final String html = "<html><head></head><body><input id='t'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlTextInput t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');

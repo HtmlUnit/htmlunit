@@ -65,7 +65,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
         final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(getBrowserVersion(), html, collectedAlerts);
+        final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
         final HtmlOption optionA2 = selectA.getOption(1);
 
@@ -162,7 +162,7 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final Page page2 = page.getHtmlElementById("testButton").click();
         final URL url2 = page2.getUrl();
         assertTrue("Select in URL " + url2, url2.toExternalForm().contains("testSelect=testValue"));

@@ -175,7 +175,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "  } catch (e) { alert('exception occurred'); document.write(4); }\n"
             + "</script>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         assertEquals("Test", page.getTitleText());
         assertEquals("4", page.getBody().asText());
     }
@@ -193,7 +193,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</script></head>\n"
             + "<body><span id='s' onclick='test()'>click</span></body></html>";
 
-        HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        HtmlPage page = loadPage(html);
         assertEquals("click", page.getBody().asText());
 
         final HtmlSpan span = page.getHtmlElementById("s");
@@ -293,7 +293,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final List<HtmlAnchor> anchorList = page.getAnchors();
         assertEquals(1, anchorList.size());
         final HtmlAnchor anchor = anchorList.get(0);
@@ -410,7 +410,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     @Test
     public void open_IgnoredDuringParsing() throws Exception {
         final String html = "<html><body>1<script>document.open();document.write('2');</script>3</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         assertEquals("123", page.getBody().asText());
     }
 
@@ -425,7 +425,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         assertTrue(page.asText().contains("Hello World"));
     }
 

@@ -40,7 +40,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
               "<html><head></head><body>\n"
             + "<input type='password' id='myInput' value='Hello world'><br>\n"
             + "</body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlPasswordInput input = page.getHtmlElementById("myInput");
         input.select();
         input.type("Bye World");
@@ -53,7 +53,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
     @Test
     public void typeLeftArrow() throws Exception {
         final String html = "<html><head></head><body><input type='password' id='t'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlPasswordInput t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');
@@ -73,7 +73,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
     @Test
     public void typeDelKey() throws Exception {
         final String html = "<html><head></head><body><input type='password' id='t'/></body></html>";
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlPasswordInput t = page.getHtmlElementById("t");
         t.type('t');
         t.type('e');

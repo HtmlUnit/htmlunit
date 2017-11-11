@@ -46,7 +46,7 @@ public class HTMLTableElement2Test extends SimpleWebTestCase {
                 + "    table.width = '200';\n"
                 + "</script></body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), content, null);
+        final HtmlPage page = loadPage(content);
         final String xml = page.asXml();
         assertTrue(xml.contains("width=\"200\""));
     }

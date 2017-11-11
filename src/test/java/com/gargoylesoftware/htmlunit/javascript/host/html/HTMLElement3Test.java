@@ -170,7 +170,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final String[] expectedAlerts = {"test hash"};
         // first use direct load
         final List<String> loadCollectedAlerts = new ArrayList<>();
-        final HtmlPage loadPage = loadPage(getBrowserVersion(), html, loadCollectedAlerts);
+        final HtmlPage loadPage = loadPage(html, loadCollectedAlerts);
         final HtmlAnchor loadHashAnchor = loadPage.getAnchorByName("hash");
         loadHashAnchor.click();
 
