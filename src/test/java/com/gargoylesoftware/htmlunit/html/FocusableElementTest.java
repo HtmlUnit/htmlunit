@@ -56,7 +56,7 @@ public class FocusableElementTest extends SimpleWebTestCase {
             + "  <a href='foo'>this page again</a>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         page.getAnchors().get(0).click();
     }
 
@@ -97,7 +97,7 @@ public class FocusableElementTest extends SimpleWebTestCase {
             + "</body>\n"
             + "</html>";
 
-        final HtmlPage page = loadPage(getBrowserVersion(), html, null);
+        final HtmlPage page = loadPage(html);
         final HtmlSelect select1 = (HtmlSelect) page.getElementById("select1");
         final HtmlSelect select2 = (HtmlSelect) page.getElementById("select2");
         final HtmlTextArea textArea = (HtmlTextArea) page.getElementById("myTextarea");
