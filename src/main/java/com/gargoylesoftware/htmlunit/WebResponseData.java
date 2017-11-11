@@ -154,8 +154,8 @@ public class WebResponseData implements Serializable {
      * @return response body
      */
     public byte[] getBody() {
-        try {
-            return IOUtils.toByteArray(getInputStream());
+        try (InputStream is = getInputStream()) {
+            return IOUtils.toByteArray(is);
         }
         catch (final IOException e) {
             throw new RuntimeException(e); // shouldn't we allow the method to throw IOException?
