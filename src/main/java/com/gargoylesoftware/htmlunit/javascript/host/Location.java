@@ -207,22 +207,6 @@ public class Location extends SimpleScriptable {
      */
     @JsxSetter
     public void setHref(final String newLocation) throws IOException {
-        setHref(newLocation, false, null);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Sets the location URL to an entirely new value.
-     *
-     * @param newLocation the new location URL
-     * @param justHistoryAPIPushState indicates if change is caused by using HTML5 HistoryAPI
-     * @param state the state object passed down if justHistoryAPIPushState is true
-     * @throws IOException if loading the specified location fails
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms533867.aspx">MSDN Documentation</a>
-     */
-    public void setHref(final String newLocation, final boolean justHistoryAPIPushState, final Object state)
-            throws IOException {
         final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
@@ -251,9 +235,6 @@ public class Location extends SimpleScriptable {
 
             final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, "JS set location");
-            if (justHistoryAPIPushState) {
-                webWindow.getWebClient().loadDownloadedResponses();
-            }
         }
         catch (final MalformedURLException e) {
             LOG.error("setHref('" + newLocation + "') got MalformedURLException", e);
