@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.History;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -1015,7 +1016,7 @@ public class HtmlPage extends SgmlPage {
         final BrowserVersion browser = client.getBrowserVersion();
         final WebRequest request = new WebRequest(url, browser.getScriptAcceptHeader());
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
-        request.setAdditionalHeader("Referer", referringRequest.getUrl().toString());
+        request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
         request.setAdditionalHeader("Accept", client.getBrowserVersion().getScriptAcceptHeader());
 
         // our cache is a bit strange;

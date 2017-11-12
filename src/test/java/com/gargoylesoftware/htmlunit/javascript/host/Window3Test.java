@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -1116,10 +1117,10 @@ public class Window3Test extends WebDriverTestCase {
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         if (expectedAlerts.length == 0) {
-            assertNull(lastAdditionalHeaders.get("Referer"));
+            assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
         }
         else {
-            assertEquals(expectedAlerts[0], lastAdditionalHeaders.get("Referer"));
+            assertEquals(expectedAlerts[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
         }
     }
 

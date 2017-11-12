@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -239,7 +240,7 @@ public class HtmlFrameSetTest extends SimpleWebTestCase {
         assertEquals("First", firstPage.getTitleText());
 
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

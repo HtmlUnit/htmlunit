@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
@@ -117,7 +118,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
         assertNull(htmlImage.getWebResponse(false));
         final WebResponse resp = htmlImage.getWebResponse(true);
         assertNotNull(resp);
-        assertEquals(url.toExternalForm(), resp.getWebRequest().getAdditionalHeaders().get("Referer"));
+        assertEquals(url.toExternalForm(), resp.getWebRequest().getAdditionalHeaders().get(HttpHeader.REFERER));
     }
 
     /**

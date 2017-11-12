@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -381,7 +382,7 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         a.click();
 
         final Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get("Referer"));
+        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

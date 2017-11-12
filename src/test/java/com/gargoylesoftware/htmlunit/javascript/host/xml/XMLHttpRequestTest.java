@@ -37,6 +37,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
@@ -903,7 +904,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
         assertEquals(urlPage2, request.getUrl());
-        assertEquals(URL_FIRST.toExternalForm(), request.getAdditionalHeaders().get("Referer"));
+        assertEquals(URL_FIRST.toExternalForm(), request.getAdditionalHeaders().get(HttpHeader.REFERER));
     }
 
     /**
@@ -1288,7 +1289,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String[] headers = {"accept-charset", "accept-encoding",
             "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date",
-            "expect", "host", "keep-alive", "referer", "te", "trailer", "transfer-encoding", "upgrade",
+            "expect", "host", "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding", "upgrade",
             "user-agent", "via" };
         for (final String header : headers) {
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header));

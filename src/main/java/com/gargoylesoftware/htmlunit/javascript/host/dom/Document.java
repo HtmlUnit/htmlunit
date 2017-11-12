@@ -64,6 +64,7 @@ import org.w3c.dom.DocumentType;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -356,7 +357,7 @@ public class Document extends Node {
         String referrer = "";
         final WebResponse webResponse = getPage().getWebResponse();
         if (webResponse != null) {
-            referrer = webResponse.getWebRequest().getAdditionalHeaders().get("Referer");
+            referrer = webResponse.getWebRequest().getAdditionalHeaders().get(HttpHeader.REFERER);
             if (referrer == null) {
                 referrer = "";
             }

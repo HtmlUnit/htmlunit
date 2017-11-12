@@ -134,7 +134,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList("accept-charset", "accept-encoding",
         "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date", "expect",
-        "host", "keep-alive", "referer", "te", "trailer", "transfer-encoding", "upgrade", "user-agent", "via");
+        "host", "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
+        "upgrade", "user-agent", "via");
 
     private int state_;
     private Function stateChangeHandler_;
@@ -538,7 +539,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
             request.setCharset(UTF_8);
-            request.setAdditionalHeader("Referer", containingPage_.getUrl().toExternalForm());
+            request.setAdditionalHeader(HttpHeader.REFERER, containingPage_.getUrl().toExternalForm());
 
             if (!isSameOrigin(originUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(originUrl.getProtocol()).append("://")
@@ -881,7 +882,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return true;
         }
         if ("accept".equals(name) || "accept-language".equals(name) || "content-language".equals(name)
-                || "referer".equals(name) || "accept-encoding".equals(name) || HttpHeader.ORIGIN_LC.equals(name)) {
+                || HttpHeader.REFERER_LC.equals(name) || "accept-encoding".equals(name)
+                || HttpHeader.ORIGIN_LC.equals(name)) {
             return false;
         }
         return true;

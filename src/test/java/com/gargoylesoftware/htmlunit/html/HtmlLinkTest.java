@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
@@ -44,6 +45,7 @@ public class HtmlLinkTest extends SimpleWebTestCase {
 
         final HtmlLink link = page.getFirstByXPath("//link");
         final WebResponse respCss = link.getWebResponse(true);
-        assertEquals(page.getUrl().toExternalForm(), respCss.getWebRequest().getAdditionalHeaders().get("Referer"));
+        assertEquals(page.getUrl().toExternalForm(),
+                respCss.getWebRequest().getAdditionalHeaders().get(HttpHeader.REFERER));
     }
 }

@@ -40,6 +40,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -462,7 +463,7 @@ public class HtmlImage extends HtmlElement {
                 final URL url = page.getFullyQualifiedUrl(src);
                 final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
                 final WebRequest request = new WebRequest(url, accept);
-                request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+                request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
                 imageWebResponse_ = webclient.loadWebResponse(request);
             }
 

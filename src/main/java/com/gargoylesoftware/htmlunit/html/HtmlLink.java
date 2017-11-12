@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -227,7 +228,7 @@ public class HtmlLink extends HtmlElement {
 
         final WebRequest request = new WebRequest(url);
 
-        request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+        request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
 
         final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
         request.setAdditionalHeader("Accept", accept);
