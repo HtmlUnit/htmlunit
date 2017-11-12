@@ -27,6 +27,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -163,7 +164,7 @@ public class HtmlAnchor extends HtmlElement {
 
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
         webRequest.setCharset(page.getCharset());
-        webRequest.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+        webRequest.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()

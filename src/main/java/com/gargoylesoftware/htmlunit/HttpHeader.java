@@ -21,6 +21,11 @@ package com.gargoylesoftware.htmlunit;
  */
 public final class HttpHeader {
 
+    /** Referer. */
+    public static final String REFERER = "Referer";
+    /** referer. */
+    public static final String REFERER_LC = "referer";
+
     /** Origin. */
     public static final String ORIGIN = "Origin";
     /** origin. */

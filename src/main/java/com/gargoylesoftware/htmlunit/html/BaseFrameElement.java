@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -181,7 +182,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
             try {
                 final WebRequest request = new WebRequest(url);
-                request.setAdditionalHeader("Referer", getPage().getUrl().toExternalForm());
+                request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {

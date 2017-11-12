@@ -23,6 +23,7 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -63,7 +64,7 @@ public class HtmlEmbed extends HtmlElement {
 
         final URL url = page.getFullyQualifiedUrl(getAttribute("src"));
         final WebRequest request = new WebRequest(url);
-        request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+        request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
         try (FileOutputStream fos = new FileOutputStream(file);

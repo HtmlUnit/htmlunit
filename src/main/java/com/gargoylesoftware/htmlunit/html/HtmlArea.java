@@ -27,6 +27,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -86,7 +87,7 @@ public class HtmlArea extends HtmlElement {
                         "Not a valid url: " + getHrefAttribute());
             }
             final WebRequest request = new WebRequest(url);
-            request.setAdditionalHeader("Referer", page.getUrl().toExternalForm());
+            request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             webClient.getPage(
                     webWindow,

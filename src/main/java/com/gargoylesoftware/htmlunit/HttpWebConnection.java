@@ -797,7 +797,7 @@ public class HttpWebConnection implements WebConnection {
                 else if ("Upgrade-Insecure-Requests".equals(header) && requestHeaders.get(header) != null) {
                     list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
-                else if ("Referer".equals(header) && requestHeaders.get(header) != null) {
+                else if (HttpHeader.REFERER.equals(header) && requestHeaders.get(header) != null) {
                     list.add(new RefererHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Connection".equals(header)) {
@@ -917,7 +917,7 @@ public class HttpWebConnection implements WebConnection {
 
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
-            request.setHeader("Referer", value_);
+            request.setHeader(HttpHeader.REFERER, value_);
         }
     }
 

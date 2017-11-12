@@ -39,6 +39,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -305,7 +306,7 @@ public class HtmlForm extends HtmlElement {
         request.setCharset(getSubmitCharset());
 
         String referer = htmlPage.getUrl().toExternalForm();
-        request.setAdditionalHeader("Referer", referer);
+        request.setAdditionalHeader(HttpHeader.REFERER, referer);
 
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
