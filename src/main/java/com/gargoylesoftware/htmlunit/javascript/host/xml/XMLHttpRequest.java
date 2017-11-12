@@ -52,6 +52,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -118,8 +119,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     /** All the data has been received; the complete data is available in responseBody and responseText. */
     @JsxConstant
     public static final int DONE = 4;
-
-    private static final String HEADER_ORIGIN = "Origin";
 
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
@@ -547,7 +546,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 if (originUrl.getPort() != -1) {
                     origin.append(':').append(originUrl.getPort());
                 }
-                request.setAdditionalHeader(HEADER_ORIGIN, origin.toString());
+                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
             }
 
             try {
@@ -707,12 +706,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
+            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             if (originHeaderValue != null && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
-                preflightRequest.setAdditionalHeader(HEADER_ORIGIN, originHeaderValue);
+                preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
 
                 // header request-method
                 preflightRequest.setAdditionalHeader(
@@ -847,7 +846,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
         final String originHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
         if (!ALLOW_ORIGIN_ALL.equals(originHeader)
-                && !webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN).equals(originHeader)) {
+                && !webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
             return false;
         }
         String headersHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_HEADERS);
@@ -882,7 +881,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return true;
         }
         if ("accept".equals(name) || "accept-language".equals(name) || "content-language".equals(name)
-                || "referer".equals(name) || "accept-encoding".equals(name) || "origin".equals(name)) {
+                || "referer".equals(name) || "accept-encoding".equals(name) || HttpHeader.ORIGIN_LC.equals(name)) {
             return false;
         }
         return true;

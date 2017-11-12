@@ -38,6 +38,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -93,7 +94,6 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     /** All the data has been received; the complete data is available in responseBody and responseText. */
     public static final int STATE_DONE = 4;
 
-    private static final String HEADER_ORIGIN = "Origin";
     private static final char REQUEST_HEADERS_SEPARATOR = ',';
 
     private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
@@ -529,12 +529,12 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private void doSend(final Context context) {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         try {
-            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN);
+            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
             if (originHeaderValue != null && isPreflight()) {
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
-                preflightRequest.setAdditionalHeader(HEADER_ORIGIN, originHeaderValue);
+                preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
 
                 // header request-method
                 preflightRequest.setAdditionalHeader(
@@ -623,7 +623,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
         final String originHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
         if (!ALLOW_ORIGIN_ALL.equals(originHeader)
-                && !webRequest_.getAdditionalHeaders().get(HEADER_ORIGIN).equals(originHeader)) {
+                && !webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
             return false;
         }
         String headersHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_HEADERS);
@@ -658,7 +658,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return true;
         }
         if ("accept".equals(name) || "accept-language".equals(name) || "content-language".equals(name)
-                || "referer".equals(name) || "accept-encoding".equals(name) || "origin".equals(name)) {
+                || "referer".equals(name) || "accept-encoding".equals(name) || HttpHeader.ORIGIN_LC.equals(name)) {
             return false;
         }
         return true;

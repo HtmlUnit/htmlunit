@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -64,7 +65,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass(domClass = HtmlAnchor.class)
 public class HTMLAnchorElement extends HTMLElement {
-    private static final List<String> REFERRER_POLICIES = Arrays.asList("no-referrer", "origin", "unsafe-url");
+    private static final List<String> REFERRER_POLICIES = Arrays.asList(
+                                        "no-referrer", HttpHeader.ORIGIN_LC, "unsafe-url");
 
     /**
      * The constructor.

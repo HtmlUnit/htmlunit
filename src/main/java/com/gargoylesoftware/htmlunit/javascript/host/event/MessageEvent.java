@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -91,7 +92,7 @@ public class MessageEvent extends Event {
         if (details != null && details != Undefined.instance) {
             data_ = details.get("data");
 
-            final String detailOrigin = (String) details.get("origin");
+            final String detailOrigin = (String) details.get(HttpHeader.ORIGIN_LC);
             if (detailOrigin != null) {
                 origin = detailOrigin;
             }
