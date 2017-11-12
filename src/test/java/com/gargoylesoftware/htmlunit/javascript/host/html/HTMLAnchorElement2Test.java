@@ -39,6 +39,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -768,7 +769,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", ""},
             IE = {"undefined", "something"})
     public void origin() throws Exception {
-        attribute("origin", "something");
+        attribute(HttpHeader.ORIGIN_LC, "something");
     }
 
     /**

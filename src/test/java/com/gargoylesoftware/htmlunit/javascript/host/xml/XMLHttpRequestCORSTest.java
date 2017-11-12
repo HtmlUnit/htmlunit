@@ -35,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -230,7 +231,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             }
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/xml");
-            String origin = request.getHeader("Origin");
+            String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";
             }
@@ -461,7 +462,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             if (ACCESS_CONTROL_ALLOW_HEADERS_ != null) {
                 response.setHeader("Access-Control-Allow-Headers", ACCESS_CONTROL_ALLOW_HEADERS_);
             }
-            options_origin_ = request.getHeader("Origin");
+            options_origin_ = request.getHeader(HttpHeader.ORIGIN);
             options_method_ = request.getHeader("Access-Control-Request-Method");
             options_headers_ = request.getHeader("Access-Control-Request-Headers");
         }
@@ -478,7 +479,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             response.setContentType("text/xml");
             final Writer writer = response.getWriter();
 
-            final String origin = request.getHeader("Origin");
+            final String origin = request.getHeader(HttpHeader.ORIGIN);
             writer.write("<result>"
                 + "<origin>" + origin + "</origin>"
                 + "<options_origin>" + options_origin_ + "</options_origin>"
@@ -911,7 +912,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             }
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType("text/xml");
-            String origin = request.getHeader("Origin");
+            String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";
             }
