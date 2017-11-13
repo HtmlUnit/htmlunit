@@ -132,7 +132,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
 
-    private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList("accept-charset", "accept-encoding",
+    private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList(
+        "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
         "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date", "expect",
         "host", "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
         "upgrade", "user-agent", "via");

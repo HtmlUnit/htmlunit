@@ -791,7 +791,7 @@ public class HttpWebConnection implements WebConnection {
                 else if (HttpHeader.ACCEPT_LANGUAGE.equals(header) && requestHeaders.get(header) != null) {
                     list.add(new AcceptLanguageHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
-                else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
+                else if (HttpHeader.ACCEPT_ENCODING.equals(header) && requestHeaders.get(header) != null) {
                     list.add(new AcceptEncodingHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Upgrade-Insecure-Requests".equals(header) && requestHeaders.get(header) != null) {

@@ -905,7 +905,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             final Writer writer = response.getWriter();
             final String html = "<html><head><script>\n"
                     + "function test() {\n"
-                    + "  alert('" + request.getHeader("Accept-Encoding") + "');\n"
+                    + "  alert('" + request.getHeader(HttpHeader.ACCEPT_ENCODING) + "');\n"
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
 

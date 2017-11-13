@@ -44,6 +44,11 @@ public final class HttpHeader {
     /** accept-language. */
     public static final String ACCEPT_LANGUAGE_LC = "accept-language";
 
+    /** Accept-Encoding. */
+    public static final String ACCEPT_ENCODING = "Accept-Encoding";
+    /** accept-encoding. */
+    public static final String ACCEPT_ENCODING_LC = "accept-encoding";
+
     private HttpHeader() {
     }
 }

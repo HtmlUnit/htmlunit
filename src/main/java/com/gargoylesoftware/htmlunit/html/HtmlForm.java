@@ -297,7 +297,7 @@ public class HtmlForm extends HtmlElement {
 
         final WebRequest request = new WebRequest(url, method);
         request.setAdditionalHeader(HttpHeader.ACCEPT, browser.getHtmlAcceptHeader());
-        request.setAdditionalHeader("Accept-Encoding", "gzip, deflate");
+        request.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, "gzip, deflate");
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));

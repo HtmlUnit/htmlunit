@@ -201,7 +201,7 @@ public class WebRequestTest {
     public void accept_encoding() throws Exception {
         final URL url = new URL("http://localhost/");
         final WebRequest request = new WebRequest(url);
-        assertEquals("gzip, deflate", request.getAdditionalHeaders().get("Accept-Encoding"));
+        assertEquals("gzip, deflate", request.getAdditionalHeaders().get(HttpHeader.ACCEPT_ENCODING));
     }
 
     /**

@@ -151,7 +151,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         startWebServer("src/test/resources/pjl-comp-filter", null);
         final WebRequest request = new WebRequest(new URL("http://localhost:"
             + PORT + "/index.html"));
-        request.setAdditionalHeader("Accept-Encoding", "deflate");
+        request.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, "deflate");
         final WebClient webClient = getWebClient();
         final HtmlPage page = webClient.getPage(request);
         assertEquals("Hello Compressed World!", page.asText());
