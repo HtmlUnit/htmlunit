@@ -296,7 +296,7 @@ public class HtmlForm extends HtmlElement {
         }
 
         final WebRequest request = new WebRequest(url, method);
-        request.setAdditionalHeader("Accept", browser.getHtmlAcceptHeader());
+        request.setAdditionalHeader(HttpHeader.ACCEPT, browser.getHtmlAcceptHeader());
         request.setAdditionalHeader("Accept-Encoding", "gzip, deflate");
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
@@ -846,7 +846,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code accept} or an empty string if that attribute isn't defined
      */
     public final String getAcceptAttribute() {
-        return getAttribute("accept");
+        return getAttribute(HttpHeader.ACCEPT_LC);
     }
 
     /**

@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -377,7 +378,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
             final Writer writer = response.getWriter();
             final String html = "<html><head><script>\n"
                     + "function test() {\n"
-                    + "  alert('" + request.getHeader("Accept") + "');\n"
+                    + "  alert('" + request.getHeader(HttpHeader.ACCEPT) + "');\n"
                     + "}\n"
                     + "</script></head><body onload='test()'></body></html>";
 

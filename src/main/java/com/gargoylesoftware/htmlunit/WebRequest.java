@@ -75,7 +75,7 @@ public class WebRequest implements Serializable {
      */
     public WebRequest(final URL url, final String acceptHeader) {
         setUrl(url);
-        setAdditionalHeader("Accept", acceptHeader);
+        setAdditionalHeader(HttpHeader.ACCEPT, acceptHeader);
         setAdditionalHeader("Accept-Encoding", "gzip, deflate");
     }
 

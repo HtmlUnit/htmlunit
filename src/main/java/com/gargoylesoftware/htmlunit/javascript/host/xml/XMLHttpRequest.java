@@ -881,7 +881,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             return true;
         }
-        if ("accept".equals(name)
+        if (HttpHeader.ACCEPT_LC.equals(name)
                 || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
                 || "content-language".equals(name)
                 || HttpHeader.REFERER_LC.equals(name)

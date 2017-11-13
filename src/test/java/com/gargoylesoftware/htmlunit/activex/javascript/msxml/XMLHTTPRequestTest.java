@@ -1177,7 +1177,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         if (getExpectedAlerts().length > 1) {
             final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             final Map<String, String> headers = lastRequest.getAdditionalHeaders();
-            assertEquals(expectedHeaders[0], "" + headers.get("Accept"));
+            assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get("Accept-Encoding"));
             assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
             assertEquals(expectedHeaders[3], "" + headers.get("Host"));
@@ -1213,7 +1213,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         if (getExpectedAlerts().length > 1) {
             final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
             final Map<String, String> headers = lastRequest.getAdditionalHeaders();
-            assertEquals(expectedHeaders[0], "" + headers.get("Accept"));
+            assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get("Accept-Encoding"));
             assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
             assertEquals(expectedHeaders[3], "" + headers.get("Host"));
@@ -1286,7 +1286,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
         assertEquals(expectedHeaders[0], String.valueOf(headers.get("foo")));
-        assertEquals(expectedHeaders[1], String.valueOf(headers.get("Accept")));
+        assertEquals(expectedHeaders[1], String.valueOf(headers.get(HttpHeader.ACCEPT)));
         assertEquals(expectedHeaders[2], String.valueOf(headers.get("ValueEmpty")));
         assertEquals(expectedHeaders[3], String.valueOf(headers.get("ValueBlank")));
     }

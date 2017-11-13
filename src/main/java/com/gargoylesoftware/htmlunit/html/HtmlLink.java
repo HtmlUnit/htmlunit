@@ -231,7 +231,7 @@ public class HtmlLink extends HtmlElement {
         request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
 
         final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
-        request.setAdditionalHeader("Accept", accept);
+        request.setAdditionalHeader(HttpHeader.ACCEPT, accept);
 
         return request;
     }

@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -346,7 +347,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getAcceptAttribute() {
-        return getAttribute("accept");
+        return getAttribute(HttpHeader.ACCEPT_LC);
     }
 
     /**
@@ -671,7 +672,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the {@code accept} attribute
      */
     public String getAccept() {
-        return getAttribute("accept");
+        return getAttribute(HttpHeader.ACCEPT_LC);
     }
 
     /**
@@ -680,7 +681,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param accept the {@code accept} attribute
      */
     public void setAccept(final String accept) {
-        setAttribute("accept", accept);
+        setAttribute(HttpHeader.ACCEPT_LC, accept);
     }
 
     /**
