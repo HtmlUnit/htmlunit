@@ -314,10 +314,10 @@ public class HtmlForm extends HtmlElement {
         }
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
-            request.setAdditionalHeader("Cache-Control", "max-age=0");
+            request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "max-age=0");
         }
         if (browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE)) {
-            request.setAdditionalHeader("Cache-Control", "no-cache");
+            request.setAdditionalHeader(HttpHeader.CACHE_CONTROL, "no-cache");
         }
 
         return request;

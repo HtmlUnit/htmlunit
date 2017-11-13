@@ -31,6 +31,9 @@ public final class HttpHeader {
     /** origin. */
     public static final String ORIGIN_LC = "origin";
 
+    /** Cache-Control. */
+    public static final String CACHE_CONTROL = "Cache-Control";
+
     private HttpHeader() {
     }
 }
