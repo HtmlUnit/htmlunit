@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import com.google.common.net.HttpHeaders;
 
 /**
  * Wrapper for the HTML element "form".
@@ -311,7 +310,7 @@ public class HtmlForm extends HtmlElement {
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
             referer = StringUtils.stripEnd(referer, "/");
-            request.setAdditionalHeader(HttpHeaders.ORIGIN, referer);
+            request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
         }
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
