@@ -34,6 +34,11 @@ public final class HttpHeader {
     /** Cache-Control. */
     public static final String CACHE_CONTROL = "Cache-Control";
 
+    /** Accept-Language. */
+    public static final String ACCEPT_LANGUAGE = "Accept-Language";
+    /** accept-language. */
+    public static final String ACCEPT_LANGUAGE_LC = "accept-language";
+
     private HttpHeader() {
     }
 }

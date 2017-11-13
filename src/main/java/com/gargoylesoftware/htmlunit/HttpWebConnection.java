@@ -788,7 +788,7 @@ public class HttpWebConnection implements WebConnection {
                 else if ("Accept".equals(header) && requestHeaders.get(header) != null) {
                     list.add(new AcceptHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
-                else if ("Accept-Language".equals(header) && requestHeaders.get(header) != null) {
+                else if (HttpHeader.ACCEPT_LANGUAGE.equals(header) && requestHeaders.get(header) != null) {
                     list.add(new AcceptLanguageHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
                 else if ("Accept-Encoding".equals(header) && requestHeaders.get(header) != null) {
@@ -878,7 +878,7 @@ public class HttpWebConnection implements WebConnection {
 
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
-            request.setHeader("Accept-Language", value_);
+            request.setHeader(HttpHeader.ACCEPT_LANGUAGE, value_);
         }
     }
 

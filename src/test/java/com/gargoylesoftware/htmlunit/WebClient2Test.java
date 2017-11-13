@@ -247,7 +247,8 @@ public class WebClient2Test extends SimpleWebTestCase {
         loadPageWithAlerts(html);
         // browsers are using different casing, but this is not relevant for this test
         assertEquals("en-us",
-                getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase(Locale.ROOT));
+                getMockWebConnection().getLastAdditionalHeaders()
+                    .get(HttpHeader.ACCEPT_LANGUAGE).toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -267,7 +268,8 @@ public class WebClient2Test extends SimpleWebTestCase {
         loadPageWithAlerts(html);
         // browsers are using different casing, but this is not relevant for this test
         assertEquals("fr",
-                getMockWebConnection().getLastAdditionalHeaders().get("Accept-Language").toLowerCase(Locale.ROOT));
+                getMockWebConnection().getLastAdditionalHeaders()
+                    .get(HttpHeader.ACCEPT_LANGUAGE).toLowerCase(Locale.ROOT));
     }
 
     /**

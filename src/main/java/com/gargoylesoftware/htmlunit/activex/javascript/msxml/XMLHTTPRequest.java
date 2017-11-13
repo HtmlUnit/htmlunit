@@ -658,8 +658,11 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             }
             return true;
         }
-        if ("accept".equals(name) || "accept-language".equals(name) || "content-language".equals(name)
-                || HttpHeader.REFERER_LC.equals(name) || "accept-encoding".equals(name)
+        if ("accept".equals(name)
+                || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
+                || "content-language".equals(name)
+                || HttpHeader.REFERER_LC.equals(name)
+                || "accept-encoding".equals(name)
                 || HttpHeader.ORIGIN_LC.equals(name)) {
             return false;
         }
