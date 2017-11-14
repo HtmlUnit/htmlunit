@@ -1463,8 +1463,8 @@ public class WebClient implements Serializable, AutoCloseable {
             wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getBrowserLanguage());
         }
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
-                && !wrs.isAdditionalHeader("Upgrade-Insecure-Requests")) {
-            wrs.setAdditionalHeader("Upgrade-Insecure-Requests", "1");
+                && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
+            wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
         }
         // Add user-specified headers last so that they can override HtmlUnit defaults.
         wrs.getAdditionalHeaders().putAll(requestHeaders_);

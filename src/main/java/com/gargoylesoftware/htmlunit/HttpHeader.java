@@ -85,6 +85,9 @@ public final class HttpHeader {
     /** DNT. */
     public static final String DNT = "DNT";
 
+    /** Upgrade-Insecure-Requests. */
+    public static final String UPGRADE_INSECURE_REQUESTS = "Upgrade-Insecure-Requests";
+
     private HttpHeader() {
     }
 }

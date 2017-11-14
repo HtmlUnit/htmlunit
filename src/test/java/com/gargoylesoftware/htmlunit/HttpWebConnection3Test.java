@@ -47,12 +47,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
+    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
+                        HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                    HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION},
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION},
             FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests"},
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION})
     @NotYetImplemented(IE)
@@ -92,14 +93,15 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
+    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
+                        HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
-                        "Cookie"},
+                        HttpHeader.COOKIE},
             FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION},
             FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION,
-                        "Upgrade-Insecure-Requests"},
+                        HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION,
                         HttpHeader.COOKIE})
