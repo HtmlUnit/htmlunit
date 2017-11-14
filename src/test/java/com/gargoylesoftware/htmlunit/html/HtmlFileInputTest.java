@@ -44,6 +44,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -425,7 +426,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("mySubmit")).click();
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
-        final String contentType = request.getAdditionalHeaders().get("Content-Type");
+        final String contentType = request.getAdditionalHeaders().get(HttpHeader.CONTENT_TYPE);
         assertTrue(StringUtils.isNotBlank(contentType));
         assertFalse(StringUtils.containsIgnoreCase(contentType, "charset"));
     }

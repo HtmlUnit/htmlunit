@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConnection;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -110,7 +111,7 @@ public abstract class FalsifyingWebConnection extends WebConnectionWrapper {
     protected WebResponse createWebResponse(final WebRequest wr, final String content,
             final String contentType, final int responseCode, final String responseMessage) throws IOException {
         final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("content-type", contentType + "; charset=" + UTF_8));
+        headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC, contentType + "; charset=" + UTF_8));
         final byte[] body = content.getBytes(UTF_8);
         final WebResponseData wrd = new WebResponseData(body, responseCode, responseMessage, headers);
         return new WebResponse(wrd, wr.getUrl(), wr.getHttpMethod(), 0);

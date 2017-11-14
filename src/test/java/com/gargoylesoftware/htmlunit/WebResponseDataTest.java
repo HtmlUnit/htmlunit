@@ -105,7 +105,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         }
 
         if (contentType != null) {
-            headers.add(new NameValuePair("Content-Type", contentType));
+            headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, contentType));
         }
 
         final WebResponseData data = new WebResponseData("".getBytes(), statusCode, "OK", headers);

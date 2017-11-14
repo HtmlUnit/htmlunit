@@ -79,7 +79,7 @@ public class MockWebConnection implements WebConnection {
                 compiledHeaders.addAll(headers);
             }
             if (contentType != null) {
-                compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+                compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, contentType));
             }
             return compiledHeaders;
         }

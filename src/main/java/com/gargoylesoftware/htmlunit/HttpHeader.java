@@ -64,6 +64,14 @@ public final class HttpHeader {
     /** content-length. */
     public static final String CONTENT_LENGTH_LC = "content-length";
 
+    /** Content-Type. */
+    public static final String CONTENT_TYPE = "Content-Type";
+    /** content-type. */
+    public static final String CONTENT_TYPE_LC = "content-type";
+
+    /** content-language. */
+    public static final String CONTENT_LANGUAGE_LC = "content-language";
+
     /** Cookie. */
     public static final String COOKIE = "Cookie";
     /** cookie. */

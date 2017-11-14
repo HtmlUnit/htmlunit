@@ -36,6 +36,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
+
 /**
  * Sniffs encoding settings from HTML, XML or other content. The HTML encoding sniffing algorithm is based on the
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/parsing.html#determining-the-character-encoding">HTML5
@@ -497,7 +499,7 @@ public final class EncodingSniffer {
     static boolean contentTypeEndsWith(final List<NameValuePair> headers, final String... contentTypeEndings) {
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
-            if ("content-type".equalsIgnoreCase(name)) {
+            if (HttpHeader.CONTENT_TYPE_LC.equalsIgnoreCase(name)) {
                 String value = pair.getValue();
                 final int i = value.indexOf(';');
                 if (i != -1) {
@@ -617,7 +619,7 @@ public final class EncodingSniffer {
     public static Charset sniffEncodingFromHttpHeaders(final List<NameValuePair> headers) {
         for (final NameValuePair pair : headers) {
             final String name = pair.getName();
-            if ("content-type".equalsIgnoreCase(name)) {
+            if (HttpHeader.CONTENT_TYPE_LC.equalsIgnoreCase(name)) {
                 final Charset encoding = extractEncodingFromContentType(pair.getValue());
                 if (encoding != null) {
                     if (LOG.isDebugEnabled()) {

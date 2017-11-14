@@ -135,7 +135,7 @@ public class WebResponse implements Serializable {
      * @return the content type returned from the server, e.g. "text/html"
      */
     public String getContentType() {
-        final String contentTypeHeader = getResponseHeaderValue("content-type");
+        final String contentTypeHeader = getResponseHeaderValue(HttpHeader.CONTENT_TYPE_LC);
         if (contentTypeHeader == null) {
             // Not technically legal but some servers don't return a content-type
             return "";

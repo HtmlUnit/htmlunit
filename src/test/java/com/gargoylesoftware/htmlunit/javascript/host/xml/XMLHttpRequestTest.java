@@ -1104,7 +1104,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             resp.setStatus(200);
-            resp.addHeader("Content-Type", "text/html");
+            resp.addHeader(HttpHeader.CONTENT_TYPE, "text/html");
             try {
                 for (int i = 0; i < 10; i++) {
                     resp.getOutputStream().print(String.valueOf(i));
@@ -1154,7 +1154,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 }
 
                 resp.setStatus(200);
-                resp.addHeader("Content-Type", "text/plain");
+                resp.addHeader(HttpHeader.CONTENT_TYPE, "text/plain");
                 resp.getOutputStream().print(authToken);
                 resp.flushBuffer();
             }
@@ -1285,7 +1285,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     public void isAuthorizedHeader() throws Exception {
         assertTrue(XMLHttpRequest.isAuthorizedHeader("Foo"));
-        assertTrue(XMLHttpRequest.isAuthorizedHeader("Content-Type"));
+        assertTrue(XMLHttpRequest.isAuthorizedHeader(HttpHeader.CONTENT_TYPE));
 
         final String[] headers = {"accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
             HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",

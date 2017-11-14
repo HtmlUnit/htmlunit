@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
@@ -1126,7 +1127,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("");
         loadPageWithAlerts2(html);
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
-            .get("Content-Type");
+            .get(HttpHeader.CONTENT_TYPE);
         // Can't test equality for multipart/form-data as it will have the form:
         // multipart/form-data; boundary=---------------------------42937861433140731107235900
         headerValue = StringUtils.substringBefore(headerValue, ";");

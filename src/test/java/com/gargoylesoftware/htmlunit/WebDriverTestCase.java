@@ -719,7 +719,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             boolean charsetInContentType = false;
             for (final NameValuePair responseHeader : resp.getHeaders()) {
                 final String headerName = responseHeader.getName();
-                if ("Content-Type".equals(headerName) && responseHeader.getValue().contains("charset=")) {
+                if (HttpHeader.CONTENT_TYPE.equals(headerName) && responseHeader.getValue().contains("charset=")) {
                     charsetInContentType = true;
                 }
                 response.addHeader(headerName, responseHeader.getValue());

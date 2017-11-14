@@ -26,6 +26,8 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
+
 /**
  * Unit tests for {@link EncodingSniffer}.
  *
@@ -41,10 +43,10 @@ public class EncodingSnifferTest {
     public void fromHttpHeaders() throws Exception {
         header(null, null, null);
         header(null, "foo", "bar");
-        header(null, "Content-Type", "blah");
-        header(null, "Content-Type", "text/html;charset=blah");
-        header(UTF_8, "Content-Type", "text/html;charset=utf-8");
-        header(UTF_8, "Content-Type", "text/html;charset=utf-8;");
+        header(null, HttpHeader.CONTENT_TYPE, "blah");
+        header(null, HttpHeader.CONTENT_TYPE, "text/html;charset=blah");
+        header(UTF_8, HttpHeader.CONTENT_TYPE, "text/html;charset=utf-8");
+        header(UTF_8, HttpHeader.CONTENT_TYPE, "text/html;charset=utf-8;");
     }
 
     private static void header(final Charset expectedEncoding, final String headerName, final String headerValue) {

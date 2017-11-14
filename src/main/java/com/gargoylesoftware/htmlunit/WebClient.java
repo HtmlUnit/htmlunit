@@ -1150,7 +1150,7 @@ public class WebClient implements Serializable, AutoCloseable {
         catch (final DecoderException e) {
             throw new IOException(e.getMessage());
         }
-        responseHeaders.add(new NameValuePair("content-type",
+        responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
             connection.getMediaType() + ";charset=" + connection.getCharset()));
 
         try (InputStream is = connection.getInputStream()) {
@@ -1195,7 +1195,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (!file.exists()) {
             // construct 404
             final List<NameValuePair> compiledHeaders = new ArrayList<>();
-            compiledHeaders.add(new NameValuePair("Content-Type", "text/html"));
+            compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html"));
             final WebResponseData responseData =
                 new WebResponseData(
                     TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
@@ -1207,7 +1207,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final DownloadedContent content = new DownloadedContent.OnFile(file, false);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
-        compiledHeaders.add(new NameValuePair("Content-Type", contentType));
+        compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, contentType));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
         return new WebResponse(responseData, webRequest, 0);
     }

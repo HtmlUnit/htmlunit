@@ -114,14 +114,14 @@ public class WebResponseTest extends WebServerTestCase {
     private void illegalCharset(final String cntTypeHeader, final Charset expectedCharset) throws Exception {
         final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Type", cntTypeHeader));
+        headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, cntTypeHeader));
         conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
         final WebClient webClient = getWebClient();
         webClient.setWebConnection(conn);
 
         final Page page = webClient.getPage(URL_FIRST);
         assertEquals(expectedCharset, page.getWebResponse().getContentCharset());
-        assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue("Content-Type"));
+        assertEquals(cntTypeHeader, page.getWebResponse().getResponseHeaderValue(HttpHeader.CONTENT_TYPE));
         assertEquals("<html/>", page.getWebResponse().getContentAsString());
     }
 
