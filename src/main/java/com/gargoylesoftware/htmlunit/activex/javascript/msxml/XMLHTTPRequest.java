@@ -109,7 +109,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
 
     private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
-        HttpHeader.CONNECTION_LC, "content-length", HttpHeader.COOKIE_LC, "cookie2",
+        HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
         "content-transfer-encoding", "date", "expect",
         HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding", "upgrade",
         HttpHeader.USER_AGENT_LC, "via");

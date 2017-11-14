@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -192,7 +193,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(css, "text/css");
         final List<NameValuePair> headers = new ArrayList<>();
-        headers.add(new NameValuePair("Content-Length", "0"));
+        headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, "0"));
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
 

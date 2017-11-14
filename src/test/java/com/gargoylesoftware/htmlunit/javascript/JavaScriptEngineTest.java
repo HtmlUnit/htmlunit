@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -355,7 +356,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             bytes.write("".getBytes("ASCII"));
 
             final List<NameValuePair> headers = new ArrayList<>();
-            headers.add(new NameValuePair("Content-Length", "0"));
+            headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, "0"));
             headers.add(new NameValuePair("Content-Encoding", "gzip"));
             webConnection.setResponse(new URL(URL_FIRST, "foo.js"),
                     bytes.toByteArray(), 200, "OK", "text/javascript", headers);

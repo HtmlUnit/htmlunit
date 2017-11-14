@@ -1179,7 +1179,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             final Map<String, String> headers = lastRequest.getAdditionalHeaders();
             assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get(HttpHeader.ACCEPT_ENCODING));
-            assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
+            assertEquals(expectedHeaders[2], "" + headers.get(HttpHeader.CONTENT_LENGTH));
             assertEquals(expectedHeaders[3], "" + headers.get(HttpHeader.HOST));
             assertEquals(expectedHeaders[4], "" + headers.get(HttpHeader.REFERER));
         }
@@ -1215,7 +1215,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             final Map<String, String> headers = lastRequest.getAdditionalHeaders();
             assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get(HttpHeader.ACCEPT_ENCODING));
-            assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
+            assertEquals(expectedHeaders[2], "" + headers.get(HttpHeader.CONTENT_LENGTH));
             assertEquals(expectedHeaders[3], "" + headers.get(HttpHeader.HOST));
             assertEquals(expectedHeaders[4], "" + headers.get(HttpHeader.REFERER));
         }
@@ -1320,7 +1320,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
-        assertEquals(contentLength, headers.get("Content-Length"));
+        assertEquals(contentLength, headers.get(HttpHeader.CONTENT_LENGTH));
     }
 
     private void property(final String property) throws Exception {

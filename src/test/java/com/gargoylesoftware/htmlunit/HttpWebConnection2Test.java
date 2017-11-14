@@ -244,7 +244,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final byte[] content = new byte[] {-1};
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        headers.add(new NameValuePair("Content-Length", String.valueOf(content.length)));
+        headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(content.length)));
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, content, 404, "OK", "text/html", headers);

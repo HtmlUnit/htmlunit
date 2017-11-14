@@ -59,6 +59,11 @@ public final class HttpHeader {
     /** host. */
     public static final String HOST_LC = "host";
 
+    /** Content-Length. */
+    public static final String CONTENT_LENGTH = "Content-Length";
+    /** content-length. */
+    public static final String CONTENT_LENGTH_LC = "content-length";
+
     /** Cookie. */
     public static final String COOKIE = "Cookie";
     /** cookie. */

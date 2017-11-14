@@ -438,7 +438,7 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "deflate"));
-        headers.add(new NameValuePair("Content-Length", String.valueOf(compressedDataLength)));
+        headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(compressedDataLength)));
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_SECOND, content, 200, "OK", "text/javascript", headers);

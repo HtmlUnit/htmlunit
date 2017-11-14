@@ -184,7 +184,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
-        assertEquals("" + body.length(), headers.get("Content-Length"));
+        assertEquals("" + body.length(), headers.get(HttpHeader.CONTENT_LENGTH));
     }
 
     /**

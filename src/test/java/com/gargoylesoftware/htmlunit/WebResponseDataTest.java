@@ -101,7 +101,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
         if (contentLength != -1) {
-            headers.add(new NameValuePair("Content-Length", String.valueOf(contentLength)));
+            headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(contentLength)));
         }
 
         if (contentType != null) {
