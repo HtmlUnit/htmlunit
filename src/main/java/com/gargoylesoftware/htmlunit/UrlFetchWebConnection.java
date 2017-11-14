@@ -178,7 +178,7 @@ public class UrlFetchWebConnection implements WebConnection {
             }
             cookieNb++;
         }
-        connection.setRequestProperty("Cookie", cookieHeader.toString());
+        connection.setRequestProperty(HttpHeader.COOKIE, cookieHeader.toString());
     }
 
     private void saveCookies(final String domain, final List<NameValuePair> headers) {

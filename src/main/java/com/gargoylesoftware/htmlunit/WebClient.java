@@ -593,7 +593,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see #removeRequestHeader(String)
      */
     public void addRequestHeader(final String name, final String value) {
-        if ("cookie".equalsIgnoreCase(name)) {
+        if (HttpHeader.COOKIE_LC.equalsIgnoreCase(name)) {
             throw new IllegalArgumentException("Do not add 'Cookie' header, use .getCookieManager() instead");
         }
         requestHeaders_.put(name, value);

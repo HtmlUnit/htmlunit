@@ -206,7 +206,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final List<String> ignoredHeaders = Arrays.asList(
                 HttpHeader.ACCEPT_LC, "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
                 HttpHeader.ACCEPT_LANGUAGE_LC, "keep-alive");
-        final List<String> caseInsensitiveHeaders = Arrays.asList("connection");
+        final List<String> caseInsensitiveHeaders = Arrays.asList(HttpHeader.CONNECTION_LC);
 
         // ensure ordering for comparison
         final Map<String, String> headers = new TreeMap<>(request.getAdditionalHeaders());

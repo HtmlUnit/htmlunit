@@ -29,6 +29,7 @@ import org.apache.http.util.Args;
 import org.apache.http.util.TextUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 
 /**
  * Customized BasicDomainHandler for HtmlUnit.
@@ -46,7 +47,7 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
     @Override
     public void parse(final SetCookie cookie, final String value)
             throws MalformedCookieException {
-        Args.notNull(cookie, "Cookie");
+        Args.notNull(cookie, HttpHeader.COOKIE);
         if (TextUtils.isBlank(value)) {
             throw new MalformedCookieException("Blank or null value for domain attribute");
         }

@@ -134,7 +134,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private static Collection<String> PROHIBITED_HEADERS_ = Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
-        "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date", "expect",
+        HttpHeader.CONNECTION_LC, "content-length", HttpHeader.COOKIE_LC, "cookie2",
+        "content-transfer-encoding", "date", "expect",
         HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
         "upgrade", HttpHeader.USER_AGENT_LC, "via");
 

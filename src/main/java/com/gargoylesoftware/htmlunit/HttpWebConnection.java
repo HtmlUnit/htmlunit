@@ -800,13 +800,13 @@ public class HttpWebConnection implements WebConnection {
                 else if (HttpHeader.REFERER.equals(header) && requestHeaders.get(header) != null) {
                     list.add(new RefererHeaderHttpRequestInterceptor(requestHeaders.get(header)));
                 }
-                else if ("Connection".equals(header)) {
+                else if (HttpHeader.CONNECTION.equals(header)) {
                     list.add(new RequestClientConnControl());
                 }
-                else if ("Cookie".equals(header)) {
+                else if (HttpHeader.COOKIE.equals(header)) {
                     list.add(new RequestAddCookies());
                 }
-                else if ("DNT".equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
+                else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
                     list.add(new DntHeaderHttpRequestInterceptor("1"));
                 }
             }
@@ -930,7 +930,7 @@ public class HttpWebConnection implements WebConnection {
 
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
-            request.setHeader("DNT", value_);
+            request.setHeader(HttpHeader.DNT, value_);
         }
     }
 

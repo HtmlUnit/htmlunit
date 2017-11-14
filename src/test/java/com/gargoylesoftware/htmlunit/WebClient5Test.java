@@ -45,7 +45,7 @@ public class WebClient5Test extends WebTestCase {
     @Test
     public void addRequestHeader_Cookie() throws Exception {
         try (WebClient wc = new WebClient()) {
-            wc.addRequestHeader("Cookie", "some_value");
+            wc.addRequestHeader(HttpHeader.COOKIE, "some_value");
             fail("Should have thrown an exception ");
         }
         catch (final IllegalArgumentException e) {

@@ -163,7 +163,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_45.buildId_ = "20170411115307";
         FIREFOX_45.productSub_ = "20100101";
         FIREFOX_45.headerNamesOrdered_ = new String[] {
-            HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection"};
+            HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION};
         FIREFOX_45.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_45.xmlHttpRequestAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_45.imgAcceptHeader_ = "image/png,image/*;q=0.8,*/*;q=0.5";
@@ -182,7 +182,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.buildId_ = "20170921064520";
         FIREFOX_52.productSub_ = "20100101";
         FIREFOX_52.headerNamesOrdered_ = new String[] {
-            HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection", "Upgrade-Insecure-Requests"};
+            HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests"};
         FIREFOX_52.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_52.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX_52.fontHeights_ = new int[] {
@@ -198,8 +198,8 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko";
         INTERNET_EXPLORER.platform_ = PLATFORM_WIN32;
         INTERNET_EXPLORER.headerNamesOrdered_ = new String[] {
-            HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT, HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, "DNT", "Connection",
-            "Cookie"};
+            HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT, HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION,
+            HttpHeader.COOKIE};
         INTERNET_EXPLORER.htmlAcceptHeader_ = "text/html, application/xhtml+xml, */*";
         INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5";
         INTERNET_EXPLORER.cssAcceptHeader_ = "text/css, */*";
@@ -226,7 +226,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.cpuClass_ = null;
         CHROME.productSub_ = "20030107";
         CHROME.headerNamesOrdered_ = new String[] {
-            HttpHeader.HOST, "Connection", "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE, "Cookie"};
+            HttpHeader.HOST, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.COOKIE};
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
         CHROME.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";

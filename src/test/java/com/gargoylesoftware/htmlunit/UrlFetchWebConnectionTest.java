@@ -193,7 +193,7 @@ public class UrlFetchWebConnectionTest extends WebServerTestCase {
     }
 
     private static String headersToString(final WebRequest request) {
-        final Set<String> caseInsensitiveHeaders = new HashSet<>(Arrays.asList("Connection"));
+        final Set<String> caseInsensitiveHeaders = new HashSet<>(Arrays.asList(HttpHeader.CONNECTION));
 
         final StringBuilder sb = new StringBuilder();
         // ensure ordering for comparison

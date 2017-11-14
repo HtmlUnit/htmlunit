@@ -47,14 +47,14 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {HttpHeader.HOST, "Connection", "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
+    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                    HttpHeader.ACCEPT_ENCODING, "Connection"},
+                    HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION},
             FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                        HttpHeader.ACCEPT_ENCODING, "Connection", "Upgrade-Insecure-Requests"},
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests"},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, "DNT", "Connection"})
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION})
     @NotYetImplemented(IE)
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
@@ -92,16 +92,17 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {HttpHeader.HOST, "Connection", "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
+    @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                         "Cookie"},
             FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection"},
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION},
             FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection",
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION,
                         "Upgrade-Insecure-Requests"},
             IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, "DNT", "Connection", "Cookie"})
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION,
+                        HttpHeader.COOKIE})
     @NotYetImplemented(IE)
     public void headers_cookie_referer() throws Exception {
         final String htmlResponse = "<a href='2.html'>Click me</a>";

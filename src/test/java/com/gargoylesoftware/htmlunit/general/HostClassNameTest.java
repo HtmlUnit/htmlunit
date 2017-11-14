@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
@@ -1079,7 +1080,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void connection() throws Exception {
-        test("Connection");
+        test(HttpHeader.CONNECTION);
     }
 
     /**

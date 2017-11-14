@@ -47,6 +47,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -335,7 +336,8 @@ public class WebSocketTest extends WebDriverTestCase {
             @Override
             public void onWebSocketText(final String data) {
                 try {
-                    final String cookie = session_.getUpgradeRequest().getHeaders().get("Cookie").get(0) + counter_++;
+                    final String cookie = session_.getUpgradeRequest().getHeaders()
+                                                        .get(HttpHeader.COOKIE).get(0) + counter_++;
                     for (final CookiesWebSocket webSocket : webSockets_) {
                         webSocket.session_.getRemote().sendString(cookie);
                     }

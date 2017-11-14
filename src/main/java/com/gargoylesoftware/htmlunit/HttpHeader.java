@@ -59,6 +59,19 @@ public final class HttpHeader {
     /** host. */
     public static final String HOST_LC = "host";
 
+    /** Cookie. */
+    public static final String COOKIE = "Cookie";
+    /** cookie. */
+    public static final String COOKIE_LC = "cookie";
+
+    /** Connection. */
+    public static final String CONNECTION = "Connection";
+    /** connection. */
+    public static final String CONNECTION_LC = "connection";
+
+    /** DNT. */
+    public static final String DNT = "DNT";
+
     private HttpHeader() {
     }
 }

@@ -452,11 +452,11 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(new URL(URL_HOST1));
         WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
-        assertNull(lastRequest.getAdditionalHeaders().get("Cookie"));
+        assertNull(lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
 
         webDriver.findElement(By.linkText("next page")).click();
         lastRequest = getMockWebConnection().getLastWebRequest();
-        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get("Cookie"));
+        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
     }
 
     /**
@@ -486,7 +486,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         loadPageWithAlerts2(new URL(URL_HOST1));
         assertEquals(2, getMockWebConnection().getRequestCount() - startCount);
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
-        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get("Cookie"));
+        assertEquals("c1=1; c2=2", lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
     }
 
     /**

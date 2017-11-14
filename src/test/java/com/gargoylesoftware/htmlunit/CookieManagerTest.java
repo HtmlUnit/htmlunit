@@ -116,7 +116,7 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         assertEquals("exampleCookie=currentPath; exampleCookie=rootPath",
-            lastRequest.getAdditionalHeaders().get("Cookie"));
+            lastRequest.getAdditionalHeaders().get(HttpHeader.COOKIE));
     }
 
     /**
@@ -166,7 +166,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         driver.get(URL_SECOND.toExternalForm());
 
         // strange check, but there is no order
-        final String lastCookies = getMockWebConnection().getLastAdditionalHeaders().get("Cookie");
+        final String lastCookies = getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.COOKIE);
         assertEquals(26, lastCookies.length());
         assertTrue("lastCookies: " + lastCookies, lastCookies.contains("key=value")
                 && lastCookies.contains("test=\"aa= xx==\"")
@@ -222,7 +222,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
         driver.get(URL_SECOND.toExternalForm());
 
-        final String lastCookie = getMockWebConnection().getLastAdditionalHeaders().get("Cookie");
+        final String lastCookie = getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.COOKIE);
         assertEquals(cookie, lastCookie);
     }
 
@@ -567,7 +567,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
 
         // strange check, but there is no order
-        final String lastCookies = lastHeaders.get("Cookie");
+        final String lastCookies = lastHeaders.get(HttpHeader.COOKIE);
         assertEquals(17, lastCookies.length());
         assertTrue("lastCookies: " + lastCookies, lastCookies.contains("first=1")
                     && lastCookies.contains("second=2")
