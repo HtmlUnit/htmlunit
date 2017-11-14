@@ -400,8 +400,8 @@ public final class BrowserVersion implements Serializable {
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
-    private final Set<PluginConfiguration> plugins_ = new HashSet<>();
-    private final Set<BrowserVersionFeatures> features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
+    private final Set<PluginConfiguration> plugins_;
+    private final Set<BrowserVersionFeatures> features_;
     private String htmlAcceptHeader_;
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
@@ -409,7 +409,7 @@ public final class BrowserVersion implements Serializable {
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
     private int[] fontHeights_;
-    private Map<String, String> uploadMimeTypes_ = new HashMap<>();
+    private final Map<String, String> uploadMimeTypes_;
 
     /**
      * Creates a new browser version instance.
@@ -427,6 +427,10 @@ public final class BrowserVersion implements Serializable {
         cssAcceptHeader_ = "*/*";
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
+
+        plugins_ = new HashSet<>();
+        features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
+        uploadMimeTypes_ = new HashMap<>();
 
         initFeatures();
     }
