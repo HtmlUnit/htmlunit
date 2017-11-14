@@ -779,10 +779,10 @@ public class HttpWebConnection implements WebConnection {
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
         if (headerNames != null) {
             for (final String header : headerNames) {
-                if ("Host".equals(header)) {
+                if (HttpHeader.HOST.equals(header)) {
                     list.add(new HostHeaderHttpRequestInterceptor(host.toString()));
                 }
-                else if ("User-Agent".equals(header)) {
+                else if (HttpHeader.USER_AGENT.equals(header)) {
                     list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
                 }
                 else if (HttpHeader.ACCEPT.equals(header) && requestHeaders.get(header) != null) {
@@ -839,7 +839,7 @@ public class HttpWebConnection implements WebConnection {
 
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
-            request.setHeader("Host", value_);
+            request.setHeader(HttpHeader.HOST, value_);
         }
     }
 
@@ -852,7 +852,7 @@ public class HttpWebConnection implements WebConnection {
 
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
-            request.setHeader("User-Agent", value_);
+            request.setHeader(HttpHeader.USER_AGENT, value_);
         }
     }
 

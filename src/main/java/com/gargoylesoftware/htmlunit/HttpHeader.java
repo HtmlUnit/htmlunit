@@ -49,6 +49,16 @@ public final class HttpHeader {
     /** accept-encoding. */
     public static final String ACCEPT_ENCODING_LC = "accept-encoding";
 
+    /** User-Agent. */
+    public static final String USER_AGENT = "User-Agent";
+    /** user-agent. */
+    public static final String USER_AGENT_LC = "user-agent";
+
+    /** Host. */
+    public static final String HOST = "Host";
+    /** host. */
+    public static final String HOST_LC = "host";
+
     private HttpHeader() {
     }
 }

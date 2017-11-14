@@ -47,14 +47,14 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
+    @Alerts(CHROME = {HttpHeader.HOST, "Connection", "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
-            FF45 = {"Host", "User-Agent", HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+            FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                     HttpHeader.ACCEPT_ENCODING, "Connection"},
-            FF52 = {"Host", "User-Agent", HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING,
-                        "Connection", "Upgrade-Insecure-Requests"},
-            IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, "User-Agent",
-                        HttpHeader.ACCEPT_ENCODING, "Host", "DNT", "Connection"})
+            FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+                        HttpHeader.ACCEPT_ENCODING, "Connection", "Upgrade-Insecure-Requests"},
+            IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, "DNT", "Connection"})
     @NotYetImplemented(IE)
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
@@ -92,15 +92,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Host", "Connection", "Upgrade-Insecure-Requests", "User-Agent",
+    @Alerts(CHROME = {HttpHeader.HOST, "Connection", "Upgrade-Insecure-Requests", HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                         "Cookie"},
-            FF45 = {"Host", "User-Agent", HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING,
-                        HttpHeader.REFERER, "Cookie", "Connection"},
-            FF52 = {"Host", "User-Agent", HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.ACCEPT_ENCODING,
-                        HttpHeader.REFERER, "Cookie", "Connection", "Upgrade-Insecure-Requests"},
-            IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, "User-Agent",
-                        HttpHeader.ACCEPT_ENCODING, "Host", "DNT", "Connection", "Cookie"})
+            FF45 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection"},
+            FF52 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, "Cookie", "Connection",
+                        "Upgrade-Insecure-Requests"},
+            IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, "DNT", "Connection", "Cookie"})
     @NotYetImplemented(IE)
     public void headers_cookie_referer() throws Exception {
         final String htmlResponse = "<a href='2.html'>Click me</a>";

@@ -44,17 +44,19 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         provider.addCredentials("username", "password");
 
         UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserName());
         assertEquals("password", credentials.getPassword());
 
         provider.addCredentials("username", "new password");
-        credentials = (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+        credentials = (UsernamePasswordCredentials) provider
+                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserName());
         assertEquals("new password", credentials.getPassword());
 
         provider.addCredentials("new username", "other password");
-        credentials = (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+        credentials = (UsernamePasswordCredentials) provider
+                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("new username", credentials.getUserName());
         assertEquals("other password", credentials.getPassword());
     }
@@ -82,16 +84,17 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final String scheme = new BasicScheme().getSchemeName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", "password", "host", 80, realm);
+        provider.addCredentials("username", "password", HttpHeader.HOST_LC, 80, realm);
 
         UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserName());
         assertEquals("password", credentials.getPassword());
 
-        provider.removeCredentials(new AuthScope("host", 80, realm, scheme));
+        provider.removeCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
 
-        credentials = (UsernamePasswordCredentials) provider.getCredentials(new AuthScope("host", 80, realm, scheme));
+        credentials = (UsernamePasswordCredentials) provider
+                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertNull(credentials);
     }
 

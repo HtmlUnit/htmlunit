@@ -1180,7 +1180,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get(HttpHeader.ACCEPT_ENCODING));
             assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
-            assertEquals(expectedHeaders[3], "" + headers.get("Host"));
+            assertEquals(expectedHeaders[3], "" + headers.get(HttpHeader.HOST));
             assertEquals(expectedHeaders[4], "" + headers.get(HttpHeader.REFERER));
         }
     }
@@ -1216,7 +1216,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             assertEquals(expectedHeaders[0], "" + headers.get(HttpHeader.ACCEPT));
             assertEquals(expectedHeaders[1], "" + headers.get(HttpHeader.ACCEPT_ENCODING));
             assertEquals(expectedHeaders[2], "" + headers.get("Content-Length"));
-            assertEquals(expectedHeaders[3], "" + headers.get("Host"));
+            assertEquals(expectedHeaders[3], "" + headers.get(HttpHeader.HOST));
             assertEquals(expectedHeaders[4], "" + headers.get(HttpHeader.REFERER));
         }
     }

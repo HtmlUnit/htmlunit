@@ -95,7 +95,7 @@ public class UrlFetchWebConnection implements WebConnection {
 //            connection.setUseCaches(false);
             connection.setConnectTimeout(webClient_.getOptions().getTimeout());
 
-            connection.addRequestProperty("User-Agent", webClient_.getBrowserVersion().getUserAgent());
+            connection.addRequestProperty(HttpHeader.USER_AGENT, webClient_.getBrowserVersion().getUserAgent());
             connection.setInstanceFollowRedirects(false);
 
             // copy the headers from WebRequestSettings

@@ -1289,8 +1289,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String[] headers = {"accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
             "connection", "content-length", "cookie", "cookie2", "content-transfer-encoding", "date",
-            "expect", "host", "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding", "upgrade",
-            "user-agent", "via" };
+            "expect", HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC,
+            "te", "trailer", "transfer-encoding", "upgrade",
+            HttpHeader.USER_AGENT_LC, "via" };
         for (final String header : headers) {
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header));
             assertFalse(XMLHttpRequest.isAuthorizedHeader(header.toUpperCase(Locale.ROOT)));
