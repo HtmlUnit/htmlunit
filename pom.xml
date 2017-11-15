@@ -19,7 +19,7 @@
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.4</checkstyle.version>
-    	<selenium.version>3.7.1</selenium.version>
+        <selenium.version>3.7.1</selenium.version>
     </properties>
 
     <build>
