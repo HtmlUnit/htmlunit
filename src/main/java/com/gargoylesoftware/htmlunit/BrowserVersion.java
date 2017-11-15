@@ -386,31 +386,31 @@ public final class BrowserVersion implements Serializable {
                 "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        CHROME.getPlugins().add(flash);
+        CHROME.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 27.0 r0", "27.0.0.183", "NPSWF32_27_0_0_183.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        FIREFOX_45.getPlugins().add(flash);
+        FIREFOX_45.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 27.0 r0", "27.0.0.183", "NPSWF64_27_0_0_183.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        FIREFOX_52.getPlugins().add(flash);
+        FIREFOX_52.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 27.0 r0", "27.0.0.183", "Flash32_27_0_0_183.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        INTERNET_EXPLORER.getPlugins().add(flash);
+        INTERNET_EXPLORER.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        EDGE.getPlugins().add(flash);
+        EDGE.plugins_.add(flash);
     }
 
     private final int browserVersionNumeric_;
@@ -888,7 +888,7 @@ public final class BrowserVersion implements Serializable {
             workPiece_.fontHeights_ = version.fontHeights_;
 
             for (final PluginConfiguration pluginConf : version.getPlugins()) {
-                workPiece_.getPlugins().add(pluginConf.clone());
+                workPiece_.plugins_.add(pluginConf.clone());
             }
 
             workPiece_.features_.addAll(version.features_);
