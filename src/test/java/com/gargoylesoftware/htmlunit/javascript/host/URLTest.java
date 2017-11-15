@@ -63,6 +63,74 @@ public class URLTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "https://developer.mozilla.org/", "https://developer.mozilla.org/",
+                "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+                "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
+                "http://www.example.com/", "type error", "type error" },
+            IE = {})
+    // @NotYetImplemented({FF, CHROME})
+    public void ctor() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        alert(new URL('/', 'https://developer.mozilla.org'));\n"
+            + "        var b = new URL('https://developer.mozilla.org');\n"
+            + "        alert(b);\n"
+            + "        alert(new URL('en-US/docs', b));\n"
+            + "        var d = new URL('/en-US/docs', b);\n"
+            + "        alert(d);\n"
+            + "        alert(new URL('/en-US/docs', d));\n"
+            + "        alert(new URL('/en-US/docs', 'https://developer.mozilla.org/fr-FR/toto'));\n"
+            + "        alert(new URL('http://www.example.com', 'https://developers.mozilla.com'));\n"
+            + "        try {\n"
+            + "          new URL('/en-US/docs', '');\n"
+            + "        } catch(e) { alert('type error'); }\n"
+            + "        try {\n"
+            + "          new URL('/en-US/docs');\n"
+            + "        } catch(e) { alert('type error'); }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "http://developer.mozilla.org",
+            IE = {})
+    // @NotYetImplemented({FF, CHROME})
+    public void origin() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        var u = new URL('http://developer.mozilla.org/en-US/docs');\n"
+            + "        alert(u.origin);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
