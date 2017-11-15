@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -81,14 +80,14 @@ public class MimeTypeTest extends SimpleWebTestCase {
         createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final List<String> collectedAlerts = new ArrayList<>();
-        final Set<PluginConfiguration> plugins = new HashSet<>(BrowserVersion.FIREFOX_45.getPlugins());
+        final Set<PluginConfiguration> plugins = new HashSet<>(getBrowserVersion().getPlugins());
         getBrowserVersion().getPlugins().clear();
         try {
             loadPage(html, collectedAlerts);
             assertEquals(expectedAlerts, collectedAlerts);
         }
         finally {
-            BrowserVersion.FIREFOX_45.getPlugins().addAll(plugins);
+            getBrowserVersion().getPlugins().addAll(plugins);
         }
     }
 }

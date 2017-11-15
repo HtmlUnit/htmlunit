@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -754,7 +753,7 @@ public final class BrowserVersion implements Serializable {
      * @return the available plugins
      */
     public Set<PluginConfiguration> getPlugins() {
-        return Collections.unmodifiableSet(plugins_);
+        return plugins_;
     }
 
     /**
