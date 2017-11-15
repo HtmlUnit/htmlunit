@@ -8,11 +8,11 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="">
-        </release>
-        <release version="2.28" date="November 12, 2017" description="Bugfixes, Chrome 62, improved Promise">
             <action type="add" dev="rbri">
                 JavaScript: URL constuctor and origin property added.
             </action>
+        </release>
+        <release version="2.28" date="November 12, 2017" description="Bugfixes, Chrome 62, improved Promise">
             <action type="fix" dev="rbri" issue="1927">
                 The link tag now supports the onLoad and the onError handler.
             </action>
