@@ -71,7 +71,6 @@ public class URLTest extends WebDriverTestCase {
                 "https://developer.mozilla.org/en-US/docs", "https://developer.mozilla.org/en-US/docs",
                 "http://www.example.com/", "type error", "type error" },
             IE = {})
-    // @NotYetImplemented({FF, CHROME})
     public void ctor() throws Exception {
         final String html =
             "<html>\n"
@@ -110,7 +109,6 @@ public class URLTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "http://developer.mozilla.org",
             IE = {})
-    // @NotYetImplemented({FF, CHROME})
     public void origin() throws Exception {
         final String html =
             "<html>\n"
