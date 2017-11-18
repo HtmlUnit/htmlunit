@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class AppletClassLoader extends URLClassLoader {
 
     private static final Log LOG = LogFactory.getLog(AppletClassLoader.class);
+    private final StringBuilder info_ = new StringBuilder();
 
     /**
      * The constructor.
@@ -69,6 +70,7 @@ public class AppletClassLoader extends URLClassLoader {
      */
     public void addArchiveToClassPath(final URL jarUrl) {
         addURL(jarUrl);
+        info_.append("    Archive: " + jarUrl.toString() + "\n");
     }
 
     /**
@@ -82,6 +84,7 @@ public class AppletClassLoader extends URLClassLoader {
             final byte[] bytes = IOUtils.toByteArray(content);
             defineClass(className, bytes, 0, bytes.length);
         }
+        info_.append("    Class: " + webResponse.getWebRequest().getUrl() + "\n");
     }
 
     private Class<?> loadOurNetscapeStuff(final String classNane) throws IOException {
@@ -99,5 +102,12 @@ public class AppletClassLoader extends URLClassLoader {
             }
         }
         return null;
+    }
+
+    /**
+     * @return info about classpath
+     */
+    public String info() {
+        return info_.toString();
     }
 }
