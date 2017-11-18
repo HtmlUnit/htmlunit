@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.AbstractMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -120,9 +121,11 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public void delete(final String name) {
-        for (Entry<String, String> param : params_) {
-            if (param.getKey().equals(name)) {
-                params_.remove(param);
+        final Iterator<Entry<String, String>> iter = params_.iterator();
+        while (iter.hasNext()) {
+            final Entry<String, String> entry = iter.next();
+            if (entry.getKey().equals(name)) {
+                iter.remove();
             }
         }
     }
@@ -163,6 +166,37 @@ public class URLSearchParams extends SimpleScriptable {
         final NativeArray jsValues = new NativeArray(result.toArray());
         ScriptRuntime.setBuiltinProtoAndParent(jsValues, getWindow(this), TopLevel.Builtins.Array);
         return jsValues;
+    }
+
+    /**
+     * The set() method of the URLSearchParams interface sets the value associated with a
+     * given search parameter to the given value. If there were several matching values,
+     * this method deletes the others. If the search parameter doesn't exist, this method
+     * creates it.
+     *
+     * @param name  The name of the parameter to set.
+     * @param value The value of the parameter to set.
+     */
+    @JsxFunction
+    public void set(final String name, final String value) {
+        final Iterator<Entry<String, String>> iter = params_.iterator();
+        boolean change = true;
+        while (iter.hasNext()) {
+            final Entry<String, String> entry = iter.next();
+            if (entry.getKey().equals(name)) {
+                if (change) {
+                    entry.setValue(value);
+                    change = false;
+                }
+                else {
+                    iter.remove();
+                }
+            }
+        }
+
+        if (change) {
+            append(name, value);
+        }
     }
 
     /**

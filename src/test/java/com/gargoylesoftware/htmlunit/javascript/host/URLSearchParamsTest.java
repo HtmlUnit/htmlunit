@@ -36,8 +36,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "foo=1&bar=2", ""},
-            FF45 = { "%3Ffoo=1&bar=2", ""},
+    @Alerts(DEFAULT = {"foo=1&bar=2", ""},
+            FF45 = {"%3Ffoo=1&bar=2", ""},
             IE = {})
     @NotYetImplemented(FF45)
     public void ctor() throws Exception {
@@ -63,7 +63,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "key=value", "key=value&empty-key=undefined",
+    @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
                         "key=value&empty-key=undefined&key=overwrite"},
             IE = {})
     public void append() throws Exception {
@@ -94,7 +94,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "key2=val2", "key2=val2", "key2=val2"},
+    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", ""},
             IE = {})
     public void delete() throws Exception {
         final String html =
@@ -103,12 +103,12 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "  <script>\n"
             + "    function test() {\n"
             + "      if (self.URLSearchParams) {\n"
-            + "        var param = new URLSearchParams('key1=val1&key2=val2');\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=val2&key2=val3');\n"
             + "        param.delete('key1');\n"
+            + "        alert(param);\n"
+            + "        param.delete('key2');\n"
             + "        alert(param);\n"
             + "        param.delete('key3');\n"
-            + "        alert(param);\n"
-            + "        param.delete('key1');\n"
             + "        alert(param);\n"
             + "      }\n"
             + "    }\n"
@@ -124,7 +124,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "val1", "val2", "null"},
+    @Alerts(DEFAULT = {"val1", "val2", "null"},
             IE = {})
     public void get() throws Exception {
         final String html =
@@ -151,7 +151,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "true", "true", "false"},
+    @Alerts(DEFAULT = {"true", "true", "false"},
             IE = {})
     public void has() throws Exception {
         final String html =
@@ -178,7 +178,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = { "val1,val3", "val2", ""},
+    @Alerts(DEFAULT = {"val1,val3", "val2", ""},
             IE = {})
     public void getAll() throws Exception {
         final String html =
@@ -191,6 +191,38 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param.getAll('key1'));\n"
             + "        alert(param.getAll('key2'));\n"
             + "        alert(param.getAll('key3'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"key1=val1&key2=val2&key2=val3&key4=val4",
+                        "key1=new1&key2=val2&key2=val3&key4=val4",
+                        "key1=new1&key2=new2&key4=val4"},
+            IE = {})
+    public void set() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=val2&key2=val3');\n"
+            + "        param.set('key4', 'val4');\n"
+            + "        alert(param);\n"
+            + "        param.set('key1', 'new1');\n"
+            + "        alert(param);\n"
+            + "        param.set('key2', 'new2');\n"
+            + "        alert(param);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
