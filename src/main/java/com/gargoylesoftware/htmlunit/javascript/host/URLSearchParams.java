@@ -30,6 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -139,6 +142,44 @@ public class URLSearchParams extends SimpleScriptable {
             }
         }
         return null;
+    }
+
+    /**
+     * The getAll() method of the URLSearchParams interface returns all the values
+     * associated with a given search parameter as an array.
+     *
+     * @param name The name of the parameter to return.
+     * @return An array of USVStrings.
+     */
+    @JsxFunction
+    public NativeArray getAll(final String name) {
+        final List<String> result = new LinkedList<>();
+        for (Entry<String, String> param : params_) {
+            if (param.getKey().equals(name)) {
+                result.add(param.getValue());
+            }
+        }
+
+        final NativeArray jsValues = new NativeArray(result.toArray());
+        ScriptRuntime.setBuiltinProtoAndParent(jsValues, getWindow(this), TopLevel.Builtins.Array);
+        return jsValues;
+    }
+
+    /**
+     * The has() method of the URLSearchParams interface returns a Boolean that
+     * indicates whether a parameter with the specified name exists.
+     *
+     * @param name The name of the parameter to find.
+     * @return A Boolean.
+     */
+    @JsxFunction
+    public boolean has(final String name) {
+        for (Entry<String, String> param : params_) {
+            if (param.getKey().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
