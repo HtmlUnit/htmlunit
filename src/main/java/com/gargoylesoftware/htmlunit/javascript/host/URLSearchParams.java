@@ -18,7 +18,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.AbstractMap;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -40,7 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass({CHROME, FF})
 public class URLSearchParams extends SimpleScriptable {
 
-    private final LinkedHashSet<Entry<String, String>> params_ = new LinkedHashSet<>();
+    private final List<Entry<String, String>> params_ = new LinkedList<>();
 
     /**
      * Constructs a new instance.
@@ -93,6 +95,50 @@ public class URLSearchParams extends SimpleScriptable {
         final String key = singleParam;
         final String value = null;
         return new AbstractMap.SimpleEntry<>(key, value);
+    }
+
+    /**
+     * The append() method of the URLSearchParams interface appends a specified
+     * key/value pair as a new search parameter.
+     *
+     * @param name  The name of the parameter to append.
+     * @param value The value of the parameter to append.
+     */
+    @JsxFunction
+    public void append(final String name, final String value) {
+        params_.add(new AbstractMap.SimpleEntry<>(name, value));
+    }
+
+    /**
+     * The delete() method of the URLSearchParams interface deletes the given search
+     * parameter and its associated value, from the list of all search parameters.
+     *
+     * @param name The name of the parameter to be deleted.
+     */
+    @JsxFunction
+    public void delete(final String name) {
+        for (Entry<String, String> param : params_) {
+            if (param.getKey().equals(name)) {
+                params_.remove(param);
+            }
+        }
+    }
+
+    /**
+     * The get() method of the URLSearchParams interface returns the
+     * first value associated to the given search parameter.
+     *
+     * @param name The name of the parameter to return.
+     * @return An array of USVStrings.
+     */
+    @JsxFunction
+    public String get(final String name) {
+        for (Entry<String, String> param : params_) {
+            if (param.getKey().equals(name)) {
+                return param.getValue();
+            }
+        }
+        return null;
     }
 
     /**

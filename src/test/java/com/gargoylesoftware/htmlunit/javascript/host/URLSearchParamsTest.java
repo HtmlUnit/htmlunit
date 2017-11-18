@@ -58,4 +58,92 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "key=value", "key=value&empty-key=undefined",
+                        "key=value&empty-key=undefined&key=overwrite"},
+            IE = {})
+    public void append() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams();\n"
+            + "        param.append('key', 'value');\n"
+            + "        alert(param);\n"
+            + "        param.append('empty-key', undefined);\n"
+            + "        alert(param);\n"
+            + "        param.append('key', 'overwrite');\n"
+            + "        alert(param);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "key2=val2", "key2=val2", "key2=val2"},
+            IE = {})
+    public void delete() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=val2');\n"
+            + "        param.delete('key1');\n"
+            + "        alert(param);\n"
+            + "        param.delete('key3');\n"
+            + "        alert(param);\n"
+            + "        param.delete('key1');\n"
+            + "        alert(param);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = { "val1", "val2", "null"},
+            IE = {})
+    public void get() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=val2&key1=val3');\n"
+            + "        alert(param.get('key1'));\n"
+            + "        alert(param.get('key2'));\n"
+            + "        alert(param.get('key3'));\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }
