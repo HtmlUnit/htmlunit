@@ -19,7 +19,6 @@
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.4</checkstyle.version>
-        <selenium.version>3.7.1</selenium.version>
     </properties>
 
     <build>
@@ -993,7 +992,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-ie-driver</artifactId>
-            <version>${selenium.version}</version>
+            <version>3.7.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1013,7 +1012,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>${selenium.version}</version>
+            <version>3.7.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1029,7 +1028,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>${selenium.version}</version>
+            <version>3.7.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1045,7 +1044,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
-            <version>${selenium.version}</version>
+            <version>3.7.1</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
