@@ -1398,7 +1398,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
         else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
-            && status <= (getBrowserVersion().hasFeature(HTTP_REDIRECT_308) ? 308 : 307)
+            && status <= (getBrowserVersion().hasFeature(HTTP_REDIRECT_308) ? 308 : HttpStatus.SC_TEMPORARY_REDIRECT)
             && status != HttpStatus.SC_NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 
@@ -1430,7 +1430,8 @@ public class WebClient implements Serializable, AutoCloseable {
                 throw new FailingHttpStatusCodeException("Too much redirect for "
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
-            else if (status == HttpStatus.SC_MOVED_PERMANENTLY
+
+            if (status == HttpStatus.SC_MOVED_PERMANENTLY
                     || status == HttpStatus.SC_MOVED_TEMPORARILY
                     || status == HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
