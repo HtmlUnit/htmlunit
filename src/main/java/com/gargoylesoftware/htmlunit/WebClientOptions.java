@@ -59,6 +59,11 @@ public class WebClientOptions implements Serializable {
     private int screenWidth_ = 1024;
     private int screenHeight_ = 768;
 
+    private int webSocketMaxTextMessageSize_ = -1;
+    private int webSocketMaxTextMessageBufferSize_ = -1;
+    private int webSocketMaxBinaryMessageSize_ = -1;
+    private int webSocketMaxBinaryMessageBufferSize_ = -1;
+
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
      * whether they have valid certificates or not. This is especially useful when you are trying to
@@ -661,5 +666,69 @@ public class WebClientOptions implements Serializable {
      */
     public int getScreenHeight() {
         return screenHeight_;
+    }
+
+    /**
+     * @return the WebSocket maxTextMessageSize
+     */
+    public int getWebSocketMaxTextMessageSize() {
+        return webSocketMaxTextMessageSize_;
+    }
+
+    /**
+     * Sets the WebSocket maxTextMessageSize.
+     *
+     * @param webSocketMaxTextMessageSize the new value
+     */
+    public void setWebSocketMaxTextMessageSize(final int webSocketMaxTextMessageSize) {
+        webSocketMaxTextMessageSize_ = webSocketMaxTextMessageSize;
+    }
+
+    /**
+     * @return the WebSocket maxTextMessageBufferSize
+     */
+    public int getWebSocketMaxTextMessageBufferSize() {
+        return webSocketMaxTextMessageBufferSize_;
+    }
+
+    /**
+     * Sets the WebSocket maxTextMessageBufferSize.
+     *
+     * @param webSocketMaxTextMessageBufferSize the new value
+     */
+    public void setWebSocketMaxTextMessageBufferSize(final int webSocketMaxTextMessageBufferSize) {
+        webSocketMaxTextMessageBufferSize_ = webSocketMaxTextMessageBufferSize;
+    }
+
+    /**
+     * @return the WebSocket maxTextMessageSize
+     */
+    public int getWebSocketMaxBinaryMessageSize() {
+        return webSocketMaxBinaryMessageSize_;
+    }
+
+    /**
+     * Sets the WebSocket maxBinaryMessageSize.
+     *
+     * @param webSocketMaxBinaryMessageSize the new value
+     */
+    public void setWebSocketMaxBinaryMessageSize(final int webSocketMaxBinaryMessageSize) {
+        webSocketMaxBinaryMessageSize_ = webSocketMaxBinaryMessageSize;
+    }
+
+    /**
+     * @return the WebSocket maxBinaryMessageBufferSize
+     */
+    public int getWebSocketMaxBinaryMessageBufferSize() {
+        return webSocketMaxBinaryMessageBufferSize_;
+    }
+
+    /**
+     * Sets the WebSocket maxBinaryMessageBufferSize.
+     *
+     * @param webSocketMaxBinaryMessageBufferSize the new value
+     */
+    public void setWebSocketMaxBinaryMessageBufferSize(final int webSocketMaxBinaryMessageBufferSize) {
+        webSocketMaxBinaryMessageBufferSize_ = webSocketMaxBinaryMessageBufferSize;
     }
 }

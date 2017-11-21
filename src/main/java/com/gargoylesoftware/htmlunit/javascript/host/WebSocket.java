@@ -28,6 +28,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.api.WebSocketListener;
+import org.eclipse.jetty.websocket.api.WebSocketPolicy;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -137,6 +138,25 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 client_ = new WebSocketClient();
             }
             client_.setCookieStore(new WebSocketCookieStore(webClient));
+
+            final WebSocketPolicy policy = client_.getPolicy();
+            int size = webClient.getOptions().getWebSocketMaxBinaryMessageSize();
+            if (size > 0) {
+                policy.setMaxBinaryMessageSize(size);
+            }
+            size = webClient.getOptions().getWebSocketMaxBinaryMessageBufferSize();
+            if (size > 0) {
+                policy.setMaxBinaryMessageBufferSize(size);
+            }
+            size = webClient.getOptions().getWebSocketMaxTextMessageSize();
+            if (size > 0) {
+                policy.setMaxTextMessageSize(size);
+            }
+            size = webClient.getOptions().getWebSocketMaxTextMessageBufferSize();
+            if (size > 0) {
+                policy.setMaxTextMessageBufferSize(size);
+            }
+
             client_.start();
             containingPage_.addAutoCloseable(this);
             url_ = new URI(url);

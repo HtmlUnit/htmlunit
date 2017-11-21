@@ -9,6 +9,10 @@
     <body>
         <release version="2.29" date="xx, 2017" description="">
             <action type="add" dev="rbri">
+                New configuration settings webSocketMaxTextMessageSize, webSocketMaxTextMessageBufferSize,
+                    webSocketMaxBinaryMessageSize, and webSocketMaxBinaryMessageBufferSize.
+            </action>
+            <action type="add" dev="rbri">
                 JavaScript: URL constuctor and origin property added.
             </action>
         </release>
