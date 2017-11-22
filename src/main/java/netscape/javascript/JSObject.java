@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.ConsString;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -131,7 +132,11 @@ public class JSObject {
      * @throws JSException in case or error
      */
     public void setMember(final String name, final Object value) throws JSException {
-        final String stringValue = value.toString();
+        String stringValue = "";
+        if (value != null) {
+            stringValue = Context.toString(value);
+        }
+
         if (LOG.isInfoEnabled()) {
             LOG.info("JSObject setMember '" + name + "' to '" + stringValue + "'");
         }
