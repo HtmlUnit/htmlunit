@@ -64,7 +64,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
-                        "key=value&empty-key=undefined&key=overwrite"},
+                        "key=value&empty-key=undefined&key=overwrite",
+                        "key=value&empty-key=undefined&key=overwrite&key-null=null"},
             IE = {})
     public void append() throws Exception {
         final String html =
@@ -80,6 +81,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param);\n"
             + "        param.append('key', 'overwrite');\n"
             + "        alert(param);\n"
+            + "        param.append('key-null', null);\n"
+            + "        alert(param);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -94,7 +97,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", ""},
+    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", "", "", ""},
             IE = {})
     public void delete() throws Exception {
         final String html =
@@ -110,6 +113,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param);\n"
             + "        param.delete('key3');\n"
             + "        alert(param);\n"
+            + "        param.delete(undefined);\n"
+            + "        alert(param);\n"
+            + "        param.delete(null);\n"
+            + "        alert(param);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -124,7 +131,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"val1", "val2", "null"},
+    @Alerts(DEFAULT = {"val1", "val2", "null", "null", "null"},
             IE = {})
     public void get() throws Exception {
         final String html =
@@ -137,6 +144,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param.get('key1'));\n"
             + "        alert(param.get('key2'));\n"
             + "        alert(param.get('key3'));\n"
+            + "        alert(param.get(undefined));\n"
+            + "        alert(param.get(null));\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -151,7 +160,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "false"},
+    @Alerts(DEFAULT = {"true", "true", "false", "false"},
             IE = {})
     public void has() throws Exception {
         final String html =
@@ -164,6 +173,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param.has('key1'));\n"
             + "        alert(param.has('key2'));\n"
             + "        alert(param.has('key3'));\n"
+            + "        alert(param.has(undefined));\n"
+            + "        alert(param.has(null));\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -178,7 +189,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"val1,val3", "val2", ""},
+    @Alerts(DEFAULT = {"val1,val3", "val2", "", "", ""},
             IE = {})
     public void getAll() throws Exception {
         final String html =
@@ -191,6 +202,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param.getAll('key1'));\n"
             + "        alert(param.getAll('key2'));\n"
             + "        alert(param.getAll('key3'));\n"
+            + "        alert(param.getAll(undefined));\n"
+            + "        alert(param.getAll(null));\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -207,7 +220,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"key1=val1&key2=val2&key2=val3&key4=val4",
                         "key1=new1&key2=val2&key2=val3&key4=val4",
-                        "key1=new1&key2=new2&key4=val4"},
+                        "key1=new1&key2=new2&key4=val4",
+                        "key1=new1&key2=new2&key4=val4&key3=undefined",
+                        "key1=new1&key2=new2&key4=null&key3=undefined"},
             IE = {})
     public void set() throws Exception {
         final String html =
@@ -222,6 +237,10 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        param.set('key1', 'new1');\n"
             + "        alert(param);\n"
             + "        param.set('key2', 'new2');\n"
+            + "        alert(param);\n"
+            + "        param.set('key3', undefined);\n"
+            + "        alert(param);\n"
+            + "        param.set('key4', null);\n"
             + "        alert(param);\n"
             + "      }\n"
             + "    }\n"
