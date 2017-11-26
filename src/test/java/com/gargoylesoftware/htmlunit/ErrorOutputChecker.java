@@ -49,7 +49,7 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*\taddons\\..*\r?\n"),
             Pattern.compile("\\*\\*\\* Blocklist::.*\r?\n"),
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + "3\\.4\\.0\\.0\r?\n"
+                    + "3\\.6\\.0\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
             // edge
