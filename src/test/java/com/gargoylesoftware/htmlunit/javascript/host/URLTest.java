@@ -176,4 +176,31 @@ public class URLTest extends WebDriverTestCase {
             FileUtils.deleteQuietly(tstFile);
         }
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "a=u&x="},
+            IE = {})
+    public void searchParams() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        var u = new URL('http://developer.mozilla.org/en-US/docs');\n"
+            + "        alert(u.searchParams);\n"
+            + "        u = new URL('http://developer.mozilla.org/en-US/docs?a=u&x');\n"
+            + "        alert(u.searchParams);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
 }

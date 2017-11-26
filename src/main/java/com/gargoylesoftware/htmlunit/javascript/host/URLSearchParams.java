@@ -66,7 +66,7 @@ public class URLSearchParams extends SimpleScriptable {
         // TODO: Pass in a record
         // new URLSearchParams({"foo" : 1 , "bar" : 2});
 
-        if (Undefined.instance == params) {
+        if (Undefined.instance == params || null == params) {
             return;
         }
 
@@ -232,7 +232,10 @@ public class URLSearchParams extends SimpleScriptable {
             paramStr.append(param.getKey());
             paramStr.append("=");
             // TODO: need to encode value
-            paramStr.append(param.getValue());
+            final String value = param.getValue();
+            if (value != null) {
+                paramStr.append(param.getValue());
+            }
         }
         return paramStr.toString();
     }

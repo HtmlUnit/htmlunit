@@ -120,6 +120,18 @@ public class URL extends SimpleScriptable {
     }
 
     /**
+     * @return the origin
+     */
+    @JsxGetter
+    public URLSearchParams getSearchParams() {
+        if (url_ == null) {
+            return null;
+        }
+
+        return new URLSearchParams(url_.getQuery());
+    }
+
+    /**
      * Calls for instance for implicit conversion to string.
      * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
