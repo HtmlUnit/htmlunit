@@ -15,9 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.text.NumberFormat;
+import java.util.IllformedLocaleException;
 import java.util.Locale;
-
-import org.apache.commons.lang3.LocaleUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -49,10 +48,10 @@ public final class NumberCustom {
         if (args.length != 0 && args[0] instanceof String) {
             final String localeStr = (String) args[0];
             try {
-                final Locale locale = LocaleUtils.toLocale(localeStr);
+                final Locale locale = new Locale.Builder().setLanguageTag(localeStr).build();
                 return NumberFormat.getInstance(locale).format(Double.parseDouble(thisObj.toString()));
             }
-            catch (final IllegalArgumentException e) {
+            catch (final IllformedLocaleException e) {
                 throw ScriptRuntime.rangeError("Invalid language tag: " + localeStr);
             }
         }

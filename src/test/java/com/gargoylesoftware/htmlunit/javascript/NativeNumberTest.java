@@ -101,6 +101,19 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12,345")
+    public void toLocaleStringEnUS() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  alert((12345).toLocaleString('en-US'));\n"
+            + "</script></head><body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("12,345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
             + "  try {\n"
