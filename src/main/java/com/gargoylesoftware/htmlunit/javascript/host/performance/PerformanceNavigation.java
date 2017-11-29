@@ -17,7 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.performance;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,13 +28,20 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser;
+import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser.ParseException;
+
 /**
  * A JavaScript object for {@code PerformanceNavigation}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class PerformanceNavigation extends SimpleScriptable {
+
+    private static final Log LOG = LogFactory.getLog(PerformanceNavigation.class);
 
     /** Navigate. */
     @JsxConstant
@@ -79,9 +88,21 @@ public class PerformanceNavigation extends SimpleScriptable {
      * The {@code toJSON} function.
      * @return the {@code toJSON} object
      */
-    @JsxFunction({FF, IE})
+    @JsxFunction
     public Object toJSON() {
-        throw new UnsupportedOperationException();
+        final String jsonString = new StringBuilder()
+                .append("{\"type\":")
+                .append(Integer.toString(getType()))
+                .append(", \"redirectCount\":")
+                .append(Integer.toString(getRedirectCount()))
+                .append("}").toString();
+        try {
+            return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
+        }
+        catch (final ParseException e) {
+            LOG.warn("Failed parsingJSON '" + jsonString + "' reason: " + e.getMessage());
+        }
+        return null;
     }
 
 }
