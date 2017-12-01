@@ -90,6 +90,27 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"[object WebSocket]", "ws://localhost:12345/"})
+    public void earlyConstruction() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    var location = 'ws://localhost:" + PORT + "/';\n"
+            + "    var ws = new WebSocket(location);\n"
+            + "    alert(ws);\n"
+            + "    alert(ws.url);\n"
+            + "  }\n"
+            + "  test();\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"exception undefined", "exception null", "exception empty", "exception invalid"})
     public void initialWithoutUrl() throws Exception {
         final String html = "<html><head><script>\n"

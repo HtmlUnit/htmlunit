@@ -9,6 +9,9 @@
     <body>
         <release version="2.29" date="xx, 2017" description="">
             <action type="fix" dev="rbri" issue="1932">
+                JavaScript: WebSocket constructor call failed with a NPE when called during page construction.
+            </action>
+            <action type="fix" dev="rbri" issue="1932">
                 JavaScript: fix Number.toLocaleString() to be able to support locale strings like 'en-US'.
             </action>
             <action type="add" dev="rbri">

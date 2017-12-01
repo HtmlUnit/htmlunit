@@ -128,7 +128,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         try {
             containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
             setParentScope(window);
-            setDomNode(containingPage_.getBody(), false);
+            setDomNode(containingPage_.getDocumentElement(), false);
 
             final WebClient webClient = window.getWebWindow().getWebClient();
             if (webClient.getOptions().isUseInsecureSSL()) {
