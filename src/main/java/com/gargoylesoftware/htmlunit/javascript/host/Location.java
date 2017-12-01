@@ -145,7 +145,7 @@ public class Location extends SimpleScriptable {
         request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
 
         final WebWindow webWindow = window_.getWebWindow();
-        webWindow.getWebClient().download(webWindow, "", request, true, false, "JS reload");
+        webWindow.getWebClient().download(webWindow, "", request, true, false, "JS location.reload");
     }
 
     /**
