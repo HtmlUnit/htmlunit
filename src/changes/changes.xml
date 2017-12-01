@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="">
-            <action type="fix" dev="rbri" issue="1932">
+            <action type="fix" dev="rbri" issue="1840">
+                JavaScript: location.reload uses the same request method like the original request.
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: WebSocket constructor call failed with a NPE when called during page construction.
             </action>
             <action type="fix" dev="rbri" issue="1932">

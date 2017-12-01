@@ -134,13 +134,18 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void reload(final boolean force) throws IOException {
-        final String url = getHref();
-        if (UNKNOWN.equals(url)) {
-            LOG.error("Unable to reload location: current URL is unknown.");
-        }
-        else {
-            setHref(url);
-        }
+        final HtmlPage htmlPage = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final WebRequest request = htmlPage.getWebResponse().getWebRequest();
+
+        String referer = htmlPage.getUrl().toExternalForm();
+        request.setAdditionalHeader(HttpHeader.REFERER, referer);
+
+        referer = UrlUtils.getUrlWithNewQuery(htmlPage.getUrl(), null).toExternalForm();
+        referer = StringUtils.stripEnd(referer, "/");
+        request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
+
+        final WebWindow webWindow = window_.getWebWindow();
+        webWindow.getWebClient().download(webWindow, "", request, true, false, "JS reload");
     }
 
     /**

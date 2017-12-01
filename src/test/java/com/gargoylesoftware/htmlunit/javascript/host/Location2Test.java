@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -26,11 +27,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link Location}.
@@ -769,7 +773,7 @@ public class Location2Test extends WebDriverTestCase {
 
         assertEquals(2, conn.getRequestCount());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
 
         loadPage2(html);
         assertEquals(3, conn.getRequestCount());
@@ -777,7 +781,7 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.id("jsLink")).click();
         assertEquals(4, conn.getRequestCount());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -814,13 +818,13 @@ public class Location2Test extends WebDriverTestCase {
         driver.findElement(By.id("link")).click();
         assertEquals(3, conn.getRequestCount());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
         assertEquals(4, conn.getRequestCount());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get("Referer"));
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -843,5 +847,93 @@ public class Location2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         verifyAlerts(driver, expectedAlerts);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void reloadGet() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head></head>\n"
+            + "  <body>\n"
+            + "    <a href='javascript:window.location.reload(true);' id='link'>reload</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+        final WebDriver driver = loadPage2(html, new URL(URL_FIRST + "a.html?p1=sieben&p2"));
+        assertEquals(1, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("link")).click();
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_FIRST + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+
+        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        assertEquals(2, params.size());
+        assertEquals("p1", params.get(0).getName());
+        assertEquals("sieben", params.get(0).getValue());
+        assertEquals("p2", params.get(1).getName());
+        assertEquals("", params.get(1).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver(FF)
+    public void reloadPost() throws Exception {
+        final String form =
+                "<html>\n"
+              + "  <head></head>\n"
+              + "  <body>\n"
+              + "    <form method='POST' name='form' action='" + URL_SECOND + "a.html?urlParam=urlVal'>\n"
+              + "      <input type='hidden' name='p1' value='seven'>\n"
+              + "      <input type='hidden' name='p2' value=''>\n"
+              + "      <input type='submit' id='enter' name='sub' value='ok'>\n"
+              + "    </form>\n"
+              + "  </body>\n"
+              + "</html>";
+
+        final String html =
+              "<html>\n"
+            + "  <head></head>\n"
+            + "  <body>\n"
+            + "    <a href='javascript:window.location.reload(true);' id='link'>reload</a>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+
+        final WebDriver driver = loadPage2(form, URL_FIRST);
+        assertEquals(1, getMockWebConnection().getRequestCount());
+        driver.findElement(By.id("enter")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("link")).click();
+        assertEquals(3, getMockWebConnection().getRequestCount());
+
+        assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());
+        assertEquals(URL_SECOND + "a.html", getMockWebConnection().getLastWebRequest().getUrl());
+
+        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        assertEquals(4, params.size());
+        assertEquals("p1", params.get(0).getName());
+        assertEquals("seven", params.get(0).getValue());
+        assertEquals("sub", params.get(1).getName());
+        assertEquals("ok", params.get(1).getValue());
+        assertEquals("p2", params.get(2).getName());
+        assertEquals("", params.get(2).getValue());
+        assertEquals("urlParam", params.get(3).getName());
+        assertEquals("urlVal", params.get(3).getValue());
+
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        // assertEquals("http://localhost:" + PORT, additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(URL_SECOND + "a.html?urlParam=urlVal", additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
     }
 }
