@@ -977,8 +977,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             secondString = null;
             body = null;
         }
-        assertEquals(firstString, PingServlet.HEADERS_.get("Ping-From"));
-        assertEquals(secondString, PingServlet.HEADERS_.get("Ping-To"));
+        assertEquals(firstString, PingServlet.HEADERS_.get(HttpHeader.PING_FROM));
+        assertEquals(secondString, PingServlet.HEADERS_.get(HttpHeader.PING_TO));
         assertEquals(body, PingServlet.BODY_);
     }
 

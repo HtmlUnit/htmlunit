@@ -120,12 +120,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxConstant
     public static final int DONE = 4;
 
-    private static final String HEADER_ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
-    private static final String HEADER_ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
-    private static final String HEADER_ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
-    private static final String HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS = "Access-Control-Allow-Credentials";
-    private static final String HEADER_ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
-
     private static final String ALLOW_ORIGIN_ALL = "*";
 
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
@@ -718,7 +712,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
                 // header request-method
                 preflightRequest.setAdditionalHeader(
-                        HEADER_ACCESS_CONTROL_REQUEST_METHOD,
+                        HttpHeader.ACCESS_CONTROL_REQUEST_METHOD,
                         webRequest_.getHttpMethod().name());
 
                 // header request-headers
@@ -733,7 +727,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         builder.append(name);
                     }
                 }
-                preflightRequest.setAdditionalHeader(HEADER_ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
+                preflightRequest.setAdditionalHeader(HttpHeader.ACCESS_CONTROL_REQUEST_HEADERS, builder.toString());
 
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
@@ -755,7 +749,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             boolean allowOriginResponse = true;
             if (originHeaderValue != null) {
-                String value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+                String value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
                 allowOriginResponse = originHeaderValue.equals(value);
                 if (isWithCredentials()) {
                     allowOriginResponse = allowOriginResponse
@@ -763,7 +757,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                             && ALLOW_ORIGIN_ALL.equals(value));
 
                     // second step: check the allow-credentials header for true
-                    value = webResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS);
+                    value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
                     allowOriginResponse = allowOriginResponse && Boolean.parseBoolean(value);
                 }
                 else {
@@ -847,12 +841,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private boolean isPreflightAuthorized(final WebResponse preflightResponse) {
-        final String originHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN);
+        final String originHeader = preflightResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
         if (!ALLOW_ORIGIN_ALL.equals(originHeader)
                 && !webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
             return false;
         }
-        String headersHeader = preflightResponse.getResponseHeaderValue(HEADER_ACCESS_CONTROL_ALLOW_HEADERS);
+        String headersHeader = preflightResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS);
         if (headersHeader == null) {
             headersHeader = "";
         }

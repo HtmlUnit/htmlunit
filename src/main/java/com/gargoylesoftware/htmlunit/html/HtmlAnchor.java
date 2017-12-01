@@ -156,8 +156,8 @@ public class HtmlAnchor extends HtmlElement {
         if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
             final URL pingUrl = getTargetUrl(getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
-            pingRequest.setAdditionalHeader("Ping-From", page.getUrl().toExternalForm());
-            pingRequest.setAdditionalHeader("Ping-To", url.toExternalForm());
+            pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());
+            pingRequest.setAdditionalHeader(HttpHeader.PING_TO, url.toExternalForm());
             pingRequest.setRequestBody("PING");
             page.getWebClient().loadWebResponse(pingRequest);
         }
