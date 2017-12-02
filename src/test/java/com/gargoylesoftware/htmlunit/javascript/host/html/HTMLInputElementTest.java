@@ -1226,6 +1226,43 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"text text", "text  password", "text hidden ", "text checkbox ", "text \tradio"})
+    public void typeTrim() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var t = document.getElementById('aText');\n"
+            + "  alert(t.type + ' ' + t.getAttribute('type'));\n"
+            + "  var p = document.getElementById('aPassword');\n"
+            + "  alert(p.type + ' ' + p.getAttribute('type'));\n"
+            + "  var h = document.getElementById('aHidden');\n"
+            + "  alert(h.type + ' ' + h.getAttribute('type'));\n"
+            + "  var cb = document.getElementById('aCb');\n"
+            + "  alert(cb.type + ' ' + cb.getAttribute('type'));\n"
+            + "  var r = document.getElementById('aRadio');\n"
+            + "  alert(r.type + ' ' + r.getAttribute('type'));\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onLoad='test()'>\n"
+            + "  <form action='foo'>\n"
+            + "    <input type='text' id='aText' value='some test'>\n"
+            + "    <input type=' password' id='aPassword' value='some test'>\n"
+            + "    <input type='hidden ' id='aHidden' value='some test'>\n"
+            + "    <input type='checkbox ' id='aCb'>\n"
+            + "    <input type='\tradio' id='aRadio'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void readOnly() throws Exception {
         final String html
