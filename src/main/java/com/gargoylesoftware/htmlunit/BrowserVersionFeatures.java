@@ -872,6 +872,10 @@ public enum BrowserVersionFeatures {
         IE})
     JS_ENUM_NUMBERS_FIRST,
 
+    /** Javascript {@code Error.captureStackTrace}. */
+    @BrowserFeature(CHROME)
+    JS_ERROR_CAPTURE_STACK_TRACE,
+
     /** Javascript {@code Error.stack}. */
     @BrowserFeature({CHROME, FF})
     JS_ERROR_STACK,

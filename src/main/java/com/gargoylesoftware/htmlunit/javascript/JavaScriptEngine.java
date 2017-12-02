@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
@@ -236,6 +237,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         else {
             ScriptableObject.deleteProperty(errorObject, "stackTraceLimit");
+        }
+        if (!browserVersion.hasFeature(JS_ERROR_CAPTURE_STACK_TRACE)) {
+            ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
         }
 
         final Intl intl = new Intl();

@@ -9,6 +9,9 @@
     <body>
         <release version="2.29" date="xx, 2017" description="">
             <action type="fix" dev="rbri" issue="1840">
+                JavaScript: Error.captureStackTrace is not available in FF and IE.
+            </action>
+            <action type="fix" dev="rbri" issue="1840">
                 JavaScript: location.reload uses the same request method like the original request.
             </action>
             <action type="fix" dev="rbri">
