@@ -19,6 +19,8 @@
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.5</checkstyle.version>
+        <jetty.version>9.4.8.v20171121</jetty.version>
+        <selenium.version>3.7.1</selenium.version>
     </properties>
 
     <build>
@@ -885,7 +887,7 @@
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-client</artifactId>
-            <version>9.4.7.v20170914</version>
+            <version>${jetty.version}</version>
         </dependency>
         <!-- Test dependencies. -->
         <dependency>
@@ -959,13 +961,13 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>9.4.7.v20170914</version>
+            <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
             <artifactId>websocket-server</artifactId>
-            <version>9.4.7.v20170914</version>
+            <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
@@ -992,7 +994,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-ie-driver</artifactId>
-            <version>3.7.1</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1012,7 +1014,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>3.7.1</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1028,7 +1030,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.7.1</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1044,7 +1046,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
-            <version>3.7.1</version>
+            <version>${selenium.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
