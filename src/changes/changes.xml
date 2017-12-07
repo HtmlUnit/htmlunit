@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="">
+            <action type="fix" dev="rbri" issue="1935">
+                Check option cssEnabled before downloading a css file (regression from 1927).
+            </action>
             <action type="fix" dev="rbri" issue="1840">
                 JavaScript: Error.captureStackTrace is not available in FF and IE.
             </action>

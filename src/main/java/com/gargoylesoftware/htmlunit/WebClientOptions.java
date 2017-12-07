@@ -230,6 +230,8 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Enables/disables CSS support. By default, this property is enabled.
+     * If disabled HtmlUnit will not download the linked css files and also
+     * not triggered the associated onload/onerror events.
      *
      * @param enabled {@code true} to enable CSS support
      */

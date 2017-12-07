@@ -274,7 +274,8 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        if (!StyleSheetList.isStyleSheetLink(this)) {
+        if (!getPage().getWebClient().getOptions().isCssEnabled()
+                || !StyleSheetList.isStyleSheetLink(this)) {
             return;
         }
 

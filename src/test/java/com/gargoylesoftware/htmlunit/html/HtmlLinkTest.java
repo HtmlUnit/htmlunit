@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -47,5 +50,75 @@ public class HtmlLinkTest extends SimpleWebTestCase {
         final WebResponse respCss = link.getWebResponse(true);
         assertEquals(page.getUrl().toExternalForm(),
                 respCss.getWebRequest().getAdditionalHeaders().get(HttpHeader.REFERER));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("body onLoad")
+    public void onLoad() throws Exception {
+        getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <link rel='stylesheet' href='simple.css' "
+                        + "onload='alert(\"onLoad\")' onerror='alert(\"onError\")'>\n"
+                + "</head>\n"
+                + "<body onload='alert(\"body onLoad\")'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageWithAlerts(html);
+        assertEquals(1, getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void onLoadDynamic() throws Exception {
+        getWebClientWithMockWebConnection().getOptions().setCssEnabled(false);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'simple.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+
+                + "      var dynLink = document.createElement('link');\n"
+                + "      dynLink.rel = 'stylesheet';\n"
+                + "      dynLink.type = 'text/css';\n"
+                + "      dynLink.href = 'unknown.css';"
+                + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
+                + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
+                + "      document.head.appendChild(dynLink);\n"
+                + "    }\n"
+
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final HtmlPage page = loadPageWithAlerts(html);
+        final String text = page.getElementById("log").getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+
+        assertEquals(1, getMockWebConnection().getRequestCount());
     }
 }

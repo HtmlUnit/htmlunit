@@ -128,10 +128,9 @@ public class StyleSheetList extends SimpleScriptable {
         setPrototype(getPrototype(getClass()));
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final boolean cssEnabled = webClient.getOptions().isCssEnabled();
-        final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
 
-        if (cssEnabled) {
+        if (webClient.getOptions().isCssEnabled()) {
+            final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
             nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true) {
                 @Override
                 protected boolean isMatching(final DomNode node) {
