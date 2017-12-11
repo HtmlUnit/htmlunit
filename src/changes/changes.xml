@@ -7,7 +7,11 @@
     </properties>
 
     <body>
-        <release version="2.29" date="xx, 2017" description="">
+        <release version="2.29" date="xx, 2017" description="Bugfixes, WebStart support">
+            <action type="add" dev="rbri">
+                WebClient.setWebStartHandler() and the interface WebStartHandler added. Create your implementation
+                of this interface to support WebStart links.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: CanvasGradient.addColorStop() added
             </action>

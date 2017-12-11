@@ -94,6 +94,7 @@ import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -159,6 +160,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private PromptHandler promptHandler_;
     private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
+    private WebStartHandler webStartHandler_;
     private AppletConfirmHandler appletConfirmHandler_;
     private AjaxController ajaxController_ = new AjaxController();
 
@@ -504,6 +506,11 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("webWindow", webWindow);
 
         if (webResponse.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+            return webWindow.getEnclosedPage();
+        }
+
+        if (webStartHandler_ != null && "application/x-java-jnlp-file".equals(webResponse.getContentType())) {
+            webStartHandler_.handleJnlpResponse(webResponse);
             return webWindow.getEnclosedPage();
         }
 
@@ -1697,6 +1704,22 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public AttachmentHandler getAttachmentHandler() {
         return attachmentHandler_;
+    }
+
+    /**
+     * Sets the WebStart handler.
+     * @param handler the new WebStart handler
+     */
+    public void setWebStartHandler(final WebStartHandler handler) {
+        webStartHandler_ = handler;
+    }
+
+    /**
+     * Returns the current WebStart handler.
+     * @return the current WebStart handler
+     */
+    public WebStartHandler getWebStartHandler() {
+        return webStartHandler_;
     }
 
     /**
