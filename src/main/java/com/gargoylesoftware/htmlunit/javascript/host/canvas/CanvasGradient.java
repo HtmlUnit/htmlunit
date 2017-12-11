@@ -21,11 +21,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
  * A JavaScript object for {@code CanvasGradient}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class CanvasGradient extends SimpleScriptable {
@@ -35,5 +37,17 @@ public class CanvasGradient extends SimpleScriptable {
      */
     @JsxConstructor({CHROME, FF, EDGE})
     public CanvasGradient() {
+    }
+
+    /**
+     * Adds a new stop, defined by an offset and a color, to the gradient.
+     * @param offset A number between 0 and 1. An INDEX_SIZE_ERR is raised,
+     * if the number is not in that range.
+     * @param color A CSS <color>. A SYNTAX_ERR is raised, if the value
+     * can not be parsed as a CSS <color> value.
+     */
+    @JsxFunction
+    public void addColorStop(final double offset, final String color) {
+        // empty
     }
 }

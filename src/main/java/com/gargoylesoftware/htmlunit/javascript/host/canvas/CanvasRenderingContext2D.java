@@ -257,11 +257,15 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param x1 the x1
      * @param y1 the y1
      * @param r1 the r1
+     * @return the new CanvasGradient
      */
     @JsxFunction
-    public void createLinearGradient(final double x0, final double y0, final double r0, final double x1,
+    public CanvasGradient createLinearGradient(final double x0, final double y0, final double r0, final double x1,
             final Object y1, final Object r1) {
-        //empty
+        final CanvasGradient canvasGradient = new CanvasGradient();
+        canvasGradient.setParentScope(getParentScope());
+        canvasGradient.setPrototype(getPrototype(canvasGradient.getClass()));
+        return canvasGradient;
     }
 
     /**
@@ -274,10 +278,21 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
 
     /**
      * Creates a gradient.
+     * @param x0 the x axis of the coordinate of the start circle
+     * @param y0 the y axis of the coordinate of the start circle
+     * @param r0 the radius of the start circle
+     * @param x1 the x axis of the coordinate of the end circle
+     * @param y1 the y axis of the coordinate of the end circle
+     * @param r1 the radius of the end circle
+     * @return the new CanvasGradient
      */
     @JsxFunction
-    public void createRadialGradient() {
-        //empty
+    public CanvasGradient createRadialGradient(final double x0, final double y0,
+                            final double r0, final double x1, final double y1, final double r1) {
+        final CanvasGradient canvasGradient = new CanvasGradient();
+        canvasGradient.setParentScope(getParentScope());
+        canvasGradient.setPrototype(getPrototype(canvasGradient.getClass()));
+        return canvasGradient;
     }
 
     /**

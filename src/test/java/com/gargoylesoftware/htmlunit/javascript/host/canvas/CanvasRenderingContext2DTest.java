@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CanvasRenderingContext2DTest extends WebDriverTestCase {
@@ -400,6 +401,48 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'><canvas id='myCanvas' width='42' height='42'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object CanvasGradient]")
+    public void createLinearGradient() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  var ctx = canvas.getContext('2d');\n"
+            + "  var gradient = ctx.createLinearGradient(0, 0, 200, 0);\n"
+            + "  alert(gradient);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("[object CanvasGradient]")
+    public void createRadialGradient() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  var ctx = canvas.getContext('2d');\n"
+            + "  var gradient = ctx.createRadialGradient(100, 100, 100, 100, 100, 0);\n"
+            + "  alert(gradient);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
         loadPageWithAlerts2(html);
     }

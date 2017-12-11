@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="">
+            <action type="add" dev="rbri">
+                JavaScript: CanvasGradient.addColorStop() added
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CanvasRenderingContext2D.createRadialGradient() now returns an CanvasGradient
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CanvasRenderingContext2D.createLinearGradient() now returns an CanvasGradient
+            </action>
             <action type="fix" dev="rbri" issue="1935">
                 Check option cssEnabled before downloading a css file (regression from 1927).
             </action>
