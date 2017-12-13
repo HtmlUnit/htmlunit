@@ -864,7 +864,7 @@ public final class StyleAttributes {
         FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff("1")),
 
         /** The style property {@code font}. */
-        FONT("font", "font", chrome("normal normal normal normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
+        FONT("font", "font", chrome("normal normal 400 normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
 
         /** The style property {@code fontDisplay}. */
         FONT_DISPLAY("fontDisplay", "font-display", chrome("")),
@@ -907,7 +907,7 @@ public final class StyleAttributes {
         FONT_SIZE_ADJUST_("font-size-adjust", "font-size-adjust", ff("none")),
 
         /** The style property {@code fontStretch}. */
-        FONT_STRETCH("fontStretch", "font-stretch", chrome("normal"), ff("normal"), ie("normal")),
+        FONT_STRETCH("fontStretch", "font-stretch", chrome("100%"), ff("normal"), ie("normal")),
 
         /** The style property {@code font-stretch}. */
         FONT_STRETCH_("font-stretch", "font-stretch", ff("normal")),
@@ -966,8 +966,11 @@ public final class StyleAttributes {
         /** The style property {@code font-variant-position}. */
         FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ff("normal")),
 
+        /** The style property {@code fontVariationSettings}. */
+        FONT_VARIATION_SETTING("fontVariationSettings", "font-variation-settings", chrome("normal")),
+
         /** The style property {@code fontWeight}. */
-        FONT_WEIGHT("fontWeight", "font-weight", chrome("normal"), ff("400"), ie("400")),
+        FONT_WEIGHT("fontWeight", "font-weight", chrome("400"), ff("400"), ie("400")),
 
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
@@ -981,7 +984,7 @@ public final class StyleAttributes {
                 ie("auto")),
 
         /** The style property {@code grid}. */
-        GRID("grid", "grid", chrome("none / none / none / row / auto / auto / 0px / 0px"),
+        GRID("grid", "grid", chrome("none / none / none / row / auto / auto"),
                 ff52up("")),
 
         /** The style property {@code gridArea}. */
@@ -2273,6 +2276,15 @@ public final class StyleAttributes {
         /** The style property {@code overflow-y}. */
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
+        /** The style property {@code overscrollBehavior}. */
+        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto auto")),
+
+        /** The style property {@code overscrollBehaviorX}. */
+        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior_x", chrome("auto")),
+
+        /** The style property {@code overscrollBehaviorY}. */
+        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior_y", chrome("auto")),
+
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
 
@@ -2875,7 +2887,7 @@ public final class StyleAttributes {
         UNICODE_RANGE("unicodeRange", "unicode-range", chrome("")),
 
         /** The style property {@code userSelect}. */
-        USER_SELECT("userSelect", "user-select", chrome("text")),
+        USER_SELECT("userSelect", "user-select", chrome("auto")),
 
         /** The style property {@code userZoom}. */
         USER_ZOOM("userZoom", "user-zoom", chrome("")),
@@ -3553,7 +3565,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTextEmphasisPosition}. */
         WEBKIT_TEXT_EMPHASIS_POSITION("webkitTextEmphasisPosition", "webkit-text-emphasis-position",
-                chrome("over")),
+                chrome("over right")),
 
         /** The style property {@code webkitTextEmphasisStyle}. */
         WEBKIT_TEXT_EMPHASIS_STYLE("webkitTextEmphasisStyle", "webkit-text-emphasis-style",

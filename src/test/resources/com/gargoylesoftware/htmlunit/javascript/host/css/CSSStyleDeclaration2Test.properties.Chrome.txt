@@ -127,8 +127,10 @@ fontStretch
 fontStyle
 fontVariant
 fontVariantCaps
+fontVariantEastAsian
 fontVariantLigatures
 fontVariantNumeric
+fontVariationSettings
 fontWeight
 grid
 gridArea
@@ -208,6 +210,9 @@ overflowAnchor
 overflowWrap
 overflowX
 overflowY
+overscrollBehavior
+overscrollBehaviorX
+overscrollBehaviorY
 padding
 paddingBottom
 paddingLeft
