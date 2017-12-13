@@ -41,7 +41,7 @@ public class NetworkInformation extends EventTarget {
      */
     @JsxGetter
     public double getDownlink() {
-        return 1.95d;
+        return 10d;
     }
 
     /**
@@ -57,6 +57,6 @@ public class NetworkInformation extends EventTarget {
      */
     @JsxGetter
     public int getRtt() {
-        return 125;
+        return 50;
     }
 }

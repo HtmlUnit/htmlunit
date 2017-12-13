@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_BLA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NOT_AVAILABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INVISIBLE_NO_SRC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
@@ -671,17 +670,6 @@ public class HtmlImage extends HtmlElement {
             return false;
         }
 
-        if (hasFeature(HTMLIMAGE_INVISIBLE_NOT_AVAILABLE)) {
-            try {
-                downloadImageIfNeeded();
-                if (imageWebResponse_ == null || !imageWebResponse_.getContentType().contains("image")) {
-                    return false;
-                }
-            }
-            catch (final IOException e) {
-                return false;
-            }
-        }
         return super.isDisplayed();
     }
 

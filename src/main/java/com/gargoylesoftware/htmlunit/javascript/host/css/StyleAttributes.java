@@ -943,7 +943,7 @@ public final class StyleAttributes {
         FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff("normal")),
 
         /** The style property {@code fontVariantEastAsian}. */
-        FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff("normal")),
+        FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff("normal"), chrome("normal")),
 
         /** The style property {@code font-variant-east-asian}. */
         FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ff("normal")),

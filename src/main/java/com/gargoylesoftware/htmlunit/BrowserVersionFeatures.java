@@ -412,10 +412,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLIMAGE_HTMLUNKNOWNELEMENT,
 
-    /** Mark the image as invisible if the download failes. */
-    @BrowserFeature(CHROME)
-    HTMLIMAGE_INVISIBLE_NOT_AVAILABLE,
-
     /** Mark the image as invisible if no src attribute defined. */
     @BrowserFeature({CHROME, FF})
     HTMLIMAGE_INVISIBLE_NO_SRC,

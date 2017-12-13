@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.Animation;
-import com.gargoylesoftware.htmlunit.javascript.host.AppBannerPromptResult;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
 import com.gargoylesoftware.htmlunit.javascript.host.BarProp;
@@ -158,7 +157,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValue;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValueList;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSViewportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
@@ -433,7 +431,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
-        AppBannerPromptResult.class, ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
+        ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
         ArrayBufferView.class, ArrayBufferViewBase.class,
         Atomics.class, Attr.class,
         Audio.class, AudioBuffer.class,
@@ -456,7 +454,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
         CSSPrimitiveValue.class, CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,
         CSSStyleSheet.class,
-        CSSSupportsRule.class, CSSValue.class, CSSValueList.class, CSSViewportRule.class, CustomElementRegistry.class,
+        CSSSupportsRule.class, CSSValue.class, CSSValueList.class, CustomElementRegistry.class,
         CustomEvent.class, DataTransfer.class,
         DataTransferItem.class, DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class,
         DeviceMotionEvent.class, DeviceOrientationEvent.class, DeviceProximityEvent.class,
