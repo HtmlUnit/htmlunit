@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -239,31 +240,37 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final String src = img.getSrcAttribute();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != src) {
-            try {
-                return img.getWidth();
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 28;
             }
-            catch (final IOException e) {
-                final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                    return 28;
-                }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
-                    return 0;
-                }
-                return 24;
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                    || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+                return 0;
             }
+            return 24;
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-            return 28;
-        }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                && !StringUtils.isEmpty(src)
+                && StringUtils.isBlank(src)) {
             return 0;
         }
-        return 24;
+
+        try {
+            return img.getWidth();
+        }
+        catch (final IOException e) {
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 28;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+                return 16;
+            }
+            return 24;
+        }
     }
 
     /**
@@ -295,31 +302,37 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final String src = img.getSrcAttribute();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != src) {
-            try {
-                return img.getHeight();
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+            final BrowserVersion browserVersion = getBrowserVersion();
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 30;
             }
-            catch (final IOException e) {
-                final BrowserVersion browserVersion = getBrowserVersion();
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-                    return 30;
-                }
-                if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)) {
-                    return 0;
-                }
-                return 24;
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                    || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+                return 0;
             }
+            return 24;
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
-            return 30;
-        }
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0)
-                || browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
+                && !StringUtils.isEmpty(src)
+                && StringUtils.isBlank(src)) {
             return 0;
         }
-        return 24;
+
+        try {
+            return img.getHeight();
+        }
+        catch (final IOException e) {
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
+                return 30;
+            }
+            if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)) {
+                return 16;
+            }
+            return 24;
+        }
     }
 
     /**

@@ -967,11 +967,11 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE,
 
     /**
-     * Getting the width and height of an image tag without a source returns 18x20;
-     * for invalid values returns 1.
+     * Getting the width and height of an image tag without a source returns 16x16;
+     * for invalid values returns 0.
      */
     @BrowserFeature(CHROME)
-    JS_IMAGE_WIDTH_HEIGHT_RETURNS_0x0_0x0,
+    JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0,
 
     /**
      * Getting the width and height of an image tag without a source returns 18x20;

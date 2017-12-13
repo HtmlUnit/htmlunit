@@ -547,7 +547,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 70000);
     }
 
     /**
