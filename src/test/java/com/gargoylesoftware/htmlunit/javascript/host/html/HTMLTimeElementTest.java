@@ -61,8 +61,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "20:40", "undefined", ""},
-            FF = {"", "20:40", "2001-05-15 19:00", ""})
+    @Alerts(DEFAULT = {"", "20:40", "2001-05-15 19:00", ""},
+            IE = {"undefined", "20:40", "undefined", ""})
     public void datetime() throws Exception {
         final String html =
             "<html>\n"

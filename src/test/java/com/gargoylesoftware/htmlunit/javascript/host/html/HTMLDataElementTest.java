@@ -32,8 +32,8 @@ public class HTMLDataElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLDataElement]")
+    @Alerts(DEFAULT = "[object HTMLDataElement]",
+            IE = "[object HTMLUnknownElement]")
     public void tag() throws Exception {
         final String html = "<html><body>\n"
             + "  <data id='it' value='1234'>onetwothreefour</data>\n"
@@ -47,8 +47,8 @@ public class HTMLDataElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "#12o", "undefined", "#12o"},
-            FF = {"1234", "#12o", "", "#12o"})
+    @Alerts(DEFAULT = {"1234", "#12o", "", "#12o"},
+            IE = {"undefined", "#12o", "undefined", "#12o"})
     public void value() throws Exception {
         final String html = "<html><body>\n"
             + "  <data id='d1' value='1234'>onetwothreefour</data>\n"

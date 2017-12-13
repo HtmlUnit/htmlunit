@@ -132,7 +132,7 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "1.95")
+            CHROME = "10")
     public void downlink() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -157,7 +157,7 @@ public class NetworkInformationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no connection",
-            CHROME = "125")
+            CHROME = "50")
     public void rtt() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

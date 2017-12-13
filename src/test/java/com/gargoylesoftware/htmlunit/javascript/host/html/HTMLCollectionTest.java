@@ -99,7 +99,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"string 0", "string item", "string length", "string namedItem"},
-            CHROME = {"string 0", "string item", "string length", "string myForm", "string namedItem"},
             IE = {"string item", "string length", "string myForm", "string namedItem"})
     @NotYetImplemented(IE)
     public void for_in() throws Exception {
@@ -128,10 +127,6 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
             "string item", "string length", "string namedItem"},
-            CHROME = {"string 0", "string 1", "string 2", "string 3", "string 4", "string 5",
-                 "string action", "string first_submit", "string id1", "string input_disabled",
-                 "string item", "string length", "string namedItem", "string second_submit",
-                 "string val1", "string val2"},
             IE = {"string 1", "string action", "string first_submit", "string item",
                 "string length", "string namedItem", "string second_submit", "string val1",
                 "string val2"})
