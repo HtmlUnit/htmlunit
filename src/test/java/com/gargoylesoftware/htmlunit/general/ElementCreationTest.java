@@ -1478,8 +1478,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLTimeElement]")
+    @Alerts(DEFAULT = "[object HTMLTimeElement]",
+            IE = "[object HTMLUnknownElement]")
     public void time() throws Exception {
         test("time");
     }
@@ -2011,8 +2011,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            FF = "[object HTMLDataElement]")
+    @Alerts(DEFAULT = "[object HTMLDataElement]",
+            IE = "[object HTMLUnknownElement]")
     public void data() throws Exception {
         test("data");
     }

@@ -272,6 +272,16 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    public void _FONT_VARIANT_EAST_ASIAN() throws Exception {
+        test("fontVariantEastAsian");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _FONT_VARIANT_NUMERIC() throws Exception {
         test("fontVariantNumeric");
     }

@@ -112,8 +112,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void appBannerPromptResult() throws Exception {
         test("AppBannerPromptResult");
     }
@@ -1013,8 +1012,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void cssViewportRule() throws Exception {
         test("CSSViewportRule");
     }
@@ -2014,8 +2012,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
     }
@@ -2939,8 +2937,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void htmlTimeElement() throws Exception {
         test("HTMLTimeElement");
     }

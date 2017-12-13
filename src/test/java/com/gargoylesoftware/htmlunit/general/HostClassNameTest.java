@@ -217,8 +217,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function AppBannerPromptResult() { [native code] }")
+    @Alerts("exception")
     public void appBannerPromptResult() throws Exception {
         test("AppBannerPromptResult");
     }
@@ -1498,8 +1497,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function CSSViewportRule() { [native code] }")
+    @Alerts("exception")
     public void cssViewportRule() throws Exception {
         test("CSSViewportRule");
     }
@@ -3164,7 +3162,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function HTMLDataElement() {\n    [native code]\n}")
+            FF = "function HTMLDataElement() {\n    [native code]\n}",
+            CHROME = "function HTMLDataElement() { [native code] }")
     public void htmlDataElement() throws Exception {
         test("HTMLDataElement");
     }
@@ -4146,7 +4145,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function HTMLTimeElement() {\n    [native code]\n}")
+            FF = "function HTMLTimeElement() {\n    [native code]\n}",
+            CHROME = "function HTMLTimeElement() { [native code] }")
     public void htmlTimeElement() throws Exception {
         test("HTMLTimeElement");
     }

@@ -580,7 +580,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
-                + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
+                + "webkitMatchesSelector(),webkitRequestFullscreen(),webkitRequestFullScreen()",
             FF45 = "attributes,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -678,8 +678,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "getMatchedCSSRules(),getSelection(),history,"
                 + "indexedDB,innerHeight,innerWidth,isSecureContext,length,"
                 + "localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),name,navigator,onabort,"
-                + "onanimationend,onanimationiteration,onanimationstart,onappinstalled,"
-                + "onauxclick,onbeforeinstallprompt,"
+                + "onafterprint,onanimationend,onanimationiteration,onanimationstart,onappinstalled,"
+                + "onauxclick,onbeforeinstallprompt,onbeforeprint,"
                 + "onbeforeunload,onblur,oncancel,oncanplay,oncanplaythrough,"
                 + "onchange,onclick,onclose,oncontextmenu,oncuechange,ondblclick,ondevicemotion,ondeviceorientation,"
                 + "ondeviceorientationabsolute,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -953,7 +953,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
-                + "canPlayType(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
+                + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
                 + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,load(),loop,mediaKeys,muted,NETWORK_EMPTY,NETWORK_IDLE,"
@@ -1100,7 +1100,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "aLink,background,bgColor,link,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
+    @Alerts(CHROME = "aLink,background,bgColor,link,onafterprint,onbeforeprint,"
+                + "onbeforeunload,onhashchange,onlanguagechange,onmessage,"
                 + "onmessageerror,onoffline,ononline,onpagehide,onpageshow,onpopstate,"
                 + "onrejectionhandled,onstorage,onunhandledrejection,onunload,"
                 + "text,vLink",
@@ -1511,8 +1512,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "cols,onbeforeunload,onhashchange,onlanguagechange,onmessage,onmessageerror,"
-                + "onoffline,ononline,onpagehide,"
+    @Alerts(CHROME = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,"
+                + "onmessage,onmessageerror,onoffline,ononline,onpagehide,"
                 + "onpageshow,onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,"
                 + "rows",
             FF = "cols,onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,onmessage,"
@@ -2656,8 +2657,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            FF = "dateTime")
+    @Alerts(DEFAULT = "dateTime",
+            IE = "-")
     public void time() throws Exception {
         test("time");
     }
@@ -2727,7 +2728,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
-                + "canPlayType(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
+                + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
                 + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
@@ -2739,7 +2740,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
                 + "webkitDisplayingFullscreen,webkitDroppedFrameCount,"
                 + "webkitEnterFullscreen(),webkitEnterFullScreen(),"
-                + "webkitExitFullscreen(),webkitExitFullScreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
+                + "webkitExitFullScreen(),webkitExitFullscreen(),webkitSupportsFullscreen,webkitVideoDecodedByteCount,"
                 + "width",
             FF45 = "addTextTrack(),autoplay,buffered,canPlayType(),controls,crossOrigin,currentSrc,currentTime,"
                 + "defaultMuted,defaultPlaybackRate,duration,ended,error,fastSeek(),getVideoPlaybackQuality(),"
@@ -2865,8 +2866,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            FF = "value")
+    @Alerts(DEFAULT = "value",
+            IE = "-")
     public void data() throws Exception {
         test("data");
     }
@@ -3045,7 +3046,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,onpointerlockerror,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,onreset,onresize,"
                 + "onscroll,onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwebkitfullscreenchange,"
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvisibilitychange,onvolumechange,onwaiting,"
+                + "onwebkitfullscreenchange,"
                 + "onwebkitfullscreenerror,onwheel,open(),origin,plugins,pointerLockElement,preferredStylesheetSet,"
                 + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
                 + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,registerElement(),"
