@@ -193,8 +193,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"#üöä", "§§URL§§#üöä"},
-            FF = {"#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"})
+    @Alerts(DEFAULT = {"#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"},
+            IE = {"#üöä", "§§URL§§#üöä"})
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'üöä';\n"

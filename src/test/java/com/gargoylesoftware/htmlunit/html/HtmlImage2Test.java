@@ -151,7 +151,6 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false",
             FF52 = "false")
     public void isDisplayedEmptySource() throws Exception {
         isDisplayed("src=''");
@@ -171,8 +170,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts("true")
     public void isDisplayedInvalidSource() throws Exception {
         isDisplayed("src='unknown.gif'");
     }
@@ -181,8 +179,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false")
+    @Alerts("true")
     public void isDisplayedWrongType() throws Exception {
         isDisplayed("src='" + URL_FIRST + "'");
     }
