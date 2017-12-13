@@ -46,7 +46,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_FAMILY;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_SIZE;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STRETCH;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_VARIANT;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.FONT_WEIGHT;
@@ -610,10 +609,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getFont() {
         if (getBrowserVersion().hasFeature(CSS_COMPUTED_NO_Z_INDEX)
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
-            return getStyleAttribute(FONT_STYLE, true) + ' ' + getStyleAttribute(FONT_VARIANT, true) + ' '
-                    + getStyleAttribute(FONT_WEIGHT, true) + ' ' + getStyleAttribute(FONT_STRETCH, true) + ' '
-                    + getFontSize() + ' ' + '/' + ' ' + getStyleAttribute(LINE_HEIGHT, true) + ' '
-                    + getStyleAttribute(FONT_FAMILY, true);
+            return super.getFont();
         }
         return "";
     }
