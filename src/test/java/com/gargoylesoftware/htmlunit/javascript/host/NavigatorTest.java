@@ -216,10 +216,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.183", "NPSWF32_27_0_0_183.dll"},
-            FF52 = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.183", "NPSWF64_27_0_0_183.dll"},
-            CHROME = {"Shockwave Flash", "Shockwave Flash 24.0 r0", "undefined", "internal-not-yet-present"},
-            IE = {"Shockwave Flash", "Shockwave Flash 27.0 r0", "27.0.0.183", "Flash32_27_0_0_183.ocx"},
+    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.126", "NPSWF32_28_0_0_126.dll"},
+            FF52 = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.126", "NPSWF64_28_0_0_126.dll"},
+            CHROME = "Shockwave Flash not available",
+            IE = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.126", "Flash32_28_0_0_126.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
@@ -227,14 +227,19 @@ public class NavigatorTest extends WebDriverTestCase {
                 + "  <title>test</title>\n"
                 + "  <script>\n"
                 + "  function doTest() {\n"
+                + "    var flash = false;\n"
                 + "    for (var i = 0; i < window.navigator.plugins.length; i++) {\n"
                 + "      var plugin = window.navigator.plugins[i];\n"
                 + "      if ('Shockwave Flash' == window.navigator.plugins[i].name) {\n"
+                + "        flash = true;\n"
                 + "        alert(plugin.name);\n"
                 + "        alert(plugin.description);\n"
                 + "        alert(plugin.version);\n"
                 + "        alert(plugin.filename);\n"
                 + "      }\n"
+                + "    }\n"
+                + "    if (!flash) {\n"
+                + "      alert('Shockwave Flash not available');\n"
                 + "    }\n"
                 + "  }\n"
                 + "  </script>\n"
@@ -382,7 +387,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF45 = "20170411115307",
-            FF52 = "20170921064520")
+            FF52 = "20171206101620")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
