@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
@@ -34,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass
 public class Crypto extends SimpleScriptable {
@@ -69,5 +71,18 @@ public class Crypto extends SimpleScriptable {
         for (int i = 0; i < array.getLength(); i++) {
             array.put(i, array, random.nextInt());
         }
+    }
+
+    /**
+     * Returns the {@code subtle} property.
+     * @return the {@code stuble} property
+     */
+    @JsxGetter({CHROME, FF})
+    public SubtleCrypto getSubtle() {
+        final SubtleCrypto stuble = new SubtleCrypto();
+        final Window window = getWindow();
+        stuble.setParentScope(window);
+        stuble.setPrototype(window.getPrototype(SubtleCrypto.class));
+        return stuble;
     }
 }

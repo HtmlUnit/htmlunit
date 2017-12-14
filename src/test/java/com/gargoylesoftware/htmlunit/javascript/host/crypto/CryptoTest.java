@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link Crypto}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CryptoTest extends WebDriverTestCase {
@@ -42,6 +43,23 @@ public class CryptoTest extends WebDriverTestCase {
             + "  alert(array[3] == 0);\n"
             + "  window.crypto.getRandomValues(array);\n"
             + "  alert(array[3] == 0);\n"
+            + "}\n"
+            + "catch(e) { alert('exception'); }\n"
+            + "</script></head></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object SubtleCrypto]",
+            IE = "exception")
+    public void subtle() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "try {\n"
+            + "  alert(window.crypto.subtle);\n"
             + "}\n"
             + "catch(e) { alert('exception'); }\n"
             + "</script></head></html>";
