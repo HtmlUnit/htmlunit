@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link HTMLAudioElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAudioElementTest extends WebDriverTestCase {
@@ -153,7 +159,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLAudioElement]", "maybe", "done"})
+    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "maybe", "done"},
+            IE = {"[object HTMLAudioElement]", "", "done"})
+    @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -167,6 +175,192 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void canPlayType() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('a1');\n"
+            + "    alert(typeof elem.canPlayType === 'function');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <audio id='a1'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_AudioOgg() throws Exception {
+        canPlayType("audio/ogg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_VideoOgg() throws Exception {
+        canPlayType("video/ogg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_ApplicationOgg() throws Exception {
+        canPlayType("application/ogg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("maybe")
+    @NotYetImplemented
+    public void canPlayType_Mp4() throws Exception {
+        canPlayType("video/mp4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "maybe")
+    @NotYetImplemented(FF)
+    public void canPlayType_AudioWave() throws Exception {
+        canPlayType("audio/wave");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_AudioWav() throws Exception {
+        canPlayType("audio/wav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_AudioXWav() throws Exception {
+        canPlayType("audio/x-wav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF = "maybe")
+    @NotYetImplemented(FF)
+    public void canPlayType_AudioPnWav() throws Exception {
+        canPlayType("audio/x-pn-wav");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_AudioWebm() throws Exception {
+        canPlayType("audio/webm");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF})
+    public void canPlayType_VideoWebm() throws Exception {
+        canPlayType("video/webm");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "maybe",
+            CHROME = "probably")
+    @NotYetImplemented
+    public void canPlayType_AudioMpeg() throws Exception {
+        canPlayType("audio/mpeg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "probably",
+            FF45 = "",
+            FF = "maybe",
+            IE = "")
+    @NotYetImplemented({CHROME, FF52})
+    public void canPlayType_AudioFlac() throws Exception {
+        canPlayType("audio/flac");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            FF52 = "maybe")
+    @NotYetImplemented(FF52)
+    public void canPlayType_AudioXFlac() throws Exception {
+        canPlayType("audio/x-flac");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void canPlayType(final String mimeType) throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var elem = document.getElementById('a1');\n"
+            + "    alert(elem.canPlayType('" + mimeType + "'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <audio id='a1'/>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
