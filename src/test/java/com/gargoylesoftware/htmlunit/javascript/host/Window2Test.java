@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -496,7 +494,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Hello window", ""})
-    @BuggyWebDriver(IE)
     public void open() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -531,7 +528,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"Hello window", "New window"})
-    @BuggyWebDriver(IE)
     public void openWindowParams() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -566,7 +562,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"window1", "window2"})
-    @BuggyWebDriver(IE)
     public void openWindowParamReplace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
