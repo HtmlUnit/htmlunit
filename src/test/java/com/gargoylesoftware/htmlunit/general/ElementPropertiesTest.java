@@ -712,7 +712,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createImageBitmap(),crypto,devicePixelRatio,dispatchEvent(),document,dump(),"
                 + "external,fetch(),find(),"
                 + "focus(),frameElement,frames,fullScreen,getComputedStyle(),getDefaultComputedStyle(),"
-                + "getSelection(),history,ieMethods,indexedDB,innerHeight,innerWidth,"
+                + "getSelection(),history,indexedDB,innerHeight,innerWidth,"
                 + "InstallTrigger,length,localStorage,location,locationbar,matchMedia(),menubar,moveBy(),moveTo(),"
                 + "mozInnerScreenX,mozInnerScreenY,mozPaintCount,name,navigator,onabort,"
                 + "onafterprint,onbeforeprint,onbeforeunload,onblur,"

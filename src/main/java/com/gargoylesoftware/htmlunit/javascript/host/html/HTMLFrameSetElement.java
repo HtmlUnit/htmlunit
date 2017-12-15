@@ -388,7 +388,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onafterprint} event handler.
      * @return the {@code onafterprint} event handler
      */
-    @JsxGetter({FF, IE})
+    @JsxGetter
     public Function getOnafterprint() {
         return getEventHandler("afterprint");
     }
@@ -397,7 +397,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onafterprint} event handler.
      * @param afterprint the {@code onafterprint} event handler
      */
-    @JsxSetter({FF, IE})
+    @JsxSetter
     public void setOnafterprint(final Object afterprint) {
         setEventHandler("afterprint", afterprint);
     }
@@ -406,7 +406,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onbeforeprint} event handler.
      * @return the {@code onbeforeprint} event handler
      */
-    @JsxGetter({FF, IE})
+    @JsxGetter
     public Function getOnbeforeprint() {
         return getEventHandler("beforeprint");
     }
@@ -415,7 +415,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onbeforeprint} event handler.
      * @param beforeprint the {@code onbeforeprint} event handler
      */
-    @JsxSetter({FF, IE})
+    @JsxSetter
     public void setOnbeforeprint(final Object beforeprint) {
         setEventHandler("beforeprint", beforeprint);
     }

@@ -475,7 +475,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onafterprint} event handler for this element.
      * @return the {@code onafterprint} event handler for this element
      */
-    @JsxGetter({FF, IE})
+    @JsxGetter
     public Function getOnafterprint() {
         return getEventHandler("afterprint");
     }
@@ -484,7 +484,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onafterprint} event handler for this element.
      * @param onafterprint the {@code onafterprint} event handler for this element
      */
-    @JsxSetter({FF, IE})
+    @JsxSetter
     public void setOnafterprint(final Object onafterprint) {
         setEventHandler("afterprint", onafterprint);
     }
@@ -493,7 +493,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Returns the {@code onbeforeprint} event handler for this element.
      * @return the {@code onbeforeprint} event handler for this element
      */
-    @JsxGetter({FF, IE})
+    @JsxGetter
     public Function getOnbeforeprint() {
         return getEventHandler("beforeprint");
     }
@@ -502,7 +502,7 @@ public class HTMLBodyElement extends HTMLElement {
      * Sets the {@code onbeforeprint} event handler for this element.
      * @param onbeforeprint the {@code onbeforeprint} event handler for this element
      */
-    @JsxSetter({FF, IE})
+    @JsxSetter
     public void setOnbeforeprint(final Object onbeforeprint) {
         setEventHandler("beforeprint", onbeforeprint);
     }
