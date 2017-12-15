@@ -14,15 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
@@ -30,6 +29,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Unit tests for {@link MimeType}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MimeTypeTest extends SimpleWebTestCase {
@@ -39,26 +39,25 @@ public class MimeTypeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"[object MimeType]", "swf", "Shockwave Flash", "true", "true"},
+            CHROME = "undefined")
     public void flashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
             + "  var mimeTypeFlash = navigator.mimeTypes['application/x-shockwave-flash'];\n"
             + "  alert(mimeTypeFlash);\n"
-            + "  alert(mimeTypeFlash.suffixes);\n"
-            + "  var pluginFlash = mimeTypeFlash.enabledPlugin;\n"
-            + "  alert(pluginFlash.name);\n"
-            + "  alert(pluginFlash == navigator.plugins[pluginFlash.name]);\n"
-            + "  alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));\n"
+            + "  if (mimeTypeFlash) {\n"
+            + "    alert(mimeTypeFlash.suffixes);\n"
+            + "    var pluginFlash = mimeTypeFlash.enabledPlugin;\n"
+            + "    alert(pluginFlash.name);\n"
+            + "    alert(pluginFlash == navigator.plugins[pluginFlash.name]);\n"
+            + "    alert(pluginFlash == navigator.plugins.namedItem(pluginFlash.name));\n"
+            + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
 
-        final String[] expectedAlerts = {"[object MimeType]", "swf", "Shockwave Flash", "true", "true"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(html, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        loadPage(html);
     }
 
     /**
@@ -66,6 +65,7 @@ public class MimeTypeTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"undefined", "undefined", "null"})
     public void removeFlashMimeType() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -76,15 +76,11 @@ public class MimeTypeTest extends SimpleWebTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";
-        final String[] expectedAlerts = {"undefined", "undefined", "null"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
-        final List<String> collectedAlerts = new ArrayList<>();
         final Set<PluginConfiguration> plugins = new HashSet<>(getBrowserVersion().getPlugins());
         getBrowserVersion().getPlugins().clear();
         try {
-            loadPage(html, collectedAlerts);
-            assertEquals(expectedAlerts, collectedAlerts);
+            loadPage(html);
         }
         finally {
             getBrowserVersion().getPlugins().addAll(plugins);
