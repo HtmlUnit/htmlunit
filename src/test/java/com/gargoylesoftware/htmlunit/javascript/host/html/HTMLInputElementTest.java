@@ -32,7 +32,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
@@ -1805,7 +1804,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverSubmit() throws Exception {
         mouseOver("<input id='tester' type='submit' onmouseover='dumpEvent(event);' >");
     }
@@ -1825,7 +1823,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverReset() throws Exception {
         mouseOver("<input id='tester' type='reset' onmouseover='dumpEvent(event);' >");
     }
@@ -1845,7 +1842,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverText() throws Exception {
         mouseOver("<input id='tester' type='text' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
@@ -1865,7 +1861,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverPassword() throws Exception {
         mouseOver("<input id='tester' type='password' onmouseover='dumpEvent(event);' value='HtmlUnit'>");
     }
@@ -1885,7 +1880,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("mouse over [tester]")
-    @BuggyWebDriver(IE)
     public void mouseOverFile() throws Exception {
         mouseOver("<input id='tester' type='file' onmouseover='dumpEvent(event);'>");
     }
