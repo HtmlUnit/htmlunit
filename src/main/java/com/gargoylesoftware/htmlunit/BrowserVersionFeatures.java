@@ -401,7 +401,7 @@ public enum BrowserVersionFeatures {
     HTMLIMAGE_BLANK_SRC_AS_EMPTY,
 
     /** Empty src attribute sets display to false. */
-    @BrowserFeature(FF52)
+    @BrowserFeature({IE, FF52})
     HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE,
 
     /** Is document.cretaeElement('image') an HTMLElement. */

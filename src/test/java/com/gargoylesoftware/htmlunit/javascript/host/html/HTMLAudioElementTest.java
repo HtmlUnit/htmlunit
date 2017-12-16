@@ -326,10 +326,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "probably",
-            FF45 = "",
-            FF = "maybe",
-            IE = "")
+    @Alerts(DEFAULT = "",
+            CHROME = "probably",
+            FF52 = "maybe")
     @NotYetImplemented({CHROME, FF52})
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");

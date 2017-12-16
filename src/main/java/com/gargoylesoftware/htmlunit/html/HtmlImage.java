@@ -663,11 +663,19 @@ public class HtmlImage extends HtmlElement {
     @Override
     public boolean isDisplayed() {
         final String src = getSrcAttribute();
-        if (hasFeature(HTMLIMAGE_INVISIBLE_NO_SRC)
-                && (ATTRIBUTE_NOT_DEFINED == src
-                    || (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))
-                    || (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src)))) {
-            return false;
+        if (hasFeature(HTMLIMAGE_INVISIBLE_NO_SRC)) {
+            if (ATTRIBUTE_NOT_DEFINED == src) {
+                return false;
+            }
+            if (StringUtils.isEmpty(src)) {
+                if (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE)) {
+                    return false;
+                }
+                return true;
+            }
+            if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src)) {
+                return false;
+            }
         }
 
         return super.isDisplayed();
