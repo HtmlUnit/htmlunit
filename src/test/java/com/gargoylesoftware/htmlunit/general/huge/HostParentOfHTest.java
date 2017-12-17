@@ -266,6 +266,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _HTMLDataElement_HTMLDataElement() throws Exception {
         test("HTMLDataElement", "HTMLDataElement");
@@ -494,6 +495,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _HTMLElement_HTMLDataElement() throws Exception {
         test("HTMLElement", "HTMLDataElement");
@@ -1108,6 +1110,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _HTMLElement_HTMLTimeElement() throws Exception {
         test("HTMLElement", "HTMLTimeElement");
@@ -1786,6 +1789,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF = "true")
     public void _HTMLTimeElement_HTMLTimeElement() throws Exception {
         test("HTMLTimeElement", "HTMLTimeElement");

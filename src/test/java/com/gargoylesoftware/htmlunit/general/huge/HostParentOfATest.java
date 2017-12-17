@@ -113,8 +113,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _AppBannerPromptResult_AppBannerPromptResult() throws Exception {
         test("AppBannerPromptResult", "AppBannerPromptResult");
     }
