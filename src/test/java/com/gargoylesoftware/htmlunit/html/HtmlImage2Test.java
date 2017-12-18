@@ -185,6 +185,15 @@ public class HtmlImage2Test extends WebDriverTestCase {
         isDisplayed("src='" + URL_FIRST + "'");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("false")
+    public void isDisplayedDisplayNone() throws Exception {
+        isDisplayed("src='img.jpg' style='display: none'");
+    }
+
     private void isDisplayed(final String src) throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

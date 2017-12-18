@@ -670,7 +670,9 @@ public class HtmlImage extends HtmlElement {
             if (hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src)) {
                 return false;
             }
-            return !(hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src));
+            if (hasFeature(HTMLIMAGE_EMPTY_SRC_DISPLAY_FALSE) && StringUtils.isEmpty(src)) {
+                return false;
+            }
         }
 
         return super.isDisplayed();
