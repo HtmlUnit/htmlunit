@@ -289,6 +289,16 @@ public class HostParentOfWTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
+        test("WebKitCSSMatrix", "DOMMatrix");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
             FF45 = "false")

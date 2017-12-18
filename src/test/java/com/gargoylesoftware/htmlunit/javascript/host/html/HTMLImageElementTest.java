@@ -472,7 +472,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
       */
     @Test
     @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
-            CHROME = {"number: 300", "number: 200", "number: 16", "number: 16", "number: 16", "number: 16"},
             FF45 = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
             IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     @NotYetImplemented(FF52)
@@ -506,7 +505,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 70000);
     }
 
     /**

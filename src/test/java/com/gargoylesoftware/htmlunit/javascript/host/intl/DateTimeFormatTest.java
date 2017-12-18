@@ -244,6 +244,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Thursday, December 20, 2012, GMT",
+            CHROME = "Thursday, December 20, 2012, UTC",
             IE = "\u200EThursday\u200E, \u200EDecember\u200E \u200E20\u200E, \u200E2012")
     @NotYetImplemented
     public void format_utc_short() throws Exception {

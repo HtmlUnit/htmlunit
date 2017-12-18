@@ -253,9 +253,7 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
-                && !StringUtils.isEmpty(src)
-                && StringUtils.isBlank(src)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
             return 0;
         }
 
@@ -315,9 +313,7 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0)
-                && !StringUtils.isEmpty(src)
-                && StringUtils.isBlank(src)) {
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
             return 0;
         }
 
