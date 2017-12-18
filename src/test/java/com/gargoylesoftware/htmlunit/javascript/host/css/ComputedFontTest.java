@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -171,6 +172,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "xyz", "xyz", "1px abc", "normal normal 400 normal 1px / normal abc", "abc", "abc"},
             FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
+    @NotYetImplemented(TestedBrowser.CHROME)
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
     }
@@ -183,6 +185,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             "", "\"Times New Roman\"", "", "normal normal 400 normal 16px / normal abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
+    @NotYetImplemented(TestedBrowser.CHROME)
     public void minimalFontFamilyReversed() throws Exception {
         font("xyz 1px", "fontFamily", "abc");
     }
@@ -195,7 +198,7 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
             FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({CHROME, FF})
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
