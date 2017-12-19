@@ -25,7 +25,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 
@@ -137,7 +136,6 @@ public final class DomElementTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @NotYetImplemented
     public void sendEnterKeyWithHiddenSubmit() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
