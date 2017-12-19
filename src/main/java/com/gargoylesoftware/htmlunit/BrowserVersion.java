@@ -51,39 +51,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
  * <p>But keep in mind this now one still behaves like a FF52, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
- * <script>
-       var pre = document.getElementById('htmlUnitCode');
-       pre.innerHTML = pre.innerHTML.replace('APPNAME', navigator.appName);
-       pre.innerHTML = pre.innerHTML.replace('APPVERSION', navigator.appVersion);
-       pre.innerHTML = pre.innerHTML.replace('USERAGENT', navigator.userAgent);
-       var isMicrosoft = navigator.appVersion.indexOf('Trident/') != -1;
-       var isEdge = navigator.appVersion.indexOf('Edge') != -1;
-       var isChrome = navigator.appVersion.indexOf('Chrome') != -1;
-       var numeric = 52;
-       if (isMicrosoft) {
-           numeric = 11;
-       }
-       else if (isEdge) {
-           numeric = 14;
-       }
-       else if (isChrome) {
-           numeric = 60;
-       }
-       pre.innerHTML = pre.innerHTML.replace('NUMERIC', numeric);
-       var browser = "FIREFOX_52";
-       if (isMicrosoft) {
-           browser = "INTERNET_EXPLORER";
-       }
-       else if (isEdge) {
-           browser = "EDGE";
-       }
-       else if (isChrome) {
-           browser = "CHROME";
-       }
-       pre.innerHTML = pre.innerHTML.replace('BROWSER', browser);
-   </script>
- * However, note that the constants are not enough to fully customize the browser,
- *   you also need to look into the {@link BrowserVersionFeatures} and the classes inside "javascript" package.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Daniel Gredler
