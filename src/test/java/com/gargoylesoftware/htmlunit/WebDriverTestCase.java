@@ -686,7 +686,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             final String queryString = request.getQueryString();
-            if (queryString != null) {
+            if (StringUtils.isNotBlank(queryString)) {
                 url = url + "?" + queryString;
             }
             final URL requestedUrl = new URL(url);
