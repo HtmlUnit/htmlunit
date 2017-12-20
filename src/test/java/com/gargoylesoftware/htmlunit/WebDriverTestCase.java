@@ -685,6 +685,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
 
+            final String queryString = request.getQueryString();
+            if (queryString != null) {
+                url = url + "?" + queryString;
+            }
             final URL requestedUrl = new URL(url);
             final WebRequest webRequest = new WebRequest(requestedUrl);
             webRequest.setHttpMethod(HttpMethod.valueOf(request.getMethod()));
