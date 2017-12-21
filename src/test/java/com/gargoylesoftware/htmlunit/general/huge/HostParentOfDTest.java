@@ -261,7 +261,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
     }
@@ -293,7 +293,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF52 = "true")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
     }
@@ -582,9 +582,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Element_HTMLDataElement() throws Exception {
         test("Element", "HTMLDataElement");
     }
@@ -1197,9 +1196,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Element_HTMLTimeElement() throws Exception {
         test("Element", "HTMLTimeElement");
     }
@@ -3082,9 +3080,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_HTMLDataElement() throws Exception {
         test("EventTarget", "HTMLDataElement");
     }
@@ -3685,9 +3682,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_HTMLTimeElement() throws Exception {
         test("EventTarget", "HTMLTimeElement");
     }

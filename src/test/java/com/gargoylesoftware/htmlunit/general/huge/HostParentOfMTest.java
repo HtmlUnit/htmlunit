@@ -976,9 +976,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Node_HTMLDataElement() throws Exception {
         test("Node", "HTMLDataElement");
     }
@@ -1666,9 +1665,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Node_HTMLTimeElement() throws Exception {
         test("Node", "HTMLTimeElement");
     }

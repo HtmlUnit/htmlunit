@@ -662,8 +662,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _CSSRule_CSSViewportRule() throws Exception {
         test("CSSRule", "CSSViewportRule");
     }
@@ -778,8 +777,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _CSSViewportRule_CSSViewportRule() throws Exception {
         test("CSSViewportRule", "CSSViewportRule");
     }
