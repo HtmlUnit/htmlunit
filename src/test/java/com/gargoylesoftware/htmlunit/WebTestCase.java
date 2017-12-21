@@ -693,14 +693,6 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Sets the mock WebConnection instance for the current test.
-     * @param connection the connection to use
-     */
-    protected void setMockWebConnection(final MockWebConnection connection) {
-        mockWebConnection_ = connection;
-    }
-
-    /**
      * Cleanup after a test.
      */
     @After

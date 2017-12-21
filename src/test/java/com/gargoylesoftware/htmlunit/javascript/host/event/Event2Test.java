@@ -166,7 +166,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts("")
     public void submitClick() throws Exception {
-        final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "       <input type='submit' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -180,7 +180,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() throws Exception {
-        final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -194,7 +194,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() throws Exception {
-        final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">\n";
 
         testClickEvents(firstSnippet, secondSnippet);
@@ -208,7 +208,7 @@ public class Event2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() throws Exception {
-        final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe' size='2'\n";
+        final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe'\n";
         final String secondSnippet = ">anchor</a>\n";
 
         testClickEvents(firstSnippet, secondSnippet);

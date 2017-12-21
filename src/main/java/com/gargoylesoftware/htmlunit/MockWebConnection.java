@@ -178,12 +178,17 @@ public class MockWebConnection implements WebConnection {
         requestCount_++;
         requestedUrls_.add(url);
 
-        RawResponseData rawResponse = responseMap_.get(url.toExternalForm());
+        String urlString = url.toExternalForm();
+        final int queryStart = urlString.lastIndexOf('?');
+        if (queryStart > -1) {
+            urlString = urlString.substring(0, queryStart);
+        }
+        RawResponseData rawResponse = responseMap_.get(urlString);
         if (rawResponse == null) {
             rawResponse = defaultResponse_;
             if (rawResponse == null) {
                 throw new IllegalStateException("No response specified that can handle URL ["
-                    + url.toExternalForm()
+                    + urlString
                     + "]");
             }
         }
