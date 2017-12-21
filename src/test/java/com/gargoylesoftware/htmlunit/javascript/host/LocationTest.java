@@ -202,19 +202,17 @@ public class LocationTest extends SimpleWebTestCase {
      */
     @Test
     public void setPathname() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("http://abc.com/en/index.html?blah=bleh");
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.pathname=\"/en/index.html\"'>...</body></html>";
         final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
-        webConnection.setResponse(url, html);
-        webConnection.setResponse(url2, html2);
-        webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(url);
+        getMockWebConnection().setResponse(url, html);
+        getMockWebConnection().setResponse(url2, html2);
+
+        final HtmlPage page = getWebClientWithMockWebConnection().getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getUrl().toExternalForm());
     }
@@ -246,19 +244,17 @@ public class LocationTest extends SimpleWebTestCase {
      */
     @Test
     public void setProtocol() throws Exception {
-        final WebClient webClient = getWebClient();
-        final MockWebConnection webConnection = new MockWebConnection();
         final URL url = new URL("http://abc.com/index.html?blah=bleh");
         final URL url2 = new URL("ftp://abc.com/index.html?blah=bleh");
         final String html
             = "<html><head><title>Test 1</title></head>\n"
             + "<body onload='location.protocol=\"ftp\"'>...</body></html>";
         final String html2 = "<html><head><title>Test 2</title></head><body>...</body></html>";
-        webConnection.setResponse(url, html);
-        webConnection.setResponse(url2, html2);
-        webClient.setWebConnection(webConnection);
 
-        final HtmlPage page = webClient.getPage(url);
+        getMockWebConnection().setResponse(url, html);
+        getMockWebConnection().setResponse(url2, html2);
+
+        final HtmlPage page = getWebClientWithMockWebConnection().getPage(url);
         assertEquals("Test 2", page.getTitleText());
         assertEquals(url2.toExternalForm(), page.getUrl().toExternalForm());
     }

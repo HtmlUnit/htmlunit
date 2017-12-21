@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Tests for {@link HtmlForm}, with BrowserRunner.
@@ -669,7 +670,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(By.id("myButton")).click();
 
         assertEquals(2, getMockWebConnection().getRequestCount());
-        assertEquals(URL_SECOND.toString(), getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(URL_SECOND.toString(),
+                UrlUtils.getUrlWithNewQuery(getMockWebConnection().getLastWebRequest().getUrl(), null));
         assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getHttpMethod().name());
     }
 

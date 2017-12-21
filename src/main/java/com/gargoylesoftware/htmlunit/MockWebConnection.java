@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class MockWebConnection implements WebConnection {
 
@@ -179,17 +180,23 @@ public class MockWebConnection implements WebConnection {
         requestedUrls_.add(url);
 
         String urlString = url.toExternalForm();
-        final int queryStart = urlString.lastIndexOf('?');
-        if (queryStart > -1) {
-            urlString = urlString.substring(0, queryStart);
-        }
         RawResponseData rawResponse = responseMap_.get(urlString);
         if (rawResponse == null) {
-            rawResponse = defaultResponse_;
+            // try to find without query params
+            final int queryStart = urlString.lastIndexOf('?');
+            if (queryStart > -1) {
+                urlString = urlString.substring(0, queryStart);
+                rawResponse = responseMap_.get(urlString);
+            }
+
+            // fall back to default
             if (rawResponse == null) {
-                throw new IllegalStateException("No response specified that can handle URL ["
-                    + urlString
-                    + "]");
+                rawResponse = defaultResponse_;
+                if (rawResponse == null) {
+                    throw new IllegalStateException("No response specified that can handle URL ["
+                        + urlString
+                        + "]");
+                }
             }
         }
 
