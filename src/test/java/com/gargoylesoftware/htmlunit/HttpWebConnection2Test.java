@@ -32,6 +32,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Tests methods in {@link HttpWebConnection}.
@@ -68,7 +69,8 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         assertSame(ISO_8859_1, lastRequest.getCharset());
         assertEquals(null, lastRequest.getProxyHost());
         assertEquals(null, lastRequest.getRequestBody());
-        assertEquals(URL_FIRST + "foo", lastRequest.getUrl());
+        // we will check the parameters later on
+        assertEquals(URL_FIRST + "foo", UrlUtils.getUrlWithNewQuery(lastRequest.getUrl(), null));
 
         String expectedHeaders = "";
         if (getBrowserVersion().isChrome()) {
