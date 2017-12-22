@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="Bugfixes, Chrome 63, WebStart support">
+            <action type="fix" dev="rbri" issue="1939 ">
+                If the coords of an image map entry are not valid ignore this entry.
+            </action>
+            <action type="fix" dev="rbri" issue="1939 ">
+                JavaScript: calling click() from js should always work even if the control is not visible.
+            </action>
             <action type="add" dev="rbri" issue="1936">
                 JavaScript: Crypto.subtle added
             </action>

@@ -317,14 +317,21 @@ public class HtmlArea extends HtmlElement {
     private GeneralPath parsePoly() {
         final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
         final GeneralPath path = new GeneralPath();
-        for (int i = 0; i + 1 < coords.length; i += 2) {
-            if (i == 0) {
-                path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
-            }
-            else {
-                path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
+
+        try {
+            for (int i = 0; i + 1 < coords.length; i += 2) {
+                if (i == 0) {
+                    path.moveTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
+                }
+                else {
+                    path.lineTo(Float.parseFloat(coords[i]), Float.parseFloat(coords[i + 1]));
+                }
             }
         }
+        catch (final NumberFormatException e) {
+            LOG.warn("Invalid poly coords '" + coords + "'", e);
+        }
+
         path.closePath();
         return path;
     }
