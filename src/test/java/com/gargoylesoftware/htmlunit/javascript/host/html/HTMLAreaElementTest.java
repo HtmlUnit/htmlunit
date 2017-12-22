@@ -137,4 +137,31 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myImage clicked", "myImageDisplayNone clicked"})
+    public void click() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById('a1').click();\n"
+            + "    document.getElementById('a2').click();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <img usemap='#dot'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+            + "  <map name='dot'>\n"
+            + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='alert(\"a1 clicked\");'/>\n"
+            + "    <area id='a2' shape='rect' coords='0 0 2 2' onclick='alert(\"a2 clicked\");'/>\n"
+            + "  <map>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

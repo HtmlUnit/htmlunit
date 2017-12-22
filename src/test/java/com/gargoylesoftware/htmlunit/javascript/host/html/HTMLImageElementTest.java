@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -671,34 +672,52 @@ public class HTMLImageElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myImage clicked", "myImageDisplayNone clicked"})
+    @Alerts({"myImage clicked", "myImageNone clicked"})
     public void click() throws Exception {
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final URL urlImage = new URL(URL_FIRST, "img.jpg");
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        }
-
         final String html = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
-            + "    var img = document.getElementById('myImage');\n"
-            + "    img.click();\n"
-            + "    img = document.getElementById('myImageDisplayNone');\n"
-            + "    img.click();\n"
+            + "    document.getElementById('myImage').click();\n"
+            + "    document.getElementById('myImageNone').click();\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <img id='myImage' src='\" + URL_SECOND + \"img.jpg' onclick='alert(\"myImage clicked\");'>\n"
-            + "  <img id='myImageDisplayNone' src='\" + URL_SECOND + \"img.jpg' style='display: none'"
-                        + " onclick='alert(\"myImageDisplayNone clicked\");'>\n"
+            + "  <img id='myImage' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
+                            + " onclick='alert(\"myImage clicked\");'>\n"
+            + "  <img id='myImageNone' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                                    + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
+                            + " style='display: none' onclick='alert(\"myImageNone clicked\");'>\n"
             + "</body></html>";
 
-        final WebDriver driver = getWebDriver();
-        if (driver instanceof HtmlUnitDriver) {
-            ((HtmlUnitDriver) driver).setDownloadImages(true);
-        }
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "myImageWithMap clicked",
+            IE = "a0 clicked")
+    @NotYetImplemented(IE)
+    public void clickWithMap() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById('myImageWithMap').click();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImageWithMap' usemap='#dot'"
+                                + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                                + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
+                            + " onclick='alert(\"myImageWithMap clicked\");'>\n"
+                + "  <map name='dot'>\n"
+                + "    <area id='a0' shape='rect' coords='0 0 7 7' onclick='alert(\"a0 clicked\");'/>\n"
+                + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='alert(\"a1 clicked\");'/>\n"
+                + "  <map>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, 70000000);
     }
 }

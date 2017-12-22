@@ -26,6 +26,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -46,6 +48,7 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Frank Danek
  */
 public class HtmlArea extends HtmlElement {
+    private static final Log LOG = LogFactory.getLog(HtmlArea.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "area";
@@ -265,21 +268,28 @@ public class HtmlArea extends HtmlElement {
         final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
 
         double leftX = 0;
-        if (coords.length > 0) {
-            leftX = Double.parseDouble(coords[0].trim());
-        }
         double topY = 0;
-        if (coords.length > 1) {
-            topY = Double.parseDouble(coords[1].trim());
-        }
         double rightX = 0;
-        if (coords.length > 2) {
-            rightX = Double.parseDouble(coords[2].trim());
-        }
         double bottomY = 0;
-        if (coords.length > 3) {
-            bottomY = Double.parseDouble(coords[3].trim());
+
+        try {
+            if (coords.length > 0) {
+                leftX = Double.parseDouble(coords[0].trim());
+            }
+            if (coords.length > 1) {
+                topY = Double.parseDouble(coords[1].trim());
+            }
+            if (coords.length > 2) {
+                rightX = Double.parseDouble(coords[2].trim());
+            }
+            if (coords.length > 3) {
+                bottomY = Double.parseDouble(coords[3].trim());
+            }
         }
+        catch (final NumberFormatException e) {
+            LOG.warn("Invalid rect coords '" + coords + "'", e);
+        }
+
         final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
                 rightX - leftX, bottomY - topY);
         return rectangle;
