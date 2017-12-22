@@ -718,6 +718,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                 + "  <map>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 70000000);
+        loadPageWithAlerts2(html);
     }
 }
