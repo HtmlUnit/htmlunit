@@ -142,7 +142,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"myImage clicked", "myImageDisplayNone clicked"})
+    @Alerts({"a1 clicked", "a2 clicked"})
     public void click() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
