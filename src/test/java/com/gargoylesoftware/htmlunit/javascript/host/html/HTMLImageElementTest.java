@@ -666,4 +666,39 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myImage clicked", "myImageDisplayNone clicked"})
+    public void click() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var img = document.getElementById('myImage');\n"
+            + "    img.click();\n"
+            + "    img = document.getElementById('myImageDisplayNone');\n"
+            + "    img.click();\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <img id='myImage' src='\" + URL_SECOND + \"img.jpg' onclick='alert(\"myImage clicked\");'>\n"
+            + "  <img id='myImageDisplayNone' src='\" + URL_SECOND + \"img.jpg' style='display: none'"
+                        + " onclick='alert(\"myImageDisplayNone clicked\");'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPageWithAlerts2(html);
+    }
 }

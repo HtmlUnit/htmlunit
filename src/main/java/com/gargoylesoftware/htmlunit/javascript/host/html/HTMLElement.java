@@ -1358,7 +1358,8 @@ public class HTMLElement extends Element {
      */
     @JsxFunction
     public void click() throws IOException {
-        getDomNodeOrDie().click();
+        // when triggered from js the visibility is ignored
+        getDomNodeOrDie().click(false, false, false, true, true, false);
     }
 
     /**
