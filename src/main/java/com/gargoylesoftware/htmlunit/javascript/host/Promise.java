@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.KEY_STARTING_SCOPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
@@ -110,8 +112,24 @@ public class Promise extends SimpleScriptable {
             }
         };
 
+        final Context cx = Context.getCurrentContext();
         try {
-            fun.call(Context.getCurrentContext(), window, window, new Object[] {resolve, reject});
+            // KEY_STARTING_SCOPE maintains a stack of scopes
+            @SuppressWarnings("unchecked")
+            Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
+            if (null == stack) {
+                stack = new Stack<>();
+                cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
+            }
+            stack.push(window);
+            try {
+                fun.call(cx, window, window, new Object[] {resolve, reject});
+            }
+            finally {
+                stack.pop();
+            }
+
+            window.getWebWindow().getWebClient().getJavaScriptEngine().processPostponedActions();
         }
         catch (final JavaScriptException e) {
             thisPromise.settle(false, e.getValue(), window);
@@ -331,7 +349,7 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void run() {
-                Context.enter();
+                final Context cx = Context.enter();
                 try {
                     Function toExecute = null;
                     if (thisPromise.state_ == PromiseState.FULFILLED && onFulfilled instanceof Function) {
@@ -350,8 +368,22 @@ public class Promise extends SimpleScriptable {
                             callbackResult = dummy;
                         }
                         else {
-                            callbackResult = toExecute.call(Context.getCurrentContext(),
-                                    window, thisPromise, new Object[] {value_});
+                            // KEY_STARTING_SCOPE maintains a stack of scopes
+                            @SuppressWarnings("unchecked")
+                            Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
+                            if (null == stack) {
+                                stack = new Stack<>();
+                                cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
+                            }
+                            stack.push(window);
+                            try {
+                                callbackResult = toExecute.call(cx, window, thisPromise, new Object[] {value_});
+                            }
+                            finally {
+                                stack.pop();
+                            }
+
+                            window.getWebWindow().getWebClient().getJavaScriptEngine().processPostponedActions();
                         }
                         if (callbackResult instanceof Promise) {
                             final Promise resultPromise = (Promise) callbackResult;

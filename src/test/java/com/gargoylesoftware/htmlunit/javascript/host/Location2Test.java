@@ -795,36 +795,39 @@ public class Location2Test extends WebDriverTestCase {
         final String html = "<html><head><title>Frameset</title></head>\n"
                 + "<frameset rows='20%,80%'>\n"
                 + "  <frame src='menu.html' name='menu'>\n"
-                + "  <frame src='' name='content'>\n"
+                + "  <frame src='content.html' name='content'>\n"
                 + "</frameset></html>";
 
         final String menu = "<html><head><title>Menu</title></head>\n"
                 + "<body>\n"
-                + "  <a id='link' href='content.html' target='content'>Link</a>\n"
-                + "  <a id='jsLink' href='#' onclick=\"javascript:top.content.location='content.html';\">jsLink</a>\n"
+                + "  <a id='link' href='newContent.html' target='content'>Link</a>\n"
+                + "  <a id='jsLink' href='#' "
+                        + "onclick=\"javascript:top.content.location='newContent.html';\">jsLink</a>\n"
                 + "</body></html>";
 
         final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+        final String newContent = "<html><head><title>New Content</title></head><body><p>new content</p></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(new URL(URL_FIRST, "menu.html"), menu);
         conn.setResponse(new URL(URL_FIRST, "content.html"), content);
+        conn.setResponse(new URL(URL_FIRST, "newContent.html"), newContent);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
 
-        assertEquals(2, conn.getRequestCount());
+        assertEquals(3, conn.getRequestCount());
 
         // click an anchor with href and target
         driver.switchTo().frame(0);
         driver.findElement(By.id("link")).click();
-        assertEquals(3, conn.getRequestCount());
+        assertEquals(4, conn.getRequestCount());
         Map<String, String> lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
-        assertEquals(4, conn.getRequestCount());
+        assertEquals(5, conn.getRequestCount());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }

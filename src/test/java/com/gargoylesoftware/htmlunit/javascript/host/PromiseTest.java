@@ -1600,4 +1600,35 @@ public class PromiseTest extends WebDriverTestCase {
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            IE = "test")
+    public void changeLocationFromPromise() throws Exception {
+        final String html =
+                "<html>\n"
+              + "<head>\n"
+              + "  <title>test</title>\n"
+              + "  <script>\n"
+              + "    function test() {\n"
+              + "      if (window.Promise) {\n"
+              + "        Promise.resolve(1).then(function () {\n"
+              + "          location.href = 'about:blank';\n"
+              + "        });\n"
+              + "      }\n"
+              + "    }\n"
+              + "  </script>\n"
+              + "</head>\n"
+              + "<body onload='test()'>\n"
+              + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+              + "</body>\n"
+              + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
 }
