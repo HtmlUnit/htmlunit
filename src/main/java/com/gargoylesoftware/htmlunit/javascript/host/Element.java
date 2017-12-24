@@ -451,10 +451,10 @@ public class Element extends Node {
     public String getAttributeNS(final String namespaceURI, final String localName) {
         final String value = getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
         if (ATTRIBUTE_NOT_DEFINED == value
-                && !getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
-            return null;
+                && getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            return "";
         }
-        return value;
+        return null;
     }
 
     /**
@@ -1216,9 +1216,7 @@ public class Element extends Node {
      * @param style the style of the element
      */
     protected void setStyle(final String style) {
-        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
-            getStyle().setCssText(style);
-        }
+        getStyle().setCssText(style);
     }
 
     /**

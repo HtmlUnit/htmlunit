@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import java.net.URL;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class MutationObserverTest extends WebDriverTestCase {
@@ -362,7 +364,76 @@ public class MutationObserverTest extends WebDriverTestCase {
             driver.get(URL_FIRST.toExternalForm());
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("headline")));
             element.setAttribute("style", "color: red");
+
+            element.getHtmlPageOrNull().getWebClient().getJavaScriptEngine().processPostponedActions();
             verifyAlerts(driver, getExpectedAlerts());
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "after div", "after text", "div observed", "text observed"})
+    public void callbackOrder() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var divObserver = new MutationObserver(function() {\n"
+            + "      alert('div observed');\n"
+            + "    });\n"
+            + "\n"
+            + "  divObserver.observe(div, { attributes: true });\n"
+            + "\n"
+            + "  var text = document.createTextNode('')\n"
+            + "  var txtObserver = new MutationObserver(function() {\n"
+            + "        alert('text observed');\n"
+            + "    });\n"
+            + "  txtObserver.observe(text, { characterData: true });"
+            + "\n"
+            + "  alert('before');\n"
+            + "  div.style = 'background-color: red'\n"
+            + "  alert('after div')\n"
+            + "  text.data = 42\n"
+            + "  alert('after text')\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' style='color: green'>old</div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html, 700000);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Content")
+    public void callbackRequiresStackSetup() throws Exception {
+        final String content = "<html><head><title>Content</title></head><body><p>content</p></body></html>";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), content);
+
+        final String html
+            = "<html><head><script>\n"
+            + "function test() {\n"
+            + "\n"
+            + "  var text = document.createTextNode('')\n"
+            + "  var txtObserver = new MutationObserver(function() {\n"
+            + "        window.location.href = 'content.html'"
+            + "    });\n"
+            + "  txtObserver.observe(text, { characterData: true });"
+            + "\n"
+            + "  text.data = 42\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv' dir='ltr'>old</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
 }

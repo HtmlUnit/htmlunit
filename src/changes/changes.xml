@@ -8,11 +8,14 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="Bugfixes, Chrome 63, WebStart support">
-            <action type="fix" dev="rbri" issue="1941 ">
+            <action type="fix" dev="rbri" issue="1940" due-to="Atsushi Nakagawa">
+                JavaScript: MutationObserver fires callbacks asynchronously
+            </action>
+            <action type="fix" dev="rbri" issue="1941">
                 JavaScript: Promise has to provide the same context setup as the rest
                 and call processPostponedActions afterwards
             </action>
-            <action type="fix" dev="rbri" issue="1939 ">
+            <action type="fix" dev="rbri" issue="1939">
                 If the coords of an image map entry are not valid ignore this entry.
             </action>
             <action type="fix" dev="rbri" issue="1939 ">

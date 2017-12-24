@@ -19,10 +19,14 @@ import com.gargoylesoftware.htmlunit.html.CharacterDataChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -37,6 +41,8 @@ import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
  * A JavaScript object for {@code MutationObserver}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @JsxClass
 public class MutationObserver extends SimpleScriptable implements HtmlAttributeChangeListener,
@@ -143,15 +149,18 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                 mutationRecord.setOldValue(event.getOldValue());
             }
 
-            final NativeArray array = new NativeArray(new Object[] {mutationRecord});
-            ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
-            final Context context = Context.enter();
-            try {
-                function_.call(context, scope, this, new Object[] {array});
-            }
-            finally {
-                Context.exit();
-            }
+            final Window window = getWindow();
+            final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
+            final JavaScriptEngine jsEngine =
+                    (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
+            jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+                @Override
+                public void execute() throws Exception {
+                    final NativeArray array = new NativeArray(new Object[] {mutationRecord});
+                    ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
+                    jsEngine.callFunction(owningPage, function_, scope, MutationObserver.this, new Object[] {array});
+                }
+            });
         }
     }
 
@@ -190,14 +199,19 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
                     mutationRecord.setOldValue(event.getValue());
                 }
 
-                final Context context = Context.enter();
-                try {
-                    final Scriptable array = context.newArray(scope, new Object[] {mutationRecord});
-                    function_.call(context, scope, this, new Object[] {array});
-                }
-                finally {
-                    Context.exit();
-                }
+                final Window window = getWindow();
+                final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
+                final JavaScriptEngine jsEngine =
+                        (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
+                jsEngine.addPostponedAction(new PostponedAction(owningPage) {
+                    @Override
+                    public void execute() throws Exception {
+                        final NativeArray array = new NativeArray(new Object[] {mutationRecord});
+                        ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
+                        jsEngine.callFunction(owningPage, function_, scope,
+                                                MutationObserver.this, new Object[] {array});
+                    }
+                });
             }
         }
     }
