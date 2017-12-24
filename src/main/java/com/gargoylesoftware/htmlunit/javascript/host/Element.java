@@ -1216,7 +1216,9 @@ public class Element extends Node {
      * @param style the style of the element
      */
     protected void setStyle(final String style) {
-        getStyle().setCssText(style);
+        if (!getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            getStyle().setCssText(style);
+        }
     }
 
     /**

@@ -1785,10 +1785,11 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var div1 = document.getElementById('div1');\n"
+
             + "    var empty = getOffsetHeight('width: 300px; height: 300px;');\n"
             + "    var marginAndPadding = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;');\n"
             + "    var withBorderBox = getOffsetHeight('width: 300px; height: 300px; margin: 3px; padding: 5px;"
-            + " box-sizing: border-box;');\n"
+                                                            + " box-sizing: border-box;');\n"
             + "    alert(marginAndPadding - empty);\n"
             + "    alert(withBorderBox - empty);\n"
             + "  }\n"

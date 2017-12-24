@@ -21,12 +21,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Tests for {@link MutationObserver}.
@@ -359,15 +357,6 @@ public class MutationObserverTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).click();
         verifyAlerts(driver, getExpectedAlerts());
-
-        if (driver instanceof HtmlUnitDriver) {
-            driver.get(URL_FIRST.toExternalForm());
-            final HtmlElement element = toHtmlElement(driver.findElement(By.id("headline")));
-            element.setAttribute("style", "color: red");
-
-            element.getHtmlPageOrNull().getWebClient().getJavaScriptEngine().processPostponedActions();
-            verifyAlerts(driver, getExpectedAlerts());
-        }
     }
 
     /**
@@ -402,7 +391,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' style='color: green'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html, 700000);
+        loadPageWithAlerts2(html);
     }
 
     /**
