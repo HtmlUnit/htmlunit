@@ -451,10 +451,10 @@ public class Element extends Node {
     public String getAttributeNS(final String namespaceURI, final String localName) {
         final String value = getDomNodeOrDie().getAttributeNS(namespaceURI, localName);
         if (ATTRIBUTE_NOT_DEFINED == value
-                && getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
-            return "";
+                && !getBrowserVersion().hasFeature(JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY)) {
+            return null;
         }
-        return null;
+        return value;
     }
 
     /**
