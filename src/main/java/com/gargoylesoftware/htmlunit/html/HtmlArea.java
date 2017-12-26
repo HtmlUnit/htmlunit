@@ -265,7 +265,8 @@ public class HtmlArea extends HtmlElement {
     }
 
     private Rectangle2D parseRect() {
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
+        // browsers seem to support comma and blank
+        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
 
         double leftX = 0;
         double topY = 0;
@@ -296,7 +297,8 @@ public class HtmlArea extends HtmlElement {
     }
 
     private Ellipse2D parseCircle() {
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
+        // browsers seem to support comma and blank
+        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
         final String radiusString = coords[2].trim();
 
         final int radius;
@@ -315,7 +317,8 @@ public class HtmlArea extends HtmlElement {
     }
 
     private GeneralPath parsePoly() {
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ',');
+        // browsers seem to support comma and blank
+        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
         final GeneralPath path = new GeneralPath();
 
         try {
