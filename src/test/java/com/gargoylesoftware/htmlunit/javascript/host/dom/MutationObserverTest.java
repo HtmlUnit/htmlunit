@@ -363,7 +363,8 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"before", "after div", "after text", "div observed", "text observed"})
+    @Alerts(DEFAULT = {"before", "after div", "after text", "div observed", "text observed"},
+            IE = {"before", "after div", "after text", "text observed"})
     public void callbackOrder() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -382,10 +383,10 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "  txtObserver.observe(text, { characterData: true });"
             + "\n"
             + "  alert('before');\n"
-            + "  div.style = 'background-color: red'\n"
-            + "  alert('after div')\n"
-            + "  text.data = 42\n"
-            + "  alert('after text')\n"
+            + "  div.style = 'background-color: red';\n"
+            + "  alert('after div');\n"
+            + "  text.data = 42;\n"
+            + "  alert('after text');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
