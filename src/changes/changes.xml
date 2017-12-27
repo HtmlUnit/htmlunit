@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.29" date="xx, 2017" description="Bugfixes, Chrome 63, WebStart support">
+            <action type="add" dev="rbri">
+                JavaScript: TextEncoder/TextDecoder impl added.
+            </action>
             <action type="fix" dev="rbri" issue="1940" due-to="Atsushi Nakagawa">
                 JavaScript: MutationObserver fires callbacks asynchronously
             </action>

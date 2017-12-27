@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -30,6 +31,32 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass
 public class Uint8Array extends ArrayBufferViewBase {
+
+    /**
+     * Ctor.
+     */
+    public Uint8Array() {
+        super();
+    }
+
+    /**
+     * Ctor.
+     *
+     * @param bytes the bytes to store
+     * @param window the context
+     */
+    public Uint8Array(final byte[] bytes, final Window window) {
+        this();
+        setPrototype(window.getPrototype(getClass()));
+        setParentScope(getParentScope());
+
+        setByteLength(bytes.length);
+
+        final ArrayBuffer buffer = new ArrayBuffer(bytes);
+        buffer.setPrototype(window.getPrototype(buffer.getClass()));
+        buffer.setParentScope(getParentScope());
+        setBuffer(buffer);
+    }
 
     /** The size, in bytes, of each array element. */
     @JsxConstant
@@ -70,5 +97,4 @@ public class Uint8Array extends ArrayBufferViewBase {
     protected int getBytesPerElement() {
         return BYTES_PER_ELEMENT;
     }
-
 }
