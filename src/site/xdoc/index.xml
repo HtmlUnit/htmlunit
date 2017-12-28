@@ -60,7 +60,7 @@
                     
                     <dt>Latest release <date>November 12, 2017</date></dt>
                     <dd>
-                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.28/">version 2.28</a>
+                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.29/">version 2.29</a>
                     </dd>
                 </dl>
             </p>
@@ -156,7 +156,7 @@
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.28</version>
+    <version>2.29</version>
 </dependency>]]></source>
             </p>
         </section>
