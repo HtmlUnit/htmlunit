@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class TextDecoder extends SimpleScriptable {
     private static java.util.Map<String, Charset> ENCODINGS_;
     private static java.util.Map<String, String> ENCODING_NAMES_;
-    private Charset encoding_ = StandardCharsets.UTF_8;
+    private String encoding_ = StandardCharsets.UTF_8.name();
 
     static {
         ENCODINGS_ = new HashMap<>();
@@ -360,7 +360,7 @@ public class TextDecoder extends SimpleScriptable {
         final String enc = Context.toString(encoding);
         final Charset charset = ENCODINGS_.get(enc);
         if (charset != null) {
-            encoding_ = charset;
+            encoding_ = charset.name();
             return;
         }
         throw ScriptRuntime.typeError("Argument 1 '" + enc + "' is not a supported encoding");
@@ -371,12 +371,11 @@ public class TextDecoder extends SimpleScriptable {
      */
     @JsxGetter
     public String getEncoding() {
-        String name = encoding_.name();
-        name = ENCODING_NAMES_.get(name);
+        final String name = ENCODING_NAMES_.get(encoding_);
         if (name != null) {
             return name;
         }
-        return encoding_.name().toLowerCase();
+        return encoding_.toLowerCase();
     }
 
     /**
@@ -398,7 +397,7 @@ public class TextDecoder extends SimpleScriptable {
         }
 
         if (arrayBuffer != null) {
-            return new String(arrayBuffer.getBytes(), encoding_);
+            return new String(arrayBuffer.getBytes(), Charset.forName(encoding_));
         }
 
         throw ScriptRuntime.typeError("Argument 1 of TextDecoder.decode could not be"
