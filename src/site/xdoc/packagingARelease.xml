@@ -81,7 +81,7 @@ mvn clean deploy -Dmaven.test.skip=true
                     </li>
                     <li>
                         Build the zip files, (clean avoids duplicated pom.xml because of Maven/Eclipse conflicts)
-                        <source>mvn -up clean site package</source>
+                        <source>mvn -up clean site package -Dmaven.test.skip=true</source>
                     </li>
                     <li>
                         Upload the two zip files (htmlunit-x.y-bin.zip and htmlunit-x.y-src.zip) to
@@ -99,9 +99,9 @@ mvn scm:tag
                     </li>
                     <li>Deploy the release to Sonatype OSS Maven repository.
                     <source>
-mvn deploy
+mvn deploy -Dmaven.test.skip=true
 </source>
-                    and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories">Sonatype OSS staging repository</a> to close and release the artifacts.
+                    and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a> to close and release the artifacts.
                     </li>
                     <li>
                         Create a shell to shell.sourceforge.net with your username and project group
