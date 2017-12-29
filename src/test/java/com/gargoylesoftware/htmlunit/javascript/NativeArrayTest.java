@@ -365,6 +365,69 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"3", "1", "two", "3"},
+            IE = "not supported")
+    @NotYetImplemented
+    public void fromUserDefinedIterable() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var myIterable = {};\n"
+            + "    myIterable[Symbol.iterator] = function*() {\n"
+            + "        yield 1;\n"
+            + "        yield 'two';\n"
+            + "        yield 3;\n"
+            + "      };\n"
+            + "    var arr = Array.from(myIterable);\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "not supported")
+    public void fromNativeObject() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var arr = Array.from({firstName: 'Erika', age: 42});\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"true", "true", "true", "true", "false", "false", "false",
                 "false", "false", "false", "false", "false", "false"})
     public void isArray() throws Exception {

@@ -19,9 +19,9 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -57,10 +57,11 @@ public final class ArrayCustom {
                     array[i] = scriptable.get(i, scriptable);
                 }
             }
+
             final Object iterator = scriptable.get(Symbol.ITERATOR_STRING, scriptable);
             if (iterator != Scriptable.NOT_FOUND) {
                 final List<Object> list = new ArrayList<>();
-                final Iterator it = (Iterator) ((FunctionObject) iterator)
+                final Iterator it = (Iterator) ((BaseFunction) iterator)
                         .call(context, thisObj.getParentScope(), scriptable, new Object[0]);
                 SimpleScriptable next = it.next();
                 boolean done = (boolean) next.get("done");
