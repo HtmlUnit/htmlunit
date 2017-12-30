@@ -191,8 +191,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "false", "false", "0", "2", "p"},
-            FF = {"1", "false", "true", "0", "2", "p"})
+    @Alerts(DEFAULT = {"1", "false", "false", "0", "2", "p", "vertical-align: top;"},
+            FF = {"1", "false", "true", "0", "2", "p", "vertical-align: top;"})
     public void addRule_insertRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -205,9 +205,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  if (s.insertRule)\n"
             + "    alert(s.insertRule('div { color: red; }', 0));\n"
             + "  else\n"
-            + "    alert(s.addRule('div', 'color: red;', 1));\n"
+            + "    alert(s.addRule('div', 'color: red;'));\n"
             + "  alert(rules.length);\n"
             + "  alert(rules[1].selectorText);\n"
+            + "  alert(rules[1].style.cssText);\n"
             + "}</script>\n"
             + "<style id='myStyle'>p { vertical-align:top }</style>\n"
             + "</head><body onload='doTest()'>\n"
@@ -217,12 +218,45 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     }
 
     /**
+     * Minimal test for addRule / insertRule.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "-1", "div", "", "2"},
+            IE = {"1", "1", "div", "", "2"},
+            FF = {"1", "1"})
+    public void addRuleInvalidRule() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function doTest() {\n"
+                + "    var f = document.getElementById('myStyle');\n"
+                + "    var s = f.sheet ? f.sheet : f.styleSheet;\n"
+                + "    var rules = s.cssRules || s.rules;\n"
+                + "    alert(rules.length);\n"
+                + "    if (s.addRule) {\n"
+                + "      alert(s.addRule('div', 'invalid'));\n"
+                + "      alert(rules[rules.length - 1].selectorText);\n"
+                + "      alert(rules[rules.length - 1].style.cssText);\n"
+                + "    }\n"
+                + "    alert(rules.length);\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "  <style id='myStyle'>p { vertical-align:top }</style>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Minimal test for removeRule / deleteRule.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"2", "false", "false", "undefined", "1", "div"},
-            FF = {"2", "false", "true", "undefined", "1", "div"})
+    @Alerts(DEFAULT = {"2", "false", "false", "undefined", "1", "div", "color: red;"},
+            FF = {"2", "false", "true", "undefined", "1", "div", "color: red;"})
     public void removeRule_deleteRule() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -238,6 +272,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    alert(s.removeRule(0));\n"
             + "  alert(rules.length);\n"
             + "  alert(rules[0].selectorText);\n"
+            + "  alert(rules[0].style.cssText);\n"
             + "}</script>\n"
             + "<style id='myStyle'>p { vertical-align:top } div { color: red; }</style>\n"
             + "</head><body onload='doTest()'>\n"
@@ -277,7 +312,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "1", "div"})
+    @Alerts({"2", "1", "div", "color: red;"})
     public void deleteRuleIgnored() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -292,6 +327,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "      s.removeRule(0);\n"
             + "    alert(rules.length);\n"
             + "    alert(rules[0].selectorText);\n"
+            + "    alert(rules[0].style.cssText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
             + "<style id='myStyle'>\n"
@@ -309,7 +345,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "1", "p"})
+    @Alerts({"2", "1", "p", "vertical-align: top;"})
     public void deleteRuleIgnoredLast() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function doTest() {\n"
@@ -324,6 +360,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "      s.removeRule(1);\n"
             + "    alert(rules.length);\n"
             + "    alert(rules[0].selectorText);\n"
+            + "    alert(rules[0].style.cssText);\n"
             + "  } catch(err) { alert('exception'); }\n"
             + "}</script>\n"
             + "<style id='myStyle'>\n"
@@ -342,7 +379,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", ".testStyleDef", ".testStyle"})
+    @Alerts({"2", ".testStyleDef", "height: 42px;", ".testStyle", "width: 24px;"})
     public void insertRuleLeadingWhitespace() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -356,7 +393,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    s.insertRule(' .testStyleDef { height: 42px; }', 0);\n"
             + "    alert(rules.length);\n"
             + "    alert(rules[0].selectorText);\n"
+            + "    alert(rules[0].style.cssText);\n"
             + "    alert(rules[1].selectorText);\n"
+            + "    alert(rules[1].style.cssText);\n"
             + "  }\n"
             + "}</script>\n"
             + "<style id='myStyle'></style>\n"

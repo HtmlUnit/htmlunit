@@ -1176,14 +1176,23 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxFunction({IE, CHROME})
     public int addRule(final String selector, final String rule) {
-        final String completeRule = selector + " {" + rule + "}";
+        String completeRule = selector + " {" + rule + "}";
         try {
             initCssRules();
             wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
             refreshCssRules();
         }
         catch (final DOMException e) {
-            throw Context.throwAsScriptRuntimeEx(e);
+            // in case of error try with an empty rule
+            completeRule = selector + " {}";
+            try {
+                initCssRules();
+                wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+                refreshCssRules();
+            }
+            catch (final DOMException ex) {
+                throw Context.throwAsScriptRuntimeEx(ex);
+            }
         }
         return -1;
     }

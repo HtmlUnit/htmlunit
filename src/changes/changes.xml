@@ -7,6 +7,18 @@
     </properties>
 
     <body>
+        <release version="2.30" date="xx, 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1943">
+                JavaScript: CSSStyleSheet#addRule fixed error handling
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CSSStyleDeclaration#cssText throws an NPE when in stylesheet mode
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CSSStyleDeclaration#cssText usually return a ';' after the last rule
+            </action>
+        </release>
+
         <release version="2.29" date="December 28, 2017" description="Bugfixes, Chrome 63, WebStart support">
             <action type="add" dev="rbri">
                 JavaScript: TextEncoder/TextDecoder impl added.

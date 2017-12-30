@@ -273,7 +273,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * Initializes the object.
      * @param htmlElement the element that this style describes
      */
-    void initialize(final Element element) {
+    private void initialize(final Element element) {
         // Initialize.
         WebAssert.notNull("htmlElement", element);
         jsElement_ = element;
@@ -1217,6 +1217,13 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxGetter
     public String getCssText() {
+        if (styleDeclaration_ != null) {
+            final String text = styleDeclaration_.getCssText();
+            if (styleDeclaration_.getLength() > 0) {
+                return text + ";";
+            }
+            return text;
+        }
         return jsElement_.getDomNodeOrDie().getAttribute("style");
     }
 
@@ -1226,6 +1233,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setCssText(final String value) {
+        if (styleDeclaration_ != null) {
+            styleDeclaration_.setCssText(value);
+            return;
+        }
         jsElement_.getDomNodeOrDie().setAttribute("style", value);
     }
 
