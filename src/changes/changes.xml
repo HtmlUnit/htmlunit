@@ -12,6 +12,12 @@
                 JavaScript: CSSStyleSheet#addRule fixed error handling
             </action>
             <action type="fix" dev="rbri">
+                JavaScript: CSSStyleSheet#addRule fixed return value when simulating ie
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScript: CSSStyleSheet#insertRule improved error handling
+            </action>
+            <action type="fix" dev="rbri">
                 JavaScript: CSSStyleDeclaration#cssText throws an NPE when in stylesheet mode
             </action>
             <action type="fix" dev="rbri">

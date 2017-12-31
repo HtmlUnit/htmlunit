@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHEC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NO_TARGET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -1106,6 +1107,19 @@ public class CSSStyleSheet extends StyleSheet {
             return result;
         }
         catch (final DOMException e) {
+            // in case of error try with an empty rule
+            final int pos = rule.indexOf('{');
+            if (pos > -1) {
+                final String newRule = rule.substring(0, pos) + "{}";
+                try {
+                    final int result = wrapped_.insertRule(newRule, fixIndex(position));
+                    refreshCssRules();
+                    return result;
+                }
+                catch (final DOMException ex) {
+                    throw Context.throwAsScriptRuntimeEx(ex);
+                }
+            }
             throw Context.throwAsScriptRuntimeEx(e);
         }
     }
@@ -1186,13 +1200,15 @@ public class CSSStyleSheet extends StyleSheet {
             // in case of error try with an empty rule
             completeRule = selector + " {}";
             try {
-                initCssRules();
                 wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
                 refreshCssRules();
             }
             catch (final DOMException ex) {
                 throw Context.throwAsScriptRuntimeEx(ex);
             }
+        }
+        if (getBrowserVersion().hasFeature(STYLESHEET_ADD_RULE_RETURNS_POS)) {
+            return wrapped_.getCssRules().getLength() - 1;
         }
         return -1;
     }

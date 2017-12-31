@@ -1509,6 +1509,13 @@ public enum BrowserVersionFeatures {
     STRING_TRIM_LEFT_RIGHT,
 
     /**
+     * Method addRule returns the rule position instead of -1.
+     * (href empty) is null.
+     */
+    @BrowserFeature(IE)
+    STYLESHEET_ADD_RULE_RETURNS_POS,
+
+    /**
      * Indicates that the href property for a &lt;link rel="stylesheet" type="text/css" href="" /&gt;
      * (href empty) is null.
      */
