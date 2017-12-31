@@ -40,12 +40,13 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
@@ -640,6 +641,136 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "text/xml",
                                            UTF_8, responseHeaders);
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Test the correct origin header.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts({"ok", "4", "<null>"})
+    public void baseUrlAbsoluteRequest() throws Exception {
+        final String html = "<html><head>\n"
+            + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  try {\n"
+            + "    xhr.open('GET', '" + URL_SECOND + "', false);\n"
+            + "    alert('ok');\n"
+            + "    xhr.send();\n"
+            + "    alert(xhr.readyState);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("access-control-allow-origin", "*"));
+        getMockWebConnection().setResponse(URL_SECOND,
+                                           "<empty/>",
+                                           200,
+                                           "OK",
+                                           "text/xml",
+                                           UTF_8, responseHeaders);
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        String origin = lastAdditionalHeaders.get(HttpHeader.ORIGIN);
+        if (origin == null) {
+            origin = "<null>";
+        }
+        assertEquals(getExpectedAlerts()[2], origin);
+    }
+
+    /**
+     * Test the correct origin header.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"ok", "4", "http://localhost:12345"},
+            IE = {"ok", "4", "<null>"})
+    public void baseUrlAbsoluteRequestOtherUrl() throws Exception {
+        final String html = "<html><head>\n"
+            + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  try {\n"
+            + "    xhr.open('GET', '" + URL_CROSS_ORIGIN2 + "', false);\n"
+            + "    alert('ok');\n"
+            + "    xhr.send();\n"
+            + "    alert(xhr.readyState);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("access-control-allow-origin", "*"));
+        getMockWebConnection().setResponse(URL_CROSS_ORIGIN2,
+                                           "<empty/>",
+                                           200,
+                                           "OK",
+                                           "text/xml",
+                                           UTF_8, responseHeaders);
+
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        String origin = lastAdditionalHeaders.get(HttpHeader.ORIGIN);
+        if (origin == null) {
+            origin = "<null>";
+        }
+        assertEquals(getExpectedAlerts()[2], origin);
+    }
+
+    /**
+     * Test the correct origin header.
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"ok", "4", "http://localhost:12345"},
+            IE = {"ok", "4", "<null>"})
+    public void baseUrlRelativeRequest() throws Exception {
+        final String html = "<html><head>\n"
+            + "<base href='" + URL_CROSS_ORIGIN_BASE + "'>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  try {\n"
+            + "    xhr.open('GET', 'corsAllowAll', false);\n"
+            + "    alert('ok');\n"
+            + "    xhr.send();\n"
+            + "    alert(xhr.readyState);\n"
+            + "  } catch(e) { alert('exception ' + e); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
+        responseHeaders.add(new NameValuePair("access-control-allow-origin", "*"));
+        getMockWebConnection().setResponse(new URL(URL_CROSS_ORIGIN_BASE, "/corsAllowAll"),
+                                           "<empty/>",
+                                           200,
+                                           "OK",
+                                           "text/xml",
+                                           UTF_8, responseHeaders);
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        String origin = lastAdditionalHeaders.get(HttpHeader.ORIGIN);
+        if (origin == null) {
+            origin = "<null>";
+        }
+        assertEquals(getExpectedAlerts()[2], origin);
     }
 
     @Override

@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1944">
+                JavaScript: Invalid 'Origin' header was sent as part of XMLHttpRequest 
+                if the request url was absolute and the page contains a base tag
+            </action>
             <action type="fix" dev="rbri" issue="1943">
                 JavaScript: CSSStyleSheet#addRule fixed error handling
             </action>

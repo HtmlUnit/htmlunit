@@ -679,8 +679,6 @@ public class HtmlPage extends SgmlPage {
      * @exception MalformedURLException if an error occurred when creating a URL object
      */
     public URL getFullyQualifiedUrl(String relativeUrl) throws MalformedURLException {
-        final URL baseUrl = getBaseURL();
-
         // to handle http: and http:/ in FF (Bug #474)
         if (hasFeature(URL_MISSING_SLASHES)) {
             boolean incorrectnessNotified = false;
@@ -693,7 +691,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        return WebClient.expandUrl(baseUrl, relativeUrl);
+        return WebClient.expandUrl(getBaseURL(), relativeUrl);
     }
 
     /**
