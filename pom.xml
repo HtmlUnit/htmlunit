@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.5</checkstyle.version>
+        <checkstyle.version>8.7</checkstyle.version>
         <jetty.version>9.4.8.v20171121</jetty.version>
         <selenium.version>3.8.1</selenium.version>
     </properties>
@@ -85,7 +85,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.6</version>
+                <version>3.7</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -971,7 +971,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>htmlunit-driver</artifactId>
-            <version>2.28.5</version>
+            <version>2.29.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
