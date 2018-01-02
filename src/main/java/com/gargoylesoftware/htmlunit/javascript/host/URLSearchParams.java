@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -45,6 +47,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass({CHROME, FF})
 public class URLSearchParams extends SimpleScriptable {
+
+    private static final String ITERATOR_NAME = "URLSearchParamsIterator";
+    private static com.gargoylesoftware.htmlunit.javascript.host.Iterator ITERATOR_PROTOTYPE_;
 
     private final List<Entry<String, String>> params_ = new LinkedList<>();
 
@@ -88,7 +93,7 @@ public class URLSearchParams extends SimpleScriptable {
 
     private Entry<String, String> splitQueryParameter(final String singleParam) {
         final int idx = singleParam.indexOf('=');
-        if (idx > 0) {
+        if (idx > -1) {
             final String key = singleParam.substring(0, idx);
             String value = null;
             if (idx < singleParam.length()) {
@@ -214,6 +219,69 @@ public class URLSearchParams extends SimpleScriptable {
             }
         }
         return false;
+    }
+
+    /**
+     * The URLSearchParams.entries() method returns an iterator allowing to go through
+     * all key/value pairs contained in this object. The key and value of each pair
+     * are USVString objects.
+     *
+     * @return an iterator.
+     */
+    @JsxFunction
+    public Object entries() {
+        final SimpleScriptable object =
+                new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, params_.iterator());
+        object.setParentScope(getParentScope());
+        setIteratorPrototype(object);
+        return object;
+    }
+
+    /**
+     * The URLSearchParams.keys() method returns an iterator allowing to go through
+     * all keys contained in this object. The keys are USVString objects.
+     *
+     * @return an iterator.
+     */
+    @JsxFunction
+    public Object keys() {
+        final List<String> keys = new ArrayList<>(params_.size());
+        for (Entry<String, String> entry : params_) {
+            keys.add(entry.getKey());
+        }
+
+        final SimpleScriptable object =
+                new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, keys.iterator());
+        object.setParentScope(getParentScope());
+        setIteratorPrototype(object);
+        return object;
+    }
+
+    /**
+     * The URLSearchParams.values() method returns an iterator allowing to go through
+     * all values contained in this object. The values are USVString objects.
+     *
+     * @return an iterator.
+     */
+    @JsxFunction
+    public Object values() {
+        final List<String> values = new ArrayList<>(params_.size());
+        for (Entry<String, String> entry : params_) {
+            values.add(entry.getValue());
+        }
+
+        final SimpleScriptable object =
+                new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, values.iterator());
+        object.setParentScope(getParentScope());
+        setIteratorPrototype(object);
+        return object;
+    }
+
+    private static void setIteratorPrototype(final Scriptable scriptable) {
+        if (ITERATOR_PROTOTYPE_ == null) {
+            ITERATOR_PROTOTYPE_ = new com.gargoylesoftware.htmlunit.javascript.host.Iterator(ITERATOR_NAME, null);
+        }
+        scriptable.setPrototype(ITERATOR_PROTOTYPE_);
     }
 
     /**

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 
 import org.junit.Test;
@@ -242,6 +243,135 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        alert(param);\n"
             + "        param.set('key4', null);\n"
             + "        alert(param);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function keys() { [native code] }", "[object Iterator]",
+                    "key1", "key2", "key1", "", "true"},
+            FF = {"function keys() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+                    "key1", "key2", "key1", "", "true"},
+            IE = {})
+    @NotYetImplemented(CHROME)
+    public void keys() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=&key1=val3&=val4');\n"
+
+            + "        alert(param.keys);\n"
+            + "        var iter = param.keys();\n"
+            + "        alert(iter);\n"
+
+            + "        var entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+
+            + "        alert(iter.next().done);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function values() { [native code] }", "[object Iterator]",
+                    "val1", "", "val3", "val4", "true"},
+            FF = {"function values() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+                    "val1", "", "val3", "val4", "true"},
+            IE = {})
+    @NotYetImplemented(CHROME)
+    public void values() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=&key1=val3&=val4');\n"
+
+            + "        alert(param.values);\n"
+            + "        var iter = param.values();\n"
+            + "        alert(iter);\n"
+
+            + "        var entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry);\n"
+
+            + "        alert(iter.next().done);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html, 666666);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function entries() { [native code] }", "[object Iterator]",
+                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+            FF = {"function entries() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+            IE = {})
+    @NotYetImplemented(CHROME)
+    public void entries() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=&key1=val3&=val4');\n"
+
+            + "        alert(param.entries);\n"
+            + "        var iter = param.entries();\n"
+            + "        alert(iter);\n"
+
+            + "        var entry = iter.next().value;\n"
+            + "        alert(entry[0] + '-' + entry[1]);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry[0] + '-' + entry[1]);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry[0] + '-' + entry[1]);\n"
+            + "        entry = iter.next().value;\n"
+            + "        alert(entry[0] + '-' + entry[1]);\n"
+
+            + "        alert(iter.next().done);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
