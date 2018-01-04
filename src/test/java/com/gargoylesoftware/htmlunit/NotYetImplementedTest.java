@@ -47,22 +47,25 @@ public class NotYetImplementedTest {
     }
 
     private void process(final File dir) throws IOException {
-        for (final File file : dir.listFiles()) {
-            final String fileName = file.getName();
-            if (file.isDirectory()
-                    && !"huge".equals(fileName)
-                    && !".svn".equals(fileName)) {
-                process(file);
-            }
-            else {
-                if (fileName.endsWith(".java")
-                        && !"SimpleWebTestCase.java".equals(fileName)
-                        && !"NotYetImplementedTest.java".equals(fileName)
-                        && !"CodeStyleTest.java".equals(fileName)) {
-                    final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
-                    final String relativePath = file.getAbsolutePath().substring(
-                        new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
-                    process(lines, relativePath);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                final String fileName = file.getName();
+                if (file.isDirectory()
+                        && !"huge".equals(fileName)
+                        && !".svn".equals(fileName)) {
+                    process(file);
+                }
+                else {
+                    if (fileName.endsWith(".java")
+                            && !"SimpleWebTestCase.java".equals(fileName)
+                            && !"NotYetImplementedTest.java".equals(fileName)
+                            && !"CodeStyleTest.java".equals(fileName)) {
+                        final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                        final String relativePath = file.getAbsolutePath().substring(
+                            new File(".").getAbsolutePath().length() - 1).replace('\\', '/');
+                        process(lines, relativePath);
+                    }
                 }
             }
         }

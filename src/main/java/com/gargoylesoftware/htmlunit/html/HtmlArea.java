@@ -22,6 +22,7 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 
@@ -288,7 +289,7 @@ public class HtmlArea extends HtmlElement {
             }
         }
         catch (final NumberFormatException e) {
-            LOG.warn("Invalid rect coords '" + coords + "'", e);
+            LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
         }
 
         final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
@@ -332,7 +333,7 @@ public class HtmlArea extends HtmlElement {
             }
         }
         catch (final NumberFormatException e) {
-            LOG.warn("Invalid poly coords '" + coords + "'", e);
+            LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
         }
 
         path.closePath();

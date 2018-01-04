@@ -202,6 +202,9 @@ public class HtmlPage4Test extends WebServerTestCase {
                 return name.startsWith("htmlunit");
             }
         });
+        if (list == null) {
+            return 0;
+        }
         return list.length;
     }
 }

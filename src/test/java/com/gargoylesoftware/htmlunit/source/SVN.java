@@ -54,13 +54,16 @@ public final class SVN {
      * @throws IOException if an exception happens
      */
     public static void deleteSVN(final File dir) throws IOException {
-        for (final File f : dir.listFiles()) {
-            if (f.isDirectory()) {
-                if (".svn".equals(f.getName())) {
-                    FileUtils.deleteDirectory(f);
-                }
-                else {
-                    deleteSVN(f);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File f : files) {
+                if (f.isDirectory()) {
+                    if (".svn".equals(f.getName())) {
+                        FileUtils.deleteDirectory(f);
+                    }
+                    else {
+                        deleteSVN(f);
+                    }
                 }
             }
         }
@@ -72,18 +75,21 @@ public final class SVN {
      * @throws IOException if an exception happens
      */
     public static void consistentNewlines(final File dir) throws IOException {
-        for (final File f : dir.listFiles()) {
-            if (f.isDirectory()) {
-                if (!".svn".equals(f.getName())) {
-                    consistentNewlines(f);
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File f : files) {
+                if (f.isDirectory()) {
+                    if (!".svn".equals(f.getName())) {
+                        consistentNewlines(f);
+                    }
                 }
-            }
-            else {
-                final String fileName = f.getName().toLowerCase(Locale.ROOT);
-                for (final String extension : EOL_EXTENSIONS_) {
-                    if (fileName.endsWith(extension)) {
-                        FileUtils.writeLines(f, FileUtils.readLines(f, ISO_8859_1));
-                        break;
+                else {
+                    final String fileName = f.getName().toLowerCase(Locale.ROOT);
+                    for (final String extension : EOL_EXTENSIONS_) {
+                        if (fileName.endsWith(extension)) {
+                            FileUtils.writeLines(f, FileUtils.readLines(f, ISO_8859_1));
+                            break;
+                        }
                     }
                 }
             }

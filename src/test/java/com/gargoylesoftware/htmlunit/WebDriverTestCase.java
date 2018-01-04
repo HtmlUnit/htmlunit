@@ -494,7 +494,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
-            STATIC_SERVER_ = new Server(PORT);
+            final Server server = new Server(PORT);
 
             final WebAppContext context = new WebAppContext();
             context.setContextPath("/");
@@ -521,27 +521,30 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 context.addFilter(AsciiEncodingFilter.class, "/*",
                         EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
             }
-            STATIC_SERVER_.setHandler(context);
-            STATIC_SERVER_.start();
+            server.setHandler(context);
+            server.start();
+            STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            STATIC_SERVER2_ = new Server(PORT2);
+            Server server = new Server(PORT2);
             final WebAppContext context2 = new WebAppContext();
             context2.setContextPath("/");
             context2.setResourceBase("./");
             context2.addServlet(MockWebConnectionServlet.class, "/*");
-            STATIC_SERVER2_.setHandler(context2);
-            STATIC_SERVER2_.start();
+            server.setHandler(context2);
+            server.start();
+            STATIC_SERVER2_ = server;
 
-            STATIC_SERVER3_ = new Server(PORT3);
+            server = new Server(PORT3);
             final WebAppContext context3 = new WebAppContext();
             context3.setContextPath("/");
             context3.setResourceBase("./");
             context3.addServlet(MockWebConnectionServlet.class, "/*");
-            STATIC_SERVER3_.setHandler(context3);
-            STATIC_SERVER3_.start();
+            server.setHandler(context3);
+            server.start();
+            STATIC_SERVER3_ = server;
             /*
              * The mock connection servlet call sit under both servers, so long as tests
              * keep the URLs distinct.

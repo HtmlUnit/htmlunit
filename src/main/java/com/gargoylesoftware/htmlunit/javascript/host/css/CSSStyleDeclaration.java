@@ -3141,7 +3141,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 || valueString.endsWith("mm")
                 || valueString.endsWith("in")
                 || valueString.endsWith("pc")
-                || valueString.endsWith("pc")
                 || valueString.endsWith("ch")
                 || valueString.endsWith("vh")
                 || valueString.endsWith("vw")) {

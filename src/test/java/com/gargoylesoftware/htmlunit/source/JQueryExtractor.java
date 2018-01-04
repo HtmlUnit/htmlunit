@@ -157,12 +157,15 @@ public final class JQueryExtractor {
             }
         }
         final Map<String, Expectations> browserExpectations = new HashMap<>();
-        for (final File file : dir.listFiles()) {
-            if (file.isFile() && file.getName().endsWith(".txt")) {
-                for (final TestedBrowser b : browsers) {
-                    final String browserName = b.name();
-                    if (file.getName().equalsIgnoreCase("results." + browserName.replace('_', '.') + ".txt")) {
-                        browserExpectations.put(browserName, Expectations.readExpectations(file));
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isFile() && file.getName().endsWith(".txt")) {
+                    for (final TestedBrowser b : browsers) {
+                        final String browserName = b.name();
+                        if (file.getName().equalsIgnoreCase("results." + browserName.replace('_', '.') + ".txt")) {
+                            browserExpectations.put(browserName, Expectations.readExpectations(file));
+                        }
                     }
                 }
             }

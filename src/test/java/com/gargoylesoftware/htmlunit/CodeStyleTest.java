@@ -982,7 +982,12 @@ public class CodeStyleTest {
     }
 
     private void testTests(final File dir) throws Exception {
-        for (final File file : dir.listFiles()) {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        for (final File file : files) {
             if (file.isDirectory()) {
                 if (!".svn".equals(file.getName())) {
                     testTests(file);

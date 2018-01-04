@@ -142,17 +142,20 @@ public class BrowserVersionFeaturesTest  {
     }
 
     private void unusedCheck(final File dir, final List<String> unusedFeatures) throws IOException {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                unusedCheck(file, unusedFeatures);
-            }
-            else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
-                final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
-                for (final String line : lines) {
-                    for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {
-                        if (line.contains(browserVersionFeatures + '.' + it.next())) {
-                            it.remove();
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    unusedCheck(file, unusedFeatures);
+                }
+                else if (file.getName().endsWith(".java")) {
+                    final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                    final String browserVersionFeatures = BrowserVersionFeatures.class.getSimpleName();
+                    for (final String line : lines) {
+                        for (final Iterator<String> it = unusedFeatures.iterator(); it.hasNext();) {
+                            if (line.contains(browserVersionFeatures + '.' + it.next())) {
+                                it.remove();
+                            }
                         }
                     }
                 }

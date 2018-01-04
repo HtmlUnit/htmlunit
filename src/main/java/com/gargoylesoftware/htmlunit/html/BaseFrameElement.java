@@ -383,7 +383,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if ("src".equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }

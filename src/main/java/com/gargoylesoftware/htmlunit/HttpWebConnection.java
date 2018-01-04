@@ -100,7 +100,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpProcessorBuilder;
-import org.apache.http.protocol.HttpRequestExecutor;
 import org.apache.http.protocol.RequestContent;
 import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
@@ -1005,11 +1004,6 @@ public class HttpWebConnection implements WebConnection {
             PublicSuffixMatcher publicSuffixMatcher = getField(builder, "publicSuffixMatcher");
             if (publicSuffixMatcher == null) {
                 publicSuffixMatcher = PublicSuffixMatcherLoader.getDefault();
-            }
-
-            HttpRequestExecutor requestExec = getField(builder, "requestExec");
-            if (requestExec == null) {
-                requestExec = new HttpRequestExecutor();
             }
 
             LayeredConnectionSocketFactory sslSocketFactory = getField(builder, "sslSocketFactory");

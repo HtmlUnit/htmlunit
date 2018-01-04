@@ -15,6 +15,7 @@
 package netscape.javascript;
 
 import java.applet.Applet;
+import java.util.Arrays;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -62,7 +63,7 @@ public class JSObject {
      */
     public Object call(final String methodName, final Object[] args) throws JSException {
         if (LOG.isInfoEnabled()) {
-            LOG.info("JSObject call '" + methodName + "(" + args + ")'");
+            LOG.info("JSObject call '" + methodName + "(" + Arrays.toString(args) + ")'");
         }
 
         final Object jsResult = ScriptableObject.callMethod(scriptableObject_, methodName, args);

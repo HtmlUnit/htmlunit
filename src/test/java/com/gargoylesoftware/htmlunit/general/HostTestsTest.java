@@ -72,16 +72,19 @@ public class HostTestsTest {
     }
 
     private void collectionObjectNames(final File dir, final Set<String> set) throws IOException {
-        for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !".svn".equals(file.getName())) {
-                collectionObjectNames(file, set);
-            }
-            else if (file.getName().endsWith(".java")) {
-                final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
-                for (final String line : lines) {
-                    final Matcher matcher = pattern_.matcher(line);
-                    while (matcher.find()) {
-                        set.add(matcher.group(1));
+        final File[] files = dir.listFiles();
+        if (files != null) {
+            for (final File file : files) {
+                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                    collectionObjectNames(file, set);
+                }
+                else if (file.getName().endsWith(".java")) {
+                    final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
+                    for (final String line : lines) {
+                        final Matcher matcher = pattern_.matcher(line);
+                        while (matcher.find()) {
+                            set.add(matcher.group(1));
+                        }
                     }
                 }
             }

@@ -319,7 +319,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
-            STATIC_SERVER_ = new Server(PORT);
+            final Server server = new Server(PORT);
 
             final WebAppContext context = new WebAppContext();
             context.setContextPath("/");
@@ -341,8 +341,9 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
 
             context.addServlet(MockWebConnectionServlet.class, "/*");
-            STATIC_SERVER_.setHandler(context);
-            STATIC_SERVER_.start();
+            server.setHandler(context);
+            server.start();
+            STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
     }
