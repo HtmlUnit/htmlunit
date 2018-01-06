@@ -1902,6 +1902,17 @@ public class HtmlPageTest extends SimpleWebTestCase {
                 page.addAutoCloseable(new WebSocket());
             }
         });
+        page.cleanUp();
     }
 
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void addAutoCloseableNull() throws Exception {
+        final String html = "";
+        final HtmlPage page = loadPage(html);
+        page.addAutoCloseable(null);
+        page.cleanUp();
+    }
 }

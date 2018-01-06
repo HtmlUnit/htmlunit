@@ -331,9 +331,6 @@ public class HtmlPage extends SgmlPage {
         cleaning_ = false;
         if (autoCloseableList_ != null) {
             for (final AutoCloseable closeable : new ArrayList<>(autoCloseableList_)) {
-                if (closeable == null) {
-                    continue;
-                }
                 try {
                     closeable.close();
                 }
@@ -2326,6 +2323,10 @@ public class HtmlPage extends SgmlPage {
      * @param autoCloseable the autoclosable
      */
     public void addAutoCloseable(final AutoCloseable autoCloseable) {
+        if (autoCloseable == null) {
+            return;
+        }
+
         if (autoCloseableList_ == null) {
             autoCloseableList_ = new ArrayList<>();
         }
