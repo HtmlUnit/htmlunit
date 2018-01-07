@@ -151,6 +151,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
     private transient AbstractJavaScriptEngine<?> scriptEngine_;
+    private transient List<LoadJob> loadQueue_;
     private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
@@ -222,34 +223,30 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param browserVersion the browser version to simulate
      */
     public WebClient(final BrowserVersion browserVersion) {
-        WebAssert.notNull("browserVersion", browserVersion);
-        init(browserVersion, new ProxyConfig());
+        this(BrowserVersion.getDefault(), null, -1);
     }
 
     /**
      * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
      * @param browserVersion the browser version to simulate
-     * @param proxyHost the server that will act as proxy
+     * @param proxyHost the server that will act as proxy or null for no proxy
      * @param proxyPort the port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
         WebAssert.notNull("browserVersion", browserVersion);
-        WebAssert.notNull("proxyHost", proxyHost);
-        init(browserVersion, new ProxyConfig(proxyHost, proxyPort));
-    }
 
-    /**
-     * Generic initialization logic used by all constructors. This method does not perform any
-     * parameter validation; such validation must be handled by the constructors themselves.
-     * @param browserVersion the browser version to simulate
-     * @param proxyConfig the proxy configuration to use
-     */
-    private void init(final BrowserVersion browserVersion, final ProxyConfig proxyConfig) {
         browserVersion_ = browserVersion;
-        getOptions().setProxyConfig(proxyConfig);
+        if (proxyHost == null) {
+            getOptions().setProxyConfig(new ProxyConfig());
+        }
+        else {
+            getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort));
+        }
 
         webConnection_ = createWebConnection(); // this has to be done after the browser version was set
         scriptEngine_ = new JavaScriptEngine(this);
+        loadQueue_ = new ArrayList<>();
+
         // The window must be constructed AFTER the script engine.
         addWebWindowListener(new CurrentWindowTracker(this));
         currentWindow_ = new TopLevelWindow("", this);
@@ -2046,6 +2043,7 @@ public class WebClient implements Serializable, AutoCloseable {
         webConnection_ = createWebConnection();
         scriptEngine_ = new JavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
+        loadQueue_ = new ArrayList<>();
 
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
             initMSXMLActiveX();
@@ -2102,8 +2100,6 @@ public class WebClient implements Serializable, AutoCloseable {
             return false;
         }
     }
-
-    private final List<LoadJob> loadQueue_ = new ArrayList<>();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
