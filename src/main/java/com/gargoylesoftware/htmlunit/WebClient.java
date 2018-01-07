@@ -223,7 +223,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param browserVersion the browser version to simulate
      */
     public WebClient(final BrowserVersion browserVersion) {
-        this(BrowserVersion.getDefault(), null, -1);
+        this(browserVersion, null, -1);
     }
 
     /**
