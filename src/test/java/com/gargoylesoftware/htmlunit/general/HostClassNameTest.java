@@ -10124,15 +10124,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("exception")
-    public void urlSearchParamsIterator() throws Exception {
-        test("URLSearchParamsIterator");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

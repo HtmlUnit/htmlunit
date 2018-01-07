@@ -36,6 +36,7 @@ import org.junit.Test;
  * {@link HostClassNameTest} and {@link HostTypeOfTest} include those objects.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HostTestsTest {
 
@@ -61,6 +62,9 @@ public class HostTestsTest {
             set.remove("Arguments");
             set.add("arguments");
         }
+
+        set.remove("Iterator");
+        set.remove("URLSearchParamsIterator");
 
         // Worker
         set.remove("DedicatedWorkerGlobalScope");
