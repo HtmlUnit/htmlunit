@@ -50,8 +50,6 @@ public class ExternalTest {
     /** Chrome driver. */
     static String CHROME_DRIVER_ = "2.33";
 
-    private static final DateFormat TEAM_CITY_FORMAT_ = new SimpleDateFormat("dd MMM yy HH:mm", Locale.ROOT);
-
     /**
      * Tests that POM dependencies are the latest.
      *
@@ -250,7 +248,8 @@ public class ExternalTest {
             final String triggerDate = triggerText.substring(start + marker.length());
 
             final Calendar buildCalendar = Calendar.getInstance(Locale.ROOT);
-            buildCalendar.setTime(TEAM_CITY_FORMAT_.parse(triggerDate));
+            buildCalendar.setTime(new SimpleDateFormat("dd MMM yy HH:mm", Locale.ROOT).parse(triggerDate));
+
             return Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) != buildCalendar.get(Calendar.WEEK_OF_YEAR);
         }
     }
