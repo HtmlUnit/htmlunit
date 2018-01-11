@@ -67,6 +67,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -1089,10 +1090,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Reads the number of JS threads remaining from unit tests run before.
      * This should be always 0, if {@link #isWebClientCached()} is {@code false}.
+     * @throws InterruptedException in case of problems
      */
     @Before
-    public void beforeTest() {
+    public void beforeTest() throws InterruptedException {
         if (!isWebClientCached()) {
+            if (!getJavaScriptThreads().isEmpty()) {
+                Thread.sleep(200);
+            }
             assertTrue(getJavaScriptThreads().isEmpty());
         }
     }
@@ -1104,9 +1109,21 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @After
     @Override
     public void releaseResources() {
-        // getTitle will do an implicit check for open alerts
+        final List<String> unhandledAlerts = new ArrayList<>();
         if (webDriver_ != null) {
-            webDriver_.getTitle();
+            UnhandledAlertException ex = null;
+            do {
+                ex = null;
+                try {
+                    // getTitle will do an implicit check for open alerts
+                    webDriver_.getTitle();
+                }
+                catch (final UnhandledAlertException e) {
+                    ex = e;
+                    unhandledAlerts.add(e.getMessage());
+                }
+            }
+            while (ex != null);
         }
 
         super.releaseResources();
@@ -1171,6 +1188,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
         }
+        assertTrue("There are still unhandled alerts", unhandledAlerts.isEmpty());
     }
 
     /**
