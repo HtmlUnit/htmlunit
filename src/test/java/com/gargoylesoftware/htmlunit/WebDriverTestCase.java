@@ -426,16 +426,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
 
             if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
-                // disable the new marionette interface because it requires ff47 or more
-                System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
-
                 return createFirefoxDriver(FF45_BIN_);
             }
 
             if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
-                // disable the new marionette interface because it requires ff47 or more
-                System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
-
                 return createFirefoxDriver(FF52_BIN_);
             }
 
@@ -457,6 +451,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private static FirefoxDriver createFirefoxDriver(final String binary) {
+        // disable the new marionette interface because it requires ff47 or more
+        System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
+
         if (binary != null) {
             final FirefoxOptions options = new FirefoxOptions();
             options.setBinary(binary);
@@ -1107,6 +1104,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     @After
     @Override
     public void releaseResources() {
+        // getTitle will do an implicit check for open alerts
+        if (webDriver_ != null) {
+            webDriver_.getTitle();
+        }
+
         super.releaseResources();
 
         if (!isWebClientCached()) {
