@@ -575,7 +575,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.tagName("a")).click();
+
         assertEquals(1, getMockWebConnection().getRequestCount());
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**

@@ -109,7 +109,7 @@ public class FormDataTest extends WebDriverTestCase {
         servlets.put("/test2", PostServlet.class);
 
         final WebDriver driver = loadPage2(html, servlets);
-        final List<String> alerts = getCollectedAlerts(driver);
+        final List<String> alerts = getCollectedAlerts(driver, 1);
         if (!alerts.isEmpty()) {
             String[] lines = alerts.get(0).split("\\n");
             if (lines.length == 2 && lines[0].isEmpty()) {
@@ -156,7 +156,7 @@ public class FormDataTest extends WebDriverTestCase {
         servlets.put("/test2", PostServlet.class);
 
         final WebDriver driver = loadPage2(html, servlets);
-        final List<String> alerts = getCollectedAlerts(driver);
+        final List<String> alerts = getCollectedAlerts(driver, 1);
         if (!alerts.isEmpty()) {
             final String[] lines = alerts.get(0).split("\\n");
             assertEquals("Response: " + alerts.get(0) + "; line count", 21, lines.length);
@@ -243,7 +243,7 @@ public class FormDataTest extends WebDriverTestCase {
                 fileName = tstFile.getName();
             }
 
-            final List<String> alerts = getCollectedAlerts(driver);
+            final List<String> alerts = getCollectedAlerts(driver, 1);
             if (!alerts.isEmpty()) {
                 final String[] lines = alerts.get(0).split("\\n");
                 assertEquals(6, lines.length);
@@ -426,7 +426,7 @@ public class FormDataTest extends WebDriverTestCase {
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/test2", PostServlet.class);
         final WebDriver driver = loadPage2(html, servlets);
-        final String alerts = getCollectedAlerts(driver).get(0);
+        final String alerts = getCollectedAlerts(driver, 1).get(0);
         for (String expected : getExpectedAlerts()) {
             assertTrue(expected + " not found", alerts.contains(expected));
         }
@@ -597,7 +597,7 @@ public class FormDataTest extends WebDriverTestCase {
         servlets.put("/test2", PostServlet.class);
 
         final WebDriver driver = loadPage2(html, servlets);
-        final List<String> alerts = getCollectedAlerts(driver);
+        final List<String> alerts = getCollectedAlerts(driver, 1);
 
         if (alerts.get(0).equals("no set")) {
             assertEquals(getExpectedAlerts(), alerts);
@@ -677,7 +677,7 @@ public class FormDataTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            final List<String> alerts = getCollectedAlerts(driver);
+            final List<String> alerts = getCollectedAlerts(driver, 1);
             if (!alerts.isEmpty()) {
                 final String[] lines = alerts.get(0).split("\\n");
                 assertEquals("Response: " + alerts.get(0) + "; line count", 14, lines.length);
@@ -744,7 +744,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         driver.findElement(By.id("testBtn")).click();
 
-        final List<String> alerts = getCollectedAlerts(driver);
+        final List<String> alerts = getCollectedAlerts(driver, 1);
         if (!alerts.isEmpty()) {
             final String[] lines = alerts.get(0).split("\\n");
             assertEquals("Response: " + alerts.get(0) + "; line count", 9, lines.length);
@@ -802,7 +802,7 @@ public class FormDataTest extends WebDriverTestCase {
 
         driver.findElement(By.id("testBtn")).click();
 
-        final List<String> alerts = getCollectedAlerts(driver);
+        final List<String> alerts = getCollectedAlerts(driver, 1);
         if (!alerts.isEmpty()) {
             final String[] lines = alerts.get(0).split("\\n");
             assertEquals("Response: " + alerts.get(0) + "; line count", 5, lines.length);
