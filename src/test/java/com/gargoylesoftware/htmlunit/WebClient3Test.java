@@ -531,6 +531,7 @@ public class WebClient3Test extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
+    @NotYetImplemented
     public void javascriptContentDetectorContentTypeApplicationJavascript() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", "application/javascript");
