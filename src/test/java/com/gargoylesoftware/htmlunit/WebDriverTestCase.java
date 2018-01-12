@@ -1098,7 +1098,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             if (!getJavaScriptThreads().isEmpty()) {
                 Thread.sleep(200);
             }
-            assertTrue(getJavaScriptThreads().isEmpty());
+            assertTrue("There are already JS threads running before the test", getJavaScriptThreads().isEmpty());
         }
     }
 
@@ -1188,7 +1188,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
             }
         }
-        assertTrue("There are still unhandled alerts", unhandledAlerts.isEmpty());
+        assertTrue("There are still unhandled alerts: " + String.join("; ", unhandledAlerts),
+                        unhandledAlerts.isEmpty());
     }
 
     /**
