@@ -1118,6 +1118,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     // getTitle will do an implicit check for open alerts
                     webDriver_.getTitle();
                 }
+                catch (final NoSuchWindowException e) {
+                    // ignore
+                }
                 catch (final UnhandledAlertException e) {
                     ex = e;
                     unhandledAlerts.add(e.getMessage());
