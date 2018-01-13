@@ -235,19 +235,12 @@ public class FormDataTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            final String fileName;
-            if (getBrowserVersion().isIE()) {
-                fileName = tstFile.getAbsolutePath();
-            }
-            else {
-                fileName = tstFile.getName();
-            }
-
             final List<String> alerts = getCollectedAlerts(driver, 1);
             if (!alerts.isEmpty()) {
                 final String[] lines = alerts.get(0).split("\\n");
                 assertEquals(6, lines.length);
-                assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"" + fileName + "\"", lines[1]);
+                assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\""
+                                + tstFile.getName() + "\"", lines[1]);
                 assertEquals("Content-Type: text/plain", lines[2]);
                 assertEquals("", lines[3]);
                 assertEquals("Hello HtmlUnit", lines[4]);
