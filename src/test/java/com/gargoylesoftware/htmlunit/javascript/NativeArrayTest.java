@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -27,8 +29,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.annotations.BuildServerDiscrepancy;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.annotations.BuildServerDiscrepancy;
 
 /**
  * Array is a native JavaScript object and therefore provided by Rhino but behavior should be
@@ -307,6 +309,36 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"3", "a", "b", "c"},
+            IE = "not supported")
+    @NotYetImplemented({CHROME, FF})
+    public void fromArrayIterator() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var input = ['a', 'b', 'c'];\n"
+            + "    var arr = Array.from(input[Symbol.iterator]());\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"2", "abc", "[object Window]"},
             IE = "not supported")
     public void fromSet() throws Exception {
@@ -365,9 +397,8 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"3", "1", "two", "3"},
+    @Alerts(DEFAULT = {"1", "by"},
             IE = "not supported")
-    @NotYetImplemented
     public void fromUserDefinedIterable() throws Exception {
         final String html
             = "<html>\n"
@@ -375,16 +406,55 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  if (Array.from) {\n"
             + "    var myIterable = {};\n"
-            + "    myIterable[Symbol.iterator] = function*() {\n"
-            + "        yield 1;\n"
-            + "        yield 'two';\n"
-            + "        yield 3;\n"
+            + "    myIterable[Symbol.iterator] = function() {\n"
+            + "      return {\n"
+            + "        next: function(){\n"
+            + "          if (this._first) {;\n"
+            + "            this._first = false;\n"
+            + "            return { value: 'by', done: false };\n"
+            + "          }\n"
+            + "          return { done: true };\n"
+            + "        },\n"
+            + "        _first: true\n"
             + "      };\n"
+            + "    };\n"
+
             + "    var arr = Array.from(myIterable);\n"
             + "    alert(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
             + "      alert(arr[i]);\n"
             + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"TypeError"},
+            IE = "not supported")
+    public void fromObject() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var myIterable = {};\n"
+            + "    myIterable[Symbol.iterator] = function() {\n"
+            + "      return { done: true };\n"
+            + "    };\n"
+
+            + "    try {\n"
+            + "      Array.from(myIterable);\n"
+            + "    } catch(e) { alert('TypeError'); }\n"
             + "  } else {\n"
             + "    alert('not supported');\n"
             + "  }\n"
@@ -409,6 +479,36 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "<script>\n"
             + "  if (Array.from) {\n"
             + "    var arr = Array.from({firstName: 'Erika', age: 42});\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "abc"},
+            IE = "not supported")
+    public void fromArguments() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test(a) { return Array.from(arguments); }\n"
+
+            + "  if (Array.from) {\n"
+            + "    var arr = test('abc') \n"
             + "    alert(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
             + "      alert(arr[i]);\n"
@@ -460,7 +560,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "20"})
+    @Alerts(DEFAULT = {"function", "20"},
+            IE = "undefined")
+    @NotYetImplemented(IE)
     public void find() throws Exception {
         final String html
             = "<html>\n"
@@ -470,7 +572,9 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  alert(typeof arr.find);\n"
-            + "  alert(arr.find(isBig));\n"
+            + "  if (typeof arr.find == 'function') {\n"
+            + "    alert(arr.find(isBig));\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -483,7 +587,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "20"})
+    @Alerts(DEFAULT = {"function", "20"},
+            IE = "undefined")
+    @NotYetImplemented(IE)
     public void findPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -494,7 +600,9 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var find = Array.prototype.find;\n"
             + "  alert(typeof find);\n"
-            + "  alert(find.call(arr, isBig));\n"
+            + "  if (typeof find == 'function') {\n"
+            + "    alert(find.call(arr, isBig));\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -532,7 +640,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "1"})
+    @Alerts(DEFAULT = {"function", "1"},
+            IE = "undefined")
+    @NotYetImplemented(IE)
     public void findIndex() throws Exception {
         final String html
             = "<html>\n"
@@ -542,7 +652,9 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "\n"
             + "  var arr = [1, 20, 7, 17];\n"
             + "  alert(typeof arr.findIndex);\n"
-            + "  alert(arr.findIndex(isBig));\n"
+            + "  if (typeof arr.findIndex == 'function') {\n"
+            + "    alert(arr.findIndex(isBig));\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -555,7 +667,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function", "1"})
+    @Alerts(DEFAULT = {"function", "1"},
+            IE = "undefined")
+    @NotYetImplemented(IE)
     public void findIndexPrototype() throws Exception {
         final String html
             = "<html>\n"
@@ -566,7 +680,9 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  var arr = [1, 20, 7, 17];\n"
             + "  var findIndex = Array.prototype.findIndex;\n"
             + "  alert(typeof findIndex);\n"
-            + "  alert(findIndex.call(arr, isBig));\n"
+            + "  if (typeof findIndex == 'function') {\n"
+            + "    alert(findIndex.call(arr, isBig));\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"

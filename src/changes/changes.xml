@@ -9,6 +9,9 @@
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented">
             <action type="change" dev="rbri">
+                JavaScript: Array.from() now supports user defined iterators also.
+            </action>
+            <action type="change" dev="rbri">
                 Samples on page Get Started updated.
             </action>
             <action type="fix" dev="rbri" issue="1946">

@@ -21,8 +21,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -48,7 +51,7 @@ public final class ArrayCustom {
         final Object arrayLike = args[0];
         Object[] array = null;
         if (arrayLike instanceof Scriptable) {
-            final Scriptable scriptable = (Scriptable) arrayLike;
+            Scriptable scriptable = (Scriptable) arrayLike;
             final Object length = scriptable.get("length", scriptable);
             if (length != Scriptable.NOT_FOUND) {
                 final int size = (int) Context.toNumber(length);
@@ -60,21 +63,52 @@ public final class ArrayCustom {
 
             final Object iterator = scriptable.get(Symbol.ITERATOR_STRING, scriptable);
             if (iterator != Scriptable.NOT_FOUND) {
-                final List<Object> list = new ArrayList<>();
-                final Iterator it = (Iterator) ((BaseFunction) iterator)
+                final Object obj = ((BaseFunction) iterator)
                         .call(context, thisObj.getParentScope(), scriptable, new Object[0]);
-                SimpleScriptable next = it.next();
-                boolean done = (boolean) next.get("done");
-                Object value = next.get("value");
-                while (!done) {
-                    if (value != Undefined.instance) {
-                        list.add(value);
+
+                if (obj instanceof Iterator) {
+                    final Iterator it = (Iterator) obj;
+                    SimpleScriptable next = it.next();
+                    boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                    Object value = next.get(ES6Iterator.VALUE_PROPERTY);
+
+                    final List<Object> list = new ArrayList<>();
+                    while (!done) {
+                        if (value != Undefined.instance) {
+                            list.add(value);
+                        }
+                        next = it.next();
+                        done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                        value = next.get(ES6Iterator.VALUE_PROPERTY);
                     }
-                    next = it.next();
-                    done = (boolean) next.get("done");
-                    value = next.get("value");
+                    array = list.toArray();
                 }
-                array = list.toArray();
+                else if (obj instanceof Scriptable) {
+                    scriptable = (Scriptable) obj;
+                    // handle user defined iterator
+                    final Object nextFunct = scriptable.get(ES6Iterator.NEXT_METHOD, (Scriptable) obj);
+                    if (!(nextFunct instanceof BaseFunction)) {
+                        throw ScriptRuntime.typeError("undefined is not a function");
+                    }
+                    final Object nextObj = ((BaseFunction) nextFunct)
+                            .call(context, thisObj.getParentScope(), scriptable, new Object[0]);
+
+                    ScriptableObject next = (ScriptableObject) nextObj;
+                    boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                    Object value = next.get(ES6Iterator.VALUE_PROPERTY);
+
+                    final List<Object> list = new ArrayList<>();
+                    while (!done) {
+                        if (value != Undefined.instance) {
+                            list.add(value);
+                        }
+                        next = (ScriptableObject) ((BaseFunction) nextFunct)
+                                .call(context, thisObj.getParentScope(), scriptable, new Object[0]);
+                        done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                        value = next.get(ES6Iterator.VALUE_PROPERTY);
+                    }
+                    array = list.toArray();
+                }
             }
         }
         else if (arrayLike instanceof String) {
