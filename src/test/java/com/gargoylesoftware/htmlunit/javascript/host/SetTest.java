@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link Set}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SetTest extends WebDriverTestCase {
@@ -139,7 +140,26 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "0")
-    public void constructor() throws Exception {
+    public void constructorArray() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var mySet = new Set([2, 7]);\n"
+            + "  alert(mySet.size);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            IE = "0")
+    public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -213,6 +233,45 @@ public class SetTest extends WebDriverTestCase {
             + "  alert(mySet.has('value2'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "#77"},
+            IE = "exception")
+    public void constructorIteratorParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value) {\n"
+            + "  alert(value);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var myIterable = {};\n"
+            + "    myIterable[Symbol.iterator] = function() {\n"
+            + "      return {\n"
+            + "        next: function() {\n"
+            + "          if (this._first) {;\n"
+            + "            this._first = false;\n"
+            + "            return { value: '#77', done: false };\n"
+            + "          }\n"
+            + "          return { done: true };\n"
+            + "        },\n"
+            + "        _first: true\n"
+            + "      };\n"
+            + "    };\n"
+            + "    var mySet = new Set(myIterable);\n"
+            + "    alert(mySet.size);\n"
+            + "    mySet.forEach(logElement);\n"
+            + "  }catch(e) { alert('exception'); }"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

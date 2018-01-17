@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MAP_CONSTRUCTOR_ARGUMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -40,6 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code Map}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Map extends SimpleScriptable {
@@ -56,41 +57,91 @@ public class Map extends SimpleScriptable {
 
     /**
      * Creates an instance.
-     * @param iterable an Array or other iterable object
+     * @param arrayLike an Array or other iterable object
      */
     @JsxConstructor
-    public Map(final Object iterable) {
-        if (iterable != Undefined.instance) {
-            final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
-            if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
-                if (iterable instanceof NativeArray) {
-                    final NativeArray array = (NativeArray) iterable;
-                    for (int i = 0; i < array.getLength(); i++) {
-                        final Object entryObject = array.get(i);
-                        if (entryObject instanceof NativeArray) {
-                            final Object[] entry = toArray((NativeArray) entryObject);
+    public Map(final Object arrayLike) {
+        if (arrayLike == Undefined.instance) {
+            return;
+        }
+
+        final Context context = Context.getCurrentContext();
+        final Window window = (Window) ScriptRuntime.getTopCallScope(context);
+        if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT)) {
+            return;
+        }
+
+        if (arrayLike instanceof NativeArray) {
+            final NativeArray array = (NativeArray) arrayLike;
+            for (int i = 0; i < array.getLength(); i++) {
+                final Object entryObject = array.get(i);
+                if (entryObject instanceof NativeArray) {
+                    final Object[] entry = toArray((NativeArray) entryObject);
+                    if (entry.length > 0) {
+                        final Object key = entry[0];
+                        final Object value = entry.length > 1 ? entry[1] : null;
+                        set(key, value);
+                    }
+                }
+                else {
+                    throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                + entryObject.getClass().getName() + ")");
+                }
+            }
+            return;
+        }
+
+        if (arrayLike instanceof Map) {
+            final Map map = (Map) arrayLike;
+            map_.putAll(map.map_);
+            return;
+        }
+
+        if (arrayLike instanceof Scriptable) {
+            final Scriptable scriptable = (Scriptable) arrayLike;
+            final Object length = scriptable.get("length", scriptable);
+            if (length != Scriptable.NOT_FOUND) {
+                final int size = (int) Context.toNumber(length);
+                for (int i = 0; i < size; i++) {
+                    final Object entryObject = scriptable.get(i, scriptable);
+                    if (entryObject instanceof NativeArray) {
+                        final Object[] entry = toArray((NativeArray) entryObject);
+                        if (entry.length > 0) {
+                            final Object key = entry[0];
+                            final Object value = entry.length > 1 ? entry[1] : null;
+                            set(key, value);
+                        }
+                    }
+                    else {
+                        throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                    + entryObject.getClass().getName() + ")");
+                    }
+                }
+                return;
+            }
+
+            if (Iterator.iterate(context, this, scriptable,
+                value -> {
+                    if (value != Undefined.instance) {
+                        if (value instanceof NativeArray) {
+                            final Object[] entry = toArray((NativeArray) value);
                             if (entry.length > 0) {
-                                final Object key = entry[0];
-                                final Object value = entry.length > 1 ? entry[1] : null;
-                                set(key, value);
+                                final Object entryKey = entry[0];
+                                final Object entryValue = entry.length > 1 ? entry[1] : null;
+                                set(entryKey, entryValue);
                             }
                         }
                         else {
                             throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                        + entryObject.getClass().getName() + ")");
+                                        + value.getClass().getName() + ")");
                         }
                     }
-                }
-                else if (iterable instanceof Map) {
-                    final Map map = (Map) iterable;
-                    map_.putAll(map.map_);
-                }
-                else {
-                    throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                + iterable.getClass().getName() + ")");
-                }
+                })) {
+                return;
             }
         }
+
+        throw Context.reportRuntimeError("TypeError: object is not iterable (" + arrayLike.getClass().getName() + ")");
     }
 
     /**
@@ -245,19 +296,21 @@ public class Map extends SimpleScriptable {
      */
     @JsxFunction
     public void forEach(final Function callback, final Object thisArg) {
-        if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
-            final Scriptable thisArgument;
-            if (thisArg instanceof Scriptable) {
-                thisArgument = (Scriptable) thisArg;
-            }
-            else {
-                thisArgument = getWindow();
-            }
-            for (final java.util.Map.Entry<Object, Object> entry : map_.entrySet()) {
-                callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
-                        new Object[] {entry.getValue(), entry.getKey(), this});
-            }
+        if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT)) {
+            return;
+        }
+
+        final Scriptable thisArgument;
+        if (thisArg instanceof Scriptable) {
+            thisArgument = (Scriptable) thisArg;
+        }
+        else {
+            thisArgument = getWindow();
+        }
+
+        for (final java.util.Map.Entry<Object, Object> entry : map_.entrySet()) {
+            callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
+                    new Object[] {entry.getValue(), entry.getKey(), this});
         }
     }
-
 }

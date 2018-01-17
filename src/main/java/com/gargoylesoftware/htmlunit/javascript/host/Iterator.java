@@ -14,11 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.util.function.Consumer;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -95,4 +100,65 @@ public class Iterator extends SimpleScriptable {
         return object;
     }
 
+    /**
+     * Helper to support objects implementing the iterator interface.
+     *
+     * @param context the Context
+     * @param thisObj the this Object
+     * @param scriptable the scriptable
+     * @param processor the method to be called for every object
+     * @return true if @@iterator property was available
+     */
+    public static boolean iterate(final Context context,
+            final Scriptable thisObj,
+            final Scriptable scriptable,
+            final Consumer<Object> processor) {
+        final Object iterator = scriptable.get(Symbol.ITERATOR_STRING, scriptable);
+        if (iterator == Scriptable.NOT_FOUND) {
+            return false;
+        }
+
+        final Object obj = ((BaseFunction) iterator).call(context, thisObj.getParentScope(), scriptable, new Object[0]);
+
+        if (obj instanceof Iterator) {
+            final Iterator it = (Iterator) obj;
+            SimpleScriptable next = it.next();
+            boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+            Object value = next.get(ES6Iterator.VALUE_PROPERTY);
+
+            while (!done) {
+                processor.accept(value);
+
+                next = it.next();
+                done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                value = next.get(ES6Iterator.VALUE_PROPERTY);
+            }
+            return true;
+        }
+        if (obj instanceof Scriptable) {
+            // handle user defined iterator
+            final Scriptable scriptableIterator = (Scriptable) obj;
+            final Object nextFunct = scriptableIterator.get(ES6Iterator.NEXT_METHOD, (Scriptable) obj);
+            if (!(nextFunct instanceof BaseFunction)) {
+                throw ScriptRuntime.typeError("undefined is not a function");
+            }
+            final Object nextObj = ((BaseFunction) nextFunct)
+                    .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+
+            ScriptableObject next = (ScriptableObject) nextObj;
+            boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+            Object value = next.get(ES6Iterator.VALUE_PROPERTY);
+
+            while (!done) {
+                processor.accept(value);
+
+                next = (ScriptableObject) ((BaseFunction) nextFunct)
+                        .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+                done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                value = next.get(ES6Iterator.VALUE_PROPERTY);
+            }
+            return true;
+        }
+        return false;
+    }
 }

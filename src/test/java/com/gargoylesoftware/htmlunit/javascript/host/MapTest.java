@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link Map}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class MapTest extends WebDriverTestCase {
@@ -209,9 +210,28 @@ public class MapTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "2",
+            IE = "0")
+    public void constructorArray() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var myMap = new Map([[ 1, 'one' ],[ 2, 'two' ]]);\n"
+            + "  alert(myMap.size);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "exception",
             IE = "0")
-    public void constructor() throws Exception {
+    public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
@@ -291,6 +311,46 @@ public class MapTest extends WebDriverTestCase {
             + "  alert(myMap.size);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "77", "one"},
+            IE = "exception")
+    public void constructorIteratorParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function logElement(value, key) {\n"
+            + "  alert(key);\n"
+            + "  alert(value);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var myIterable = {};\n"
+            + "    myIterable[Symbol.iterator] = function() {\n"
+            + "      return {\n"
+            + "        next: function() {\n"
+            + "          if (this._first) {;\n"
+            + "            this._first = false;\n"
+            + "            return { value: [ 77, 'one' ], done: false };\n"
+            + "          }\n"
+            + "          return { done: true };\n"
+            + "        },\n"
+            + "        _first: true\n"
+            + "      };\n"
+            + "    };\n"
+            + "    var myMap = new Map(myIterable);\n"
+            + "    alert(myMap.size);\n"
+            + "    myMap.forEach(logElement);\n"
+            + "  }catch(e) { alert('exception'); }"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

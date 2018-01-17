@@ -1068,9 +1068,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
-    /** Map supports the argument constructor. */
-    @BrowserFeature({CHROME, FF})
-    JS_MAP_CONSTRUCTOR_ARGUMENT,
+    /** Map ignores the argument constructor. */
+    @BrowserFeature(IE)
+    JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT,
 
     /** Indicates that an empty media list is represented by the string 'all'. */
     @BrowserFeature(IE)
@@ -1215,6 +1215,10 @@ public enum BrowserVersionFeatures {
      * not the option text. */
     @BrowserFeature(IE)
     JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
+
+    /** Set ignores the constructor argument. */
+    @BrowserFeature(IE)
+    JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT,
 
     /** Whether to get any property from the items first. */
     @BrowserFeature(IE)

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MAP_CONSTRUCTOR_ARGUMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code Set}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class Set extends SimpleScriptable {
@@ -61,48 +62,70 @@ public class Set extends SimpleScriptable {
      */
     @JsxConstructor
     public Set(final Object iterable) {
-        if (iterable != Undefined.instance) {
-            final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
-            if (window.getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
-                if (iterable instanceof NativeArray) {
-                    final NativeArray array = (NativeArray) iterable;
-                    for (int i = 0; i < array.getLength(); i++) {
-                        add(ScriptableObject.getProperty(array, i));
-                    }
-                }
-                else if (iterable instanceof ArrayBufferViewBase) {
-                    final ArrayBufferViewBase array = (ArrayBufferViewBase) iterable;
-                    for (int i = 0; i < array.getLength(); i++) {
-                        add(ScriptableObject.getProperty(array, i));
-                    }
-                }
-                else if (iterable instanceof String) {
-                    final String string = (String) iterable;
-                    for (int i = 0; i < string.length(); i++) {
-                        add(String.valueOf(string.charAt(i)));
-                    }
-                }
-                else if (iterable instanceof Set) {
-                    final Set set = (Set) iterable;
-                    for (Object object : set.set_) {
-                        add(object);
-                    }
-                }
-                else if (iterable instanceof Map) {
-                    final Iterator iterator = (Iterator) ((Map) iterable).entries();
+        if (iterable == Undefined.instance) {
+            return;
+        }
+        final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
+        if (window.getBrowserVersion().hasFeature(JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT)) {
+            return;
+        }
 
-                    SimpleScriptable object = iterator.next();
-                    while (Undefined.instance != object.get("value", null)) {
-                        add(object);
-                        object = iterator.next();
+        if (iterable instanceof NativeArray) {
+            final NativeArray array = (NativeArray) iterable;
+            for (int i = 0; i < array.getLength(); i++) {
+                add(ScriptableObject.getProperty(array, i));
+            }
+            return;
+        }
+
+        if (iterable instanceof ArrayBufferViewBase) {
+            final ArrayBufferViewBase array = (ArrayBufferViewBase) iterable;
+            for (int i = 0; i < array.getLength(); i++) {
+                add(ScriptableObject.getProperty(array, i));
+            }
+            return;
+        }
+
+        if (iterable instanceof String) {
+            final String string = (String) iterable;
+            for (int i = 0; i < string.length(); i++) {
+                add(String.valueOf(string.charAt(i)));
+            }
+            return;
+        }
+
+        if (iterable instanceof Set) {
+            final Set set = (Set) iterable;
+            for (Object object : set.set_) {
+                add(object);
+            }
+            return;
+        }
+
+        if (iterable instanceof Map) {
+            final Iterator iterator = (Iterator) ((Map) iterable).entries();
+
+            SimpleScriptable object = iterator.next();
+            while (Undefined.instance != object.get("value", null)) {
+                add(object);
+                object = iterator.next();
+            }
+            return;
+        }
+
+        if (iterable instanceof Scriptable) {
+            final Scriptable scriptable = (Scriptable) iterable;
+            if (Iterator.iterate(Context.getCurrentContext(), this, scriptable,
+                value -> {
+                    if (value != Undefined.instance) {
+                        add(value);
                     }
-                }
-                else {
-                    throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                + iterable.getClass().getName() + ")");
-                }
+                })) {
+                return;
             }
         }
+
+        throw Context.reportRuntimeError("TypeError: object is not iterable (" + iterable.getClass().getName() + ")");
     }
 
     /**
@@ -198,19 +221,20 @@ public class Set extends SimpleScriptable {
      */
     @JsxFunction
     public void forEach(final Function callback, final Object thisArg) {
-        if (getBrowserVersion().hasFeature(JS_MAP_CONSTRUCTOR_ARGUMENT)) {
-            final Scriptable thisArgument;
-            if (thisArg instanceof Scriptable) {
-                thisArgument = (Scriptable) thisArg;
-            }
-            else {
-                thisArgument = getWindow();
-            }
-            for (final Object object : set_) {
-                callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
-                        new Object[] {object, object, this});
-            }
+        if (getBrowserVersion().hasFeature(JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT)) {
+            return;
+        }
+
+        final Scriptable thisArgument;
+        if (thisArg instanceof Scriptable) {
+            thisArgument = (Scriptable) thisArg;
+        }
+        else {
+            thisArgument = getWindow();
+        }
+        for (final Object object : set_) {
+            callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
+                    new Object[] {object, object, this});
         }
     }
-
 }
