@@ -205,6 +205,15 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"300", "150"})
+    public void getWidthAlphaDigit() throws Exception {
+        getWidth("a7");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"300", "150"})
     public void getWidthAlpha() throws Exception {
         getWidth("abb");
     }
