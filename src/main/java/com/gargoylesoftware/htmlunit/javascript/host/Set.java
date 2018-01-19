@@ -65,6 +65,7 @@ public class Set extends SimpleScriptable {
         if (iterable == Undefined.instance) {
             return;
         }
+
         final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
         if (window.getBrowserVersion().hasFeature(JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT)) {
             return;
