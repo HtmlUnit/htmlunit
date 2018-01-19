@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators">
+            <action type="add" dev="rbri">
+                JavaScript: Setter for history.scrollRestoration added.
+            </action>
             <action type="fix" dev="rbri" issue="1674">
                 Fix the broken initialization of the canvas context that empties the canvas every time canvas.getContext("2d") was called.
             </action>

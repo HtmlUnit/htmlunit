@@ -767,4 +767,39 @@ public class History2Test extends WebDriverTestCase {
         loadPage2(html2, URL_SECOND);
         assertEquals("page2", driver.getTitle());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"auto", "manual", "auto", "auto", "auto", "auto"},
+            FF45 = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"},
+            IE = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"})
+    public void scrollRestoration() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "  function test() {\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "    history.scrollRestoration = 'manual';\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "    history.scrollRestoration = 'auto';\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "    history.scrollRestoration = 'MaNUaL';\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "    history.scrollRestoration = 'unknown';\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "    history.scrollRestoration = undefined;\n"
+                + "    alert(history.scrollRestoration);\n"
+
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

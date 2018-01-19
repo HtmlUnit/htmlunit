@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -47,6 +48,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  */
 @JsxClass
 public class History extends SimpleScriptable {
+    private static final String SCROLL_RESTAURATION_AUTO = "auto";
+    private static final String SCROLL_RESTAURATION_MANUAL = "manual";
+
+    private String scrollRestoration_ = SCROLL_RESTAURATION_AUTO;
 
     /**
      * Creates an instance.
@@ -165,7 +170,21 @@ public class History extends SimpleScriptable {
      */
     @JsxGetter({CHROME, FF52})
     public String getScrollRestoration() {
-        return "auto";
+        return scrollRestoration_;
     }
 
+    /**
+     * @param scrollRestoration the new value
+     */
+    @JsxSetter({CHROME, FF52})
+    public void setScrollRestoration(final String scrollRestoration) {
+        if (SCROLL_RESTAURATION_AUTO.equals(scrollRestoration)) {
+            scrollRestoration_ = SCROLL_RESTAURATION_AUTO;
+            return;
+        }
+        if (SCROLL_RESTAURATION_MANUAL.equals(scrollRestoration)) {
+            scrollRestoration_ = SCROLL_RESTAURATION_MANUAL;
+            return;
+        }
+    }
 }
