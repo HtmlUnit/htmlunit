@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass(domClass = HtmlCanvas.class)
 public class HTMLCanvasElement extends HTMLElement {
 
-    private Object context_;
+    private CanvasRenderingContext2D context2d_;
 
     /**
      * Creates an instance.
@@ -117,11 +117,13 @@ public class HTMLCanvasElement extends HTMLElement {
     @JsxFunction
     public Object getContext(final String contextId) {
         if ("2d".equals(contextId)) {
-            final CanvasRenderingContext2D context = new CanvasRenderingContext2D(this);
-            context.setParentScope(getParentScope());
-            context.setPrototype(getPrototype(context.getClass()));
-            context_ = context;
-            return context;
+            if (context2d_ == null) {
+                final CanvasRenderingContext2D context = new CanvasRenderingContext2D(this);
+                context.setParentScope(getParentScope());
+                context.setPrototype(getPrototype(context.getClass()));
+                context2d_ = context;
+            }
+            return context2d_;
         }
         return null;
     }
@@ -134,13 +136,14 @@ public class HTMLCanvasElement extends HTMLElement {
      */
     @JsxFunction
     public String toDataURL(final Object type) {
-        if (context_ instanceof CanvasRenderingContext2D) {
+        if (context2d_ != null) {
             String typeInUse = type.toString();
             if (type == Undefined.instance) {
                 typeInUse = null;
             }
-            return ((CanvasRenderingContext2D) context_).toDataURL(typeInUse);
+            return context2d_.toDataURL(typeInUse);
         }
+
         if (getBrowserVersion().hasFeature(JS_CANVAS_DATA_URL_IE_PNG)) {
             return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACWCAYAAABkW7XSAAAAAXNSR0IArs4c6QAAAARnQU1BAA"
                 + "Cxjwv8YQUAAADGSURBVHhe7cExAQAAAMKg9U9tCF8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"

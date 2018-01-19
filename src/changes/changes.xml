@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented">
+        <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators">
+            <action type="fix" dev="rbri" issue="1674">
+                Fix the broken initialization of the canvas context that empties the canvas every time canvas.getContext("2d") was called.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: Set and Map constructor now supports user defined iterators also.
             </action>
