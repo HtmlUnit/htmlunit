@@ -863,7 +863,7 @@
         <dependency>
             <groupId>net.sourceforge.cssparser</groupId>
             <artifactId>cssparser</artifactId>
-            <version>0.9.24</version>
+            <version>0.9.25-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
