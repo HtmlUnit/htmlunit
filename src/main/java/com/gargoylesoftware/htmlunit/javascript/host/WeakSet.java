@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -36,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code WeakSet}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
 public class WeakSet extends SimpleScriptable {
@@ -54,18 +56,36 @@ public class WeakSet extends SimpleScriptable {
      */
     @JsxConstructor
     public WeakSet(final Object iterable) {
-        if (iterable != Undefined.instance) {
-            if (iterable instanceof NativeArray) {
-                final NativeArray array = (NativeArray) iterable;
-                for (int i = 0; i < array.getLength(); i++) {
-                    add(array.get(i));
+        if (iterable == Undefined.instance) {
+            return;
+        }
+
+        if (iterable instanceof NativeArray) {
+            final NativeArray array = (NativeArray) iterable;
+            for (int i = 0; i < array.getLength(); i++) {
+                final Object value = ScriptableObject.getProperty(array, i);
+                if (Undefined.instance != value
+                        && value instanceof ScriptableObject) {
+                    add(ScriptableObject.getProperty(array, i));
                 }
             }
-            else {
-                throw Context.reportRuntimeError("TypeError: object is not iterablee ("
-                                                    + iterable.getClass().getName() + ")");
+            return;
+        }
+
+        if (iterable instanceof Scriptable) {
+            final Scriptable scriptable = (Scriptable) iterable;
+            if (Iterator.iterate(Context.getCurrentContext(), this, scriptable,
+                value -> {
+                    if (Undefined.instance != value
+                            && value instanceof ScriptableObject) {
+                        add(value);
+                    }
+                })) {
+                return;
             }
         }
+
+        throw Context.reportRuntimeError("TypeError: object is not iterable (" + iterable.getClass().getName() + ")");
     }
 
     /**
@@ -78,9 +98,11 @@ public class WeakSet extends SimpleScriptable {
         if (value instanceof Delegator) {
             value = ((Delegator) value).getDelegee();
         }
+
         if (!(value instanceof ScriptableObject)) {
             throw Context.reportRuntimeError("TypeError: key is not an object");
         }
+
         set_.add(value);
         return this;
     }
