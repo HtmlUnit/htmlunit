@@ -99,42 +99,21 @@ public class Map extends SimpleScriptable {
 
         if (arrayLike instanceof Scriptable) {
             final Scriptable scriptable = (Scriptable) arrayLike;
-            final Object length = scriptable.get("length", scriptable);
-            if (length != Scriptable.NOT_FOUND) {
-                final int size = (int) Context.toNumber(length);
-                for (int i = 0; i < size; i++) {
-                    final Object entryObject = scriptable.get(i, scriptable);
-                    if (entryObject instanceof NativeArray) {
-                        final Object[] entry = toArray((NativeArray) entryObject);
+            if (Iterator.iterate(Context.getCurrentContext(), this, scriptable,
+                value -> {
+                    if (Undefined.instance != value && value instanceof NativeArray) {
+                        final Object[] entry = toArray((NativeArray) value);
                         if (entry.length > 0) {
                             final Object key = entry[0];
-                            final Object value = entry.length > 1 ? entry[1] : null;
-                            set(key, value);
+                            if (Undefined.instance != key) {
+                                final Object entryValue = entry.length > 1 ? entry[1] : null;
+                                set(key, entryValue);
+                            }
                         }
                     }
                     else {
                         throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                    + entryObject.getClass().getName() + ")");
-                    }
-                }
-                return;
-            }
-
-            if (Iterator.iterate(context, this, scriptable,
-                value -> {
-                    if (value != Undefined.instance) {
-                        if (value instanceof NativeArray) {
-                            final Object[] entry = toArray((NativeArray) value);
-                            if (entry.length > 0) {
-                                final Object entryKey = entry[0];
-                                final Object entryValue = entry.length > 1 ? entry[1] : null;
-                                set(entryKey, entryValue);
-                            }
-                        }
-                        else {
-                            throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                        + value.getClass().getName() + ")");
-                        }
+                                    + value.getClass().getName() + ")");
                     }
                 })) {
                 return;

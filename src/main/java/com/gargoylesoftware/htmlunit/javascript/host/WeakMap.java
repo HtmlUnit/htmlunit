@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEAKMAP_CONSTRUCTOR_ARGUMENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEAKMAP_CONSTRUCTOR_IGNORE_ARGUMENT;
 
 import java.util.WeakHashMap;
 
@@ -27,6 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -48,37 +49,83 @@ public class WeakMap extends SimpleScriptable {
 
     /**
      * Creates an instance.
-     * @param iterable an Array or other iterable object
+     * @param arrayLike an Array or other iterable object
      */
     @JsxConstructor
-    public WeakMap(final Object iterable) {
-        if (iterable != Undefined.instance) {
-            final Window window = (Window) ScriptRuntime.getTopCallScope(Context.getCurrentContext());
-            if (window.getBrowserVersion().hasFeature(JS_WEAKMAP_CONSTRUCTOR_ARGUMENT)) {
-                if (iterable instanceof NativeArray) {
-                    final NativeArray array = (NativeArray) iterable;
-                    for (int i = 0; i < array.getLength(); i++) {
-                        final Object entryObject = array.get(i);
-                        if (entryObject instanceof NativeArray) {
-                            final Object[] entry = ((NativeArray) entryObject).toArray();
-                            if (entry.length > 0) {
-                                final Object key = entry[0];
-                                final Object value = entry.length > 1 ? entry[1] : null;
-                                set(key, value);
-                            }
-                        }
-                        else {
-                            throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                            + entryObject.getClass().getName() + ")");
+    public WeakMap(final Object arrayLike) {
+        if (arrayLike == Undefined.instance) {
+            return;
+        }
+
+        final Context context = Context.getCurrentContext();
+        final Window window = (Window) ScriptRuntime.getTopCallScope(context);
+        if (window.getBrowserVersion().hasFeature(JS_WEAKMAP_CONSTRUCTOR_IGNORE_ARGUMENT)) {
+            return;
+        }
+
+        if (arrayLike instanceof NativeArray) {
+            final NativeArray array = (NativeArray) arrayLike;
+            for (int i = 0; i < array.getLength(); i++) {
+                final Object entryObject = array.get(i);
+                if (entryObject instanceof NativeArray) {
+                    final Object[] entry = toArray((NativeArray) entryObject);
+                    if (entry.length > 0) {
+                        final Object key = entry[0];
+                        if (Undefined.instance != key && key instanceof ScriptableObject) {
+                            final Object value = entry.length > 1 ? entry[1] : null;
+                            set(key, value);
                         }
                     }
                 }
                 else {
                     throw Context.reportRuntimeError("TypeError: object is not iterable ("
-                                            + iterable.getClass().getName() + ")");
+                                + entryObject.getClass().getName() + ")");
                 }
             }
+            return;
         }
+
+        if (arrayLike instanceof Scriptable) {
+            final Scriptable scriptable = (Scriptable) arrayLike;
+            if (Iterator.iterate(Context.getCurrentContext(), this, scriptable,
+                value -> {
+                    if (Undefined.instance != value && value instanceof NativeArray) {
+                        final Object[] entry = toArray((NativeArray) value);
+                        if (entry.length > 0) {
+                            final Object key = entry[0];
+                            if (Undefined.instance != key && key instanceof ScriptableObject) {
+                                final Object entryValue = entry.length > 1 ? entry[1] : null;
+                                set(key, entryValue);
+                            }
+                        }
+                    }
+                    else {
+                        throw Context.reportRuntimeError("TypeError: object is not iterable ("
+                                    + value.getClass().getName() + ")");
+                    }
+                })) {
+                return;
+            }
+        }
+
+        throw Context.reportRuntimeError("TypeError: object is not iterable (" + arrayLike.getClass().getName() + ")");
+    }
+
+    /**
+     * Replacement of {@link NativeArray#toArray()}.
+     */
+    private static Object[] toArray(final NativeArray narray) {
+        final long longLen = narray.getLength();
+        if (longLen > Integer.MAX_VALUE) {
+            throw new IllegalStateException();
+        }
+
+        final int len = (int) longLen;
+        final Object[] arr = new Object[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = ScriptableObject.getProperty(narray, i);
+        }
+        return arr;
     }
 
     /**

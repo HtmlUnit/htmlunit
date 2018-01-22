@@ -25,9 +25,122 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link WeakMap}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WeakMapTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "one"},
+            IE = {"false", "undefined"})
+    public void constructorArray() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  var foo = {};\n"
+            + "  var myMap = new WeakMap([[ obj, 'one' ],[ foo, 'two' ]]);\n"
+            + "  alert(myMap.has(foo));\n"
+            + "  alert(myMap.get(obj));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            IE = {"false"})
+    public void constructorSetParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var myMap = new WeakMap(new Set('test'));\n"
+            + "    alert(myMap.has('test'));\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void constructorMapParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var obj = {};\n"
+            + "  var foo = {};\n"
+            + "  var testMap = new Map([[ obj, 'one' ],[ foo, 'two' ]]);\n"
+            + "  try {\n"
+            + "    var myMap = new WeakMap(testMap);\n"
+            + "    alert(myMap.has(foo));\n"
+            + "  } catch(e) {\n"
+            + "    alert('exception');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = {})
+    public void constructorIteratorParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  if (window.WeakSet) {\n"
+            + "    var obj = {};\n"
+            + "    var foo = {};\n"
+            + "    var myIterable = {};\n"
+            + "    myIterable[Symbol.iterator] = function() {\n"
+            + "      return {\n"
+            + "        next: function() {\n"
+            + "          if (this._first) {;\n"
+            + "            this._first = false;\n"
+            + "            return { value: [ foo, 'one' ], done: false };\n"
+            + "          }\n"
+            + "          return { done: true };\n"
+            + "        },\n"
+            + "        _first: true\n"
+            + "      };\n"
+            + "    };\n"
+            + "    try {\n"
+            + "      var myMap = new WeakMap(myIterable);\n"
+            + "      alert(myMap.has(foo));\n"
+            + "    } catch(e) {\n"
+            + "      alert('exception');\n"
+            + "    }\n"
+            + "  }"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 
     /**
      * @throws Exception if the test fails

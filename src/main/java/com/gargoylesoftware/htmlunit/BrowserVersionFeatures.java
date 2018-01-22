@@ -1338,9 +1338,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
-    /** WeakMap supports the argument constructor. */
-    @BrowserFeature({CHROME, FF})
-    JS_WEAKMAP_CONSTRUCTOR_ARGUMENT,
+    /** WeakMap ignores the constructor argument. */
+    @BrowserFeature(IE)
+    JS_WEAKMAP_CONSTRUCTOR_IGNORE_ARGUMENT,
 
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
