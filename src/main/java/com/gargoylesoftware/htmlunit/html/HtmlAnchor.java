@@ -131,12 +131,18 @@ public class HtmlAnchor extends HtmlElement {
                 builder.append(ch);
             }
 
-            if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
+            if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF) && !shiftKey && !ctrlKey) {
                 page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
             }
             else {
-                final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(),
-                        page.getResolvedTarget(getTargetAttribute()), "_self");
+                final String target;
+                if (shiftKey || ctrlKey) {
+                    target = "_blank";
+                }
+                else {
+                    target = page.getResolvedTarget(getTargetAttribute());
+                }
+                final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
                 Page enclosedPage = win.getEnclosedPage();
                 if (enclosedPage == null) {
                     win.getWebClient().getPage(win, new WebRequest(WebClient.URL_ABOUT_BLANK));

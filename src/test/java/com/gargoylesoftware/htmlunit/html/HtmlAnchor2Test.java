@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Marc Guillemot
  * @author Stefan Anzinger
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlAnchor2Test extends SimpleWebTestCase {
@@ -640,4 +641,123 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         assertEquals("First", secondPage.getTitleText());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickCtrlShift() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='" + URL_SECOND + "' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(true, true, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("First", secondPage.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickShiftJavascript() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(true, false, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("Second", secondPage.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickCtrlJavascript() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(false, true, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("First", secondPage.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void clickShiftCtrlJavascript() throws Exception {
+        final String first
+            = "<html><head><title>First</title></head><body>\n"
+            + "  <a href='javascript: window.location=\"" + URL_SECOND + "\"' id='a2'>link to foo2</a>\n"
+            + "</body></html>";
+        final String second
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final WebClient client = getWebClient();
+        final List<String> collectedAlerts = new ArrayList<>();
+        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setResponse(URL_FIRST, first);
+        webConnection.setResponse(URL_SECOND, second);
+        client.setWebConnection(webConnection);
+
+        assertEquals(1, getWebClient().getTopLevelWindows().size());
+        final HtmlPage page = client.getPage(URL_FIRST);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        final HtmlPage secondPage = anchor.click(true, true, false);
+        assertEquals(2, getWebClient().getTopLevelWindows().size());
+        assertEquals("First", secondPage.getTitleText());
+    }
 }

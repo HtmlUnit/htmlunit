@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators">
+            <action type="fix" dev="rbri">
+                Doing Ctrl+Click on an anchor now opens a new window also if the href is javascript based.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: Setter for history.scrollRestoration added.
             </action>
