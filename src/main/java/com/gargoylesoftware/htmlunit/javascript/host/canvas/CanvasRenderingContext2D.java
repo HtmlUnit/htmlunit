@@ -51,9 +51,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
-    /** The number of (horizontal) pixels to assume that each character occupies. */
-    private static final int PIXELS_PER_CHAR = 10;
-
     private final HTMLCanvasElement canvas_;
     private RenderingBackend renderingBackend_;
 
@@ -482,7 +479,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         final String textValue = Context.toString(text);
 
         // TODO take font into account
-        final int width = textValue.length() * PIXELS_PER_CHAR;
+        final int width = textValue.length() * getBrowserVersion().getPixesPerChar();
 
         final TextMetrics metrics = new TextMetrics(width);
         metrics.setParentScope(getParentScope());
