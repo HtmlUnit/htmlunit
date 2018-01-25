@@ -130,7 +130,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

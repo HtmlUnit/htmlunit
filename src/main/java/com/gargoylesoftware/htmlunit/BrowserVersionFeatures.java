@@ -517,13 +517,13 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
 
     /** Dates format pattern 2. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, EDGE})
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
-    /** Indicates that the pas is extracted from the location.
+    /** Indicates that the path is extracted from the location.
      * Sample: from the location /foo/boo only /foo is used.
      */
-    @BrowserFeature(IE)
+    @BrowserFeature({IE, EDGE})
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
     /** domain '.org' is handled as 'org'. */
@@ -534,7 +534,7 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({CHROME, FF})
+    @BrowserFeature({CHROME, FF, EDGE})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Browser sends Upgrade-Insecure-Requests header. */

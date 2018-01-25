@@ -24,6 +24,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
  * Unit tests for {@link BrowserVersion}.
@@ -42,9 +43,11 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-            IE = "Accept: text/html, application/xhtml+xml, */*")
+            IE = "Accept: text/html, application/xhtml+xml, */*",
+            EDGE = "Accept: text/html, application/xhtml+xml, image/jxr, */*")
     public void acceptHeaderGetUrl() throws Exception {
-        final String html = "<html><body>Response</body></html>";
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>Response</body></html>";
         loadPage2(html);
 
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -57,12 +60,15 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
             CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"},
-            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
+            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"},
+            EDGE = {"2", "Accept: text/html, application/xhtml+xml, image/jxr, */*"})
     public void acceptHeaderWindowOpen() throws Exception {
-        String html = "<html><body>Response</body></html>";
+        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = "<html><head><title>First</title></head>\n"
+        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='javascript: window.open(\"" + URL_SECOND + "\")'>Click me</a>\n"
                 + "</body></html>";
@@ -84,12 +90,15 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
             CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"},
-            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
+            IE = {"2", "Accept: text/html, application/xhtml+xml, */*"},
+            EDGE = { "2", "Accept: text/html, application/xhtml+xml, image/jxr, */*" })
     public void acceptHeaderAnchorClick() throws Exception {
-        String html = "<html><body>Response</body></html>";
+        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = "<html><head><title>First</title></head>\n"
+        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html'>Click me</a>\n"
                 + "</body></html>";
@@ -106,17 +115,23 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-            IE = "Accept: text/html, application/xhtml+xml, */*")
+            IE = "Accept: text/html, application/xhtml+xml, */*",
+            EDGE = "Accept: text/html, application/xhtml+xml, image/jxr, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
-        String html = "<html><body>Response</body></html>";
+        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><body>Response</body></html>";
         getMockWebConnection().setDefaultResponse(html);
 
-        html = "<html><head><title>First</title></head>\n"
+        html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>First</title></head>\n"
                 + "<body>\n"
                 + "  <a id='clickme' href='test.html' type='text/plain'>Click me</a>\n"
                 + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickme")).click();
+
+        // we have to be a bit patient
+        Thread.sleep(100);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());
@@ -129,10 +144,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
             CHROME = "Accept: image/webp,image/apng,image/*,*/*;q=0.8",
             FF52 = "Accept: */*",
-            IE = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5")
+            IE = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5",
+            EDGE = "Accept: image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "<script>\n"
             + "  function doTest() {\n"
             // force access
@@ -153,10 +170,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: text/css, */*")
+            IE = "Accept: text/css, */*",
+            EDGE = "Accept: text/css, */*")
     public void acceptHeaderCss() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/css'>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -178,10 +197,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            IE = "Accept: application/javascript, */*;q=0.8")
+            IE = "Accept: application/javascript, */*;q=0.8",
+            EDGE = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascript() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <script src='test.js' type='text/javascript'></script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -197,10 +218,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            IE = "Accept: application/javascript, */*;q=0.8")
+            IE = "Accept: application/javascript, */*;q=0.8",
+            EDGE = "Accept: application/javascript, */*;q=0.8")
     public void acceptHeaderJavascriptWithoutType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <script src='test.js'></script>\n"
             + "</head>\n"
             + "<body>\n"
@@ -216,10 +239,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: text/css,*/*;q=0.1",
-            IE = "Accept: text/css, */*")
+            IE = "Accept: text/css, */*",
+            EDGE = "Accept: text/css, */*")
     public void acceptHeaderCssWithoutType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet'>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -241,10 +266,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
-            IE = {"2", "Accept: text/css, */*"})
+            IE = {"2", "Accept: text/css, */*"},
+            EDGE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssEmptyType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type=''>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -269,10 +296,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
-            IE = {"2", "Accept: text/css, */*"})
+            IE = {"2", "Accept: text/css, */*"},
+            EDGE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssBlankType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type=' '>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -299,10 +328,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
             CHROME = {"1", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"},
-            IE = {"2", "Accept: text/css, */*"})
+            IE = {"2", "Accept: text/css, */*"},
+            EDGE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='text/html'>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -329,10 +360,12 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
             CHROME = {"1", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"},
-            IE = {"2", "Accept: text/css, */*"})
+            IE = {"2", "Accept: text/css, */*"},
+            EDGE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssWrongType() throws Exception {
         final String html
-            = "<html><head>\n"
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
             + "  <link href='test.css' rel='stylesheet' type='css'>\n"
             + "<script>\n"
             + "  function doTest() {\n"
@@ -359,8 +392,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "Accept: */*",
             FF45 = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderXMLHttpRequest() throws Exception {
-        final String html =
-              "<html>\n"
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
             + "  <head>\n"
             + "    <title>XMLHttpRequest Test</title>\n"
             + "    <script>\n"
@@ -383,6 +417,9 @@ public class BrowserVersion2Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(xml);
         loadPage2(html);
+
+        // we have to be a bit patient
+        Thread.sleep(100);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
         assertEquals(getExpectedAlerts()[0], acceptHeaderString());

@@ -108,7 +108,7 @@ public class Element extends Node {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public Element() {
         // Empty.
     }
@@ -304,7 +304,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF, EDGE})
     public boolean hasAttributes() {
         return super.hasAttributes();
     }
@@ -427,7 +427,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -436,7 +436,7 @@ public class Element extends Node {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -1095,7 +1095,7 @@ public class Element extends Node {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public String getId() {
         return getDomNodeOrDie().getId();
     }
@@ -1240,7 +1240,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter({CHROME, FF52, EDGE})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1249,7 +1249,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter({CHROME, FF52, EDGE})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1258,7 +1258,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter({CHROME, FF52, EDGE})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
@@ -2005,7 +2005,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF, EDGE})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String selectorString = (String) args[0];

@@ -29,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
@@ -45,7 +46,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class CookieManagerTest extends WebDriverTestCase {
 
     /**
-     * Closes the real ie because clearing all cookies seem to be not working
+     * Closes the real IE because clearing all cookies seem to be not working
      * at the moment.
      */
     @After
@@ -54,15 +55,18 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /** HTML code with JS code <code>alert(document.cookie)</code>. */
-    public static final String HTML_ALERT_COOKIE = "<html><head>\n"
-        + "<script>\n"
+    public static final String HTML_ALERT_COOKIE
+        = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        + "<html><head><title>foo</title><script>\n"
+        + "  function test() {\n"
         // there is no fixed order, sort for stable testing
-        + "  var c = document.cookie;\n"
-        + "  c = c.split('; ').sort().join('; ');\n"
-        + "  alert(c);\n"
-        + "</script>\n"
-        + "</head>\n"
-        + "<body></body></html>";
+        + "    var c = document.cookie;\n"
+        + "    c = c.split('; ').sort().join('; ');\n"
+        + "    alert(c);\n"
+        + "  }\n"
+        + "</script></head>\n"
+        + "<body onload='test()'>\n"
+        + "</body></html>";
 
     /**
      * @throws Exception if the test fails
@@ -291,8 +295,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "first=1; second=2; third=3",
-            CHROME = "fourth=4; third=3",
+    @Alerts(DEFAULT = "fourth=4; third=3",
+            FF = "first=1; second=2; third=3",
             IE = "first=1; fourth=4; second=2; third=3")
     public void setCookieExpired_badDateFormat() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -310,8 +314,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
-            CHROME = "cookie1=1",
+    @Alerts(DEFAULT = "cookie1=1",
+            FF = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -332,8 +336,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "cookie1=1; cookie2=2; cookie3=3",
-            CHROME = "cookie1=1",
+    @Alerts(DEFAULT = "cookie1=1",
+            FF = "cookie1=1; cookie2=2; cookie3=3",
             IE = "cookie1=1; cookie2=2; cookie3=3; cookie4=4; cookie5=5; cookie6=6")
     public void setCookieExpires_twoDigits2() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
@@ -388,15 +392,15 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("dog=dalmation")
+    @Alerts({"", "dog=dalmation"})
     public void trailing_slash() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = getWebDriver();
 
-        setExpectedAlerts("");
+        setExpectedAlerts(expectedAlerts[0]);
         loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
 
-        setExpectedAlerts(expectedAlerts);
+        setExpectedAlerts(expectedAlerts[1]);
         driver.manage().addCookie(new org.openqa.selenium.Cookie("dog", "dalmation", "/second/"));
         loadPageWithAlerts2(HTML_ALERT_COOKIE, URL_SECOND);
     }
@@ -408,21 +412,23 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
-        final String html = "<html><body>\n"
-            + "<script>\n"
-            + "function f() {\n"
-            + "  alert('Cookies: ' + document.cookie);\n"
-            + "}\n"
-            + "\n"
-            + "var date1 = new Date();\n"
-            + "date1.setTime(date1.getTime() + 1000);\n"
-            + "document.cookie = 'cookie1=value1; expires=' + date1.toGMTString() + '; path=/';\n"
-            + "var date2 = new Date();\n"
-            + "date2.setTime(date2.getTime() + 60 * 1000);\n"
-            + "document.cookie = 'cookie2=value2; expires=' + date2.toGMTString() + '; path=/';\n"
-            + "f();\n"
-            + "setTimeout(f, 1500);\n"
-            + "</script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function f() {\n"
+            + "    alert('Cookies: ' + document.cookie);\n"
+            + "  }\n"
+
+            + "  function test() {\n"
+            + "    var date1 = new Date();\n"
+            + "    date1.setTime(date1.getTime() + 1000);\n"
+            + "    document.cookie = 'cookie1=value1; expires=' + date1.toGMTString() + '; path=/';\n"
+            + "    var date2 = new Date();\n"
+            + "    date2.setTime(date2.getTime() + 60 * 1000);\n"
+            + "    document.cookie = 'cookie2=value2; expires=' + date2.toGMTString() + '; path=/';\n"
+            + "    f();\n"
+            + "    setTimeout(f, 1500);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html, 4000);
@@ -456,7 +462,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1")
+            IE = "first=1",
+            EDGE = "first=1")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;path=/foo/blah"));
@@ -475,7 +482,8 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1")
+            IE = "first=1",
+            EDGE = "first=1")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));
@@ -519,27 +527,24 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Test
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "<script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head><title>foo</title><script>\n"
                 + "  function alertCookies() {\n"
                 + "    alert('cookies: ' + document.cookie);\n"
                 + "  }\n"
-                + "</script>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "<script>\n"
-                + "  alertCookies();\n"
-                + "  window.setTimeout(alertCookies, 3100);\n"
-                + "</script>\n"
-                + "</body>\n"
-                + "</html>";
+
+                + "  function test() {\n"
+                + "    alertCookies();\n"
+                + "    window.setTimeout(alertCookies, 3600);\n"
+                + "  }\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
         final URL firstUrl = new URL(URL_FIRST, "/foo/test.html");
 
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
-        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 3000));
+        final String expires = DateUtils.formatDate(new Date(System.currentTimeMillis() + 3500));
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + "; path=/foo"));
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", "text/html", responseHeader1);

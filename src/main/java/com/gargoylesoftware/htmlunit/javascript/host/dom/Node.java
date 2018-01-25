@@ -701,7 +701,7 @@ public class Node extends EventTarget {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public String getBaseURI() {
         return getDomNodeOrDie().getBaseURI();
     }

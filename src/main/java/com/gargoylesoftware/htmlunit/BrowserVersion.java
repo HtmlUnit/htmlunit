@@ -205,6 +205,11 @@ public final class BrowserVersion implements Serializable {
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
+        EDGE.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
+        EDGE.cssAcceptHeader_ = "text/css, */*";
+        EDGE.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
+        EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
+
         // CHROME
         CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36";

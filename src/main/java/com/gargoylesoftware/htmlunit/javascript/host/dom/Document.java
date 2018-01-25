@@ -895,7 +895,7 @@ public class Document extends Node {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({CHROME, IE})
+    @JsxGetter({CHROME, IE, EDGE})
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         final Page page = getPage();
@@ -1974,7 +1974,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF, EDGE})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
