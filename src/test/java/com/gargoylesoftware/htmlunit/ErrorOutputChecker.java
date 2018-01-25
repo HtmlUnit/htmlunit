@@ -40,6 +40,7 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile("Starting ChromeDriver " + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
                     + "\\.[0-9]+ ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n"),
+            Pattern.compile(".*Unable to retrieve document state unexpected alert open\r?\n"),
             Pattern.compile(".*FirefoxOptions toCapabilities\r?\n"),
             Pattern.compile(".*Preferring the firefox binary in these options \\(.*\\)\r?\n"),
             Pattern.compile(".*geckodriver.*\r?\n"),
@@ -49,7 +50,7 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*\taddons\\..*\r?\n"),
             Pattern.compile("\\*\\*\\* Blocklist::.*\r?\n"),
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + "3\\.6\\.0\\.0\r?\n"
+                    + "3\\.8\\.0\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
             // edge

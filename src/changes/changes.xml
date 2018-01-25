@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators">
+            <action type="fix" dev="rbri" due-to="Frank Danek">
+                Fix some problem to be able to run our test suite with edge.
+            </action>
             <action type="add" dev="rbri">
                 JavaScript: WeakSet and WeakMap constructor now supports user defined iterators also.
             </action>

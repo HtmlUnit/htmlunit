@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -354,6 +355,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected static void shutDownRealIE() {
         shutDownReal(INTERNET_EXPLORER);
+    }
+
+    /**
+     * Closes the real Edge browser drivers.
+     */
+    protected static void shutDownRealEdge() {
+        shutDownReal(EDGE);
     }
 
     /**
@@ -805,14 +813,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
         WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
             try {
-                driver.manage().window().setSize(new Dimension(1272, 768));
+                resizeIfNeeded(driver);
             }
             catch (final NoSuchSessionException e) {
                 // maybe the driver was killed by the test before; setup a new one
                 shutDownRealBrowsers();
 
                 driver = getWebDriver();
-                driver.manage().window().setSize(new Dimension(1272, 768));
+                resizeIfNeeded(driver);
             }
         }
         driver.get(url.toExternalForm());
@@ -849,10 +857,30 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         startWebServer("./", null, servlets);
 
-        final WebDriver driver = getWebDriver();
+        WebDriver driver = getWebDriver();
+        if (!(driver instanceof HtmlUnitDriver)) {
+            try {
+                resizeIfNeeded(driver);
+            }
+            catch (final NoSuchSessionException e) {
+                // maybe the driver was killed by the test before; setup a new one
+                shutDownRealBrowsers();
+
+                driver = getWebDriver();
+                resizeIfNeeded(driver);
+            }
+        }
         driver.get(url.toExternalForm());
 
         return driver;
+    }
+
+    private void resizeIfNeeded(final WebDriver driver) {
+        final Dimension size = driver.manage().window().getSize();
+        if (size.getWidth() != 1272 || size.getHeight() != 768) {
+            // only resize if needed because it may be quite expensive (e.g. Edge)
+            driver.manage().window().setSize(new Dimension(1272, 768));
+        }
     }
 
     /**
@@ -1054,16 +1082,36 @@ public abstract class WebDriverTestCase extends WebTestCase {
         while (collectedAlerts.size() < alertsLength && System.currentTimeMillis() < maxWait) {
             try {
                 final Alert alert = driver.switchTo().alert();
-                collectedAlerts.add(alert.getText());
+                String text = alert.getText();
+
+                if (useRealBrowser() && getBrowserVersion().isEdge()) {
+                    // EdgeDriver reads empty strings as null -> harmonize
+                    if (text == null) {
+                        text = "";
+                    }
+
+                    // alerts for real Edge need some time until they may be accepted
+                    Thread.sleep(100);
+                }
+
+                collectedAlerts.add(text);
                 alert.accept();
 
                 // handling of alerts requires some time
                 // at least for tests with many alerts we have to take this into account
                 maxWait += 100;
 
-                if (useRealBrowser() && getBrowserVersion().isIE()) {
-                    // alerts for real IE are really slow
-                    maxWait += 5000;
+                if (useRealBrowser()) {
+                    if (getBrowserVersion().isIE()) {
+                        // alerts for real IE are really slow
+                        maxWait += 5000;
+                    }
+                    else if (getBrowserVersion().isEdge()) {
+                        // closing one alert and opening the next one takes some time in real Edge
+                        // (most probably due to the 'nice' fade animations...)
+                        Thread.sleep(500);
+                        maxWait += 800;
+                    }
                 }
             }
             catch (final NoAlertPresentException e) {

@@ -1220,7 +1220,7 @@ public class HTMLElement extends Element {
         if (event == null) {
             return false;
         }
-        else if (!(event.getSrcElement() instanceof HTMLElement)) {
+        if (!(event.getSrcElement() instanceof HTMLElement)) {
             return false;
         }
         final HTMLElement srcElement = (HTMLElement) event.getSrcElement();
