@@ -76,13 +76,13 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
             "<html><head><script>\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
-            + "    var found = false;\n"
             + "    for (var i in e.style) {\n"
             + "      if (i == '" + propertyName + "') {\n"
-            + "        found = true;\n"
+            + "        alert('true');\n"
+            + "        return;\n"
             + "      }\n"
             + "    }\n"
-            + "    alert(found);\n"
+            + "    alert('false');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
@@ -105,9 +105,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
     public void _WEBKIT_BACKGROUND_CLIP() throws Exception {
         test("webkitBackgroundClip");
     }
@@ -116,9 +115,8 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+    @Alerts(DEFAULT = "false",
+            FF52 = "true")
     public void _WEBKIT_BACKGROUND_ORIGIN() throws Exception {
         test("webkitBackgroundOrigin");
     }

@@ -3052,23 +3052,19 @@ public final class StyleAttributes {
         WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", ff52up("border-box")),
 
         /** The style property {@code WebkitBackgroundClip}. */
-        WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip",
-                ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip", ff52up("border-box")),
 
         /** The style property {@code -webkit-background-clip}. */
-        WEBKIT_BACKGROUND_CLIP__("-webkit-background-clip", "webkit-background-clip",
-                ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP__("-webkit-background-clip", "webkit-background-clip", ff52up("border-box")),
 
         /** The style property {@code webkitBackgroundOrigin}. */
         WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", ff52up("padding-box")),
 
         /** The style property {@code WebkitBackgroundOrigin}. */
-        WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin",
-                ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin", ff52up("padding-box")),
 
         /** The style property {@code -webkit-background-origin}. */
-        WEBKIT_BACKGROUND_ORIGIN__("-webkit-background-origin", "webkit-background-origin",
-                ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN__("-webkit-background-origin", "webkit-background-origin", ff52up("padding-box")),
 
         /** The style property {@code webkitBackgroundSize}. */
         WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
