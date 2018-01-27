@@ -448,10 +448,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
 
-    /** */
-    @BrowserFeature({FF, IE})
-    HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN,
-
     /** If the single select has exact one option, this options gets never deselected. */
     @BrowserFeature(FF45)
     HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED,

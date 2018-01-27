@@ -850,9 +850,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Text]", "[object Text]", "null"},
-            CHROME = {"null", "[object Text]", "[object Text]"},
-            IE = {"null", "[object Text]", "null"})
+    @Alerts(DEFAULT = {"null", "[object Text]", "null"},
+            FF = {"[object Text]", "[object Text]", "null"})
     public void setText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

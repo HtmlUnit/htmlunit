@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
@@ -391,8 +390,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param text the text
      */
     public void setText(final String text) {
-        if ((text == null || text.isEmpty())
-                && hasFeature(HTMLOPTION_EMPTY_TEXT_IS_NO_CHILDREN)) {
+        if (text == null || text.isEmpty()) {
             removeAllChildren();
         }
         else {
