@@ -2728,8 +2728,8 @@ public final class StyleAttributes {
         TEXT_DECORATION_OVERLINE("textDecorationOverline", "text-decoration-overline",
                 ie("false").setIteratable(false)),
 
-        /** The style property {@code textDecorationSkip}. */
-        TEXT_DECORATION_SKIP("textDecorationSkip", "text-decoration-sskip", chrome("objects")),
+        /** The style property {@code textDecorationSkipInk}. */
+        TEXT_DECORATION_SKIP("textDecorationSkipInk", "text-decoration-skip-ink", chrome("auto")),
 
         /** The style property {@code textDecorationStyle}. */
         TEXT_DECORATION_STYLE("textDecorationStyle", "text-decoration-style", chrome("solid"), ff("solid")),
@@ -2830,6 +2830,9 @@ public final class StyleAttributes {
 
         /** The style property {@code transform}. */
         TRANSFORM("transform", "transform", ff("none"), ie("none"), chrome("none")),
+
+        /** The style property {@code transformBox}. */
+        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
@@ -3046,8 +3049,7 @@ public final class StyleAttributes {
                 ff52up("visible")),
 
         /** The style property {@code webkitBackgroundClip}. */
-        WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip",
-                chrome("border-box"), ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", ff52up("border-box")),
 
         /** The style property {@code WebkitBackgroundClip}. */
         WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip",
@@ -3058,8 +3060,7 @@ public final class StyleAttributes {
                 ff52up("border-box")),
 
         /** The style property {@code webkitBackgroundOrigin}. */
-        WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin",
-                chrome("padding-box"), ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", ff52up("padding-box")),
 
         /** The style property {@code WebkitBackgroundOrigin}. */
         WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin",

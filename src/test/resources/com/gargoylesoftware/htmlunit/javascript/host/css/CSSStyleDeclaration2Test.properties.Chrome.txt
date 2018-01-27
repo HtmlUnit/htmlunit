@@ -263,7 +263,7 @@ textCombineUpright
 textDecoration
 textDecorationColor
 textDecorationLine
-textDecorationSkip
+textDecorationSkipInk
 textDecorationStyle
 textIndent
 textOrientation
@@ -276,6 +276,7 @@ textUnderlinePosition
 top
 touchAction
 transform
+transformBox
 transformOrigin
 transformStyle
 transition
@@ -292,8 +293,6 @@ verticalAlign
 visibility
 webkitAppRegion
 webkitAppearance
-webkitBackgroundClip
-webkitBackgroundOrigin
 webkitBorderAfter
 webkitBorderAfterColor
 webkitBorderAfterStyle
