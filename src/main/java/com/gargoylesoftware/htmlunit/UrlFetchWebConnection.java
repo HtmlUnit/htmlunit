@@ -165,20 +165,20 @@ public class UrlFetchWebConnection implements WebConnection {
 
     private void addCookies(final HttpURLConnection connection) {
         final StringBuilder cookieHeader = new StringBuilder();
-        final Set<Cookie> cookies = webClient_.getCookieManager().getCookies();
-        if (cookies.isEmpty()) {
-            return;
-        }
-
-        int cookieNb = 1;
-        for (Cookie cookie : webClient_.getCookieManager().getCookies()) {
-            cookieHeader.append(cookie.getName()).append('=').append(cookie.getValue());
-            if (cookieNb < cookies.size()) {
+        boolean isFirst = true;
+        for (Cookie cookie : webClient_.getCookies(connection.getURL())) {
+            if (isFirst) {
+                isFirst = false;
+            }
+            else {
                 cookieHeader.append("; ");
             }
-            cookieNb++;
+
+            cookieHeader.append(cookie.getName()).append('=').append(cookie.getValue());
         }
-        connection.setRequestProperty(HttpHeader.COOKIE, cookieHeader.toString());
+        if (!isFirst) {
+            connection.setRequestProperty(HttpHeader.COOKIE, cookieHeader.toString());
+        }
     }
 
     private void saveCookies(final String domain, final List<NameValuePair> headers) {
