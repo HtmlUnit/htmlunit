@@ -853,4 +853,25 @@ public class Event2Test extends WebDriverTestCase {
         driver.findElement(By.id("theSpan")).click();
         verifyAlerts(driver, alerts[i++]);
     }
+
+    /**
+     * Test event order for clicking on a select option.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object Event]",
+            FF = "undefined")
+    public void windowEvent() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    alert(window.event);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
