@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -82,11 +81,12 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        // [IE] real IE waits for the page to load until infinity
-        if (useRealBrowser() && getBrowserVersion().isIE()) {
-            Assert.fail("Blocks real IE");
+        try {
+            loadPageWithAlerts2(html);
         }
-        loadPageWithAlerts2(html);
+        finally {
+            shutDownRealIE();
+        }
     }
 
     /**
@@ -227,7 +227,6 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
     @NotYetImplemented
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeInNewWindowAndReadFormCollection() throws Exception {
@@ -237,17 +236,19 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "  var newWin = window.open('', 'myPopup', '');\n"
             + "  var newDoc = newWin.document;\n"
             + "  newDoc.write('<html><body><form name=newForm></form></body></html>');\n"
-            + "  alert(newDoc.forms.length);\n"
+            + "  document.title = '#' + newDoc.forms.length;\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
-
-        // for some reason, the selenium driven browser is in an invalid state after this test
-        releaseResources();
-        shutDownAll();
+        try {
+            final WebDriver driver = loadPageWithAlerts2(html);
+            assertEquals("#1", driver.getTitle());
+        }
+        finally {
+            shutDownRealIE();
+        }
     }
 
     /**
@@ -276,12 +277,18 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver driver = loadPage2(html);
-        driver.switchTo().window("myPopup");
-        driver.findElement(By.id("it")).click();
+        try {
+            final WebDriver driver = loadPage2(html);
+            driver.switchTo().window("myPopup");
+            driver.findElement(By.id("it")).click();
 
-        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - startCount);
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
+            assertEquals(Integer.parseInt(getExpectedAlerts()[0]),
+                    getMockWebConnection().getRequestCount() - startCount);
+            assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
+        }
+        finally {
+            shutDownRealIE();
+        }
     }
 
     /**
@@ -290,24 +297,29 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"<form></form>", "[object HTMLFormElement]"})
+    @Alerts("<form></form>#[object HTMLFormElement]")
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void writeOnOpenedWindow_WindowIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "var w = window.open('','blah','width=460,height=420');\n"
-            + "w.document.write('<html><body><form></form></body></html>');\n"
-            + "w.document.close();\n"
-            + "alert(w.document.body.innerHTML);\n"
-            + "alert(w.document.forms[0]);\n"
+            + "  var w = window.open('','blah','width=460,height=420');\n"
+            + "  w.document.write('<html><body><form></form></body></html>');\n"
+            + "  w.document.close();\n"
+            + "  document.title = w.document.body.innerHTML;\n"
+            + "  document.title += '#' + w.document.forms[0];\n"
             + "}\n"
-            + "</script></head><body onload='test()'>foo</body></html>";
-        loadPageWithAlerts2(html);
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
 
-        // for some reason, the selenium driven browser is in an invalid state after this test
-        releaseResources();
-        shutDownAll();
+        try {
+            final WebDriver driver = loadPage2(html);
+            assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        }
+        finally {
+            shutDownRealIE();
+        }
     }
 
     /**
@@ -316,24 +328,27 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"<form></form>", "[object HTMLFormElement]"})
+    @Alerts("<form></form>#[object HTMLFormElement]")
     public void writeOnOpenedWindow_DocumentIsProxied() throws Exception {
         final String html
             = "<html><head><script>\n"
             + "function test() {\n"
-            + "var w = window.open('','blah','width=460,height=420');\n"
-            + "var d = w.document;\n"
-            + "d.write('<html><body><form></form></body></html>');\n"
-            + "d.close();\n"
-            + "alert(d.body.innerHTML);\n"
-            + "alert(d.forms[0]);\n"
+            + "  var w = window.open('','blah','width=460,height=420');\n"
+            + "  var d = w.document;\n"
+            + "  d.write('<html><body><form></form></body></html>');\n"
+            + "  d.close();\n"
+            + "  document.title = d.body.innerHTML;\n"
+            + "  document.title += '#' + d.forms[0];\n"
             + "}\n"
             + "</script></head><body onload='test()'>foo</body></html>";
-        loadPageWithAlerts2(html);
 
-        // for some reason, the selenium driven browser is in an invalid state after this test
-        releaseResources();
-        shutDownAll();
+        try {
+            final WebDriver driver = loadPage2(html);
+            assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        }
+        finally {
+            shutDownAll();
+        }
     }
 
     /**
@@ -395,10 +410,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</script></div></body></html>";
         final WebDriver driver = loadPageWithAlerts2(html);
 
-        if (getExpectedAlerts().length == 0) {
-            assertEquals("done", driver.getTitle());
-            assertEquals("in inline script", driver.findElement(By.id("it")).getText());
-        }
+        assertEquals("done", driver.getTitle());
+        assertEquals("in inline script", driver.findElement(By.id("it")).getText());
     }
 
     /**
