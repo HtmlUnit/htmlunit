@@ -1457,15 +1457,21 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPage2(firstHtml);
-        assertEquals("First:" + getExpectedAlerts()[0], driver.getTitle());
+        try {
+            final WebDriver driver = loadPage2(firstHtml);
+            assertEquals("First:" + getExpectedAlerts()[0], driver.getTitle());
 
-        driver.findElement(By.id("button1")).click();
-        driver.switchTo().window("second");
-        assertEquals("Second:" + getExpectedAlerts()[1], driver.getTitle());
+            driver.findElement(By.id("button1")).click();
 
-        driver.findElement(By.id("button2")).click();
-        assertEquals("Second:" + getExpectedAlerts()[2], driver.getTitle());
+            driver.switchTo().window("second");
+            assertEquals("Second:" + getExpectedAlerts()[1], driver.getTitle());
+
+            driver.findElement(By.id("button2")).click();
+            assertEquals("Second:" + getExpectedAlerts()[2], driver.getTitle());
+        }
+        finally {
+            shutDownRealIE();
+        }
     }
 
     /**
