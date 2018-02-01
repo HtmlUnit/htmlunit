@@ -715,36 +715,37 @@ public class HttpWebConnection implements WebConnection {
         if (is == null) {
             return new DownloadedContent.InMemory(null);
         }
-        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-        final byte[] buffer = new byte[1024];
-        int nbRead;
-        try {
-            while ((nbRead = is.read(buffer)) != -1) {
-                bos.write(buffer, 0, nbRead);
-                if (bos.size() > maxInMemory) {
-                    // we have exceeded the max for memory, let's write everything to a temporary file
-                    final File file = File.createTempFile("htmlunit", ".tmp");
-                    file.deleteOnExit();
-                    try (FileOutputStream fos = new FileOutputStream(file)) {
-                        bos.writeTo(fos); // what we have already read
-                        IOUtils.copyLarge(is, fos); // what remains from the server response
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            final byte[] buffer = new byte[1024];
+            int nbRead;
+            try {
+                while ((nbRead = is.read(buffer)) != -1) {
+                    bos.write(buffer, 0, nbRead);
+                    if (bos.size() > maxInMemory) {
+                        // we have exceeded the max for memory, let's write everything to a temporary file
+                        final File file = File.createTempFile("htmlunit", ".tmp");
+                        file.deleteOnExit();
+                        try (FileOutputStream fos = new FileOutputStream(file)) {
+                            bos.writeTo(fos); // what we have already read
+                            IOUtils.copyLarge(is, fos); // what remains from the server response
+                        }
+                        return new DownloadedContent.OnFile(file, true);
                     }
-                    return new DownloadedContent.OnFile(file, true);
                 }
             }
-        }
-        catch (final ConnectionClosedException e) {
-            LOG.warn("Connection was closed while reading from stream.", e);
-            return new DownloadedContent.InMemory(bos.toByteArray());
-        }
-        catch (final EOFException e) {
-            // this might happen with broken gzip content
-            LOG.warn("EOFException while reading from stream.", e);
-            return new DownloadedContent.InMemory(bos.toByteArray());
-        }
+            catch (final ConnectionClosedException e) {
+                LOG.warn("Connection was closed while reading from stream.", e);
+                throw e;
+            }
+            catch (final EOFException e) {
+                // this might happen with broken gzip content
+                LOG.warn("EOFException while reading from stream.", e);
+                throw e;
+            }
 
-        return new DownloadedContent.InMemory(bos.toByteArray());
+            return new DownloadedContent.InMemory(bos.toByteArray());
+        }
     }
 
     /**
