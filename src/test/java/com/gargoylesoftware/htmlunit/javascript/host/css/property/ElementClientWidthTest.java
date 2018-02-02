@@ -1466,7 +1466,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "300",
-            FF = "0")
+            FF = "0",
+            IE = "-16")
     @NotYetImplemented
     public void svg() throws Exception {
         loadPageWithAlerts2(test("svg"));
