@@ -176,7 +176,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("BackCompat")
-    @NotYetImplemented
     public void compatMode_question() throws Exception {
         compatMode("<?DOCTYPE html>");
     }

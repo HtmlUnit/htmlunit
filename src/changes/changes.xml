@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="1682" dev="rbri">
+                Handling of invalid processing instructions fixed in neko.
+            </action>
             <action type="fix" dev="rbri" due-to="Frank Danek">
                 Fix some problem to be able to run our test suite with edge.
             </action>
