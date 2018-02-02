@@ -736,12 +736,12 @@ public class HttpWebConnection implements WebConnection {
             }
             catch (final ConnectionClosedException e) {
                 LOG.warn("Connection was closed while reading from stream.", e);
-                throw e;
+                return new DownloadedContent.InMemory(bos.toByteArray());
             }
             catch (final EOFException e) {
                 // this might happen with broken gzip content
                 LOG.warn("EOFException while reading from stream.", e);
-                throw e;
+                return new DownloadedContent.InMemory(bos.toByteArray());
             }
 
             return new DownloadedContent.InMemory(bos.toByteArray());
