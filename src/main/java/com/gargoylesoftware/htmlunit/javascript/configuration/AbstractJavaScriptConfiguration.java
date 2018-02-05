@@ -14,7 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.*;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -97,22 +103,22 @@ public abstract class AbstractJavaScriptConfiguration {
         if (browser != null) {
             final SupportedBrowser expectedBrowser;
             if (browser.isChrome()) {
-                expectedBrowser = SupportedBrowser.CHROME;
+                expectedBrowser = CHROME;
             }
             else if (browser.isIE()) {
-                expectedBrowser = SupportedBrowser.IE;
+                expectedBrowser = IE;
             }
             else if (browser.isEdge()) {
-                expectedBrowser = SupportedBrowser.EDGE;
+                expectedBrowser = EDGE;
             }
             else if (browser.isFirefox52()) {
-                expectedBrowser = SupportedBrowser.FF52;
+                expectedBrowser = FF52;
             }
             else if (browser.isFirefox()) {
-                expectedBrowser = SupportedBrowser.FF45;
+                expectedBrowser = FF45;
             }
             else {
-                expectedBrowser = SupportedBrowser.CHROME;  // our current fallback
+                expectedBrowser = CHROME;  // our current fallback
             }
 
             final String hostClassName = klass.getName();
