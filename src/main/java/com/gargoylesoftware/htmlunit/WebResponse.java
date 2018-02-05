@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_16BE;
+import static java.nio.charset.StandardCharsets.UTF_16LE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
@@ -22,7 +24,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.ByteOrderMark;
@@ -230,13 +231,13 @@ public class WebResponse implements Serializable {
                         // we have to call this before hasBOM(ByteOrderMark)
                         if (bomIn.hasBOM()) {
                             if (!ignoreUtf8Bom && bomIn.hasBOM(ByteOrderMark.UTF_8)) {
-                                return IOUtils.toString(bomIn, StandardCharsets.UTF_8);
+                                return IOUtils.toString(bomIn, UTF_8);
                             }
                             if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
-                                return IOUtils.toString(bomIn, StandardCharsets.UTF_16BE);
+                                return IOUtils.toString(bomIn, UTF_16BE);
                             }
                             if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
-                                return IOUtils.toString(bomIn, StandardCharsets.UTF_16LE);
+                                return IOUtils.toString(bomIn, UTF_16LE);
                             }
                         }
                         return IOUtils.toString(bomIn, encoding);
