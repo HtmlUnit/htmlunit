@@ -64,7 +64,6 @@ import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.LangCondition;
 import org.w3c.css.sac.NegativeCondition;
 import org.w3c.css.sac.NegativeSelector;
-import org.w3c.css.sac.SACMediaList;
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.SiblingSelector;
@@ -116,7 +115,6 @@ import com.steadystate.css.dom.CSSValueImpl;
 import com.steadystate.css.dom.MediaListImpl;
 import com.steadystate.css.dom.Property;
 import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACMediaListImpl;
 import com.steadystate.css.parser.SACParserCSS3;
 import com.steadystate.css.parser.SelectorListImpl;
 import com.steadystate.css.parser.media.MediaQuery;
@@ -160,6 +158,9 @@ public class CSSStyleSheet extends StyleSheet {
 
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<>();
+
+    /** cache parsed media strings */
+    private static final transient Map<String, MediaList> media_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
@@ -972,21 +973,30 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
      */
-    static SACMediaList parseMedia(final ErrorHandler errorHandler, final String mediaString) {
+    static MediaList parseMedia(final ErrorHandler errorHandler, final String mediaString) {
+        MediaList media = media_.get(mediaString);
+        if (media != null) {
+            return media;
+        }
+
         try {
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
 
             final InputSource source = new InputSource(new StringReader(mediaString));
-            final SACMediaList media = parser.parseMedia(source);
+            media = new MediaListImpl(parser.parseMedia(source));
             if (media != null) {
+                media_.put(mediaString, media);
                 return media;
             }
         }
         catch (final Exception e) {
             LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
         }
-        return new SACMediaListImpl();
+
+        media = new MediaListImpl();
+        media_.put(mediaString, media);
+        return media;
     }
 
     /**
@@ -1262,8 +1272,8 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final SACMediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
-        return isActive(this, new MediaListImpl(mediaList));
+        final MediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
+        return isActive(this, mediaList);
     }
 
     /**

@@ -1664,8 +1664,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final CSSStyleDeclaration original = e.getStyle();
         final CSS2Properties style = new CSS2Properties(original);
 
-        if (e.getOwnerDocument() instanceof HTMLDocument) {
-            final StyleSheetList sheets = ((HTMLDocument) e.getOwnerDocument()).getStyleSheets();
+        final Object ownerDocument = e.getOwnerDocument();
+        if (ownerDocument instanceof HTMLDocument) {
+            final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
             final boolean trace = LOG.isTraceEnabled();
             for (int i = 0; i < sheets.getLength(); i++) {
                 final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);

@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.css.sac.SACMediaList;
+import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
-import com.steadystate.css.dom.MediaListImpl;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -104,8 +103,8 @@ public class StyleSheetList extends SimpleScriptable {
                     return true;
                 }
                 final WebClient webClient = getWindow().getWebWindow().getWebClient();
-                final SACMediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
-                return CSSStyleSheet.isActive(this, new MediaListImpl(mediaList));
+                final MediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
+                return CSSStyleSheet.isActive(this, mediaList);
             }
         }
         return false;
@@ -176,23 +175,18 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (nodes_ == null || index < 0 || index >= nodes_.getLength()) {
+        if (index < 0 || index >= nodes_.getLength()) {
             return Undefined.instance;
         }
 
         final HTMLElement element = (HTMLElement) nodes_.item(Integer.valueOf(index));
 
-        final CSSStyleSheet sheet;
         // <style type="text/css"> ... </style>
         if (element instanceof HTMLStyleElement) {
-            sheet = ((HTMLStyleElement) element).getSheet();
+            return ((HTMLStyleElement) element).getSheet();
         }
-        else {
-            // <link rel="stylesheet" type="text/css" href="..." />
-            sheet = ((HTMLLinkElement) element).getSheet();
-        }
-
-        return sheet;
+        // <link rel="stylesheet" type="text/css" href="..." />
+        return ((HTMLLinkElement) element).getSheet();
     }
 
     /**
