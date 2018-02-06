@@ -230,6 +230,7 @@ public class Document extends Node {
     private String domain_;
     private String lastModified_;
     private ScriptableObject currentScript_;
+    private transient StyleSheetList styleSheetList_;
 
     static {
         // commands
@@ -861,10 +862,6 @@ public class Document extends Node {
 
             @Override
             protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final HtmlElement node = event.getHtmlElement();
-                if (!(node instanceof HtmlAnchor)) {
-                    return EffectOnCache.NONE;
-                }
                 if ("name".equals(event.getName()) || "id".equals(event.getName())) {
                     return EffectOnCache.RESET;
                 }
@@ -1881,7 +1878,10 @@ public class Document extends Node {
      */
     @JsxGetter
     public StyleSheetList getStyleSheets() {
-        return new StyleSheetList(this);
+        if (styleSheetList_ == null) {
+            styleSheetList_ = new StyleSheetList(this);
+        }
+        return styleSheetList_;
     }
 
     /**
