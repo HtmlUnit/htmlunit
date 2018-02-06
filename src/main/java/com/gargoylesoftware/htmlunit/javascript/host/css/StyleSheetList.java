@@ -175,7 +175,7 @@ public class StyleSheetList extends SimpleScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (index < 0 || index >= nodes_.getLength()) {
+        if (nodes_ == null || index < 0 || index >= nodes_.getLength()) {
             return Undefined.instance;
         }
 
