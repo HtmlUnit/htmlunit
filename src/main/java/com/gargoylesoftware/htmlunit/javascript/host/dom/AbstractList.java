@@ -571,7 +571,10 @@ public class AbstractList extends SimpleScriptable implements Function {
          */
         @Override
         public void nodeAdded(final DomChangeEvent event) {
-            clearCache();
+            final AbstractList nodes = nodeList_.get();
+            if (null != nodes && nodes.isMatching(event.getChangedNode())) {
+                clearCache(nodes);
+            }
         }
 
         /**
@@ -579,7 +582,10 @@ public class AbstractList extends SimpleScriptable implements Function {
          */
         @Override
         public void nodeDeleted(final DomChangeEvent event) {
-            clearCache();
+            final AbstractList nodes = nodeList_.get();
+            if (null != nodes && nodes.isMatching(event.getChangedNode())) {
+                clearCache(nodes);
+            }
         }
 
         /**
@@ -587,7 +593,10 @@ public class AbstractList extends SimpleScriptable implements Function {
          */
         @Override
         public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(event);
+            final AbstractList nodes = nodeList_.get();
+            if (null != nodes && nodes.isMatching(event.getHtmlElement())) {
+                handleChangeOnCache(nodes, event);
+            }
         }
 
         /**
@@ -595,7 +604,10 @@ public class AbstractList extends SimpleScriptable implements Function {
          */
         @Override
         public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            handleChangeOnCache(event);
+            final AbstractList nodes = nodeList_.get();
+            if (null != nodes && nodes.isMatching(event.getHtmlElement())) {
+                handleChangeOnCache(nodes, event);
+            }
         }
 
         /**
@@ -604,34 +616,23 @@ public class AbstractList extends SimpleScriptable implements Function {
         @Override
         public void attributeReplaced(final HtmlAttributeChangeEvent event) {
             final AbstractList nodes = nodeList_.get();
-            if (null == nodes) {
-                return;
-            }
-            if (nodes.attributeChangeSensitive_) {
-                handleChangeOnCache(event);
+            if (null != nodes && nodes.attributeChangeSensitive_ && nodes.isMatching(event.getHtmlElement())) {
+                handleChangeOnCache(nodes, event);
             }
         }
 
-        private void handleChangeOnCache(final HtmlAttributeChangeEvent event) {
-            final AbstractList nodes = nodeList_.get();
-            if (null == nodes) {
-                return;
-            }
-
+        private void handleChangeOnCache(final AbstractList nodes, final HtmlAttributeChangeEvent event) {
             final EffectOnCache effectOnCache = nodes.getEffectOnCache(event);
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
             }
             if (EffectOnCache.RESET == effectOnCache) {
-                clearCache();
+                clearCache(nodes);
             }
         }
 
-        private void clearCache() {
-            final AbstractList nodes = nodeList_.get();
-            if (null != nodes) {
-                nodes.cachedElements_ = null;
-            }
+        private void clearCache(final AbstractList nodes) {
+            nodes.cachedElements_ = null;
         }
     }
 
