@@ -461,7 +461,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         Pattern getPattern() {
             return pattern_;
         }
-
     }
 
     /**
