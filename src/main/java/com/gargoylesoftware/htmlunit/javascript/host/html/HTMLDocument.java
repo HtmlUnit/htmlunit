@@ -572,9 +572,10 @@ public class HTMLDocument extends Document {
             LOG.warn("Function open() called when document is already open.");
         }
         writeInCurrentDocument_ = false;
-        if (getWindow().getWebWindow() instanceof FrameWindow
+        final WebWindow ww = getWindow().getWebWindow();
+        if (ww instanceof FrameWindow
                 && WebClient.ABOUT_BLANK.equals(getPage().getUrl().toExternalForm())) {
-            final URL enclosingUrl = ((FrameWindow) getWindow().getWebWindow()).getEnclosingPage().getUrl();
+            final URL enclosingUrl = ((FrameWindow) ww).getEnclosingPage().getUrl();
             getPage().getWebResponse().getWebRequest().setUrl(enclosingUrl);
         }
         return this;

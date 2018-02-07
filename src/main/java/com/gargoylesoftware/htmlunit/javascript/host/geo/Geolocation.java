@@ -50,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * A JavaScript object for {@code Geolocation}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({IE, EDGE})
 @JsxClass(isJSObject = false, value = {CHROME, FF})
@@ -96,7 +97,7 @@ public class Geolocation extends SimpleScriptable {
                             doGetPosition();
                         }
                     });
-            webWindow.getJobManager().addJob(job, getWindow().getWebWindow().getEnclosedPage());
+            webWindow.getJobManager().addJob(job, webWindow.getEnclosedPage());
         }
     }
 
@@ -162,9 +163,10 @@ public class Geolocation extends SimpleScriptable {
                 final Position position = new Position(coordinates);
                 position.setPrototype(getPrototype(position.getClass()));
 
+                final WebWindow ww = getWindow().getWebWindow();
                 final JavaScriptEngine jsEngine =
-                        (JavaScriptEngine) getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
-                jsEngine.callFunction((HtmlPage) getWindow().getWebWindow().getEnclosedPage(), successHandler_, this,
+                        (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
+                jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(), successHandler_, this,
                         getParentScope(), new Object[] {position});
             }
             catch (final Exception e) {

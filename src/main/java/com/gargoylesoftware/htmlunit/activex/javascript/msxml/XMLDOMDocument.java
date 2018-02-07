@@ -550,11 +550,12 @@ public class XMLDOMDocument extends XMLDOMNode {
             LOG.debug("XMLDOMDocument.load(): 'async' is true, currently treated as false.");
         }
         try {
-            final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+            final WebWindow ww = getWindow().getWebWindow();
+            final HtmlPage htmlPage = (HtmlPage) ww.getEnclosedPage();
             final URL fullyQualifiedURL = htmlPage.getFullyQualifiedUrl(xmlSource);
             final WebRequest request = new WebRequest(fullyQualifiedURL);
-            final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(request);
-            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false, false);
+            final WebResponse webResponse = ww.getWebClient().loadWebResponse(request);
+            final XmlPage page = new XmlPage(webResponse, ww, false, false);
             setDomNode(page);
 
             preserveWhiteSpaceDuringLoad_ = preserveWhiteSpace_;

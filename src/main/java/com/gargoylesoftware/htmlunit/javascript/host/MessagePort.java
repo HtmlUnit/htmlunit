@@ -99,16 +99,17 @@ public class MessagePort extends EventTarget {
     @JsxFunction
     public void postMessage(final String message, final Object transfer) {
         if (port1_ != null) {
-            final URL currentURL = getWindow().getWebWindow().getEnclosedPage().getUrl();
+            final Window w = getWindow();
+            final URL currentURL = w.getWebWindow().getEnclosedPage().getUrl();
             final MessageEvent event = new MessageEvent();
             final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
-            event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", getWindow(), transfer);
+            event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", w, transfer);
             event.setParentScope(port1_);
             event.setPrototype(getPrototype(event.getClass()));
 
             final JavaScriptEngine jsEngine
-                = (JavaScriptEngine) getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
-            final PostponedAction action = new PostponedAction(getWindow().getWebWindow().getEnclosedPage()) {
+                = (JavaScriptEngine) w.getWebWindow().getWebClient().getJavaScriptEngine();
+            final PostponedAction action = new PostponedAction(w.getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {
                     final ContextAction contextAction = new ContextAction() {

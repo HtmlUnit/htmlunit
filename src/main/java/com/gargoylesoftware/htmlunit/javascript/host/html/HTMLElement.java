@@ -48,6 +48,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -1108,13 +1109,14 @@ public class HTMLElement extends Element {
      * @throws MalformedURLException if the URL cannot be created
      */
     public void startDownload(final String uri, final Function callback) throws MalformedURLException {
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final WebWindow ww = getWindow().getWebWindow();
+        final HtmlPage page = (HtmlPage) ww.getEnclosedPage();
         final URL url = page.getFullyQualifiedUrl(uri);
         if (!page.getUrl().getHost().equals(url.getHost())) {
             throw Context.reportRuntimeError("Not authorized url: " + url);
         }
         final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                createDownloadBehaviorJob(url, callback, getWindow().getWebWindow().getWebClient());
+                createDownloadBehaviorJob(url, callback, ww.getWebClient());
         page.getEnclosingWindow().getJobManager().addJob(job, page);
     }
 

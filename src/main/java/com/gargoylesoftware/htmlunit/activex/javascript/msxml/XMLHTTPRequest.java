@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -230,16 +231,17 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         if (state_ == STATE_UNSENT) {
             throw Context.reportRuntimeError("Unspecified error (request not opened).");
         }
+        final Window w = getWindow();
         if (state_ == STATE_DONE && webResponse_ != null && !(webResponse_ instanceof NetworkErrorWebResponse)) {
             final String contentType = webResponse_.getContentType();
             if (contentType.contains("xml")) {
                 try {
-                    final XmlPage page = new XmlPage(webResponse_, getWindow().getWebWindow(), true, false);
+                    final XmlPage page = new XmlPage(webResponse_, w.getWebWindow(), true, false);
                     final XMLDOMDocument doc = new XMLDOMDocument();
                     doc.setDomNode(page);
                     doc.setPrototype(getPrototype(doc.getClass()));
                     doc.setEnvironment(getEnvironment());
-                    doc.setParentScope(getWindow());
+                    doc.setParentScope(w);
                     return doc;
                 }
                 catch (final IOException e) {
@@ -249,7 +251,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                 }
             }
         }
-        final XMLDOMDocument doc = new XMLDOMDocument(getWindow().getWebWindow());
+        final XMLDOMDocument doc = new XMLDOMDocument(w.getWebWindow());
         doc.setPrototype(getPrototype(doc.getClass()));
         doc.setEnvironment(getEnvironment());
         return doc;
@@ -450,16 +452,17 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         // quite strange but IE seems to fire state loading twice
         setState(STATE_OPENED, Context.getCurrentContext());
 
-        final WebClient client = getWindow().getWebWindow().getWebClient();
+        final Window w = getWindow();
+        final WebClient client = w.getWebWindow().getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) w.getWebWindow().getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());
         }
         else {
             // Create and start a thread in which to execute the request.
-            final Scriptable startingScope = getWindow();
+            final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
@@ -488,7 +491,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHTTPRequest thread for asynchronous request");
             }
-            jobID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = w.getWebWindow().getJobManager().addJob(job, page);
         }
     }
 

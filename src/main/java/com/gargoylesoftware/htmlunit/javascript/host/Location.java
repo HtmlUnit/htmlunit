@@ -343,15 +343,16 @@ public class Location extends SimpleScriptable {
         final String newURL = getHref();
 
         if (hasChanged) {
+            final Window w = getWindow();
             final Event event;
             if (getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)) {
-                event = new HashChangeEvent(getWindow(), Event.TYPE_HASH_CHANGE, oldURL, newURL);
+                event = new HashChangeEvent(w, Event.TYPE_HASH_CHANGE, oldURL, newURL);
             }
             else {
-                event = new Event(getWindow(), Event.TYPE_HASH_CHANGE);
+                event = new Event(w, Event.TYPE_HASH_CHANGE);
                 event.initEvent(Event.TYPE_HASH_CHANGE, false, false);
             }
-            getWindow().executeEventLocally(event);
+            w.executeEventLocally(event);
         }
     }
 

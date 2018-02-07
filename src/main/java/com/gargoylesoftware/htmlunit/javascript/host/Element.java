@@ -681,13 +681,14 @@ public class Element extends Node {
      */
     @JsxFunction
     public ClientRectList getClientRects() {
+        final Window w = getWindow();
         final ClientRectList rectList = new ClientRectList();
-        rectList.setParentScope(getWindow());
+        rectList.setParentScope(w);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         if (!isDisplayNone() && getDomNodeOrDie().isAttachedToPage()) {
             final ClientRect rect = new ClientRect(0, 0, 1, 1);
-            rect.setParentScope(getWindow());
+            rect.setParentScope(w);
             rect.setPrototype(getPrototype(rect.getClass()));
             rectList.add(rect);
         }

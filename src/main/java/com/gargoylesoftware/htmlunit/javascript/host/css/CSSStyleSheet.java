@@ -418,6 +418,7 @@ public class CSSStyleSheet extends StyleSheet {
         switch (selector.getSelectorType()) {
             case Selector.SAC_ANY_NODE_SELECTOR:
                 return true;
+
             case Selector.SAC_CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
                 if (parentNode == element.getPage()) {
@@ -430,6 +431,7 @@ public class CSSStyleSheet extends StyleSheet {
                 return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
                     && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode,
                             pseudoElement, fromQuerySelectorAll);
+
             case Selector.SAC_DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final SimpleSelector simpleSelector = ds.getSimpleSelector();
@@ -448,18 +450,22 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
                 return false;
+
             case Selector.SAC_CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
                 return (simpleSel == null || selects(browserVersion, simpleSel, element,
                         pseudoElement, fromQuerySelectorAll))
                     && selects(browserVersion, conditional.getCondition(), element, fromQuerySelectorAll);
+
             case Selector.SAC_ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
                 return name == null || name.equalsIgnoreCase(element.getLocalName());
+
             case Selector.SAC_ROOT_NODE_SELECTOR:
                 return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
+
             case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
                 final SiblingSelector ss = (SiblingSelector) selector;
 
@@ -485,20 +491,24 @@ public class CSSStyleSheet extends StyleSheet {
                     && selects(browserVersion, ss.getSelector(), (HtmlElement) prev,
                             pseudoElement, fromQuerySelectorAll)
                     && selects(browserVersion, ss.getSiblingSelector(), element, pseudoElement, fromQuerySelectorAll);
+
             case Selector.SAC_NEGATIVE_SELECTOR:
                 final NegativeSelector ns = (NegativeSelector) selector;
                 return !selects(browserVersion, ns.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll);
+
             case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
                 if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
                     final String pseudoName = ((ElementSelector) selector).getLocalName();
                     return pseudoName.equals(pseudoElement.substring(1));
                 }
                 return false;
+
             case Selector.SAC_COMMENT_NODE_SELECTOR:
             case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
             case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
             case Selector.SAC_TEXT_NODE_SELECTOR:
                 return false;
+
             default:
                 LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
                 return false;
@@ -516,25 +526,30 @@ public class CSSStyleSheet extends StyleSheet {
      */
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
             final boolean fromQuerySelectorAll) {
+
         if (condition instanceof PrefixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
         }
+
         if (condition instanceof SuffixAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
         }
+
         if (condition instanceof SubstringAttributeConditionImpl) {
             final AttributeCondition ac = (AttributeCondition) condition;
             final String value = ac.getValue();
             return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
         }
+
         switch (condition.getConditionType()) {
             case Condition.SAC_ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
                 return ac4.getValue().equals(element.getId());
+
             case Condition.SAC_CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
                 String v3 = ac3.getValue();
@@ -543,10 +558,12 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 final String a3 = element.getAttribute("class");
                 return selectsWhitespaceSeparated(v3, a3);
+
             case Condition.SAC_AND_CONDITION:
                 final CombinatorCondition cc1 = (CombinatorCondition) condition;
                 return selects(browserVersion, cc1.getFirstCondition(), element, fromQuerySelectorAll)
                     && selects(browserVersion, cc1.getSecondCondition(), element, fromQuerySelectorAll);
+
             case Condition.SAC_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if (ac1.getSpecified()) {
@@ -558,28 +575,35 @@ public class CSSStyleSheet extends StyleSheet {
                     return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
                 }
                 return element.hasAttribute(ac1.getLocalName());
+
             case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac2 = (AttributeCondition) condition;
                 final String v = ac2.getValue();
                 final String a = element.getAttribute(ac2.getLocalName());
                 return selects(v, a, '-');
+
             case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
                 final String v2 = ac5.getValue();
                 final String a2 = element.getAttribute(ac5.getLocalName());
                 return selects(v2, a2, ' ');
+
             case Condition.SAC_OR_CONDITION:
                 final CombinatorCondition cc2 = (CombinatorCondition) condition;
                 return selects(browserVersion, cc2.getFirstCondition(), element, fromQuerySelectorAll)
                     || selects(browserVersion, cc2.getSecondCondition(), element, fromQuerySelectorAll);
+
             case Condition.SAC_NEGATIVE_CONDITION:
                 final NegativeCondition nc = (NegativeCondition) condition;
                 return !selects(browserVersion, nc.getCondition(), element, fromQuerySelectorAll);
+
             case Condition.SAC_ONLY_CHILD_CONDITION:
                 return element.getParentNode().getChildNodes().getLength() == 1;
+
             case Condition.SAC_CONTENT_CONDITION:
                 final ContentCondition cc = (ContentCondition) condition;
                 return element.asText().contains(cc.getData());
+
             case Condition.SAC_LANG_CONDITION:
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
@@ -592,14 +616,18 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
                 return false;
+
             case Condition.SAC_ONLY_TYPE_CONDITION:
                 final String tagName = element.getTagName();
                 return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
+
             case Condition.SAC_PSEUDO_CLASS_CONDITION:
                 return selectsPseudoClass(browserVersion,
                         (AttributeCondition) condition, element, fromQuerySelectorAll);
+
             case Condition.SAC_POSITIONAL_CONDITION:
                 return false;
+
             default:
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
                 return false;

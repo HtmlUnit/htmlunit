@@ -57,7 +57,6 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -68,6 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -382,12 +382,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         final String contentType = webResponse_.getContentType();
         if (contentType.isEmpty() || contentType.contains("xml")) {
-            final WebWindow webWindow = getWindow().getWebWindow();
+            final Window w = getWindow();
             try {
-                final XmlPage page = new XmlPage(webResponse_, webWindow);
+                final XmlPage page = new XmlPage(webResponse_, w.getWebWindow());
                 final XMLDocument document = new XMLDocument();
                 document.setPrototype(getPrototype(document.getClass()));
-                document.setParentScope(getWindow());
+                document.setParentScope(w);
                 document.setDomNode(page);
                 return document;
             }
@@ -618,9 +618,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         prepareRequest(content);
 
-        final WebClient client = getWindow().getWebWindow().getWebClient();
+        final Window w = getWindow();
+        final WebClient client = w.getWebWindow().getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
-        final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) w.getWebWindow().getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());
@@ -633,7 +634,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             // Create and start a thread in which to execute the request.
-            final Scriptable startingScope = getWindow();
+            final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction action = new ContextAction() {
                 @Override
@@ -667,7 +668,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
-            jobID_ = getWindow().getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = w.getWebWindow().getJobManager().addJob(job, page);
         }
     }
 

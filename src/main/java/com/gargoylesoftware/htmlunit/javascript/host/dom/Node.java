@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -250,8 +251,9 @@ public class Node extends EventTarget {
      * @return the created exception
      */
     protected RhinoException asJavaScriptException(final DOMException exception) {
-        exception.setPrototype(getWindow().getPrototype(exception.getClass()));
-        exception.setParentScope(getWindow());
+        final Window w = getWindow();
+        exception.setPrototype(w.getPrototype(exception.getClass()));
+        exception.setParentScope(w);
 
         // get current line and file name
         // this method can only be used in interpreted mode. If one day we choose to use compiled mode,

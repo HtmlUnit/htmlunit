@@ -131,10 +131,11 @@ public class XMLDocument extends Document {
             }
         }
         try {
-            final HtmlPage htmlPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+            final WebWindow ww = getWindow().getWebWindow();
+            final HtmlPage htmlPage = (HtmlPage) ww.getEnclosedPage();
             final WebRequest request = new WebRequest(htmlPage.getFullyQualifiedUrl(xmlSource));
-            final WebResponse webResponse = getWindow().getWebWindow().getWebClient().loadWebResponse(request);
-            final XmlPage page = new XmlPage(webResponse, getWindow().getWebWindow(), false);
+            final WebResponse webResponse = ww.getWebClient().loadWebResponse(request);
+            final XmlPage page = new XmlPage(webResponse, ww, false);
             setDomNode(page);
             return true;
         }
