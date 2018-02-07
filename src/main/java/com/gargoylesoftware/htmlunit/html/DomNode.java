@@ -1096,7 +1096,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        fireNodeAdded(this, domNode);
+        fireNodeAdded(new DomChangeEvent(this, domNode));
     }
 
     /**
@@ -1198,9 +1198,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         if (exParent != null) {
-            fireNodeDeleted(exParent, this);
+            final DomChangeEvent event = new DomChangeEvent(exParent, this);
+            fireNodeDeleted(event);
             // ask ex-parent to fire event (because we don't have parent now)
-            exParent.fireNodeDeleted(exParent, this);
+            exParent.fireNodeDeleted(event);
         }
     }
 
@@ -1729,19 +1730,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomNode, DomNode)}.
      *
-     * @param parentNode the parent of the node that was added
-     * @param addedNode the node that was added
+     * @param event the DomChangeEvent to be propagated
      */
-    protected void fireNodeAdded(final DomNode parentNode, final DomNode addedNode) {
+    protected void fireNodeAdded(final DomChangeEvent event) {
         final List<DomChangeListener> listeners = safeGetDomListeners();
         if (listeners != null) {
-            final DomChangeEvent event = new DomChangeEvent(parentNode, addedNode);
             for (final DomChangeListener listener : listeners) {
                 listener.nodeAdded(event);
             }
         }
         if (parent_ != null) {
-            parent_.fireNodeAdded(parentNode, addedNode);
+            parent_.fireNodeAdded(event);
         }
     }
 
@@ -1787,19 +1786,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Note that this method recursively calls this node's parent's {@link #fireCharacterDataChanged}.
      *
-     * @param charcterData the character data that was changed
-     * @param oldValue the old value
+     * @param event the CharacterDataChangeEvent to be propagated
      */
-    protected void fireCharacterDataChanged(final DomCharacterData charcterData, final String oldValue) {
+    protected void fireCharacterDataChanged(final CharacterDataChangeEvent event) {
         final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
         if (listeners != null) {
-            final CharacterDataChangeEvent event = new CharacterDataChangeEvent(charcterData, oldValue);
             for (final CharacterDataChangeListener listener : listeners) {
                 listener.characterDataChanged(event);
             }
         }
         if (parent_ != null) {
-            parent_.fireCharacterDataChanged(charcterData, oldValue);
+            parent_.fireCharacterDataChanged(event);
         }
     }
 
@@ -1809,19 +1806,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomNode, DomNode)}.
      *
-     * @param parentNode the parent of the node that was deleted
-     * @param deletedNode the node that was deleted
+     * @param event the DomChangeEvent to be propagated
      */
-    protected void fireNodeDeleted(final DomNode parentNode, final DomNode deletedNode) {
+    protected void fireNodeDeleted(final DomChangeEvent event) {
         final List<DomChangeListener> listeners = safeGetDomListeners();
         if (listeners != null) {
-            final DomChangeEvent event = new DomChangeEvent(parentNode, deletedNode);
             for (final DomChangeListener listener : listeners) {
                 listener.nodeDeleted(event);
             }
         }
         if (parent_ != null) {
-            parent_.fireNodeDeleted(parentNode, deletedNode);
+            parent_.fireNodeDeleted(event);
         }
     }
 

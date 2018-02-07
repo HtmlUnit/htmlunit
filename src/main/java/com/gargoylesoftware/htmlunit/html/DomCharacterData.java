@@ -61,7 +61,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
     public void setData(final String data) {
         final String oldData = data_;
         data_ = data;
-        fireCharacterDataChanged(this, oldData);
+        fireCharacterDataChanged(new CharacterDataChangeEvent(this, oldData));
     }
 
     /**
