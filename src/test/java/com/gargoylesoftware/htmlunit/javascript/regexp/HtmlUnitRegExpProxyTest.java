@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  * @author Carsten Steurl
  * @author Leszek Hoppe
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
@@ -1048,5 +1049,75 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abc")
+    public void specialBrackets1() throws Exception {
+        // [] matches no character in JS
+        testEvaluate("'abc'.replace(/[]/, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void specialBrackets2() throws Exception {
+        // [] matches no character in JS
+        testEvaluate("'abc'.match(/[]*/)[0]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xaxbxcx")
+    public void specialBrackets3() throws Exception {
+        // [] matches no character in JS
+        testEvaluate("'abc'.replace(/[]*/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xaxbxxcx*xdx")
+    public void specialBrackets4() throws Exception {
+        // [] matches no character in JS
+        testEvaluate("'ab]c*d'.replace(/[]*]*/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("xxx")
+    public void specialBrackets5() throws Exception {
+        // [^] matches any character in JS
+        testEvaluate("'abc'.replace(/[^]/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("abc")
+    public void specialBrackets6() throws Exception {
+        // [^] matches any character in JS
+        testEvaluate("'abc'.match(/[^]*/)[0]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("axcd")
+    public void specialBrackets7() throws Exception {
+        // [^] matches any character in JS
+        testEvaluate("'ab]cd'.replace(/[^]]/g, 'x')");
     }
 }

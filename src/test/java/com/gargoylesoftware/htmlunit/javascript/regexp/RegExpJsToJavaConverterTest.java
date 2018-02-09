@@ -462,4 +462,17 @@ public class RegExpJsToJavaConverterTest {
         assertEquals("[!\\^()\\[\\]]", regExpJsToJavaConverter.convert("[!\\^()\\[\\]]"));
     }
 
+    /**
+     * Verifies that square braces can be used non escaped in JS regexp.
+     */
+    @Test
+    public void squareBracket() {
+        final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
+
+        assertEquals("(?!)", regExpJsToJavaConverter.convert("[]"));
+        assertEquals("x(?!)y", regExpJsToJavaConverter.convert("x[]y"));
+
+        assertEquals(".", regExpJsToJavaConverter.convert("[^]"));
+        assertEquals("x.y", regExpJsToJavaConverter.convert("x[^]y"));
+    }
 }

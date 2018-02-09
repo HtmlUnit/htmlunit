@@ -30,6 +30,7 @@ import java.util.Stack;
  *
  * @author Ronald Brill
  * @author Leszek Hoppe
+ * @author Atsushi Nakagawa
  */
 public class RegExpJsToJavaConverter {
 
@@ -103,6 +104,14 @@ public class RegExpJsToJavaConverter {
          */
         public void replace(final String token) {
             tape_.replace(currentPos_, currentPos_ + 1, token);
+        }
+
+        /**
+         * Removes number of chars from the given string.
+         * @param count the number of chars to remove
+         */
+        public void remove(final int count) {
+            tape_.delete(currentPos_, currentPos_ + count);
         }
 
         /**
@@ -221,16 +230,27 @@ public class RegExpJsToJavaConverter {
                         next = tape_.read();
                         if (']' == next) {
                             tape_.move(-3);
-                            tape_.replace("");
-                            tape_.replace("");
+                            tape_.remove(2);
                             tape_.replace(".");
                             insideCharClass_ = false;
                         }
                     }
                 }
+                else if (']' == next) {
+                    // [^]
+                    tape_.move(-3);
+                    tape_.remove(2);
+                    tape_.replace(".");
+                }
                 else {
                     tape_.move(-1);
                 }
+            }
+            else if (']' == next) {
+                // []
+                tape_.move(-2);
+                tape_.remove(1);
+                tape_.replace("(?!)");
             }
             else {
                 tape_.move(-1);
@@ -338,7 +358,7 @@ public class RegExpJsToJavaConverter {
         if ("ACEFGHIJKLMNOPQRTUVXYZaeghijklmpqyz".indexOf(escapeSequence) > -1) {
             // no need to escape this chars
             tape_.move(-2);
-            tape_.replace("");
+            tape_.remove(1);
             tape_.move(1);
             return;
         }
@@ -414,7 +434,7 @@ public class RegExpJsToJavaConverter {
             // drop back reference
             for (int i = tmpInsertPos; i <= 0; i++) {
                 tape_.move(-1);
-                tape_.replace("");
+                tape_.remove(1);
             }
         }
 
