@@ -102,8 +102,9 @@ public class RegExpJsToJavaConverter {
          * Replaces the current char with the given string.
          * @param token the string to insert
          */
-        public void replace(final String token) {
-            tape_.replace(currentPos_, currentPos_ + 1, token);
+        public void replace(final int count, final String token) {
+            tape_.replace(currentPos_, currentPos_ + count, token);
+            currentPos_ += token.length();
         }
 
         /**
@@ -230,8 +231,7 @@ public class RegExpJsToJavaConverter {
                         next = tape_.read();
                         if (']' == next) {
                             tape_.move(-3);
-                            tape_.remove(2);
-                            tape_.replace(".");
+                            tape_.replace(3, ".");
                             insideCharClass_ = false;
                         }
                     }
@@ -239,8 +239,7 @@ public class RegExpJsToJavaConverter {
                 else if (']' == next) {
                     // [^]
                     tape_.move(-3);
-                    tape_.remove(2);
-                    tape_.replace(".");
+                    tape_.replace(3, ".");
                 }
                 else {
                     tape_.move(-1);
@@ -249,8 +248,7 @@ public class RegExpJsToJavaConverter {
             else if (']' == next) {
                 // []
                 tape_.move(-2);
-                tape_.remove(1);
-                tape_.replace("(?!)");
+                tape_.replace(2, "(?!)");
             }
             else {
                 tape_.move(-1);
@@ -366,8 +364,7 @@ public class RegExpJsToJavaConverter {
         if (insideCharClass_ && 'b' == escapeSequence) {
             // [...\b...] -> [...\cH...]
             tape_.move(-1);
-            tape_.replace("cH");
-            tape_.move(2);
+            tape_.replace(1, "cH");
             return;
         }
 
