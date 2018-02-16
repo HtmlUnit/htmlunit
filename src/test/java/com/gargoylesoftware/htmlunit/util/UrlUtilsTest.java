@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * @author Sudhan Moghe
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Hartmut Arlt
  */
 public class UrlUtilsTest extends SimpleWebTestCase {
 
@@ -313,6 +314,37 @@ public class UrlUtilsTest extends SimpleWebTestCase {
 
         url = new URL("http://localhost/bug.html?%2x");
         assertEquals("http://localhost/bug.html?%252x",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+    }
+
+    /**
+     * Tests for #1951.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void percentEncoding2() throws Exception {
+        URL url = new URL("http://localhost/foo%%20bar.html");
+        assertEquals("http://localhost/foo%25%20bar.html",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+
+        url = new URL("http://localhost/foo%20bar.html");
+        assertEquals("http://localhost/foo%20bar.html",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+
+        url = new URL("http://localhost/foo%ar.html");
+        assertEquals("http://localhost/foo%25ar.html",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+
+        url = new URL("http://localhost/foo%%xyz.html");
+        assertEquals("http://localhost/foo%25%25xyz.html",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+
+        url = new URL("http://localhost/foo%20%xyz.html");
+        assertEquals("http://localhost/foo%20%25xyz.html",
+                UrlUtils.encodeUrl(url, false, ISO_8859_1));
+
+        url = new URL("http://localhost/foo%2x%bar.html");
+        assertEquals("http://localhost/foo%252x%bar.html",
                 UrlUtils.encodeUrl(url, false, ISO_8859_1));
     }
 

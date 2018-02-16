@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Joerg Werner
+ * @author Hartmut Arlt
  */
 public final class UrlUtils {
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
@@ -323,7 +324,7 @@ public final class UrlUtils {
         int offset = 0;
         for (int i = 0; i < input.length; i++) {
             final byte b = input[i];
-            if (b == '%') {
+            if (state == 0 && b == '%') {
                 state = 1;
             }
             else if (state == 1 || state == 2) {
@@ -339,7 +340,7 @@ public final class UrlUtils {
                     final int st = i - state + offset;
                     result.replace(st, st + 1, "%25");
                     offset = offset + 2;
-                    state = 0;
+                    state = b == '%' ? 1 : 0;
                 }
             }
         }
