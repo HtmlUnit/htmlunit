@@ -394,8 +394,10 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         assertTrue(UrlUtils.sameFile(new URL("https://localhost:443/bug.html"), new URL("https://localhost/bug.html")));
 
         // issue #1787
-        final URL u1 = new URL("http://sourceforge.net/");
-        final URL u2 = new URL("http://ch3.sourceforge.net/");
+        // final URL u1 = new URL("http://sourceforge.net/");
+        // final URL u2 = new URL("http://ch3.sourceforge.net/");
+        final URL u1 = new URL("http://rbri.de/");
+        final URL u2 = new URL("http://jonas.rbri.de/");
         assertEquals(InetAddress.getByName(u1.getHost()), InetAddress.getByName(u2.getHost()));
         assertFalse(UrlUtils.sameFile(u1, u2));
     }
