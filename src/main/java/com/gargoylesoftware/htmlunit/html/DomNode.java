@@ -34,18 +34,20 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.apache.xml.utils.PrefixResolver;
-import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.InputSource;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.CSSParseException;
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.IncorrectnessListener;
@@ -63,8 +65,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -1956,7 +1956,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return getPage().getWebClient().getBrowserVersion().hasFeature(feature);
     }
 
-    private static final class CheckErrorHandler implements ErrorHandler {
+    private static final class CheckErrorHandler implements CSSErrorHandler {
         private boolean errorDetected_;
 
         protected CheckErrorHandler() {

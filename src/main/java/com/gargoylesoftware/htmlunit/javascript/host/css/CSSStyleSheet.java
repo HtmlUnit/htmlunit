@@ -25,11 +25,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
@@ -50,30 +47,47 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.AttributeCondition;
-import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.CombinatorCondition;
-import org.w3c.css.sac.Condition;
-import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.ContentCondition;
-import org.w3c.css.sac.DescendantSelector;
-import org.w3c.css.sac.ElementSelector;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.InputSource;
-import org.w3c.css.sac.LangCondition;
-import org.w3c.css.sac.NegativeCondition;
-import org.w3c.css.sac.NegativeSelector;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
-import org.w3c.css.sac.SiblingSelector;
-import org.w3c.css.sac.SimpleSelector;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.stylesheets.MediaList;
 
+import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
+import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.css.dom.Property;
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.CSSParseException;
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.condition.AndConditionImpl;
+import com.gargoylesoftware.css.parser.condition.AttributeCondition;
+import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.LangConditionImpl;
+import com.gargoylesoftware.css.parser.condition.PrefixAttributeConditionImpl;
+import com.gargoylesoftware.css.parser.condition.PseudoClassConditionImpl;
+import com.gargoylesoftware.css.parser.condition.SubstringAttributeConditionImpl;
+import com.gargoylesoftware.css.parser.condition.SuffixAttributeConditionImpl;
+import com.gargoylesoftware.css.parser.media.MediaQuery;
+import com.gargoylesoftware.css.parser.selector.ChildSelector;
+import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
+import com.gargoylesoftware.css.parser.selector.DescendantSelector;
+import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
+import com.gargoylesoftware.css.parser.selector.ElementSelector;
+import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
+import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
+import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
+import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -88,7 +102,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
@@ -106,23 +119,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
-import com.steadystate.css.dom.CSSImportRuleImpl;
-import com.steadystate.css.dom.CSSMediaRuleImpl;
-import com.steadystate.css.dom.CSSRuleListImpl;
-import com.steadystate.css.dom.CSSStyleRuleImpl;
-import com.steadystate.css.dom.CSSStyleSheetImpl;
-import com.steadystate.css.dom.CSSValueImpl;
-import com.steadystate.css.dom.MediaListImpl;
-import com.steadystate.css.dom.Property;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
-import com.steadystate.css.parser.SelectorListImpl;
-import com.steadystate.css.parser.media.MediaQuery;
-import com.steadystate.css.parser.selectors.GeneralAdjacentSelectorImpl;
-import com.steadystate.css.parser.selectors.PrefixAttributeConditionImpl;
-import com.steadystate.css.parser.selectors.PseudoClassConditionImpl;
-import com.steadystate.css.parser.selectors.SubstringAttributeConditionImpl;
-import com.steadystate.css.parser.selectors.SuffixAttributeConditionImpl;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -361,14 +357,13 @@ public class CSSStyleSheet extends StyleSheet {
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
 
-                final InputSource source = new InputSource();
+                final InputSource source;
                 final String contentType = response.getContentType();
                 if (StringUtils.isEmpty(contentType) || "text/css".equals(contentType)) {
-                    source.setByteStream(response.getContentAsStream());
-                    source.setEncoding(response.getContentCharset().name());
+                    source = new InputSource(response.getContentAsStream(), response.getContentCharset().name());
                 }
                 else {
-                    source.setCharacterStream(new StringReader(""));
+                    source = new InputSource(new StringReader(""));
                 }
                 sheet = new CSSStyleSheet(element, source, uri);
 
@@ -416,10 +411,10 @@ public class CSSStyleSheet extends StyleSheet {
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
-            case Selector.SAC_ANY_NODE_SELECTOR:
+            case ANY_NODE_SELECTOR:
                 return true;
 
-            case Selector.SAC_CHILD_SELECTOR:
+            case CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
                 if (parentNode == element.getPage()) {
                     return false;
@@ -427,17 +422,17 @@ public class CSSStyleSheet extends StyleSheet {
                 if (!(parentNode instanceof HtmlElement)) {
                     return false; // for instance parent is a DocumentFragment
                 }
-                final DescendantSelector cs = (DescendantSelector) selector;
+                final ChildSelector cs = (ChildSelector) selector;
                 return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
                     && selects(browserVersion, cs.getAncestorSelector(), (HtmlElement) parentNode,
                             pseudoElement, fromQuerySelectorAll);
 
-            case Selector.SAC_DESCENDANT_SELECTOR:
+            case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final SimpleSelector simpleSelector = ds.getSimpleSelector();
                 if (selects(browserVersion, simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
                     DomNode ancestor = element;
-                    if (simpleSelector.getSelectorType() != Selector.SAC_PSEUDO_ELEMENT_SELECTOR) {
+                    if (simpleSelector.getSelectorType() != SelectorType.PSEUDO_ELEMENT_SELECTOR) {
                         ancestor = ancestor.getParentNode();
                     }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
@@ -451,62 +446,48 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return false;
 
-            case Selector.SAC_CONDITIONAL_SELECTOR:
+            case CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
                 return (simpleSel == null || selects(browserVersion, simpleSel, element,
                         pseudoElement, fromQuerySelectorAll))
                     && selects(browserVersion, conditional.getCondition(), element, fromQuerySelectorAll);
 
-            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+            case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
                 return name == null || name.equalsIgnoreCase(element.getLocalName());
 
-            case Selector.SAC_ROOT_NODE_SELECTOR:
-                return HtmlHtml.TAG_NAME.equalsIgnoreCase(element.getTagName());
-
-            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-                final SiblingSelector ss = (SiblingSelector) selector;
-
-                if (selector instanceof GeneralAdjacentSelectorImpl) {
-                    final SimpleSelector ssSiblingSelector = ss.getSiblingSelector();
-                    for (DomNode prev = element.getPreviousSibling(); prev != null; prev = prev.getPreviousSibling()) {
-                        if (prev instanceof HtmlElement
-                            && selects(browserVersion, ss.getSelector(), (HtmlElement) prev,
-                                    pseudoElement, fromQuerySelectorAll)
-                            && selects(browserVersion, ssSiblingSelector, element,
-                                    pseudoElement, fromQuerySelectorAll)) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-
+            case DIRECT_ADJACENT_SELECTOR:
+                final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 DomNode prev = element.getPreviousSibling();
                 while (prev != null && !(prev instanceof HtmlElement)) {
                     prev = prev.getPreviousSibling();
                 }
                 return prev != null
-                    && selects(browserVersion, ss.getSelector(), (HtmlElement) prev,
+                    && selects(browserVersion, das.getSelector(), (HtmlElement) prev,
                             pseudoElement, fromQuerySelectorAll)
-                    && selects(browserVersion, ss.getSiblingSelector(), element, pseudoElement, fromQuerySelectorAll);
+                    && selects(browserVersion, das.getSiblingSelector(), element, pseudoElement, fromQuerySelectorAll);
 
-            case Selector.SAC_NEGATIVE_SELECTOR:
-                final NegativeSelector ns = (NegativeSelector) selector;
-                return !selects(browserVersion, ns.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll);
+            case GENERAL_ADJACENT_SELECTOR:
+                final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
 
-            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
-                if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
-                    final String pseudoName = ((ElementSelector) selector).getLocalName();
-                    return pseudoName.equals(pseudoElement.substring(1));
+                final SimpleSelector ssSiblingSelector = gas.getSiblingSelector();
+                for (DomNode prev1 = element.getPreviousSibling(); prev1 != null; prev1 = prev1.getPreviousSibling()) {
+                    if (prev1 instanceof HtmlElement
+                        && selects(browserVersion, gas.getSelector(), (HtmlElement) prev1,
+                                pseudoElement, fromQuerySelectorAll)
+                        && selects(browserVersion, ssSiblingSelector, element,
+                                pseudoElement, fromQuerySelectorAll)) {
+                        return true;
+                    }
                 }
                 return false;
-
-            case Selector.SAC_COMMENT_NODE_SELECTOR:
-            case Selector.SAC_CDATA_SECTION_NODE_SELECTOR:
-            case Selector.SAC_PROCESSING_INSTRUCTION_NODE_SELECTOR:
-            case Selector.SAC_TEXT_NODE_SELECTOR:
+            case PSEUDO_ELEMENT_SELECTOR:
+                if (pseudoElement != null && !pseudoElement.isEmpty() && pseudoElement.charAt(0) == ':') {
+                    final String pseudoName = ((PseudoElementSelector) selector).getLocalName();
+                    return pseudoName.equals(pseudoElement.substring(1));
+                }
                 return false;
 
             default:
@@ -546,11 +527,11 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         switch (condition.getConditionType()) {
-            case Condition.SAC_ID_CONDITION:
+            case ID_CONDITION:
                 final AttributeCondition ac4 = (AttributeCondition) condition;
                 return ac4.getValue().equals(element.getId());
 
-            case Condition.SAC_CLASS_CONDITION:
+            case CLASS_CONDITION:
                 final AttributeCondition ac3 = (AttributeCondition) condition;
                 String v3 = ac3.getValue();
                 if (v3.indexOf('\\') > -1) {
@@ -559,15 +540,15 @@ public class CSSStyleSheet extends StyleSheet {
                 final String a3 = element.getAttribute("class");
                 return selectsWhitespaceSeparated(v3, a3);
 
-            case Condition.SAC_AND_CONDITION:
-                final CombinatorCondition cc1 = (CombinatorCondition) condition;
-                return selects(browserVersion, cc1.getFirstCondition(), element, fromQuerySelectorAll)
-                    && selects(browserVersion, cc1.getSecondCondition(), element, fromQuerySelectorAll);
+            case AND_CONDITION:
+                final AndConditionImpl ac = (AndConditionImpl) condition;
+                return selects(browserVersion, ac.getFirstCondition(), element, fromQuerySelectorAll)
+                    && selects(browserVersion, ac.getSecondCondition(), element, fromQuerySelectorAll);
 
-            case Condition.SAC_ATTRIBUTE_CONDITION:
+            case ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
-                if (ac1.getSpecified()) {
-                    String value = ac1.getValue();
+                String value = ac1.getValue();
+                if (value != null) {
                     if (value.indexOf('\\') > -1) {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
@@ -576,36 +557,20 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return element.hasAttribute(ac1.getLocalName());
 
-            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac2 = (AttributeCondition) condition;
                 final String v = ac2.getValue();
                 final String a = element.getAttribute(ac2.getLocalName());
                 return selects(v, a, '-');
 
-            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
+            case ONE_OF_ATTRIBUTE_CONDITION:
                 final AttributeCondition ac5 = (AttributeCondition) condition;
                 final String v2 = ac5.getValue();
                 final String a2 = element.getAttribute(ac5.getLocalName());
                 return selects(v2, a2, ' ');
 
-            case Condition.SAC_OR_CONDITION:
-                final CombinatorCondition cc2 = (CombinatorCondition) condition;
-                return selects(browserVersion, cc2.getFirstCondition(), element, fromQuerySelectorAll)
-                    || selects(browserVersion, cc2.getSecondCondition(), element, fromQuerySelectorAll);
-
-            case Condition.SAC_NEGATIVE_CONDITION:
-                final NegativeCondition nc = (NegativeCondition) condition;
-                return !selects(browserVersion, nc.getCondition(), element, fromQuerySelectorAll);
-
-            case Condition.SAC_ONLY_CHILD_CONDITION:
-                return element.getParentNode().getChildNodes().getLength() == 1;
-
-            case Condition.SAC_CONTENT_CONDITION:
-                final ContentCondition cc = (ContentCondition) condition;
-                return element.asText().contains(cc.getData());
-
-            case Condition.SAC_LANG_CONDITION:
-                final String lcLang = ((LangCondition) condition).getLang();
+            case LANG_CONDITION:
+                final String lcLang = ((LangConditionImpl) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttribute("lang");
@@ -617,16 +582,9 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return false;
 
-            case Condition.SAC_ONLY_TYPE_CONDITION:
-                final String tagName = element.getTagName();
-                return ((HtmlPage) element.getPage()).getElementsByTagName(tagName).getLength() == 1;
-
-            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+            case PSEUDO_CLASS_CONDITION:
                 return selectsPseudoClass(browserVersion,
                         (AttributeCondition) condition, element, fromQuerySelectorAll);
-
-            case Condition.SAC_POSITIONAL_CONDITION:
-                return false;
 
             default:
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
@@ -860,7 +818,7 @@ public class CSSStyleSheet extends StyleSheet {
                 else if (value.startsWith("not(")) {
                     final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
                     final AtomicBoolean errorOccured = new AtomicBoolean(false);
-                    final ErrorHandler errorHandler = new ErrorHandler() {
+                    final CSSErrorHandler errorHandler = new CSSErrorHandler() {
                         @Override
                         public void warning(final CSSParseException exception) throws CSSException {
                             // ignore
@@ -956,7 +914,7 @@ public class CSSStyleSheet extends StyleSheet {
     private org.w3c.dom.css.CSSStyleSheet parseCSS(final InputSource source) {
         org.w3c.dom.css.CSSStyleSheet ss;
         try {
-            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null, null);
@@ -978,7 +936,7 @@ public class CSSStyleSheet extends StyleSheet {
     public SelectorList parseSelectors(final InputSource source) {
         SelectorList selectors;
         try {
-            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
@@ -1001,7 +959,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
      */
-    static MediaList parseMedia(final ErrorHandler errorHandler, final String mediaString) {
+    static MediaList parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
         MediaList media = media_.get(mediaString);
         if (media != null) {
             return media;
@@ -1022,7 +980,7 @@ public class CSSStyleSheet extends StyleSheet {
             LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
         }
 
-        media = new MediaListImpl();
+        media = new MediaListImpl(null);
         media_.put(mediaString, media);
         return media;
     }
@@ -1034,7 +992,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     private static String toString(final InputSource source) {
         try {
-            final Reader reader = source.getCharacterStream();
+            final Reader reader = source.getReader();
             if (null != reader) {
                 // try to reset to produce some output
                 if (reader instanceof StringReader) {
@@ -1042,15 +1000,6 @@ public class CSSStyleSheet extends StyleSheet {
                     sr.reset();
                 }
                 return IOUtils.toString(reader);
-            }
-            final InputStream is = source.getByteStream();
-            if (null != is) {
-                // try to reset to produce some output
-                if (is instanceof ByteArrayInputStream) {
-                    final ByteArrayInputStream bis = (ByteArrayInputStream) is;
-                    bis.reset();
-                }
-                return IOUtils.toString(is, ISO_8859_1);
             }
             return "";
         }
@@ -1525,23 +1474,30 @@ public class CSSStyleSheet extends StyleSheet {
      */
     private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
         switch (selector.getSelectorType()) {
-            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+            case ELEMENT_NODE_SELECTOR:
                 return true;
-            case Selector.SAC_CONDITIONAL_SELECTOR:
+            case CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
                 return (simpleSel == null || isValidSelector(simpleSel, documentMode, domNode))
                         && isValidCondition(conditional.getCondition(), documentMode, domNode);
-            case Selector.SAC_DESCENDANT_SELECTOR:
-            case Selector.SAC_CHILD_SELECTOR:
+            case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
                         && isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
-            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-                final SiblingSelector ss = (SiblingSelector) selector;
-                return isValidSelector(ss.getSelector(), documentMode, domNode)
-                        && isValidSelector(ss.getSiblingSelector(), documentMode, domNode);
-            case Selector.SAC_ANY_NODE_SELECTOR:
+            case CHILD_SELECTOR:
+                final ChildSelector cs = (ChildSelector) selector;
+                return isValidSelector(cs.getAncestorSelector(), documentMode, domNode)
+                        && isValidSelector(cs.getSimpleSelector(), documentMode, domNode);
+            case DIRECT_ADJACENT_SELECTOR:
+                final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
+                return isValidSelector(das.getSelector(), documentMode, domNode)
+                        && isValidSelector(das.getSiblingSelector(), documentMode, domNode);
+            case GENERAL_ADJACENT_SELECTOR:
+                final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
+                return isValidSelector(gas.getSelector(), documentMode, domNode)
+                        && isValidSelector(gas.getSiblingSelector(), documentMode, domNode);
+            case ANY_NODE_SELECTOR:
             //$FALL-THROUGH$
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
@@ -1554,21 +1510,18 @@ public class CSSStyleSheet extends StyleSheet {
      */
     private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
-            case Condition.SAC_AND_CONDITION:
-                final CombinatorCondition cc1 = (CombinatorCondition) condition;
+            case AND_CONDITION:
+                final AndConditionImpl cc1 = (AndConditionImpl) condition;
                 return isValidCondition(cc1.getFirstCondition(), documentMode, domNode)
                         && isValidCondition(cc1.getSecondCondition(), documentMode, domNode);
-            case Condition.SAC_ATTRIBUTE_CONDITION:
-            case Condition.SAC_ID_CONDITION:
-            case Condition.SAC_LANG_CONDITION:
-            case Condition.SAC_ONE_OF_ATTRIBUTE_CONDITION:
-            case Condition.SAC_BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-            case Condition.SAC_ONLY_CHILD_CONDITION:
-            case Condition.SAC_ONLY_TYPE_CONDITION:
-            case Condition.SAC_CONTENT_CONDITION:
-            case Condition.SAC_CLASS_CONDITION:
+            case ATTRIBUTE_CONDITION:
+            case ID_CONDITION:
+            case LANG_CONDITION:
+            case ONE_OF_ATTRIBUTE_CONDITION:
+            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+            case CLASS_CONDITION:
                 return true;
-            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+            case PSEUDO_CLASS_CONDITION:
                 final PseudoClassConditionImpl pcc = (PseudoClassConditionImpl) condition;
                 String value = pcc.getValue();
                 if (value.endsWith(")")) {

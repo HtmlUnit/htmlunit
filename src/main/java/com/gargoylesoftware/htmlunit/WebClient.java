@@ -63,8 +63,8 @@ import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
-import org.w3c.css.sac.ErrorHandler;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
@@ -176,7 +176,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private WebWindow currentWindow_;
 
     private HTMLParserListener htmlParserListener_;
-    private ErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
+    private CSSErrorHandler cssErrorHandler_ = new DefaultCssErrorHandler();
     private OnbeforeunloadHandler onbeforeunloadHandler_;
     private Cache cache_ = new Cache();
 
@@ -1601,7 +1601,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see DefaultCssErrorHandler
      * @see SilentCssErrorHandler
      */
-    public ErrorHandler getCssErrorHandler() {
+    public CSSErrorHandler getCssErrorHandler() {
         return cssErrorHandler_;
     }
 
@@ -1611,7 +1611,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @see DefaultCssErrorHandler
      * @see SilentCssErrorHandler
      */
-    public void setCssErrorHandler(final ErrorHandler cssErrorHandler) {
+    public void setCssErrorHandler(final CSSErrorHandler cssErrorHandler) {
         WebAssert.notNull("cssErrorHandler", cssErrorHandler);
         cssErrorHandler_ = cssErrorHandler;
     }

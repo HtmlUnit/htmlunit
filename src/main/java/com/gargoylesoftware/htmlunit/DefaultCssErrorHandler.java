@@ -18,16 +18,18 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.ErrorHandler;
+
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSParseException;
 
 /**
- * HtmlUnit's default implementation of {@link ErrorHandler}, which logs all CSS problems.
+ * HtmlUnit's default implementation of {@link CSSErrorHandler}, which logs all CSS problems.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  * @see SilentCssErrorHandler
  */
-public class DefaultCssErrorHandler implements ErrorHandler, Serializable {
+public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultCssErrorHandler.class);
 

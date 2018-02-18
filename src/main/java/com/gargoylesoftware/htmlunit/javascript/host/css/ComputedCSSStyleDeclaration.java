@@ -93,8 +93,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.css.sac.Selector;
 
+import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.css.SelectorSpecificity;

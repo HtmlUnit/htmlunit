@@ -37,9 +37,9 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.CSSException;
 import org.xml.sax.SAXException;
 
+import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;

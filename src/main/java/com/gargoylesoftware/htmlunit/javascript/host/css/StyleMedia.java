@@ -18,9 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.w3c.css.sac.ErrorHandler;
 import org.w3c.dom.stylesheets.MediaList;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -59,7 +59,7 @@ public class StyleMedia extends SimpleScriptable {
      */
     @JsxFunction
     public boolean matchMedium(final String media) {
-        final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+        final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
         final MediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
         return CSSStyleSheet.isActive(this, mediaList);
     }

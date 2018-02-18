@@ -18,10 +18,10 @@ import java.io.StringReader;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w3c.css.sac.InputSource;
-import org.w3c.css.sac.Selector;
 import org.w3c.dom.NodeList;
 
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;

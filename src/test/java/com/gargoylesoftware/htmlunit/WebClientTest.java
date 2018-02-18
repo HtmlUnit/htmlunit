@@ -43,10 +43,10 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.ErrorHandler;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
@@ -1995,7 +1995,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final MutableInt errors = new MutableInt();
         final MutableInt warnings = new MutableInt();
         final StringBuilder errorUri = new StringBuilder();
-        final ErrorHandler handler = new ErrorHandler() {
+        final CSSErrorHandler handler = new CSSErrorHandler() {
             @Override
             public void warning(final CSSParseException exception) throws CSSException {
                 warnings.increment();

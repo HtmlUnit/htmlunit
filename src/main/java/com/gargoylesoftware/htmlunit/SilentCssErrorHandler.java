@@ -16,16 +16,17 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-import org.w3c.css.sac.CSSParseException;
-import org.w3c.css.sac.ErrorHandler;
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSParseException;
 
 /**
- * Implementation of {@link ErrorHandler} which ignores all CSS problems.
+ * Implementation of {@link CSSErrorHandler} which ignores all CSS problems.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  * @see DefaultCssErrorHandler
  */
-public class SilentCssErrorHandler implements ErrorHandler, Serializable {
+public class SilentCssErrorHandler implements CSSErrorHandler, Serializable {
 
     /**
      * {@inheritDoc}

@@ -20,8 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.StringReader;
 
-import org.w3c.css.sac.InputSource;
-
+import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;

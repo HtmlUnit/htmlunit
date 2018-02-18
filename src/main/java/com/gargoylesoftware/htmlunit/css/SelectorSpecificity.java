@@ -18,15 +18,19 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.AttributeCondition;
-import org.w3c.css.sac.CombinatorCondition;
-import org.w3c.css.sac.Condition;
-import org.w3c.css.sac.ConditionalSelector;
-import org.w3c.css.sac.DescendantSelector;
-import org.w3c.css.sac.ElementSelector;
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SiblingSelector;
-import org.w3c.css.sac.SimpleSelector;
+
+import com.gargoylesoftware.css.parser.condition.AndConditionImpl;
+import com.gargoylesoftware.css.parser.condition.AttributeCondition;
+import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.selector.ChildSelector;
+import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
+import com.gargoylesoftware.css.parser.selector.DescendantSelector;
+import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
+import com.gargoylesoftware.css.parser.selector.ElementSelector;
+import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
+import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -71,19 +75,19 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     private void readSelectorSpecificity(final Selector selector) {
         switch (selector.getSelectorType()) {
-            case Selector.SAC_ANY_NODE_SELECTOR:
+            case ANY_NODE_SELECTOR:
                 return;
-            case Selector.SAC_DESCENDANT_SELECTOR:
+            case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 readSelectorSpecificity(ds.getAncestorSelector());
                 readSelectorSpecificity(ds.getSimpleSelector());
                 return;
-            case Selector.SAC_CHILD_SELECTOR:
-                final DescendantSelector cs = (DescendantSelector) selector;
+            case CHILD_SELECTOR:
+                final ChildSelector cs = (ChildSelector) selector;
                 readSelectorSpecificity(cs.getAncestorSelector());
                 readSelectorSpecificity(cs.getSimpleSelector());
                 return;
-            case Selector.SAC_CONDITIONAL_SELECTOR:
+            case CONDITIONAL_SELECTOR:
                 final ConditionalSelector conditional = (ConditionalSelector) selector;
                 final SimpleSelector simpleSel = conditional.getSimpleSelector();
                 if (simpleSel != null) {
@@ -91,24 +95,29 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 }
                 readSelectorSpecificity(conditional.getCondition());
                 return;
-            case Selector.SAC_ELEMENT_NODE_SELECTOR:
+            case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String esName = es.getLocalName();
                 if (esName != null) {
                     fieldD_++;
                 }
                 return;
-            case Selector.SAC_PSEUDO_ELEMENT_SELECTOR:
-                final ElementSelector pes = (ElementSelector) selector;
+            case PSEUDO_ELEMENT_SELECTOR:
+                final PseudoElementSelector pes = (PseudoElementSelector) selector;
                 final String pesName = pes.getLocalName();
                 if (pesName != null) {
                     fieldD_++;
                 }
                 return;
-            case Selector.SAC_DIRECT_ADJACENT_SELECTOR:
-                final SiblingSelector ss = (SiblingSelector) selector;
-                readSelectorSpecificity(ss.getSelector());
-                readSelectorSpecificity(ss.getSiblingSelector());
+            case DIRECT_ADJACENT_SELECTOR:
+                final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
+                readSelectorSpecificity(das.getSelector());
+                readSelectorSpecificity(das.getSiblingSelector());
+                return;
+            case GENERAL_ADJACENT_SELECTOR:
+                final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
+                readSelectorSpecificity(gas.getSelector());
+                readSelectorSpecificity(gas.getSiblingSelector());
                 return;
             default:
                 LOG.warn("Unhandled CSS selector type for specificity computation: '"
@@ -119,18 +128,18 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     private void readSelectorSpecificity(final Condition condition) {
         switch (condition.getConditionType()) {
-            case Condition.SAC_ID_CONDITION:
+            case ID_CONDITION:
                 fieldB_++;
                 return;
-            case Condition.SAC_CLASS_CONDITION:
+            case CLASS_CONDITION:
                 fieldC_++;
                 return;
-            case Condition.SAC_AND_CONDITION:
-                final CombinatorCondition cc1 = (CombinatorCondition) condition;
+            case AND_CONDITION:
+                final AndConditionImpl cc1 = (AndConditionImpl) condition;
                 readSelectorSpecificity(cc1.getFirstCondition());
                 readSelectorSpecificity(cc1.getSecondCondition());
                 return;
-            case Condition.SAC_ATTRIBUTE_CONDITION:
+            case ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
                 if ("id".equalsIgnoreCase(ac1.getLocalName())) {
                     fieldB_++;
@@ -139,7 +148,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                     fieldC_++;
                 }
                 return;
-            case Condition.SAC_PSEUDO_CLASS_CONDITION:
+            case PSEUDO_CLASS_CONDITION:
                 fieldD_++;
                 return;
             default:

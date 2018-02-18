@@ -121,9 +121,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.css.sac.ErrorHandler;
-import org.w3c.css.sac.InputSource;
 
+import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.SACParserCSS3;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -139,9 +142,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
-import com.steadystate.css.dom.CSSValueImpl;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -2566,7 +2566,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
             final InputSource source = new InputSource(new StringReader(styleAttribute));
             source.setURI(uri);
-            final ErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
             parser.setErrorHandler(errorHandler);
             try {
@@ -2578,7 +2578,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
         org.w3c.dom.css.CSSValue cssValue = styleDeclaration_.getPropertyCSSValue(name);
         if (cssValue == null) {
-            final CSSValueImpl newValue = new CSSValueImpl();
+            final CSSValueImpl newValue = new CSSValueImpl(null, false);
             newValue.setFloatValue(CSSPrimitiveValue.CSS_PX, 0);
             cssValue = newValue;
         }

@@ -18,8 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import org.w3c.css.sac.CSSException;
-
+import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;

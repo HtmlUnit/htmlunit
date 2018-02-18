@@ -58,10 +58,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xml.utils.PrefixResolver;
-import org.w3c.css.sac.CSSException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 
+import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpHeader;
