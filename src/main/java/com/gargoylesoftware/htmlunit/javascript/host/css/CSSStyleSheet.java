@@ -955,7 +955,7 @@ public class CSSStyleSheet extends StyleSheet {
 
     /**
      * Parses the given media string. If anything at all goes wrong, this
-     * method returns an empty SACMediaList list.
+     * method returns an empty MediaList list.
      *
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
