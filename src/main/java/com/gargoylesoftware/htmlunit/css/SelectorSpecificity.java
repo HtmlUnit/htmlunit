@@ -19,9 +19,14 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.css.parser.condition.AndConditionImpl;
+import com.gargoylesoftware.css.parser.condition.AndCondition;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
+import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.OneOfAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.PrefixAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.SubstringAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.SuffixAttributeCondition;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
@@ -135,13 +140,52 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 fieldC_++;
                 return;
             case AND_CONDITION:
-                final AndConditionImpl cc1 = (AndConditionImpl) condition;
-                readSelectorSpecificity(cc1.getFirstCondition());
-                readSelectorSpecificity(cc1.getSecondCondition());
+                final AndCondition andc = (AndCondition) condition;
+                readSelectorSpecificity(andc.getFirstCondition());
+                readSelectorSpecificity(andc.getSecondCondition());
                 return;
             case ATTRIBUTE_CONDITION:
-                final AttributeCondition ac1 = (AttributeCondition) condition;
-                if ("id".equalsIgnoreCase(ac1.getLocalName())) {
+                if ("id".equalsIgnoreCase(((AttributeCondition) condition).getLocalName())) {
+                    fieldB_++;
+                }
+                else {
+                    fieldC_++;
+                }
+                return;
+            case SUBSTRING_ATTRIBUTE_CONDITION:
+                if ("id".equalsIgnoreCase(((SubstringAttributeCondition) condition).getLocalName())) {
+                    fieldB_++;
+                }
+                else {
+                    fieldC_++;
+                }
+                return;
+            case SUFFIX_ATTRIBUTE_CONDITION:
+                if ("id".equalsIgnoreCase(((SuffixAttributeCondition) condition).getLocalName())) {
+                    fieldB_++;
+                }
+                else {
+                    fieldC_++;
+                }
+                return;
+            case PREFIX_ATTRIBUTE_CONDITION:
+                if ("id".equalsIgnoreCase(((PrefixAttributeCondition) condition).getLocalName())) {
+                    fieldB_++;
+                }
+                else {
+                    fieldC_++;
+                }
+                return;
+            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
+                if ("id".equalsIgnoreCase(((BeginHyphenAttributeCondition) condition).getLocalName())) {
+                    fieldB_++;
+                }
+                else {
+                    fieldC_++;
+                }
+                return;
+            case ONE_OF_ATTRIBUTE_CONDITION:
+                if ("id".equalsIgnoreCase(((OneOfAttributeCondition) condition).getLocalName())) {
                     fieldB_++;
                 }
                 else {

@@ -67,14 +67,18 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.SACParserCSS3;
-import com.gargoylesoftware.css.parser.condition.AndConditionImpl;
+import com.gargoylesoftware.css.parser.condition.AndCondition;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
+import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.ClassCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
-import com.gargoylesoftware.css.parser.condition.LangConditionImpl;
-import com.gargoylesoftware.css.parser.condition.PrefixAttributeConditionImpl;
-import com.gargoylesoftware.css.parser.condition.PseudoClassConditionImpl;
-import com.gargoylesoftware.css.parser.condition.SubstringAttributeConditionImpl;
-import com.gargoylesoftware.css.parser.condition.SuffixAttributeConditionImpl;
+import com.gargoylesoftware.css.parser.condition.IdCondition;
+import com.gargoylesoftware.css.parser.condition.LangCondition;
+import com.gargoylesoftware.css.parser.condition.OneOfAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.PrefixAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.PseudoClassCondition;
+import com.gargoylesoftware.css.parser.condition.SubstringAttributeCondition;
+import com.gargoylesoftware.css.parser.condition.SuffixAttributeCondition;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
@@ -508,31 +512,13 @@ public class CSSStyleSheet extends StyleSheet {
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
             final boolean fromQuerySelectorAll) {
 
-        if (condition instanceof PrefixAttributeConditionImpl) {
-            final AttributeCondition ac = (AttributeCondition) condition;
-            final String value = ac.getValue();
-            return !"".equals(value) && element.getAttribute(ac.getLocalName()).startsWith(value);
-        }
-
-        if (condition instanceof SuffixAttributeConditionImpl) {
-            final AttributeCondition ac = (AttributeCondition) condition;
-            final String value = ac.getValue();
-            return !"".equals(value) && element.getAttribute(ac.getLocalName()).endsWith(value);
-        }
-
-        if (condition instanceof SubstringAttributeConditionImpl) {
-            final AttributeCondition ac = (AttributeCondition) condition;
-            final String value = ac.getValue();
-            return !"".equals(value) && element.getAttribute(ac.getLocalName()).contains(value);
-        }
-
         switch (condition.getConditionType()) {
             case ID_CONDITION:
-                final AttributeCondition ac4 = (AttributeCondition) condition;
+                final IdCondition ac4 = (IdCondition) condition;
                 return ac4.getValue().equals(element.getId());
 
             case CLASS_CONDITION:
-                final AttributeCondition ac3 = (AttributeCondition) condition;
+                final ClassCondition ac3 = (ClassCondition) condition;
                 String v3 = ac3.getValue();
                 if (v3.indexOf('\\') > -1) {
                     v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
@@ -541,7 +527,7 @@ public class CSSStyleSheet extends StyleSheet {
                 return selectsWhitespaceSeparated(v3, a3);
 
             case AND_CONDITION:
-                final AndConditionImpl ac = (AndConditionImpl) condition;
+                final AndCondition ac = (AndCondition) condition;
                 return selects(browserVersion, ac.getFirstCondition(), element, fromQuerySelectorAll)
                     && selects(browserVersion, ac.getSecondCondition(), element, fromQuerySelectorAll);
 
@@ -557,20 +543,35 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return element.hasAttribute(ac1.getLocalName());
 
+            case PREFIX_ATTRIBUTE_CONDITION:
+                final PrefixAttributeCondition pac = (PrefixAttributeCondition) condition;
+                final String prefixValue = pac.getValue();
+                return !"".equals(prefixValue) && element.getAttribute(pac.getLocalName()).startsWith(prefixValue);
+
+            case SUFFIX_ATTRIBUTE_CONDITION:
+                final SuffixAttributeCondition sac = (SuffixAttributeCondition) condition;
+                final String suffixValue = sac.getValue();
+                return !"".equals(suffixValue) && element.getAttribute(sac.getLocalName()).endsWith(suffixValue);
+
+            case SUBSTRING_ATTRIBUTE_CONDITION:
+                final SubstringAttributeCondition suac = (SubstringAttributeCondition) condition;
+                final String substringValue = suac.getValue();
+                return !"".equals(substringValue) && element.getAttribute(suac.getLocalName()).contains(substringValue);
+
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                final AttributeCondition ac2 = (AttributeCondition) condition;
-                final String v = ac2.getValue();
-                final String a = element.getAttribute(ac2.getLocalName());
+                final BeginHyphenAttributeCondition bhac = (BeginHyphenAttributeCondition) condition;
+                final String v = bhac.getValue();
+                final String a = element.getAttribute(bhac.getLocalName());
                 return selects(v, a, '-');
 
             case ONE_OF_ATTRIBUTE_CONDITION:
-                final AttributeCondition ac5 = (AttributeCondition) condition;
-                final String v2 = ac5.getValue();
-                final String a2 = element.getAttribute(ac5.getLocalName());
+                final OneOfAttributeCondition ooac = (OneOfAttributeCondition) condition;
+                final String v2 = ooac.getValue();
+                final String a2 = element.getAttribute(ooac.getLocalName());
                 return selects(v2, a2, ' ');
 
             case LANG_CONDITION:
-                final String lcLang = ((LangConditionImpl) condition).getLang();
+                final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
                     final String nodeLang = ((HtmlElement) node).getAttribute("lang");
@@ -584,7 +585,7 @@ public class CSSStyleSheet extends StyleSheet {
 
             case PSEUDO_CLASS_CONDITION:
                 return selectsPseudoClass(browserVersion,
-                        (AttributeCondition) condition, element, fromQuerySelectorAll);
+                        (PseudoClassCondition) condition, element, fromQuerySelectorAll);
 
             default:
                 LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
@@ -654,7 +655,7 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final AttributeCondition condition, final DomElement element, final boolean fromQuerySelectorAll) {
+            final PseudoClassCondition condition, final DomElement element, final boolean fromQuerySelectorAll) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Object sobj = element.getPage().getScriptableObject();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
@@ -1511,7 +1512,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
             case AND_CONDITION:
-                final AndConditionImpl cc1 = (AndConditionImpl) condition;
+                final AndCondition cc1 = (AndCondition) condition;
                 return isValidCondition(cc1.getFirstCondition(), documentMode, domNode)
                         && isValidCondition(cc1.getSecondCondition(), documentMode, domNode);
             case ATTRIBUTE_CONDITION:
@@ -1522,7 +1523,7 @@ public class CSSStyleSheet extends StyleSheet {
             case CLASS_CONDITION:
                 return true;
             case PSEUDO_CLASS_CONDITION:
-                final PseudoClassConditionImpl pcc = (PseudoClassConditionImpl) condition;
+                final PseudoClassCondition pcc = (PseudoClassCondition) condition;
                 String value = pcc.getValue();
                 if (value.endsWith(")")) {
                     if (value.endsWith("()")) {
