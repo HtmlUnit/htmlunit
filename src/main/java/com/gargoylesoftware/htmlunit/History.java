@@ -25,6 +25,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
+import com.gargoylesoftware.htmlunit.util.HeaderUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -47,7 +48,14 @@ public class History implements Serializable {
         private Object state_;
 
         private HistoryEntry(final Page page) {
-            page_ = new SoftReference<>(page);
+
+            // verify cache-control header values before storing
+            if (HeaderUtils.containsNoStore(page.getWebResponse())) {
+                page_ = new SoftReference<>(page);
+            }
+            else {
+                page_ = null;
+            }
 
             final WebRequest request = page.getWebResponse().getWebRequest();
             webRequest_ = new WebRequest(request.getUrl(), request.getHttpMethod());
@@ -257,6 +265,7 @@ public class History implements Serializable {
         if (entries_.size() > cacheLimit) {
             entries_.get(entries_.size() - cacheLimit - 1).clearPage();
         }
+
         return entry;
     }
 

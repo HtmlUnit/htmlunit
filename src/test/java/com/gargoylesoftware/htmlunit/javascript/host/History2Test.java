@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link History}.
@@ -34,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Ronald Brill
  * @author Adam Afeltowicz
  * @author Carsten Steul
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
@@ -801,5 +807,43 @@ public class History2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testHistoryBackAndForwarWithNoStoreCacheControlHeader() throws Exception {
+        final String html = "<html><body>"
+            + "<a id='startButton' href='" + URL_SECOND + "'>Start</a>\n"
+            + "</body></html>";
+        final String secondContent = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <a id='nextButton' href='" + URL_THIRD + "'>Next</a>\n"
+            + "  <a id='forwardButton' onclick='javascript:window.history.forward()'>Forward</a>\n"
+            + "</body></html>";
+        final String thirdContent = "<html><body>"
+            + "<a id='backButton' onclick='javascript:window.history.back()'>Back</a>\n"
+            + "</body></html>";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Cache-Control", "some-other-value, no-store"));
+        getMockWebConnection().setResponse(URL_SECOND, secondContent, 200, "OK", "text/html;charset=ISO-8859-1",
+            ISO_8859_1, headers);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent, 200, "OK", "text/html;charset=ISO-8859-1",
+            ISO_8859_1, headers);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("startButton")).click();
+        driver.findElement(By.id("nextButton")).click();
+        driver.findElement(By.id("backButton")).click();
+
+        assertEquals(URL_SECOND.toString(), driver.getCurrentUrl());
+        assertEquals(4, getMockWebConnection().getRequestCount());
+
+        driver.findElement(By.id("forwardButton")).click();
+        assertEquals(URL_THIRD.toString(), driver.getCurrentUrl());
+        assertEquals(5, getMockWebConnection().getRequestCount());
     }
 }

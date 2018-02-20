@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="add" dev="rbri" issue="1952" due-to="Anton Demydenko">
+                Our page cache now takes care of Cache Control headers.
+            </action>
             <action type="fix" dev="rbri" issue="1951" due-to="Hartmut Arlt">
                 Fix incorrect encoding of consecutive '%' characters in url's
             </action>

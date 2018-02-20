@@ -18,6 +18,7 @@ package com.gargoylesoftware.htmlunit;
  * Various constants.
  *
  * @author Ronald Brill
+ * @author Anton Demydenko
  */
 public final class HttpHeader {
 
@@ -33,6 +34,12 @@ public final class HttpHeader {
 
     /** Cache-Control. */
     public static final String CACHE_CONTROL = "Cache-Control";
+
+    /** Last-Modified. */
+    public static final String LAST_MODIFIED = "Last-Modified";
+
+    /** Expires. */
+    public static final String EXPIRES = "Expires";
 
     /** Accept. */
     public static final String ACCEPT = "Accept";

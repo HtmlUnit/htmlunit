@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 import org.apache.http.client.utils.DateUtils;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.htmlunit.util.HeaderUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -36,6 +37,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Marc Guillemot
  * @author Daniel Gredler
  * @author Ahmed Ashour
+ * @author Anton Demydenko
  */
 public class Cache implements Serializable {
 
@@ -43,7 +45,7 @@ public class Cache implements Serializable {
     private int maxSize_ = 40;
 
     private static final Pattern DATE_HEADER_PATTERN = Pattern.compile("-?\\d+");
-
+    private static final long DELAY = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
     /**
      * The map which holds the cached responses. Note that when keying on URLs, we key on the string version
      * of the URLs, rather than on the URLs themselves. This is done for performance, because a) the
@@ -61,12 +63,14 @@ public class Cache implements Serializable {
         private WebResponse response_;
         private Object value_;
         private long lastAccess_;
+        private long createdAt_;
 
         Entry(final String key, final WebResponse response, final Object value) {
             key_ = key;
             response_ = response;
             value_ = value;
-            lastAccess_ = System.currentTimeMillis();
+            createdAt_ = System.currentTimeMillis();
+            lastAccess_ = createdAt_;
         }
 
         /**
@@ -178,6 +182,8 @@ public class Cache implements Serializable {
     }
 
     /**
+     * <p>Perform prior validation for 'no-store' directive in Cache-Control header.</p>
+     *
      * <p>Tries to guess if the content is dynamic or not.</p>
      *
      * <p>"Since origin servers do not always provide explicit expiration times, HTTP caches typically
@@ -188,19 +194,23 @@ public class Cache implements Serializable {
      * <tt>Last-Modified</tt> header with a date older than 10 minutes or with an <tt>Expires</tt> header
      * specifying expiration in more than 10 minutes.</p>
      *
+     * @see @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
      * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">RFC 2616</a>
      * @param response the response to examine
      * @return {@code true} if the response should be considered as cacheable
      */
     protected boolean isCacheableContent(final WebResponse response) {
-        final Date lastModified = parseDateHeader(response, "Last-Modified");
-        final Date expires = parseDateHeader(response, "Expires");
+        if (HeaderUtils.containsNoStore(response)) {
+            return false;
+        }
 
-        final long delay = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
+        final Date lastModified = parseDateHeader(response, HttpHeader.LAST_MODIFIED);
+        final Date expires = parseDateHeader(response, HttpHeader.EXPIRES);
+
         final long now = getCurrentTimestamp();
 
-        return expires != null && (expires.getTime() - now > delay)
-                || (expires == null && lastModified != null && now - lastModified.getTime() > delay);
+        return expires != null && (expires.getTime() - now > DELAY)
+                || (expires == null && lastModified != null && now - lastModified.getTime() > DELAY);
     }
 
     /**
@@ -235,6 +245,9 @@ public class Cache implements Serializable {
      * Returns the cached response corresponding to the specified request. If there is
      * no corresponding cached object, this method returns {@code null}.
      *
+     * <p>Calculates and check if object still fresh(RFC 7234) otherwise returns {@code null}.</p>
+     * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
+     *
      * @param request the request whose corresponding response is sought
      * @return the cached response corresponding to the specified request if any
      */
@@ -249,6 +262,9 @@ public class Cache implements Serializable {
     /**
      * Returns the cached object corresponding to the specified request. If there is
      * no corresponding cached object, this method returns {@code null}.
+     *
+     * <p>Calculates and check if object still fresh(RFC 7234) otherwise returns {@code null}.</p>
+     * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
      *
      * @param request the request whose corresponding cached compiled script is sought
      * @return the cached object corresponding to the specified request if any
@@ -274,10 +290,55 @@ public class Cache implements Serializable {
         if (cachedEntry == null) {
             return null;
         }
-        synchronized (entries_) {
-            cachedEntry.touch();
+
+        // check if object still fresh
+        if (checkFreshness(cachedEntry.response_, cachedEntry.createdAt_)) {
+            synchronized (entries_) {
+                cachedEntry.touch();
+            }
+            return cachedEntry;
         }
-        return cachedEntry;
+        else {
+            entries_.remove(UrlUtils.normalize(url));
+        }
+        return null;
+    }
+
+    /**
+     * <p>Check freshness return value if
+     * a) s-maxage specified
+     * b) max-age specified
+     * c) expired specified
+     * otherwise return {@code null}</p>
+     *
+     * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
+     *
+     * @param response
+     * @param createdAt
+     * @return freshnessLifetime
+     */
+    private boolean checkFreshness(final WebResponse response, final long createdAt) {
+        final long now = getCurrentTimestamp();
+        long freshnessLifetime = 0;
+        if (!HeaderUtils.containsPrivate(response) && HeaderUtils.containsSMaxage(response)) {
+            // check s-maxage
+            freshnessLifetime = HeaderUtils.sMaxage(response);
+        }
+        else if (HeaderUtils.containsMaxAge(response)) {
+            // check max-age
+            freshnessLifetime = HeaderUtils.maxAge(response);
+        }
+        else if (response.getResponseHeaderValue(HttpHeader.EXPIRES) != null) {
+            final Date expires = parseDateHeader(response, HttpHeader.EXPIRES);
+            if (expires != null) {
+                // use the same logic as in isCacheableContent()
+                return expires.getTime() - now > DELAY;
+            }
+        }
+        else {
+            return true;
+        }
+        return now - createdAt < freshnessLifetime * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_SECOND;
     }
 
     /**
@@ -344,5 +405,4 @@ public class Cache implements Serializable {
             entries_.clear();
         }
     }
-
 }

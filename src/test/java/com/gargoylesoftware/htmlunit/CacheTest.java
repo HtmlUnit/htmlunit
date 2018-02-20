@@ -24,6 +24,7 @@ import static org.easymock.EasyMock.verify;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -46,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
@@ -85,6 +87,9 @@ public class CacheTest extends SimpleWebTestCase {
         assertFalse(cache.isCacheableContent(response));
 
         headers.put("Expires", "-1");
+        assertFalse(cache.isCacheableContent(response));
+
+        headers.put("Cache-Control", "no-store");
         assertFalse(cache.isCacheableContent(response));
     }
 
@@ -359,6 +364,154 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testNoStoreCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Cache-Control", "some-other-value, no-store"));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+
+        client.getPage(pageUrl);
+        assertEquals(0, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+
+        client.getPage(pageUrl);
+        assertEquals(0, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMaxAgeCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Last-Modified", "Tue, 20 Feb 2018 10:00:00 GMT"));
+        headers.add(new NameValuePair("Cache-Control", "some-other-value, max-age=1"));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // resources should be still in cache
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // wait for max-age seconds + 1 for recache
+        Thread.sleep(2 * 1000);
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testSMaxageCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Last-Modified", "Tue, 20 Feb 2018 10:00:00 GMT"));
+        headers.add(new NameValuePair("Cache-Control", "public, s-maxage=1, some-other-value, max-age=10"));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // resources should be still in cache
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // wait for s-maxage seconds + 1 for recache
+        Thread.sleep(2 * 1000);
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testExpiresCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Last-Modified", "Tue, 20 Feb 2018 10:00:00 GMT"));
+        headers.add(new NameValuePair("Expires", new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").format(new Date(
+            System.currentTimeMillis() + 2 * 1000 + 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE))));
+        headers.add(new NameValuePair("Cache-Control", "public, some-other-value"));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // resources should be still in cache
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // wait for expires
+        Thread.sleep(2 * 1000);
+        client.getPage(pageUrl);
+        assertEquals(0, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
+    }
+
+    /**
      * Ensures {@link WebResponse#cleanUp()} is called for overflow deleted entries.
      * @throws Exception if the test fails
      */
@@ -368,16 +521,18 @@ public class CacheTest extends SimpleWebTestCase {
         final WebResponse response1 = createMock(WebResponse.class);
         expect(response1.getWebRequest()).andReturn(request1);
         expectLastCall().atLeastOnce();
-        expect(response1.getResponseHeaderValue("Last-Modified")).andReturn(null);
-        expect(response1.getResponseHeaderValue("Expires")).andReturn(
+        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
+        expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
+        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
                 StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
 
         final WebRequest request2 = new WebRequest(URL_SECOND, HttpMethod.GET);
         final WebResponse response2 = createMock(WebResponse.class);
         expect(response2.getWebRequest()).andReturn(request2);
         expectLastCall().atLeastOnce();
-        expect(response2.getResponseHeaderValue("Last-Modified")).andReturn(null);
-        expect(response2.getResponseHeaderValue("Expires")).andReturn(
+        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
+        expect(response2.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
+        expect(response2.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
                 StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
 
         response1.cleanUp();
@@ -402,8 +557,9 @@ public class CacheTest extends SimpleWebTestCase {
         final WebResponse response1 = createMock(WebResponse.class);
         expect(response1.getWebRequest()).andReturn(request1);
         expectLastCall().atLeastOnce();
-        expect(response1.getResponseHeaderValue("Last-Modified")).andReturn(null);
-        expect(response1.getResponseHeaderValue("Expires")).andReturn(
+        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
+        expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
+        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
                 StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
 
         response1.cleanUp();
