@@ -194,7 +194,7 @@ public class Cache implements Serializable {
      * <tt>Last-Modified</tt> header with a date older than 10 minutes or with an <tt>Expires</tt> header
      * specifying expiration in more than 10 minutes.</p>
      *
-     * @see @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
+     * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
      * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html">RFC 2616</a>
      * @param response the response to examine
      * @return {@code true} if the response should be considered as cacheable
