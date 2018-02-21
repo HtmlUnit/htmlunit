@@ -66,7 +66,7 @@ import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.CSS3Parser;
 import com.gargoylesoftware.css.parser.condition.AndCondition;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
@@ -835,7 +835,7 @@ public class CSSStyleSheet extends StyleSheet {
                             errorOccured.set(true);
                         }
                     };
-                    final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+                    final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
                     parser.setErrorHandler(errorHandler);
                     try {
                         final SelectorList selectorList
@@ -916,9 +916,9 @@ public class CSSStyleSheet extends StyleSheet {
         org.w3c.dom.css.CSSStyleSheet ss;
         try {
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
-            ss = parser.parseStyleSheet(source, null, null);
+            ss = parser.parseStyleSheet(source, null);
         }
         catch (final Throwable t) {
             LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
@@ -938,7 +938,7 @@ public class CSSStyleSheet extends StyleSheet {
         SelectorList selectors;
         try {
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             selectors = parser.parseSelectors(source);
             // in case of error parseSelectors returns null
@@ -967,7 +967,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         try {
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
 
             final InputSource source = new InputSource(new StringReader(mediaString));

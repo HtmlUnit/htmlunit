@@ -126,7 +126,7 @@ import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.CSS3Parser;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -2567,7 +2567,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             final InputSource source = new InputSource(new StringReader(styleAttribute));
             source.setURI(uri);
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             try {
                 styleDeclaration_ = parser.parseStyleDeclaration(source);

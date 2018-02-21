@@ -45,7 +45,7 @@ import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -1883,7 +1883,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     protected SelectorList getSelectorList(final String selectors, final BrowserVersion browserVersion)
             throws IOException {
-        final CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+        final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
         final CheckErrorHandler errorHandler = new CheckErrorHandler();
         parser.setErrorHandler(errorHandler);
 
