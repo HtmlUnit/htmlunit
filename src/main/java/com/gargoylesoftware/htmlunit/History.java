@@ -51,10 +51,10 @@ public class History implements Serializable {
 
             // verify cache-control header values before storing
             if (HeaderUtils.containsNoStore(page.getWebResponse())) {
-                page_ = new SoftReference<>(page);
+                page_ = null;
             }
             else {
-                page_ = null;
+                page_ = new SoftReference<>(page);
             }
 
             final WebRequest request = page.getWebResponse().getWebRequest();
