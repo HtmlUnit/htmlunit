@@ -67,7 +67,6 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.CSS3Parser;
-import com.gargoylesoftware.css.parser.condition.AndCondition;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.ClassCondition;
@@ -81,7 +80,6 @@ import com.gargoylesoftware.css.parser.condition.SubstringAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.SuffixAttributeCondition;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
-import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.ElementSelector;
@@ -450,18 +448,21 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return false;
 
-            case CONDITIONAL_SELECTOR:
-                final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final SimpleSelector simpleSel = conditional.getSimpleSelector();
-                return (simpleSel == null || selects(browserVersion, simpleSel, element,
-                        pseudoElement, fromQuerySelectorAll))
-                    && selects(browserVersion, conditional.getCondition(), element, fromQuerySelectorAll);
-
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
-                return name == null || name.equalsIgnoreCase(element.getLocalName());
-
+                if (name == null || name.equalsIgnoreCase(element.getLocalName())) {
+                    final List<Condition> conditions = es.getConditions();
+                    if (conditions != null) {
+                        for (Condition condition : conditions) {
+                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+                return false;
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 DomNode prev = element.getPreviousSibling();
@@ -525,11 +526,6 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 final String a3 = element.getAttribute("class");
                 return selectsWhitespaceSeparated(v3, a3);
-
-            case AND_CONDITION:
-                final AndCondition ac = (AndCondition) condition;
-                return selects(browserVersion, ac.getFirstCondition(), element, fromQuerySelectorAll)
-                    && selects(browserVersion, ac.getSecondCondition(), element, fromQuerySelectorAll);
 
             case ATTRIBUTE_CONDITION:
                 final AttributeCondition ac1 = (AttributeCondition) condition;
@@ -1476,12 +1472,15 @@ public class CSSStyleSheet extends StyleSheet {
     private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
+                final List<Condition> conditions = ((ElementSelector) selector).getConditions();
+                if (conditions != null) {
+                    for (Condition condition : conditions) {
+                        if (!isValidCondition(condition, documentMode, domNode)) {
+                            return false;
+                        }
+                    }
+                }
                 return true;
-            case CONDITIONAL_SELECTOR:
-                final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final SimpleSelector simpleSel = conditional.getSimpleSelector();
-                return (simpleSel == null || isValidSelector(simpleSel, documentMode, domNode))
-                        && isValidCondition(conditional.getCondition(), documentMode, domNode);
             case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
@@ -1511,10 +1510,6 @@ public class CSSStyleSheet extends StyleSheet {
      */
     private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
-            case AND_CONDITION:
-                final AndCondition cc1 = (AndCondition) condition;
-                return isValidCondition(cc1.getFirstCondition(), documentMode, domNode)
-                        && isValidCondition(cc1.getSecondCondition(), documentMode, domNode);
             case ATTRIBUTE_CONDITION:
             case ID_CONDITION:
             case LANG_CONDITION:

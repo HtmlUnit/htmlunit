@@ -19,7 +19,6 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.css.parser.condition.AndCondition;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
@@ -28,14 +27,12 @@ import com.gargoylesoftware.css.parser.condition.PrefixAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.SubstringAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.SuffixAttributeCondition;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
-import com.gargoylesoftware.css.parser.selector.ConditionalSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -92,19 +89,16 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 readSelectorSpecificity(cs.getAncestorSelector());
                 readSelectorSpecificity(cs.getSimpleSelector());
                 return;
-            case CONDITIONAL_SELECTOR:
-                final ConditionalSelector conditional = (ConditionalSelector) selector;
-                final SimpleSelector simpleSel = conditional.getSimpleSelector();
-                if (simpleSel != null) {
-                    readSelectorSpecificity(simpleSel);
-                }
-                readSelectorSpecificity(conditional.getCondition());
-                return;
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String esName = es.getLocalName();
                 if (esName != null) {
                     fieldD_++;
+                }
+                if (es.getConditions() != null) {
+                    for (Condition condition : es.getConditions()) {
+                        readSelectorSpecificity(condition);
+                    }
                 }
                 return;
             case PSEUDO_ELEMENT_SELECTOR:
@@ -138,11 +132,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 return;
             case CLASS_CONDITION:
                 fieldC_++;
-                return;
-            case AND_CONDITION:
-                final AndCondition andc = (AndCondition) condition;
-                readSelectorSpecificity(andc.getFirstCondition());
-                readSelectorSpecificity(andc.getSecondCondition());
                 return;
             case ATTRIBUTE_CONDITION:
                 if ("id".equalsIgnoreCase(((AttributeCondition) condition).getLocalName())) {
