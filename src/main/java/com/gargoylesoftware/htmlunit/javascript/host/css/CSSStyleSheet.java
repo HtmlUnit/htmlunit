@@ -61,12 +61,12 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.dom.Property;
+import com.gargoylesoftware.css.parser.CSS3Parser;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.CSS3Parser;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.ClassCondition;
@@ -412,9 +412,6 @@ public class CSSStyleSheet extends StyleSheet {
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
-            case ANY_NODE_SELECTOR:
-                return true;
-
             case CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
                 if (parentNode == element.getPage()) {
@@ -1495,8 +1492,6 @@ public class CSSStyleSheet extends StyleSheet {
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
                 return isValidSelector(gas.getSelector(), documentMode, domNode)
                         && isValidSelector(gas.getSiblingSelector(), documentMode, domNode);
-            case ANY_NODE_SELECTOR:
-            //$FALL-THROUGH$
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff

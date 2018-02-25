@@ -77,8 +77,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     private void readSelectorSpecificity(final Selector selector) {
         switch (selector.getSelectorType()) {
-            case ANY_NODE_SELECTOR:
-                return;
             case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 readSelectorSpecificity(ds.getAncestorSelector());
@@ -91,8 +89,7 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
                 return;
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
-                final String esName = es.getLocalName();
-                if (esName != null) {
+                if (es.getLocalName() != null) {
                     fieldD_++;
                 }
                 if (es.getConditions() != null) {
