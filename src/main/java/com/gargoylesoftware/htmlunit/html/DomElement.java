@@ -1490,8 +1490,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
 
             if (selectorList != null) {
-                for (int i = 0; i < selectorList.getLength(); i++) {
-                    final Selector selector = selectorList.item(i);
+                for (Selector selector : selectorList) {
                     if (CSSStyleSheet.selects(browserVersion, selector, this, null, true)) {
                         return true;
                     }

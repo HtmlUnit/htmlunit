@@ -105,6 +105,6 @@ public class SelectorSpecificityTest extends SimpleWebTestCase {
     }
 
     private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
-        return sheet.parseSelectors(new InputSource(new StringReader(rule))).item(0);
+        return sheet.parseSelectors(new InputSource(new StringReader(rule))).get(0);
     }
 }

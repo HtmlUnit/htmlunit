@@ -258,8 +258,7 @@ public class CSSStyleSheet extends StyleSheet {
             if (CSSRule.STYLE_RULE == ruleType) {
                 final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
                 final SelectorList selectors = styleRule.getSelectors();
-                for (int j = 0; j < selectors.getLength(); j++) {
-                    final Selector selector = selectors.item(j);
+                for (Selector selector : selectors) {
                     final boolean selected = selects(browser, selector, e, pseudoElement, false);
                     if (selected) {
                         final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
@@ -836,13 +835,13 @@ public class CSSStyleSheet extends StyleSheet {
                     try {
                         final SelectorList selectorList
                             = parser.parseSelectors(new InputSource(new StringReader(selectors)));
-                        if (errorOccured.get() || selectorList == null || selectorList.getLength() != 1) {
+                        if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
                             throw new CSSException("Invalid selectors: " + selectors);
                         }
 
                         validateSelectors(selectorList, 9, element);
 
-                        return !selects(browserVersion, selectorList.item(0), element,
+                        return !selects(browserVersion, selectorList.get(0), element,
                                 null, fromQuerySelectorAll);
                     }
                     catch (final IOException e) {
@@ -1458,10 +1457,9 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        for (int i = 0; i < selectorList.getLength(); i++) {
-            final Selector item = selectorList.item(i);
-            if (!isValidSelector(item, documentMode, domNode)) {
-                throw new CSSException("Invalid selector: " + item);
+        for (Selector selector : selectorList) {
+            if (!isValidSelector(selector, documentMode, domNode)) {
+                throw new CSSException("Invalid selector: " + selector);
             }
         }
     }

@@ -1858,8 +1858,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final List<DomNode> elements = new ArrayList<>();
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
-                    for (int i = 0; i < selectorList.getLength(); i++) {
-                        final Selector selector = selectorList.item(i);
+                    for (Selector selector : selectorList) {
                         if (CSSStyleSheet.selects(browserVersion, selector, child, null, true)) {
                             elements.add(child);
                             break;
