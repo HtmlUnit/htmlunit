@@ -2141,7 +2141,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public void postMessage(final String message, final String targetOrigin, final Object transfer) {
-        final URL currentURL = getWebWindow().getEnclosedPage().getUrl();
+        final Page page = getWebWindow().getEnclosedPage();
+        final URL currentURL = page.getUrl();
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
             URL targetURL = null;
@@ -2165,15 +2166,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 return;
             }
         }
+
         final MessageEvent event = new MessageEvent();
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
         event.setParentScope(this);
         event.setPrototype(getPrototype(event.getClass()));
 
-        final JavaScriptEngine jsEngine
-            = (JavaScriptEngine) getWebWindow().getWebClient().getJavaScriptEngine();
-        final PostponedAction action = new PostponedAction(getDomNodeOrDie().getPage()) {
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) getWebWindow().getWebClient().getJavaScriptEngine();
+        final PostponedAction action = new PostponedAction(page) {
             @Override
             public void execute() throws Exception {
                 final ContextAction contextAction = new ContextAction() {
