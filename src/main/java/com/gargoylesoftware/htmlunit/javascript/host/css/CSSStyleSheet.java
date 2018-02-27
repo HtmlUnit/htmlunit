@@ -461,26 +461,27 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                DomNode prev = element.getPreviousSibling();
-                while (prev != null && !(prev instanceof HtmlElement)) {
-                    prev = prev.getPreviousSibling();
+                if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+                    DomNode prev = element.getPreviousSibling();
+                    while (prev != null && !(prev instanceof HtmlElement)) {
+                        prev = prev.getPreviousSibling();
+                    }
+                    return prev != null
+                            && selects(browserVersion, das.getSelector(),
+                                    (HtmlElement) prev, pseudoElement, fromQuerySelectorAll);
                 }
-                return prev != null
-                    && selects(browserVersion, das.getSelector(), (HtmlElement) prev,
-                            pseudoElement, fromQuerySelectorAll)
-                    && selects(browserVersion, das.getSiblingSelector(), element, pseudoElement, fromQuerySelectorAll);
+                return false;
 
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-
-                final SimpleSelector ssSiblingSelector = gas.getSiblingSelector();
-                for (DomNode prev1 = element.getPreviousSibling(); prev1 != null; prev1 = prev1.getPreviousSibling()) {
-                    if (prev1 instanceof HtmlElement
-                        && selects(browserVersion, gas.getSelector(), (HtmlElement) prev1,
-                                pseudoElement, fromQuerySelectorAll)
-                        && selects(browserVersion, ssSiblingSelector, element,
-                                pseudoElement, fromQuerySelectorAll)) {
-                        return true;
+                if (selects(browserVersion, gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+                    for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
+                                                        prev1 = prev1.getPreviousSibling()) {
+                        if (prev1 instanceof HtmlElement
+                            && selects(browserVersion, gas.getSelector(), (HtmlElement) prev1,
+                                    pseudoElement, fromQuerySelectorAll)) {
+                            return true;
+                        }
                     }
                 }
                 return false;
@@ -1487,11 +1488,11 @@ public class CSSStyleSheet extends StyleSheet {
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 return isValidSelector(das.getSelector(), documentMode, domNode)
-                        && isValidSelector(das.getSiblingSelector(), documentMode, domNode);
+                        && isValidSelector(das.getSimpleSelector(), documentMode, domNode);
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
                 return isValidSelector(gas.getSelector(), documentMode, domNode)
-                        && isValidSelector(gas.getSiblingSelector(), documentMode, domNode);
+                        && isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
             default:
                 LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
                 return true; // at least in a first time to break less stuff

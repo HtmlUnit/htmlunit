@@ -108,12 +108,12 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 readSelectorSpecificity(das.getSelector());
-                readSelectorSpecificity(das.getSiblingSelector());
+                readSelectorSpecificity(das.getSimpleSelector());
                 return;
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
                 readSelectorSpecificity(gas.getSelector());
-                readSelectorSpecificity(gas.getSiblingSelector());
+                readSelectorSpecificity(gas.getSimpleSelector());
                 return;
             default:
                 LOG.warn("Unhandled CSS selector type for specificity computation: '"
