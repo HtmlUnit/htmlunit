@@ -260,7 +260,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return a sorted map containing style elements, keyed on style element name
      */
     public Map<String, StyleElement> getStyleMap() {
-        final String styleAttribute = getAttribute("style");
+        final String styleAttribute = getAttributeDirect("style");
         if (styleString_ == styleAttribute) {
             return styleMap_;
         }
@@ -382,6 +382,20 @@ public class DomElement extends DomNamespaceNode implements Element {
     @Override
     public String getAttribute(final String attributeName) {
         final DomAttr attr = attributes_.get(attributeName);
+        if (attr != null) {
+            return attr.getNodeValue();
+        }
+        return ATTRIBUTE_NOT_DEFINED;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param attributeName the name of the attribute
+     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
+     */
+    public String getAttributeDirect(final String attributeName) {
+        final DomAttr attr = attributes_.getDirect(attributeName);
         if (attr != null) {
             return attr.getNodeValue();
         }
@@ -679,7 +693,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the identifier of this element
      */
     public final String getId() {
-        return getAttribute("id");
+        return getAttributeDirect("id");
     }
 
     /**
@@ -1684,6 +1698,14 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
             return map_.get(name);
         }
         return null;
+    }
+
+    /**
+     * Fast access.
+     * @param the key
+     */
+    DomAttr getDirect(final String key) {
+        return map_.get(key);
     }
 
     /**
