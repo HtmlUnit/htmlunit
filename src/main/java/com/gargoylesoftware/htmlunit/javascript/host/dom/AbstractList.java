@@ -128,6 +128,9 @@ public class AbstractList extends SimpleScriptable implements Function {
         }
         attributeChangeSensitive_ = attributeChangeSensitive;
         cachedElements_ = initialElements;
+        if (initialElements != null) {
+            registerListener();
+        }
     }
 
     /**
@@ -229,27 +232,31 @@ public class AbstractList extends SimpleScriptable implements Function {
                 cachedElements = computeElements();
             }
             cachedElements_ = cachedElements;
-            if (!listenerRegistered_) {
-                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
-                final DomNode domNode = getDomNodeOrNull();
-                if (domNode != null) {
-                    domNode.addDomChangeListener(listener);
-                    if (attributeChangeSensitive_) {
-                        if (domNode instanceof HtmlElement) {
-                            ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
-                        }
-                        else if (domNode instanceof HtmlPage) {
-                            ((HtmlPage) domNode).addHtmlAttributeChangeListener(listener);
-                        }
-                    }
-                    listenerRegistered_ = true;
-                }
-            }
         }
+        registerListener();
 
         // maybe the cache was cleared in between
         // then this returns the old state and never null
         return cachedElements;
+    }
+
+    private void registerListener() {
+        if (!listenerRegistered_) {
+            final DomNode domNode = getDomNodeOrNull();
+            if (domNode != null) {
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl(this);
+                domNode.addDomChangeListener(listener);
+                if (attributeChangeSensitive_) {
+                    if (domNode instanceof HtmlElement) {
+                        ((HtmlElement) domNode).addHtmlAttributeChangeListener(listener);
+                    }
+                    else if (domNode instanceof HtmlPage) {
+                        ((HtmlPage) domNode).addHtmlAttributeChangeListener(listener);
+                    }
+                }
+                listenerRegistered_ = true;
+            }
+        }
     }
 
     /**

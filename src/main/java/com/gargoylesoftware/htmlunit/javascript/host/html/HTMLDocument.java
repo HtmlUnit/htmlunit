@@ -774,24 +774,27 @@ public class HTMLDocument extends Document {
 
         final boolean forIDAndOrName = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
-        final HTMLCollection collection = new HTMLCollection(page, true) {
+
+        // for performance
+        // we will calculate the elements to decide if we really have
+        // to really create a HTMLCollection or not
+        final List<DomNode> matchingElements = getItComputeElements(page, name, forIDAndOrName, alsoFrames);
+        final int size = matchingElements.size();
+        if (size == 0) {
+            return NOT_FOUND;
+        }
+        if (size == 1) {
+            final DomNode object = matchingElements.get(0);
+            if (alsoFrames && object instanceof BaseFrameElement) {
+                return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
+            }
+            return super.getScriptableFor(object);
+        }
+
+        final HTMLCollection collection = new HTMLCollection(page, matchingElements) {
             @Override
             protected List<DomNode> computeElements() {
-                final List<DomElement> elements;
-                if (forIDAndOrName) {
-                    elements = page.getElementsByIdAndOrName(name);
-                }
-                else {
-                    elements = page.getElementsByName(name);
-                }
-                final List<DomNode> matchingElements = new ArrayList<>();
-                for (final DomElement elt : elements) {
-                    if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
-                            || (alsoFrames && elt instanceof BaseFrameElement)) {
-                        matchingElements.add(elt);
-                    }
-                }
-                return matchingElements;
+                return getItComputeElements(page, name, forIDAndOrName, alsoFrames);
             }
 
             @Override
@@ -816,15 +819,26 @@ public class HTMLDocument extends Document {
             }
         };
 
-        final int length = collection.getLength();
-        if (length == 0) {
-            return NOT_FOUND;
-        }
-        else if (length == 1) {
-            return collection.item(Integer.valueOf(0));
-        }
-
         return collection;
+    }
+
+    private List<DomNode> getItComputeElements(final HtmlPage page, final String name,
+            final boolean forIDAndOrName, final boolean alsoFrames) {
+        final List<DomElement> elements;
+        if (forIDAndOrName) {
+            elements = page.getElementsByIdAndOrName(name);
+        }
+        else {
+            elements = page.getElementsByName(name);
+        }
+        final List<DomNode> matchingElements = new ArrayList<>();
+        for (final DomElement elt : elements) {
+            if (elt instanceof HtmlForm || elt instanceof HtmlImage || elt instanceof HtmlApplet
+                    || (alsoFrames && elt instanceof BaseFrameElement)) {
+                matchingElements.add(elt);
+            }
+        }
+        return matchingElements;
     }
 
     /**
