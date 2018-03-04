@@ -57,6 +57,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
@@ -1212,6 +1213,8 @@ public class WebClient implements Serializable, AutoCloseable {
         final DownloadedContent content = new DownloadedContent.OnFile(file, false);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, contentType));
+        compiledHeaders.add(new NameValuePair(HttpHeader.LAST_MODIFIED,
+                DateUtils.formatDate(new Date(file.lastModified()))));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
         return new WebResponse(responseData, webRequest, 0);
     }
