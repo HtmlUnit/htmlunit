@@ -771,6 +771,9 @@ public class HTMLDocument extends Document {
 
     private Object getIt(final String name) {
         final HtmlPage page = (HtmlPage) getDomNodeOrNull();
+        if (page == null) {
+            return NOT_FOUND;
+        }
 
         final boolean forIDAndOrName = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME);
         final boolean alsoFrames = getBrowserVersion().hasFeature(HTMLDOCUMENT_GET_ALSO_FRAMES);
