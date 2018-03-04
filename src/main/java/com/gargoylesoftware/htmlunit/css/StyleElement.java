@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
 
+import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
+
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
  *

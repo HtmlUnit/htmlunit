@@ -254,6 +254,6 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, screenCss, "text/css");
         getMockWebConnection().setResponse(URL_THIRD, printCss, "text/css");
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 70000);
     }
 }

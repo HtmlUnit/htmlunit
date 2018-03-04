@@ -238,22 +238,29 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
             final String pseudoElement) {
-        final CSSRuleList rules = getWrappedSheet().getCssRules();
-        modifyIfNecessary(style, element, pseudoElement, rules, new HashSet<String>());
+//        final CSSRuleList ruleList = getWrappedSheet().getCssRules();
+//        modifyIfNecessary(style, element, pseudoElement, ruleList, new HashSet<String>());
+
+        final BrowserVersion browser = getBrowserVersion();
+        final DomElement e = element.getDomNodeOrDie();
+        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
+                selects(getRuleIndex(), this, browser, e, pseudoElement, false);
+        for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+            final org.w3c.dom.css.CSSStyleDeclaration dec = entry.getRule().getStyle();
+            style.applyStyleFromSelector(dec, entry.getSelector());
+        }
     }
 
     private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
-            final String pseudoElement, final CSSRuleList rules, final Set<String> alreadyProcessing) {
-        if (rules == null) {
+            final String pseudoElement, final CSSRuleList ruleList, final Set<String> alreadyProcessing) {
+        if (ruleList == null) {
             return;
         }
 
         final BrowserVersion browser = getBrowserVersion();
         final DomElement e = element.getDomNodeOrDie();
-        final int rulesLength = rules.getLength();
-        for (int i = 0; i < rulesLength; i++) {
-            final CSSRule rule = rules.item(i);
-
+        final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
+        for (CSSRule rule : rules) {
             final short ruleType = rule.getType();
             if (CSSRule.STYLE_RULE == ruleType) {
                 final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
@@ -281,9 +288,9 @@ public class CSSStyleSheet extends StyleSheet {
                     }
 
                     if (!alreadyProcessing.contains(sheet.getUri())) {
-                        final CSSRuleList sheetRules = sheet.getWrappedSheet().getCssRules();
+                        final CSSRuleList sheetRuleList = sheet.getWrappedSheet().getCssRules();
                         alreadyProcessing.add(getUri());
-                        sheet.modifyIfNecessary(style, element, pseudoElement, sheetRules, alreadyProcessing);
+                        sheet.modifyIfNecessary(style, element, pseudoElement, sheetRuleList, alreadyProcessing);
                     }
                 }
             }
@@ -308,7 +315,7 @@ public class CSSStyleSheet extends StyleSheet {
     public static CSSStyleSheet loadStylesheet(final HTMLElement element, final HtmlLink link, final String url) {
         CSSStyleSheet sheet;
         final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
-        String uri = page.getUrl().toExternalForm(); // fallback uri for exceptions
+        String uri = page.getUrl().toExternalForm();
         try {
             // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
             final WebRequest request;
@@ -335,8 +342,7 @@ public class CSSStyleSheet extends StyleSheet {
                 // Use href.
                 final String accept = client.getBrowserVersion().getCssAcceptHeader();
                 request = new WebRequest(new URL(url), accept);
-                final String referer = page.getUrl().toExternalForm();
-                request.setAdditionalHeader(HttpHeader.REFERER, referer);
+                request.setAdditionalHeader(HttpHeader.REFERER, uri);
 
                 // our cache is a bit strange;
                 // loadWebResponse check the cache for the web response
@@ -1113,11 +1119,10 @@ public class CSSStyleSheet extends StyleSheet {
         cssRules_.clearRules();
         cssRulesIndexFix_.clear();
 
-        final CSSRuleList ruleList = getWrappedSheet().getCssRules();
-        final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
+        final CSSRuleListImpl ruleList = (CSSRuleListImpl) getWrappedSheet().getCssRules();
+        final List<org.w3c.dom.css.CSSRule> rules = ruleList.getRules();
         int pos = 0;
-        for (Iterator<CSSRule> it = rules.iterator(); it.hasNext();) {
-            final org.w3c.dom.css.CSSRule rule = it.next();
+        for (CSSRule rule : rules) {
             if (rule instanceof org.w3c.dom.css.CSSCharsetRule) {
                 cssRulesIndexFix_.add(pos);
                 continue;
@@ -1133,6 +1138,9 @@ public class CSSStyleSheet extends StyleSheet {
             }
             pos++;
         }
+
+        // reset our index also
+        ((CSSStyleSheetImpl) getWrappedSheet()).resetRuleIndex();
     }
 
     private int fixIndex(int index) {
@@ -1550,5 +1558,105 @@ public class CSSStyleSheet extends StyleSheet {
             cssRulesIndexFix_ = new ArrayList<>();
             refreshCssRules();
         }
+    }
+
+    private CSSStyleSheetImpl.CSSStyleSheetRuleIndex getRuleIndex() {
+        final CSSStyleSheetImpl styleSheet = (CSSStyleSheetImpl) getWrappedSheet();
+        CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
+
+        if (index == null) {
+            index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
+            final CSSRuleListImpl ruleList = (CSSRuleListImpl) styleSheet.getCssRules();
+            index(index, ruleList, new HashSet<String>());
+
+            styleSheet.setRuleIndex(index);
+        }
+        return index;
+    }
+
+    private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList,
+            final Set<String> alreadyProcessing) {
+
+        for (CSSRule rule : ruleList.getRules()) {
+            final short ruleType = rule.getType();
+            if (CSSRule.STYLE_RULE == ruleType) {
+                final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
+                final SelectorList selectors = styleRule.getSelectors();
+                for (Selector selector : selectors) {
+                    final SimpleSelector simpleSel = selector.getSimpleSelector();
+                    if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
+                        final ElementSelector es = (ElementSelector) simpleSel;
+                        index.addElementSelector(es.getElementName(), selector, styleRule);
+                    }
+                    else {
+                        index.addOtherSelector(selector, styleRule);
+                    }
+                }
+            }
+            else if (CSSRule.IMPORT_RULE == ruleType) {
+                final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
+                final MediaList mediaList = importRule.getMedia();
+
+                CSSStyleSheet sheet = imports_.get(importRule);
+                if (sheet == null) {
+                    final String href = importRule.getHref();
+                    final String url = UrlUtils.resolveUrl(getUri(), href);
+                    sheet = loadStylesheet(ownerNode_, null, url);
+                    imports_.put(importRule, sheet);
+                }
+
+                if (!alreadyProcessing.contains(sheet.getUri())) {
+                    final CSSRuleList sheetRuleList = sheet.getWrappedSheet().getCssRules();
+                    alreadyProcessing.add(sheet.getUri());
+
+                    if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                        index(index, (CSSRuleListImpl) sheetRuleList, alreadyProcessing);
+                    }
+                    else {
+                        index(index.addMedia(mediaList), (CSSRuleListImpl) sheetRuleList, alreadyProcessing);
+                    }
+                }
+            }
+            else if (CSSRule.MEDIA_RULE == ruleType) {
+                final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
+                final MediaList mediaList = mediaRule.getMedia();
+                if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                    index(index, (CSSRuleListImpl) mediaRule.getCssRules(), alreadyProcessing);
+                }
+                else {
+                    index(index.addMedia(mediaList), (CSSRuleListImpl) mediaRule.getCssRules(), alreadyProcessing);
+                }
+            }
+        }
+    }
+
+    private List<CSSStyleSheetImpl.SelectorEntry> selects(
+                            final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
+                            final SimpleScriptable scriptable,
+                            final BrowserVersion browserVersion, final DomElement element,
+                            final String pseudoElement, final boolean fromQuerySelectorAll) {
+
+        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
+
+        if (CSSStyleSheet.isActive(scriptable, index.getMediaList())) {
+            final String elementName = element.getLocalName();
+            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName);
+
+            CSSStyleSheetImpl.SelectorEntry entry = iter.next();
+            while (null != entry) {
+                if (CSSStyleSheet.selects(browserVersion, entry.getSelector(),
+                                            element, pseudoElement, fromQuerySelectorAll)) {
+                    matchingRules.add(entry);
+                }
+                entry = iter.next();
+            }
+
+            for (CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
+                matchingRules.addAll(selects(child, scriptable, browserVersion,
+                                                    element, pseudoElement, fromQuerySelectorAll));
+            }
+        }
+
+        return matchingRules;
     }
 }
