@@ -94,7 +94,7 @@ public class HtmlTableRow extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -106,7 +106,7 @@ public class HtmlTableRow extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
-        return getAttribute("char");
+        return getAttributeDirect("char");
     }
 
     /**
@@ -118,7 +118,7 @@ public class HtmlTableRow extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
-        return getAttribute("charoff");
+        return getAttributeDirect("charoff");
     }
 
     /**
@@ -130,7 +130,7 @@ public class HtmlTableRow extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
-        return getAttribute("valign");
+        return getAttributeDirect("valign");
     }
 
     /**
@@ -150,7 +150,7 @@ public class HtmlTableRow extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
-        return getAttribute("bgcolor");
+        return getAttributeDirect("bgcolor");
     }
 
     /**

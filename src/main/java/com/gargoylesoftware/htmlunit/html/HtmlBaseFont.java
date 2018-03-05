@@ -64,7 +64,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        final String size = getAttribute("size");
+        final String size = getAttributeDirect("size");
         if (ATTRIBUTE_NOT_DEFINED == size) {
             return "3";
         }
@@ -79,7 +79,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute {@code color} or an empty string if that attribute isn't defined
      */
     public final String getColorAttribute() {
-        return getAttribute("color");
+        return getAttributeDirect("color");
     }
 
     /**
@@ -90,7 +90,7 @@ public class HtmlBaseFont extends HtmlElement {
      * @return the value of the attribute {@code face} or an empty string if that attribute isn't defined
      */
     public final String getFaceAttribute() {
-        return getAttribute("face");
+        return getAttributeDirect("face");
     }
 
     /**

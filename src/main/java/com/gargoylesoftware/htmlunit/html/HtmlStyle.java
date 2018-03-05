@@ -52,7 +52,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -72,7 +72,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute {@code media} or an empty string if that attribute isn't defined
      */
     public final String getMediaAttribute() {
-        return getAttribute("media");
+        return getAttributeDirect("media");
     }
 
     /**
@@ -83,7 +83,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute {@code title} or an empty string if that attribute isn't defined
      */
     public final String getTitleAttribute() {
-        return getAttribute("title");
+        return getAttributeDirect("title");
     }
 
     /**

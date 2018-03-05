@@ -54,7 +54,7 @@ public class HtmlBlockQuote extends HtmlElement {
      * @return the value of the attribute {@code cite} or an empty string if that attribute isn't defined
      */
     public final String getCiteAttribute() {
-        return getAttribute("cite");
+        return getAttributeDirect("cite");
     }
 
     /**

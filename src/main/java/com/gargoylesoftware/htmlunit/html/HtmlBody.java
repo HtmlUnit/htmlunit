@@ -65,7 +65,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttribute("onload");
+        return getAttributeDirect("onload");
     }
 
     /**
@@ -76,7 +76,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code onunload} or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
-        return getAttribute("onunload");
+        return getAttributeDirect("onunload");
     }
 
     /**
@@ -87,7 +87,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code background} or an empty string if that attribute isn't defined
      */
     public final String getBackgroundAttribute() {
-        return getAttribute("background");
+        return getAttributeDirect("background");
     }
 
     /**
@@ -98,7 +98,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code bgcolor} or an empty string if that attribute isn't defined
      */
     public final String getBgcolorAttribute() {
-        return getAttribute("bgcolor");
+        return getAttributeDirect("bgcolor");
     }
 
     /**
@@ -109,7 +109,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code text} or an empty string if that attribute isn't defined
      */
     public final String getTextAttribute() {
-        return getAttribute("text");
+        return getAttributeDirect("text");
     }
 
     /**
@@ -120,7 +120,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code link} or an empty string if that attribute isn't defined
      */
     public final String getLinkAttribute() {
-        return getAttribute("link");
+        return getAttributeDirect("link");
     }
 
     /**
@@ -131,7 +131,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code vlink} or an empty string if that attribute isn't defined
      */
     public final String getVlinkAttribute() {
-        return getAttribute("vlink");
+        return getAttributeDirect("vlink");
     }
 
     /**
@@ -142,7 +142,7 @@ public class HtmlBody extends HtmlElement {
      * @return the value of the attribute {@code alink} or an empty string if that attribute isn't defined
      */
     public final String getAlinkAttribute() {
-        return getAttribute("alink");
+        return getAttributeDirect("alink");
     }
 
     /**

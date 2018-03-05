@@ -168,7 +168,7 @@ public class HtmlForm extends HtmlElement {
         if (submitElement instanceof HtmlElement) {
             final HtmlElement element = (HtmlElement) submitElement;
 
-            final String type = element.getAttribute("type");
+            final String type = element.getAttributeDirect("type");
             boolean typeImage = false;
             final boolean typeSubmit = "submit".equalsIgnoreCase(type);
             final boolean isInput = HtmlInput.TAG_NAME.equals(element.getTagName());
@@ -194,19 +194,19 @@ public class HtmlForm extends HtmlElement {
                 return;
             }
 
-            final String formaction = element.getAttribute("formaction");
+            final String formaction = element.getAttributeDirect("formaction");
             if (DomElement.ATTRIBUTE_NOT_DEFINED != formaction) {
                 setActionAttribute(formaction);
             }
-            final String formmethod = element.getAttribute("formmethod");
+            final String formmethod = element.getAttributeDirect("formmethod");
             if (DomElement.ATTRIBUTE_NOT_DEFINED != formmethod) {
                 setMethodAttribute(formmethod);
             }
-            final String formtarget = element.getAttribute("formtarget");
+            final String formtarget = element.getAttributeDirect("formtarget");
             if (DomElement.ATTRIBUTE_NOT_DEFINED != formtarget) {
                 setTargetAttribute(formtarget);
             }
-            final String formenctype = element.getAttribute("formenctype");
+            final String formenctype = element.getAttributeDirect("formenctype");
             if (DomElement.ATTRIBUTE_NOT_DEFINED != formenctype) {
                 setEnctypeAttribute(formenctype);
             }
@@ -430,12 +430,12 @@ public class HtmlForm extends HtmlElement {
             return false;
         }
 
-        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttribute("name"))) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttributeDirect("name"))) {
             return false;
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttribute("type").toLowerCase(Locale.ROOT);
+            final String type = element.getAttributeDirect("type").toLowerCase(Locale.ROOT);
             if ("radio".equals(type) || "checkbox".equals(type)) {
                 return ((HtmlInput) element).isChecked();
             }
@@ -490,7 +490,7 @@ public class HtmlForm extends HtmlElement {
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlInput && name.equals(elt.getAttribute("name"))) {
+            if (elt instanceof HtmlInput && name.equals(elt.getAttributeDirect("name"))) {
                 list.add((HtmlInput) elt);
             }
         }
@@ -580,7 +580,7 @@ public class HtmlForm extends HtmlElement {
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlSelect && name.equals(elt.getAttribute("name"))) {
+            if (elt instanceof HtmlSelect && name.equals(elt.getAttributeDirect("name"))) {
                 list.add((HtmlSelect) elt);
             }
         }
@@ -614,7 +614,7 @@ public class HtmlForm extends HtmlElement {
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlButton && name.equals(elt.getAttribute("name"))) {
+            if (elt instanceof HtmlButton && name.equals(elt.getAttributeDirect("name"))) {
                 list.add((HtmlButton) elt);
             }
         }
@@ -648,7 +648,7 @@ public class HtmlForm extends HtmlElement {
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlTextArea && name.equals(elt.getAttribute("name"))) {
+            if (elt instanceof HtmlTextArea && name.equals(elt.getAttributeDirect("name"))) {
                 list.add((HtmlTextArea) elt);
             }
         }
@@ -734,7 +734,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code action} or an empty string if that attribute isn't defined
      */
     public final String getActionAttribute() {
-        return getAttribute("action");
+        return getAttributeDirect("action");
     }
 
     /**
@@ -756,7 +756,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code method} or an empty string if that attribute isn't defined
      */
     public final String getMethodAttribute() {
-        return getAttribute("method");
+        return getAttributeDirect("method");
     }
 
     /**
@@ -778,7 +778,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -801,7 +801,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code enctype} or an empty string if that attribute isn't defined
      */
     public final String getEnctypeAttribute() {
-        return getAttribute("enctype");
+        return getAttributeDirect("enctype");
     }
 
     /**
@@ -824,7 +824,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code onsubmit} or an empty string if that attribute isn't defined
      */
     public final String getOnSubmitAttribute() {
-        return getAttribute("onsubmit");
+        return getAttributeDirect("onsubmit");
     }
 
     /**
@@ -835,7 +835,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code onreset} or an empty string if that attribute isn't defined
      */
     public final String getOnResetAttribute() {
-        return getAttribute("onreset");
+        return getAttributeDirect("onreset");
     }
 
     /**
@@ -868,7 +868,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttribute("target");
+        return getAttributeDirect("target");
     }
 
     /**
@@ -907,7 +907,7 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlInput> results = getFormElementsByAttribute(HtmlInput.TAG_NAME, "value", value);
 
         for (final HtmlElement element : getLostChildren()) {
-            if (element instanceof HtmlInput && value.equals(element.getAttribute("value"))) {
+            if (element instanceof HtmlInput && value.equals(element.getAttributeDirect("value"))) {
                 results.add((HtmlInput) element);
             }
         }

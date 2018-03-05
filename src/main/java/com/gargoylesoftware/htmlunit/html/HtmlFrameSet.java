@@ -55,7 +55,7 @@ public class HtmlFrameSet extends HtmlElement {
      * @return the value of the attribute {@code rows} or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
-        return getAttribute("rows");
+        return getAttributeDirect("rows");
     }
 
     /**
@@ -66,7 +66,7 @@ public class HtmlFrameSet extends HtmlElement {
      * @return the value of the attribute {@code cols} or an empty string if that attribute isn't defined
      */
     public final String getColsAttribute() {
-        return getAttribute("cols");
+        return getAttributeDirect("cols");
     }
 
     /**
@@ -77,7 +77,7 @@ public class HtmlFrameSet extends HtmlElement {
      * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttribute("onload");
+        return getAttributeDirect("onload");
     }
 
     /**
@@ -88,6 +88,6 @@ public class HtmlFrameSet extends HtmlElement {
      * @return the value of the attribute {@code onunload} or an empty string if that attribute isn't defined
      */
     public final String getOnUnloadAttribute() {
-        return getAttribute("onunload");
+        return getAttributeDirect("onunload");
     }
 }

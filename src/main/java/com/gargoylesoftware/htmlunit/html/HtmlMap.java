@@ -56,7 +56,7 @@ public class HtmlMap extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**

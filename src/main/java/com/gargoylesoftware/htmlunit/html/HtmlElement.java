@@ -411,7 +411,7 @@ public abstract class HtmlElement extends DomElement {
      * @return this element's tab index
      */
     public Short getTabIndex() {
-        final String index = getAttribute("tabindex");
+        final String index = getAttributeDirect("tabindex");
         if (index == null || index.isEmpty()) {
             return null;
         }
@@ -1000,7 +1000,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code lang} or an empty string if that attribute isn't defined
      */
     public final String getLangAttribute() {
-        return getAttribute("lang");
+        return getAttributeDirect("lang");
     }
 
     /**
@@ -1022,7 +1022,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code dir} or an empty string if that attribute isn't defined
      */
     public final String getTextDirectionAttribute() {
-        return getAttribute("dir");
+        return getAttributeDirect("dir");
     }
 
     /**
@@ -1033,7 +1033,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onclick} or an empty string if that attribute isn't defined
      */
     public final String getOnClickAttribute() {
-        return getAttribute("onclick");
+        return getAttributeDirect("onclick");
     }
 
     /**
@@ -1044,7 +1044,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code ondblclick} or an empty string if that attribute isn't defined
      */
     public final String getOnDblClickAttribute() {
-        return getAttribute("ondblclick");
+        return getAttributeDirect("ondblclick");
     }
 
     /**
@@ -1055,7 +1055,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onmousedown} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseDownAttribute() {
-        return getAttribute("onmousedown");
+        return getAttributeDirect("onmousedown");
     }
 
     /**
@@ -1066,7 +1066,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onmouseup} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseUpAttribute() {
-        return getAttribute("onmouseup");
+        return getAttributeDirect("onmouseup");
     }
 
     /**
@@ -1077,7 +1077,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onmouseover} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOverAttribute() {
-        return getAttribute("onmouseover");
+        return getAttributeDirect("onmouseover");
     }
 
     /**
@@ -1088,7 +1088,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onmousemove} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseMoveAttribute() {
-        return getAttribute("onmousemove");
+        return getAttributeDirect("onmousemove");
     }
 
     /**
@@ -1099,7 +1099,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onmouseout} or an empty string if that attribute isn't defined
      */
     public final String getOnMouseOutAttribute() {
-        return getAttribute("onmouseout");
+        return getAttributeDirect("onmouseout");
     }
 
     /**
@@ -1110,7 +1110,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onkeypress} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyPressAttribute() {
-        return getAttribute("onkeypress");
+        return getAttributeDirect("onkeypress");
     }
 
     /**
@@ -1121,7 +1121,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onkeydown} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyDownAttribute() {
-        return getAttribute("onkeydown");
+        return getAttributeDirect("onkeydown");
     }
 
     /**
@@ -1132,7 +1132,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the value of the attribute {@code onkeyup} or an empty string if that attribute isn't defined
      */
     public final String getOnKeyUpAttribute() {
-        return getAttribute("onkeyup");
+        return getAttributeDirect("onkeyup");
     }
 
     /**
@@ -1175,7 +1175,7 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public boolean isDisplayed() {
-        if (ATTRIBUTE_NOT_DEFINED != getAttribute("hidden")) {
+        if (ATTRIBUTE_NOT_DEFINED != getAttributeDirect("hidden")) {
             return false;
         }
         return super.isDisplayed();
@@ -1202,7 +1202,7 @@ public abstract class HtmlElement extends DomElement {
         // at the moment StringUtils.replaceChars returns the org string
         // if nothing to replace was found but the doc implies, that we
         // can't trust on this in the future
-        final String attrib = getAttribute("src");
+        final String attrib = getAttributeDirect("src");
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
         }
@@ -1297,8 +1297,8 @@ public abstract class HtmlElement extends DomElement {
      * @return whether this element satisfies all form validation constraints set
      */
     public boolean isValid() {
-        return !isRequiredSupported() || getAttribute("required") == ATTRIBUTE_NOT_DEFINED
-                || !getAttribute("value").isEmpty();
+        return !isRequiredSupported() || getAttributeDirect("required") == ATTRIBUTE_NOT_DEFINED
+                || !getAttributeDirect("value").isEmpty();
     }
 
     /**

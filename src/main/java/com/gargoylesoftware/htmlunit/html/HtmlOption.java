@@ -167,7 +167,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSelectedAttribute() {
-        return getAttribute("selected");
+        return getAttributeDirect("selected");
     }
 
     /**
@@ -202,7 +202,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -213,7 +213,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
-        return getAttribute("label");
+        return getAttributeDirect("label");
     }
 
     /**
@@ -236,7 +236,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {
-        String value = getAttribute("value");
+        String value = getAttributeDirect("value");
         if (value == ATTRIBUTE_NOT_DEFINED) {
             value = getText();
         }
@@ -360,7 +360,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
         super.printOpeningTagContentAsXml(printWriter);
-        if (selected_ && getAttribute("selected") == ATTRIBUTE_NOT_DEFINED) {
+        if (selected_ && getAttributeDirect("selected") == ATTRIBUTE_NOT_DEFINED) {
             printWriter.print(" selected=\"selected\"");
         }
     }

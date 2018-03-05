@@ -48,7 +48,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      * @return the value of the colspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getColumnSpan() {
-        final String spanString = getAttribute("colspan");
+        final String spanString = getAttributeDirect("colspan");
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }
@@ -60,7 +60,7 @@ public abstract class HtmlTableCell extends HtmlElement {
      * @return the value of the rowspan attribute, or <tt>1</tt> if the attribute wasn't specified
      */
     public int getRowSpan() {
-        final String spanString = getAttribute("rowspan");
+        final String spanString = getAttributeDirect("rowspan");
         if (spanString == null || spanString.isEmpty()) {
             return 1;
         }

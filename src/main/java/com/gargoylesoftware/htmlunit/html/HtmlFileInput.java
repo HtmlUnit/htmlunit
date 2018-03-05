@@ -156,7 +156,7 @@ public class HtmlFileInput extends HtmlInput {
      * @param files the list of files to upload
      */
     public void setFiles(final File... files) {
-        if (files.length > 1 && getAttribute("multiple") == ATTRIBUTE_NOT_DEFINED) {
+        if (files.length > 1 && getAttributeDirect("multiple") == ATTRIBUTE_NOT_DEFINED) {
             throw new IllegalStateException("HtmlFileInput is not 'multiple'.");
         }
         for (int i = 0; i < files.length; i++) {

@@ -53,7 +53,7 @@ public class HtmlBase extends HtmlElement {
      * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttribute("href");
+        return getAttributeDirect("href");
     }
 
     /**
@@ -64,7 +64,7 @@ public class HtmlBase extends HtmlElement {
      * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttribute("target");
+        return getAttributeDirect("target");
     }
 
     /**

@@ -52,6 +52,6 @@ public class HtmlDefinitionList extends HtmlElement {
      * @return the value of the attribute {@code compact} or an empty string if that attribute isn't defined
      */
     public final String getCompactAttribute() {
-        return getAttribute("compact");
+        return getAttributeDirect("compact");
     }
 }

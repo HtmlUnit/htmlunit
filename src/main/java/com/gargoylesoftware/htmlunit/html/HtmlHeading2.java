@@ -52,6 +52,6 @@ public class HtmlHeading2 extends HtmlElement {
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 }

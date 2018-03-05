@@ -59,7 +59,7 @@ public class HtmlLabel extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getForAttribute() {
-        return getAttribute("for");
+        return getAttributeDirect("for");
     }
 
     /**
@@ -71,7 +71,7 @@ public class HtmlLabel extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -83,7 +83,7 @@ public class HtmlLabel extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -95,7 +95,7 @@ public class HtmlLabel extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**

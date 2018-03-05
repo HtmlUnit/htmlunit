@@ -120,7 +120,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        final String type = getAttribute("type");
+        final String type = getAttributeDirect("type");
         if (ATTRIBUTE_NOT_DEFINED == type) {
             return "text";
         }
@@ -135,7 +135,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -146,7 +146,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
-        return getAttribute("value");
+        return getAttributeDirect("value");
     }
 
     /**
@@ -157,7 +157,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code checked} or an empty string if that attribute isn't defined
      */
     public final String getCheckedAttribute() {
-        return getAttribute("checked");
+        return getAttributeDirect("checked");
     }
 
     /**
@@ -165,7 +165,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -185,7 +185,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getReadOnlyAttribute() {
-        return getAttribute("readonly");
+        return getAttributeDirect("readonly");
     }
 
     /**
@@ -197,7 +197,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getSizeAttribute() {
-        return getAttribute("size");
+        return getAttributeDirect("size");
     }
 
     /**
@@ -251,7 +251,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getAltAttribute() {
-        return getAttribute("alt");
+        return getAttributeDirect("alt");
     }
 
     /**
@@ -263,7 +263,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
-        return getAttribute("usemap");
+        return getAttributeDirect("usemap");
     }
 
     /**
@@ -275,7 +275,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -287,7 +287,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -299,7 +299,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -311,7 +311,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**
@@ -323,7 +323,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnSelectAttribute() {
-        return getAttribute("onselect");
+        return getAttributeDirect("onselect");
     }
 
     /**
@@ -335,7 +335,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getOnChangeAttribute() {
-        return getAttribute("onchange");
+        return getAttributeDirect("onchange");
     }
 
     /**
@@ -359,7 +359,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -636,7 +636,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the {@code size} attribute
      */
     public String getSize() {
-        return getAttribute("size");
+        return getAttributeDirect("size");
     }
 
     /**
@@ -690,7 +690,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the {@code autocomplete} attribute
      */
     public String getAutocomplete() {
-        return getAttribute("autocomplete");
+        return getAttributeDirect("autocomplete");
     }
 
     /**
@@ -708,7 +708,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the {@code placeholder} attribute
      */
     public String getPlaceholder() {
-        return getAttribute("placeholder");
+        return getAttributeDirect("placeholder");
     }
 
     /**

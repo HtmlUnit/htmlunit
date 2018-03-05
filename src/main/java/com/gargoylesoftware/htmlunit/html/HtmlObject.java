@@ -87,7 +87,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeclareAttribute() {
-        return getAttribute("declare");
+        return getAttributeDirect("declare");
     }
 
     /**
@@ -99,7 +99,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getClassIdAttribute() {
-        return getAttribute("classid");
+        return getAttributeDirect("classid");
     }
 
     /**
@@ -111,7 +111,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodebaseAttribute() {
-        return getAttribute("codebase");
+        return getAttributeDirect("codebase");
     }
 
     /**
@@ -123,7 +123,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDataAttribute() {
-        return getAttribute("data");
+        return getAttributeDirect("data");
     }
 
     /**
@@ -135,7 +135,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -147,7 +147,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCodeTypeAttribute() {
-        return getAttribute("codetype");
+        return getAttributeDirect("codetype");
     }
 
     /**
@@ -159,7 +159,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getArchiveAttribute() {
-        return getAttribute("archive");
+        return getAttributeDirect("archive");
     }
 
     /**
@@ -171,7 +171,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getStandbyAttribute() {
-        return getAttribute("standby");
+        return getAttributeDirect("standby");
     }
 
     /**
@@ -183,7 +183,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHeightAttribute() {
-        return getAttribute("height");
+        return getAttributeDirect("height");
     }
 
     /**
@@ -195,7 +195,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 
     /**
@@ -207,7 +207,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getUseMapAttribute() {
-        return getAttribute("usemap");
+        return getAttributeDirect("usemap");
     }
 
     /**
@@ -219,7 +219,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -231,7 +231,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -243,7 +243,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -255,7 +255,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
-        return getAttribute("border");
+        return getAttributeDirect("border");
     }
 
     /**
@@ -267,7 +267,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHspaceAttribute() {
-        return getAttribute("hspace");
+        return getAttributeDirect("hspace");
     }
 
     /**
@@ -279,7 +279,7 @@ public class HtmlObject extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getVspaceAttribute() {
-        return getAttribute("vspace");
+        return getAttributeDirect("vspace");
     }
 
     /**
@@ -366,7 +366,7 @@ public class HtmlObject extends HtmlElement {
             return;
         }
 
-        String appletClassName = getAttribute("code");
+        String appletClassName = getAttributeDirect("code");
         if (StringUtils.isEmpty(appletClassName)) {
             appletClassName = params.get("code");
         }
@@ -415,7 +415,7 @@ public class HtmlObject extends HtmlElement {
 
         // no archive attribute, single class
         if (archiveUrls_.isEmpty()) {
-            final String tempUrl = UrlUtils.resolveUrl(baseUrl, getAttribute("code"));
+            final String tempUrl = UrlUtils.resolveUrl(baseUrl, getAttributeDirect("code"));
             final URL classUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
             final WebResponse response = webclient.loadWebResponse(new WebRequest(classUrl));

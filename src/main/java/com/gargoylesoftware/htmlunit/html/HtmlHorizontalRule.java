@@ -52,7 +52,7 @@ public class HtmlHorizontalRule extends HtmlElement {
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -63,7 +63,7 @@ public class HtmlHorizontalRule extends HtmlElement {
      * @return the value of the attribute {@code noshade} or an empty string if that attribute isn't defined
      */
     public final String getNoShadeAttribute() {
-        return getAttribute("noshade");
+        return getAttributeDirect("noshade");
     }
 
     /**
@@ -74,7 +74,7 @@ public class HtmlHorizontalRule extends HtmlElement {
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttribute("size");
+        return getAttributeDirect("size");
     }
 
     /**
@@ -85,6 +85,6 @@ public class HtmlHorizontalRule extends HtmlElement {
      * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 }

@@ -56,7 +56,7 @@ public class HtmlLegend extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -68,7 +68,7 @@ public class HtmlLegend extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**

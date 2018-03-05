@@ -53,6 +53,6 @@ public class HtmlPreformattedText extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 }

@@ -1704,7 +1704,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      * Fast access.
      * @param the key
      */
-    DomAttr getDirect(final String key) {
+    protected DomAttr getDirect(final String key) {
         return map_.get(key);
     }
 

@@ -53,7 +53,7 @@ public class HtmlOrderedList extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -65,7 +65,7 @@ public class HtmlOrderedList extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCompactAttribute() {
-        return getAttribute("compact");
+        return getAttributeDirect("compact");
     }
 
     /**
@@ -77,7 +77,7 @@ public class HtmlOrderedList extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getStartAttribute() {
-        return getAttribute("start");
+        return getAttributeDirect("start");
     }
 
     /**

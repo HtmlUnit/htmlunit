@@ -209,8 +209,8 @@ public final class ScriptElementSupport {
         }
 
         // If the script language is not JavaScript, we can't execute.
-        final String t = element.getAttribute("type");
-        final String l = element.getAttribute("language");
+        final String t = element.getAttributeDirect("type");
+        final String l = element.getAttributeDirect("language");
         if (!isJavaScript(element, t, l)) {
             LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
             return false;
@@ -279,8 +279,8 @@ public final class ScriptElementSupport {
             return;
         }
 
-        final String forr = element.getAttribute("for");
-        String event = element.getAttribute("event");
+        final String forr = element.getAttributeDirect("for");
+        String event = element.getAttributeDirect("event");
         // The event name can be like "onload" or "onload()".
         if (event.endsWith("()")) {
             event = event.substring(0, event.length() - 2);

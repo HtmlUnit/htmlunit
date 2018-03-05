@@ -67,7 +67,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -78,7 +78,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
      * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
      */
     public final String getLabelAttribute() {
-        return getAttribute("label");
+        return getAttributeDirect("label");
     }
 
     /**

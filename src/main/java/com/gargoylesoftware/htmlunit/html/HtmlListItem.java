@@ -53,7 +53,7 @@ public class HtmlListItem extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -65,7 +65,7 @@ public class HtmlListItem extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
-        return getAttribute("value");
+        return getAttributeDirect("value");
     }
 
     /**

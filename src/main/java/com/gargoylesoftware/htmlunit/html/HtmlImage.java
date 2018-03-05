@@ -256,7 +256,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttribute("alt");
+        return getAttributeDirect("alt");
     }
 
     /**
@@ -267,7 +267,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -278,7 +278,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
-        return getAttribute("longdesc");
+        return getAttributeDirect("longdesc");
     }
 
     /**
@@ -289,7 +289,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code height} or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
-        return getAttribute("height");
+        return getAttributeDirect("height");
     }
 
     /**
@@ -300,7 +300,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 
     /**
@@ -311,7 +311,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code usemap} or an empty string if that attribute isn't defined
      */
     public final String getUseMapAttribute() {
-        return getAttribute("usemap");
+        return getAttributeDirect("usemap");
     }
 
     /**
@@ -322,7 +322,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code ismap} or an empty string if that attribute isn't defined
      */
     public final String getIsmapAttribute() {
-        return getAttribute("ismap");
+        return getAttributeDirect("ismap");
     }
 
     /**
@@ -333,7 +333,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -344,7 +344,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code border} or an empty string if that attribute isn't defined
      */
     public final String getBorderAttribute() {
-        return getAttribute("border");
+        return getAttributeDirect("border");
     }
 
     /**
@@ -355,7 +355,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code hspace} or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
-        return getAttribute("hspace");
+        return getAttributeDirect("hspace");
     }
 
     /**
@@ -366,7 +366,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code vspace} or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
-        return getAttribute("vspace");
+        return getAttributeDirect("vspace");
     }
 
     /**

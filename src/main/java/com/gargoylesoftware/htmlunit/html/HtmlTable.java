@@ -239,7 +239,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getSummaryAttribute() {
-        return getAttribute("summary");
+        return getAttributeDirect("summary");
     }
 
     /**
@@ -251,7 +251,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 
     /**
@@ -263,7 +263,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBorderAttribute() {
-        return getAttribute("border");
+        return getAttributeDirect("border");
     }
 
     /**
@@ -275,7 +275,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getFrameAttribute() {
-        return getAttribute("frame");
+        return getAttributeDirect("frame");
     }
 
     /**
@@ -287,7 +287,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRulesAttribute() {
-        return getAttribute("rules");
+        return getAttributeDirect("rules");
     }
 
     /**
@@ -299,7 +299,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellSpacingAttribute() {
-        return getAttribute("cellspacing");
+        return getAttributeDirect("cellspacing");
     }
 
     /**
@@ -311,7 +311,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCellPaddingAttribute() {
-        return getAttribute("cellpadding");
+        return getAttributeDirect("cellpadding");
     }
 
     /**
@@ -323,7 +323,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -335,7 +335,7 @@ public class HtmlTable extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getBgcolorAttribute() {
-        return getAttribute("bgcolor");
+        return getAttributeDirect("bgcolor");
     }
 
     /**

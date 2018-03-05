@@ -71,7 +71,7 @@ public abstract class TableRowGroup extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class TableRowGroup extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharAttribute() {
-        return getAttribute("char");
+        return getAttributeDirect("char");
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class TableRowGroup extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharoffAttribute() {
-        return getAttribute("charoff");
+        return getAttributeDirect("charoff");
     }
 
     /**
@@ -107,6 +107,6 @@ public abstract class TableRowGroup extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValignAttribute() {
-        return getAttribute("valign");
+        return getAttributeDirect("valign");
     }
 }

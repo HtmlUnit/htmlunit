@@ -278,7 +278,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -289,7 +289,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code rows} or an empty string if that attribute isn't defined
      */
     public final String getRowsAttribute() {
-        return getAttribute("rows");
+        return getAttributeDirect("rows");
     }
 
     /**
@@ -300,7 +300,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code cols} or an empty string if that attribute isn't defined
      */
     public final String getColumnsAttribute() {
-        return getAttribute("cols");
+        return getAttributeDirect("cols");
     }
 
     /**
@@ -316,7 +316,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -327,7 +327,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code readonly} or an empty string if that attribute isn't defined
      */
     public final String getReadOnlyAttribute() {
-        return getAttribute("readonly");
+        return getAttributeDirect("readonly");
     }
 
     /**
@@ -338,7 +338,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -349,7 +349,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -360,7 +360,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -371,7 +371,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**
@@ -382,7 +382,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code onselect} or an empty string if that attribute isn't defined
      */
     public final String getOnSelectAttribute() {
-        return getAttribute("onselect");
+        return getAttributeDirect("onselect");
     }
 
     /**
@@ -393,7 +393,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
-        return getAttribute("onchange");
+        return getAttributeDirect("onchange");
     }
 
     /**
@@ -607,7 +607,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * @return the value of the {@code placeholder} attribute
      */
     public String getPlaceholder() {
-        return getAttribute("placeholder");
+        return getAttributeDirect("placeholder");
     }
 
     /**

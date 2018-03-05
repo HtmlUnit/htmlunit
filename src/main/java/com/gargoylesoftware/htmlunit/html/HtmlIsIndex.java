@@ -136,7 +136,7 @@ public class HtmlIsIndex extends HtmlElement implements SubmittableElement {
      * @return the value of the attribute {@code prompt} or an empty string if that attribute isn't defined
      */
     public final String getPromptAttribute() {
-        return getAttribute("prompt");
+        return getAttributeDirect("prompt");
     }
 
     /**

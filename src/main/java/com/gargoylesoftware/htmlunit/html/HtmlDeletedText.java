@@ -53,7 +53,7 @@ public class HtmlDeletedText extends HtmlElement {
      * @return the value of the attribute {@code cite} or an empty string if that attribute isn't defined
      */
     public final String getCiteAttribute() {
-        return getAttribute("cite");
+        return getAttributeDirect("cite");
     }
 
     /**
@@ -64,7 +64,7 @@ public class HtmlDeletedText extends HtmlElement {
      * @return the value of the attribute {@code datetime} or an empty string if that attribute isn't defined
      */
     public final String getDateTimeAttribute() {
-        return getAttribute("datetime");
+        return getAttributeDirect("datetime");
     }
 
     /**

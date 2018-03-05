@@ -78,7 +78,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getCharsetAttribute() {
-        return getAttribute("charset");
+        return getAttributeDirect("charset");
     }
 
     /**
@@ -90,7 +90,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefAttribute() {
-        return getAttribute("href");
+        return getAttributeDirect("href");
     }
 
     /**
@@ -102,7 +102,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getHrefLangAttribute() {
-        return getAttribute("hreflang");
+        return getAttributeDirect("hreflang");
     }
 
     /**
@@ -114,7 +114,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -126,7 +126,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRelAttribute() {
-        return getAttribute("rel");
+        return getAttributeDirect("rel");
     }
 
     /**
@@ -138,7 +138,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getRevAttribute() {
-        return getAttribute("rev");
+        return getAttributeDirect("rev");
     }
 
     /**
@@ -150,7 +150,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getMediaAttribute() {
-        return getAttribute("media");
+        return getAttributeDirect("media");
     }
 
     /**
@@ -162,7 +162,7 @@ public class HtmlLink extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTargetAttribute() {
-        return getAttribute("target");
+        return getAttributeDirect("target");
     }
 
     /**

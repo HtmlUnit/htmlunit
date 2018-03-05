@@ -53,7 +53,7 @@ public class HtmlFont extends HtmlElement {
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttribute("size");
+        return getAttributeDirect("size");
     }
 
     /**
@@ -64,7 +64,7 @@ public class HtmlFont extends HtmlElement {
      * @return the value of the attribute {@code color} or an empty string if that attribute isn't defined
      */
     public final String getColorAttribute() {
-        return getAttribute("color");
+        return getAttributeDirect("color");
     }
 
     /**
@@ -75,7 +75,7 @@ public class HtmlFont extends HtmlElement {
      * @return the value of the attribute {@code face} or an empty string if that attribute isn't defined
      */
     public final String getFaceAttribute() {
-        return getAttribute("face");
+        return getAttributeDirect("face");
     }
 
     /**

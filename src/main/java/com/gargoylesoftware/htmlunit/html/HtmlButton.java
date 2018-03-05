@@ -84,7 +84,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
 
         HtmlForm form = null;
-        final String formId = getAttribute("form");
+        final String formId = getAttributeDirect("form");
         if (DomElement.ATTRIBUTE_NOT_DEFINED == formId) {
             form = getEnclosingForm();
         }
@@ -223,7 +223,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -234,7 +234,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
-        return getAttribute("value");
+        return getAttributeDirect("value");
     }
 
     /**
@@ -263,7 +263,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code type} or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -275,7 +275,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -286,7 +286,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -297,7 +297,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -308,7 +308,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -319,7 +319,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**

@@ -55,7 +55,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getIdAttribute() {
-        return getAttribute("id");
+        return getAttributeDirect("id");
     }
 
     /**
@@ -67,7 +67,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -79,7 +79,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
-        return getAttribute("value");
+        return getAttributeDirect("value");
     }
 
     /**
@@ -91,7 +91,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueTypeAttribute() {
-        return getAttribute("valuetype");
+        return getAttributeDirect("valuetype");
     }
 
     /**
@@ -103,7 +103,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**

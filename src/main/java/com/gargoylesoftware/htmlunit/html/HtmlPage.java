@@ -860,7 +860,7 @@ public class HtmlPage extends SgmlPage {
         final String searchString = Character.toString(accessKey).toLowerCase(Locale.ROOT);
         for (final HtmlElement element : getHtmlElementDescendants()) {
             if (ACCEPTABLE_TAG_NAMES.contains(element.getTagName())) {
-                final String accessKeyAttribute = element.getAttribute("accesskey");
+                final String accessKeyAttribute = element.getAttributeDirect("accesskey");
                 if (searchString.equalsIgnoreCase(accessKeyAttribute)) {
                     elements.add(element);
                 }

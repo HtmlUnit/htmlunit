@@ -502,7 +502,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return {@code true} if this select is using "multiple select"
      */
     public boolean isMultipleSelectEnabled() {
-        return getAttribute("multiple") != ATTRIBUTE_NOT_DEFINED;
+        return getAttributeDirect("multiple") != ATTRIBUTE_NOT_DEFINED;
     }
 
     /**
@@ -525,7 +525,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     private HtmlOption getOptionByValueStrict(final String value) throws ElementNotFoundException {
         WebAssert.notNull("value", value);
         for (final HtmlOption option : getOptions()) {
-            if (option.getAttribute("value").equals(value)) {
+            if (option.getAttributeDirect("value").equals(value)) {
                 return option;
             }
         }
@@ -589,7 +589,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -600,7 +600,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
      */
     public final String getSizeAttribute() {
-        return getAttribute("size");
+        return getAttributeDirect("size");
     }
 
     /**
@@ -610,7 +610,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code multiple} or an empty string if that attribute isn't defined
      */
     public final String getMultipleAttribute() {
-        return getAttribute("multiple");
+        return getAttributeDirect("multiple");
     }
 
     /**
@@ -618,7 +618,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttribute("disabled");
+        return getAttributeDirect("disabled");
     }
 
     /**
@@ -636,7 +636,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -646,7 +646,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -656,7 +656,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**
@@ -666,7 +666,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */
     public final String getOnChangeAttribute() {
-        return getAttribute("onchange");
+        return getAttributeDirect("onchange");
     }
 
     /**

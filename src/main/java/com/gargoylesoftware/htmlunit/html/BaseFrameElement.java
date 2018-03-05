@@ -221,7 +221,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
      */
     public final String getLongDescAttribute() {
-        return getAttribute("longdesc");
+        return getAttributeDirect("longdesc");
     }
 
     /**
@@ -232,7 +232,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -263,7 +263,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code frameborder} or an empty string if that attribute isn't defined
      */
     public final String getFrameBorderAttribute() {
-        return getAttribute("frameborder");
+        return getAttributeDirect("frameborder");
     }
 
     /**
@@ -274,7 +274,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code marginwidth} or an empty string if that attribute isn't defined
      */
     public final String getMarginWidthAttribute() {
-        return getAttribute("marginwidth");
+        return getAttributeDirect("marginwidth");
     }
 
     /**
@@ -285,7 +285,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code marginheight} or an empty string if that attribute isn't defined
      */
     public final String getMarginHeightAttribute() {
-        return getAttribute("marginheight");
+        return getAttributeDirect("marginheight");
     }
 
     /**
@@ -296,7 +296,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code noresize} or an empty string if that attribute isn't defined
      */
     public final String getNoResizeAttribute() {
-        return getAttribute("noresize");
+        return getAttributeDirect("noresize");
     }
 
     /**
@@ -307,7 +307,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code scrolling} or an empty string if that attribute isn't defined
      */
     public final String getScrollingAttribute() {
-        return getAttribute("scrolling");
+        return getAttributeDirect("scrolling");
     }
 
     /**
@@ -318,7 +318,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
      */
     public final String getOnLoadAttribute() {
-        return getAttribute("onload");
+        return getAttributeDirect("onload");
     }
 
     /**

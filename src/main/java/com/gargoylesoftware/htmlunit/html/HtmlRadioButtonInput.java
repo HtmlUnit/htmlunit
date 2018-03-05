@@ -66,7 +66,7 @@ public class HtmlRadioButtonInput extends HtmlInput {
         super(qualifiedName, page, addValueIfNeeded(page, attributes));
 
         // fix the default value in case we have set it
-        if (getAttribute("value") == DEFAULT_VALUE) {
+        if (getAttributeDirect("value") == DEFAULT_VALUE) {
             setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
         }
 

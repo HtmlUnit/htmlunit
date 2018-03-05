@@ -98,7 +98,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      */
     @Override
     public final String getCharsetAttribute() {
-        return getAttribute("charset");
+        return getAttributeDirect("charset");
     }
 
     /**
@@ -122,7 +122,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -134,7 +134,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getLanguageAttribute() {
-        return getAttribute("language");
+        return getAttributeDirect("language");
     }
 
     /**
@@ -150,7 +150,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * @return the value of the attribute {@code event}
      */
     public final String getEventAttribute() {
-        return getAttribute("event");
+        return getAttributeDirect("event");
     }
 
     /**
@@ -158,7 +158,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * @return the value of the attribute {@code for}
      */
     public final String getHtmlForAttribute() {
-        return getAttribute("for");
+        return getAttributeDirect("for");
     }
 
     /**
@@ -170,7 +170,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getDeferAttribute() {
-        return getAttribute("defer");
+        return getAttributeDirect("defer");
     }
 
     /**

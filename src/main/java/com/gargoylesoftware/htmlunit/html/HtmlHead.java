@@ -51,7 +51,7 @@ public class HtmlHead extends HtmlElement {
      * @return the value of the attribute {@code profile} or an empty string if that attribute isn't defined
      */
     public final String getProfileAttribute() {
-        return getAttribute("profile");
+        return getAttributeDirect("profile");
     }
 
     /**
