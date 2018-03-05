@@ -108,7 +108,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute "code" or an empty string if that attribute isn't defined
      */
     public final String getCodeAttribute() {
-        return getAttribute("code");
+        return getAttributeDirect("code");
     }
 
     /**
@@ -119,7 +119,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code object} or an empty string if that attribute isn't defined
      */
     public final String getObjectAttribute() {
-        return getAttribute("object");
+        return getAttributeDirect("object");
     }
 
     /**
@@ -130,7 +130,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttribute("alt");
+        return getAttributeDirect("alt");
     }
 
     /**
@@ -141,7 +141,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -152,7 +152,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
      */
     public final String getWidthAttribute() {
-        return getAttribute("width");
+        return getAttributeDirect("width");
     }
 
     /**
@@ -163,7 +163,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code height} or an empty string if that attribute isn't defined
      */
     public final String getHeightAttribute() {
-        return getAttribute("height");
+        return getAttributeDirect("height");
     }
 
     /**
@@ -174,7 +174,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
      */
     public final String getAlignAttribute() {
-        return getAttribute("align");
+        return getAttributeDirect("align");
     }
 
     /**
@@ -185,7 +185,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code hspace} or an empty string if that attribute isn't defined
      */
     public final String getHspaceAttribute() {
-        return getAttribute("hspace");
+        return getAttributeDirect("hspace");
     }
 
     /**
@@ -196,7 +196,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code vspace} or an empty string if that attribute isn't defined
      */
     public final String getVspaceAttribute() {
-        return getAttribute("vspace");
+        return getAttributeDirect("vspace");
     }
 
     /**

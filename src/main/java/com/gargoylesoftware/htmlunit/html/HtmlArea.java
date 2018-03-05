@@ -109,7 +109,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code shape} or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
-        return getAttribute("shape");
+        return getAttributeDirect("shape");
     }
 
     /**
@@ -120,7 +120,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code coords} or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
-        return getAttribute("coords");
+        return getAttributeDirect("coords");
     }
 
     /**
@@ -131,7 +131,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttribute("href");
+        return getAttributeDirect("href");
     }
 
     /**
@@ -142,7 +142,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code nohref} or an empty string if that attribute isn't defined
      */
     public final String getNoHrefAttribute() {
-        return getAttribute("nohref");
+        return getAttributeDirect("nohref");
     }
 
     /**
@@ -153,7 +153,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
      */
     public final String getAltAttribute() {
-        return getAttribute("alt");
+        return getAttributeDirect("alt");
     }
 
     /**
@@ -164,7 +164,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -175,7 +175,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -186,7 +186,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -197,7 +197,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**
@@ -208,7 +208,7 @@ public class HtmlArea extends HtmlElement {
      * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttribute("target");
+        return getAttributeDirect("target");
     }
 
     /**

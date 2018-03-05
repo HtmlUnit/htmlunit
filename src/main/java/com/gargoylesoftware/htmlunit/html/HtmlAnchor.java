@@ -232,7 +232,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code charset} or an empty string if that attribute isn't defined
      */
     public final String getCharsetAttribute() {
-        return getAttribute("charset");
+        return getAttributeDirect("charset");
     }
 
     /**
@@ -243,7 +243,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttribute("type");
+        return getAttributeDirect("type");
     }
 
     /**
@@ -254,7 +254,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttribute("name");
+        return getAttributeDirect("name");
     }
 
     /**
@@ -265,7 +265,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
      */
     public final String getHrefAttribute() {
-        return getAttribute("href").trim();
+        return getAttributeDirect("href").trim();
     }
 
     /**
@@ -276,7 +276,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code hreflang} or an empty string if that attribute isn't defined
      */
     public final String getHrefLangAttribute() {
-        return getAttribute("hreflang");
+        return getAttributeDirect("hreflang");
     }
 
     /**
@@ -287,7 +287,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
      */
     public final String getRelAttribute() {
-        return getAttribute("rel");
+        return getAttributeDirect("rel");
     }
 
     /**
@@ -298,7 +298,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code rev} or an empty string if that attribute isn't defined
      */
     public final String getRevAttribute() {
-        return getAttribute("rev");
+        return getAttributeDirect("rev");
     }
 
     /**
@@ -309,7 +309,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
      */
     public final String getAccessKeyAttribute() {
-        return getAttribute("accesskey");
+        return getAttributeDirect("accesskey");
     }
 
     /**
@@ -320,7 +320,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code shape} or an empty string if that attribute isn't defined
      */
     public final String getShapeAttribute() {
-        return getAttribute("shape");
+        return getAttributeDirect("shape");
     }
 
     /**
@@ -331,7 +331,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code coords} or an empty string if that attribute isn't defined
      */
     public final String getCoordsAttribute() {
-        return getAttribute("coords");
+        return getAttributeDirect("coords");
     }
 
     /**
@@ -342,7 +342,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
     public final String getTabIndexAttribute() {
-        return getAttribute("tabindex");
+        return getAttributeDirect("tabindex");
     }
 
     /**
@@ -353,7 +353,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
     public final String getOnFocusAttribute() {
-        return getAttribute("onfocus");
+        return getAttributeDirect("onfocus");
     }
 
     /**
@@ -364,7 +364,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
     public final String getOnBlurAttribute() {
-        return getAttribute("onblur");
+        return getAttributeDirect("onblur");
     }
 
     /**
@@ -375,7 +375,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
      */
     public final String getTargetAttribute() {
-        return getAttribute("target");
+        return getAttributeDirect("target");
     }
 
     /**
@@ -426,7 +426,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code ping}
      */
     public final String getPingAttribute() {
-        return getAttribute("ping");
+        return getAttributeDirect("ping");
     }
 
 }
