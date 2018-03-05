@@ -127,7 +127,7 @@ public class HTMLBodyElement extends HTMLElement {
     @JsxGetter
     public String getBackground() {
         final HtmlElement node = getDomNodeOrDie();
-        return node.getAttribute("background");
+        return node.getAttributeDirect("background");
     }
 
     /**
@@ -167,7 +167,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public String getLink() {
-        return getDomNodeOrDie().getAttribute("link");
+        return getDomNodeOrDie().getAttributeDirect("link");
     }
 
     /**
@@ -187,7 +187,7 @@ public class HTMLBodyElement extends HTMLElement {
      */
     @JsxGetter
     public String getText() {
-        return getDomNodeOrDie().getAttribute("text");
+        return getDomNodeOrDie().getAttributeDirect("text");
     }
 
     /**

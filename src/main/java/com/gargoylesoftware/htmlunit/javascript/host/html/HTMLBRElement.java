@@ -54,7 +54,7 @@ public class HTMLBRElement extends HTMLElement {
      */
     @JsxGetter
     public String getClear() {
-        final String clear = getDomNodeOrDie().getAttribute("clear");
+        final String clear = getDomNodeOrDie().getAttributeDirect("clear");
         if (getBrowserVersion().hasFeature(JS_CLEAR_RESTRICT) && !ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             return "";
         }

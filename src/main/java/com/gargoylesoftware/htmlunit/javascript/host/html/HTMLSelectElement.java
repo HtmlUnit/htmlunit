@@ -264,7 +264,7 @@ public class HTMLSelectElement extends FormField {
     @JsxGetter
     public int getSize() {
         int size = 0;
-        final String sizeAttribute = getDomNodeOrDie().getAttribute("size");
+        final String sizeAttribute = getDomNodeOrDie().getAttributeDirect("size");
         if (sizeAttribute != DomElement.ATTRIBUTE_NOT_DEFINED && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
             try {
                 size = Integer.parseInt(sizeAttribute);

@@ -285,7 +285,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter(propertyName = "width")
     public String getWidth_js() {
-        return getDomNodeOrDie().getAttribute("width");
+        return getDomNodeOrDie().getAttributeDirect("width");
     }
 
     /**
@@ -303,7 +303,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getCellSpacing() {
-        return getDomNodeOrDie().getAttribute("cellspacing");
+        return getDomNodeOrDie().getAttributeDirect("cellspacing");
     }
 
     /**
@@ -321,7 +321,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getCellPadding() {
-        return getDomNodeOrDie().getAttribute("cellpadding");
+        return getDomNodeOrDie().getAttributeDirect("cellpadding");
     }
 
     /**
@@ -339,7 +339,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttribute("border");
+        final String border = getDomNodeOrDie().getAttributeDirect("border");
         return border;
     }
 
@@ -460,7 +460,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getSummary() {
-        return getDomNodeOrDie().getAttribute("summary");
+        return getDomNodeOrDie().getAttributeDirect("summary");
     }
 
     /**
@@ -478,7 +478,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getRules() {
-        String rules = getDomNodeOrDie().getAttribute("rules");
+        String rules = getDomNodeOrDie().getAttributeDirect("rules");
         if (getBrowserVersion().hasFeature(JS_TABLE_VALIGN_SUPPORTS_IE_VALUES)
                 && !VALID_RULES_.contains(rules)) {
             rules = "";

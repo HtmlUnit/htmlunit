@@ -45,7 +45,7 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**
@@ -54,7 +54,7 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxGetter
     public String getValue() {
-        return getDomNodeOrDie().getAttribute("value");
+        return getDomNodeOrDie().getAttributeDirect("value");
     }
 
     /**
@@ -63,7 +63,7 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getAttribute("type");
+        return getDomNodeOrDie().getAttributeDirect("type");
     }
 
     /**
@@ -72,7 +72,7 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxGetter
     public String getValueType() {
-        return getDomNodeOrDie().getAttribute("valuetype");
+        return getDomNodeOrDie().getAttributeDirect("valuetype");
     }
 
     /**

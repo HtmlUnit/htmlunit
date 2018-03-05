@@ -64,7 +64,7 @@ public class HTMLMetaElement extends HTMLElement {
      */
     @JsxGetter
     public String getContent() {
-        return getDomNodeOrDie().getAttribute("content");
+        return getDomNodeOrDie().getAttributeDirect("content");
     }
 
     /**
@@ -100,7 +100,7 @@ public class HTMLMetaElement extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**
@@ -118,7 +118,7 @@ public class HTMLMetaElement extends HTMLElement {
      */
     @JsxGetter
     public String getScheme() {
-        return getDomNodeOrDie().getAttribute("scheme");
+        return getDomNodeOrDie().getAttributeDirect("scheme");
     }
 
     /**

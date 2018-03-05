@@ -49,7 +49,7 @@ public class HTMLQuoteElement extends HTMLElement {
      */
     @JsxGetter
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
+        final String cite = getDomNodeOrDie().getAttributeDirect("cite");
         return cite;
     }
 

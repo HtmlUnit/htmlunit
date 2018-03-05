@@ -53,7 +53,7 @@ public class HTMLTableColElement extends HTMLTableComponent {
      */
     @JsxGetter
     public int getSpan() {
-        final String span = getDomNodeOrDie().getAttribute("span");
+        final String span = getDomNodeOrDie().getAttributeDirect("span");
         int i;
         try {
             i = Integer.parseInt(span);

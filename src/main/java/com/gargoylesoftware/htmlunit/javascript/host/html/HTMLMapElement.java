@@ -77,7 +77,7 @@ public class HTMLMapElement extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**

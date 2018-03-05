@@ -133,7 +133,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**
@@ -151,7 +151,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getTarget() {
-        return getDomNodeOrDie().getAttribute("target");
+        return getDomNodeOrDie().getAttributeDirect("target");
     }
 
     /**
@@ -513,7 +513,7 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     static String getDefaultValue(final HtmlElement element) {
-        String href = element.getAttribute("href");
+        String href = element.getAttributeDirect("href");
 
         if (DomElement.ATTRIBUTE_NOT_DEFINED == href) {
             return ""; // for example for named anchors
@@ -560,7 +560,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getCharset() {
-        return getDomNodeOrDie().getAttribute("charset");
+        return getDomNodeOrDie().getAttributeDirect("charset");
     }
 
     /**
@@ -578,7 +578,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getCoords() {
-        return getDomNodeOrDie().getAttribute("coords");
+        return getDomNodeOrDie().getAttributeDirect("coords");
     }
 
     /**
@@ -596,7 +596,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getHreflang() {
-        return getDomNodeOrDie().getAttribute("hreflang");
+        return getDomNodeOrDie().getAttributeDirect("hreflang");
     }
 
     /**
@@ -731,7 +731,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getAttribute("type");
+        return getDomNodeOrDie().getAttributeDirect("type");
     }
 
     /**

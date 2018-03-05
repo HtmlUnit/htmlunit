@@ -66,7 +66,7 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlt() {
-        return getDomNodeOrDie().getAttribute("alt");
+        return getDomNodeOrDie().getAttributeDirect("alt");
     }
 
     /**
@@ -115,7 +115,7 @@ public class HTMLAreaElement extends HTMLElement {
      */
     @JsxGetter
     public String getCoords() {
-        return getDomNodeOrDie().getAttribute("coords");
+        return getDomNodeOrDie().getAttributeDirect("coords");
     }
 
     /**

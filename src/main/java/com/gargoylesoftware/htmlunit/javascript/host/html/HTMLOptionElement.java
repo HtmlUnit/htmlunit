@@ -86,7 +86,7 @@ public class HTMLOptionElement extends HTMLElement {
      */
     @JsxGetter
     public String getValue() {
-        String value = getDomNodeOrNull().getAttribute("value");
+        String value = getDomNodeOrNull().getAttributeDirect("value");
         if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
             value = ((HtmlOption) getDomNodeOrNull()).getText();
         }

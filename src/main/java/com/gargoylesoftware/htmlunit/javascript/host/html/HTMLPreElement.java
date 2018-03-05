@@ -61,7 +61,7 @@ public class HTMLPreElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
+        final String cite = getDomNodeOrDie().getAttributeDirect("cite");
         return cite;
     }
 
@@ -83,7 +83,7 @@ public class HTMLPreElement extends HTMLElement {
         if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
             return getWidthOrHeight("width", Boolean.TRUE);
         }
-        final String value = getDomNodeOrDie().getAttribute("width");
+        final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
             return intValue;
@@ -111,7 +111,7 @@ public class HTMLPreElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getClear() {
-        final String clear = getDomNodeOrDie().getAttribute("clear");
+        final String clear = getDomNodeOrDie().getAttributeDirect("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             return "";
         }

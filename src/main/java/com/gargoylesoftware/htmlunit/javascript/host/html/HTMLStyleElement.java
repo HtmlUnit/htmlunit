@@ -106,7 +106,7 @@ public class HTMLStyleElement extends HTMLElement {
     @JsxGetter
     public String getMedia() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        return style.getAttribute("media");
+        return style.getAttributeDirect("media");
     }
 
     /**

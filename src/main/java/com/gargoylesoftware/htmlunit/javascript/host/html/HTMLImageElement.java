@@ -147,7 +147,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttribute("alt");
+        final String alt = getDomNodeOrDie().getAttributeDirect("alt");
         return alt;
     }
 
@@ -166,7 +166,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttribute("border");
+        final String border = getDomNodeOrDie().getAttributeDirect("border");
         return border;
     }
 
@@ -187,7 +187,7 @@ public class HTMLImageElement extends HTMLElement {
     public String getAlign() {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
 
-        final String align = getDomNodeOrDie().getAttribute("align");
+        final String align = getDomNodeOrDie().getAttributeDirect("align");
         if (acceptArbitraryValues) {
             return align;
         }
@@ -393,7 +393,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**

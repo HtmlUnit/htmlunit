@@ -941,7 +941,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxGetter({CHROME, FF})
     public String getLinkColor() {
-        String color = getPage().getBody().getAttribute("link");
+        String color = getPage().getBody().getAttributeDirect("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#0000ff";
         }
@@ -993,7 +993,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxGetter({CHROME, FF})
     public String getFgColor() {
-        String color = getPage().getBody().getAttribute("text");
+        String color = getPage().getBody().getAttributeDirect("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
             color = "#000000";
         }

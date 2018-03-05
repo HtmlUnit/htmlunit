@@ -143,7 +143,7 @@ public class HTMLCollection extends AbstractList {
         for (final DomNode next : elements) {
             if (next instanceof DomElement
                     && (searchName || next instanceof HtmlInput || next instanceof HtmlForm)) {
-                final String nodeName = ((DomElement) next).getAttribute("name");
+                final String nodeName = ((DomElement) next).getAttributeDirect("name");
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }
@@ -233,7 +233,7 @@ public class HTMLCollection extends AbstractList {
         for (final Object next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
-                final String nodeName = elem.getAttribute("name");
+                final String nodeName = elem.getAttributeDirect("name");
                 if (name.equals(nodeName)) {
                     return getScriptableForElement(elem);
                 }

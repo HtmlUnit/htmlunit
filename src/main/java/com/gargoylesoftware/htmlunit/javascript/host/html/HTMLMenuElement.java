@@ -61,7 +61,7 @@ public class HTMLMenuElement extends HTMLListElement {
             return "";
         }
 
-        final String type = getDomNodeOrDie().getAttribute("type");
+        final String type = getDomNodeOrDie().getAttributeDirect("type");
         if ("context".equalsIgnoreCase(type)) {
             return "context";
         }

@@ -128,7 +128,7 @@ public class HTMLPhraseElement extends HTMLElement {
      * @return the value of the {@code cite} property
      */
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
+        final String cite = getDomNodeOrDie().getAttributeDirect("cite");
         return cite;
     }
 
@@ -145,7 +145,7 @@ public class HTMLPhraseElement extends HTMLElement {
      * @return the value of the {@code dateTime} property
      */
     public String getDateTime() {
-        final String dateTime = getDomNodeOrDie().getAttribute("datetime");
+        final String dateTime = getDomNodeOrDie().getAttributeDirect("datetime");
         return dateTime;
     }
 

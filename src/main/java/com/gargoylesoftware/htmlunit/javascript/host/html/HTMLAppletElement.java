@@ -111,7 +111,7 @@ public class HTMLAppletElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttribute("alt");
+        final String alt = getDomNodeOrDie().getAttributeDirect("alt");
         return alt;
     }
 
@@ -130,7 +130,7 @@ public class HTMLAppletElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttribute("border");
+        final String border = getDomNodeOrDie().getAttributeDirect("border");
         return border;
     }
 
@@ -167,7 +167,7 @@ public class HTMLAppletElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getClassid() {
-        return getDomNodeOrDie().getAttribute("classid");
+        return getDomNodeOrDie().getAttributeDirect("classid");
     }
 
     /**

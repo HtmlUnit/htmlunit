@@ -62,7 +62,7 @@ public class HTMLBlockElement extends HTMLElement {
      * @return the value of the {@code cite} property
      */
     public String getCite() {
-        return getDomNodeOrDie().getAttribute("cite");
+        return getDomNodeOrDie().getAttributeDirect("cite");
     }
 
     /**
@@ -78,7 +78,7 @@ public class HTMLBlockElement extends HTMLElement {
      * @return the value of the {@code dateTime} property
      */
     public String getDateTime() {
-        final String dateTime = getDomNodeOrDie().getAttribute("datetime");
+        final String dateTime = getDomNodeOrDie().getAttributeDirect("datetime");
         return dateTime;
     }
 
@@ -109,7 +109,7 @@ public class HTMLBlockElement extends HTMLElement {
      */
     @JsxGetter
     public String getClear() {
-        return getDomNodeOrDie().getAttribute("clear");
+        return getDomNodeOrDie().getAttributeDirect("clear");
     }
 
     /**

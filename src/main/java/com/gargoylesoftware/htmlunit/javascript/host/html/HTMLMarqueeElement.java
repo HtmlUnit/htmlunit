@@ -47,7 +47,7 @@ public class HTMLMarqueeElement extends HTMLElement {
     @Override
     @JsxGetter({CHROME, IE})
     public int getWidth() {
-        final String value = getDomNodeOrDie().getAttribute("width");
+        final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
             return intValue;
@@ -71,7 +71,7 @@ public class HTMLMarqueeElement extends HTMLElement {
     @Override
     @JsxGetter({CHROME, IE})
     public int getHeight() {
-        final String value = getDomNodeOrDie().getAttribute("height");
+        final String value = getDomNodeOrDie().getAttributeDirect("height");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
             return intValue;

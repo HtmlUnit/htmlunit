@@ -66,7 +66,7 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxGetter({CHROME, FF})
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**

@@ -57,7 +57,7 @@ class LabelsHelper extends NodeList {
         final String id = domElement.getId();
         if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
             for (final DomElement label : domElement.getHtmlPageOrNull().getElementsByTagName("label")) {
-                if (id.equals(label.getAttribute("for"))) {
+                if (id.equals(label.getAttributeDirect("for"))) {
                     response.add(label);
                 }
             }

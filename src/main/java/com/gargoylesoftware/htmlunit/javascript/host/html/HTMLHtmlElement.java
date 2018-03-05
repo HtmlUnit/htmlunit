@@ -85,7 +85,7 @@ public class HTMLHtmlElement extends HTMLElement {
      */
     @JsxGetter
     public String getVersion() {
-        return getDomNodeOrDie().getAttribute("version");
+        return getDomNodeOrDie().getAttributeDirect("version");
     }
 
     /**

@@ -130,7 +130,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public String getAbbr() {
-        return getDomNodeOrDie().getAttribute("abbr");
+        return getDomNodeOrDie().getAttributeDirect("abbr");
     }
 
     /**
@@ -148,7 +148,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public String getAxis() {
-        return getDomNodeOrDie().getAttribute("axis");
+        return getDomNodeOrDie().getAttributeDirect("axis");
     }
 
     /**
@@ -401,7 +401,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public String getHeaders() {
-        return getDomNodeOrDie().getAttribute("headers");
+        return getDomNodeOrDie().getAttributeDirect("headers");
     }
 
     /**
@@ -419,7 +419,7 @@ public class HTMLTableCellElement extends HTMLTableComponent {
      */
     @JsxGetter
     public String getScope() {
-        return getDomNodeOrDie().getAttribute("scope");
+        return getDomNodeOrDie().getAttributeDirect("scope");
     }
 
     /**

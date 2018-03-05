@@ -418,7 +418,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getTitle() {
-        return getDomNodeOrDie().getAttribute("title");
+        return getDomNodeOrDie().getAttributeDirect("title");
     }
 
     /**
@@ -520,7 +520,7 @@ public class HTMLElement extends Element {
         // Merge ID and name if we aren't preserving identity.
         if (preserveIdentity instanceof Boolean && !((Boolean) preserveIdentity).booleanValue()) {
             target.setId(src.getId());
-            target.setAttribute("name", src.getAttribute("name"));
+            target.setAttribute("name", src.getAttributeDirect("name"));
         }
     }
 
@@ -1370,7 +1370,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(FF)
     public boolean isSpellcheck() {
-        return Context.toBoolean(getDomNodeOrDie().getAttribute("spellcheck"));
+        return Context.toBoolean(getDomNodeOrDie().getAttributeDirect("spellcheck"));
     }
 
     /**
@@ -1388,7 +1388,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getLang() {
-        return getDomNodeOrDie().getAttribute("lang");
+        return getDomNodeOrDie().getAttributeDirect("lang");
     }
 
     /**
@@ -1406,7 +1406,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public String getLanguage() {
-        return getDomNodeOrDie().getAttribute("language");
+        return getDomNodeOrDie().getAttributeDirect("language");
     }
 
     /**
@@ -1424,7 +1424,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getDir() {
-        return getDomNodeOrDie().getAttribute("dir");
+        return getDomNodeOrDie().getAttributeDirect("dir");
     }
 
     /**
@@ -1442,7 +1442,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public int getTabIndex() {
-        return (int) Context.toNumber(getDomNodeOrDie().getAttribute("tabindex"));
+        return (int) Context.toNumber(getDomNodeOrDie().getAttributeDirect("tabindex"));
     }
 
     /**
@@ -1460,7 +1460,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getAccessKey() {
-        return getDomNodeOrDie().getAttribute("accesskey");
+        return getDomNodeOrDie().getAttributeDirect("accesskey");
     }
 
     /**
@@ -1605,7 +1605,7 @@ public class HTMLElement extends Element {
     protected String getAlign(final boolean returnInvalidValues) {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_ALIGN_ACCEPTS_ARBITRARY_VALUES);
 
-        final String align = getDomNodeOrDie().getAttribute("align");
+        final String align = getDomNodeOrDie().getAttributeDirect("align");
         if (returnInvalidValues || acceptArbitraryValues
             || "center".equals(align)
             || "justify".equals(align)
@@ -1650,7 +1650,7 @@ public class HTMLElement extends Element {
      * @return the value of the {@code vAlign} property
      */
     protected String getVAlign(final String[] valid, final String defaultValue) {
-        final String valign = getDomNodeOrDie().getAttribute("valign");
+        final String valign = getDomNodeOrDie().getAttributeDirect("valign");
         if (valid == null || ArrayUtils.contains(valid, valign)) {
             return valign;
         }
@@ -1677,7 +1677,7 @@ public class HTMLElement extends Element {
      * @return the value of the {@code ch} property
      */
     protected String getCh() {
-        return getDomNodeOrDie().getAttribute("char");
+        return getDomNodeOrDie().getAttributeDirect("char");
     }
 
     /**

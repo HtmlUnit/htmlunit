@@ -450,7 +450,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     return true;
                 }
             }
-            else if (name.equals(element.getAttribute("name"))) {
+            else if (name.equals(element.getAttributeDirect("name"))) {
                 return true;
             }
 

@@ -57,7 +57,7 @@ public class FormField extends HTMLElement {
      */
     @JsxGetter
     public String getValue() {
-        return getDomNodeOrDie().getAttribute("value");
+        return getDomNodeOrDie().getAttributeDirect("value");
     }
 
     /**
@@ -77,7 +77,7 @@ public class FormField extends HTMLElement {
      */
     @JsxGetter
     public String getName() {
-        return getDomNodeOrDie().getAttribute("name");
+        return getDomNodeOrDie().getAttributeDirect("name");
     }
 
     /**

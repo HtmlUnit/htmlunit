@@ -65,7 +65,7 @@ public class HTMLOptGroupElement extends HTMLElement {
      */
     @JsxGetter
     public String getLabel() {
-        final String label = getDomNodeOrDie().getAttribute("label");
+        final String label = getDomNodeOrDie().getAttributeDirect("label");
         if (DomElement.ATTRIBUTE_NOT_DEFINED == label) {
             return "";
         }

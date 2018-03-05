@@ -48,7 +48,7 @@ public class HTMLModElement extends HTMLElement {
      */
     @JsxGetter
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttribute("cite");
+        final String cite = getDomNodeOrDie().getAttributeDirect("cite");
         return cite;
     }
 
@@ -67,7 +67,7 @@ public class HTMLModElement extends HTMLElement {
      */
     @JsxGetter
     public String getDateTime() {
-        final String cite = getDomNodeOrDie().getAttribute("datetime");
+        final String cite = getDomNodeOrDie().getAttributeDirect("datetime");
         return cite;
     }
 

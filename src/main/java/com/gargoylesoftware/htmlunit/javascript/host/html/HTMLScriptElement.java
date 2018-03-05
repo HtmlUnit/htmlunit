@@ -122,7 +122,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getAttribute("type");
+        return getDomNodeOrDie().getAttributeDirect("type");
     }
 
     /**

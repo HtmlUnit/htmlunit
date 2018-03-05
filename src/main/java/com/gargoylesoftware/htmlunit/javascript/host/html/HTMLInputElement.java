@@ -127,7 +127,7 @@ public class HTMLInputElement extends FormField {
     public void setType(String newType) {
         HtmlInput input = getDomNodeOrDie();
 
-        final String currentType = input.getAttribute("type");
+        final String currentType = input.getAttributeDirect("type");
 
         if (!currentType.equalsIgnoreCase(newType)) {
             if (newType != null && getBrowserVersion().hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
@@ -445,7 +445,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getMin() {
-        return getDomNodeOrDie().getAttribute("min");
+        return getDomNodeOrDie().getAttributeDirect("min");
     }
 
     /**
@@ -463,7 +463,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getMax() {
-        return getDomNodeOrDie().getAttribute("max");
+        return getDomNodeOrDie().getAttributeDirect("max");
     }
 
     /**
@@ -510,7 +510,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter
     public String getAlt() {
-        return getDomNodeOrDie().getAttribute("alt");
+        return getDomNodeOrDie().getAttributeDirect("alt");
     }
 
     /**
@@ -528,7 +528,7 @@ public class HTMLInputElement extends FormField {
      */
     @JsxGetter(IE)
     public String getBorder() {
-        return getDomNodeOrDie().getAttribute("border");
+        return getDomNodeOrDie().getAttributeDirect("border");
     }
 
     /**
@@ -761,7 +761,7 @@ public class HTMLInputElement extends FormField {
     @Override
     @JsxGetter
     public int getWidth() {
-        final String value = getDomNodeOrDie().getAttribute("width");
+        final String value = getDomNodeOrDie().getAttributeDirect("width");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
             return intValue;
@@ -785,7 +785,7 @@ public class HTMLInputElement extends FormField {
     @Override
     @JsxGetter
     public int getHeight() {
-        final String value = getDomNodeOrDie().getAttribute("height");
+        final String value = getDomNodeOrDie().getAttributeDirect("height");
         final Integer intValue = HTMLCanvasElement.getValue(value);
         if (intValue != null) {
             return intValue;

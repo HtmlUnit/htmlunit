@@ -48,7 +48,7 @@ public class HTMLBaseElement extends HTMLElement {
      */
     @JsxGetter
     public String getHref() {
-        final String href = getDomNodeOrDie().getAttribute("href");
+        final String href = getDomNodeOrDie().getAttributeDirect("href");
         if (ATTRIBUTE_NOT_DEFINED == href) {
             if (getBrowserVersion().hasFeature(HTMLBASE_HREF_DEFAULT_EMPTY)) {
                 return href;
@@ -73,7 +73,7 @@ public class HTMLBaseElement extends HTMLElement {
      */
     @JsxGetter
     public String getTarget() {
-        return getDomNodeOrDie().getAttribute("target");
+        return getDomNodeOrDie().getAttributeDirect("target");
     }
 
     /**

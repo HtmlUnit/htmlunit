@@ -100,7 +100,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxGetter
     public int getCols() {
-        final String s = getDomNodeOrDie().getAttribute("cols");
+        final String s = getDomNodeOrDie().getAttributeDirect("cols");
         try {
             return Integer.parseInt(s);
         }
@@ -140,7 +140,7 @@ public class HTMLTextAreaElement extends FormField {
      */
     @JsxGetter
     public int getRows() {
-        final String s = getDomNodeOrDie().getAttribute("rows");
+        final String s = getDomNodeOrDie().getAttributeDirect("rows");
         try {
             return Integer.parseInt(s);
         }

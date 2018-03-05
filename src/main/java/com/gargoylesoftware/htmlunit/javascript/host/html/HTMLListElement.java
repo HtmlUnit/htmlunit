@@ -62,7 +62,7 @@ public class HTMLListElement extends HTMLElement {
     protected String getType() {
         final boolean acceptArbitraryValues = getBrowserVersion().hasFeature(JS_TYPE_ACCEPTS_ARBITRARY_VALUES);
 
-        final String type = getDomNodeOrDie().getAttribute("type");
+        final String type = getDomNodeOrDie().getAttributeDirect("type");
         if (acceptArbitraryValues
             || "1".equals(type)
             || "a".equals(type)

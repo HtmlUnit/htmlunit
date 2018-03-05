@@ -73,7 +73,7 @@ public class HTMLParagraphElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getClear() {
-        final String clear = getDomNodeOrDie().getAttribute("clear");
+        final String clear = getDomNodeOrDie().getAttributeDirect("clear");
         if (!ArrayUtils.contains(VALID_CLEAR_VALUES, clear)) {
             return "";
         }

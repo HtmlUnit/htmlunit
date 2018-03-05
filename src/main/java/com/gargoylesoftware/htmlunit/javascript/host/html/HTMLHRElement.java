@@ -89,7 +89,7 @@ public class HTMLHRElement extends HTMLElement {
      */
     @JsxGetter
     public String getColor() {
-        return getDomNodeOrDie().getAttribute("color");
+        return getDomNodeOrDie().getAttributeDirect("color");
     }
 
     /**
