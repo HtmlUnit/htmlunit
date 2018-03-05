@@ -83,7 +83,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
         // at the moment StringUtils.replaceChars returns the org string
         // if nothing to replace was found but the doc implies, that we
         // can't trust on this in the future
-        final String attrib = getAttribute("src");
+        final String attrib = getAttributeDirect("src");
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
         }
@@ -96,7 +96,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      */
     @Override
     public final String getCharsetAttribute() {
-        return getAttribute("charset");
+        return getAttributeDirect("charset");
     }
 
     /**
