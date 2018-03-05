@@ -1194,6 +1194,11 @@ public class WebClient implements Serializable, AutoCloseable {
             cleanUrl = UrlUtils.getUrlWithNewRef(cleanUrl, null);
         }
 
+        final WebResponse fromCache = getCache().getCachedResponse(webRequest);
+        if (fromCache != null) {
+            return new WebResponseFromCache(fromCache, webRequest);
+        }
+
         String fileUrl = cleanUrl.toExternalForm();
         fileUrl = URLDecoder.decode(fileUrl, UTF_8.name());
         final File file = new File(fileUrl.substring(5));
@@ -1216,7 +1221,9 @@ public class WebClient implements Serializable, AutoCloseable {
         compiledHeaders.add(new NameValuePair(HttpHeader.LAST_MODIFIED,
                 DateUtils.formatDate(new Date(file.lastModified()))));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
-        return new WebResponse(responseData, webRequest, 0);
+        final WebResponse webResponse = new WebResponse(responseData, webRequest, 0);
+        getCache().cacheIfPossible(webRequest, webResponse, null);
+        return webResponse;
     }
 
     /**
