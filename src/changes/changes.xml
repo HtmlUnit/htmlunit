@@ -8,6 +8,21 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="change" dev="rbri">
+                Major refactoring of the css handling (selector processing). Every style sheet now has
+                a selector index to speed up style processing.
+            </action>
+            <action type="change" dev="rbri">
+                We have now our own cssparser (a cleaned up version of the cssparser we have used so far)
+                to be able to change the model classes to better support our use cases.
+            </action>
+            <action type="change" dev="rbri">
+                getArttibute is optimized for speed in some special cases.
+            </action>
+            <action type="change" dev="rbri">
+                Local files are now cached using the same rules as server requests
+                (cacheable if date-modified is more than ten minutes in the past)
+            </action>
             <action type="add" dev="rbri" issue="1952" due-to="Anton Demydenko">
                 Our page cache now takes care of Cache Control headers.
             </action>
