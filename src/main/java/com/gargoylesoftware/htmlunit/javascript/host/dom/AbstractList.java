@@ -360,7 +360,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
-                final String nodeName = ((DomElement) next).getAttribute("name");
+                final String nodeName = ((DomElement) next).getAttributeDirect("name");
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }
@@ -481,7 +481,7 @@ public class AbstractList extends SimpleScriptable implements Function {
             for (final Object next : getElements()) {
                 if (next instanceof DomElement) {
                     final DomElement element = (DomElement) next;
-                    if (name.equals(element.getAttribute("name"))) {
+                    if (name.equals(element.getAttributeDirect("name"))) {
                         return true;
                     }
 
@@ -546,7 +546,7 @@ public class AbstractList extends SimpleScriptable implements Function {
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement element = (DomElement) next;
-                final String name = element.getAttribute("name");
+                final String name = element.getAttributeDirect("name");
                 if (name != DomElement.ATTRIBUTE_NOT_DEFINED) {
                     idList.add(name);
                 }

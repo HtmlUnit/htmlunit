@@ -577,7 +577,7 @@ public class Element extends Node {
      */
     @JsxGetter(propertyName = "className", value = {CHROME, FF})
     public Object getClassName_js() {
-        return getDomNodeOrDie().getAttribute("class");
+        return getDomNodeOrDie().getAttributeDirect("class");
     }
 
     /**
@@ -656,7 +656,7 @@ public class Element extends Node {
                 if (!(node instanceof HtmlElement)) {
                     return false;
                 }
-                String classAttribute = ((HtmlElement) node).getAttribute("class");
+                String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
                 if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
                     return false; // probably better performance as most of elements won't have a class attribute
                 }

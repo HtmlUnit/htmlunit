@@ -1224,7 +1224,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             }
             return text;
         }
-        return jsElement_.getDomNodeOrDie().getAttribute("style");
+        return jsElement_.getDomNodeOrDie().getAttributeDirect("style");
     }
 
     /**
@@ -2563,7 +2563,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (styleDeclaration_ == null) {
             final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                     .getUrl().toExternalForm();
-            final String styleAttribute = jsElement_.getDomNodeOrDie().getAttribute("style");
+            final String styleAttribute = jsElement_.getDomNodeOrDie().getAttributeDirect("style");
             final InputSource source = new InputSource(new StringReader(styleAttribute));
             source.setURI(uri);
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
@@ -3070,7 +3070,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (jsElement_ == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
-        final String style = jsElement_.getDomNodeOrDie().getAttribute("style");
+        final String style = jsElement_.getDomNodeOrDie().getAttributeDirect("style");
         return "CSSStyleDeclaration for '" + style + "'";
     }
 

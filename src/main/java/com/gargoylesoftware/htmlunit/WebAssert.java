@@ -417,7 +417,7 @@ public final class WebAssert {
             for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {
                 final Short tabIndex = element.getTabIndex();
                 if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
-                    final String s = element.getAttribute("tabindex");
+                    final String s = element.getAttributeDirect("tabindex");
                     throw new AssertionError("Illegal value for tab index: '" + s + "'.");
                 }
             }
@@ -434,7 +434,7 @@ public final class WebAssert {
     public static void assertAllAccessKeyAttributesUnique(final HtmlPage page) {
         final List<String> list = new ArrayList<>();
         for (final HtmlElement element : page.getHtmlElementDescendants()) {
-            final String key = element.getAttribute("accesskey");
+            final String key = element.getAttributeDirect("accesskey");
             if (key != null && !key.isEmpty()) {
                 if (list.contains(key)) {
                     throw new AssertionError("The access key '" + key + "' is not unique.");

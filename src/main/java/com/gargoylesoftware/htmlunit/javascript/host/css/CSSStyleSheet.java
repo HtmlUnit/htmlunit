@@ -527,7 +527,7 @@ public class CSSStyleSheet extends StyleSheet {
                 if (v3.indexOf('\\') > -1) {
                     v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
                 }
-                final String a3 = element.getAttribute("class");
+                final String a3 = element.getAttributeDirect("class");
                 return selectsWhitespaceSeparated(v3, a3);
 
             case ATTRIBUTE_CONDITION:
@@ -573,7 +573,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final String lcLang = ((LangCondition) condition).getLang();
                 final int lcLangLength = lcLang.length();
                 for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
-                    final String nodeLang = ((HtmlElement) node).getAttribute("lang");
+                    final String nodeLang = ((HtmlElement) node).getAttributeDirect("lang");
                     if (ATTRIBUTE_NOT_DEFINED != nodeLang) {
                         // "en", "en-GB" should be matched by "en" but not "english"
                         return nodeLang.startsWith(lcLang)
