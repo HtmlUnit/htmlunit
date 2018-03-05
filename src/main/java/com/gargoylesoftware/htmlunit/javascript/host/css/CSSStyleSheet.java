@@ -238,8 +238,6 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
             final String pseudoElement) {
-//        final CSSRuleList ruleList = getWrappedSheet().getCssRules();
-//        modifyIfNecessary(style, element, pseudoElement, ruleList, new HashSet<String>());
 
         final BrowserVersion browser = getBrowserVersion();
         final DomElement e = element.getDomNodeOrDie();
@@ -248,60 +246,6 @@ public class CSSStyleSheet extends StyleSheet {
         for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final org.w3c.dom.css.CSSStyleDeclaration dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
-        }
-    }
-
-    private void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
-            final String pseudoElement, final CSSRuleList ruleList, final Set<String> alreadyProcessing) {
-        if (ruleList == null) {
-            return;
-        }
-
-        final BrowserVersion browser = getBrowserVersion();
-        final DomElement e = element.getDomNodeOrDie();
-        final List<org.w3c.dom.css.CSSRule> rules = ((CSSRuleListImpl) ruleList).getRules();
-        for (CSSRule rule : rules) {
-            final short ruleType = rule.getType();
-            if (CSSRule.STYLE_RULE == ruleType) {
-                final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
-                final SelectorList selectors = styleRule.getSelectors();
-                for (Selector selector : selectors) {
-                    final boolean selected = selects(browser, selector, e, pseudoElement, false);
-                    if (selected) {
-                        final org.w3c.dom.css.CSSStyleDeclaration dec = styleRule.getStyle();
-                        style.applyStyleFromSelector(dec, selector);
-                    }
-                }
-            }
-            else if (CSSRule.IMPORT_RULE == ruleType) {
-                final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                final MediaList mediaList = importRule.getMedia();
-                if (isActive(this, mediaList)) {
-                    CSSStyleSheet sheet = imports_.get(importRule);
-                    if (sheet == null) {
-                        // TODO: surely wrong: in which case is it null and why?
-                        final String uri = (uri_ != null) ? uri_ : e.getPage().getUrl().toExternalForm();
-                        final String href = importRule.getHref();
-                        final String url = UrlUtils.resolveUrl(uri, href);
-                        sheet = loadStylesheet(ownerNode_, null, url);
-                        imports_.put(importRule, sheet);
-                    }
-
-                    if (!alreadyProcessing.contains(sheet.getUri())) {
-                        final CSSRuleList sheetRuleList = sheet.getWrappedSheet().getCssRules();
-                        alreadyProcessing.add(getUri());
-                        sheet.modifyIfNecessary(style, element, pseudoElement, sheetRuleList, alreadyProcessing);
-                    }
-                }
-            }
-            else if (CSSRule.MEDIA_RULE == ruleType) {
-                final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-                final MediaList mediaList = mediaRule.getMedia();
-                if (isActive(this, mediaList)) {
-                    final CSSRuleList internalRules = mediaRule.getCssRules();
-                    modifyIfNecessary(style, element, pseudoElement, internalRules, alreadyProcessing);
-                }
-            }
         }
     }
 
