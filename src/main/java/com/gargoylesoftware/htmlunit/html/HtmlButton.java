@@ -263,7 +263,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code type} or the default value if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttributeDirect("type");
+        return getAttribute("type");
     }
 
     /**
