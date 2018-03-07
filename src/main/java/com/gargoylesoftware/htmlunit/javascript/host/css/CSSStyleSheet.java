@@ -1533,14 +1533,13 @@ public class CSSStyleSheet extends StyleSheet {
                     if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
                         final ElementSelector es = (ElementSelector) simpleSel;
                         boolean wasClass = false;
-                        if (es.getLocalName() == null) {
-                            final List<Condition> conds = es.getConditions();
-                            if (conds != null && conds.size() == 1) {
-                                final Condition c = conds.get(0);
-                                if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
-                                    index.addClassSelector(((ClassCondition) c).getValue(), selector, styleRule);
-                                    wasClass = true;
-                                }
+                        final List<Condition> conds = es.getConditions();
+                        if (conds != null && conds.size() == 1) {
+                            final Condition c = conds.get(0);
+                            if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
+                                index.addClassSelector(es.getLocalName(),
+                                            ((ClassCondition) c).getValue(), selector, styleRule);
+                                wasClass = true;
                             }
                         }
                         if (!wasClass) {
