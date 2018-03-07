@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="add" dev="rbri" issue="1954">
+                Use the correct content type when guessing from the '.js' file extension.
+            </action>
             <action type="change" dev="rbri">
                 Major refactoring of the css handling (selector processing). Every style sheet now has
                 a selector index to speed up style processing.
