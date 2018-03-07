@@ -71,6 +71,7 @@ import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.BeginHyphenAttributeCondition;
 import com.gargoylesoftware.css.parser.condition.ClassCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.condition.IdCondition;
 import com.gargoylesoftware.css.parser.condition.LangCondition;
 import com.gargoylesoftware.css.parser.condition.OneOfAttributeCondition;
@@ -362,6 +363,22 @@ public class CSSStyleSheet extends StyleSheet {
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
+            case ELEMENT_NODE_SELECTOR:
+                final ElementSelector es = (ElementSelector) selector;
+                final String name = es.getLocalName();
+                if (name == null || name.equalsIgnoreCase(element.getLocalName())) {
+                    final List<Condition> conditions = es.getConditions();
+                    if (conditions != null) {
+                        for (Condition condition : conditions) {
+                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+                return false;
+
             case CHILD_SELECTOR:
                 final DomNode parentNode = element.getParentNode();
                 if (parentNode == element.getPage()) {
@@ -394,21 +411,6 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return false;
 
-            case ELEMENT_NODE_SELECTOR:
-                final ElementSelector es = (ElementSelector) selector;
-                final String name = es.getLocalName();
-                if (name == null || name.equalsIgnoreCase(element.getLocalName())) {
-                    final List<Condition> conditions = es.getConditions();
-                    if (conditions != null) {
-                        for (Condition condition : conditions) {
-                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
-                                return false;
-                            }
-                        }
-                    }
-                    return true;
-                }
-                return false;
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
                 if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
@@ -1530,7 +1532,20 @@ public class CSSStyleSheet extends StyleSheet {
                     final SimpleSelector simpleSel = selector.getSimpleSelector();
                     if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
                         final ElementSelector es = (ElementSelector) simpleSel;
-                        index.addElementSelector(es.getElementName(), selector, styleRule);
+                        boolean wasClass = false;
+                        if (es.getLocalName() == null) {
+                            final List<Condition> conds = es.getConditions();
+                            if (conds != null && conds.size() == 1) {
+                                final Condition c = conds.get(0);
+                                if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
+                                    index.addClassSelector(((ClassCondition) c).getValue(), selector, styleRule);
+                                    wasClass = true;
+                                }
+                            }
+                        }
+                        if (!wasClass) {
+                            index.addElementSelector(es.getElementName(), selector, styleRule);
+                        }
                     }
                     else {
                         index.addOtherSelector(selector, styleRule);
@@ -1584,7 +1599,9 @@ public class CSSStyleSheet extends StyleSheet {
 
         if (CSSStyleSheet.isActive(scriptable, index.getMediaList())) {
             final String elementName = element.getLocalName();
-            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName);
+            final String[] classes = StringUtils.split(element.getAttributeDirect("class"), null, -1);
+            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
+                    index.getSelectorEntriesIteratorFor(elementName, classes);
 
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
