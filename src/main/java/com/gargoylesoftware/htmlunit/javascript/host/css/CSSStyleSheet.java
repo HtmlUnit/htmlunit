@@ -366,7 +366,7 @@ public class CSSStyleSheet extends StyleSheet {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
                 final String name = es.getLocalName();
-                if (name == null || name.equalsIgnoreCase(element.getLocalName())) {
+                if (name == null || name.equals(element.getLowercaseName())) {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (Condition condition : conditions) {
@@ -1537,13 +1537,12 @@ public class CSSStyleSheet extends StyleSheet {
                         if (conds != null && conds.size() == 1) {
                             final Condition c = conds.get(0);
                             if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
-                                index.addClassSelector(es.getLocalName(),
-                                            ((ClassCondition) c).getValue(), selector, styleRule);
+                                index.addClassSelector(es, ((ClassCondition) c).getValue(), selector, styleRule);
                                 wasClass = true;
                             }
                         }
                         if (!wasClass) {
-                            index.addElementSelector(es.getElementName(), selector, styleRule);
+                            index.addElementSelector(es, selector, styleRule);
                         }
                     }
                     else {
@@ -1597,7 +1596,7 @@ public class CSSStyleSheet extends StyleSheet {
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 
         if (CSSStyleSheet.isActive(scriptable, index.getMediaList())) {
-            final String elementName = element.getLocalName();
+            final String elementName = element.getLowercaseName();
             final String[] classes = StringUtils.split(element.getAttributeDirect("class"), null, -1);
             final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
                     index.getSelectorEntriesIteratorFor(elementName, classes);

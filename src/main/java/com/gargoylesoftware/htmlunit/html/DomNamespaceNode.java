@@ -92,6 +92,14 @@ public abstract class DomNamespaceNode extends DomNode {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     * @return the element name as lowercase
+     */
+    public String getLowercaseName() {
+        return localNameLC_;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
