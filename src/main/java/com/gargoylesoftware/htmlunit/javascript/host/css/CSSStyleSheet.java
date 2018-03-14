@@ -365,7 +365,7 @@ public class CSSStyleSheet extends StyleSheet {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
-                final String name = es.getLocalName();
+                final String name = es.getLocalNameLowerCase();
                 if (name == null || name.equals(element.getLowercaseName())) {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {

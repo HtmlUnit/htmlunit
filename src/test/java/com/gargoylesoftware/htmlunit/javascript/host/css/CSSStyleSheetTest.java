@@ -1415,4 +1415,235 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         webDriver.get(URL_FIRST + "#anchor");
         assertTrue(webDriver.findElement(By.id("anchor")).isDisplayed());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexLowercaseElement() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  div { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercaseElement() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  div { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <DIV id='di'>\n"
+                + "    <p>Content</p>\n"
+                + "  </DIV>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercaseRule() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  DIV { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexLowercaseClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  .cls { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='cls'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercaseElementClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  .cls { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='CLS'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertTrue(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercaseRuleClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  .CLS { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='cls'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertTrue(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercaseClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  .CLS { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='CLS'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexLowercase2Class() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  div.cls { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='cls'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercase2ElementClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  div.cls { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <DIV id='di' class='CLS'>\n"
+                + "    <p>Content</p>\n"
+                + "  </DIV>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertTrue(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercase2RuleClass() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  div.CLS { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <diV id='di' class='cls'>\n"
+                + "    <p>Content</p>\n"
+                + "  </diV>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertTrue(webDriver.findElement(By.id("di")).isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void indexUppercase2Class() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+                + "<head>\n"
+                + "<style>\n"
+                + "  DiV.CLS { display: none; }\n"
+                + "</style>"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='di' class='CLS'>\n"
+                + "    <p>Content</p>\n"
+                + "  </div>\n"
+                + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+        assertFalse(webDriver.findElement(By.id("di")).isDisplayed());
+    }
 }
