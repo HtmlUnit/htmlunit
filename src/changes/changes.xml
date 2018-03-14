@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="add" dev="rbri">
+                Setters for window.innerWidth/Height and window.outerWidth/Height added.
+            </action>
             <action type="fix" dev="rbri" issue="1957">
                 Redirect of head requests should be head requests also.
             </action>

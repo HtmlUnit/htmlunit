@@ -1553,6 +1553,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * Sets the {@code innerWidth}.
+     * @param width the {@code innerWidth}
+     */
+    @JsxSetter
+    public void setInnerWidth(final int width) {
+        getWebWindow().setInnerWidth(width);
+    }
+
+    /**
      * Returns the {@code outerWidth}.
      * @return the {@code outerWidth}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref79.html">Mozilla doc</a>
@@ -1560,6 +1569,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     @JsxGetter
     public int getOuterWidth() {
         return getWebWindow().getOuterWidth();
+    }
+
+    /**
+     * Sets the {@code outerWidth}.
+     * @param width the {@code outerWidth}
+     */
+    @JsxSetter
+    public void setOuterWidth(final int width) {
+        getWebWindow().setOuterWidth(width);
     }
 
     /**
@@ -1573,6 +1591,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * Sets the {@code innerHeight}.
+     * @param height the {@code innerHeight}
+     */
+    @JsxSetter
+    public void setInneHeight(final int height) {
+        getWebWindow().setInnerHeight(height);
+    }
+
+    /**
      * Returns the {@code outerHeight}.
      * @return the {@code outerHeight}
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref78.html">Mozilla doc</a>
@@ -1580,6 +1607,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     @JsxGetter
     public int getOuterHeight() {
         return getWebWindow().getOuterHeight();
+    }
+
+    /**
+     * Sets the {@code outerHeight}.
+     * @param height the {@code outerHeight}
+     */
+    @JsxSetter
+    public void setOuterHeight(final int height) {
+        getWebWindow().setOuterHeight(height);
     }
 
     /**

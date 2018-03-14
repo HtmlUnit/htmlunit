@@ -676,6 +676,78 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1234"})
+    public void setInnerWidth() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.innerWidth > 0);\n"
+            + "  window.innerWidth = 1234;\n"
+            + "  alert(window.innerWidth);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1234"})
+    public void setInnerHeight() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.innerHeight > 0);\n"
+            + "  window.innerHeight = 1234;\n"
+            + "  alert(window.innerHeight);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1234"})
+    public void setOuterWidth() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.outerWidth > 0);\n"
+            + "  window.outerWidth = 1234;\n"
+            + "  alert(window.outerWidth);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "1234"})
+    public void setOuterHeight() throws Exception {
+        final String html
+            = "<html><body onload='test()'><script>\n"
+            + "function test() {\n"
+            + "  alert(window.outerHeight > 0);\n"
+            + "  window.outerHeight = 1234;\n"
+            + "  alert(window.outerHeight);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Regression test for bug 2944261.
      * @throws Exception if the test fails
      */
