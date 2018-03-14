@@ -1449,6 +1449,9 @@ public class WebClient implements Serializable, AutoCloseable {
                     || status == HttpStatus.SC_MOVED_TEMPORARILY
                     || status == HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
+                if (HttpMethod.HEAD == webRequest.getHttpMethod()) {
+                    wrs.setHttpMethod(HttpMethod.HEAD);
+                }
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
                 }
