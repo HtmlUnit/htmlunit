@@ -473,4 +473,55 @@ public class MapTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void setSize() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var map = new Map();\n"
+            + "  try {\n"
+            + "    alert(map.size);\n"
+            + "    map.size = 100;\n"
+            + "    alert(map.size);\n"
+            + "  } catch(e) { alert(e); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "Type error"})
+    public void setSizeStrictMode() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  'use strict';\n"
+            + "  var map = new Map();\n"
+            + "  try {\n"
+            + "    alert(map.size);\n"
+            + "    map.size = 100;\n"
+            + "    alert(map.size);\n"
+            + "  } catch(e) { alert('Type error'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
 }

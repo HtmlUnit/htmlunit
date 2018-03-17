@@ -284,7 +284,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
         final String html
             = "<html>\n"
-            + "<head><title>Tester</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "function test() {\n"
             + "  var style = document.getElementById('myDiv').style;\n"
@@ -308,5 +308,56 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
         String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
         actual = StringUtils.replace(actual, "\r\n", "\n");
         assertEquals(expected, actual);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void setLength() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var style = document.body.style;\n"
+            + "  try {\n"
+            + "    alert(style.length);\n"
+            + "    style.length = 100;\n"
+            + "    alert(style.length);\n"
+            + "  } catch(e) { alert(e); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "Type error"})
+    public void setLengthStrictMode() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  'use strict';\n"
+            + "  var style = document.body.style;\n"
+            + "  try {\n"
+            + "    alert(style.length);\n"
+            + "    style.length = 100;\n"
+            + "    alert(style.length);\n"
+            + "  } catch(e) { alert('Type error'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
     }
 }

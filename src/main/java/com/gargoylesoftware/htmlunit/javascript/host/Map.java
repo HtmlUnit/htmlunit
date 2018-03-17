@@ -22,6 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.LinkedHashMap;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -145,6 +147,7 @@ public class Map extends SimpleScriptable {
      * @return the size
      */
     @JsxGetter
+    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public int getSize() {
         return map_.size();
     }
