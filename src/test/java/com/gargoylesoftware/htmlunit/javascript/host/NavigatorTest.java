@@ -216,10 +216,10 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.137", "NPSWF32_28_0_0_137.dll"},
-            FF52 = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.137", "NPSWF64_28_0_0_137.dll"},
+    @Alerts(FF45 = {"Shockwave Flash", "Shockwave Flash 29.0 r0", "29.0.0.113", "NPSWF32_29_0_0_113.dll"},
+            FF52 = {"Shockwave Flash", "Shockwave Flash 29.0 r0", "29.0.0.113", "NPSWF64_29_0_0_113.dll"},
             CHROME = "Shockwave Flash not available",
-            IE = {"Shockwave Flash", "Shockwave Flash 28.0 r0", "28.0.0.137", "Flash32_28_0_0_137.ocx"},
+            IE = {"Shockwave Flash", "Shockwave Flash 29.0 r0", "29.0.0.113", "Flash32_29_0_0_113.ocx"},
             EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
@@ -387,7 +387,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF45 = "20170411115307",
-            FF52 = "20180118122319")
+            FF52 = "20180315163333")
     public void buildID() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
