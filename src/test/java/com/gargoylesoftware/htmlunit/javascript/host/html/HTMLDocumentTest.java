@@ -576,8 +576,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLCollection]", "4", "red"},
-            CHROME = {"[object NodeList]", "4", "red"})
+    @Alerts({"[object HTMLCollection]", "4", "red"})
     public void identicalIDs() throws Exception {
         final String html =
             "<html>\n"
