@@ -327,6 +327,7 @@ public class HTMLTableCellElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "3", "1", "2", "1", "5", "1", "2", "1"},
+            CHROME = {"1", "3", "1", "2", "0", "5", "1", "2", "0"},
             IE = {"1", "3", "1", "error", "2", "3", "5", "error", "error", "2", "2", "5"})
     public void rowSpan() throws Exception {
         final String html
