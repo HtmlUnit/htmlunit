@@ -1267,6 +1267,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX,
 
+    /** Set span zo zero if provided value is invalid. */
+    @BrowserFeature(CHROME)
+    JS_TABLE_SPAN_SET_ZERO_IF_INVALID,
+
     /** Throws an exception if the value for column span is less than one. */
     @BrowserFeature(IE)
     JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID,

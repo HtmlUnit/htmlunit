@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_OFFSET_INCLUDES_BORDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_CELL_WIDTH_DOES_NOT_RETURN_NEGATIVE_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_SET_ZERO_IF_INVALID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -239,6 +240,10 @@ public class HTMLTableCellElement extends HTMLTableComponent {
     public void setRowSpan(final String rowSpan) {
         try {
             final int i = (int) Double.parseDouble(rowSpan);
+            if (i < 0 && getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
+                getDomNodeOrDie().setAttribute("rowSpan", "1");
+                return;
+            }
             if (i <= 0) {
                 throw new NumberFormatException(rowSpan);
             }
@@ -248,7 +253,12 @@ public class HTMLTableCellElement extends HTMLTableComponent {
             if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_THROWS_EXCEPTION_IF_INVALID)) {
                 throw Context.throwAsScriptRuntimeEx(e);
             }
-            getDomNodeOrDie().setAttribute("rowSpan", "1");
+            if (getBrowserVersion().hasFeature(JS_TABLE_SPAN_SET_ZERO_IF_INVALID)) {
+                getDomNodeOrDie().setAttribute("rowSpan", "0");
+            }
+            else {
+                getDomNodeOrDie().setAttribute("rowSpan", "1");
+            }
         }
     }
 
