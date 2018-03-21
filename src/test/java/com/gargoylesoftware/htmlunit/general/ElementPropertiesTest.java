@@ -856,13 +856,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,referrerPolicy,rel,rev,search,shape,target,text,type,"
+                + "port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,type,"
                 + "username",
             FF45 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
                 + "port,protocol,rel,relList,rev,search,shape,target,text,type,"
-                + "username",
-            FF52 = "charset,coords,download,hash,host,hostname,href,hreflang,name,origin,password,pathname,ping,"
-                + "port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,type,"
                 + "username",
             IE = "charset,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,pathname,port,"
                 + "protocol,protocolLong,rel,rev,search,shape,target,text,type,"
@@ -912,11 +909,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,"
-                + "protocol,referrerPolicy,rel,search,shape,target,username",
+                + "protocol,referrerPolicy,rel,relList,search,shape,target,username",
             FF45 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
                 + "rel,relList,search,shape,target,username",
-            FF52 = "alt,coords,download,hash,host,hostname,href,noHref,origin,password,pathname,ping,port,protocol,"
-                + "referrerPolicy,rel,relList,search,shape,target,username",
             IE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target",
             EDGE = "alt,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,target")
     @NotYetImplemented
@@ -1703,7 +1698,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF52 = "align,alt,border,complete,crossOrigin,currentSrc,height,hspace,isMap,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
-            CHROME = "align,alt,border,complete,crossOrigin,currentSrc,decode(),"
+            CHROME = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,"
                 + "height,hspace,isMap,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
@@ -2991,7 +2986,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-",
-            CHROME = "assignedNodes(),name")
+            CHROME = "assignedElements(),assignedNodes(),name")
     @NotYetImplemented(CHROME)
     public void slot() throws Exception {
         test("slot");
@@ -3003,7 +2998,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "alinkColor,all,bgColor,captureEvents(),clear(),fgColor,linkColor,releaseEvents(),vlinkColor",
+    @Alerts(DEFAULT = "-",
             FF45 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),cookie,designMode,"
                 + "domain,"
                 + "embeds,execCommand(),fgColor,forms,getElementsByName(),getItems(),getSelection(),head,images,"
@@ -3015,8 +3010,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "embeds,execCommand(),fgColor,forms,getElementsByName(),getSelection(),head,images,"
                 + "linkColor,links,"
                 + "open(),plugins,queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),"
-                + "queryCommandSupported(),queryCommandValue(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
-            IE = "-")
+                + "queryCommandSupported(),queryCommandValue(),releaseEvents(),scripts,vlinkColor,write(),writeln()")
     @NotYetImplemented
     public void htmlDocument() throws Exception {
         testString("document, xmlDocument");
