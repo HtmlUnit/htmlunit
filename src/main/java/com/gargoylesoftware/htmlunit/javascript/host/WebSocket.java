@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
+import org.eclipse.jetty.websocket.api.UpgradeException;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.eclipse.jetty.websocket.api.WebSocketListener;
 import org.eclipse.jetty.websocket.api.WebSocketPolicy;
@@ -368,7 +369,12 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
         try {
             if (client_ != null) {
-                client_.stop();
+                try {
+                    client_.stop();
+                }
+                catch (final UpgradeException e) {
+                    LOG.error("WS stop error (connection was not established so far)", e);
+                }
                 client_ = null;
             }
         }
