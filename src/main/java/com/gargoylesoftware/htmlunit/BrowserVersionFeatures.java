@@ -305,10 +305,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLALLCOLLECTION_INTEGER_INDEX,
 
-    /** HtmlCollection returns a node list for duplicate id's. */
-    @BrowserFeature(CHROME)
-    HTMLALLCOLLECTION_NODE_LIST_FOR_DUPLICATES,
-
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
     @BrowserFeature(IE)
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
