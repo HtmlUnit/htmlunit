@@ -61,9 +61,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
 
-    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
+    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -625,5 +624,18 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     protected boolean isRequiredSupported() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlTextArea newnode = (HtmlTextArea) super.cloneNode(deep);
+        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
+        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
+        newnode.newNames_ = new HashSet<>(newNames_);
+
+        return newnode;
     }
 }

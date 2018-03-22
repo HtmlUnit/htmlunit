@@ -21,12 +21,12 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 
 /**
- * Tests for {@link HtmlEmailInput}.
+ * Tests for {@link HtmlTelInput}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlEmailInput2Test extends SimpleWebTestCase {
+public class HtmlTelInput2Test extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -38,15 +38,15 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='email' id='foo'>\n"
+            + "  <input type='tel' id='foo'>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
-        HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
-        input = (HtmlEmailInput) input.cloneNode(true);
-        input.type("abc@email.com");
-        assertEquals("abc@email.com", input.getValueAttribute());
+        HtmlTelInput input = (HtmlTelInput) page.getElementById("foo");
+        input = (HtmlTelInput) input.cloneNode(true);
+        input.type("4711");
+        assertEquals("4711", input.getValueAttribute());
     }
 }

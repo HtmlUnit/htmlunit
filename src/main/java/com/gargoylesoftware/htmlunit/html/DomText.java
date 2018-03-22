@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Ahmed Ashour
  * @author Sudhan Moghe
  * @author Philip Graf
+ * @author Ronald Brill
  */
 public class DomText extends DomCharacterData implements Text {
 
@@ -215,4 +216,15 @@ public class DomText extends DomCharacterData implements Text {
         return (c < '\uE000' || c > '\uF8FF') && (c == ' ' || !Character.isWhitespace(c));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final DomText newnode = (DomText) super.cloneNode(deep);
+        selectionDelegate_ = new SimpleSelectionDelegate();
+        doTypeProcessor_ = new DoTypeProcessor(this);
+
+        return newnode;
+    }
 }

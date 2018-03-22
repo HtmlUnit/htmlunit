@@ -28,12 +28,13 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * Wrapper for the HTML element "input" where type is "email".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
 
     private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
 
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -154,4 +155,14 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlEmailInput newnode = (HtmlEmailInput) super.cloneNode(deep);
+        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
+
+        return newnode;
+    }
 }

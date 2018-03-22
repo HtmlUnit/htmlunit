@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+            <action type="fix" dev="rbri" issue="1959">
+                Improved clone implementation to take care of references.
+            </action>
             <action type="fix" dev="rbri" issue="1956">
                 Setting the Map size property is now ignored (or throws a Type error in strict mode).
             </action>

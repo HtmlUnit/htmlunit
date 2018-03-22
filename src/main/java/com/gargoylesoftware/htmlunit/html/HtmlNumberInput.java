@@ -30,9 +30,8 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
 
-    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
+    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -202,5 +201,17 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
         catch (final NumberFormatException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlNumberInput newnode = (HtmlNumberInput) super.cloneNode(deep);
+        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
+        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
+
+        return newnode;
     }
 }

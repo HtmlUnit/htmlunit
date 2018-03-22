@@ -24,12 +24,12 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * Wrapper for the HTML element "input" where type is "tel".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
 
-    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
+    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -139,4 +139,15 @@ public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlTelInput newnode = (HtmlTelInput) super.cloneNode(deep);
+        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
+        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
+
+        return newnode;
+    }
 }

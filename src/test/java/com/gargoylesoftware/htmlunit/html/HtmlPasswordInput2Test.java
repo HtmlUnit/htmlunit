@@ -85,4 +85,26 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("tt", t.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndClone() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='password' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        HtmlPasswordInput input = (HtmlPasswordInput) page.getElementById("foo");
+        input = (HtmlPasswordInput) input.cloneNode(true);
+        input.type("4711");
+        assertEquals("4711", input.getValueAttribute());
+    }
 }

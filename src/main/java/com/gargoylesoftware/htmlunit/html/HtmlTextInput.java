@@ -36,9 +36,8 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  */
 public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
-    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-
-    private final DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
+    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -192,5 +191,17 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlTextInput newnode = (HtmlTextInput) super.cloneNode(deep);
+        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
+        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
+
+        return newnode;
     }
 }
