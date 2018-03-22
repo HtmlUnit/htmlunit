@@ -133,7 +133,7 @@ public abstract class HtmlElement extends DomElement {
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
     /** The listeners which are to be notified of attribute changes. */
-    private final Collection<HtmlAttributeChangeListener> attributeListeners_;
+    private Collection<HtmlAttributeChangeListener> attributeListeners_;
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
@@ -1332,4 +1332,14 @@ public abstract class HtmlElement extends DomElement {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
+        newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+
+        return newnode;
+    }
 }

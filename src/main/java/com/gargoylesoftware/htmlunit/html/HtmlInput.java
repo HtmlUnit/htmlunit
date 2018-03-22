@@ -727,4 +727,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     protected boolean isRequiredSupported() {
         return true;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomNode cloneNode(final boolean deep) {
+        final HtmlInput newnode = (HtmlInput) super.cloneNode(deep);
+        newnode.newNames_ = new HashSet<>(newNames_);
+
+        return newnode;
+    }
 }
