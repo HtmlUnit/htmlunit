@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 64">
+        <release version="2.30" date="xx, 2018" description="Bugfixes, URLSearchParams implemented, start adding support of user defined iterators, CHROME 66">
             <action type="fix" dev="rbri" issue="1959">
                 Improved clone implementation to take care of references.
             </action>
