@@ -32,8 +32,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
 
-    private final SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-
+    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
@@ -161,6 +160,7 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlEmailInput newnode = (HtmlEmailInput) super.cloneNode(deep);
+        selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
