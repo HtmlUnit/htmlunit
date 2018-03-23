@@ -160,7 +160,7 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
     @Override
     public DomNode cloneNode(final boolean deep) {
         final HtmlEmailInput newnode = (HtmlEmailInput) super.cloneNode(deep);
-        selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
+        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
