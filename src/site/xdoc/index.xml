@@ -6,6 +6,7 @@
         <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
         <author email="mguillem@users.sourceforge.net">Marc Guillemot</author>
         <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+        <author email="rbri@rbri.de">RBRi</author>
     </properties>
 
     <body>
@@ -58,9 +59,9 @@
                         <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a> 
                     </dd>
                     
-                    <dt>Latest release <date>November 12, 2017</date></dt>
+                    <dt>Latest release <date>March 25, 2018</date></dt>
                     <dd>
-                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.29/">version 2.29</a>
+                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.30/">version 2.30</a>
                     </dd>
                 </dl>
             </p>
@@ -156,7 +157,7 @@
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.29</version>
+    <version>2.30</version>
 </dependency>]]></source>
             </p>
         </section>
