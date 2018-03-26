@@ -1,0 +1,22 @@
+ 12 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.declare" has 12 tests to run
+ PASSED test: smokeTest
+ PASSED test: smokeTest2
+ PASSED test: smokeTestWithCtor
+ PASSED test: smokeTestCompactArgs
+ PASSED test: subclass
+ PASSED test: subclassWithCtor
+ PASSED test: mixinSubclass
+ PASSED test: superclassRef
+ PASSED test: inheritedCall
+ PASSED test: inheritedExplicitCall
+ PASSED test: inheritedMixinCalls
+ PASSED test: mixinPreamble
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      12 tests in 1 groups
+      0 errors
+      0 failures

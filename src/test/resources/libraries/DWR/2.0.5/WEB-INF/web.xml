@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app PUBLIC
+    "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app id="dwr">
+
+  <display-name>DWR (Direct Web Remoting)</display-name>
+  <description>A Simple Demo DWR</description>
+
+  <listener>
+    <listener-class>org.directwebremoting.servlet.EfficientShutdownServletContextAttributeListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.directwebremoting.servlet.EfficientShutdownServletContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>org.getahead.dwrdemo.gidemo.PublisherServletContextListener</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>dwr-invoker</servlet-name>
+    <display-name>DWR Servlet</display-name>
+    <description>Direct Web Remoter Servlet</description>
+    <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+
+    <!-- This should NEVER be present in live -->
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <!-- Remove this unless you want to use active reverse ajax -->
+    <init-param>
+      <param-name>activeReverseAjaxEnabled</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <!-- By default DWR creates application scope objects when they are first
+    used. This creates them when the app-server is started -->
+    <init-param>
+      <param-name>initApplicationScopeCreatorsAtStartup</param-name>
+      <param-value>true</param-value>
+    </init-param>
+
+    <!-- This enables full streaming mode. It's probably better to leave this
+    out if you are running across the internet -->
+    <init-param>
+      <param-name>maxWaitAfterWrite</param-name>
+      <param-value>-1</param-value>
+    </init-param>
+
+    <!--
+    For more information on these parameters, see:
+    - http://getahead.org/dwr/server/servlet
+    - http://getahead.org/dwr/reverse-ajax/configuration
+    -->
+
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dwr-invoker</servlet-name>
+    <url-pattern>/dwr/*</url-pattern>
+  </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,4 @@
+This directory contains the resources necessary to run the MochiKit (http://mochikit.com/) JS tests.
+
+Each subdirectory corresponds to a specific version. Each of these subdirectories
+was created by downloading the distribution.

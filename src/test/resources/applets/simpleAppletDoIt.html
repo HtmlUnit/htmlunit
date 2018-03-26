@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>simple applet test</title>
+  <script>
+    function execJsOuterHtml() {
+      var applet = document.applets[0];
+      var script = "document.getElementById('myInput').outerHTML";
+      applet.execJS(script);
+    }
+
+    function callSample(param) {
+      var input = document.getElementById('myInput');
+      input.value = param;
+      return 'done';
+    }
+  </script>
+</head>
+<body>
+A simple applet (without display) with a method called doIt(String message) that shows "Called: doIt(#message#)" in the status bar of the window.
+ <applet id='myApplet'
+   archive='simpleAppletDoIt.jar'
+   code='net.sourceforge.htmlunit.testapplets.AppletDoIt'
+   width='50' height='50'>
+   <param name='param1' value='value1'>
+   <param name='param2' value='value2'>
+ Your browser does not support the applet tag.
+ </applet>
+
+<input type="text" id="myInput">
+
+<button onclick="document.applets[0].doIt('hello')" id="button1">call applet's doIt('hello')</button>
+<button onclick="document.applets[0].doIt(12345)" id="button2">call applet's doIt(12345)</button>
+
+<button onclick="document.applets[0].showCodeBase()" id="buttonShowCodeBase">ShowCodeBase</button>
+<button onclick="document.applets[0].showDocumentBase()" id="buttonShowDocumentBase">ShowDocumentBase</button>
+
+<button onclick="document.applets[0].showParam('param1')" id="buttonParam1">ShowParam1</button>
+<button onclick="document.applets[0].showParam('param2')" id="buttonParam2">ShowParam2</button>
+<button onclick="document.applets[0].showParam('codebase')" id="buttonParamCodebase">ShowParamCodebase</button>
+<button onclick="document.applets[0].showParam('archive')" id="buttonParamArchive">ShowParamArchive</button>
+
+<button onclick="document.applets[0].execJS('7')" id="execJs7">execJs7</button>
+<button onclick="execJsOuterHtml()" id="execJsOuterHtml">execJsOuterHtml</button>
+<button onclick="document.applets[0].setValueAttribute('myInput', 'HtmlUnit')" id="setValueAttribute">setValueAttribute</button>
+
+<button onclick="document.applets[0].callWithoutParams('callSample')" id="callWithoutParams">callWithoutParams</button>
+<button onclick="document.applets[0].callWithStringParam('callSample')" id="callWithStringParam">callWithStringParam</button>
+
+</body></html>

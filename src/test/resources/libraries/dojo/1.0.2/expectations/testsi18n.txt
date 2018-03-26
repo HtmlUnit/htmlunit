@@ -1,0 +1,19 @@
+ 9 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.i18n" has 9 tests to run
+ PASSED test: salutations-de
+ PASSED test: salutations-en
+ PASSED test: salutations-en-au
+ PASSED test: salutations-en-us
+ PASSED test: salutations-en-us-texas
+ PASSED test: salutations-en-us-new_york
+ PASSED test: salutations-en-us-new_york-brooklyn
+ PASSED test: salutations-xx
+ PASSED test: salutations-zh-cn
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      9 tests in 1 groups
+      0 errors
+      0 failures

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Area]]></name>
+ <icon><![CDATA[icons/areaSeries.gif]]></icon>
+ <description><![CDATA[the series type for an area chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.AreaSeries">
+   <dynamics/>
+   <variants interpolateValues="0" usePrimaryX="1" usePrimaryY="1"/>
+   <strings form="segment" jsxname="areaSeries" seriesName="Area Series" tooltipFunction="jsx3.chart.AreaSeries.tooltip"/>
+  </object>
+</serialization>

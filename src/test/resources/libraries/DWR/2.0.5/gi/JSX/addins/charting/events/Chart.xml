@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><data jsxid="jsxroot">
+
+	<record jsxid="jsxspy" jsxtext="Spyglass" jsxtip="fires before a spyglass is displayed; should eval to the HTML content of the spyglass" vetoable="1">
+		<record jsxid="this" jsxtext="JSX Object instance (MODEL)" type="$class$"/>
+    <record jsxid="objEVENT" jsxtext="jsx3.gui.Event instance" type="jsx3.gui.Event"/>
+	</record>
+
+	<record jsxid="jsxmenu" jsxtext="Menu" jsxtip="fires before a context menu is shown" vetoable="1">
+		<record jsxid="this" jsxtext="JSX Object instance" type="$class$"/>
+    <record jsxid="objEVENT" jsxtext="jsx3.gui.Event instance" type="jsx3.gui.Event"/>
+    <record jsxid="objMENU" jsxreturntext="use this field to override the default menu with an instance of jsx3.gui.Menu" jsxtext="JSX menu instance to display" type="jsx3.gui.Menu" vartype="inout"/>
+	</record>
+
+	<record always="1" jsxid="jsxdestroy" jsxtext="Destroy" jsxtip="fires when the item has just been removed from the DOM">
+		<record jsxid="this" jsxtext="JSX object that is in the process of being destroyed" type="$class$"/>
+    <record jsxid="objPARENT" jsxtext="the parent of this JSX object before it was detatched from the DOM tree to be destroyed" type="jsx3.app.Model"/>
+	</record>
+
+</data>

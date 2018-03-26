@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>DWR and TIBCO General Interface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+  <script type='text/javascript' src='../tabs/tabs.js'> </script>
+  <script type='text/javascript' src='../dwr/engine.js'> </script>
+  <script type='text/javascript' src='../dwr/interface/Demo.js'> </script>
+  <script type="text/javascript" src="../dwr/interface/Publisher.js"> </script>
+  <script type="text/javascript" src='OpenAjax.js'> </script>
+  <script type="text/javascript" src='index.js'> </script>
+  <link rel="stylesheet" type="text/css" href="../tabs/tabs.css" />
+  <link rel="stylesheet" type="text/css" href="../generic.css" />
+</head>
+<body onload="Tabs.init('tabList', 'tabContents');">
+<div id="page-title">[
+  <a href="http://getahead.org/dwr/">DWR Website</a> |
+  <a href="..">Web Application Index</a>
+]</div>
+
+<h1>DWR and TIBCO General Interface</h1>
+
+<p>This is a simple demonstration of integrating a GI user interface with
+Reverse Ajax.</p>
+
+<ul id="tabList">
+  <li><a href="#" tabId="demoDiv">Demo</a></li>
+  <li><a href="#" tabId="explainDiv">How it works</a></li>
+</ul>
+
+<div id="tabContents">
+
+  <div id="demoDiv">
+
+    <div style="width:100%; height:280px;" id="gidemo">
+      <script
+          type="text/javascript"
+          src="JSX/js/JSX30.js"
+          jsxapppath="gidemo"
+          jsxlt="true"> </script>
+    </div>
+
+    <p>The stock data above is totally fictitious <i>and</i> delayed by 15 minutes.</p>
+
+  </div>
+
+  <div id="explainDiv">
+    <p>The HTML includes a div which loads a GI component</p>
+    
+<pre>
+&lt;div style="width:100%; height:220px;"&gt;
+  &lt;script
+      type="text/javascript"
+      src="JSX/js/JSX30.js"
+      jsxapppath="gidemo" jsxlt="true"&gt; &lt;/script&gt;
+&lt;/div&gt;
+</pre>
+
+    <p>This causes GI to render the Matrix component from config.xml and the
+    component declaration: appCanvas.xml. Once these are loaded the init
+    function is called by GI.</p>
+
+<pre>
+function giLoaded() {
+  OpenAjax.subscribe("gidemo", "corporation", objectPublished);
+  dwr.engine.setActiveReverseAjax(true);
+}
+</pre>
+
+    <p>This subscribes to the OpenAjax hub listening for publications to the
+    'gidemo' + 'corporation' topic. When a publish happens, the objectPublished
+    function is called. It also turns Reverse Ajax on. The objectPublished
+    function looks like this:</p>
+
+<pre>
+function objectPublished(prefix, name, handlerData, corporation) {
+  var matrix = giApp.getJSXByName("matrix");
+  var inserted = matrix.getRecordNode(corporation.jsxid);
+  matrix.insertRecord(corporation, null, inserted == null);
+  matrix.repaintData();
+}
+</pre>
+
+    <p>This simply takes the published data and inserts it into the matrix
+    component. That's it.</p>
+
+    <p>There are a number of possible repaint strategies, including the simple
+    <code>matrix.repaintData();</code> documented above. The full source
+    contains a strategy that enables cell highlighting</p>
+
+    <p>Meanwhile, on the server the following code is running in a thread</p>
+
+<pre>
+while (!Thread.currentThread().isInterrupted())
+{
+    Collection sessions = serverContext.getScriptSessionsByPage("/dwr/gi/index.html");
+    ScriptProxy proxy = new ScriptProxy(sessions);
+
+    Corporation corp = corporations.getNextChangedCorporation();
+    proxy.addFunctionCall("OpenAjax.publish", "gidemo", "corporation", corp);
+
+    int timeToSleep = random.nextInt(2500);
+    Thread.sleep(timeToSleep);
+}
+</pre>
+
+    <p>This simply finds the people viewing this page, and creates a
+    ScriptProxy to allow us to push Javascript to these users. We then ask
+    the <code>corporations</code> object for a Stock price change, and publish
+    this to the Open Ajax Hub. The hub has not been finally released yet, but
+    we are including a beta with this demo.</p>
+
+    <p>For the full source to all the files, including the config.xml and
+    appCanvas.xml see the source in the war file.</p>
+
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+ 10 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.connect" has 10 tests to run
+ PASSED test: smokeTest
+ PASSED test: basicTest
+ PASSED test: hubConnectDisconnect1000
+ PASSED test: args4Test
+ PASSED test: args3Test
+ PASSED test: args2Test
+ PASSED test: scopeTest1
+ PASSED test: scopeTest2
+ PASSED test: connectPublisher
+ PASSED test: publishSubscribe1000
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      10 tests in 1 groups
+      0 errors
+      0 failures

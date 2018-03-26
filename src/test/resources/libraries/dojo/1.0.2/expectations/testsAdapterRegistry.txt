@@ -1,0 +1,15 @@
+ 5 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.AdapterRegistry" has 5 tests to run
+ PASSED test: ctor
+ PASSED test: register
+ PASSED test: noMatch
+ PASSED test: returnWrappers
+ PASSED test: unregister
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      5 tests in 1 groups
+      0 errors
+      0 failures

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  ~ Copyright (c) 2001-2007, TIBCO Software Inc.
+  ~ Use, modification, and distribution subject to terms of license.
+  --><serialization xmlns="urn:tibco.com/v3.0">
+ <name><![CDATA[Pie]]></name>
+ <icon><![CDATA[icons/pie.gif]]></icon>
+ <description><![CDATA[a sample pie chart]]></description>
+ <onBeforeDeserialize/>
+ <onAfterDeserialize/>
+  <object type="jsx3.chart.PieChart">
+   <dynamics/>
+   <variants alpha="1" borderAlpha="1" borderWidth="1" colors="['#FF0033','#66CC00','#00FF66','#CCCCCC','#FFCC33','#66CCCC','#CCFF66','#666666']" innerRadius="0" jsxheight="300" jsxleft="0" jsxrelativeposition="1" jsxtop="0" jsxwidth="400" loadState="1" seriesPadding="0.1" startAngle="0" totalAngle="360"/>
+   <strings borderColor="#999999" categoryField="name" colorFunction="jsx3.chart.PieChart.defaultColoring" dataPadding="20" jsxbgcolor="#FFFFFF" jsxname="pieChart" jsxxml="&lt;data jsxid=&quot;jsxroot&quot;&gt;&lt;record name=&quot;Taxes&quot; value=&quot;24750&quot;/&gt; &lt;record name=&quot;Housing&quot; value=&quot;57840&quot;/&gt; &lt;record name=&quot;Food&quot; value=&quot;15930&quot;/&gt; &lt;record name=&quot;Other&quot; value=&quot;26050&quot;/&gt; &lt;/data&gt;" legendPlacement="right" seriesStroke="#666666" titlePlacement="top"/>
+    <object type="jsx3.chart.ChartLabel">
+     <dynamics/>
+     <variants jsxfontsize="14" labelRotation="0"/>
+     <strings jsxbgcolor="#666666" jsxcolor="#FFFFFF" jsxfontname="Arial" jsxfontweight="bold" jsxname="title" jsxpadding="4 0 0 0" jsxtext="Pie Chart" jsxtextalign="center"/>
+    </object>
+    <object type="jsx3.chart.PieSeries">
+     <dynamics/>
+     <variants index="0" usePrimaryX="1" usePrimaryY="1"/>
+     <strings field="value" jsxname="series1" seriesName="Series 1" tooltipFunction="jsx3.chart.PieSeries.tooltip"/>
+    </object>
+    <object type="jsx3.chart.Legend">
+     <dynamics/>
+     <variants boxHeight="10" boxSpace="6" lineHeight="22" titleSpace="8"/>
+     <strings backgroundStroke="#BBBBBB" jsxmargin="10 10 10 4" jsxname="legend" jsxpadding="4 4 0 4" labelStyle="font-size: 10px; font-weight: bold;"/>
+      <object type="jsx3.chart.ChartLabel">
+       <dynamics/>
+       <variants jsxfontsize="12" labelRotation="0" preferredHeight="20"/>
+       <strings jsxfontname="Arial" jsxfontweight="bold" jsxname="legendTitle" jsxtext="Expenses" jsxtextalign="center"/>
+      </object>
+    </object>
+  </object>
+</serialization>

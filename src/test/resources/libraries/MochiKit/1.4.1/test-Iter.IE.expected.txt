@@ -1,0 +1,70 @@
+Passed: 68
+Failed: 0
+ok - sum works on Arrays
+ok - list([x]) == [x]
+ok - list(range(6, 0, -1)
+ok - list(range(6))
+ok - sum(ifilter(, range()))
+ok - sum(ifilterfalse(, range()))
+ok - count()
+ok - cycle()
+ok - repeat()
+ok - izip()
+ok - range(x)
+ok - islice(x, y, z)
+ok - imap(fn, p, q)
+ok - filter(fn, iterable)
+ok - map(fn, iterable)
+ok - map(fn, iterable, q)
+ok - map(fn, iterable, iterable)
+ok - applymap()
+ok - applymap(self)
+ok - chain(p, q)
+ok - takewhile()
+ok - dropwhile()
+ok - tee(..., 3) p0 == p1
+ok - tee(..., 3) p2 == fixed
+ok - reduce(op.add)
+ok - reduce raised TypeError correctly
+ok - range initial value OK empty
+ok - range initial value OK populated
+ok - iextend(...)
+ok - iextend handles array-like iterables
+ok - exhaust(...)
+ok - every false
+ok - every true
+ok - some true
+ok - some false
+ok - some true
+ok - forEach works bound
+ok - forEach works unbound
+ok - forEach handles array-like iterables
+ok - sorted default
+ok - sorted custom
+ok - reversed iterator
+ok - reversed list
+ok - iterateNext
+ok - raised StopIteration correctly
+ok - odd(2) = odd(4) = odd(6) == 0
+ok - sub-iterator.next() == 2
+ok - sub-iterator.next() == 4
+ok - sub-iterator.next() == 6
+ok - raised StopIteration correctly
+ok - odd(7) == 1
+ok - sub-iterator.next() == 7
+ok - raised StopIteration correctly
+ok - 0 = odd(2) = odd(4) = odd(6)
+ok - 1 = odd(7)
+ok - raised StopIteration correctly
+ok - odd(1) == 1
+ok - sub-iterator.next() == 3
+ok - skip (1,1), odd(2) == 0
+ok - raised StopIteration correctly
+ok - null ok
+ok - empty
+ok - [1,1,1]: [1,1,1]
+ok - [1,2,2]: [1], [2,2]
+ok - [1,1,2]: [1,1], [2]
+ok - [null,null]: [null,null]
+ok - [1,1,3,2,4,6,7] odd: [1,1,3], [2,4,6,8]
+ok - test suite finished!

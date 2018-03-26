@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Submitting JavaScript Bugs</title>
+        <author>Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                HtmlUnit has a good support for JavaScript which gets continuously improved,
+                and test cases for complex libraries (Dojo, jQuery, Prototype,
+                Google Web Toolkit, Yahoo User Interface and Sarissa) are already included.
+                However, not all test cases succeed, and you would probably face an issue in real-life example.
+            </p>
+            <p>
+                Before reporting an issue with JavaScript, it is very preferred if you 
+                isolate the root cause of a single JavaScript property or method,
+                but just saying 'jQuery' or a given web site is not working, doesn't help much.<br/>
+                To find the offending line, you can put <code>alert()</code> at various places,
+                compare the result of HtmlUnit to a real browser (Chrome, Firefox or Internet Explorer),
+                and you will mostly be able to provide a tiny failing test case which contains
+                few lines of JavaScript (independent of the whole JavaScript library),
+                please have a look at <a href="https://sourceforge.net/p/htmlunit/code/HEAD/tree/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/javascript/ArgumentsTest.java">some sample test cases</a>.<br/>
+                Once the cause is identified, it is very likely to be fixed in a timely manner.<br/>
+            </p>
+            <p>
+                If you need help in tracing, please don't hesitate to ask the team.
+            </p>
+        </section>
+
+        <section name="Suggested steps">
+            <p>
+                The first step is to have a way to compare HtmlUnit behavior against real browser, and this can be done
+                by installing a proxy that modifies the incoming content (so debugging statements can be put).
+                There are many proxy servers that can be used, one suggested option is <a href="http://www.charlesproxy.com/">Charles</a>.
+            </p>
+            <p>
+                Ensure you can correctly modify the content, and that the real browser does not cache the response.
+            <source><![CDATA[
+function someFunction() {
+    alert('I am called!!');
+    anotherFunction();
+}]]></source>
+            </p>
+            <p>
+                Ensure you are using HtmlUnit with the same simulated <a href="http://htmlunit.sourceforge.net/apidocs/com/gargoylesoftware/htmlunit/WebClient.html#WebClient(com.gargoylesoftware.htmlunit.BrowserVersion)">
+                BrowserVersion</a> as the real browser.
+            </p>
+            <p>
+                You can encounter an error similar to: 
+            </p>
+            <source><![CDATA[
+net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
+(http://download.dojotoolkit.org/release-1.4.0/dojo-release-1.4.0/dojo/dojo.js#16(eval)#16)]]></source>
+            <p>
+                which means that in <code>some_variable.getAttribute()</code>, <code>some_variable</code>
+                was evaluated to '<code>undefined</code>' during execution of that line.<br/>
+            </p>
+            <p>
+                Once that line is found, you can start navigating the hierarchy of the caller functions to see
+                where exactly the discrepancy is.
+            </p>
+            <p>
+                To quickly modify the content, you can save the file locally and tell the proxy to replace the content
+                of a specific URL with that file. This is called <code>MAP LOCAL</code> in Charles.<br/>
+                You can also beautify the JavaScript, look for online tools.
+            </p>
+            <p>
+                Use the latest released version at least, if not the
+                <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">
+                latest snapshot</a>.
+            </p>
+        </section>
+        <section name="JavaScript hints">
+            <p>
+                To know a variable value, you can simply use <code>alert</code>, and check the value in HtmlUnit
+                and compare it with real browser.
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    alert(c);
+    return c;
+}]]></source>
+            </p>
+            <p>
+                To know the <code>caller</code> function, you can use:
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    alert(arguments.callee.caller);
+    return c;
+}]]></source> which will print the content of the <code>caller</code> function.
+            </p>
+            <p>
+                To know what function will be called, you can use:
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    alert(anotherFunction);
+    return anotherFunction(c + 'something');
+}]]></source>
+            </p>
+            <p>
+                If a function is called too many times, you can put conditional <code>alert</code>
+            <source><![CDATA[
+function myfunction(a, b) {
+    var c = a + b;
+    if (a == 'properties') {
+        alert(c);
+    }
+    return anotherFunction(c + 'something');
+}]]></source> or use a global variable:
+            <source><![CDATA[
+var debug = false;
+
+function main() {
+  debug = true; // to debug only during the next method execution
+  myFunction(a, b);
+  debug = false; // to stop debugging
+}
+
+function myfunction(a, b) {
+    var c = a + b;
+    if (debug) {
+        alert(anotherFunction);
+    }
+    return anotherFunction(c + 'something');
+}}]]></source>
+            </p>
+        </section>
+    </body>
+</document>

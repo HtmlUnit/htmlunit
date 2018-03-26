@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>JavaScript Support</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                Core language support for JavaScript is provided by the
+                <a href="http://www.mozilla.org/rhino">Mozilla Rhino</a> engine.  What HtmlUnit provides
+                are all the browser specific host objects such as Document or Navigator.
+            </p>
+        </section>
+
+        <section name="SimpleScriptable">
+            <p>
+                All of HtmlUnit's JavaScript objects subclass SimpleScripable either directly or indirectly.
+                This class contains all the common methods needed by the HtmlUnit host objects.  Additionally,
+                it changes the way that JavaScript method lookup happens.  The rhino engine doesn't walk
+                up the class hierarchy when looking for methods starting with jsGet_, jsSet_ or jsFunction.
+                SimpleScriptable changes this so that the superclass hierarchy is walked.
+            </p>
+        </section>
+
+        <section name="Debugging JavaScript Errors">
+            <p>
+                Testing pages with JavaScript on them can produce a number of errors.  These errors occur for
+                several reasons.  Some browsers accept shortcuts that are not part of the DOM model and currently not
+                duplicated by HtmlUnit.  Also, HtmlUnit still does not implement all of the extensions that have been
+                added by the different browsers.  HtmlUnit wraps the inline code into a wrapper function but when
+                errors are reported from this code, it is hard to determine what code was really being called.  A
+                custom logger has been added to HtmlUnit to support this.  If you set 
+                'com.gargoylesoftware.htmlunit.javascript' to debug level, the
+                inline code will be logged with the wrapper function to help you determine what line of code is failing.
+            </p>
+            <p>
+                One of the problems with JavaScript is finding the objects that you expect to be defined but have not
+                been defined within the code.  To help find some of these errors, HtmlUnit will produce WARN level messages
+                reporting these errors. Before submitting JavaScript bugs, please read <a href="submittingJSBugs.html">this</a>.
+            </p>
+        </section>
+    </body>
+</document>

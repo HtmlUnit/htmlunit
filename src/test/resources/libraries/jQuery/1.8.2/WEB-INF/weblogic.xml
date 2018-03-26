@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90">
+<container-descriptor>
+<show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+</container-descriptor>
+</weblogic-web-app>

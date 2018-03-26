@@ -1,0 +1,115 @@
+ 2 tests to run in 2 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.query" has 1 test to run
+ 70 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 70 tests to run
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('h1:first-child')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('h3:first-child')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#bug')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('#t h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('div#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, (dojo.query('div#t h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('span#t')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t div > h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('.foo.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('#t > h3')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(12, (dojo.query('#t > *')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(12, (dojo.query('#t >')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('.foo >')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('.foo > *')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('> *', 'container')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('> h3', 't')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo, .bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo,.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('.foo.bar')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.foo')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('span.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('sPaN.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('SPAN.baz')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('[foo~="bar"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, (dojo.query('[ foo ~= "bar" ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, (dojo.query('[foo]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$="thud"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$=thud]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo$="thudish"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t [foo$=thud]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('#t [ title $= thud ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('#t span[ title $= thud ]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo|="bar"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, (dojo.query('[foo|="bar-baz"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, (dojo.query('[foo|="baz"]')).length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(dojo.byId('_foo'), dojo.query('.foo:nth-child(2)')[0]);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(dojo.query('style')[0], dojo.query(':nth-child(2)')[0]);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('>', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('> *', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('> [qux]', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('child1', dojo.query('> [qux]', 'container')[0].id);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('child3', dojo.query('> [qux]', 'container')[1].id);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('>', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('> *', 'container').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is('passed', dojo.query('#bug')[0].value);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t span.foo:not(span:first-child)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t span.foo:not(:first-child)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('#t > h3:nth-child(odd)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t h3:nth-child(odd)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t h3:nth-child(2n+1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t h3:nth-child(even)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t h3:nth-child(2n)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('#t h3:nth-child(2n+3)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(2, dojo.query('#t h3:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('#t > h3:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(3, dojo.query('#t :nth-child(3)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('#t > div:nth-child(1)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(7, dojo.query('#t span').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(4, dojo.query('#t > span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(6, dojo.query('#t span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(0, dojo.query('h3 span:empty').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::doh.is(1, dojo.query('h3 :not(:empty)').length);
+ PASSED test: ../../dojo/tests/_base/query.html::t::silly_IDs1
+ PASSED test: ../../dojo/tests/_base/query.html::t::NodeList_identity
+ PASSED test: ../../dojo/tests/_base/query.html::t::xml
+ PASSED test: ../../dojo/tests/_base/query.html
+ ------------------------------------------------------------
+ GROUP "tests._base.NodeList" has 1 test to run
+ 25 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 25 tests to run
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctor
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctorArgs
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::ctorArgs2
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::forEach
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::indexOf
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::lastIndexOf
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::every
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::some
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::map
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::slice
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::splice
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceInsert
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceDel
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::spliceInsertDel
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::query
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::filter
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::coords
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styleGet
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styleSet
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::styles
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::concat
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::concat2
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::place
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::orphan
+ PASSED test: ../../dojo/tests/_base/NodeList.html::t::connect
+ PASSED test: ../../dojo/tests/_base/NodeList.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      97 tests in 4 groups
+      0 errors
+      0 failures

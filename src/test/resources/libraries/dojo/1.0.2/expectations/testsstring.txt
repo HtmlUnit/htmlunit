@@ -1,0 +1,13 @@
+ 3 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests.string" has 3 tests to run
+ PASSED test: test_string_pad
+ PASSED test: test_string_substitute
+ PASSED test: test_string_trim
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      3 tests in 1 groups
+      0 errors
+      0 failures

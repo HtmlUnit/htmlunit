@@ -1,0 +1,29 @@
+Passed: 27
+Failed: 0
+ok - isoDate year ok
+ok - isoDate day ok
+ok - isoDate month ok
+ok - matches string date
+ok - toISODate ok
+ok - isoDate year ok
+ok - isoDate day ok
+ok - isoDate month ok
+ok - matches string date
+ok - toISODate ok
+ok - isoDate year ok for year < 1000
+ok - isoDate day ok for year < 1000
+ok - isoDate month ok for year < 1000
+ok - matches string date for year < 1000
+ok - toISODate ok for year < 1000
+ok - dates compare eq
+ok - dates compare lt
+ok - dates compare gt
+ok - americanDate eq
+ok - toAmericanDate eq
+ok - isoTimestamp eq
+ok - isoTimestamp (real ISO) eq
+ok - toISOTimestamp eq
+ok - toISOTimestamp (real ISO) eq
+ok - equal with local tz
+ok - equal with specific tz
+ok - test suite finished!

@@ -1,0 +1,41 @@
+ 1 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "tests._base.xhr" has 1 test to run
+ 27 tests to run in 1 groups
+ ------------------------------------------------------------
+ GROUP "t" has 27 tests to run
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formNodeToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formIdToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToObjectWithMultiSelect
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQuery
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::objectToQueryArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQuery
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToQueryArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJson
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::formToJsonArr
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::queryToObject
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::textContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsonCFContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::jsContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xmlContentHandler
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGet404
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetForm
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrGetFormWithContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPost
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostWithContent
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPostForm
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::rawXhrPost
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrPut
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrDelete
+ PASSED test: ../../dojo/tests/_base/xhr.html::t::xhrCancel
+ PASSED test: ../../dojo/tests/_base/xhr.html
+ WOOHOO!!
+ ------------------------------------------------------------
+ | TEST SUMMARY:
+ ------------------------------------------------------------
+      28 tests in 2 groups
+      0 errors
+      0 failures

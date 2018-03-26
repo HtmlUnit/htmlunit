@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>Packaging a release</title>
+        <author email="mbowler@GargoyleSoftware.com">Mike Bowler</author>
+        <author email="asashour@users.sourceforge.net">Ahmed Ashour</author>
+    </properties>
+
+    <body>
+        <section>
+            <p>
+                This document is intended for committers who are packaging a release.  It likely won't be
+                of much use to anyone else.
+            </p>
+            <p>
+                If this is the first time you're doing a release you'll need to perform
+                some setup.
+                <ol>
+                       <li>
+                           Configure your SourceForge username in ~/.m2/settings.xml (see <a href="http://maven.apache.org/guides/mini/guide-deployment-security-settings.html">Security and Deployment Settings</a>). 
+                        As an example, my settings.xml looks like:
+<source>
+<![CDATA[<settings>
+  ...
+  <servers>
+    <server>
+      <id>htmlunit-website</id>
+      <username>mguillem,htmlunit</username>
+      <!-- optional element:
+        <password>your-sourceforge-pwd</password>
+      -->
+    </server>
+    <server>
+      <id>sonatype-nexus-snapshots</id>
+      <username>your-jira-id</username>
+      <!-- optional element:
+        <password>your-jira-pwd</password>
+      -->
+    </server>
+    <server>
+      <id>ossrh</id>
+      <username>your-jira-id</username>
+      <!-- optional element:
+        <password>your-jira-pwd</password>
+      -->
+    </server>
+  </servers>
+  ...
+</settings>]]></source>
+                       </li>
+                   </ol>
+               </p>
+            <p>
+                For Snapshots:
+                <ol>
+                    <li>
+                    <source>
+mvn clean deploy -Dmaven.test.skip=true
+</source>
+                    </li>
+                </ol>
+            </p>
+            <p>
+                Now do this for each release:
+                <ol>
+                    <li>
+                        Update maven to latest version, and delete ~/.m2/repository folder.
+                    </li>
+                    <li>
+                        Update the version number in pom.xml
+                    </li>
+                    <li>
+                        Update the version number and release date in src/site/xdoc/index.xml (maven dependency as well)
+                    </li>
+                    <li>
+                        Update the release date in src/changes/changes.xml
+                    </li>
+                    <li>
+                        Remove pom.xml reference to any snapshot repository (needed for Maven upload request).
+                    </li>
+                    <li>
+                        Build the zip files, (clean avoids duplicated pom.xml because of Maven/Eclipse conflicts)
+                        <source>mvn -up clean site package -Dmaven.test.skip=true</source>
+                    </li>
+                    <li>
+                        Upload the two zip files (htmlunit-x.y-bin.zip and htmlunit-x.y-src.zip) to
+                        <a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/">SourceForge</a>,
+                        and make sure the binary file is the default download for all platforms.
+                    </li>
+                    <li>
+                        Make sure everything is checked in and tag the release:
+                    <source>
+mvn scm:tag
+</source>
+                    </li>
+                    <li>
+                        Ensure HtmlUnit-related dependencies are 'tagged' in the repository.
+                    </li>
+                    <li>Deploy the release to Sonatype OSS Maven repository.
+                    <source>
+mvn deploy -Dmaven.test.skip=true
+</source>
+                    and then go to <a href="https://oss.sonatype.org/index.html#stagingRepositories" target="_blank">Sonatype OSS staging repository</a> to close and release the artifacts.
+                    </li>
+                    <li>
+                        Create a shell to shell.sourceforge.net with your username and project group
+                        (see <a href="http://maven.apache.org/plugins/maven-site-plugin/examples/site-deploy-to-sourceforge.net.html">Maven site plugin for details</a>).
+                        <source>ssh -t mguillem,htmlunit@shell.sf.net create</source>
+                        
+                        (On Windows, PuTTY: Connection -> SSH -> Remote Command -> "create")
+                    </li>
+                    <li>
+                        Delete online website (/home/project-web/htmlunit/htdocs).
+                        <source>rm -rf /home/project-web/htmlunit/htdocs/*</source>
+                    </li>
+                    <li>
+                        Deploy the site documentation (skipping the tests).
+                        <source>mvn -Dmaven.test.skip=true site:deploy</source>
+                    </li>
+                    <li>
+                        Build the OSGi bundle
+                        <source>mvn -Dmaven.test.skip=true org.apache.felix:maven-bundle-plugin:bundle</source>
+                    </li>
+                    <li>
+                        Rename 'htmlunit-x.y.jar' to 'htmlunit-x.y-OSGi.jar',
+                        and upload it to SourceForge files.
+                    </li>
+                    <li>
+                        Add a new Milestone in SourceForge bugs system (for both Bugs and Feature-Requests).
+                    </li>
+                </ol>
+            </p>
+        </section>
+    </body>
+</document>
+
