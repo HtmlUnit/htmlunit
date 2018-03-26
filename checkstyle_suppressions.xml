@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+    <suppress checks="JavadocPackage" files=".*[\\/]src[\\/](test)[\\/]"/>
+    <suppress checks="AvoidStarImport" files="JavaScriptConfiguration.java"/>
+    <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
+    <suppress checks="Header" files=".+.properties"/>
+    <suppress checks="JavadocPackage" files=".*Test.java|StandardsMode.java|StandardsMode.java|ElementTestSource.java|BrowserStatement.java|Patch.java|BrowserVersionClassRunnerWithParameters.java|ToRunWithRealBrowsers.java|PatchedHtmlUnitKeyboard.java|CanvasRenderingContext2D2Test2.java"/>
+    <!-- checkstyle bug: http://sourceforge.net/tracker/?func=detail&aid=3469410&group_id=29721&atid=397078 -->
+    <suppress checks="JavadocStyle" files="BrowserVersion.java"/>
+    <suppress checks="LineLength" files="BrowserVersion.java"/>
+    <suppress checks="LineLength" files="JavaScriptEngine.java"/>
+    <suppress checks="LineLength" files="EncodingSniffer.java"/>
+    <suppress checks="LineLength" files="Dojo102Test.java"/>
+    <suppress checks="LineLength" files="BoxObjectTest.java"/>
+    <suppress checks="LineLength" files="HTMLBodyElementTest.java"/>
+    <suppress checks="LineLength" files="HtmlOption.java" lines="1-30"/>
+    <suppress checks="LineLength" files="HTMLOptionsCollection.java" lines="1-30"/>
+    <suppress checks="LineLength" files="HTMLScriptElementTest.java"/>
+    <suppress checks="LineLength" files="HTMLTableElement.java" lines="1-30"/>
+    <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
+    <suppress checks="LineLength" files="JQuery1x8x2Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x11x3Test.java"/>
+    <suppress checks="LineLength" files="JQuery1x12x0Test.java"/>
+    <suppress checks="LineLength" files="Node.java" lines="1-30"/>
+    <suppress checks="LineLength" files="NodeTest.java" lines="1-30"/>
+    <suppress checks="LineLength" files="XMLDOMNamedNodeMap.java"/>
+    <suppress checks="LineLength" files="XMLDOMAttributeTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMCDATASectionTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMCommentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocument2Test.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocument3Test.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentFragmentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMDocumentTypeTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMElementTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMNamedNodeMapTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMNodeListTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMParseErrorTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMProcessingInstructionTest.java"/>
+    <suppress checks="LineLength" files="XMLDOMTextTest.java"/>
+    <suppress checks="LineLength" files="XMLHttpRequest.java" lines="1-30"/>
+    <suppress checks="LineLength" files="XMLSerializer.java" lines="1-30"/>
+    <suppress checks="LineLength" files="XMLSerializerTest.java"/>
+    <suppress checks="LineLength" files="XSLProcessorTest.java"/>
+
+    <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfATest.java"/>
+    <suppress checks="MethodName" files="HostParentOfBTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfCTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfDTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfFTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfHTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfITest.java"/>
+    <suppress checks="MethodName" files="HostParentOfMTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfPTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfSTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfTTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfWTest.java"/>
+    <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
+    <suppress checks="MethodName" files="HtmlScript3Test.java"/>
+
+    <suppress checks="TypeName" files="webkit.*\.java$|moz.*\.java$"/>
+    <suppress checks="TypeName" files="EXT_.*\.java$|OES_.*\.java$|WEBGL_.*\.java$|ANGLE_.*\.java$"/>
+
+    <!-- JUnit Rules require the rules field to have public visibility. -->
+    <!-- See http://checkstyle.sourceforge.net/config_design.html#VisibilityModifier -->
+    <suppress checks="VisibilityModifier" files=".*(?:Test|TestBase)\.java$"/>
+    <suppress checks="VisibilityModifier" files="HostParentOf.java"/>
+    <suppress checks="VisibilityModifier" files="WebTestCase.java"/>
+    <suppress checks="VisibilityModifier" files="WebDriverTestCase.java"/>
+</suppressions>
