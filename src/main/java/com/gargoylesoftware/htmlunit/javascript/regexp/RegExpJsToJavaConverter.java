@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * Translates JavaScript RegExp to Java RegExp.<br>
@@ -145,7 +146,7 @@ public class RegExpJsToJavaConverter {
     private Tape tape_;
     private boolean insideCharClass_;
     private boolean insideRepetition_;
-    private Stack<Subexpresion> parsingSubexpressions_;
+    private Deque<Subexpresion> parsingSubexpressions_;
     private List<Subexpresion> subexpressions_;
 
     /**
@@ -167,7 +168,7 @@ public class RegExpJsToJavaConverter {
         insideCharClass_ = false;
         insideRepetition_ = false;
 
-        parsingSubexpressions_ = new Stack<>();
+        parsingSubexpressions_ = new ArrayDeque<>();
         subexpressions_ = new LinkedList<>();
 
         int current = tape_.read();

@@ -499,7 +499,7 @@ public class Document extends Node {
      */
     @JsxFunction
     public Attr createAttribute(final String attributeName) {
-        return (Attr) getPage().createAttribute(attributeName).getScriptableObject();
+        return getPage().createAttribute(attributeName).getScriptableObject();
     }
 
     /**
@@ -775,14 +775,12 @@ public class Document extends Node {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
+        return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return localName.equals(node.getLocalName());
             }
         };
-
-        return collection;
     }
 
     /**
@@ -899,7 +897,7 @@ public class Document extends Node {
         if (page instanceof HtmlPage) {
             final HtmlElement body = ((HtmlPage) page).getBody();
             if (body != null) {
-                return (HTMLElement) body.getScriptableObject();
+                return body.getScriptableObject();
             }
         }
         return null;
@@ -1001,7 +999,7 @@ public class Document extends Node {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptableObject();
+                return node.getScriptableObject();
             }
             return null;
         }

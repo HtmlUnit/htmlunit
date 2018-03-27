@@ -248,21 +248,17 @@ public class Symbol extends SimpleScriptable {
     @Override
     @JsxFunction
     public String toString() {
-        String name;
         if (name_ == Undefined.instance) {
-            name = "";
+            return "Symbol()";
         }
-        else {
-            name = Context.toString(name_);
-            final ClassConfiguration config = AbstractJavaScriptConfiguration
-                    .getClassConfiguration(getClass(), getBrowserVersion());
 
-            for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry
-                    : config.getStaticPropertyEntries()) {
-                if (propertyEntry.getKey().equals(name)) {
-                    name = "Symbol." + name;
-                    break;
-                }
+        final ClassConfiguration config = AbstractJavaScriptConfiguration
+                .getClassConfiguration(getClass(), getBrowserVersion());
+
+        final String name = Context.toString(name_);
+        for (final Entry<String, ClassConfiguration.PropertyInfo> propertyEntry : config.getStaticPropertyEntries()) {
+            if (propertyEntry.getKey().equals(name)) {
+                return "Symbol(Symbol." + name + ')';
             }
         }
         return "Symbol(" + name + ')';

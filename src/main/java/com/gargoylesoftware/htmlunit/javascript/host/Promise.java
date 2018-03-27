@@ -19,9 +19,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
@@ -116,9 +117,9 @@ public class Promise extends SimpleScriptable {
         try {
             // KEY_STARTING_SCOPE maintains a stack of scopes
             @SuppressWarnings("unchecked")
-            Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
+            Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
             if (null == stack) {
-                stack = new Stack<>();
+                stack = new ArrayDeque<>();
                 cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
             }
             stack.push(window);
@@ -370,9 +371,9 @@ public class Promise extends SimpleScriptable {
                         else {
                             // KEY_STARTING_SCOPE maintains a stack of scopes
                             @SuppressWarnings("unchecked")
-                            Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
+                            Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
                             if (null == stack) {
-                                stack = new Stack<>();
+                                stack = new ArrayDeque<>();
                                 cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                             }
                             stack.push(window);

@@ -3053,8 +3053,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
          */
         public final String get(final Element element) {
             final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
-            final String value = get(style);
-            return value;
+            return get(style);
         }
 
         /**

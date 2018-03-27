@@ -95,23 +95,20 @@ public class EventTarget extends SimpleScriptable {
      */
     public ScriptResult executeEventLocally(final Event event) {
         final EventListenersContainer eventListenersContainer = getEventListenersContainer();
-        if (eventListenersContainer != null) {
-            final Window window = getWindow();
-            final Object[] args = new Object[] {event};
+        final Window window = getWindow();
+        final Object[] args = new Object[] {event};
 
-            // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs = args;
+        // handlers declared as property on a node don't receive the event as argument for IE
+        final Object[] propHandlerArgs = args;
 
-            final Event previousEvent = window.getCurrentEvent();
-            window.setCurrentEvent(event);
-            try {
-                return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
-            }
-            finally {
-                window.setCurrentEvent(previousEvent); // reset event
-            }
+        final Event previousEvent = window.getCurrentEvent();
+        window.setCurrentEvent(event);
+        try {
+            return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
         }
-        return null;
+        finally {
+            window.setCurrentEvent(previousEvent); // reset event
+        }
     }
 
     /**

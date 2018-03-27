@@ -69,8 +69,7 @@ public class EventHandler extends BaseFunction {
             realFunction_.setParentScope(jsObj);
         }
 
-        final Object result = realFunction_.call(cx, scope, thisObj, args);
-        return result;
+        return realFunction_.call(cx, scope, thisObj, args);
     }
 
     /**

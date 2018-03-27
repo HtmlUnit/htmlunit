@@ -99,7 +99,7 @@ public class PointerEvent extends MouseEvent {
                 value = String.valueOf(value);
             }
             else if (defaulValue instanceof Double) {
-                value = (double) Context.toNumber(value);
+                value = Context.toNumber(value);
             }
             else if (defaulValue instanceof Number) {
                 value = (int) Context.toNumber(value);
