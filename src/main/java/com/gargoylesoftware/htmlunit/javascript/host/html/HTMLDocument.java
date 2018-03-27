@@ -905,7 +905,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxSetter({CHROME, FF})
     public void setBgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
+        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setBgColor(color);
     }
 
@@ -931,7 +931,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxSetter({CHROME, FF})
     public void setAlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
+        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setALink(color);
     }
 
@@ -957,7 +957,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxSetter({CHROME, FF})
     public void setLinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
+        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setLink(color);
     }
 
@@ -983,7 +983,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxSetter({CHROME, FF})
     public void setVlinkColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
+        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setVLink(color);
     }
 
@@ -1009,7 +1009,7 @@ public class HTMLDocument extends Document {
     @Override
     @JsxSetter({CHROME, FF})
     public void setFgColor(final String color) {
-        final HTMLBodyElement body = (HTMLBodyElement) getPage().getBody().getScriptableObject();
+        final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setText(color);
     }
 

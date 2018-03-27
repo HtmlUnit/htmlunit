@@ -778,7 +778,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     Charset charset = EncodingSniffer.toCharset(charsetName);
                     if (charset == null
                             && getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
-                        final HTMLDocument doc = (HTMLDocument) containingPage_.getScriptableObject();
+                        final HTMLDocument doc = containingPage_.getScriptableObject();
                         charset = Charset.forName(doc.getDefaultCharset());
                     }
                     final String charsetNameFinal = charsetName;

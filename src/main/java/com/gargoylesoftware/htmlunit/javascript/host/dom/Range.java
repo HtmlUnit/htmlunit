@@ -93,11 +93,11 @@ public class Range extends SimpleScriptable {
 
     Range(final org.w3c.dom.ranges.Range w3cRange) {
         final DomNode domNodeStartContainer = (DomNode) w3cRange.getStartContainer();
-        startContainer_ = (Node) domNodeStartContainer.getScriptableObject();
+        startContainer_ = domNodeStartContainer.getScriptableObject();
         startOffset_ = w3cRange.getStartOffset();
 
         final DomNode domNodeEndContainer = (DomNode) w3cRange.getEndContainer();
-        endContainer_ = (Node) domNodeEndContainer.getScriptableObject();
+        endContainer_ = domNodeEndContainer.getScriptableObject();
         endOffset_ = w3cRange.getEndOffset();
     }
 

@@ -1147,7 +1147,7 @@ public class Document extends Node {
             else if (start instanceof HTMLDocument) {
                 final DomNode page = ((HTMLDocument) start).getDomNodeOrNull();
                 if (page != null) {
-                    document = (Document) page.getScriptableObject();
+                    document = page.getScriptableObject();
                 }
             }
             if (document instanceof HTMLDocument && ((HTMLDocument) document).getDocumentMode() < 8) {

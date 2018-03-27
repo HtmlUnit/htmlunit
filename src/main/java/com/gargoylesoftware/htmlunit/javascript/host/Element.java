@@ -1029,7 +1029,7 @@ public class Element extends Node {
         }
         else if (html) {
             final DomElement element = (DomElement) node;
-            final Element scriptObject = (Element) node.getScriptableObject();
+            final Element scriptObject = node.getScriptableObject();
             final String tag = element.getTagName();
 
             Element htmlElement = null;

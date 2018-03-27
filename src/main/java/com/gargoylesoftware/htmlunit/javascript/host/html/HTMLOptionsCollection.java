@@ -145,7 +145,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
             return;
         }
 
-        final HTMLSelectElement parent = (HTMLSelectElement) htmlSelect_.getScriptableObject();
+        final HTMLSelectElement parent = htmlSelect_.getScriptableObject();
 
         if (!has(name, start) && ScriptableObject.hasProperty(parent, name)) {
             ScriptableObject.putProperty(parent, name, value);

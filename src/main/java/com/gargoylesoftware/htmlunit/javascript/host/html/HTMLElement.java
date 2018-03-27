@@ -1737,7 +1737,7 @@ public class HTMLElement extends Element {
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptableObject();
+        HTMLElement element = node.getScriptableObject();
         ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
         left += style.getLeft(true, false, false);
 
@@ -1751,7 +1751,7 @@ public class HTMLElement extends Element {
         node = node.getParentNode();
         while (node != null && node.getScriptableObject() != offsetParent) {
             if (node.getScriptableObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptableObject();
+                element = node.getScriptableObject();
                 style = element.getWindow().getComputedStyle(element, null);
                 left += style.getLeft(true, true, true);
             }
@@ -1835,7 +1835,7 @@ public class HTMLElement extends Element {
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
-        HTMLElement element = (HTMLElement) node.getScriptableObject();
+        HTMLElement element = node.getScriptableObject();
         ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
         top += style.getTop(true, false, false);
 
@@ -1849,7 +1849,7 @@ public class HTMLElement extends Element {
         node = node.getParentNode();
         while (node != null && node.getScriptableObject() != offsetParent) {
             if (node.getScriptableObject() instanceof HTMLElement) {
-                element = (HTMLElement) node.getScriptableObject();
+                element = node.getScriptableObject();
                 style = element.getWindow().getComputedStyle(element, null);
                 top += style.getTop(false, true, true);
             }
@@ -1857,7 +1857,7 @@ public class HTMLElement extends Element {
         }
 
         if (offsetParent != null) {
-            final HTMLElement thiz = (HTMLElement) getDomNodeOrDie().getScriptableObject();
+            final HTMLElement thiz = getDomNodeOrDie().getScriptableObject();
             style = thiz.getWindow().getComputedStyle(thiz, null);
             final boolean thisElementHasTopMargin = style.getMarginTopValue() != 0;
 
@@ -1896,7 +1896,7 @@ public class HTMLElement extends Element {
         }
 
         Object offsetParent = null;
-        final HTMLElement htmlElement = (HTMLElement) currentElement.getScriptableObject();
+        final HTMLElement htmlElement = currentElement.getScriptableObject();
         if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
                 StyleAttributes.Definition.POSITION, true))) {
             return null;
@@ -1919,7 +1919,7 @@ public class HTMLElement extends Element {
             }
 
             if (parentNode != null && parentNode.getScriptableObject() instanceof HTMLElement) {
-                final HTMLElement parentElement = (HTMLElement) parentNode.getScriptableObject();
+                final HTMLElement parentElement = parentNode.getScriptableObject();
                 final ComputedCSSStyleDeclaration parentStyle =
                             parentElement.getWindow().getComputedStyle(parentElement, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();

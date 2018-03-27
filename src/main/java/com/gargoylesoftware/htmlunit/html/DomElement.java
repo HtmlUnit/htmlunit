@@ -1413,7 +1413,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = (EventTarget) getScriptableObject();
+        final EventTarget jsElt = getScriptableObject();
         final ContextAction action = new ContextAction() {
             @Override
             public Object run(final Context cx) {

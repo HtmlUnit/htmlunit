@@ -1043,7 +1043,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 }
                 else {
                     // Block elements take up 100% of the parent's width.
-                    final HTMLElement parentJS = (HTMLElement) parent.getScriptableObject();
+                    final HTMLElement parentJS = parent.getScriptableObject();
                     width = pixelValue(parentJS, new CssValue(0, windowWidth) {
                         @Override public String get(final ComputedCSSStyleDeclaration style) {
                             return style.getWidth();
@@ -1112,7 +1112,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         for (final DomNode child : children) {
             if (child.getScriptableObject() instanceof HTMLElement) {
-                final HTMLElement e = (HTMLElement) child.getScriptableObject();
+                final HTMLElement e = child.getScriptableObject();
                 final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                 final int w = style.getCalculatedWidth(true, true);
                 width += w;
@@ -1120,7 +1120,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if (child.getScriptableObject() instanceof Text) {
                 final DomNode parent = child.getParentNode();
                 if (parent instanceof HtmlElement) {
-                    final HTMLElement e = (HTMLElement) child.getParentNode().getScriptableObject();
+                    final HTMLElement e = child.getParentNode().getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final int height = getBrowserVersion().getFontHeight(style.getFontSize());
                     width += child.getTextContent().length() * (int) (height / 1.8f);
@@ -1505,7 +1505,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             left = 0;
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
                 if (n.getScriptableObject() instanceof HTMLElement) {
-                    final HTMLElement e = (HTMLElement) n.getScriptableObject();
+                    final HTMLElement e = n.getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String d = style.getDisplay();
                     if ("block".equals(d)) {

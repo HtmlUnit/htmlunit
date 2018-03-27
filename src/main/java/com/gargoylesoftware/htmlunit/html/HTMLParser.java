@@ -986,7 +986,7 @@ public final class HTMLParser {
                 if (to.getAttributes().getNamedItem(attrName) == null) {
                     to.setAttribute(attrName, attrs.getValue(i));
                     if (attrName.startsWith("on") && to.getScriptableObject() instanceof HTMLBodyElement) {
-                        final HTMLBodyElement jsBody = (HTMLBodyElement) to.getScriptableObject();
+                        final HTMLBodyElement jsBody = to.getScriptableObject();
                         jsBody.createEventHandlerFromAttribute(attrName, attrs.getValue(i));
                     }
                 }

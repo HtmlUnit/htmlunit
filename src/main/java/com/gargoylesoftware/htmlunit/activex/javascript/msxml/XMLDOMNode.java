@@ -514,7 +514,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
                     replaceChild(node.getScriptableObject(), oldChild);
-                    firstNode = (XMLDOMNode) node.getScriptableObject();
+                    firstNode = node.getScriptableObject();
                 }
                 else {
                     insertBeforeImpl(new Object[] {node.getScriptableObject(), refChildObject});

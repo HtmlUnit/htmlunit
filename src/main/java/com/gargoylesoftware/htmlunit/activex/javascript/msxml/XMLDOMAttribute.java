@@ -83,7 +83,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
             if (!org.apache.commons.lang3.StringUtils.isEmpty(value)) {
                 final DomText text = new DomText(getDomNodeOrDie().getPage(), value);
                 getDomNodeOrDie().appendChild(text);
-                textNode_ = (XMLDOMText) text.getScriptableObject();
+                textNode_ = text.getScriptableObject();
             }
         }
     }

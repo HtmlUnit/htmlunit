@@ -41,7 +41,7 @@ public class WindowProxy extends SimpleScriptableProxy<Window> {
      */
     @Override
     public Window getDelegee() {
-        return (Window) webWindow_.getScriptableObject();
+        return webWindow_.getScriptableObject();
     }
 
     /**

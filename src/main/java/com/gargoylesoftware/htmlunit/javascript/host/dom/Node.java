@@ -423,7 +423,7 @@ public class Node extends EventTarget {
             for (final DomNode node : fragment.getDomNodeOrDie().getChildren()) {
                 if (firstNode == null) {
                     replaceChild(node.getScriptableObject(), oldChildObject);
-                    firstNode = (Node) node.getScriptableObject();
+                    firstNode = node.getScriptableObject();
                 }
                 else {
                     insertBeforeImpl(new Object[] {node.getScriptableObject(), refChildObject});

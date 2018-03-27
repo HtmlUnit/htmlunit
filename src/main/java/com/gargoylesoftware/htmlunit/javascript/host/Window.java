@@ -613,16 +613,14 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @return the storage
      */
     public Storage getStorage(final Type storageType) {
-        Storage storage = storages_.get(storageType);
-        if (storage == null) {
-            final WebWindow webWindow = getWebWindow();
-            final Map<String, String> store = webWindow.getWebClient().getStorageHolder().getStore(storageType,
-                webWindow.getEnclosedPage());
-            storage = new Storage(this, store);
-            storages_.put(storageType, storage);
-        }
-
-        return storage;
+        return storages_.computeIfAbsent(storageType,
+            k -> {
+                final WebWindow webWindow = getWebWindow();
+                final Map<String, String> store = webWindow.getWebClient().getStorageHolder().
+                        getStore(storageType, webWindow.getEnclosedPage());
+                return new Storage(this, store);
+            }
+        );
     }
 
     /**
@@ -1110,7 +1108,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
             final HtmlElement body = page.getBody();
             if (body != null) {
-                final HTMLBodyElement b = (HTMLBodyElement) body.getScriptableObject();
+                final HTMLBodyElement b = body.getScriptableObject();
                 return b.getEventHandler("onload");
             }
             return null;
