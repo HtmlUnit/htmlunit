@@ -944,8 +944,8 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context)
             throws HttpException, IOException {
-            for (final String key : map_.keySet()) {
-                request.setHeader(key, map_.get(key));
+            for (final Map.Entry<String, String> entry : map_.entrySet()) {
+                request.setHeader(entry.getKey(), entry.getValue());
             }
         }
     }

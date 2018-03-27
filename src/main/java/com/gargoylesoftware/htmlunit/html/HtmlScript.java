@@ -298,7 +298,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final String scriptCode = getScriptCode();
         if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED
                 && hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-            final Window window = (Window) getPage().getEnclosingWindow().getScriptableObject();
+            final Window window = getPage().getEnclosingWindow().getScriptableObject();
             final BaseFunction function = new EventHandler(this, event, scriptCode);
             window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
             return;

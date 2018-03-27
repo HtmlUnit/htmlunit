@@ -36,10 +36,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -48,7 +50,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
@@ -170,7 +171,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<>(5);
-    private final Stack<TopLevelWindow> topLevelWindows_ = new Stack<>(); // top-level windows
+    private final Deque<TopLevelWindow> topLevelWindows_ = new ArrayDeque<>(); // top-level windows
     private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
     private transient List<WeakReference<JavaScriptJobManager>> jobManagers_ =
             Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
@@ -1273,12 +1274,8 @@ public class WebClient implements Serializable, AutoCloseable {
             page = (HtmlPage) frameWindow.getEnclosedPage();
         }
         else {
-            Page currentPage = webWindow.getEnclosedPage();
-            if (currentPage == null) {
-                // Starting with a JavaScript URL; quickly fill an "about:blank".
-                currentPage = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
-            }
-            else if (currentPage instanceof HtmlPage) {
+            final Page currentPage = webWindow.getEnclosedPage();
+            if (currentPage instanceof HtmlPage) {
                 page = (HtmlPage) currentPage;
             }
         }
