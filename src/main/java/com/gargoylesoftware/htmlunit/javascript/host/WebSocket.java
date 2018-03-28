@@ -518,6 +518,5 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
             engine.callFunction(containingPage_, function, scope, WebSocket.this, args);
         }
-
     }
 }
