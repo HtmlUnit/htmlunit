@@ -561,7 +561,7 @@ public class Element extends Node {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptableObject();
+                return node.getScriptableObject();
             }
             return null;
         }

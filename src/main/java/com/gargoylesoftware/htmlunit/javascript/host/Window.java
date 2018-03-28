@@ -34,6 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -203,7 +204,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
-    private final Map<Type, Storage> storages_ = new HashMap<>();
+    private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
     /**
      * Creates an instance.
@@ -1798,8 +1799,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         try {
             final URL completeUrl = ((HtmlPage) getDomNodeOrDie()).getFullyQualifiedUrl(url);
             final DialogWindow dialog = client.openDialogWindow(completeUrl, webWindow, arguments);
-            final Window jsDialog = (Window) dialog.getScriptableObject();
-            return jsDialog;
+            return dialog.getScriptableObject();
         }
         catch (final IOException e) {
             throw Context.throwAsScriptRuntimeEx(e);
@@ -1874,16 +1874,14 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 || object instanceof HtmlObject) {
                 return true;
             }
-            if (includeFormFields_ && (
-                    object instanceof HtmlAnchor
-                    || object instanceof HtmlButton
-                    || object instanceof HtmlInput
-                    || object instanceof HtmlMap
-                    || object instanceof HtmlSelect
-                    || object instanceof HtmlTextArea)) {
-                return true;
-            }
-            return false;
+
+            return includeFormFields_
+                    && (object instanceof HtmlAnchor
+                        || object instanceof HtmlButton
+                        || object instanceof HtmlInput
+                        || object instanceof HtmlMap
+                        || object instanceof HtmlSelect
+                        || object instanceof HtmlTextArea);
         }
     }
 

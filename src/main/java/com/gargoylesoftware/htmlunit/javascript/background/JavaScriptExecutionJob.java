@@ -39,7 +39,7 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
     private final String label_;
 
     /** The window to which this job belongs (weakly referenced, so as not to leak memory). */
-    private final transient WeakReference<WebWindow> window_;
+    private final WeakReference<WebWindow> window_;
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a string.

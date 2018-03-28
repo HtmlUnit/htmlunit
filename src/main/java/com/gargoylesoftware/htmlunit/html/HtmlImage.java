@@ -199,40 +199,41 @@ public class HtmlImage extends HtmlElement {
         }
 
         if (hasEventHandlers("onload") && !getSrcAttribute().isEmpty()) {
-            onloadInvoked_ = true;
             // An onload handler and source are defined; we need to download the image and then call the onload handler.
-            boolean ok;
+            onloadInvoked_ = true;
             try {
                 downloadImageIfNeeded();
                 final int i = imageWebResponse_.getStatusCode();
-                ok = (i >= HttpStatus.SC_OK && i < HttpStatus.SC_MULTIPLE_CHOICES) || i == HttpStatus.SC_USE_PROXY;
+                if ((i >= HttpStatus.SC_OK && i < HttpStatus.SC_MULTIPLE_CHOICES)
+                        || i == HttpStatus.SC_USE_PROXY) {
+
+                    // If the download was a success, trigger the onload handler.
+                    final Event event = new Event(this, Event.TYPE_LOAD);
+                    final Node scriptObject = getScriptableObject();
+
+                    final String readyState = htmlPage.getReadyState();
+                    if (READY_STATE_LOADING.equals(readyState)) {
+                        final PostponedAction action = new PostponedAction(getPage()) {
+                            @Override
+                            public void execute() throws Exception {
+                                scriptObject.executeEventLocally(event);
+                            }
+                        };
+                        htmlPage.addAfterLoadAction(action);
+                    }
+                    else {
+                        scriptObject.executeEventLocally(event);
+                    }
+                }
+                return;
             }
             catch (final IOException e) {
-                ok = false;
-            }
-            // If the download was a success, trigger the onload handler.
-            if (ok) {
-                final Event event = new Event(this, Event.TYPE_LOAD);
-                final Node scriptObject = getScriptableObject();
-
-                final String readyState = htmlPage.getReadyState();
-                if (READY_STATE_LOADING.equals(readyState)) {
-                    final PostponedAction action = new PostponedAction(getPage()) {
-                        @Override
-                        public void execute() throws Exception {
-                            scriptObject.executeEventLocally(event);
-                        }
-                    };
-                    htmlPage.addAfterLoadAction(action);
-                }
-                else {
-                    scriptObject.executeEventLocally(event);
-                }
-            }
-            else {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Unable to download image for " + this + "; not firing onload event.");
+                    LOG.debug("IOException while downloading image for '" + this + "' : " + e.getMessage());
                 }
+            }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Unable to download image for '" + this + "'; not firing onload event.");
             }
         }
     }

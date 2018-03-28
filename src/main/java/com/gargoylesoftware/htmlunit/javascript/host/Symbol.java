@@ -95,16 +95,14 @@ public class Symbol extends SimpleScriptable {
             SYMBOL_MAP_.put(browserVersion.getNickname(), map);
         }
 
-        Symbol symbol = map.get(name);
-        if (symbol == null) {
-            symbol = new Symbol();
-            symbol.name_ = name;
-            symbol.setParentScope(scope);
-            symbol.setPrototype(scope.getPrototype(symbol.getClass()));
-            map.put(name, symbol);
-        }
-
-        return symbol;
+        return map.computeIfAbsent(name,
+            k -> {
+                final Symbol sym = new Symbol();
+                sym.name_ = k;
+                sym.setParentScope(scope);
+                sym.setPrototype(scope.getPrototype(sym.getClass()));
+                return sym;
+            });
     }
 
     /**

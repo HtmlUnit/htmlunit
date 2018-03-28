@@ -103,7 +103,7 @@ public class ClientRectList extends SimpleScriptable {
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class == hint
                 && getBrowserVersion().hasFeature(JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST)) {
-            if (clientRects_.size() > 0) {
+            if (!clientRects_.isEmpty()) {
                 return clientRects_.get(0).getDefaultValue(hint);
             }
             return "";
