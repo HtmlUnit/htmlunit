@@ -88,10 +88,7 @@ final class HtmlUnitDomainHandler extends BasicDomainHandler {
             if (browserVersion_.hasFeature(HTTP_COOKIE_REMOVE_DOT_FROM_ROOT_DOMAINS)) {
                 domain = domain.substring(1);
             }
-            if (host.equals(domain)) {
-                return true;
-            }
-            return false;
+            return host.equals(domain);
         }
 
         if (dotIndex == -1

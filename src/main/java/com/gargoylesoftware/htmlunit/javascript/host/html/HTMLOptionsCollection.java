@@ -271,16 +271,12 @@ public class HTMLOptionsCollection extends SimpleScriptable {
      */
     @JsxFunction
     public void add(final Object newOptionObject, final Object beforeOptionObject) {
-        // If newIndex is undefined, then the item will be appended to the end of
-        // the list
-        int index = getLength();
-
         final HtmlOption htmlOption = (HtmlOption) ((HTMLOptionElement) newOptionObject).getDomNodeOrNull();
 
         HtmlOption beforeOption = null;
         // If newIndex was specified, then use it
         if (beforeOptionObject instanceof Number) {
-            index = ((Integer) Context.jsToJava(beforeOptionObject, Integer.class)).intValue();
+            final int index = ((Integer) Context.jsToJava(beforeOptionObject, Integer.class)).intValue();
             if (index < 0 || index >= getLength()) {
                 // Add a new option at the end.
                 htmlSelect_.appendOption(htmlOption);

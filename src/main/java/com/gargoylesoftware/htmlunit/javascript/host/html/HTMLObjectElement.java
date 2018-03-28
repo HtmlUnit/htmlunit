@@ -123,8 +123,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     @JsxGetter(IE)
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttributeDirect("alt");
-        return alt;
+        return getDomNodeOrDie().getAttributeDirect("alt");
     }
 
     /**
@@ -142,8 +141,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     @JsxGetter
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttributeDirect("border");
-        return border;
+        return getDomNodeOrDie().getAttributeDirect("border");
     }
 
     /**
@@ -161,8 +159,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     @JsxGetter(IE)
     public String getClassid() {
-        final String classid = getDomNodeOrDie().getAttributeDirect("classid");
-        return classid;
+        return getDomNodeOrDie().getAttributeDirect("classid");
     }
 
     /**

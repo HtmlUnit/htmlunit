@@ -107,12 +107,10 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                 protocol = "SSL";
             }
             final SSLContext sslContext = SSLContext.getInstance(protocol);
-            sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager2()}, null);
+            sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager()}, null);
 
-            final SSLConnectionSocketFactory factory = new HtmlUnitSSLConnectionSocketFactory(sslContext,
-                NoopHostnameVerifier.INSTANCE,
-                useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
-            return factory;
+            return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
+                                            useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
         }
         catch (final GeneralSecurityException e) {
             throw new RuntimeException(e);
@@ -243,7 +241,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
  * @author Daniel Gredler
  * @author Marc Guillemot
  */
-class InsecureTrustManager2 implements X509TrustManager {
+class InsecureTrustManager implements X509TrustManager {
     private final Set<X509Certificate> acceptedIssuers_ = new HashSet<>();
 
     /**

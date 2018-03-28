@@ -733,7 +733,7 @@ public class HTMLDocument extends Document {
         final String expElementName = "null".equals(elementName) ? "" : elementName;
 
         final HtmlPage page = getPage();
-        final HTMLCollection collection = new HTMLCollection(page, true) {
+        return new HTMLCollection(page, true) {
             @Override
             protected List<DomNode> computeElements() {
                 return new ArrayList<>(page.getElementsByName(expElementName));
@@ -747,8 +747,6 @@ public class HTMLDocument extends Document {
                 return EffectOnCache.NONE;
             }
         };
-
-        return collection;
     }
 
     /**
@@ -789,12 +787,12 @@ public class HTMLDocument extends Document {
         if (size == 1) {
             final DomNode object = matchingElements.get(0);
             if (alsoFrames && object instanceof BaseFrameElement) {
-                return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
+                return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
             }
             return super.getScriptableFor(object);
         }
 
-        final HTMLCollection collection = new HTMLCollection(page, matchingElements) {
+        return new HTMLCollection(page, matchingElements) {
             @Override
             protected List<DomNode> computeElements() {
                 return getItComputeElements(page, name, forIDAndOrName, alsoFrames);
@@ -803,10 +801,7 @@ public class HTMLDocument extends Document {
             @Override
             protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
                 final String attributeName = event.getName();
-                if ("name".equals(attributeName)) {
-                    return EffectOnCache.RESET;
-                }
-                else if (forIDAndOrName && "id".equals(attributeName)) {
+                if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
                     return EffectOnCache.RESET;
                 }
 
@@ -816,13 +811,11 @@ public class HTMLDocument extends Document {
             @Override
             protected SimpleScriptable getScriptableFor(final Object object) {
                 if (alsoFrames && object instanceof BaseFrameElement) {
-                    return (SimpleScriptable) ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
+                    return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
                 }
                 return super.getScriptableFor(object);
             }
         };
-
-        return collection;
     }
 
     private List<DomNode> getItComputeElements(final HtmlPage page, final String name,
@@ -851,10 +844,10 @@ public class HTMLDocument extends Document {
     @JsxGetter
     public HTMLElement getHead() {
         final HtmlElement head = getPage().getHead();
-        if (head != null) {
-            return (HTMLElement) head.getScriptableObject();
+        if (head == null) {
+            return null;
         }
-        return null;
+        return head.getScriptableObject();
     }
 
     /**
@@ -1080,7 +1073,7 @@ public class HTMLDocument extends Document {
             if (window instanceof FrameWindow) {
                 final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
                 if (frame instanceof HtmlInlineFrame) {
-                    final Window winWithFrame = (Window) frame.getPage().getEnclosingWindow().getScriptableObject();
+                    final Window winWithFrame = frame.getPage().getEnclosingWindow().getScriptableObject();
                     ((HTMLDocument) winWithFrame.getDocument()).setActiveElement(
                                 (HTMLElement) frame.getScriptableObject());
                 }
