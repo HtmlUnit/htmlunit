@@ -34,12 +34,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Stack;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -882,9 +883,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             try {
                 // KEY_STARTING_SCOPE maintains a stack of scopes
                 @SuppressWarnings("unchecked")
-                Stack<Scriptable> stack = (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                 if (null == stack) {
-                    stack = new Stack<>();
+                    stack = new ArrayDeque<>();
                     cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                 }
 

@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
 import java.lang.reflect.Method;
-import java.util.Stack;
+import java.util.Deque;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -314,8 +314,8 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      */
     protected Scriptable getStartingScope() {
         @SuppressWarnings("unchecked")
-        final Stack<Scriptable> stack =
-                (Stack<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+        final Deque<Scriptable> stack =
+                (Deque<Scriptable>) Context.getCurrentContext().getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
         if (null == stack) {
             return null;
         }

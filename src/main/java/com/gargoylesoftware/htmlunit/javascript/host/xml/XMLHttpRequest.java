@@ -36,13 +36,14 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
-import java.util.Stack;
 import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
@@ -641,10 +642,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 public Object run(final Context cx) {
                     // KEY_STARTING_SCOPE maintains a stack of scopes
                     @SuppressWarnings("unchecked")
-                    Stack<Scriptable> stack =
-                            (Stack<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                    Deque<Scriptable> stack =
+                            (Deque<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
                     if (null == stack) {
-                        stack = new Stack<>();
+                        stack = new ArrayDeque<>();
                         cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
                     stack.push(startingScope);
