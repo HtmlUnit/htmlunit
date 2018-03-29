@@ -652,22 +652,17 @@ public class XMLHTTPRequest extends MSXMLScriptable {
     private static boolean isPreflightHeader(final String name, final String value) {
         if (HttpHeader.CONTENT_TYPE_LC.equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
-            if (lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
+            return !(lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
                 || lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                || lcValue.startsWith("text/plain")) {
-                return false;
-            }
-            return true;
+                || lcValue.startsWith("text/plain"));
         }
-        if (HttpHeader.ACCEPT_LC.equals(name)
+
+        return !(HttpHeader.ACCEPT_LC.equals(name)
                 || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
                 || HttpHeader.CONTENT_LANGUAGE_LC.equals(name)
                 || HttpHeader.REFERER_LC.equals(name)
                 || HttpHeader.ACCEPT_ENCODING_LC.equals(name)
-                || HttpHeader.ORIGIN_LC.equals(name)) {
-            return false;
-        }
-        return true;
+                || HttpHeader.ORIGIN_LC.equals(name));
     }
 
     /**

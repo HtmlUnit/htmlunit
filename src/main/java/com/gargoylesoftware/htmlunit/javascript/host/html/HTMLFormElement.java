@@ -279,12 +279,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxSetter
     public void setEnctype(final String enctype) {
         WebAssert.notNull("encoding", enctype);
-        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)) {
-            if (!FormEncodingType.URL_ENCODED.getName().equals(enctype)
-                    && !FormEncodingType.MULTIPART.getName().equals(enctype)) {
-                throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '"
-                        + enctype + "'");
-            }
+        if (getBrowserVersion().hasFeature(JS_FORM_REJECT_INVALID_ENCODING)
+                && !FormEncodingType.URL_ENCODED.getName().equals(enctype)
+                && !FormEncodingType.MULTIPART.getName().equals(enctype)) {
+            throw Context.reportRuntimeError("Cannot set the encoding property to invalid value: '" + enctype + "'");
         }
         getHtmlForm().setEnctypeAttribute(enctype);
     }
@@ -392,13 +390,12 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return getScriptableFor(elements.get(0));
         }
         final List<DomNode> nodes = new ArrayList<>(elements);
-        final HTMLCollection collection = new HTMLCollection(getHtmlForm(), nodes) {
+        return new HTMLCollection(getHtmlForm(), nodes) {
             @Override
             protected List<DomNode> computeElements() {
                 return new ArrayList<>(findElements(name));
             }
         };
-        return collection;
     }
 
     private List<HtmlElement> findElements(final String name) {
@@ -454,10 +451,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 return true;
             }
 
-            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)) {
-                if (elementWithNames.getNewNames().contains(name)) {
-                    return true;
-                }
+            if (getBrowserVersion().hasFeature(FORMFIELD_REACHABLE_BY_NEW_NAMES)
+                    && elementWithNames.getNewNames().contains(name)) {
+                return true;
             }
         }
         return false;

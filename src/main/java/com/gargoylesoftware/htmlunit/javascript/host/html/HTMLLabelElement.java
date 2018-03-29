@@ -79,7 +79,7 @@ public class HTMLLabelElement extends HTMLElement {
         if (null == elem || !(elem instanceof HtmlElement)) {
             return null;
         }
-        return (HTMLElement) ((HtmlElement) elem).getScriptableObject();
+        return ((HtmlElement) elem).getScriptableObject();
     }
 
     /**

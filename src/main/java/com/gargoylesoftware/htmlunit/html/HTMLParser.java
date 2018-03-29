@@ -400,7 +400,7 @@ public final class HTMLParser {
     static final class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
 
-        private enum HeadParsed { YES, SYNTHESIZED, NO };
+        private enum HeadParsed { YES, SYNTHESIZED, NO }
 
         private final HtmlPage page_;
 

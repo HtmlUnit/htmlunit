@@ -35,10 +35,8 @@ public class HTMLBGSoundElement extends HTMLElement {
      */
     @Override
     public String getClassName() {
-        if (getWindow().getWebWindow() != null) {
-            if (getBrowserVersion().hasFeature(JS_BGSOUND_AS_UNKNOWN)) {
-                return "HTMLUnknownElement";
-            }
+        if (getWindow().getWebWindow() != null && getBrowserVersion().hasFeature(JS_BGSOUND_AS_UNKNOWN)) {
+            return "HTMLUnknownElement";
         }
         return super.getClassName();
     }

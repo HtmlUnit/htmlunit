@@ -862,7 +862,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click() throws IOException {
-        return (P) click(false, false, false);
+        return click(false, false, false);
     }
 
     /**
@@ -970,7 +970,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             if (disableProcessLabelAfterBubbling) {
                 event.disableProcessLabelAfterBubbling();
             }
-            return (P) click(event, ignoreVisibility);
+            return click(event, ignoreVisibility);
         }
     }
 
@@ -1104,7 +1104,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P dblClick() throws IOException {
-        return (P) dblClick(false, false, false);
+        return dblClick(false, false, false);
     }
 
     /**
@@ -1522,7 +1522,7 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
-    public static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
+    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
     private final List<String> attrPositions_ = new ArrayList<>();

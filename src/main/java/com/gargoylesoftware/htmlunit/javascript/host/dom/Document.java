@@ -969,10 +969,7 @@ public class Document extends Node {
                 }
             }
             else if (docType.getPublicId() == null) {
-                if (docType.getName() != null) {
-                    return false;
-                }
-                return true;
+                return docType.getName() == null;
             }
         }
         return true;
@@ -1213,11 +1210,7 @@ public class Document extends Node {
             event.eventCreated();
             return event;
         }
-        catch (final InstantiationException e) {
-            throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
-                            + "' for event type of '" + eventType + "': " + e.getMessage());
-        }
-        catch (final IllegalAccessException e) {
+        catch (final InstantiationException | IllegalAccessException e) {
             throw Context.reportRuntimeError("Failed to instantiate event: class ='" + clazz.getName()
                             + "' for event type of '" + eventType + "': " + e.getMessage());
         }

@@ -370,7 +370,7 @@ public class Node extends EventTarget {
     private static boolean isNodeInsertable(final Node childObject) {
         if (childObject instanceof HTMLHtmlElement) {
             final DomNode domNode = childObject.getDomNodeOrDie();
-            return !(domNode.getPage().getDocumentElement() == domNode);
+            return domNode.getPage().getDocumentElement() != domNode;
         }
         return true;
     }

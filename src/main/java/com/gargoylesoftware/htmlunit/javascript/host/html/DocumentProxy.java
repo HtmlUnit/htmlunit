@@ -45,7 +45,7 @@ public class DocumentProxy extends SimpleScriptableProxy<Document> {
      */
     @Override
     public Document getDelegee() {
-        final Window w = (Window) webWindow_.getScriptableObject();
+        final Window w = webWindow_.getScriptableObject();
         return w.getDocument();
     }
 

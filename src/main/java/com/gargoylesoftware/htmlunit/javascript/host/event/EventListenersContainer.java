@@ -164,12 +164,7 @@ public class EventListenersContainer implements Serializable {
 
     private TypeContainer getTypeContainer(final String type) {
         final String typeLC = type.toLowerCase(Locale.ROOT);
-        TypeContainer container = typeContainers_.get(typeLC);
-        if (container == null) {
-            container = new TypeContainer();
-            typeContainers_.put(typeLC, container);
-        }
-        return container;
+        return typeContainers_.computeIfAbsent(typeLC, k -> new TypeContainer());
     }
 
     /**

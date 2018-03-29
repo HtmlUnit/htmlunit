@@ -120,11 +120,11 @@ public class MSXMLJavaScriptEnvironment {
 
         // the properties
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
-        for (final String propertyName : propertyMap.keySet()) {
-            final PropertyInfo info = propertyMap.get(propertyName);
+        for (final Map.Entry<String, PropertyInfo> entry : propertyMap.entrySet()) {
+            final PropertyInfo info = entry.getValue();
             final Method readMethod = info.getReadMethod();
             final Method writeMethod = info.getWriteMethod();
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
+            scriptable.defineProperty(entry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
 
         final int attributes = ScriptableObject.DONTENUM;

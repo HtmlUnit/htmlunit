@@ -253,7 +253,7 @@ public class XPathResult extends SimpleScriptable {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return result_.size() > 0;
+        return !result_.isEmpty();
     }
 
     /**

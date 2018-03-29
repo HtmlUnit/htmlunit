@@ -967,7 +967,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         else {
             // clean up the new node, in case it is being moved
-            if (domNode != this && domNode.getParentNode() != null) {
+            if (domNode.getParentNode() != null) {
                 domNode.detach();
             }
 
@@ -1323,12 +1323,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {
-        return new Iterable<DomNode>() {
-            @Override
-            public Iterator<DomNode> iterator() {
-                return new ChildIterator();
-            }
-        };
+        return () -> new ChildIterator();
     }
 
     /**
@@ -1373,12 +1368,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an {@link Iterable} that will recursively iterate over all of this node's descendants
      */
     public final Iterable<DomNode> getDescendants() {
-        return new Iterable<DomNode>() {
-            @Override
-            public Iterator<DomNode> iterator() {
-                return new DescendantElementsIterator<>(DomNode.class);
-            }
-        };
+        return () -> new DescendantElementsIterator<>(DomNode.class);
     }
 
     /**
@@ -1390,12 +1380,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getDomElementDescendants()
      */
     public final Iterable<HtmlElement> getHtmlElementDescendants() {
-        return new Iterable<HtmlElement>() {
-            @Override
-            public Iterator<HtmlElement> iterator() {
-                return new DescendantElementsIterator<>(HtmlElement.class);
-            }
-        };
+        return () -> new DescendantElementsIterator<>(HtmlElement.class);
     }
 
     /**
@@ -1407,12 +1392,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getHtmlElementDescendants()
      */
     public final Iterable<DomElement> getDomElementDescendants() {
-        return new Iterable<DomElement>() {
-            @Override
-            public Iterator<DomElement> iterator() {
-                return new DescendantElementsIterator<>(DomElement.class);
-            }
-        };
+        return () -> new DescendantElementsIterator<>(DomElement.class);
     }
 
     /**
@@ -1980,7 +1960,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         public void error(final CSSParseException exception) throws CSSException {
             errorDetected_ = true;
         }
-    };
+    }
 
     /**
      * Indicates if the provided event can be applied to this node.

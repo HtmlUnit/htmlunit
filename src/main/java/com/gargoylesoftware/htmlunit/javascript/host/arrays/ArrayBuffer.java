@@ -92,8 +92,7 @@ public class ArrayBuffer extends SimpleScriptable {
         else if (Double.isInfinite(beginNumber)) {
             if (beginNumber > 0) {
                 final byte[] byteArray = new byte[0];
-                final ArrayBuffer arrayBuffer = new ArrayBuffer(byteArray);
-                return arrayBuffer;
+                return new ArrayBuffer(byteArray);
             }
             beginInt = 0;
         }
@@ -118,8 +117,7 @@ public class ArrayBuffer extends SimpleScriptable {
 
         final byte[] byteArray = new byte[(int) endNumber - beginInt];
         System.arraycopy(bytes_, beginInt, byteArray, 0, byteArray.length);
-        final ArrayBuffer arrayBuffer = new ArrayBuffer(byteArray);
-        return arrayBuffer;
+        return new ArrayBuffer(byteArray);
     }
 
     byte getByte(final int index) {

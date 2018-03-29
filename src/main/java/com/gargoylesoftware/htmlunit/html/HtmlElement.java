@@ -535,12 +535,12 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
-                shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
+                shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
         if (!keyDown.isAborted(keyDownResult)) {
             final Event keyPress = new KeyboardEvent(this, Event.TYPE_KEY_PRESS, c,
-                    shiftPressed_ | isShiftNeeded, ctrlPressed_, altPressed_);
+                    shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
             final ScriptResult keyPressResult = fireEvent(keyPress);
 
             if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
@@ -553,10 +553,10 @@ public abstract class HtmlElement extends DomElement {
         if (this instanceof HtmlTextInput
                 || this instanceof HtmlTextArea
                 || this instanceof HtmlPasswordInput) {
-            fireKeyboardEvent(Event.TYPE_INPUT, c, shiftPressed_ | isShiftNeeded);
+            fireKeyboardEvent(Event.TYPE_INPUT, c, shiftPressed_ || isShiftNeeded);
         }
 
-        fireKeyboardEvent(Event.TYPE_KEY_UP, c, shiftPressed_ | isShiftNeeded);
+        fireKeyboardEvent(Event.TYPE_KEY_UP, c, shiftPressed_ || isShiftNeeded);
 
         if (isShiftNeeded) {
             final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,

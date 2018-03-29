@@ -545,10 +545,7 @@ public class HTMLElement extends Element {
                     final Method method = getClass().getMethod("set" + name, METHOD_PARAMS_OBJECT);
                     method.invoke(this, new EventHandler(getDomNodeOrDie(), name.substring(2), value));
                 }
-                catch (final NoSuchMethodException e) {
-                    //silently ignore
-                }
-                catch (final IllegalAccessException e) {
+                catch (final NoSuchMethodException | IllegalAccessException e) {
                     //silently ignore
                 }
                 catch (final InvocationTargetException e) {
@@ -1532,10 +1529,8 @@ public class HTMLElement extends Element {
                 try {
                     final Float f = Float.valueOf(value);
                     final int i = f.intValue();
-                    if (i < 0) {
-                        if (!allowNegativeValues) {
-                            error = true;
-                        }
+                    if (i < 0 && !allowNegativeValues) {
+                        error = true;
                     }
                 }
                 catch (final NumberFormatException e) {
@@ -1570,24 +1565,22 @@ public class HTMLElement extends Element {
                     }
                 }
             }
-            if (!isName) {
-                if (restrict) {
-                    if (s.charAt(0) == '#') {
-                        s = s.substring(1);
-                    }
-                    final StringBuilder builder = new StringBuilder(7);
-                    for (int x = 0; x < 6 && x < s.length(); x++) {
-                        final char ch = s.charAt(x);
-                        if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')) {
-                            builder.append(ch);
-                        }
-                        else {
-                            builder.append('0');
-                        }
-                    }
-                    builder.insert(0, '#');
-                    s = builder.toString();
+            if (!isName && restrict) {
+                if (s.charAt(0) == '#') {
+                    s = s.substring(1);
                 }
+                final StringBuilder builder = new StringBuilder(7);
+                for (int x = 0; x < 6 && x < s.length(); x++) {
+                    final char ch = s.charAt(x);
+                    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F')) {
+                        builder.append(ch);
+                    }
+                    else {
+                        builder.append('0');
+                    }
+                }
+                builder.insert(0, '#');
+                s = builder.toString();
             }
             if (getBrowserVersion().hasFeature(HTML_COLOR_TO_LOWER)) {
                 s = s.toLowerCase(Locale.ROOT);

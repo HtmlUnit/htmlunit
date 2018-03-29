@@ -42,12 +42,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public final class XPathUtils {
 
-    private static ThreadLocal<Boolean> PROCESS_XPATH_ = new ThreadLocal<Boolean>() {
-        @Override
-        protected synchronized Boolean initialValue() {
-            return Boolean.FALSE;
-        }
-    };
+    private static ThreadLocal<Boolean> PROCESS_XPATH_ = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
     /**
      * Private to avoid instantiation.
