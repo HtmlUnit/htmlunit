@@ -394,7 +394,7 @@ public class Range extends SimpleScriptable {
             if (offsetForThis < offsetForOther) {
                 return Integer.valueOf(-1);
             }
-            else if (offsetForThis < offsetForOther) {
+            else if (offsetForThis > offsetForOther) {
                 return Integer.valueOf(1);
             }
             return Integer.valueOf(0);

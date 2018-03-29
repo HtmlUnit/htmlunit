@@ -969,10 +969,7 @@ public final class UrlUtils {
     }
 
     static boolean isNormalUrlProtocol(final String protocol) {
-        if ("http".equals(protocol) || "https".equals(protocol) || "file".equals(protocol)) {
-            return true;
-        }
-        return false;
+        return "http".equals(protocol) || "https".equals(protocol) || "file".equals(protocol);
     }
 
     /**

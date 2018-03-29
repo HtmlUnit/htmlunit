@@ -126,7 +126,7 @@ abstract class URLCreator {
             final String stringUrl = url.toString();
             if (stringUrl.startsWith(PREFIX)) {
                 final int begin = PREFIX.length();
-                final int end = stringUrl.indexOf("/", begin);
+                final int end = stringUrl.indexOf('/', begin);
                 return stringUrl.substring(begin, end);
             }
 
