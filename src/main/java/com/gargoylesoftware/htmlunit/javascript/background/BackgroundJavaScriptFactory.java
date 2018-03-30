@@ -18,7 +18,6 @@ import java.net.URL;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -131,9 +130,6 @@ public class BackgroundJavaScriptFactory {
      * @return the executor.
      */
     public JavaScriptExecutor createJavaScriptExecutor(final WebClient webClient) {
-        if (GAEUtils.isGaeMode()) {
-            return new GAEJavaScriptExecutor(webClient);
-        }
         return new DefaultJavaScriptExecutor(webClient);
     }
 
