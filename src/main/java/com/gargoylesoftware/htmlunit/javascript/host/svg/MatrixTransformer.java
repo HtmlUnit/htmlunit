@@ -19,7 +19,7 @@ import java.awt.geom.NoninvertibleTransformException;
 import java.io.Serializable;
 
 /**
- * Interface redirection to support GAE also.
+ * Helper to support various matrix transform operations.
  *
  * @author Ronald Brill
  */

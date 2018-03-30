@@ -120,17 +120,6 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         return javaScriptJobManager;
     }
 
-    /**
-     * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
-     * No use in non-GAE mode.
-     * @param timeoutMillis the timeout in milliseconds
-     * @return the number of jobs executed
-     */
-    @Override
-    public int pumpEventLoop(final long timeoutMillis) {
-        return 0;
-    }
-
     /** Runs the eventLoop. */
     @Override
     public void run() {

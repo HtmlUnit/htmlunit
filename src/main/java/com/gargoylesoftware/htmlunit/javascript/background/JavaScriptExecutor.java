@@ -37,12 +37,4 @@ public interface JavaScriptExecutor extends Runnable, Serializable {
      * Notes that this thread has been shutdown.
      */
     void shutdown();
-
-    /**
-     * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
-     * No use in non-GAE mode.
-     * @param timeoutMillis the timeout in milliseconds
-     * @return the number of jobs executed
-     */
-    int pumpEventLoop(long timeoutMillis);
 }

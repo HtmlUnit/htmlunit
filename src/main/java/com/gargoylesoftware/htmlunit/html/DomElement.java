@@ -860,7 +860,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P click() throws IOException {
         return click(false, false, false);
     }
@@ -1102,7 +1101,6 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the page that occupies this element's window after the element has been double-clicked
      * @exception IOException if an IO error occurs
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P dblClick() throws IOException {
         return dblClick(false, false, false);
     }

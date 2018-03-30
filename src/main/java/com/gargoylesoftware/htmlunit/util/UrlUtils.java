@@ -21,13 +21,18 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLStreamHandler;
 import java.nio.charset.Charset;
 import java.util.BitSet;
+import java.util.Locale;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.protocol.AnyHandler;
+import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 
 /**
  * URL utilities class that makes it easy to create new URLs based off of old URLs
@@ -43,11 +48,14 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Hartmut Arlt
  */
 public final class UrlUtils {
+    private static final URLStreamHandler JS_HANDLER = new com.gargoylesoftware.htmlunit.protocol.javascript.Handler();
+    private static final URLStreamHandler ABOUT_HANDLER = new com.gargoylesoftware.htmlunit.protocol.about.Handler();
+    private static final URLStreamHandler DATA_HANDLER = new com.gargoylesoftware.htmlunit.protocol.data.Handler();
+
     private static final BitSet PATH_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet QUERY_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet HASH_ALLOWED_CHARS = new BitSet(256);
-    private static final URLCreator URL_CREATOR = URLCreator.getCreator();
 
     /**
      * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
@@ -203,7 +211,36 @@ public final class UrlUtils {
      */
     public static URL toUrlUnsafe(final String url) throws MalformedURLException {
         WebAssert.notNull("url", url);
-        return URL_CREATOR.toUrlUnsafeClassic(url);
+
+        final String protocol = org.apache.commons.lang3.StringUtils.substringBefore(url, ":").toLowerCase(Locale.ROOT);
+
+        if (protocol.isEmpty() || UrlUtils.isNormalUrlProtocol(protocol)) {
+            final URL response = new URL(url);
+            if (response.getProtocol().startsWith("http")
+                    && org.apache.commons.lang3.StringUtils.isEmpty(response.getHost())) {
+                throw new MalformedURLException("Missing host name in url: " + url);
+            }
+            return response;
+        }
+
+        if (JavaScriptURLConnection.JAVASCRIPT_PREFIX.equals(protocol + ":")) {
+            return new URL(null, url, JS_HANDLER);
+        }
+
+        if ("about".equals(protocol)) {
+            if (WebClient.URL_ABOUT_BLANK != null
+                    && org.apache.commons.lang3.StringUtils.
+                        equalsIgnoreCase(WebClient.URL_ABOUT_BLANK.toExternalForm(), url)) {
+                return WebClient.URL_ABOUT_BLANK;
+            }
+            return new URL(null, url, ABOUT_HANDLER);
+        }
+
+        if ("data".equals(protocol)) {
+            return new URL(null, url, DATA_HANDLER);
+        }
+
+        return new URL(null, url, AnyHandler.INSTANCE);
     }
 
     /**
@@ -218,7 +255,7 @@ public final class UrlUtils {
      * @return the encoded URL
      */
     public static URL encodeUrl(final URL url, final boolean minimalQueryEncoding, final Charset charset) {
-        if (!isNormalUrlProtocol(URL_CREATOR.getProtocol(url))) {
+        if (!isNormalUrlProtocol(url.getProtocol())) {
             return url; // javascript:, about:, data: and anything not supported like foo:
         }
 

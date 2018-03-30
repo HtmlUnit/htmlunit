@@ -70,7 +70,6 @@ import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.Attachment;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -245,7 +244,7 @@ public class WebClient implements Serializable, AutoCloseable {
             getOptions().setProxyConfig(new ProxyConfig(proxyHost, proxyPort));
         }
 
-        webConnection_ = createWebConnection(); // this has to be done after the browser version was set
+        webConnection_ = new HttpWebConnection(this); // this has to be done after the browser version was set
         scriptEngine_ = new JavaScriptEngine(this);
         loadQueue_ = new ArrayList<>();
 
@@ -2050,7 +2049,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
 
-        webConnection_ = createWebConnection();
+        webConnection_ = new HttpWebConnection(this);
         scriptEngine_ = new JavaScriptEngine(this);
         jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
         loadQueue_ = new ArrayList<>();
@@ -2058,14 +2057,6 @@ public class WebClient implements Serializable, AutoCloseable {
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
             initMSXMLActiveX();
         }
-    }
-
-    private WebConnection createWebConnection() {
-        if (GAEUtils.isGaeMode()) {
-            return new UrlFetchWebConnection(this);
-        }
-
-        return new HttpWebConnection(this);
     }
 
     private static class LoadJob {

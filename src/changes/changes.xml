@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="2.31" date="xx, 2018" description="Bugfixes, special GAE handlings removed">
+            <action type="update" dev="rbri">
+                Special handling of the GAE environment is no longer required, the JDK8 at GAE has no longer
+                any restrictions.
+            </action>
+        </release>
+
         <release version="2.30" date="March 25, 2018" description="Bugfixes, using or own CSSParser for improved performance, URLSearchParams implemented, start adding support of user defined iterators, CHROME 66">
             <action type="fix" dev="rbri" issue="1959">
                 Improved clone implementation to take care of references.
@@ -26,18 +33,18 @@
             <action type="add" dev="rbri" issue="1954">
                 Use the correct content type when guessing from the '.js' file extension.
             </action>
-            <action type="change" dev="rbri">
+            <action type="update" dev="rbri">
                 Major refactoring of the css handling (selector processing). Every style sheet now has
                 a selector index to speed up style processing.
             </action>
-            <action type="change" dev="rbri">
+            <action type="update" dev="rbri">
                 We have now our own cssparser (a cleaned up version of the cssparser we have used so far)
                 to be able to change the model classes to better support our use cases.
             </action>
-            <action type="change" dev="rbri">
+            <action type="update" dev="rbri">
                 getArttibute is optimized for speed in some special cases.
             </action>
-            <action type="change" dev="rbri">
+            <action type="update" dev="rbri">
                 Local files are now cached using the same rules as server requests
                 (cacheable if date-modified is more than ten minutes in the past)
             </action>
@@ -74,7 +81,7 @@
             <action type="add" dev="rbri">
                 JavaScript: Array.from() now supports user defined iterators also.
             </action>
-            <action type="change" dev="rbri">
+            <action type="update" dev="rbri">
                 Samples on page Get Started updated.
             </action>
             <action type="fix" dev="rbri" issue="1946">
@@ -244,7 +251,7 @@
                 INCOMPATIBLE CHANGE: BrowserVersion is final now and all constructors are removed.
                 The only way to create new customized Browser versions is by using the BrowserVersionBuilder.
             </action>
-            <action type="change" dev="rbri" issue="1890">
+            <action type="update" dev="rbri" issue="1890">
                 BrowserVersion setter methods are fluent now.
             </action>
             <action type="fix" dev="asashour" issue="1905">
@@ -733,7 +740,7 @@
             <action type="fix" dev="rbri" issue="1803" due-to="Carsten Steul">
                 IllegalStateException adding an option to a select.
             </action>
-            <action type="change" dev="rbri" issue="1620">
+            <action type="update" dev="rbri" issue="1620">
                 New class DefaultJavaScriptErrorListener added. This listener will be always used of no specific listener is defined.
                 The logging of js errors was moved to this class. If you like to have the logging and your own JavaScriptErrorListener
                 than subclass or decorate this.

@@ -671,19 +671,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * Executes the jobs in the eventLoop till timeoutMillis expires or the eventLoop becomes empty.
-     * No use in non-GAE mode (see {@link com.gargoylesoftware.htmlunit.gae.GAEUtils#isGaeMode}.
-     * @param timeoutMillis the timeout in milliseconds
-     * @return the number of jobs executed
-     */
-    public int pumpEventLoop(final long timeoutMillis) {
-        if (javaScriptExecutor_ == null) {
-            return 0;
-        }
-        return javaScriptExecutor_.pumpEventLoop(timeoutMillis);
-    }
-
-    /**
      * Shutdown the JavaScriptEngine.
      */
     @Override
