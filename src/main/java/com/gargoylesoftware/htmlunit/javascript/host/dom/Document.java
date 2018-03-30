@@ -1285,7 +1285,7 @@ public class Document extends Node {
             boolean expandEntityReferences) throws DOMException {
 
         // seems that Rhino doesn't like long as parameter type
-        final int whatToShowI = (int) Double.valueOf(whatToShow).longValue();
+        final int whatToShowI = (int) whatToShow;
 
         if (getBrowserVersion().hasFeature(JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE)) {
             expandEntityReferences = false;

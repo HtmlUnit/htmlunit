@@ -55,16 +55,14 @@ public class StorageHolder implements Serializable {
      * @return the store
      */
     public Map<String, String> getStore(final Type storageType, final Page page) {
-        final String key = getKey(storageType, page);
         final Map<String, Map<String, String>> storage = getStorage(storageType);
+        if (storage == null) {
+            return null;
+        }
 
         synchronized (storage) {
-            Map<String, String> map = storage.get(key);
-            if (map == null) {
-                map = new LinkedHashMap<>();
-                storage.put(key, map);
-            }
-            return map;
+            final String key = getKey(storageType, page);
+            return storage.computeIfAbsent(key, k -> new LinkedHashMap<>());
         }
     }
 
