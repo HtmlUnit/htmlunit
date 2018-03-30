@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -38,8 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 @JsxClass
 public class SVGMatrix extends SimpleScriptable {
 
-    private static final MatrixTransformer matrixTransformer_ =
-                    GAEUtils.isGaeMode() ? new GAEMatrixTransformer() : new AwtMatrixTransformer();
+    private static final MatrixTransformer matrixTransformer_ = new MatrixTransformer();
     private MatrixTransformer.SvgMatrix svgMatrix_;
 
     /**
