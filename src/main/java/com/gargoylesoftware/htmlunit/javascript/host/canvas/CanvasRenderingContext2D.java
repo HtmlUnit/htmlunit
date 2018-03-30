@@ -24,7 +24,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageReader;
 
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.GaeRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
@@ -76,12 +74,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         if (renderingBackend_ == null) {
             final int imageWidth = Math.max(1, canvas_.getWidth());
             final int imageHeight = Math.max(1, canvas_.getHeight());
-            if (GAEUtils.isGaeMode()) {
-                renderingBackend_ = new GaeRenderingBackend(imageWidth, imageHeight);
-            }
-            else {
-                renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
-            }
+            renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
         }
         return renderingBackend_;
     }
