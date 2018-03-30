@@ -16,12 +16,19 @@ package com.gargoylesoftware.htmlunit.javascript.host.intl;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
+import java.time.ZoneId;
+import java.time.chrono.Chronology;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.JapaneseChronology;
+import java.time.chrono.ThaiBuddhistChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.gae.GAEUtils;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -48,7 +55,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
-    private AbstractDateTimeFormatter formatter_;
+    private DateTimeFormatHelper formatter_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -264,12 +271,7 @@ public class DateTimeFormat extends SimpleScriptable {
             pattern = pattern.replace("\u200E", "");
         }
 
-        if (GAEUtils.isGaeMode()) {
-            formatter_ = new GAEDateTimeFormatter(locale, browserVersion, pattern);
-        }
-        else {
-            formatter_ = new DefaultDateTimeFormatter(locale, browserVersion, pattern);
-        }
+        formatter_ = new DateTimeFormatHelper(locale, browserVersion, pattern);
     }
 
     private static String getPattern(final Map<String, String> formats, final String locale) {
@@ -328,4 +330,66 @@ public class DateTimeFormat extends SimpleScriptable {
         return formatter_.format(date);
     }
 
+    /**
+     * Helper.
+     */
+    static final class DateTimeFormatHelper {
+
+        private DateTimeFormatter formatter_;
+        private Chronology chronology_;
+
+        DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
+            formatter_ = DateTimeFormatter.ofPattern(pattern);
+            if (locale.startsWith("ar")
+                    && (!"ar-DZ".equals(locale)
+                                    && !"ar-LY".equals(locale)
+                                    && !"ar-MA".equals(locale)
+                                    && !"ar-TN".equals(locale))) {
+                final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
+                formatter_ = formatter_.withDecimalStyle(decimalStyle);
+            }
+
+            switch (locale) {
+                case "ja-JP-u-ca-japanese":
+                    chronology_ = JapaneseChronology.INSTANCE;
+                    break;
+
+                case "ar":
+                    if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
+                        chronology_ = HijrahChronology.INSTANCE;
+                    }
+                    break;
+
+                case "ar-SA":
+                    chronology_ = HijrahChronology.INSTANCE;
+                    break;
+
+                case "ar-SD":
+                    if (browserVersion.hasFeature(JS_DATE_WITH_LEFT_TO_RIGHT_MARK)) {
+                        chronology_ = HijrahChronology.INSTANCE;
+                    }
+                    break;
+
+                case "th":
+                case "th-TH":
+                    chronology_ = ThaiBuddhistChronology.INSTANCE;
+                    break;
+
+                default:
+            }
+        }
+
+        /**
+         * Formats a date according to the locale and formatting options of this {@code DateTimeFormat} object.
+         * @param date the JavaScript object to convert
+         * @return the dated formated
+         */
+        String format(final Date date) {
+            TemporalAccessor zonedDateTime = date.toInstant().atZone(ZoneId.systemDefault());
+            if (chronology_ != null) {
+                zonedDateTime = chronology_.date(zonedDateTime);
+            }
+            return formatter_.format(zonedDateTime);
+        }
+    }
 }
