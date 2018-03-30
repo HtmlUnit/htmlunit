@@ -935,16 +935,6 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns the connection type being used. Part of the <tt>#default#clientCaps</tt>
-     * default IE behavior implementation.
-     * @return the connection type being used
-     * Current implementation always return "modem"
-     */
-    public String getConnectionType() {
-        return "modem";
-    }
-
-    /**
      * Returns {@code true} if cookies are enabled. Part of the <tt>#default#clientCaps</tt>
      * default IE behavior implementation.
      * @return whether or not cookies are enabled
@@ -1888,7 +1878,6 @@ public class HTMLElement extends Element {
             return null;
         }
 
-        Object offsetParent = null;
         final HTMLElement htmlElement = currentElement.getScriptableObject();
         if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
                 StyleAttributes.Definition.POSITION, true))) {
@@ -1899,16 +1888,13 @@ public class HTMLElement extends Element {
         final String position = style.getPositionWithInheritance();
         final boolean staticPos = "static".equals(position);
 
-        final boolean useTables = staticPos;
-
         while (currentElement != null) {
 
             final DomNode parentNode = currentElement.getParentNode();
             if (parentNode instanceof HtmlBody
-                || (useTables && parentNode instanceof HtmlTableDataCell)
-                || (useTables && parentNode instanceof HtmlTable)) {
-                offsetParent = parentNode.getScriptableObject();
-                break;
+                || (staticPos && parentNode instanceof HtmlTableDataCell)
+                || (staticPos && parentNode instanceof HtmlTable)) {
+                return parentNode.getScriptableObject();
             }
 
             if (parentNode != null && parentNode.getScriptableObject() instanceof HTMLElement) {
@@ -1916,17 +1902,15 @@ public class HTMLElement extends Element {
                 final ComputedCSSStyleDeclaration parentStyle =
                             parentElement.getWindow().getComputedStyle(parentElement, null);
                 final String parentPosition = parentStyle.getPositionWithInheritance();
-                final boolean parentIsStatic = "static".equals(parentPosition);
-                if (!parentIsStatic) {
-                    offsetParent = parentNode.getScriptableObject();
-                    break;
+                if (!"static".equals(parentPosition)) {
+                    return parentNode.getScriptableObject();
                 }
             }
 
             currentElement = currentElement.getParentNode();
         }
 
-        return offsetParent;
+        return null;
     }
 
     /**

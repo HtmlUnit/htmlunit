@@ -523,7 +523,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBottom() {
-        return defaultIfEmpty(super.getBottom(), "auto", null);
+        return defaultIfEmpty(super.getBottom(), AUTO, null);
     }
 
     /**
@@ -653,7 +653,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 return "";
             }
             if (getStyleAttribute(HEIGHT, true).isEmpty()) {
-                return "auto";
+                return AUTO;
             }
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
@@ -661,7 +661,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             @Override
             public String get(final ComputedCSSStyleDeclaration style) {
                 final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
-                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, "auto");
+                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, AUTO);
             }
         });
     }
@@ -673,7 +673,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getLeft() {
         final String superLeft = super.getLeft();
         if (!superLeft.endsWith("%")) {
-            return defaultIfEmpty(superLeft, "auto", null);
+            return defaultIfEmpty(superLeft, AUTO, null);
         }
 
         final Element elem = getElement();
@@ -850,7 +850,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getRight() {
-        return defaultIfEmpty(super.getRight(), "auto", null);
+        return defaultIfEmpty(super.getRight(), AUTO, null);
     }
 
     /**
@@ -925,7 +925,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getWidth() {
         if ("none".equals(getDisplay())) {
-            return "auto";
+            return AUTO;
         }
 
         final Element elem = getElement();
@@ -934,7 +934,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 return "";
             }
             if (getStyleAttribute(WIDTH, true).isEmpty()) {
-                return "auto";
+                return AUTO;
             }
         }
 
@@ -959,7 +959,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     }
                     return windowDefaultValue + "px";
                 }
-                else if ("auto".equals(value)) {
+                else if (AUTO.equals(value)) {
                     int windowDefaultValue = getWindowDefaultValue();
                     if (elem instanceof HTMLBodyElement) {
                         windowDefaultValue -= 16;
@@ -1079,7 +1079,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = getContentWidth();
             }
         }
-        else if ("auto".equals(styleWidth)) {
+        else if (AUTO.equals(styleWidth)) {
             width = windowWidth;
         }
         else {
@@ -1305,7 +1305,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement e = (HTMLElement) scriptObj;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String pos = style.getPositionWithInheritance();
-                    if ("static".equals(pos) || "relative".equals(pos)) {
+                    if (STATIC.equals(pos) || "relative".equals(pos)) {
                         lastFlowing = style;
                     }
                     else if ("absolute".equals(pos)) {
@@ -1348,12 +1348,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String overflow = getStyleAttribute(OVERFLOW, true);
         if (horizontal) {
             // TODO: inherit, overflow-x
-            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
+            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentWidth() > getCalculatedWidth());
         }
         else {
             // TODO: inherit, overflow-y
-            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || "auto".equals(overflow))
+            scrollable = (node instanceof HTMLBodyElement || "scroll".equals(overflow) || AUTO.equals(overflow))
                 && (ignoreSize || getContentHeight() > getEmptyHeight());
         }
         return scrollable;
@@ -1439,14 +1439,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int top = 0;
         final String t = getTopWithInheritance();
 
-        if (!"auto".equals(t)) {
+        if (!AUTO.equals(t)) {
             // No need to calculate displacement caused by sibling nodes.
             top = pixelValue(t);
         }
         else {
             final String b = getBottomWithInheritance();
 
-            if (!"auto".equals(b)) {
+            if (!AUTO.equals(b)) {
                 // Estimate the vertical displacement caused by *all* siblings.
                 // This is very rough, and doesn't even take position or display types into account.
                 // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
@@ -1477,30 +1477,30 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String r = getRightWithInheritance();
 
         int left;
-        if ("absolute".equals(p) && !"auto".equals(l)) {
+        if ("absolute".equals(p) && !AUTO.equals(l)) {
             // No need to calculate displacement caused by sibling nodes.
             left = pixelValue(l);
         }
-        else if ("absolute".equals(p) && !"auto".equals(r)) {
+        else if ("absolute".equals(p) && !AUTO.equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
             final int parentWidth = style.getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
-        else if ("fixed".equals(p) && !"auto".equals(r)) {
+        else if ("fixed".equals(p) && !AUTO.equals(r)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
             final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
             left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
         }
-        else if ("fixed".equals(p) && "auto".equals(l)) {
+        else if ("fixed".equals(p) && AUTO.equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
             left = pixelValue(style.getLeftWithInheritance());
         }
-        else if ("static".equals(p)) {
+        else if (STATIC.equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
             left = 0;
             for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
@@ -1552,10 +1552,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public String getPositionWithInheritance() {
         String p = getStyleAttribute(POSITION, true);
-        if ("inherit".equals(p)) {
+        if (INHERIT.equals(p)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
-                p = "static";
+                p = STATIC;
             }
             else {
                 final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1571,10 +1571,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public String getLeftWithInheritance() {
         String left = getLeft();
-        if ("inherit".equals(left)) {
+        if (INHERIT.equals(left)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
-                left = "auto";
+                left = AUTO;
             }
             else {
                 final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1590,10 +1590,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public String getRightWithInheritance() {
         String right = getRight();
-        if ("inherit".equals(right)) {
+        if (INHERIT.equals(right)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
-                right = "auto";
+                right = AUTO;
             }
             else {
                 final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1609,10 +1609,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public String getTopWithInheritance() {
         String top = getTop();
-        if ("inherit".equals(top)) {
+        if (INHERIT.equals(top)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
-                top = "auto";
+                top = AUTO;
             }
             else {
                 final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1628,10 +1628,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public String getBottomWithInheritance() {
         String bottom = getBottom();
-        if ("inherit".equals(bottom)) {
+        if (INHERIT.equals(bottom)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             if (parent == null) {
-                bottom = "auto";
+                bottom = AUTO;
             }
             else {
                 final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1807,7 +1807,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public Object getZIndex() {
         final Object response = super.getZIndex();
         if (response.toString().isEmpty()) {
-            return "auto";
+            return AUTO;
         }
         return response;
     }

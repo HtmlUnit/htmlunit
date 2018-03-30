@@ -209,6 +209,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             MAX_WIDTH.getAttributeName()
             ));
 
+    static final String AUTO = "auto";
+    static final String STATIC = "static";
+    static final String INHERIT = "inherit";
+    private static final String INITIAL = "initial";
+    private static final String RELATIVE = "relative";
+    private static final String FIXED = "fixed";
+    private static final String ABSOLUTE = "absolute";
+    private static final String REPEAT = "repeat";
+
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
@@ -582,7 +591,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 if (value == null) {
                     if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
                             && getClass() == CSSStyleDeclaration.class) {
-                        return "initial";
+                        return INITIAL;
                     }
                     return "scroll"; // default if shorthand is used
                 }
@@ -619,7 +628,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             if (value == null) {
                 if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)) {
                     if (getClass() == CSSStyleDeclaration.class) {
-                        return "initial";
+                        return INITIAL;
                     }
                     return "rgba(0, 0, 0, 0)";
                 }
@@ -656,7 +665,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
-                    return backgroundInitial && !isComputed ? "initial" : "none";
+                    return backgroundInitial && !isComputed ? INITIAL : "none";
                 }
                 if (isComputed) {
                     try {
@@ -706,7 +715,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 if (value == null) {
                     if (isInitial) {
-                        return isComputed ? "" : "initial";
+                        return isComputed ? "" : INITIAL;
                     }
                     return "0% 0%";
                 }
@@ -787,9 +796,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 if (value == null) {
                     if (getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL)
                             && getClass() == CSSStyleDeclaration.class) {
-                        return "initial";
+                        return INITIAL;
                     }
-                    return "repeat"; // default if shorthand is used
+                    return REPEAT; // default if shorthand is used
                 }
                 return value;
             }
@@ -2452,9 +2461,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setPosition(final String position) {
-        if (position.isEmpty() || "static".equalsIgnoreCase(position) || "absolute".equalsIgnoreCase(position)
-                || "fixed".equalsIgnoreCase(position) || "relative".equalsIgnoreCase(position)
-                || "initial".equalsIgnoreCase(position) || "inherit".equalsIgnoreCase(position)) {
+        if (position.isEmpty() || STATIC.equalsIgnoreCase(position) || ABSOLUTE.equalsIgnoreCase(position)
+                || FIXED.equalsIgnoreCase(position) || RELATIVE.equalsIgnoreCase(position)
+                || INITIAL.equalsIgnoreCase(position) || INHERIT.equalsIgnoreCase(position)) {
             setStyleAttribute(POSITION.getAttributeName(), position.toLowerCase(Locale.ROOT));
         }
     }
@@ -2801,8 +2810,8 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (text.contains("no-repeat")) {
             return "no-repeat";
         }
-        if (text.contains("repeat")) {
-            return "repeat";
+        if (text.contains(REPEAT)) {
+            return REPEAT;
         }
         return null;
     }
@@ -2816,8 +2825,8 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (text.contains("scroll")) {
             return "scroll";
         }
-        if (text.contains("fixed")) {
-            return "fixed";
+        if (text.contains(FIXED)) {
+            return FIXED;
         }
         return null;
     }
@@ -2945,7 +2954,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                             ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
             return (int) ((i / 100D) * absoluteValue);
         }
-        if ("auto".equals(s)) {
+        if (AUTO.equals(s)) {
             return value.getDefaultValue();
         }
         if (s.isEmpty()) {
@@ -3114,9 +3123,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 return;
             }
 
-            if ((auto && "auto".equals(valueString))
-                    || "initial".equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL)
-                    || "inherit".equals(valueString)) {
+            if ((auto && AUTO.equals(valueString))
+                    || INITIAL.equals(valueString) && getBrowserVersion().hasFeature(CSS_LENGTH_INITIAL)
+                    || INHERIT.equals(valueString)) {
                 setStyleAttribute(name, valueString, important);
                 return;
             }
