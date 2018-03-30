@@ -31,7 +31,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Unit tests for {@link CookieManager}.
@@ -282,7 +281,7 @@ public class CookieManagerTest extends WebDriverTestCase {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;expires=Fri, 02-Jan-1970 00:00:00 GMT"));
         responseHeader1.add(new NameValuePair("Set-Cookie",
-            "second=2;expires=" + StringUtils.formatHttpDate(aBitLater)));
+            "second=2;expires=" + DateUtils.formatDate(aBitLater)));
         responseHeader1.add(new NameValuePair("Set-Cookie", "visit=fo; expires=\"Sat, 07-Apr-2002 13:11:33 GMT\";"));
         responseHeader1.add(new NameValuePair("Set-Cookie", "visitor=f2; expires=\"Sat, 07-Apr-2092 13:11:33 GMT\";"));
         getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader1);

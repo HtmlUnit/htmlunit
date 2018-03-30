@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.apache.http.client.utils.DateUtils.formatDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -31,7 +33,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link SgmlPage}.
@@ -51,7 +52,7 @@ public final class SgmlPageTest extends WebServerTestCase {
             webClient.getOptions().setMaxInMemory(3);
 
             final List<NameValuePair> headers = new ArrayList<>();
-            headers.add(new NameValuePair("Expires", StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1))));
+            headers.add(new NameValuePair("Expires", formatDate(DateUtils.addHours(new Date(), 1))));
             getMockWebConnection().setDefaultResponse("something", 200, "Ok", "text/html", headers);
             startWebServer(getMockWebConnection());
 

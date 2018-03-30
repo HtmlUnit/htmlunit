@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.apache.http.client.utils.DateUtils.formatDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link AbstractPage}.
@@ -43,7 +44,7 @@ public final class AbstractPageTest extends WebServerTestCase {
             webClient.getOptions().setMaxInMemory(3);
 
             final List<NameValuePair> headers = new ArrayList<>();
-            headers.add(new NameValuePair("Expires", StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1))));
+            headers.add(new NameValuePair("Expires", formatDate(DateUtils.addHours(new Date(), 1))));
             getMockWebConnection().setDefaultResponse("something", 200, "Ok", "unknown_type", headers);
             startWebServer(getMockWebConnection());
 

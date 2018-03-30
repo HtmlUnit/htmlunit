@@ -45,35 +45,6 @@ public class StringUtilsTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void isColorRGB() throws Exception {
-        assertFalse(StringUtils.isColorRGB(null));
-        assertFalse(StringUtils.isColorRGB(""));
-        assertFalse(StringUtils.isColorRGB("    "));
-
-        assertFalse(StringUtils.isColorRGB("#a1"));
-        assertTrue(StringUtils.isColorRGB("rgb(1,12,13)"));
-        assertTrue(StringUtils.isColorRGB("  rgb(1,12,13)   "));
-        assertTrue(StringUtils.isColorRGB("rgb  ( 1,  12,  13        )"));
-        assertFalse(StringUtils.isColorRGB("rgb(a1,12,13)"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asColorRGB() throws Exception {
-        assertNull(StringUtils.asColorRGB(null));
-        assertNull(StringUtils.asColorRGB(""));
-        assertNull(StringUtils.asColorRGB("    "));
-
-        assertNull(StringUtils.asColorRGB("#a1"));
-        assertEquals(new Color(1, 12, 13), StringUtils.asColorRGB("rgb(1,12,13)"));
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     public void findColorRGB() throws Exception {
         assertNull(StringUtils.findColorRGB(null));
         assertNull(StringUtils.findColorRGB(""));

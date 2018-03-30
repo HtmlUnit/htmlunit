@@ -1507,19 +1507,19 @@ public class HtmlPage extends SgmlPage {
         final HtmlElement element = getHtmlElementByAccessKey(accessKey);
         if (element != null) {
             element.focus();
-            final Page newPage;
-            if (element instanceof HtmlAnchor || element instanceof HtmlArea || element instanceof HtmlButton
-                    || element instanceof HtmlInput || element instanceof HtmlLabel || element instanceof HtmlLegend
-                    || element instanceof HtmlTextArea || element instanceof HtmlArea) {
-                newPage = element.click();
-            }
-            else {
-                newPage = this;
-            }
+            if (element instanceof HtmlAnchor
+                    || element instanceof HtmlArea
+                    || element instanceof HtmlButton
+                    || element instanceof HtmlInput
+                    || element instanceof HtmlLabel
+                    || element instanceof HtmlLegend
+                    || element instanceof HtmlTextArea) {
+                final Page newPage = element.click();
 
-            if (newPage != this && getFocusedElement() == element) {
-                // The page was reloaded therefore no element on this page will have the focus.
-                getFocusedElement().blur();
+                if (newPage != this && getFocusedElement() == element) {
+                    // The page was reloaded therefore no element on this page will have the focus.
+                    getFocusedElement().blur();
+                }
             }
         }
 

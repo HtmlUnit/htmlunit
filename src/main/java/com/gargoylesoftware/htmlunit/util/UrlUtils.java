@@ -510,8 +510,7 @@ public final class UrlUtils {
             s.append(ref);
         }
 
-        final URL url = new URL(s.toString());
-        return url;
+        return new URL(s.toString());
     }
 
     /**

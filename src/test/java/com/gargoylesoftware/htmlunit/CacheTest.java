@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.util.StringUtils.formatHttpDate;
+import static org.apache.http.client.utils.DateUtils.formatDate;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
@@ -39,7 +39,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link Cache}.
@@ -71,13 +70,13 @@ public class CacheTest extends SimpleWebTestCase {
         headers.put("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT");
         assertTrue(cache.isCacheableContent(response));
 
-        headers.put("Last-Modified", formatHttpDate(DateUtils.addMinutes(new Date(), -5)));
+        headers.put("Last-Modified", formatDate(DateUtils.addMinutes(new Date(), -5)));
         assertFalse(cache.isCacheableContent(response));
 
-        headers.put("Expires", formatHttpDate(DateUtils.addMinutes(new Date(), 5)));
+        headers.put("Expires", formatDate(DateUtils.addMinutes(new Date(), 5)));
         assertFalse(cache.isCacheableContent(response));
 
-        headers.put("Expires", formatHttpDate(DateUtils.addHours(new Date(), 1)));
+        headers.put("Expires", formatDate(DateUtils.addHours(new Date(), 1)));
         assertTrue(cache.isCacheableContent(response));
 
         headers.remove("Last-Modified");
@@ -524,7 +523,7 @@ public class CacheTest extends SimpleWebTestCase {
         expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+                formatDate(DateUtils.addHours(new Date(), 1)));
 
         final WebRequest request2 = new WebRequest(URL_SECOND, HttpMethod.GET);
         final WebResponse response2 = createMock(WebResponse.class);
@@ -533,7 +532,7 @@ public class CacheTest extends SimpleWebTestCase {
         expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response2.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response2.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+                formatDate(DateUtils.addHours(new Date(), 1)));
 
         response1.cleanUp();
 
@@ -560,7 +559,7 @@ public class CacheTest extends SimpleWebTestCase {
         expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                StringUtils.formatHttpDate(DateUtils.addHours(new Date(), 1)));
+                formatDate(DateUtils.addHours(new Date(), 1)));
 
         response1.cleanUp();
 

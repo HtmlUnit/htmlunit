@@ -21,8 +21,6 @@ import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
 
-import com.gargoylesoftware.htmlunit.WebAssert;
-
 /**
  * String utilities class for utility functions not covered by third party libraries.
  *
@@ -149,49 +147,13 @@ public final class StringUtils {
             final int tmpRed = Integer.parseInt(tmpHex.substring(0, 2), 16);
             final int tmpGreen = Integer.parseInt(tmpHex.substring(2, 4), 16);
             final int tmpBlue = Integer.parseInt(tmpHex.substring(4, 6), 16);
-            final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
-            return tmpColor;
+            return new Color(tmpRed, tmpGreen, tmpBlue);
         }
 
         final int tmpRed = Integer.parseInt(tmpHex.substring(0, 1) + tmpHex.substring(0, 1), 16);
         final int tmpGreen = Integer.parseInt(tmpHex.substring(1, 2) + tmpHex.substring(1, 2), 16);
         final int tmpBlue = Integer.parseInt(tmpHex.substring(2, 3) + tmpHex.substring(2, 3), 16);
-        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
-        return tmpColor;
-    }
-
-    /**
-     * Returns true if the specified token is in RGB notation.
-     * @param token the token to check
-     * @return whether the token is a color in RGB notation or not
-     */
-    public static boolean isColorRGB(final String token) {
-        if (token == null) {
-            return false;
-        }
-        return RGB_COLOR.matcher(token.trim()).matches();
-    }
-
-    /**
-     * Returns a Color parsed from the given rgb notation.
-     * @param token the token to parse
-     * @return a Color whether the token is a color in RGB notation; otherwise null
-     */
-    public static Color asColorRGB(final String token) {
-        if (token == null) {
-            return null;
-        }
-        final Matcher tmpMatcher = RGB_COLOR.matcher(token);
-        final boolean tmpFound = tmpMatcher.matches();
-        if (!tmpFound) {
-            return null;
-        }
-
-        final int tmpRed = Integer.parseInt(tmpMatcher.group(1));
-        final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
-        final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
-        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
-        return tmpColor;
+        return new Color(tmpRed, tmpGreen, tmpBlue);
     }
 
     /**
@@ -204,16 +166,14 @@ public final class StringUtils {
             return null;
         }
         final Matcher tmpMatcher = RGB_COLOR.matcher(token);
-        final boolean tmpFound = tmpMatcher.find();
-        if (!tmpFound) {
+        if (!tmpMatcher.find()) {
             return null;
         }
 
         final int tmpRed = Integer.parseInt(tmpMatcher.group(1));
         final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
         final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
-        final Color tmpColor = new Color(tmpRed, tmpGreen, tmpBlue);
-        return tmpColor;
+        return new Color(tmpRed, tmpGreen, tmpBlue);
     }
 
     /**
@@ -227,17 +187,6 @@ public final class StringUtils {
     }
 
     /**
-     * Formats the specified date according to RFC 1123.
-     *
-     * @param date the date to format
-     * @return the specified date, formatted according to RFC 1123
-     */
-    public static String formatHttpDate(final Date date) {
-        WebAssert.notNull("date", date);
-        return DateUtils.formatDate(date);
-    }
-
-    /**
      * Sanitize a string for use in Matcher.appendReplacement.
      * Replaces all \ with \\ and $ as \$ because they are used as control
      * characters in appendReplacement.
@@ -246,9 +195,8 @@ public final class StringUtils {
      * @return sanitized version of the given string
      */
     public static String sanitizeForAppendReplacement(final String toSanitize) {
-        final String toReplace = org.apache.commons.lang3.StringUtils.replaceEach(toSanitize,
-                new String[] {"\\", "$"}, new String[]{"\\\\", "\\$"});
-        return toReplace;
+        return org.apache.commons.lang3.StringUtils.replaceEach(toSanitize,
+                                    new String[] {"\\", "$"}, new String[]{"\\\\", "\\$"});
     }
 
     /**
