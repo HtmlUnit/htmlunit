@@ -274,7 +274,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         // TODO this should be done by using cssparser also
         for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
-            final int index = token.indexOf(":");
+            final int index = token.indexOf(':');
             if (index != -1) {
                 final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
                 String value = token.substring(index + 1).trim();
@@ -799,7 +799,12 @@ public class DomElement extends DomNamespaceNode implements Element {
         /** @return the next one */
         @Override
         public DomElement next() {
-            return nextElement();
+            if (nextElement_ != null) {
+                final DomElement result = nextElement_;
+                setNextElement(nextElement_);
+                return result;
+            }
+            throw new NoSuchElementException();
         }
 
         /** Removes the current one. */
@@ -812,16 +817,6 @@ public class DomElement extends DomNamespaceNode implements Element {
             if (sibling != null) {
                 sibling.remove();
             }
-        }
-
-        /** @return the next element */
-        public DomElement nextElement() {
-            if (nextElement_ != null) {
-                final DomElement result = nextElement_;
-                setNextElement(nextElement_);
-                return result;
-            }
-            throw new NoSuchElementException();
         }
 
         private void setNextElement(final DomNode node) {

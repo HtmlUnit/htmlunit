@@ -3105,10 +3105,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
         else {
             String valueString = Context.toString(value);
-            if (undefinedAsEmpty && Undefined.instance == value) {
-                valueString = "";
-            }
-            else if (null == value) {
+            if (null == value || (undefinedAsEmpty && Undefined.instance == value)) {
                 valueString = "";
             }
 
@@ -3138,7 +3135,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             else if (valueString.endsWith("px")
                 || valueString.endsWith("em")
                 || valueString.endsWith("ex")
-                || valueString.endsWith("px")
+                || valueString.endsWith("pt")
                 || valueString.endsWith("cm")
                 || valueString.endsWith("mm")
                 || valueString.endsWith("in")

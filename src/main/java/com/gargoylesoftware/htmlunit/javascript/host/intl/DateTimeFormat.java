@@ -55,7 +55,7 @@ public class DateTimeFormat extends SimpleScriptable {
     private static Map<String, String> CHROME_FORMATS_ = new HashMap<>();
     private static Map<String, String> IE_FORMATS_ = new HashMap<>();
 
-    private DateTimeFormatHelper formatter_;
+    private transient DateTimeFormatHelper formatter_;
 
     static {
         final String ddSlash = "\u200Edd\u200E/\u200EMM\u200E/\u200EYYYY";
@@ -335,18 +335,20 @@ public class DateTimeFormat extends SimpleScriptable {
      */
     static final class DateTimeFormatHelper {
 
-        private DateTimeFormatter formatter_;
+        private final DateTimeFormatter formatter_;
         private Chronology chronology_;
 
         DateTimeFormatHelper(final String locale, final BrowserVersion browserVersion, final String pattern) {
-            formatter_ = DateTimeFormatter.ofPattern(pattern);
             if (locale.startsWith("ar")
                     && (!"ar-DZ".equals(locale)
                                     && !"ar-LY".equals(locale)
                                     && !"ar-MA".equals(locale)
                                     && !"ar-TN".equals(locale))) {
                 final DecimalStyle decimalStyle = DecimalStyle.STANDARD.withZeroDigit('\u0660');
-                formatter_ = formatter_.withDecimalStyle(decimalStyle);
+                formatter_ = DateTimeFormatter.ofPattern(pattern).withDecimalStyle(decimalStyle);
+            }
+            else {
+                formatter_ = DateTimeFormatter.ofPattern(pattern);
             }
 
             switch (locale) {

@@ -59,12 +59,12 @@ public class ArrayBufferViewBase extends ArrayBufferView {
             final ArrayBuffer array = (ArrayBuffer) object;
 
             double dbByteOffset = Context.toNumber(byteOffset);
-            if (dbByteOffset != dbByteOffset) { // test if == NaN
+            if (Double.isNaN(dbByteOffset)) {
                 dbByteOffset = 0;
             }
 
             double dbLength = Context.toNumber(length);
-            if (dbLength != dbLength) { // test if == NaN
+            if (Double.isNaN(dbLength)) {
                 dbLength = array.getByteLength();
             }
             super.constructor(array, (int) dbByteOffset, (int) dbLength);
