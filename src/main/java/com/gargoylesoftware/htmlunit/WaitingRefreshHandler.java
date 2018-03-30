@@ -71,7 +71,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
             seconds = maxwait_;
         }
         try {
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
         }
         catch (final InterruptedException e) {
             /* This can happen when the refresh is happening from a navigation that started
