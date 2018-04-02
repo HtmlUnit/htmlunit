@@ -14,12 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -300,12 +302,16 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code doNotTrack} property.
      * @return the {@code doNotTrack} property
      */
-    @JsxGetter(FF)
-    public String getDoNotTrack() {
-        if (getWindow().getWebWindow().getWebClient().getOptions().isDoNotTrackEnabled()) {
-            return "yes";
+    @JsxGetter({CHROME, FF})
+    public Object getDoNotTrack() {
+        final WebClient client = getWindow().getWebWindow().getWebClient();
+        if (client.getOptions().isDoNotTrackEnabled()) {
+            return 1;
         }
-        return "unspecified";
+        if (client.getBrowserVersion().hasFeature(JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED)) {
+            return "unspecified";
+        }
+        return null;
     }
 
     /**

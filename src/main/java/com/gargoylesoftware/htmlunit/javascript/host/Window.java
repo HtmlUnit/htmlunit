@@ -4483,6 +4483,18 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         setEventHandler("selectstart", selectstart);
     }
 
+    /**
+     * Returns the {@code doNotTrack} property.
+     * @return the {@code doNotTrack} property
+     */
+    @JsxGetter(IE)
+    public Object getDoNotTrack() {
+        final WebClient client = getWindow().getWebWindow().getWebClient();
+        if (client.getOptions().isDoNotTrackEnabled()) {
+            return 1;
+        }
+        return null;
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {
@@ -4545,5 +4557,4 @@ class HTMLCollectionFrames extends HTMLCollection {
             }
         }
     }
-
 }

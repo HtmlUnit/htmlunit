@@ -1076,6 +1076,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_MENU_TYPE_EMPTY,
 
+    /** Navigator.doNotTrack returns unspecified if not set. */
+    @BrowserFeature(FF)
+    JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
+
     /** Indicates if the String representation of a native function is without newline. */
     @BrowserFeature({CHROME, EDGE})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,

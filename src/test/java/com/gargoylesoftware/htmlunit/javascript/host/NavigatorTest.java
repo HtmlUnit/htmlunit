@@ -466,4 +466,27 @@ public class NavigatorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"unspecified", "undefined", "undefined"},
+            CHROME = {"null", "undefined", "undefined"},
+            IE = {"undefined", "undefined", "null"})
+    public void doNotTrack() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(navigator.doNotTrack);\n"
+            + "    alert(navigator.msDoNotTrack);\n"
+            + "    alert(window.doNotTrack);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
