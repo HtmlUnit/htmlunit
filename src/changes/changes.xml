@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.31" date="xx, 2018" description="Bugfixes, special GAE handlings removed">
+        <release version="2.31" date="xx, 2018" description="Bugfixes, FIREFOX_45 is deprecated, special GAE handlings removed">
+            <action type="update" dev="rbri">
+                BrowserVersion: deprecate FIREFOX_45.
+            </action>
+            <action type="fix" dev="rbri">
+                Navigator.doNotTrack fixed, property is available in Chrome too, Window.doNotTrack added for is available for IE.
+            </action>
             <action type="update" dev="rbri">
                 Special handling of the GAE environment is no longer required, the JDK8 at GAE has no longer
                 any restrictions.

@@ -95,7 +95,9 @@ public final class BrowserVersion implements Serializable {
     /**
      * Firefox 45 ESR.
      * @since 2.21
+     * @deprecated starting with version 2.31
      */
+    @Deprecated
     public static final BrowserVersion FIREFOX_45 = new BrowserVersion(45, "FF45");
 
     /**
