@@ -1075,11 +1075,6 @@ public enum BrowserVersionFeatures {
     /** Type property of menu has always '' as value. */
     @BrowserFeature(IE)
     JS_MENU_TYPE_EMPTY,
-
-    /** Navigator.doNotTrack returns unspecified if not set. */
-    @BrowserFeature(FF)
-    JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
-
     /** Indicates if the String representation of a native function is without newline. */
     @BrowserFeature({CHROME, EDGE})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
@@ -1087,6 +1082,10 @@ public enum BrowserVersionFeatures {
     /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
     @BrowserFeature(IE)
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
+
+    /** Navigator.doNotTrack returns unspecified if not set. */
+    @BrowserFeature(FF)
+    JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
 
     /** <code>Node.contains</code> returns false instead of throwing an exception. */
     @BrowserFeature(IE)
