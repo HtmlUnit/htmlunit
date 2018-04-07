@@ -19,10 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -30,7 +26,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.annotations.BuildServerDiscrepancy;
 
 /**
  * Array is a native JavaScript object and therefore provided by Rhino but behavior should be
@@ -149,56 +144,6 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Test for "Comparison method violates its general contract!".
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("finished")
-    public void comparisonMethodViolatesContract() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "var results = [1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1,"
-            + " -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, -1,"
-            + " 1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 0, -1, -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,"
-            + " 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1,"
-            + " 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];\n"
-            + "var index = 0;\n"
-            + "function test() {\n"
-            + "  var arr = new Array(37);\n"
-            + "  for (var x = 0; x < arr.length; x++) {\n"
-            + "    arr[x] = new Object();\n"
-            + "  }\n"
-            + "  arr.sort(function (a, b) {\n"
-            + "    return results[index++];\n"
-            + "  });\n"
-            + "  alert('finished');\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * Test for "Comparison method violates its general contract!".
-     * @throws Exception if the test fails
-     */
-    @Test
-    @BuildServerDiscrepancy
-    public void comparisonMethodViolatesContract2() throws Exception {
-        final Properties props = System.getProperties();
-        props.list(System.out);
-        final int[] results = {1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1,
-            -1, -1, 1, -1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, -1,
-            1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1, 0, -1, -1, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
-            1, 1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1,
-            1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        final Integer[] arr = new Integer[37];
-        final AtomicInteger index = new AtomicInteger();
-        Arrays.sort(arr, (e1, e2) -> results[index.incrementAndGet()]);
     }
 
     /**
