@@ -17,11 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -30,7 +25,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
-import org.eclipse.jetty.websocket.api.WebSocketListener;
 import org.eclipse.jetty.websocket.server.WebSocketHandler;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeRequest;
 import org.eclipse.jetty.websocket.servlet.ServletUpgradeResponse;
@@ -39,17 +33,15 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebClientInternals;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -512,33 +504,30 @@ public class WebSocketTest extends WebDriverTestCase {
                 null, null, new EventsWebSocketHandler());
 
         final WebDriver driver = getWebDriver();
-        WebSocketListener listener = null;
+        final int[] webSocketCreated = {0};
 
         if (driver instanceof HtmlUnitDriver) {
             final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
-            final WebClientInternals.Listener internalsListener = mock(WebClientInternals.Listener.class);
+            final WebClientInternals internals = webClient.getInternals();
 
-            listener = mock(WebSocketListener.class);
-            final WebSocketListener listenerFinal = listener;
-
-            doAnswer(new Answer<Void>() {
+            internals.addListener(new WebClientInternals.Listener() {
                 @Override
-                public Void answer(final InvocationOnMock invocation) {
-                    final Object[] args = invocation.getArguments();
-                    final WebSocket webSocket = (WebSocket) args[0];
-                    webSocket.setWebSocketListener(listenerFinal);
-                    return null;
+                public void webSocketCreated(final WebSocket webSocket) {
+                    webSocketCreated[0]++;
                 }
-            }).when(internalsListener).webSocketCreated(any());
-
-            webClient.getInternals().addListener(internalsListener);
+            });
         }
 
         driver.get(URL_FIRST + "WebSocketTest_listener.html");
 
-        if (listener != null) {
-            verify(listener, timeout(DEFAULT_WAIT_TIME)).onWebSocketConnect(any());
+        if (driver instanceof HtmlUnitDriver) {
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+            while (webSocketCreated[0] < 0 && System.currentTimeMillis() < maxWait) {
+                Thread.sleep(30);
+            }
+            assertEquals(1, webSocketCreated[0]);
         }
+
         stopWebServers();
     }
 
