@@ -161,7 +161,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "false", "false"},
+    @Alerts(DEFAULT = {"true", "true", "false", "false", "false"},
             IE = {})
     public void has() throws Exception {
         final String html =
