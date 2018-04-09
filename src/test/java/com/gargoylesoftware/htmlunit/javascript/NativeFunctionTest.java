@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NativeFunctionTest extends WebDriverTestCase {
@@ -410,6 +411,56 @@ public class NativeFunctionTest extends WebDriverTestCase {
             + "  })();\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a=[object Window]")
+    public void callWithNullContext() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function foo() { return this }\n"
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var a = foo.call(null);\n"
+            + "      alert ('a=' + a);\n"
+            + "    } catch (e) { alert(e); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a=[object Window]")
+    public void callWithUndefinedContext() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function foo() { return this }\n"
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var a = foo.call(undefined);\n"
+            + "      alert ('a=' + a);\n"
+            + "    } catch (e) { alert(e); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
