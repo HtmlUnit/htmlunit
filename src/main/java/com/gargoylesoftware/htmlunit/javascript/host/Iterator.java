@@ -26,6 +26,8 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
+import net.sourceforge.htmlunit.corejs.javascript.SymbolScriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -113,7 +115,10 @@ public class Iterator extends SimpleScriptable {
             final Scriptable thisObj,
             final Scriptable scriptable,
             final Consumer<Object> processor) {
-        final Object iterator = scriptable.get(Symbol.ITERATOR_STRING, scriptable);
+        if (!(scriptable instanceof SymbolScriptable)) {
+            return false;
+        }
+        final Object iterator = ((SymbolScriptable) scriptable).get(SymbolKey.ITERATOR, scriptable);
         if (iterator == Scriptable.NOT_FOUND) {
             return false;
         }

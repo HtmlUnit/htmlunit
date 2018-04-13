@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -178,7 +174,6 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "exception"},
             FF45 = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "undefined"},
             IE = "not supported")
-    @NotYetImplemented({CHROME, FF52})
     public void string() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

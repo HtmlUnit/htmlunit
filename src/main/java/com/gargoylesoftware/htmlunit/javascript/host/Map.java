@@ -36,6 +36,9 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Symbol;
+import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
+import net.sourceforge.htmlunit.corejs.javascript.SymbolScriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -45,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  */
 @JsxClass
-public class Map extends SimpleScriptable {
+public class Map extends SimpleScriptable implements SymbolScriptable {
 
     private static final String MAP_ITERATOR_NAME = "Map Iterator";
     private static Iterator ITERATOR_PROTOTYPE_;
@@ -214,18 +217,6 @@ public class Map extends SimpleScriptable {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        // A hack to handle Rhino not supporting "get(Object object, Scriptable start)"
-        if (name.equals(Symbol.ITERATOR_STRING)) {
-            return ScriptableObject.getProperty(start, "entries");
-        }
-        return super.get(name, start);
-    }
-
-    /**
      * Returns a new {@code Iterator} object that contains the {@code [key, value]} pairs for each element in the
      * Map object in insertion order.
      * @return a new {@code Iterator} object
@@ -294,5 +285,27 @@ public class Map extends SimpleScriptable {
             callback.call(Context.getCurrentContext(), getParentScope(), thisArgument,
                     new Object[] {entry.getValue(), entry.getKey(), this});
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final Symbol key, final Scriptable start) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            return ScriptableObject.getProperty(start, "entries");
+        }
+        return super.get(key, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean has(final Symbol key, final Scriptable start) {
+        if (SymbolKey.ITERATOR.equals(key)) {
+            return true;
+        }
+        return super.has(key, start);
     }
 }

@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -70,7 +66,6 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "symbol", "symbol", "1", "c"},
             IE = "not defined")
-    @NotYetImplemented({CHROME, FF})
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

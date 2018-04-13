@@ -69,7 +69,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
 import com.gargoylesoftware.htmlunit.javascript.host.StorageManager;
-import com.gargoylesoftware.htmlunit.javascript.host.Symbol;
 import com.gargoylesoftware.htmlunit.javascript.host.TextDecoder;
 import com.gargoylesoftware.htmlunit.javascript.host.TextEncoder;
 import com.gargoylesoftware.htmlunit.javascript.host.Touch;
@@ -593,7 +592,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SVGSymbolElement.class, SVGTextContentElement.class, SVGTextElement.class,
         SVGTextPathElement.class, SVGTextPositioningElement.class, SVGTitleElement.class, SVGTransform.class,
         SVGTransformList.class, SVGTSpanElement.class, SVGUnitTypes.class, SVGUseElement.class, SVGViewElement.class,
-        SVGZoomEvent.class, Symbol.class, SyncManager.class, Text.class, TextDecoder.class,
+        SVGZoomEvent.class, SyncManager.class, Text.class, TextDecoder.class,
         TextEncoder.class, TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,

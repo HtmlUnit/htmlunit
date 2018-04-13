@@ -267,6 +267,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     @Override
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
+        cx.setLanguageVersion(Context.VERSION_ES6);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);

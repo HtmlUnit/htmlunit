@@ -2347,7 +2347,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @Override
     public void close() {
-        Symbol.remove(this);
     }
 
     /**
