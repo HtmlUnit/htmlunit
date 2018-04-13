@@ -311,7 +311,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "true", "true"},
             IE = "exception")
-    @NotYetImplemented({CHROME, FF})
     public void getOwnPropertySymbols() throws Exception {
         final String html = ""
             + "<html><head>\n"
