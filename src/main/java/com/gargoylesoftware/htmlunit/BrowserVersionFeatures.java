@@ -1246,6 +1246,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
 
+    /** Supports Symbol. */
+    @BrowserFeature({CHROME, FF, EDGE})
+    JS_SYMBOL,
+
     /** The width cell height does not return negative values. */
     @BrowserFeature(IE)
     JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,

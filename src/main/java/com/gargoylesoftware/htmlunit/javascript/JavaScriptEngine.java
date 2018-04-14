@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
@@ -230,6 +231,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (!browserVersion.hasFeature(JS_Iterator)) {
             deleteProperties(window, "Iterator", "StopIteration");
+        }
+
+        if (!browserVersion.hasFeature(JS_SYMBOL)) {
+            deleteProperties(window, "Symbol");
         }
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
