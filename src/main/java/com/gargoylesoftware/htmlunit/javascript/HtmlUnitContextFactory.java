@@ -19,8 +19,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_CONS
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GET_PROTOTYPE_OF_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PRE_WIDTH_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
@@ -267,7 +267,12 @@ public class HtmlUnitContextFactory extends ContextFactory {
     @Override
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
-        cx.setLanguageVersion(Context.VERSION_ES6);
+        if (browserVersion_.hasFeature(JS_PRE_WIDTH_STRING)) {
+            cx.setLanguageVersion(Context.VERSION_1_8);
+        }
+        else {
+            cx.setLanguageVersion(Context.VERSION_ES6);
+        }
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);
@@ -344,8 +349,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
                 return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
-            case Context.FEATURE_HTMLUNIT_GET_PROTOTYPE_OF_STRING:
-                return browserVersion_.hasFeature(JS_GET_PROTOTYPE_OF_STRING);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -239,15 +238,15 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "true",
             IE = "exception")
-    public void getPrototypeOf() throws Exception {
+    public void getPrototypeOfString() throws Exception {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(Object.getPrototypeOf(''));\n"
+            + "      alert(String.prototype === Object.getPrototypeOf(''));\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
@@ -262,7 +261,7 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
+    @Alerts(DEFAULT = "true",
             IE = "exception")
     public void getPrototypeOfNumber() throws Exception {
         final String html = ""
@@ -270,7 +269,30 @@ public class NativeObjectTest extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(Object.getPrototypeOf(1));\n"
+            + "      alert(Number.prototype === Object.getPrototypeOf(1));\n"
+            + "    } catch(e) {alert('exception')}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "exception")
+    public void getPrototypeOfBoolean() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      alert(Boolean.prototype === Object.getPrototypeOf(true));\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
@@ -287,7 +309,6 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             IE = "exception")
-    @NotYetImplemented({CHROME, FF})
     public void getTypeOfPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"
