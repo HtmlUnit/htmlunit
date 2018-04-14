@@ -271,8 +271,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             reflect.defineProperties();
         }
 
+        final String windowClassName = Window.class.getName();
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final boolean isWindow = Window.class.getName().equals(config.getHostClass().getName());
+            final boolean isWindow = windowClassName.equals(config.getHostClass().getName());
             if (isWindow) {
                 configureConstantsPropertiesAndFunctions(config, window);
 
