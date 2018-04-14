@@ -1250,6 +1250,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF, EDGE})
     JS_SYMBOL,
 
+    /** Symbol support is limited in FF45. */
+    @BrowserFeature(FF45)
+    JS_SYMBOL_FF45,
+
     /** The width cell height does not return negative values. */
     @BrowserFeature(IE)
     JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,

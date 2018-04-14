@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL_FF45;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
@@ -37,6 +38,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -235,6 +237,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");
+        }
+
+        if (browserVersion.hasFeature(JS_SYMBOL_FF45)) {
+            final ScriptableObject sym = (ScriptableObject) ScriptableObject.getProperty(window, "Symbol");
+            final List<String> toDelete = Arrays.asList("hasInstance", "isConcatSpreadable", "replace",
+                    "search", "split", "string", "toStringTag", "unscopables");
+            for (String propName : toDelete) {
+                sym.setAttributes(propName, ScriptableObject.EMPTY);
+                sym.delete(propName);
+            }
         }
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
