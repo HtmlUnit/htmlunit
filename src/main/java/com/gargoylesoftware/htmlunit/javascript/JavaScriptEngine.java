@@ -66,7 +66,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ArrayCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
-import com.gargoylesoftware.htmlunit.javascript.host.ObjectCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -498,9 +497,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
 
-        if (browserVersion.hasFeature(JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS)) {
-            ((ScriptableObject) objectPrototype).defineFunctionProperties(new String[] {"getOwnPropertySymbols"},
-                    ObjectCustom.class, ScriptableObject.DONTENUM);
+        if (!browserVersion.hasFeature(JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS)) {
+            ((ScriptableObject) ScriptableObject.getProperty(window, "Object")).delete("getOwnPropertySymbols");
         }
 
         if (browserVersion.hasFeature(JS_ARRAY_FROM)) {
