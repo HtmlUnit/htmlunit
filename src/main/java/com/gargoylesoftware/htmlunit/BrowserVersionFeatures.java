@@ -1071,6 +1071,7 @@ public enum BrowserVersionFeatures {
     /** Type property of menu has always '' as value. */
     @BrowserFeature(IE)
     JS_MENU_TYPE_EMPTY,
+
     /** Indicates if the String representation of a native function is without newline. */
     @BrowserFeature({CHROME, EDGE})
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
