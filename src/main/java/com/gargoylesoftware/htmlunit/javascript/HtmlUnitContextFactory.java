@@ -339,6 +339,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         switch (featureIndex) {
             case Context.FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER:
                 return true;
+            case Context.FEATURE_OLD_UNDEF_NULL_THIS:
+                return true;
             case Context.FEATURE_NON_ECMA_GET_YEAR:
                 return false;
             case Context.FEATURE_HTMLUNIT_FN_ARGUMENTS_IS_RO_VIEW:
