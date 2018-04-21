@@ -1840,7 +1840,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
+    @Alerts(DEFAULT = {"", "contents"},
             FF = {"block", "inline"},
             IE = {"inline", "inline"})
     public void slot() throws Exception {
