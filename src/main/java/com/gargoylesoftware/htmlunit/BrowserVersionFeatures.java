@@ -1061,7 +1061,7 @@ public enum BrowserVersionFeatures {
     JS_MEDIA_LIST_ALL,
 
     /** Indicates that an empty media list is represented by the string 'all'. */
-    @BrowserFeature(FF)
+    @BrowserFeature({CHROME, FF})
     JS_MEDIA_LIST_EMPTY_STRING,
 
     /** Type property of menu has always '' as value. */
