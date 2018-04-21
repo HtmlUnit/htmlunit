@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "2.37";
+    static String CHROME_DRIVER_ = "2.38";
 
     /**
      * Tests that POM dependencies are the latest.
