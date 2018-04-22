@@ -1914,7 +1914,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "24"},
-            CHROME = {"0", "23"},
             FF = {"0", "26"})
     @NotYetImplemented
     public void offsetHeightTable() throws Exception {

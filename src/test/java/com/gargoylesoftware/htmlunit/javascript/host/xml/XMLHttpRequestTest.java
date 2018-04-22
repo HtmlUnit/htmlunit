@@ -1635,7 +1635,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",
-                        "function () { return !0 }",
+                        "function() { return !0 }",
                         "function () { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",

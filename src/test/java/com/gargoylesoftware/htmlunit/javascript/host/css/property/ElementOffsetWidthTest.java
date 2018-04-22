@@ -1568,7 +1568,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "183",
-            CHROME = "162")
+            CHROME = "161")
     @NotYetImplemented
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
@@ -1704,7 +1704,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "161",
+    @Alerts(CHROME = "173",
             FF = "143",
             IE = "145")
     @NotYetImplemented
@@ -1768,7 +1768,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "161",
+    @Alerts(CHROME = "173",
             FF = "143",
             IE = "147")
     @NotYetImplemented
@@ -1807,7 +1807,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "162",
+    @Alerts(CHROME = "175",
             FF = "143",
             IE = "145")
     @NotYetImplemented
@@ -1835,7 +1835,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "161",
+    @Alerts(CHROME = "173",
             FF = "143",
             IE = "145")
     @NotYetImplemented
