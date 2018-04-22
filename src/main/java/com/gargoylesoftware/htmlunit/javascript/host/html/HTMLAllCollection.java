@@ -172,7 +172,7 @@ public class HTMLAllCollection extends HTMLCollection {
             if (args[0] instanceof Number) {
                 final double val = ((Number) args[0]).doubleValue();
                 if (val != (int) val) {
-                    return Undefined.instance;
+                    return null;
                 }
                 if (val >= 0) {
                     nullIfNotFound = true;

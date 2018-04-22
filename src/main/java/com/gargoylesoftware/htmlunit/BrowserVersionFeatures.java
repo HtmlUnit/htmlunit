@@ -338,7 +338,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
-    @BrowserFeature(FF)
+    @BrowserFeature({CHROME, FF})
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
 
     /** HtmlAllCollection(int) is not supported. */
