@@ -983,6 +983,9 @@ public final class StyleAttributes {
         GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical",
                 ie("auto")),
 
+        /** The style property {@code gap}. */
+        GAP("gap", "gap", chrome("normal normal")),
+
         /** The style property {@code grid}. */
         GRID("grid", "grid", chrome("none / none / none / row / auto / auto"),
                 ff52up("")),
@@ -1024,7 +1027,7 @@ public final class StyleAttributes {
         GRID_COLUMN_END_("grid-column-end", "grid-column-end", ff52up("auto")),
 
         /** The style property {@code gridColumnGap}. */
-        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("0px"), ff52up("0px")),
+        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("normal"), ff52up("0px")),
 
         /** The style property {@code grid-column-gap}. */
         GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ff52up("0px")),
@@ -1036,7 +1039,7 @@ public final class StyleAttributes {
         GRID_COLUMN_START_("grid-column-start", "grid-column-start", ff52up("auto")),
 
         /** The style property {@code gridGap}. */
-        GRID_GAP("gridGap", "grid-gap", chrome("0px 0px"), ff52up("")),
+        GRID_GAP("gridGap", "grid-gap", chrome("normal normal"), ff52up("")),
 
         /** The style property {@code grid-gap}. */
         GRID_GAP_("grid-gap", "grid-gap", ff52up("")),
@@ -1054,7 +1057,7 @@ public final class StyleAttributes {
         GRID_ROW_END_("grid-row-end", "grid-row-end", ff52up("auto")),
 
         /** The style property {@code gridRowGap}. */
-        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("0px"), ff52up("0px")),
+        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("normal"), ff52up("0px")),
 
         /** The style property {@code grid-row-gap}. */
         GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ff52up("0px")),
@@ -2466,6 +2469,9 @@ public final class StyleAttributes {
 
         /** The style property {@code right}. */
         RIGHT("right", "right", chrome("auto"), ff(""), ie("")),
+
+        /** The style property {@code rowGap}. */
+        ROW_GAP("rowGap", "rowGap", chrome("normal")),
 
         /** The style property {@code rubyAlign}. */
         RUBY_ALIGN("rubyAlign", "ruby-align", ff("space-around"), ie("")),

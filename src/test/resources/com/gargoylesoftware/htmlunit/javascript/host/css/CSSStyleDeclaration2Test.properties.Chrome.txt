@@ -132,6 +132,7 @@ fontVariantLigatures
 fontVariantNumeric
 fontVariationSettings
 fontWeight
+gap
 grid
 gridArea
 gridAutoColumns
@@ -234,6 +235,7 @@ quotes
 r
 resize
 right
+rowGap
 rx
 ry
 scrollBehavior
