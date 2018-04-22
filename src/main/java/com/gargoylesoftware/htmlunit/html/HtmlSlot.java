@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SLOT_CONTENTS;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -22,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "slot".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlSlot extends HtmlElement {
 
@@ -45,6 +48,9 @@ public class HtmlSlot extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(SLOT_CONTENTS)) {
+            return DisplayStyle.CONTENTS;
+        }
         return DisplayStyle.INLINE;
     }
 }

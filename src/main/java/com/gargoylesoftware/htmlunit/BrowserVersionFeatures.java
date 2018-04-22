@@ -305,10 +305,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS,
 
-    /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({IE, FF})
-    HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
-
     /** HtmlAllCollection.namedItem returns null instead of undefined if an element was not found. */
     @BrowserFeature({CHROME, FF})
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
@@ -338,7 +334,7 @@ public enum BrowserVersionFeatures {
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
     /** HtmlCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature(IE)
+    @BrowserFeature({CHROME, IE})
     HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
 
     /** HtmlCollection returns null instead of undefined if an element was not found. */
@@ -1491,6 +1487,10 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature({CHROME, FF52, IE})
     SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
+
+    /** The default display style of slot is 'content'. */
+    @BrowserFeature(CHROME)
+    SLOT_CONTENTS,
 
     /** Indicates that string.contains() is supported. */
     @BrowserFeature(FF45)

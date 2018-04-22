@@ -18,10 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLEC
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_INTEGER_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NO_COLLECTION_FOR_MANY_HITS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -88,7 +86,7 @@ public class HTMLAllCollection extends HTMLCollection {
                 numb = ScriptRuntime.toNumber(index);
             }
             if (numb.isNaN()) {
-                return itemNotFound(browser);
+                return null;
             }
         }
         else {
@@ -97,12 +95,12 @@ public class HTMLAllCollection extends HTMLCollection {
         }
 
         if (numb < 0) {
-            return itemNotFound(browser);
+            return null;
         }
 
         if (!browser.hasFeature(HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO)
                 && (Double.isInfinite(numb) || numb != Math.floor(numb))) {
-            return itemNotFound(browser);
+            return null;
         }
 
         final Object object = get(numb.intValue(), this);
@@ -110,13 +108,6 @@ public class HTMLAllCollection extends HTMLCollection {
             return null;
         }
         return object;
-    }
-
-    private static Object itemNotFound(final BrowserVersion browser) {
-        if (browser.hasFeature(HTMLALLCOLLECTION_NULL_IF_ITEM_NOT_FOUND)) {
-            return null;
-        }
-        return Undefined.instance;
     }
 
     /**
@@ -130,24 +121,11 @@ public class HTMLAllCollection extends HTMLCollection {
         final List<DomElement> matching = new ArrayList<>();
 
         final BrowserVersion browser = getBrowserVersion();
-
-        final boolean idFirst = browser.hasFeature(HTMLCOLLECTION_NAMED_ITEM_ID_FIRST);
-        if (idFirst) {
-            for (final Object next : elements) {
-                if (next instanceof DomElement) {
-                    final DomElement elem = (DomElement) next;
-                    if (name.equals(elem.getId())) {
-                        matching.add(elem);
-                    }
-                }
-            }
-        }
-
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
                 if (name.equals(elem.getAttributeDirect("name"))
-                        || (!idFirst && name.equals(elem.getId()))) {
+                        || name.equals(elem.getId())) {
                     matching.add(elem);
                 }
             }

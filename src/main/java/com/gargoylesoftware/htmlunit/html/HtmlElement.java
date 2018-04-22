@@ -81,6 +81,8 @@ public abstract class HtmlElement extends DomElement {
         NONE("none"),
         /** block. */
         BLOCK("block"),
+        /** contents. */
+        CONTENTS("contents"),
         /** inline. */
         INLINE("inline"),
         /** inline-block. */
@@ -222,7 +224,7 @@ public abstract class HtmlElement extends DomElement {
     protected static void notifyAttributeChangeListeners(final HtmlAttributeChangeEvent event,
             final HtmlElement element, final String oldAttributeValue, final boolean notifyMutationObservers) {
         final Collection<HtmlAttributeChangeListener> listeners = element.attributeListeners_;
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             synchronized (listeners) {
                 for (final HtmlAttributeChangeListener listener : listeners) {
                     if (notifyMutationObservers || !(listener instanceof MutationObserver)) {

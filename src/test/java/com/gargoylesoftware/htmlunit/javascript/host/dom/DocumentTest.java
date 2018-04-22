@@ -1356,7 +1356,6 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"coll 2", "f6<->form6", "form6<->form6_2"},
-            CHROME = {"coll 2", "form6<->form6_2", "f6<->form6"},
             IE = "f6<->form6")
     public void all_NamedItem_DuplicateIdName() throws Exception {
         namedItem("form6");
@@ -1471,8 +1470,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined", "null"},
-            FF = {"null", "null", "null"},
+    @Alerts(DEFAULT = {"null", "null", "null"},
             IE = {"undefined", "null", "undefined"})
     public void all_NotExisting() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
