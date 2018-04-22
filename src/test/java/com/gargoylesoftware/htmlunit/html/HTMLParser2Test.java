@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import org.junit.Test;
@@ -414,13 +415,13 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
-                            "1", "IFRAME", "null", "1",
-                            "3", "#text", "</div></body></html>"},
-            FF = {"<iframe></div></body></html></iframe>", "1",
-                            "1", "IFRAME", "null", "1",
-                            "3", "#text", "</div></body></html>"})
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = {"<iframe></div></body></html></iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                        "3", "#text", "</div></body></html>"},
+            IE = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+                        "1", "IFRAME", "null", "1",
+                        "3", "#text", "</div></body></html>"})
+    @NotYetImplemented({CHROME, FF})
     public void selfClosingIframe() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

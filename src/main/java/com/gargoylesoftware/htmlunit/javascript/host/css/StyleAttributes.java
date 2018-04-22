@@ -975,6 +975,9 @@ public final class StyleAttributes {
         /** The style property {@code font-weight}. */
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
+        /** The style property {@code gap}. */
+        GAP("gap", "gap", chrome("normal normal")),
+
         /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
                 ie("0deg")),
@@ -982,9 +985,6 @@ public final class StyleAttributes {
         /** The style property {@code glyphOrientationVertical}. */
         GLYPH_ORIENTATION_VERTICAL("glyphOrientationVertical", "glyph-orientation-vertical",
                 ie("auto")),
-
-        /** The style property {@code gap}. */
-        GAP("gap", "gap", chrome("normal normal")),
 
         /** The style property {@code grid}. */
         GRID("grid", "grid", chrome("none / none / none / row / auto / auto"),

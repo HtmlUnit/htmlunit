@@ -418,8 +418,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "accessKey,blur(),click(),contentEditable,dataset,dir,draggable,focus(),hidden,"
-                + "innerText,isContentEditable,lang,nonce,"
+    @Alerts(CHROME = "accessKey,autocapitalize,"
+                + "blur(),click(),contentEditable,dataset,dir,draggable,focus(),hidden,"
+                + "innerText,inputMode,isContentEditable,lang,nonce,"
                 + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncuechange,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
@@ -505,10 +506,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "animate(),append(),attachShadow(),attributes,childElementCount,children,classList,className,"
-                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),createShadowRoot(),firstElementChild,"
-                + "getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
-                + "getBoundingClientRect(),"
+    @Alerts(DEFAULT = "animate(),append(),attachShadow(),attributes,attributeStyleMap,"
+                + "childElementCount,children,classList,className,"
+                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),createShadowRoot(),"
+                + "firstElementChild,getAttribute(),getAttributeNames(),getAttributeNode(),"
+                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
                 + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,"
@@ -565,8 +567,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,"
-                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),createShadowRoot(),getAttribute(),"
+    @Alerts(CHROME = "after(),animate(),assignedSlot,attachShadow(),attributes,attributeStyleMap,"
+                + "before(),classList,className,"
+                + "clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),createShadowRoot(),"
+                + "getAttribute(),"
                 + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),"
                 + "getDestinationInsertionPoints(),getElementsByClassName(),getElementsByTagName(),"
@@ -580,7 +584,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
-                + "webkitMatchesSelector(),webkitRequestFullscreen(),webkitRequestFullScreen()",
+                + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
             FF45 = "attributes,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -2327,7 +2331,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "add(),autofocus,checkValidity(),disabled,form,item(),labels,length,multiple,name,namedItem(),"
+    @Alerts(CHROME = "add(),autocomplete,autofocus,checkValidity(),"
+                + "disabled,form,item(),labels,length,multiple,name,namedItem(),"
                 + "options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),size,type,"
                 + "validationMessage,validity,value,"
                 + "willValidate",
@@ -2585,7 +2590,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "autocapitalize,autofocus,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,"
+    @Alerts(CHROME = "autocomplete,autofocus,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,"
                 + "maxLength,minLength,name,placeholder,readOnly,reportValidity(),required,rows,select(),"
                 + "selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setRangeText(),"
                 + "setSelectionRange(),textLength,type,validationMessage,validity,value,willValidate,"
@@ -2836,7 +2841,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
                 + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,willValidate",
-            CHROME = "accept,align,alt,autocapitalize,autocomplete,autofocus,checked,checkValidity(),"
+            CHROME = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),"
                 + "defaultChecked,defaultValue,"
                 + "dirName,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "incremental,indeterminate,labels,list,max,maxLength,min,minLength,multiple,name,pattern,"
