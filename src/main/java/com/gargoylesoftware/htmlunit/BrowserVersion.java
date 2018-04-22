@@ -213,8 +213,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -356,19 +356,19 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.113", "NPSWF32_29_0_0_113.dll");
+                "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF32_29_0_0_140.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_45.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.113", "NPSWF64_29_0_0_113.dll");
+                "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF64_29_0_0_140.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.113", "Flash32_29_0_0_113.ocx");
+                "Shockwave Flash 29.0 r0", "29.0.0.140", "Flash32_29_0_0_140.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
