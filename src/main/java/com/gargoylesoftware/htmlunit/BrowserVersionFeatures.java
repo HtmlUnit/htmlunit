@@ -333,10 +333,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLCOLLECTION_NAMED_ITEM_ID_FIRST,
 
-    /** HtmlCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({CHROME, IE})
-    HTMLCOLLECTION_NULL_IF_ITEM_NOT_FOUND,
-
     /** HtmlCollection returns null instead of undefined if an element was not found. */
     @BrowserFeature({CHROME, FF})
     HTMLCOLLECTION_NULL_IF_NOT_FOUND,
