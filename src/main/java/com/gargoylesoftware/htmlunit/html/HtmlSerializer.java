@@ -48,7 +48,6 @@ public class HtmlSerializer {
 
     private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
 
-    private boolean appletEnabled_;
     private boolean ignoreMaskedElements_ = true;
 
     /**
@@ -57,8 +56,6 @@ public class HtmlSerializer {
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
-        appletEnabled_ = node.getPage().getWebClient().getOptions().isAppletEnabled();
-
         final StringBuilder builder = new StringBuilder();
         appendNode(builder, node);
         final String response = builder.toString();
@@ -226,7 +223,8 @@ public class HtmlSerializer {
         else if (node instanceof DomComment) {
             appendComment(builder, (DomComment) node);
         }
-        else if (node instanceof HtmlApplet && appletEnabled_) {
+        else if (node instanceof HtmlApplet
+                && node.getPage().getWebClient().getOptions().isAppletEnabled()) {
             appendApplet(builder, (HtmlApplet) node);
         }
         else if (node instanceof HtmlBreak) {
