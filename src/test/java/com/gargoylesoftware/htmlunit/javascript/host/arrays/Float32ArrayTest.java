@@ -102,13 +102,15 @@ public class Float32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"NaN", "NaN", "4", "undefined"})
-    public void nullValueInArray() throws Exception {
+    @Alerts({"undefined", "NaN", "NaN", "4", "undefined"})
+    public void undefinedValueInArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var array = [];\n"
             + "  array[2] = 4;\n"
+            + "  alert(array[0]);\n"
+
             + "  var nativeArray = new Float32Array(array);\n"
             + "  alert(nativeArray[0]);\n"
             + "  alert(nativeArray[1]);\n"
