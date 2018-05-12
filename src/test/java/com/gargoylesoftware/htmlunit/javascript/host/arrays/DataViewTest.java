@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DataViewTest extends WebDriverTestCase {
@@ -60,7 +61,8 @@ public class DataViewTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"570119236", "2.1426990032196045", "0", "0", "0", "0", "64", "9",
+    @Alerts({"1146420001", "570119236", "-8.36147406512941e+35", "2.1426990032196045",
+                "0", "0", "0", "0", "64", "9",
                 "33", "-5", "84", "68", "45", "24"})
     public void endian() throws Exception {
         final String html
@@ -69,8 +71,11 @@ public class DataViewTest extends WebDriverTestCase {
             + "  try {\n"
             + "    var array = new DataView(new ArrayBuffer(12), 4);\n"
             + "    array.setFloat64(0, Math.PI);\n"
-            + "    alert(array.getInt32(2), true);\n"
-            + "    alert(array.getFloat32(0), false);\n"
+            + "    alert(array.getInt32(2, true));\n"
+            + "    alert(array.getInt32(2, false));\n"
+            + "    alert(array.getFloat32(0, true));\n"
+            + "    alert(array.getFloat32(0, false));\n"
+
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
             + "      alert(array2[i]);\n"
