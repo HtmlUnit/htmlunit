@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -266,4 +269,53 @@ public class Int16ArrayTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
+            FF45 = {"[object Int16Array]", "[object Int16Array]", "[object Int16Array]",
+                    "[object Int16Array]", "[object Int16Array]"})
+    @NotYetImplemented(FF45)
+    public void asString() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var array = new Int16Array(0);\n"
+            + "  alert(array.toString());\n"
+
+            + "  array = new Int16Array(1);\n"
+            + "  alert(array.toString());\n"
+
+            + "  array = new Int16Array([1]);\n"
+            + "  alert(array.toString());\n"
+
+            + "  array = new Int16Array([1,3]);\n"
+            + "  alert(array.toString());\n"
+
+            + "  array = new Int16Array([1,3,4,7,11,0,123]);\n"
+            + "  alert(array.toString());\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Int16Array")
+    public void name() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  alert(Int16Array.name);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
