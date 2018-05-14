@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.31" date="xx, 2018" description="Bugfixes, FIREFOX_45 is deprecated, special GAE handlings removed">
+            <action type="add" dev="rbri">
+                document.fonts added.
+            </action>
             <action type="update" dev="rbri">
                 BrowserVersion: deprecate FIREFOX_45.
             </action>

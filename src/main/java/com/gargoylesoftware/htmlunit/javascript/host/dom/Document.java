@@ -104,6 +104,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.FontFaceSet;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -230,6 +231,7 @@ public class Document extends Node {
     private String domain_;
     private String lastModified_;
     private ScriptableObject currentScript_;
+    private transient FontFaceSet fonts_;
     private transient StyleSheetList styleSheetList_;
 
     static {
@@ -4290,5 +4292,19 @@ public class Document extends Node {
      */
     public void setCurrentScript(final ScriptableObject script) {
         currentScript_ = script;
+    }
+
+    /**
+     * @return the {@code FontFaceSet}
+     */
+    @JsxGetter({CHROME, FF})
+    public ScriptableObject getFonts() {
+        if (fonts_ == null) {
+            final FontFaceSet fonts = new FontFaceSet();
+            fonts.setParentScope(getWindow());
+            fonts.setPrototype(getPrototype(fonts.getClass()));
+            fonts_ = fonts;
+        }
+        return fonts_;
     }
 }
