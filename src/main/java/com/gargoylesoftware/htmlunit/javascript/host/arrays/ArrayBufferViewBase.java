@@ -203,20 +203,29 @@ public class ArrayBufferViewBase extends ArrayBufferView {
     }
 
     /**
+     * @return the string version
+     */
+    @JsxFunction(functionName = "toString")
+    public String jsToString() {
+        final int arrayLength = getLength();
+        final StringBuilder builder = new StringBuilder();
+        if (arrayLength > 0) {
+            builder.append(ScriptRuntime.toString(get(0, this)));
+        }
+        for (int i = 1; i < arrayLength; i++) {
+            builder.append(',');
+            builder.append(ScriptRuntime.toString(get(i, this)));
+        }
+        return builder.toString();
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {
         if (String.class.equals(hint) || hint == null) {
-            final int length = getLength();
-            final StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < length; i++) {
-                builder.append(get(i, this));
-                if (i < length - 1) {
-                    builder.append(',');
-                }
-            }
-            return builder.toString();
+            return jsToString();
         }
         return super.getDefaultValue(hint);
     }
