@@ -430,8 +430,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
-        ApplicationCache.class, ApplicationCacheErrorEvent.class, ArrayBuffer.class,
-        ArrayBufferView.class, ArrayBufferViewBase.class,
+        ApplicationCache.class, ApplicationCacheErrorEvent.class,
         Atomics.class, Attr.class,
         Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
@@ -455,7 +454,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CSSStyleSheet.class,
         CSSSupportsRule.class, CSSValue.class, CSSValueList.class, CustomElementRegistry.class,
         CustomEvent.class, DataTransfer.class,
-        DataTransferItem.class, DataTransferItemList.class, DataView.class, DelayNode.class, DeviceLightEvent.class,
+        DataTransferItem.class, DataTransferItemList.class,
+        DelayNode.class, DeviceLightEvent.class,
         DeviceMotionEvent.class, DeviceOrientationEvent.class, DeviceProximityEvent.class,
         Document.class, DocumentFragment.class, DocumentType.class, DOMCursor.class, DOMError.class, DOMException.class,
         DOMImplementation.class, DOMMatrix.class, DOMMatrixReadOnly.class, DOMParser.class, DOMPoint.class,
@@ -467,7 +467,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         File.class, FileList.class, FileReader.class,
         FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,
         FileSystemEntry.class, FileSystemFileEntry.class,
-        Float32Array.class, Float64Array.class, FocusEvent.class, FontFace.class,
+        FocusEvent.class, FontFace.class,
         FontFaceSet.class, FormData.class, FormField.class, GainNode.class, Gamepad.class,
         GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
@@ -505,8 +505,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
         Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
         InputDeviceCapabilities.class, InputEvent.class,
-        InstallTrigger.class, Int16Array.class, Int32Array.class, Int8Array.class, IntersectionObserver.class,
-        IntersectionObserverEntry.class,
+        InstallTrigger.class,
+        IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, LocalMediaStream.class,
         Location.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
         MediaDeviceInfo.class,
@@ -596,7 +596,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         TextEncoder.class, TextEvent.class, TextMetrics.class, TextRange.class, TextTrack.class, TextTrackCue.class,
         TextTrackCueList.class, TextTrackList.class, TimeEvent.class, TimeRanges.class,
         Touch.class, TouchEvent.class, TouchList.class, TrackEvent.class, TransitionEvent.class, TreeWalker.class,
-        UIEvent.class, Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class, URL.class,
+        UIEvent.class,
+        URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
         VTTCue.class, WaveShaperNode.class, WeakMap.class, WeakSet.class, WebGL2RenderingContext.class,
         WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
@@ -615,7 +616,15 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,
-        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class};
+        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
+
+        // we will use the Rhino stuff as soon as possible
+        ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
+        DataView.class,
+        Float32Array.class, Float64Array.class,
+        Int16Array.class, Int32Array.class, Int8Array.class,
+        Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class
+    };
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */
     private static final Map<String, JavaScriptConfiguration> CONFIGURATION_MAP_ = new WeakHashMap<>();
