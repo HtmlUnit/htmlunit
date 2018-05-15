@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
@@ -36,5 +37,18 @@ public class FontFaceSet extends EventTarget {
      */
     @JsxConstructor
     public FontFaceSet() {
+    }
+
+    /**
+     * @param font a font specification using the CSS value syntax, e.g. "italic bold 16px Roboto"
+     * @param text limit the font faces to those whose Unicode range contains at least one
+     *          of the characters in text. This does not check for individual glyph coverage.
+     * @return a Promise of an Array of FontFace loaded. The promise is fulfilled
+     *          when all the fonts are loaded; it is rejected if one of the fonts failed to load.
+     */
+    @JsxFunction
+    public Promise load(final String font, final String text) {
+        final Promise promise = Promise.resolve(null, this, new Object[] {""}, null);
+        return promise;
     }
 }

@@ -64,4 +64,28 @@ public class FontFaceSetTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "then: ",
+            IE = "document.fonts is undefined")
+    public void load() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  if (document.fonts) {\n"
+            + "    document.fonts.load('12px Arial', 'HtmlUnit').then(function(value) {\n"
+            + "        alert('then: ' + value);"
+            + "      });\n"
+            + "  } else {\n"
+            + "    alert('document.fonts is undefined');\n"
+            + "  }"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
