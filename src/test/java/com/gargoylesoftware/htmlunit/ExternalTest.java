@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+// import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -57,7 +57,7 @@ public class ExternalTest {
      *
      * @throws Exception if an error occurs
      */
-    @Test
+    // @Test
     public void pom() throws Exception {
         if (isDifferentWeek()) {
             final Map<String, String> properties = new HashMap<>();
@@ -99,7 +99,7 @@ public class ExternalTest {
 
     private static void assertChromeDriver() throws Exception {
         try (WebClient webClient = getWebClient()) {
-            final AbstractPage page = webClient.getPage("http://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
         }
@@ -112,7 +112,7 @@ public class ExternalTest {
      *
      * @throws Exception if an error occurs
      */
-    @Test
+    // @Test
     public void snapshot() throws Exception {
         if (isDifferentWeek()) {
             final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
