@@ -24,14 +24,13 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
-// import org.junit.Test;
+import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -57,31 +56,31 @@ public class ExternalTest {
      *
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     public void pom() throws Exception {
-        if (isDifferentWeek()) {
-            final Map<String, String> properties = new HashMap<>();
-            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
-            for (int i = 0; i < lines.size(); i++) {
-                final String line = lines.get(i);
-                if (line.trim().equals("<properties>")) {
-                    processProperties(lines, i + 1, properties);
-                }
-                if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
-                    final String artifactId = getValue(line);
-                    final String groupId = getValue(lines.get(i - 1));
-                    if (!lines.get(i + 1).contains("</exclusion>")) {
-                        String version = getValue(lines.get(i + 1));
-                        if (version.startsWith("${")) {
-                            version = properties.get(version.substring(2, version.length() - 1));
-                        }
-                        assertVersion(groupId, artifactId, version);
-                    }
-                }
-            }
-            assertVersion("org.sonatype.oss", "oss-parent", "9");
-            assertChromeDriver();
-        }
+//        if (isDifferentWeek()) {
+//            final Map<String, String> properties = new HashMap<>();
+//            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+//            for (int i = 0; i < lines.size(); i++) {
+//                final String line = lines.get(i);
+//                if (line.trim().equals("<properties>")) {
+//                    processProperties(lines, i + 1, properties);
+//                }
+//                if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
+//                    final String artifactId = getValue(line);
+//                    final String groupId = getValue(lines.get(i - 1));
+//                    if (!lines.get(i + 1).contains("</exclusion>")) {
+//                        String version = getValue(lines.get(i + 1));
+//                        if (version.startsWith("${")) {
+//                            version = properties.get(version.substring(2, version.length() - 1));
+//                        }
+//                        assertVersion(groupId, artifactId, version);
+//                    }
+//                }
+//            }
+//            assertVersion("org.sonatype.oss", "oss-parent", "9");
+//            assertChromeDriver();
+//        }
     }
 
     private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
@@ -112,7 +111,7 @@ public class ExternalTest {
      *
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     public void snapshot() throws Exception {
         if (isDifferentWeek()) {
             final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
