@@ -29,10 +29,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -47,6 +50,19 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
@@ -283,15 +299,28 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
      */
     @Test
     public void lexicographicOrder() {
-//        String lastClassName = null;
-//        for (final Class<?> c : JavaScriptConfiguration.CLASSES_) {
-//            final String name = c.getSimpleName();
-//            if (lastClassName != null && name.compareToIgnoreCase(lastClassName) < 0) {
-//                fail("JavaScriptConfiguration.CLASSES_: '"
-//                    + name + "' should be before '" + lastClassName + "'");
-//            }
-//            lastClassName = name;
-//        }
+        // we will use the Rhino stuff as soon as possible
+        final Set<Class> ignore = new HashSet<Class>(Arrays.asList(
+            ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
+            DataView.class,
+            Float32Array.class, Float64Array.class,
+            Int16Array.class, Int32Array.class, Int8Array.class,
+            Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class
+        ));
+
+        String lastClassName = null;
+        for (final Class<?> c : JavaScriptConfiguration.CLASSES_) {
+            if (ignore.contains(c)) {
+                continue;
+            }
+
+            final String name = c.getSimpleName();
+            if (lastClassName != null && name.compareToIgnoreCase(lastClassName) < 0) {
+                fail("JavaScriptConfiguration.CLASSES_: '"
+                    + name + "' should be before '" + lastClassName + "'");
+            }
+            lastClassName = name;
+        }
     }
 
     /**
