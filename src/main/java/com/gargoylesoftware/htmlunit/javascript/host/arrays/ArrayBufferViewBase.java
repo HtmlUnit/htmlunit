@@ -26,6 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
 
 /**
  * The parent class of all typed arrays, {@link DataView} is not included.
@@ -125,7 +126,19 @@ public class ArrayBufferViewBase extends ArrayBufferView {
         if (lengthProperty instanceof Number) {
             final int length = ((Number) lengthProperty).intValue();
             for (int i = 0; i < length; i++) {
-                put(i + offset, this, sourceArray.get(i));
+                final Object value = sourceArray.get(i, sourceArray);
+                if (value == Scriptable.NOT_FOUND || value == Undefined.instance) {
+                    put(i + offset, this, Double.NaN);
+                }
+                else if (value == null) {
+                    put(i + offset, this, 0);
+                }
+                else if (value instanceof Wrapper) {
+                    put(i + offset, this, ((Wrapper) value).unwrap());
+                }
+                else {
+                    put(i + offset, this, value);
+                }
             }
         }
     }
@@ -149,7 +162,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
     @Override
     public void put(final int index, final Scriptable start, final Object value) {
         getBuffer().setBytes(index * getBytesPerElement() + getByteOffset(),
-                                value == null ? toArray(null) : toArray(Context.toNumber(value)));
+                                value == null ? toByteArray(null) : toByteArray(Context.toNumber(value)));
     }
 
     /**
@@ -157,7 +170,7 @@ public class ArrayBufferViewBase extends ArrayBufferView {
      * @param number the number
      * @return the byte array
      */
-    protected byte[] toArray(final Number number) {
+    protected byte[] toByteArray(final Number number) {
         return null;
     }
 

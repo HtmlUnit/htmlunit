@@ -47,7 +47,7 @@ public class Uint8ClampedArray extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected byte[] toArray(Number number) {
+    protected byte[] toByteArray(Number number) {
         if (number == null || number.intValue() < 0) {
             number = 0;
         }

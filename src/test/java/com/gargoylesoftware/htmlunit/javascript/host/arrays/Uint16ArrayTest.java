@@ -106,20 +106,28 @@ public class Uint16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"undefined", "0", "0", "4", "undefined"})
+    @Alerts({"undefined", "6", "0", "0", "0", "0", "0", "4", "undefined"})
     public void undefinedValueInArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  var array = [];\n"
-            + "  array[2] = 4;\n"
+            + "  array[1] = null;\n"
+            + "  array[2] = Number.NaN;\n"
+            + "  array[3] = Number.POSITIVE_INFINITY;\n"
+            + "  array[4] = Number.NEGATIVE_INFINITY;\n"
+            + "  array[5] = 4;\n"
             + "  alert(array[0]);\n"
 
             + "  var nativeArray = new Uint16Array(array);\n"
+            + "  alert(nativeArray.length);\n"
             + "  alert(nativeArray[0]);\n"
             + "  alert(nativeArray[1]);\n"
             + "  alert(nativeArray[2]);\n"
             + "  alert(nativeArray[3]);\n"
+            + "  alert(nativeArray[4]);\n"
+            + "  alert(nativeArray[5]);\n"
+            + "  alert(nativeArray[6]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

@@ -51,10 +51,14 @@ public class Int16Array extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected byte[] toArray(final Number number) {
+    protected byte[] toByteArray(final Number number) {
         final ByteBuffer buff = ByteBuffer.allocate(BYTES_PER_ELEMENT);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putShort(number != null ? number.shortValue() : 0);
+        if (number == null || Double.isInfinite(number.doubleValue())) {
+            buff.putShort((short) 0);
+            return buff.array();
+        }
+        buff.putShort(number.shortValue());
         return buff.array();
     }
 

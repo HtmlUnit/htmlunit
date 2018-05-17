@@ -51,10 +51,14 @@ public class Int32Array extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected byte[] toArray(final Number number) {
+    protected byte[] toByteArray(final Number number) {
         final ByteBuffer buff = ByteBuffer.allocate(BYTES_PER_ELEMENT);
         buff.order(ByteOrder.LITTLE_ENDIAN);
-        buff.putInt(number != null ? number.intValue() : 0);
+        if (number == null || Double.isInfinite(number.doubleValue())) {
+            buff.putInt(0);
+            return buff.array();
+        }
+        buff.putInt(number.intValue());
         return buff.array();
     }
 

@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -120,42 +119,19 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"6", /* "0", */ "NaN", "NaN", "10", "1", "2.5", "2.75"})
+    @Alerts({"7", "0", "NaN", "NaN", "10", "1", "2.5", "2.75"})
     public void ctorInvalidValuesFloat() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  try {\n"
-            + "    var x = new Float32Array(['null', undefined, '10', true, 2.5, '2.75']);\n"
-            // + "    var x = new Float32Array([null, 'null', undefined, '10', true, 2.5, '2.75']);\n"
+            + "    var x = new Float32Array([null, 'null', undefined, '10', true, 2.5, '2.75']);\n"
             + "    alert(x.length);\n"
             + "    for(var i = 0; i < x.length; i++) {\n"
             + "      alert(x[i]);\n"
             + "    }\n"
             + "  } catch(e) {\n"
             + "    alert('exception');\n"
-            + "  }\n"
-            + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"1", "0"})
-    @NotYetImplemented
-    public void ctorInvalidValuesFloatNYI() throws Exception {
-        final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function test() {\n"
-            + "  var x = new Float32Array([null]);\n"
-            + "  alert(x.length);\n"
-            + "  for(var i = 0; i < x.length; i++) {\n"
-            + "    alert(x[i]);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"

@@ -48,8 +48,11 @@ public class Int8Array extends ArrayBufferViewBase {
      * {@inheritDoc}
      */
     @Override
-    protected byte[] toArray(final Number number) {
-        return new byte[] {number != null ? number.byteValue() : 0};
+    protected byte[] toByteArray(final Number number) {
+        if (number == null || Double.isInfinite(number.doubleValue())) {
+            return new byte[] {0};
+        }
+        return new byte[] {number.byteValue()};
     }
 
     /**
