@@ -226,7 +226,9 @@ public class ExternalTest {
     }
 
     private static WebClient getWebClient() {
-        return new WebClient();
+        final WebClient webClient = new WebClient();
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        return webClient;
     }
 
     /**
