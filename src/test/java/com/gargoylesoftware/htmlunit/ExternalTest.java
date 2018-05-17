@@ -14,21 +14,30 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeNotNull;
 
+import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * Tests against external websites, this should be done once every while.
@@ -50,29 +59,29 @@ public class ExternalTest {
      */
     @Test
     public void pom() throws Exception {
-//        if (isDifferentWeek()) {
-//            final Map<String, String> properties = new HashMap<>();
-//            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
-//            for (int i = 0; i < lines.size(); i++) {
-//                final String line = lines.get(i);
-//                if (line.trim().equals("<properties>")) {
-//                    processProperties(lines, i + 1, properties);
-//                }
-//                if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
-//                    final String artifactId = getValue(line);
-//                    final String groupId = getValue(lines.get(i - 1));
-//                    if (!lines.get(i + 1).contains("</exclusion>")) {
-//                        String version = getValue(lines.get(i + 1));
-//                        if (version.startsWith("${")) {
-//                            version = properties.get(version.substring(2, version.length() - 1));
-//                        }
-//                        assertVersion(groupId, artifactId, version);
-//                    }
-//                }
-//            }
-//            assertVersion("org.sonatype.oss", "oss-parent", "9");
-//            assertChromeDriver();
-//        }
+        if (isDifferentWeek()) {
+            final Map<String, String> properties = new HashMap<>();
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+            for (int i = 0; i < lines.size(); i++) {
+                final String line = lines.get(i);
+                if (line.trim().equals("<properties>")) {
+                    processProperties(lines, i + 1, properties);
+                }
+                if (line.contains("artifactId") && !line.contains(">htmlunit<")) {
+                    final String artifactId = getValue(line);
+                    final String groupId = getValue(lines.get(i - 1));
+                    if (!lines.get(i + 1).contains("</exclusion>")) {
+                        String version = getValue(lines.get(i + 1));
+                        if (version.startsWith("${")) {
+                            version = properties.get(version.substring(2, version.length() - 1));
+                        }
+                        assertVersion(groupId, artifactId, version);
+                    }
+                }
+            }
+            assertVersion("org.sonatype.oss", "oss-parent", "9");
+            assertChromeDriver();
+        }
     }
 
     private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
@@ -105,29 +114,29 @@ public class ExternalTest {
      */
     @Test
     public void snapshot() throws Exception {
-//        if (isDifferentWeek()) {
-//            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
-//            String version = null;
-//            for (int i = 0; i < lines.size(); i++) {
-//                if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {
-//                    version = getValue(lines.get(i + 1));
-//                    break;
-//                }
-//            }
-//            assertNotNull(version);
-//            if (version.contains("SNAPSHOT")) {
-//                try (WebClient webClient = getWebClient()) {
-//                    final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
-//                            + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
-//                    final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
-//                    final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
-//                    final long snapshotMillis = format.parse(timestamp).getTime();
-//                    final long nowMillis = System.currentTimeMillis();
-//                    final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
-//                    assertTrue("Snapshot not deployed for " + days + " days", days < 14);
-//                }
-//            }
-//        }
+        if (isDifferentWeek()) {
+            final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+            String version = null;
+            for (int i = 0; i < lines.size(); i++) {
+                if ("<artifactId>htmlunit</artifactId>".equals(lines.get(i).trim())) {
+                    version = getValue(lines.get(i + 1));
+                    break;
+                }
+            }
+            assertNotNull(version);
+            if (version.contains("SNAPSHOT")) {
+                try (WebClient webClient = getWebClient()) {
+                    final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
+                            + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
+                    final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
+                    final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
+                    final long snapshotMillis = format.parse(timestamp).getTime();
+                    final long nowMillis = System.currentTimeMillis();
+                    final long days = TimeUnit.MILLISECONDS.toDays(nowMillis - snapshotMillis);
+                    assertTrue("Snapshot not deployed for " + days + " days", days < 14);
+                }
+            }
+        }
     }
 
     private static void assertVersion(final String groupId, final String artifactId, final String version)
