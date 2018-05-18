@@ -406,4 +406,41 @@ public class SymbolTest extends WebDriverTestCase {
             + "</body></html>\n";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = {})
+    public void prototypeAddFunction() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  if (window.Symbol) {\n"
+                + "    Symbol.prototype.myCustomFunction = function() {};\n"
+                + "    alert(typeof Symbol.prototype.myCustomFunction);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "object",
+            IE = {})
+    public void prototypeTypeOf() throws Exception {
+        final String html = "<html><head><script>\n"
+                + "function test() {\n"
+                + "  if (window.Symbol) {\n"
+                + "    alert(typeof Symbol.prototype);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script></head><body onload='test()'>\n"
+                + "</body></html>\n";
+        loadPageWithAlerts2(html);
+    }
 }
