@@ -127,4 +127,25 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final HtmlPage page = loadPageWithAlerts(html);
         assertNotNull(page);
     }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    public void tableWithoutColgroup() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <table><col width='7'/><col width='1'/><tbody><tr><td>seven</td><td>One</td></tr></tbody></table>\n"
+            + "</body></html>";
+
+        final WebClient webClient = getWebClient();
+        final WebResponse webResponse = new StringWebResponse(html, URL_FIRST);
+
+        final XHtmlPage page = HTMLParser.parseXHtml(webResponse, webClient.getCurrentWindow());
+
+        final DomElement col = page.getElementsByTagName("col").get(0);
+        assertEquals(col.getParentNode().getNodeName(), HtmlTableColumnGroup.TAG_NAME);
+    }
 }
