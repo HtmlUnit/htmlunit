@@ -199,16 +199,18 @@ public class SetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"7", "true", "false"},
-            IE = {"0", "false", "false"})
+            IE = {})
     public void constructorStringIteratorParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
-            + "  var strIter = 'HtmlUnit'[Symbol.iterator]();"
-            + "  var mySet = new Set(strIter);\n"
-            + "  alert(mySet.size);\n"
-            + "  alert(mySet.has('t'));\n"
-            + "  alert(mySet.has('x'));\n"
+            + "  if (window.Symbol) {\n"
+            + "    var strIter = 'HtmlUnit'[Symbol.iterator]();"
+            + "    var mySet = new Set(strIter);\n"
+            + "    alert(mySet.size);\n"
+            + "    alert(mySet.has('t'));\n"
+            + "    alert(mySet.has('x'));\n"
+            + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";

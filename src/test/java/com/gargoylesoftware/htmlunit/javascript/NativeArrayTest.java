@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -256,7 +254,6 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "a", "b", "c"},
             IE = "not supported")
-    @NotYetImplemented({CHROME, FF})
     public void fromArrayIterator() throws Exception {
         final String html
             = "<html>\n"
@@ -265,6 +262,34 @@ public class NativeArrayTest extends WebDriverTestCase {
             + "  if (Array.from) {\n"
             + "    var input = ['a', 'b', 'c'];\n"
             + "    var arr = Array.from(input[Symbol.iterator]());\n"
+            + "    alert(arr.length);\n"
+            + "    for (var i = 0; i < arr.length; i++) {\n"
+            + "      alert(arr[i]);\n"
+            + "    }\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "T", "e", "s", "t"},
+            IE = "not supported")
+    public void fromStringIterator() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.from) {\n"
+            + "    var arr = Array.from('Test'[Symbol.iterator]());\n"
             + "    alert(arr.length);\n"
             + "    for (var i = 0; i < arr.length; i++) {\n"
             + "      alert(arr[i]);\n"
