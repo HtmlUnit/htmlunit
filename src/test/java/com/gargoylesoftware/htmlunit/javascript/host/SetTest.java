@@ -198,6 +198,28 @@ public class SetTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"7", "true", "false"},
+            IE = {"0", "false", "false"})
+    public void constructorStringIteratorParam() throws Exception {
+        final String html
+            = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var strIter = 'HtmlUnit'[Symbol.iterator]();"
+            + "  var mySet = new Set(strIter);\n"
+            + "  alert(mySet.size);\n"
+            + "  alert(mySet.has('t'));\n"
+            + "  alert(mySet.has('x'));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"3", "true", "false"},
             IE = {"0", "false", "false"})
     public void constructorSetParam() throws Exception {

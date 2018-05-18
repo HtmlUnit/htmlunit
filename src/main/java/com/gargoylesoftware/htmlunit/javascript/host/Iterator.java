@@ -34,6 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code Iterator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class Iterator extends SimpleScriptable {
 
@@ -115,6 +116,22 @@ public class Iterator extends SimpleScriptable {
             final Scriptable thisObj,
             final Scriptable scriptable,
             final Consumer<Object> processor) {
+
+        if (scriptable instanceof ES6Iterator) {
+            ScriptableObject next = (ScriptableObject) ScriptableObject.callMethod(scriptable, "next", null);
+            boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+            Object value = next.get(ES6Iterator.VALUE_PROPERTY);
+
+            while (!done) {
+                processor.accept(value);
+
+                next = (ScriptableObject) ScriptableObject.callMethod(scriptable, "next", null);
+                done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
+                value = next.get(ES6Iterator.VALUE_PROPERTY);
+            }
+            return true;
+        }
+
         if (!(scriptable instanceof SymbolScriptable)) {
             return false;
         }
