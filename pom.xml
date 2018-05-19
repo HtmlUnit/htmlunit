@@ -233,6 +233,18 @@
                     </instructions>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.simplify4u.plugins</groupId>
+                <artifactId>pgpverify-maven-plugin</artifactId>
+                <version>1.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                 </executions>
+            </plugin>
         </plugins>
         <extensions>
             <extension>
