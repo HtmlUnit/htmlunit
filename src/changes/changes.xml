@@ -7,7 +7,19 @@
     </properties>
 
     <body>
-        <release version="2.31" date="xx, 2018" description="Bugfixes, FIREFOX_45 is deprecated, special GAE handlings removed">
+        <release version="2.31" date="xx, 2018" description="Bugfixes, sync with Rhino, FIREFOX_45 is deprecated, special GAE handlings removed">
+            <action type="update" dev="rbri">
+                core-js is now in sync with the latest Rhino codebase.
+            </action>
+            <action type="update" dev="rbri">
+                Use Rhino/core-js now es2 mode (instead of using the outdated default mode).
+            </action>
+            <action type="update" dev="rbri">
+                Use Rhino/core-js Symbol implementation instead of our own one.
+            </action>
+            <action type="fix" dev="rbri">
+                Various updates/fixes for the typed array support.
+            </action>
             <action type="fix" dev="rbri">
                 Set constructor now supports parameters of type iterator also.
             </action>
