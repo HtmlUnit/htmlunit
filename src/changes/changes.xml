@@ -7,12 +7,12 @@
     </properties>
 
     <body>
-        <release version="2.31" date="xx, 2018" description="Bugfixes, sync with Rhino, FIREFOX_45 is deprecated, special GAE handlings removed">
+        <release version="2.31" date="May 22, 2018" description="Bugfixes, sync with Rhino, FIREFOX_45 is deprecated, special GAE handlings removed">
             <action type="update" dev="rbri">
                 core-js is now in sync with the latest Rhino codebase.
             </action>
             <action type="update" dev="rbri">
-                Use Rhino/core-js now es2 mode (instead of using the outdated default mode).
+                Use Rhino/core-js now es2 mode (instead of using rhinos outdated default mode).
             </action>
             <action type="update" dev="rbri">
                 Use Rhino/core-js Symbol implementation instead of our own one.
