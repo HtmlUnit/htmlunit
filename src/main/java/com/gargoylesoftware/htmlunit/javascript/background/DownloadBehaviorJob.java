@@ -26,8 +26,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -73,15 +71,11 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
                 LOG.debug("Downloaded content: " + StringUtils.abbreviate(content, 512));
             }
             final Object[] args = new Object[] {content};
-            final ContextAction action = new ContextAction() {
-                @Override
-                public Object run(final Context cx) {
-                    callback_.call(cx, scope, scope, args);
-                    return null;
-                }
-            };
             final ContextFactory cf = ((JavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory();
-            cf.call(action);
+            cf.call(cx -> {
+                callback_.call(cx, scope, scope, args);
+                return null;
+            });
         }
         catch (final IOException e) {
             LOG.error("Behavior #default#download: Cannot download " + url_, e);

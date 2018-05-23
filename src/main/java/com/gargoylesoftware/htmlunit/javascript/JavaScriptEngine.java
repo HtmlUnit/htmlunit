@@ -170,22 +170,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
 
-        final ContextAction action = new ContextAction() {
-            @Override
-            public Object run(final Context cx) {
-                try {
-                    init(webWindow, cx);
-                }
-                catch (final Exception e) {
-                    LOG.error("Exception while initializing JavaScript for the page", e);
-                    throw new ScriptException(null, e); // BUG: null is not useful.
-                }
-
-                return null;
+        getContextFactory().call(cx -> {
+            try {
+                init(webWindow, cx);
             }
-        };
-
-        getContextFactory().call(action);
+            catch (final Exception e) {
+                LOG.error("Exception while initializing JavaScript for the page", e);
+                throw new ScriptException(null, e); // BUG: null is not useful.
+            }
+            return null;
+        });
     }
 
     /**
@@ -734,7 +728,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final ContextAction action = new HtmlUnitContextAction(scope, owningPage) {
+        final ContextAction<Object> action = new HtmlUnitContextAction(scope, owningPage) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(sourceCode, sourceName, startLine, null);
@@ -783,7 +777,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the result of executing the specified code
      */
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
-        final ContextAction action = new HtmlUnitContextAction(scope, page) {
+        final ContextAction<Object> action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 return script.exec(cx, scope);
@@ -831,7 +825,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public Object callFunction(final HtmlPage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
-        final ContextAction action = new HtmlUnitContextAction(scope, page) {
+        final ContextAction<Object> action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 if (ScriptRuntime.hasTopCall(cx)) {
@@ -869,7 +863,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * ContextAction should be preferred because according to Rhino doc it
      * "guarantees proper association of Context instances with the current thread and is faster".
      */
-    private abstract class HtmlUnitContextAction implements ContextAction {
+    private abstract class HtmlUnitContextAction implements ContextAction<Object> {
         private final Scriptable scope_;
         private final HtmlPage page_;
 

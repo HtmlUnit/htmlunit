@@ -32,7 +32,6 @@ import org.eclipse.jetty.websocket.api.WebSocketListener;
 import org.eclipse.jetty.websocket.api.WebSocketPolicy;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -49,7 +48,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -499,14 +497,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             evt.setParentScope(getParentScope());
             evt.setPrototype(getPrototype(evt.getClass()));
 
-            final JavaScriptEngine engine
-                = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-            engine.getContextFactory().call(new ContextAction() {
-                @Override
-                public ScriptResult run(final Context cx) {
-                    return executeEventLocally(evt);
-                }
-            });
+            final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
+            engine.getContextFactory().call(cx -> executeEventLocally(evt));
         }
 
         private void callFunction(final Function function, final Object[] args) {

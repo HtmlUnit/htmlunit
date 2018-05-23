@@ -129,7 +129,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         // skip if it is already formatted? => TODO
 
         final ContextFactory factory = new ContextFactory();
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 cx.setOptimizationLevel(-1);

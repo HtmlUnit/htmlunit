@@ -120,7 +120,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         }
         final JavaScriptEngine jsEngine =
                 (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 worker_.getEventListenersContainer().executeCapturingListeners(event, null);
@@ -145,7 +145,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
         final JavaScriptEngine jsEngine =
                 (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 return executeEvent(cx, event);
@@ -202,7 +202,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
         final JavaScriptEngine javaScriptEngine = (JavaScriptEngine) webClient.getJavaScriptEngine();
 
         final DedicatedWorkerGlobalScope thisScope = this;
-        final ContextAction action = new ContextAction() {
+        final ContextAction<Object> action = new ContextAction<Object>() {
             @Override
             public Object run(final Context cx) {
                 final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
@@ -226,10 +226,10 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
 class WorkerJob extends BasicJavaScriptJob {
     private final ContextFactory contextFactory_;
-    private final ContextAction action_;
+    private final ContextAction<Object> action_;
     private final String description_;
 
-    WorkerJob(final ContextFactory contextFactory, final ContextAction action, final String description) {
+    WorkerJob(final ContextFactory contextFactory, final ContextAction<Object> action, final String description) {
         contextFactory_ = contextFactory;
         action_ = action;
         description_ = description;

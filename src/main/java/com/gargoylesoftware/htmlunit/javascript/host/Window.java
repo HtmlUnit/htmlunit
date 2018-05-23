@@ -2209,7 +2209,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final PostponedAction action = new PostponedAction(page) {
             @Override
             public void execute() throws Exception {
-                final ContextAction contextAction = new ContextAction() {
+                final ContextAction<Object> contextAction = new ContextAction<Object>() {
                     @Override
                     public Object run(final Context cx) {
                         return dispatchEvent(event);

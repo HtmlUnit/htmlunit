@@ -90,7 +90,7 @@ public class BackgroundJavaScriptFactory {
      * @return JavaScriptJob the created job
      */
     public JavaScriptJob createJavascriptXMLHttpRequestJob(final ContextFactory contextFactory,
-            final ContextAction action) {
+            final ContextAction<Object> action) {
         return new JavascriptXMLHttpRequestJob(contextFactory, action);
     }
 

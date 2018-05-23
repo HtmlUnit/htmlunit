@@ -23,9 +23,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
  */
 final class JavascriptXMLHttpRequestJob extends BasicJavaScriptJob {
     private final ContextFactory contextFactory_;
-    private final ContextAction action_;
+    private final ContextAction<Object> action_;
 
-    JavascriptXMLHttpRequestJob(final ContextFactory contextFactory, final ContextAction action) {
+    JavascriptXMLHttpRequestJob(final ContextFactory contextFactory, final ContextAction<Object> action) {
         super();
         contextFactory_ = contextFactory;
         action_ = action;

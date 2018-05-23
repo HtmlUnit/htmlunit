@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -112,15 +110,8 @@ public class MessagePort extends EventTarget {
             final PostponedAction action = new PostponedAction(w.getWebWindow().getEnclosedPage()) {
                 @Override
                 public void execute() throws Exception {
-                    final ContextAction contextAction = new ContextAction() {
-                        @Override
-                        public Object run(final Context cx) {
-                            return port1_.dispatchEvent(event);
-                        }
-                    };
-
                     final ContextFactory cf = jsEngine.getContextFactory();
-                    cf.call(contextAction);
+                    cf.call(cx -> port1_.dispatchEvent(event));
                 }
             };
             jsEngine.addPostponedAction(action);

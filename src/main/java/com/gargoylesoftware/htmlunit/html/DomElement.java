@@ -64,8 +64,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
@@ -1406,16 +1404,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing " + event);
         }
-        final EventTarget jsElt = getScriptableObject();
-        final ContextAction action = new ContextAction() {
-            @Override
-            public Object run(final Context cx) {
-                return jsElt.fireEvent(event);
-            }
-        };
 
+        final EventTarget jsElt = getScriptableObject();
         final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final ScriptResult result = (ScriptResult) cf.call(action);
+        final ScriptResult result = (ScriptResult) cf.call(cx -> jsElt.fireEvent(event));
         if (event.isAborted(result)) {
             preventDefault();
         }

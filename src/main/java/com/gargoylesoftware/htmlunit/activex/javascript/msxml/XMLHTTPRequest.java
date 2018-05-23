@@ -465,7 +465,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             // Create and start a thread in which to execute the request.
             final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-            final ContextAction action = new ContextAction() {
+            final ContextAction<Object> action = new ContextAction<Object>() {
                 @Override
                 public Object run(final Context cx) {
                     // KEY_STARTING_SCOPE maintains a stack of scopes
