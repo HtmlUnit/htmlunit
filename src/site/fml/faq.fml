@@ -165,8 +165,7 @@
             <answer>
                 <source>
 26.02.2003 16:07:05 org.apache.commons.httpclient.HttpMethodBase   processRedirectResponse
-INFO: Redirect requested but followRedirects is disabled
-                </source>
+INFO: Redirect requested but followRedirects is disabled</source>
                 <p>
                     It's an annoyance that I haven't figured out how to fix yet.
                 </p>
@@ -181,6 +180,30 @@ INFO: Redirect requested but followRedirects is disabled
                     is being used.  The problem is that there isn't a way to disable the messages without knowing
                     the logger in use.
                 </p>
+            </answer>
+        </faq>
+
+        <faq id="SilentCssErrorHandler">
+            <question>
+                There are many errors reported by the DefaultCssErrorHandler inside my log output. Can I ignore/disable these messages?
+            </question>
+            <answer>
+                <p>
+                    This is because our CSS parser detects some problem with one of the css resources your page relies on.
+                    Usually you will see similar error messages if you open your browser debug output window and enable the css log
+                    message.
+                </p>
+                <p>
+                    At least if you are scraping web pages you can ignore this. To suppress the output use the SilentCssErrorHandler
+                    or implement your own CSSErrorHandler.
+                </p>
+            <source><![CDATA[
+
+        try (WebClient webClient = new WebClient(browserVersion)) {
+            webClient.setCssErrorHandler(new SilentCssErrorHandler());
+            ....
+        }
+            ]]></source>
             </answer>
         </faq>
 
