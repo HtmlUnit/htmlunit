@@ -113,7 +113,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  *   <li>chrome.bin (mandatory if it does not exist in the <i>path</i>): is the location of the ChromeDriver binary (see
  *   <a href="http://chromedriver.storage.googleapis.com/index.html">Chrome Driver downloads</a>)</li>
- *   <li>ff45.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
+ *   <li>ff60.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ff52.bin (optional): is the location of the FF binary, in Windows use double back-slashes</li>
  *   <li>ie.bin (mandatory if it does not exist in the <i>path</i>): is the location of the IEDriverServer binary (see
  *   <a href="http://selenium-release.storage.googleapis.com/index.html">IEDriverServer downloads</a>)</li>
@@ -138,14 +138,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45,
+    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60,
         BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
 
     /**
      * Browsers which run by default.
      */
     public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
-        {BrowserVersion.CHROME, BrowserVersion.FIREFOX_45, BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER};
+        {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60, BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
@@ -153,7 +153,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static String CHROME_BIN_;
     private static String EDGE_BIN_;
     private static String IE_BIN_;
-    private static String FF45_BIN_;
+    private static String FF60_BIN_;
     private static String FF52_BIN_;
 
     /** The driver cache. */
@@ -205,7 +205,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
-                    FF45_BIN_ = properties.getProperty("ff45.bin");
+                    FF60_BIN_ = properties.getProperty("ff60.bin");
                     FF52_BIN_ = properties.getProperty("ff52.bin");
 
                     final boolean autofix = Boolean.parseBoolean(properties.getProperty("autofix"));
@@ -434,12 +434,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new EdgeDriver();
             }
 
-            if (BrowserVersion.FIREFOX_45 == getBrowserVersion()) {
-                return createFirefoxDriver(FF45_BIN_);
+            if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
+                // disable the new marionette interface because it requires ff47 or more
+                System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
+                return createFirefoxDriver(FF52_BIN_);
             }
 
-            if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
-                return createFirefoxDriver(FF52_BIN_);
+            if (BrowserVersion.FIREFOX_60 == getBrowserVersion()) {
+                return createFirefoxDriver(FF60_BIN_);
             }
 
             throw new RuntimeException("Unexpected BrowserVersion: " + getBrowserVersion());
@@ -460,9 +462,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private static FirefoxDriver createFirefoxDriver(final String binary) {
-        // disable the new marionette interface because it requires ff47 or more
-        System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
-
         if (binary != null) {
             final FirefoxOptions options = new FirefoxOptions();
             options.setBinary(binary);
@@ -472,7 +471,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.FIREFOX_45) {
+        if (browserVersion == BrowserVersion.FIREFOX_60) {
             return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
         }
         else if (browserVersion == BrowserVersion.FIREFOX_52) {

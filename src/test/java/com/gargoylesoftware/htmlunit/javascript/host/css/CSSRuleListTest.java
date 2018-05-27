@@ -123,7 +123,7 @@ public class CSSRuleListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "[object CSSKeyframesRule]"},
-            FF45 = {"1", "[object MozCSSKeyframesRule]"})
+            FF60 = {"1", "[object MozCSSKeyframesRule]"})
     public void ruleListKeyframes() throws Exception {
         final String html = "<html><head><title>First</title>\n"
                 + "<style>\n"

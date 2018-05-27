@@ -779,7 +779,7 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"auto", "manual", "auto", "auto", "auto", "auto"},
-            FF45 = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"},
+            FF60 = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"},
             IE = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"})
     public void scrollRestoration() throws Exception {
         final String html = "<html><head><script>\n"

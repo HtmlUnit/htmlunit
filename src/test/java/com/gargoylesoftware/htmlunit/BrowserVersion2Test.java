@@ -390,7 +390,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Accept: */*",
-            FF45 = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+            FF60 = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     public void acceptHeaderXMLHttpRequest() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -2774,7 +2774,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null", "null"},
-            FF45 = {"undefined", "undefined"})
+            FF60 = {"undefined", "undefined"})
     public void rootElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -4147,7 +4147,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end"},
-            FF45 = "insertAdjacentElement not available")
+            FF60 = "insertAdjacentElement not available")
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentElement("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");
@@ -4200,7 +4200,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF45 = "insertAdjacentElement not available")
+            FF60 = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4226,7 +4226,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "executed",
-            FF45 = "insertAdjacentElement not available")
+            FF60 = "insertAdjacentElement not available")
     public void insertAdjacentElementExecuteNestedJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4254,7 +4254,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "declared",
-            FF45 = "insertAdjacentElement not available")
+            FF60 = "insertAdjacentElement not available")
     public void insertAdjacentElementDeclareJavaScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -4281,7 +4281,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"outside", "middle",
                 "before-begin after-begin inside before-end after-end"},
-            FF45 = "insertAdjacentText not available")
+            FF60 = "insertAdjacentText not available")
     public void insertAdjacentText() throws Exception {
         insertAdjacentText("beforeend", "afterend", "beforebegin", "afterbegin");
         insertAdjacentText("beforeEnd", "afterEnd", "beforeBegin", "afterBegin");

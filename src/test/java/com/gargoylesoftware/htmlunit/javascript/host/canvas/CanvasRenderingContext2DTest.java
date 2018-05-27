@@ -194,7 +194,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"rendering...", "...done"},
-            FF45 = {"rendering...", "exception"})
+            FF60 = {"rendering...", "exception"})
     public void drawImage_noImage() throws Exception {
         final String html = "<html><body>\n"
             + "<img id='myImage'>\n"
@@ -218,7 +218,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"rendering...", "...done"},
-            FF45 = {"rendering...", "exception"})
+            FF60 = {"rendering...", "exception"})
     public void drawImage_invalidImage() throws Exception {
         try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);

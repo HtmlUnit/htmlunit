@@ -35,7 +35,7 @@ public class WebGLContextEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "3"},
             IE = {"undefined", "undefined", "undefined"},
-            FF45 = "exception")
+            FF60 = "exception")
     public void constants() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

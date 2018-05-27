@@ -688,7 +688,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "exception"},
-            FF45 = {"true", "overwritten"})
+            FF60 = {"true", "overwritten"})
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

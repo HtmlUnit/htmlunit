@@ -93,12 +93,10 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /**
-     * Firefox 45 ESR.
-     * @since 2.21
-     * @deprecated As of 2.31
+     * Firefox 60 ESR.
+     * @since 2,.32
      */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_45 = new BrowserVersion(45, "FF45");
+    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(45, "FF60");
 
     /**
      * Firefox 52 ESR.
@@ -125,13 +123,13 @@ public final class BrowserVersion implements Serializable {
 
     /** Register plugins for the browser versions. */
     static {
-        // FF45
-        FIREFOX_45.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_45.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
-        FIREFOX_45.platform_ = PLATFORM_WIN32;
-        FIREFOX_45.buildId_ = "20170411115307";
-        FIREFOX_45.productSub_ = "20100101";
-        FIREFOX_45.headerNamesOrdered_ = new String[] {
+        // FF60
+        FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
+        FIREFOX_60.platform_ = PLATFORM_WIN32;
+        FIREFOX_60.buildId_ = "20170411115307";
+        FIREFOX_60.productSub_ = "20100101";
+        FIREFOX_60.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -140,11 +138,11 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.REFERER,
             HttpHeader.COOKIE,
             HttpHeader.CONNECTION};
-        FIREFOX_45.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_45.xmlHttpRequestAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_45.imgAcceptHeader_ = "image/png,image/*;q=0.8,*/*;q=0.5";
-        FIREFOX_45.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX_45.fontHeights_ = new int[] {
+        FIREFOX_60.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_60.xmlHttpRequestAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_60.imgAcceptHeader_ = "image/png,image/*;q=0.8,*/*;q=0.5";
+        FIREFOX_60.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX_60.fontHeights_ = new int[] {
             0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
             30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 53, 55, 57, 58,
             59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 84, 85, 86, 87, 88,
@@ -271,29 +269,29 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("txt", "text/plain");
         CHROME.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_45.registerUploadMimeType("html", "text/html");
-        FIREFOX_45.registerUploadMimeType("htm", "text/html");
-        FIREFOX_45.registerUploadMimeType("css", "text/css");
-        FIREFOX_45.registerUploadMimeType("xml", "text/xml");
-        FIREFOX_45.registerUploadMimeType("gif", "image/gif");
-        FIREFOX_45.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX_45.registerUploadMimeType("jpg", "image/jpeg");
-        FIREFOX_45.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_45.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_45.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_45.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_45.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_45.registerUploadMimeType("ogm", "video/x-ogm");
-        FIREFOX_45.registerUploadMimeType("ogg", "video/ogg");
-        FIREFOX_45.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_45.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_45.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_45.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_45.registerUploadMimeType("flac", "audio/x-flac");
-        FIREFOX_45.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_45.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_45.registerUploadMimeType("txt", "text/plain");
-        FIREFOX_45.registerUploadMimeType("text", "text/plain");
+        FIREFOX_60.registerUploadMimeType("html", "text/html");
+        FIREFOX_60.registerUploadMimeType("htm", "text/html");
+        FIREFOX_60.registerUploadMimeType("css", "text/css");
+        FIREFOX_60.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_60.registerUploadMimeType("gif", "image/gif");
+        FIREFOX_60.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX_60.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_60.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_60.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_60.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_60.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_60.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_60.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX_60.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_60.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_60.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_60.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_60.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_60.registerUploadMimeType("flac", "audio/x-flac");
+        FIREFOX_60.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_60.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_60.registerUploadMimeType("txt", "text/plain");
+        FIREFOX_60.registerUploadMimeType("text", "text/plain");
 
         FIREFOX_52.registerUploadMimeType("html", "text/html");
         FIREFOX_52.registerUploadMimeType("htm", "text/html");
@@ -359,7 +357,7 @@ public final class BrowserVersion implements Serializable {
                 "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF32_29_0_0_140.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
-        FIREFOX_45.plugins_.add(flash);
+        FIREFOX_60.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF64_29_0_0_140.dll");
@@ -442,7 +440,7 @@ public final class BrowserVersion implements Serializable {
             expectedBrowser = SupportedBrowser.FF52;
         }
         else if (isFirefox()) {
-            expectedBrowser = SupportedBrowser.FF45;
+            expectedBrowser = SupportedBrowser.FF60;
         }
         else if (isIE()) {
             expectedBrowser = SupportedBrowser.IE;

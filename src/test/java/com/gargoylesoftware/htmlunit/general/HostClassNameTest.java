@@ -1312,7 +1312,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSKeyframeRule]",
             CHROME = "function CSSKeyframeRule() { [native code] }",
-            FF45 = "exception")
+            FF60 = "exception")
     public void cssKeyframeRule() throws Exception {
         test("CSSKeyframeRule");
     }
@@ -1322,7 +1322,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function CSSKeyframesRule() { [native code] }",
-            FF45 = "exception",
+            FF60 = "exception",
             FF52 = "[object CSSKeyframesRule]",
             IE = "[object CSSKeyframesRule]")
     public void cssKeyframesRule() throws Exception {
@@ -3152,7 +3152,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLContentElement() { [native code] }",
-            FF45 = "function HTMLContentElement() {\n    [native code]\n}")
+            FF60 = "function HTMLContentElement() {\n    [native code]\n}")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -3936,7 +3936,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLShadowElement() { [native code] }",
-            FF45 = "function HTMLShadowElement() {\n    [native code]\n}")
+            FF60 = "function HTMLShadowElement() {\n    [native code]\n}")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }
@@ -5532,7 +5532,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function MozContactChangeEvent() {\n    [native code]\n}")
+            FF60 = "function MozContactChangeEvent() {\n    [native code]\n}")
     public void mozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent");
     }
@@ -5542,7 +5542,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "[object MozCSSKeyframesRule]")
+            FF60 = "[object MozCSSKeyframesRule]")
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -5714,7 +5714,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function MozPowerManager() {\n    [native code]\n}")
+            FF60 = "function MozPowerManager() {\n    [native code]\n}")
     public void mozPowerManager() throws Exception {
         test("MozPowerManager");
     }
@@ -5754,7 +5754,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function MozSettingsEvent() {\n    [native code]\n}")
+            FF60 = "function MozSettingsEvent() {\n    [native code]\n}")
     public void mozSettingsEvent() throws Exception {
         test("MozSettingsEvent");
     }
@@ -8001,7 +8001,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SVGAltGlyphElement() {\n    [native code]\n}")
+            FF60 = "function SVGAltGlyphElement() {\n    [native code]\n}")
     public void svgAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement");
     }
@@ -8306,7 +8306,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF45 = "function SVGDocument() {\n    [native code]\n}")
+            FF60 = "function SVGDocument() {\n    [native code]\n}")
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -10482,7 +10482,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function WebGLContextEvent() { [native code] }",
-            FF45 = "exception",
+            FF60 = "exception",
             IE = "\nfunction WebGLContextEvent() {\n    [native code]\n}\n",
             FF52 = "function WebGLContextEvent() {\n    [native code]\n}")
     public void webGLContextEvent() throws Exception {

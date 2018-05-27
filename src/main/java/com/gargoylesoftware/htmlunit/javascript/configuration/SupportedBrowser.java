@@ -34,7 +34,7 @@ public enum SupportedBrowser {
     FF,
 
     /** Firefox 45. */
-    FF45,
+    FF60,
 
     /** Firefox 52. */
     FF52

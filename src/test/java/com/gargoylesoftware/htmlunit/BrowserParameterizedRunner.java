@@ -134,9 +134,9 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.CHROME, true, tests));
                 }
-                if (browsers.contains("ff45")) {
+                if (browsers.contains("ff60")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.FIREFOX_45, true, tests));
+                            klass, BrowserVersion.FIREFOX_60, true, tests));
                 }
                 if (browsers.contains("ff52")) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
@@ -156,9 +156,9 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.CHROME, false, tests));
             }
-            if (browsers.contains("hu-ff45")) {
+            if (browsers.contains("hu_ff60")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.FIREFOX_45, false, tests));
+                        klass, BrowserVersion.FIREFOX_60, false, tests));
             }
             if (browsers.contains("hu-ff52")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(

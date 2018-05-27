@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -422,9 +422,9 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Map Iterator]",
-            FF45 = "[object Object]",
+            FF60 = "[object Object]",
             IE = {})
-    @NotYetImplemented(FF45)
+    @NotYetImplemented(FF60)
     public void iteratorPrototype() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

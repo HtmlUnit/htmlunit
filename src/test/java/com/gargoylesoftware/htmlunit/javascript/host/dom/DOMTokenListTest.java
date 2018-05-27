@@ -747,7 +747,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d e"},
-            FF45 = {"a \t c \n d  e", "4", "3", "a d  e"})
+            FF60 = {"a \t c \n d  e", "4", "3", "a d  e"})
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }

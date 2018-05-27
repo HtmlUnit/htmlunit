@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -156,9 +153,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF45 = {"3", "0", "1234", "0"})
-    @NotYetImplemented(FF45)
+    @Alerts(DEFAULT = "0")
     public void sliceInvalidStartIndexPositiveInfinity() throws Exception {
         sliceInvalidIndex("Number.POSITIVE_INFINITY");
     }

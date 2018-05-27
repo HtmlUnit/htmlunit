@@ -102,7 +102,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF45 = {"block", "inline-block"},
+            FF60 = {"block", "inline-block"},
             FF52 = {"block", "inline"},
             IE = {"inline", "inline"})
     public void applet() throws Exception {
@@ -449,7 +449,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF45 = {"block", "inline"},
+            FF60 = {"block", "inline"},
             FF52 = {"block", "block"},
             IE = {"inline", "inline"})
     public void details() throws Exception {
@@ -1480,7 +1480,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF45 = {"block", "inline"},
+            FF60 = {"block", "inline"},
             FF52 = {"block", "block"},
             IE = {"inline", "inline"})
     public void summary() throws Exception {

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -148,8 +148,8 @@ public class DOMParserTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object XMLDocument]",
-            FF45 = "[object SVGDocument]")
-    @NotYetImplemented(FF45)
+            FF60 = "[object SVGDocument]")
+    @NotYetImplemented(FF60)
     public void parseFromString_application_svgXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

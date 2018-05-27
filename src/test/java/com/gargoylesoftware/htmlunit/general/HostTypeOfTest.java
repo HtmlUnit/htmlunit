@@ -3786,7 +3786,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+            FF60 = "function")
     public void mozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent");
     }
@@ -3796,7 +3796,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "object")
+            FF60 = "object")
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -3842,7 +3842,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+            FF60 = "function")
     public void mozPowerManager() throws Exception {
         test("MozPowerManager");
     }
@@ -3882,7 +3882,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+            FF60 = "function")
     public void mozSettingsEvent() throws Exception {
         test("MozSettingsEvent");
     }
@@ -5266,7 +5266,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+            FF60 = "function")
     public void svgAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement");
     }
@@ -5531,7 +5531,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF45 = "function")
+            FF60 = "function")
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -7141,7 +7141,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF45 = "undefined")
+            FF60 = "undefined")
     public void webGLContextEvent() throws Exception {
         test("WebGLContextEvent");
     }

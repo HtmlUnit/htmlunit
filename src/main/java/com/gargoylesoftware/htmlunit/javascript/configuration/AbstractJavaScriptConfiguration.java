@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -115,7 +115,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 expectedBrowser = FF52;
             }
             else if (browser.isFirefox()) {
-                expectedBrowser = FF45;
+                expectedBrowser = FF60;
             }
             else {
                 expectedBrowser = CHROME;  // our current fallback
@@ -330,8 +330,8 @@ public abstract class AbstractJavaScriptConfiguration {
      */
     public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
         return (browser1 == browser2)
-                || (browser1 == FF && (browser2 == FF45 || browser2 == FF52))
-                || (browser2 == FF && (browser1 == FF45 || browser1 == FF52));
+                || (browser1 == FF && (browser2 == FF60 || browser2 == FF52))
+                || (browser2 == FF && (browser1 == FF60 || browser1 == FF52));
     }
 
     /**

@@ -753,7 +753,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"636", "1256", "619", "1239"},
-            FF45 = {"674", "1258", "657", "1241"},
+            FF60 = {"674", "1258", "657", "1241"},
             FF52 = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
@@ -877,7 +877,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF45 = {"11", "91"},
+            FF60 = {"11", "91"},
             FF52 = {"11", "91"})
     public void mozInnerScreen() throws Exception {
         final String html

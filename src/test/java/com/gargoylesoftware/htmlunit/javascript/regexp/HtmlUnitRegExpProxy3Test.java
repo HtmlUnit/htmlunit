@@ -44,7 +44,7 @@ public class HtmlUnitRegExpProxy3Test {
         final Matcher matcher1group = Pattern.compile("(h)").matcher("hello");
         matcher1group.find();
 
-        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX_45);
+        final HtmlUnitRegExpProxy proxy = new HtmlUnitRegExpProxy(null, BrowserVersion.FIREFOX_60);
 
         assertEquals("$", proxy.computeReplacementValue("$$", theString, matcher0group, false));
         assertEquals("$$x$", proxy.computeReplacementValue("$$$$x$$", theString, matcher0group, false));

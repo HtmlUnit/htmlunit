@@ -23,7 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL_FF45;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL_FF60;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
@@ -232,7 +232,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             deleteProperties(window, "Symbol");
         }
 
-        if (browserVersion.hasFeature(JS_SYMBOL_FF45)) {
+        if (browserVersion.hasFeature(JS_SYMBOL_FF60)) {
             final ScriptableObject sym = (ScriptableObject) ScriptableObject.getProperty(window, "Symbol");
             final List<String> toDelete = Arrays.asList("hasInstance", "isConcatSpreadable", "replace",
                     "search", "split", "string", "toStringTag", "unscopables");

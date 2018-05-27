@@ -355,7 +355,7 @@ public class NodeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false"},
-            FF45 = {"isSameNode not supported"})
+            FF60 = {"isSameNode not supported"})
     public void isSameNode() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

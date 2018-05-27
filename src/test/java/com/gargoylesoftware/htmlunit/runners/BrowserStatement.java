@@ -83,12 +83,12 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts.IE(), alerts.DEFAULT());
                 assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(alerts.FF45(), alerts.DEFAULT());
+                assertNotEquals(alerts.FF60(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF52(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF(), alerts.CHROME());
                 assertNotEquals(alerts.IE(), alerts.CHROME());
                 assertNotEquals(alerts.IE(), alerts.FF());
-                assertNotEquals(alerts.FF45(), alerts.FF());
+                assertNotEquals(alerts.FF60(), alerts.FF());
                 assertNotEquals(alerts.FF52(), alerts.FF());
             }
         }
@@ -98,12 +98,12 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts2.IE(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.FF45(), alerts2.DEFAULT());
+                assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF52(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF(), alerts2.CHROME());
                 assertNotEquals(alerts2.IE(), alerts2.CHROME());
                 assertNotEquals(alerts2.IE(), alerts2.FF());
-                assertNotEquals(alerts2.FF45(), alerts2.FF());
+                assertNotEquals(alerts2.FF60(), alerts2.FF());
                 assertNotEquals(alerts2.FF52(), alerts2.FF());
             }
         }

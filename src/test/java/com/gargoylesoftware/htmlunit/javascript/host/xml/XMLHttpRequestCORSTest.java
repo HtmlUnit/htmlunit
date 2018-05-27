@@ -595,7 +595,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "true", "false", "true"},
-            FF45 = {"false", "true", "false", "ex: open", "true"})
+            FF60 = {"false", "true", "false", "ex: open", "true"})
     public void withCredentials_setBeforeOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -676,7 +676,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "false"},
-            FF45 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
+            FF60 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenSync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -710,7 +710,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "false"},
-            FF45 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
+            FF60 = {"false", "false", "ex: withCredentials=true", "ex: withCredentials=false"})
     public void withCredentials_setAfterOpenAsync() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

@@ -77,8 +77,8 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("chrome")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
-                if (browsers.contains("ff45")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, true));
+                if (browsers.contains("ff60")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, true));
                 }
                 if (browsers.contains("ff52")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, true));
@@ -94,8 +94,8 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
-            if (browsers.contains("hu-ff45")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_45, false));
+            if (browsers.contains("hu-ff60")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, false));
             }
             if (browsers.contains("hu-ff52")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, false));
@@ -170,7 +170,7 @@ public class BrowserRunner extends Suite {
         FF,
 
         /** Firefox 45. */
-        FF45,
+        FF60,
 
         /** Firefox 52. */
         FF52
@@ -217,7 +217,7 @@ public class BrowserRunner extends Suite {
          * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
-        String[] FF45() default { EMPTY_DEFAULT };
+        String[] FF60() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 52. If not defined, {@link #FF()} is used.
@@ -275,7 +275,7 @@ public class BrowserRunner extends Suite {
          * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
-        String[] FF45() default { EMPTY_DEFAULT };
+        String[] FF60() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 52. If not defined, {@link #FF()} is used.

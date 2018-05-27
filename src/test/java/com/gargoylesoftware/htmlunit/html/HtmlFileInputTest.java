@@ -255,7 +255,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
-            FF45 = {"CONTENT_TYPE:audio/x-flac", "charset"},
+            FF60 = {"CONTENT_TYPE:audio/x-flac", "charset"},
             FF52 = {"CONTENT_TYPE:application/octet-stream", "charset"},
             IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
     public void contentTypeFlac() throws Exception {
@@ -864,7 +864,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF45 = {"exception", "exception value", "exception",
+            FF60 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",
@@ -881,7 +881,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF45 = {"exception", "exception value", "exception",
+            FF60 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",
@@ -898,7 +898,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF45 = {"exception", "exception value", "exception",
+            FF60 = {"exception", "exception value", "exception",
                         "exception", "exception",
                         "exception", "exception"},
             IE = {"exception", "exception",

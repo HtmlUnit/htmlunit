@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -259,7 +256,8 @@ public class Int16ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "0")
+            CHROME = "0",
+            FF60 = "0")
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -281,10 +279,7 @@ public class Int16ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
-            FF45 = {"[object Int16Array]", "[object Int16Array]", "[object Int16Array]",
-                    "[object Int16Array]", "[object Int16Array]"})
-    @NotYetImplemented(FF45)
+    @Alerts({"", "0", "1", "1,3", "1,3,4,7,11,0,123"})
     public void asString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

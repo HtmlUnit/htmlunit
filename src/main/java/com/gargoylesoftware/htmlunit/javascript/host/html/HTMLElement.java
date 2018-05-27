@@ -23,7 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIG
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -173,7 +173,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlElement.class, value = {FF, IE})
 @JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlExample.class, value = FF45)
+@JsxClass(domClass = HtmlExample.class, value = FF60)
 @JsxClass(domClass = HtmlFigure.class)
 @JsxClass(domClass = HtmlFigureCaption.class)
 @JsxClass(domClass = HtmlFooter.class)
@@ -181,7 +181,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlItalic.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlKeyboard.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlLayer.class, value = CHROME)
-@JsxClass(domClass = HtmlListing.class, value = FF45)
+@JsxClass(domClass = HtmlListing.class, value = FF60)
 @JsxClass(domClass = HtmlMark.class)
 @JsxClass(domClass = HtmlNav.class)
 @JsxClass(domClass = HtmlNoBreak.class, value = {CHROME, FF})
@@ -343,7 +343,7 @@ public class HTMLElement extends Element {
         COLORS_MAP_IE.put("Olive", "#808000");
         COLORS_MAP_IE.put("OliveDrab", "#6B8E23");
         COLORS_MAP_IE.put("Orange", "#FFA500");
-        COLORS_MAP_IE.put("OrangeRed", "#FF4500");
+        COLORS_MAP_IE.put("OrangeRed", "#FF6000");
         COLORS_MAP_IE.put("Orchid", "#DA70D6");
         COLORS_MAP_IE.put("PaleGoldenrod", "#EEE8AA");
         COLORS_MAP_IE.put("PaleGreen", "#98FB98");
@@ -3578,7 +3578,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozpointerlockchange} event handler for this element.
      * @return the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxGetter(FF45)
+    @JsxGetter(FF60)
     public Function getOnmozpointerlockchange() {
         return getEventHandler("mozpointerlockchange");
     }
@@ -3587,7 +3587,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozpointerlockchange} event handler for this element.
      * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxSetter(FF45)
+    @JsxSetter(FF60)
     public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
         setEventHandler("mozpointerlockchange", onmozpointerlockchange);
     }
@@ -3596,7 +3596,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozpointerlockerror} event handler for this element.
      * @return the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxGetter(FF45)
+    @JsxGetter(FF60)
     public Function getOnmozpointerlockerror() {
         return getEventHandler("mozpointerlockerror");
     }
@@ -3605,7 +3605,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozpointerlockerror} event handler for this element.
      * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxSetter(FF45)
+    @JsxSetter(FF60)
     public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
         setEventHandler("mozpointerlockerror", onmozpointerlockerror);
     }

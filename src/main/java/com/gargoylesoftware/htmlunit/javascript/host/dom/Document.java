@@ -34,7 +34,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
@@ -3563,7 +3563,7 @@ public class Document extends Node {
      * Returns the {@code onmozpointerlockchange} event handler for this element.
      * @return the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxGetter(FF45)
+    @JsxGetter(FF60)
     public Function getOnmozpointerlockchange() {
         return getEventHandler("mozpointerlockchange");
     }
@@ -3572,7 +3572,7 @@ public class Document extends Node {
      * Sets the {@code onmozpointerlockchange} event handler for this element.
      * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler for this element
      */
-    @JsxSetter(FF45)
+    @JsxSetter(FF60)
     public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
         setEventHandler("mozpointerlockchange", onmozpointerlockchange);
     }
@@ -3581,7 +3581,7 @@ public class Document extends Node {
      * Returns the {@code onmozpointerlockerror} event handler for this element.
      * @return the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxGetter(FF45)
+    @JsxGetter(FF60)
     public Function getOnmozpointerlockerror() {
         return getEventHandler("mozpointerlockerror");
     }
@@ -3590,7 +3590,7 @@ public class Document extends Node {
      * Sets the {@code onmozpointerlockerror} event handler for this element.
      * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler for this element
      */
-    @JsxSetter(FF45)
+    @JsxSetter(FF60)
     public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
         setEventHandler("mozpointerlockerror", onmozpointerlockerror);
     }

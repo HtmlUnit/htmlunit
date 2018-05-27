@@ -96,7 +96,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _TOUCH_ACTION() throws Exception {
         test("touchAction");
     }
@@ -127,7 +127,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BORDER_IMAGE() throws Exception {
         test("webkitBorderImage");
     }
@@ -138,7 +138,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_ALIGN() throws Exception {
         test("webkitBoxAlign");
     }
@@ -149,7 +149,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_DIRECTION() throws Exception {
         test("webkitBoxDirection");
     }
@@ -160,7 +160,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_FLEX() throws Exception {
         test("webkitBoxFlex");
     }
@@ -171,7 +171,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_ORDINAL_GROUP() throws Exception {
         test("webkitBoxOrdinalGroup");
     }
@@ -182,7 +182,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_ORIENT() throws Exception {
         test("webkitBoxOrient");
     }
@@ -193,7 +193,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_BOX_PACK() throws Exception {
         test("webkitBoxPack");
     }
@@ -204,7 +204,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_TEXT_FILL_COLOR() throws Exception {
         test("webkitTextFillColor");
     }
@@ -215,7 +215,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_TEXT_STROKE() throws Exception {
         test("webkitTextStroke");
     }
@@ -226,7 +226,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_TEXT_STROKE_COLOR() throws Exception {
         test("webkitTextStrokeColor");
     }
@@ -237,7 +237,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _WEBKIT_TEXT_STROKE_WIDTH() throws Exception {
         test("webkitTextStrokeWidth");
     }
@@ -289,7 +289,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _BACKGROUND_POSITION_X() throws Exception {
         test("backgroundPositionX");
     }
@@ -299,7 +299,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _BACKGROUND_POSITION_Y() throws Exception {
         test("backgroundPositionY");
     }
@@ -319,7 +319,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMNS() throws Exception {
         test("columns");
     }
@@ -329,7 +329,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_COUNT() throws Exception {
         test("columnCount");
     }
@@ -339,7 +339,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_FILL() throws Exception {
         test("columnFill");
     }
@@ -349,7 +349,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_GAP() throws Exception {
         test("columnGap");
     }
@@ -359,7 +359,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_RULE() throws Exception {
         test("columnRule");
     }
@@ -369,7 +369,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_RULE_COLOR() throws Exception {
         test("columnRuleColor");
     }
@@ -379,7 +379,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_RULE_STYLE() throws Exception {
         test("columnRuleStyle");
     }
@@ -389,7 +389,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_RULE_WIDTH() throws Exception {
         test("columnRuleWidth");
     }
@@ -399,7 +399,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _COLUMN_WIDTH() throws Exception {
         test("columnWidth");
     }
@@ -410,7 +410,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID() throws Exception {
         test("grid");
     }
@@ -421,7 +421,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_AREA() throws Exception {
         test("gridArea");
     }
@@ -432,7 +432,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_AUTO_COLUMNS() throws Exception {
         test("gridAutoColumns");
     }
@@ -443,7 +443,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_AUTO_FLOW() throws Exception {
         test("gridAutoFlow");
     }
@@ -454,7 +454,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_AUTO_ROWS() throws Exception {
         test("gridAutoRows");
     }
@@ -465,7 +465,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_COLUMN() throws Exception {
         test("gridColumn");
     }
@@ -476,7 +476,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_COLUMN_END() throws Exception {
         test("gridColumnEnd");
     }
@@ -487,7 +487,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_COLUMN_GAP() throws Exception {
         test("gridColumnGap");
     }
@@ -498,7 +498,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_COLUMN_START() throws Exception {
         test("gridColumnStart");
     }
@@ -509,7 +509,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_GAP() throws Exception {
         test("gridGap");
     }
@@ -520,7 +520,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_ROW() throws Exception {
         test("gridRow");
     }
@@ -531,7 +531,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_ROW_END() throws Exception {
         test("gridRowEnd");
     }
@@ -542,7 +542,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_ROW_GAP() throws Exception {
         test("gridRowGap");
     }
@@ -553,7 +553,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_ROW_START() throws Exception {
         test("gridRowStart");
     }
@@ -564,7 +564,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_TEMPLATE() throws Exception {
         test("gridTemplate");
     }
@@ -575,7 +575,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_TEMPLATE_AREAS() throws Exception {
         test("gridTemplateAreas");
     }
@@ -586,7 +586,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_TEMPLATE_COLUMNS() throws Exception {
         test("gridTemplateColumns");
     }
@@ -597,7 +597,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _GRID_TEMPLATE_ROWS() throws Exception {
         test("gridTemplateRows");
     }
@@ -647,7 +647,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF60 = "true")
     public void _MARKER_OFFSET() throws Exception {
         test("markerOffset");
     }
@@ -657,7 +657,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF45 = "true")
+            FF60 = "true")
     public void _MARKER_OFFSET_() throws Exception {
         test("marker-offset");
     }
@@ -726,7 +726,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _OVERFLOW_WRAP() throws Exception {
         test("overflowWrap");
     }
@@ -786,7 +786,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false",
+            FF60 = "false",
             IE = "false")
     public void _PLACE_CONTENT() throws Exception {
         test("placeContent");
@@ -797,7 +797,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false",
+            FF60 = "false",
             IE = "false")
     public void _PLACE_ITEMS() throws Exception {
         test("placeItems");
@@ -808,7 +808,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false",
+            FF60 = "false",
             IE = "false")
     public void _PLACE_SELF() throws Exception {
         test("placeSelf");
@@ -899,7 +899,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF45 = "false")
+            FF60 = "false")
     public void _TEXT_ALIGN_LAST() throws Exception {
         test("textAlignLast");
     }
@@ -910,7 +910,7 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false",
-            FF45 = "false")
+            FF60 = "false")
     public void _TEXT_COMBINE_UPRIGHT() throws Exception {
         test("textCombineUpright");
     }

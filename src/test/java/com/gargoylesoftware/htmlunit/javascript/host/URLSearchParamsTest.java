@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,9 +38,9 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"foo=1&bar=2", ""},
-            FF45 = {"%3Ffoo=1&bar=2", ""},
+            FF60 = {"%3Ffoo=1&bar=2", ""},
             IE = {})
-    @NotYetImplemented(FF45)
+    @NotYetImplemented(FF60)
     public void ctor() throws Exception {
         final String html =
             "<html>\n"

@@ -126,7 +126,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"", "about:blank", "blank", "", "about:", ""},
-            FF45 = {"", "about:blank", "", "", "about:", ""},
+            FF60 = {"", "about:blank", "", "", "about:", ""},
             FF52 = {"", "about:blank", "blank", "", "about:", ""},
             IE = {"", "about:blank", "/blank", "", "about:", ""})
     public void about_blank_attributes() throws Exception {

@@ -39,7 +39,7 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object SVGElement]",
-            FF45 = "[object SVGAltGlyphElement]")
+            FF60 = "[object SVGAltGlyphElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
