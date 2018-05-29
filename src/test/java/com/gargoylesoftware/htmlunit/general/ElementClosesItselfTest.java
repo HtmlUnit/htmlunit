@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -807,7 +810,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            CHROME = "1")
+            CHROME = "1",
+            FF60 = "1")
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
@@ -1673,7 +1677,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
+    @Alerts(DEFAULT = "0",
+            IE = "1")
+    @NotYetImplemented(IE)
     public void template() throws Exception {
         loadPageWithAlerts2(test("template"));
     }

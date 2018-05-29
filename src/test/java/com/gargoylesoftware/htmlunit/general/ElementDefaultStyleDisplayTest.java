@@ -51,7 +51,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void abbr() throws Exception {
         loadPageWithAlerts2(test("abbr"));
@@ -64,7 +65,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void acronym() throws Exception {
         loadPageWithAlerts2(test("acronym"));
@@ -77,7 +79,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void a() throws Exception {
         loadPageWithAlerts2(test("a"));
@@ -102,8 +105,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF60 = {"block", "inline-block"},
             FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
@@ -165,7 +168,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bgsound() throws Exception {
         loadPageWithAlerts2(test("bgsound"));
@@ -204,7 +208,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bdi() throws Exception {
         loadPageWithAlerts2(test("bdi"));
@@ -217,7 +222,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void bdo() throws Exception {
         loadPageWithAlerts2(test("bdo"));
@@ -230,7 +236,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void big() throws Exception {
         loadPageWithAlerts2(test("big"));
@@ -243,7 +250,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void blink() throws Exception {
         loadPageWithAlerts2(test("blink"));
@@ -280,7 +288,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void b() throws Exception {
         loadPageWithAlerts2(test("b"));
@@ -293,7 +302,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void br() throws Exception {
         loadPageWithAlerts2(test("br"));
@@ -306,7 +316,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline-block"},
+            FF52 = {"block", "inline-block"},
+            FF60 = {"inline-block", "inline-block"},
             IE = {"inline-block", "inline-block"})
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
@@ -319,7 +330,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void canvas() throws Exception {
         loadPageWithAlerts2(test("canvas"));
@@ -332,7 +344,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-caption"},
-            FF = {"block", "table-caption"},
+            FF52 = {"block", "table-caption"},
+            FF60 = {"table-caption", "table-caption"},
             IE = {"table-caption", "table-caption"})
     public void caption() throws Exception {
         loadPageWithAlerts2(test("caption"));
@@ -357,7 +370,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void cite() throws Exception {
         loadPageWithAlerts2(test("cite"));
@@ -370,7 +384,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void code() throws Exception {
         loadPageWithAlerts2(test("code"));
@@ -383,7 +398,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
@@ -408,7 +424,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void dfn() throws Exception {
         loadPageWithAlerts2(test("dfn"));
@@ -436,7 +453,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void del() throws Exception {
         loadPageWithAlerts2(test("del"));
@@ -449,8 +467,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF60 = {"block", "inline"},
-            FF52 = {"block", "block"},
+            FF = {"block", "block"},
             IE = {"inline", "inline"})
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
@@ -463,7 +480,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "none"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"none", "none"},
             IE = {"inline", "inline"})
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
@@ -524,7 +542,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void embed() throws Exception {
         loadPageWithAlerts2(test("embed"));
@@ -537,7 +556,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void em() throws Exception {
         loadPageWithAlerts2(test("em"));
@@ -586,7 +606,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void font() throws Exception {
         loadPageWithAlerts2(test("font"));
@@ -623,7 +644,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"block", "block"})
     public void frame() throws Exception {
         loadPageWithAlerts2(test("frame"));
@@ -768,7 +790,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void iframe() throws Exception {
         loadPageWithAlerts2(test("iframe"));
@@ -781,7 +804,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void q() throws Exception {
         loadPageWithAlerts2(test("q"));
@@ -794,7 +818,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void img() throws Exception {
         loadPageWithAlerts2(test("img"));
@@ -807,7 +832,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void image() throws Exception {
         loadPageWithAlerts2(test("image"));
@@ -820,7 +846,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void ins() throws Exception {
         loadPageWithAlerts2(test("ins"));
@@ -833,7 +860,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
@@ -846,7 +874,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void i() throws Exception {
         loadPageWithAlerts2(test("i"));
@@ -859,7 +888,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void kbd() throws Exception {
         loadPageWithAlerts2(test("kbd"));
@@ -870,7 +900,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
@@ -883,7 +914,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void label() throws Exception {
         loadPageWithAlerts2(test("label"));
@@ -896,7 +928,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void layer() throws Exception {
         loadPageWithAlerts2(test("layer"));
@@ -934,7 +967,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "list-item"},
-            FF = {"block", "list-item"},
+            FF52 = {"block", "list-item"},
+            FF60 = {"list-item", "list-item"},
             IE = {"list-item", "list-item"})
     public void li() throws Exception {
         loadPageWithAlerts2(test("li"));
@@ -973,7 +1007,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void map() throws Exception {
         loadPageWithAlerts2(test("map"));
@@ -986,7 +1021,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void mark() throws Exception {
         loadPageWithAlerts2(test("mark"));
@@ -999,7 +1035,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline-block"},
+            FF52 = {"block", "inline-block"},
+            FF60 = {"inline-block", "inline-block"},
             IE = {"block", "block"})
     public void marquee() throws Exception {
         loadPageWithAlerts2(test("marquee"));
@@ -1024,7 +1061,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void menuitem() throws Exception {
         loadPageWithAlerts2(test("menuitem"));
@@ -1049,7 +1087,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline-block"},
+            FF52 = {"block", "inline-block"},
+            FF60 = {"inline-block", "inline-block"},
             IE = {"inline", "inline"})
     public void meter() throws Exception {
         loadPageWithAlerts2(test("meter"));
@@ -1087,7 +1126,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nextid() throws Exception {
         loadPageWithAlerts2(test("nextid"));
@@ -1100,7 +1140,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nobr() throws Exception {
         loadPageWithAlerts2(test("nobr"));
@@ -1137,7 +1178,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void nolayer() throws Exception {
         loadPageWithAlerts2(test("nolayer"));
@@ -1162,7 +1204,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void object() throws Exception {
         loadPageWithAlerts2(test("object"));
@@ -1213,7 +1256,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void output() throws Exception {
         loadPageWithAlerts2(test("output"));
@@ -1275,7 +1319,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline-block"},
+            FF52 = {"block", "inline-block"},
+            FF60 = {"inline-block", "inline-block"},
             IE = {"inline", "inline"})
     public void progress() throws Exception {
         loadPageWithAlerts2(test("progress"));
@@ -1301,7 +1346,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "ruby-text"},
+            FF52 = {"block", "ruby-text"},
+            FF60 = {"ruby-text", "ruby-text"},
             IE = {"ruby-text", "ruby-text"})
     public void rt() throws Exception {
         loadPageWithAlerts2(test("rt"));
@@ -1314,7 +1360,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "ruby"},
+            FF52 = {"block", "ruby"},
+            FF60 = {"ruby", "ruby"},
             IE = {"ruby", "ruby"})
     public void ruby() throws Exception {
         loadPageWithAlerts2(test("ruby"));
@@ -1327,7 +1374,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void s() throws Exception {
         loadPageWithAlerts2(test("s"));
@@ -1340,7 +1388,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void samp() throws Exception {
         loadPageWithAlerts2(test("samp"));
@@ -1377,7 +1426,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline-block"},
+            FF52 = {"block", "inline-block"},
+            FF60 = {"inline-block", "inline-block"},
             IE = {"inline-block", "inline-block"})
     public void select() throws Exception {
         loadPageWithAlerts2(test("select"));
@@ -1390,7 +1440,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void small() throws Exception {
         loadPageWithAlerts2(test("small"));
@@ -1403,7 +1454,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void source() throws Exception {
         loadPageWithAlerts2(test("source"));
@@ -1416,7 +1468,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void span() throws Exception {
         loadPageWithAlerts2(test("span"));
@@ -1429,7 +1482,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void strike() throws Exception {
         loadPageWithAlerts2(test("strike"));
@@ -1442,7 +1496,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void strong() throws Exception {
         loadPageWithAlerts2(test("strong"));
@@ -1467,7 +1522,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void sub() throws Exception {
         loadPageWithAlerts2(test("sub"));
@@ -1480,8 +1536,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "block"},
-            FF60 = {"block", "inline"},
-            FF52 = {"block", "block"},
+            FF = {"block", "block"},
             IE = {"inline", "inline"})
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
@@ -1494,7 +1549,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void sup() throws Exception {
         loadPageWithAlerts2(test("sup"));
@@ -1507,7 +1563,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void svg() throws Exception {
         loadPageWithAlerts2(test("svg"));
@@ -1532,7 +1589,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-column"},
-            FF = {"block", "table-column"},
+            FF52 = {"block", "table-column"},
+            FF60 = {"table-column", "table-column"},
             IE = {"table-column", "table-column"})
     public void col() throws Exception {
         loadPageWithAlerts2(test("col"));
@@ -1545,7 +1603,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-column-group"},
-            FF = {"block", "table-column-group"},
+            FF52 = {"block", "table-column-group"},
+            FF60 = {"table-column-group", "table-column-group"},
             IE = {"table-column-group", "table-column-group"})
     public void colgroup() throws Exception {
         loadPageWithAlerts2(test("colgroup"));
@@ -1558,7 +1617,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-row-group"},
-            FF = {"block", "table-row-group"},
+            FF52 = {"block", "table-row-group"},
+            FF60 = {"table-row-group", "table-row-group"},
             IE = {"table-row-group", "table-row-group"})
     public void tbody() throws Exception {
         loadPageWithAlerts2(test("tbody"));
@@ -1571,7 +1631,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-cell"},
-            FF = {"block", "table-cell"},
+            FF52 = {"block", "table-cell"},
+            FF60 = {"table-cell", "table-cell"},
             IE = {"table-cell", "table-cell"})
     public void td() throws Exception {
         loadPageWithAlerts2(test("td"));
@@ -1584,7 +1645,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-cell"},
-            FF = {"block", "table-cell"},
+            FF52 = {"block", "table-cell"},
+            FF60 = {"table-cell", "table-cell"},
             IE = {"table-cell", "table-cell"})
     public void th() throws Exception {
         loadPageWithAlerts2(test("th"));
@@ -1597,7 +1659,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-row"},
-            FF = {"block", "table-row"},
+            FF52 = {"block", "table-row"},
+            FF60 = {"table-row", "table-row"},
             IE = {"table-row", "table-row"})
     public void tr() throws Exception {
         loadPageWithAlerts2(test("tr"));
@@ -1610,7 +1673,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline-block", "inline-block"})
     public void textarea() throws Exception {
         loadPageWithAlerts2(test("textarea"));
@@ -1623,7 +1687,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-footer-group"},
-            FF = {"block", "table-footer-group"},
+            FF52 = {"block", "table-footer-group"},
+            FF60 = {"table-footer-group", "table-footer-group"},
             IE = {"table-footer-group", "table-footer-group"})
     public void tfoot() throws Exception {
         loadPageWithAlerts2(test("tfoot"));
@@ -1636,7 +1701,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "table-header-group"},
-            FF = {"block", "table-header-group"},
+            FF52 = {"block", "table-header-group"},
+            FF60 = {"table-header-group", "table-header-group"},
             IE = {"table-header-group", "table-header-group"})
     public void thead() throws Exception {
         loadPageWithAlerts2(test("thead"));
@@ -1649,7 +1715,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void tt() throws Exception {
         loadPageWithAlerts2(test("tt"));
@@ -1662,7 +1729,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void time() throws Exception {
         loadPageWithAlerts2(test("time"));
@@ -1687,7 +1755,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void track() throws Exception {
         loadPageWithAlerts2(test("track"));
@@ -1700,7 +1769,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void u() throws Exception {
         loadPageWithAlerts2(test("u"));
@@ -1725,7 +1795,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void var() throws Exception {
         loadPageWithAlerts2(test("var"));
@@ -1738,7 +1809,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void video() throws Exception {
         loadPageWithAlerts2(test("video"));
@@ -1751,7 +1823,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void wbr() throws Exception {
         loadPageWithAlerts2(test("wbr"));
@@ -1776,7 +1849,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline-block", "inline-block"})
     public void input() throws Exception {
         loadPageWithAlerts2(test("input"));
@@ -1789,7 +1863,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void data() throws Exception {
         loadPageWithAlerts2(test("data"));
@@ -1802,7 +1877,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void content() throws Exception {
         loadPageWithAlerts2(test("content"));
@@ -1815,7 +1891,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"inline", "inline"},
             IE = {"inline", "inline"})
     public void picture() throws Exception {
         loadPageWithAlerts2(test("picture"));
@@ -1841,7 +1918,8 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "contents"},
-            FF = {"block", "inline"},
+            FF52 = {"block", "inline"},
+            FF60 = {"contents", "contents"},
             IE = {"inline", "inline"})
     public void slot() throws Exception {
         loadPageWithAlerts2(test("slot"));
