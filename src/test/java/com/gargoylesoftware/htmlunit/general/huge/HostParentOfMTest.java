@@ -592,8 +592,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent", "MozContactChangeEvent");
     }
@@ -602,8 +601,7 @@ public class HostParentOfMTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
     }
@@ -613,8 +611,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _MozPowerManager_MozPowerManager() throws Exception {
         test("MozPowerManager", "MozPowerManager");
     }
@@ -657,8 +654,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
         test("MozSettingsEvent", "MozSettingsEvent");
     }
@@ -1787,8 +1783,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Node_SVGAltGlyphElement() throws Exception {
         test("Node", "SVGAltGlyphElement");
     }
@@ -1903,8 +1898,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Node_SVGDocument() throws Exception {
         test("Node", "SVGDocument");
     }

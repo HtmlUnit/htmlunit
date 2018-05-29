@@ -213,8 +213,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _SpeechSynthesisEvent_SpeechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisEvent");
     }
@@ -224,8 +223,7 @@ public class HostParentOfSTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _SpeechSynthesisUtterance_SpeechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance", "SpeechSynthesisUtterance");
     }
@@ -337,8 +335,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGAltGlyphElement_SVGAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement", "SVGAltGlyphElement");
     }
@@ -635,8 +632,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGDocument_SVGDocument() throws Exception {
         test("SVGDocument", "SVGDocument");
     }
@@ -654,8 +650,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGElement_SVGAltGlyphElement() throws Exception {
         test("SVGElement", "SVGAltGlyphElement");
     }
@@ -1694,8 +1689,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGGraphicsElement_SVGAltGlyphElement() throws Exception {
         test("SVGGraphicsElement", "SVGAltGlyphElement");
     }
@@ -2597,8 +2591,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGTextContentElement_SVGAltGlyphElement() throws Exception {
         test("SVGTextContentElement", "SVGAltGlyphElement");
     }
@@ -2670,8 +2663,7 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _SVGTextPositioningElement_SVGAltGlyphElement() throws Exception {
         test("SVGTextPositioningElement", "SVGAltGlyphElement");
     }

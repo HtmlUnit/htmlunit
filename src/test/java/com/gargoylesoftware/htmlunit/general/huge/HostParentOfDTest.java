@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF45;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
@@ -66,8 +65,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _DataTransferItem_DataTransferItem() throws Exception {
         test("DataTransferItem", "DataTransferItem");
     }
@@ -77,8 +75,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _DataTransferItemList_DataTransferItemList() throws Exception {
         test("DataTransferItemList", "DataTransferItemList");
     }
@@ -164,8 +161,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Document_SVGDocument() throws Exception {
         test("Document", "SVGDocument");
     }
@@ -260,7 +256,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF52 = "true")
+            FF = "true")
     @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
@@ -292,7 +288,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF52 = "true")
+            FF = "true")
     @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
@@ -351,9 +347,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
-    @NotYetImplemented(FF45)
+    @Alerts("false")
     public void _DOMRequest_DOMCursor() throws Exception {
         test("DOMRequest", "DOMCursor");
     }
@@ -374,7 +368,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF52 = "false")
+            FF = "false")
     public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {
         test("DOMSettableTokenList", "DOMSettableTokenList");
     }
@@ -404,7 +398,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF52 = "false")
+            FF = "false")
     public void _DOMTokenList_DOMSettableTokenList() throws Exception {
         test("DOMTokenList", "DOMSettableTokenList");
     }
@@ -469,7 +463,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            FF60 = "false")
     public void _Element_HTMLAppletElement() throws Exception {
         test("Element", "HTMLAppletElement");
     }
@@ -572,7 +567,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _Element_HTMLContentElement() throws Exception {
         test("Element", "HTMLContentElement");
@@ -612,8 +607,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _Element_HTMLDetailsElement() throws Exception {
         test("Element", "HTMLDetailsElement");
     }
@@ -1056,7 +1050,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _Element_HTMLShadowElement() throws Exception {
         test("Element", "HTMLShadowElement");
@@ -1278,8 +1272,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Element_SVGAltGlyphElement() throws Exception {
         test("Element", "SVGAltGlyphElement");
     }
@@ -1656,7 +1649,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _Element_SVGGeometryElement() throws Exception {
         test("Element", "SVGGeometryElement");
     }
@@ -1949,8 +1943,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     @NotYetImplemented({CHROME, FF52})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
@@ -2228,7 +2221,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _Event_MediaQueryListEvent() throws Exception {
         test("Event", "MediaQueryListEvent");
     }
@@ -2315,8 +2309,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Event_MozContactChangeEvent() throws Exception {
         test("Event", "MozContactChangeEvent");
     }
@@ -2325,8 +2318,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _Event_MozSettingsEvent() throws Exception {
         test("Event", "MozSettingsEvent");
     }
@@ -2374,7 +2366,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _Event_PointerEvent() throws Exception {
         test("Event", "PointerEvent");
     }
@@ -2462,8 +2454,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _Event_SpeechSynthesisEvent() throws Exception {
         test("Event", "SpeechSynthesisEvent");
     }
@@ -2482,7 +2473,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            FF60 = "false")
     public void _Event_SVGZoomEvent() throws Exception {
         test("Event", "SVGZoomEvent");
     }
@@ -2558,8 +2550,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
+    @Alerts("true")
     public void _Event_WebGLContextEvent() throws Exception {
         test("Event", "WebGLContextEvent");
     }
@@ -2708,7 +2699,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _EventTarget_AudioScheduledSourceNode() throws Exception {
         test("EventTarget", "AudioScheduledSourceNode");
     }
@@ -2718,7 +2710,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _EventTarget_BaseAudioContext() throws Exception {
         test("EventTarget", "BaseAudioContext");
     }
@@ -2828,8 +2821,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     @NotYetImplemented(FF52)
     public void _EventTarget_ConstantSourceNode() throws Exception {
         test("EventTarget", "ConstantSourceNode");
@@ -2990,7 +2982,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF52 = "true")
     public void _EventTarget_HTMLAppletElement() throws Exception {
         test("EventTarget", "HTMLAppletElement");
     }
@@ -3070,7 +3062,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _EventTarget_HTMLContentElement() throws Exception {
         test("EventTarget", "HTMLContentElement");
@@ -3101,8 +3093,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _EventTarget_HTMLDetailsElement() throws Exception {
         test("EventTarget", "HTMLDetailsElement");
     }
@@ -3552,7 +3543,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _EventTarget_HTMLShadowElement() throws Exception {
         test("EventTarget", "HTMLShadowElement");
@@ -3793,8 +3784,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _EventTarget_IIRFilterNode() throws Exception {
         test("EventTarget", "IIRFilterNode");
     }
@@ -4078,8 +4068,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _EventTarget_PermissionStatus() throws Exception {
         test("EventTarget", "PermissionStatus");
     }
@@ -4149,7 +4138,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true")
+            FF = "true")
     @NotYetImplemented(FF52)
     public void _EventTarget_Screen() throws Exception {
         test("EventTarget", "Screen");
@@ -4250,7 +4239,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true")
+            FF = "true")
     public void _EventTarget_SpeechSynthesis() throws Exception {
         test("EventTarget", "SpeechSynthesis");
     }
@@ -4260,8 +4249,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            IE = "false",
-            FF45 = "false")
+            IE = "false")
     public void _EventTarget_SpeechSynthesisUtterance() throws Exception {
         test("EventTarget", "SpeechSynthesisUtterance");
     }
@@ -4290,8 +4278,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _EventTarget_SVGAltGlyphElement() throws Exception {
         test("EventTarget", "SVGAltGlyphElement");
     }
@@ -4400,8 +4387,7 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts("false")
     public void _EventTarget_SVGDocument() throws Exception {
         test("EventTarget", "SVGDocument");
     }
@@ -4711,7 +4697,8 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _EventTarget_SVGGeometryElement() throws Exception {
         test("EventTarget", "SVGGeometryElement");
     }
@@ -5191,7 +5178,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF52 = "true")
     public void _External_External() throws Exception {
         test("External", "External");
     }

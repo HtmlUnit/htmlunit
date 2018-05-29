@@ -271,9 +271,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF52 = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _ConstantSourceNode_ConstantSourceNode() throws Exception {
         test("ConstantSourceNode", "ConstantSourceNode");
     }
@@ -303,7 +302,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _Credential_Credential() throws Exception {
         test("Credential", "Credential");
     }
@@ -333,7 +333,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _CredentialsContainer_CredentialsContainer() throws Exception {
         test("CredentialsContainer", "CredentialsContainer");
     }
@@ -480,8 +481,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
+    @Alerts("true")
     public void _CSSKeyframeRule_CSSKeyframeRule() throws Exception {
         test("CSSKeyframeRule", "CSSKeyframeRule");
     }
@@ -490,8 +490,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
+    @Alerts("true")
     public void _CSSKeyframesRule_CSSKeyframesRule() throws Exception {
         test("CSSKeyframesRule", "CSSKeyframesRule");
     }
@@ -510,7 +509,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _CSSNamespaceRule_CSSNamespaceRule() throws Exception {
         test("CSSNamespaceRule", "CSSNamespaceRule");
     }
@@ -586,8 +585,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
+    @Alerts("true")
     public void _CSSRule_CSSKeyframeRule() throws Exception {
         test("CSSRule", "CSSKeyframeRule");
     }
@@ -596,8 +594,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF45 = "false")
+    @Alerts("true")
     public void _CSSRule_CSSKeyframesRule() throws Exception {
         test("CSSRule", "CSSKeyframesRule");
     }
@@ -616,7 +613,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _CSSRule_CSSNamespaceRule() throws Exception {
         test("CSSRule", "CSSNamespaceRule");
     }
@@ -671,8 +668,8 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF45 = "true")
+    @Alerts(DEFAULT = "true",
+            FF60 = "false")
     public void _CSSRule_MozCSSKeyframesRule() throws Exception {
         test("CSSRule", "MozCSSKeyframesRule");
     }
