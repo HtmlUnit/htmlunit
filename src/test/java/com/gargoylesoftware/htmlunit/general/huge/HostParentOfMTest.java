@@ -206,7 +206,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent", "MediaQueryListEvent");
     }
@@ -550,7 +551,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
     }
@@ -847,7 +848,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            FF60 = "false")
     public void _Node_HTMLAppletElement() throws Exception {
         test("Node", "HTMLAppletElement");
     }
@@ -961,7 +963,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _Node_HTMLContentElement() throws Exception {
         test("Node", "HTMLContentElement");
@@ -1005,7 +1007,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true",
+            FF = "true",
             CHROME = "true")
     public void _Node_HTMLDetailsElement() throws Exception {
         test("Node", "HTMLDetailsElement");
@@ -1507,7 +1509,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
+            FF = "false",
             IE = "false")
     public void _Node_HTMLShadowElement() throws Exception {
         test("Node", "HTMLShadowElement");
@@ -2211,7 +2213,8 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _Node_SVGGeometryElement() throws Exception {
         test("Node", "SVGGeometryElement");
     }
