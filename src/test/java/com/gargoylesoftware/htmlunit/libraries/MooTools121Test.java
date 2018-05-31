@@ -72,10 +72,7 @@ public class MooTools121Test extends WebDriverTestCase {
                     "should return the function bound to an object with multiple arguments"},
             IE = {"364", "2", "0",
                     "should return the function bound to an object with multiple arguments",
-                    "should return a CSS string representing the Element's styles"},
-            FF45 = {"364", "2", "0",
-                    "should return true if the string constains the string and separator otherwise false",
-                    "should return the function bound to an object with multiple arguments"})
+                    "should return a CSS string representing the Element's styles"})
     @Test
     @NotYetImplemented(IE)
     public void mooTools() throws Exception {
