@@ -254,9 +254,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
@@ -286,9 +285,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
@@ -366,9 +364,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _DOMSettableTokenList_DOMSettableTokenList() throws Exception {
         test("DOMSettableTokenList", "DOMSettableTokenList");
     }
@@ -396,9 +393,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            FF = "false")
+    @Alerts(DEFAULT = "false",
+            IE = "true")
     public void _DOMTokenList_DOMSettableTokenList() throws Exception {
         test("DOMTokenList", "DOMSettableTokenList");
     }
@@ -566,9 +562,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_HTMLContentElement() throws Exception {
         test("Element", "HTMLContentElement");
     }
@@ -1049,9 +1044,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Element_HTMLShadowElement() throws Exception {
         test("Element", "HTMLShadowElement");
     }
@@ -2629,6 +2623,16 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _EventTarget_Animation() throws Exception {
+        test("EventTarget", "Animation");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             CHROME = "true")
     public void _EventTarget_ApplicationCache() throws Exception {
         test("EventTarget", "ApplicationCache");
@@ -3061,9 +3065,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _EventTarget_HTMLContentElement() throws Exception {
         test("EventTarget", "HTMLContentElement");
     }
@@ -3542,9 +3545,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _EventTarget_HTMLShadowElement() throws Exception {
         test("EventTarget", "HTMLShadowElement");
     }
@@ -5161,6 +5163,16 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_XMLHttpRequestUpload() throws Exception {
         test("EventTarget", "XMLHttpRequestUpload");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _Event_SpeechSynthesisErrorEvent() throws Exception {
+        test("Event", "SpeechSynthesisErrorEvent");
     }
 
     /**

@@ -118,9 +118,29 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _FileSystemEntry_FileSystemDirectoryEntry() throws Exception {
+        test("FileSystemEntry", "FileSystemDirectoryEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _FileSystemEntry_FileSystemEntry() throws Exception {
         test("FileSystemEntry", "FileSystemEntry");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _FileSystemEntry_FileSystemFileEntry() throws Exception {
+        test("FileSystemEntry", "FileSystemFileEntry");
     }
 
     /**

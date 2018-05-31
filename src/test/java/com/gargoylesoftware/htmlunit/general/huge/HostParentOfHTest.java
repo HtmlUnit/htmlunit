@@ -255,9 +255,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLContentElement_HTMLContentElement() throws Exception {
         test("HTMLContentElement", "HTMLContentElement");
     }
@@ -295,9 +294,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLDetailsElement_HTMLDetailsElement() throws Exception {
         test("HTMLDetailsElement", "HTMLDetailsElement");
     }
@@ -484,9 +482,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLElement_HTMLContentElement() throws Exception {
         test("HTMLElement", "HTMLContentElement");
     }
@@ -524,9 +521,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _HTMLElement_HTMLDetailsElement() throws Exception {
         test("HTMLElement", "HTMLDetailsElement");
     }
@@ -968,9 +964,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLElement_HTMLShadowElement() throws Exception {
         test("HTMLElement", "HTMLShadowElement");
     }
@@ -1626,9 +1621,8 @@ public class HostParentOfHTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _HTMLShadowElement_HTMLShadowElement() throws Exception {
         test("HTMLShadowElement", "HTMLShadowElement");
     }
