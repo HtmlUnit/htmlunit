@@ -325,7 +325,7 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _UIEvent_PointerEvent() throws Exception {
         test("UIEvent", "PointerEvent");
     }
@@ -335,7 +335,8 @@ public class HostParentOfTTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            CHROME = "false")
+            CHROME = "false",
+            FF60 = "false")
     public void _UIEvent_SVGZoomEvent() throws Exception {
         test("UIEvent", "SVGZoomEvent");
     }

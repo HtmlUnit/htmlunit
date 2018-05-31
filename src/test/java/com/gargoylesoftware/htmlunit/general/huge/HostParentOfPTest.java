@@ -173,7 +173,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     @NotYetImplemented(CHROME)
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
@@ -224,7 +225,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _PerformanceNavigationTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming", "PerformanceNavigationTiming");
     }
@@ -235,7 +236,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _PerformanceObserver_PerformanceObserver() throws Exception {
         test("PerformanceObserver", "PerformanceObserver");
     }
@@ -246,7 +248,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     public void _PerformanceObserverEntryList_PerformanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList", "PerformanceObserverEntryList");
     }
@@ -257,7 +260,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF60 = "true")
     @NotYetImplemented(CHROME)
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
@@ -300,7 +304,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true",
+            FF = "true",
             CHROME = "true")
     public void _Permissions_Permissions() throws Exception {
         test("Permissions", "Permissions");
@@ -312,7 +316,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF52 = "true",
+            FF = "true",
             CHROME = "true")
     public void _PermissionStatus_PermissionStatus() throws Exception {
         test("PermissionStatus", "PermissionStatus");
@@ -344,7 +348,7 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF52 = "false")
     public void _PointerEvent_PointerEvent() throws Exception {
         test("PointerEvent", "PointerEvent");
     }
