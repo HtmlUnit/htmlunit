@@ -57,7 +57,13 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
             // edge
             Pattern.compile(".*Stopping server.\r\r?\n"),
-            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n")
+            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
+
+            // FF60 output
+            Pattern.compile("Unable to read VR Path Registry from .*\r\r?\n"),
+            Pattern.compile("JavaScript warning: .*: String.toLowerCase is deprecated;"
+                                + " use String.prototype.toLowerCase instead\r\r?\n")
+
     };
 
     /**
