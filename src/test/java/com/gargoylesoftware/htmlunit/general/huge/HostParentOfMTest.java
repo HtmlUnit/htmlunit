@@ -962,9 +962,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_HTMLContentElement() throws Exception {
         test("Node", "HTMLContentElement");
     }
@@ -1006,9 +1005,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Node_HTMLDetailsElement() throws Exception {
         test("Node", "HTMLDetailsElement");
     }
@@ -1508,9 +1506,8 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _Node_HTMLShadowElement() throws Exception {
         test("Node", "HTMLShadowElement");
     }

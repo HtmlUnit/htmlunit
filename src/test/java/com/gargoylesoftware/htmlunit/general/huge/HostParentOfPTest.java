@@ -303,9 +303,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Permissions_Permissions() throws Exception {
         test("Permissions", "Permissions");
     }
@@ -315,9 +314,8 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true",
-            CHROME = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _PermissionStatus_PermissionStatus() throws Exception {
         test("PermissionStatus", "PermissionStatus");
     }
