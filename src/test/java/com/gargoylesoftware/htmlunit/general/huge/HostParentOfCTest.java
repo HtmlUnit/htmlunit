@@ -669,6 +669,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            CHROME = "false",
             FF60 = "false")
     public void _CSSRule_MozCSSKeyframesRule() throws Exception {
         test("CSSRule", "MozCSSKeyframesRule");
