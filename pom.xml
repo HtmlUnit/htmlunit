@@ -21,7 +21,7 @@
         <checkstyle.version>8.10.1</checkstyle.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
         <selenium.version>3.12.0</selenium.version>
-        <htmlunitdriver.version>2.31.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.32.0-SNAPSHOT</htmlunitdriver.version>
     </properties>
 
     <build>
