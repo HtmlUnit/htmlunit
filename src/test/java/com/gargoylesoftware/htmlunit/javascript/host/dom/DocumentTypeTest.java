@@ -39,9 +39,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object DocumentType]", "true", "html,10,null,undefined,undefined,undefined",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
                         + "undefined,undefined,undefined"},
-            FF60 = {"[object DocumentType]", "true", "html,10,null,null,null,null",
-                        "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
-                            + "undefined,undefined,undefined"},
             IE = {"[object DocumentType]", "true", "html,10,null,null,null,null",
                         "html,-//W3C//DTD XHTML 1.0 Strict//EN,http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd,"
                         + "null,null,null"})
@@ -77,8 +74,6 @@ public class DocumentTypeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object DocumentType]", "greeting,10,null,undefined,undefined,undefined",
-                    "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
-            FF60 = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,undefined,undefined,undefined"},
             IE = {"[object DocumentType]", "greeting,10,null,null,null,null",
                     "greeting,MyIdentifier,hello.dtd,null,null,null"})

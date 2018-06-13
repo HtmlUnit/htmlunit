@@ -125,9 +125,8 @@ public final class BrowserVersion implements Serializable {
     static {
         // FF60
         FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Firefox/45.0";
-        FIREFOX_60.platform_ = PLATFORM_WIN32;
-        FIREFOX_60.buildId_ = "20170411115307";
+        FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
+        FIREFOX_60.buildId_ = "20180605201706";
         FIREFOX_60.productSub_ = "20100101";
         FIREFOX_60.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -211,8 +210,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -354,12 +353,6 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF32_29_0_0_140.dll");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        FIREFOX_60.plugins_.add(flash);
-
-        flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF64_29_0_0_140.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));

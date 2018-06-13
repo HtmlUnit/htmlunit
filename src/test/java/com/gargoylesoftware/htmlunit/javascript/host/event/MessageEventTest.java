@@ -56,7 +56,6 @@ public class MessageEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-null", "-", "-", "-null"},
-            FF60 = {"-[object MessageEvent]", "-type-message", "-false", "-false", "-undefined", "-", "-", "-null"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -130,7 +129,7 @@ public class MessageEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
                             "-http://localhost:", "-2", "-[object Window]"},
-            FF52 = "exception",
+            FF = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
     @NotYetImplemented(FF52)

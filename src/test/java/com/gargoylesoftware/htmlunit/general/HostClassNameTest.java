@@ -132,7 +132,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function Animation() {\n    [native code]\n}")
+            FF = "function Animation() {\n    [native code]\n}")
     public void animation() throws Exception {
         test("Animation");
     }
@@ -324,8 +324,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "[object Atomics]")
+    @Alerts("exception")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -460,7 +459,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function AudioScheduledSourceNode() { [native code] }")
+            CHROME = "function AudioScheduledSourceNode() { [native code] }",
+            FF60 = "function AudioScheduledSourceNode() {\n    [native code]\n}")
     public void audioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode");
     }
@@ -490,7 +490,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function BaseAudioContext() { [native code] }")
+            CHROME = "function BaseAudioContext() { [native code] }",
+            FF60 = "function BaseAudioContext() {\n    [native code]\n}")
     public void baseAudioContext() throws Exception {
         test("BaseAudioContext");
     }
@@ -1101,7 +1102,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ConstantSourceNode() { [native code] }",
-            FF52 = "function ConstantSourceNode() {\n    [native code]\n}")
+            FF = "function ConstantSourceNode() {\n    [native code]\n}")
     public void constantSourceNode() throws Exception {
         test("ConstantSourceNode");
     }
@@ -1180,7 +1181,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function Credential() { [native code] }")
+            CHROME = "function Credential() { [native code] }",
+            FF60 = "function Credential() {\n    [native code]\n}")
     public void credential() throws Exception {
         test("Credential");
     }
@@ -1190,7 +1192,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function CredentialsContainer() { [native code] }")
+            CHROME = "function CredentialsContainer() { [native code] }",
+            FF60 = "function CredentialsContainer() {\n    [native code]\n}")
     public void credentialsContainer() throws Exception {
         test("CredentialsContainer");
     }
@@ -1255,8 +1258,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             EDGE = "function CSSConditionRule() { [native code] }",
-            FF = "[object CSSConditionRule]",
-            CHROME = "function CSSConditionRule() { [native code] }")
+            FF52 = "[object CSSConditionRule]",
+            CHROME = "function CSSConditionRule() { [native code] }",
+            FF60 = "function CSSConditionRule() {\n    [native code]\n}")
     public void cssConditionRule() throws Exception {
         test("CSSConditionRule");
     }
@@ -1266,7 +1270,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object CSSCounterStyleRule]")
+            FF52 = "[object CSSCounterStyleRule]",
+            FF60 = "function CSSCounterStyleRule() {\n    [native code]\n}")
     public void cssCounterStyleRule() throws Exception {
         test("CSSCounterStyleRule");
     }
@@ -1278,7 +1283,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSFontFaceRule]",
-            CHROME = "function CSSFontFaceRule() { [native code] }")
+            CHROME = "function CSSFontFaceRule() { [native code] }",
+            FF60 = "function CSSFontFaceRule() {\n    [native code]\n}")
     public void cssFontFaceRule() throws Exception {
         test("CSSFontFaceRule");
     }
@@ -1289,7 +1295,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function CSSGroupingRule() { [native code] }",
             IE = "exception",
-            FF = "[object CSSGroupingRule]")
+            FF52 = "[object CSSGroupingRule]",
+            FF60 = "function CSSGroupingRule() {\n    [native code]\n}")
     public void cssGroupingRule() throws Exception {
         test("CSSGroupingRule");
     }
@@ -1301,7 +1308,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSImportRule]",
-            CHROME = "function CSSImportRule() { [native code] }")
+            CHROME = "function CSSImportRule() { [native code] }",
+            FF60 = "function CSSImportRule() {\n    [native code]\n}")
     public void cssImportRule() throws Exception {
         test("CSSImportRule");
     }
@@ -1312,7 +1320,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSKeyframeRule]",
             CHROME = "function CSSKeyframeRule() { [native code] }",
-            FF60 = "exception")
+            FF60 = "function CSSKeyframeRule() {\n    [native code]\n}")
     public void cssKeyframeRule() throws Exception {
         test("CSSKeyframeRule");
     }
@@ -1322,8 +1330,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function CSSKeyframesRule() { [native code] }",
-            FF60 = "exception",
             FF52 = "[object CSSKeyframesRule]",
+            FF60 = "function CSSKeyframesRule() {\n    [native code]\n}",
             IE = "[object CSSKeyframesRule]")
     public void cssKeyframesRule() throws Exception {
         test("CSSKeyframesRule");
@@ -1345,7 +1353,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSMediaRule]",
-            CHROME = "function CSSMediaRule() { [native code] }")
+            CHROME = "function CSSMediaRule() { [native code] }",
+            FF60 = "function CSSMediaRule() {\n    [native code]\n}")
     public void cssMediaRule() throws Exception {
         test("CSSMediaRule");
     }
@@ -1355,8 +1364,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function CSSNamespaceRule() { [native code] }",
+            FF60 = "function CSSNamespaceRule() {\n    [native code]\n}",
             IE = "[object CSSNamespaceRule]",
-            FF = "exception")
+            FF52 = "exception")
     public void cssNamespaceRule() throws Exception {
         test("CSSNamespaceRule");
     }
@@ -1368,7 +1378,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSPageRule]",
-            CHROME = "function CSSPageRule() { [native code] }")
+            CHROME = "function CSSPageRule() { [native code] }",
+            FF60 = "function CSSPageRule() {\n    [native code]\n}")
     public void cssPageRule() throws Exception {
         test("CSSPageRule");
     }
@@ -1392,7 +1403,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSRule]",
-            CHROME = "function CSSRule() { [native code] }")
+            CHROME = "function CSSRule() { [native code] }",
+            FF60 = "function CSSRule() {\n    [native code]\n}")
     public void cssRule() throws Exception {
         test("CSSRule");
     }
@@ -1430,9 +1442,11 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object CSSStyleRule]",
-            CHROME = "function CSSStyleRule() { [native code] }")
+            CHROME = "function CSSStyleRule() { [native code] }",
+            FF60 = "function CSSStyleRule() {\n    [native code]\n}")
     @AlertsStandards(DEFAULT = "[object CSSStyleRule]",
             CHROME = "function CSSStyleRule() { [native code] }",
+            FF60 = "function CSSStyleRule() {\n    [native code]\n}",
             EDGE = "function CSSStyleRule() { [native code] }")
     public void cssStyleRule() throws Exception {
         test("CSSStyleRule");
@@ -1457,7 +1471,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function CSSSupportsRule() { [native code] }",
             IE = "exception",
-            FF = "[object CSSSupportsRule]")
+            FF52 = "[object CSSSupportsRule]",
+            FF60 = "function CSSSupportsRule() {\n    [native code]\n}")
     public void cssSupportsRule() throws Exception {
         test("CSSSupportsRule");
     }
@@ -1576,7 +1591,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function DataTransferItem() { [native code] }",
-            FF52 = "function DataTransferItem() {\n    [native code]\n}")
+            FF = "function DataTransferItem() {\n    [native code]\n}")
     public void dataTransferItem() throws Exception {
         test("DataTransferItem");
     }
@@ -1587,7 +1602,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function DataTransferItemList() { [native code] }",
-            FF52 = "function DataTransferItemList() {\n    [native code]\n}")
+            FF = "function DataTransferItemList() {\n    [native code]\n}")
     public void dataTransferItemList() throws Exception {
         test("DataTransferItemList");
     }
@@ -2094,10 +2109,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function DOMSettableTokenList() {\n    [native code]\n}",
-            IE = "[object DOMSettableTokenList]",
-            CHROME = "exception",
-            FF52 = "exception")
+    @Alerts(DEFAULT = "exception",
+            IE = "[object DOMSettableTokenList]")
     public void domSettableTokenList() throws Exception {
         test("DOMSettableTokenList");
     }
@@ -2497,7 +2510,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function External() {\n    [native code]\n}")
+            FF52 = "function External() {\n    [native code]\n}")
     public void external() throws Exception {
         test("External");
     }
@@ -2622,7 +2635,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function FileSystem() {\n    [native code]\n}")
+            FF = "function FileSystem() {\n    [native code]\n}")
     public void fileSystem() throws Exception {
         test("FileSystem");
     }
@@ -2632,7 +2645,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function FileSystemDirectoryEntry() {\n    [native code]\n}")
+            FF = "function FileSystemDirectoryEntry() {\n    [native code]\n}")
     public void fileSystemDirectoryEntry() throws Exception {
         test("FileSystemDirectoryEntry");
     }
@@ -2642,7 +2655,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function FileSystemDirectoryReader() {\n    [native code]\n}")
+            FF = "function FileSystemDirectoryReader() {\n    [native code]\n}")
     public void fileSystemDirectoryReader() throws Exception {
         test("FileSystemDirectoryReader");
     }
@@ -2652,7 +2665,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function FileSystemEntry() {\n    [native code]\n}")
+            FF = "function FileSystemEntry() {\n    [native code]\n}")
     public void fileSystemEntry() throws Exception {
         test("FileSystemEntry");
     }
@@ -2662,7 +2675,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function FileSystemFileEntry() {\n    [native code]\n}")
+            FF = "function FileSystemFileEntry() {\n    [native code]\n}")
     public void fileSystemFileEntry() throws Exception {
         test("FileSystemFileEntry");
     }
@@ -2978,7 +2991,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "[object HTMLAppletElement]",
-            FF = "function HTMLAppletElement() {\n    [native code]\n}")
+            FF52 = "function HTMLAppletElement() {\n    [native code]\n}")
     public void htmlAppletElement() throws Exception {
         test("HTMLAppletElement");
     }
@@ -3151,8 +3164,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLContentElement() { [native code] }",
-            FF60 = "function HTMLContentElement() {\n    [native code]\n}")
+            CHROME = "function HTMLContentElement() { [native code] }")
     public void htmlContentElement() throws Exception {
         test("HTMLContentElement");
     }
@@ -3223,7 +3235,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLDetailsElement() { [native code] }",
-            FF52 = "function HTMLDetailsElement() {\n    [native code]\n}")
+            FF = "function HTMLDetailsElement() {\n    [native code]\n}")
     public void htmlDetailsElement() throws Exception {
         test("HTMLDetailsElement");
     }
@@ -3935,8 +3947,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function HTMLShadowElement() { [native code] }",
-            FF60 = "function HTMLShadowElement() {\n    [native code]\n}")
+            CHROME = "function HTMLShadowElement() { [native code] }")
     public void htmlShadowElement() throws Exception {
         test("HTMLShadowElement");
     }
@@ -4471,7 +4482,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function IdleDeadline() { [native code] }")
+            CHROME = "function IdleDeadline() { [native code] }",
+            FF60 = "function IdleDeadline() {\n    [native code]\n}")
     public void idleDeadline() throws Exception {
         test("IdleDeadline");
     }
@@ -4482,7 +4494,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function IIRFilterNode() { [native code] }",
-            FF52 = "function IIRFilterNode() {\n    [native code]\n}")
+            FF = "function IIRFilterNode() {\n    [native code]\n}")
     public void iirFilterNode() throws Exception {
         test("IIRFilterNode");
     }
@@ -4527,7 +4539,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ImageBitmapRenderingContext() { [native code] }",
-            FF52 = "function ImageBitmapRenderingContext() {\n    [native code]\n}")
+            FF = "function ImageBitmapRenderingContext() {\n    [native code]\n}")
     public void imageBitmapRenderingContext() throws Exception {
         test("ImageBitmapRenderingContext");
     }
@@ -4683,7 +4695,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function IntersectionObserver() { [native code] }")
+            CHROME = "function IntersectionObserver() { [native code] }",
+            FF60 = "function IntersectionObserver() {\n    [native code]\n}")
     public void intersectionObserver() throws Exception {
         test("IntersectionObserver");
     }
@@ -4693,7 +4706,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function IntersectionObserverEntry() { [native code] }")
+            CHROME = "function IntersectionObserverEntry() { [native code] }",
+            FF60 = "function IntersectionObserverEntry() {\n    [native code]\n}")
     public void intersectionObserverEntry() throws Exception {
         test("IntersectionObserverEntry");
     }
@@ -4769,7 +4783,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function Iterator() {\n    [native code]\n}")
+            FF52 = "function Iterator() {\n    [native code]\n}")
     public void iterator() throws Exception {
         test("Iterator");
     }
@@ -5156,7 +5170,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function MediaQueryListEvent() { [native code] }")
+            CHROME = "function MediaQueryListEvent() { [native code] }",
+            FF60 = "function MediaQueryListEvent() {\n    [native code]\n}")
     public void mediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent");
     }
@@ -5531,8 +5546,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "function MozContactChangeEvent() {\n    [native code]\n}")
+    @Alerts("exception")
     public void mozContactChangeEvent() throws Exception {
         test("MozContactChangeEvent");
     }
@@ -5541,8 +5555,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "[object MozCSSKeyframesRule]")
+    @Alerts("exception")
     public void mozCSSKeyframesRule() throws Exception {
         test("MozCSSKeyframesRule");
     }
@@ -5713,8 +5726,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "function MozPowerManager() {\n    [native code]\n}")
+    @Alerts("exception")
     public void mozPowerManager() throws Exception {
         test("MozPowerManager");
     }
@@ -5753,8 +5765,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "function MozSettingsEvent() {\n    [native code]\n}")
+    @Alerts("exception")
     public void mozSettingsEvent() throws Exception {
         test("MozSettingsEvent");
     }
@@ -6546,8 +6557,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function PerformanceNavigationTiming() { [native code] }",
+            FF60 = "function PerformanceNavigationTiming() {\n    [native code]\n}",
             IE = "[object PerformanceNavigationTiming]",
-            FF = "exception")
+            FF52 = "exception")
     public void performanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming");
     }
@@ -6557,7 +6569,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PerformanceObserver() { [native code] }")
+            CHROME = "function PerformanceObserver() { [native code] }",
+            FF60 = "function PerformanceObserver() {\n    [native code]\n}")
     public void performanceObserver() throws Exception {
         test("PerformanceObserver");
     }
@@ -6567,7 +6580,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PerformanceObserverEntryList() { [native code] }")
+            CHROME = "function PerformanceObserverEntryList() { [native code] }",
+            FF60 = "function PerformanceObserverEntryList() {\n    [native code]\n}")
     public void performanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList");
     }
@@ -6638,7 +6652,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Permissions() { [native code] }",
-            FF52 = "function Permissions() {\n    [native code]\n}")
+            FF = "function Permissions() {\n    [native code]\n}")
     public void permissions() throws Exception {
         test("Permissions");
     }
@@ -6658,7 +6672,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PermissionStatus() { [native code] }",
-            FF52 = "function PermissionStatus() {\n    [native code]\n}")
+            FF = "function PermissionStatus() {\n    [native code]\n}")
     public void permissionStatus() throws Exception {
         test("PermissionStatus");
     }
@@ -6706,6 +6720,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function PointerEvent() { [native code] }",
+            FF60 = "function PointerEvent() {\n    [native code]\n}",
             IE = "[object PointerEvent]",
             EDGE = "function PointerEvent() { [native code] }")
     public void pointerEvent() throws Exception {
@@ -7188,7 +7203,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function RTCDataChannel() { [native code] }")
+            CHROME = "function RTCDataChannel() { [native code] }",
+            FF60 = "function RTCDataChannel() {\n    [native code]\n}")
     @NotYetImplemented(CHROME)
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
@@ -7474,8 +7490,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SharedArrayBuffer() { [native code] }")
+    @Alerts("exception")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }
@@ -7792,7 +7807,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function SpeechSynthesis() {\n    [native code]\n}")
+            FF = "function SpeechSynthesis() {\n    [native code]\n}")
     public void speechSynthesis() throws Exception {
         test("SpeechSynthesis");
     }
@@ -7802,7 +7817,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function SpeechSynthesisErrorEvent() {\n    [native code]\n}")
+            FF = "function SpeechSynthesisErrorEvent() {\n    [native code]\n}")
     public void speechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisErrorEvent");
     }
@@ -7813,7 +7828,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechSynthesisEvent() { [native code] }",
-            FF52 = "function SpeechSynthesisEvent() {\n    [native code]\n}")
+            FF = "function SpeechSynthesisEvent() {\n    [native code]\n}")
     public void speechSynthesisEvent() throws Exception {
         test("SpeechSynthesisEvent");
     }
@@ -7824,7 +7839,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SpeechSynthesisUtterance() { [native code] }",
-            FF52 = "function SpeechSynthesisUtterance() {\n    [native code]\n}")
+            FF = "function SpeechSynthesisUtterance() {\n    [native code]\n}")
     public void speechSynthesisUtterance() throws Exception {
         test("SpeechSynthesisUtterance");
     }
@@ -7834,7 +7849,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function SpeechSynthesisVoice() {\n    [native code]\n}")
+            FF = "function SpeechSynthesisVoice() {\n    [native code]\n}")
     public void speechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice");
     }
@@ -7867,7 +7882,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object StopIteration]")
+            FF52 = "[object StopIteration]")
     public void stopIteration() throws Exception {
         test("StopIteration");
     }
@@ -7910,7 +7925,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function StorageManager() { [native code] }")
+            CHROME = "function StorageManager() { [native code] }",
+            FF60 = "function StorageManager() {\n    [native code]\n}")
     public void storageManager() throws Exception {
         test("StorageManager");
     }
@@ -8000,8 +8016,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "function SVGAltGlyphElement() {\n    [native code]\n}")
+    @Alerts("exception")
     public void svgAltGlyphElement() throws Exception {
         test("SVGAltGlyphElement");
     }
@@ -8305,8 +8320,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF60 = "function SVGDocument() {\n    [native code]\n}")
+    @Alerts("exception")
     public void svgDocument() throws Exception {
         test("SVGDocument");
     }
@@ -8767,7 +8781,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function SVGGeometryElement() { [native code] }")
+            CHROME = "function SVGGeometryElement() { [native code] }",
+            FF60 = "function SVGGeometryElement() {\n    [native code]\n}")
     public void svgGeometryElement() throws Exception {
         test("SVGGeometryElement");
     }
@@ -8987,9 +9002,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SVGPathSeg() { [native code] }",
-            FF = "function SVGPathSeg() {\n    [native code]\n}",
+            FF52 = "function SVGPathSeg() {\n    [native code]\n}",
             IE = "[object SVGPathSeg]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSeg() throws Exception {
         test("SVGPathSeg");
     }
@@ -9000,7 +9016,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegArcAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegArcAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegArcAbs() throws Exception {
         test("SVGPathSegArcAbs");
     }
@@ -9011,7 +9028,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegArcRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegArcRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegArcRel() throws Exception {
         test("SVGPathSegArcRel");
     }
@@ -9022,7 +9040,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegClosePath() {\n    [native code]\n}",
             IE = "[object SVGPathSegClosePath]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegClosePath() throws Exception {
         test("SVGPathSegClosePath");
     }
@@ -9033,7 +9052,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoCubicAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoCubicAbs() throws Exception {
         test("SVGPathSegCurvetoCubicAbs");
     }
@@ -9044,7 +9064,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoCubicRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoCubicRel() throws Exception {
         test("SVGPathSegCurvetoCubicRel");
     }
@@ -9055,7 +9076,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicSmoothAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoCubicSmoothAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoCubicSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothAbs");
     }
@@ -9066,7 +9088,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoCubicSmoothRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoCubicSmoothRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoCubicSmoothRel() throws Exception {
         test("SVGPathSegCurvetoCubicSmoothRel");
     }
@@ -9077,7 +9100,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoQuadraticAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoQuadraticAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticAbs");
     }
@@ -9088,7 +9112,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoQuadraticRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoQuadraticRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticRel");
     }
@@ -9099,7 +9124,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticSmoothAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoQuadraticSmoothAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoQuadraticSmoothAbs() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothAbs");
     }
@@ -9110,7 +9136,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegCurvetoQuadraticSmoothRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegCurvetoQuadraticSmoothRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegCurvetoQuadraticSmoothRel() throws Exception {
         test("SVGPathSegCurvetoQuadraticSmoothRel");
     }
@@ -9121,7 +9148,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoAbs() throws Exception {
         test("SVGPathSegLinetoAbs");
     }
@@ -9132,7 +9160,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoHorizontalAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoHorizontalAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoHorizontalAbs() throws Exception {
         test("SVGPathSegLinetoHorizontalAbs");
     }
@@ -9143,7 +9172,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoHorizontalRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoHorizontalRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoHorizontalRel() throws Exception {
         test("SVGPathSegLinetoHorizontalRel");
     }
@@ -9154,7 +9184,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoRel() throws Exception {
         test("SVGPathSegLinetoRel");
     }
@@ -9165,7 +9196,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoVerticalAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoVerticalAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoVerticalAbs() throws Exception {
         test("SVGPathSegLinetoVerticalAbs");
     }
@@ -9176,7 +9208,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegLinetoVerticalRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegLinetoVerticalRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegLinetoVerticalRel() throws Exception {
         test("SVGPathSegLinetoVerticalRel");
     }
@@ -9198,7 +9231,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegMovetoAbs() {\n    [native code]\n}",
             IE = "[object SVGPathSegMovetoAbs]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegMovetoAbs() throws Exception {
         test("SVGPathSegMovetoAbs");
     }
@@ -9209,7 +9243,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function SVGPathSegMovetoRel() {\n    [native code]\n}",
             IE = "[object SVGPathSegMovetoRel]",
-            CHROME = "exception")
+            CHROME = "exception",
+            FF60 = "exception")
     public void svgPathSegMovetoRel() throws Exception {
         test("SVGPathSegMovetoRel");
     }
@@ -9628,7 +9663,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function SVGZoomEvent() {\n    [native code]\n}",
+            FF52 = "function SVGZoomEvent() {\n    [native code]\n}",
             IE = "[object SVGZoomEvent]")
     public void svgZoomEvent() throws Exception {
         test("SVGZoomEvent");
@@ -10204,7 +10239,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VRDisplay() {\n    [native code]\n}")
     public void vrDisplay() throws Exception {
         test("VRDisplay");
     }
@@ -10213,7 +10249,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VRDisplayCapabilities() {\n    [native code]\n}")
     public void vrDisplayCapabilities() throws Exception {
         test("VRDisplayCapabilities");
     }
@@ -10222,7 +10259,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VREyeParameters() {\n    [native code]\n}")
     public void vrEyeParameters() throws Exception {
         test("VREyeParameters");
     }
@@ -10231,7 +10269,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VRFieldOfView() {\n    [native code]\n}")
     public void vrFieldOfView() throws Exception {
         test("VRFieldOfView");
     }
@@ -10258,7 +10297,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VRPose() {\n    [native code]\n}")
     public void vrPose() throws Exception {
         test("VRPose");
     }
@@ -10276,7 +10316,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            FF60 = "function VRStageParameters() {\n    [native code]\n}")
     public void vrStageParameters() throws Exception {
         test("VRStageParameters");
     }
@@ -10450,7 +10491,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGL2RenderingContext() { [native code] }",
-            FF52 = "function WebGL2RenderingContext() {\n    [native code]\n}")
+            FF = "function WebGL2RenderingContext() {\n    [native code]\n}")
     public void webGL2RenderingContext() throws Exception {
         test("WebGL2RenderingContext");
     }
@@ -10482,9 +10523,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function WebGLContextEvent() { [native code] }",
-            FF60 = "exception",
             IE = "\nfunction WebGLContextEvent() {\n    [native code]\n}\n",
-            FF52 = "function WebGLContextEvent() {\n    [native code]\n}")
+            FF = "function WebGLContextEvent() {\n    [native code]\n}")
     public void webGLContextEvent() throws Exception {
         test("WebGLContextEvent");
     }
@@ -10517,7 +10557,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLQuery() { [native code] }",
-            FF52 = "function WebGLQuery() {\n    [native code]\n}")
+            FF = "function WebGLQuery() {\n    [native code]\n}")
     public void webGLQuery() throws Exception {
         test("WebGLQuery");
     }
@@ -10552,7 +10592,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLSampler() { [native code] }",
-            FF52 = "function WebGLSampler() {\n    [native code]\n}")
+            FF = "function WebGLSampler() {\n    [native code]\n}")
     public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
@@ -10585,7 +10625,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLSync() { [native code] }",
-            FF52 = "function WebGLSync() {\n    [native code]\n}")
+            FF = "function WebGLSync() {\n    [native code]\n}")
     public void webGLSync() throws Exception {
         test("WebGLSync");
     }
@@ -10616,7 +10656,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLTransformFeedback() { [native code] }",
-            FF52 = "function WebGLTransformFeedback() {\n    [native code]\n}")
+            FF = "function WebGLTransformFeedback() {\n    [native code]\n}")
     public void webGLTransformFeedback() throws Exception {
         test("WebGLTransformFeedback");
     }
@@ -10638,7 +10678,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function WebGLVertexArrayObject() { [native code] }",
-            FF52 = "function WebGLVertexArrayObject() {\n    [native code]\n}")
+            FF = "function WebGLVertexArrayObject() {\n    [native code]\n}")
     public void webGLVertexArrayObject() throws Exception {
         test("WebGLVertexArrayObject");
     }
@@ -10678,7 +10718,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function DOMMatrix() { [native code] }",
             EDGE = "function WebKitCSSMatrix() { [native code] }",
-            FF52 = "function WebKitCSSMatrix() {\n    [native code]\n}")
+            FF = "function WebKitCSSMatrix() {\n    [native code]\n}")
     @NotYetImplemented(CHROME)
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");

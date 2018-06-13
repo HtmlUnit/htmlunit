@@ -34,8 +34,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSKeyframesRule]", "7"},
-            FF60 = {"[object MozCSSKeyframesRule]", "7"})
+    @Alerts({"[object CSSKeyframesRule]", "7"})
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
@@ -64,8 +63,7 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object CSSKeyframesRule]", "identifier"},
-            FF60 = {"[object MozCSSKeyframesRule]", "identifier"})
+    @Alerts({"[object CSSKeyframesRule]", "identifier"})
     @NotYetImplemented
     public void name() throws Exception {
         final String html

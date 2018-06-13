@@ -153,7 +153,7 @@ public class ArrayBufferTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0")
+    @Alerts("0")
     public void sliceInvalidStartIndexPositiveInfinity() throws Exception {
         sliceInvalidIndex("Number.POSITIVE_INFINITY");
     }

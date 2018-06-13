@@ -422,7 +422,6 @@ public class MapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Map Iterator]",
-            FF60 = "[object Object]",
             IE = {})
     @NotYetImplemented(FF60)
     public void iteratorPrototype() throws Exception {

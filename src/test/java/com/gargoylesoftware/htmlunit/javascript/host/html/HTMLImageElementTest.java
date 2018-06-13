@@ -473,7 +473,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
       */
     @Test
     @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
-            FF60 = {"number: 300", "number: 200", "number: 24", "number: 24", "number: 24", "number: 24"},
             IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
     @NotYetImplemented(FF52)
     public void widthHeightEmptySource() throws Exception {

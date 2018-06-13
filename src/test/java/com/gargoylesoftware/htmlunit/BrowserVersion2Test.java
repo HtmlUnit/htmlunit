@@ -141,9 +141,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: image/png,image/*;q=0.8,*/*;q=0.5",
-            CHROME = "Accept: image/webp,image/apng,image/*,*/*;q=0.8",
-            FF52 = "Accept: */*",
+    @Alerts(CHROME = "Accept: image/webp,image/apng,image/*,*/*;q=0.8",
+            FF = "Accept: */*",
             IE = "Accept: image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5",
             EDGE = "Accept: image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
@@ -389,8 +388,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Accept: */*",
-            FF60 = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+    @Alerts("Accept: */*")
     public void acceptHeaderXMLHttpRequest() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

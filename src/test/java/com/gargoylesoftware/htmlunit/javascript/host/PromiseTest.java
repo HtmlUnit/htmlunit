@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -461,9 +458,7 @@ public class PromiseTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "fulfilled!", "TypeError: Throwing 1", "Resolving"},
-            CHROME = {"true", "fulfilled!", "Resolving"},
             IE = "")
-    @NotYetImplemented(CHROME)
     public void resolveThenables() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

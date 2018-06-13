@@ -170,6 +170,26 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void _WEBKIT_BOX_FLEX_GROUP() throws Exception {
+        test("webkitBoxFlexGroup");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false")
+    public void _WEBKIT_BOX_LINES() throws Exception {
+        test("webkitBoxLines");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
             IE = "false",
             FF60 = "false")
     public void _WEBKIT_BOX_ORDINAL_GROUP() throws Exception {

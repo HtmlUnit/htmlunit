@@ -18,10 +18,10 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.10</checkstyle.version>
-        <jetty.version>9.4.10.v20180503</jetty.version>
+        <checkstyle.version>8.10.1</checkstyle.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
         <selenium.version>3.12.0</selenium.version>
-        <htmlunitdriver.version>2.30.1</htmlunitdriver.version>
+        <htmlunitdriver.version>2.31.0</htmlunitdriver.version>
     </properties>
 
     <build>
@@ -125,7 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.1</version>
                 <configuration>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                 </configuration>
@@ -213,7 +213,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.9.5</version>
+                <version>1.10.0</version>
                 <configuration>
                     <tag>${project.name}-${project.version}</tag>
                     <message>Release ${project.version}</message>
@@ -250,7 +250,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
             </extension>
         </extensions>
     </build>
@@ -372,7 +372,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.1</version>
                 <configuration>
                     <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath:com.gargoylesoftware.htmlunit.html.applets:com.gargoylesoftware.htmlunit.html.impl:com.gargoylesoftware.htmlunit.activex</excludePackageNames>
                     <additionalparam>--allow-script-in-comments</additionalparam>
@@ -397,7 +397,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.9.0</version>
+                <version>3.10.0</version>
                 <configuration>
                     <targetJdk>1.8</targetJdk>
             </configuration>
@@ -1069,7 +1069,7 @@
         <dependency>
             <groupId>org.tmatesoft.svnkit</groupId>
             <artifactId>svnkit</artifactId>
-            <version>1.9.2</version>
+            <version>1.9.3</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

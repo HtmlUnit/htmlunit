@@ -274,7 +274,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
             CHROME = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                         "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
                         "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true"},
-            FF52 = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
+            FF = {"http://www.w3.org/TR/SVG11/feature#BasicStructure 1.0: true",
                         "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.1: true",
                         "http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2: true"})
     public void hasFeature_SVG_BasicStructure() throws Exception {
@@ -291,7 +291,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
             CHROME = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                         "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
                         "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true"},
-            FF52 = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
+            FF = {"http://www.w3.org/TR/SVG11/feature#Shape 1.0: true",
                         "http://www.w3.org/TR/SVG11/feature#Shape 1.1: true",
                         "http://www.w3.org/TR/SVG11/feature#Shape 1.2: true"})
     public void hasFeature_SVG_Shape() throws Exception {

@@ -114,8 +114,10 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "normal", "normal",
                 "oblique 15px arial, sans-serif", "italic normal 400 normal 15px / normal arial, sans-serif",
                 "oblique", "italic"},
-            FF = {"15px arial,sans-serif", "", "normal", "normal",
+            FF52 = {"15px arial,sans-serif", "", "normal", "normal",
                     "oblique 15px arial,sans-serif", "", "oblique", "oblique"},
+            FF60 = {"15px arial, sans-serif", "", "normal", "normal",
+                    "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
             IE = {"15px/normal arial, sans-serif", "", "normal", "normal",
                     "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique"})
     @NotYetImplemented

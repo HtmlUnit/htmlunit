@@ -203,6 +203,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
             CHROME = {"0,0", "11,11", "11,11", "11,11"},
+            FF60 = {"0,0", "11,11", "11,11", "11,11"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);
@@ -508,7 +509,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            CHROME = {"0", "2", "1", "2", "1", "1"})
+            CHROME = {"0", "2", "1", "2", "1", "1"},
+            FF60 = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"
