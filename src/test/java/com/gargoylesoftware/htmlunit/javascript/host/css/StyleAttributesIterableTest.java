@@ -316,9 +316,29 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _BACKGROUND_POSITION_X_() throws Exception {
+        test("background-position-x");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void _BACKGROUND_POSITION_Y() throws Exception {
         test("backgroundPositionY");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _BACKGROUND_POSITION_Y_() throws Exception {
+        test("background-position-y");
     }
 
     /**
@@ -344,9 +364,49 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _CARET_COLOR() throws Exception {
+        test("caretColor");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLOR_ADJUST() throws Exception {
+        test("colorAdjust");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLOR_ADJUST_() throws Exception {
+        test("color-adjust");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void _COLUMN_COUNT() throws Exception {
         test("columnCount");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_COUNT_() throws Exception {
+        test("column-count");
     }
 
     /**
@@ -362,9 +422,29 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_FILL_() throws Exception {
+        test("column-fill");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void _COLUMN_GAP() throws Exception {
         test("columnGap");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_GAP_() throws Exception {
+        test("column-gap");
     }
 
     /**
@@ -380,6 +460,16 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_RULE_() throws Exception {
+        test("column-rule");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void _COLUMN_RULE_COLOR() throws Exception {
         test("columnRuleColor");
@@ -389,9 +479,29 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_RULE_COLOR_() throws Exception {
+        test("column-rule-color");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("true")
     public void _COLUMN_RULE_STYLE() throws Exception {
         test("columnRuleStyle");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF60 = "true")
+    public void _COLUMN_RULE_STYLE_() throws Exception {
+        test("column-rule-style");
     }
 
     /**
