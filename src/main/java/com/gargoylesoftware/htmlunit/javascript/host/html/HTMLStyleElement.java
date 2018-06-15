@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
 import java.io.StringReader;
 
@@ -123,7 +124,7 @@ public class HTMLStyleElement extends HTMLElement {
      * Returns the scoped of this style.
      * @return the scoped
      */
-    @JsxGetter(FF)
+    @JsxGetter(FF52)
     public boolean isScoped() {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         return style.hasAttribute("scoped");

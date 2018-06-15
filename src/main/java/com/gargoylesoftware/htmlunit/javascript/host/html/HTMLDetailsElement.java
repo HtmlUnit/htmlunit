@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,8 +26,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * The JavaScript object {@code HTMLDetailsElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlDetails.class, value = {CHROME, FF52})
+@JsxClass(domClass = HtmlDetails.class, value = {CHROME, FF})
 public class HTMLDetailsElement extends HTMLElement {
 
     /**
