@@ -156,9 +156,8 @@ public class HTMLLabelElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLFormElement]",
-            CHROME = "null",
-            FF52 = "null")
+    @Alerts(DEFAULT = "null",
+            IE = "[object HTMLFormElement]")
     public void form() throws Exception {
         final String html
             = "<html>\n"

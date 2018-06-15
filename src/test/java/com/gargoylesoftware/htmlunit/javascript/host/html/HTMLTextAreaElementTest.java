@@ -163,6 +163,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11", "7,7"},
             CHROME = {"0,0", "11,11", "11,11", "11,11", "7,7"},
+            FF60 = {"0,0", "11,11", "11,11", "11,11", "7,7"},
             IE = {"0,0", "0,0", "0,0", "0,11", "0,0"})
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);
@@ -368,7 +369,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"20", "5", "8", "4", "20", "20", "20", "3"},
-            FF60 = {"20", "5", "8", "4", "error", "4", "error", "4", "20", "3"},
             IE = {"20", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void cols() throws Exception {
         final String html
@@ -419,7 +419,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "5", "8", "4", "2", "2", "2", "3"},
-            FF60 = {"2", "5", "8", "4", "error", "4", "error", "4", "2", "3"},
             IE = {"2", "5", "8", "4", "error", "4", "error", "4", "error", "4", "3"})
     public void rows() throws Exception {
         final String html

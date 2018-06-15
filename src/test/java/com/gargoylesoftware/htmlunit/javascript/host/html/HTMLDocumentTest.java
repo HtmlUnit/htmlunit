@@ -392,7 +392,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLCollection]", "0"})
+    @Alerts(DEFAULT = {"[object HTMLCollection]", "0"},
+            FF60 = {"[object NodeList]", "0"})
     public void applets() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -867,7 +868,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "0"})
+    @Alerts(DEFAULT = {"2", "0"},
+            FF60 = {"0", "0"})
     public void getElementsByName_emptyName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

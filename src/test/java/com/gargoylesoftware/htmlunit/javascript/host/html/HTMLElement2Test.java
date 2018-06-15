@@ -825,9 +825,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"something", "null"},
-            CHROME = {"something", "0"},
-            FF = {"something", "0"})
+    @Alerts(DEFAULT = {"something", "0"},
+            IE = {"something", "null"})
     public void innerText_null() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

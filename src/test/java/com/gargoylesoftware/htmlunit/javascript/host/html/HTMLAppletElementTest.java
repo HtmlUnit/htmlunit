@@ -40,6 +40,8 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top", "wrong", ""},
             IE = {"left", "right", "bottom", "middle", "top", "", ""},
             CHROME = {"undefined", "undefined", "undefined", "undefined",
+                    "undefined", "undefined", "undefined"},
+            FF60 = {"undefined", "undefined", "undefined", "undefined",
                     "undefined", "undefined", "undefined"})
     @NotYetImplemented(IE)
     public void getAlign() throws Exception {
@@ -103,7 +105,8 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"[object HTMLAppletElement]", "[object HTMLAppletElement]"},
             CHROME = {"[object HTMLUnknownElement]", "exception"},
-            FF = {"[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}"})
+            FF60 = {"[object HTMLUnknownElement]", "exception"},
+            FF52 = {"[object HTMLAppletElement]", "function HTMLAppletElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

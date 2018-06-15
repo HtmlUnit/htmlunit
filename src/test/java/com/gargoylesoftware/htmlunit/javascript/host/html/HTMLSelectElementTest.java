@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.List;
 
@@ -2128,8 +2128,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""},
-            FF60 = {"two", "two"})
+    @Alerts(DEFAULT = {"two", ""})
     public void value() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2185,8 +2184,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""},
-            FF60 = {"two", "two"})
+    @Alerts(DEFAULT = {"two", ""})
     public void valueByValueCase() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2272,8 +2270,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""},
-            FF60 = {"two", "two"})
+    @Alerts(DEFAULT = {"two", ""})
     public void valueNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2301,8 +2298,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", "", ""},
-            FF60 = {"two", "two", "two"})
+    @Alerts(DEFAULT = {"two", "", ""})
     public void valueOther() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2432,7 +2428,8 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
-            CHROME = {"0", "2", "1", "2", "1", "1"})
+            CHROME = {"0", "2", "1", "2", "1", "1"},
+            FF60 = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"
@@ -2639,7 +2636,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     // https://github.com/mozilla/geckodriver/issues/584
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF52)
     public void optionClickActions() throws Exception {
         final String html
             = "<html><body>\n"

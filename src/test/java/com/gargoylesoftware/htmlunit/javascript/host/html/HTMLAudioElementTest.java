@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -328,8 +327,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "probably",
-            FF52 = "maybe")
-    @NotYetImplemented({CHROME, FF52})
+            FF = "maybe")
+    @NotYetImplemented({CHROME, FF})
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");
     }
@@ -339,8 +338,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF52 = "maybe")
-    @NotYetImplemented(FF52)
+            FF = "maybe")
+    @NotYetImplemented(FF)
     public void canPlayType_AudioXFlac() throws Exception {
         canPlayType("audio/x-flac");
     }
