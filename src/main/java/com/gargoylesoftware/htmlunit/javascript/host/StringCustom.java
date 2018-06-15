@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 /**
  * Contains some missing features of Rhino NativeString.
  *
@@ -27,29 +23,4 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 public final class StringCustom {
 
     private StringCustom() { }
-
-    /**
-     * Determines whether one string may be found within another string,
-     * returning true or false as appropriate.
-     * @param context the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
-     * @return true or false
-     */
-    public static boolean contains(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        if (args.length < 1) {
-            return false;
-        }
-        final String string = Context.toString(thisObj);
-        final String search = Context.toString(args[0]);
-
-        if (args.length < 2) {
-            return string.contains(search);
-        }
-
-        final int start = (int) Math.max(0, Context.toNumber(args[1]));
-        return string.indexOf(search, start) > -1;
-    }
 }

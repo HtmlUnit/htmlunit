@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL_FF60;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_CONTAINS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_REPEAT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
@@ -67,7 +66,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.ArrayCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
-import com.gargoylesoftware.htmlunit.javascript.host.StringCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
@@ -463,12 +461,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (!browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
             removePrototypeProperties(window, "String", "trimLeft");
             removePrototypeProperties(window, "String", "trimRight");
-        }
-        if (browserVersion.hasFeature(STRING_CONTAINS)) {
-            final ScriptableObject stringPrototype =
-                (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
-            stringPrototype.defineFunctionProperties(new String[] {"contains"},
-                StringCustom.class, ScriptableObject.EMPTY);
         }
 
         // only FF has toSource

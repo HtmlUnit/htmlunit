@@ -1488,10 +1488,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     SLOT_CONTENTS,
 
-    /** Indicates that string.contains() is supported. */
-    @BrowserFeature(FF60)
-    STRING_CONTAINS,
-
     /** Indicates that string.includes() is supported. */
     @BrowserFeature({CHROME, FF})
     STRING_INCLUDES,
