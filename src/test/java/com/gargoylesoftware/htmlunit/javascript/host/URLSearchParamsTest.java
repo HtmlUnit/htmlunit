@@ -38,7 +38,6 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"foo=1&bar=2", ""},
-            FF60 = {"%3Ffoo=1&bar=2", ""},
             IE = {})
     @NotYetImplemented(FF60)
     public void ctor() throws Exception {

@@ -788,7 +788,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"})
+            FF52 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"},
+            FF60 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1254"})
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -877,8 +878,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF60 = {"11", "91"},
-            FF52 = {"11", "91"})
+            FF52 = {"11", "91"},
+            FF60 = {"11", "83"})
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1141,9 +1142,14 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({
+    @Alerts(DEFAULT = {
             "string string 7 number string",
             "string string 8 number object",
+            "string string 9 number object",
+            "string string 1 number object"},
+            FF = {
+            "string string 0 number string",
+            "string string 0 number object",
             "string string 9 number object",
             "string string 1 number object"})
     public void onErrorExceptionInstance() throws Exception {
@@ -1916,7 +1922,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            CHROME = "undefined")
+            CHROME = "undefined",
+            FF60 = "undefined")
     public void showModalDialog() throws Exception {
         final String html
             = "<html><body><script>\n"

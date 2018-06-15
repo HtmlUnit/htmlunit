@@ -718,11 +718,9 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState", "state"},
-            FF52 = {"back", "forward", "go", "length", "pushState", "replaceState",
+    @Alerts(DEFAULT = {"back", "forward", "go", "length", "pushState", "replaceState",
                         "scrollRestoration", "state"},
-            CHROME = {"back", "forward", "go", "length", "pushState", "replaceState",
-                        "scrollRestoration", "state"})
+            IE = {"back", "forward", "go", "length", "pushState", "replaceState", "state"})
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
                 + "  function test() {\n"
@@ -779,7 +777,6 @@ public class History2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"auto", "manual", "auto", "auto", "auto", "auto"},
-            FF60 = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"},
             IE = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"})
     public void scrollRestoration() throws Exception {
         final String html = "<html><head><script>\n"

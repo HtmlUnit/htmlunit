@@ -56,7 +56,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.replace)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void replace() throws Exception {
         name("replace");
@@ -67,7 +66,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.search)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void search() throws Exception {
         name("search");
@@ -78,7 +76,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.split)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void split() throws Exception {
         name("split");
@@ -89,7 +86,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.hasInstance)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void hasInstance() throws Exception {
         name("hasInstance");
@@ -100,7 +96,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.isConcatSpreadable)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void isConcatSpreadable() throws Exception {
         name("isConcatSpreadable");
@@ -111,7 +106,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.unscopables)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void unscopables() throws Exception {
         name("unscopables");
@@ -142,7 +136,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"symbol", "Symbol(Symbol.toStringTag)", "true"},
-            FF60 = {"undefined", "-", "true"},
             IE = "not supported")
     public void toStringTag() throws Exception {
         name("toStringTag");
@@ -172,7 +165,6 @@ public class SymbolTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "exception"},
-            FF60 = {"Symbol()", "Symbol(foo)", "Symbol(Symbol.iterator)", "undefined"},
             IE = "not supported")
     public void string() throws Exception {
         final String html =

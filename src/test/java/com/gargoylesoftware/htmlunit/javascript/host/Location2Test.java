@@ -125,9 +125,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "about:blank", "blank", "", "about:", ""},
-            FF60 = {"", "about:blank", "", "", "about:", ""},
-            FF52 = {"", "about:blank", "blank", "", "about:", ""},
+    @Alerts(DEFAULT = {"", "about:blank", "blank", "", "about:", ""},
             IE = {"", "about:blank", "/blank", "", "about:", ""})
     public void about_blank_attributes() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
