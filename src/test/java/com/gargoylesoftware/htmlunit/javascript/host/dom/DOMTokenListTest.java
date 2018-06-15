@@ -127,6 +127,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "0", "3", "8"},
             CHROME = {"3", "0", "2", "8"},
+            FF60 = {"3", "0", "2", "8"},
             IE = {"3", "0", "3", "7"})
     public void length() throws Exception {
         final String html
@@ -251,9 +252,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a b", "2", "exception"},
-            CHROME = {"a b", "2", "false"},
-            FF52 = {"a b", "2", "false"})
+    @Alerts(DEFAULT = {"a b", "2", "false"},
+            IE = {"a b", "2", "exception"})
     public void containsEmpty() throws Exception {
         contains("a b", "");
     }
@@ -262,9 +262,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a b", "2", "exception"},
-            CHROME = {"a b", "2", "false"},
-            FF52 = {"a b", "2", "false"})
+    @Alerts(DEFAULT = {"a b", "2", "false"},
+            IE = {"a b", "2", "exception"})
     public void containsBlank() throws Exception {
         contains("a b", " ");
     }
@@ -273,9 +272,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a b", "2", "exception"},
-            CHROME = {"a b", "2", "false"},
-            FF52 = {"a b", "2", "false"})
+    @Alerts(DEFAULT = {"a b", "2", "false"},
+            IE = {"a b", "2", "exception"})
     public void containsTab() throws Exception {
         contains("a b", "\t");
     }
@@ -284,9 +282,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a b", "2", "exception"},
-            CHROME = {"a b", "2", "false"},
-            FF52 = {"a b", "2", "false"})
+    @Alerts(DEFAULT = {"a b", "2", "false"},
+            IE = {"a b", "2", "exception"})
     public void containsCr() throws Exception {
         contains("a b", "\\r");
     }
@@ -295,9 +292,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a b", "2", "exception"},
-            CHROME = {"a b", "2", "false"},
-            FF52 = {"a b", "2", "false"})
+    @Alerts(DEFAULT = {"a b", "2", "false"},
+            IE = {"a b", "2", "exception"})
     public void containsNl() throws Exception {
         contains("a b", "\\n");
     }
@@ -493,7 +489,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {" \t \n  ", "0", "1", "a"},
-            FF = {" \t \n  ", "0", "1", " \t \n  a"})
+            FF52 = {" \t \n  ", "0", "1", " \t \n  a"})
     public void addToWhitespace() throws Exception {
         add(" \t \r  ", "a");
     }
@@ -503,7 +499,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a  ", "1", "2", "a b"},
-            FF = {"a  ", "1", "2", "a  b"})
+            FF52 = {"a  ", "1", "2", "a  b"})
     public void addToWhitespaceAtEnd() throws Exception {
         add("a  ", "b");
     }
@@ -540,7 +536,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b a", "3", "exception", "3", "a b a"},
-            CHROME = {"a b a", "2", "exception", "2", "a b a"})
+            CHROME = {"a b a", "2", "exception", "2", "a b a"},
+            FF60 = {"a b a", "2", "exception", "2", "a b a"})
     public void addElementWithBlank() throws Exception {
         add("a b a", "a b");
     }
@@ -550,7 +547,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b a\tb", "4", "exception", "4", "a b a\tb"},
-            CHROME = {"a b a\tb", "2", "exception", "2", "a b a\tb"})
+            CHROME = {"a b a\tb", "2", "exception", "2", "a b a\tb"},
+            FF60 = {"a b a\tb", "2", "exception", "2", "a b a\tb"})
     public void addElementWithTab() throws Exception {
         add("a b a\tb", "a\tb");
     }
@@ -560,7 +558,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a \t c \n d  e", "4", "4", "a \t c \n d  e"},
-            CHROME = {"a \t c \n d  e", "4", "4", "a c d e"})
+            CHROME = {"a \t c \n d  e", "4", "4", "a c d e"},
+            FF60 = {"a \t c \n d  e", "4", "4", "a c d e"})
     public void addToWhitespaceExisting() throws Exception {
         add("a \t c \n d  e", "c");
     }
@@ -687,9 +686,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {" \t \n  ", "0", "0", " \t \n  "},
-            CHROME = {" \t \n  ", "0", "0", ""},
-            FF52 = {" \t \n  ", "0", "0", ""})
+    @Alerts(DEFAULT = {" \t \n  ", "0", "0", ""},
+            IE = {" \t \n  ", "0", "0", " \t \n  "})
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
     }
@@ -708,7 +706,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b a", "3", "1", "b"},
-            CHROME = {"a b a", "2", "1", "b"})
+            CHROME = {"a b a", "2", "1", "b"},
+            FF60 = {"a b a", "2", "1", "b"})
     public void removeDuplicated() throws Exception {
         remove("a b a", "a");
     }
@@ -718,7 +717,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b a", "3", "exception", "3", "a b a"},
-            CHROME = {"a b a", "2", "exception", "2", "a b a"})
+            CHROME = {"a b a", "2", "exception", "2", "a b a"},
+            FF60 = {"a b a", "2", "exception", "2", "a b a"})
     public void removeElementWithBlank() throws Exception {
         remove("a b a", "a b");
     }
@@ -728,7 +728,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"a b a\tb", "4", "exception", "4", "a b a\tb"},
-            CHROME = {"a b a\tb", "2", "exception", "2", "a b a\tb"})
+            CHROME = {"a b a\tb", "2", "exception", "2", "a b a\tb"},
+            FF60 = {"a b a\tb", "2", "exception", "2", "a b a\tb"})
     public void removeElementWithTab() throws Exception {
         remove("a b a\tb", "a\tb");
     }
@@ -746,8 +747,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a \t c \n d  e", "4", "3", "a d e"},
-            FF60 = {"a \t c \n d  e", "4", "3", "a d  e"})
+    @Alerts({"a \t c \n d  e", "4", "3", "a d e"})
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }

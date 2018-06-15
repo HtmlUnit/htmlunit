@@ -253,7 +253,8 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "3", "3", "true"},
-            CHROME = {"0", "0", "0", "true"})
+            CHROME = {"0", "0", "0", "true"},
+            FF60 = {"0", "0", "0", "true"})
     public void applets() throws Exception {
         final String html =
             "<html>\n"
@@ -2773,8 +2774,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "null"},
-            FF60 = {"undefined", "undefined"})
+    @Alerts({"null", "null"})
     public void rootElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests for {@link NodeList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class NodeListTest extends WebDriverTestCase {
@@ -72,7 +73,6 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0,1,2,3,4,5,entries,forEach,item,keys,length,values",
-            FF60 = "0,1,2,3,4,5,item,length",
             IE = "0,1,2,3,4,5,item,length",
             EDGE = "0,1,2,3,4,5,item,length")
     public void iterator() throws Exception {
@@ -107,7 +107,6 @@ public class NodeListTest extends WebDriverTestCase {
                 "[object HTMLScriptElement] 3 [object NodeList] undefined",
                 "[object HTMLBodyElement] 4 [object NodeList] undefined",
                 "[object HTMLDivElement] 5 [object NodeList] undefined"},
-            FF60 = "no forEach",
             IE = "no forEach",
             EDGE = "no forEach")
     public void forEach() throws Exception {
@@ -137,7 +136,6 @@ public class NodeListTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"done", "value", "object", "0", "[object HTMLHtmlElement]"},
-            FF60 = "not defined",
             IE = "not defined",
             EDGE = "not defined")
     public void entries() throws Exception {

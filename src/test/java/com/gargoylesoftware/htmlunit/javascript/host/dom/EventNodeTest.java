@@ -132,6 +132,7 @@ public class EventNodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "mousedown label,focus text,mouseup label,click label,click text,",
             CHROME = "mousedown label,mouseup label,click label,focus text,click text,",
+            FF60 = "mousedown label,mouseup label,click label,focus text,click text,",
             IE = "mousedown label,mouseup label,click label,click text,focus text,")
     @NotYetImplemented({FF, IE})
     public void clickEventsLabel() throws Exception {
