@@ -122,8 +122,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"in goo", "in hoo", "in foo"},
-            FF60 = {"in goo", "in hoo", "foo error"})
+    @Alerts({"in goo", "in hoo", "in foo"})
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -149,10 +148,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function foo() {}", "function foo() {}"},
-            CHROME = {"undefined", "function foo() {}"},
-            FF52 = {"undefined", "function foo() {}"},
-            FF60 = {"undefined", "foo error"})
+    @Alerts(DEFAULT = {"undefined", "function foo() {}"},
+            IE = {"function foo() {}", "function foo() {}"})
     @NotYetImplemented({IE, CHROME, FF52})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"

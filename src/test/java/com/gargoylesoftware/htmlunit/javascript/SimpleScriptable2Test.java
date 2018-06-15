@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Sudhan Moghe
  * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SimpleScriptable2Test extends WebDriverTestCase {
@@ -322,7 +323,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
+    @Alerts(DEFAULT = {"function", "true", "function get length() {\n    [native code]\n}", "0", "0"},
             CHROME = {"undefined", "false", "undefined", "exception"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @NotYetImplemented(CHROME)

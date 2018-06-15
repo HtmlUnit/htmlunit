@@ -114,7 +114,8 @@ public class NativeFunctionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function anonymous() {\n    var x = 1;\n}",
-            CHROME = "function anonymous(\n) {\n    var x = 1;\n}")
+            CHROME = "function anonymous(\n) {\n    var x = 1;\n}",
+            FF60 = "function anonymous(\n) {\n    var x = 1;\n}")
     public void newFunctionToString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

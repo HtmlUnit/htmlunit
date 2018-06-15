@@ -34,7 +34,7 @@ public class IteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Iterator not available",
-            FF = {"first,1", "second,2"})
+            FF52 = {"first,1", "second,2"})
     public void simple() throws Exception {
         final String html
             = "<html>\n"
@@ -61,7 +61,7 @@ public class IteratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Iterator not available",
-            FF = "[object StopIteration]")
+            FF52 = "[object StopIteration]")
     public void stopIteration() throws Exception {
         final String html
             = "<html>\n"
