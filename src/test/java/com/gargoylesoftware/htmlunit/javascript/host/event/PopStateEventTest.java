@@ -143,8 +143,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception"},
-            FF60 = {"dispatched"})
+    @Alerts("exception")
     @NotYetImplemented({IE, CHROME, FF52})
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
