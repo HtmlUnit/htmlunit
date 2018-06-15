@@ -938,6 +938,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
             CHROME = {"", "", "inline", "rgb(0, 0, 0)"},
+            FF60 = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
@@ -2378,7 +2379,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"black", "pink", "color: pink;", "color: pink;"},
-            FF = {"BLACK", "pink", "color: pink;", "color: pink;"})
+            FF52 = {"BLACK", "pink", "color: pink;", "color: pink;"})
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
