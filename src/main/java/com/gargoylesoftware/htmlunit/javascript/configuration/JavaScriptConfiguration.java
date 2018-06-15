@@ -84,14 +84,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Atomics;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.SharedArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
 import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
@@ -431,8 +429,11 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class, ApplicationCacheErrorEvent.class,
-        Atomics.class, Attr.class,
-        Audio.class, AudioBuffer.class,
+
+        // disabled because of Spectre:
+        // Atomics.class,
+
+        Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
         BarProp.class, BaseAudioContext.class,
@@ -549,7 +550,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
-        SharedArrayBuffer.class,
+
+        // disabled because of Spectre:
+        // SharedArrayBuffer.class,
+
         SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
