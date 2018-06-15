@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff52up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow52;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff60up;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -94,24 +94,24 @@ public final class StyleAttributes {
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"),
-                ffBelow52("auto"), ff52up("normal"), chrome("normal")),
+                ff("normal"), chrome("normal")),
 
         /** The style property {@code align-content}. */
-        ALIGN_CONTENT_("align-content", "align-content", ffBelow52("auto"), ff52up("normal")),
+        ALIGN_CONTENT_("align-content", "align-content", ff("normal")),
 
         /** The style property {@code alignItems}. */
-        ALIGN_ITEMS("alignItems", "align-items", ffBelow52("start"), ff52up("normal"),
+        ALIGN_ITEMS("alignItems", "align-items", ff("normal"),
                 ie("stretch"), chrome("normal")),
 
         /** The style property {@code align-items}. */
-        ALIGN_ITEMS_("align-items", "align-items", ffBelow52("start"), ff52up("normal")),
+        ALIGN_ITEMS_("align-items", "align-items", ff("normal")),
 
         /** The style property {@code alignSelf}. */
-        ALIGN_SELF("alignSelf", "align-self", ffBelow52("start"), ff52up("auto"),
+        ALIGN_SELF("alignSelf", "align-self", ff("auto"),
                 ie("auto"), chrome("auto")),
 
         /** The style property {@code align-self}. */
-        ALIGN_SELF_("align-self", "align-self", ffBelow52("start"), ff52up("auto")),
+        ALIGN_SELF_("align-self", "align-self", ff("auto")),
 
         /** The style property {@code alignmentBaseline}. */
         ALIGNMENT_BASELINE("alignmentBaseline", "alignment-baseline", ie("auto"), chrome("auto")),
@@ -239,17 +239,17 @@ public final class StyleAttributes {
 
         /** The style property {@code backgroundPositionX}. */
         BACKGROUND_POSITION_X("backgroundPositionX", "background-position-x",
-                ie("undefined"), chrome("0%"), ff52up("0%")),
+                ie("undefined"), chrome("0%"), ff("0%")),
 
         /** The style property {@code background-position-x}. */
-        BACKGROUND_POSITION_X_("background-position-x", "background-position-x", ff52up("0%")),
+        BACKGROUND_POSITION_X_("background-position-x", "background-position-x", ff("0%")),
 
         /** The style property {@code backgroundPositionY}. */
         BACKGROUND_POSITION_Y("backgroundPositionY", "background-position-y",
-                ie("undefined"), chrome("0%"), ff52up("0%")),
+                ie("undefined"), chrome("0%"), ff("0%")),
 
         /** The style property {@code background-position-y}. */
-        BACKGROUND_POSITION_Y_("background-position-y", "background-position-y", ff52up("0%")),
+        BACKGROUND_POSITION_Y_("background-position-y", "background-position-y", ff("0%")),
 
         /** The style property {@code backgroundRepeat}. */
         BACKGROUND_REPEAT("backgroundRepeat", "background-repeat", chrome("repeat"), ff("repeat"), ie("repeat")),
@@ -620,7 +620,7 @@ public final class StyleAttributes {
         CAPTION_SIDE_("caption-side", "caption-side", ff("top")),
 
         /** The style property {@code caretColor}. */
-        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)")),
+        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)"), ff60up("")),
 
         /** The style property {@code clear}. */
         CLEAR("clear", "clear", chrome("none"), ff("none"), ie("none")),
@@ -644,10 +644,10 @@ public final class StyleAttributes {
         COLOR("color", "color", chrome("rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code colorAdjust}. */
-        COLOR_ADJUST("colorAdjust", "color-adjust", ff52up("economy")),
+        COLOR_ADJUST("colorAdjust", "color-adjust", ff("economy")),
 
         /** The style property {@code color-adjust}. */
-        COLOR_ADJUST_("color-adjust", "color-adjust", ff52up("economy")),
+        COLOR_ADJUST_("color-adjust", "color-adjust", ff("economy")),
 
         /** The style property {@code colorInterpolation}. */
         COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("sRGB")),
@@ -666,59 +666,59 @@ public final class StyleAttributes {
         COLOR_RENDERING("colorRendering", "color-rendering", chrome("auto")),
 
         /** The style property {@code columnCount}. */
-        COLUMN_COUNT("columnCount", "column-count", chrome("auto"), ff52up("auto"), ie("auto")),
+        COLUMN_COUNT("columnCount", "column-count", chrome("auto"), ff("auto"), ie("auto")),
 
         /** The style property {@code column-count}. */
-        COLUMN_COUNT_("column-count", "column-count", ff52up("auto")),
+        COLUMN_COUNT_("column-count", "column-count", ff("auto")),
 
         /** The style property {@code columnFill}. */
-        COLUMN_FILL("columnFill", "column-fill", chrome("balance"), ff52up("balance"), ie("balance")),
+        COLUMN_FILL("columnFill", "column-fill", chrome("balance"), ff("balance"), ie("balance")),
 
         /** The style property {@code column-fill}. */
-        COLUMN_FILL_("column-fill", "column-fill", ff52up("balance")),
+        COLUMN_FILL_("column-fill", "column-fill", ff("balance")),
 
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ff52up("16px"), ie("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ff("16px"), ie("normal")),
 
         /** The style property {@code column-gap}. */
-        COLUMN_GAP_("column-gap", "column-gap", ff52up("16px")),
+        COLUMN_GAP_("column-gap", "column-gap", ff("16px")),
 
         /** The style property {@code columnRule}. */
-        COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ff52up(""), ie("")),
+        COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code column-rule}. */
-        COLUMN_RULE_("column-rule", "column-rule", ff52up("")),
+        COLUMN_RULE_("column-rule", "column-rule", ff("")),
 
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
-                chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)"), ie("rgb(0, 0, 0)")),
+                chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)"), ie("rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule-color}. */
-        COLUMN_RULE_COLOR_("column-rule-color", "column-rule-color", ff52up("rgb(0, 0, 0)")),
+        COLUMN_RULE_COLOR_("column-rule-color", "column-rule-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleStyle}. */
-        COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", chrome("none"), ff52up("none"), ie("none")),
+        COLUMN_RULE_STYLE("columnRuleStyle", "column-rule-style", chrome("none"), ff("none"), ie("none")),
 
         /** The style property {@code column-rule-style}. */
-        COLUMN_RULE_STYLE_("column-rule-style", "column-rule-style", ff52up("none")),
+        COLUMN_RULE_STYLE_("column-rule-style", "column-rule-style", ff("none")),
 
         /** The style property {@code columnRuleWidth}. */
-        COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chrome("0px"), ff52up("0px"), ie("medium")),
+        COLUMN_RULE_WIDTH("columnRuleWidth", "column-rule-width", chrome("0px"), ff("0px"), ie("medium")),
 
         /** The style property {@code column-rule-width}. */
-        COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff52up("0px")),
+        COLUMN_RULE_WIDTH_("column-rule-width", "column-rule-width", ff("0px")),
 
         /** The style property {@code columnSpan}. */
         COLUMN_SPAN("columnSpan", "column-span", chrome("none"), ie("1")),
 
         /** The style property {@code columnWidth}. */
-        COLUMN_WIDTH("columnWidth", "column-width", chrome("auto"), ff52up("auto"), ie("auto")),
+        COLUMN_WIDTH("columnWidth", "column-width", chrome("auto"), ff("auto"), ie("auto")),
 
         /** The style property {@code column-width}. */
-        COLUMN_WIDTH_("column-width", "column-width", ff52up("auto")),
+        COLUMN_WIDTH_("column-width", "column-width", ff("auto")),
 
         /** The style property {@code columns}. */
-        COLUMNS("columns", "columns", chrome("auto auto"), ff52up(""), ie("")),
+        COLUMNS("columns", "columns", chrome("auto auto"), ff(""), ie("")),
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chrome("none")),
@@ -988,109 +988,111 @@ public final class StyleAttributes {
 
         /** The style property {@code grid}. */
         GRID("grid", "grid", chrome("none / none / none / row / auto / auto"),
-                ff52up("")),
+                ff("")),
 
         /** The style property {@code gridArea}. */
-        GRID_AREA("gridArea", "grid-area", chrome("auto / auto / auto / auto"), ff52up("")),
+        GRID_AREA("gridArea", "grid-area", chrome("auto / auto / auto / auto"), ff("")),
 
         /** The style property {@code grid-area}. */
-        GRID_AREA_("grid-area", "grid-area", ff52up("")),
+        GRID_AREA_("grid-area", "grid-area", ff("")),
 
         /** The style property {@code gridAutoColumns}. */
-        GRID_AUTO_COLUMNS("gridAutoColumns", "grid-auto-columns", chrome("auto"), ff52up("auto")),
+        GRID_AUTO_COLUMNS("gridAutoColumns", "grid-auto-columns", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-auto-columns}. */
-        GRID_AUTO_COLUMNS_("grid-auto-columns", "grid-auto-columns", ff52up("auto")),
+        GRID_AUTO_COLUMNS_("grid-auto-columns", "grid-auto-columns", ff("auto")),
 
         /** The style property {@code gridAutoFlow}. */
-        GRID_AUTO_FLOW("gridAutoFlow", "grid-auto-flow", chrome("row"), ff52up("row")),
+        GRID_AUTO_FLOW("gridAutoFlow", "grid-auto-flow", chrome("row"), ff("row")),
 
         /** The style property {@code grid-auto-flow}. */
-        GRID_AUTO_FLOW_("grid-auto-flow", "grid-auto-flow", ff52up("row")),
+        GRID_AUTO_FLOW_("grid-auto-flow", "grid-auto-flow", ff("row")),
 
         /** The style property {@code gridAutoRows}. */
-        GRID_AUTO_ROWS("gridAutoRows", "grid-auto-rows", chrome("auto"), ff52up("auto")),
+        GRID_AUTO_ROWS("gridAutoRows", "grid-auto-rows", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-auto-rows}. */
-        GRID_AUTO_ROWS_("grid-auto-rows", "grid-auto-rows", ff52up("auto")),
+        GRID_AUTO_ROWS_("grid-auto-rows", "grid-auto-rows", ff("auto")),
 
         /** The style property {@code gridColumn}. */
-        GRID_COLUMN("gridColumn", "grid-column", chrome("auto / auto"), ff52up("")),
+        GRID_COLUMN("gridColumn", "grid-column", chrome("auto / auto"), ff("")),
 
         /** The style property {@code grid-column}. */
-        GRID_COLUMN_("grid-column", "grid-column", ff52up("")),
+        GRID_COLUMN_("grid-column", "grid-column", ff("")),
 
         /** The style property {@code gridColumnEnd}. */
-        GRID_COLUMN_END("gridColumnEnd", "grid-column-end", chrome("auto"), ff52up("auto")),
+        GRID_COLUMN_END("gridColumnEnd", "grid-column-end", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-column-end}. */
-        GRID_COLUMN_END_("grid-column-end", "grid-column-end", ff52up("auto")),
+        GRID_COLUMN_END_("grid-column-end", "grid-column-end", ff("auto")),
 
         /** The style property {@code gridColumnGap}. */
-        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("normal"), ff52up("0px")),
+        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chrome("normal"), ff("0px")),
 
         /** The style property {@code grid-column-gap}. */
-        GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ff52up("0px")),
+        GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ff("0px")),
 
         /** The style property {@code gridColumnStart}. */
-        GRID_COLUMN_START("gridColumnStart", "grid-column-start", chrome("auto"), ff52up("auto")),
+        GRID_COLUMN_START("gridColumnStart", "grid-column-start", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-column-start}. */
-        GRID_COLUMN_START_("grid-column-start", "grid-column-start", ff52up("auto")),
+        GRID_COLUMN_START_("grid-column-start", "grid-column-start", ff("auto")),
 
         /** The style property {@code gridGap}. */
-        GRID_GAP("gridGap", "grid-gap", chrome("normal normal"), ff52up("")),
+        GRID_GAP("gridGap", "grid-gap", chrome("normal normal"), ff("")),
 
         /** The style property {@code grid-gap}. */
-        GRID_GAP_("grid-gap", "grid-gap", ff52up("")),
+        GRID_GAP_("grid-gap", "grid-gap", ff("")),
 
         /** The style property {@code gridRow}. */
-        GRID_ROW("gridRow", "grid-row", chrome("auto / auto"), ff52up("")),
+        GRID_ROW("gridRow", "grid-row", chrome("auto / auto"), ff("")),
 
         /** The style property {@code grid-row}. */
-        GRID_ROW_("grid-row", "grid-row", ff52up("")),
+        GRID_ROW_("grid-row", "grid-row", ff("")),
 
         /** The style property {@code gridRowEnd}. */
-        GRID_ROW_END("gridRowEnd", "grid-row-end", chrome("auto"), ff52up("auto")),
+        GRID_ROW_END("gridRowEnd", "grid-row-end", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-row-end}. */
-        GRID_ROW_END_("grid-row-end", "grid-row-end", ff52up("auto")),
+        GRID_ROW_END_("grid-row-end", "grid-row-end", ff("auto")),
 
         /** The style property {@code gridRowGap}. */
-        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("normal"), ff52up("0px")),
+        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chrome("normal"), ff("0px")),
 
         /** The style property {@code grid-row-gap}. */
-        GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ff52up("0px")),
+        GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ff("0px")),
 
         /** The style property {@code gridRowStart}. */
-        GRID_ROW_START("gridRowStart", "grid-row-start", chrome("auto"), ff52up("auto")),
+        GRID_ROW_START("gridRowStart", "grid-row-start", chrome("auto"), ff("auto")),
 
         /** The style property {@code grid-row-start}. */
-        GRID_ROW_START_("grid-row-start", "grid-row-start", ff52up("auto")),
+        GRID_ROW_START_("grid-row-start", "grid-row-start", ff("auto")),
 
         /** The style property {@code gridTemplate}. */
-        GRID_TEMPLATE("gridTemplate", "grid-template", chrome("none / none / none"), ff52up("")),
+        GRID_TEMPLATE("gridTemplate", "grid-template", chrome("none / none / none"), ff("")),
 
         /** The style property {@code grid-template}. */
-        GRID_TEMPLATE_("grid-template", "grid-template", ff52up("")),
+        GRID_TEMPLATE_("grid-template", "grid-template", ff("")),
 
         /** The style property {@code gridTemplateAreas}. */
-        GRID_TEMPLATE_AREAS("gridTemplateAreas", "grid-template-areas", chrome("none"), ff52up("none")),
+        GRID_TEMPLATE_AREAS("gridTemplateAreas", "grid-template-areas", chrome("none"),
+                ff("none")),
 
         /** The style property {@code grid-template-areas}. */
-        GRID_TEMPLATE_AREAS_("grid-template-areas", "grid-template-areas", ff52up("none")),
+        GRID_TEMPLATE_AREAS_("grid-template-areas", "grid-template-areas",
+                ff("none")),
 
         /** The style property {@code gridTemplateColumns}. */
-        GRID_TEMPLATE_COLUMNS("gridTemplateColumns", "grid-template-columns", chrome("none"), ff52up("none")),
+        GRID_TEMPLATE_COLUMNS("gridTemplateColumns", "grid-template-columns", chrome("none"), ff("none")),
 
         /** The style property {@code grid-template-columns}. */
-        GRID_TEMPLATE_COLUMNS_("grid-template-columns", "grid-template-columns", ff52up("none")),
+        GRID_TEMPLATE_COLUMNS_("grid-template-columns", "grid-template-columns", ff("none")),
 
         /** The style property {@code gridTemplateRows}. */
-        GRID_TEMPLATE_ROWS("gridTemplateRows", "grid-template-rows", chrome("none"), ff52up("none")),
+        GRID_TEMPLATE_ROWS("gridTemplateRows", "grid-template-rows", chrome("none"), ff("none")),
 
         /** The style property {@code grid-template-rows}. */
-        GRID_TEMPLATE_ROWS_("grid-template-rows", "grid-template-rows", ff52up("none")),
+        GRID_TEMPLATE_ROWS_("grid-template-rows", "grid-template-rows", ff("none")),
 
         /** The style property {@code height}. */
         HEIGHT("height", "height", chrome(""), ff(""), ie("")),
@@ -1127,23 +1129,23 @@ public final class StyleAttributes {
 
         /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
-                ffBelow52("auto"), ff52up("normal"),
+                ff("normal"),
                 ie("flex-start"), chrome("normal")),
 
         /** The style property {@code justify-content}. */
-        JUSTIFY_CONTENT_("justify-content", "justify-content", ffBelow52("auto"), ff52up("normal")),
+        JUSTIFY_CONTENT_("justify-content", "justify-content", ff("normal")),
 
         /** The style property {@code justifyItems}. */
-        JUSTIFY_ITEMS("justifyItems", "justify-items", ffBelow52("start"), ff52up("normal"), chrome("normal")),
+        JUSTIFY_ITEMS("justifyItems", "justify-items", ff("normal"), chrome("normal")),
 
         /** The style property {@code justify-items}. */
-        JUSTIFY_ITEMS_("justify-items", "justify-items", ffBelow52("start"), ff52up("normal")),
+        JUSTIFY_ITEMS_("justify-items", "justify-items", ff("normal")),
 
         /** The style property {@code justifySelf}. */
-        JUSTIFY_SELF("justifySelf", "justify-self", ffBelow52("start"), ff52up("auto"), chrome("auto")),
+        JUSTIFY_SELF("justifySelf", "justify-self", ff("auto"), chrome("auto")),
 
         /** The style property {@code justify-self}. */
-        JUSTIFY_SELF_("justify-self", "justify-self", ffBelow52("start"), ff52up("auto")),
+        JUSTIFY_SELF_("justify-self", "justify-self", ff("auto")),
 
         /** The style property {@code kerning}. */
         KERNING("kerning", "kerning", ie("auto")),
@@ -1283,10 +1285,10 @@ public final class StyleAttributes {
         MARKER_MID_("marker-mid", "marker-mid", ff("none")),
 
         /** The style property {@code markerOffset}. */
-        MARKER_OFFSET("markerOffset", "marker-offset", ffBelow52("auto")),
+        MARKER_OFFSET("markerOffset", "marker-offset"),
 
         /** The style property {@code marker-offset}. */
-        MARKER_OFFSET_("marker-offset", "marker-offset", ffBelow52("auto")),
+        MARKER_OFFSET_("marker-offset", "marker-offset"),
 
         /** The style property {@code markerStart}. */
         MARKER_START("markerStart", "marker-start", ff("none"), ie("none"), chrome("none")),
@@ -1367,50 +1369,50 @@ public final class StyleAttributes {
         MOZ_ANIMATION("MozAnimation", "-moz-animation", ff("")),
 
         /** The style property {@code -moz-animation}. */
-        MOZ_ANIMATION__("-moz-animation", "-moz-animation", ff52up("")),
+        MOZ_ANIMATION__("-moz-animation", "-moz-animation", ff("")),
 
         /** The style property {@code MozAnimationDelay}. */
         MOZ_ANIMATION_DELAY("MozAnimationDelay", "-moz-animation-delay", ff("0s")),
 
         /** The style property {@code -moz-animation-delay}. */
-        MOZ_ANIMATION_DELAY__("-moz-animation-delay", "-moz-animation-delay", ff52up("0s")),
+        MOZ_ANIMATION_DELAY__("-moz-animation-delay", "-moz-animation-delay", ff("0s")),
 
         /** The style property {@code MozAnimationDirection}. */
         MOZ_ANIMATION_DIRECTION("MozAnimationDirection", "-moz-animation-direction", ff("normal")),
 
         /** The style property {@code -moz-animation-direction}. */
-        MOZ_ANIMATION_DIRECTION__("-moz-animation-direction", "-moz-animation-direction", ff52up("normal")),
+        MOZ_ANIMATION_DIRECTION__("-moz-animation-direction", "-moz-animation-direction", ff("normal")),
 
         /** The style property {@code MozAnimationDuration}. */
         MOZ_ANIMATION_DURATION("MozAnimationDuration", "-moz-animation-duration", ff("0s")),
 
         /** The style property {@code -moz-animation-duration}. */
-        MOZ_ANIMATION_DURATION__("-moz-animation-duration", "-moz-animation-duration", ff52up("0s")),
+        MOZ_ANIMATION_DURATION__("-moz-animation-duration", "-moz-animation-duration", ff("0s")),
 
         /** The style property {@code MozAnimationFillMode}. */
         MOZ_ANIMATION_FILL_MODE("MozAnimationFillMode", "-moz-animation-fill-mode", ff("none")),
 
         /** The style property {@code -moz-animation-fill-mode}. */
-        MOZ_ANIMATION_FILL_MODE__("-moz-animation-fill-mode", "-moz-animation-fill-mode", ff52up("none")),
+        MOZ_ANIMATION_FILL_MODE__("-moz-animation-fill-mode", "-moz-animation-fill-mode", ff("none")),
 
         /** The style property {@code MozAnimationIterationCount}. */
         MOZ_ANIMATION_ITERATION_COUNT("MozAnimationIterationCount", "-moz-animation-iteration-count", ff("1")),
 
         /** The style property {@code -moz-animation-iteration-count}. */
         MOZ_ANIMATION_ITERATION_COUNT__("-moz-animation-iteration-count", "-moz-animation-iteration-count",
-                ff52up("1")),
+                ff("1")),
 
         /** The style property {@code MozAnimationName}. */
         MOZ_ANIMATION_NAME("MozAnimationName", "-moz-animation-name", ff("none")),
 
         /** The style property {@code -moz-animation-name}. */
-        MOZ_ANIMATION_NAME__("-moz-animation-name", "-moz-animation-name", ff52up("none")),
+        MOZ_ANIMATION_NAME__("-moz-animation-name", "-moz-animation-name", ff("none")),
 
         /** The style property {@code MozAnimationPlayState}. */
         MOZ_ANIMATION_PLAY_STATE("MozAnimationPlayState", "-moz-animation-play-state", ff("running")),
 
         /** The style property {@code -moz-animation-play-state}. */
-        MOZ_ANIMATION_PLAY_STATE__("-moz-animation-play-state", "-moz-animation-play-state", ff52up("running")),
+        MOZ_ANIMATION_PLAY_STATE__("-moz-animation-play-state", "-moz-animation-play-state", ff("running")),
 
         /** The style property {@code MozAnimationTimingFunction}. */
         MOZ_ANIMATION_TIMING_FUNCTION("MozAnimationTimingFunction", "-moz-animation-timing-function",
@@ -1418,19 +1420,19 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-animation-timing-function}. */
         MOZ_ANIMATION_TIMING_FUNCTION__("-moz-animation-timing-function", "-moz-animation-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code MozAppearance}. */
         MOZ_APPEARANCE("MozAppearance", "-moz-appearance", ff("none")),
 
         /** The style property {@code -moz-appearance}. */
-        MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ff52up("none")),
+        MOZ_APPEARANCE__("-moz-appearance", "-moz-appearance", ff("none")),
 
         /** The style property {@code MozBackfaceVisibility}. */
         MOZ_BACKFACE_VISIBILITY("MozBackfaceVisibility", "-moz-backface-visibility", ff("visible")),
 
         /** The style property {@code -moz-backface-visibility}. */
-        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility", ff52up("visible")),
+        MOZ_BACKFACE_VISIBILITY__("-moz-backface-visibility", "-moz-backface-visibility", ff("visible")),
 
         /** The style property {@code MozBackgroundClip}. */
         MOZ_BACKGROUND_CLIP("MozBackgroundClip", "-moz-background-clip"),
@@ -1445,50 +1447,53 @@ public final class StyleAttributes {
         MOZ_BINDING("MozBinding", "-moz-binding", ff("none")),
 
         /** The style property {@code -moz-binding}. */
-        MOZ_BINDING__("-moz-binding", "-moz-binding", ff52up("none")),
+        MOZ_BINDING__("-moz-binding", "-moz-binding", ff("none")),
 
         /** The style property {@code MozBorderBottomColors}. */
-        MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors", ff("none")),
+        MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-bottom-colors}. */
         MOZ_BORDER_BOTTOM_COLORS__("-moz-border-bottom-colors", "-moz-border-bottom-colors",
-                ff52up("none")),
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code MozBorderEnd}. */
         MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ff("")),
 
         /** The style property {@code -moz-border-end}. */
-        MOZ_BORDER_END__("-moz-border-end", "-moz-border-end", ff52up("")),
+        MOZ_BORDER_END__("-moz-border-end", "-moz-border-end", ff("")),
 
         /** The style property {@code MozBorderEndColor}. */
         MOZ_BORDER_END_COLOR("MozBorderEndColor", "-moz-border-end-color", ff("")),
 
         /** The style property {@code -moz-border-end-color}. */
-        MOZ_BORDER_END_COLOR__("-moz-border-end-color", "-moz-border-end-color", ff52up("")),
+        MOZ_BORDER_END_COLOR__("-moz-border-end-color", "-moz-border-end-color", ff("")),
 
         /** The style property {@code MozBorderEndStyle}. */
         MOZ_BORDER_END_STYLE("MozBorderEndStyle", "-moz-border-end-style", ff("")),
 
         /** The style property {@code -moz-border-end-style}. */
-        MOZ_BORDER_END_STYLE__("-moz-border-end-style", "-moz-border-end-style", ff52up("")),
+        MOZ_BORDER_END_STYLE__("-moz-border-end-style", "-moz-border-end-style", ff("")),
 
         /** The style property {@code MozBorderEndWidth}. */
         MOZ_BORDER_END_WIDTH("MozBorderEndWidth", "-moz-border-end-width", ff("")),
 
         /** The style property {@code -moz-border-end-width}. */
-        MOZ_BORDER_END_WIDTH__("-moz-border-end-width", "-moz-border-end-width", ff52up("")),
+        MOZ_BORDER_END_WIDTH__("-moz-border-end-width", "-moz-border-end-width", ff("")),
 
         /** The style property {@code MozBorderImage}. */
         MOZ_BORDER_IMAGE("MozBorderImage", "-moz-border-image", ff("")),
 
         /** The style property {@code -moz-border-image}. */
-        MOZ_BORDER_IMAGE__("-moz-border-image", "-moz-border-image", ff52up("")),
+        MOZ_BORDER_IMAGE__("-moz-border-image", "-moz-border-image", ff("")),
 
         /** The style property {@code MozBorderLeftColors}. */
-        MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors", ff("none")),
+        MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-left-colors}. */
-        MOZ_BORDER_LEFT_COLORS__("-moz-border-left-colors", "-moz-border-left-colors", ff52up("none")),
+        MOZ_BORDER_LEFT_COLORS__("-moz-border-left-colors", "-moz-border-left-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code MozBorderRadius}. */
         MOZ_BORDER_RADIUS("MozBorderRadius", "-moz-border-radius"),
@@ -1506,76 +1511,80 @@ public final class StyleAttributes {
         MOZ_BORDER_RADIUS_TOPRIGHT("MozBorderRadiusTopright", "-moz-border-radius-topright"),
 
         /** The style property {@code MozBorderRightColors}. */
-        MOZ_BORDER_RIGHT_COLORS("MozBorderRightColors", "-moz-border-right-colors", ff("none")),
+        MOZ_BORDER_RIGHT_COLORS("MozBorderRightColors", "-moz-border-right-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-right-colors}. */
-        MOZ_BORDER_RIGHT_COLORS__("-moz-border-right-colors", "-moz-border-right-colors", ff52up("none")),
+        MOZ_BORDER_RIGHT_COLORS__("-moz-border-right-colors", "-moz-border-right-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code MozBorderStart}. */
         MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ff("")),
 
         /** The style property {@code -moz-border-start}. */
-        MOZ_BORDER_START__("-moz-border-start", "-moz-border-start", ff52up("")),
+        MOZ_BORDER_START__("-moz-border-start", "-moz-border-start", ff("")),
 
         /** The style property {@code MozBorderStartColor}. */
         MOZ_BORDER_START_COLOR("MozBorderStartColor", "-moz-border-start-color", ff("")),
 
         /** The style property {@code -moz-border-start-color}. */
-        MOZ_BORDER_START_COLOR__("-moz-border-start-color", "-moz-border-start-color", ff52up("")),
+        MOZ_BORDER_START_COLOR__("-moz-border-start-color", "-moz-border-start-color", ff("")),
 
         /** The style property {@code MozBorderStartStyle}. */
         MOZ_BORDER_START_STYLE("MozBorderStartStyle", "-moz-border-start-style", ff("")),
 
         /** The style property {@code -moz-border-start-style}. */
-        MOZ_BORDER_START_STYLE__("-moz-border-start-style", "-moz-border-start-style", ff52up("")),
+        MOZ_BORDER_START_STYLE__("-moz-border-start-style", "-moz-border-start-style", ff("")),
 
         /** The style property {@code MozBorderStartWidth}. */
         MOZ_BORDER_START_WIDTH("MozBorderStartWidth", "-moz-border-start-width", ff("")),
 
         /** The style property {@code -moz-border-start-width}. */
-        MOZ_BORDER_START_WIDTH__("-moz-border-start-width", "-moz-border-start-width", ff52up("")),
+        MOZ_BORDER_START_WIDTH__("-moz-border-start-width", "-moz-border-start-width", ff("")),
 
         /** The style property {@code MozBorderTopColors}. */
-        MOZ_BORDER_TOP_COLORS("MozBorderTopColors", "-moz-border-top-colors", ff("none")),
+        MOZ_BORDER_TOP_COLORS("MozBorderTopColors", "-moz-border-top-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-top-colors}. */
-        MOZ_BORDER_TOP_COLORS__("-moz-border-top-colors", "-moz-border-top-colors", ff52up("none")),
+        MOZ_BORDER_TOP_COLORS__("-moz-border-top-colors", "-moz-border-top-colors",
+                ffBelow60("none"), ff60up("none").setIteratable(false)),
 
         /** The style property {@code MozBoxAlign}. */
         MOZ_BOX_ALIGN("MozBoxAlign", "-moz-box-align", ff("stretch")),
 
         /** The style property {@code -moz-box-align}. */
-        MOZ_BOX_ALIGN__("-moz-box-align", "-moz-box-align", ff52up("stretch")),
+        MOZ_BOX_ALIGN__("-moz-box-align", "-moz-box-align", ff("stretch")),
 
         /** The style property {@code MozBoxDirection}. */
         MOZ_BOX_DIRECTION("MozBoxDirection", "-moz-box-direction", ff("normal")),
 
         /** The style property {@code -moz-box-direction}. */
-        MOZ_BOX_DIRECTION__("-moz-box-direction", "-moz-box-direction", ff52up("normal")),
+        MOZ_BOX_DIRECTION__("-moz-box-direction", "-moz-box-direction", ff("normal")),
 
         /** The style property {@code MozBoxFlex}. */
         MOZ_BOX_FLEX("MozBoxFlex", "-moz-box-flex", ff("0")),
 
         /** The style property {@code -moz-box-flex}. */
-        MOZ_BOX_FLEX__("-moz-box-flex", "-moz-box-flex", ff52up("0")),
+        MOZ_BOX_FLEX__("-moz-box-flex", "-moz-box-flex", ff("0")),
 
         /** The style property {@code MozBoxOrdinalGroup}. */
         MOZ_BOX_ORDINAL_GROUP("MozBoxOrdinalGroup", "-moz-box-ordinal-group", ff("1")),
 
         /** The style property {@code -moz-box-ordinal-group}. */
-        MOZ_BOX_ORDINAL_GROUP__("-moz-box-ordinal-group", "-moz-box-ordinal-group", ff52up("1")),
+        MOZ_BOX_ORDINAL_GROUP__("-moz-box-ordinal-group", "-moz-box-ordinal-group", ff("1")),
 
         /** The style property {@code MozBoxOrient}. */
         MOZ_BOX_ORIENT("MozBoxOrient", "-moz-box-orient", ff("horizontal")),
 
         /** The style property {@code -moz-box-orient}. */
-        MOZ_BOX_ORIENT__("-moz-box-orient", "-moz-box-orient", ff52up("horizontal")),
+        MOZ_BOX_ORIENT__("-moz-box-orient", "-moz-box-orient", ff("horizontal")),
 
         /** The style property {@code MozBoxPack}. */
         MOZ_BOX_PACK("MozBoxPack", "-moz-box-pack", ff("start")),
 
         /** The style property {@code -moz-box-pack}. */
-        MOZ_BOX_PACK__("-moz-box-pack", "-moz-box-pack", ff52up("start")),
+        MOZ_BOX_PACK__("-moz-box-pack", "-moz-box-pack", ff("start")),
 
         /** The style property {@code MozBoxShadow}. */
         MOZ_BOX_SHADOW("MozBoxShadow", "-moz-box-shadow"),
@@ -1584,31 +1593,31 @@ public final class StyleAttributes {
         MOZ_BOX_SIZING("MozBoxSizing", "-moz-box-sizing", ff("content-box")),
 
         /** The style property {@code -moz-box-sizing}. */
-        MOZ_BOX_SIZING__("-moz-box-sizing", "-moz-box-sizing", ff52up("content-box")),
+        MOZ_BOX_SIZING__("-moz-box-sizing", "-moz-box-sizing", ff("content-box")),
 
         /** The style property {@code MozColumnCount}. */
         MOZ_COLUMN_COUNT("MozColumnCount", "-moz-column-count", ff("auto")),
 
         /** The style property {@code -moz-column-count}. */
-        MOZ_COLUMN_COUNT__("-moz-column-count", "-moz-column-count", ff52up("auto")),
+        MOZ_COLUMN_COUNT__("-moz-column-count", "-moz-column-count", ff("auto")),
 
         /** The style property {@code MozColumnFill}. */
         MOZ_COLUMN_FILL("MozColumnFill", "-moz-column-fill", ff("balance")),
 
         /** The style property {@code -moz-column-fill}. */
-        MOZ_COLUMN_FILL__("-moz-column-fill", "-moz-column-fill", ff52up("balance")),
+        MOZ_COLUMN_FILL__("-moz-column-fill", "-moz-column-fill", ff("balance")),
 
         /** The style property {@code MozColumnGap}. */
         MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("16px")),
 
         /** The style property {@code -moz-column-gap}. */
-        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ff52up("16px")),
+        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ff("16px")),
 
         /** The style property {@code MozColumnRule}. */
         MOZ_COLUMN_RULE("MozColumnRule", "-moz-column-rule", ff("")),
 
         /** The style property {@code -moz-column-rule}. */
-        MOZ_COLUMN_RULE__("-moz-column-rule", "-moz-column-rule", ff52up("")),
+        MOZ_COLUMN_RULE__("-moz-column-rule", "-moz-column-rule", ff("")),
 
         /** The style property {@code MozColumnRuleColor}. */
         MOZ_COLUMN_RULE_COLOR("MozColumnRuleColor", "-moz-column-rule-color",
@@ -1616,7 +1625,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-column-rule-color}. */
         MOZ_COLUMN_RULE_COLOR__("-moz-column-rule-color", "-moz-column-rule-color",
-                ff52up("rgb(0, 0, 0)")),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code MozColumnRuleStyle}. */
         MOZ_COLUMN_RULE_STYLE("MozColumnRuleStyle", "-moz-column-rule-style",
@@ -1624,7 +1633,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-column-rule-style}. */
         MOZ_COLUMN_RULE_STYLE__("-moz-column-rule-style", "-moz-column-rule-style",
-                ff52up("none")),
+                ff("none")),
 
         /** The style property {@code MozColumnRuleWidth}. */
         MOZ_COLUMN_RULE_WIDTH("MozColumnRuleWidth", "-moz-column-rule-width",
@@ -1632,25 +1641,25 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-column-rule-width}. */
         MOZ_COLUMN_RULE_WIDTH__("-moz-column-rule-width", "-moz-column-rule-width",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code MozColumnWidth}. */
         MOZ_COLUMN_WIDTH("MozColumnWidth", "-moz-column-width", ff("auto")),
 
         /** The style property {@code -moz-column-width}. */
-        MOZ_COLUMN_WIDTH__("-moz-column-width", "-moz-column-width", ff52up("auto")),
+        MOZ_COLUMN_WIDTH__("-moz-column-width", "-moz-column-width", ff("auto")),
 
         /** The style property {@code MozColumns}. */
         MOZ_COLUMNS("MozColumns", "-moz-columns", ff("")),
 
         /** The style property {@code -moz-columns}. */
-        MOZ_COLUMNS__("-moz-columns", "-moz-columns", ff52up("")),
+        MOZ_COLUMNS__("-moz-columns", "-moz-columns", ff("")),
 
         /** The style property {@code MozFloatEdge}. */
         MOZ_FLOAT_EDGE("MozFloatEdge", "-moz-float-edge", ff("content-box")),
 
         /** The style property {@code -moz-float-edge}. */
-        MOZ_FLOAT_EDGE__("-moz-float-edge", "-moz-float-edge", ff52up("content-box")),
+        MOZ_FLOAT_EDGE__("-moz-float-edge", "-moz-float-edge", ff("content-box")),
 
         /** The style property {@code MozFontFeatureSettings}. */
         MOZ_FONT_FEATURE_SETTINGS("MozFontFeatureSettings", "-moz-font-feature-settings",
@@ -1658,7 +1667,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-font-feature-settings}. */
         MOZ_FONT_FEATURE_SETTINGS__("-moz-font-feature-settings", "-moz-font-feature-settings",
-                ff52up("normal")),
+                ff("normal")),
 
         /** The style property {@code MozFontLanguageOverride}. */
         MOZ_FONT_LANGUAGE_OVERRIDE("MozFontLanguageOverride", "-moz-font-language-override",
@@ -1666,7 +1675,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-font-language-override}. */
         MOZ_FONT_LANGUAGE_OVERRIDE__("-moz-font-language-override", "-moz-font-language-override",
-                ff52up("normal")),
+                ff("normal")),
 
         /** The style property {@code MozForceBrokenImageIcon}. */
         MOZ_FORCE_BROKEN_IMAGE_ICON("MozForceBrokenImageIcon", "-moz-force-broken-image-icon",
@@ -1674,31 +1683,31 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-force-broken-image-icon}. */
         MOZ_FORCE_BROKEN_IMAGE_ICON__("-moz-force-broken-image-icon", "-moz-force-broken-image-icon",
-                ff52up("0")),
+                ff("0")),
 
         /** The style property {@code MozHyphens}. */
         MOZ_HYPHENS("MozHyphens", "-moz-hyphens", ff("manual")),
 
         /** The style property {@code -moz-hyphens}. */
-        MOZ_HYPHENS__("-moz-hyphens", "-moz-hyphens", ff52up("manual")),
+        MOZ_HYPHENS__("-moz-hyphens", "-moz-hyphens", ff("manual")),
 
         /** The style property {@code MozImageRegion}. */
         MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ff("auto")),
 
         /** The style property {@code -moz-image-region}. */
-        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ff52up("auto")),
+        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ff("auto")),
 
         /** The style property {@code MozMarginEnd}. */
         MOZ_MARGIN_END("MozMarginEnd", "-moz-margin-end", ff("")),
 
         /** The style property {@code -moz-margin-end}. */
-        MOZ_MARGIN_END__("-moz-margin-end", "-moz-margin-end", ff52up("")),
+        MOZ_MARGIN_END__("-moz-margin-end", "-moz-margin-end", ff("")),
 
         /** The style property {@code MozMarginStart}. */
         MOZ_MARGIN_START("MozMarginStart", "-moz-margin-start", ff("")),
 
         /** The style property {@code -moz-margin-start}. */
-        MOZ_MARGIN_START__("-moz-margin-start", "-moz-margin-start", ff52up("")),
+        MOZ_MARGIN_START__("-moz-margin-start", "-moz-margin-start", ff("")),
 
         /** The style property {@code MozOpacity}. */
         MOZ_OPACITY("MozOpacity", "-moz-opacity"),
@@ -1707,7 +1716,7 @@ public final class StyleAttributes {
         MOZ_ORIENT("MozOrient", "-moz-orient", ff("inline")),
 
         /** The style property {@code -moz-orient}. */
-        MOZ_ORIENT__("-moz-orient", "-moz-orient", ff52up("inline")),
+        MOZ_ORIENT__("-moz-orient", "-moz-orient", ff("inline")),
 
         /** The style property {@code MozOutline}. */
         MOZ_OUTLINE("MozOutline", "-moz-outline"),
@@ -1722,7 +1731,7 @@ public final class StyleAttributes {
         MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-moz-outline-radius", ff("")),
 
         /** The style property {@code -moz-outline-radius}. */
-        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff52up("")),
+        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff("")),
 
         /** The style property {@code MozOutlineRadiusBottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT("MozOutlineRadiusBottomleft",
@@ -1730,7 +1739,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-outline-radius-bottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT__("-moz-outline-radius-bottomleft",
-                "-moz-outline-radius-bottomleft", ff52up("0px")),
+                "-moz-outline-radius-bottomleft", ff("0px")),
 
         /** The style property {@code MozOutlineRadiusBottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT("MozOutlineRadiusBottomright",
@@ -1738,7 +1747,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-outline-radius-bottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT__("-moz-outline-radius-bottomright",
-                "-moz-outline-radius-bottomright", ff52up("0px")),
+                "-moz-outline-radius-bottomright", ff("0px")),
 
         /** The style property {@code MozOutlineRadiusTopleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT("MozOutlineRadiusTopleft",
@@ -1746,7 +1755,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-outline-radius-topleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT__("-moz-outline-radius-topleft",
-                "-moz-outline-radius-topleft", ff52up("0px")),
+                "-moz-outline-radius-topleft", ff("0px")),
 
         /** The style property {@code MozOutlineRadiusTopright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT("MozOutlineRadiusTopright",
@@ -1754,7 +1763,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-outline-radius-topright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT__("-moz-outline-radius-topright",
-                "-moz-outline-radius-topright", ff52up("0px")),
+                "-moz-outline-radius-topright", ff("0px")),
 
         /** The style property {@code MozOutlineStyle}. */
         MOZ_OUTLINE_STYLE("MozOutlineStyle", "-moz-outline-style"),
@@ -1766,47 +1775,47 @@ public final class StyleAttributes {
         MOZ_PADDING_END("MozPaddingEnd", "-moz-padding-end", ff("")),
 
         /** The style property {@code -moz-padding-end}. */
-        MOZ_PADDING_END__("-moz-padding-end", "-moz-padding-end", ff52up("")),
+        MOZ_PADDING_END__("-moz-padding-end", "-moz-padding-end", ff("")),
 
         /** The style property {@code MozPaddingStart}. */
         MOZ_PADDING_START("MozPaddingStart", "-moz-padding-start", ff("")),
 
         /** The style property {@code -moz-padding-start}. */
-        MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff52up("")),
+        MOZ_PADDING_START__("-moz-padding-start", "-moz-padding-start", ff("")),
 
         /** The style property {@code MozPerspective}. */
         MOZ_PERSPECTIVE("MozPerspective", "-moz-perspective", ff("none")),
 
         /** The style property {@code -moz-perspective}. */
-        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ff52up("none")),
+        MOZ_PERSPECTIVE__("-moz-perspective", "-moz-perspective", ff("none")),
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
+                "-moz-perspective-origin", ff("625px 172.5px")),
 
         /** The style property {@code -moz-perspective-origin}. */
         MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
-                "-moz-perspective-origin", ff52up("625px 172.5px")),
+                "-moz-perspective-origin", ff("625px 172.5px")),
 
         /** The style property {@code MozStackSizing}. */
         MOZ_STACK_SIZING("MozStackSizing", "-moz-stack-sizing", ff("stretch-to-fit")),
 
         /** The style property {@code -moz-stack-sizing}. */
-        MOZ_STACK_SIZING__("-moz-stack-sizing", "-moz-stack-sizing", ff52up("stretch-to-fit")),
+        MOZ_STACK_SIZING__("-moz-stack-sizing", "-moz-stack-sizing", ff("stretch-to-fit")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
 
         /** The style property {@code -moz-tab-size}. */
-        MOZ_TAB_SIZE__("-moz-tab-size", "-moz-tab-size", ff52up("8")),
+        MOZ_TAB_SIZE__("-moz-tab-size", "-moz-tab-size", ff("8")),
 
         /** The style property {@code MozTextAlignLast}. */
         MOZ_TEXT_ALIGN_LAST("MozTextAlignLast", "-moz-text-align-last",
-                ff("auto")),
+                ffBelow60("auto"), ff60up("auto").setIteratable(false)),
 
         /** The style property {@code -moz-text-align-last}. */
         MOZ_TEXT_ALIGN_LAST__("-moz-text-align-last", "-moz-text-align-last",
-                ff52up("auto")),
+                ffBelow60("auto"), ff60up("auto").setIteratable(false)),
 
         /** The style property {@code MozTextSizeAdjust}. */
         MOZ_TEXT_SIZE_ADJUST("MozTextSizeAdjust", "-moz-text-size-adjust",
@@ -1814,21 +1823,21 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-text-size-adjust}. */
         MOZ_TEXT_SIZE_ADJUST__("-moz-text-size-adjust", "-moz-text-size-adjust",
-                ff52up("auto")),
+                ff("auto")),
 
         /** The style property {@code MozTransform}. */
         MOZ_TRANSFORM("MozTransform", "-moz-transform", ff("none")),
 
         /** The style property {@code -moz-transform}. */
-        MOZ_TRANSFORM__("-moz-transform", "-moz-transform", ff52up("none")),
+        MOZ_TRANSFORM__("-moz-transform", "-moz-transform", ff("none")),
 
         /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
-                ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
+                ff("625px 172.5px")),
 
         /** The style property {@code -moz-transform-origin}. */
         MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin",
-                ff52up("625px 172.5px")),
+                ff("625px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -1836,13 +1845,13 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-transform-style}. */
         MOZ_TRANSFORM_STYLE__("-moz-transform-style", "-moz-transform-style",
-                ff52up("flat")),
+                ff("flat")),
 
         /** The style property {@code MozTransition}. */
         MOZ_TRANSITION("MozTransition", "-moz-transition", ff("")),
 
         /** The style property {@code -moz-transition}. */
-        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ff52up("")),
+        MOZ_TRANSITION__("-moz-transition", "-moz-transition", ff("")),
 
         /** The style property {@code MozTransitionDelay}. */
         MOZ_TRANSITION_DELAY("MozTransitionDelay", "-moz-transition-delay",
@@ -1850,7 +1859,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-transition-delay}. */
         MOZ_TRANSITION_DELAY__("-moz-transition-delay", "-moz-transition-delay",
-                ff52up("0s")),
+                ff("0s")),
 
         /** The style property {@code MozTransitionDuration}. */
         MOZ_TRANSITION_DURATION("MozTransitionDuration", "-moz-transition-duration",
@@ -1858,7 +1867,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-transition-duration}. */
         MOZ_TRANSITION_DURATION__("-moz-transition-duration", "-moz-transition-duration",
-                ff52up("0s")),
+                ff("0s")),
 
         /** The style property {@code MozTransitionProperty}. */
         MOZ_TRANSITION_PROPERTY("MozTransitionProperty", "-moz-transition-property",
@@ -1866,7 +1875,7 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-transition-property}. */
         MOZ_TRANSITION_PROPERTY__("-moz-transition-property", "-moz-transition-property",
-                ff52up("all")),
+                ff("all")),
 
         /** The style property {@code MozTransitionTimingFunction}. */
         MOZ_TRANSITION_TIMING_FUNCTION("MozTransitionTimingFunction",
@@ -1874,37 +1883,37 @@ public final class StyleAttributes {
 
         /** The style property {@code -moz-transition-timing-function}. */
         MOZ_TRANSITION_TIMING_FUNCTION__("-moz-transition-timing-function",
-                "-moz-transition-timing-function", ff52up("ease")),
+                "-moz-transition-timing-function", ff("ease")),
 
         /** The style property {@code MozUserFocus}. */
         MOZ_USER_FOCUS("MozUserFocus", "-moz-user-focus", ff("none")),
 
         /** The style property {@code -moz-user-focus}. */
-        MOZ_USER_FOCUS__("-moz-user-focus", "-moz-user-focus", ff52up("none")),
+        MOZ_USER_FOCUS__("-moz-user-focus", "-moz-user-focus", ff("none")),
 
         /** The style property {@code MozUserInput}. */
         MOZ_USER_INPUT("MozUserInput", "-moz-user-input", ff("auto")),
 
         /** The style property {@code -moz-user-input}. */
-        MOZ_USER_INPUT__("-moz-user-input", "-moz-user-input", ff52up("auto")),
+        MOZ_USER_INPUT__("-moz-user-input", "-moz-user-input", ff("auto")),
 
         /** The style property {@code MozUserModify}. */
         MOZ_USER_MODIFY("MozUserModify", "-moz-user-modify", ff("read-only")),
 
         /** The style property {@code -moz-user-modify}. */
-        MOZ_USER_MODIFY__("-moz-user-modify", "-moz-user-modify", ff52up("read-only")),
+        MOZ_USER_MODIFY__("-moz-user-modify", "-moz-user-modify", ff("read-only")),
 
         /** The style property {@code MozUserSelect}. */
         MOZ_USER_SELECT("MozUserSelect", "-moz-user-select", ff("auto")),
 
         /** The style property {@code -moz-user-select}. */
-        MOZ_USER_SELECT__("-moz-user-select", "-moz-user-select", ff52up("auto")),
+        MOZ_USER_SELECT__("-moz-user-select", "-moz-user-select", ff("auto")),
 
         /** The style property {@code MozWindowDragging}. */
-        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ffBelow52("no-drag"), ff52up("default")),
+        MOZ_WINDOW_DRAGGING("MozWindowDragging", "-moz-window-dragging", ff("default")),
 
         /** The style property {@code -moz-window-dragging}. */
-        MOZ_WINDOW_DRAGGING__("-moz-window-dragging", "-moz-window-dragging", ff52up("default")),
+        MOZ_WINDOW_DRAGGING__("-moz-window-dragging", "-moz-window-dragging", ff("default")),
 
         /** The style property {@code msAnimation}. */
         MS_ANIMATION("msAnimation", "-ms-animation", ie("")),
@@ -2262,10 +2271,10 @@ public final class StyleAttributes {
         OVERFLOW_ANCHOR("overflowAnchor", "overflow-anchor", chrome("auto")),
 
         /** The style property {@code overflowWrap}. */
-        OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal"), ff52up("normal")),
+        OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal"), ff("normal")),
 
         /** The style property {@code overflow-wrap}. */
-        OVERFLOW_WRAP_("overflow-wrap", "overflow-wrap", ff52up("normal")),
+        OVERFLOW_WRAP_("overflow-wrap", "overflow-wrap", ff("normal")),
 
         /** The style property {@code overflowX}. */
         OVERFLOW_X("overflowX", "overflow-x", chrome("visible"), ff("visible"), ie("visible")),
@@ -2280,13 +2289,13 @@ public final class StyleAttributes {
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
         /** The style property {@code overscrollBehavior}. */
-        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto auto")),
+        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto auto"), ff60up("")),
 
         /** The style property {@code overscrollBehaviorX}. */
-        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior_x", chrome("auto")),
+        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior_x", chrome("auto"), ff60up("")),
 
         /** The style property {@code overscrollBehaviorY}. */
-        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior_y", chrome("auto")),
+        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior_y", chrome("auto"), ff60up("")),
 
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
@@ -2380,11 +2389,11 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ffBelow52("705px 172.5px"), ff52up("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
+                ff("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
-                ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
+                ff("625px 172.5px")),
 
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
@@ -2393,40 +2402,40 @@ public final class StyleAttributes {
         PITCH_RANGE("pitchRange", "pitch-range"),
 
         /** The style property {@code pixelBottom}. */
-        PIXEL_BOTTOM("pixelBottom", "pixel-bottom", ie("").setIteratable(false)),
+        PIXEL_BOTTOM("pixelBottom", "pixel-bottom", ie("")),
 
         /** The style property {@code pixelHeight}. */
-        PIXEL_HEIGHT("pixelHeight", "pixel-height", ie("").setIteratable(false)),
+        PIXEL_HEIGHT("pixelHeight", "pixel-height", ie("")),
 
         /** The style property {@code pixelLeft}. */
-        PIXEL_LEFT("pixelLeft", "pixel-left", ie("").setIteratable(false)),
+        PIXEL_LEFT("pixelLeft", "pixel-left", ie("")),
 
         /** The style property {@code pixelRight}. */
-        PIXEL_RIGHT("pixelRight", "pixel-right", ie("").setIteratable(false)),
+        PIXEL_RIGHT("pixelRight", "pixel-right", ie("")),
 
         /** The style property {@code pixelTop}. */
-        PIXEL_TOP("pixelTop", "pixel-top", ie("").setIteratable(false)),
+        PIXEL_TOP("pixelTop", "pixel-top", ie("")),
 
         /** The style property {@code pixelWidth}. */
-        PIXEL_WIDTH("pixelWidth", "pixel-width", ie("").setIteratable(false)),
+        PIXEL_WIDTH("pixelWidth", "pixel-width", ie("")),
 
         /** The style property {@code placeContent}. */
-        PLACE_CONTENT("placeContent", "place-content", chrome("normal normal"), ff52up("")),
+        PLACE_CONTENT("placeContent", "place-content", chrome("normal normal"), ff("")),
 
         /** The style property {@code place-content}. */
-        PLACE_CONTENT_("place-content", "place-content", ff52up("")),
+        PLACE_CONTENT_("place-content", "place-content", ff("")),
 
         /** The style property {@code placeItems}. */
-        PLACE_ITEMS("placeItems", "place-items", chrome("normal normal"), ff52up("")),
+        PLACE_ITEMS("placeItems", "place-items", chrome("normal normal"), ff("")),
 
         /** The style property {@code place-items}. */
-        PLACE_ITEMS_("place-items", "place-items", ff52up("")),
+        PLACE_ITEMS_("place-items", "place-items", ff("")),
 
         /** The style property {@code placeSelf}. */
-        PLACE_SELF("placeSelf", "place-self", chrome("auto auto"), ff52up("")),
+        PLACE_SELF("placeSelf", "place-self", chrome("auto auto"), ff("")),
 
         /** The style property {@code place-self}. */
-        PLACE_SELF_("place-self", "place-self", ff52up("")),
+        PLACE_SELF_("place-self", "place-self", ff("")),
 
         /** The style property {@code pointerEvents}. */
         POINTER_EVENTS("pointerEvents", "pointer-events", ie("visiblePainted"), chrome("auto"), ff("auto")),
@@ -2435,22 +2444,22 @@ public final class StyleAttributes {
         POINTER_EVENTS_("pointer-events", "pointer-events", ff("auto")),
 
         /** The style property {@code posBottom}. */
-        POS_BOTTOM("posBottom", "pos-bottom", ie("").setIteratable(false)),
+        POS_BOTTOM("posBottom", "pos-bottom", ie("")),
 
         /** The style property {@code posHeight}. */
-        POS_HEIGHT("posHeight", "pos-height", ie("").setIteratable(false)),
+        POS_HEIGHT("posHeight", "pos-height", ie("")),
 
         /** The style property {@code posLeft}. */
-        POS_LEFT("posLeft", "pos-left", ie("").setIteratable(false)),
+        POS_LEFT("posLeft", "pos-left", ie("")),
 
         /** The style property {@code posRight}. */
-        POS_RIGHT("posRight", "pos-right", ie("").setIteratable(false)),
+        POS_RIGHT("posRight", "pos-right", ie("")),
 
         /** The style property {@code posTop}. */
-        POS_TOP("posTop", "pos-top", ie("").setIteratable(false)),
+        POS_TOP("posTop", "pos-top", ie("")),
 
         /** The style property {@code posWidth}. */
-        POS_WIDTH("posWidth", "pos-width", ie("").setIteratable(false)),
+        POS_WIDTH("posWidth", "pos-width", ie("")),
 
         /** The style property {@code position}. */
         POSITION("position", "position", chrome("static"), ff("static"), ie("static")),
@@ -2681,10 +2690,10 @@ public final class StyleAttributes {
         TEXT_ALIGN_("text-align", "text-align", ff("start")),
 
         /** The style property {@code textAlignLast}. */
-        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto"), ff52up("auto")),
+        TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chrome("auto"), ff("auto")),
 
         /** The style property {@code text-align-last}. */
-        TEXT_ALIGN_LAST_("text-align-last", "text-align-last", ff52up("auto")),
+        TEXT_ALIGN_LAST_("text-align-last", "text-align-last", ff("auto")),
 
         /** The style property {@code textAnchor}. */
         TEXT_ANCHOR("textAnchor", "text-anchor", ff("start"), ie("start"), chrome("start")),
@@ -2696,10 +2705,10 @@ public final class StyleAttributes {
         TEXT_AUTOSPACE("textAutospace", "text-autospace", ie("undefined")),
 
         /** The style property {@code textCombineUpright}. */
-        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none"), ff52up("none")),
+        TEXT_COMBINE_UPRIGHT("textCombineUpright", "text-combine-upright", chrome("none"), ff("none")),
 
         /** The style property {@code text-combine-upright}. */
-        TEXT_COMBINE_UPRIGHT_("text-combine-upright", "text-combine-upright", ff52up("none")),
+        TEXT_COMBINE_UPRIGHT_("text-combine-upright", "text-combine-upright", ff("none")),
 
         /** The style property {@code textDecoration}. */
         TEXT_DECORATION("textDecoration", "text-decoration", chrome("none solid rgb(0, 0, 0)"), ff("none"), ie("none")),
@@ -2708,7 +2717,7 @@ public final class StyleAttributes {
         TEXT_DECORATION_("text-decoration", "text-decoration", ff("none")),
 
         /** The style property {@code textDecorationBlink}. */
-        TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false").setIteratable(false)),
+        TEXT_DECORATION_BLINK("textDecorationBlink", "text-decoration-blink", ie("false")),
 
         /** The style property {@code textDecorationColor}. */
         TEXT_DECORATION_COLOR("textDecorationColor", "text-decoration-color",
@@ -2725,14 +2734,14 @@ public final class StyleAttributes {
 
         /** The style property {@code textDecorationLineThrough}. */
         TEXT_DECORATION_LINE_THROUGH("textDecorationLineThrough", "text-decoration-line-through",
-                ie("false").setIteratable(false)),
+                ie("false")),
 
         /** The style property {@code textDecorationNone}. */
-        TEXT_DECORATION_NONE("textDecorationNone", "text-decoration-none", ie("false").setIteratable(false)),
+        TEXT_DECORATION_NONE("textDecorationNone", "text-decoration-none", ie("false")),
 
         /** The style property {@code textDecorationOverline}. */
         TEXT_DECORATION_OVERLINE("textDecorationOverline", "text-decoration-overline",
-                ie("false").setIteratable(false)),
+                ie("false")),
 
         /** The style property {@code textDecorationSkipInk}. */
         TEXT_DECORATION_SKIP("textDecorationSkipInk", "text-decoration-skip-ink", chrome("auto")),
@@ -2745,31 +2754,31 @@ public final class StyleAttributes {
 
         /** The style property {@code textDecorationUnderline}. */
         TEXT_DECORATION_UNDERLINE("textDecorationUnderline", "text-decoration-underline",
-                ie("false").setIteratable(false)),
+                ie("false")),
 
         /** The style property {@code textEmphasis}. */
-        TEXT_EMPHASIS("textEmphasis", "text-emphasis", ff52up("")),
+        TEXT_EMPHASIS("textEmphasis", "text-emphasis", ff("")),
 
         /** The style property {@code text-emphasis}. */
-        TEXT_EMPHASIS_("text-emphasis", "text-emphasis", ff52up("")),
+        TEXT_EMPHASIS_("text-emphasis", "text-emphasis", ff("")),
 
         /** The style property {@code textEmphasisColor}. */
-        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", ff52up("rgb(0, 0, 0)")),
+        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code text-emphasis-color}. */
-        TEXT_EMPHASIS_COLOR_("text-emphasis-color", "text-emphasis-color", ff52up("rgb(0, 0, 0)")),
+        TEXT_EMPHASIS_COLOR_("text-emphasis-color", "text-emphasis-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textEmphasisPosition}. */
-        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", ff52up("over right")),
+        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", ff("over right")),
 
         /** The style property {@code text-emphasis-position}. */
-        TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position", ff52up("over right")),
+        TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position", ff("over right")),
 
         /** The style property {@code textEmphasisStyle}. */
-        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", ff52up("none")),
+        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", ff("none")),
 
         /** The style property {@code text-emphasis-style}. */
-        TEXT_EMPHASIS_STYLE_("text-emphasis-style", "text-emphasis-style", ff52up("none")),
+        TEXT_EMPHASIS_STYLE_("text-emphasis-style", "text-emphasis-style", ff("none")),
 
         /** The style property {@code textIndent}. */
         TEXT_INDENT("textIndent", "text-indent", chrome("0px"), ff(""), ie("")),
@@ -2778,7 +2787,7 @@ public final class StyleAttributes {
         TEXT_INDENT_("text-indent", "text-indent", ff("0px")),
 
         /** The style property {@code textJustify}. */
-        TEXT_JUSTIFY("textJustify", "text-justify", ie("auto")),
+        TEXT_JUSTIFY("textJustify", "text-justify", ie("auto"), ff60up("auto")),
 
         /** The style property {@code textJustifyTrim}. */
         TEXT_JUSTIFY_TRIM("textJustifyTrim", "text-justify-trim", ie("undefined")),
@@ -2829,23 +2838,23 @@ public final class StyleAttributes {
         TOP("top", "top", ff("auto"), ie("auto"), chrome("auto")),
 
         /** The style property {@code touchAction}. */
-        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto"), ff52up("auto")),
+        TOUCH_ACTION("touchAction", "touch-action", ie("auto"), chrome("auto"), ff("auto")),
 
         /** The style property {@code touch-action}. */
-        TOUCH_ACTION_("touch-action", "touch-action", ff52up("auto")),
+        TOUCH_ACTION_("touch-action", "touch-action", ff("auto")),
 
         /** The style property {@code transform}. */
         TRANSFORM("transform", "transform", ff("none"), ie("none"), chrome("none")),
 
         /** The style property {@code transformBox}. */
-        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box")),
+        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box"), ff60up("")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ffBelow52("705px 172.5px"), ff52up("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
+                ff("625px 172.5px"), ie("620px 163.2px"), chrome("456.5px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ffBelow52("705px 172.5px"), ff52up("625px 172.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("625px 172.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chrome("flat")),
@@ -2887,10 +2896,10 @@ public final class StyleAttributes {
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
-                ffBelow52("-moz-isolate"), ff52up("isolate"), ie("normal"), chrome("normal")),
+                ff("isolate"), ie("normal"), chrome("normal")),
 
         /** The style property {@code unicode-bidi}. */
-        UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ffBelow52("-moz-isolate"), ff52up("isolate")),
+        UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff("isolate")),
 
         /** The style property {@code unicodeRange}. */
         UNICODE_RANGE("unicodeRange", "unicode-range", chrome("")),
@@ -2923,118 +2932,118 @@ public final class StyleAttributes {
         VOLUME("volume", "volume"),
 
         /** The style property {@code webkitAlignContent}. */
-        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", ff52up("normal")),
+        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", ff("normal")),
 
         /** The style property {@code WebkitAlignContent}. */
-        WEBKIT_ALIGN_CONTENT_("WebkitAlignContent", "webkit-align-content", ff52up("normal")),
+        WEBKIT_ALIGN_CONTENT_("WebkitAlignContent", "webkit-align-content", ff("normal")),
 
         /** The style property {@code -webkit-align-content}. */
-        WEBKIT_ALIGN_CONTENT__("-webkit-align-content", "webkit-align-content", ff52up("normal")),
+        WEBKIT_ALIGN_CONTENT__("-webkit-align-content", "webkit-align-content", ff("normal")),
 
         /** The style property {@code webkitAlignItems}. */
-        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", ff52up("normal")),
+        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", ff("normal")),
 
         /** The style property {@code WebkitAlignItems}. */
-        WEBKIT_ALIGN_ITEMS_("WebkitAlignItems", "webkit-align-items", ff52up("normal")),
+        WEBKIT_ALIGN_ITEMS_("WebkitAlignItems", "webkit-align-items", ff("normal")),
 
         /** The style property {@code -webkit-align-items}. */
-        WEBKIT_ALIGN_ITEMS__("-webkit-align-items", "webkit-align-items", ff52up("normal")),
+        WEBKIT_ALIGN_ITEMS__("-webkit-align-items", "webkit-align-items", ff("normal")),
 
         /** The style property {@code webkitAlignSelf}. */
-        WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", ff52up("auto")),
+        WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", ff("auto")),
 
         /** The style property {@code WebkitAlignSelf}. */
-        WEBKIT_ALIGN_SELF_("WebkitAlignSelf", "webkit-align-self", ff52up("auto")),
+        WEBKIT_ALIGN_SELF_("WebkitAlignSelf", "webkit-align-self", ff("auto")),
 
         /** The style property {@code -webkit-align-self}. */
-        WEBKIT_ALIGN_SELF__("-webkit-align-self", "webkit-align-self", ff52up("auto")),
+        WEBKIT_ALIGN_SELF__("-webkit-align-self", "webkit-align-self", ff("auto")),
 
         /** The style property {@code webkitAnimation}. */
-        WEBKIT_ANIMATION("webkitAnimation", "webkit-animation", ff52up("")),
+        WEBKIT_ANIMATION("webkitAnimation", "webkit-animation", ff("")),
 
         /** The style property {@code WebkitAnimation}. */
-        WEBKIT_ANIMATION_("WebkitAnimation", "webkit-animation", ff52up("")),
+        WEBKIT_ANIMATION_("WebkitAnimation", "webkit-animation", ff("")),
 
         /** The style property {@code -webkit-animation}. */
-        WEBKIT_ANIMATION__("-webkit-animation", "webkit-animation", ff52up("")),
+        WEBKIT_ANIMATION__("-webkit-animation", "webkit-animation", ff("")),
 
         /** The style property {@code webkitAnimationDelay}. */
-        WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", ff52up("0s")),
+        WEBKIT_ANIMATION_DELAY("webkitAnimationDelay", "webkit-animation-delay", ff("0s")),
 
         /** The style property {@code WebkitAnimationDelay}. */
-        WEBKIT_ANIMATION_DELAY_("WebkitAnimationDelay", "webkit-animation-delay", ff52up("0s")),
+        WEBKIT_ANIMATION_DELAY_("WebkitAnimationDelay", "webkit-animation-delay", ff("0s")),
 
         /** The style property {@code -webkit-animation-delay}. */
-        WEBKIT_ANIMATION_DELAY__("-webkit-animation-delay", "webkit-animation-delay", ff52up("0s")),
+        WEBKIT_ANIMATION_DELAY__("-webkit-animation-delay", "webkit-animation-delay", ff("0s")),
 
         /** The style property {@code webkitAnimationDirection}. */
-        WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", ff52up("normal")),
+        WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction", ff("normal")),
 
         /** The style property {@code WebkitAnimationDirection}. */
-        WEBKIT_ANIMATION_DIRECTION_("WebkitAnimationDirection", "webkit-animation-direction", ff52up("normal")),
+        WEBKIT_ANIMATION_DIRECTION_("WebkitAnimationDirection", "webkit-animation-direction", ff("normal")),
 
         /** The style property {@code -webkit-animation-direction}. */
-        WEBKIT_ANIMATION_DIRECTION__("-webkit-animation-direction", "webkit-animation-direction", ff52up("normal")),
+        WEBKIT_ANIMATION_DIRECTION__("-webkit-animation-direction", "webkit-animation-direction", ff("normal")),
 
         /** The style property {@code webkitAnimationDuration}. */
-        WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", ff52up("0s")),
+        WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration", ff("0s")),
 
         /** The style property {@code WebkitAnimationDuration}. */
-        WEBKIT_ANIMATION_DURATION_("WebkitAnimationDuration", "webkit-animation-duration", ff52up("0s")),
+        WEBKIT_ANIMATION_DURATION_("WebkitAnimationDuration", "webkit-animation-duration", ff("0s")),
 
         /** The style property {@code -webkit-animation-duration}. */
-        WEBKIT_ANIMATION_DURATION__("-webkit-animation-duration", "webkit-animation-duration", ff52up("0s")),
+        WEBKIT_ANIMATION_DURATION__("-webkit-animation-duration", "webkit-animation-duration", ff("0s")),
 
         /** The style property {@code webkitAnimationFillMode}. */
-        WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("none")),
+        WEBKIT_ANIMATION_FILL_MODE("webkitAnimationFillMode", "webkit-animation-fill-mode", ff("none")),
 
         /** The style property {@code WebkitAnimationFillMode}. */
-        WEBKIT_ANIMATION_FILL_MODE_("WebkitAnimationFillMode", "webkit-animation-fill-mode", ff52up("none")),
+        WEBKIT_ANIMATION_FILL_MODE_("WebkitAnimationFillMode", "webkit-animation-fill-mode", ff("none")),
 
         /** The style property {@code -webkit-animation-fill-mode}. */
-        WEBKIT_ANIMATION_FILL_MODE__("-webkit-animation-fill-mode", "webkit-animation-fill-mode", ff52up("none")),
+        WEBKIT_ANIMATION_FILL_MODE__("-webkit-animation-fill-mode", "webkit-animation-fill-mode", ff("none")),
 
         /** The style property {@code webkitAnimationIterationCount}. */
         WEBKIT_ANIMATION_ITERATION_COUNT("webkitAnimationIterationCount", "webkit-animation-iteration-count",
-                ff52up("1")),
+                ff("1")),
 
         /** The style property {@code WebkitAnimationIterationCount}. */
         WEBKIT_ANIMATION_ITERATION_COUNT_("WebkitAnimationIterationCount", "webkit-animation-iteration-count",
-                ff52up("1")),
+                ff("1")),
 
         /** The style property {@code -webkit-animation-iteration-count}. */
         WEBKIT_ANIMATION_ITERATION_COUNT__("-webkit-animation-iteration-count", "webkit-animation-iteration-count",
-                ff52up("1")),
+                ff("1")),
 
         /** The style property {@code webkitAnimationName}. */
-        WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", ff52up("none")),
+        WEBKIT_ANIMATION_NAME("webkitAnimationName", "webkit-animation-name", ff("none")),
 
         /** The style property {@code WebkitAnimationName}. */
-        WEBKIT_ANIMATION_NAME_("WebkitAnimationName", "webkit-animation-name", ff52up("none")),
+        WEBKIT_ANIMATION_NAME_("WebkitAnimationName", "webkit-animation-name", ff("none")),
 
         /** The style property {@code -webkit-animation-name}. */
-        WEBKIT_ANIMATION_NAME__("-webkit-animation-name", "webkit-animation-name", ff52up("none")),
+        WEBKIT_ANIMATION_NAME__("-webkit-animation-name", "webkit-animation-name", ff("none")),
 
         /** The style property {@code webkitAnimationPlayState}. */
-        WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", ff52up("running")),
+        WEBKIT_ANIMATION_PLAY_STATE("webkitAnimationPlayState", "webkit-animation-play-state", ff("running")),
 
         /** The style property {@code WebkitAnimationPlayState}. */
-        WEBKIT_ANIMATION_PLAY_STATE_("WebkitAnimationPlayState", "webkit-animation-play-state", ff52up("running")),
+        WEBKIT_ANIMATION_PLAY_STATE_("WebkitAnimationPlayState", "webkit-animation-play-state", ff("running")),
 
         /** The style property {@code -webkit-animation-play-state}. */
-        WEBKIT_ANIMATION_PLAY_STATE__("-webkit-animation-play-state", "webkit-animation-play-state", ff52up("running")),
+        WEBKIT_ANIMATION_PLAY_STATE__("-webkit-animation-play-state", "webkit-animation-play-state", ff("running")),
 
         /** The style property {@code webkitAnimationTimingFunction}. */
         WEBKIT_ANIMATION_TIMING_FUNCTION("webkitAnimationTimingFunction", "webkit-animation-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code WebkitAnimationTimingFunction}. */
         WEBKIT_ANIMATION_TIMING_FUNCTION_("WebkitAnimationTimingFunction", "webkit-animation-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code -webkit-animation-timing-function}. */
         WEBKIT_ANIMATION_TIMING_FUNCTION__("-webkit-animation-timing-function", "webkit-animation-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code webkitAppRegion}. */
         WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("no-drag")),
@@ -3044,42 +3053,42 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",
-                ff52up("visible")),
+                ff("visible")),
 
         /** The style property {@code WebkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY_("WebkitBackfaceVisibility", "webkit-backface-visibility",
-                ff52up("visible")),
+                ff("visible")),
 
         /** The style property {@code -webkit-backface-visibility}. */
         WEBKIT_BACKFACE_VISIBILITY__("-webkit-backface-visibility", "webkit-backface-visibility",
-                ff52up("visible")),
+                ff("visible")),
 
         /** The style property {@code webkitBackgroundClip}. */
-        WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP("webkitBackgroundClip", "webkit-background-clip", ff("border-box")),
 
         /** The style property {@code WebkitBackgroundClip}. */
-        WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip", ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP_("WebkitBackgroundClip", "webkit-background-clip", ff("border-box")),
 
         /** The style property {@code -webkit-background-clip}. */
-        WEBKIT_BACKGROUND_CLIP__("-webkit-background-clip", "webkit-background-clip", ff52up("border-box")),
+        WEBKIT_BACKGROUND_CLIP__("-webkit-background-clip", "webkit-background-clip", ff("border-box")),
 
         /** The style property {@code webkitBackgroundOrigin}. */
-        WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN("webkitBackgroundOrigin", "webkit-background-origin", ff("padding-box")),
 
         /** The style property {@code WebkitBackgroundOrigin}. */
-        WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin", ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN_("WebkitBackgroundOrigin", "webkit-background-origin", ff("padding-box")),
 
         /** The style property {@code -webkit-background-origin}. */
-        WEBKIT_BACKGROUND_ORIGIN__("-webkit-background-origin", "webkit-background-origin", ff52up("padding-box")),
+        WEBKIT_BACKGROUND_ORIGIN__("-webkit-background-origin", "webkit-background-origin", ff("padding-box")),
 
         /** The style property {@code webkitBackgroundSize}. */
-        WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
+        WEBKIT_BACKGROUND_SIZE("webkitBackgroundSize", "webkit-background-size", ff("auto auto")),
 
         /** The style property {@code WebkitBackgroundSize}. */
-        WEBKIT_BACKGROUND_SIZE_("WebkitBackgroundSize", "webkit-background-size", ff52up("auto auto")),
+        WEBKIT_BACKGROUND_SIZE_("WebkitBackgroundSize", "webkit-background-size", ff("auto auto")),
 
         /** The style property {@code -webkit-background-size}. */
-        WEBKIT_BACKGROUND_SIZE__("-webkit-background-size", "webkit-background-size", ff52up("auto auto")),
+        WEBKIT_BACKGROUND_SIZE__("-webkit-background-size", "webkit-background-size", ff("auto auto")),
 
         /** The style property {@code webkitBorderAfter}. */
         WEBKIT_BORDER_AFTER("webkitBorderAfter", "webkit-border-after", chrome("0px none rgb(0, 0, 0)")),
@@ -3107,27 +3116,27 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitBorderBottomLeftRadius}. */
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS("webkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code WebkitBorderBottomLeftRadius}. */
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS_("WebkitBorderBottomLeftRadius", "webkit-border-bottom-left-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code -webkit-border-bottom-left-radius}. */
         WEBKIT_BORDER_BOTTOM_LEFT_RADIUS__("-webkit-border-bottom-left-radius", "webkit-border-bottom-left-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code webkitBorderBottomRightRadius}. */
         WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS("webkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code WebkitBorderBottomRightRadius}. */
         WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS_("WebkitBorderBottomRightRadius", "webkit-border-bottom-right-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code -webkit-border-bottom-right-radius}. */
         WEBKIT_BORDER_BOTTOM_RIGHT_RADIUS__("-webkit-border-bottom-right-radius", "webkit-border-bottom-right-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code webkitBorderEnd}. */
         WEBKIT_BORDER_END("webkitBorderEnd", "webkit-border-end", chrome("0px none rgb(0, 0, 0)")),
@@ -3146,22 +3155,22 @@ public final class StyleAttributes {
                 chrome("0px")),
 
         /** The style property {@code webkitBorderImage}. */
-        WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff52up("")),
+        WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chrome("none"), ff("")),
 
         /** The style property {@code WebkitBorderImage}. */
-        WEBKIT_BORDER_IMAGE_("WebkitBorderImage", "webkit-border-image", ff52up("")),
+        WEBKIT_BORDER_IMAGE_("WebkitBorderImage", "webkit-border-image", ff("")),
 
         /** The style property {@code -webkit-border-image}. */
-        WEBKIT_BORDER_IMAGE__("-webkit-border-image", "webkit-border-image", ff52up("")),
+        WEBKIT_BORDER_IMAGE__("-webkit-border-image", "webkit-border-image", ff("")),
 
         /** The style property {@code webkitBorderRadius}. */
-        WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff52up("")),
+        WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", ff("")),
 
         /** The style property {@code WebkitBorderRadius}. */
-        WEBKIT_BORDER_RADIUS_("WebkitBorderRadius", "webkit-border-radius", ff52up("")),
+        WEBKIT_BORDER_RADIUS_("WebkitBorderRadius", "webkit-border-radius", ff("")),
 
         /** The style property {@code -webkit-border-radius}. */
-        WEBKIT_BORDER_RADIUS__("-webkit-border-radius", "webkit-border-radius", ff52up("")),
+        WEBKIT_BORDER_RADIUS__("-webkit-border-radius", "webkit-border-radius", ff("")),
 
         /** The style property {@code webkitBorderStart}. */
         WEBKIT_BORDER_START("webkitBorderStart", "webkit-border-start", chrome("0px none rgb(0, 0, 0)")),
@@ -3176,111 +3185,111 @@ public final class StyleAttributes {
         WEBKIT_BORDER_START_WIDTH("webkitBorderStartWidth", "webkit-border-start-width", chrome("0px")),
 
         /** The style property {@code webkitBorderTopLeftRadius}. */
-        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
+        WEBKIT_BORDER_TOP_LEFT_RADIUS("webkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff("0px")),
 
         /** The style property {@code WebkitBorderTopLeftRadius}. */
-        WEBKIT_BORDER_TOP_LEFT_RADIUS_("WebkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff52up("0px")),
+        WEBKIT_BORDER_TOP_LEFT_RADIUS_("WebkitBorderTopLeftRadius", "webkit-border-top-left-radius", ff("0px")),
 
         /** The style property {@code -webkit-border-top-left-radius}. */
         WEBKIT_BORDER_TOP_LEFT_RADIUS__("-webkit-border-top-left-radius", "webkit-border-top-left-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code webkitBorderTopRightRadius}. */
-        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("0px")),
+        WEBKIT_BORDER_TOP_RIGHT_RADIUS("webkitBorderTopRightRadius", "webkit-border-top-right-radius", ff("0px")),
 
         /** The style property {@code WebkitBorderTopRightRadius}. */
-        WEBKIT_BORDER_TOP_RIGHT_RADIUS_("WebkitBorderTopRightRadius", "webkit-border-top-right-radius", ff52up("0px")),
+        WEBKIT_BORDER_TOP_RIGHT_RADIUS_("WebkitBorderTopRightRadius", "webkit-border-top-right-radius", ff("0px")),
 
         /** The style property {@code -webkit-border-top-right-radius}. */
         WEBKIT_BORDER_TOP_RIGHT_RADIUS__("-webkit-border-top-right-radius", "webkit-border-top-right-radius",
-                ff52up("0px")),
+                ff("0px")),
 
         /** The style property {@code webkitBorderVerticalSpacing}. */
         WEBKIT_BORDER_VERTICAL_SPACING("webkitBorderVerticalSpacing", "webkit-border-vertical-spacing", chrome("0px")),
 
         /** The style property {@code webkitBoxAlign}. */
-        WEBKIT_BOX_ALIGN("webkitBoxAlign", "webkit-box-align", chrome("stretch"), ff52up("stretch")),
+        WEBKIT_BOX_ALIGN("webkitBoxAlign", "webkit-box-align", chrome("stretch"), ff("stretch")),
 
         /** The style property {@code WebkitBoxAlign}. */
-        WEBKIT_BOX_ALIGN_("WebkitBoxAlign", "webkit-box-align", ff52up("stretch")),
+        WEBKIT_BOX_ALIGN_("WebkitBoxAlign", "webkit-box-align", ff("stretch")),
 
         /** The style property {@code -webkit-box-align}. */
-        WEBKIT_BOX_ALIGN__("-webkit-box-align", "webkit-box-align", ff52up("stretch")),
+        WEBKIT_BOX_ALIGN__("-webkit-box-align", "webkit-box-align", ff("stretch")),
 
         /** The style property {@code webkitBoxDecorationBreak}. */
         WEBKIT_BOX_DECORATION_BREAK("webkitBoxDecorationBreak", "webkit-box-decoration-break", chrome("slice")),
 
         /** The style property {@code webkitBoxDirection}. */
-        WEBKIT_BOX_DIRECTION("webkitBoxDirection", "webkit-box-direction", chrome("normal"), ff52up("normal")),
+        WEBKIT_BOX_DIRECTION("webkitBoxDirection", "webkit-box-direction", chrome("normal"), ff("normal")),
 
         /** The style property {@code WebkitBoxDirection}. */
-        WEBKIT_BOX_DIRECTION_("WebkitBoxDirection", "webkit-box-direction", ff52up("normal")),
+        WEBKIT_BOX_DIRECTION_("WebkitBoxDirection", "webkit-box-direction", ff("normal")),
 
         /** The style property {@code -webkit-box-direction}. */
-        WEBKIT_BOX_DIRECTION__("-webkit-box-direction", "webkit-box-direction", ff52up("normal")),
+        WEBKIT_BOX_DIRECTION__("-webkit-box-direction", "webkit-box-direction", ff("normal")),
 
         /** The style property {@code webkitBoxFlex}. */
-        WEBKIT_BOX_FLEX("webkitBoxFlex", "webkit-box-flex", chrome("0"), ff52up("0")),
+        WEBKIT_BOX_FLEX("webkitBoxFlex", "webkit-box-flex", chrome("0"), ff("0")),
 
         /** The style property {@code WebkitBoxFlex}. */
-        WEBKIT_BOX_FLEX_("WebkitBoxFlex", "webkit-box-flex", ff52up("0")),
+        WEBKIT_BOX_FLEX_("WebkitBoxFlex", "webkit-box-flex", ff("0")),
 
         /** The style property {@code -webkit-box-flex}. */
-        WEBKIT_BOX_FLEX__("-webkit-box-flex", "webkit-box-flex", ff52up("0")),
+        WEBKIT_BOX_FLEX__("-webkit-box-flex", "webkit-box-flex", ff("0")),
 
         /** The style property {@code webkitBoxFlexGroup}. */
-        WEBKIT_BOX_FLEX_GROUP("webkitBoxFlexGroup", "webkit-box-flex-group", chrome("1")),
+        WEBKIT_BOX_FLEX_GROUP("webkitBoxFlexGroup", "webkit-box-flex-group", chrome("1").setIteratable(false)),
 
         /** The style property {@code webkitBoxLines}. */
-        WEBKIT_BOX_LINES("webkitBoxLines", "webkit-box-lines", chrome("single")),
+        WEBKIT_BOX_LINES("webkitBoxLines", "webkit-box-lines", chrome("single").setIteratable(false)),
 
         /** The style property {@code webkitBoxOrdinalGroup}. */
-        WEBKIT_BOX_ORDINAL_GROUP("webkitBoxOrdinalGroup", "webkit-box-ordinal-group", chrome("1"), ff52up("1")),
+        WEBKIT_BOX_ORDINAL_GROUP("webkitBoxOrdinalGroup", "webkit-box-ordinal-group", chrome("1"), ff("1")),
 
         /** The style property {@code WebkitBoxOrdinalGroup}. */
-        WEBKIT_BOX_ORDINAL_GROUP_("WebkitBoxOrdinalGroup", "webkit-box-ordinal-group", ff52up("1")),
+        WEBKIT_BOX_ORDINAL_GROUP_("WebkitBoxOrdinalGroup", "webkit-box-ordinal-group", ff("1")),
 
         /** The style property {@code -webkit-box-ordinal-group}. */
-        WEBKIT_BOX_ORDINAL_GROUP__("-webkit-box-ordinal-group", "webkit-box-ordinal-group", ff52up("1")),
+        WEBKIT_BOX_ORDINAL_GROUP__("-webkit-box-ordinal-group", "webkit-box-ordinal-group", ff("1")),
 
         /** The style property {@code webkitBoxOrient}. */
-        WEBKIT_BOX_ORIENT("webkitBoxOrient", "webkit-box-orient", chrome("horizontal"), ff52up("horizontal")),
+        WEBKIT_BOX_ORIENT("webkitBoxOrient", "webkit-box-orient", chrome("horizontal"), ff("horizontal")),
 
         /** The style property {@code WebkitBoxOrient}. */
-        WEBKIT_BOX_ORIENT_("WebkitBoxOrient", "webkit-box-orient", ff52up("horizontal")),
+        WEBKIT_BOX_ORIENT_("WebkitBoxOrient", "webkit-box-orient", ff("horizontal")),
 
         /** The style property {@code -webkit-box-orient}. */
-        WEBKIT_BOX_ORIENT__("-webkit-box-orient", "webkit-box-orient", ff52up("horizontal")),
+        WEBKIT_BOX_ORIENT__("-webkit-box-orient", "webkit-box-orient", ff("horizontal")),
 
         /** The style property {@code webkitBoxPack}. */
-        WEBKIT_BOX_PACK("webkitBoxPack", "webkit-box-pack", chrome("start"), ff52up("start")),
+        WEBKIT_BOX_PACK("webkitBoxPack", "webkit-box-pack", chrome("start"), ff("start")),
 
         /** The style property {@code WebkitBoxPack}. */
-        WEBKIT_BOX_PACK_("WebkitBoxPack", "webkit-box-pack", ff52up("start")),
+        WEBKIT_BOX_PACK_("WebkitBoxPack", "webkit-box-pack", ff("start")),
 
         /** The style property {@code -webkit-box-pack}. */
-        WEBKIT_BOX_PACK__("-webkit-box-pack", "webkit-box-pack", ff52up("start")),
+        WEBKIT_BOX_PACK__("-webkit-box-pack", "webkit-box-pack", ff("start")),
 
         /** The style property {@code webkitBoxReflect}. */
         WEBKIT_BOX_REFLECT("webkitBoxReflect", "webkit-box-reflect", chrome("none")),
 
         /** The style property {@code webkitBoxShadow}. */
-        WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", ff52up("none")),
+        WEBKIT_BOX_SHADOW("webkitBoxShadow", "webkit-box-shadow", ff("none")),
 
         /** The style property {@code WebkitBoxShadow}. */
-        WEBKIT_BOX_SHADOW_("WebkitBoxShadow", "webkit-box-shadow", ff52up("none")),
+        WEBKIT_BOX_SHADOW_("WebkitBoxShadow", "webkit-box-shadow", ff("none")),
 
         /** The style property {@code -webkit-box-shadow}. */
-        WEBKIT_BOX_SHADOW__("-webkit-box-shadow", "webkit-box-shadow", ff52up("none")),
+        WEBKIT_BOX_SHADOW__("-webkit-box-shadow", "webkit-box-shadow", ff("none")),
 
         /** The style property {@code webkitBoxSizing}. */
-        WEBKIT_BOX_SIZING("webkitBoxSizing", "webkit-box-sizing", ff52up("content-box")),
+        WEBKIT_BOX_SIZING("webkitBoxSizing", "webkit-box-sizing", ff("content-box")),
 
         /** The style property {@code WebkitBoxSizing}. */
-        WEBKIT_BOX_SIZING_("WebkitBoxSizing", "webkit-box-sizing", ff52up("content-box")),
+        WEBKIT_BOX_SIZING_("WebkitBoxSizing", "webkit-box-sizing", ff("content-box")),
 
         /** The style property {@code -webkit-box-sizing}. */
-        WEBKIT_BOX_SIZING__("-webkit-box-sizing", "webkit-box-sizing", ff52up("content-box")),
+        WEBKIT_BOX_SIZING__("-webkit-box-sizing", "webkit-box-sizing", ff("content-box")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chrome("auto")),
@@ -3292,76 +3301,76 @@ public final class StyleAttributes {
         WEBKIT_COLUMN_BREAK_INSIDE("webkitColumnBreakInside", "webkit-column-break-inside", chrome("auto")),
 
         /** The style property {@code webkitFilter}. */
-        WEBKIT_FILTER("webkitFilter", "webkit-filter", ff52up("none")),
+        WEBKIT_FILTER("webkitFilter", "webkit-filter", ff("none")),
 
         /** The style property {@code WebkitFilter}. */
-        WEBKIT_FILTER_("WebkitFilter", "webkit-filter", ff52up("none")),
+        WEBKIT_FILTER_("WebkitFilter", "webkit-filter", ff("none")),
 
         /** The style property {@code -webkit-filter}. */
-        WEBKIT_FILTER__("-webkit-filter", "webkit-filter", ff52up("none")),
+        WEBKIT_FILTER__("-webkit-filter", "webkit-filter", ff("none")),
 
         /** The style property {@code webkitFlex}. */
-        WEBKIT_FLEX("webkitFlex", "webkit-flex", ff52up("")),
+        WEBKIT_FLEX("webkitFlex", "webkit-flex", ff("")),
 
         /** The style property {@code WebkitFlex}. */
-        WEBKIT_FLEX_("WebkitFlex", "webkit-flex", ff52up("")),
+        WEBKIT_FLEX_("WebkitFlex", "webkit-flex", ff("")),
 
         /** The style property {@code -webkit-flex}. */
-        WEBKIT_FLEX__("-webkit-flex", "webkit-flex", ff52up("")),
+        WEBKIT_FLEX__("-webkit-flex", "webkit-flex", ff("")),
 
         /** The style property {@code webkitFlexBasis}. */
-        WEBKIT_FLEX_BASIS("webkitFlexBasis", "webkit-flex-basis", ff52up("auto")),
+        WEBKIT_FLEX_BASIS("webkitFlexBasis", "webkit-flex-basis", ff("auto")),
 
         /** The style property {@code WebkitFlexBasis}. */
-        WEBKIT_FLEX_BASIS_("WebkitFlexBasis", "webkit-flex-basis", ff52up("auto")),
+        WEBKIT_FLEX_BASIS_("WebkitFlexBasis", "webkit-flex-basis", ff("auto")),
 
         /** The style property {@code -webkit-flex-basis}. */
-        WEBKIT_FLEX_BASIS__("-webkit-flex-basis", "webkit-flex-basis", ff52up("auto")),
+        WEBKIT_FLEX_BASIS__("-webkit-flex-basis", "webkit-flex-basis", ff("auto")),
 
         /** The style property {@code webkitFlexDirection}. */
-        WEBKIT_FLEX_DIRECTION("webkitFlexDirection", "webkit-flex-direction", ff52up("row")),
+        WEBKIT_FLEX_DIRECTION("webkitFlexDirection", "webkit-flex-direction", ff("row")),
 
         /** The style property {@code WebkitFlexDirection}. */
-        WEBKIT_FLEX_DIRECTION_("WebkitFlexDirection", "webkit-flex-direction", ff52up("row")),
+        WEBKIT_FLEX_DIRECTION_("WebkitFlexDirection", "webkit-flex-direction", ff("row")),
 
         /** The style property {@code -webkit-flex-direction}. */
-        WEBKIT_FLEX_DIRECTION__("-webkit-flex-direction", "webkit-flex-direction", ff52up("row")),
+        WEBKIT_FLEX_DIRECTION__("-webkit-flex-direction", "webkit-flex-direction", ff("row")),
 
         /** The style property {@code webkitFlexFlow}. */
-        WEBKIT_FLEX_FLOW("webkitFlexFlow", "webkit-flex-flow", ff52up("")),
+        WEBKIT_FLEX_FLOW("webkitFlexFlow", "webkit-flex-flow", ff("")),
 
         /** The style property {@code WebkitFlexFlow}. */
-        WEBKIT_FLEX_FLOW_("WebkitFlexFlow", "webkit-flex-flow", ff52up("")),
+        WEBKIT_FLEX_FLOW_("WebkitFlexFlow", "webkit-flex-flow", ff("")),
 
         /** The style property {@code -webkit-flex-flow}. */
-        WEBKIT_FLEX_FLOW__("-webkit-flex-flow", "webkit-flex-flow", ff52up("")),
+        WEBKIT_FLEX_FLOW__("-webkit-flex-flow", "webkit-flex-flow", ff("")),
 
         /** The style property {@code webkitFlexGrow}. */
-        WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", ff52up("0")),
+        WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", ff("0")),
 
         /** The style property {@code WebkitFlexGrow}. */
-        WEBKIT_FLEX_GROW_("WebkitFlexGrow", "webkit-flex-grow", ff52up("0")),
+        WEBKIT_FLEX_GROW_("WebkitFlexGrow", "webkit-flex-grow", ff("0")),
 
         /** The style property {@code -webkit-flex-grow}. */
-        WEBKIT_FLEX_GROW__("-webkit-flex-grow", "webkit-flex-grow", ff52up("0")),
+        WEBKIT_FLEX_GROW__("-webkit-flex-grow", "webkit-flex-grow", ff("0")),
 
         /** The style property {@code webkitFlexShrink}. */
-        WEBKIT_FLEX_SHRINK("webkitFlexShrink", "webkit-flex-shrink", ff52up("1")),
+        WEBKIT_FLEX_SHRINK("webkitFlexShrink", "webkit-flex-shrink", ff("1")),
 
         /** The style property {@code WebkitFlexShrink}. */
-        WEBKIT_FLEX_SHRINK_("WebkitFlexShrink", "webkit-flex-shrink", ff52up("1")),
+        WEBKIT_FLEX_SHRINK_("WebkitFlexShrink", "webkit-flex-shrink", ff("1")),
 
         /** The style property {@code -webkit-flex-shrink}. */
-        WEBKIT_FLEX_SHRINK__("-webkit-flex-shrink", "webkit-flex-shrink", ff52up("1")),
+        WEBKIT_FLEX_SHRINK__("-webkit-flex-shrink", "webkit-flex-shrink", ff("1")),
 
         /** The style property {@code webkitFlexWrap}. */
-        WEBKIT_FLEX_WRAP("webkitFlexWrap", "webkit-flex-wrap", ff52up("nowrap")),
+        WEBKIT_FLEX_WRAP("webkitFlexWrap", "webkit-flex-wrap", ff("nowrap")),
 
         /** The style property {@code WebkitFlexWrap}. */
-        WEBKIT_FLEX_WRAP_("WebkitFlexWrap", "webkit-flex-wrap", ff52up("nowrap")),
+        WEBKIT_FLEX_WRAP_("WebkitFlexWrap", "webkit-flex-wrap", ff("nowrap")),
 
         /** The style property {@code -webkit-flex-wrap}. */
-        WEBKIT_FLEX_WRAP__("-webkit-flex-wrap", "webkit-flex-wrap", ff52up("nowrap")),
+        WEBKIT_FLEX_WRAP__("-webkit-flex-wrap", "webkit-flex-wrap", ff("nowrap")),
 
         /** The style property {@code webkitFontSizeDelta}. */
         WEBKIT_FONT_SIZE_DELTA("webkitFontSizeDelta", "webkit-font-size-delta", chrome("")),
@@ -3376,13 +3385,13 @@ public final class StyleAttributes {
         WEBKIT_HYPHENATE_CHARACTER("webkitHyphenateCharacter", "webkit-hyphenate-character", chrome("auto")),
 
         /** The style property {@code webkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CONTENT("webkitJustifyContent", "webkit-justify-content", ff52up("normal")),
+        WEBKIT_JUSTIFY_CONTENT("webkitJustifyContent", "webkit-justify-content", ff("normal")),
 
         /** The style property {@code WebkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ff52up("normal")),
+        WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ff("normal")),
 
         /** The style property {@code -webkit-justify-content}. */
-        WEBKIT_JUSTIFY_CONTENT__("-webkit-justify-content", "webkit-justify-content", ff52up("normal")),
+        WEBKIT_JUSTIFY_CONTENT__("-webkit-justify-content", "webkit-justify-content", ff("normal")),
 
         /** The style property {@code webkitLineBreak}. */
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chrome("auto")),
@@ -3429,7 +3438,7 @@ public final class StyleAttributes {
         WEBKIT_MARGIN_TOP_COLLAPSE("webkitMarginTopCollapse", "webkit-margin-top-collapse", chrome("collapse")),
 
         /** The style property {@code webkitMask}. */
-        WEBKIT_MASK("webkitMask", "webkit-mask", chrome("")),
+        WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff60up("")),
 
         /** The style property {@code webkitMaskBoxImage}. */
         WEBKIT_MASK_BOX_IMAGE("webkitMaskBoxImage", "webkit-mask-box-image", chrome("none")),
@@ -3450,28 +3459,28 @@ public final class StyleAttributes {
         WEBKIT_MASK_BOX_IMAGE_WIDTH("webkitMaskBoxImageWidth", "webkit-mask-box-image-width", chrome("auto")),
 
         /** The style property {@code webkitMaskClip}. */
-        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box")),
+        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box"), ff60up("")),
 
         /** The style property {@code webkitMaskComposite}. */
-        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over")),
+        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over"), ff60up("")),
 
         /** The style property {@code webkitMaskImage}. */
-        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none")),
+        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none"), ff60up("")),
 
         /** The style property {@code webkitMaskOrigin}. */
-        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box")),
+        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box"), ff60up("")),
 
         /** The style property {@code webkitMaskPosition}. */
-        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%")),
+        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%"), ff60up("")),
 
         /** The style property {@code webkitMaskPositionX}. */
-        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%")),
+        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%"), ff60up("")),
 
         /** The style property {@code webkitMaskPositionY}. */
-        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%")),
+        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%"), ff60up("")),
 
         /** The style property {@code webkitMaskRepeat}. */
-        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat")),
+        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat"), ff60up("")),
 
         /** The style property {@code webkitMaskRepeatX}. */
         WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chrome("")),
@@ -3480,7 +3489,7 @@ public final class StyleAttributes {
         WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chrome("")),
 
         /** The style property {@code webkitMaskSize}. */
-        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto")),
+        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto"), ff60up("")),
 
         /** The style property {@code webkitMaxLogicalHeight}. */
         WEBKIT_MAX_LOGICAL_HEIGHT("webkitMaxLogicalHeight", "webkit-max-logical-height", chrome("none")),
@@ -3495,13 +3504,13 @@ public final class StyleAttributes {
         WEBKIT_MIN_LOGICAL_WIDTH("webkitMinLogicalWidth", "webkit-min-logical-width", chrome("0px")),
 
         /** The style property {@code webkitOrder}. */
-        WEBKIT_ORDER("webkitOrder", "webkit-order", ff52up("0")),
+        WEBKIT_ORDER("webkitOrder", "webkit-order", ff("0")),
 
         /** The style property {@code WebkitOrder}. */
-        WEBKIT_ORDER_("WebkitOrder", "webkit-order", ff52up("0")),
+        WEBKIT_ORDER_("WebkitOrder", "webkit-order", ff("0")),
 
         /** The style property {@code -webkit-order}. */
-        WEBKIT_ORDER__("-webkit-order", "webkit-order", ff52up("0")),
+        WEBKIT_ORDER__("-webkit-order", "webkit-order", ff("0")),
 
         /** The style property {@code webkitPaddingAfter}. */
         WEBKIT_PADDING_AFTER("webkitPaddingAfter", "webkit-padding-after", chrome("0px")),
@@ -3516,22 +3525,22 @@ public final class StyleAttributes {
         WEBKIT_PADDING_START("webkitPaddingStart", "webkit-padding-start", chrome("0px")),
 
         /** The style property {@code webkitPerspective}. */
-        WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff52up("none")),
+        WEBKIT_PERSPECTIVE("webkitPerspective", "webkit-perspective", ff("none")),
 
         /** The style property {@code WebkitPerspective}. */
-        WEBKIT_PERSPECTIVE_("WebkitPerspective", "webkit-perspective", ff52up("none")),
+        WEBKIT_PERSPECTIVE_("WebkitPerspective", "webkit-perspective", ff("none")),
 
         /** The style property {@code -webkit-perspective}. */
-        WEBKIT_PERSPECTIVE__("-webkit-perspective", "webkit-perspective", ff52up("none")),
+        WEBKIT_PERSPECTIVE__("-webkit-perspective", "webkit-perspective", ff("none")),
 
         /** The style property {@code webkitPerspectiveOrigin}. */
-        WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
+        WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin", ff("625px 172.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
-        WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin", ff52up("625px 172.5px")),
+        WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin", ff("625px 172.5px")),
 
         /** The style property {@code -webkit-perspective-origin}. */
-        WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin", ff52up("625px 172.5px")),
+        WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin", ff("625px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chrome("")),
@@ -3576,15 +3585,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTextFillColor}. */
         WEBKIT_TEXT_FILL_COLOR("webkitTextFillColor", "webkit-text-fill-color",
-                chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)")),
+                chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
 
         /** The style property {@code WebkitTextFillColor}. */
         WEBKIT_TEXT_FILL_COLOR_("WebkitTextFillColor", "webkit-text-fill-color",
-                ff52up("rgb(0, 0, 0)")),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code -webkit-text-fill-color}. */
         WEBKIT_TEXT_FILL_COLOR__("-webkit-text-fill-color", "webkit-text-fill-color",
-                ff52up("rgb(0, 0, 0)")),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code webkitTextOrientation}. */
         WEBKIT_TEXT_ORIENTATION("webkitTextOrientation", "webkit-text-orientation", chrome("vertical-right")),
@@ -3593,61 +3602,61 @@ public final class StyleAttributes {
         WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chrome("none")),
 
         /** The style property {@code webkitTextSizeAdjust}. */
-        WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
+        WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", ff("auto")),
 
         /** The style property {@code WebkitTextSizeAdjust}. */
-        WEBKIT_TEXT_SIZE_ADJUST_("WebkitTextSizeAdjust", "webkit-text-size-adjust", ff52up("auto")),
+        WEBKIT_TEXT_SIZE_ADJUST_("WebkitTextSizeAdjust", "webkit-text-size-adjust", ff("auto")),
 
         /** The style property {@code -webkit-text-size-adjust}. */
-        WEBKIT_TEXT_SIZE_ADJUST__("-webkit-text-size-adjust", "webkit-text-size-adjust", ff52up("auto")),
+        WEBKIT_TEXT_SIZE_ADJUST__("-webkit-text-size-adjust", "webkit-text-size-adjust", ff("auto")),
 
         /** The style property {@code webkitTextStroke}. */
-        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chrome(""), ff52up("")),
+        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chrome(""), ff("")),
 
         /** The style property {@code WebkitTextStroke}. */
-        WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff52up("")),
+        WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff("")),
 
         /** The style property {@code -webkit-text-stroke}. */
-        WEBKIT_TEXT_STROKE__("-webkit-text-stroke", "webkit-text-stroke", ff52up("")),
+        WEBKIT_TEXT_STROKE__("-webkit-text-stroke", "webkit-text-stroke", ff("")),
 
         /** The style property {@code webkitTextStrokeColor}. */
         WEBKIT_TEXT_STROKE_COLOR("webkitTextStrokeColor", "webkit-text-stroke-color",
-                chrome("rgb(0, 0, 0)"), ff52up("rgb(0, 0, 0)")),
+                chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
 
         /** The style property {@code WebkitTextStrokeColor}. */
         WEBKIT_TEXT_STROKE_COLOR_("WebkitTextStrokeColor", "webkit-text-stroke-color",
-                ff52up("rgb(0, 0, 0)")),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code -webkit-text-stroke-color}. */
         WEBKIT_TEXT_STROKE_COLOR__("-webkit-text-stroke-color", "webkit-text-stroke-color",
-                ff52up("rgb(0, 0, 0)")),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code webkitTextStrokeWidth}. */
-        WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff52up("0px")),
+        WEBKIT_TEXT_STROKE_WIDTH("webkitTextStrokeWidth", "webkit-text-stroke-width", chrome("0px"), ff("0px")),
 
         /** The style property {@code WebkitTextStrokeWidth}. */
-        WEBKIT_TEXT_STROKE_WIDTH_("WebkitTextStrokeWidth", "webkit-text-stroke-width", ff52up("0px")),
+        WEBKIT_TEXT_STROKE_WIDTH_("WebkitTextStrokeWidth", "webkit-text-stroke-width", ff("0px")),
 
         /** The style property {@code -webkit-text-stroke-width}. */
-        WEBKIT_TEXT_STROKE_WIDTH__("-webkit-text-stroke-width", "webkit-text-stroke-width", ff52up("0px")),
+        WEBKIT_TEXT_STROKE_WIDTH__("-webkit-text-stroke-width", "webkit-text-stroke-width", ff("0px")),
 
         /** The style property {@code webkitTransform}. */
-        WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff52up("none")),
+        WEBKIT_TRANSFORM("webkitTransform", "webkit-transform", ff("none")),
 
         /** The style property {@code WebkitTransform}. */
-        WEBKIT_TRANSFORM_("WebkitTransform", "webkit-transform", ff52up("none")),
+        WEBKIT_TRANSFORM_("WebkitTransform", "webkit-transform", ff("none")),
 
         /** The style property {@code -webkit-transform}. */
-        WEBKIT_TRANSFORM__("-webkit-transform", "webkit-transform", ff52up("none")),
+        WEBKIT_TRANSFORM__("-webkit-transform", "webkit-transform", ff("none")),
 
         /** The style property {@code webkitTransformOrigin}. */
-        WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
+        WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin", ff("625px 172.5px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
-        WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin", ff52up("625px 172.5px")),
+        WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin", ff("625px 172.5px")),
 
         /** The style property {@code -webkit-transform-origin}. */
-        WEBKIT_TRANSFORM_ORIGIN__("-webkit-transform-origin", "webkit-transform-origin", ff52up("625px 172.5px")),
+        WEBKIT_TRANSFORM_ORIGIN__("-webkit-transform-origin", "webkit-transform-origin", ff("625px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chrome("")),
@@ -3659,61 +3668,61 @@ public final class StyleAttributes {
         WEBKIT_TRANSFORM_ORIGIN_Z("webkitTransformOriginZ", "webkit-transform-origin-z", chrome("")),
 
         /** The style property {@code webkitTransformStyle}. */
-        WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", ff52up("flat")),
+        WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", ff("flat")),
 
         /** The style property {@code WebkitTransformStyle}. */
-        WEBKIT_TRANSFORM_STYLE_("WebkitTransformStyle", "webkit-transform-style", ff52up("flat")),
+        WEBKIT_TRANSFORM_STYLE_("WebkitTransformStyle", "webkit-transform-style", ff("flat")),
 
         /** The style property {@code -webkit-transform-style}. */
-        WEBKIT_TRANSFORM_STYLE__("-webkit-transform-style", "webkit-transform-style", ff52up("flat")),
+        WEBKIT_TRANSFORM_STYLE__("-webkit-transform-style", "webkit-transform-style", ff("flat")),
 
         /** The style property {@code webkitTransition}. */
-        WEBKIT_TRANSITION("webkitTransition", "webkit-transition", ff52up("")),
+        WEBKIT_TRANSITION("webkitTransition", "webkit-transition", ff("")),
 
         /** The style property {@code WebkitTransition}. */
-        WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ff52up("")),
+        WEBKIT_TRANSITION_("WebkitTransition", "webkit-transition", ff("")),
 
         /** The style property {@code -webkit-transition}. */
-        WEBKIT_TRANSITION__("-webkit-transition", "webkit-transition", ff52up("")),
+        WEBKIT_TRANSITION__("-webkit-transition", "webkit-transition", ff("")),
 
         /** The style property {@code webkitTransitionDelay}. */
-        WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
+        WEBKIT_TRANSITION_DELAY("webkitTransitionDelay", "webkit-transition-delay", ff("0s")),
 
         /** The style property {@code WebkitTransitionDelay}. */
-        WEBKIT_TRANSITION_DELAY_("WebkitTransitionDelay", "webkit-transition-delay", ff52up("0s")),
+        WEBKIT_TRANSITION_DELAY_("WebkitTransitionDelay", "webkit-transition-delay", ff("0s")),
 
         /** The style property {@code -webkit-transition-delay}. */
-        WEBKIT_TRANSITION_DELAY__("-webkit-transition-delay", "webkit-transition-delay", ff52up("0s")),
+        WEBKIT_TRANSITION_DELAY__("-webkit-transition-delay", "webkit-transition-delay", ff("0s")),
 
         /** The style property {@code webkitTransitionDuration}. */
-        WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
+        WEBKIT_TRANSITION_DURATION("webkitTransitionDuration", "webkit-transition-duration", ff("0s")),
 
         /** The style property {@code WebkitTransitionDuration}. */
-        WEBKIT_TRANSITION_DURATION_("WebkitTransitionDuration", "webkit-transition-duration", ff52up("0s")),
+        WEBKIT_TRANSITION_DURATION_("WebkitTransitionDuration", "webkit-transition-duration", ff("0s")),
 
         /** The style property {@code -webkit-transition-duration}. */
-        WEBKIT_TRANSITION_DURATION__("-webkit-transition-duration", "webkit-transition-duration", ff52up("0s")),
+        WEBKIT_TRANSITION_DURATION__("-webkit-transition-duration", "webkit-transition-duration", ff("0s")),
 
         /** The style property {@code webkitTransitionProperty}. */
-        WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff52up("all")),
+        WEBKIT_TRANSITION_PROPERTY("webkitTransitionProperty", "webkit-transition-property", ff("all")),
 
         /** The style property {@code WebkitTransitionProperty}. */
-        WEBKIT_TRANSITION_PROPERTY_("WebkitTransitionProperty", "webkit-transition-property", ff52up("all")),
+        WEBKIT_TRANSITION_PROPERTY_("WebkitTransitionProperty", "webkit-transition-property", ff("all")),
 
         /** The style property {@code -webkit-transition-property}. */
-        WEBKIT_TRANSITION_PROPERTY__("-webkit-transition-property", "webkit-transition-property", ff52up("all")),
+        WEBKIT_TRANSITION_PROPERTY__("-webkit-transition-property", "webkit-transition-property", ff("all")),
 
         /** The style property {@code webkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION("webkitTransitionTimingFunction", "webkit-transition-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code WebkitTransitionTimingFunction}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION_("WebkitTransitionTimingFunction", "webkit-transition-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code -webkit-transition-timing-function}. */
         WEBKIT_TRANSITION_TIMING_FUNCTION__("-webkit-transition-timing-function", "webkit-transition-timing-function",
-                ff52up("ease")),
+                ff("ease")),
 
         /** The style property {@code webkitUserDrag}. */
         WEBKIT_USER_DRAG("webkitUserDrag", "webkit-user-drag", chrome("auto")),
@@ -3722,13 +3731,13 @@ public final class StyleAttributes {
         WEBKIT_USER_MODIFY("webkitUserModify", "webkit-user-modify", chrome("read-only")),
 
         /** The style property {@code webkitUserSelect}. */
-        WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", ff52up("auto")),
+        WEBKIT_USER_SELECT("webkitUserSelect", "webkit-user-select", ff("auto")),
 
         /** The style property {@code WebkitUserSelect}. */
-        WEBKIT_USER_SELECT_("WebkitUserSelect", "webkit-user-select", ff52up("auto")),
+        WEBKIT_USER_SELECT_("WebkitUserSelect", "webkit-user-select", ff("auto")),
 
         /** The style property {@code -webkit-user-select}. */
-        WEBKIT_USER_SELECT__("-webkit-user-select", "webkit-user-select", ff52up("auto")),
+        WEBKIT_USER_SELECT__("-webkit-user-select", "webkit-user-select", ff("auto")),
 
         /** The style property {@code webkitWritingMode}. */
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chrome("horizontal-tb")),

@@ -94,9 +94,9 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Firefox 60 ESR.
-     * @since 2,.32
+     * @since 2.32
      */
-    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(45, "FF60");
+    public static final BrowserVersion FIREFOX_60 = new BrowserVersion(60, "FF60");
 
     /**
      * Firefox 52 ESR.
