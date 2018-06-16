@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -132,7 +132,7 @@ public class MessageEventTest extends WebDriverTestCase {
             FF = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
-    @NotYetImplemented(FF52)
+    @NotYetImplemented(FF)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
