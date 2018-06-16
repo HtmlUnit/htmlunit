@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.htmlunit.html.HtmlOutput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -66,7 +67,7 @@ public class HTMLOutputElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, FF60})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
