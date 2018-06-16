@@ -788,7 +788,7 @@ public enum BrowserVersionFeatures {
     JS_DOMPARSER_PARSERERROR_ON_ERROR,
 
     /** DOMTokenList returns false instead of throwing an exception when receiver is blank. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     JS_DOMTOKENLIST_CONTAINS_RETURNS_FALSE_FOR_BLANK,
 
     /** DOMTokenList uses an enhanced set of whitespace chars. */
@@ -800,7 +800,7 @@ public enum BrowserVersionFeatures {
     JS_DOMTOKENLIST_GET_NULL_IF_OUTSIDE,
 
     /** DOMTokenList ignores duplicates when determining the length. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES,
 
     /** DOMTokenList removed all whitespace chars during add. */
@@ -812,7 +812,7 @@ public enum BrowserVersionFeatures {
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
     /** DOMTokenList removed all whitespace chars during remove. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE,
 
     /** Javascript property function {@code delete} throws an exception if the given count is negative. */
