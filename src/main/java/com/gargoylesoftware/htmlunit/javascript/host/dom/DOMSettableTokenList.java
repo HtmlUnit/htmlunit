@@ -15,8 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,14 +24,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code DOMSettableTokenList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({FF60, IE, EDGE})
+@JsxClass({IE, EDGE})
 public class DOMSettableTokenList extends DOMTokenList {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({FF, EDGE})
+    @JsxConstructor(EDGE)
     public DOMSettableTokenList() {
     }
 }
