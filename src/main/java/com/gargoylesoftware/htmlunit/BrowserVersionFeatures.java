@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
@@ -1302,7 +1303,7 @@ public enum BrowserVersionFeatures {
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
     /** Types arrays can be constructed with {@code null}. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     JS_TYPED_ARRAYS_NULL,
 
     /** Setting the property align to arbitrary values is allowed. */
