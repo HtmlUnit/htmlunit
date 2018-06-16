@@ -157,7 +157,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSValueList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
-import com.gargoylesoftware.htmlunit.javascript.host.css.MozCSSKeyframesRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
@@ -517,8 +516,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozCSSKeyframesRule.class,
-        mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
+        MouseWheelEvent.class, mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
         MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class,
