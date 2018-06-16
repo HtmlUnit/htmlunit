@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CSS_MOZ_CSS_KEYFRAMES_RULE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
@@ -57,17 +56,5 @@ public class CSSKeyframesRule extends CSSRule {
     @JsxGetter
     public short getType() {
         return KEYFRAMES_RULE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if ((String.class.equals(hint) || hint == null)
-                && getBrowserVersion().hasFeature(JS_CSS_MOZ_CSS_KEYFRAMES_RULE)) {
-            return "[object MozCSSKeyframesRule]";
-        }
-        return super.getDefaultValue(hint);
     }
 }

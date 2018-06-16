@@ -471,10 +471,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
-        if (browserVersion == BrowserVersion.FIREFOX_60) {
+        if (browserVersion == BrowserVersion.FIREFOX_52) {
             return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
         }
-        else if (browserVersion == BrowserVersion.FIREFOX_52) {
+        else if (browserVersion == BrowserVersion.FIREFOX_60) {
             return BrowserType.FIREFOX;
         }
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {

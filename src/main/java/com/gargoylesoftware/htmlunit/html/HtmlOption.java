@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSE
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_UP_FOR_SELECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_PREVENT_DISABLED;
 
 import java.io.IOException;
@@ -110,17 +109,13 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param shiftKey {@code true} if SHIFT is pressed
      * @param ctrlKey {@code true} if CTRL is pressed
      */
-    private void setSelected(boolean selected, final boolean invokeOnFocus, final boolean isClick,
+    private void setSelected(final boolean selected, final boolean invokeOnFocus, final boolean isClick,
             final boolean shiftKey, final boolean ctrlKey) {
         if (selected == isSelected()) {
             return;
         }
         final HtmlSelect select = getEnclosingSelect();
         if (select != null) {
-            if (hasFeature(HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED)
-                    && !select.isMultipleSelectEnabled() && select.getOptionSize() == 1) {
-                selected = true;
-            }
             select.setSelectedAttribute(this, selected, invokeOnFocus, shiftKey, ctrlKey, isClick);
             return;
         }

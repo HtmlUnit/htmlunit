@@ -20,12 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OVERRIDE_MIME_TYPE_BEFORE_SEND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -515,13 +513,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             async = ScriptRuntime.toBoolean(asyncParam);
         }
 
-        if (!async
-                && isWithCredentials()
-                && getBrowserVersion().hasFeature(XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION)) {
-            throw Context.reportRuntimeError(
-                            "open() in sync mode is not possible because 'withCredentials' is set to true");
-        }
-
         final String url = Context.toString(urlParam);
 
         // (URL + Method + User + Password) become a WebRequest instance.
@@ -960,11 +951,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      */
     @JsxSetter
     public void setWithCredentials(final boolean withCredentials) {
-        if (!async_ && state_ != UNSENT) {
-            if (getBrowserVersion().hasFeature(XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION)) {
-                throw Context.reportRuntimeError("Property 'withCredentials' not writable in sync mode.");
-            }
-        }
         withCredentials_ = withCredentials;
     }
 

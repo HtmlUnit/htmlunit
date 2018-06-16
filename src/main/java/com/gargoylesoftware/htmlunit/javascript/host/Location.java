@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_H
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_EMPTY_PATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -432,9 +431,6 @@ public class Location extends SimpleScriptable {
     @JsxGetter
     public String getPathname() {
         if (WebClient.URL_ABOUT_BLANK == getUrl()) {
-            if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_EMPTY_PATH)) {
-                return "";
-            }
             if (getBrowserVersion().hasFeature(URL_ABOUT_BLANK_HAS_BLANK_PATH)) {
                 return "blank";
             }

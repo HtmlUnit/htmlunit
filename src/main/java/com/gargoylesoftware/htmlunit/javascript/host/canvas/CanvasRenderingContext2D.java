@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -333,9 +332,6 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             }
         }
         catch (final IOException ioe) {
-            if (getBrowserVersion().hasFeature(JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG)) {
-                throw Context.throwAsScriptRuntimeEx(ioe);
-            }
         }
     }
 
