@@ -243,8 +243,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseScrollEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MozContactChangeEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MozSettingsEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.OfflineAudioCompletionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PageTransitionEvent;
@@ -375,7 +373,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidat
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.webkitRTCPeerConnection;
-import com.gargoylesoftware.htmlunit.javascript.host.moz.MozPowerManager;
 import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentAddress;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentRequest;
@@ -520,9 +517,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozContactChangeEvent.class, MozCSSKeyframesRule.class,
-        MozPowerManager.class, mozRTCIceCandidate.class,
-        mozRTCPeerConnection.class, mozRTCSessionDescription.class, MozSettingsEvent.class,
+        MouseWheelEvent.class, MozCSSKeyframesRule.class,
+        mozRTCIceCandidate.class, mozRTCPeerConnection.class, mozRTCSessionDescription.class,
         MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class,
