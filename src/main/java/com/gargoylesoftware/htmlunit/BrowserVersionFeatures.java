@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -49,10 +48,6 @@ public enum BrowserVersionFeatures {
     /** Ignore target when {@code href} is a javascript snippet. */
     @BrowserFeature(CHROME)
     ANCHOR_IGNORE_TARGET_FOR_JS_HREF,
-
-    /** Is the default display style of Applet is 'inline-block'. */
-    @BrowserFeature(FF60)
-    APPLET_INLINE_BLOCK,
 
     /** Background image is 'initial'. */
     @BrowserFeature(CHROME)
@@ -432,10 +427,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     HTMLLINK_CHECK_TYPE_FOR_STYLESHEET,
 
-    /** If the single select has exact one option, this options gets never deselected. */
-    @BrowserFeature(FF60)
-    HTMLOPTION_EXACT_ONE_OPTION_GETS_NERVER_DESELECTED,
-
     /** */
     @BrowserFeature(IE)
     HTMLOPTION_PREVENT_DISABLED,
@@ -607,10 +598,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_CANVAS_DATA_URL_IE_PNG,
 
-    /** draw for canvas throws an error if no image available. */
-    @BrowserFeature(FF60)
-    JS_CANVAS_DRAW_THROWS_FOR_MISSING_IMG,
-
     /** Do not allow invalid clear values. */
     @BrowserFeature(IE)
     JS_CLEAR_RESTRICT,
@@ -642,10 +629,6 @@ public enum BrowserVersionFeatures {
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature(FF)
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
-
-    /** Uses {@code MozCSSKeyframesRule}. */
-    @BrowserFeature(FF60)
-    JS_CSS_MOZ_CSS_KEYFRAMES_RULE,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({CHROME, FF})
@@ -1235,10 +1218,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF, EDGE})
     JS_SYMBOL,
 
-    /** Symbol support is limited in FF60. */
-    @BrowserFeature(FF60)
-    JS_SYMBOL_FF60,
-
     /** The width cell height does not return negative values. */
     @BrowserFeature(IE)
     JS_TABLE_CELL_HEIGHT_DOES_NOT_RETURN_NEGATIVE_VALUES,
@@ -1290,7 +1269,7 @@ public enum BrowserVersionFeatures {
     /** Setting the property cols throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets cols to 0.
      */
-    @BrowserFeature({IE, FF60})
+    @BrowserFeature(IE)
     JS_TEXT_AREA_SET_COLS_THROWS_EXCEPTION,
 
     /** Setting the property {@code maxLength} throws an exception, if the provided value is less than 0. */
@@ -1304,7 +1283,7 @@ public enum BrowserVersionFeatures {
     /** Setting the property rows throws an exception, if the provided value is not convertible into an integer.
      * FF ignores the provided value in this case and sets rows to 0.
      */
-    @BrowserFeature({IE, FF60})
+    @BrowserFeature(IE)
     JS_TEXT_AREA_SET_ROWS_THROWS_EXCEPTION,
 
     /** Setting the value processes null as null value. */
@@ -1323,7 +1302,7 @@ public enum BrowserVersionFeatures {
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
     /** Types arrays can be constructed with {@code null}. */
-    @BrowserFeature({CHROME, FF60})
+    @BrowserFeature(CHROME)
     JS_TYPED_ARRAYS_NULL,
 
     /** Setting the property align to arbitrary values is allowed. */
@@ -1534,13 +1513,6 @@ public enum BrowserVersionFeatures {
     URL_ABOUT_BLANK_HAS_BLANK_PATH,
 
     /**
-     * Indicates, that the pathname for the url {@code about:blank} is empty;
-     * instead of '/blank'.
-     */
-    @BrowserFeature(FF60)
-    URL_ABOUT_BLANK_HAS_EMPTY_PATH,
-
-    /**
      * Indicates, that the browser supports username and password as
      * part of the url (e.g. http://john.smith:secret@localhost).
      */
@@ -1577,7 +1549,7 @@ public enum BrowserVersionFeatures {
     XHR_IGNORE_PORT_FOR_SAME_ORIGIN,
 
     /** ProgressEvent.lengthComputable is true. */
-    @BrowserFeature({FF60, IE})
+    @BrowserFeature(IE)
     XHR_LENGTH_COMPUTABLE,
 
     /** A cross origin request to {@code about:blank} is not allowed. */
@@ -1587,10 +1559,6 @@ public enum BrowserVersionFeatures {
     /** Indicates if an empty url is allowed as url param for the open method. */
     @BrowserFeature({CHROME, FF})
     XHR_OPEN_ALLOW_EMTPY_URL,
-
-    /** Indicates that open() throws an exception in sync mode if 'withCredentials' is set to true. */
-    @BrowserFeature(FF60)
-    XHR_OPEN_WITHCREDENTIALS_TRUE_IN_SYNC_EXCEPTION,
 
     /** Indicates that method overrideMimeType throws if msg was already sent. */
     @BrowserFeature({CHROME, FF52, IE})
@@ -1608,13 +1576,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL,
 
-    /**
-     * Indicates that the property <code>withCredentials</code> is not writable for sync requests.
-     * Setting the property throws an exception.
-     */
-    @BrowserFeature(FF60)
-    XHR_WITHCREDENTIALS_NOT_WRITEABLE_IN_SYNC_EXCEPTION,
-
     /** Indicates that the XPath attribute is case sensitive. */
     @BrowserFeature(CHROME)
     XPATH_ATTRIBUTE_CASE_SENSITIVE,
@@ -1622,5 +1583,4 @@ public enum BrowserVersionFeatures {
     /** Indicates that the 'SelectionNamespaces' property is supported by XPath expressions. */
     @BrowserFeature({IE, CHROME})
     XPATH_SELECTION_NAMESPACES,
-
 }
