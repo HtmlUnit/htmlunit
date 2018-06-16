@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.performance;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -25,14 +26,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code PerformanceNavigationTiming}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({CHROME, IE})
+@JsxClass({CHROME, FF60, IE})
 public class PerformanceNavigationTiming extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor(CHROME)
+    @JsxConstructor({CHROME, FF60})
     public PerformanceNavigationTiming() {
     }
 }

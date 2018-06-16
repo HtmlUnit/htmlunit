@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -37,8 +38,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  *
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({CHROME, IE, EDGE})
+@JsxClass({CHROME, FF60, IE, EDGE})
 public class PointerEvent extends MouseEvent {
 
     private int pointerId_;
@@ -64,7 +66,7 @@ public class PointerEvent extends MouseEvent {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({CHROME, EDGE})
+    @JsxConstructor({CHROME, FF60, EDGE})
     public static Scriptable jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
