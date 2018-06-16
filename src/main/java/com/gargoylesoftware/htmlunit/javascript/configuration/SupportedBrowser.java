@@ -33,7 +33,7 @@ public enum SupportedBrowser {
     /** All versions of Firefox. */
     FF,
 
-    /** Firefox 45. */
+    /** Firefox 60. */
     FF60,
 
     /** Firefox 52. */

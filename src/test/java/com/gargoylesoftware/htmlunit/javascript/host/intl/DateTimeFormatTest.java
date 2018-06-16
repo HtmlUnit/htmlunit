@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.intl;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
+import org.apache.commons.lang3.CharUtils;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -62,7 +64,23 @@ public class DateTimeFormatTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        try {
+            loadPageWithAlerts2(html);
+        }
+        catch (final ComparisonFailure e) {
+            final String msg = e.getMessage();
+            for (int i = 0; i < msg.length(); i++) {
+                final char c = msg.charAt(i);
+                if (CharUtils.isAscii(c)) {
+                    System.out.print(c);
+                }
+                else {
+                    System.out.print(CharUtils.unicodeEscaped(c));
+                }
+            }
+            System.out.println();
+            throw e;
+        }
     }
 
     /**
@@ -89,8 +107,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u5e73\u621024/12/20",
-            FF = "24/12/20",
+    @Alerts(DEFAULT = "24/12/20",
             IE = "\u200e\u5e73\u6210\u200e\u0020\u200e24\u200e\u5e74\u200e12\u200e\u6708\u200e20\u200e\u65e5")
     public void format_ja_jp_u_ca_japanese() throws Exception {
         test("new Intl.DateTimeFormat('ja-JP-u-ca-japanese').format(date)");
@@ -103,6 +120,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20.12.2012",
+            FF60 = "12/20/2012",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2012")
     public void format_ban() throws Exception {
         test("new Intl.DateTimeFormat('ban').format(date)");
@@ -222,7 +240,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0627\u0644\u062E\u0645\u064A\u0633\u060C \u0662\u0660 \u062F\u064A\u0633\u0645\u0628\u0631"
+    @Alerts(DEFAULT = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
+                + " \u0662\u0660\u0661\u0662 \u0645\u064a\u0644\u0627\u062f\u064a"
+                + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
+            FF52 = "\u0627\u0644\u062E\u0645\u064A\u0633\u060C \u0662\u0660 \u062F\u064A\u0633\u0645\u0628\u0631"
                 + "\u060C \u0662\u0660\u0661\u0662 \u0645\u064A\u0644\u0627\u062F\u064A \u0664:\u0660\u0660:\u0660"
                 + "\u0660 \u0635",
             IE = "\u200F\u0627\u0644\u062E\u0645\u064A\u0633\u200F,"
@@ -242,6 +263,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Thursday, December 20, 2012, GMT",
             CHROME = "Thursday, December 20, 2012, UTC",
+            FF60 = "Thursday, December 20, 2012, UTC",
             IE = "\u200EThursday\u200E, \u200EDecember\u200E \u200E20\u200E, \u200E2012")
     @NotYetImplemented
     public void format_utc_short() throws Exception {
@@ -1367,7 +1389,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF52 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt').format(date)");
@@ -1378,7 +1400,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2012-12-20",
-            FF52 = "20/12/2012",
+            FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt-MT').format(date)");
@@ -1399,7 +1421,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
-            FF60 = "20-12-2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_nl_be() throws Exception {
         test("new Intl.DateTimeFormat('nl-BE').format(date)");
