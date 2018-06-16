@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -26,39 +26,39 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass(FF52)
+@JsxClass(FF)
 public class SpeechSynthesisErrorEvent extends SimpleScriptable {
 
     /** Constant. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final int ALT_MASK = 0x1;
 
     /** Constant. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final int CONTROL_MASK = 0x2;
 
     /** Constant. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final int SHIFT_MASK = 0x4;
 
     /** Constant. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final int META_MASK = 0x8;
 
     /** The first event phase: the capturing phase. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final short CAPTURING_PHASE = 1;
 
     /** The second event phase: at the event target. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final short AT_TARGET = 2;
 
     /** The third (and final) event phase: the bubbling phase. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final short BUBBLING_PHASE = 3;
 
     /** No event phase. */
-    @JsxConstant(FF52)
+    @JsxConstant(FF)
     public static final short NONE = 0;
 
     /**

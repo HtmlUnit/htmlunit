@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
-
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
@@ -24,8 +21,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  * A JavaScript object for {@code SVGDocument}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(FF60)
 public class SVGDocument extends Document {
 
     /**

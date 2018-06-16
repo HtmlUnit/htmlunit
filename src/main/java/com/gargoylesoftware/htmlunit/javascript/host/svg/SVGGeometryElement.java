@@ -16,7 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,9 +28,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * A JavaScript object for {@code SVGGeometryElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-@JsxClass(isJSObject = false, value = {IE, FF, EDGE})
+@JsxClass({CHROME, FF60})
+@JsxClass(isJSObject = false, value = {IE, FF52, EDGE})
 public class SVGGeometryElement extends SVGGraphicsElement {
 
     /**
