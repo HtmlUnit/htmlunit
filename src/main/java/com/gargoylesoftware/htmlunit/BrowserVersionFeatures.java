@@ -991,7 +991,7 @@ public enum BrowserVersionFeatures {
     JS_INTL_V8_BREAK_ITERATOR,
 
     /** Supports Iterator and StopIteration. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF52)
     JS_Iterator,
 
     /** Property form for label always returns null. */
