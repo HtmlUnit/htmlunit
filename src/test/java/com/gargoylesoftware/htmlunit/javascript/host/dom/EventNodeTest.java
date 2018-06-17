@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -134,7 +134,7 @@ public class EventNodeTest extends WebDriverTestCase {
             CHROME = "mousedown label,mouseup label,click label,focus text,click text,",
             FF60 = "mousedown label,mouseup label,click label,focus text,click text,",
             IE = "mousedown label,mouseup label,click label,click text,focus text,")
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF52, IE})
     public void clickEventsLabel() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
