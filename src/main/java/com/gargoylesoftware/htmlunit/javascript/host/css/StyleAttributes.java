@@ -212,11 +212,12 @@ public final class StyleAttributes {
         BACKGROUND_CLIP_("background-clip", "background-clip", ff("border-box")),
 
         /** The style property {@code backgroundColor}. */
-        BACKGROUND_COLOR("backgroundColor", "background-color", chrome("rgba(0, 0, 0, 0)"), ff("transparent"),
+        BACKGROUND_COLOR("backgroundColor", "background-color", chrome("rgba(0, 0, 0, 0)"),
+                ffBelow60("transparent"), ff60up("rgba(0, 0, 0, 0)"),
                 ie("transparent")),
 
         /** The style property {@code background-color}. */
-        BACKGROUND_COLOR_("background-color", "background-color", ff("transparent")),
+        BACKGROUND_COLOR_("background-color", "background-color", ffBelow60("transparent"), ff60up("rgba(0, 0, 0, 0)")),
 
         /** The style property {@code backgroundImage}. */
         BACKGROUND_IMAGE("backgroundImage", "background-image", chrome("none"), ff("none"), ie("none")),
@@ -390,10 +391,11 @@ public final class StyleAttributes {
         BORDER_IMAGE_("border-image", "border-image", ff("")),
 
         /** The style property {@code borderImageOutset}. */
-        BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ff("0 0 0 0"), ie("0"), chrome("0px")),
+        BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ie("0"), chrome("0px"),
+                ffBelow60("0 0 0 0"), ff60up("0")),
 
         /** The style property {@code border-image-outset}. */
-        BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ff("0 0 0 0")),
+        BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ffBelow60("0 0 0 0"), ff60up("0")),
 
         /** The style property {@code borderImageRepeat}. */
         BORDER_IMAGE_REPEAT("borderImageRepeat", "border-image-repeat",
@@ -403,11 +405,12 @@ public final class StyleAttributes {
         BORDER_IMAGE_REPEAT_("border-image-repeat", "border-image-repeat", ff("stretch stretch")),
 
         /** The style property {@code borderImageSlice}. */
-        BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice",
-                ff("100% 100% 100% 100%"), ie("100%"), chrome("100%")),
+        BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice", ie("100%"), chrome("100%"),
+                ffBelow60("100% 100% 100% 100%"), ff60up("100%")),
 
         /** The style property {@code border-image-slice}. */
-        BORDER_IMAGE_SLICE_("border-image-slice", "border-image-slice", ff("100% 100% 100% 100%")),
+        BORDER_IMAGE_SLICE_("border-image-slice", "border-image-slice",
+                ffBelow60("100% 100% 100% 100%"), ff60up("100%")),
 
         /** The style property {@code borderImageSource}. */
         BORDER_IMAGE_SOURCE("borderImageSource", "border-image-source", ff("none"), ie("none"), chrome("none")),
@@ -416,10 +419,11 @@ public final class StyleAttributes {
         BORDER_IMAGE_SOURCE_("border-image-source", "border-image-source", ff("none")),
 
         /** The style property {@code borderImageWidth}. */
-        BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width", ff("1 1 1 1"), ie("1"), chrome("1")),
+        BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width", ie("1"), chrome("1"),
+                ffBelow60("1 1 1 1"), ff60up("1")),
 
         /** The style property {@code border-image-width}. */
-        BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff("1 1 1 1")),
+        BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ffBelow60("1 1 1 1"), ff60up("1")),
 
         /** The style property {@code borderInlineEnd}. */
         BORDER_INLINE_END("borderInlineEnd", "border-inline-end", ff("")),
@@ -620,7 +624,10 @@ public final class StyleAttributes {
         CAPTION_SIDE_("caption-side", "caption-side", ff("top")),
 
         /** The style property {@code caretColor}. */
-        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)"), ff60up("")),
+        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)"), ff60up("rgb(0, 0, 0)")),
+
+        /** The style property {@code caret-color}. */
+        CARET_COLOR_("caret-color", "caret-color", ff60up("rgb(0, 0, 0)")),
 
         /** The style property {@code clear}. */
         CLEAR("clear", "clear", chrome("none"), ff("none"), ie("none")),
@@ -678,10 +685,11 @@ public final class StyleAttributes {
         COLUMN_FILL_("column-fill", "column-fill", ff("balance")),
 
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ff("16px"), ie("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ie("normal"),
+                ffBelow60("16px"), ff60up("normal")),
 
         /** The style property {@code column-gap}. */
-        COLUMN_GAP_("column-gap", "column-gap", ff("16px")),
+        COLUMN_GAP_("column-gap", "column-gap", ffBelow60("16px"), ff60up("normal")),
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -724,7 +732,7 @@ public final class StyleAttributes {
         CONTAIN("contain", "contain", chrome("none")),
 
         /** The style property {@code content}. */
-        CONTENT("content", "content", ie("normal"), chrome(""), ff("none")),
+        CONTENT("content", "content", ie("normal"), chrome("normal"), ff("none")),
 
         /** The style property {@code counterIncrement}. */
         COUNTER_INCREMENT("counterIncrement", "counter-increment", chrome("none"), ff("none"), ie("none")),
@@ -1299,6 +1307,66 @@ public final class StyleAttributes {
         /** The style property {@code mask}. */
         MASK("mask", "mask", ff("none"), ie("none"), chrome("none")),
 
+        /** The style property {@code maskClip}. */
+        MASK_CLIP("maskClip", "mask-clip", ff60up("border-box")),
+
+        /** The style property {@code mask-clip}. */
+        MASK_CLIP_("mask-clip", "mask-clip", ff60up("border-box")),
+
+        /** The style property {@code maskComposite}. */
+        MASK_COMPOSITE("maskComposite", "mask-composite", ff60up("add")),
+
+        /** The style property {@code mask-composite}. */
+        MASK_COMPOSITE_("mask-composite", "mask-composite", ff60up("add")),
+
+        /** The style property {@code maskImage}. */
+        MASK_IMAGE("maskImage", "mask-image", ff60up("none")),
+
+        /** The style property {@code mask-image}. */
+        MASK_IMAGE_("mask-image", "mask-image", ff60up("none")),
+
+        /** The style property {@code maskMode}. */
+        MASK_MODE("maskMode", "mask-mode", ff60up("match-source")),
+
+        /** The style property {@code mask-mode}. */
+        MASK_MODE_("mask-mode", "mask-mode", ff60up("match-source")),
+
+        /** The style property {@code maskOrigin}. */
+        MASK_ORIGIN("maskOrigin", "mask-origin", ff60up("border-box")),
+
+        /** The style property {@code mask-origin}. */
+        MASK_ORIGIN_("mask-origin", "mask-origin", ff60up("border-box")),
+
+        /** The style property {@code maskPosition}. */
+        MASK_POSITION("maskPosition", "mask-position", ff60up("0% 0%")),
+
+        /** The style property {@code mask-position}. */
+        MASK_POSITION_("mask-position", "mask-position", ff60up("0% 0%")),
+
+        /** The style property {@code maskPositionX}. */
+        MASK_POSITION_X("maskPositionX", "mask-position-x", ff60up("0%")),
+
+        /** The style property {@code mask-position-x}. */
+        MASK_POSITION_X_("mask-position-x", "mask-position-x", ff60up("0%")),
+
+        /** The style property {@code maskPositionY}. */
+        MASK_POSITION_Y("maskPositionY", "mask-position-y", ff60up("0%")),
+
+        /** The style property {@code mask-position-y}. */
+        MASK_POSITION_Y_("mask-position-y", "mask-position-y", ff60up("0%")),
+
+        /** The style property {@code maskRepeat}. */
+        MASK_REPEAT("maskRepeat", "mask-repeat", ff60up("repeat")),
+
+        /** The style property {@code mask-repeat}. */
+        MASK_REPEAT_("mask-repeat", "mask-repeat", ff60up("repeat")),
+
+        /** The style property {@code maskSize}. */
+        MASK_SIZE("maskSize", "mask-size", ff60up("auto auto")),
+
+        /** The style property {@code mask-size}. */
+        MASK_SIZE_("mask-size", "mask-size", ff60up("auto auto")),
+
         /** The style property {@code maskType}. */
         MASK_TYPE("maskType", "mask-type", ff("luminance"), chrome("luminance")),
 
@@ -1608,10 +1676,10 @@ public final class StyleAttributes {
         MOZ_COLUMN_FILL__("-moz-column-fill", "-moz-column-fill", ff("balance")),
 
         /** The style property {@code MozColumnGap}. */
-        MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("16px")),
+        MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ffBelow60("16px"), ff60up("normal")),
 
         /** The style property {@code -moz-column-gap}. */
-        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ff("16px")),
+        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ffBelow60("16px"), ff60up("normal")),
 
         /** The style property {@code MozColumnRule}. */
         MOZ_COLUMN_RULE("MozColumnRule", "-moz-column-rule", ff("")),
@@ -2291,11 +2359,20 @@ public final class StyleAttributes {
         /** The style property {@code overscrollBehavior}. */
         OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto auto"), ff60up("")),
 
+        /** The style property {@code overscroll-behavior}. */
+        OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff60up("")),
+
         /** The style property {@code overscrollBehaviorX}. */
-        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior_x", chrome("auto"), ff60up("")),
+        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior-x", chrome("auto"), ff60up("auto")),
+
+        /** The style property {@code overscroll-behavior-x}. */
+        OVERSCROLL_BEHAVIOR_X_("overscroll-behavior-x", "overscroll-behavior-x", ff60up("auto")),
 
         /** The style property {@code overscrollBehaviorY}. */
-        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior_y", chrome("auto"), ff60up("")),
+        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior-y", chrome("auto"), ff60up("auto")),
+
+        /** The style property {@code overscroll-behavior-y}. */
+        OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff60up("auto")),
 
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
@@ -2789,6 +2866,9 @@ public final class StyleAttributes {
         /** The style property {@code textJustify}. */
         TEXT_JUSTIFY("textJustify", "text-justify", ie("auto"), ff60up("auto")),
 
+        /** The style property {@code text-justify}. */
+        TEXT_JUSTIFY_("text-justify", "text-justify", ff60up("auto")),
+
         /** The style property {@code textJustifyTrim}. */
         TEXT_JUSTIFY_TRIM("textJustifyTrim", "text-justify-trim", ie("undefined")),
 
@@ -2847,7 +2927,10 @@ public final class StyleAttributes {
         TRANSFORM("transform", "transform", ff("none"), ie("none"), chrome("none")),
 
         /** The style property {@code transformBox}. */
-        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box"), ff60up("")),
+        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box"), ff60up("border-box")),
+
+        /** The style property {@code transform-box}. */
+        TRANSFORM_BOX_("transform-box", "transform-box", ff60up("border-box")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
@@ -3046,7 +3129,7 @@ public final class StyleAttributes {
                 ff("ease")),
 
         /** The style property {@code webkitAppRegion}. */
-        WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("no-drag")),
+        WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("none")),
 
         /** The style property {@code webkitAppearance}. */
         WEBKIT_APPEARANCE("webkitAppearance", "webkit-appearance", chrome("none")),
@@ -3438,7 +3521,13 @@ public final class StyleAttributes {
         WEBKIT_MARGIN_TOP_COLLAPSE("webkitMarginTopCollapse", "webkit-margin-top-collapse", chrome("collapse")),
 
         /** The style property {@code webkitMask}. */
-        WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff60up("")),
+        WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff60up("none")),
+
+        /** The style property {@code WebkitMask}. */
+        WEBKIT_MASK_("WebkitMask", "webkit-mask", ff60up("none")),
+
+        /** The style property {@code -webkit-mask}. */
+        WEBKIT_MASK__("-webkit-mask", "webkit-mask", ff60up("none")),
 
         /** The style property {@code webkitMaskBoxImage}. */
         WEBKIT_MASK_BOX_IMAGE("webkitMaskBoxImage", "webkit-mask-box-image", chrome("none")),
@@ -3459,28 +3548,76 @@ public final class StyleAttributes {
         WEBKIT_MASK_BOX_IMAGE_WIDTH("webkitMaskBoxImageWidth", "webkit-mask-box-image-width", chrome("auto")),
 
         /** The style property {@code webkitMaskClip}. */
-        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box"), ff60up("")),
+        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box"), ff60up("border-box")),
+
+        /** The style property {@code WebkitMaskClip}. */
+        WEBKIT_MASK_CLIP_("WebkitMaskClip", "webkit-mask-clip", ff60up("border-box")),
+
+        /** The style property {@code -webkit-mask-clip}. */
+        WEBKIT_MASK_CLIP__("-webkit-mask-clip", "webkit-mask-clip", ff60up("border-box")),
 
         /** The style property {@code webkitMaskComposite}. */
-        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over"), ff60up("")),
+        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over"), ff60up("add")),
+
+        /** The style property {@code WebkitMaskComposite}. */
+        WEBKIT_MASK_COMPOSITE_("WebkitMaskComposite", "webkit-mask-composite", ff60up("add")),
+
+        /** The style property {@code -webkit-mask-composite}. */
+        WEBKIT_MASK_COMPOSITE__("-webkit-mask-composite", "webkit-mask-composite", ff60up("add")),
 
         /** The style property {@code webkitMaskImage}. */
-        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none"), ff60up("")),
+        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none"), ff60up("none")),
+
+        /** The style property {@code WebkitMaskImage}. */
+        WEBKIT_MASK_IMAGE_("WebkitMaskImage", "webkit-mask-image", ff60up("none")),
+
+        /** The style property {@code -webkit-mask-image}. */
+        WEBKIT_MASK_IMAGE__("-webkit-mask-image", "webkit-mask-image", ff60up("none")),
 
         /** The style property {@code webkitMaskOrigin}. */
-        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box"), ff60up("")),
+        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box"), ff60up("border-box")),
+
+        /** The style property {@code WebkitMaskOrigin}. */
+        WEBKIT_MASK_ORIGIN_("WebkitMaskOrigin", "webkit-mask-origin", ff60up("border-box")),
+
+        /** The style property {@code -webkit-mask-origin}. */
+        WEBKIT_MASK_ORIGIN__("-webkit-mask-origin", "webkit-mask-origin", ff60up("border-box")),
 
         /** The style property {@code webkitMaskPosition}. */
-        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%"), ff60up("")),
+        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%"), ff60up("0% 0%")),
+
+        /** The style property {@code WebkitMaskPosition}. */
+        WEBKIT_MASK_POSITION_("WebkitMaskPosition", "webkit-mask-position", ff60up("0% 0%")),
+
+        /** The style property {@code -webkit-mask-position}. */
+        WEBKIT_MASK_POSITION__("-webkit-mask-position", "webkit-mask-position", ff60up("0% 0%")),
 
         /** The style property {@code webkitMaskPositionX}. */
-        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%"), ff60up("")),
+        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%"), ff60up("0%")),
+
+        /** The style property {@code WebkitMaskPositionX}. */
+        WEBKIT_MASK_POSITION_X_("WebkitMaskPositionX", "webkit-mask-position-x", ff60up("0%")),
+
+        /** The style property {@code -webkit-mask-position-x}. */
+        WEBKIT_MASK_POSITION_X__("-webkit-mask-position-x", "webkit-mask-position-x", ff60up("0%")),
 
         /** The style property {@code webkitMaskPositionY}. */
-        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%"), ff60up("")),
+        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%"), ff60up("0%")),
+
+        /** The style property {@code WebkitMaskPositionY}. */
+        WEBKIT_MASK_POSITION_Y_("WebkitMaskPositionY", "webkit-mask-position-y", ff60up("0%")),
+
+        /** The style property {@code -webkit-mask-position-y}. */
+        WEBKIT_MASK_POSITION_Y__("-webkit-mask-position-y", "webkit-mask-position-y", ff60up("0%")),
 
         /** The style property {@code webkitMaskRepeat}. */
-        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat"), ff60up("")),
+        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat"), ff60up("repeat")),
+
+        /** The style property {@code WebkitMaskRepeat}. */
+        WEBKIT_MASK_REPEAT_("WebkitMaskRepeat", "webkit-mask-repeat", ff60up("repeat")),
+
+        /** The style property {@code -webkit-mask-repeat}. */
+        WEBKIT_MASK_REPEAT__("-webkit-mask-repeat", "webkit-mask-repeat", ff60up("repeat")),
 
         /** The style property {@code webkitMaskRepeatX}. */
         WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chrome("")),
@@ -3489,7 +3626,13 @@ public final class StyleAttributes {
         WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chrome("")),
 
         /** The style property {@code webkitMaskSize}. */
-        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto"), ff60up("")),
+        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto"), ff60up("auto auto")),
+
+        /** The style property {@code WebkitMaskSize}. */
+        WEBKIT_MASK_SIZE_("WebkitMaskSize", "webkit-mask-size", ff60up("auto auto")),
+
+        /** The style property {@code -webkit-mask-size}. */
+        WEBKIT_MASK_SIZE__("-webkit-mask-size", "webkit-mask-size", ff60up("auto auto")),
 
         /** The style property {@code webkitMaxLogicalHeight}. */
         WEBKIT_MAX_LOGICAL_HEIGHT("webkitMaxLogicalHeight", "webkit-max-logical-height", chrome("none")),
