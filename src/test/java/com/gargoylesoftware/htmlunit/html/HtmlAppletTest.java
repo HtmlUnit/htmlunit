@@ -58,7 +58,8 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            CHROME = "Your browser doesn't support applets")
+            CHROME = "Your browser doesn't support applets",
+            FF60 = "Your browser doesn't support applets")
     public void asText_appletEnabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
@@ -78,7 +79,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void simpleInstantiation() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -113,7 +114,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletBaseWithoutCodebase() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -152,7 +153,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletBase() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -191,7 +192,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkSubdirAppletBase() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -230,7 +231,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkSubdirRelativeAppletBase() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -269,7 +270,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletParams() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -309,7 +310,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletCall() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -351,7 +352,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletExecJs() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -390,7 +391,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void setMember() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -425,7 +426,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletOverwriteArchive() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -466,7 +467,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletUnknownArchive() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -503,7 +504,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void checkAppletIgnoreUnknownArchive() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -533,7 +534,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void appletConfirmHandler() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -576,7 +577,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
      */
     @Test
     public void appletConfirmHandlerPermit() throws Exception {
-        if (getBrowserVersion().isChrome()) {
+        if (areAppletsNotSupported()) {
             return;
         }
 
@@ -612,5 +613,9 @@ public class HtmlAppletTest extends SimpleWebTestCase {
 
         final HtmlApplet htmlApplet = (HtmlApplet) applets.get(0);
         assertTrue(htmlApplet.getApplet() == null);
+    }
+
+    private boolean areAppletsNotSupported() {
+        return getBrowserVersion().isChrome() || getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox52();
     }
 }
