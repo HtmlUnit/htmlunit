@@ -55,7 +55,7 @@ public enum BrowserVersionFeatures {
     CSS_BACKGROUND_INITIAL,
 
     /** Computed {@code display} is {@code block} for non-attached elements. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF52)
     CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED,
 
     /** Computed {@code zIndex} is not considered. */

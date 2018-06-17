@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  * Tests the result of the default 'display' style of an element.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 @StandardsMode
