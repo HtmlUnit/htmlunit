@@ -54,6 +54,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     CSS_BACKGROUND_INITIAL,
 
+    /** Background image is 'rgba(0, 0, 0, 0)'. */
+    @BrowserFeature(FF60)
+    CSS_BACKGROUND_RGBA,
+
     /** Computed {@code display} is {@code block} for non-attached elements. */
     @BrowserFeature(FF52)
     CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED,

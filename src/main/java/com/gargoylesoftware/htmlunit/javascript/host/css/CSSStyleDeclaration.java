@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
@@ -629,6 +630,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                     if (getClass() == CSSStyleDeclaration.class) {
                         return INITIAL;
                     }
+                    return "rgba(0, 0, 0, 0)";
+                }
+                if (getBrowserVersion().hasFeature(CSS_BACKGROUND_RGBA)) {
                     return "rgba(0, 0, 0, 0)";
                 }
                 return "transparent"; // default if shorthand is used
