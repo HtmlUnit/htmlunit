@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -479,7 +478,7 @@ public class Node extends EventTarget {
      *
      * @return whether this node is the same node as the given one
      */
-    @JsxFunction({CHROME, FF52, IE})
+    @JsxFunction
     public boolean isSameNode(final Object other) {
         return other == this;
     }
