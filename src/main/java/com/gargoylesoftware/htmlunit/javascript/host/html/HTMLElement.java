@@ -196,7 +196,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlStrike.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlStrong.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlSubscript.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlSummary.class, value = {CHROME, FF52})
+@JsxClass(domClass = HtmlSummary.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlSuperscript.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlTeletype.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlUnderlined.class, value = {CHROME, FF})
