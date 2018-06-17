@@ -108,7 +108,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(60, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(67, "Chrome");
 
     /** Microsoft Edge. Work In Progress!!! */
     public static final BrowserVersion EDGE = new BrowserVersion(14, "Edge");

@@ -98,7 +98,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLAppletElement]",
-            CHROME = "[object HTMLUnknownElement]")
+            CHROME = "[object HTMLUnknownElement]",
+            FF60 = "[object HTMLUnknownElement]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -465,9 +466,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            CHROME = "[object HTMLPreElement]",
-            FF52 = "[object HTMLPreElement]",
+    @Alerts(DEFAULT = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
     public void xmp() throws Exception {
         test("xmp");
@@ -825,9 +824,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLElement]",
-            CHROME = "[object HTMLPreElement]",
-            FF52 = "[object HTMLPreElement]",
+    @Alerts(DEFAULT = "[object HTMLPreElement]",
             IE = "[object HTMLBlockElement]")
     public void listing() throws Exception {
         test("listing");
@@ -1307,9 +1304,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]",
-            FF52 = "[object HTMLElement]")
+    @Alerts(DEFAULT = "[object HTMLElement]",
+            IE = "[object HTMLUnknownElement]")
     public void summary() throws Exception {
         test("summary");
     }
@@ -1657,9 +1653,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDetailsElement]",
-            FF52 = "[object HTMLDetailsElement]")
+    @Alerts(DEFAULT = "[object HTMLDetailsElement]",
+            IE = "[object HTMLUnknownElement]")
     public void details() throws Exception {
         test("details");
     }
@@ -2023,9 +2018,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLContentElement]",
-            FF52 = "[object HTMLUnknownElement]",
-            IE = "[object HTMLUnknownElement]")
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            CHROME = "[object HTMLContentElement]")
     public void content() throws Exception {
         test("content");
     }
