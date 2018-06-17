@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css.property;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -187,9 +186,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            FF60 = "240")
-    @NotYetImplemented(FF60)
+    @Alerts("0")
     public void applet() throws Exception {
         loadPageWithAlerts2(test("applet"));
     }
@@ -367,7 +364,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF = "18",
+            FF52 = "18",
+            FF60 = "16",
             IE = "20")
     @NotYetImplemented
     public void button() throws Exception {
@@ -457,9 +455,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "-16",
-            FF52 = "-16")
+    @Alerts(DEFAULT = "-16",
+            IE = "0")
     public void details() throws Exception {
         loadPageWithAlerts2(test("details"));
     }
@@ -848,7 +845,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "141",
+            FF52 = "141",
             IE = "143")
     @NotYetImplemented
     public void isindex() throws Exception {
@@ -1441,9 +1438,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "-16",
-            FF52 = "-16")
+    @Alerts(DEFAULT = "-16",
+            IE = "0")
     public void summary() throws Exception {
         loadPageWithAlerts2(test("summary"));
     }
@@ -1721,7 +1717,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF = "18",
+            FF52 = "18",
+            FF60 = "16",
             IE = "20")
     @NotYetImplemented
     public void inputButton() throws Exception {
@@ -1746,7 +1743,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "253",
-            FF = "237",
+            FF52 = "237",
+            FF60 = "235",
             IE = "262")
     @NotYetImplemented
     public void inputFile() throws Exception {
@@ -1796,7 +1794,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "92",
-            FF = "50",
+            FF52 = "50",
+            FF60 = "48",
             IE = "100")
     @NotYetImplemented
     public void inputReset() throws Exception {
@@ -1824,7 +1823,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "58",
-            FF = "96",
+            FF52 = "96",
+            FF60 = "94",
             IE = "114")
     @NotYetImplemented
     public void inputSubmit() throws Exception {
