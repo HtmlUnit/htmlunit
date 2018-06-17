@@ -844,10 +844,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "inline", "inline"},
-            DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
-                        "inline", "inline", "inline", "inline", "inline", "block", "inline"})
+    @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
+                        "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+            IE = {"inline", "inline", "none", "block", "inline-block", "inline",
+                        "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"

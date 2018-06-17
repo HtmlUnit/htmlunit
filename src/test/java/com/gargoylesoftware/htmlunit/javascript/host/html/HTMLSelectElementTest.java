@@ -2128,7 +2128,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""})
+    @Alerts({"two", ""})
     public void value() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2184,7 +2184,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""})
+    @Alerts({"two", ""})
     public void valueByValueCase() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2270,7 +2270,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", ""})
+    @Alerts({"two", ""})
     public void valueNull() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -2298,7 +2298,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"two", "", ""})
+    @Alerts({"two", "", ""})
     public void valueOther() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

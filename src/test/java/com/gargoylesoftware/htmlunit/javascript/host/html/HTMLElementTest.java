@@ -4145,7 +4145,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"outside", "1", "middle", "2", "3", "4",
+    @Alerts({"outside", "1", "middle", "2", "3", "4",
                 "before-begin after-begin inside before-end after-end"})
     public void insertAdjacentElement() throws Exception {
         insertAdjacentElement("beforeend", "afterend", "beforebegin", "afterbegin");
