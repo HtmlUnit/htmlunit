@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -311,10 +310,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             return setSelectedAttribute(selected, isSelected, invokeOnFocus, true, false, true);
         }
         catch (final ElementNotFoundException e) {
-            if (hasFeature(SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN)) {
-                for (final HtmlOption o : getSelectedOptions()) {
-                    o.setSelected(false);
-                }
+            for (final HtmlOption o : getSelectedOptions()) {
+                o.setSelected(false);
             }
             return (P) getPage();
         }

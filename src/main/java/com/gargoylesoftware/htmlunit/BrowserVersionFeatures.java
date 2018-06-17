@@ -804,7 +804,7 @@ public enum BrowserVersionFeatures {
     JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES,
 
     /** DOMTokenList removed all whitespace chars during add. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
 
     /** DOMTokenList removed all whitespace chars during edit. */
@@ -1456,13 +1456,6 @@ public enum BrowserVersionFeatures {
     /** Set the value attribute of a reset input to 'Reset' if no value attribute specified. */
     @BrowserFeature(IE)
     RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
-
-    /**
-     * Indicates that all options of a select are deselected,
-     * if the select state is changed for an unknown option.
-     */
-    @BrowserFeature({CHROME, FF52, IE})
-    SELECT_DESELECT_ALL_IF_SWITCHING_UNKNOWN,
 
     /** The default display style of slot is 'content'. */
     @BrowserFeature(CHROME)
