@@ -976,7 +976,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_TYPE_LOWERCASE,
 
     /** Setting the value of an Input Date to blank will result in an empty value. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     JS_INPUT_SET_VALUE_DATE_SUPPORTED,
 
     /** Setting the value of an Input Email to blank will result in an empty value. */
