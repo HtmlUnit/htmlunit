@@ -413,7 +413,8 @@ public class ElementChildNodesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"3", "2", "2", "3", "2", "2"})
+    @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
+            FF60 = {"1", "0", "1", "1", "0", "1"})
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
     }

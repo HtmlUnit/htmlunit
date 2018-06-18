@@ -465,6 +465,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Something",
+            FF60 = "error",
             IE = "error")
     @NotYetImplemented(IE)
     public void shouldBeAbleToFindElementByXPathInXmlDocument() throws Exception {
