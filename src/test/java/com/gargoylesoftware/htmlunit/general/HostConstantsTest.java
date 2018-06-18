@@ -26,6 +26,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
@@ -77,8 +79,11 @@ public class HostConstantsTest extends WebDriverTestCase {
     public void test() throws Exception {
         setExpectedAlerts(getExpectedString());
 
-        loadPageWithAlerts2("<html><head>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
+                + "function log(x) {\n"
+                + "  document.getElementById('log').value += x + '\\n';\n"
+                + "}\n"
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var all = [];\n"
@@ -104,12 +109,18 @@ public class HostConstantsTest extends WebDriverTestCase {
                 + "      var x = all[i];\n"
                 + "      string += x + ':' + " + host_ + "[x] + ' ';\n"
                 + "    }\n"
-                + "    alert(string);\n"
+                + "    log(string);\n"
                 + "  } catch (e) {}\n"
                 + "}\n"
                 + "</script>\n"
-                + "</head><body onload='test()'>\n"
-                + "</body></html>");
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
@@ -156,7 +167,7 @@ public class HostConstantsTest extends WebDriverTestCase {
         for (final String key : constants) {
             builder.append(key).append(' ');
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 
     /**

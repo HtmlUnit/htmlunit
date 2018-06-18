@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -45,7 +46,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant({FF, IE, EDGE})
+    @JsxConstant({FF52, IE, EDGE})
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -93,7 +94,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframesRule}.
      */
-    @JsxConstant(FF)
+    @JsxConstant(FF52)
     public static final short MOZ_KEYFRAMES_RULE        = 7;
 
     /**
@@ -105,7 +106,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSKeyframeRule}.
      */
-    @JsxConstant(FF)
+    @JsxConstant(FF52)
     public static final short MOZ_KEYFRAME_RULE         = 8;
 
     /**
