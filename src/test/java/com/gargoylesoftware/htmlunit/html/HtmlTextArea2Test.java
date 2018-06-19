@@ -23,9 +23,10 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
 /**
- * Tests for {@link HtmlTextInput}.
+ * Tests for {@link HTMLTextAreaElement}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
