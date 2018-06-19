@@ -752,7 +752,7 @@ public enum BrowserVersionFeatures {
     JS_DOMIMPLEMENTATION_FEATURE_STYLESHEETS,
 
     /** If document.implementation.hasFeature() supports 'http://www.w3.org/TR/SVG11/feature#BasicStructure 1.2'. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2,
 
     /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
