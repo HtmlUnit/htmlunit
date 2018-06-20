@@ -37,33 +37,25 @@ public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
+
+            // chrome
             Pattern.compile("Starting ChromeDriver " + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
                     + "\\.[0-9]+ ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n"),
-            Pattern.compile(".*Unable to retrieve document state unexpected alert open\r?\n"),
-            Pattern.compile(".*FirefoxOptions toCapabilities\r?\n"),
-            Pattern.compile(".*Preferring the firefox binary in these options \\(.*\\)\r?\n"),
-            Pattern.compile(".*geckodriver.*\r?\n"),
-            Pattern.compile(".*mozprofile.*\r?\n"),
-            Pattern.compile(".*Marionette.*\r?\n"),
-            Pattern.compile(".*\tDEBUG\t.*\r?\n"),
-            Pattern.compile(".*\taddons\\..*\r?\n"),
-            Pattern.compile("\\*\\*\\* Blocklist::.*\r?\n"),
+
+            // GeckoDriver
+            Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
+                                + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
+            // ie
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + "3\\.8\\.0\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
+
             // edge
             Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
-            // edge
             Pattern.compile(".*Stopping server.\r\r?\n"),
             Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
-
-            // FF60 output
-            Pattern.compile("Unable to read VR Path Registry from .*\r\r?\n"),
-            Pattern.compile("JavaScript warning: .*: String.toLowerCase is deprecated;"
-                                + " use String.prototype.toLowerCase instead\r\r?\n")
-
     };
 
     /**

@@ -33,6 +33,8 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
@@ -81,8 +83,11 @@ public class ExternalTest {
                     }
                 }
             }
+
             assertVersion("org.sonatype.oss", "oss-parent", "9");
+
             assertChromeDriver();
+            assertGeckoDriver();
         }
     }
 
@@ -104,6 +109,14 @@ public class ExternalTest {
             final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
+        }
+    }
+
+    private static void assertGeckoDriver() throws Exception {
+        try (WebClient webClient = getWebClient()) {
+            final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
+            final DomNodeList<DomNode> divs = page.querySelectorAll(".release-title");
+            assertEquals("Gecko Driver", divs.get(0).asText(), "v" + GECKO_DRIVER_);
         }
     }
 
