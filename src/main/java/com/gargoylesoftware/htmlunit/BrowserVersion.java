@@ -286,7 +286,6 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("opus", "audio/ogg");
         FIREFOX_60.registerUploadMimeType("webm", "video/webm");
         FIREFOX_60.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_60.registerUploadMimeType("flac", "audio/x-flac");
         FIREFOX_60.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_60.registerUploadMimeType("xht", "application/xhtml+xml");
         FIREFOX_60.registerUploadMimeType("txt", "text/plain");

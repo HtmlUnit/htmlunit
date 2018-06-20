@@ -39,7 +39,8 @@ public class HtmlApplet2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLAppletElement]", "[object HTMLCollection]", "1", "[object HTMLAppletElement]"},
-            CHROME = {"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"})
+            CHROME = {"[object HTMLUnknownElement]", "[object HTMLCollection]", "0", "undefined"},
+            FF60 = {"[object HTMLUnknownElement]", "[object NodeList]", "0", "undefined"})
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

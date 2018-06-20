@@ -254,10 +254,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"CONTENT_TYPE:audio/flac", "charset"},
-            FF60 = {"CONTENT_TYPE:audio/x-flac", "charset"},
-            FF52 = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
+            CHROME = {"CONTENT_TYPE:audio/flac", "charset"})
     public void contentTypeFlac() throws Exception {
         contentType("flac");
     }
@@ -827,9 +825,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"ex start", "ex end", "exception"},
-            CHROME = {"null", "null", "0"},
-            FF52 = {"null", "null", "0"})
+    @Alerts(DEFAULT = {"null", "null", "0"},
+            IE = {"ex start", "ex end", "exception"})
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -864,9 +861,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF60 = {"exception", "exception value", "exception",
-                        "exception", "exception",
-                        "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
@@ -881,9 +875,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF60 = {"exception", "exception value", "exception",
-                        "exception", "exception",
-                        "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
@@ -898,9 +889,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"null,null", "exception value", "null,null",
                         "exception", "null,null",
                         "exception", "null,null"},
-            FF60 = {"exception", "exception value", "exception",
-                        "exception", "exception",
-                        "exception", "exception"},
             IE = {"exception", "exception",
                         "exception", "exception",
                         "exception", "exception"})
@@ -949,9 +937,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = {"null,null", "exception"},
-            FF52 = {"null,null", "exception"})
+    @Alerts(DEFAULT = {"null,null", "exception"},
+            IE = "exception")
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -1033,7 +1020,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
-            FF = "pom.xml--null")
+            FF52 = "pom.xml--null")
     // since 2.28
     // there is an option for IE, for local and trusted sites IE includes the file path
     // because we do not support any IE specific setting we do not send the filename as
@@ -1115,7 +1102,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "C:\\fakepath\\pom.xml",
-            FF = "pom.xml")
+            FF52 = "pom.xml")
     // since 2.28
     // there is an option for IE, for local and trusted sites IE includes the file path
     // because we do not support any IE specific setting we do not send the filename as

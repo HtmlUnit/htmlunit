@@ -417,11 +417,11 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_FILES_UNDEFINED,
 
     /** HTMLInputElement: type {@code file} selectionSart/End are null. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
     /** HTMLInputElement: type {@code file} value to be {@code fakepath}. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF60, IE})
     HTMLINPUT_FILE_VALUE_FAKEPATH,
 
     /** Should the HTMLElement of {@code keygen} have no end tag. */
