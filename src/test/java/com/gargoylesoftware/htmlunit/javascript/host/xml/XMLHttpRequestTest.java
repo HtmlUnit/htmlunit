@@ -687,8 +687,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "exception"},
-            FF60 = {"true", "overwritten"})
+    @Alerts({"true", "exception"})
     public void overrideMimeTypeAfterSend() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1397,9 +1396,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true"},
-            CHROME = {"someLoad [object ProgressEvent]", "load", "false"},
-            FF52 = {"someLoad [object ProgressEvent]", "load", "false"})
+    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false"},
+            IE = {"someLoad [object ProgressEvent]", "load", "true"})
     public void addEventListener() throws Exception {
         final String html =
               "<html>\n"
@@ -1434,9 +1432,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"},
-            CHROME = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
-            FF52 = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"})
+    @Alerts(DEFAULT = {"someLoad [object ProgressEvent]", "load", "false", "11", "0"},
+            IE = {"someLoad [object ProgressEvent]", "load", "true", "11", "11"})
     public void addEventListenerDetails() throws Exception {
         final String html =
               "<html>\n"
@@ -1473,9 +1470,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "null",
-            CHROME = "function",
-            FF52 = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "null")
     @NotYetImplemented
     public void addEventListenerCaller() throws Exception {
         final String html =
@@ -1579,11 +1575,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "function onreadystatechange() {\n    [native code]\n}",
-                        "true", "true"},
-            FF52 = {"[object Object]", "undefined", "undefined",
+    @Alerts(FF = {"[object Object]", "undefined", "undefined",
                         "function get onreadystatechange() {\n    [native code]\n}",
                         "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
@@ -1626,12 +1618,12 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Object]", "undefined", "undefined",
+    @Alerts(FF52 = {"[object Object]", "undefined", "undefined",
                         "function () { return !0 }",
-                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
-            FF52 = {"[object Object]", "undefined", "undefined",
-                        "function () { return !0 }",
+            FF60 = {"[object Object]", "undefined", "undefined",
+                        "function() { return !0 }",
                         "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",

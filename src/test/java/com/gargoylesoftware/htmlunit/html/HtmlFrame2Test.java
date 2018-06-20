@@ -99,7 +99,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "second [object HTMLFormElement] third [object HTMLFormElement] "
                         + "parent [object HTMLFormElement]",
             CHROME = "second undefined third [object HTMLFormElement] "
-                        + "parent [object HTMLFormElement]")
+                        + "parent [object HTMLFormElement]",
+            FF60 = "second undefined third [object HTMLFormElement] "
+                    + "parent [object HTMLFormElement]")
     // real FF sometimes alerts 'third' before 'second'
     @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {

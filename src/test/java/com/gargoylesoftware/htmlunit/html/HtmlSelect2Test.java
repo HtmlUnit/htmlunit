@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.List;
@@ -44,7 +44,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @BuggyWebDriver({FF, IE})
+    @BuggyWebDriver({FF52, IE})
     public void select() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
@@ -113,7 +113,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @BuggyWebDriver({FF, IE})
+    @BuggyWebDriver({FF52, IE})
     public void controlClick() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'><select name='select1' multiple>\n"
