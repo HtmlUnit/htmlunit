@@ -963,8 +963,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF52})
     JS_INNER_TEXT_VALUE_NULL,
 
-    /** Chrome ignores negative selection starts. */
-    @BrowserFeature(CHROME)
+    /** Ignore negative selection starts. */
+    @BrowserFeature({CHROME, FF60})
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */

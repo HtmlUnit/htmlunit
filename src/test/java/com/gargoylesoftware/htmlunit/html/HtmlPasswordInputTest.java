@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -67,13 +68,13 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("abc");
         assertEquals("abc", p.getAttribute("value"));
-        p.sendKeys("\b");
+        p.sendKeys(Keys.BACK_SPACE);
         assertEquals("ab", p.getAttribute("value"));
-        p.sendKeys("\b");
+        p.sendKeys(Keys.BACK_SPACE);
         assertEquals("a", p.getAttribute("value"));
-        p.sendKeys("\b");
+        p.sendKeys(Keys.BACK_SPACE);
         assertEquals("", p.getAttribute("value"));
-        p.sendKeys("\b");
+        p.sendKeys(Keys.BACK_SPACE);
         assertEquals("", p.getAttribute("value"));
     }
 
