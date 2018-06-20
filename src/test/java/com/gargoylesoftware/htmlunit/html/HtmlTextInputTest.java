@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,13 +67,13 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         final WebElement t = driver.findElement(By.id("t"));
         t.sendKeys("abc");
         assertEquals("abc", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("ab", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("a", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("", t.getAttribute("value"));
     }
 

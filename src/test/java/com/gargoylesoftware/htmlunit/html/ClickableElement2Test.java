@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,7 +64,7 @@ public class ClickableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("click click dblclick ")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver({CHROME, FF52})
     public void dblClick() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
