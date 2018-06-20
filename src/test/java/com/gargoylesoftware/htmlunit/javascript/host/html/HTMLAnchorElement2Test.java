@@ -690,7 +690,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"},
             CHROME = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
-                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"})
+                        "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
+            FF60 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+                    "foo:||||||", "p:||||||", "p:||||||", "p:||||||"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -815,13 +817,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined-null", "undefined-", "undefined-  \t ",
-                        "undefined-no-referrer", "undefined-origin",
-                        "undefined-unsafe-url", "undefined-unknown"},
-            CHROME = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
+    @Alerts(DEFAULT = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
                         "origin-origin", "unsafe-url-unsafe-url", "-unknown"},
-            FF52 = {"-null", "-", "-  \t ", "no-referrer-no-referrer",
-                        "origin-origin", "unsafe-url-unsafe-url", "-unknown"})
+            IE = {"undefined-null", "undefined-", "undefined-  \t ",
+                        "undefined-no-referrer", "undefined-origin",
+                        "undefined-unsafe-url", "undefined-unknown"})
     public void referrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
@@ -853,13 +853,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined-origin", "unknown-origin", "no-referrer-origin",
-                        "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
-                        "NO-reFerrer- ", "NO-reFerrer-unknown"},
-            CHROME = {"origin-origin", "-unknown", "no-referrer-no-referrer",
+    @Alerts(DEFAULT = {"origin-origin", "-unknown", "no-referrer-no-referrer",
                         "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"},
-            FF52 = {"origin-origin", "-unknown", "no-referrer-no-referrer",
-                        "-", "no-referrer-NO-reFerrer", "origin-origin", "- ", "-unknown"})
+            IE = {"undefined-origin", "unknown-origin", "no-referrer-origin",
+                        "-origin", "NO-reFerrer-origin", "NO-reFerrer-origin",
+                        "NO-reFerrer- ", "NO-reFerrer-unknown"})
     public void setReferrerPolicy() throws Exception {
         final String html =
                 "<html>\n"
