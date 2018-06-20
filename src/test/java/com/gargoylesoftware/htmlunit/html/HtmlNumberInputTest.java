@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlTextInput}.
+ * Tests for {@link HtmlNumberInput}.
  *
  * @author Ronald Brill
  */

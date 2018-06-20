@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import java.net.URL;
 
@@ -103,7 +104,7 @@ public class HtmlFrame2Test extends WebDriverTestCase {
             FF60 = "second undefined third [object HTMLFormElement] "
                     + "parent [object HTMLFormElement]")
     // real FF sometimes alerts 'third' before 'second'
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF60})
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "
                 + "onload=\"document.title += ' parent ' + window.parent.frames['third'].document.frm\">\n"
