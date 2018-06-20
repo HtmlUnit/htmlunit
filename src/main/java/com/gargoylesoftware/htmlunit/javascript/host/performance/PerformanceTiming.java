@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.performance;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -131,7 +132,7 @@ public class PerformanceTiming extends SimpleScriptable {
     /**
      * @return a secureConnectionStart
      */
-    @JsxGetter(CHROME)
+    @JsxGetter({CHROME, FF60})
     public long getSecureConnectionStart() {
         return 0;
     }
