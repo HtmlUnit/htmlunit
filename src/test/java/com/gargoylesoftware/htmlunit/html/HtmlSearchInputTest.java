@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -42,13 +43,13 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         final WebElement input = webDriver.findElement(By.id("t"));
         input.sendKeys("abc");
         assertEquals("abc", input.getAttribute("value"));
-        input.sendKeys("\b");
+        input.sendKeys(Keys.BACK_SPACE);
         assertEquals("ab", input.getAttribute("value"));
-        input.sendKeys("\b");
+        input.sendKeys(Keys.BACK_SPACE);
         assertEquals("a", input.getAttribute("value"));
-        input.sendKeys("\b");
+        input.sendKeys(Keys.BACK_SPACE);
         assertEquals("", input.getAttribute("value"));
-        input.sendKeys("\b");
+        input.sendKeys(Keys.BACK_SPACE);
         assertEquals("", input.getAttribute("value"));
     }
 }
