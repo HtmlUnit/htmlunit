@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.32" date="xx 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added">
+            <action type="fix" dev="rbri" issue="1970">
+                WebClient default request header should not overwrite request-specific ones.
+            </action>
             <action type="fix" dev="rbri" issue="1962">
                 Various fixes for the selector specificity calculation (CssParser).
             </action>

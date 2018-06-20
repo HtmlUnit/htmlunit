@@ -20,6 +20,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -1516,6 +1517,32 @@ public class WebClientTest extends SimpleWebTestCase {
         client.removeRequestHeader("foo-header");
         client.getPage(URL_FIRST);
         assertNull(webConnection.getLastAdditionalHeaders().get("foo-header"));
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void requestHeaderDoNotOverwriteExisting() throws Exception {
+        final String content = "<html></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_FIRST);
+        assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+
+        client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, "foo value");
+        client.getPage(URL_FIRST);
+        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+
+        client.removeRequestHeader(HttpHeader.ACCEPT_LANGUAGE);
+        client.getPage(URL_FIRST);
+        assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
     }
 
     /**
