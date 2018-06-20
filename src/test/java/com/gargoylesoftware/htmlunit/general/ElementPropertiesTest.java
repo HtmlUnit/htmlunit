@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -911,7 +912,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "width",
             CHROME = "-",
             FF60 = "-")
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF52, IE})
     public void applet() throws Exception {
         test("applet");
     }

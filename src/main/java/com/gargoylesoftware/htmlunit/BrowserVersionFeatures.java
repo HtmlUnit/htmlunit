@@ -1507,7 +1507,7 @@ public enum BrowserVersionFeatures {
      * Indicates, that the pathname for the url 'blank' is empty;
      * instead of 'blank'.
      */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     URL_ABOUT_BLANK_HAS_BLANK_PATH,
 
     /**

@@ -17,16 +17,17 @@ package com.gargoylesoftware.htmlunit.general;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
 
@@ -7205,7 +7206,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCDataChannel() { [native code] }",
             FF60 = "function RTCDataChannel() {\n    [native code]\n}")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF60})
     public void rtcDataChannel() throws Exception {
         test("RTCDataChannel");
     }
@@ -10241,6 +10242,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VRDisplay() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrDisplay() throws Exception {
         test("VRDisplay");
     }
@@ -10251,6 +10253,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VRDisplayCapabilities() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrDisplayCapabilities() throws Exception {
         test("VRDisplayCapabilities");
     }
@@ -10261,6 +10264,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VREyeParameters() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrEyeParameters() throws Exception {
         test("VREyeParameters");
     }
@@ -10271,6 +10275,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VRFieldOfView() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrFieldOfView() throws Exception {
         test("VRFieldOfView");
     }
@@ -10299,6 +10304,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VRPose() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrPose() throws Exception {
         test("VRPose");
     }
@@ -10318,6 +10324,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF60 = "function VRStageParameters() {\n    [native code]\n}")
+    @NotYetImplemented(FF60)
     public void vrStageParameters() throws Exception {
         test("VRStageParameters");
     }
