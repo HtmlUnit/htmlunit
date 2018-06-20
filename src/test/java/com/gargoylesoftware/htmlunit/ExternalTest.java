@@ -49,6 +49,8 @@ public class ExternalTest {
 
     /** Chrome driver. */
     static String CHROME_DRIVER_ = "2.40";
+    /** Gecko driver. */
+    static String GECKO_DRIVER_ = "0.21.0";
 
     /**
      * Tests that POM dependencies are the latest.
