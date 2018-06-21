@@ -1210,6 +1210,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
 
+    /** Indicates if style properties are always in lower case. */
+    @BrowserFeature({CHROME, FF60, IE})
+    JS_STYLE_VALUES_LOWERCASE,
+
     /** Indicates wordSpacing support percent values. */
     @BrowserFeature(FF)
     JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT,
@@ -1529,13 +1533,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     WINDOW_EXECUTE_EVENTS,
 
-    /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
-    @BrowserFeature({FF60, IE})
-    XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
-
     /** XMLHttpRequest.getAllResponseHeaders() has a trailing separator. */
     @BrowserFeature(IE)
     XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR,
+
+    /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
+    @BrowserFeature({FF60, IE})
+    XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
 
     /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(IE)

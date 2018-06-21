@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_VALUES_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -1680,7 +1681,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
             if (!value.contains("url")
-                    && getBrowserVersion().hasFeature(JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE)) {
+                    && getBrowserVersion().hasFeature(JS_STYLE_VALUES_LOWERCASE)) {
                 return value.toLowerCase(Locale.ROOT);
             }
             return value;

@@ -37,12 +37,10 @@ public class ErrorOutputChecker implements TestRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
-
             // chrome
             Pattern.compile("Starting ChromeDriver " + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
                     + "\\.[0-9]+ ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
                     + "Only local connections are allowed\\.\r?\n"),
-
             // GeckoDriver
             Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
                                 + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
@@ -51,7 +49,6 @@ public class ErrorOutputChecker implements TestRule {
                     + "3\\.8\\.0\\.0\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
-
             // edge
             Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
             Pattern.compile(".*Stopping server.\r\r?\n"),
