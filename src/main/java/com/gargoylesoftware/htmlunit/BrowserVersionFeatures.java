@@ -1529,9 +1529,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     WINDOW_EXECUTE_EVENTS,
 
-    /** XMLHttpRequest.getAllResponseHeaders() has a trailing CrLf. */
+    /** XMLHttpRequest.getAllResponseHeaders() uses only Lf as separator. */
+    @BrowserFeature({FF60, IE})
+    XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF,
+
+    /** XMLHttpRequest.getAllResponseHeaders() has a trailing separator. */
     @BrowserFeature(IE)
-    XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF,
+    XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR,
 
     /** XMLHttpRequest triggers the opened event at the beginning of the send method again. */
     @BrowserFeature(IE)

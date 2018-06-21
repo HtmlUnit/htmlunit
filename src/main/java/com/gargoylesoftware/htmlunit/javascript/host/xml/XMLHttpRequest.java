@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_IGNORE_PORT_FOR_SAME_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
@@ -460,10 +461,18 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (webResponse_ != null) {
             final StringBuilder builder = new StringBuilder();
             for (final NameValuePair header : webResponse_.getResponseHeaders()) {
-                builder.append(header.getName()).append(": ").append(header.getValue()).append("\r\n");
+                builder.append(header.getName()).append(": ").append(header.getValue());
+
+                if (!getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF)) {
+                    builder.append('\r');
+                }
+                builder.append('\n');
             }
-            if (getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_APPEND_CRLF)) {
-                builder.append("\r\n");
+            if (getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_APPEND_SEPARATOR)) {
+                if (!getBrowserVersion().hasFeature(XHR_ALL_RESPONSE_HEADERS_SEPARATE_BY_LF)) {
+                    builder.append('\r');
+                }
+                builder.append('\n');
             }
             return builder.toString();
         }
