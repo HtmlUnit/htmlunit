@@ -152,7 +152,7 @@ public final class BrowserVersion implements Serializable {
         // FF52
         FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_52.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
-        FIREFOX_52.buildId_ = "20180315163333";
+        FIREFOX_52.buildId_ = "20180430140610";
         FIREFOX_52.productSub_ = "20100101";
         FIREFOX_52.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -352,13 +352,13 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.140", "NPSWF64_29_0_0_140.dll");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 29.0 r0", "29.0.0.140", "Flash32_29_0_0_140.ocx");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx");
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
