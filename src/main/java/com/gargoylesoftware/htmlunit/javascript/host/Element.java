@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_CR_NL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
@@ -733,7 +733,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, FF52})
+    @JsxFunction({CHROME, FF})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -760,7 +760,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, FF52})
+    @JsxFunction({CHROME, FF})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
@@ -1064,8 +1064,8 @@ public class Element extends Node {
             if (node instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) node;
                 if ("p".equals(element.getTagName())) {
-                    if (getBrowserVersion().hasFeature(JS_INNER_TEXT_CR_NL)) {
-                        builder.append("\r\n"); // \r\n because it's to implement something IE specific
+                    if (getBrowserVersion().hasFeature(JS_INNER_TEXT_LF)) {
+                        builder.append('\n'); // \r\n because it's to implement something IE specific
                     }
                     else {
                         int i = builder.length() - 1;

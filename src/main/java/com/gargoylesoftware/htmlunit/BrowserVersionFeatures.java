@@ -955,9 +955,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE,
 
-    /** Indicates that innerHTML uses {@code crnl} instead of {@code nl}. */
+    /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
     @BrowserFeature(IE)
-    JS_INNER_TEXT_CR_NL,
+    JS_INNER_TEXT_LF,
 
     /** Indicates that innerText setter supports null values. */
     @BrowserFeature({CHROME, FF52})
