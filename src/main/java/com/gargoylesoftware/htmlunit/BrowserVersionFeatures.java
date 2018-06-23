@@ -67,7 +67,7 @@ public enum BrowserVersionFeatures {
     CSS_COMPUTED_NO_Z_INDEX,
 
     /** Is display style of HtmlDialog is 'none'. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     CSS_DIALOG_NONE,
 
     /** Is display style 'block'. */
@@ -115,7 +115,7 @@ public enum BrowserVersionFeatures {
     CSS_RP_DISPLAY_NONE,
 
     /** The default value of the display property for the 'rt' tag is always 'ruby-text'. */
-    @BrowserFeature({IE, FF})
+    @BrowserFeature({IE, FF60})
     CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS,
 
     /** The default value of the display property for the 'ruby' tag is 'inline'. */
@@ -1466,7 +1466,7 @@ public enum BrowserVersionFeatures {
     RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED,
 
     /** The default display style of slot is 'content'. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     SLOT_CONTENTS,
 
     /** Indicates that string.includes() is supported. */

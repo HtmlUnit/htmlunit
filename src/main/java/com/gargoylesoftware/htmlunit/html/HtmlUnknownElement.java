@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RP_DISPLAY_NONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_RUBY_DISPLAY_INLINE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.MULTICOL_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SLOT_CONTENTS;
 
 import java.util.Map;
 
@@ -98,16 +100,24 @@ public class HtmlUnknownElement extends HtmlElement {
                 }
                 break;
             case HtmlRt.TAG_NAME:
-                if (wasCreatedByJavascript() && getParentNode() == null) {
+                if (!hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)
+                        && wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;
                 }
-                if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-                    return DisplayStyle.RUBY_TEXT;
-                }
-                break;
+                return DisplayStyle.RUBY_TEXT;
             case HtmlMultiColumn.TAG_NAME:
                 if (hasFeature(MULTICOL_BLOCK)) {
                     return DisplayStyle.BLOCK;
+                }
+                break;
+            case HtmlDialog.TAG_NAME:
+                if (hasFeature(CSS_DIALOG_NONE)) {
+                    return DisplayStyle.NONE;
+                }
+                break;
+            case HtmlSlot.TAG_NAME:
+                if (getPage().getWebClient().getBrowserVersion().hasFeature(SLOT_CONTENTS)) {
+                    return DisplayStyle.CONTENTS;
                 }
                 break;
             default:
