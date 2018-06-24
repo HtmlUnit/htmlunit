@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * Test all {@code constant}s defined in host classes.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 @ToRunWithRealBrowsers
@@ -136,7 +137,7 @@ public class HostConstantsTest extends WebDriverTestCase {
             return "";
         }
         if ("Error".equals(host_) && getBrowserVersion().hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
-            return "stackTraceLimit:10 ";
+            return "stackTraceLimit:10";
         }
         final JavaScriptConfiguration javaScriptConfig = JavaScriptConfiguration.getInstance(getBrowserVersion());
         final List<String> constants = new ArrayList<>();
@@ -157,7 +158,6 @@ public class HostConstantsTest extends WebDriverTestCase {
         }
 
         Collections.sort(constants, new Comparator<String>() {
-
             @Override
             public int compare(final String o1, final String o2) {
                 return o1.substring(0, o1.indexOf(':')).compareTo(o2.substring(0, o2.indexOf(':')));
