@@ -53,8 +53,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION})
-    @NotYetImplemented(IE)
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION})
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -99,9 +98,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION,
                         HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.DNT, HttpHeader.CONNECTION,
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION,
                         HttpHeader.COOKIE})
-    @NotYetImplemented(IE)
     public void headers_cookie_referer() throws Exception {
         final String htmlResponse = "<a href='2.html'>Click me</a>";
         final String response = "HTTP/1.1 200 OK\r\n"

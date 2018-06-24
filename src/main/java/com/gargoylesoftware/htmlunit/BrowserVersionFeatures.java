@@ -514,7 +514,7 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_START_DATE_1970,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
 
     /** Supports redirect via 308 code. */
