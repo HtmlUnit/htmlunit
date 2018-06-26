@@ -169,7 +169,7 @@ public class BrowserRunner extends Suite {
         /** All versions of Firefox. */
         FF,
 
-        /** Firefox 45. */
+        /** Firefox 60. */
         FF60,
 
         /** Firefox 52. */
@@ -214,7 +214,7 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
         String[] FF60() default { EMPTY_DEFAULT };
@@ -272,7 +272,7 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 45. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
         String[] FF60() default { EMPTY_DEFAULT };

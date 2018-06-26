@@ -51,7 +51,6 @@ class BrowserStatement extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
-        assertAlerts();
         for (int i = 0; i < tries_; i++) {
             try {
                 evaluateSolo();
@@ -74,6 +73,7 @@ class BrowserStatement extends Statement {
                 }
             }
         }
+        assertAlerts();
     }
 
     private void assertAlerts() {
@@ -85,6 +85,7 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts.FF(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF60(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF52(), alerts.DEFAULT());
+
                 assertNotEquals(alerts.FF(), alerts.CHROME());
                 assertNotEquals(alerts.IE(), alerts.CHROME());
                 assertNotEquals(alerts.IE(), alerts.FF());
@@ -100,6 +101,7 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF52(), alerts2.DEFAULT());
+
                 assertNotEquals(alerts2.FF(), alerts2.CHROME());
                 assertNotEquals(alerts2.IE(), alerts2.CHROME());
                 assertNotEquals(alerts2.IE(), alerts2.FF());

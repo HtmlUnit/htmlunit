@@ -37,12 +37,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
+import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -52,7 +53,7 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
  * <ol>
  *   <li>Call {@link #extractExpectations(File, File)}, where <tt>input</tt> is the raw file from the browser</li>
  *   <li>Have a quick look on the output files, and compare them to verify there are only minimal differences</li>
- *   <li>Rename all outputs to browser names e.g. {@code results.IE.txt}, {@code results.FF45.txt}, etc</li>
+ *   <li>Rename all outputs to browser names e.g. {@code results.IE.txt}, {@code results.FF60.txt}, etc</li>
  *   <li>Put all outputs in one folder and call {@link #generateTestCases(Class, File)}</li>
  * </ol>
  *
@@ -71,9 +72,9 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
 
-        final String browser = "FF45";
+        final String browser = "FF60";
         // final String browser = "CHROME";
         // final String browser = "IE";
 
@@ -211,17 +212,98 @@ public final class JQueryExtractor {
             }
             else {
                 boolean first = true;
-                for (final String browserName : availableBrowserNames) {
-                    final String expectation = testExpectation.get(browserName);
-                    if (expectation == null) {
-                        continue; // test didn't run for this browser
+
+                // Hack a bit to avoid redundant alerts
+                final List<String> cleanedBrowserNames = new ArrayList<>(testExpectation.keySet());
+                if (cleanedBrowserNames.contains(TestedBrowser.FF52.name())
+                        && cleanedBrowserNames.contains(TestedBrowser.FF60.name())
+                        && StringUtils.equals(
+                                    testExpectation.get(TestedBrowser.FF52.name()),
+                                    testExpectation.get(TestedBrowser.FF60.name()))) {
+                    if (testExpectation.get(TestedBrowser.FF60.name()) != null) {
+                        testExpectation.put("FF", testExpectation.get(TestedBrowser.FF60.name()));
+                        testExpectation.remove(TestedBrowser.FF60.name());
+                        testExpectation.remove(TestedBrowser.FF52.name());
                     }
-                    if (!first) {
-                        System.out.println(",");
-                        System.out.print("        ");
+                    cleanedBrowserNames.remove(TestedBrowser.FF60.name());
+                    cleanedBrowserNames.remove(TestedBrowser.FF52.name());
+                    cleanedBrowserNames.add("FF");
+                }
+                Collections.sort(cleanedBrowserNames);
+
+                if (testExpectation.size() == 2) {
+                    if (StringUtils.equals(
+                            testExpectation.get(TestedBrowser.CHROME.name()),
+                            testExpectation.get("FF"))) {
+                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
+                        testExpectation.put(TestedBrowser.IE.name(), "");
+                        testExpectation.remove(TestedBrowser.CHROME.name());
+                        testExpectation.remove("FF");
+                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
+                        cleanedBrowserNames.remove("FF");
+                        cleanedBrowserNames.add(0, "DEFAULT");
                     }
-                    System.out.print(browserName + " = \"" + expectation + '"');
-                    first = false;
+                    else if (StringUtils.equals(
+                            testExpectation.get(TestedBrowser.CHROME.name()),
+                            testExpectation.get(TestedBrowser.IE.name()))) {
+                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
+                        testExpectation.put("FF", "");
+                        testExpectation.remove(TestedBrowser.CHROME.name());
+                        testExpectation.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
+                        cleanedBrowserNames.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.add(0, "DEFAULT");
+                    }
+                }
+                else if (testExpectation.size() == 3) {
+                    if (StringUtils.equals(
+                            testExpectation.get(TestedBrowser.CHROME.name()),
+                            testExpectation.get("FF"))) {
+                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
+                        testExpectation.remove(TestedBrowser.CHROME.name());
+                        testExpectation.remove("FF");
+                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
+                        cleanedBrowserNames.remove("FF");
+                        cleanedBrowserNames.add(0, "DEFAULT");
+                    }
+                    else if (StringUtils.equals(
+                            testExpectation.get(TestedBrowser.CHROME.name()),
+                            testExpectation.get(TestedBrowser.IE.name()))) {
+                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
+                        testExpectation.remove(TestedBrowser.CHROME.name());
+                        testExpectation.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
+                        cleanedBrowserNames.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.add(0, "DEFAULT");
+                    }
+                    else if (StringUtils.equals(
+                            testExpectation.get("FF"),
+                            testExpectation.get(TestedBrowser.IE.name()))) {
+                        testExpectation.put("DEFAULT", testExpectation.get("FF"));
+                        testExpectation.remove("FF");
+                        testExpectation.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.remove("FF");
+                        cleanedBrowserNames.remove(TestedBrowser.IE.name());
+                        cleanedBrowserNames.add(0, "DEFAULT");
+                    }
+                }
+
+                if (cleanedBrowserNames.size() == 1 && "DEFAULT".equals(cleanedBrowserNames.get(0))) {
+                    System.out.print("\"" + testExpectation.get("DEFAULT") + '"');
+                }
+                else {
+                    for (final String browserName : cleanedBrowserNames) {
+                        final String expectation = testExpectation.get(browserName);
+                        if (expectation == null) {
+                            continue; // test didn't run for this browser
+                        }
+                        if (!first) {
+                            System.out.println(",");
+                            System.out.print("        ");
+                        }
+                        System.out.print(browserName + " = \"" + expectation + '"');
+                        first = false;
+                    }
                 }
             }
             System.out.println(")");
