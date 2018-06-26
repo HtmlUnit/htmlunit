@@ -603,7 +603,7 @@ effects: hide, fadeOut and slideUp called on element width height and width = 0 
 effects: Handle queue:false promises (0, 10, 10)
 effects: multiple unqueued and promise (0, 4, 4)
 effects: animate does not change start value for non-px animation (#7109) (0, 1, 1)
-effects: non-px animation handles non-numeric start (#11971) (0, 1, 1)
+effects: non-px animation handles non-numeric start (#11971) (0, 2, 2)
 effects: Animation callbacks (#11797) (0, 15, 15)
 effects: Animate properly sets overflow hidden when animating width/height (#12117) (0, 4, 4)
 effects: Animations with 0 duration don't ease (#12273) (0, 1, 1)

@@ -1214,7 +1214,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "1, 1, 2",
-        IE = "0, 2, 2")
+            IE = "0, 2, 2")
     @NotYetImplemented(IE)
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
@@ -5199,7 +5199,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-        FF = "0, 1, 1")
+            FF = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
@@ -7610,9 +7610,9 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "0, 2, 2",
-        FF52 = "0, 1, 1",
-        FF60 = "0, 2, 2",
-        IE = "0, 1, 1")
+            FF52 = "0, 1, 1",
+            FF60 = "0, 2, 2",
+            IE = "0, 1, 1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
@@ -7899,7 +7899,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-        CHROME = "1, 1, 2")
+            CHROME = "1, 1, 2")
     @NotYetImplemented(CHROME)
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");

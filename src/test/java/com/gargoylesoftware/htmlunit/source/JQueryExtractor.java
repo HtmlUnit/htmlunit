@@ -43,7 +43,7 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
+import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -72,10 +72,10 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
 
-        final String browser = "FF60";
-        // final String browser = "CHROME";
+        // final String browser = "FF60";
+        final String browser = "CHROME";
         // final String browser = "IE";
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
@@ -299,7 +299,7 @@ public final class JQueryExtractor {
                         }
                         if (!first) {
                             System.out.println(",");
-                            System.out.print("        ");
+                            System.out.print("            ");
                         }
                         System.out.print(browserName + " = \"" + expectation + '"');
                         first = false;
