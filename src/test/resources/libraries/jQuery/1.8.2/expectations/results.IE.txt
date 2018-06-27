@@ -423,7 +423,7 @@
 423.ajax: jQuery.ajax() - disabled globals (0, 3, 3)
 424.ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (0, 3, 3)
 425.ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP) (0, 3, 3)
-426.ajax: jQuery.ajax - HEAD requests (2, 0, 2)
+426.ajax: jQuery.ajax - HEAD requests (0, 2, 2)
 427.ajax: jQuery.ajax - beforeSend (0, 1, 1)
 428.ajax: jQuery.ajax - beforeSend, cancel request (#2688) (0, 2, 2)
 429.ajax: jQuery.ajax - beforeSend, cancel request manually (0, 2, 2)
