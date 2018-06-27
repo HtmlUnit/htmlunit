@@ -1213,9 +1213,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1, 1, 2",
-            IE = "0, 2, 2")
-    @NotYetImplemented(IE)
+    @Alerts("1, 1, 2")
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
@@ -1856,7 +1854,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 4, 4")
+    @Alerts(CHROME = "0, 4, 4",
+            FF = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -2927,7 +2926,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 2, 2")
+    @Alerts(CHROME = "0, 2, 2",
+            IE = "0, 2, 2")
     public void event__Check_order_of_focusin_focusout_events() throws Exception {
         runTest("event: Check order of focusin/focusout events");
     }
@@ -2937,7 +2937,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0, 5, 5")
+    @Alerts(CHROME = "0, 5, 5",
+            IE = "0, 5, 5")
     public void event__focus_blur_order___12868_() throws Exception {
         runTest("event: focus-blur order (#12868)");
     }
@@ -7609,9 +7610,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "0, 2, 2",
-            FF52 = "0, 1, 1",
-            FF60 = "0, 2, 2",
+    @Alerts(DEFAULT = "0, 2, 2",
             IE = "0, 1, 1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {

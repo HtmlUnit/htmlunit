@@ -43,7 +43,7 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
+import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -72,16 +72,17 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
 
         // final String browser = "FF60";
-        final String browser = "CHROME";
+        // final String browser = "FF52";
+        // final String browser = "CHROME";
         // final String browser = "IE";
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
+        // extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
         generateTestCases(testClass, baseDir);
     }
 
@@ -106,7 +107,7 @@ public final class JQueryExtractor {
                     // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
                     if (endPos > -1) {
                         line = line.substring(0, endPos);
-                        writer.write(line + "\n");
+                        writer.write(line + System.lineSeparator());
                         testNumber++;
                     }
                     else if (line.endsWith("Rerun")) {
@@ -116,7 +117,7 @@ public final class JQueryExtractor {
                             break;
                         }
                         line = "" + testNumber + '.' + ' ' + line.substring(0, line.length() - 5);
-                        writer.write(line + "\n");
+                        writer.write(line + System.lineSeparator());
                         testNumber++;
                     }
                 }
@@ -231,31 +232,7 @@ public final class JQueryExtractor {
                 }
                 Collections.sort(cleanedBrowserNames);
 
-                if (testExpectation.size() == 2) {
-                    if (StringUtils.equals(
-                            testExpectation.get(TestedBrowser.CHROME.name()),
-                            testExpectation.get("FF"))) {
-                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
-                        testExpectation.put(TestedBrowser.IE.name(), "");
-                        testExpectation.remove(TestedBrowser.CHROME.name());
-                        testExpectation.remove("FF");
-                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
-                        cleanedBrowserNames.remove("FF");
-                        cleanedBrowserNames.add(0, "DEFAULT");
-                    }
-                    else if (StringUtils.equals(
-                            testExpectation.get(TestedBrowser.CHROME.name()),
-                            testExpectation.get(TestedBrowser.IE.name()))) {
-                        testExpectation.put("DEFAULT", testExpectation.get(TestedBrowser.CHROME.name()));
-                        testExpectation.put("FF", "");
-                        testExpectation.remove(TestedBrowser.CHROME.name());
-                        testExpectation.remove(TestedBrowser.IE.name());
-                        cleanedBrowserNames.remove(TestedBrowser.CHROME.name());
-                        cleanedBrowserNames.remove(TestedBrowser.IE.name());
-                        cleanedBrowserNames.add(0, "DEFAULT");
-                    }
-                }
-                else if (testExpectation.size() == 3) {
+                if (testExpectation.size() == 3) {
                     if (StringUtils.equals(
                             testExpectation.get(TestedBrowser.CHROME.name()),
                             testExpectation.get("FF"))) {

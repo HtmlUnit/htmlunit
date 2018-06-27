@@ -86,13 +86,20 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts.FF60(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF52(), alerts.DEFAULT());
 
-                assertNotEquals(alerts.FF(), alerts.CHROME());
-                assertNotEquals(alerts.IE(), alerts.CHROME());
-                assertNotEquals(alerts.IE(), alerts.FF());
                 assertNotEquals(alerts.FF60(), alerts.FF());
                 assertNotEquals(alerts.FF52(), alerts.FF());
+                if (BrowserVersionClassRunner.isDefined(alerts.IE())) {
+                    assertNotEquals(alerts.FF(), alerts.CHROME());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts.FF())) {
+                    assertNotEquals(alerts.IE(), alerts.CHROME());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts.CHROME())) {
+                    assertNotEquals(alerts.IE(), alerts.FF());
+                }
             }
         }
+
         final AlertsStandards alerts2 = method_.getAnnotation(AlertsStandards.class);
         if (alerts2 != null) {
             if (!BrowserVersionClassRunner.isDefined(alerts2.value())) {
@@ -102,11 +109,17 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF52(), alerts2.DEFAULT());
 
-                assertNotEquals(alerts2.FF(), alerts2.CHROME());
-                assertNotEquals(alerts2.IE(), alerts2.CHROME());
-                assertNotEquals(alerts2.IE(), alerts2.FF());
                 assertNotEquals(alerts2.FF60(), alerts2.FF());
                 assertNotEquals(alerts2.FF52(), alerts2.FF());
+                if (BrowserVersionClassRunner.isDefined(alerts2.IE())) {
+                    assertNotEquals(alerts2.FF(), alerts2.CHROME());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts2.FF())) {
+                    assertNotEquals(alerts2.IE(), alerts2.CHROME());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts2.CHROME())) {
+                    assertNotEquals(alerts2.IE(), alerts2.FF());
+                }
             }
         }
     }
