@@ -387,7 +387,7 @@ public class Document extends Node {
      * Gets the JavaScript property {@code rootElement}.
      * @return the root node for the document
      */
-    @JsxGetter({CHROME, FF52, IE})
+    @JsxGetter
     public Element getRootElement() {
         return null;
     }
