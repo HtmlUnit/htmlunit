@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_FUNCTION_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_ALSO_FRAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME;
@@ -726,17 +727,17 @@ public class HTMLDocument extends Document {
     @JsxFunction(FF)
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
-        if ("null".equals(elementName)) {
+        if ("null".equals(elementName)
+                || (elementName.isEmpty()
+                    && getBrowserVersion().hasFeature(HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY))) {
             return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
-        // Null must me changed to '' for proper collection initialization.
-        final String expElementName = "null".equals(elementName) ? "" : elementName;
 
         final HtmlPage page = getPage();
         return new HTMLCollection(page, true) {
             @Override
             protected List<DomNode> computeElements() {
-                return new ArrayList<>(page.getElementsByName(expElementName));
+                return new ArrayList<>(page.getElementsByName(elementName));
             }
 
             @Override

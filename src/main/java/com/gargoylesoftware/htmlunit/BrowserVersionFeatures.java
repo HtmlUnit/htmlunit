@@ -345,6 +345,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     HTMLDEFINITION_INLINE_IN_QUIRKS,
 
+    /** {@code document.applets} returns a NodeList. */
+    @BrowserFeature(FF60)
+    HTMLDOCUMENT_APPLETS_NODELIST,
+
     /** Is {@code document.charset} lower-case. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_CHARSET_LOWERCASE,
@@ -364,6 +368,12 @@ public enum BrowserVersionFeatures {
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
+
+    /**
+    /** {@code document.getElementsByName} returns an empty list if called with the empty string.
+     */
+    @BrowserFeature(FF60)
+    HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
 
     /**
      * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements

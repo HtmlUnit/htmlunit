@@ -868,13 +868,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "0"},
-            FF60 = {"0", "0"})
+    @Alerts(DEFAULT = {"2", "0", "0"},
+            FF60 = {"0", "0", "0"})
     public void getElementsByName_emptyName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementsByName('').length);\n"
+            + "    alert(document.getElementsByName(' ').length);\n"
             + "    alert(document.getElementsByName(null).length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
