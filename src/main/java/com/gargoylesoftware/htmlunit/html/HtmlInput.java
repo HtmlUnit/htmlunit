@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DISPLAY_INLINE_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_INPUT_DISPLAY_RADIO_CHECKBOX_INLINE_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
@@ -627,6 +628,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         if (hasFeature(CSS_INPUT_DISPLAY_INLINE_BLOCK)) {
             return DisplayStyle.INLINE_BLOCK;
         }
+
+        if (hasFeature(CSS_INPUT_DISPLAY_RADIO_CHECKBOX_INLINE_BLOCK)) {
+            final String type = getTypeAttribute();
+            if ("radio".equals(type)
+                    || "checkbox".equals(type)) {
+                return DisplayStyle.INLINE_BLOCK;
+            }
+        }
+
         return DisplayStyle.INLINE;
     }
 

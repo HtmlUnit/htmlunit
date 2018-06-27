@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -150,7 +147,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "function foo() {}"},
             IE = {"function foo() {}", "function foo() {}"})
-    @NotYetImplemented({IE, CHROME, FF52})
+    @NotYetImplemented
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"

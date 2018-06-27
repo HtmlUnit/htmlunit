@@ -90,6 +90,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, IE})
     CSS_INPUT_DISPLAY_INLINE_BLOCK,
 
+    /** The default value of the display property for the 'input' tags of type
+     * radio or checkbox is 'inline-block'. */
+    @BrowserFeature(FF60)
+    CSS_INPUT_DISPLAY_RADIO_CHECKBOX_INLINE_BLOCK,
+
     /** 'initial' is a valid length value. */
     @BrowserFeature({CHROME, FF})
     CSS_LENGTH_INITIAL,
@@ -901,10 +906,6 @@ public enum BrowserVersionFeatures {
     /** Support for document.formName('inputName'). */
     @BrowserFeature(IE)
     JS_FORM_USABLE_AS_FUNCTION,
-
-    /** Indicates that function is defined even before its declaration, inside a block. */
-    @BrowserFeature({CHROME, FF52, IE})
-    JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK,
 
     /** Indicates if the method toSource exists on the native objects. */
     @BrowserFeature(FF)

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_CONSTRUCTION_PROPERTIES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PRE_WIDTH_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
@@ -350,7 +349,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_ERROR_STACK:
                 return browserVersion_.hasFeature(JS_ERROR_STACK);
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
-                return browserVersion_.hasFeature(JS_FUNCTION_DECLARED_FORWARD_IN_BLOCK);
+                return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
                 return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
