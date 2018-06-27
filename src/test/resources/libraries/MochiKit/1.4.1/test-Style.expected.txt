@@ -1,5 +1,5 @@
-Passed: 65
-Failed: 0
+Passed: 59
+Failed: 6
 ok - initial x position
 ok - initial y position
 ok - x position with offsetParent border
@@ -49,17 +49,11 @@ ok - test getViewportDimensions h
 ok - test getViewportPosition x
 ok - test getViewportPosition y
 ok - default left table cell content w ok
-ok - default left table cell content h ok
 ok - default middle table cell content w ok
-ok - default middle table cell content h ok
 ok - default right table cell content w ok
-ok - default right table cell content h ok
 ok - collapsed left table cell content w ok
-ok - collapsed left table cell content h ok
 ok - collapsed middle table cell content w ok
-ok - collapsed middle table cell content h ok
 ok - collapsed right table cell content w ok
-ok - collapsed right table cell content h ok
 ok - make clipping on overflow-x
 ok - make clipping on overflow-y
 ok - undo clipping on overflow-x

@@ -44,22 +44,22 @@ ok - sorted custom
 ok - reversed iterator
 ok - reversed list
 ok - iterateNext
-ok - raised undefined correctly
+ok - raised StopIteration correctly
 ok - odd(2) = odd(4) = odd(6) == 0
 ok - sub-iterator.next() == 2
 ok - sub-iterator.next() == 4
 ok - sub-iterator.next() == 6
-ok - raised undefined correctly
+ok - raised StopIteration correctly
 ok - odd(7) == 1
 ok - sub-iterator.next() == 7
-ok - raised undefined correctly
+ok - raised StopIteration correctly
 ok - 0 = odd(2) = odd(4) = odd(6)
 ok - 1 = odd(7)
-ok - raised undefined correctly
+ok - raised StopIteration correctly
 ok - odd(1) == 1
 ok - sub-iterator.next() == 3
 ok - skip (1,1), odd(2) == 0
-ok - raised undefined correctly
+ok - raised StopIteration correctly
 ok - null ok
 ok - empty
 ok - [1,1,1]: [1,1,1]
