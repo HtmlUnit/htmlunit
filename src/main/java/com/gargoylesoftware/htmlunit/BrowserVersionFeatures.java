@@ -357,6 +357,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLDOCUMENT_COLOR,
 
+    /**
+    /** {@code document.getElementsByName} returns an empty list if called with the empty string.
+     */
+    @BrowserFeature(FF60)
+    HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
+
     /** We can used function in detached documents. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_FUNCTION_DETACHED,
@@ -368,12 +374,6 @@ public enum BrowserVersionFeatures {
     /** Calls to <code>document.XYZ</code> looks at children with the specified ID and/or name. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_GET_FOR_ID_AND_OR_NAME,
-
-    /**
-    /** {@code document.getElementsByName} returns an empty list if called with the empty string.
-     */
-    @BrowserFeature(FF60)
-    HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
 
     /**
      * Calls to <code>document.XYZ</code> should first look at standard functions before looking at elements
@@ -554,7 +554,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF60})
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
 
     /** The anchor pathname property returns nothing for none http(s) url's. */
@@ -572,6 +572,10 @@ public enum BrowserVersionFeatures {
     /** The anchor protocol property converts drive letters to uppercase. */
     @BrowserFeature(CHROME)
     JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS,
+
+    /** The anchor protocol property returns 'http' for broken http(s) url's. */
+    @BrowserFeature(FF60)
+    JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
 
     /** Indicates that "someFunction.arguments" is a read-only view of the function's argument. */
     @BrowserFeature({CHROME, FF})

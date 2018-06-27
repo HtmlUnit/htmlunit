@@ -20,10 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.net.MalformedURLException;
@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -229,7 +230,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * Sets the rev property.
      * @param referrerPolicy referrerPolicy attribute value
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter({CHROME, FF})
     public void setReferrerPolicy(final String referrerPolicy) {
         getDomNodeOrDie().setAttribute("referrerPolicy", referrerPolicy);
     }
@@ -464,8 +465,9 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getProtocol() {
+        final BrowserVersion browser = getBrowserVersion();
         try {
-            if (getBrowserVersion().hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
+            if (browser.hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL)) {
                 final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
                 final String href = anchor.getHrefAttribute().toLowerCase(Locale.ROOT);
                 if (href.length() > 1 && Character.isLetter(href.charAt(0)) && ':' == href.charAt(1)) {
@@ -477,9 +479,13 @@ public class HTMLAnchorElement extends HTMLElement {
         }
         catch (final MalformedURLException e) {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
-            if (anchor.getHrefAttribute().startsWith("http")
-                    && getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL)) {
-                return ":";
+            if (anchor.getHrefAttribute().startsWith("http")) {
+                if (browser.hasFeature(JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL)) {
+                    return ":";
+                }
+                if (browser.hasFeature(JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL)) {
+                    return "http:";
+                }
             }
             return StringUtils.substringBefore(anchor.getHrefAttribute(), "/");
         }
