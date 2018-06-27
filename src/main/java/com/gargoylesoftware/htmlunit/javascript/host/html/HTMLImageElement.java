@@ -15,8 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_ACCEPTS_ARBITRARY_VALUES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_24x24_0x0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -253,6 +254,9 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+            return 0;
+        }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
             return 0;
         }
@@ -313,6 +317,9 @@ public class HTMLImageElement extends HTMLElement {
         }
 
         final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
+            return 0;
+        }
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_16x16_0x0) && StringUtils.isBlank(src)) {
             return 0;
         }

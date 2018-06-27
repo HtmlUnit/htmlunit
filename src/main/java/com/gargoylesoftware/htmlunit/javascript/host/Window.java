@@ -1765,7 +1765,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @JsxFunction({IE, FF})
+    @JsxFunction({IE, FF52})
     public Object showModalDialog(final String url, final Object arguments, final String features) {
         final WebWindow webWindow = getWebWindow();
         final WebClient client = webWindow.getWebClient();

@@ -1143,15 +1143,15 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-            "string string 7 number string",
-            "string string 8 number object",
-            "string string 9 number object",
-            "string string 1 number object"},
+                "string string 7 number string",
+                "string string 8 number object",
+                "string string 9 number object",
+                "string string 1 number object"},
             FF = {
-            "string string 0 number string",
-            "string string 0 number object",
-            "string string 9 number object",
-            "string string 1 number object"})
+                "string string 0 number string",
+                "string string 0 number object",
+                "string string 9 number object",
+                "string string 1 number object"})
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
