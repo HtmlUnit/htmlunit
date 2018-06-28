@@ -981,7 +981,7 @@ public enum BrowserVersionFeatures {
     JS_INNER_TEXT_LF,
 
     /** Indicates that innerText setter supports null values. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     JS_INNER_TEXT_VALUE_NULL,
 
     /** Ignore negative selection starts. */
