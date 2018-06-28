@@ -989,7 +989,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
-    @BrowserFeature({CHROME, FF52})
+    @BrowserFeature({CHROME, FF})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,
 
     /** Setting the type property of an input converts the type to lowercase. */

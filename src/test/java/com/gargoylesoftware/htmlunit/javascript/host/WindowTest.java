@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
@@ -1192,7 +1192,8 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
-            CHROME = "not available")
+            CHROME = "not available",
+            FF60 = "not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1251,8 +1252,9 @@ public class WindowTest extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "result", "finished"},
-            CHROME = {"undefined", "not available"})
-    @NotYetImplemented({FF, IE})
+            CHROME = {"undefined", "not available"},
+            FF60 = {"undefined", "not available"})
+    @NotYetImplemented({FF52, IE})
     public void showModalDialogWithButton() throws Exception {
         final String html1
             = "<html><head>\n"

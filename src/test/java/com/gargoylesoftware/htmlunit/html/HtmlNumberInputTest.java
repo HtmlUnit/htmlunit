@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -66,13 +67,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebElement t = driver.findElement(By.id("t"));
         t.sendKeys("123");
         assertEquals("123", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("12", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("1", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("", t.getAttribute("value"));
-        t.sendKeys("\b");
+        t.sendKeys(Keys.BACK_SPACE);
         assertEquals("", t.getAttribute("value"));
     }
 
@@ -523,10 +524,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "3,11", "3,10"},
-            CHROME = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
-            FF52 = {"null,null", "null,null", "exception",
+    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "3,3", "3,10"})
     public void selection2_1() throws Exception {
@@ -537,10 +535,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
-            CHROME = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
-            FF52 = {"null,null", "null,null", "exception",
+    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
@@ -551,10 +546,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "10,11", "5,5"},
-            CHROME = {"null,null", "null,null", "exception",
-                        "null,null", "exception", "null,null"},
-            FF52 = {"null,null", "null,null", "exception",
+    @Alerts(DEFAULT = {"null,null", "null,null", "exception",
                         "null,null", "exception", "null,null"},
             IE = {"0,0", "0,0", "10,10", "5,5"})
     public void selection2_3() throws Exception {
@@ -600,9 +592,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "4,5", "10,10", "4,4", "1,1"},
-            CHROME = {"null,null", "exception"},
-            FF52 = {"null,null", "exception"},
+    @Alerts(DEFAULT = {"null,null", "exception"},
             IE = {"0,0", "4,5", "0,0", "0,0", "0,0"})
     public void selectionOnUpdate() throws Exception {
         final String html = "<html>\n"
@@ -652,7 +642,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("t"));
 
-        field.sendKeys("\n");
+        field.sendKeys(Keys.ENTER);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
