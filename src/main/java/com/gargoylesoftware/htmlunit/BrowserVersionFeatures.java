@@ -831,7 +831,7 @@ public enum BrowserVersionFeatures {
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
 
     /** DOMTokenList removed all whitespace chars during edit. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF60, IE})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
     /** DOMTokenList removed all whitespace chars during remove. */
