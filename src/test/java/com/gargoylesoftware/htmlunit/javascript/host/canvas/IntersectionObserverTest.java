@@ -25,16 +25,42 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Unit tests for {@link IntersectionObserver}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class IntersectionObserverTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF52 = "false",
+            IE = "false")
+    public void inWindow() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      alert('IntersectionObserver' in window);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {},
-            CHROME = {"function", "function", "function", "function"})
+    @Alerts(DEFAULT = "no IntersectionObserver",
+            CHROME = {"function", "function", "function", "function"},
+            FF60 = {"function", "function", "function", "function"})
     public void functions() throws Exception {
         final String html =
             "<html><head><script>\n"
@@ -46,7 +72,7 @@ public class IntersectionObserverTest extends WebDriverTestCase {
             + "    alert(typeof observer.unobserve);\n"
             + "    alert(typeof observer.disconnect);\n"
             + "    alert(typeof observer.takeRecords);\n"
-            + " }\n"
+            + "  } else { alert('no IntersectionObserver'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
