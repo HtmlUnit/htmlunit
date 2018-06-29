@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MENU_TYPE_PASS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -62,12 +63,17 @@ public class HTMLMenuElement extends HTMLListElement {
         }
 
         final String type = getDomNodeOrDie().getAttributeDirect("type");
+        if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
+            return type;
+        }
+
         if ("context".equalsIgnoreCase(type)) {
             return "context";
         }
         if ("toolbar".equalsIgnoreCase(type)) {
             return "toolbar";
         }
+
         return "list";
     }
 
@@ -83,6 +89,11 @@ public class HTMLMenuElement extends HTMLListElement {
                 return;
             }
             throw Context.reportRuntimeError("Cannot set the type property to invalid value: '" + type + "'");
+        }
+
+        if (getBrowserVersion().hasFeature(JS_MENU_TYPE_PASS)) {
+            getDomNodeOrDie().setAttribute("type", type);
+            return;
         }
 
         if ("context".equalsIgnoreCase(type)) {
