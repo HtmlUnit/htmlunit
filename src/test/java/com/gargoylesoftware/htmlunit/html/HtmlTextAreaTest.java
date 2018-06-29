@@ -279,4 +279,17 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("tt", t.getText());
     }
+
+    /**
+     * Make sure removeFocus does not throw.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void removeFocus() throws Exception {
+        final String html = "<html><head></head><body><textarea id='t'></textarea></body></html>";
+        final HtmlPage page = loadPage(html, null);
+        final HtmlTextArea t = page.getHtmlElementById("t");
+        t.removeFocus();
+    }
 }

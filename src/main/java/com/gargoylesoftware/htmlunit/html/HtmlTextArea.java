@@ -512,7 +512,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     public void removeFocus() {
         super.removeFocus();
-        if (!valueAtFocus_.equals(getText())) {
+        if (valueAtFocus_ != null && !valueAtFocus_.equals(getText())) {
             HtmlInput.executeOnChangeHandlerIfAppropriate(this);
         }
         valueAtFocus_ = null;

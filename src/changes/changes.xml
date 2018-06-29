@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.32" date="xx 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added">
+            <action type="add" dev="rbri">
+                FF60 ESR support.
+            </action>
+            <action type="remove" dev="rbri">
+                FF45 support removed.
+            </action>
+            <action type="fix" dev="rbri" issue="1964">
+                NPE in HtmlTextArea.removeFocus().
+            </action>
             <action type="fix" dev="rbri" issue="1970">
                 WebClient default request header should not overwrite request-specific ones.
             </action>
