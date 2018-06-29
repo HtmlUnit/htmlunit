@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -133,6 +135,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @BuggyWebDriver(FF60)
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -188,6 +191,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
+    @BuggyWebDriver(FF60)
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -300,8 +304,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"13", "13", "13"},
-            FF52 = {"0", "13", "13"},
-            FF60 = {"10", "0", "10"})
+            FF = {"0", "13", "13"})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -321,7 +324,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("t"));
 
-        field.sendKeys("\n");
+        field.sendKeys(Keys.ENTER);
 
         verifyAlerts(driver, getExpectedAlerts());
     }
