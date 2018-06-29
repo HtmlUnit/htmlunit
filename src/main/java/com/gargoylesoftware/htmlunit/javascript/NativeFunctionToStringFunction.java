@@ -103,6 +103,7 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
             return s.replace("function anonymous() {", "function anonymous(\n) {");
         }
     }
+
     static class NativeFunctionToStringFunctionFF extends FunctionWrapper {
 
         NativeFunctionToStringFunctionFF(final Function wrapped) {
