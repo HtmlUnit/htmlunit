@@ -24,8 +24,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -155,6 +155,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  * @author Carsten Steul
  * @author Colin Alworth
+ * @author Atsushi Nakagawa
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
@@ -483,32 +484,77 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * The invocation occurs only if the window is opened after the delay
      * and does not contain an other page than the one that originated the setTimeout.
      *
-     * @param code specifies the function pointer or string that indicates the code to be executed
-     *        when the specified interval has elapsed
-     * @param timeout specifies the number of milliseconds
-     * @param language specifies language
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
+     * MDN web docs</a>
+     *
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
      * @return the id of the created timer
      */
     @JsxFunction
-    public int setTimeout(final Object code, int timeout, final Object language) {
+    public static Object setTimeout(final Context context, final Scriptable thisObj,
+            final Object[] args, final Function function) {
+        if (args.length < 1) {
+            throw ScriptRuntime.typeError("Function not provided");
+        }
+
+        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final Object[] params = (args.length > 2)
+                ? Arrays.copyOfRange(args, 2, args.length)
+                : ScriptRuntime.emptyArgs;
+        return ((Window) thisObj).setTimeoutIntervalImpl(args[0], timeout, true, params);
+    }
+
+    /**
+     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
+     *
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
+     * MDN web docs</a>
+     * @param context the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param function the function
+     * @return the id of the created interval
+     */
+    @JsxFunction
+    public static Object setInterval(final Context context, final Scriptable thisObj,
+            final Object[] args, final Function function) {
+        if (args.length < 1) {
+            throw ScriptRuntime.typeError("Function not provided");
+        }
+
+        final int timeout = ScriptRuntime.toInt32((args.length > 1) ? args[1] : Undefined.instance);
+        final Object[] params = (args.length > 2)
+                ? Arrays.copyOfRange(args, 2, args.length)
+                : ScriptRuntime.emptyArgs;
+        return ((Window) thisObj).setTimeoutIntervalImpl(args[0], timeout, false, params);
+    }
+
+    private int setTimeoutIntervalImpl(final Object code, int timeout, final boolean isTimeout, final Object[] params) {
         if (timeout < MIN_TIMER_DELAY) {
             timeout = MIN_TIMER_DELAY;
         }
-        if (code == null) {
-            throw Context.reportRuntimeError("Function not provided.");
-        }
 
-        final int id;
         final WebWindow webWindow = getWebWindow();
         final Page page = (Page) getDomNodeOrNull();
+        Integer period = null;
+        if (!isTimeout) {
+            period = Integer.valueOf(timeout);
+        }
+
         if (code instanceof String) {
             final String s = (String) code;
-            final String description = "window.setTimeout(" + s + ", " + timeout + ")";
+            final String description = "window.set"
+                                        + (isTimeout ? "Timeout" : "Interval")
+                                        + "(" + s + ", " + timeout + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, null, description, webWindow, s);
-            id = webWindow.getJobManager().addJob(job, page);
+                    createJavaScriptJob(timeout, period, description, webWindow, s);
+            return webWindow.getJobManager().addJob(job, page);
         }
-        else if (code instanceof Function) {
+
+        if (code instanceof Function) {
             final Function f = (Function) code;
             final String functionName;
             if (f instanceof FunctionObject) {
@@ -518,15 +564,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 functionName = String.valueOf(f); // can this happen?
             }
 
-            final String description = "window.setTimeout(" + functionName + ", " + timeout + ")";
+            final String description = "window.set"
+                                        + (isTimeout ? "Timeout" : "Interval")
+                                        + "(" + functionName + ", " + timeout + ")";
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                    createJavaScriptJob(timeout, null, description, webWindow, f);
-            id = webWindow.getJobManager().addJob(job, page);
+                    createJavaScriptJob(timeout, period, description, webWindow, f, params);
+            return webWindow.getJobManager().addJob(job, page);
         }
-        else {
-            throw Context.reportRuntimeError("Unknown type for function.");
-        }
-        return id;
+
+        throw Context.reportRuntimeError("Unknown type for function.");
     }
 
     /**
@@ -540,6 +586,21 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             LOG.debug("clearTimeout(" + timeoutId + ")");
         }
         getWebWindow().getJobManager().removeJob(timeoutId);
+    }
+
+    /**
+     * Cancels the interval previously started using the {@link #setInterval(Object, int, Object)} method.
+     * Current implementation does nothing.
+     * @param intervalID specifies the interval to cancel as returned by the
+     *        {@link #setInterval(Object, int, Object)} method
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
+     */
+    @JsxFunction
+    public void clearInterval(final int intervalID) {
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("clearInterval(" + intervalID + ")");
+        }
+        getWebWindow().getJobManager().removeJob(intervalID);
     }
 
     /**
@@ -1484,61 +1545,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         if (statusHandler != null) {
             statusHandler.statusMessageChanged(webWindow_.getEnclosedPage(), message);
         }
-    }
-
-    /**
-     * Sets a chunk of JavaScript to be invoked each time a specified number of milliseconds has elapsed.
-     *
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536749.aspx">MSDN documentation</a>
-     * @param code specifies the function pointer or string that indicates the code to be executed
-     *        when the specified interval has elapsed
-     * @param timeout specifies the number of milliseconds
-     * @param language specifies language
-     * @return the id of the created interval
-     */
-    @JsxFunction
-    public int setInterval(final Object code, int timeout, final Object language) {
-        if (timeout < MIN_TIMER_DELAY) {
-            timeout = MIN_TIMER_DELAY;
-        }
-        final int id;
-        final WebWindow w = getWebWindow();
-        final Page page = (Page) getDomNodeOrNull();
-        final String description = "window.setInterval(" + timeout + ")";
-        if (code == null) {
-            throw Context.reportRuntimeError("Function not provided.");
-        }
-        else if (code instanceof String) {
-            final String s = (String) code;
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, s);
-            id = w.getJobManager().addJob(job, page);
-        }
-        else if (code instanceof Function) {
-            final Function f = (Function) code;
-            final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
-                createJavaScriptJob(timeout, Integer.valueOf(timeout), description, w, f);
-            id = w.getJobManager().addJob(job, page);
-        }
-        else {
-            throw Context.reportRuntimeError("Unknown type for function.");
-        }
-        return id;
-    }
-
-    /**
-     * Cancels the interval previously started using the {@link #setInterval(Object, int, Object)} method.
-     * Current implementation does nothing.
-     * @param intervalID specifies the interval to cancel as returned by the
-     *        {@link #setInterval(Object, int, Object)} method
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
-     */
-    @JsxFunction
-    public void clearInterval(final int intervalID) {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("clearInterval(" + intervalID + ")");
-        }
-        getWebWindow().getJobManager().removeJob(intervalID);
     }
 
     /**

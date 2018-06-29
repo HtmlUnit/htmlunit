@@ -28,6 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * JavaScript engine.
  *
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 public class BackgroundJavaScriptFactory {
 
@@ -73,13 +74,14 @@ public class BackgroundJavaScriptFactory {
      * @param label the label for the job
      * @param window the window to which the job belongs
      * @param function the JavaScript code to execute
+     * @param args the arguments to pass into the function call
      *
      * @return JavaScriptJob the created job
      */
     public JavaScriptFunctionJob createJavaScriptJob(final int initialDelay,
             final Integer period, final String label,
-            final WebWindow window, final Function function) {
-        return new JavaScriptFunctionJob(initialDelay, period, label, window, function);
+            final WebWindow window, final Function function, final Object[] args) {
+        return new JavaScriptFunctionJob(initialDelay, period, label, window, function, args);
     }
 
     /**

@@ -24,11 +24,14 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 /**
  * A {@link JavaScriptJob} created from a {@link Function} object.
  * @author Brad Clarke
+ * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 class JavaScriptFunctionJob extends JavaScriptExecutionJob {
 
     /** The JavaScript code to execute. */
     private final Function function_;
+    private final Object[] args_;
 
     /**
      * Creates a new JavaScript execution job, where the JavaScript code to execute is a function.
@@ -37,11 +40,13 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
      * @param label the label for the job
      * @param window the window to which the job belongs
      * @param function the JavaScript code to execute
+     * @param args the arguments to pass into the function call
      */
     JavaScriptFunctionJob(final int initialDelay, final Integer period, final String label,
-        final WebWindow window, final Function function) {
+        final WebWindow window, final Function function, final Object[] args) {
         super(initialDelay, period, label, window);
         function_ = function;
+        args_ = args;
     }
 
     /** {@inheritDoc} */
@@ -49,7 +54,7 @@ class JavaScriptFunctionJob extends JavaScriptExecutionJob {
     protected void runJavaScript(final HtmlPage page) {
         final DomElement doc = page.getDocumentElement();
         final Scriptable scriptable = page.getEnclosingWindow().getScriptableObject();
-        page.executeJavaScriptFunction(function_, scriptable, new Object[0], doc);
+        page.executeJavaScriptFunction(function_, scriptable, args_, doc);
     }
 
 }
