@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.general;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -415,6 +418,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             FF60 = {"1", "0", "1", "1", "0", "1"})
+    @NotYetImplemented(FF60)
     public void dialog() throws Exception {
         loadPageWithAlerts2(test("dialog"));
     }

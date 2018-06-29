@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_COMPACT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NL;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -55,6 +56,13 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
             final Function newToString = new NativeFunctionToStringFunctionChrome(originalToString);
             ScriptableObject.putProperty(fnPrototype, "toString", newToString);
         }
+        else if (browserVersion.hasFeature(JS_NATIVE_FUNCTION_TOSTRING_NL)) {
+            final ScriptableObject fnPrototype =
+                    (ScriptableObject) ScriptableObject.getClassPrototype(window, "Function");
+            final Function originalToString = (Function) ScriptableObject.getProperty(fnPrototype, "toString");
+            final Function newToString = new NativeFunctionToStringFunctionFF(originalToString);
+            ScriptableObject.putProperty(fnPrototype, "toString", newToString);
+        }
     }
 
     NativeFunctionToStringFunction(final Function wrapped) {
@@ -92,7 +100,22 @@ class NativeFunctionToStringFunction extends FunctionWrapper {
                 final String functionName = ((BaseFunction) thisObj).getFunctionName();
                 return "function " + functionName + "() { [native code] }";
             }
-            return s;
+            return s.replace("function anonymous() {", "function anonymous(\n) {");
+        }
+    }
+    static class NativeFunctionToStringFunctionFF extends FunctionWrapper {
+
+        NativeFunctionToStringFunctionFF(final Function wrapped) {
+            super(wrapped);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+            final String s = (String) super.call(cx, scope, thisObj, args);
+            return s.replace("function anonymous() {", "function anonymous(\n) {");
         }
     }
 }

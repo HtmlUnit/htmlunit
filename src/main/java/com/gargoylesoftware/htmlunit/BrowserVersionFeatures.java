@@ -1093,6 +1093,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_NATIVE_FUNCTION_TOSTRING_NEW_LINE,
 
+    /** Indicates if the String representation of a native function has a newline for empty parameter list. */
+    @BrowserFeature(FF60)
+    JS_NATIVE_FUNCTION_TOSTRING_NL,
+
     /** Navigator.doNotTrack returns unspecified if not set. */
     @BrowserFeature(FF)
     JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED,
