@@ -156,7 +156,7 @@ public class BrowserParameterizedRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.CHROME, false, tests));
             }
-            if (browsers.contains("hu_ff60")) {
+            if (browsers.contains("hu-ff60")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX_60, false, tests));
             }
