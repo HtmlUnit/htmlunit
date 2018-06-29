@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -85,13 +88,13 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
                         "1:null/0/null/0/true/undefined/0/",
-                        "2:s2/0/s2/1/false/undefined/1/xyz/xyz"},
+                        "2:s2/0/s2/1/false/undefined/1/xyz[xyz"},
             CHROME = {
                         "1:null/0/null/0/true/None/0/",
-                        "2:s2/0/s2/1/false/Range/1/xyz/xyz"},
+                        "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
             FF60 = {
                     "1:null/0/null/0/true/None/0/",
-                    "2:s2/0/s2/1/false/Range/1/xyz/xyz"})
+                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"})
     public void selectAllChildren() throws Exception {
         final String jsSnippet = ""
             + "    alertSelection(selection);\n"
@@ -106,21 +109,21 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "2:s2/0/s3/1/false/undefined/1/xyzfoo/xyzfoo",
-                        "3:s2/0/s3/2/false/undefined/1/xyzfoo---/xyzfoo---",
-                        "4:s2/0/s3/3/false/undefined/1/xyzfoo---foo/xyzfoo---foo"},
+                        "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+                        "2:s2/0/s3/1/false/undefined/1/xyzfoo[xyzfoo",
+                        "3:s2/0/s3/2/false/undefined/1/xyzfoo---[xyzfoo---",
+                        "4:s2/0/s3/3/false/undefined/1/xyzfoo---foo[xyzfoo---foo"},
             CHROME = {
-                        "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                        "2:s2/0/s3/1/false/Range/1/xyzfoo/xyzfoo",
-                        "3:s2/0/s3/2/false/Range/1/xyzfoo---/xyzfoo---",
-                        "4:s2/0/s3/3/false/Range/1/xyzfoo---foo/xyzfoo---foo"},
+                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                        "2:s2/0/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                        "3:s2/0/s3/2/false/Range/1/xyzfoo---[xyzfoo---",
+                        "4:s2/0/s3/3/false/Range/1/xyzfoo---foo[xyzfoo---foo"},
             FF60 = {
-                        "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                        "2:s2/0/s3/1/false/Range/1/xyzfoo/xyzfoo",
-                        "3:s2/0/s3/2/false/Range/1/xyzfoo---/xyzfoo---",
-                        "4:s2/0/s3/3/false/Range/1/xyzfoo---foo/xyzfoo---foo"},
-            IE = {"1:s2/0/s2/1/false/undefined/1/xyz/xyz",
+                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                        "2:s2/0/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                        "3:s2/0/s3/2/false/Range/1/xyzfoo---[xyzfoo---",
+                        "4:s2/0/s3/3/false/Range/1/xyzfoo---foo[xyzfoo---foo"},
+            IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz",
                         "selection.extend not available"})
     public void extend() throws Exception {
         final String jsSnippet = ""
@@ -143,14 +146,14 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "2:s2/0/s2/0/true/undefined/1//"},
+                        "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+                        "2:s2/0/s2/0/true/undefined/1/["},
             CHROME = {
-                        "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                        "2:s2/0/s2/0/true/Caret/1//"},
+                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                        "2:s2/0/s2/0/true/Caret/1/["},
             FF60 = {
-                    "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                    "2:s2/0/s2/0/true/Caret/1//"})
+                    "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/0/s2/0/true/Caret/1/["})
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -166,14 +169,14 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/undefined/1/xyz/xyz",
-                        "2:s2/1/s2/1/true/undefined/1//"},
+                        "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+                        "2:s2/1/s2/1/true/undefined/1/["},
             CHROME = {
-                        "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                        "2:s2/1/s2/1/true/Caret/1//"},
+                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                        "2:s2/1/s2/1/true/Caret/1/["},
             FF60 = {
-                    "1:s2/0/s2/1/false/Range/1/xyz/xyz",
-                    "2:s2/1/s2/1/true/Caret/1//"})
+                    "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/1/s2/1/true/Caret/1/["})
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
             + "    selection.selectAllChildren(s2);\n"
@@ -188,30 +191,227 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                        "2:null/0/null/0/true/None/0/"},
+            FF52 = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz", "exception"},
+            IE = {"1:s2/0/s2/1/false/undefined/1/xyz[xyz", "exception"})
+    public void empty() throws Exception {
+        final String jsSnippet = ""
+            + "    selection.selectAllChildren(s2);\n"
+            + "    alertSelection(selection);\n"
+            + "    selection.empty();\n"
+            + "    alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {
                         "1:null/0/null/0/true/undefined/0/",
                         "2:null/0/null/0/true/undefined/0/",
-                        "3:s2/1/s3/1/false/undefined/1/foo/foo",
-                        "4:null/0/null/0/true/undefined/0/"},
+                        "3:s2/1/s3/1/false/undefined/1/foo[foo"},
             CHROME = {
                         "1:null/0/null/0/true/None/0/",
                         "2:null/0/null/0/true/None/0/",
-                        "3:s2/1/s3/1/false/Range/1/foo/foo",
-                        "4:null/0/null/0/true/None/0/"},
+                        "3:s2/1/s3/1/false/Range/1/foo[foo"},
             FF60 = {
                         "1:null/0/null/0/true/None/0/",
                         "2:null/0/null/0/true/None/0/",
-                        "3:s2/1/s3/1/false/Range/1//foo",
-                        "4:null/0/null/0/true/None/0/"})
-    public void range() throws Exception {
+                        "3:s2/1/s3/1/false/Range/1/[foo"})
+    @NotYetImplemented(FF60)
+    public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
+
             + "      var range = document.createRange();\n"
             + "      range.setStart(s2, 1);\n"
             + "      range.setEnd(s3, 1);\n"
             + "      alertSelection(selection);\n"
+
+            + "      selection.addRange(range);\n"
+            + "      alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                        "1:null/0/null/0/true/undefined/0/",
+                        "2:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
+                        "3:null/0/null/0/true/undefined/0/"},
+            CHROME = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                        "3:null/0/null/0/true/None/0/"},
+            FF60 = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/1/s3/1/false/Range/1/[xyzfoo",
+                        "3:null/0/null/0/true/None/0/"})
+    @NotYetImplemented(FF60)
+    public void removeAllRanges() throws Exception {
+        final String jsSnippet = ""
+            + "      alertSelection(selection);\n"
+
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s1, 1);\n"
+            + "      range.setEnd(s3, 1);\n"
             + "      selection.addRange(range);\n"
             + "      alertSelection(selection);\n"
+
+            + "      selection.removeAllRanges();\n"
+            + "      alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * The toString impl in FF60 seems to be buggy.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                        "1:s1/1/s3/1/false/undefined/1/xyzfoo[xyzfoo",
+                        "2:null/0/null/0/true/undefined/0/"},
+            CHROME = {
+                        "1:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
+                        "2:null/0/null/0/true/None/0/"},
+            FF60 = {
+                        "1:s1/1/s3/1/false/Range/1/[xyzfoo",
+                        "2:null/0/null/0/true/None/0/"})
+    @NotYetImplemented(FF60)
+    public void removeAllRanges2() throws Exception {
+        final String jsSnippet = ""
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s1, 1);\n"
+            + "      range.setEnd(s3, 1);\n"
+            + "      selection.addRange(range);\n"
+            + "      alertSelection(selection);\n"
+
+            + "      selection.removeAllRanges();\n"
+            + "      alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                        "1:null/0/null/0/true/undefined/0/",
+                        "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                        "3:null/0/null/0/true/undefined/0/"},
+            CHROME = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/0/s1/1/false/Range/1/abc[abc",
+                        "3:null/0/null/0/true/None/0/"},
+            FF60 = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/1/s3/1/false/Range/2/[abc[xyzfoo",
+                        "3:null/0/null/0/true/None/0/"},
+            FF52 = {
+                    "1:null/0/null/0/true/undefined/0/",
+                    "2:s1/1/s3/1/false/undefined/2/abcxyzfoo[abc[xyzfoo",
+                    "3:null/0/null/0/true/undefined/0/"})
+    @NotYetImplemented
+    public void selectAllChildrenAddRange() throws Exception {
+        final String jsSnippet = ""
+            + "      alertSelection(selection);\n"
+
+            + "      selection.selectAllChildren(s1);\n"
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s1, 1);\n"
+            + "      range.setEnd(s3, 1);\n"
+            + "      selection.addRange(range);\n"
+            + "      alertSelection(selection);\n"
+
+            + "      selection.removeAllRanges();\n"
+            + "      alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/0/s1/1/false/Range/1/abc[abc",
+                        "3:null/0/null/0/true/None/0/"},
+            IE = {
+                    "1:null/0/null/0/true/undefined/0/",
+                    "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                    "3:null/0/null/0/true/undefined/0/"},
+            FF52 = {
+                    "1:null/0/null/0/true/undefined/0/",
+                    "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                    "3:null/0/null/0/true/undefined/0/"})
+    public void addRangeSelectAllChildren() throws Exception {
+        final String jsSnippet = ""
+            + "      alertSelection(selection);\n"
+
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s1, 1);\n"
+            + "      range.setEnd(s3, 1);\n"
+            + "      selection.addRange(range);\n"
+            + "      selection.selectAllChildren(s1);\n"
+            + "      alertSelection(selection);\n"
+
+            + "      selection.removeAllRanges();\n"
+            + "      alertSelection(selection);\n";
+
+        tester(jsSnippet);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {
+                        "1:null/0/null/0/true/undefined/0/",
+                        "2:s1/0/s1/1/false/undefined/1/abc[abc",
+                        "3:s1/0/s1/1/false/undefined/1/abc[abc",
+                        "4:null/0/null/0/true/undefined/0/"},
+            CHROME = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/0/s1/1/false/Range/1/abc[abc",
+                        "3:s1/0/s1/1/false/Range/1/abc[abc",
+                        "4:null/0/null/0/true/None/0/"},
+            FF60 = {
+                        "1:null/0/null/0/true/None/0/",
+                        "2:s1/1/s2/1/false/Range/2/[abc[xyz",
+                        "3:s2/1/s3/3/false/Range/3/[abc[xyz[foo---foo",
+                        "4:null/0/null/0/true/None/0/"},
+            FF52 = {
+                    "1:null/0/null/0/true/undefined/0/",
+                    "2:s1/1/s2/1/false/undefined/2/abcxyz[abc[xyz",
+                    "3:s2/1/s3/3/false/undefined/3/abcxyzfoo---foo[abc[xyz[foo---foo",
+                    "4:null/0/null/0/true/undefined/0/"})
+    @NotYetImplemented
+    public void addRangeAddRange() throws Exception {
+        final String jsSnippet = ""
+            + "      alertSelection(selection);\n"
+
+            + "      selection.selectAllChildren(s1);\n"
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s1, 1);\n"
+            + "      range.setEnd(s2, 1);\n"
+            + "      selection.addRange(range);\n"
+            + "      alertSelection(selection);\n"
+
+            + "      var range = document.createRange();\n"
+            + "      range.setStart(s2, 1);\n"
+            + "      range.setEnd(s3, 3);\n"
+            + "      selection.addRange(range);\n"
+            + "      alertSelection(selection);\n"
+
             + "      selection.removeAllRanges();\n"
             + "      alertSelection(selection);\n";
 
@@ -225,15 +425,15 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {
-                    "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo/yzfo",
+                    "1:[object Text]/1/[object Text]/2/false/undefined/1/yzfo[yzfo",
                     "2:null/0/null/0/true/undefined/0/",
                     "false", "true"},
             CHROME = {
-                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
+                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
                     "2:null/0/null/0/true/None/0/",
                     "false", "true"},
             FF60 = {
-                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo/yzfo",
+                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
                     "2:null/0/null/0/true/None/0/",
                     "false", "true"})
     public void aLittleBitOfEverything_removeRange() throws Exception {
@@ -275,7 +475,7 @@ public class SelectionTest extends WebDriverTestCase {
             + "    var msg = (x++) + ':' + anchorNode + '/' + s.anchorOffset + '/' + focusNode + '/' +\n"
             + "       s.focusOffset + '/' + s.isCollapsed + '/' + s.type + '/' + s.rangeCount + '/' + s;\n"
             + "    for(var i = 0; i < s.rangeCount; i++) {\n"
-            + "      msg += '/' + s.getRangeAt(i);\n"
+            + "      msg += '[' + s.getRangeAt(i);\n"
             + "    }\n"
             + "    alert(msg);\n"
             + "  }\n"

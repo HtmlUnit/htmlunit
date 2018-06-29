@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class Selection2Test extends SimpleWebTestCase {
@@ -232,6 +233,7 @@ public class Selection2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "exception", "undefined"},
+            FF60 = {"None", "None"},
             CHROME = {"None", "None"})
     public void empty() throws Exception {
         test("try{selection.empty()}catch(e){alert('exception')}", "selection.type", "x ? x : 'undefined'");

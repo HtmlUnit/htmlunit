@@ -42,6 +42,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class Selection extends SimpleScriptable {
@@ -261,7 +262,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none.
      */
-    @JsxFunction(CHROME)
+    @JsxFunction({CHROME, FF60})
     public void empty() {
         removeAllRanges();
     }
