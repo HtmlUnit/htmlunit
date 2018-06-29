@@ -18,9 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_POP_STATE_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -89,6 +91,20 @@ public class PopStateEvent extends Event {
         else {
             state_ = state;
         }
+    }
+
+    /**
+     * Initializes this event.
+     * @param type the event type
+     * @param bubbles whether or not the event should bubble
+     * @param cancelable whether or not the event the event should be cancelable
+     * @param state the state
+     */
+    @JsxFunction(IE)
+    public void initPopStateEvent(final String type, final boolean bubbles,
+            final boolean cancelable, final Object state) {
+        initEvent(type, bubbles, cancelable);
+        state_ = state;
     }
 
     /**

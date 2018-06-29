@@ -230,6 +230,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     EVENT_ONMOUSEUP_NOT_FOR_SELECT_OPTION,
 
+    /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
+    @BrowserFeature(FF60)
+    EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
+
     /** Supports event type 'BeforeUnloadEvent'. */
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_BEFOREUNLOADEVENT,

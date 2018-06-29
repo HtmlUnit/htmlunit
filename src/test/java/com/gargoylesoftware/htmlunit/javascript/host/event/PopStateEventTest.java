@@ -100,7 +100,8 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
+            FF60 = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -121,7 +122,8 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object PopStateEvent]", "null", "", "false", "false", "null"})
+    @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
+            FF60 = "exception")
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -143,14 +145,48 @@ public class PopStateEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
-    @NotYetImplemented({IE, CHROME, FF52})
+    @Alerts(DEFAULT = "dispatched",
+            FF60 = "exception ctor")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('PopStateEvent');\n"
+            + "      event.initEvent('', true, true);\n"
+            + "    } catch (e) { alert('exception ctor'); return; }\n"
+
+            + "    try {\n"
+            + "      dispatchEvent(event);\n"
+            + "      alert('dispatched');\n"
+            + "    } catch (e) { alert('exception' + e) }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
+            + "  try {\n"
+            + "    window.addEventListener('popstate',dump);\n"
+            + "  } catch (e) { }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
+            FF60 = "exception ctor")
+    @NotYetImplemented({CHROME, FF52, IE})
+    public void dispatchEventWithoutInit() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('PopStateEvent');\n"
+            + "    } catch (e) { alert('exception ctor') }\n"
+
+            + "    try {\n"
             + "      dispatchEvent(event);\n"
             + "      alert('dispatched');\n"
             + "    } catch (e) { alert('exception') }\n"
@@ -159,6 +195,35 @@ public class PopStateEventTest extends WebDriverTestCase {
             + "  try {\n"
             + "    window.addEventListener('popstate',dump);\n"
             + "  } catch (e) { }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "no initPopStateEvent",
+            FF60 = "exception ctor",
+            IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "html"})
+    public void initPopStateEvent() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('PopStateEvent');\n"
+            + "    } catch (e) { alert('exception ctor') }\n"
+
+            + "    try {\n"
+            + "      if (event.initPopStateEvent) {\n"
+            + "        event.initPopStateEvent('PopState', true, false, 'html');\n"
+            + "        dump(event);\n"
+            + "      } else { alert('no initPopStateEvent'); }\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
