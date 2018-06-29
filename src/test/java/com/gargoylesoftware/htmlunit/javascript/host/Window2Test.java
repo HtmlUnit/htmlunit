@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -880,6 +881,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"undefined", "undefined"},
             FF52 = {"11", "91"},
             FF60 = {"11", "83"})
+    @NotYetImplemented(FF52)
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1144,14 +1146,11 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {
                 "string string 7 number string",
-                "string string 8 number object",
-                "string string 9 number object",
-                "string string 1 number object"},
+                "string string 8 number object"},
             FF = {
                 "string string 0 number string",
-                "string string 0 number object",
-                "string string 9 number object",
-                "string string 1 number object"})
+                "string string 0 number object"})
+    @NotYetImplemented(FF)
     public void onErrorExceptionInstance() throws Exception {
         final String html
                 = "<html>\n"
@@ -1163,6 +1162,29 @@ public class Window2Test extends WebDriverTestCase {
                 + "</script>\n"
                 + "<script>throw 'string';</script>\n"
                 + "<script>throw {'object':'property'};</script>\n"
+                + "</html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                    .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"string string 7 number object", "string string 1 number object"})
+    public void onErrorExceptionInstance2() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<script>\n"
+                + "  window.onerror = function(messageOrEvent, source, lineno, colno, error) {\n"
+                + "    alert(typeof messageOrEvent + ' ' + typeof source + ' '"
+                                + " + lineno + ' ' + typeof colno + ' ' + typeof error);\n"
+                + "  };\n"
+                + "</script>\n"
                 + "<script>does.not.exist();</script>\n"
                 + "<script>eval('syntax[error');</script>\n"
                 + "</html>";

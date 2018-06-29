@@ -1841,7 +1841,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter(FF)
     public int getMozInnerScreenY() {
-        return 91;
+        return 83;
     }
 
     /**
