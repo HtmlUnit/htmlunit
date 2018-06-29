@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -49,7 +50,8 @@ public class HtmlWeekInput extends HtmlInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                    && !hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValueAttribute(newValue);

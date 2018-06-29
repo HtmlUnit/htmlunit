@@ -443,6 +443,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF60, IE})
     HTMLINPUT_FILE_VALUE_FAKEPATH,
 
+    /** HTMLInputElement date and time types are supported. */
+    @BrowserFeature({CHROME, FF60})
+    HTMLINPUT_TYPE_DATETIME_SUPPORTED,
+
+    /** HTMLInputElement date and time types are supported. */
+    @BrowserFeature(FF60)
+    HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED,
+
     /** Should the HTMLElement of {@code keygen} have no end tag. */
     @BrowserFeature(IE)
     HTMLKEYGEN_END_TAG_FORBIDDEN,
@@ -1000,7 +1008,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_INPUT_SET_TYPE_LOWERCASE,
 
-    /** Setting the value of an Input Date to blank will result in an empty value. */
+    /** Setting the value of an Input Date will check for correct format. */
     @BrowserFeature({CHROME, FF60})
     JS_INPUT_SET_VALUE_DATE_SUPPORTED,
 

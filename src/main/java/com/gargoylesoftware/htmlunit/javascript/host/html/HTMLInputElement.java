@@ -18,16 +18,16 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_VALUE_FAKEPATH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -100,10 +100,21 @@ public class HTMLInputElement extends FormField {
         if (!InputElementFactory.isSupported(type)) {
             type = "text";
         }
-        else if (!browserVersion.hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+        else if (!browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)) {
             switch (type) {
                 case "date":
                 case "time":
+                case "datetime-local":
+                case "month":
+                case "week":
+                    type = "text";
+                    break;
+
+                default:
+            }
+        }
+        else if (browserVersion.hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)) {
+            switch (type) {
                 case "datetime-local":
                 case "month":
                 case "week":
@@ -425,7 +436,7 @@ public class HTMLInputElement extends FormField {
      * Gets the {@code minLength}.
      * @return the {@code minLength}
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter({CHROME, FF})
     public int getMinLength() {
         final String attrValue = getDomNodeOrDie().getAttribute("minLength");
         return NumberUtils.toInt(attrValue, -1);
@@ -435,7 +446,7 @@ public class HTMLInputElement extends FormField {
      * Sets the value of {@code minLength} attribute.
      * @param length the new value
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter({CHROME, FF})
     public void setMinLength(final int length) {
         getDomNodeOrDie().setMinLength(length);
     }

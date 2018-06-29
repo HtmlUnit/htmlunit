@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -49,7 +49,7 @@ public class HtmlTimeInput extends HtmlInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValueAttribute(newValue);

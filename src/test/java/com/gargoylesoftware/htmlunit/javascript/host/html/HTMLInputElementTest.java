@@ -267,7 +267,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html, 7777777);
     }
 
     /**
