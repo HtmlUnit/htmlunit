@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSER
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -720,7 +719,7 @@ public class Node extends EventTarget {
      * Returns the namespace prefix.
      * @return the namespace prefix
      */
-    @JsxGetter({FF60, IE})
+    @JsxGetter(IE)
     public Object getPrefix() {
         return getDomNodeOrDie().getPrefix();
     }
@@ -729,7 +728,7 @@ public class Node extends EventTarget {
      * Returns the local name of this attribute.
      * @return the local name of this attribute
      */
-    @JsxGetter({FF60, IE})
+    @JsxGetter(IE)
     public Object getLocalName() {
         return getDomNodeOrDie().getLocalName();
     }
@@ -738,7 +737,7 @@ public class Node extends EventTarget {
      * Returns the URI that identifies an XML namespace.
      * @return the URI that identifies an XML namespace
      */
-    @JsxGetter({FF60, IE})
+    @JsxGetter(IE)
     public Object getNamespaceURI() {
         return getDomNodeOrDie().getNamespaceURI();
     }

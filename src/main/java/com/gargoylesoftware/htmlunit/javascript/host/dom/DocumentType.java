@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCTYPE_NO
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.apache.commons.lang3.StringUtils;
@@ -135,33 +134,6 @@ public class DocumentType extends Node {
             return null;
         }
         return Undefined.instance;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(FF60)
-    public Object getPrefix() {
-        return super.getPrefix();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(FF60)
-    public Object getLocalName() {
-        return super.getLocalName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @JsxGetter(FF60)
-    public Object getNamespaceURI() {
-        return super.getNamespaceURI();
     }
 
     /**

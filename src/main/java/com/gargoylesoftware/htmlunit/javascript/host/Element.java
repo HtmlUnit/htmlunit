@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -1241,7 +1240,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52, EDGE})
+    @JsxGetter({CHROME, FF, EDGE})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1250,7 +1249,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52, EDGE})
+    @JsxGetter({CHROME, FF, EDGE})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1259,7 +1258,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF52, EDGE})
+    @JsxGetter({CHROME, FF, EDGE})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
