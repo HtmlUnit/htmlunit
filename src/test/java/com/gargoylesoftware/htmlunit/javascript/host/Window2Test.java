@@ -1369,7 +1369,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"number", "done", "42"})
-    @NotYetImplemented
     public void setTimeoutWithParams() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1399,8 +1398,38 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "done 2"})
-    @NotYetImplemented
+    @Alerts({"done 2", "7"})
+    public void setTimeoutCode() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      try{\n"
+            + "        var id = window.setTimeout('log(7)');\n"
+            + "        log('done 2');\n"
+            + "      } catch(e) { log(e); }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
     public void setTimeoutWrongParams() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1410,11 +1439,6 @@ public class Window2Test extends WebDriverTestCase {
             + "        window.setTimeout();\n"
             + "        log('done');\n"
             + "      } catch(e) { log(e instanceof TypeError); }\n"
-            // TypeError: Failed to execute 'setTimeout' on 'Window': 1 argument required, but only 0 present.
-            + "      try{\n"
-            + "        window.setTimeout('100');\n"
-            + "        log('done 2');\n"
-            + "      } catch(e) { log(e); }\n"
             + "    }\n"
             + "\n"
             + "    function log(x) {\n"
@@ -1455,6 +1479,165 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>\n"
             + "<form action='page2' method='post'>\n"
             + "<input id='it' type='submit' onclick='setTimeout(stop, 0)'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("it")).click();
+
+        assertEquals(URL_FIRST + "page2", driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"number", "done", "result"})
+    public void setInterval() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var id;\n"
+            + "    function test() {\n"
+            + "      id = window.setInterval( function() { log('result'); clearInterval(id); }, 20);\n"
+            + "      log(typeof id);\n"
+            + "      log('done');\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"number", "done", "42"})
+    public void setIntervalWithParams() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var id;\n"
+            + "    function test() {\n"
+            + "      id = window.setInterval( function(p1) { log(p1); clearInterval(id); }, 20, 42);\n"
+            + "      log(typeof id);\n"
+            + "      log('done');\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"done 2", "7"})
+    public void setIntervalCode() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    var id;\n"
+            + "    function test() {\n"
+            + "      try{\n"
+            + "        id = window.setInterval('log(7); clearInterval(id);' );\n"
+            + "        log('done 2');\n"
+            + "      } catch(e) { log(e); }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void setIntervalWrongParams() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      try{\n"
+            + "        window.setInterval();\n"
+            + "        log('done');\n"
+            + "      } catch(e) { log(e instanceof TypeError); }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * As of 19.02.2013, a task started by setInterval in an event handler could be executed before
+     * all events handlers have been executed due to a missing synchronization.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setIntervalShouldNotBeExecutedBeforeHandlers() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + "var id;\n"
+            + "function stop() {\n"
+            + "  window.stopIt = true;\n"
+            + "  clearInterval(id);\n"
+            + "}\n"
+            + "for (var i = 0; i < 1000; i++) {\n"
+            + "  var handler = function(e) {\n"
+            + "    if (window.stopIt) {\n"
+            + "      e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
+            + "    }\n"
+            + "  }\n"
+            + "  window.addEventListener('click', handler, false);\n"
+            + "}\n"
+            + "</script>\n"
+            + "<form action='page2' method='post'>\n"
+            + "<input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
             + "</form>\n"
             + "</body></html>";
 
