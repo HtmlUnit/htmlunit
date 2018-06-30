@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
  * This class handles all host names which starts by character 'B'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfBTest extends HostParentOf {

@@ -25,9 +25,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code OfflineAudioContext}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
-public class OfflineAudioContext extends AudioContext {
+public class OfflineAudioContext extends BaseAudioContext {
 
     /**
      * Creates an instance.

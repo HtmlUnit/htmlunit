@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * This class handles all host names which starts by character 'A'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfATest extends HostParentOf {
@@ -180,7 +182,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF52})
+    @NotYetImplemented({CHROME, FF})
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
     }
@@ -221,7 +223,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF52 = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented(FF52)
     public void _AudioContext_OfflineAudioContext() throws Exception {
         test("AudioContext", "OfflineAudioContext");
     }
@@ -495,7 +497,6 @@ public class HostParentOfATest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF60 = "true")
-    @NotYetImplemented(CHROME)
     public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioBufferSourceNode");
     }
@@ -529,7 +530,6 @@ public class HostParentOfATest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF60 = "true")
-    @NotYetImplemented(CHROME)
     public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
         test("AudioScheduledSourceNode", "OscillatorNode");
     }

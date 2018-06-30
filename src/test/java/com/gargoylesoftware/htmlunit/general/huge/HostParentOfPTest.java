@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
 
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * This class handles all host names which starts by character 'P' to 'R'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfPTest extends HostParentOf {
@@ -175,7 +177,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF60 = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented(IE)
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
     }
@@ -262,7 +264,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             CHROME = "true",
             FF60 = "true")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented(IE)
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
     }

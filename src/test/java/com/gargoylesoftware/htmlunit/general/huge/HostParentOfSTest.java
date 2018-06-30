@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * This class handles all host names which starts by character 'S'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfSTest extends HostParentOf {
@@ -1585,6 +1587,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGCircleElement() throws Exception {
         test("SVGGeometryElement", "SVGCircleElement");
     }
@@ -1595,6 +1598,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGEllipseElement() throws Exception {
         test("SVGGeometryElement", "SVGEllipseElement");
     }
@@ -1616,6 +1620,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGLineElement() throws Exception {
         test("SVGGeometryElement", "SVGLineElement");
     }
@@ -1637,6 +1642,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGPolygonElement() throws Exception {
         test("SVGGeometryElement", "SVGPolygonElement");
     }
@@ -1647,6 +1653,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGPolylineElement() throws Exception {
         test("SVGGeometryElement", "SVGPolylineElement");
     }
@@ -1657,6 +1664,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
+    @NotYetImplemented(FF60)
     public void _SVGGeometryElement_SVGRectElement() throws Exception {
         test("SVGGeometryElement", "SVGRectElement");
     }

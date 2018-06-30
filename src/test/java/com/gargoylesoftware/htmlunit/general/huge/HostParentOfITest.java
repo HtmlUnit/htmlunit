@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  * This class handles all host names which starts by character 'I' to 'L'.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
 public class HostParentOfITest extends HostParentOf {

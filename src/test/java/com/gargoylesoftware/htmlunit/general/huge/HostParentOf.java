@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * Tests two Host classes, if one prototype is parent of another.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public abstract class HostParentOf extends WebDriverTestCase {
 

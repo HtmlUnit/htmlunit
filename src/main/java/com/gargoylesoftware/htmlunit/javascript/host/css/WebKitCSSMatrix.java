@@ -18,9 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMMatrix;
 
 /**
  * A JavaScript object for {@code WebKitCSSMatrix}.
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF})
-public class WebKitCSSMatrix extends SimpleScriptable {
+public class WebKitCSSMatrix extends DOMMatrix {
 
     /**
      * Creates an instance.

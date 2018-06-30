@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
@@ -256,7 +257,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrix_WebKitCSSMatrix() throws Exception {
         test("DOMMatrix", "WebKitCSSMatrix");
     }
@@ -287,7 +287,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF52})
     public void _DOMMatrixReadOnly_WebKitCSSMatrix() throws Exception {
         test("DOMMatrixReadOnly", "WebKitCSSMatrix");
     }
@@ -1938,7 +1937,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF52})
+    @NotYetImplemented({CHROME, FF})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
     }
@@ -4141,7 +4140,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented(FF)
     public void _EventTarget_Screen() throws Exception {
         test("EventTarget", "Screen");
     }

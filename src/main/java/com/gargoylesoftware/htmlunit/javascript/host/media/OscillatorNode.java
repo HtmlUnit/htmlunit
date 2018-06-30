@@ -20,14 +20,16 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
 
 /**
  * A JavaScript object for {@code OscillatorNode}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
-public class OscillatorNode extends AudioNode {
+public class OscillatorNode extends AudioScheduledSourceNode {
 
     /**
      * Creates an instance.
