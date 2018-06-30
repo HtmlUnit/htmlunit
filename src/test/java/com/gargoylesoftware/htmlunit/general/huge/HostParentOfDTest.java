@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import java.util.Collection;
 
@@ -2623,6 +2624,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF60 = "true")
+    @NotYetImplemented(FF60)
     public void _EventTarget_Animation() throws Exception {
         test("EventTarget", "Animation");
     }
@@ -2663,6 +2665,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _EventTarget_AudioBufferSourceNode() throws Exception {
         test("EventTarget", "AudioBufferSourceNode");
     }
@@ -4028,6 +4031,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _EventTarget_OscillatorNode() throws Exception {
         test("EventTarget", "OscillatorNode");
     }
@@ -5170,6 +5174,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF60 = "true")
+    @NotYetImplemented(FF52)
     public void _Event_SpeechSynthesisErrorEvent() throws Exception {
         test("Event", "SpeechSynthesisErrorEvent");
     }
