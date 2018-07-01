@@ -264,6 +264,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _AudioNode_AudioBufferSourceNode() throws Exception {
         test("AudioNode", "AudioBufferSourceNode");
     }
@@ -426,6 +427,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(FF52)
     public void _AudioNode_OscillatorNode() throws Exception {
         test("AudioNode", "OscillatorNode");
     }
