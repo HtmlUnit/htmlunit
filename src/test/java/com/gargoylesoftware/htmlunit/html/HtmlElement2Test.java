@@ -235,8 +235,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
                 + "</form>\n"
                 + "</body></html>";
 
-        loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -275,8 +275,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
                 + "</form>\n"
                 + "</body></html>";
 
-        loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

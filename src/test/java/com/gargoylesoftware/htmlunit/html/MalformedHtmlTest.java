@@ -178,8 +178,8 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver webdriver = loadPageWithAlerts2(html);
-        assertEquals("foo", webdriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "foo");
     }
 
     /**
@@ -290,7 +290,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("button")).click();
         assertEquals(URL_FIRST + "?FromDate=inFirst", driver.getCurrentUrl());

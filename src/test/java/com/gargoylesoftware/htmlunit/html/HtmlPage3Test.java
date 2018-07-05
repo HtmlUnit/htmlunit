@@ -170,7 +170,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("foo", driver.getTitle());
+        assertTitle(driver, "foo");
     }
 
     /**

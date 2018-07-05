@@ -70,7 +70,7 @@ public class PostponedActionTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "frame3.html"), thirdContent);
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -100,7 +100,7 @@ public class PostponedActionTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -138,7 +138,6 @@ public class PostponedActionTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "iframe.html"), secondContent);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(1000);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

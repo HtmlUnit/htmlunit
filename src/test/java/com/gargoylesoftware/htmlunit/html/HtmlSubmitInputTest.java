@@ -56,12 +56,12 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "<input type='submit' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
 
-        final WebDriver wd = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        final WebElement button = wd.findElement(By.name("button"));
+        final WebElement button = driver.findElement(By.name("button"));
         button.click();
 
-        assertEquals("foo", wd.getTitle());
+        assertTitle(driver, "foo");
 
         assertEquals(Collections.singletonList(new NameValuePair("button", "foo")),
             getMockWebConnection().getLastParameters());
@@ -102,12 +102,12 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), secondHtml);
 
-        final WebDriver wd = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        final WebElement button = wd.findElement(By.id("button1"));
+        final WebElement button = driver.findElement(By.id("button1"));
         button.click();
 
-        assertEquals("Second", wd.getTitle());
+        assertTitle(driver, "Second");
     }
 
     /**
@@ -185,11 +185,11 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         mockWebConnection.setResponse(new URL(URL_FIRST, "nextPage"),
             "<html><head><title>next page</title></head></html>");
 
-        final WebDriver wd = loadPageWithAlerts2(html);
-        final WebElement input = wd.findElement(By.name("btn"));
+        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebElement input = driver.findElement(By.name("btn"));
         input.click();
 
-        assertEquals("next page", wd.getTitle());
+        assertTitle(driver, "next page");
         assertEquals(3, mockWebConnection.getRequestCount());
     }
 

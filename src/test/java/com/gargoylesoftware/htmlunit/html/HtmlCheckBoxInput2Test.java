@@ -534,7 +534,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml);
 
         driver.findElement(By.id("myCheckbox")).click();
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -558,7 +558,7 @@ public class HtmlCheckBoxInput2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml);
 
         driver.findElement(By.id("myCheckbox")).click();
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

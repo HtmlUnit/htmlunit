@@ -144,7 +144,7 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(framesContent);
 
         // top frame
-        assertEquals("Top Page", driver.getTitle());
+        assertTitle(driver, "Top Page");
         assertEquals("Body of top frame", driver.findElement(By.id("content")).getText());
 
         // left frame

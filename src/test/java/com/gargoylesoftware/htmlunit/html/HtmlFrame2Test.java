@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import java.net.URL;
 
@@ -100,11 +99,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "second [object HTMLFormElement] third [object HTMLFormElement] "
                         + "parent [object HTMLFormElement]",
             CHROME = "second undefined third [object HTMLFormElement] "
-                        + "parent [object HTMLFormElement]",
-            FF60 = "second undefined third [object HTMLFormElement] "
-                    + "parent [object HTMLFormElement]")
+                        + "parent [object HTMLFormElement]")
     // real FF sometimes alerts 'third' before 'second'
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented(CHROME)
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "
                 + "onload=\"document.title += ' parent ' + window.parent.frames['third'].document.frm\">\n"
@@ -127,9 +124,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
 
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -156,9 +153,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "second.html"), secondHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
 
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -191,10 +188,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "third.html"), thirdHtml);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "fourth.html"), fourthHtml);
 
-        loadPage2(html);
-        Thread.sleep(400);
+        final WebDriver driver = loadPage2(html);
         assertEquals(4, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

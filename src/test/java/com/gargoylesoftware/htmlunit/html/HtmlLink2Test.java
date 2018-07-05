@@ -231,9 +231,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        final String text = driver.getTitle();
-        assertEquals(String.join(";", getExpectedAlerts()), text);
+        assertTitle(driver, String.join(";", getExpectedAlerts()));
     }
 
     /**

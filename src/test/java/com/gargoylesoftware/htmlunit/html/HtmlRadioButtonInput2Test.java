@@ -617,7 +617,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml);
 
         driver.findElement(By.id("radio")).click();
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -642,7 +642,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(firstHtml);
 
         driver.findElement(By.id("radio")).click();
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

@@ -59,6 +59,6 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

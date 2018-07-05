@@ -352,7 +352,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
         if (params.size() > 0) {
             assertEquals(getExpectedAlerts()[2], params.get(0).getName() + "-" + params.get(0).getValue());
         }
-        assertEquals(getExpectedAlerts()[3], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[3]);
     }
 
     /**
@@ -702,7 +702,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[1]);
 
         shutDownRealIE();
     }
@@ -740,7 +740,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
 
         final int expectedReqCount = Integer.parseInt(getExpectedAlerts()[0]);
         assertEquals(expectedReqCount, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[1]);
     }
 
     /**
