@@ -46,7 +46,7 @@ public class ErrorOutputChecker implements TestRule {
                                 + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
             // ie
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + "3\\.8\\.0\\.0\r?\n"
+                    + ExternalTest.IE_DRIVER_.replace(".", "\\.") + "\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
             // edge
