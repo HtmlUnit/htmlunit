@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -28,8 +31,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -74,6 +78,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver({FF60, IE})
     public void referer() throws Exception {
         final WebDriver driver = createWebClient("");
 
@@ -235,6 +240,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver(FF60)
     public void click_javascriptUrl() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -274,6 +280,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver(FF60)
     public void click_javascriptUrlMixedCase() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -313,6 +320,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver(FF60)
     public void click_javascriptUrlLeadingWhitespace() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -353,6 +361,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @BuggyWebDriver(FF60)
     public void thisInJavascriptHref() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
