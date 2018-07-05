@@ -126,7 +126,7 @@ public final class BrowserVersion implements Serializable {
         // FF60
         FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
-        FIREFOX_60.buildId_ = "20180605201706";
+        FIREFOX_60.buildId_ = "20180621121604";
         FIREFOX_60.productSub_ = "20100101";
         FIREFOX_60.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -152,7 +152,7 @@ public final class BrowserVersion implements Serializable {
         // FF52
         FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_52.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
-        FIREFOX_52.buildId_ = "20180430140610";
+        FIREFOX_52.buildId_ = "20180621064021";
         FIREFOX_52.productSub_ = "20100101";
         FIREFOX_52.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
