@@ -1927,7 +1927,7 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, iframe);
         final WebDriver driver = loadPage2(html);
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1988,11 +1988,11 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
         assertEquals(1, driver.getWindowHandles().size());
 
         driver.findElement(By.id("link")).click();
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
 
         assertEquals(1, driver.getWindowHandles().size());
         assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));
@@ -2018,11 +2018,11 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
         assertEquals(1, driver.getWindowHandles().size());
 
         driver.findElement(By.id("link")).click();
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
 
         assertEquals(1, driver.getWindowHandles().size());
         assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));
@@ -2048,11 +2048,11 @@ public class Window2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
         assertEquals(1, driver.getWindowHandles().size());
 
         driver.findElement(By.id("link")).click();
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
 
         assertEquals(1, driver.getWindowHandles().size());
         assertEquals(new String[] {"", "second/"}, getMockWebConnection().getRequestedUrls(URL_FIRST));

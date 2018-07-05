@@ -766,10 +766,10 @@ public class History2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals("page1", driver.getTitle());
+        assertTitle(driver, "page1");
 
         loadPage2(html2, URL_SECOND);
-        assertEquals("page2", driver.getTitle());
+        assertTitle(driver, "page2");
     }
 
     /**

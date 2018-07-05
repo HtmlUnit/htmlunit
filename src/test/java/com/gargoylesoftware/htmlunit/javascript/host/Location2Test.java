@@ -307,9 +307,9 @@ public class Location2Test extends WebDriverTestCase {
         final String secondContent = "<html><head><title>Second</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver webdriver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
-        assertEquals("Second", webdriver.getTitle());
+        assertTitle(driver, "Second");
     }
 
     /**
@@ -333,14 +333,14 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
 
-        final WebDriver webdriver = loadPageWithAlerts2(startContent);
-        webdriver.get(URL_SECOND.toExternalForm());
+        final WebDriver driver = loadPageWithAlerts2(startContent);
+        driver.get(URL_SECOND.toExternalForm());
 
-        assertEquals("Third Page", webdriver.getTitle());
+        assertTitle(driver, "Third Page");
 
         // navigate back
-        webdriver.navigate().back();
-        assertEquals("First Page", webdriver.getTitle());
+        driver.navigate().back();
+        assertTitle(driver, "First Page");
     }
 
     /**
@@ -363,9 +363,9 @@ public class Location2Test extends WebDriverTestCase {
                 + "<body onload='alert(\"on-load\")'></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        final WebDriver webdriver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        assertEquals("Second", webdriver.getTitle());
+        assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -387,9 +387,8 @@ public class Location2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
-        final WebDriver webdriver = loadPageWithAlerts2(firstContent);
-
-        assertEquals("Second Page", webdriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        assertTitle(driver, "Second Page");
     }
 
     /**
@@ -410,7 +409,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent, URL_FIRST);
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
     }
 
     /**
@@ -434,7 +433,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         final WebDriver driver = loadPageWithAlerts2(firstContent);
 
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -456,7 +455,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent, URL_FIRST);
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
     }
 
     /**
@@ -480,7 +479,7 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         final WebDriver driver = loadPageWithAlerts2(firstContent);
 
-        assertEquals("Second", driver.getTitle());
+        assertTitle(driver, "Second");
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -558,7 +557,8 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

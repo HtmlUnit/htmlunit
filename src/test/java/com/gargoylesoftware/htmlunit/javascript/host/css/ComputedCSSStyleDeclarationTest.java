@@ -2035,7 +2035,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 + "</html>");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

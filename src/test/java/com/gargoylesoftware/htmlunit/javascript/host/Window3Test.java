@@ -109,7 +109,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
         final WebDriver driver = loadPageWithAlerts2(firstContent);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -180,7 +180,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlThird, thirdContent);
 
         final WebDriver driver = loadPageWithAlerts2(firstContent);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -227,7 +227,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(urlFourth, fourthContent);
 
         final WebDriver driver = loadPageWithAlerts2(firstContent);
-        assertEquals("first", driver.getTitle());
+        assertTitle(driver, "first");
     }
 
     /**
@@ -290,7 +290,7 @@ public class Window3Test extends WebDriverTestCase {
         setExpectedAlerts(expectedAlerts);
 
         final WebDriver driver = loadPageWithAlerts2(firstContent);
-        assertEquals("first", driver.getTitle());
+        assertTitle(driver, "first");
     }
 
     /**
@@ -1515,7 +1515,7 @@ public class Window3Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
 
         final WebDriver driver = loadPage2(firstContent, URL_FIRST);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
