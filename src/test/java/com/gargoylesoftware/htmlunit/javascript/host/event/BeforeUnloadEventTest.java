@@ -82,7 +82,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -106,7 +106,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -131,7 +131,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -156,7 +156,7 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**

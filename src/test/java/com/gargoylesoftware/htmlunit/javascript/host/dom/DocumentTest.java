@@ -148,10 +148,10 @@ public class DocumentTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(firstHtml);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("testJavascript")).click();
-        assertEquals(getExpectedAlerts()[1], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[1]);
     }
 
     /**
@@ -1642,7 +1642,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1679,7 +1679,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1697,7 +1697,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

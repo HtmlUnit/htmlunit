@@ -229,7 +229,7 @@ public class MouseEventTest extends WebDriverTestCase {
 
         setExpectedAlerts();
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("Mouse Event coordinates", driver.getTitle());
+        assertTitle(driver, "Mouse Event coordinates");
 
         final WebElement textarea = driver.findElement(By.id("myTextarea"));
         assertEquals("", textarea.getText());

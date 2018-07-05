@@ -71,7 +71,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -100,7 +100,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -155,7 +155,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 
     /**
@@ -186,6 +186,6 @@ public class MessageEventTest extends WebDriverTestCase {
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(String.join(" ", getExpectedAlerts()),  driver.getTitle());
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
     }
 }

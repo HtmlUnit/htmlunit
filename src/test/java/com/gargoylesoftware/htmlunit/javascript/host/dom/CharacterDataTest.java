@@ -52,7 +52,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -75,7 +75,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -98,7 +98,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -120,7 +120,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -165,7 +165,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -206,7 +206,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>-</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -245,7 +245,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>abcde</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -279,7 +279,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -301,7 +301,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -323,7 +323,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Old Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -345,7 +345,7 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some New Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 
     /**
@@ -369,6 +369,6 @@ public class CharacterDataTest extends WebDriverTestCase {
             + "<div id='div1'>Some Text</div></body></html>";
 
         final WebDriver driver = loadPageWithAlerts2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
     }
 }
