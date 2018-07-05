@@ -83,7 +83,7 @@ public class NoHttpResponseTest {
             try {
                 driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("loginButton")).click();
-                assertEquals("right submit", driver.getTitle());
+                assertTitle(driver, "right submit");
             }
             finally {
                 miniServer.shutDown();

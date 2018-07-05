@@ -63,6 +63,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoAlertPresentException;
@@ -1147,6 +1148,33 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             assertTrue("There are already JS threads running before the test", getJavaScriptThreads().isEmpty());
         }
+    }
+
+    /**
+     * Asserts the current title is equal to the expectation string.
+     * @param webdriver the driver in use
+     * @param expected the expected object
+     * @throws Exception in case of failure
+     */
+    protected void assertTitle(final WebDriver webdriver, final String expected) throws Exception {
+        if (useRealBrowser()) {
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
+            while (true) {
+                try {
+                    assertEquals(expected, webdriver.getTitle());
+                    break;
+                }
+                catch (final ComparisonFailure e) {
+                    if (System.currentTimeMillis() > maxWait) {
+                        throw e;
+                    }
+                    Thread.sleep(10);
+                }
+            }
+        }
+
+        assertEquals(expected, webdriver.getTitle());
     }
 
     /**
