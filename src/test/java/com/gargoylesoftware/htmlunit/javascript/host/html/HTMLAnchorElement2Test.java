@@ -200,7 +200,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("button1")).click();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

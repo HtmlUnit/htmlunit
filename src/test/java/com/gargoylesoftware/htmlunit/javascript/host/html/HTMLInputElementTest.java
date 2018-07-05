@@ -1022,7 +1022,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("field1")).sendKeys("bla");
         driver.findElement(By.tagName("img")).click();
-        assertEquals("page 2", driver.getTitle());
+        assertTitle(driver, "page 2");
     }
 
     /**
@@ -1968,7 +1968,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("tester")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

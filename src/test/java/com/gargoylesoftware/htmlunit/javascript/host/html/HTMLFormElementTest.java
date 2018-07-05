@@ -1067,7 +1067,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             // ok
         }
         driver.switchTo().window("foo1");
-        assertEquals("Name: foo1", driver.getTitle());
+        assertTitle(driver, "Name: foo1");
     }
 
     /**
@@ -1228,7 +1228,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         // NB: comparing the sequence order here is not 100% safe with a real browser
         assertEquals(expectedRequests, getMockWebConnection().getRequestedUrls(URL_FIRST));
 
-        assertEquals("Page 4", driver.getTitle());
+        assertTitle(driver, "Page 4");
     }
 
     /**

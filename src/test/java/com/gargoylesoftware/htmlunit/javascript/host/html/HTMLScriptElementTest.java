@@ -334,7 +334,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, js);
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -567,7 +567,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, js);
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1019,7 +1019,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js3.js"), "document.title += ' 3';");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1043,7 +1043,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "document.title += ' 2';");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1066,7 +1066,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "document.title += ' 2';");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1091,7 +1091,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "document.title += ' 3';");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1118,7 +1118,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "document.title += ' from script';");
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

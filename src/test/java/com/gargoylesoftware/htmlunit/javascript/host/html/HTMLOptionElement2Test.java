@@ -1427,7 +1427,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -1481,6 +1481,6 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("option1")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

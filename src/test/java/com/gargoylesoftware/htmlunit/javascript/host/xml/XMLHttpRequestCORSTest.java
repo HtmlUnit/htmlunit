@@ -834,8 +834,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         startWebServer2(".", null, servlets2);
 
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "/withCredentials1"));
-        Thread.sleep(DEFAULT_WAIT_TIME);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

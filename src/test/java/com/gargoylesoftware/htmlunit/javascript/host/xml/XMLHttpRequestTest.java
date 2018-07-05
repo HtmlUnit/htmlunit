@@ -646,9 +646,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final WebDriver webdriver = loadPageWithAlerts2(html);
-        assertEquals(URL_FIRST.toString(), webdriver.getCurrentUrl());
-        assertEquals("foo", webdriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
+        assertTitle(driver, "foo");
     }
 
     /**

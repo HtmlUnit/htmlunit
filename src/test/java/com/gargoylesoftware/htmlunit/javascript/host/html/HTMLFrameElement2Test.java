@@ -196,7 +196,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         verifyAlerts(driver, getExpectedAlerts());
 
-        assertEquals("first", driver.getTitle());
+        assertTitle(driver, "first");
     }
 
     /**
@@ -393,9 +393,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "head.html"), top);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "bottom.html"), bottom);
 
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -421,9 +421,9 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "left.html"), left);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "right.html"), right);
 
-        loadPage2(html);
+        final WebDriver driver = loadPage2(html);
         assertEquals(3, getMockWebConnection().getRequestCount());
-        assertEquals(getExpectedAlerts()[0], getWebDriver().getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -479,7 +479,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         // top frame
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         // header frame
         driver.switchTo().frame("header");
@@ -561,7 +561,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         // top frame
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         // header frame
         driver.switchTo().frame("header");
@@ -640,7 +640,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         // top frame
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         // header frame
         driver.switchTo().frame("header");

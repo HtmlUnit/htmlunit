@@ -781,6 +781,6 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("tester")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

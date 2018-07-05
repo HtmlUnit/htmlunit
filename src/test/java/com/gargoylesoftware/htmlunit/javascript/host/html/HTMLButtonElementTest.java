@@ -402,6 +402,6 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("disabledBtn")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 }

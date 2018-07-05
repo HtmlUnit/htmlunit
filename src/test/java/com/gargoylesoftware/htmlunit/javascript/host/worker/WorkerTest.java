@@ -118,8 +118,7 @@ public class WorkerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport2.js"), scriptToImportJs2);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -145,8 +144,7 @@ public class WorkerTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(200);
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

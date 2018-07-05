@@ -2387,7 +2387,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
@@ -2420,7 +2420,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("select1")));
         actions.perform();
 
-        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

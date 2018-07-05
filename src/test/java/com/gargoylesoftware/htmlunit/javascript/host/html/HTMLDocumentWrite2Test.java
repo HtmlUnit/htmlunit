@@ -244,7 +244,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         try {
             final WebDriver driver = loadPageWithAlerts2(html);
-            assertEquals("#1", driver.getTitle());
+            assertTitle(driver, "#1");
         }
         finally {
             shutDownRealIE();
@@ -315,7 +315,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         try {
             final WebDriver driver = loadPage2(html);
-            assertEquals(getExpectedAlerts()[0], driver.getTitle());
+            assertTitle(driver, getExpectedAlerts()[0]);
         }
         finally {
             shutDownRealIE();
@@ -344,7 +344,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
         try {
             final WebDriver driver = loadPage2(html);
-            assertEquals(getExpectedAlerts()[0], driver.getTitle());
+            assertTitle(driver, getExpectedAlerts()[0]);
         }
         finally {
             shutDownAll();
@@ -389,7 +389,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(script, JAVASCRIPT_MIME_TYPE);
 
         final WebDriver driver = loadPage2(html);
-        assertEquals("First", driver.getTitle());
+        assertTitle(driver, "First");
 
         assertEquals("hello", driver.findElement(By.id("div1")).getText());
     }
@@ -410,7 +410,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</script></div></body></html>";
         final WebDriver driver = loadPageWithAlerts2(html);
 
-        assertEquals("done", driver.getTitle());
+        assertTitle(driver, "done");
         assertEquals("in inline script", driver.findElement(By.id("it")).getText());
     }
 
@@ -432,7 +432,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
         final WebDriver driver = loadPage2(html);
 
-        assertEquals("done", driver.getTitle());
+        assertTitle(driver, "done");
         assertEquals("here", driver.findElement(By.id("it")).getText());
         assertEquals("here", driver.findElement(By.tagName("body")).getText());
     }

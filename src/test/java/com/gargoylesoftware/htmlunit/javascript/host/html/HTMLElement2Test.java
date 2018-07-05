@@ -1458,15 +1458,15 @@ public class HTMLElement2Test extends WebDriverTestCase {
 
         try {
             final WebDriver driver = loadPage2(firstHtml);
-            assertEquals("First:" + getExpectedAlerts()[0], driver.getTitle());
+            assertTitle(driver, "First:" + getExpectedAlerts()[0]);
 
             driver.findElement(By.id("button1")).click();
 
             driver.switchTo().window("second");
-            assertEquals("Second:" + getExpectedAlerts()[1], driver.getTitle());
+            assertTitle(driver, "Second:" + getExpectedAlerts()[1]);
 
             driver.findElement(By.id("button2")).click();
-            assertEquals("Second:" + getExpectedAlerts()[2], driver.getTitle());
+            assertTitle(driver, "Second:" + getExpectedAlerts()[2]);
         }
         finally {
             shutDownRealIE();

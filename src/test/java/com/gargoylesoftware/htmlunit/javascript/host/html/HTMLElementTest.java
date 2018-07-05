@@ -115,8 +115,8 @@ public class HTMLElementTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("test", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "test");
     }
 
     /**
@@ -270,8 +270,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("test", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "test");
     }
 
     /**
@@ -349,8 +349,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("test", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "test");
     }
 
     /**
@@ -387,13 +387,13 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String[] alerts = getExpectedAlerts();
         int i = 0;
 
-        final WebDriver webDriver = loadPage2(html);
+        final WebDriver driver = loadPage2(html);
 
-        webDriver.findElement(By.id("login")).click();
-        assertEquals(alerts[i++], webDriver.getTitle());
+        driver.findElement(By.id("login")).click();
+        assertTitle(driver, alerts[i++]);
 
-        webDriver.findElement(By.id("password")).click();
-        assertEquals(alerts[i++], webDriver.getTitle());
+        driver.findElement(By.id("password")).click();
+        assertTitle(driver, alerts[i++]);
     }
 
     /**
@@ -427,10 +427,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        webDriver.findElement(By.id("login")).click();
-        assertEquals("", webDriver.getTitle());
+        driver.findElement(By.id("login")).click();
+        assertTitle(driver, "");
     }
 
     /**
@@ -462,10 +462,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        webDriver.findElement(By.id("login")).click();
-        assertEquals("", webDriver.getTitle());
+        driver.findElement(By.id("login")).click();
+        assertTitle(driver, "");
     }
 
     /**
@@ -497,10 +497,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageWithAlerts2(html);
 
-        webDriver.findElement(By.id("login")).click();
-        assertEquals("", webDriver.getTitle());
+        driver.findElement(By.id("login")).click();
+        assertTitle(driver, "");
     }
 
     /**
@@ -533,13 +533,13 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String[] alerts = getExpectedAlerts();
         int i = 0;
 
-        final WebDriver webDriver = loadPage2(html);
+        final WebDriver driver = loadPage2(html);
 
-        webDriver.findElement(By.id("login")).click();
-        assertEquals(alerts[i++], webDriver.getTitle());
+        driver.findElement(By.id("login")).click();
+        assertTitle(driver, alerts[i++]);
 
-        webDriver.findElement(By.id("password")).click();
-        assertEquals(alerts[i++], webDriver.getTitle());
+        driver.findElement(By.id("password")).click();
+        assertTitle(driver, alerts[i++]);
     }
 
     /**
@@ -605,8 +605,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <div id='div1' align='left'></div>\n"
             + "</body>\n"
             + "</html>";
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("test", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "test");
     }
 
     /**
@@ -2759,8 +2759,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "} catch(e) { alert('exception'); }\n"
             + "</script></body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("page 1", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "page 1");
     }
 
     /**
@@ -3014,8 +3014,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "     document.body.innerHTML = unescape(document.body.innerHTML);\n"
             + "</script></body></html>";
-        final WebDriver webDriver = loadPageWithAlerts2(html);
-        assertEquals("Recursion", webDriver.getTitle());
+        final WebDriver driver = loadPageWithAlerts2(html);
+        assertTitle(driver, "Recursion");
     }
 
     /**
