@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
@@ -31,9 +29,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -532,7 +530,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts(DEFAULT = "§§URL§§",
+            FF52 = "",
+            IE = "")
     public void action() throws Exception {
         final String html =
             "<html>\n"
@@ -551,7 +551,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§",
-            FF = "")
+            FF52 = "")
     public void actionEmpty() throws Exception {
         final String html =
             "<html>\n"
@@ -1194,8 +1194,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "foo4?foo=", "script4.js"},
-            IE = {"", "foo0?foo=", "foo1?foo=", "foo2?foo=", "foo3?foo=", "foo4?foo=", "script4.js"})
-    @NotYetImplemented({CHROME, FF})
+            IE = {"", "foo0?foo=", "foo4?foo=", "script4.js"})
+    @NotYetImplemented
     public void submitTriggersRequestNotParsed() throws Exception {
         final String html = "<html><head><script>\n"
             + "function test() {\n"
@@ -1205,10 +1205,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    f.submit();\n"
             + "  }\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
-            + "<form>\n"
-            + "<input name='foo'>\n"
-            + "</form></body></html>";
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <input name='foo'>\n"
+            + "  </form>\n"
+            + "</body></html>";
 
         final MockWebConnection connection = getMockWebConnection();
         for (int i = 0; i < 5; i++) {

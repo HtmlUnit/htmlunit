@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -268,12 +269,13 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @BuggyWebDriver(FF60)
     public void clickNestedOptionElement() throws Exception {
         final String html =
               "<html>\n"
             + "<body>\n"
             + "  <a href='page2.html'>\n"
-            + "    <select>\n"
+            + "    <select size=2>\n"
             + "      <option id='theOption'>test</option>\n"
             + "    </select>\n"
             + "  </a>\n"
@@ -284,6 +286,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebElement option = driver.findElement(By.id("theOption"));
         assertEquals("option", option.getTagName());
         option.click();
+
         assertEquals(URL_FIRST + "page2.html", driver.getCurrentUrl());
     }
 
@@ -371,6 +374,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
 
         final WebElement tester = driver.findElement(By.id("a"));
         tester.click();
+
+        Thread.sleep(100);
         assertEquals(2, driver.getWindowHandles().size());
     }
 
@@ -691,6 +696,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             .keyUp(Keys.SHIFT)
             .perform();
 
+        Thread.sleep(100);
         assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
         assertEquals("Should not have navigated away", originalTitle, driver.getTitle());
     }

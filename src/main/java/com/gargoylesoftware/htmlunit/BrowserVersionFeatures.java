@@ -900,8 +900,12 @@ public enum BrowserVersionFeatures {
     JS_FILE_SHORT_DATE_FORMAT,
 
     /** Indicates that the action property will not be expanded if defined as empty string. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF52)
     JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY,
+
+    /** Indicates that the action property will not be expanded if defined as empty string. */
+    @BrowserFeature({CHROME, FF60})
+    JS_FORM_ACTION_EXPANDURL_NOT_DEFINED,
 
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature(FF)

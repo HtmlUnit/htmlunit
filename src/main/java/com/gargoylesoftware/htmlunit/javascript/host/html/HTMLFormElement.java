@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
@@ -34,7 +35,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -192,19 +192,24 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxGetter
     public String getAction() {
-        String action = getHtmlForm().getActionAttribute();
-        final BrowserVersion browser = getBrowserVersion();
-        if (action != DomElement.ATTRIBUTE_NOT_DEFINED) {
-            if (action.length() == 0 && browser.hasFeature(JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY)) {
-                return action;
-            }
+        final String action = getHtmlForm().getActionAttribute();
 
-            try {
-                action = ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
-            }
-            catch (final MalformedURLException e) {
-                // nothing, return action attribute
-            }
+        if (action != DomElement.ATTRIBUTE_NOT_DEFINED
+                && action.length() == 0
+                && getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL_IGNORE_EMPTY)) {
+            return action;
+        }
+
+        if (action == DomElement.ATTRIBUTE_NOT_DEFINED
+                && !getBrowserVersion().hasFeature(JS_FORM_ACTION_EXPANDURL_NOT_DEFINED)) {
+            return action;
+        }
+
+        try {
+            return ((HtmlPage) getHtmlForm().getPage()).getFullyQualifiedUrl(action).toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            // nothing, return action attribute
         }
         return action;
     }
