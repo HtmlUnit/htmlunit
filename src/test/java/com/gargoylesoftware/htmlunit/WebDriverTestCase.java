@@ -1157,24 +1157,20 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void assertTitle(final WebDriver webdriver, final String expected) throws Exception {
-        if (useRealBrowser()) {
-            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
 
-            while (true) {
-                try {
-                    assertEquals(expected, webdriver.getTitle());
-                    break;
+        while (true) {
+            try {
+                assertEquals(expected, webdriver.getTitle());
+                return;
+            }
+            catch (final ComparisonFailure e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw e;
                 }
-                catch (final ComparisonFailure e) {
-                    if (System.currentTimeMillis() > maxWait) {
-                        throw e;
-                    }
-                    Thread.sleep(10);
-                }
+                Thread.sleep(10);
             }
         }
-
-        assertEquals(expected, webdriver.getTitle());
     }
 
     /**
