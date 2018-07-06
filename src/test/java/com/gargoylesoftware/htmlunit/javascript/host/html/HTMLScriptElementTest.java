@@ -1074,7 +1074,6 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1 2 3")
-    @NotYetImplemented
     public void asyncFromAsyncTask() throws Exception {
         final String html = "<html><body><script>\n"
             + "function addAsyncScript() {\n"
