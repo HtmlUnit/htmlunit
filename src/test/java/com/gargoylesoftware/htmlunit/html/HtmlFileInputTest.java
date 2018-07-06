@@ -44,8 +44,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 
@@ -417,9 +417,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(htmlContent);
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
-            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
-        }
+        path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 
@@ -476,9 +475,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
-        if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
-            path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
-        }
+        path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
+
         driver.findElement(By.name("myInput")).sendKeys(path);
         driver.findElement(By.id("mySubmit")).click();
 

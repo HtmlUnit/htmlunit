@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.LinkedList;
@@ -51,7 +52,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver({CHROME, IE})
+    @BuggyWebDriver({CHROME, FF60, IE})
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
