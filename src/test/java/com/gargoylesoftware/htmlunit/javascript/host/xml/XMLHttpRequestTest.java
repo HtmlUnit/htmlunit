@@ -250,6 +250,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             }
         }
     }
+
     /**
      * Checks that not passing the async flag to <code>open()</code>
      * results in async execution.  If this gets interpreted as {@code false}
