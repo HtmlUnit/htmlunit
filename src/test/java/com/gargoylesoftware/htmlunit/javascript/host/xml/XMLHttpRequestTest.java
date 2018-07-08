@@ -32,8 +32,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -189,24 +191,26 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
             + "  function test() {\n"
             + "    try {\n"
-            + "      alertStatus('1: ');\n"
+            + "      logStatus('1: ');\n"
 
             + "      xhr.onreadystatechange = onReadyStateChange;\n"
-            + "      alertStatus('2: ');\n"
+            + "      logStatus('2: ');\n"
 
             + "      xhr.open('GET', '/foo.xml', true);\n"
-            + "      alertStatus('3: ');\n"
+            + "      logStatus('3: ');\n"
 
             + "      xhr.send();\n"
-            + "      alertStatus('4: ');\n"
-            + "    } catch(e) { alert(e) }\n"
+            + "      logStatus('4: ');\n"
+            + "    } catch(e) {\n"
+            + "      document.getElementById('log').value += e + '\\n';\n"
+            + "    }\n"
             + "  }\n"
 
             + "  function onReadyStateChange() {\n"
-            + "    alertStatus('#' + xhr.readyState + ': ');\n"
+            + "    logStatus('#' + xhr.readyState + ': ');\n"
             + "  }\n"
 
-            + "  function alertStatus(prefix) {\n"
+            + "  function logStatus(prefix) {\n"
             + "    var msg = prefix;\n"
             + "    try {\n"
             + "      msg = msg + xhr.status + '-';\n"
@@ -214,17 +218,38 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    try {\n"
             + "      msg = msg + xhr.statusText;;\n"
             + "    } catch(e) { msg = msg + 'ex: statusText' }\n"
-            + "    alert(msg);\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
             + "  }\n"
             + "</script>\n"
             + "  </head>\n"
-            + "  <body onload='test()'></body>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "  </body>\n"
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String expected = String.join("\n", getExpectedAlerts());
+        assertLog(driver, expected);
     }
 
+    private void assertLog(final WebDriver driver, final String expected) throws InterruptedException {
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+        while (true) {
+            try {
+                final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+                assertEquals(expected, text);
+                return;
+            }
+            catch (final ComparisonFailure e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw e;
+                }
+                Thread.sleep(10);
+            }
+        }
+    }
     /**
      * Checks that not passing the async flag to <code>open()</code>
      * results in async execution.  If this gets interpreted as {@code false}
@@ -234,27 +259,39 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts({"#1", "#2", "#3", "#4"})
     public void asyncIsDefault() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+
+            + "<script>\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+
             + "var xhr = new XMLHttpRequest();\n"
 
             + "function onReadyStateChange() {\n"
             + "  if( xhr.readyState == 4 ) {\n"
-            + "    alert('#4');\n"
+            + "    log('#4');\n"
             + "  }\n"
             + "}\n"
 
             + "try {\n"
-            + "  alert('#1');\n"
+            + "  log('#1');\n"
             + "  xhr.onreadystatechange = onReadyStateChange;\n"
             + "  xhr.open('GET', '/foo.xml');\n"
-            + "  alert('#2');\n"
+            + "  log('#2');\n"
             + "  xhr.send();\n"
-            + "  alert('#3');\n"
-            + "} catch(e) { alert(e); }\n"
-            + "</script></body></html>";
+            + "  log('#3');\n"
+            + "} catch(e) { log(e); }\n"
+            + "</script>\n"
+            + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String expected = String.join("\n", getExpectedAlerts());
+        assertLog(driver, expected);
     }
 
     /**
@@ -273,27 +310,36 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + "      function log(x) {\n"
+            + "        document.getElementById('log').value += x + '\\n';\n"
+            + "      }\n"
+
             + "      function test() {\n"
             + "        var xhr = new XMLHttpRequest();\n"
 
-            + "        xhr.onreadystatechange = function() { alert('orsc' + xhr.readyState); };\n"
-            + "        xhr.onload = function() { alert(xhr.readyState); alert(xhr.responseText); alert(this); }\n"
+            + "        xhr.onreadystatechange = function() { log('orsc' + xhr.readyState); };\n"
+            + "        xhr.onload = function() { log(xhr.readyState); log(xhr.responseText); log(this); }\n"
 
             + "        xhr.open('GET', '/foo.xml', true);\n"
-            + "        alert('open-done');\n"
+            + "        log('open-done');\n"
 
             + "        xhr.send('');\n"
-            + "        alert('send-done');\n"
+            + "        log('send-done');\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
-            + "  <body onload='test()'></body>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "  </body>\n"
             + "</html>";
 
         final String xml = "<a>b</a>";
 
         getMockWebConnection().setDefaultResponse(xml, "text/xml");
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        final String expected = String.join("\n", getExpectedAlerts());
+        assertLog(driver, expected);
     }
 
     /**
