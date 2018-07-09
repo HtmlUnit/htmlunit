@@ -320,6 +320,7 @@ public class MouseEvent extends UIEvent {
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
+        setMetaKey(metaKey);
         button_ = button;
         // Ignore the relatedTarget parameter; we don't support it yet.
     }
