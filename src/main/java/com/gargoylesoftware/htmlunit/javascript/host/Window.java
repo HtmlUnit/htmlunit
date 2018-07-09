@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -2656,24 +2655,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Returns the {@code onmozpointerlockchange} event handler.
-     * @return the {@code onmozpointerlockchange} event handler
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockchange() {
-        return getEventHandler("mozpointerlockchange");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockchange} event handler.
-     * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
-        setHandlerForJavaScript("mozpointerlockchange", onmozpointerlockchange);
-    }
-
-    /**
      * Returns the {@code onwebkitanimationstart} event handler.
      * @return the {@code onwebkitanimationstart} event handler
      */
@@ -4057,24 +4038,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     @JsxSetter
     public void setOninput(final Object oninput) {
         setHandlerForJavaScript(Event.TYPE_INPUT, oninput);
-    }
-
-    /**
-     * Returns the {@code onmozpointerlockerror} event handler.
-     * @return the {@code onmozpointerlockerror} event handler
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockerror() {
-        return getEventHandler("mozpointerlockerror");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockerror} event handler.
-     * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
-        setHandlerForJavaScript("mozpointerlockerror", onmozpointerlockerror);
     }
 
     /**

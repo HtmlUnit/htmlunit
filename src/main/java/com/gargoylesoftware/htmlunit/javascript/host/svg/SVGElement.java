@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -438,24 +437,6 @@ public class SVGElement extends Element {
     }
 
     /**
-     * Returns the {@code onmozpointerlockchange} event handler.
-     * @return the {@code onmozpointerlockchange} event handler
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockchange() {
-        return getEventHandler("mozpointerlockchange");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockchange} event handler.
-     * @param mozpointerlockchange the {@code onmozpointerlockchange} event handler
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockchange(final Object mozpointerlockchange) {
-        setEventHandler("mozpointerlockchange", mozpointerlockchange);
-    }
-
-    /**
      * Returns the {@code onclick} event handler.
      * @return the {@code onclick} event handler
      */
@@ -849,24 +830,6 @@ public class SVGElement extends Element {
     @JsxSetter({CHROME, FF})
     public void setOninput(final Object input) {
         setEventHandler(Event.TYPE_INPUT, input);
-    }
-
-    /**
-     * Returns the {@code onmozpointerlockerror} event handler.
-     * @return the {@code onmozpointerlockerror} event handler
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockerror() {
-        return getEventHandler("mozpointerlockerror");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockerror} event handler.
-     * @param mozpointerlockerror the {@code onmozpointerlockerror} event handler
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockerror(final Object mozpointerlockerror) {
-        setEventHandler("mozpointerlockerror", mozpointerlockerror);
     }
 
     /**

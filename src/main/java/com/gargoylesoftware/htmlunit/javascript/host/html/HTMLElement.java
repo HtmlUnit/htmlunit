@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -3568,42 +3567,6 @@ public class HTMLElement extends Element {
     @JsxSetter(FF)
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
         setEventHandler("mozfullscreenerror", onmozfullscreenerror);
-    }
-
-    /**
-     * Returns the {@code onmozpointerlockchange} event handler for this element.
-     * @return the {@code onmozpointerlockchange} event handler for this element
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockchange() {
-        return getEventHandler("mozpointerlockchange");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockchange} event handler for this element.
-     * @param onmozpointerlockchange the {@code onmozpointerlockchange} event handler for this element
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockchange(final Object onmozpointerlockchange) {
-        setEventHandler("mozpointerlockchange", onmozpointerlockchange);
-    }
-
-    /**
-     * Returns the {@code onmozpointerlockerror} event handler for this element.
-     * @return the {@code onmozpointerlockerror} event handler for this element
-     */
-    @JsxGetter(FF60)
-    public Function getOnmozpointerlockerror() {
-        return getEventHandler("mozpointerlockerror");
-    }
-
-    /**
-     * Sets the {@code onmozpointerlockerror} event handler for this element.
-     * @param onmozpointerlockerror the {@code onmozpointerlockerror} event handler for this element
-     */
-    @JsxSetter(FF60)
-    public void setOnmozpointerlockerror(final Object onmozpointerlockerror) {
-        setEventHandler("mozpointerlockerror", onmozpointerlockerror);
     }
 
     /**
