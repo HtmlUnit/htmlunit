@@ -2043,18 +2043,18 @@ public class HTMLElement extends Element {
      * @param retargetToElement if true, all events are targeted directly to this element;
      * if false, events can also fire at descendants of this element
      */
-    @JsxFunction({FF, IE})
+    @JsxFunction(IE)
     public void setCapture(final boolean retargetToElement) {
-        // empty
+        super.setCapture(retargetToElement);
     }
 
     /**
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({FF, IE})
+    @JsxFunction(IE)
     public boolean releaseCapture() {
-        return true;
+        return super.releaseCapture();
     }
 
     /**

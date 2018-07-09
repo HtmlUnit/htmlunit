@@ -1957,6 +1957,25 @@ public class Element extends Node {
     }
 
     /**
+     * Mock for the moment.
+     * @param retargetToElement if true, all events are targeted directly to this element;
+     * if false, events can also fire at descendants of this element
+     */
+    @JsxFunction(FF)
+    public void setCapture(final boolean retargetToElement) {
+        // empty
+    }
+
+    /**
+     * Mock for the moment.
+     * @return true for success
+     */
+    @JsxFunction(FF)
+    public boolean releaseCapture() {
+        return true;
+    }
+
+    /**
      * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
      * just before this ChildNode.
      * @param context the context
