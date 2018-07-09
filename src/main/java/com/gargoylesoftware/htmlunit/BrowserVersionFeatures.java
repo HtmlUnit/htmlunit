@@ -238,6 +238,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_BEFOREUNLOADEVENT,
 
+    /** Supports event type 'FocusEvent'. */
+    @BrowserFeature({CHROME, FF60, IE})
+    EVENT_TYPE_FOCUSEVENT,
+
     /** Supports event type 'HashChangeEvent'. */
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_HASHCHANGEEVENT,
@@ -257,6 +261,14 @@ public enum BrowserVersionFeatures {
     /** Supports event type 'ProgressEvent'. */
     @BrowserFeature(IE)
     EVENT_TYPE_PROGRESSEVENT,
+
+    /** Supports event type 'SVGZoomEvent'. */
+    @BrowserFeature(FF52)
+    EVENT_TYPE_SVGZOOMEVENT,
+
+    /** Supports event type 'WheelEvent'. */
+    @BrowserFeature({CHROME, IE})
+    EVENT_TYPE_WHEELEVENT,
 
     /** For new pages the focus points to the body node. */
     @BrowserFeature(IE)

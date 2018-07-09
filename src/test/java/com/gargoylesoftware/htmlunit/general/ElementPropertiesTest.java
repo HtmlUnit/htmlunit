@@ -320,23 +320,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
         html.append("<tr>").append('\n').append("<td rowspan='2'>").append("<a name='" + name + "'>").append(name)
             .append("</a>").append("</td>").append('\n').append("<td>");
         int implementedCount = 0;
-        for (int i = 0; i < realProperties.size(); i++) {
-            final String color;
-            if (implementedProperties.contains(realProperties.get(i))) {
-                color = "green";
-                implementedCount++;
-            }
-            else {
-                color = "blue";
-            }
-            html.append("<span style='color: " + color + "'>").append(realProperties.get(i)).append("</span>");
-            if (i < realProperties.size() - 1) {
-                html.append(',').append(' ');
-            }
-        }
+
         if (realProperties.isEmpty()) {
             html.append("&nbsp;");
         }
+        else if (realProperties.size() == 1
+                && realProperties.contains("exception")
+                && implementedProperties.size() == 1
+                && implementedProperties.contains("exception")
+                && erroredProperties.size() == 0) {
+            html.append("&nbsp;");
+        }
+        else {
+            for (int i = 0; i < realProperties.size(); i++) {
+                final String color;
+                if (implementedProperties.contains(realProperties.get(i))) {
+                    color = "green";
+                    implementedCount++;
+                }
+                else {
+                    color = "blue";
+                }
+                html.append("<span style='color: " + color + "'>").append(realProperties.get(i)).append("</span>");
+                if (i < realProperties.size() - 1) {
+                    html.append(',').append(' ');
+                }
+            }
+        }
+
         html.append("</td>").append("<td>").append(implementedCount).append('/')
             .append(realProperties.size()).append("</td>").append("</tr>").append('\n');
         html.append("<tr>").append("<td>");
@@ -3142,7 +3153,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF52 = "exception",
             FF60 = "relatedTarget",
             IE = "initFocusEvent(),relatedTarget")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF60, IE})
     public void focusEvent() throws Exception {
         testString("document.createEvent('FocusEvent'), document.createEvent('UIEvent')");
     }

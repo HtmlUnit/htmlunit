@@ -17,11 +17,14 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_FOCUSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MOUSEWHEELEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_SVGZOOMEVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_APPLETS_NODELIST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
@@ -128,7 +131,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.SVGZoomEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.TextEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -212,8 +218,8 @@ public class Document extends Node {
         dom3EventMap.put("CustomEvent", CustomEvent.class);
         dom3EventMap.put("CloseEvent", CloseEvent.class);
         dom3EventMap.put("CompositionEvent", CompositionEvent.class);
-        dom3EventMap.put("FocusEvent", FocusEvent.class);
         dom3EventMap.put("DragEvent", DragEvent.class);
+        dom3EventMap.put("TextEvent", TextEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
         final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
@@ -225,6 +231,9 @@ public class Document extends Node {
         additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
         additionalEventMap.put("MouseWheelEvent", MouseWheelEvent.class);
+        additionalEventMap.put("FocusEvent", FocusEvent.class);
+        additionalEventMap.put("WheelEvent", WheelEvent.class);
+        additionalEventMap.put("SVGZoomEvent", SVGZoomEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
     }
 
@@ -1218,7 +1227,13 @@ public class Document extends Node {
                     && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
                 || "ProgressEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT))) {
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
+                || "FocusEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_FOCUSEVENT)
+                || "SVGZoomEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_SVGZOOMEVENT)
+                || "WheelEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
 
             if (PopStateEvent.class == clazz
