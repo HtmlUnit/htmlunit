@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -2036,6 +2037,24 @@ public class HTMLElement extends Element {
     @JsxSetter
     public void setOnsubmit(final Object onsubmit) {
         setEventHandler(Event.TYPE_SUBMIT, onsubmit);
+    }
+
+    /**
+     * Returns the {@code onwheel} event handler for this element.
+     * @return the {@code onwheel} event handler for this element
+     */
+    @JsxGetter({CHROME, FF60})
+    public Function getOnwheel() {
+        return super.getOnwheel();
+    }
+
+    /**
+     * Sets the {@code onwheel} event handler for this element.
+     * @param onwheel the {@code onwheel} event handler for this element
+     */
+    @JsxSetter({CHROME, FF60})
+    public void setOnwheel(final Object onwheel) {
+        super.setOnwheel(onwheel);
     }
 
     /**
