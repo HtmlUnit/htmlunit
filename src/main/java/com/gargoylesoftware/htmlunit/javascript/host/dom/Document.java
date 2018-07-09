@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONPOPST
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MOUSEWHEELEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_APPLETS_NODELIST;
@@ -113,12 +114,16 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CustomEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
@@ -206,6 +211,9 @@ public class Document extends Node {
         dom3EventMap.put("UIEvent", UIEvent.class);
         dom3EventMap.put("CustomEvent", CustomEvent.class);
         dom3EventMap.put("CloseEvent", CloseEvent.class);
+        dom3EventMap.put("CompositionEvent", CompositionEvent.class);
+        dom3EventMap.put("FocusEvent", FocusEvent.class);
+        dom3EventMap.put("DragEvent", DragEvent.class);
         SUPPORTED_DOM3_EVENT_TYPE_MAP = Collections.unmodifiableMap(dom3EventMap);
 
         final Map<String, Class<? extends Event>> additionalEventMap = new HashMap<>();
@@ -216,6 +224,7 @@ public class Document extends Node {
         additionalEventMap.put("PointerEvent", PointerEvent.class);
         additionalEventMap.put("PopStateEvent", PopStateEvent.class);
         additionalEventMap.put("ProgressEvent", ProgressEvent.class);
+        additionalEventMap.put("MouseWheelEvent", MouseWheelEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
     }
 
@@ -1200,14 +1209,16 @@ public class Document extends Node {
                 && ("Events".equals(eventType)
                 || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
                 || "HashChangeEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
                 || "BeforeUnloadEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                || "MouseWheelEvent".equals(eventType)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_MOUSEWHEELEVENT)
                 || "PointerEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
                 || "ProgressEvent".equals(eventType)
-                && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT))) {
+                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
 
             if (PopStateEvent.class == clazz

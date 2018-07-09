@@ -246,6 +246,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     EVENT_TYPE_KEY_EVENTS,
 
+    /** Supports vendor specific event type 'MouseWheelEvent'. */
+    @BrowserFeature(IE)
+    EVENT_TYPE_MOUSEWHEELEVENT,
+
     /** Supports event type 'PointerEvent'. */
     @BrowserFeature(IE)
     EVENT_TYPE_POINTEREVENT,

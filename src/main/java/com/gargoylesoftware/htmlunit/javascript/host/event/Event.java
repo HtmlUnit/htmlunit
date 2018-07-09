@@ -534,7 +534,7 @@ public class Event extends SimpleScriptable {
     /**
      * @return indicates if event propagation is stopped
      */
-    @JsxGetter(IE)
+    @JsxGetter
     public boolean isCancelBubble() {
         return stopPropagation_;
     }
@@ -542,7 +542,7 @@ public class Event extends SimpleScriptable {
     /**
      * @param newValue indicates if event propagation is stopped
      */
-    @JsxSetter(IE)
+    @JsxSetter
     public void setCancelBubble(final boolean newValue) {
         stopPropagation_ = newValue;
     }

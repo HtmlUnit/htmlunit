@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -82,7 +83,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "    var unknown = document.createElement('harhar');\n"
                 + "    var div = document.createElement('div');\n"
                 + "    var svg = document.getElementById('mySvg');\n"
-                + "    process(" + string + ");\n"
+                + "    try{\n"
+                + "      process(" + string + ");\n"
+                + "    } catch (e) {\n"
+                + "      alert('exception');\n"
+                + "      return;"
+                + "    }\n"
                 + "  }\n"
                 + "\n"
                 + "  /*\n"
@@ -3017,9 +3023,208 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF60 = "detail,initUIEvent(),layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,initUIEvent(),view")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void uiEvent() throws Exception {
         testString("document.createEvent('UIEvent'), document.createEvent('Event')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "dataTransfer",
+            FF52 = "dataTransfer,initDragEvent()",
+            FF60 = "dataTransfer,initDragEvent()",
+            IE = "dataTransfer,initDragEvent(),msConvertURL()")
+    @NotYetImplemented
+    public void dragEvent() throws Exception {
+        testString("document.createEvent('DragEvent'), document.createEvent('MouseEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+                + "tangentialPressure,tiltX,tiltY,twist,width",
+            FF52 = "exception",
+            FF60 = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+                + "tangentialPressure,tiltX,tiltY,twist,width",
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF60})
+    public void pointerEvent() throws Exception {
+        testString("new PointerEvent('click'), document.createEvent('MouseEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "exception",
+            FF52 = "exception",
+            FF60 = "exception",
+            IE = "height,hwTimestamp,initPointerEvent(),isPrimary,pointerId,"
+                + "pointerType,pressure,rotation,tiltX,tiltY,width")
+    @NotYetImplemented(IE)
+    public void pointerEvent2() throws Exception {
+        testString(" document.createEvent('PointerEvent'), document.createEvent('MouseEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,"
+                + "DOM_DELTA_PIXEL,wheelDelta,wheelDeltaX,wheelDeltaY",
+            FF52 = "exception",
+            FF60 = "exception",
+            IE = "deltaMode,deltaX,deltaY,deltaZ,DOM_DELTA_LINE,DOM_DELTA_PAGE,DOM_DELTA_PIXEL,initWheelEvent()")
+    @NotYetImplemented({CHROME, IE})
+    public void wheelEvent() throws Exception {
+        testString("document.createEvent('WheelEvent'), document.createEvent('MouseEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),"
+                + "initMouseEvent(),layerX,layerY,metaKey,movementX,movementY,offsetX,offsetY,"
+                + "pageX,pageY,relatedTarget,screenX,screenY,shiftKey,toElement,x,y",
+            FF52 = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
+                + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
+                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
+                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey",
+            FF60 = "altKey,button,buttons,clientX,clientY,ctrlKey,getModifierState(),initMouseEvent(),"
+                + "initNSMouseEvent(),metaKey,movementX,movementY,MOZ_SOURCE_CURSOR,MOZ_SOURCE_ERASER,"
+                + "MOZ_SOURCE_KEYBOARD,MOZ_SOURCE_MOUSE,MOZ_SOURCE_PEN,MOZ_SOURCE_TOUCH,MOZ_SOURCE_UNKNOWN,"
+                + "mozInputSource,mozPressure,offsetX,offsetY,region,relatedTarget,screenX,screenY,shiftKey,x,y",
+            IE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),initMouseEvent(),"
+                + "layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,screenX,screenY,shiftKey,"
+                + "toElement,which,x,y")
+    @NotYetImplemented
+    public void mouseEvent() throws Exception {
+        testString("document.createEvent('MouseEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "data,initCompositionEvent()",
+            FF60 = "data,initCompositionEvent(),locale",
+            FF52 = "data,initCompositionEvent(),locale",
+            IE = "data,initCompositionEvent(),locale")
+    @NotYetImplemented
+    public void compositionEvent() throws Exception {
+        testString("document.createEvent('CompositionEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.FocusEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "relatedTarget",
+            FF52 = "exception",
+            FF60 = "relatedTarget",
+            IE = "initFocusEvent(),relatedTarget")
+    @NotYetImplemented
+    public void focusEvent() throws Exception {
+        testString("document.createEvent('FocusEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.InputEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "data,dataTransfer,getTargetRanges(),inputType,isComposing",
+            FF52 = "isComposing",
+            FF60 = "isComposing",
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF})
+    public void inputEvent() throws Exception {
+        testString("new InputEvent('input'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseWheelEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "exception",
+            FF52 = "exception",
+            FF60 = "exception",
+            IE = "altKey,button,buttons,clientX,clientY,ctrlKey,fromElement,getModifierState(),initMouseEvent(),"
+                + "initMouseWheelEvent(),layerX,layerY,metaKey,offsetX,offsetY,pageX,pageY,relatedTarget,"
+                + "screenX,screenY,shiftKey,toElement,wheelDelta,which,x,y")
+    @NotYetImplemented(IE)
+    public void mouseWheelEvent() throws Exception {
+        testString("document.createEvent('MouseWheelEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.SVGZoomEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "exception",
+            FF52 = "newScale,newTranslate,previousScale,previousTranslate",
+            FF60 = "exception",
+            IE = "exception")
+    @NotYetImplemented(FF52)
+    public void svgZoomEvent() throws Exception {
+        testString("document.createEvent('SVGZoomEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.TextEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "data,initTextEvent()",
+            FF52 = "data,initCompositionEvent(),locale",
+            FF60 = "data,initCompositionEvent(),locale",
+            IE = "data,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
+                + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
+                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,"
+                + "DOM_INPUT_METHOD_VOICE,initTextEvent(),inputMethod,locale")
+    @NotYetImplemented
+    public void textEvent() throws Exception {
+        testString("document.createEvent('TextEvent'), document.createEvent('UIEvent')");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey,changedTouches,ctrlKey,metaKey,shiftKey,targetTouches,touches",
+            FF52 = "exception",
+            FF60 = "exception",
+            IE = "exception")
+    @NotYetImplemented(CHROME)
+    public void touchEvent2() throws Exception {
+        testString("new TouchEvent('touch'), document.createEvent('UIEvent')");
     }
 
     /**

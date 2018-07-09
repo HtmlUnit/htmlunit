@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class KeyboardEvent extends UIEvent {
@@ -851,6 +852,9 @@ public class KeyboardEvent extends UIEvent {
     private int charCode_;
     private int which_;
 
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
     /**
      * Creates a new keyboard event instance.
      */
@@ -1130,4 +1134,19 @@ public class KeyboardEvent extends UIEvent {
         }
     }
 
+    /**
+     * Returns whether or not the "meta" key was pressed during the event firing.
+     * @return whether or not the "meta" key was pressed during the event firing
+     */
+    @JsxGetter
+    public boolean getMetaKey() {
+        return metaKey_;
+    }
+
+    /**
+     * @param metaKey whether Meta has been pressed during this event or not
+     */
+    protected void setMetaKey(final boolean metaKey) {
+        metaKey_ = metaKey;
+    }
 }

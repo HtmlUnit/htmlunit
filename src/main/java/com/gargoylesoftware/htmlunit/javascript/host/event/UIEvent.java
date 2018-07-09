@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * JavaScript object representing a UI event. For general information on which properties and functions should be
@@ -34,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass
 public class UIEvent extends Event {
@@ -48,9 +48,6 @@ public class UIEvent extends Event {
 
     /** Specifies some detail information about the event. */
     private long detail_;
-
-    /** Whether or not the "meta" key was pressed during the firing of the event. */
-    private boolean metaKey_;
 
     /**
      * Creates a new UI event instance.
@@ -100,24 +97,6 @@ public class UIEvent extends Event {
     }
 
     /**
-     * @return indicates if event propagation is stopped
-     */
-    @Override
-    @JsxGetter
-    public boolean isCancelBubble() {
-        return super.isCancelBubble();
-    }
-
-    /**
-     * @param newValue indicates if event propagation is stopped
-     */
-    @Override
-    @JsxSetter
-    public void setCancelBubble(final boolean newValue) {
-        super.setCancelBubble(newValue);
-    }
-
-    /**
      * Returns the view from which the event was generated. In browsers, this is the originating window.
      *
      * @return the view from which the event was generated
@@ -147,21 +126,4 @@ public class UIEvent extends Event {
         // Ignore the view parameter; we always use the window.
         setDetail(detail);
     }
-
-    /**
-     * Returns whether or not the "meta" key was pressed during the event firing.
-     * @return whether or not the "meta" key was pressed during the event firing
-     */
-    @JsxGetter
-    public boolean getMetaKey() {
-        return metaKey_;
-    }
-
-    /**
-     * @param metaKey whether Meta has been pressed during this event or not
-     */
-    protected void setMetaKey(final boolean metaKey) {
-        metaKey_ = metaKey;
-    }
-
 }

@@ -169,7 +169,7 @@ public class PointerEvent extends MouseEvent {
      * @param hwTimestamp the initial value of hwTimestamp
      * @param isPrimary the initial value of isPrimary
      */
-    @JsxFunction
+    @JsxFunction(IE)
     public void initPointerEvent(final String type,
             final boolean bubbles,
             final boolean cancelable,

@@ -111,6 +111,9 @@ public class MouseEvent extends UIEvent {
     /** Switch to disable label handling if we already processing the event triggered from label processing */
     private boolean processLabelAfterBubbling_ = true;
 
+    /** Whether or not the "meta" key was pressed during the firing of the event. */
+    private boolean metaKey_;
+
     /**
      * Used to build the prototype.
      */
@@ -137,7 +140,6 @@ public class MouseEvent extends UIEvent {
         setShiftKey(shiftKey);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
-        setMetaKey(false);
 
         if (button != BUTTON_LEFT && button != BUTTON_MIDDLE && button != BUTTON_RIGHT) {
             throw new IllegalArgumentException("Invalid button code: " + button);
@@ -318,7 +320,6 @@ public class MouseEvent extends UIEvent {
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
-        setMetaKey(metaKey);
         button_ = button;
         // Ignore the relatedTarget parameter; we don't support it yet.
     }
@@ -394,5 +395,21 @@ public class MouseEvent extends UIEvent {
      */
     public void disableProcessLabelAfterBubbling() {
         processLabelAfterBubbling_ = false;
+    }
+
+    /**
+     * Returns whether or not the "meta" key was pressed during the event firing.
+     * @return whether or not the "meta" key was pressed during the event firing
+     */
+    @JsxGetter
+    public boolean getMetaKey() {
+        return metaKey_;
+    }
+
+    /**
+     * @param metaKey whether Meta has been pressed during this event or not
+     */
+    protected void setMetaKey(final boolean metaKey) {
+        metaKey_ = metaKey;
     }
 }
