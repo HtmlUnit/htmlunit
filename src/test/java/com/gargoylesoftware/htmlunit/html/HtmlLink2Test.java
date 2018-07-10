@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -208,7 +209,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"})
+    @Alerts(DEFAULT = {"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"},
+            IE = {"onLoadJs1", "body onLoad", "onLoad1", "onLoad2;"})
+    @NotYetImplemented(TestedBrowser.IE)
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
@@ -238,7 +241,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"onLoad [object Event]", "onError [object Event]"})
+    @Alerts("onLoad [object Event]")
     public void onLoadDynamic() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         final String html
@@ -253,7 +256,38 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "      dynLink.onload = function (e) { log(\"onLoad \" + e) };\n"
                 + "      dynLink.onerror = function (e) { log(\"onError \" + e) };\n"
                 + "      document.head.appendChild(dynLink);\n"
+                + "    }\n"
 
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'></body>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "onError [object Event]",
+            IE = "onLoad [object Event]")
+    @NotYetImplemented(TestedBrowser.IE)
+    public void onLoadDynamicUnknown() throws Exception {
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
+        final String html
+                = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
                 + "      var dynLink = document.createElement('link');\n"
                 + "      dynLink.rel = 'stylesheet';\n"
                 + "      dynLink.type = 'text/css';\n"
