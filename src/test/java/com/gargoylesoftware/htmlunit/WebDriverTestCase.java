@@ -75,6 +75,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -425,7 +426,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 if (CHROME_BIN_ != null) {
                     System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, CHROME_BIN_);
                 }
-                return new ChromeDriver();
+                final ChromeOptions options = new ChromeOptions();
+                options.addArguments("--lang=en-US");
+                return new ChromeDriver(options);
             }
 
             if (BrowserVersion.EDGE == getBrowserVersion()) {
