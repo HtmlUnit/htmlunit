@@ -1183,21 +1183,28 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "<head>\n"
             + "  <title>test</title>\n"
             + "  <script>\n"
+            + "  function log(x) {\n"
+            + "    document.getElementById('log').value += x + '\\n';\n"
+            + "  }\n"
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
-            + "    alert('Old = ' + myNode.innerHTML);\n"
+            + "    log('Old = ' + myNode.innerHTML);\n"
             + "    myNode.innerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "    alert('New = ' + myNode.innerHTML);\n"
-            + "    alert(document.getElementById('newElt').tagName);\n"
+            + "    log('New = ' + myNode.innerHTML);\n"
+            + "    log(document.getElementById('newElt').tagName);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
-            + "<p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
+            + "  <p id='myNode'><b>Old innerHTML</b><!-- old comment --></p>\n"
+            + "  <textarea id='log'></textarea>\n"
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        final WebElement log = driver.findElement(By.id("log"));
+        final String text = log.getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
 
         final WebElement pElt = driver.findElement(By.id("myNode"));
         assertEquals("p", pElt.getTagName());
