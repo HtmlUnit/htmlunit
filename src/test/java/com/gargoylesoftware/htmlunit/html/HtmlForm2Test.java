@@ -41,7 +41,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
@@ -480,7 +479,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"2", "third"})
-    @BuggyWebDriver(IE)
     public void buttonWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head><title>first</title></head>\n"
@@ -539,9 +537,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "third/"},
-            IE = {"1", "/"})
-    @NotYetImplemented(IE)
+    @Alerts({"2", "third/"})
     public void inputTypeSubmitWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -766,7 +762,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(IE)
     public void buttonWithFormTarget() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
@@ -810,7 +805,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "second content",
             IE = "hello world")
-    @NotYetImplemented(IE)
     public void inputTypeSubmitWithFormTarget() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"

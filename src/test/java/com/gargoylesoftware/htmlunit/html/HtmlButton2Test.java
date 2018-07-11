@@ -674,7 +674,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "second"},
-            IE = {"1", "first"})
+            IE = {"2", "third"})
     public void externalPreferenceFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"
@@ -712,7 +712,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "second"},
-            IE = {"1", "first"})
+            IE = {"2", "third"})
     public void internalDifferentFrom() throws Exception {
         final String html
             = "<html><head><title>first</title></head><body>\n"

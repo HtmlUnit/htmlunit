@@ -85,15 +85,13 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
         HtmlForm form = null;
         final String formId = getAttributeDirect("form");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId) {
+        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
             form = getEnclosingForm();
         }
         else {
-            if (hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
-                final DomElement elem = getHtmlPageOrNull().getElementById(formId);
-                if (elem instanceof HtmlForm) {
-                    form = (HtmlForm) elem;
-                }
+            final DomElement elem = getHtmlPageOrNull().getElementById(formId);
+            if (elem instanceof HtmlForm) {
+                form = (HtmlForm) elem;
             }
         }
 
