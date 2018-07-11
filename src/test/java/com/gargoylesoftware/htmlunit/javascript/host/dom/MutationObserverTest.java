@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+
 import java.net.URL;
 import java.util.Arrays;
 
@@ -24,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -322,6 +325,7 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
+    @BuggyWebDriver(FF60)
     public void attributeValue2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function makeRed() {\n"
@@ -329,7 +333,11 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  function print(mutation) {\n"
-            + "    alert(mutation.target + '-' + mutation.type);\n"
+            + "    log(mutation.target + '-' + mutation.type);\n"
+            + "  }\n"
+
+            + "  function log(x) {\n"
+            + "    document.getElementById('log').value += x + '\\n';\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -353,10 +361,13 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "    <h1 id='headline' style='font-style: italic'>Some headline</h1>\n"
             + "    <input id='id1' type='button' onclick='makeRed()' value='Make Red'>\n"
             + "  </div>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
             + "</body></html>\n";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("id1")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
