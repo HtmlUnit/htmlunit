@@ -41,6 +41,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
@@ -803,8 +804,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "second content",
-            IE = "hello world")
+    @Alerts("second content")
+    @BuggyWebDriver(IE)
     public void inputTypeSubmitWithFormTarget() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head></head>\n"
