@@ -54,7 +54,7 @@ public class PrimitiveWebServer {
      *
      * @param port the port
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @param otherResponse the sebsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
      */
     public PrimitiveWebServer(final int port, final String firstResponse, final String otherResponse) {
         port_ = port;
