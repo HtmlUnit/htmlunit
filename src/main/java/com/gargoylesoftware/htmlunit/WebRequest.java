@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -62,7 +62,7 @@ public class WebRequest implements Serializable {
     private Map<String, String> additionalHeaders_ = new HashMap<>();
     private Credentials urlCredentials_;
     private Credentials credentials_;
-    private transient Charset charset_ = UTF_8;
+    private transient Charset charset_ = ISO_8859_1;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
