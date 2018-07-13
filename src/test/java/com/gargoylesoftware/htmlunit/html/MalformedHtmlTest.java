@@ -1090,4 +1090,26 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         assertEquals(0, webDriver.findElements(By.name("main")).size());
         assertEquals(1, webDriver.findElements(By.id("tester")).size());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§foo?a=1&copy=2&prod=3")
+    @NotYetImplemented
+    public void incompleteEntities() throws Exception {
+        final String html = "<html><head>\n"
+            + "<title>Test document</title>\n"
+            + "</head><body>\n"
+            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><head><title>foo</title></head><body></body></html>");
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myLink")).click();
+
+        assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl());
+    }
 }

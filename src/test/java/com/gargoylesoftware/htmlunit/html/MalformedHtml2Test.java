@@ -30,30 +30,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 public class MalformedHtml2Test extends SimpleWebTestCase {
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void incompleteEntities() throws Exception {
-        final String html = "<html><head>\n"
-            + "<title>Test document</title>\n"
-            + "</head><body>\n"
-            + "<a href='foo?a=1&copy=2&prod=3' id='myLink'>my link</a>\n"
-            + "</body></html>";
-
-        final HtmlPage page = loadPage(html);
-        final HtmlPage page2 = page.getAnchors().get(0).click();
-
-        final String query;
-        if (getBrowserVersion().isIE()) {
-            query = "a=1\u00A9=2&prod=3";
-        }
-        else {
-            query = "a=1%A9=2&prod=3";
-        }
-        assertEquals(query, page2.getUrl().getQuery());
-    }
-
-    /**
      * Regression test for Bug #1018.
      * @throws Exception if an error occurs
      */

@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class PrimitiveWebServer {
     private final String firstResponse_;
     private final String otherResponse_;
     private ServerSocket server_;
+    private Charset charset_ = StandardCharsets.UTF_8;
     private List<String> requests_ = new ArrayList<>();
 
     /**
@@ -95,7 +97,7 @@ public class PrimitiveWebServer {
                                 response = otherResponse_;
                             }
                             first = false;
-                            out.write(response.getBytes(StandardCharsets.UTF_8));
+                            out.write(response.getBytes(charset_));
                         }
                     }
                 }
@@ -130,5 +132,12 @@ public class PrimitiveWebServer {
      */
     public void clearRequests() {
         requests_.clear();
+    }
+
+    /**
+     * @param charset the charset
+     */
+    public void setCharset(final Charset charset) {
+        charset_ = charset;
     }
 }

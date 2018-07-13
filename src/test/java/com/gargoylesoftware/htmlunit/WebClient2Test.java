@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -28,7 +27,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -41,18 +39,6 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient2Test extends SimpleWebTestCase {
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "http://first/?param=%A3",
-            IE = "http://first/?param=\u00A3")
-    public void encodeURL() throws Exception {
-        final String html = "<body onload='alert(window.location.href)'></body>";
-        getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts(html, new URL("http://first/?param=\u00A3"), -1);
-    }
 
     /**
      * Test for 3151939. The Browser removes leading '/..' from the path.

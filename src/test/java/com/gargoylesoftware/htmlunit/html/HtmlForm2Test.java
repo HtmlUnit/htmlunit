@@ -46,7 +46,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -165,35 +164,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void linkUrlEncoding() throws Exception {
-        final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
-            + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
-            + "</head>\n"
-            + "<body>\n"
-            + "  <a href='bug.html?k\u00F6nig' id='myLink'>Click me</a>\n"
-            + "</body></html>";
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(html, "text/html", ISO_8859_1);
-
-        final WebDriver driver = loadPage2(html);
-        assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
-        driver.findElement(By.id("myLink")).click();
-        final String linkSuffix;
-        if (getBrowserVersion().isIE()) {
-            linkSuffix = "bug.html?k\u00F6nig";
-        }
-        else {
-            linkSuffix = "bug.html?k%F6nig";
-        }
-        assertEquals(URL_FIRST + linkSuffix, driver.getCurrentUrl());
     }
 
     /**
