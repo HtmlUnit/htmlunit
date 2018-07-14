@@ -36,6 +36,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -460,8 +461,10 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow().getTopWindow(),
-                new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader()));
+        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        request.setCharset(StandardCharsets.UTF_8);
+
+        return (P) getPage(getCurrentWindow().getTopWindow(), request);
     }
 
     /**
@@ -881,6 +884,8 @@ public class WebClient implements Serializable, AutoCloseable {
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+                request.setCharset(StandardCharsets.UTF_8);
+
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null) {
                     final String referer = openerPage.getUrl().toExternalForm();
@@ -1011,6 +1016,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        request.setCharset(StandardCharsets.UTF_8);
+
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
             final String referer = openerPage.getUrl().toExternalForm();
             request.setAdditionalHeader(HttpHeader.REFERER, referer);
@@ -1444,6 +1451,8 @@ public class WebClient implements Serializable, AutoCloseable {
                     || status == HttpStatus.SC_MOVED_TEMPORARILY
                     || status == HttpStatus.SC_SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
+                wrs.setCharset(webRequest.getCharset());
+
                 if (HttpMethod.HEAD == webRequest.getHttpMethod()) {
                     wrs.setHttpMethod(HttpMethod.HEAD);
                 }
@@ -1455,6 +1464,8 @@ public class WebClient implements Serializable, AutoCloseable {
             else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
                         || status == 308) {
                 final WebRequest wrs = new WebRequest(newUrl, webRequest.getHttpMethod());
+                wrs.setCharset(webRequest.getCharset());
+
                 wrs.setRequestParameters(parameters);
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
                     wrs.setAdditionalHeader(entry.getKey(), entry.getValue());
