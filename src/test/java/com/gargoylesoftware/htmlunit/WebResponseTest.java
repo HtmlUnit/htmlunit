@@ -107,8 +107,8 @@ public class WebResponseTest extends WebServerTestCase {
     public void illegalCharset() throws Exception {
         illegalCharset("text/html; text/html; charset=ISO-8859-1;", ISO_8859_1);
         illegalCharset("text/html; charset=UTF-8; charset=UTF-8", UTF_8);
-        illegalCharset("text/html; charset=#sda+s", UTF_8);
-        illegalCharset("text/html; charset=UnknownCharset", UTF_8);
+        illegalCharset("text/html; charset=#sda+s", ISO_8859_1);
+        illegalCharset("text/html; charset=UnknownCharset", ISO_8859_1);
     }
 
     private void illegalCharset(final String cntTypeHeader, final Charset expectedCharset) throws Exception {

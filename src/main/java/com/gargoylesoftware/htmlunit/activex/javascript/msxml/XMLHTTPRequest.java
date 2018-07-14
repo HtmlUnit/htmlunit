@@ -574,6 +574,9 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Web response loaded successfully.");
             }
+            // this kind of web responses using UTF-8 as default encoding
+            webResponse.defaultCharsetUtf8();
+
             boolean allowOriginResponse = true;
             if (originHeaderValue != null) {
                 final String value = webResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);

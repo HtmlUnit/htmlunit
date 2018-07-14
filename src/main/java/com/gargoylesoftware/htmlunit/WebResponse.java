@@ -57,6 +57,7 @@ public class WebResponse implements Serializable {
     private long loadTime_;
     private WebResponseData responseData_;
     private WebRequest request_;
+    private boolean defaultCharsetUtf8_;
 
     /**
      * Constructs with all data.
@@ -180,12 +181,12 @@ public class WebResponse implements Serializable {
 
             // xml pages are using a different content type
             if (null != contentType
-                && PageType.XML == DefaultPageCreator.determinePageType(contentType)) {
+                && (defaultCharsetUtf8_
+                    || PageType.XML == DefaultPageCreator.determinePageType(contentType))) {
                 return UTF_8;
             }
-
-            charset = getWebRequest().getCharset();
         }
+
         if (charset == null) {
             charset = ISO_8859_1;
         }
@@ -286,5 +287,12 @@ public class WebResponse implements Serializable {
         if (responseData_ != null) {
             responseData_.cleanUp();
         }
+    }
+
+    /**
+     * Mark this response for using UTF-8 as default charset.
+     */
+    public void defaultCharsetUtf8() {
+        defaultCharsetUtf8_ = true;
     }
 }
