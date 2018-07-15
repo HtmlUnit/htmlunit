@@ -219,16 +219,9 @@ public final class HTMLParser {
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url, null);
 
-        Charset charset = webResponse.getContentCharsetOrNull();
+        final Charset charset = webResponse.getContentCharsetOrNull();
         try {
-            // handle charset
-            if (charset == null) {
-                final Charset specifiedCharset = webResponse.getWebRequest().getCharset();
-                if (specifiedCharset != null) {
-                    charset = specifiedCharset;
-                }
-            }
-            else {
+            if (charset != null) {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
 
