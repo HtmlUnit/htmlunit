@@ -28,6 +28,7 @@ import java.io.StringReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -219,9 +220,12 @@ public final class HTMLParser {
         final URL url = webResponse.getWebRequest().getUrl();
         final HtmlUnitDOMBuilder domBuilder = new HtmlUnitDOMBuilder(page, url, null);
 
-        final Charset charset = webResponse.getContentCharsetOrNull();
+        Charset charset = webResponse.getContentCharsetOrNull();
         try {
-            if (charset != null) {
+            if (charset == null) {
+                charset = StandardCharsets.ISO_8859_1;
+            }
+            else {
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
 
