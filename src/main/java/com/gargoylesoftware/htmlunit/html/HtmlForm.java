@@ -249,13 +249,14 @@ public class HtmlForm extends HtmlElement {
         final BrowserVersion browser = getPage().getWebClient().getBrowserVersion();
         String actionUrl = getActionAttribute();
         String anchor = null;
-        String queryFromFields = "";
+        String queryFormFields = "";
+        final Charset enc = getSubmitCharset();
+
         if (HttpMethod.GET == method) {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            final Charset enc = getPage().getCharset();
-            queryFromFields =
+            queryFormFields =
                 URLEncodedUtils.format(Arrays.asList(NameValuePair.toHttpClient(parameters)), enc);
 
             // action may already contain some query parameters: they have to be removed
@@ -263,6 +264,7 @@ public class HtmlForm extends HtmlElement {
             actionUrl = StringUtils.substringBefore(actionUrl, "?");
             parameters.clear(); // parameters have been added to query
         }
+
         URL url;
         try {
             if (actionUrl.isEmpty()) {
@@ -272,8 +274,8 @@ public class HtmlForm extends HtmlElement {
                 url = htmlPage.getFullyQualifiedUrl(actionUrl);
             }
 
-            if (!queryFromFields.isEmpty()) {
-                url = UrlUtils.getUrlWithNewQuery(url, queryFromFields);
+            if (!queryFormFields.isEmpty()) {
+                url = UrlUtils.getUrlWithNewQuery(url, queryFormFields);
             }
 
             if (HttpMethod.GET == method && browser.hasFeature(FORM_SUBMISSION_URL_WITHOUT_HASH)
@@ -302,7 +304,7 @@ public class HtmlForm extends HtmlElement {
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
-        request.setCharset(getSubmitCharset());
+        request.setCharset(enc);
 
         String referer = htmlPage.getUrl().toExternalForm();
         request.setAdditionalHeader(HttpHeader.REFERER, referer);
