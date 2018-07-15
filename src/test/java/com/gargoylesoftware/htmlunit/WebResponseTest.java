@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebResponseTest extends WebServerTestCase {
@@ -54,7 +55,7 @@ public class WebResponseTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void encoding() throws Exception {
+    public void encodingCharsetUtf8() throws Exception {
         final String title = "\u6211\u662F\u6211\u7684FOCUS";
         final String content =
             "<html><head>\n"
@@ -66,7 +67,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, content.getBytes(UTF_8), 200, "OK", "text/html", null);
+        webConnection.setResponse(URL_FIRST, content.getBytes(UTF_8), 200, "OK", "text/html; charset=UTF-8", null);
         client.setWebConnection(webConnection);
         final WebRequest request = new WebRequest(URL_FIRST);
         request.setCharset(UTF_8);

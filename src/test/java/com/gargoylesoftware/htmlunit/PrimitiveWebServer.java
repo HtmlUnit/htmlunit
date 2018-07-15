@@ -38,7 +38,7 @@ public class PrimitiveWebServer {
     private final String firstResponse_;
     private final String otherResponse_;
     private ServerSocket server_;
-    private Charset charset_ = StandardCharsets.UTF_8;
+    private Charset charset_ = StandardCharsets.ISO_8859_1;
     private List<String> requests_ = new ArrayList<>();
 
     /**
@@ -87,17 +87,27 @@ public class PrimitiveWebServer {
                                 break;
                             }
                         }
-                        requests_.add(writer.toString());
-                        try (OutputStream out = socket.getOutputStream()) {
-                            final String response;
-                            if (first || otherResponse_ == null) {
-                                response = firstResponse_;
+                        final String requestString = writer.toString();
+
+                        final String response;
+                        if (requestString.contains("/favicon.ico")) {
+                            response = "HTTP/1.1 404 Not Found\r\n"
+                                    + "Content-Length: 0\r\n"
+                                    + "Content-Type: text/html; charset=iso-8859-1\r\n"
+                                    + "Connection: Closed\r\n\r\n";
+                        }
+                        else {
+                            requests_.add(writer.toString());
+                            try (OutputStream out = socket.getOutputStream()) {
+                                if (first || otherResponse_ == null) {
+                                    response = firstResponse_;
+                                }
+                                else {
+                                    response = otherResponse_;
+                                }
+                                first = false;
+                                out.write(response.getBytes(charset_));
                             }
-                            else {
-                                response = otherResponse_;
-                            }
-                            first = false;
-                            out.write(response.getBytes(charset_));
                         }
                     }
                 }

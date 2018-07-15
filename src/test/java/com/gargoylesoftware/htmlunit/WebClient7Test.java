@@ -158,8 +158,8 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/bug.html?k%C3%B6nig",
-            IE = "/bug.html?k\u00c3\u00b6nig")
+    @Alerts(DEFAULT = "/bug.html?k%EF%BF%BDnig",
+            IE = "/bug.html?k\u00ef\u00bf\u00bdnig")
     @NotYetImplemented(IE)
     public void linkUrlEncodingUTF8() throws Exception {
         final String html = "<html>\n"
@@ -176,14 +176,17 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
 
-        final String response = "HTTP/1.1 200 OK\r\n"
-                + "Content-Length: 2\r\n"
-                + "Content-Type: text/html\r\n"
-                + "\r\n"
-                + "<html><head><title>foo</title></head><body>"
+        final String html2 = "<html><head><title>foo</title></head><body>"
                 + "</body></html>";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, response);
+        final String secondResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html2.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html2;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
+        primitiveWebServer_.setCharset(StandardCharsets.ISO_8859_1);
         primitiveWebServer_.start();
 
         final WebDriver driver = getWebDriver();
@@ -192,9 +195,6 @@ public class WebClient7Test extends WebDriverTestCase {
         driver.findElement(By.id("myLink")).click();
 
         String reqUrl = primitiveWebServer_.getRequests().get(1);
-        if (reqUrl.contains("/favicon.ico")) {
-            reqUrl = primitiveWebServer_.getRequests().get(2);
-        }
         reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
         assertEquals(getExpectedAlerts()[0], reqUrl);
