@@ -16,9 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.After;
 import org.junit.Test;
@@ -157,14 +156,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
-            IE = "§§URL§§أهلاً")
-    @NotYetImplemented(IE)
+    @Alerts("§§URL§§?????")
     // seems to work only when running alone
     public void locationUTF() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
-                + "Location: " +  URL_FIRST + "أهلاً" + "\r\n"
+                + "Location: " +  URL_FIRST + "\u0623\u0647\u0644\u0627\u064b" + "\r\n"
                 + "\r\n";
 
         final String response2 = "HTTP/1.1 200 OK\r\n"
@@ -183,9 +180,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("Hi"));
 
-        final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
-                .collect(Collectors.toList());
-        assertEquals(2, requests.size());
+        assertEquals(2, primitiveWebServer_.getRequests().size());
     }
 
     /**
@@ -194,14 +189,15 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
-            IE = "§§URL§§test?Ø£Ù‡Ù„Ø§Ù‹")
-    @NotYetImplemented(IE)
-    // seems to work only when running alone
-    public void locationQueryUTF() throws Exception {
+    @Alerts("§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
+    public void locationQueryUTF8Encoded() throws Exception {
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
-                + "Location: " +  URL_FIRST + "test?أهلاً" + "\r\n"
+                + "Location: "
+                    +  URL_FIRST
+                    + "test?"
+                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
+                    + "\r\n"
                 + "\r\n";
 
         final String response2 = "HTTP/1.1 200 OK\r\n"
@@ -220,9 +216,42 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
         assertTrue(driver.getPageSource().contains("Hi"));
 
-        final List<String> requests = primitiveWebServer_.getRequests().stream().filter(r -> !r.contains("favicon.ico"))
-                .collect(Collectors.toList());
-        assertEquals(2, requests.size());
+        assertEquals(2, primitiveWebServer_.getRequests().size());
+    }
+
+    /**
+     * Test for bug #1898.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("§§URL§§%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
+    public void locationUTF8Encoded() throws Exception {
+        final String response = "HTTP/1.1 302 Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Location: "
+                    +  URL_FIRST
+                    + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
+                    + "\r\n"
+                + "\r\n";
+
+        final String response2 = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + "Hi";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+        driver.get(URL_FIRST.toExternalForm());
+        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+        assertTrue(driver.getPageSource().contains("Hi"));
+
+        assertEquals(2, primitiveWebServer_.getRequests().size());
     }
 
     /**
