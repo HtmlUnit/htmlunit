@@ -1337,7 +1337,7 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("parameters", parameters);
 
         url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
-                                        webRequest.getCharset());
+                                        webRequest.getUrlEncodingCharset());
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {

@@ -23,6 +23,7 @@ import java.io.Serializable;
 import java.net.IDN;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -427,6 +428,21 @@ public class WebRequest implements Serializable {
      */
     public void setCharset(final Charset charset) {
         charset_ = charset;
+    }
+
+    /**
+     * Returns the character set to use to encode the url params.
+     * @return the character set to use to encode the url params
+     */
+    public Charset getUrlEncodingCharset() {
+        if (HttpMethod.GET == getHttpMethod()
+                || HttpMethod.DELETE == getHttpMethod()
+                || HttpMethod.HEAD == getHttpMethod()
+                || HttpMethod.OPTIONS == getHttpMethod()
+                || HttpMethod.TRACE == getHttpMethod()) {
+            return StandardCharsets.UTF_8;
+        }
+        return charset_;
     }
 
     /**
