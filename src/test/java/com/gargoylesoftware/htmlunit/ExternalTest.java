@@ -87,9 +87,6 @@ public class ExternalTest {
             }
 
             assertVersion("org.sonatype.oss", "oss-parent", "9");
-
-            assertChromeDriver();
-            assertGeckoDriver();
         }
     }
 
@@ -106,7 +103,12 @@ public class ExternalTest {
         }
     }
 
-    private static void assertChromeDriver() throws Exception {
+    /**
+     * Tests that we use the latest chrome driver.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertChromeDriver() throws Exception {
         try (WebClient webClient = getWebClient()) {
             final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
@@ -114,11 +116,21 @@ public class ExternalTest {
         }
     }
 
-    private static void assertGeckoDriver() throws Exception {
+    /**
+     * Tests that we use the latest gecko driver.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void assertGeckoDriver() throws Exception {
         try (WebClient webClient = getWebClient()) {
-            final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
-            final DomNodeList<DomNode> divs = page.querySelectorAll(".release-title");
-            assertEquals("Gecko Driver", divs.get(0).asText(), "v" + GECKO_DRIVER_);
+            try {
+                final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
+                final DomNodeList<DomNode> divs = page.querySelectorAll(".release-title");
+                assertEquals("Gecko Driver", divs.get(0).asText(), "v" + GECKO_DRIVER_);
+            }
+            catch (final FailingHttpStatusCodeException e) {
+                // ignore
+            }
         }
     }
 
