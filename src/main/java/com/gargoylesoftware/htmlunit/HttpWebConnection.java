@@ -28,6 +28,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -288,16 +289,28 @@ public class HttpWebConnection implements WebConnection {
 
         final Charset charset = webRequest.getCharset();
         final HttpContext httpContext = getHttpContext();
+
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
+        final URL url;
+        if (HttpMethod.GET == webRequest.getHttpMethod()
+                || HttpMethod.DELETE == webRequest.getHttpMethod()
+                || HttpMethod.HEAD == webRequest.getHttpMethod()
+                || HttpMethod.OPTIONS == webRequest.getHttpMethod()
+                || HttpMethod.TRACE == webRequest.getHttpMethod()) {
+            url = UrlUtils.encodeUrl(webRequest.getUrl(), false, StandardCharsets.UTF_8);
+        }
+        else {
+            url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
+        }
 
         URI uri = UrlUtils.toURI(url, escapeQuery(url.getQuery()));
         if (getVirtualHost() != null) {
             uri = URI.create(getVirtualHost());
         }
+
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
         if (!(httpMethod instanceof HttpEntityEnclosingRequest)) {
