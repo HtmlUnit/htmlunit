@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.junit.After;
@@ -132,12 +133,15 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void testRequestUrlEncoding(final String url) throws Exception {
+        final String html = "<html>"
+                + "<head><title>foo</title></head>"
+                + "<body></body></html>";
+
         final String response = "HTTP/1.1 200 OK\r\n"
-                + "Content-Length: 58\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
                 + "Content-Type: text/html\r\n"
                 + "\r\n"
-                + "<html><head><title>foo</title></head><body>"
-                + "</body></html>";
+                + html;
 
         primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
         primitiveWebServer_.start();
@@ -146,9 +150,6 @@ public class WebClient7Test extends WebDriverTestCase {
 
         driver.get(new URL(URL_FIRST, url).toString());
         String reqUrl = primitiveWebServer_.getRequests().get(0);
-        if (reqUrl.contains("/favicon.ico")) {
-            reqUrl = primitiveWebServer_.getRequests().get(1);
-        }
         reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
         assertEquals(getExpectedAlerts()[0], reqUrl);
@@ -158,25 +159,84 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/bug.html?k%EF%BF%BDnig",
-            IE = "/bug.html?k\u00ef\u00bf\u00bdnig")
+    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
+            IE = "/test.html?k\u00c3\u00b6nig")
     @NotYetImplemented(IE)
-    public void linkUrlEncodingUTF8() throws Exception {
-        final String html = "<html>\n"
-                + "<head><title>foo</title>\n"
-                + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
-                + "</head>\n"
+    public void anchorUrlEncodingUTF8Header() throws Exception {
+        urlEncoding(true, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.html?k%C3%B6nig",
+            IE = "/test.html?k\u00c3\u00b6nig")
+    @NotYetImplemented(IE)
+    public void anchorUrlEncodingUTF8Meta() throws Exception {
+        urlEncoding(false, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.html?k%F6nig",
+            IE = "/test.html?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void anchorUrlEncodingISO8859_1Header() throws Exception {
+        urlEncoding(true, "ISO-8859-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.html?k%F6nig",
+            IE = "/test.html?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void anchorUrlEncodingISO8859_1Meta() throws Exception {
+        urlEncoding(false, "ISO-8859-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("/test.html?k?nig")
+    public void anchorUrlEncodingWindows_1251Header() throws Exception {
+        urlEncoding(true, "Windows-1251");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("/test.html?k?nig")
+    public void anchorUrlEncodingWindows_1251Meta() throws Exception {
+        urlEncoding(false, "Windows-1251");
+    }
+
+    private void urlEncoding(final boolean header, final String charset) throws Exception {
+        String html = "<html>\n"
+                + "<head><title>foo</title>\n";
+        if (!header) {
+            html += "  <meta http-equiv='Content-Type' content='text/html; charset=" + charset + "'>\n";
+        }
+
+        html += "</head>\n"
                 + "<body>\n"
-                + "  <a id='myLink' href='bug.html?k\u00F6nig'>Click me</a>\n"
+                + "  <a id='myLink' href='test.html?k\u00F6nig'>Click me</a>\n"
                 + "</body></html>";
 
-        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+        String firstResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html.length() + "\r\n"
-                + "Content-Type: text/html\r\n"
-                + "\r\n"
-                + html;
+                + "Content-Type: text/html";
+        if (header) {
+            firstResponse += "; charset=" + charset;
+        }
+        firstResponse += "\r\n\r\n" + html;
 
-        final String html2 = "<html><head><title>foo</title></head><body>"
+        final String html2 = "<html><head></head><body>"
                 + "</body></html>";
 
         final String secondResponse = "HTTP/1.1 200 OK\r\n"
@@ -186,7 +246,7 @@ public class WebClient7Test extends WebDriverTestCase {
                 + html2;
 
         primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
-        primitiveWebServer_.setCharset(StandardCharsets.ISO_8859_1);
+        primitiveWebServer_.setCharset(Charset.forName(charset));
         primitiveWebServer_.start();
 
         final WebDriver driver = getWebDriver();
@@ -204,16 +264,59 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "/bug.html?k%F6nig",
-            IE = "/bug.html?k\u00f6nig")
+    @Alerts(DEFAULT = "/test.css?k%C3%B6nig",
+            IE = "/test.css?k\u00c3\u00b6nig")
     @NotYetImplemented(IE)
-    public void linkUrlEncodingISO8859_1() throws Exception {
+    public void linkUrlEncodingUTF8Header() throws Exception {
         final String html = "<html>\n"
                 + "<head><title>foo</title>\n"
-                + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
+                + "  <link rel='stylesheet' type='text/css' href='test.css?k\u00F6nig'>"
                 + "</head>\n"
                 + "<body>\n"
-                + "  <a id='myLink' href='bug.html?k\u00F6nig'>Click me</a>\n"
+                + "</body></html>";
+
+        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html; charset=UTF-8\r\n"
+                + "\r\n"
+                + html;
+
+        final String css = "p { color: red; }";
+
+        final String secondResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + css.length() + "\r\n"
+                + "Content-Type: text/css\r\n"
+                + "\r\n"
+                + css;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
+        primitiveWebServer_.setCharset(StandardCharsets.UTF_8);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+
+        driver.get(URL_FIRST.toString());
+
+        String reqUrl = primitiveWebServer_.getRequests().get(1);
+        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+        assertEquals(getExpectedAlerts()[0], reqUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.css?k%C3%B6nig",
+            IE = "/test.css?k\u00c3\u00b6nig")
+    @NotYetImplemented(IE)
+    public void linkUrlEncodingUTF8Meta() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n"
+                + "  <link rel='stylesheet' type='text/css' href='test.css?k\u00F6nig'>"
+                + "</head>\n"
+                + "<body>\n"
                 + "</body></html>";
 
         final String firstResponse = "HTTP/1.1 200 OK\r\n"
@@ -222,26 +325,110 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
 
-        final String response = "HTTP/1.1 200 OK\r\n"
-                + "Content-Length: 2\r\n"
-                + "Content-Type: text/html\r\n"
+        final String css = "p { color: red; }";
+
+        final String secondResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + css.length() + "\r\n"
+                + "Content-Type: text/css\r\n"
                 + "\r\n"
-                + "<html><head><title>foo</title></head><body>"
+                + css;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
+        primitiveWebServer_.setCharset(StandardCharsets.UTF_8);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+
+        driver.get(URL_FIRST.toString());
+
+        String reqUrl = primitiveWebServer_.getRequests().get(1);
+        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+        assertEquals(getExpectedAlerts()[0], reqUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.css?k%F6nig",
+            IE = "/test.css?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void linkUrlEncodingISO8859_1Header() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "  <link rel='stylesheet' type='text/css' href='test.css?k\u00F6nig'>"
+                + "</head>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, response);
+        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html; charset=ISO-8859-1\r\n"
+                + "\r\n"
+                + html;
+
+        final String css = "p { color: red; }";
+
+        final String secondResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + css.length() + "\r\n"
+                + "Content-Type: text/css\r\n"
+                + "\r\n"
+                + css;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
         primitiveWebServer_.setCharset(StandardCharsets.ISO_8859_1);
         primitiveWebServer_.start();
 
         final WebDriver driver = getWebDriver();
 
         driver.get(URL_FIRST.toString());
-        driver.findElement(By.id("myLink")).click();
 
         String reqUrl = primitiveWebServer_.getRequests().get(1);
-        if (reqUrl.contains("/favicon.ico")) {
-            reqUrl = primitiveWebServer_.getRequests().get(2);
-        }
+        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+        assertEquals(getExpectedAlerts()[0], reqUrl);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.css?k%F6nig",
+            IE = "/test.css?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void linkUrlEncodingISO8859_1Meta() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title>\n"
+                + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
+                + "  <link rel='stylesheet' type='text/css' href='test.css?k\u00F6nig'>"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+
+        final String css = "p { color: red; }";
+
+        final String secondResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + css.length() + "\r\n"
+                + "Content-Type: text/css\r\n"
+                + "\r\n"
+                + css;
+
+        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
+        primitiveWebServer_.setCharset(StandardCharsets.ISO_8859_1);
+        primitiveWebServer_.start();
+
+        final WebDriver driver = getWebDriver();
+
+        driver.get(URL_FIRST.toString());
+
+        String reqUrl = primitiveWebServer_.getRequests().get(1);
         reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
         assertEquals(getExpectedAlerts()[0], reqUrl);

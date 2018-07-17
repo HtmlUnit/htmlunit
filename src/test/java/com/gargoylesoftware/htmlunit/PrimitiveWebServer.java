@@ -80,14 +80,18 @@ public class PrimitiveWebServer {
                         final Socket socket = server_.accept();
                         final InputStream in = socket.getInputStream();
                         final CharArrayWriter writer = new CharArrayWriter();
+
+                        String requestString = writer.toString();
                         int i;
+
                         while ((i = in.read()) != -1) {
                             writer.append((char) i);
-                            if (i == '\n' && writer.toString().endsWith("\r\n\r\n")) {
+                            requestString = writer.toString();
+
+                            if (i == '\n' && requestString.endsWith("\r\n\r\n")) {
                                 break;
                             }
                         }
-                        final String requestString = writer.toString();
 
                         final String response;
                         if (requestString.contains("/favicon.ico")) {
@@ -97,7 +101,7 @@ public class PrimitiveWebServer {
                                     + "Connection: Closed\r\n\r\n";
                         }
                         else {
-                            requests_.add(writer.toString());
+                            requests_.add(requestString);
                             try (OutputStream out = socket.getOutputStream()) {
                                 if (first || otherResponse_ == null) {
                                     response = firstResponse_;
