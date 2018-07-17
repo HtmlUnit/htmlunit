@@ -241,7 +241,7 @@ public class WebClient7Test extends WebDriverTestCase {
 
         final String secondResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html2.length() + "\r\n"
-                + "Content-Type: text/html\r\n"
+                + "Content-Type: text/html; charset=" + charset + "\r\n"
                 + "\r\n"
                 + html2;
 
@@ -433,4 +433,13 @@ public class WebClient7Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], reqUrl);
     }
+
+//    BaseFrameElement.java (2 matches)
+//    HtmlApplet.java
+//    HtmlArea.java
+//    HtmlEmbed.java
+//    HtmlForm.java
+//    HtmlImage.java
+//    HtmlImageInput.java
+//    HtmlObject.java
 }
