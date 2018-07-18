@@ -179,6 +179,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             }
             try {
                 final WebRequest request = new WebRequest(url);
+                request.setCharset(getPage().getCharset());
                 request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }

@@ -97,7 +97,9 @@ public class PrimitiveWebServer {
                         final String response;
                         if (requestString.contains("/favicon.ico")) {
                             response = "HTTP/1.1 404 Not Found\r\n"
-                                    + "Content-Length: 0\r\n\r\n";
+                                    + "Content-Length: 0\r\n"
+                                    + "Connection: close\r\n"
+                                    + "\r\n";
                         }
                         else {
                             requests_.add(requestString);
