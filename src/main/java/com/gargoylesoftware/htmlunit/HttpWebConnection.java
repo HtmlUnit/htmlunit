@@ -204,7 +204,7 @@ System.out.println("# done");
                 }
             }
             catch (final Error e) {
-System.out.println("#" + e);
+System.out.println("##" + e);
                 // in case a StackOverflowError occurs while the connection is leased, it won't get released.
                 // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
                 // come out of connections and throw a ConnectionPoolTimeoutException.
@@ -213,7 +213,7 @@ System.out.println("#" + e);
                 throw e;
             }
             catch (final Throwable e) {
-e.printStackTrace();
+System.out.println("###" + e);
                 throw e;
             }
 
