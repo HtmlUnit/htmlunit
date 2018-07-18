@@ -225,7 +225,7 @@ public class WebClient7Test extends WebDriverTestCase {
 
         html += "</head>\n"
                 + "<body>\n"
-                + "  <a id='myLink' href='test.html?k\u00F6nig'>Click me</a>\n"
+                + "  <a id='myLink' href='test.html?ku00F6nig'>Click me</a>\n"
                 + "</body></html>";
 
         String firstResponse = "HTTP/1.1 200 OK\r\n"
