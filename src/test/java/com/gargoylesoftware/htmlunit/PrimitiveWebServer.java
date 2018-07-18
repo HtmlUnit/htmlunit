@@ -96,9 +96,7 @@ public class PrimitiveWebServer {
                         final String response;
                         if (requestString.contains("/favicon.ico")) {
                             response = "HTTP/1.1 404 Not Found\r\n"
-                                    + "Content-Length: 0\r\n"
-                                    + "Content-Type: text/html; charset=iso-8859-1\r\n"
-                                    + "Connection: Closed\r\n\r\n";
+                                    + "Content-Length: 0\r\n\r\n";
                         }
                         else {
                             requests_.add(requestString);
@@ -110,6 +108,7 @@ public class PrimitiveWebServer {
                                     response = otherResponse_;
                                 }
                                 first = false;
+System.out.println("resp: " + response);
                                 out.write(response.getBytes(charset_));
                             }
                         }
