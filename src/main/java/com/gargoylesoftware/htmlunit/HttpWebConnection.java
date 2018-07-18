@@ -287,20 +287,17 @@ public class HttpWebConnection implements WebConnection {
         throws URISyntaxException {
 
         final HttpContext httpContext = getHttpContext();
-        final Charset encCharset = webRequest.getUrlEncodingCharset();
-
+        final Charset charset = webRequest.getCharset();
         // Make sure that the URL is fully encoded. IE actually sends some Unicode chars in request
         // URLs; because of this we allow some Unicode chars in URLs. However, at this point we're
         // handing things over the HttpClient, and HttpClient will blow up if we leave these Unicode
         // chars in the URL.
-        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, encCharset);
+        final URL url = UrlUtils.encodeUrl(webRequest.getUrl(), false, charset);
 
         URI uri = UrlUtils.toURI(url, escapeQuery(url.getQuery()));
         if (getVirtualHost() != null) {
             uri = URI.create(getVirtualHost());
         }
-
-        final Charset charset = webRequest.getCharset();
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
@@ -309,7 +306,7 @@ public class HttpWebConnection implements WebConnection {
             if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
                 final org.apache.http.NameValuePair[] httpClientPairs = NameValuePair.toHttpClient(pairs);
-                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), encCharset);
+                final String query = URLEncodedUtils.format(Arrays.asList(httpClientPairs), charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
             }

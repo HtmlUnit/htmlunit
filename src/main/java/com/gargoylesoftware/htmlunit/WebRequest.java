@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.net.IDN;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +63,6 @@ public class WebRequest implements Serializable {
     private Credentials urlCredentials_;
     private Credentials credentials_;
     private transient Charset charset_ = ISO_8859_1;
-    private transient Charset urlEncodingCharset_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
     private List<NameValuePair> requestParameters_ = Collections.emptyList();
@@ -429,31 +427,6 @@ public class WebRequest implements Serializable {
      */
     public void setCharset(final Charset charset) {
         charset_ = charset;
-    }
-
-    /**
-     * @param charset the character set to use for url (param) encoding
-     */
-    public void setUrlEncodingCharset(final Charset charset) {
-        urlEncodingCharset_ = charset;
-    }
-
-    /**
-     * @return the character set to use to encode the url (params)
-     */
-    public Charset getUrlEncodingCharset() {
-        if (urlEncodingCharset_ != null) {
-            return urlEncodingCharset_;
-        }
-
-        if (HttpMethod.GET == getHttpMethod()
-                || HttpMethod.DELETE == getHttpMethod()
-                || HttpMethod.HEAD == getHttpMethod()
-                || HttpMethod.OPTIONS == getHttpMethod()
-                || HttpMethod.TRACE == getHttpMethod()) {
-            return StandardCharsets.UTF_8;
-        }
-        return charset_;
     }
 
     /**

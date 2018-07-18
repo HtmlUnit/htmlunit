@@ -169,9 +169,9 @@ public class HtmlAnchor extends HtmlElement {
         }
 
         final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
-        webRequest.setCharset(page.getCharset());
         // use the page encoding even if this is a GET requests
-        webRequest.setUrlEncodingCharset(page.getCharset());
+        webRequest.setCharset(page.getCharset());
+
         webRequest.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
         if (LOG.isDebugEnabled()) {
             LOG.debug(

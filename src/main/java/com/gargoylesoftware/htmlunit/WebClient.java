@@ -36,6 +36,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -461,6 +462,8 @@ public class WebClient implements Serializable, AutoCloseable {
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        request.setCharset(StandardCharsets.UTF_8);
+
         return (P) getPage(getCurrentWindow().getTopWindow(), request);
     }
 
@@ -881,6 +884,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+                request.setCharset(StandardCharsets.UTF_8);
 
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
                         && openerPage != null) {
@@ -1012,6 +1016,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        request.setCharset(StandardCharsets.UTF_8);
 
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {
             final String referer = openerPage.getUrl().toExternalForm();
@@ -1337,7 +1342,7 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("parameters", parameters);
 
         url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
-                                        webRequest.getUrlEncodingCharset());
+                                        webRequest.getCharset());
         webRequest.setUrl(url);
 
         if (LOG.isDebugEnabled()) {
