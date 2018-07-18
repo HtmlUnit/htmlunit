@@ -31,6 +31,7 @@ import java.util.List;
  * This covers some cases which are not possible with Jetty.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class PrimitiveWebServer {
 
@@ -69,6 +70,7 @@ public class PrimitiveWebServer {
      * @throws IOException if an error occurs
      */
     public void start() throws IOException {
+System.out.println("start ");
         server_ = new ServerSocket(port_);
         new Thread(new Runnable() {
 
