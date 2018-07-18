@@ -189,9 +189,7 @@ public class HttpWebConnection implements WebConnection {
 
             HttpResponse httpResponse = null;
             try {
-System.out.println("#");
                 httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
-System.out.println("# done");
             }
             catch (final SSLPeerUnverifiedException s) {
                 // Try to use only SSLv3 instead
@@ -204,16 +202,11 @@ System.out.println("# done");
                 }
             }
             catch (final Error e) {
-System.out.println("##" + e);
                 // in case a StackOverflowError occurs while the connection is leased, it won't get released.
                 // Calling code may catch the StackOverflowError, but due to the leak, the httpClient_ may
                 // come out of connections and throw a ConnectionPoolTimeoutException.
                 // => best solution, discard the HttpClient instance.
                 httpClientBuilder_.remove(Thread.currentThread());
-                throw e;
-            }
-            catch (final Throwable e) {
-System.out.println("###" + e);
                 throw e;
             }
 
@@ -389,7 +382,6 @@ System.out.println("###" + e);
         httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
         httpContext.removeAttribute(HttpClientContext.CREDS_PROVIDER);
         httpContext.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
-System.out.println("conn: " + httpMethod.getURI());
         return httpMethod;
     }
 

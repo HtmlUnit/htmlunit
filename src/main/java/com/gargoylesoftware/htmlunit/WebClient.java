@@ -1344,7 +1344,6 @@ public class WebClient implements Serializable, AutoCloseable {
         url = UrlUtils.encodeUrl(url, getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
                                         webRequest.getCharset());
         webRequest.setUrl(url);
-System.out.println("client: " + url);
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("Load response for " + method + " " + url.toExternalForm());

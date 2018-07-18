@@ -25,7 +25,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A very simple implementation of a Web Server.
@@ -71,9 +70,6 @@ public class PrimitiveWebServer {
      * @throws IOException if an error occurs
      */
     public void start() throws IOException {
-System.out.println("start ");
-System.out.println(Locale.getDefault());
-System.out.println(System.getProperty("java.version"));
         server_ = new ServerSocket(port_);
         new Thread(new Runnable() {
 
@@ -97,7 +93,6 @@ System.out.println(System.getProperty("java.version"));
                                 break;
                             }
                         }
-System.out.println("req: " + requestString);
 
                         final String response;
                         if (requestString.contains("/favicon.ico")) {
@@ -114,7 +109,6 @@ System.out.println("req: " + requestString);
                                     response = otherResponse_;
                                 }
                                 first = false;
-System.out.println("resp: " + response);
                                 out.write(response.getBytes(charset_));
                             }
                         }
