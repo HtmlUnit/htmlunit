@@ -212,6 +212,10 @@ System.out.println("#" + e);
                 httpClientBuilder_.remove(Thread.currentThread());
                 throw e;
             }
+            catch (final Throwable e) {
+e.printStackTrace();
+                throw e;
+            }
 
             final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
             final long endTime = System.currentTimeMillis();
