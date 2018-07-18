@@ -94,6 +94,7 @@ System.out.println("start ");
                                 break;
                             }
                         }
+System.out.println("req: " + requestString);
 
                         final String response;
                         if (requestString.contains("/favicon.ico")) {
