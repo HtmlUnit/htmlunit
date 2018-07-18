@@ -234,7 +234,9 @@ public class WebClient7Test extends WebDriverTestCase {
         if (header) {
             firstResponse += "; charset=" + charset;
         }
-        firstResponse += "\r\n\r\n" + html;
+        firstResponse += "\r\n"
+                + "Connection: close\r\n"
+                + "\r\n" + html;
 
         final String html2 = "<html><head></head><body>"
                 + "</body></html>";
@@ -242,6 +244,7 @@ public class WebClient7Test extends WebDriverTestCase {
         final String secondResponse = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + html2.length() + "\r\n"
                 + "Content-Type: text/html; charset=" + charset + "\r\n"
+                + "Connection: close\r\n"
                 + "\r\n"
                 + html2;
 
