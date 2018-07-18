@@ -382,7 +382,7 @@ public class HttpWebConnection implements WebConnection {
         httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
         httpContext.removeAttribute(HttpClientContext.CREDS_PROVIDER);
         httpContext.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
-
+System.out.println("conn: " + httpMethod.getURI());
         return httpMethod;
     }
 
