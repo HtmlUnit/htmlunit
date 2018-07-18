@@ -25,6 +25,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A very simple implementation of a Web Server.
@@ -71,6 +72,8 @@ public class PrimitiveWebServer {
      */
     public void start() throws IOException {
 System.out.println("start ");
+System.out.println(Locale.getDefault());
+System.out.println(System.getProperty("java.version"));
         server_ = new ServerSocket(port_);
         new Thread(new Runnable() {
 
