@@ -103,16 +103,17 @@ public class PrimitiveWebServer {
                         }
                         else {
                             requests_.add(requestString);
-                            try (OutputStream out = socket.getOutputStream()) {
-                                if (first || otherResponse_ == null) {
-                                    response = firstResponse_;
-                                }
-                                else {
-                                    response = otherResponse_;
-                                }
-                                first = false;
-                                out.write(response.getBytes(charset_));
+                            if (first || otherResponse_ == null) {
+                                response = firstResponse_;
                             }
+                            else {
+                                response = otherResponse_;
+                            }
+                            first = false;
+                        }
+
+                        try (OutputStream out = socket.getOutputStream()) {
+                            out.write(response.getBytes(charset_));
                         }
                     }
                 }

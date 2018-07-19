@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -221,6 +223,98 @@ public class WebClient7Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
+            IE = "/area.html?k\u00c3\u00b6nig")
+    @BuggyWebDriver(FF60)
+    @NotYetImplemented(IE)
+    public void areaUrlEncodingUTF8Header() throws Exception {
+        areaUrlEncoding(true, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
+            IE = "/area.html?k\u00c3\u00b6nig")
+    @BuggyWebDriver(FF60)
+    @NotYetImplemented(IE)
+    public void areaUrlEncodingUTF8Meta() throws Exception {
+        areaUrlEncoding(false, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/area.html?k%F6nig",
+            IE = "/area.html?k\u00f6nig")
+    @BuggyWebDriver(FF60)
+    @NotYetImplemented(IE)
+    public void areaUrlEncodingISO8859_1Header() throws Exception {
+        areaUrlEncoding(true, "ISO-8859-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/area.html?k%F6nig",
+            IE = "/area.html?k\u00f6nig")
+    @BuggyWebDriver(FF60)
+    @NotYetImplemented(IE)
+    public void areaUrlEncodingISO8859_1Meta() throws Exception {
+        areaUrlEncoding(false, "ISO-8859-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.gif?k%C3%B6nig",
+            IE = "/test.gif?k\u00c3\u00b6nig")
+    @NotYetImplemented(IE)
+    public void imageUrlEncodingUTF8Header() throws Exception {
+        imageUrlEncoding(true, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.gif?k%C3%B6nig",
+            IE = "/test.gif?k\u00c3\u00b6nig")
+    @NotYetImplemented(IE)
+    public void imageUrlEncodingUTF8Meta() throws Exception {
+        imageUrlEncoding(false, "UTF-8");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.gif?k%F6nig",
+            IE = "/test.gif?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void imageUrlEncodingISO8859_1Header() throws Exception {
+        imageUrlEncoding(true, "ISO_8859_1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "/test.gif?k%F6nig",
+            IE = "/test.gif?k\u00f6nig")
+    @NotYetImplemented(IE)
+    public void imageUrlEncodingISO8859_1Meta() throws Exception {
+        imageUrlEncoding(false, "ISO_8859_1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "/test.css?k%C3%B6nig",
             IE = "/test.css?k\u00c3\u00b6nig")
     @NotYetImplemented(IE)
@@ -298,6 +392,26 @@ public class WebClient7Test extends WebDriverTestCase {
         urlEncoding(header, charset,
                 null,
                 "  <a id='myLink' href='test.html?k\u00F6nig'>Click me</a>",
+                true);
+    }
+
+    private void areaUrlEncoding(final boolean header, final String charset) throws Exception {
+        urlEncoding(header, charset,
+                null,
+                "  <img id='myImg' usemap='#dot' width='100' height='100'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+                + "  <map name='dot'>\n"
+                + "    <area id='myLink' shape='rect' coords='0,0,42,42' href='area.html?k\u00F6nig'/>\n"
+                + "  <map>\n",
+                true);
+    }
+
+    private void imageUrlEncoding(final boolean header, final String charset) throws Exception {
+        urlEncoding(header, charset,
+                null,
+                "  <img id='myImg' src='test.gif?k\u00F6nig'>"
+                + "  <button id='myLink' onClick='document.getElementById(\"myImg\").width'></button>",
                 true);
     }
 
@@ -418,11 +532,8 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
 //    HtmlApplet.java
-//    HtmlArea.java
 //    HtmlEmbed.java
 //    HtmlForm.java
-//    HtmlImage.java
 //    HtmlImageInput.java
 //    HtmlObject.java
-
 }

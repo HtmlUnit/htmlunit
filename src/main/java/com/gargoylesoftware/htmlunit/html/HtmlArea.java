@@ -91,6 +91,7 @@ public class HtmlArea extends HtmlElement {
                         "Not a valid url: " + getHrefAttribute());
             }
             final WebRequest request = new WebRequest(url);
+            request.setCharset(page.getCharset());
             request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
             webClient.getPage(
