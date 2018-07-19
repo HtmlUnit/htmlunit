@@ -216,6 +216,7 @@ public class HtmlImageInput extends HtmlInput {
                 final URL url = page.getFullyQualifiedUrl(src);
                 final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
                 final WebRequest request = new WebRequest(url, accept);
+                request.setCharset(page.getCharset());
                 request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
                 imageWebResponse_ = webclient.loadWebResponse(request);
             }

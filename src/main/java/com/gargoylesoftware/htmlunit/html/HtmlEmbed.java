@@ -64,6 +64,7 @@ public class HtmlEmbed extends HtmlElement {
 
         final URL url = page.getFullyQualifiedUrl(getAttributeDirect("src"));
         final WebRequest request = new WebRequest(url);
+        request.setCharset(page.getCharset());
         request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
