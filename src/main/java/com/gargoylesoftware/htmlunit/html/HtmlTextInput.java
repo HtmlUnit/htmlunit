@@ -180,17 +180,19 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new HtmlTextInput(getQualifiedName(), getPage(), getAttributesMap());
+    public void setDefaultValue(final String defaultValue) {
+        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
+        setDefaultValue(defaultValue, modifyValue);
     }
 
     /**
      * {@inheritDoc}
+     * @see HtmlInput#reset()
      */
     @Override
-    public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
-        setDefaultValue(defaultValue, modifyValue);
+    public void reset() {
+        super.reset();
+        setSelectionEnd(0);
     }
 
     /**

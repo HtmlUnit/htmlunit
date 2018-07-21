@@ -292,4 +292,51 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
         final HtmlTextArea t = page.getHtmlElementById("t");
         t.removeFocus();
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndClone() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <textarea id='foo'></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        HtmlTextArea input = (HtmlTextArea) page.getElementById("foo");
+        input = (HtmlTextArea) input.cloneNode(true);
+        input.type("4711");
+        assertEquals("4711", input.getTextContent());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndReset() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <textarea id='foo'></textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTextArea input = (HtmlTextArea) page.getElementById("foo");
+
+        input.type("4711");
+        input.reset();
+        input.type("0815");
+
+        assertEquals("0815", input.getTextContent());
+    }
 }

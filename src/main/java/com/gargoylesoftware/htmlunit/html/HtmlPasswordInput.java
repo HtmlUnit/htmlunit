@@ -158,14 +158,6 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new HtmlPasswordInput(getQualifiedName(), getPage(), getAttributesMap());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
@@ -190,6 +182,16 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see HtmlInput#reset()
+     */
+    @Override
+    public void reset() {
+        super.reset();
+        setSelectionEnd(0);
     }
 
     /**

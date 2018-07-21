@@ -107,4 +107,29 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.type("4711");
         assertEquals("4711", input.getValueAttribute());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndReset() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='password' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlPasswordInput input = (HtmlPasswordInput) page.getElementById("foo");
+
+        input.type("4711");
+        input.reset();
+        input.type("0815");
+
+        assertEquals("0815", input.getValueAttribute());
+    }
 }

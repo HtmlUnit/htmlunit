@@ -544,14 +544,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new HtmlTextArea(getQualifiedName(), getPage(), getAttributesMap());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         if ("name".equals(qualifiedName)) {

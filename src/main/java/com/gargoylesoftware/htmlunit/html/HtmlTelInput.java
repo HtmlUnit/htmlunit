@@ -150,4 +150,14 @@ public class HtmlTelInput extends HtmlInput implements SelectableTextInput {
 
         return newnode;
     }
+
+    /**
+     * {@inheritDoc}
+     * @see HtmlInput#reset()
+     */
+    @Override
+    public void reset() {
+        super.reset();
+        setSelectionEnd(0);
+    }
 }

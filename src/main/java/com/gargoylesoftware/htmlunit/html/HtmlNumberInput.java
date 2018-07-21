@@ -174,14 +174,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new HtmlNumberInput(getQualifiedName(), getPage(), getAttributesMap());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
@@ -201,6 +193,16 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
         catch (final NumberFormatException e) {
             // ignore
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see HtmlInput#reset()
+     */
+    @Override
+    public void reset() {
+        super.reset();
+        setSelectionEnd(0);
     }
 
     /**

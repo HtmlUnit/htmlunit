@@ -156,6 +156,16 @@ public class HtmlUrlInput extends HtmlInput implements SelectableTextInput {
 
     /**
      * {@inheritDoc}
+     * @see HtmlInput#reset()
+     */
+    @Override
+    public void reset() {
+        super.reset();
+        setSelectionEnd(0);
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public DomNode cloneNode(final boolean deep) {
