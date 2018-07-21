@@ -624,7 +624,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * special setter for IE to ignore this call.
+     * Special setter for IE to ignore this call.
      * @param ignore parame gets ignored
      */
     @JsxSetter(IE)
