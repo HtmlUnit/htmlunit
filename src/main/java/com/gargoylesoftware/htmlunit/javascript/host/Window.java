@@ -624,6 +624,14 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * special setter for IE to ignore this call.
+     * @param ignore parame gets ignored
+     */
+    @JsxSetter(IE)
+    public void setClientInformation(final Object ignore) {
+    }
+
+    /**
      * Returns the JavaScript property {@code clipboardData}.
      * @return the {@link DataTransfer}
      */

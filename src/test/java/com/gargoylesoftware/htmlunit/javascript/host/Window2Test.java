@@ -2385,4 +2385,25 @@ public class Window2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
+              IE = {"[object Navigator]", "[object Navigator]"},
+              FF = {"undefined", "##test##"})
+    public void clientInformation() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(window.clientInformation);\n"
+            + "    window.clientInformation = '##test##';\n"
+            + "    alert(window.clientInformation);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
