@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-
 /**
  * <p>A collection of offline resources as defined in the HTML5 spec.
  * Intended to support offline web applications.</p>
@@ -224,10 +222,7 @@ public class ApplicationCache extends EventTarget {
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
-        if (handler == null || handler instanceof Scriptable) {
-            getEventListenersContainer().setEventHandler(eventName, handler);
-        }
-        // Otherwise, fail silently.
+        getEventListenersContainer().setEventHandler(eventName, handler);
     }
 
     /**

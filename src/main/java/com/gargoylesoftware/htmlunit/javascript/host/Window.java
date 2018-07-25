@@ -1194,7 +1194,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnload(final Object onload) {
-        getEventListenersContainer().setEventHandler(Event.TYPE_LOAD, onload);
+        setHandlerForJavaScript(Event.TYPE_LOAD, onload);
     }
 
     /**
@@ -1203,7 +1203,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxSetter
     public void setOnblur(final Object onblur) {
-        getEventListenersContainer().setEventHandler(Event.TYPE_BLUR, onblur);
+        setHandlerForJavaScript(Event.TYPE_BLUR, onblur);
     }
 
     /**
@@ -1377,10 +1377,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
-        if (handler == null || handler instanceof Function) {
-            getEventListenersContainer().setEventHandler(eventName, handler);
-        }
-        // Otherwise, fail silently.
+        getEventListenersContainer().setEventHandler(eventName, handler);
     }
 
     /**

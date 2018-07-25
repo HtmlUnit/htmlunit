@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.32" date="xx 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added">
+            <action type="fix" dev="rbri" issue="1976">
+                Event listeners had to be functions, other types are ignored.
+            </action>
             <action type="fix" dev="rbri">
                 Setting window.clientInformation is ignored in IE.
             </action>

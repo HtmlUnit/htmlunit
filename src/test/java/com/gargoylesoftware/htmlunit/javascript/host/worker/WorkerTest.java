@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.worker;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import java.net.URL;
 
 import org.junit.After;
@@ -23,12 +25,14 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Unit tests for {@code Worker}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WorkerTest extends WebDriverTestCase {
@@ -161,6 +165,59 @@ public class WorkerTest extends WebDriverTestCase {
             + "  alert('no exception');\n"
             + "} catch(e) { alert('exception catched'); }\n"
             + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("function")
+    public void onmessageFunction() throws Exception {
+        final String html = "<html><body><script>\n"
+                + "  var myWorker = new Worker('worker.js');\n"
+                + "  myWorker.onmessage = function(e) {};\n"
+                + "  alert(typeof myWorker.onmessage);\n"
+                + "</script></body></html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE = "exception Error")
+    @NotYetImplemented(IE)
+    public void onmessageNumber() throws Exception {
+        final String html = "<html><body><script>\n"
+                + "  var myWorker = new Worker('worker.js');\n"
+                + "  try {\n"
+                + "    myWorker.onmessage = 17;\n"
+                + "    alert(myWorker.onmessage);\n"
+                + "  } catch(e) { alert('exception ' + e.name); }\n"
+                + "</script></body></html>\n";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "null",
+            IE = "HtmlUnit")
+    @NotYetImplemented(IE)
+    public void onmessageString() throws Exception {
+        final String html = "<html><body><script>\n"
+                + "  var myWorker = new Worker('worker.js');\n"
+                + "  try {\n"
+                + "    myWorker.onmessage = 'HtmlUnit';\n"
+                + "    alert(myWorker.onmessage);\n"
+                + "  } catch(e) { alert('exception ' + e.name); }\n"
+                + "</script></body></html>\n";
 
         loadPageWithAlerts2(html);
     }

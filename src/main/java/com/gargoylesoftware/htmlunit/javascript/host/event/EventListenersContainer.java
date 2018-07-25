@@ -57,7 +57,7 @@ public class EventListenersContainer implements Serializable {
     static class TypeContainer implements Serializable {
         private List<Scriptable> capturingListeners_;
         private List<Scriptable> bubblingListeners_;
-        private Object handler_;
+        private Function handler_;
 
         TypeContainer() {
             capturingListeners_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
@@ -65,7 +65,7 @@ public class EventListenersContainer implements Serializable {
         }
 
         private TypeContainer(final List<Scriptable> capturingListeners,
-                    final List<Scriptable> bubblingListeners, final Object handler) {
+                    final List<Scriptable> bubblingListeners, final Function handler) {
             capturingListeners_ = Collections.unmodifiableList(new ArrayList<>(capturingListeners));
             bubblingListeners_ = Collections.unmodifiableList(new ArrayList<>(bubblingListeners));
             handler_ = handler;
@@ -206,9 +206,14 @@ public class EventListenersContainer implements Serializable {
      * @param value the new property
      */
     public void setEventHandler(final String eventType, final Object value) {
-        Object handler = value;
-        if (handler == Undefined.instance) {
+        final Function handler;
+
+        // Otherwise, ignore silently.
+        if (value == Undefined.instance || !(value instanceof Function)) {
             handler = null;
+        }
+        else {
+            handler = (Function) value;
         }
 
         final TypeContainer container = getTypeContainer(eventType);

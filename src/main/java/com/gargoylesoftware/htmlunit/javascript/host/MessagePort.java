@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent;
 
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code MessagePort}.
@@ -82,10 +81,7 @@ public class MessagePort extends EventTarget {
     }
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
-        if (handler == null || handler instanceof Function) {
-            getEventListenersContainer().setEventHandler(eventName, handler);
-        }
-        // Otherwise, fail silently.
+        getEventListenersContainer().setEventHandler(eventName, handler);
     }
 
     /**
