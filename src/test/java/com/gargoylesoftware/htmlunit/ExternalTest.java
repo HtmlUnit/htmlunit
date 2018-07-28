@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "2.40";
+    static String CHROME_DRIVER_ = "2.41";
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.21.0";
     /** IE driver. */

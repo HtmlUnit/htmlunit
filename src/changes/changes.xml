@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.32" date="xx 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added">
+        <release version="2.32" date="xx 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added, CHROME 68">
             <action type="fix" dev="rbri" issue="1976">
                 Event listeners had to be functions, other types are ignored.
             </action>

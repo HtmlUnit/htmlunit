@@ -148,9 +148,9 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+    @Alerts(DEFAULT = {"#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"},
-            FF = {"#a%20b", "§§URL§§#a%20b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
+            IE = {"#a b", "§§URL§§#a b", "#a%20b", "§§URL§§#a%20b", "#abc;,/?:@&=+$-_.!~*()ABC123foo",
                     "#%25%20%5E%5B%5D%7C%22%3C%3E%7B%7D%5C"})
     public void hashEncoding() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -177,7 +177,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({CHROME, FF})
     public void hashEncoding2() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'myDataTable=foo%3Dojkoj';\n"
@@ -194,7 +194,6 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"#%C3%BC%C3%B6%C3%A4", "§§URL§§#%C3%BC%C3%B6%C3%A4"},
             IE = {"#üöä", "§§URL§§#üöä"})
-    @NotYetImplemented(CHROME)
     public void hashEncoding3() throws Exception {
         final String html = "<html><body><script>\n"
             + "window.location.hash = 'üöä';\n"
@@ -209,8 +208,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "#<a>foobar</a>",
-            FF = "#%3Ca%3Efoobar%3C/a%3E")
+    @Alerts(DEFAULT = "#%3Ca%3Efoobar%3C/a%3E",
+            IE = "#<a>foobar</a>")
     public void hash() throws Exception {
         checkHash(URL_FIRST + "?#<a>foobar</a>");
     }

@@ -76,7 +76,7 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("", mmSlash);
         commonFormats.put("ar", "dd\u200F/MM\u200F/YYYY");
         commonFormats.put("ar-SA", "d\u200F/M\u200F/YYYY هـ");
-        commonFormats.put("ban", ddDot);
+        commonFormats.put("ban", mmSlash);
         commonFormats.put("be", ddDot);
         commonFormats.put("bg", ddDot + "\u200E \u0433.");
         commonFormats.put("ca", ddSlash);
@@ -153,9 +153,9 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("sq", ddDot);
 
         FF_52_FORMATS_.putAll(commonFormats);
+        FF_52_FORMATS_.put("ban", ddDot);
 
         FF_60_FORMATS_.putAll(commonFormats);
-        FF_60_FORMATS_.put("ban", mmSlash);
 
         CHROME_FORMATS_.put("be", yyyyDash);
         CHROME_FORMATS_.put("en-CA", yyyyDash);
@@ -165,7 +165,6 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("es-US", ddSlash);
         CHROME_FORMATS_.put("fr-CH", ddDot);
         CHROME_FORMATS_.put("hr", ddDotBlankDot);
-        CHROME_FORMATS_.put("in", ddDot);
         CHROME_FORMATS_.put("in-ID", ddSlash);
         CHROME_FORMATS_.put("is", yyyyDash);
         CHROME_FORMATS_.put("iw", ddDot);
@@ -193,6 +192,7 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("ar-SD", rightToLeft);
         IE_FORMATS_.put("ar-SY", rightToLeft);
         IE_FORMATS_.put("ar-YE", rightToLeft);
+        IE_FORMATS_.put("ban", ddDot);
         IE_FORMATS_.put("cs", ddDot);
         IE_FORMATS_.put("da", ddDash);
         IE_FORMATS_.put("en-IN", ddDash);

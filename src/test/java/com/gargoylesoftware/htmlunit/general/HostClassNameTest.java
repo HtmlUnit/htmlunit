@@ -2078,9 +2078,10 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function DOMRectList() {\n    [native code]\n}")
-    @NotYetImplemented(FF)
+    @Alerts(DEFAULT = "function DOMRectList() {\n    [native code]\n}",
+            CHROME = "function DOMRectList() { [native code] }",
+            IE = "exception")
+    @NotYetImplemented({CHROME, FF})
     public void domRectList() throws Exception {
         test("DOMRectList");
     }

@@ -1057,7 +1057,7 @@ public enum BrowserVersionFeatures {
     JS_LABEL_FORM_NULL,
 
     /** location.hash returns an encoded hash. */
-    @BrowserFeature(FF)
+    @BrowserFeature({CHROME, FF})
     JS_LOCATION_HASH_HASH_IS_ENCODED,
 
     /**
@@ -1066,7 +1066,7 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#%C3%BC'.<br>
      * IE evaluates to #%C3%BC.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature({CHROME, FF})
     JS_LOCATION_HASH_IS_DECODED,
 
     /**
@@ -1082,7 +1082,7 @@ public enum BrowserVersionFeatures {
      * for url 'http://localhost/something/#&uuml;'.<br>
      * IE evaluates to #&uuml;.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature({CHROME, FF})
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
     /** Map ignores the argument constructor. */
