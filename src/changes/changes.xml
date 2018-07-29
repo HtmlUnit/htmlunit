@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Major cleanup for neko and switch to xerces 2.12.0
+            </action>
+        </release>
+
         <release version="2.32" date="July 29, 2018" description="Bugfixes, FIREFOX_45 removed, FIREFOX_60 added, CHROME 68">
             <action type="fix" dev="rbri" issue="1976">
                 Event listeners had to be functions, other types are ignored.
