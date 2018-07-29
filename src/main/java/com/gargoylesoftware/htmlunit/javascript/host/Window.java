@@ -29,6 +29,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -102,7 +103,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
@@ -160,6 +160,54 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Window extends EventTarget implements Function, AutoCloseable {
 
+    /**
+     * Cache computed styles when possible, because their calculation is very expensive.
+     * We use a weak hash map because we don't want this cache to be the only reason
+     * nodes are kept around in the JVM, if all other references to them are gone.
+     */
+    private static final class CSSPropertiesCache implements Serializable {
+        private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+
+        public synchronized CSS2Properties get(final Element element, final String normalizedPseudo) {
+            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap != null) {
+                return elementMap.get(normalizedPseudo);
+            }
+            return null;
+        }
+
+        public synchronized void put(final Element element, final String normalizedPseudo, final CSS2Properties style) {
+            Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            if (elementMap == null) {
+                elementMap = new WeakHashMap<>();
+                computedStyles_.put(element, elementMap);
+            }
+            elementMap.put(normalizedPseudo, style);
+        }
+
+        public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
+            for (final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i
+                    = computedStyles_.entrySet().iterator(); i.hasNext();) {
+                final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
+                final DomNode node = entry.getKey().getDomNodeOrDie();
+                if (changed == node
+                    || changed.getParentNode() == node.getParentNode()
+                    || changed.isAncestorOf(node)
+                    || clearParents && node.isAncestorOf(changed)) {
+                    i.remove();
+                }
+            }
+        }
+
+        public synchronized void clear() {
+            computedStyles_.clear();
+        }
+
+        public synchronized Map<String, CSS2Properties> remove(final Element element) {
+            return computedStyles_.remove(element);
+        }
+    }
+
     private static final Log LOG = LogFactory.getLog(Window.class);
 
     /** To be documented. */
@@ -197,12 +245,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
 
-    /**
-     * Cache computed styles when possible, because their calculation is very expensive.
-     * We use a weak hash map because we don't want this cache to be the only reason
-     * nodes are kept around in the JVM, if all other references to them are gone.
-     */
-    private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
 
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
@@ -228,14 +271,14 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Restores the transient {@link #computedStyles_} map during deserialization.
+     * Restores the transient {@link #cssPropertiesCache_} map during deserialization.
      * @param stream the stream to read the object from
      * @throws IOException if an IO error occurs
      * @throws ClassNotFoundException if a class is not found
      */
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        computedStyles_ = new WeakHashMap<>();
+        cssPropertiesCache_ = new CSSPropertiesCache();
     }
 
     /**
@@ -1699,19 +1742,12 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             }
         }
 
-        synchronized (computedStyles_) {
-            final Map<String, CSS2Properties> elementMap = computedStyles_.get(e);
-            if (elementMap != null) {
-                final CSS2Properties style = elementMap.get(normalizedPseudo);
-                if (style != null) {
-                    return style;
-                }
-            }
+        final CSS2Properties styleFromCache = cssPropertiesCache_.get(e, normalizedPseudo);
+        if (styleFromCache != null) {
+            return styleFromCache;
         }
 
-        final CSSStyleDeclaration original = e.getStyle();
-        final CSS2Properties style = new CSS2Properties(original);
-
+        final CSS2Properties style = new CSS2Properties(e.getStyle());
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
@@ -1726,14 +1762,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 }
             }
 
-            synchronized (computedStyles_) {
-                Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
-                if (elementMap == null) {
-                    elementMap = new WeakHashMap<>();
-                    computedStyles_.put(e, elementMap);
-                }
-                elementMap.put(normalizedPseudo, style);
-            }
+            cssPropertiesCache_.put(e, normalizedPseudo, style);
         }
         return style;
     }
@@ -1902,9 +1931,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Clears the computed styles.
      */
     public void clearComputedStyles() {
-        synchronized (computedStyles_) {
-            computedStyles_.clear();
-        }
+        cssPropertiesCache_.clear();
     }
 
     /**
@@ -1912,9 +1939,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @param element the element to clear its cache
      */
     public void clearComputedStyles(final Element element) {
-        synchronized (computedStyles_) {
-            computedStyles_.remove(element);
-        }
+        cssPropertiesCache_.remove(element);
     }
 
     /**
@@ -2005,21 +2030,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                     return;
                 }
             }
+
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
-            synchronized (computedStyles_) {
-                final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-                for (final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i
-                        = computedStyles_.entrySet().iterator(); i.hasNext();) {
-                    final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
-                    final DomNode node = entry.getKey().getDomNodeOrDie();
-                    if (changed == node
-                        || changed.getParentNode() == node.getParentNode()
-                        || changed.isAncestorOf(node)
-                        || clearParents && node.isAncestorOf(changed)) {
-                        i.remove();
-                    }
-                }
-            }
+            final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
+            cssPropertiesCache_.nodeChanged(changed, clearParents);
         }
     }
 
