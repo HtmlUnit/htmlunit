@@ -19,7 +19,7 @@
         <additionalparam>-Xdoclint:none</additionalparam>
         <jetty.version>9.4.11.v20180605</jetty.version>
         <selenium.version>3.13.0</selenium.version>
-        <htmlunitdriver.version>2.32.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>2.32.0</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.11</checkstyle.version>
     </properties>
