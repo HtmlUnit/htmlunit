@@ -8013,8 +8013,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAltGlyphElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
