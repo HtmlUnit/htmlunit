@@ -82,7 +82,7 @@ public class HtmlTableRow extends HtmlElement {
             }
             count++;
         }
-        throw new IndexOutOfBoundsException();
+        throw new IndexOutOfBoundsException("No cell found for index " + index + ".");
     }
 
     /**

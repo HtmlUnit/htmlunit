@@ -139,7 +139,7 @@ public class HtmlTable extends HtmlElement {
             }
             count++;
         }
-        throw new IndexOutOfBoundsException();
+        throw new IndexOutOfBoundsException("No row found for index " + index + ".");
     }
 
     /**
