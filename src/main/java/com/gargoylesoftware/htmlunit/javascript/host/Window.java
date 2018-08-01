@@ -168,6 +168,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     private static final class CSSPropertiesCache implements Serializable {
         private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
+        // Dummy value to associate with an Object in the backing Map
+        private static final Object PRESENT = new Object();
+        private transient WeakHashMap<DomNode, Object> cleanedNodes_ = new WeakHashMap<>();
+
         public synchronized CSS2Properties get(final Element element, final String normalizedPseudo) {
             final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
@@ -181,11 +185,16 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             if (elementMap == null) {
                 elementMap = new WeakHashMap<>();
                 computedStyles_.put(element, elementMap);
+                cleanedNodes_.remove(element.getDomNodeOrDie());
             }
             elementMap.put(normalizedPseudo, style);
         }
 
         public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
+            if (cleanedNodes_.containsKey(changed)) {
+                return;
+            }
+
             for (final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i
                     = computedStyles_.entrySet().iterator(); i.hasNext();) {
                 final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
@@ -194,6 +203,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                     || changed.getParentNode() == node.getParentNode()
                     || changed.isAncestorOf(node)
                     || clearParents && node.isAncestorOf(changed)) {
+                    cleanedNodes_.put(node, PRESENT);
                     i.remove();
                 }
             }
