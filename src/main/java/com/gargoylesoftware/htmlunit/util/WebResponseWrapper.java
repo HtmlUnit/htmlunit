@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 public class WebResponseWrapper extends WebResponse {
 
@@ -47,6 +48,15 @@ public class WebResponseWrapper extends WebResponse {
             throw new IllegalArgumentException("Wrapped WebResponse can't be null");
         }
         wrappedWebResponse_ = webResponse;
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to return getContentLength() on the wrapped webResponse object.
+     */
+    @Override
+    public long getContentLength() {
+        return wrappedWebResponse_.getContentLength();
     }
 
     /**
@@ -165,5 +175,23 @@ public class WebResponseWrapper extends WebResponse {
     @Override
     public WebRequest getWebRequest() {
         return wrappedWebResponse_.getWebRequest();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to call cleanUp() on the wrapped webResponse object.
+     */
+    @Override
+    public void cleanUp() {
+        wrappedWebResponse_.cleanUp();
+    }
+
+    /**
+     * {@inheritDoc}
+     * The default behavior of this method is to call defaultCharsetUtf8() on the wrapped webResponse object.
+     */
+    @Override
+    public void defaultCharsetUtf8() {
+        wrappedWebResponse_.defaultCharsetUtf8();
     }
 }

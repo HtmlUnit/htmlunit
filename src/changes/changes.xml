@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1978" due-to="Atsushi Nakagawa">
+                Add missing default delegating methods getContentLength(), cleanUp(), and defaultCharsetUtf8()
+                to WebResponseWrapper.
+            </action>
             <action type="update" dev="rbri">
                 Major cleanup for neko and switch to xerces 2.12.0
             </action>
