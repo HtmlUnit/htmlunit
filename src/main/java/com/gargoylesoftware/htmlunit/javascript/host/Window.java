@@ -197,6 +197,34 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                     i.remove();
                 }
             }
+
+            // maybe this is a better solution but i have to think a bit more about this
+            //
+            //            if (computedStyles_.isEmpty()) {
+            //                return;
+            //            }
+            //
+            //            // remove all siblings
+            //            DomNode parent = changed.getParentNode();
+            //            if (parent != null) {
+            //                for (DomNode sibling : parent.getChildNodes()) {
+            //                    computedStyles_.remove(sibling.getScriptableObject());
+            //                }
+            //
+            //                if (clearParents) {
+            //                    // remove all parents
+            //                    while (parent != null) {
+            //                        computedStyles_.remove(parent.getScriptableObject());
+            //                        parent = parent.getParentNode();
+            //                    }
+            //                }
+            //            }
+            //
+            //            // remove changed itself and all descendants
+            //            computedStyles_.remove(changed.getScriptableObject());
+            //            for (DomNode descendant : changed.getDescendants()) {
+            //                computedStyles_.remove(descendant.getScriptableObject());
+            //            }
         }
 
         public synchronized void clear() {
