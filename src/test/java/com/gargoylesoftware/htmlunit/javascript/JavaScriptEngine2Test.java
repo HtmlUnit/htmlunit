@@ -716,4 +716,163 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"outer abc = 1", "inner abc = function abc() { alert('inner abc = ' + abc); }"})
+    @NotYetImplemented
+    public void functionHasNameOfVarStrictMode() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + "  var abc = 1;\n"
+                + "  var foo = function abc() { alert('inner abc = ' + abc); }\n"
+                + "  alert('outer abc = ' + abc);\n"
+                + "  foo()\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"a", "b"})
+    @NotYetImplemented
+    public void innerFunctionWithSameName() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  var a = function () {\n"
+                + "    var x = (function x () { alert('a') });\n"
+                + "    return function () { x() };\n"
+                + "  }();\n"
+
+                + "  var b = function () {\n"
+                + "    var x = (function x () { alert('b') });\n"
+                + "    return function () { x() };\n"
+                + "  }();\n"
+
+                + "  a();\n"
+                + "  b();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("a")
+    @NotYetImplemented
+    public void innerFunctionWithSameNameAsOutsideStrict() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + "  var a = function () {\n"
+                + "    var x = (function x () { alert('a') });\n"
+                + "    return function () { x() };\n"
+                + "  }();\n"
+
+                + "  var x = function () { alert('x') };\n"
+
+                + "  a();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function func() { alert(func); }", "outer"})
+    @NotYetImplemented
+    public void secondFunctionWithSameNameStrict() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + "  function func () { alert('outer'); }\n"
+
+                + "  var x = function func() { alert(func); }\n"
+
+                + "  x();\n"
+                + "  func();\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "!f10", "f11", "f12", "f13"})
+    @NotYetImplemented
+    public void functioNamesExceptionsStrict() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+
+                + "  function f1() {"
+                + "    alert('f1');"
+                + "    function f9() { alert('f9'); }"
+                + "  }\n"
+
+                + "  var f2 = function () { alert('f2'); }\n"
+                + "  var f3 = function f4() { alert('f3'); }\n"
+                + "  var f5 = function f5() { alert('f5'); }\n"
+
+                + "  !function f6() { alert('f6'); };\n"
+                + "  (function f7() { alert('f7'); });\n"
+
+                + "  void function f8() { alert('f8'); }\n"
+
+                + "  try { f1() } catch (e) { alert('!f1'); }"
+                + "  try { f2() } catch (e) { alert('!f2'); }"
+                + "  try { f3() } catch (e) { alert('!f3'); }"
+                + "  try { f4() } catch (e) { alert('!f4'); }"
+                + "  try { f5() } catch (e) { alert('!f5'); }"
+                + "  try { f6() } catch (e) { alert('!f6'); }"
+                + "  try { f7() } catch (e) { alert('!f7'); }"
+                + "  try { f8() } catch (e) { alert('!f8'); }"
+
+                + "  {\n"
+                + "    function f10() { alert('f10'); }\n"
+                + "    var f11 = function () { alert('f11'); }\n"
+                + "    var f12 = function f12() { alert('f12'); }\n"
+                + "    f10();\n"
+                + "    f11();\n"
+                + "    f12();\n"
+                + "  }\n"
+
+                + "  try { f10() } catch (e) { alert('!f10'); }"
+                + "  try { f11() } catch (e) { alert('!f11'); }"
+                + "  try { f12() } catch (e) { alert('!f12'); }"
+
+                + "  function f13() { alert('f13') } + 1;"
+                + "  try { f13() } catch (e) { alert('!f13'); }"
+
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
