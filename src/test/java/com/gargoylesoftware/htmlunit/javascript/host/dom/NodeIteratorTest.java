@@ -135,4 +135,47 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * Test case for issue 1982.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "11", "12"})
+    public void subroot() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (document.createNodeIterator) {\n"
+            + "        var nodeIterator = document.createNodeIterator(\n"
+            + "          document.getElementById('1'),\n"
+            + "          NodeFilter.SHOW_ELEMENT );\n"
+
+            + "        var currentNode;\n"
+            + "        while (currentNode = nodeIterator.nextNode()) {\n"
+            + "          alert(currentNode.id);\n"
+            + "        }\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='before'>before</div>\n"
+            + "<table>\n"
+            + "  <tr id='1'>\n"
+            + "    <td id='11'>11</td>\n"
+            + "    <td id='12'>12</td>\n"
+            + "  </tr>\n"
+            + "  <tr id='2'>\n"
+            + "    <td id='21'>21</td>\n"
+            + "    <td id='22'>22</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "<div id='after'>after</div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

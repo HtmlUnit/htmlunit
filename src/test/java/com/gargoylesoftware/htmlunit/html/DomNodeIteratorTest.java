@@ -17,10 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -31,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * Tests for {@link DomNodeIterator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public final class DomNodeIteratorTest extends WebDriverTestCase {
@@ -55,10 +58,51 @@ public final class DomNodeIteratorTest extends WebDriverTestCase {
         if (driver instanceof HtmlUnitDriver) {
             final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-            final NodeIterator iterator = page.createNodeIterator(page.getDocumentElement(),
-                    org.w3c.dom.traversal.NodeFilter.SHOW_ALL, null,
+            final NodeIterator iterator = page.createNodeIterator(page.getDocumentElement(), NodeFilter.SHOW_ALL, null,
                     true);
             assertThat(iterator.nextNode(), instanceOf(HtmlHtml.class));
         }
+    }
+
+    /**
+     * Test case for issue 1982.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void subroot() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<table>\n"
+            + "  <tr id='1'>\n"
+            + "    <td id='11'>11</td>\n"
+            + "    <td id='12'>12</td>\n"
+            + "  </tr>\n"
+            + "  <tr id='2'>\n"
+            + "    <td id='21'>21</td>\n"
+            + "    <td id='22'>22</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
+        final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+
+        final HtmlElement subroot = (HtmlElement) page.getElementById("1");
+        final NodeIterator iterator = page.createNodeIterator(subroot, NodeFilter.SHOW_ELEMENT, null, true);
+
+        HtmlElement element = (HtmlElement) iterator.nextNode();
+        Assert.assertEquals("1", element.getId());
+
+        element = (HtmlElement) iterator.nextNode();
+        Assert.assertEquals("11", element.getId());
+
+        element = (HtmlElement) iterator.nextNode();
+        Assert.assertEquals("12", element.getId());
+
+        Assert.assertNull(iterator.nextNode());
     }
 }

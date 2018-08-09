@@ -191,12 +191,12 @@ public class DomNodeIterator implements NodeIterator {
      * traversal) from the given node.
      */
     private DomNode getFirstUncleNode(final DomNode node) {
-        if (node == root_ || node == null) {
+        if (node == null || node == root_) {
             return null;
         }
 
         final DomNode parent = node.getParentNode();
-        if (parent == null) {
+        if (parent == null || parent == root_) {
             return null;
         }
 
