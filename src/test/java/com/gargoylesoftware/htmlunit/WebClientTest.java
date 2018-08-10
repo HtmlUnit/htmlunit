@@ -2173,28 +2173,59 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_SECOND, "<html><body></body></html>");
         client.setWebConnection(conn);
 
+        final WebWindow firstWindow = client.getWebWindows().get(0);
+
         assertEquals(1, client.getWebWindows().size());
         assertEquals(1, client.getTopLevelWindows().size());
+        assertEquals(client.getCurrentWindow(), client.getWebWindows().get(0));
+        assertEquals(client.getCurrentWindow(), client.getTopLevelWindows().get(0));
+        assertEquals(firstWindow, client.getWebWindows().get(0));
+        assertEquals(firstWindow, client.getTopLevelWindows().get(0));
 
         client.getPage(URL_FIRST);
 
         assertEquals(2, client.getWebWindows().size());
         assertEquals(1, client.getTopLevelWindows().size());
+        assertEquals(client.getCurrentWindow(), client.getWebWindows().get(0));
+        assertEquals(client.getCurrentWindow(), client.getTopLevelWindows().get(0));
+        assertEquals(firstWindow, client.getWebWindows().get(0));
+        assertEquals(firstWindow, client.getTopLevelWindows().get(0));
 
         client.getPage(URL_SECOND);
 
         assertEquals(1, client.getWebWindows().size());
         assertEquals(1, client.getTopLevelWindows().size());
+        assertEquals(client.getCurrentWindow(), client.getWebWindows().get(0));
+        assertEquals(client.getCurrentWindow(), client.getTopLevelWindows().get(0));
+        assertEquals(firstWindow, client.getWebWindows().get(0));
+        assertEquals(firstWindow, client.getTopLevelWindows().get(0));
 
         client.openWindow(URL_SECOND, "a");
 
         assertEquals(2, client.getWebWindows().size());
         assertEquals(2, client.getTopLevelWindows().size());
+        assertEquals(client.getCurrentWindow(), client.getWebWindows().get(1));
+        assertEquals(client.getCurrentWindow(), client.getTopLevelWindows().get(1));
+        assertEquals(client.getWebWindows().get(1), client.getTopLevelWindows().get(1));
+        assertEquals(firstWindow, client.getWebWindows().get(0));
+        assertEquals(firstWindow, client.getTopLevelWindows().get(0));
+        assertNotEquals(firstWindow, client.getWebWindows().get(1));
+        assertNotEquals(firstWindow, client.getTopLevelWindows().get(1));
 
         client.openWindow(URL_SECOND, "b");
 
         assertEquals(3, client.getWebWindows().size());
         assertEquals(3, client.getTopLevelWindows().size());
+        assertEquals(client.getCurrentWindow(), client.getWebWindows().get(2));
+        assertEquals(client.getCurrentWindow(), client.getTopLevelWindows().get(2));
+        assertEquals(firstWindow, client.getWebWindows().get(0));
+        assertEquals(firstWindow, client.getTopLevelWindows().get(0));
+        assertEquals(client.getWebWindows().get(1), client.getTopLevelWindows().get(1));
+        assertNotEquals(firstWindow, client.getWebWindows().get(1));
+        assertNotEquals(firstWindow, client.getTopLevelWindows().get(1));
+        assertEquals(client.getWebWindows().get(2), client.getTopLevelWindows().get(2));
+        assertNotEquals(firstWindow, client.getWebWindows().get(2));
+        assertNotEquals(firstWindow, client.getTopLevelWindows().get(2));
 
         client.close();
 

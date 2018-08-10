@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1979" due-to="Atsushi Nakagawa">
+                Fix the order of the windows returned by WebClient.getTopLevelWindows()
+                to be again the same as WebClient.getWebWindows().
+            </action>
             <action type="fix" dev="rbri" issue="1980" due-to="Atsushi Nakagawa">
                 Improved support for javascript named function expressions.
             </action>

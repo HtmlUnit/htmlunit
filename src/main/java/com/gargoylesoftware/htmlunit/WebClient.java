@@ -37,12 +37,10 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
 import java.util.Date;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -171,7 +169,8 @@ public class WebClient implements Serializable, AutoCloseable {
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<>(5);
-    private final Deque<TopLevelWindow> topLevelWindows_ = new ArrayDeque<>(); // top-level windows
+    private final List<TopLevelWindow> topLevelWindows_ =
+            Collections.synchronizedList(new ArrayList<TopLevelWindow>()); // top-level windows
     private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
     private transient List<WeakReference<JavaScriptJobManager>> jobManagers_ =
             Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
@@ -1502,6 +1501,8 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Returns an immutable list of open web windows (whether they are top level windows or not).
      * This is a snapshot; future changes are not reflected by this list.
+     * <p>
+     * The list is ordered by age, the oldest one first.
      *
      * @return an immutable list of open web windows (whether they are top level windows or not)
      * @see #getWebWindowByName(String)
@@ -1528,6 +1529,8 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Returns an immutable list of open top level windows.
      * This is a snapshot; future changes are not reflected by this list.
+     * <p>
+     * The list is ordered by age, the oldest one first.
      *
      * @return an immutable list of open top level windows
      * @see #getWebWindowByName(String)
@@ -1816,18 +1819,25 @@ public class WebClient implements Serializable, AutoCloseable {
                     if (webClient_.topLevelWindows_.isEmpty()) {
                         // Must always have at least window, and there are no top-level windows left; must create one.
                         final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
-                        webClient_.topLevelWindows_.push(newWindow);
+                        webClient_.topLevelWindows_.add(newWindow);
                         webClient_.setCurrentWindow(newWindow);
                     }
                     else {
                         // The current window is now the previous top-level window.
-                        webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
+                        webClient_.setCurrentWindow(
+                                webClient_.topLevelWindows_.get(webClient_.topLevelWindows_.size() - 1));
                     }
                 }
             }
             else if (window == webClient_.getCurrentWindow()) {
                 // The current window is now the last top-level window.
-                webClient_.setCurrentWindow(webClient_.topLevelWindows_.peek());
+                if (webClient_.topLevelWindows_.isEmpty()) {
+                    webClient_.setCurrentWindow(null);
+                }
+                else {
+                    webClient_.setCurrentWindow(
+                            webClient_.topLevelWindows_.get(webClient_.topLevelWindows_.size() - 1));
+                }
             }
         }
 
@@ -1876,7 +1886,7 @@ public class WebClient implements Serializable, AutoCloseable {
             final WebWindow window = event.getWebWindow();
             if (window instanceof TopLevelWindow) {
                 final TopLevelWindow tlw = (TopLevelWindow) window;
-                webClient_.topLevelWindows_.push(tlw);
+                webClient_.topLevelWindows_.add(tlw);
             }
             // Page is not loaded yet, don't set it now as current window.
         }
