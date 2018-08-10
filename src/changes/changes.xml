@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1980" due-to="Atsushi Nakagawa">
+                Improved support for javascript named function expressions.
+            </action>
+            <action type="fix" dev="rbri" issue="1982" due-to="Steve Harney">
+                DomNodeIterator no longer traverses uncles of root node.
+            </action>
             <action type="fix" dev="rbri" issue="1978" due-to="Atsushi Nakagawa">
                 Add missing default delegating methods getContentLength(), cleanUp(), and defaultCharsetUtf8()
                 to WebResponseWrapper.
