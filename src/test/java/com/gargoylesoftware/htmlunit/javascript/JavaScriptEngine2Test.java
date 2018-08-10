@@ -328,17 +328,18 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @BuggyWebDriver
     public void function_object_method() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
                 + "  try {\n"
                 + "    alert('1');\n"
                 + "    function document.onclick() {\n"
                 + "      alert('hi');\n"
                 + "    }\n"
                 + "    alert('2');\n"
-                + "  } catch(e) {alert(e)}\n"
-                + "</script></head>\n"
+                + "  } catch(e) { alert(e); }\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "  <div id='myDiv'>Hello there</div>\n"
                 + "</body></html>";
 
         try {
@@ -721,14 +722,13 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"outer abc = 1", "inner abc = function abc() { alert('inner abc = ' + abc); }"})
-    @NotYetImplemented
+    @Alerts({"outer abc = 1", "inner abc = function"})
     public void functionHasNameOfVarStrictMode() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
                 + "  var abc = 1;\n"
-                + "  var foo = function abc() { alert('inner abc = ' + abc); }\n"
+                + "  var foo = function abc() { alert('inner abc = ' + typeof abc); }\n"
                 + "  alert('outer abc = ' + abc);\n"
                 + "  foo()\n"
                 + "</script>\n"
@@ -744,7 +744,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"a", "b"})
-    @NotYetImplemented
     public void innerFunctionWithSameName() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -773,7 +772,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("a")
-    @NotYetImplemented
     public void innerFunctionWithSameNameAsOutsideStrict() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -798,15 +796,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function func() { alert(func); }", "outer"})
-    @NotYetImplemented
+    @Alerts({"functionfunc(){alert(norm(func));}", "outer"})
     public void secondFunctionWithSameNameStrict() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
+                + "  function norm(foo) { return ('' + foo).replace(/(\\s)/gm,'') }\n"
+
                 + "  function func () { alert('outer'); }\n"
 
-                + "  var x = function func() { alert(func); }\n"
+                + "  var x = function func() { alert(norm(func)); }\n"
 
                 + "  x();\n"
                 + "  func();\n"
