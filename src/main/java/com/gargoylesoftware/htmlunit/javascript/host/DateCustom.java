@@ -19,9 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_
 
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -38,8 +36,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Frank Danek
  */
 public final class DateCustom {
-
-    private static final TimeZone UTC_TIME_ZONE = TimeZone.getTimeZone("UTC");
 
     private DateCustom() { }
 
@@ -92,20 +88,6 @@ public final class DateCustom {
         }
         final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
         return format.format(getDateValue(thisObj));
-    }
-
-    /**
-     * Converts a date to a UTC string. Special version for IE
-     * @param context the JavaScript context
-     * @param thisObj the scriptable
-     * @param args the arguments passed into the method
-     * @param function the function
-     * @return converted string
-     */
-    public static String toUTCString(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        final Date date = new Date(getDateValue(thisObj));
-        return DateFormatUtils.format(date, "EEE, d MMM yyyy HH:mm:ss z", UTC_TIME_ZONE, Locale.ENGLISH);
     }
 
     private static long getDateValue(final Scriptable thisObj) {

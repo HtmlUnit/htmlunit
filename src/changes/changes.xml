@@ -8,12 +8,15 @@
 
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Method Date.toUTCString() is available in Rhino; remove our own impl.
+            </action>
             <action type="fix" dev="rbri" issue="1979" due-to="Atsushi Nakagawa">
                 Fix the order of the windows returned by WebClient.getTopLevelWindows()
                 to be again the same as WebClient.getWebWindows().
             </action>
             <action type="fix" dev="rbri" issue="1980" due-to="Atsushi Nakagawa">
-                Improved support for javascript named function expressions.
+                Improved support for javascript named function expressions (core-js).
             </action>
             <action type="fix" dev="rbri" issue="1982" due-to="Steve Harney">
                 DomNodeIterator no longer traverses uncles of root node.
