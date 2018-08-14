@@ -19,17 +19,16 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_R
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -54,35 +53,81 @@ public class EventListenersContainer implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
 
-    static class TypeContainer implements Serializable {
-        private List<Scriptable> capturingListeners_;
-        private List<Scriptable> bubblingListeners_;
-        private Function handler_;
+    private static class TypeContainer implements Serializable {
+        public static final TypeContainer EMPTY = new TypeContainer();
+
+        // This sentinel value could be some singleton instance but null
+        // isn't used for anything else so why not.
+        private static final Scriptable EVENT_HANDLER_PLACEHOLDER = null;
+
+        private final List<Scriptable> capturingListeners_;
+        private final List<Scriptable> bubblingListeners_;
+        private final List<Scriptable> atTargetListeners_;
+        private final Function handler_;
 
         TypeContainer() {
-            capturingListeners_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
-            bubblingListeners_ = Collections.unmodifiableList(new ArrayList<Scriptable>());
+            capturingListeners_ = Collections.emptyList();
+            bubblingListeners_ = Collections.emptyList();
+            atTargetListeners_ = Collections.emptyList();
+            handler_ = null;
         }
 
         private TypeContainer(final List<Scriptable> capturingListeners,
-                    final List<Scriptable> bubblingListeners, final Function handler) {
-            capturingListeners_ = Collections.unmodifiableList(new ArrayList<>(capturingListeners));
-            bubblingListeners_ = Collections.unmodifiableList(new ArrayList<>(bubblingListeners));
+                    final List<Scriptable> bubblingListeners, final List<Scriptable> atTargetListeners,
+                    final Function handler) {
+            capturingListeners_ = capturingListeners;
+            bubblingListeners_ = bubblingListeners;
+            atTargetListeners_ = atTargetListeners;
             handler_ = handler;
         }
 
-        private List<Scriptable> getListeners(final boolean useCapture) {
-            if (useCapture) {
-                return capturingListeners_;
+        private List<Scriptable> getListeners(final int eventPhase) {
+            switch (eventPhase) {
+                case Event.CAPTURING_PHASE:
+                    return capturingListeners_;
+                case Event.AT_TARGET:
+                    return atTargetListeners_;
+                case Event.BUBBLING_PHASE:
+                    return bubblingListeners_;
+                default:
+                    throw new UnsupportedOperationException("eventPhase: " + eventPhase);
             }
-            return bubblingListeners_;
         }
 
-        private synchronized boolean addListener(final Scriptable listener, final boolean useCapture) {
-            final List<Scriptable> listeners = getListeners(useCapture);
+        public TypeContainer setPropertyHandler(final Function propertyHandler) {
+            if (propertyHandler != null) {
+                // If we already have a handler then the position of the existing
+                // placeholder should not be changed so just change the handler
+                if (handler_ != null) {
+                    if (propertyHandler == handler_) {
+                        return this;
+                    }
+                    return withPropertyHandler(propertyHandler);
+                }
+
+                // Insert the placeholder and set the handler
+                return withPropertyHandler(propertyHandler).addListener(EVENT_HANDLER_PLACEHOLDER, false);
+            }
+            else {
+                if (handler_ == null) {
+                    return this;
+                }
+                return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
+            }
+        }
+
+        private TypeContainer withPropertyHandler(final Function propertyHandler) {
+            return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, propertyHandler);
+        }
+
+        public TypeContainer addListener(final Scriptable listener, final boolean useCapture) {
+
+            List<Scriptable> capturingListeners = capturingListeners_;
+            List<Scriptable> bubblingListeners = bubblingListeners_;
+            final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
 
             if (listeners.contains(listener)) {
-                return false;
+                return this;
             }
 
             List<Scriptable> newListeners = new ArrayList<>(listeners.size() + 1);
@@ -91,21 +136,29 @@ public class EventListenersContainer implements Serializable {
             newListeners = Collections.unmodifiableList(newListeners);
 
             if (useCapture) {
-                capturingListeners_ = newListeners;
+                capturingListeners = newListeners;
             }
             else {
-                bubblingListeners_ = newListeners;
+                bubblingListeners = newListeners;
             }
 
-            return true;
+            List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_.size() + 1);
+            atTargetListeners.addAll(atTargetListeners_);
+            atTargetListeners.add(listener);
+            atTargetListeners = Collections.unmodifiableList(atTargetListeners);
+
+            return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
         }
 
-        private synchronized void removeListener(final Scriptable listener, final boolean useCapture) {
-            final List<Scriptable> listeners = getListeners(useCapture);
+        public TypeContainer removeListener(final Scriptable listener, final boolean useCapture) {
+
+            List<Scriptable> capturingListeners = capturingListeners_;
+            List<Scriptable> bubblingListeners = bubblingListeners_;
+            final List<Scriptable> listeners = useCapture ? capturingListeners : bubblingListeners;
 
             final int idx = listeners.indexOf(listener);
             if (idx < 0) {
-                return;
+                return this;
             }
 
             List<Scriptable> newListeners = new ArrayList<>(listeners);
@@ -113,20 +166,32 @@ public class EventListenersContainer implements Serializable {
             newListeners = Collections.unmodifiableList(newListeners);
 
             if (useCapture) {
-                capturingListeners_ = newListeners;
+                capturingListeners = newListeners;
             }
             else {
-                bubblingListeners_ = newListeners;
+                bubblingListeners = newListeners;
             }
+
+            List<Scriptable> atTargetListeners = new ArrayList<>(atTargetListeners_);
+            atTargetListeners.remove(listener);
+            atTargetListeners = Collections.unmodifiableList(atTargetListeners);
+
+            return new TypeContainer(capturingListeners, bubblingListeners, atTargetListeners, handler_);
         }
 
+        // Refactoring note: This method doesn't appear to be used
         @Override
         protected TypeContainer clone() {
-            return new TypeContainer(capturingListeners_, bubblingListeners_, handler_);
+            return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, handler_);
         }
     }
 
-    private final Map<String, TypeContainer> typeContainers_ = new HashMap<>();
+    // Refactoring note: This seems ad-hoc..  Shouldn't synchronization be orchestrated between
+    // JS thread and main thread at a much higher layer?  Anyways, to preserve behaviour of prior
+    // coding where 'synchronized' was used more explicitly, we're using a ConcurrentHashMap here
+    // and using ConcurrentMap.compute() to mutate below so that mutations are atomic.  This for
+    // example avoids the case where two concurrent addListener()s can result in either being lost.
+    private final ConcurrentMap<String, TypeContainer> typeContainers_ = new ConcurrentHashMap<>();
     private final EventTarget jsNode_;
 
     /**
@@ -151,9 +216,17 @@ public class EventListenersContainer implements Serializable {
             return true;
         }
 
-        final TypeContainer container = getTypeContainer(type);
-        final boolean added = container.addListener(listener, useCapture);
-        if (!added) {
+        final boolean[] added = {false};
+        typeContainers_.compute(type.toLowerCase(Locale.ROOT), (k, container) -> {
+            if (container == null) {
+                container = TypeContainer.EMPTY;
+            }
+            final TypeContainer newContainer = container.addListener(listener, useCapture);
+            added[0] = newContainer != container;
+            return newContainer;
+        });
+
+        if (!added[0]) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug(type + " listener already registered, skipping it (" + listener + ")");
             }
@@ -164,7 +237,7 @@ public class EventListenersContainer implements Serializable {
 
     private TypeContainer getTypeContainer(final String type) {
         final String typeLC = type.toLowerCase(Locale.ROOT);
-        return typeContainers_.computeIfAbsent(typeLC, k -> new TypeContainer());
+        return typeContainers_.getOrDefault(typeLC, TypeContainer.EMPTY);
     }
 
     /**
@@ -172,14 +245,10 @@ public class EventListenersContainer implements Serializable {
      *
      * @param eventType the event type
      * @param useCapture whether to use capture of not
-     * @return the listeners list
+     * @return the listeners list (empty list when empty)
      */
     public List<Scriptable> getListeners(final String eventType, final boolean useCapture) {
-        final TypeContainer container = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
-        if (container != null) {
-            return container.getListeners(useCapture);
-        }
-        return null;
+        return getTypeContainer(eventType).getListeners(useCapture ? Event.CAPTURING_PHASE : Event.BUBBLING_PHASE);
     }
 
     /**
@@ -194,10 +263,8 @@ public class EventListenersContainer implements Serializable {
             return;
         }
 
-        final TypeContainer container = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
-        if (container != null) {
-            container.removeListener(listener, useCapture);
-        }
+        typeContainers_.computeIfPresent(eventType.toLowerCase(Locale.ROOT),
+            (k, container) -> container.removeListener(listener, useCapture));
     }
 
     /**
@@ -216,11 +283,15 @@ public class EventListenersContainer implements Serializable {
             handler = (Function) value;
         }
 
-        final TypeContainer container = getTypeContainer(eventType);
-        container.handler_ = handler;
+        typeContainers_.compute(eventType.toLowerCase(Locale.ROOT), (k, container) -> {
+            if (container == null) {
+                container = TypeContainer.EMPTY;
+            }
+            return container.setPropertyHandler(handler);
+        });
     }
 
-    private ScriptResult executeEventListeners(final boolean useCapture, final Event event, final Object[] args) {
+    private ScriptResult executeEventListeners(final int eventPhase, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
         if (node != null && !node.handles(event)) {
@@ -228,8 +299,9 @@ public class EventListenersContainer implements Serializable {
         }
 
         ScriptResult allResult = null;
-        final List<Scriptable> listeners = getListeners(event.getType(), useCapture);
-        if (listeners != null && !listeners.isEmpty()) {
+        final TypeContainer container = getTypeContainer(event.getType());
+        final List<Scriptable> listeners = container.getListeners(eventPhase);
+        if (!listeners.isEmpty()) {
             event.setCurrentTarget(jsNode_);
 
             final HtmlPage page;
@@ -250,7 +322,12 @@ public class EventListenersContainer implements Serializable {
             }
 
             // no need for a copy, listeners are copy on write
-            for (final Scriptable listener : listeners) {
+            for (Scriptable listener : listeners) {
+                boolean isPropertyHandler = false;
+                if (listener == TypeContainer.EVENT_HANDLER_PLACEHOLDER) {
+                    listener = container.handler_;
+                    isPropertyHandler = true;
+                }
                 Function function = null;
                 Scriptable thisObject = null;
                 if (listener instanceof Function) {
@@ -267,7 +344,8 @@ public class EventListenersContainer implements Serializable {
                 if (function != null) {
                     final ScriptResult result =
                             page.executeJavaScriptFunction(function, thisObject, args, node);
-                    if (event.isPropagationStopped()) {
+                    // Return value is only honoured for property handlers (Chrome/FF)
+                    if (isPropertyHandler) {
                         allResult = result;
                     }
                     if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
@@ -290,53 +368,14 @@ public class EventListenersContainer implements Serializable {
         return allResult;
     }
 
-    private ScriptResult executeEventHandler(final Event event, final Object[] propHandlerArgs) {
-        final DomNode node = jsNode_.getDomNodeOrNull();
-        // some event don't apply on all kind of nodes, for instance "blur"
-        if (node != null && !node.handles(event)) {
-            return null;
-        }
-        final Function handler = getEventHandler(event.getType());
-        if (handler != null) {
-            event.setCurrentTarget(jsNode_);
-            final HtmlPage page = (HtmlPage) (node != null
-                    ? node.getPage()
-                    : jsNode_.getWindow().getWebWindow().getEnclosedPage());
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Executing " + event.getType() + " handler for " + node);
-            }
-            return page.executeJavaScriptFunction(handler, jsNode_,
-                    propHandlerArgs, page);
-        }
-        return null;
-    }
-
     /**
      * Executes bubbling listeners.
      * @param event the event
      * @param args arguments
-     * @param propHandlerArgs handler arguments
      * @return the result
      */
-    public ScriptResult executeBubblingListeners(final Event event, final Object[] args,
-            final Object[] propHandlerArgs) {
-        ScriptResult result = null;
-
-        // the handler declared as property if any (not on body, as handler declared on body goes to the window)
-        final DomNode domNode = jsNode_.getDomNodeOrNull();
-        if (!(domNode instanceof HtmlBody)) {
-            result = executeEventHandler(event, propHandlerArgs);
-            if (event.isPropagationStopped()) {
-                return result;
-            }
-        }
-
-        // the registered listeners (if any)
-        final ScriptResult newResult = executeEventListeners(false, event, args);
-        if (newResult != null) {
-            result = newResult;
-        }
-        return result;
+    public ScriptResult executeBubblingListeners(final Event event, final Object[] args) {
+        return executeEventListeners(Event.BUBBLING_PHASE, event, args);
     }
 
     /**
@@ -346,7 +385,17 @@ public class EventListenersContainer implements Serializable {
      * @return the result
      */
     public ScriptResult executeCapturingListeners(final Event event, final Object[] args) {
-        return executeEventListeners(true, event, args);
+        return executeEventListeners(Event.CAPTURING_PHASE, event, args);
+    }
+
+    /**
+     * Executes listeners for events targeting the node. (non-propagation phase)
+     * @param event the event
+     * @param args the arguments
+     * @return the result
+     */
+    public ScriptResult executeAtTargetListeners(final Event event, final Object[] args) {
+        return executeEventListeners(Event.AT_TARGET, event, args);
     }
 
     /**
@@ -355,11 +404,7 @@ public class EventListenersContainer implements Serializable {
      * @return the handler function, {@code null} if the property is null or not a function
      */
     public Function getEventHandler(final String eventType) {
-        final TypeContainer container = typeContainers_.get(eventType.toLowerCase(Locale.ROOT));
-        if (container == null) {
-            return null;
-        }
-        return (Function) container.handler_;
+        return getTypeContainer(eventType).handler_;
     }
 
     /**
@@ -368,47 +413,7 @@ public class EventListenersContainer implements Serializable {
      * @return {@code true} if there are any event listeners for the specified event, {@code false} otherwise
      */
     boolean hasEventListeners(final String eventType) {
-        final TypeContainer container = typeContainers_.get(eventType);
-        return container != null
-            && (container.handler_ instanceof Function
-                    || !container.bubblingListeners_.isEmpty()
-                    || !container.capturingListeners_.isEmpty());
-    }
-
-    /**
-     * Executes listeners.
-     *
-     * @param event the event
-     * @param args the arguments
-     * @param propHandlerArgs handler arguments
-     * @return the result
-     */
-    ScriptResult executeListeners(final Event event, final Object[] args, final Object[] propHandlerArgs) {
-        // the registered capturing listeners (if any)
-        event.setEventPhase(Event.CAPTURING_PHASE);
-        ScriptResult result = executeEventListeners(true, event, args);
-        if (event.isPropagationStopped()) {
-            return result;
-        }
-
-        // the handler declared as property (if any)
-        event.setEventPhase(Event.AT_TARGET);
-        ScriptResult newResult = executeEventHandler(event, propHandlerArgs);
-        if (newResult != null) {
-            result = newResult;
-        }
-        if (event.isPropagationStopped()) {
-            return result;
-        }
-
-        // the registered bubbling listeners (if any)
-        event.setEventPhase(Event.BUBBLING_PHASE);
-        newResult = executeEventListeners(false, event, args);
-        if (newResult != null) {
-            result = newResult;
-        }
-
-        return result;
+        return !getTypeContainer(eventType).atTargetListeners_.isEmpty();
     }
 
     /**

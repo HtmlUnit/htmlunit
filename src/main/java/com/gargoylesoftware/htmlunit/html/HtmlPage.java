@@ -85,15 +85,16 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -1206,18 +1207,23 @@ public class HtmlPage extends SgmlPage {
         // Execute the specified event on the document element.
         final WebWindow window = getEnclosingWindow();
         if (window.getScriptableObject() instanceof Window) {
-            final DomElement element = getDocumentElement();
-            if (element == null) { // happens for instance if document.documentElement has been removed from parent
-                return true;
-            }
             final Event event;
             if (eventType.equals(Event.TYPE_BEFORE_UNLOAD)) {
-                event = new BeforeUnloadEvent(element, eventType);
+                event = new BeforeUnloadEvent(this, eventType);
             }
             else {
-                event = new Event(element, eventType);
+                event = new Event(this, eventType);
             }
-            final ScriptResult result = element.fireEvent(event);
+
+            // This is the same as DomElement.fireEvent() and was copied
+            // here so it could be used with HtmlPage.
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Firing " + event);
+            }
+            final EventTarget jsNode = this.getScriptableObject();
+            final ContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine()).getContextFactory();
+            final ScriptResult result = cf.call(cx -> jsNode.fireEvent(event));
+
             if (!isOnbeforeunloadAccepted(this, event, result)) {
                 return false;
             }
@@ -1245,7 +1251,12 @@ public class HtmlPage extends SgmlPage {
                     else {
                         event = new Event(frame, eventType);
                     }
-                    final ScriptResult result = ((Node) frame.getScriptableObject()).executeEventLocally(event);
+                    // This fires the "load" event for the <frame> element which, like all non-window
+                    // load events, propagates up to Document but not Window.  The "load" event for
+                    // <frameset> on the other hand, like that of <body>, is handled above where it is
+                    // fired against Document and directed to Window.
+                    final ScriptResult result = frame.fireEvent(event);
+
                     if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event, result)) {
                         return false;
                     }

@@ -16,9 +16,13 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.InputStream;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -31,6 +35,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link Window}.
@@ -1571,5 +1576,575 @@ public class Window3Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Tests the ordering of DOMContentLoaded for window and document
+     * as well as how capturing / bubbling phases are handled.
+     * Tests the ordering of load for window and document, and how they
+     * relate to the onload property of 'body'.
+     * Verifies handling of the at target phase.
+     * Checks the state of event.eventPhase for a non-bubbling event after the bubbling phase.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"window DOMContentLoaded 1 capture",
+                        "window DOMContentLoaded 2 capture",
+                        "document DOMContentLoaded 1",
+                        "document DOMContentLoaded 1 capture",
+                        "document DOMContentLoaded 2",
+                        "document DOMContentLoaded 2 capture",
+                        "window DOMContentLoaded 1",
+                        "window DOMContentLoaded 2",
+                        "window at load 1",
+                        "window at load 1 capture",
+                        "window at load 2",
+                        "onload 2",
+                        "window at load 2 capture",
+                        "after"},
+            IE = {"window DOMContentLoaded 1 capture",
+                        "window DOMContentLoaded 2 capture",
+                        "document DOMContentLoaded 1",
+                        "document DOMContentLoaded 1 capture",
+                        "document DOMContentLoaded 2",
+                        "document DOMContentLoaded 2 capture",
+                        "window DOMContentLoaded 1",
+                        "window DOMContentLoaded 2",
+                        "window at load 1",
+                        "window at load 1 capture",
+                        "window at load 2",
+                        "onload 2",
+                        "window at load 2 capture",
+                        "document at load 1 capture",
+                        "document at load 2 capture",
+                        "document at load 1 capture",
+                        "document at load 2 capture",
+                        "after"})
+    public void onload() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+
+            // These 'load' events and 'onload' property below target 'document' when fired
+            // but path 'window' only. (Chrome/FF)
+            // This is unlike other events where the path always includes the target and
+            // all ancestors up to 'window'. Ascertaining this is possible by inspecting
+            // the 'event' object which is a property of 'window' in Chrome, or
+            // obtained via the first parameter of the event function in FF: e.g. function (event) { log('xyz', event) }
+            + "  window.addEventListener('load', function () { log('window at load 1') })\n"
+
+            // This 'onload' callback is called when the 'load' event is fired.
+            // Ordering of the call is preserved with respect to other 'load' callbacks and is relative to
+            // the position the property is set.  Subsequent overwriting of 'window.onload' with another
+            // valid function does not move this position.  However, setting 'window.onload' to null or a
+            // non-function value will reset the position and a new position us determined the next time
+            // the property is set. The 'body' tag with an 'onload' property behaves synonymously as
+            // writing 'window.onload = function () { ... }'
+            // at the position the 'body' tag appears.
+            //window.onload = function () { log('onload 1') }
+
+            + "  window.addEventListener('load', function () { log('window at load 1 capture') }, true)\n"
+            // This 'DOMContentLoaded' event targets 'document' and paths [window, document] as expected. (Chrome/FF)
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded 1') })\n"
+            + "  window.addEventListener('DOMContentLoaded', "
+                    + "function () { log('window DOMContentLoaded 1 capture') }, true)\n"
+
+            + "  document.addEventListener('load', function () { log('document at load 1') })\n"
+            + "  document.addEventListener('load', function () { log('document at load 1 capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded 1') })\n"
+            + "  document.addEventListener('DOMContentLoaded', "
+                    + "function () { log('document DOMContentLoaded 1 capture') }, true)\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  window.addEventListener('load', function () { log('window at load 2') })\n"
+            //window.onload = null
+            //window.onload = 123
+            + "  window.onload = function () { log('onload 2') }\n"
+            + "  window.addEventListener('load', function () { log('window at load 2 capture') }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded 2') })\n"
+            + "  window.addEventListener('DOMContentLoaded', "
+                    + "function () { log('window DOMContentLoaded 2 capture') }, true)\n"
+
+            + "  document.addEventListener('load', function () { log('document at load 2 capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded 2') })\n"
+            + "  document.addEventListener('DOMContentLoaded', "
+                    + "function () { log('document DOMContentLoaded 2 capture') }, true)\n"
+
+            // This is for testing the state of event.eventPhase afterwards
+            + "  window.addEventListener('load', "
+                    + "function (event) { var x = event; "
+                        + "window.setTimeout(function () { log('after', x.eventPhase) }, 100) }, true)\n"
+            + "</script>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Tests load and error events of 'script' tags.
+     * Checks that they should be using EventTarget.fireEvent()
+     * rather than Event.executeEventLocally().
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"document DOMContentLoaded",
+                        "window DOMContentLoaded",
+                        "window at load",
+                        "window at load capture",
+                        "body onload"},
+            IE = {"document DOMContentLoaded",
+                        "window DOMContentLoaded",
+                        "window at load",
+                        "window at load capture",
+                        "document at load capture",
+                        "body onload"})
+    public void onloadScript() throws Exception {
+        getMockWebConnection().setResponse(URL_SECOND, "");
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+
+            + "  window.addEventListener('load', function () { log('window at load') })\n"
+            + "  window.addEventListener('load', function () { log('window at load capture') }, true)\n"
+            + "  window.addEventListener('error', function () { log('window at error') })\n"
+            + "  window.addEventListener('error', function () { log('window at error capture') }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded') })\n"
+
+            + "  document.addEventListener('load', function () { log('document at load') })\n"
+            + "  document.addEventListener('load', function () { log('document at load capture') }, true)\n"
+            + "  document.addEventListener('error', function () { log('document at error') })\n"
+            + "  document.addEventListener('error', function () { log('document at error capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded') })\n"
+
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(\"body onload\")'>\n"
+            + "  <script src='" + URL_SECOND + "' onload='log(\"element 1 onload\")' "
+                                        + "onerror='log(\"element 1 onerror\")'></script>\n"
+            + "  <script src='missing.txt' onload='log(\"element 2 onload\")' "
+                                        + "onerror='log(\"element 2 onerror\")'></script>\n"
+
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Tests load and error events of 'img' tags.
+     * Checks that they should be using EventTarget.fireEvent()
+     * rather than Event.executeEventLocally().
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"window at error capture",
+                        "document at error capture",
+                        "element 2 onerror",
+                        "document DOMContentLoaded",
+                        "window DOMContentLoaded",
+                        "document at load capture",
+                        "element 1 onload",
+                        "window at load",
+                        "window at load capture",
+                        "body onload"},
+            CHROME = {"document DOMContentLoaded",
+                        "window DOMContentLoaded",
+                        "window at error capture",
+                        "document at error capture",
+                        "element 2 onerror",
+                        "document at load capture",
+                        "element 1 onload",
+                        "window at load",
+                        "window at load capture",
+                        "body onload"},
+            IE = {"document at load capture",
+                        "element 1 onload",
+                        "document DOMContentLoaded",
+                        "window DOMContentLoaded",
+                        "window at load",
+                        "window at load capture",
+                        "body onload",
+                        "document at load capture",
+                        "window at error capture",
+                        "document at error capture",
+                        "element 2 onerror"})
+    public void onloadImg() throws Exception {
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+
+            + "  window.addEventListener('load', function () { log('window at load') })\n"
+            + "  window.addEventListener('load', function () { log('window at load capture') }, true)\n"
+            + "  window.addEventListener('error', function () { log('window at error') })\n"
+            + "  window.addEventListener('error', function () { log('window at error capture') }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded') })\n"
+
+            + "  document.addEventListener('load', function () { log('document at load') })\n"
+            + "  document.addEventListener('load', function () { log('document at load capture') }, true)\n"
+            + "  document.addEventListener('error', function () { log('document at error') })\n"
+            + "  document.addEventListener('error', function () { log('document at error capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded') })\n"
+
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(\"body onload\")'>\n"
+            + "  <img src='" + urlImage + "' onload='log(\"element 1 onload\")' "
+                                        + "onerror='log(\"element 1 onerror\")'>\n"
+            + "  <img src='' onload='log(\"element 2 onload\")' "
+                                        + "onerror='log(\"element 2 onerror\")'>\n"
+
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Same as {@link #onload()} but from frame.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"framing window DOMContentLoaded 1 capture",
+                        "framing document DOMContentLoaded 1",
+                        "framing document DOMContentLoaded 1 capture",
+                        "framing window DOMContentLoaded 1",
+                        "window DOMContentLoaded 1 capture",
+                        "window DOMContentLoaded 2 capture",
+                        "document DOMContentLoaded 1",
+                        "document DOMContentLoaded 1 capture",
+                        "document DOMContentLoaded 2",
+                        "document DOMContentLoaded 2 capture",
+                        "window DOMContentLoaded 1",
+                        "window DOMContentLoaded 2",
+                        "window at load 1",
+                        "window at load 1 capture",
+                        "window at load 2",
+                        "onload 2",
+                        "window at load 2 capture",
+                        "framing document at load 1 capture",
+                        "frame onload",
+                        "framing window at load 1",
+                        "framing window at load 1 capture",
+                        "frameset onload",
+                        "after"},
+            IE = {"framing window DOMContentLoaded 1 capture",
+                        "framing document DOMContentLoaded 1",
+                        "framing document DOMContentLoaded 1 capture",
+                        "framing window DOMContentLoaded 1",
+                        "framing document at load 1 capture",
+                        "window DOMContentLoaded 1 capture",
+                        "window DOMContentLoaded 2 capture",
+                        "document DOMContentLoaded 1",
+                        "document DOMContentLoaded 1 capture",
+                        "document DOMContentLoaded 2",
+                        "document DOMContentLoaded 2 capture",
+                        "window DOMContentLoaded 1",
+                        "window DOMContentLoaded 2",
+                        "window at load 1",
+                        "window at load 1 capture",
+                        "window at load 2",
+                        "onload 2",
+                        "window at load 2 capture",
+                        "framing document at load 1 capture",
+                        "frame onload",
+                        "framing window at load 1",
+                        "framing window at load 1 capture",
+                        "frameset onload",
+                        "document at load 1 capture",
+                        "document at load 2 capture",
+                        "document at load 1 capture",
+                        "document at load 2 capture",
+                        "after"})
+    public void onloadFrame() throws Exception {
+
+        final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    window.parent.document.title += msg + ';';\n"
+            + "  }\n"
+
+            + "  window.addEventListener('load', function () { log('window at load 1') })\n"
+
+            + "  window.addEventListener('load', function () { log('window at load 1 capture') }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded 1') })\n"
+            + "  window.addEventListener('DOMContentLoaded', "
+                    + "function () { log('window DOMContentLoaded 1 capture') }, true)\n"
+
+            + "  document.addEventListener('load', function () { log('document at load 1') })\n"
+            + "  document.addEventListener('load', function () { log('document at load 1 capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded 1') })\n"
+            + "  document.addEventListener('DOMContentLoaded', "
+                    + "function () { log('document DOMContentLoaded 1 capture') }, true)\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body >\n"
+            + "<script>\n"
+            + "  window.addEventListener('load', function () { log('window at load 2') })\n"
+            + "  window.onload = function () { log('onload 2') }\n"
+            + "  window.addEventListener('load', function () { log('window at load 2 capture') }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded 2') })\n"
+            + "  window.addEventListener('DOMContentLoaded', "
+                    + "function () { log('window DOMContentLoaded 2 capture') }, true)\n"
+
+            + "  document.addEventListener('load', function () { log('document at load 2 capture') }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded 2') })\n"
+            + "  document.addEventListener('DOMContentLoaded', "
+                    + "function () { log('document DOMContentLoaded 2 capture') }, true)\n"
+
+            + "  window.addEventListener('load', "
+                    + "function (event) { var x = event; "
+                        + "window.setTimeout(function () { log('after', x.eventPhase) }, 100) }, true)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(content);
+
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function log(msg) {\n"
+                + "    window.document.title += msg + ';';\n"
+                + "  }\n"
+
+                + "  window.addEventListener('load', function () { log('framing window at load 1') })\n"
+                + "  window.addEventListener('load', function () { log('framing window at load 1 capture') }, true)\n"
+                + "  window.addEventListener('DOMContentLoaded', "
+                            + "function () { log('framing window DOMContentLoaded 1') })\n"
+                + "  window.addEventListener('DOMContentLoaded', "
+                            + "function () { log('framing window DOMContentLoaded 1 capture') }, true)\n"
+
+                // should not fire because bubbles = false
+                + "  document.addEventListener('load', "
+                            + "function () { log('framing document at load 1') })\n"
+                + "  document.addEventListener('load', "
+                            + "function () { log('framing document at load 1 capture') }, true)\n"
+                + "  document.addEventListener('DOMContentLoaded', "
+                            + "function () { log('framing document DOMContentLoaded 1') })\n"
+                + "  document.addEventListener('DOMContentLoaded', "
+                            + "function () { log('framing document DOMContentLoaded 1 capture') }, true)\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<frameset onload='log(\"frameset onload\")'>\n"
+                + "<frame src='test_onload.html' onload='log(\"frame onload\")'>\n"
+                + "</frameset>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Tests propagation of a more or less basic event (click event) with regards to
+     * handling of the capturing / bubbling / at target phases.
+     * Tests listener and property handler ordering.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"window at click 1 capture",
+                        "window at click 2 capture",
+                        "onclick 2",
+                        "i1 at click 1",
+                        "i1 at click 1 capture",
+                        "i1 at click 2",
+                        "i1 at click 2 capture",
+                        "window at click 1",
+                        "window at click 2"})
+    public void propagation() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <input id='tester' type='button' value='test' onclick='log(\"onclick\")'>\n"
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+
+            + "<script>\n"
+            + "  window.addEventListener('click', function () { log('window at click 1') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 1 capture') }, true)\n"
+            + "  window.addEventListener('click', function () { log('window at click 2') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 2 capture') }, true)\n"
+
+            + "  tester.addEventListener('click', function () { log('i1 at click 1') })\n"
+            + "  tester.addEventListener('click', function () { log('i1 at click 1 capture') }, true)\n"
+            + "  tester.addEventListener('click', function () { log('i1 at click 2') })\n"
+            + "  tester.onclick = function () { log('onclick 2') }\n"
+            + "  tester.addEventListener('click', function () { log('i1 at click 2 capture') }, true)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).click();
+
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Similar as {@link #propagation()} except with a deeper propagation path.
+     * Check bubbling propagation after modification of the DOM tree by an intermediate listener.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"d1 at click 1 capture",
+                        "d1 at click 2 capture",
+                        "d2 at click 1 capture",
+                        "d2 at click 2 capture",
+                        "d3 at click 1",
+                        "d3 onclick",
+                        "d3 at click 1 capture",
+                        "d3 at click 2",
+                        "d3 at click 2 capture",
+                        "d2 at click 1",
+                        "d2 onclick",
+                        "d2 at click 2",
+                        "d1 at click 1",
+                        "d1 onclick",
+                        "d1 at click 2"})
+    public void propagationNested() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='d1' style='width: 150px; height: 150px; background-color: blue'>\n"
+            + "    <div id='d2' style='width: 100px; height: 100px; background-color: green'>\n"
+            + "      <div id='d3' style='width: 50px; height: 50px; background-color: red'>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+
+            + "<script>\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 1') })\n"
+            + "  d1.onclick = function () { log('d1 onclick') }\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 1 capture') }, true)\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 2') })\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 2 capture') }, true)\n"
+
+            + "  d2.addEventListener('click', function () { log('d2 at click 1') })\n"
+            + "  d2.onclick = function () { log('d2 onclick'); d2.parentNode.removeChild(d2) }\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 1 capture') }, true)\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 2') })\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 2 capture') }, true)\n"
+
+            + "  d3.addEventListener('click', function () { log('d3 at click 1') })\n"
+            + "  d3.onclick = function () { log('d3 onclick') }\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 1 capture') }, true)\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 2') })\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 2 capture') }, true)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("d3")).click();
+
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * This test determines that the return value of listeners are apparently
+     * ignored and only that of the property handler is used.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"listener: stop propagation & return false",
+                        "FIRED a1",
+                        "listener: return true",
+                        "property: return false",
+                        "listener: return true"})
+    public void stopPropagation() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div><a id='a1' href='javascript:log(\"FIRED a1\")'>test: listener return false</a></div>\n"
+            + "  <div><a id='a2' href='javascript:log(\"FIRED a2\")'>test: property return false</a></div>\n"
+
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+
+            + "<script>\n"
+            // The event.stopPropagation() has no bearing on whether 'return false'
+            // below is effective at preventing "href" processing.
+            + "  a1.addEventListener('click', function (event) { "
+                                                + "log('listener: stop propagation & return false');"
+                                                + "event.stopPropagation(); return false })\n"
+
+             // The only return value that matters is the value from the 'onclick' property.  The 'return false' below
+             // prevents "href' being processed.
+             + "  a2.addEventListener('click',"
+             + "        function (event) { log('listener: return true'); event.stopPropagation(); return true })\n"
+             + "  a2.onclick = function () { log('property: return false'); return false }\n"
+             + "  a2.addEventListener('click', function (event) { log('listener: return true'); return true })\n"
+
+             // Uncommenting this causes a2 to fire because propagation is
+             // stopped before 'onclick' property is processed.
+             // Again, the 'return false' here is ineffective.
+             // The return values of non-property handlers are probably ignored. (tested in Chrome/FF)
+             //window.addEventListener("click", function (event) {
+             //                  log('window: stop propagation & return false');
+             //                  event.stopPropagation(); return false }, true)
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("a1")).click();
+        driver.findElement(By.id("a2")).click();
+
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 }

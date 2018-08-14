@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -98,13 +97,11 @@ public class EventTarget extends SimpleScriptable {
         final Window window = getWindow();
         final Object[] args = new Object[] {event};
 
-        // handlers declared as property on a node don't receive the event as argument for IE
-        final Object[] propHandlerArgs = args;
-
         final Event previousEvent = window.getCurrentEvent();
         window.setCurrentEvent(event);
         try {
-            return eventListenersContainer.executeListeners(event, args, propHandlerArgs);
+            event.setEventPhase(Event.AT_TARGET);
+            return eventListenersContainer.executeAtTargetListeners(event, args);
         }
         finally {
             window.setCurrentEvent(previousEvent); // reset event
@@ -125,47 +122,81 @@ public class EventTarget extends SimpleScriptable {
         final Event previousEvent = window.getCurrentEvent();
         window.setCurrentEvent(event);
 
-        try {
-            // window's listeners
-            final EventListenersContainer windowsListeners = window.getEventListenersContainer();
+        // The load event has some unnatural behaviour that we need to handle specially
+        final boolean isLoadEvent = Event.TYPE_LOAD.equals(event.getType());
 
-            // capturing phase
-            event.setEventPhase(Event.CAPTURING_PHASE);
-            final boolean windowEventIfDetached = getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED);
+        try {
+            // These can be null if we aren't tied to a DOM node
+            final DomNode ourNode = getDomNodeOrNull();
+            final DomNode ourParentNode = (ourNode != null) ? ourNode.getParentNode() : null;
 
             boolean isAttached = false;
-            for (DomNode node = getDomNodeOrNull(); node != null; node = node.getParentNode()) {
+            for (DomNode node = ourNode; node != null; node = node.getParentNode()) {
                 if (node instanceof Document || node instanceof DomDocumentFragment) {
                     isAttached = true;
                     break;
                 }
             }
 
-            if (isAttached || windowEventIfDetached) {
-                result = windowsListeners.executeCapturingListeners(event, args);
-                if (event.isPropagationStopped()) {
-                    return result;
+            // Determine the propagation path which is fixed here and not affected by
+            // DOM tree modification from intermediate listeners (tested in Chrome)
+            final List<EventTarget> propagationPath = new ArrayList<>();
+
+            // The window 'load' event targets Document but paths Window only (tested in Chrome/FF)
+            if (!isLoadEvent || !(ourNode instanceof Document)) {
+                // We go on the propagation path first
+                if (isAttached || !(this instanceof HTMLElement)) {
+                    propagationPath.add(this);
+                }
+                // Then add all our parents if we have any (pure JS object such as XMLHttpRequest
+                // and MessagePort, etc. will not have any parents)
+                for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
+                    final EventTarget jsNode = parent.getScriptableObject();
+                    if (isAttached || !(jsNode instanceof HTMLElement)) {
+                        propagationPath.add(jsNode);
+                    }
                 }
             }
-            final List<EventTarget> eventTargetList = new ArrayList<>();
-            EventTarget eventTarget = this;
-            while (eventTarget != null) {
-                if (isAttached) {
-                    eventTargetList.add(eventTarget);
-                }
-                final DomNode domNode = eventTarget.getDomNodeOrNull();
-                eventTarget = null;
-                if (domNode != null && domNode.getParentNode() != null) {
-                    eventTarget = domNode.getParentNode().getScriptableObject();
+            // The 'load' event for other elements target that element and but does not path Window
+            // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
+            if (!isLoadEvent || ourNode instanceof Document) {
+                if (isAttached || getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED)) {
+                    propagationPath.add(window);
                 }
             }
 
             final boolean ie = getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-            for (int i = eventTargetList.size() - 1; i >= 0; i--) {
-                final EventTarget jsNode = eventTargetList.get(i);
+
+            // Refactoring note: Not sure of the reasoning for this but preserving nonetheless: Nodes
+            // are traversed if they're attached or if they're non-HTMLElement.  However, the capturing
+            // phase only traverses nodes that are attached
+            if (isAttached) {
+                // capturing phase
+                event.setEventPhase(Event.CAPTURING_PHASE);
+
+                for (int i = propagationPath.size() - 1; i >= 1; i--) {
+                    final EventTarget jsNode = propagationPath.get(i);
+                    final EventListenersContainer elc = jsNode.eventListenersContainer_;
+                    if (elc != null) {
+                        final ScriptResult r = elc.executeCapturingListeners(event, args);
+                        result = ScriptResult.combine(r, result, ie);
+                        if (event.isPropagationStopped()) {
+                            return result;
+                        }
+                    }
+                }
+            }
+
+            // at target phase
+            event.setEventPhase(Event.AT_TARGET);
+
+            if (!propagationPath.isEmpty()) {
+                // Note: This element is not always the same as event.getTarget():
+                // e.g. the 'load' event targets Document but "at target" is on Window.
+                final EventTarget jsNode = propagationPath.get(0);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null && isAttached) {
-                    final ScriptResult r = elc.executeCapturingListeners(event, args);
+                if (elc != null) {
+                    final ScriptResult r = elc.executeAtTargetListeners(event, args);
                     result = ScriptResult.combine(r, result, ie);
                     if (event.isPropagationStopped()) {
                         return result;
@@ -173,36 +204,33 @@ public class EventTarget extends SimpleScriptable {
                 }
             }
 
-            // handlers declared as property on a node don't receive the event as argument for IE
-            final Object[] propHandlerArgs = args;
-
-            // bubbling phase
-            event.setEventPhase(Event.AT_TARGET);
-            eventTarget = this;
+            // Refactoring note: This should probably be done further down
             HtmlLabel label = null;
-            final boolean processLabelAfterBubbling = event.processLabelAfterBubbling();
-
-            while (eventTarget != null) {
-                final EventTarget jsNode = eventTarget;
-                final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                if (elc != null && !(jsNode instanceof Window) && (isAttached || !(jsNode instanceof HTMLElement))) {
-                    final ScriptResult r = elc.executeBubblingListeners(event, args, propHandlerArgs);
-                    result = ScriptResult.combine(r, result, ie);
-                    if (event.isPropagationStopped()) {
-                        return result;
+            if (event.processLabelAfterBubbling()) {
+                for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
+                    if (parent instanceof HtmlLabel) {
+                        label = (HtmlLabel) parent;
+                        break;
                     }
                 }
-                final DomNode domNode = eventTarget.getDomNodeOrNull();
-                eventTarget = null;
-                if (domNode != null && domNode.getParentNode() != null) {
-                    eventTarget = domNode.getParentNode().getScriptableObject();
-                }
+            }
+
+            // bubbling phase
+            if (event.isBubbles()) {
+                // This belongs here inside the block because events that don't bubble never set
+                // eventPhase = 3 (tested in Chrome)
                 event.setEventPhase(Event.BUBBLING_PHASE);
 
-                if (eventTarget != null
-                        && label == null
-                        && processLabelAfterBubbling && eventTarget instanceof HTMLLabelElement) {
-                    label = (HtmlLabel) eventTarget.getDomNodeOrNull();
+                for (int i = 1, size = propagationPath.size(); i < size; i++) {
+                    final EventTarget jsNode = propagationPath.get(i);
+                    final EventListenersContainer elc = jsNode.eventListenersContainer_;
+                    if (elc != null) {
+                        final ScriptResult r = elc.executeBubblingListeners(event, args);
+                        result = ScriptResult.combine(r, result, ie);
+                        if (event.isPropagationStopped()) {
+                            return result;
+                        }
+                    }
                 }
             }
 
@@ -218,10 +246,6 @@ public class EventTarget extends SimpleScriptable {
                 }
             }
 
-            if (isAttached || windowEventIfDetached) {
-                final ScriptResult r = windowsListeners.executeBubblingListeners(event, args, propHandlerArgs);
-                result = ScriptResult.combine(r, result, ie);
-            }
         }
         finally {
             event.endFire();
