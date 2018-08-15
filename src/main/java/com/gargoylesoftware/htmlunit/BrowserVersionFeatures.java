@@ -899,10 +899,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
 
-    /** Executes the window event listeners if the node is detached from the document. */
-    @BrowserFeature(CHROME)
-    JS_EVENT_WINDOW_EXECUTE_IF_DITACHED,
-
     /** Whether {@code FileReader} includes content type or not. */
     @BrowserFeature(FF)
     JS_FILEREADER_CONTENT_TYPE,

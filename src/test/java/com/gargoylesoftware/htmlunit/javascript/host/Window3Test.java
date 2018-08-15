@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Daniel Gredler
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @RunWith(BrowserRunner.class)
 public class Window3Test extends WebDriverTestCase {
@@ -1889,7 +1890,6 @@ public class Window3Test extends WebDriverTestCase {
                         "document at load 2 capture",
                         "after"})
     public void onloadFrame() throws Exception {
-
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
@@ -1977,15 +1977,15 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window at click 1 capture",
-                        "window at click 2 capture",
-                        "onclick 2",
-                        "i1 at click 1",
-                        "i1 at click 1 capture",
-                        "i1 at click 2",
-                        "i1 at click 2 capture",
-                        "window at click 1",
-                        "window at click 2"})
+    @Alerts({"window at click 1 capture",
+                "window at click 2 capture",
+                "onclick 2",
+                "i1 at click 1",
+                "i1 at click 1 capture",
+                "i1 at click 2",
+                "i1 at click 2 capture",
+                "window at click 1",
+                "window at click 2"})
     public void propagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2027,21 +2027,25 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"d1 at click 1 capture",
-                        "d1 at click 2 capture",
-                        "d2 at click 1 capture",
-                        "d2 at click 2 capture",
-                        "d3 at click 1",
-                        "d3 onclick",
-                        "d3 at click 1 capture",
-                        "d3 at click 2",
-                        "d3 at click 2 capture",
-                        "d2 at click 1",
-                        "d2 onclick",
-                        "d2 at click 2",
-                        "d1 at click 1",
-                        "d1 onclick",
-                        "d1 at click 2"})
+    @Alerts({"window at click 1 capture",
+                "window at click 2 capture",
+                "d1 at click 1 capture",
+                "d1 at click 2 capture",
+                "d2 at click 1 capture",
+                "d2 at click 2 capture",
+                "d3 at click 1",
+                "d3 onclick",
+                "d3 at click 1 capture",
+                "d3 at click 2",
+                "d3 at click 2 capture",
+                "d2 at click 1",
+                "d2 onclick",
+                "d2 at click 2",
+                "d1 at click 1",
+                "d1 onclick",
+                "d1 at click 2",
+                "window at click 1",
+                "window at click 2"})
     public void propagationNested() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2062,6 +2066,11 @@ public class Window3Test extends WebDriverTestCase {
             + "  <textarea id='log' rows=40 cols=80></textarea>\n"
 
             + "<script>\n"
+            + "  window.addEventListener('click', function () { log('window at click 1') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 1 capture') }, true)\n"
+            + "  window.addEventListener('click', function () { log('window at click 2') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 2 capture') }, true)\n"
+
             + "  d1.addEventListener('click', function () { log('d1 at click 1') })\n"
             + "  d1.onclick = function () { log('d1 onclick') }\n"
             + "  d1.addEventListener('click', function () { log('d1 at click 1 capture') }, true)\n"
@@ -2090,17 +2099,102 @@ public class Window3Test extends WebDriverTestCase {
     }
 
     /**
+     * Similar as {@link #propagationNested()} but clicking a detached element.
+     * Check bubbling propagation after modification of the DOM tree by an intermediate listener.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"window at click 1 capture",
+                "window at click 2 capture",
+                "begin detach click",
+                "d2 at click 1 capture",
+                "d2 at click 2 capture",
+                "d3 at click 1",
+                "d3 onclick",
+                "d3 at click 1 capture",
+                "d3 at click 2",
+                "d3 at click 2 capture",
+                "d2 at click 1",
+                "d2 onclick",
+                "d2 at click 2",
+                "end detach click",
+                "window at click 1",
+                "window at click 2"})
+    public void propagationNestedDetached() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) {\n"
+            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "  }\n"
+
+            + "  function detachAndClick() {\n"
+            + "    log('begin detach click')\n"
+            + "    var d2 = window.d2, d3 = window.d3\n"
+            + "    d2.parentNode.removeChild(d2);\n"
+            + "    d3.click();\n"
+            + "    log('end detach click')\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='d1' style='width: 150px; height: 150px; background-color: blue'>\n"
+            + "    <div id='d2' style='width: 100px; height: 100px; background-color: green'>\n"
+            + "      <div id='d3' style='width: 50px; height: 50px; background-color: red'>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "  <input id='detach_click' type='button' value='Detach & click' onclick='detachAndClick()'>\n"
+
+            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
+
+            + "<script>\n"
+            + "  d2 = window.d2, d3 = window.d3\n" // Save because "Detach & click" removes them
+            + "  window.addEventListener('click', function () { log('window at click 1') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 1 capture') }, true)\n"
+            + "  window.addEventListener('click', function () { log('window at click 2') })\n"
+            + "  window.addEventListener('click', function () { log('window at click 2 capture') }, true)\n"
+
+            + "  d1.addEventListener('click', function () { log('d1 at click 1') })\n"
+            + "  d1.onclick = function () { log('d1 onclick') }\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 1 capture') }, true)\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 2') })\n"
+            + "  d1.addEventListener('click', function () { log('d1 at click 2 capture') }, true)\n"
+
+            + "  d2.addEventListener('click', function () { log('d2 at click 1') })\n"
+            + "  d2.onclick = function () { log('d2 onclick'); d2.parentNode.removeChild(d2) }\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 1 capture') }, true)\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 2') })\n"
+            + "  d2.addEventListener('click', function () { log('d2 at click 2 capture') }, true)\n"
+
+            + "  d3.addEventListener('click', function () { log('d3 at click 1') })\n"
+            + "  d3.onclick = function () { log('d3 onclick') }\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 1 capture') }, true)\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 2') })\n"
+            + "  d3.addEventListener('click', function () { log('d3 at click 2 capture') }, true)\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("detach_click")).click();
+
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
      * This test determines that the return value of listeners are apparently
      * ignored and only that of the property handler is used.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"listener: stop propagation & return false",
-                        "FIRED a1",
-                        "listener: return true",
-                        "property: return false",
-                        "listener: return true"})
+    @Alerts({"listener: stop propagation & return false",
+                "FIRED a1",
+                "listener: return true",
+                "property: return false",
+                "listener: return true"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

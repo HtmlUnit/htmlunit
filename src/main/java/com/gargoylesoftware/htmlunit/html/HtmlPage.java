@@ -141,6 +141,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Joerg Werner
+ * @author Atsushi Nakagawa
  */
 public class HtmlPage extends SgmlPage {
 

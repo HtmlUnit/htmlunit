@@ -48,6 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 public class EventListenersContainer implements Serializable {
 

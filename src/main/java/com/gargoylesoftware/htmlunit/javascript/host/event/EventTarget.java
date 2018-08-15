@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_WINDOW_EXECUTE_IF_DITACHED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -26,10 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Document;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -39,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -49,6 +46,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * A JavaScript object for {@code EventTarget}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @JsxClass({CHROME, FF, EDGE})
 @JsxClass(isJSObject = false, value = IE)
@@ -122,67 +121,58 @@ public class EventTarget extends SimpleScriptable {
         final Event previousEvent = window.getCurrentEvent();
         window.setCurrentEvent(event);
 
-        // The load event has some unnatural behaviour that we need to handle specially
-        final boolean isLoadEvent = Event.TYPE_LOAD.equals(event.getType());
-
         try {
             // These can be null if we aren't tied to a DOM node
             final DomNode ourNode = getDomNodeOrNull();
             final DomNode ourParentNode = (ourNode != null) ? ourNode.getParentNode() : null;
 
-            boolean isAttached = false;
-            for (DomNode node = ourNode; node != null; node = node.getParentNode()) {
-                if (node instanceof Document || node instanceof DomDocumentFragment) {
-                    isAttached = true;
-                    break;
-                }
-            }
-
             // Determine the propagation path which is fixed here and not affected by
             // DOM tree modification from intermediate listeners (tested in Chrome)
             final List<EventTarget> propagationPath = new ArrayList<>();
 
-            // The window 'load' event targets Document but paths Window only (tested in Chrome/FF)
-            if (!isLoadEvent || !(ourNode instanceof Document)) {
-                // We go on the propagation path first
-                if (isAttached || !(this instanceof HTMLElement)) {
-                    propagationPath.add(this);
+            // We're added to the propagation path first
+            propagationPath.add(this);
+
+            // Then add all our parents if we have any (pure JS object such as XMLHttpRequest
+            // and MessagePort, etc. will not have any parents)
+            for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
+                propagationPath.add(parent.getScriptableObject());
+            }
+
+            // The load event has some unnatural behaviour that we need to handle specially
+            if (Event.TYPE_LOAD.equals(event.getType())) {
+
+                // The Window load event targets Document but paths Window only (tested in Chrome/FF)
+                if (this instanceof Document) {
+                    propagationPath.clear();
+                    propagationPath.add(window);
                 }
-                // Then add all our parents if we have any (pure JS object such as XMLHttpRequest
-                // and MessagePort, etc. will not have any parents)
-                for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
-                    final EventTarget jsNode = parent.getScriptableObject();
-                    if (isAttached || !(jsNode instanceof HTMLElement)) {
-                        propagationPath.add(jsNode);
-                    }
+                else {
+                    // The load event for other elements target that element and but path only
+                    // up to Document and not Window, so do nothing here
+                    // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
                 }
             }
-            // The 'load' event for other elements target that element and but does not path Window
-            // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
-            if (!isLoadEvent || ourNode instanceof Document) {
-                if (isAttached || getBrowserVersion().hasFeature(JS_EVENT_WINDOW_EXECUTE_IF_DITACHED)) {
+            else {
+                // Add Window if the the propagation path reached Document
+                if (propagationPath.get(propagationPath.size() - 1) instanceof Document) {
                     propagationPath.add(window);
                 }
             }
 
             final boolean ie = getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
 
-            // Refactoring note: Not sure of the reasoning for this but preserving nonetheless: Nodes
-            // are traversed if they're attached or if they're non-HTMLElement.  However, the capturing
-            // phase only traverses nodes that are attached
-            if (isAttached) {
-                // capturing phase
-                event.setEventPhase(Event.CAPTURING_PHASE);
+            // capturing phase
+            event.setEventPhase(Event.CAPTURING_PHASE);
 
-                for (int i = propagationPath.size() - 1; i >= 1; i--) {
-                    final EventTarget jsNode = propagationPath.get(i);
-                    final EventListenersContainer elc = jsNode.eventListenersContainer_;
-                    if (elc != null) {
-                        final ScriptResult r = elc.executeCapturingListeners(event, args);
-                        result = ScriptResult.combine(r, result, ie);
-                        if (event.isPropagationStopped()) {
-                            return result;
-                        }
+            for (int i = propagationPath.size() - 1; i >= 1; i--) {
+                final EventTarget jsNode = propagationPath.get(i);
+                final EventListenersContainer elc = jsNode.eventListenersContainer_;
+                if (elc != null) {
+                    final ScriptResult r = elc.executeCapturingListeners(event, args);
+                    result = ScriptResult.combine(r, result, ie);
+                    if (event.isPropagationStopped()) {
+                        return result;
                     }
                 }
             }
