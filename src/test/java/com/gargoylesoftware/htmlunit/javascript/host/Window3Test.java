@@ -1627,7 +1627,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
 
             // These 'load' events and 'onload' property below target 'document' when fired
@@ -1682,12 +1682,11 @@ public class Window3Test extends WebDriverTestCase {
                     + "function (event) { var x = event; "
                         + "window.setTimeout(function () { log('after', x.eventPhase) }, 100) }, true)\n"
             + "</script>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -1699,17 +1698,27 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"document DOMContentLoaded",
+    @Alerts(DEFAULT = {"document at load capture",
+                        "element 1 onload",
+                        "window at error capture",
+                        "document at error capture",
+                        "element 2 onerror",
+                        "document DOMContentLoaded",
                         "window DOMContentLoaded",
                         "window at load",
                         "window at load capture",
                         "body onload"},
-            IE = {"document DOMContentLoaded",
+            IE = {"document at load capture",
+                        "element 1 onload",
+                        "window at error capture",
+                        "document at error capture",
+                        "element 2 onerror",
+                        "document DOMContentLoaded",
                         "window DOMContentLoaded",
                         "window at load",
                         "window at load capture",
-                        "document at load capture",
-                        "body onload"})
+                        "body onload",
+                        "document at load capture"})
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
 
@@ -1717,7 +1726,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
 
             + "  window.addEventListener('load', function () { log('window at load') })\n"
@@ -1739,13 +1748,11 @@ public class Window3Test extends WebDriverTestCase {
                                         + "onerror='log(\"element 1 onerror\")'></script>\n"
             + "  <script src='missing.txt' onload='log(\"element 2 onload\")' "
                                         + "onerror='log(\"element 2 onerror\")'></script>\n"
-
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -1800,7 +1807,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
 
             + "  window.addEventListener('load', function () { log('window at load') })\n"
@@ -1823,12 +1830,11 @@ public class Window3Test extends WebDriverTestCase {
             + "  <img src='' onload='log(\"element 2 onload\")' "
                                         + "onerror='log(\"element 2 onerror\")'>\n"
 
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -1991,13 +1997,12 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <input id='tester' type='button' value='test' onclick='log(\"onclick\")'>\n"
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
 
             + "<script>\n"
             + "  window.addEventListener('click', function () { log('window at click 1') })\n"
@@ -2016,7 +2021,7 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -2051,7 +2056,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2062,8 +2067,6 @@ public class Window3Test extends WebDriverTestCase {
             + "      </div>\n"
             + "    </div>\n"
             + "  </div>\n"
-
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
 
             + "<script>\n"
             + "  window.addEventListener('click', function () { log('window at click 1') })\n"
@@ -2094,7 +2097,7 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("d3")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -2126,7 +2129,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
 
             + "  function detachAndClick() {\n"
@@ -2146,8 +2149,6 @@ public class Window3Test extends WebDriverTestCase {
             + "    </div>\n"
             + "  </div>\n"
             + "  <input id='detach_click' type='button' value='Detach & click' onclick='detachAndClick()'>\n"
-
-            + "  <textarea id='log' rows=40 cols=80></textarea>\n"
 
             + "<script>\n"
             + "  d2 = window.d2, d3 = window.d3\n" // Save because "Detach & click" removes them
@@ -2179,7 +2180,7 @@ public class Window3Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("detach_click")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
@@ -2200,7 +2201,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "<script>\n"
             + "  function log(msg) {\n"
-            + "    document.getElementById('log').value += msg + '\\n';\n"
+            + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -2238,7 +2239,7 @@ public class Window3Test extends WebDriverTestCase {
         driver.findElement(By.id("a1")).click();
         driver.findElement(By.id("a2")).click();
 
-        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 }
