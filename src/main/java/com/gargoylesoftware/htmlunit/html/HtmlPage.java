@@ -246,6 +246,9 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
+
+        executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
+
         loadFrames();
 
         // don't set the ready state if we really load the blank page into the window
@@ -258,7 +261,6 @@ public class HtmlPage extends SgmlPage {
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
         }
 
-        executeEventHandlersIfNeeded(Event.TYPE_DOM_DOCUMENT_LOADED);
         executeDeferredScriptsIfNeeded();
         setReadyStateOnDeferredScriptsIfNeeded();
 
