@@ -141,17 +141,9 @@ public class EventTarget extends SimpleScriptable {
 
             // The load event has some unnatural behaviour that we need to handle specially
             if (Event.TYPE_LOAD.equals(event.getType())) {
-
-                // The Window load event targets Document but paths Window only (tested in Chrome/FF)
-                if (this instanceof Document) {
-                    propagationPath.clear();
-                    propagationPath.add(window);
-                }
-                else {
-                    // The load event for other elements target that element and but path only
-                    // up to Document and not Window, so do nothing here
-                    // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
-                }
+                // The load event for other elements target that element and but path only
+                // up to Document and not Window, so do nothing here
+                // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
             }
             else {
                 // Add Window if the the propagation path reached Document

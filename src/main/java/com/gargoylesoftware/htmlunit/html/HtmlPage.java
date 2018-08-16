@@ -1223,7 +1223,16 @@ public class HtmlPage extends SgmlPage {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Firing " + event);
             }
-            final EventTarget jsNode = this.getScriptableObject();
+
+            final EventTarget jsNode;
+            if (Event.TYPE_DOM_DOCUMENT_LOADED.equals(eventType)) {
+                jsNode = this.getScriptableObject();
+            }
+            else {
+                // The load/beforeunload/unload events target Document but paths Window only (tested in Chrome/FF)
+                jsNode = window.getScriptableObject();
+            }
+
             final ContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine()).getContextFactory();
             final ScriptResult result = cf.call(cx -> jsNode.fireEvent(event));
 
