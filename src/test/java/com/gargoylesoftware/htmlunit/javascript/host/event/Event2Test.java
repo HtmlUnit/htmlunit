@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -873,5 +874,88 @@ public class Event2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"anchor onclick prevented=false",
+                "document onclick prevented=false",
+                "window onclick prevented=true"})
+    public void returnPriority() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function log(msg) {\n"
+                + "    window.document.title += msg + ';';\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<a id='tester' href='javascript:log(\"FIRED\")'>test: onclick return value</a>\n"
+                + "<script>\n"
+                + "  tester.onclick = function (event) { "
+                                    + "log('anchor onclick prevented=' + event.defaultPrevented); return true }\n"
+                + "  document.onclick = function (event) { "
+                                    + "log('document onclick prevented=' + event.defaultPrevented); return false }\n"
+                + "  window.onclick = function (event) { "
+                                    + "log('window onclick prevented=' + event.defaultPrevented); return true; }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).click();
+
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * BeforeUnloadEvent's returnValue behaves differently to other events.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"nullwindow at beforeunload rv=",
+                        "window onbeforeunload rv=1",
+                        "window at beforeunload rv=1"},
+            IE = {"nullwindow at beforeunload rv=undefined",
+                        "window onbeforeunload rv=1",
+                        "window at beforeunload rv=2"})
+    public void returnPriority2() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  output = '';\n"
+                + "  function log(msg) {\n"
+                + "    var output = localStorage.getItem('output');\n"
+                + "    output += msg + ';';\n"
+                + "    localStorage.setItem('output', output);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<button id='tester' onclick='window.location.reload()'>test: onbeforeunload return value</button>\n"
+
+                + "<button id='getResult' "
+                        + "onclick='window.document.title=localStorage.getItem(\"output\")'>get result</button>\n"
+                + "<script>\n"
+                + "  window.addEventListener('beforeunload', function (event) { "
+                        + "log('window at beforeunload rv=' + event.returnValue); event.returnValue='1' });\n"
+                + "  window.onbeforeunload = function (event) { "
+                        + "log('window onbeforeunload rv=' + event.returnValue); return '2' }\n"
+                + "  window.addEventListener('beforeunload', function (event) { "
+                        + "log('window at beforeunload rv=' + event.returnValue); event.returnValue='3' });\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("tester")).click();
+        driver.switchTo().alert().accept();
+        Thread.sleep(200); // avoid stale element exception in FF60
+
+        driver.findElement(By.id("getResult")).click();
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 }
