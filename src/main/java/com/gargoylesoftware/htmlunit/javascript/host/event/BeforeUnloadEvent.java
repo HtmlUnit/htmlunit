@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -34,6 +36,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Frank Danek
  * @author Ahmed Ashour
+ * @author Ronald Brill
+ * @author Atsushi Nakagawa
  */
 @JsxClass
 public class BeforeUnloadEvent extends Event {
@@ -64,11 +68,35 @@ public class BeforeUnloadEvent extends Event {
         super(domNode, type);
 
         setBubbles(false);
-        setReturnValue(Undefined.instance);
+        setReturnValue(getReturnValueDefault(getBrowserVersion()));
+    }
+
+    @Override
+    public void initEvent(final String type, final boolean bubbles, final boolean cancelable) {
+        super.initEvent(type, bubbles, cancelable);
+        setReturnValue(getReturnValueDefault(getBrowserVersion()));
+    }
+
+    private static Object getReturnValueDefault(final BrowserVersion browserVersion) {
+        if (browserVersion.isChrome() || browserVersion.isFirefox()) {
+            return "";
+        }
+        return Undefined.instance;
+    }
+
+    @Override
+    protected boolean isReturnValueBackedByPreventDefault() {
+        return false;
     }
 
     /**
-     * Returns the return value associated with the event.
+     * @return {@code true} if returnValue holds the beforeunload message
+     */
+    public boolean isBeforeUnloadMessageSet() {
+        return !getReturnValueDefault(getBrowserVersion()).equals(getReturnValue());
+    }
+
+    /**
      * @return the return value associated with the event
      */
     @Override
@@ -85,5 +113,19 @@ public class BeforeUnloadEvent extends Event {
     @JsxSetter
     public void setReturnValue(final Object returnValue) {
         super.setReturnValue(returnValue);
+    }
+
+    @Override
+    void handlePropertyHandlerReturnValue(final Object returnValue) {
+        super.handlePropertyHandlerReturnValue(returnValue);
+
+        final BrowserVersion browserVersion = getBrowserVersion();
+
+        if (!Undefined.isUndefined(returnValue) && (returnValue != null || browserVersion.isIE())) {
+            if (!browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST)
+                    || !getReturnValueDefault(browserVersion).equals(getReturnValue())) {
+                setReturnValue(returnValue);
+            }
+        }
     }
 }

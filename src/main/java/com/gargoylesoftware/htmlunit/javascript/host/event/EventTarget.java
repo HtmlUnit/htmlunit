@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -152,8 +151,6 @@ public class EventTarget extends SimpleScriptable {
                 }
             }
 
-            final boolean ie = getBrowserVersion().hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-
             // capturing phase
             event.setEventPhase(Event.CAPTURING_PHASE);
 
@@ -162,7 +159,7 @@ public class EventTarget extends SimpleScriptable {
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
                     final ScriptResult r = elc.executeCapturingListeners(event, args);
-                    result = ScriptResult.combine(r, result, ie);
+                    result = ScriptResult.combine(r, result);
                     if (event.isPropagationStopped()) {
                         return result;
                     }
@@ -179,7 +176,7 @@ public class EventTarget extends SimpleScriptable {
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
                     final ScriptResult r = elc.executeAtTargetListeners(event, args);
-                    result = ScriptResult.combine(r, result, ie);
+                    result = ScriptResult.combine(r, result);
                     if (event.isPropagationStopped()) {
                         return result;
                     }
@@ -208,7 +205,7 @@ public class EventTarget extends SimpleScriptable {
                     final EventListenersContainer elc = jsNode.eventListenersContainer_;
                     if (elc != null) {
                         final ScriptResult r = elc.executeBubblingListeners(event, args);
-                        result = ScriptResult.combine(r, result, ie);
+                        result = ScriptResult.combine(r, result);
                         if (event.isPropagationStopped()) {
                             return result;
                         }

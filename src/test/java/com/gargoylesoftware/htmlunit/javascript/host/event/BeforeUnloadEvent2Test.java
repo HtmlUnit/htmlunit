@@ -152,5 +152,4 @@ public class BeforeUnloadEvent2Test extends WebServerTestCase {
         onbeforeunload("e.returnValue = 'Hello';\n"
                 + "return 'Hello'");
     }
-
 }

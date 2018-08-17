@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FALSE_RESULT;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -345,20 +343,13 @@ public class EventListenersContainer implements Serializable {
                 if (function != null) {
                     final ScriptResult result =
                             page.executeJavaScriptFunction(function, thisObject, args, node);
-                    // Return value is only honoured for property handlers (Chrome/FF)
+                    // Return value is only honored for property handlers (Tested in Chrome/FF/IE11)
                     if (isPropertyHandler) {
                         allResult = result;
-                    }
-                    if (jsNode_.getBrowserVersion().hasFeature(EVENT_FALSE_RESULT)) {
-                        if (ScriptResult.isFalse(result)) {
-                            allResult = result;
-                        }
-                        else {
-                            final Object eventReturnValue = event.getReturnValue();
-                            if (eventReturnValue instanceof Boolean && !((Boolean) eventReturnValue).booleanValue()) {
-                                allResult = new ScriptResult(Boolean.FALSE, page);
-                            }
-                        }
+                        event.handlePropertyHandlerReturnValue(result.getJavaScriptResult());
+
+                        // This return value is now all but unused and can be refactored away
+                        allResult = null;
                     }
                 }
                 if (event.isImmediatePropagationStopped()) {

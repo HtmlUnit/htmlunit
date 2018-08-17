@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CALL_RESULT_IS_LAST_RETURN_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DEFERRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
@@ -99,7 +98,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -1289,10 +1287,9 @@ public class HtmlPage extends SgmlPage {
     }
 
     private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event, final ScriptResult result) {
-        if (event.getType().equals(Event.TYPE_BEFORE_UNLOAD)) {
-            final boolean ie = hasFeature(JS_CALL_RESULT_IS_LAST_RETURN_VALUE);
-            final String message = getBeforeUnloadMessage(event, result, ie);
-            if (message != null) {
+        if (event instanceof BeforeUnloadEvent) {
+            if (((BeforeUnloadEvent) event).isBeforeUnloadMessageSet()) {
+                final String message = Context.toString(event.getReturnValue());
                 final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
                 if (handler == null) {
                     LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
@@ -1304,30 +1301,6 @@ public class HtmlPage extends SgmlPage {
             }
         }
         return true;
-    }
-
-    private static String getBeforeUnloadMessage(final Event event, final ScriptResult result, final boolean ie) {
-        String message = null;
-        if (event.getReturnValue() != Undefined.instance) {
-            if (!ie || event.getReturnValue() != null || result == null || result.getJavaScriptResult() == null
-                    || result.getJavaScriptResult() == Undefined.instance) {
-                message = Context.toString(event.getReturnValue());
-            }
-        }
-        else {
-            if (result != null) {
-                if (ie) {
-                    if (result.getJavaScriptResult() != Undefined.instance) {
-                        message = Context.toString(result.getJavaScriptResult());
-                    }
-                }
-                else if (result.getJavaScriptResult() != null
-                        && result.getJavaScriptResult() != Undefined.instance) {
-                    message = Context.toString(result.getJavaScriptResult());
-                }
-            }
-        }
-        return message;
     }
 
     /**

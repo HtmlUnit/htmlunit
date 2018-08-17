@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_RETURN_VALUE_IS_PREVENT_DEFAULT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -35,6 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -57,6 +59,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Rob Di Marco
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Atsushi Nakagawa
  */
 @JsxClass
 public class Event extends SimpleScriptable {
@@ -181,7 +184,7 @@ public class Event extends SimpleScriptable {
     private boolean stopImmediatePropagation_;
     private Object returnValue_;
     private boolean preventDefault_;
-
+    private Boolean returnValueIsPreventDefault_;
     /**
      * The current event phase. This is a W3C standard attribute. One of {@link #NONE},
      * {@link #CAPTURING_PHASE}, {@link #AT_TARGET} or {@link #BUBBLING_PHASE}.
@@ -581,10 +584,23 @@ public class Event extends SimpleScriptable {
     }
 
     /**
+     * @return true if returnValue is backed by the same storage as preventDefault.
+     */
+    protected boolean isReturnValueBackedByPreventDefault() {
+        if (returnValueIsPreventDefault_ == null) {
+            returnValueIsPreventDefault_ = getBrowserVersion().hasFeature(EVENT_RETURN_VALUE_IS_PREVENT_DEFAULT);
+        }
+        return returnValueIsPreventDefault_;
+    }
+
+    /**
      * Returns the return value associated with the event.
      * @return the return value associated with the event
      */
     public Object getReturnValue() {
+        if (isReturnValueBackedByPreventDefault()) {
+            return !preventDefault_;
+        }
         return returnValue_;
     }
 
@@ -593,7 +609,22 @@ public class Event extends SimpleScriptable {
      * @param returnValue the return value associated with the event
      */
     public void setReturnValue(final Object returnValue) {
-        returnValue_ = returnValue;
+        if (isReturnValueBackedByPreventDefault()) {
+            preventDefault_ = !ScriptRuntime.toBoolean(returnValue);
+        }
+        else {
+            returnValue_ = returnValue;
+        }
+    }
+
+    /**
+     * Handles the return values of property handlers.
+     * @param returnValue the return value returned by the property handler
+     */
+    void handlePropertyHandlerReturnValue(final Object returnValue) {
+        if (Boolean.FALSE.equals(returnValue)) {
+            preventDefault();
+        }
     }
 
     /**
@@ -621,9 +652,6 @@ public class Event extends SimpleScriptable {
                 final Method readMethod = klass.getMethod("getReturnValue");
                 final Method writeMethod = klass.getMethod("setReturnValue", Object.class);
                 defineProperty("returnValue", null, readMethod, writeMethod, ScriptableObject.EMPTY);
-                if ("Event".equals(klass.getSimpleName())) {
-                    setReturnValue(Boolean.TRUE);
-                }
             }
             catch (final Exception e) {
                 throw Context.throwAsScriptRuntimeEx(e);

@@ -90,45 +90,24 @@ public final class ScriptResult {
      *
      * @param newResult the new {@link ScriptResult} (may be {@code null})
      * @param originalResult the original {@link ScriptResult} (may be {@code null})
-     * @param ie whether or not we are emulating IE
      * @return a composite {@link ScriptResult}, based on the two input {@link ScriptResult}s
      */
-    public static ScriptResult combine(final ScriptResult newResult, final ScriptResult originalResult,
-        final boolean ie) {
+    public static ScriptResult combine(final ScriptResult newResult, final ScriptResult originalResult) {
 
         final Object jsResult;
         final Page page;
 
-        // If we're emulating IE, the overall JavaScript return value is the last return value.
-        // If we're emulating FF, the overall JavaScript return value is false if the return value
-        // was false at any level.
-        if (ie) {
-            if (newResult != null && !ScriptResult.isUndefined(newResult)) {
-                jsResult = newResult.getJavaScriptResult();
-            }
-            else if (originalResult != null) {
-                jsResult = originalResult.getJavaScriptResult();
-            }
-            else if (newResult != null) {
-                jsResult = newResult.getJavaScriptResult();
-            }
-            else {
-                jsResult = null;
-            }
+        if (ScriptResult.isFalse(newResult)) {
+            jsResult = newResult.getJavaScriptResult();
+        }
+        else if (originalResult != null) {
+            jsResult = originalResult.getJavaScriptResult();
+        }
+        else if (newResult != null) {
+            jsResult = newResult.getJavaScriptResult();
         }
         else {
-            if (ScriptResult.isFalse(newResult)) {
-                jsResult = newResult.getJavaScriptResult();
-            }
-            else if (originalResult != null) {
-                jsResult = originalResult.getJavaScriptResult();
-            }
-            else if (newResult != null) {
-                jsResult = newResult.getJavaScriptResult();
-            }
-            else {
-                jsResult = null;
-            }
+            jsResult = null;
         }
 
         // The new page is always the newest page.

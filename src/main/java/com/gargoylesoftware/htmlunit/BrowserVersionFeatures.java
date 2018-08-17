@@ -154,9 +154,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
-    /** Event false result. */
-    @BrowserFeature(IE)
-    EVENT_FALSE_RESULT,
+    /** Indicates handler return value is only used if returnValue is the default value. */
+    @BrowserFeature({CHROME, FF})
+    EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST,
 
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
     @BrowserFeature(CHROME)
@@ -233,6 +233,10 @@ public enum BrowserVersionFeatures {
     /** <code>PopStateEvent</code> can not be created by calling document.createEvent('PopStateEvent'). */
     @BrowserFeature(FF60)
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
+
+    /** Indicates if event.returnValue is backed by !event.defaultPrevented. */
+    @BrowserFeature({CHROME, EDGE})
+    EVENT_RETURN_VALUE_IS_PREVENT_DEFAULT,
 
     /** Supports event type 'BeforeUnloadEvent'. */
     @BrowserFeature({CHROME, FF})
@@ -637,10 +641,6 @@ public enum BrowserVersionFeatures {
     /** HtmlElement.getBoundingClientRect throws an error if the element is not attached to the page. */
     @BrowserFeature(IE)
     JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED,
-
-    /** If we're emulating IE, the overall JavaScript return value is the last return value. */
-    @BrowserFeature(IE)
-    JS_CALL_RESULT_IS_LAST_RETURN_VALUE,
 
     /** toDataURL for canvas returns the CHROME version of the PNG. */
     @BrowserFeature(CHROME)

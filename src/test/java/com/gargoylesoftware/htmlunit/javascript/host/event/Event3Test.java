@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,7 +219,6 @@ public class Event3Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts("false") // here not alerts! ;-)
-    @NotYetImplemented(IE)
     public void eventBubblingReturns_2() throws Exception {
         final boolean changesPage = Boolean.parseBoolean(getExpectedAlerts()[0]);
         testEventBubblingReturns("return true; ", "return false;", "return true; ", changesPage);
