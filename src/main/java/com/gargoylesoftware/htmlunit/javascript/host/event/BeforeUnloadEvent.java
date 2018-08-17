@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class BeforeUnloadEvent extends Event {
+    private Object returnValue_;
 
     /**
      * Creates a new event instance.
@@ -84,11 +85,6 @@ public class BeforeUnloadEvent extends Event {
         return Undefined.instance;
     }
 
-    @Override
-    protected boolean isReturnValueBackedByPreventDefault() {
-        return false;
-    }
-
     /**
      * @return {@code true} if returnValue holds the beforeunload message
      */
@@ -99,20 +95,18 @@ public class BeforeUnloadEvent extends Event {
     /**
      * @return the return value associated with the event
      */
-    @Override
     @JsxGetter
     public Object getReturnValue() {
-        return super.getReturnValue();
+        return returnValue_;
     }
 
     /**
      * Sets the return value associated with the event.
      * @param returnValue the return value associated with the event
      */
-    @Override
     @JsxSetter
     public void setReturnValue(final Object returnValue) {
-        super.setReturnValue(returnValue);
+        returnValue_ = returnValue;
     }
 
     @Override
