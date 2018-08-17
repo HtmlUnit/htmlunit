@@ -93,7 +93,6 @@ public final class ScriptResult {
      * @return a composite {@link ScriptResult}, based on the two input {@link ScriptResult}s
      */
     public static ScriptResult combine(final ScriptResult newResult, final ScriptResult originalResult) {
-
         final Object jsResult;
         final Page page;
 
