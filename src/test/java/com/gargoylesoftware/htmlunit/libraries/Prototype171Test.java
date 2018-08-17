@@ -137,7 +137,6 @@ public class Prototype171Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @NotYetImplemented
     public void event() throws Exception {
         test("event_test.html");
     }
