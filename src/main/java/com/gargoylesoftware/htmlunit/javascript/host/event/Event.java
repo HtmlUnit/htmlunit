@@ -529,7 +529,7 @@ public class Event extends SimpleScriptable {
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
-    @JsxGetter({FF, IE, EDGE})
+    @JsxGetter
     public boolean isDefaultPrevented() {
         return cancelable_ && preventDefault_;
     }
