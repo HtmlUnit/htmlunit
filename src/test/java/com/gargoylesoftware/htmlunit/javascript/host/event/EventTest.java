@@ -392,20 +392,20 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "frame1",
-            CHROME = {})
+    @Alerts("frame1")
     public void thisInEventHandler() throws Exception {
         final String html
-            = "<html><head></head>\n"
+            = "<html>\n"
             + "<body>\n"
-            + "<button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
-            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
-            + "<script>\n"
-            + "  var e = document.getElementById('frame1');\n"
-            + "  e.onload = document.getElementById('button1').onclick;\n"
-            + "</script>\n"
+            + "  <button name='button1' id='button1' onclick='alert(this.name)'>1</button>\n"
+            + "  <iframe src='default' name='frame1' id='frame1'></iframe>\n"
+            + "  <script>\n"
+            + "    var e = document.getElementById('frame1');\n"
+            + "    e.onload = document.getElementById('button1').onclick;\n"
+            + "  </script>\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("<html><body></body></html>");
         loadPageWithAlerts2(html);
     }
 
@@ -413,8 +413,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "called",
-            CHROME = {})
+    @Alerts("called")
     public void iframeOnload() throws Exception {
         final String html
             = "<html><head>\n"
@@ -425,13 +424,14 @@ public class EventTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
-            + "<iframe src='about:blank' name='frame1' id='frame1'></iframe>\n"
+            + "<iframe src='default' name='frame1' id='frame1'></iframe>\n"
             + "<script>\n"
             + "  var e = document.getElementById('frame1');\n"
             + "  e.onload = test;\n"
             + "</script>\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("<html><body></body></html>");
         loadPageWithAlerts2(html);
     }
 
@@ -506,7 +506,8 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void nullEventHandler() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    alert(div.onclick);\n"
