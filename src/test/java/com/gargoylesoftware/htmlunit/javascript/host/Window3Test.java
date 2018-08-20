@@ -2164,7 +2164,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  d1.addEventListener('click', function () { log('d1 at click 2 capture') }, true)\n"
 
             + "  d2.addEventListener('click', function () { log('d2 at click 1') })\n"
-            + "  d2.onclick = function () { log('d2 onclick'); d2.parentNode.removeChild(d2) }\n"
+            + "  d2.onclick = function () { log('d2 onclick'); if (d2.parentNode) d2.parentNode.removeChild(d2) }\n"
             + "  d2.addEventListener('click', function () { log('d2 at click 1 capture') }, true)\n"
             + "  d2.addEventListener('click', function () { log('d2 at click 2') })\n"
             + "  d2.addEventListener('click', function () { log('d2 at click 2 capture') }, true)\n"

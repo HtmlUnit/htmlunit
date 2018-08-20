@@ -969,4 +969,72 @@ public class EventTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined"},
+            CHROME = {"true", "boolean"})
+    public void returnValue() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined",
+                        "false", "boolean",
+                        "undefined", "undefined",
+                        "test", "string",
+                        "0", "number"},
+            CHROME = {"true", "boolean",
+                        "false", "boolean",
+                        "false", "boolean",
+                        "true", "boolean",
+                        "false", "boolean"})
+    public void returnValueSetter() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event.returnValue = false;\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event.returnValue = undefined;\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event.returnValue = 'test';\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event.returnValue = 0;\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

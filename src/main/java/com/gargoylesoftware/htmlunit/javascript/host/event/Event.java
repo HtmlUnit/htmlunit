@@ -14,14 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_FOCUS_IN_BLUR_OUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -35,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -181,6 +180,7 @@ public class Event extends SimpleScriptable {
     private boolean stopPropagation_;
     private boolean stopImmediatePropagation_;
     private boolean preventDefault_;
+    private boolean returnValue_;
 
     /**
      * The current event phase. This is a W3C standard attribute. One of {@link #NONE},
@@ -229,6 +229,8 @@ public class Event extends SimpleScriptable {
         target_ = target;
         currentTarget_ = target;
         type_ = type;
+        returnValue_ = true;
+
         setParentScope(target);
         setPrototype(getPrototype(getClass()));
 
@@ -268,6 +270,7 @@ public class Event extends SimpleScriptable {
     public void eventCreated() {
         setBubbles(false);
         setCancelable(false);
+        returnValue_ = true;
     }
 
     /**
@@ -609,17 +612,7 @@ public class Event extends SimpleScriptable {
         type_ = type;
         bubbles_ = bubbles;
         cancelable_ = cancelable;
-        if (TYPE_BEFORE_UNLOAD.equals(type) && getBrowserVersion().hasFeature(EVENT_FOCUS_FOCUS_IN_BLUR_OUT)) {
-            try {
-                final Class<?> klass = getClass();
-                final Method readMethod = klass.getMethod("getReturnValue");
-                final Method writeMethod = klass.getMethod("setReturnValue", Object.class);
-                defineProperty("returnValue", null, readMethod, writeMethod, ScriptableObject.EMPTY);
-            }
-            catch (final Exception e) {
-                throw Context.throwAsScriptRuntimeEx(e);
-            }
-        }
+        returnValue_ = true;
     }
 
     /**
@@ -667,5 +660,21 @@ public class Event extends SimpleScriptable {
      */
     public boolean processLabelAfterBubbling() {
         return false;
+    }
+
+    /**
+     * @return the return value property
+     */
+    @JsxGetter(CHROME)
+    public Object getReturnValue() {
+        return returnValue_;
+    }
+
+    /**
+     * @param newValue the new return value
+     */
+    @JsxSetter(CHROME)
+    public void setReturnValue(final Object newValue) {
+        returnValue_ = ScriptRuntime.toBoolean(newValue);
     }
 }
