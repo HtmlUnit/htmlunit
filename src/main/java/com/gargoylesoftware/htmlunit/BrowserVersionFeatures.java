@@ -234,10 +234,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF60)
     EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED,
 
-    /** Indicates if event.returnValue is backed by !event.defaultPrevented. */
-    @BrowserFeature({CHROME, EDGE})
-    EVENT_RETURN_VALUE_IS_PREVENT_DEFAULT,
-
     /** Supports event type 'BeforeUnloadEvent'. */
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_BEFOREUNLOADEVENT,
