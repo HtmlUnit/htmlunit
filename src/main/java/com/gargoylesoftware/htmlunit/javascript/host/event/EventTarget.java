@@ -112,6 +112,16 @@ public class EventTarget extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
+        fireEventImpl(event);
+        // This is deprecated but there're still a few places using ScriptResult.getNewPage()
+        return new ScriptResult(null, getWindow().getWebWindow().getWebClient().getCurrentWindow().getEnclosedPage());
+    }
+
+    /**
+     * Fires the event on the node with capturing and bubbling phase.
+     * @param event the event
+     */
+    private void fireEventImpl(final Event event) {
         final Window window = getWindow();
         final Object[] args = new Object[] {event};
 
@@ -161,7 +171,7 @@ public class EventTarget extends SimpleScriptable {
                     final ScriptResult r = elc.executeCapturingListeners(event, args);
                     result = ScriptResult.combine(r, result);
                     if (event.isPropagationStopped()) {
-                        return result;
+                        return;
                     }
                 }
             }
@@ -178,7 +188,7 @@ public class EventTarget extends SimpleScriptable {
                     final ScriptResult r = elc.executeAtTargetListeners(event, args);
                     result = ScriptResult.combine(r, result);
                     if (event.isPropagationStopped()) {
-                        return result;
+                        return;
                     }
                 }
             }
@@ -207,7 +217,7 @@ public class EventTarget extends SimpleScriptable {
                         final ScriptResult r = elc.executeBubblingListeners(event, args);
                         result = ScriptResult.combine(r, result);
                         if (event.isPropagationStopped()) {
-                            return result;
+                            return;
                         }
                     }
                 }
@@ -230,8 +240,6 @@ public class EventTarget extends SimpleScriptable {
             event.endFire();
             window.setCurrentEvent(previousEvent); // reset event
         }
-
-        return result;
     }
 
     /**

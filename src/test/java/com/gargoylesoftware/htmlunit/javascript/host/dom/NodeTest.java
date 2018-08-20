@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callLoadXMLDocumentFromString;
 import static com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest.callSerializeXMLDocumentToString;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -1278,5 +1279,111 @@ public class NodeTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2", "§§URL§§second"})
+    public void eventListener() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "     e.addEventListener('click', clicking1, false);\n"
+            + "     e.addEventListener('click', clicking2, false);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='second' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><body>Test</body></html>");
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myAnchor")).click();
+        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        Thread.sleep(200); // FF60 WebDriver
+        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "2", "§§URL§§second"})
+    public void eventListener_return_false() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "    return false;\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "    e.addEventListener('click', clicking1, false);\n"
+            + "    e.addEventListener('click', clicking2, false);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='second' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><body>Test</body></html>");
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myAnchor")).click();
+        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        Thread.sleep(200); // FF60 WebDriver
+        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "§§URL§§second"},
+            CHROME = {"1", "2", "§§URL§§"})
+    public void eventListener_returnValue_false() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function clicking1() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "  function clicking2() {\n"
+            + "    alert(2);\n"
+            + "    if (window.event)\n"
+            + "      window.event.returnValue = false;\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myAnchor');\n"
+            + "    e.addEventListener('click', clicking1, false);\n"
+            + "    e.addEventListener('click', clicking2, false);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <a href='second' id='myAnchor'>Click me</a>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("<html><body>Test</body></html>");
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myAnchor")).click();
+        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        Thread.sleep(200); // FF60 WebDriver
+        assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }
 }

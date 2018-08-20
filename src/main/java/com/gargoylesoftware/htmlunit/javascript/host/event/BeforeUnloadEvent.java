@@ -117,7 +117,7 @@ public class BeforeUnloadEvent extends Event {
 
         if (!Undefined.isUndefined(returnValue) && (returnValue != null || browserVersion.isIE())) {
             if (!browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST)
-                    || !getReturnValueDefault(browserVersion).equals(getReturnValue())) {
+                    || getReturnValueDefault(browserVersion).equals(getReturnValue())) {
                 setReturnValue(returnValue);
             }
         }
