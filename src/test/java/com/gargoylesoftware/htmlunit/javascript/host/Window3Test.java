@@ -2191,11 +2191,28 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"listener: stop propagation & return false",
+    @Alerts(DEFAULT = {"listener: stop propagation & return false",
                 "FIRED a1",
                 "listener: return true",
                 "property: return false",
-                "listener: return true"})
+                "listener: return true",
+                "listener: prevented=false returnValue: undefined -> false (false)",
+                "listener: prevented=false returnValue: false -> true (true)",
+                "listener: prevented=false returnValue: true -> preventDefault() (true)",
+                "property: prevented=true returnValue: true -> return true",
+                "listener: prevented=true returnValue: true -> x (x)",
+                "listener: prevented=true returnValue: x -> null (null)"},
+            CHROME = {"listener: stop propagation & return false",
+                "FIRED a1",
+                "listener: return true",
+                "property: return false",
+                "listener: return true",
+                "listener: prevented=false returnValue: true -> false (false)",
+                "listener: prevented=true returnValue: false -> true (true)",
+                "listener: prevented=false returnValue: true -> preventDefault() (false)",
+                "property: prevented=true returnValue: false -> return true",
+                "listener: prevented=true returnValue: false -> x (true)",
+                "listener: prevented=false returnValue: true -> null (false)"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -2208,6 +2225,7 @@ public class Window3Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <div><a id='a1' href='javascript:log(\"FIRED a1\")'>test: listener return false</a></div>\n"
             + "  <div><a id='a2' href='javascript:log(\"FIRED a2\")'>test: property return false</a></div>\n"
+            + "  <div><a id='a3' href='javascript:log(\"FIRED a3\")'>test: listener returnValue = false</a></div>\n"
 
             + "  <textarea id='log' rows=40 cols=80></textarea>\n"
 
@@ -2218,26 +2236,65 @@ public class Window3Test extends WebDriverTestCase {
                                                 + "log('listener: stop propagation & return false');"
                                                 + "event.stopPropagation(); return false })\n"
 
-             // The only return value that matters is the value from the 'onclick' property.  The 'return false' below
-             // prevents "href' being processed.
-             + "  a2.addEventListener('click',"
-             + "        function (event) { log('listener: return true'); event.stopPropagation(); return true })\n"
-             + "  a2.onclick = function () { log('property: return false'); return false }\n"
-             + "  a2.addEventListener('click', function (event) { log('listener: return true'); return true })\n"
+            // The only return value that matters is the value from the 'onclick' property.  The 'return false' below
+            // prevents "href' being processed.
+            + "  a2.addEventListener('click',"
+            + "        function (event) { log('listener: return true'); event.stopPropagation(); return true })\n"
+            + "  a2.onclick = function () { log('property: return false'); return false }\n"
+            + "  a2.addEventListener('click', function (event) { log('listener: return true'); return true })\n"
 
-             // Uncommenting this causes a2 to fire because propagation is
-             // stopped before 'onclick' property is processed.
-             // Again, the 'return false' here is ineffective.
-             // The return values of non-property handlers are probably ignored. (tested in Chrome/FF)
-             //window.addEventListener("click", function (event) {
-             //                  log('window: stop propagation & return false');
-             //                  event.stopPropagation(); return false }, true)
+            // Uncommenting this causes a2 to fire because propagation is
+            // stopped before 'onclick' property is processed.
+            // Again, the 'return false' here is ineffective.
+            // The return values of non-property handlers are probably ignored. (tested in Chrome/FF)
+            //window.addEventListener("click", function (event) {
+            //                  log('window: stop propagation & return false');
+            //                  event.stopPropagation(); return false }, true)
+
+            // In Chrome/Edge, this sets event.returnValue to 'false'
+            // which is synonymous with setting 'event.defaultPrevented'
+            // In FF/IE11, event.returnValue is settable but does not appear to be used for anything
+            + "  a3.addEventListener('click', function (event) {"
+            + "      var a = event.returnValue, p = event.defaultPrevented, b = false; event.returnValue = b;"
+            + "      log('listener: prevented=' + p + ' returnValue: ' + a "
+                                    + "+ ' -> ' + b + ' (' + event.returnValue + ')') })\n"
+             // This shows it's possible to set event.returnValue back to 'true' from 'false'
+            + "  a3.addEventListener('click', function (event) {"
+            + "      var a = event.returnValue, p = event.defaultPrevented, b = true; event.returnValue = b;"
+            + "      log('listener: prevented=' + p + ' returnValue: ' + a "
+                                    + "+ ' -> ' + b + ' (' + event.returnValue + ')') })\n"
+            // The value of event.returnValue is consistent across multiple listener calls of the same event
+            + "  a3.addEventListener('click', function (event) {"
+            + "      var a = event.returnValue, p = event.defaultPrevented, "
+                                    + "b = 'preventDefault()'; event.preventDefault();"
+            + "      log('listener: prevented=' + p + ' returnValue: ' + a "
+                                    + "+ ' -> ' + b + ' (' + event.returnValue + ')') })\n"
+            // This shows a property handler returning 'true' will not change event.returnValue if it's already 'false'
+            + "  a3.onclick = function (event) {"
+            + "      var a = event.returnValue, p = event.defaultPrevented; b = true;"
+            + "      log('property: prevented=' + p + ' returnValue: ' + a + ' -> return ' + b); return b }\n"
+            // Instead of returning 'true', the property handler can directly set
+            // event.returnValue to set it to 'true' from 'false'
+            //+ "  a3.onclick = function (event) {"
+            //+ "      var a = event.returnValue, p = event.defaultPrevented; b = true;"
+            //+ "      log('property: prevented=' + p + ' returnValue: ' + a + ' -> true'); event.returnValue = b }\n"
+            // These shows setting event.returnValue cannot be set to a non-boolean
+            // value in Chrome/Edge but can in (FF/IE11)
+            + "  a3.addEventListener('click', function (event) {"
+            + "        var a = event.returnValue, p = event.defaultPrevented, b = 'x'; event.returnValue = b;"
+            + "        log('listener: prevented=' + p + ' returnValue: ' + a "
+                                    + "+ ' -> ' + b + ' (' + event.returnValue + ')') })\n"
+            + "  a3.addEventListener('click', function (event) {"
+            + "        var a = event.returnValue, p = event.defaultPrevented, b = null; event.returnValue = b;"
+            + "        log('listener: prevented=' + p + ' returnValue: ' + a "
+                                    + "+ ' -> ' + b + ' (' + event.returnValue + ')') })\n"
             + "</script>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("a1")).click();
         driver.findElement(By.id("a2")).click();
+        driver.findElement(By.id("a3")).click();
 
         final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
