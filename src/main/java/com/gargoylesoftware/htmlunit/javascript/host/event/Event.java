@@ -180,7 +180,6 @@ public class Event extends SimpleScriptable {
     private boolean stopPropagation_;
     private boolean stopImmediatePropagation_;
     private boolean preventDefault_;
-    private boolean returnValue_;
 
     /**
      * The current event phase. This is a W3C standard attribute. One of {@link #NONE},
@@ -229,7 +228,6 @@ public class Event extends SimpleScriptable {
         target_ = target;
         currentTarget_ = target;
         type_ = type;
-        returnValue_ = true;
 
         setParentScope(target);
         setPrototype(getPrototype(getClass()));
@@ -270,7 +268,6 @@ public class Event extends SimpleScriptable {
     public void eventCreated() {
         setBubbles(false);
         setCancelable(false);
-        returnValue_ = true;
     }
 
     /**
@@ -612,7 +609,6 @@ public class Event extends SimpleScriptable {
         type_ = type;
         bubbles_ = bubbles;
         cancelable_ = cancelable;
-        returnValue_ = true;
     }
 
     /**
@@ -667,7 +663,7 @@ public class Event extends SimpleScriptable {
      */
     @JsxGetter(CHROME)
     public Object getReturnValue() {
-        return returnValue_;
+        return !preventDefault_;
     }
 
     /**
@@ -675,7 +671,6 @@ public class Event extends SimpleScriptable {
      */
     @JsxSetter(CHROME)
     public void setReturnValue(final Object newValue) {
-        returnValue_ = ScriptRuntime.toBoolean(newValue);
-        preventDefault_ = !returnValue_;
+        preventDefault_ = !ScriptRuntime.toBoolean(newValue);
     }
 }
