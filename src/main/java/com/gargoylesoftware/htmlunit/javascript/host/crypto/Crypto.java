@@ -26,9 +26,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
 
 /**
  * A JavaScript object for {@code Crypto}.
@@ -62,13 +62,13 @@ public class Crypto extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/RandomSource/getRandomValues">MDN Doc</a>
      */
     @JsxFunction
-    public void getRandomValues(final ArrayBufferViewBase array) {
+    public void getRandomValues(final NativeTypedArrayView<?> array) {
         if (array == null) {
             throw Context.reportRuntimeError("TypeError: Argument 1 of Crypto.getRandomValues is not an object.");
         }
 
         final Random random = new Random();
-        for (int i = 0; i < array.getLength(); i++) {
+        for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {
             array.put(i, array, random.nextInt());
         }
     }

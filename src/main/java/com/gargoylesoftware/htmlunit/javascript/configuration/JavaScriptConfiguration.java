@@ -81,19 +81,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
 import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.budget.BudgetService;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack;
@@ -614,14 +601,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,
-        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class,
-
-        // we will use the Rhino stuff as soon as possible
-        ArrayBuffer.class, ArrayBufferView.class, ArrayBufferViewBase.class,
-        DataView.class,
-        Float32Array.class, Float64Array.class,
-        Int16Array.class, Int32Array.class, Int8Array.class,
-        Uint16Array.class, Uint32Array.class, Uint8Array.class, Uint8ClampedArray.class
+        XPathNSResolver.class, XPathResult.class, XSLTProcessor.class
     };
 
     /** Cache of browser versions and their corresponding JavaScript configurations. */

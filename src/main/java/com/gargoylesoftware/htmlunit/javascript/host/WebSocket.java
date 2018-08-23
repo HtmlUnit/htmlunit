@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -41,7 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -51,7 +49,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
  * A JavaScript object for {@code WebSocket}.
@@ -391,8 +391,8 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             if (content instanceof String) {
                 outgoingSession_.getRemote().sendString((String) content);
             }
-            else if (content instanceof ArrayBuffer) {
-                final byte[] bytes = ((ArrayBuffer) content).getBytes();
+            else if (content instanceof NativeArrayBuffer) {
+                final byte[] bytes = ((NativeArrayBuffer) content).getBuffer();
                 final ByteBuffer buffer = ByteBuffer.wrap(bytes);
                 outgoingSession_.getRemote().sendBytes(buffer);
             }
@@ -460,9 +460,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             }
             super.onWebSocketBinary(data, offset, length);
 
-            final ArrayBuffer buffer = new ArrayBuffer(Arrays.copyOfRange(data, offset, length));
+            final NativeArrayBuffer buffer = new NativeArrayBuffer(length);
+            System.arraycopy(data, offset, buffer.getBuffer(), 0, length);
             buffer.setParentScope(getParentScope());
-            buffer.setPrototype(getPrototype(buffer.getClass()));
+            buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
 
             final MessageEvent msgEvent = new MessageEvent(buffer);
             msgEvent.setOrigin(getUrl());

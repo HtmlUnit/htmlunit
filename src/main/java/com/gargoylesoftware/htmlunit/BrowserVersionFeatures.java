@@ -1363,10 +1363,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_TREEWALKER_FILTER_FUNCTION_ONLY,
 
-    /** Types arrays can be constructed with {@code null}. */
-    @BrowserFeature({CHROME, FF60})
-    JS_TYPED_ARRAYS_NULL,
-
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,

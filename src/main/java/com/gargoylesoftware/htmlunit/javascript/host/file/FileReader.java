@@ -31,11 +31,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
  * A JavaScript object for {@code FileReader}.
@@ -141,9 +142,11 @@ public class FileReader extends EventTarget {
 
             final byte[] bytes = bos.toByteArray();
 
-            final ArrayBuffer buffer = new ArrayBuffer(bytes);
+            final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
+            System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
             buffer.setParentScope(getParentScope());
-            buffer.setPrototype(getPrototype(buffer.getClass()));
+            buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
+
             result_ = buffer;
         }
         readyState_ = DONE;

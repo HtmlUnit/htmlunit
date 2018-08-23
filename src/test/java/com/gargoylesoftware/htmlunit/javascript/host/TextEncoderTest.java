@@ -85,7 +85,7 @@ public class TextEncoderTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 7777777);
     }
 
     /**

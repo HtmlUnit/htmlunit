@@ -22,9 +22,11 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
+
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
 
 /**
  * A JavaScript object for {@code ImageData}.
@@ -40,7 +42,7 @@ public class ImageData extends SimpleScriptable {
     private final int sy_;
     private final int width_;
     private final int height_;
-    private Uint8ClampedArray data_;
+    private NativeUint8ClampedArray data_;
 
     /**
      * Default constructor.
@@ -77,23 +79,20 @@ public class ImageData extends SimpleScriptable {
     }
 
     /**
-     * Returns a {@link Uint8ClampedArray} representing a one-dimensional array containing
+     * Returns a {@link NativeUint8ClampedArray} representing a one-dimensional array containing
      * the data in the RGBA order, with integer values between 0 and 255 (included).
      * @return the {@code data} property
      */
     @JsxGetter
-    public Uint8ClampedArray getData() {
+    public NativeUint8ClampedArray getData() {
         if (data_ == null) {
             final byte[] bytes = renderingContext_.getBytes(width_, height_, sx_, sy_);
-            final ArrayBuffer arrayBuffer = new ArrayBuffer();
-            arrayBuffer.constructor(bytes.length);
-            arrayBuffer.setBytes(0, bytes);
+            final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes.length);
+            System.arraycopy(bytes, 0, arrayBuffer.getBuffer(), 0, bytes.length);
 
-            data_ = new Uint8ClampedArray();
+            data_ = new NativeUint8ClampedArray(arrayBuffer, 0, bytes.length);
             data_.setParentScope(getParentScope());
-            data_.setPrototype(getPrototype(data_.getClass()));
-
-            data_.constructor(arrayBuffer, 0, bytes.length);
+            data_.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), data_.getClassName()));
         }
 
         return data_;

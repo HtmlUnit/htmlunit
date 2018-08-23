@@ -26,12 +26,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 
 /**
  * A JavaScript object for {@code TextDecoder}.
@@ -388,16 +388,16 @@ public class TextDecoder extends SimpleScriptable {
             return "";
         }
 
-        ArrayBuffer arrayBuffer = null;
-        if (buffer instanceof ArrayBuffer) {
-            arrayBuffer = (ArrayBuffer) buffer;
+        NativeArrayBuffer arrayBuffer = null;
+        if (buffer instanceof NativeArrayBuffer) {
+            arrayBuffer = (NativeArrayBuffer) buffer;
         }
-        else if (buffer instanceof ArrayBufferView) {
-            arrayBuffer = ((ArrayBufferView) buffer).getBuffer();
+        else if (buffer instanceof NativeArrayBufferView) {
+            arrayBuffer = ((NativeArrayBufferView) buffer).getBuffer();
         }
 
         if (arrayBuffer != null) {
-            return new String(arrayBuffer.getBytes(), Charset.forName(encoding_));
+            return new String(arrayBuffer.getBuffer(), Charset.forName(encoding_));
         }
 
         throw ScriptRuntime.typeError("Argument 1 of TextDecoder.decode could not be"

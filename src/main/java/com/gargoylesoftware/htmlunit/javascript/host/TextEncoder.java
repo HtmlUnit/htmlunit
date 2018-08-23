@@ -24,10 +24,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
 
 /**
  * A JavaScript object for {@code TextEncoder}.
@@ -58,9 +60,12 @@ public class TextEncoder extends SimpleScriptable {
      * @return returns a Uint8Array containing the text given encoded .
      */
     @JsxFunction
-    public Uint8Array encode(final Object toEncode) {
+    public NativeUint8Array encode(final Object toEncode) {
         if (Undefined.instance == toEncode) {
-            return new Uint8Array(new byte[0], getWindow());
+            final NativeUint8Array result = new NativeUint8Array(0);
+            result.setParentScope(getParentScope());
+            result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));
+            return result;
         }
 
         final String txt;
@@ -72,6 +77,13 @@ public class TextEncoder extends SimpleScriptable {
         }
 
         final byte[] bytes = txt.getBytes(StandardCharsets.UTF_8);
-        return new Uint8Array(bytes, getWindow());
+
+        final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes.length);
+        System.arraycopy(bytes, 0, arrayBuffer.getBuffer(), 0, bytes.length);
+
+        final NativeUint8Array result = new NativeUint8Array(arrayBuffer, 0, bytes.length);
+        result.setParentScope(getParentScope());
+        result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));
+        return result;
     }
 }
