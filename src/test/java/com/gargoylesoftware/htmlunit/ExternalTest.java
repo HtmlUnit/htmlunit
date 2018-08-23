@@ -54,7 +54,7 @@ public class ExternalTest {
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.21.0";
     /** IE driver. */
-    static String IE_DRIVER_ = "3.13.0.0";
+    static String IE_DRIVER_ = "3.14.0.0";
 
     /**
      * Tests that POM dependencies are the latest.

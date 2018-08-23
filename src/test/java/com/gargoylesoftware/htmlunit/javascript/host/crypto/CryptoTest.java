@@ -35,7 +35,7 @@ public class CryptoTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false"},
-            IE = {"true", "exception"})
+            IE = {"true", "true", "true", "exception"})
     public void getRandomValues() throws Exception {
         final String html = "<html><head><script>\n"
             + "try {\n"
@@ -51,7 +51,7 @@ public class CryptoTest extends WebDriverTestCase {
             + "catch(e) { alert('exception'); }\n"
             + "</script></head></html>";
 
-        loadPageWithAlerts2(html, 777777);
+        loadPageWithAlerts2(html);
     }
 
     /**

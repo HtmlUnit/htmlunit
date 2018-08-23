@@ -9,6 +9,9 @@
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
             <action type="update" dev="rbri">
+                We are using the typed array implementation from Rhino now, our own impl is gone.
+            </action>
+            <action type="update" dev="rbri">
                 Method Date.toUTCString() is available in Rhino; remove our own impl.
             </action>
             <action type="fix" dev="rbri" issue="1979" due-to="Atsushi Nakagawa">

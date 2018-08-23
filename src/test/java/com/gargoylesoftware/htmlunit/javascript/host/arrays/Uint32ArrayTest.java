@@ -14,11 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -183,9 +187,10 @@ public class Uint32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "0",
-            FF60 = "0")
+    @Alerts(DEFAULT = "0",
+            FF52 = "exception",
+            IE = "exception")
+    @NotYetImplemented({FF52, IE})
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -207,7 +212,11 @@ public class Uint32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "0", "1", "1,3", "1,3,4,7,11,0,123"})
+    @Alerts(DEFAULT = {"", "0", "1", "1,3", "1,3,4,7,11,0,123"},
+            IE = {"[object Uint32Array]", "[object Uint32Array]",
+                    "[object Uint32Array]", "[object Uint32Array]",
+                    "[object Uint32Array]"})
+    @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -237,7 +246,9 @@ public class Uint32ArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Uint32Array")
+    @Alerts(DEFAULT = "Uint32Array",
+            IE = "undefined")
+    @NotYetImplemented(IE)
     public void name() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
