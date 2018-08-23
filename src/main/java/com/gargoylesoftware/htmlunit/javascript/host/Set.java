@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
@@ -39,6 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
 import net.sourceforge.htmlunit.corejs.javascript.SymbolScriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayView;
 
 /**
  * A JavaScript object for {@code Set}.
@@ -82,9 +82,9 @@ public class Set extends SimpleScriptable implements SymbolScriptable {
             return;
         }
 
-        if (iterable instanceof ArrayBufferViewBase) {
-            final ArrayBufferViewBase array = (ArrayBufferViewBase) iterable;
-            for (int i = 0; i < array.getLength(); i++) {
+        if (iterable instanceof NativeTypedArrayView) {
+            final NativeTypedArrayView<?> array = (NativeTypedArrayView<?>) iterable;
+            for (int i = 0; i < array.getByteLength() / array.getBytesPerElement(); i++) {
                 add(ScriptableObject.getProperty(array, i));
             }
             return;
