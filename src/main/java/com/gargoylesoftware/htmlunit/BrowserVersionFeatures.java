@@ -154,9 +154,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     DOM_NORMALIZE_REMOVE_CHILDREN,
 
-    /** Indicates handler return value is only used if returnValue is the default value. */
+    /** Indicates whether returnValue behaves HTML5-like with an empty string default. */
     @BrowserFeature({CHROME, FF})
-    EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST,
+    EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE,
 
     /** Triggers the onfocus onfocusin blur onfocusout events in this order. */
     @BrowserFeature(CHROME)
@@ -165,6 +165,10 @@ public enum BrowserVersionFeatures {
     /** Triggers the onfocusin onfocus onfocusout blur events in this order. */
     @BrowserFeature(IE)
     EVENT_FOCUS_IN_FOCUS_OUT_BLUR,
+
+    /** Indicates whether returning 'null' from a property handler is meaningful. */
+    @BrowserFeature(IE)
+    EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL,
 
     /** Mouse events are triggered on disabled elements also. */
     @BrowserFeature(FF)

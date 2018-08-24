@@ -98,6 +98,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -908,7 +909,7 @@ public class HtmlPage extends SgmlPage {
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
+            return new ScriptResult(Undefined.instance, this);
         }
 
         if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {

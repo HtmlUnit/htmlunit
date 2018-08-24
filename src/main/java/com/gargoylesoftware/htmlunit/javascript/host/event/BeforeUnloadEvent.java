@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -79,7 +80,9 @@ public class BeforeUnloadEvent extends Event {
     }
 
     private static Object getReturnValueDefault(final BrowserVersion browserVersion) {
-        if (browserVersion.isChrome() || browserVersion.isFirefox()) {
+        if (browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE)) {
+            // Empty string default is specified by HTML5
+            // https://www.w3.org/TR/html5/browsers.html#the-beforeunloadevent-interface
             return "";
         }
         return Undefined.instance;
@@ -115,8 +118,10 @@ public class BeforeUnloadEvent extends Event {
 
         final BrowserVersion browserVersion = getBrowserVersion();
 
-        if (!Undefined.isUndefined(returnValue) && (returnValue != null || browserVersion.isIE())) {
-            if (!browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_USES_HANDLER_RETURN_ONLY_IF_FIRST)
+        // Most browsers ignore null return values of property handlers
+        if (returnValue != null || browserVersion.hasFeature(EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL)) {
+            // Chrome/Firefox only accept the return value if returnValue is equal to default
+            if (!browserVersion.hasFeature(EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE)
                     || getReturnValueDefault(browserVersion).equals(getReturnValue())) {
                 setReturnValue(returnValue);
             }

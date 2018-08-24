@@ -344,8 +344,7 @@ public class EventListenersContainer implements Serializable {
                     final ScriptResult result =
                             page.executeJavaScriptFunction(function, thisObject, args, node);
                     // Return value is only honored for property handlers (Tested in Chrome/FF/IE11)
-                    if (isPropertyHandler) {
-                        allResult = result;
+                    if (isPropertyHandler && !ScriptResult.isUndefined(result)) {
                         event.handlePropertyHandlerReturnValue(result.getJavaScriptResult());
 
                         // This return value is now all but unused and can be refactored away
