@@ -1622,6 +1622,7 @@ public class Window3Test extends WebDriverTestCase {
                         "document at load 1 capture",
                         "document at load 2 capture",
                         "after"})
+    @NotYetImplemented(IE) // The extra 'document at load' from <script> not yet handled (waiting on onloadScript())
     public void onload() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1719,6 +1720,7 @@ public class Window3Test extends WebDriverTestCase {
                         "window at load capture",
                         "body onload",
                         "document at load capture"})
+    @NotYetImplemented
     public void onloadScript() throws Exception {
         getMockWebConnection().setResponse(URL_SECOND, "");
 
@@ -1895,6 +1897,7 @@ public class Window3Test extends WebDriverTestCase {
                         "document at load 1 capture",
                         "document at load 2 capture",
                         "after"})
+    @NotYetImplemented(IE) // The extra 'document at load' from <script> not yet handled (waiting on onloadScript())
     public void onloadFrame() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
