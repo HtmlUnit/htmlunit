@@ -241,6 +241,10 @@ public class Event extends SimpleScriptable {
                 cancelable_ = false;
             }
         }
+        else if (TYPE_ERROR.equals(type)) {
+            // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error
+            bubbles_ = false;
+        }
     }
 
     /**

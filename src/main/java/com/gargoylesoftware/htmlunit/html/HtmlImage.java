@@ -46,7 +46,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
@@ -80,7 +79,7 @@ public class HtmlImage extends HtmlElement {
     private int height_ = -1;
     private boolean downloaded_;
     private boolean isComplete_;
-    private boolean onloadInvoked_;
+    private boolean onloadProcessed_;
     private boolean createdByJavascript_;
 
     /**
@@ -137,7 +136,7 @@ public class HtmlImage extends HtmlElement {
                         notifyMutationObservers);
 
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
-                onloadInvoked_ = false;
+                onloadProcessed_ = false;
                 downloaded_ = false;
                 isComplete_ = false;
                 width_ = -1;
@@ -170,20 +169,20 @@ public class HtmlImage extends HtmlElement {
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
-     * <p>Executes this element's <tt>onload</tt> handler if it has one. This method also downloads the image
-     * if this element has an <tt>onload</tt> handler (prior to invoking said handler), because applications
-     * sometimes use images to send information to the server and use the <tt>onload</tt> handler to get notified
-     * when the information has been received by the server.</p>
+     * <p>Executes this element's <tt>onload</tt> or <tt>onerror</tt> handler. This method downloads the image
+     * if either of these handlers are present (prior to invoking the resulting handler), because applications
+     * sometimes use images to send information to the server and use these handlers to get notified when the
+     * information has been received by the server.</p>
      *
      * <p>See <a href="http://www.nabble.com/How-should-we-handle-image.onload--tt9850876.html">here</a> and
      * <a href="http://www.nabble.com/Image-Onload-Support-td18895781.html">here</a> for the discussion which
      * lead up to this method.</p>
      *
-     * <p>This method may be called multiple times, but will only attempt to execute the <tt>onload</tt>
-     * handler the first time it is invoked.</p>
+     * <p>This method may be called multiple times, but will only attempt to execute the <tt>onload</tt> or
+     * <tt>onerror</tt> handler the first time it is invoked.</p>
      */
     public void doOnLoad() {
-        if (onloadInvoked_) {
+        if (onloadProcessed_) {
             return;
         }
 
@@ -194,46 +193,47 @@ public class HtmlImage extends HtmlElement {
 
         final WebClient client = htmlPage.getWebClient();
         if (!client.getOptions().isJavaScriptEnabled()) {
-            onloadInvoked_ = true;
+            onloadProcessed_ = true;
             return;
         }
 
-        if (hasEventHandlers("onload") && !getSrcAttribute().isEmpty()) {
-            // An onload handler and source are defined; we need to download the image and then call the onload handler.
-            onloadInvoked_ = true;
-            try {
-                downloadImageIfNeeded();
-                final int i = imageWebResponse_.getStatusCode();
-                if ((i >= HttpStatus.SC_OK && i < HttpStatus.SC_MULTIPLE_CHOICES)
-                        || i == HttpStatus.SC_USE_PROXY) {
-
-                    // If the download was a success, trigger the onload handler.
-                    final Event event = new Event(this, Event.TYPE_LOAD);
-                    final Node scriptObject = getScriptableObject();
-
-                    final String readyState = htmlPage.getReadyState();
-                    if (READY_STATE_LOADING.equals(readyState)) {
-                        final PostponedAction action = new PostponedAction(getPage()) {
-                            @Override
-                            public void execute() throws Exception {
-                                scriptObject.executeEventLocally(event);
-                            }
-                        };
-                        htmlPage.addAfterLoadAction(action);
-                    }
-                    else {
-                        scriptObject.executeEventLocally(event);
+        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute("src")) {
+            onloadProcessed_ = true;
+            boolean loadSuccessful = false;
+            if (!getSrcAttribute().isEmpty()) {
+                // We need to download the image and then call the resulting handler.
+                try {
+                    downloadImageIfNeeded();
+                    final int i = imageWebResponse_.getStatusCode();
+                    // if the download was a success
+                    if ((i >= HttpStatus.SC_OK && i < HttpStatus.SC_MULTIPLE_CHOICES)
+                            || i == HttpStatus.SC_USE_PROXY) {
+                        loadSuccessful = true; // Trigger the onload handler
                     }
                 }
-                return;
-            }
-            catch (final IOException e) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("IOException while downloading image for '" + this + "' : " + e.getMessage());
+                catch (final IOException e) {
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("IOException while downloading image for '" + this + "' : " + e.getMessage());
+                    }
                 }
             }
+
+            final Event event = new Event(this, loadSuccessful ? Event.TYPE_LOAD : Event.TYPE_ERROR);
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Unable to download image for '" + this + "'; not firing onload event.");
+                LOG.debug("Firing the " + event.getType() + " event for '" + this + "'.");
+            }
+
+            if (READY_STATE_LOADING.equals(htmlPage.getReadyState())) {
+                final PostponedAction action = new PostponedAction(getPage()) {
+                    @Override
+                    public void execute() throws Exception {
+                        HtmlImage.this.fireEvent(event);
+                    }
+                };
+                htmlPage.addAfterLoadAction(action);
+            }
+            else {
+                fireEvent(event);
             }
         }
     }
