@@ -18,21 +18,26 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -1709,7 +1714,9 @@ public class Window3Test extends WebDriverTestCase {
                         "window at load",
                         "window at load capture",
                         "body onload"},
-            IE = {"document at load capture",
+            IE = {"window at error",
+                        "window at error capture",
+                        "document at load capture",
                         "element 1 onload",
                         "window at error capture",
                         "document at error capture",
@@ -1766,37 +1773,38 @@ public class Window3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"window at error capture",
-                        "document at error capture",
-                        "element 2 onerror",
-                        "document DOMContentLoaded",
-                        "window DOMContentLoaded",
-                        "document at load capture",
-                        "element 1 onload",
-                        "window at load",
-                        "window at load capture",
-                        "body onload"},
-            CHROME = {"document DOMContentLoaded",
-                        "window DOMContentLoaded",
-                        "window at error capture",
-                        "document at error capture",
-                        "element 2 onerror",
-                        "document at load capture",
-                        "element 1 onload",
-                        "window at load",
-                        "window at load capture",
-                        "body onload"},
-            IE = {"document at load capture",
-                        "element 1 onload",
-                        "document DOMContentLoaded",
-                        "window DOMContentLoaded",
-                        "window at load",
-                        "window at load capture",
-                        "body onload",
-                        "document at load capture",
-                        "window at error capture",
-                        "document at error capture",
-                        "element 2 onerror"})
+    @Alerts(DEFAULT = {"img2: window at error capture",
+                        "img2: document at error capture",
+                        "img2: element 2 onerror",
+                        "#document: document DOMContentLoaded",
+                        "#document: window DOMContentLoaded",
+                        "img1: document at load capture",
+                        "img1: element 1 onload",
+                        "#document: window at load",
+                        "#document: window at load capture",
+                        "#document: body onload"},
+            CHROME = {"#document: document DOMContentLoaded",
+                        "#document: window DOMContentLoaded",
+                        "img2: window at error capture",
+                        "img2: document at error capture",
+                        "img2: element 2 onerror",
+                        "img1: document at load capture",
+                        "img1: element 1 onload",
+                        "#document: window at load",
+                        "#document: window at load capture",
+                        "#document: body onload"},
+            IE = {"img1: document at load capture",
+                        "img1: element 1 onload",
+                        "#document: document DOMContentLoaded",
+                        "#document: window DOMContentLoaded",
+                        "#document: window at load",
+                        "#document: window at load capture",
+                        "#document: body onload",
+                        "SCRIPT: document at load capture",
+                        "img2: window at error capture",
+                        "img2: document at error capture",
+                        "img2: element 2 onerror"})
+    @NotYetImplemented(IE) // The extra SCRIPT is not yet handled (waiting on onloadScript())
     public void onloadImg() throws Exception {
         final URL urlImage = new URL(URL_FIRST, "img.jpg");
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
@@ -1808,36 +1816,56 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
-            + "  function log(msg) {\n"
+            + "  function log(msg, target) {\n"
+            + "    if (target) msg = (target.id ? target.id : target.nodeName) + ': ' + msg\n"
             + "    window.parent.document.title += msg + ';';\n"
             + "  }\n"
 
-            + "  window.addEventListener('load', function () { log('window at load') })\n"
-            + "  window.addEventListener('load', function () { log('window at load capture') }, true)\n"
-            + "  window.addEventListener('error', function () { log('window at error') })\n"
-            + "  window.addEventListener('error', function () { log('window at error capture') }, true)\n"
-            + "  window.addEventListener('DOMContentLoaded', function () { log('window DOMContentLoaded') })\n"
+            + "  window.addEventListener('load', function (event) { log('window at load', event.target) })\n"
+            + "  window.addEventListener('load', function (event) { "
+                                                    + "log('window at load capture', event.target) }, true)\n"
+            + "  window.addEventListener('error', function (event) { log('window at error', event.target) })\n"
+            + "  window.addEventListener('error', function (event) { "
+                                                    + "log('window at error capture', event.target) }, true)\n"
+            + "  window.addEventListener('DOMContentLoaded', function (event) { "
+                                                    + "log('window DOMContentLoaded', event.target) })\n"
 
-            + "  document.addEventListener('load', function () { log('document at load') })\n"
-            + "  document.addEventListener('load', function () { log('document at load capture') }, true)\n"
-            + "  document.addEventListener('error', function () { log('document at error') })\n"
-            + "  document.addEventListener('error', function () { log('document at error capture') }, true)\n"
-            + "  document.addEventListener('DOMContentLoaded', function () { log('document DOMContentLoaded') })\n"
+            + "  document.addEventListener('load', function (event) { log('document at load', event.target) })\n"
+            + "  document.addEventListener('load', function (event) { "
+                                                    + "log('document at load capture', event.target) }, true)\n"
+            + "  document.addEventListener('error', function (event) { log('document at error', event.target) })\n"
+            + "  document.addEventListener('error', function (event) { "
+                                                    + "log('document at error capture', event.target) }, true)\n"
+            + "  document.addEventListener('DOMContentLoaded', function (event) { "
+                                                    + "log('document DOMContentLoaded', event.target) })\n"
 
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='log(\"body onload\")'>\n"
-            + "  <img src='" + urlImage + "' onload='log(\"element 1 onload\")' "
-                                        + "onerror='log(\"element 1 onerror\")'>\n"
-            + "  <img src='' onload='log(\"element 2 onload\")' "
-                                        + "onerror='log(\"element 2 onerror\")'>\n"
+            + "<body onload='log(\"body onload\", document)'>\n"
+            + "  <img id='img1' src='" + urlImage + "' onload='log(\"element 1 onload\", this)' "
+                                       + "onerror='log(\"element 1 onerror\", this)'>\n"
+            + "  <img id='img2' src='' onload='log(\"element 2 onload\", this)' "
+                                       + "onerror='log(\"element 2 onerror\", this)'>\n"
 
             + "</body></html>";
 
+        // Image loads are usually asynchronous in browsers and ordering of these results are somewhat coincidental.
+        //
+        // Chrome/FF/Edge appears be synchronizing 'body.onload' so that it comes after all image loads, while Chrome
+        // alone also seems to be synchronizing 'DOMContentLoaded' so that it fires before image loads.  IE11 is a mess
+        // with no clear synchronization between 'body.onload' and image loads.
+        //
+        // To preserve a semblance of sanity, we're sorting the results because this test isn't concerned with the
+        // ordering of img1 vs img2 vs #document (or even images vs 'body.onload'), and instead are only concerned
+        // the events propagate in correct order once triggered.
+        final Comparator<String> sorter = Comparator.comparing(s -> StringUtils.substringBefore(s, ":"));
+
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
-        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
-        assertEquals(String.join("\n", getExpectedAlerts()), text);
+        final String text = Pattern.compile(";").splitAsStream(driver.getTitle())
+                .map(String::trim).sorted(sorter).collect(Collectors.joining("\n"));
+        final String expected = Arrays.stream(getExpectedAlerts()).sorted(sorter).collect(Collectors.joining("\n"));
+        assertEquals(expected, text);
     }
 
     /**
