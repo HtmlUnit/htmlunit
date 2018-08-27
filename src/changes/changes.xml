@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+            <action type="update" dev="rbri" issue="1986">
+                Improved calculation of the left offset.
+            </action>
             <action type="update" dev="rbri">
                 We are using the typed array implementation from Rhino now, our own impl is gone.
             </action>

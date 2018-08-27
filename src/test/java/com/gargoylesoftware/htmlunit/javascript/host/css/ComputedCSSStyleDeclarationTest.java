@@ -2202,4 +2202,24 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void boundingClientRectIgnoreSiblingWhitespace() throws Exception {
+        final String html = "<html><body>\n"
+            + "<table>\n"
+            + "<tr>\n"
+            + "  <td>  \n\t    <div id='a'>a</div></td>\n"
+            + "</tr>\n"
+            + "</table>\n"
+            + "<script>\n"
+            + "  var e = document.getElementById('a');\n"
+            + "  alert(e.getBoundingClientRect().left < 12);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }

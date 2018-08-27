@@ -131,6 +131,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -1504,9 +1505,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if (STATIC.equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
             left = 0;
-            for (DomNode n = getDomNodeOrDie(); n != null; n = n.getPreviousSibling()) {
-                if (n.getScriptableObject() instanceof HTMLElement) {
-                    final HTMLElement e = n.getScriptableObject();
+            DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
+            while (prev != null) {
+                final Scriptable prevScriptable = prev.getScriptableObject();
+                if (prevScriptable instanceof HTMLElement) {
+                    final HTMLElement e = (HTMLElement) prevScriptable;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String d = style.getDisplay();
                     if ("block".equals(d)) {
@@ -1516,12 +1519,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         left += style.getCalculatedWidth(true, true);
                     }
                 }
-                else if (n.getScriptableObject() instanceof Text) {
-                    left += n.getTextContent().length() * getBrowserVersion().getPixesPerChar();
+                else if (prevScriptable instanceof Text) {
+                    final String content = prev.getTextContent();
+                    if (content != null) {
+                        left += content.trim().length() * getBrowserVersion().getPixesPerChar();
+                    }
                 }
-                if (n instanceof HtmlTableRow) {
+                if (prev instanceof HtmlTableRow) {
                     break;
                 }
+                prev = prev.getPreviousSibling();
             }
         }
         else {
@@ -1857,5 +1864,4 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         return pixelValue(element, value) + "px";
     }
-
 }
