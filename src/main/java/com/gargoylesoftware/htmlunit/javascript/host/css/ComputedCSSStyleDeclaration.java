@@ -1506,7 +1506,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
             left = 0;
             DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
-            while (prev != null && !(prev instanceof HtmlTableRow)) {
+            while (prev != null) {
+                if (prev instanceof HtmlTableRow) {
+                    break;
+                }
+
                 final Scriptable prevScriptable = prev.getScriptableObject();
                 if (prevScriptable instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) prevScriptable;
