@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
 
@@ -537,7 +538,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final Event keyDown = new KeyboardEvent(this, Event.TYPE_KEY_DOWN, c,
-                shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
+                                                shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
         final ScriptResult keyDownResult = fireEvent(keyDown);
 
         if (!keyDown.isAborted(keyDownResult)) {
@@ -555,15 +556,32 @@ public abstract class HtmlElement extends DomElement {
         if (this instanceof HtmlTextInput
                 || this instanceof HtmlTextArea
                 || this instanceof HtmlPasswordInput) {
-            fireKeyboardEvent(Event.TYPE_INPUT, c, shiftPressed_ || isShiftNeeded);
+            fireEvent(new KeyboardEvent(this, Event.TYPE_INPUT, c,
+                                        shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_));
         }
 
-        fireKeyboardEvent(Event.TYPE_KEY_UP, c, shiftPressed_ || isShiftNeeded);
+        HtmlElement eventSource = this;
+        if (!isAttachedToPage()) {
+            final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT)) {
+                eventSource = null;
+            }
+            else {
+                eventSource = page.getBody();
+            }
+        }
 
-        if (isShiftNeeded) {
-            final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, KeyboardEvent.DOM_VK_SHIFT,
-                    false, ctrlPressed_, altPressed_);
-            fireEvent(shiftUp);
+        if (eventSource != null) {
+            final Event keyUp = new KeyboardEvent(this, Event.TYPE_KEY_UP, c,
+                                                    shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_);
+            eventSource.fireEvent(keyUp);
+
+            if (isShiftNeeded) {
+                final Event shiftUp = new KeyboardEvent(this, Event.TYPE_KEY_UP,
+                                        KeyboardEvent.DOM_VK_SHIFT,
+                                        false, ctrlPressed_, altPressed_);
+                eventSource.fireEvent(shiftUp);
+            }
         }
 
         final HtmlForm form = getEnclosingForm();
@@ -576,10 +594,6 @@ public abstract class HtmlElement extends DomElement {
             webClient.getJavaScriptEngine().processPostponedActions();
         }
         return webClient.getCurrentWindow().getEnclosedPage();
-    }
-
-    private void fireKeyboardEvent(final String eventType, final char c, final boolean shift) {
-        fireEvent(new KeyboardEvent(this, eventType, c, shift, ctrlPressed_, altPressed_));
     }
 
     /**

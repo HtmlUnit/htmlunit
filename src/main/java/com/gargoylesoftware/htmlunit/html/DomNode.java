@@ -1185,6 +1185,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         nextSibling_ = null;
         previousSibling_ = null;
         parent_ = null;
+        attachedToPage_ = false;
+        for (DomNode descendant : getDescendants()) {
+            descendant.attachedToPage_ = false;
+        }
     }
 
     private void fireRemoval(final DomNode exParent) {

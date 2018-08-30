@@ -28,6 +28,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 
 /**
  * Modified from
@@ -343,11 +344,10 @@ public class TypingTest extends SeleniumTest {
      */
     @Test
     @Alerts(DEFAULT = {"keydown (target) keyup (target) keyup (body)",
-                "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing"},
-            CHROME = {"keydown (target) keyup (target) keyup (body)",
-                "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)"},
-            FF60 = {"keydown (target) keyup (target) keyup (body)",
-                "keydown (target) keyup (target) keyup (body) keydown (target) a pressed; removing keyup (body)"})
+                "keydown (target) a pressed; removing keyup (body)"},
+            IE = {"keydown (target) keyup (target) keyup (body)",
+                "keydown (target) a pressed; removing"})
+    @BuggyWebDriver
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 
@@ -358,12 +358,10 @@ public class TypingTest extends SeleniumTest {
 
         input.sendKeys("b");
         assertEquals(getExpectedAlerts()[0], getValueText(log).replace('\n', ' '));
+        log.clear();
 
         input.sendKeys("a");
 
-        // Some drivers (IE, Firefox) do not always generate the final keyup event since the element
-        // is removed from the DOM in response to the keypress (note, this is a product of how events
-        // are generated and does not match actual user behavior).
         assertEquals(getExpectedAlerts()[1], getValueText(log).replace('\n', ' '));
     }
 

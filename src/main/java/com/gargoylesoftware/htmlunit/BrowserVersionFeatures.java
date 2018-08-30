@@ -415,6 +415,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     HTMLELEMENT_ALIGN_INVALID,
 
+    /** Detaching the active element from the dom tree triggers no keyup event. */
+    @BrowserFeature(IE)
+    HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT,
+
     /** Removing the active element from the dom tree triggers the onblur event. */
     @BrowserFeature(CHROME)
     HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT,
