@@ -82,49 +82,4 @@ public final class ScriptResult {
     public static boolean isUndefined(final ScriptResult scriptResult) {
         return scriptResult != null && scriptResult.getJavaScriptResult() instanceof Undefined;
     }
-
-    /**
-     * Creates and returns a composite {@link ScriptResult} based on the two input {@link ScriptResult}s. This
-     * method defines how the return values for multiple event handlers are combined during event capturing and
-     * bubbling. The behavior of this method varies based on whether or not we are emulating IE.
-     *
-     * @param newResult the new {@link ScriptResult} (may be {@code null})
-     * @param originalResult the original {@link ScriptResult} (may be {@code null})
-     * @return a composite {@link ScriptResult}, based on the two input {@link ScriptResult}s
-     */
-    public static ScriptResult combine(final ScriptResult newResult, final ScriptResult originalResult) {
-        final Object jsResult;
-        final Page page;
-
-        if (ScriptResult.isFalse(newResult)) {
-            jsResult = newResult.getJavaScriptResult();
-        }
-        else if (originalResult != null) {
-            jsResult = originalResult.getJavaScriptResult();
-        }
-        else if (newResult != null) {
-            jsResult = newResult.getJavaScriptResult();
-        }
-        else {
-            jsResult = null;
-        }
-
-        // The new page is always the newest page.
-        if (newResult != null) {
-            page = newResult.getNewPage();
-        }
-        else if (originalResult != null) {
-            page = originalResult.getNewPage();
-        }
-        else {
-            page = null;
-        }
-
-        // Build and return the composite script result.
-        if (jsResult == null && page == null) {
-            return null;
-        }
-        return new ScriptResult(jsResult, page);
-    }
-
 }

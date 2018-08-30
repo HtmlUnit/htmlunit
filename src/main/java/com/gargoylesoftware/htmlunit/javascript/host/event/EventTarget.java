@@ -87,10 +87,9 @@ public class EventTarget extends SimpleScriptable {
     /**
      * Executes the event on this object only (needed for instance for onload on (i)frame tags).
      * @param event the event
-     * @return the result
      * @see #fireEvent(Event)
      */
-    public ScriptResult executeEventLocally(final Event event) {
+    public void executeEventLocally(final Event event) {
         final EventListenersContainer eventListenersContainer = getEventListenersContainer();
         final Window window = getWindow();
         final Object[] args = new Object[] {event};
@@ -99,7 +98,7 @@ public class EventTarget extends SimpleScriptable {
         window.setCurrentEvent(event);
         try {
             event.setEventPhase(Event.AT_TARGET);
-            return eventListenersContainer.executeAtTargetListeners(event, args);
+            eventListenersContainer.executeAtTargetListeners(event, args);
         }
         finally {
             window.setCurrentEvent(previousEvent); // reset event
@@ -126,7 +125,6 @@ public class EventTarget extends SimpleScriptable {
         final Object[] args = new Object[] {event};
 
         event.startFire();
-        ScriptResult result = null;
         final Event previousEvent = window.getCurrentEvent();
         window.setCurrentEvent(event);
 
@@ -168,8 +166,7 @@ public class EventTarget extends SimpleScriptable {
                 final EventTarget jsNode = propagationPath.get(i);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
-                    final ScriptResult r = elc.executeCapturingListeners(event, args);
-                    result = ScriptResult.combine(r, result);
+                    elc.executeCapturingListeners(event, args);
                     if (event.isPropagationStopped()) {
                         return;
                     }
@@ -185,8 +182,7 @@ public class EventTarget extends SimpleScriptable {
                 final EventTarget jsNode = propagationPath.get(0);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
-                    final ScriptResult r = elc.executeAtTargetListeners(event, args);
-                    result = ScriptResult.combine(r, result);
+                    elc.executeAtTargetListeners(event, args);
                     if (event.isPropagationStopped()) {
                         return;
                     }
@@ -214,8 +210,7 @@ public class EventTarget extends SimpleScriptable {
                     final EventTarget jsNode = propagationPath.get(i);
                     final EventListenersContainer elc = jsNode.eventListenersContainer_;
                     if (elc != null) {
-                        final ScriptResult r = elc.executeBubblingListeners(event, args);
-                        result = ScriptResult.combine(r, result);
+                        elc.executeBubblingListeners(event, args);
                         if (event.isPropagationStopped()) {
                             return;
                         }

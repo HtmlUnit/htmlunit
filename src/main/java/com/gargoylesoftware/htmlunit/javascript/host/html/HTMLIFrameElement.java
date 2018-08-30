@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -200,12 +199,11 @@ public class HTMLIFrameElement extends HTMLElement {
      * {@inheritDoc}
      */
     @Override
-    public ScriptResult executeEventLocally(final Event event) {
+    public void executeEventLocally(final Event event) {
         if (Event.TYPE_LOAD != event.getType()
                 || !isAttachedToPageDuringOnload_ || getBrowserVersion().hasFeature(JS_IFRAME_ALWAYS_EXECUTE_ONLOAD)) {
-            return super.executeEventLocally(event);
+            super.executeEventLocally(event);
         }
-        return null;
     }
 
     /**

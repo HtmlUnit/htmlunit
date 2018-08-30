@@ -499,7 +499,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             evt.setPrototype(getPrototype(evt.getClass()));
 
             final JavaScriptEngine engine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
-            engine.getContextFactory().call(cx -> executeEventLocally(evt));
+            engine.getContextFactory().call(cx -> {
+                executeEventLocally(evt);
+                return null;
+            });
         }
 
         private void callFunction(final Function function, final Object[] args) {

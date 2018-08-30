@@ -290,14 +290,13 @@ public class EventListenersContainer implements Serializable {
         });
     }
 
-    private ScriptResult executeEventListeners(final int eventPhase, final Event event, final Object[] args) {
+    private void executeEventListeners(final int eventPhase, final Event event, final Object[] args) {
         final DomNode node = jsNode_.getDomNodeOrNull();
         // some event don't apply on all kind of nodes, for instance "blur"
         if (node != null && !node.handles(event)) {
-            return null;
+            return;
         }
 
-        ScriptResult allResult = null;
         final TypeContainer container = getTypeContainer(event.getType());
         final List<Scriptable> listeners = container.getListeners(eventPhase);
         if (!listeners.isEmpty()) {
@@ -346,47 +345,40 @@ public class EventListenersContainer implements Serializable {
                     // Return value is only honored for property handlers (Tested in Chrome/FF/IE11)
                     if (isPropertyHandler && !ScriptResult.isUndefined(result)) {
                         event.handlePropertyHandlerReturnValue(result.getJavaScriptResult());
-
-                        // This return value is now all but unused and can be refactored away
-                        allResult = null;
                     }
                 }
                 if (event.isImmediatePropagationStopped()) {
-                    return allResult;
+                    return;
                 }
             }
         }
-        return allResult;
     }
 
     /**
      * Executes bubbling listeners.
      * @param event the event
      * @param args arguments
-     * @return the result
      */
-    public ScriptResult executeBubblingListeners(final Event event, final Object[] args) {
-        return executeEventListeners(Event.BUBBLING_PHASE, event, args);
+    public void executeBubblingListeners(final Event event, final Object[] args) {
+        executeEventListeners(Event.BUBBLING_PHASE, event, args);
     }
 
     /**
      * Executes capturing listeners.
      * @param event the event
      * @param args the arguments
-     * @return the result
      */
-    public ScriptResult executeCapturingListeners(final Event event, final Object[] args) {
-        return executeEventListeners(Event.CAPTURING_PHASE, event, args);
+    public void executeCapturingListeners(final Event event, final Object[] args) {
+        executeEventListeners(Event.CAPTURING_PHASE, event, args);
     }
 
     /**
      * Executes listeners for events targeting the node. (non-propagation phase)
      * @param event the event
      * @param args the arguments
-     * @return the result
      */
-    public ScriptResult executeAtTargetListeners(final Event event, final Object[] args) {
-        return executeEventListeners(Event.AT_TARGET, event, args);
+    public void executeAtTargetListeners(final Event event, final Object[] args) {
+        executeEventListeners(Event.AT_TARGET, event, args);
     }
 
     /**

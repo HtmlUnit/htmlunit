@@ -125,7 +125,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
             public Object run(final Context cx) {
                 worker_.getEventListenersContainer().executeCapturingListeners(event, null);
                 final Object[] args = new Object[] {event};
-                return worker_.getEventListenersContainer().executeBubblingListeners(event, args);
+                worker_.getEventListenersContainer().executeBubblingListeners(event, args);
+                return null;
             }
         };
 
