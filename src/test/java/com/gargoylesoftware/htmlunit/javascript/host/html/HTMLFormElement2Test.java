@@ -64,8 +64,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         getMockWebConnection().setDefaultResponse(secondContent);
         final HtmlPage page = loadPageWithAlerts(html);
 
-        final HtmlPage secondPage =
-            (HtmlPage) page.executeJavaScript("document.form1.submit()").getNewPage();
+        page.executeJavaScript("document.form1.submit()");
+        final HtmlPage secondPage = (HtmlPage) getWebClient().getCurrentWindow().getEnclosedPage();
         assertEquals("second", secondPage.getTitleText());
     }
 
@@ -87,7 +87,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage page1 = loadPage(html, collectedAlerts);
-        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+        page1.executeJavaScript("document.form1.submit()");
+        final HtmlPage page2 = (HtmlPage) getWebClient().getCurrentWindow().getEnclosedPage();
 
         assertEquals(page1, page2);
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -111,7 +112,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage page1 = loadPage(html, collectedAlerts);
-        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+        page1.executeJavaScript("document.form1.submit()");
+        final HtmlPage page2 = (HtmlPage) getWebClient().getCurrentWindow().getEnclosedPage();
 
         assertEquals(page1, page2);
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -135,7 +137,8 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
 
         final HtmlPage page1 = loadPage(html, collectedAlerts);
-        final HtmlPage page2 = (HtmlPage) page1.executeJavaScript("document.form1.submit()").getNewPage();
+        page1.executeJavaScript("document.form1.submit()");
+        final HtmlPage page2 = (HtmlPage) getWebClient().getCurrentWindow().getEnclosedPage();
 
         assertEquals(page1, page2);
         assertEquals(getExpectedAlerts(), collectedAlerts);
@@ -183,8 +186,9 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
 
-        final HtmlPage secondPage
-            = (HtmlPage) page.executeJavaScript("document.form1.submit()").getNewPage();
+        page.executeJavaScript("document.form1.submit()");
+        final HtmlPage secondPage = (HtmlPage) getWebClient().getCurrentWindow().getEnclosedPage();
+
         assertEquals("second", secondPage.getTitleText());
         assertEquals("MyNewWindow", secondPage.getEnclosingWindow().getName());
     }

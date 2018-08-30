@@ -530,7 +530,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
         if (scriptResult != null) {
             // current window doesn't exist anymore
-            return scriptResult.getNewPage();
+            return page.getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
         return page;

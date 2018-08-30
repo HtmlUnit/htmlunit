@@ -111,18 +111,7 @@ public class EventTarget extends SimpleScriptable {
      * @return the result
      */
     public ScriptResult fireEvent(final Event event) {
-        fireEventImpl(event);
-        // This is deprecated but there're still a few places using ScriptResult.getNewPage()
-        return new ScriptResult(null, getWindow().getWebWindow().getWebClient().getCurrentWindow().getEnclosedPage());
-    }
-
-    /**
-     * Fires the event on the node with capturing and bubbling phase.
-     * @param event the event
-     */
-    private void fireEventImpl(final Event event) {
         final Window window = getWindow();
-        final Object[] args = new Object[] {event};
 
         event.startFire();
         final Event previousEvent = window.getCurrentEvent();
@@ -146,7 +135,7 @@ public class EventTarget extends SimpleScriptable {
                 propagationPath.add(parent.getScriptableObject());
             }
 
-            // The load event has some unnatural behaviour that we need to handle specially
+            // The load event has some unnatural behavior that we need to handle specially
             if (Event.TYPE_LOAD.equals(event.getType())) {
                 // The load event for other elements target that element and but path only
                 // up to Document and not Window, so do nothing here
@@ -166,9 +155,9 @@ public class EventTarget extends SimpleScriptable {
                 final EventTarget jsNode = propagationPath.get(i);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
-                    elc.executeCapturingListeners(event, args);
+                    elc.executeCapturingListeners(event, new Object[] {event});
                     if (event.isPropagationStopped()) {
-                        return;
+                        return new ScriptResult(null);
                     }
                 }
             }
@@ -182,20 +171,9 @@ public class EventTarget extends SimpleScriptable {
                 final EventTarget jsNode = propagationPath.get(0);
                 final EventListenersContainer elc = jsNode.eventListenersContainer_;
                 if (elc != null) {
-                    elc.executeAtTargetListeners(event, args);
+                    elc.executeAtTargetListeners(event, new Object[] {event});
                     if (event.isPropagationStopped()) {
-                        return;
-                    }
-                }
-            }
-
-            // Refactoring note: This should probably be done further down
-            HtmlLabel label = null;
-            if (event.processLabelAfterBubbling()) {
-                for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
-                    if (parent instanceof HtmlLabel) {
-                        label = (HtmlLabel) parent;
-                        break;
+                        return new ScriptResult(null);
                     }
                 }
             }
@@ -210,10 +188,20 @@ public class EventTarget extends SimpleScriptable {
                     final EventTarget jsNode = propagationPath.get(i);
                     final EventListenersContainer elc = jsNode.eventListenersContainer_;
                     if (elc != null) {
-                        elc.executeBubblingListeners(event, args);
+                        elc.executeBubblingListeners(event, new Object[] {event});
                         if (event.isPropagationStopped()) {
-                            return;
+                            return new ScriptResult(null);
                         }
+                    }
+                }
+            }
+
+            HtmlLabel label = null;
+            if (event.processLabelAfterBubbling()) {
+                for (DomNode parent = ourParentNode; parent != null; parent = parent.getParentNode()) {
+                    if (parent instanceof HtmlLabel) {
+                        label = (HtmlLabel) parent;
+                        break;
                     }
                 }
             }
@@ -235,6 +223,8 @@ public class EventTarget extends SimpleScriptable {
             event.endFire();
             window.setCurrentEvent(previousEvent); // reset event
         }
+
+        return new ScriptResult(null);
     }
 
     /**

@@ -909,7 +909,7 @@ public class HtmlPage extends SgmlPage {
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(Undefined.instance, this);
+            return new ScriptResult(Undefined.instance);
         }
 
         if (StringUtils.startsWithIgnoreCase(sourceCode, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
@@ -920,7 +920,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         final Object result = getWebClient().getJavaScriptEngine().execute(this, sourceCode, sourceName, startLine);
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+        return new ScriptResult(result);
     }
 
     /** Various possible external JavaScript file loading results. */
@@ -2505,7 +2505,7 @@ public class HtmlPage extends SgmlPage {
     public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
         if (!getWebClient().getOptions().isJavaScriptEnabled()) {
-            return new ScriptResult(null, this);
+            return new ScriptResult(null);
         }
 
         return executeJavaScriptFunction((Function) function, (Scriptable) thisObject, args, htmlElementScope);
@@ -2517,7 +2517,7 @@ public class HtmlPage extends SgmlPage {
         final JavaScriptEngine engine = (JavaScriptEngine) getWebClient().getJavaScriptEngine();
         final Object result = engine.callFunction(this, function, thisObject, args, htmlElementScope);
 
-        return new ScriptResult(result, getWebClient().getCurrentWindow().getEnclosedPage());
+        return new ScriptResult(result);
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {

@@ -27,18 +27,13 @@ public final class ScriptResult {
     /** The object that was returned from the script engine. */
     private final Object javaScriptResult_;
 
-    /** The page that is currently loaded at the end of the script execution. */
-    private final Page newPage_;
-
     /**
      * Creates a new instance.
      *
      * @param javaScriptResult the object that was returned from the script engine
-     * @param newPage the page that is currently loaded at the end of the script execution
      */
-    public ScriptResult(final Object javaScriptResult, final Page newPage) {
+    public ScriptResult(final Object javaScriptResult) {
         javaScriptResult_ = javaScriptResult;
-        newPage_ = newPage;
     }
 
     /**
@@ -50,19 +45,11 @@ public final class ScriptResult {
     }
 
     /**
-     * Returns the page that is loaded at the end of the script execution.
-     * @return the new page
-     */
-    public Page getNewPage() {
-        return newPage_;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "ScriptResult[result=" + javaScriptResult_ + " page=" + newPage_ + "]";
+        return "ScriptResult[result=" + javaScriptResult_ + "]";
     }
 
     /**

@@ -1150,7 +1150,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (scriptResult == null) {
             return clickPage;
         }
-        return (P) scriptResult.getNewPage();
+        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
     }
 
     /**
@@ -1359,7 +1359,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             currentPage = page;
         }
         else {
-            currentPage = scriptResult.getNewPage();
+            currentPage = page.getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
         final boolean mouseOver = !MouseEvent.TYPE_MOUSE_OUT.equals(eventType);

@@ -125,13 +125,14 @@ public class HtmlForm extends HtmlElement {
                     if (scriptResult == null) {
                         return htmlPage;
                     }
-                    return scriptResult.getNewPage();
+                    return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
                 }
             }
 
             final String action = getActionAttribute().trim();
             if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-                return htmlPage.executeJavaScript(action, "Form action", getStartLineNumber()).getNewPage();
+                htmlPage.executeJavaScript(action, "Form action", getStartLineNumber());
+                return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
             }
         }
         else {
@@ -377,7 +378,7 @@ public class HtmlForm extends HtmlElement {
         final SgmlPage htmlPage = getPage();
         final ScriptResult scriptResult = fireEvent(Event.TYPE_RESET);
         if (ScriptResult.isFalse(scriptResult)) {
-            return scriptResult.getNewPage();
+            return htmlPage.getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
         for (final HtmlElement next : getHtmlElementDescendants()) {
