@@ -441,9 +441,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:https://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit</connection>
-        <developerConnection>scm:svn:https://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit</developerConnection>
-        <url>https://sourceforge.net/p/htmlunit/code</url>
+        <connection>scm:git:https://github.com/HtmlUnit/htmlunit</connection>
+        <developerConnection>scm:git:https://github.com/HtmlUnit/htmlunit</developerConnection>
+        <url>https://github.com/HtmlUnit/htmlunit</url>
     </scm>
     <ciManagement>
         <system>TeamCity</system>
