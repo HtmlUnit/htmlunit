@@ -917,10 +917,8 @@ public class CSSStyleSheet extends StyleSheet {
 
             final InputSource source = new InputSource(new StringReader(mediaString));
             media = new MediaListImpl(parser.parseMedia(source));
-            if (media != null) {
-                media_.put(mediaString, media);
-                return media;
-            }
+            media_.put(mediaString, media);
+            return media;
         }
         catch (final Exception e) {
             LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
