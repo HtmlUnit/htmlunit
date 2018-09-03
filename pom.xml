@@ -193,8 +193,8 @@
     </local-check-config>
     <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
         <file-match-pattern match-pattern="^src/.*\.java$" include-pattern="true"/>
+        <file-match-pattern match-pattern="^src/.*general/huge/.*\.java$" include-pattern="false"/>
     </fileset>
-    <filter name="NonSrcDirs" enabled="true"/>
 </fileset-config>
 ]]>
                             </content>
