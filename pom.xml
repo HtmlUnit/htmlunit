@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
-        <jetty.version>9.4.11.v20180605</jetty.version>
+        <jetty.version>9.4.12.v20180830</jetty.version>
         <selenium.version>3.14.0</selenium.version>
         <htmlunitdriver.version>2.32.1</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
@@ -222,7 +222,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>4.0.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -233,6 +233,7 @@
                     </instructions>
                 </configuration>
             </plugin>
+<!--             
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
@@ -245,7 +246,8 @@
                     </execution>
                 </executions>
             </plugin>
-        </plugins>
+ -->
+            </plugins>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
