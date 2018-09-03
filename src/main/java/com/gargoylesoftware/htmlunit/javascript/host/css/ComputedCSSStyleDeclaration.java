@@ -1383,27 +1383,32 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     if (prev instanceof HtmlElement) {
                         final Element e = prev.getScriptableObject();
                         final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                        int prevTop = 0;
-                        if (style.top_ == null) {
-                            final String prevPosition = style.getPositionWithInheritance();
-                            if ("absolute".equals(prevPosition)) {
-                                prevTop += style.getTopForAbsolutePositionWithInheritance();
-                            }
-                            else {
-                                if ("relative".equals(prevPosition)) {
-                                    final String t = style.getTopWithInheritance();
-                                    prevTop += pixelValue(t);
+
+                        // only previous block elements are counting
+                        final String display = style.getDisplay();
+                        if ("block".equals(display)) {
+                            int prevTop = 0;
+                            if (style.top_ == null) {
+                                final String prevPosition = style.getPositionWithInheritance();
+                                if ("absolute".equals(prevPosition)) {
+                                    prevTop += style.getTopForAbsolutePositionWithInheritance();
+                                }
+                                else {
+                                    if ("relative".equals(prevPosition)) {
+                                        final String t = style.getTopWithInheritance();
+                                        prevTop += pixelValue(t);
+                                    }
                                 }
                             }
+                            else {
+                                prevHadComputedTop = true;
+                                prevTop += style.top_;
+                            }
+                            prevTop += style.getCalculatedHeight(true, true);
+                            final int margin = pixelValue(style.getMarginTop());
+                            prevTop += margin;
+                            top += prevTop;
                         }
-                        else {
-                            prevHadComputedTop = true;
-                            prevTop += style.top_;
-                        }
-                        prevTop += style.getCalculatedHeight(true, true);
-                        final int margin = pixelValue(style.getMarginTop());
-                        prevTop += margin;
-                        top += prevTop;
                     }
                     prev = prev.getPreviousSibling();
                 }

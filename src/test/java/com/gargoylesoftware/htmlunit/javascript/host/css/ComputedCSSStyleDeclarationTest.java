@@ -2222,4 +2222,23 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void boundingClientRectTopOnlyHasToTakeCareOfPreviousBlockSibling() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div style='height: 100'>100</div>\n"
+            + "<span style='height: 200'>200</span>\n"
+            + "<span id='tester'>tester</span>\n"
+
+            + "<script>\n"
+            + "  var e = document.getElementById('tester');\n"
+            + "  alert(e.getBoundingClientRect().top < 120);\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
 }
