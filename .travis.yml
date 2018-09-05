@@ -1,2 +1,4 @@
 language: java
+
+install: true
 script: mvn test -B -e -U -DwithoutLibsHuge
