@@ -1,4 +1,9 @@
 language: java
 
+# use Java 8
+jdk:
+- oraclejdk8
+
 install: true
-script: mvn test -B -e -U -DwithoutLibsHuge
+
+script: xvfb-run --server-args="-screen 0 1024x768x24" mvn test -B -e -U -DwithoutLibsHuge
