@@ -233,7 +233,7 @@
                     </instructions>
                 </configuration>
             </plugin>
-<!--             
+<!--
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
@@ -246,7 +246,7 @@
                     </execution>
                 </executions>
             </plugin>
- -->
+-->
             </plugins>
         <extensions>
             <extension>
@@ -1041,22 +1041,6 @@
                 <exclusion>
                     <groupId>org.apache.httpcomponents</groupId>
                     <artifactId>httpcore</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.tmatesoft.svnkit</groupId>
-            <artifactId>svnkit</artifactId>
-            <version>1.9.3</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.jcraft</groupId>
-                    <artifactId>jsch.agentproxy.connector-factory</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.jcraft</groupId>
-                    <artifactId>jsch.agentproxy.svnkit-trilead-ssh2</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

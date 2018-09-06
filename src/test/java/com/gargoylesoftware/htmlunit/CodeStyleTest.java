@@ -28,7 +28,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,37 +39,23 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
-import org.tmatesoft.svn.core.wc.ISVNOptions;
-import org.tmatesoft.svn.core.wc.ISVNPropertyHandler;
-import org.tmatesoft.svn.core.wc.SVNPropertyData;
-import org.tmatesoft.svn.core.wc.SVNRevision;
-import org.tmatesoft.svn.core.wc.SVNWCClient;
-import org.tmatesoft.svn.core.wc.SVNWCUtil;
-
-import com.gargoylesoftware.htmlunit.source.SVN;
 
 /**
  * Test of coding style for issues which cannot be detected by Checkstyle.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class CodeStyleTest {
 
     private static final Pattern leadingWhitespace = Pattern.compile("^\\s+");
     private List<String> failures_ = new ArrayList<>();
-    private SVNWCClient svnWCClient_;
 
     /**
      * After.
      */
     @After
     public void after() {
-        if (svnWCClient_ != null) {
-            svnWCClient_.getOperationsFactory().getRepositoryPool().dispose();
-        }
         final StringBuilder sb = new StringBuilder();
         for (final String error : failures_) {
             sb.append('\n').append(error);
@@ -94,9 +79,6 @@ public class CodeStyleTest {
      */
     @Test
     public void codeStyle() throws IOException {
-        final ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        final ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
-        svnWCClient_ = new SVNWCClient(authManager, options);
         final List<File> files = new ArrayList<>();
         addAll(new File("src/main"), files);
         addAll(new File("src/test"), files);
@@ -141,7 +123,6 @@ public class CodeStyleTest {
     private void process(final List<File> files, final List<String> classNames) throws IOException {
         for (final File file : files) {
             final String relativePath = file.getAbsolutePath().substring(new File(".").getAbsolutePath().length() - 1);
-            svnProperties(file, relativePath);
             if (file.getName().endsWith(".java")) {
                 final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
                 openingCurlyBracket(lines, relativePath);
@@ -270,59 +251,6 @@ public class CodeStyleTest {
                 addFailure("Non-empty line in " + relativePath + ", line: " + (index + 2));
             }
         }
-    }
-
-    /**
-     * Checks property {@code svn:eol-style}.
-     */
-    private void svnProperties(final File file, final String relativePath) {
-        if (!isSvnPropertiesDefined(file)) {
-            addFailure("'svn:eol-style' property is not defined for " + relativePath);
-        }
-    }
-
-    private boolean isSvnPropertiesDefined(final File file) {
-        try {
-            final AtomicBoolean eol = new AtomicBoolean();
-            svnWCClient_.doGetProperty(file, null, SVNRevision.WORKING, SVNRevision.WORKING, SVNDepth.EMPTY,
-                    new ISVNPropertyHandler() {
-
-                    @Override
-                    public void handleProperty(final long revision, final SVNPropertyData property) {
-                        // nothing to do
-                    }
-
-                    @Override
-                    public void handleProperty(final SVNURL url, final SVNPropertyData property) {
-                        // nothing to do
-                    }
-
-                    @Override
-                    public void handleProperty(final File path, final SVNPropertyData property) {
-                        final String name = property.getName();
-                        final String value = property.getValue().getString();
-                        if ("svn:eol-style".equals(name) && "native".equals(value)) {
-                            eol.set(true);
-                        }
-                    }
-                }, null);
-
-            final String fileName = file.getName().toLowerCase(Locale.ROOT);
-
-            for (final String extension : SVN.getEolExtenstions()) {
-                if (fileName.endsWith(extension)) {
-                    return eol.get();
-                }
-            }
-            return true;
-        }
-        catch (final Exception e) {
-            //nothing
-        }
-        final String path = file.getAbsolutePath();
-        // automatically generated and is outside SVN control
-        return (path.contains("jQuery") && path.contains("WEB-INF") && path.contains("cgi"))
-                || (path.contains("jQuery") && path.contains("csp.log"));
     }
 
     /**
