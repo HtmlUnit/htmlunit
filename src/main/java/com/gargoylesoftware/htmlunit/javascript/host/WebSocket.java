@@ -131,7 +131,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
 
             final WebClient webClient = window.getWebWindow().getWebClient();
             if (webClient.getOptions().isUseInsecureSSL()) {
-                client_ = new WebSocketClient(new SslContextFactory(true));
+                client_ = new WebSocketClient(new SslContextFactory(true), null, null);
             }
             else {
                 client_ = new WebSocketClient();
@@ -171,7 +171,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                         incomingSession_ = connectFuture.get();
                     }
                     catch (final Exception e) {
-                        LOG.error("WS connect error", e);
+                        LOG.error("WS connect error for url '" + url + "':", e);
                     }
                 }
             });
