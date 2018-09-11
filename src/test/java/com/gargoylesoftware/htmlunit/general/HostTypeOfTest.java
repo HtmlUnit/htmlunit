@@ -153,7 +153,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBuffer}.
+     * Test ArrayBuffer.
      *
      * @throws Exception if an error occurs
      */
@@ -164,7 +164,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferView}.
+     * Test ArrayBufferView.
      *
      * @throws Exception if an error occurs
      */
@@ -175,7 +175,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.ArrayBufferViewBase}.
+     * Test ArrayBufferViewBase.
      *
      * @throws Exception if an error occurs
      */
@@ -1076,7 +1076,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.DataView}.
+     * Test DataView.
      *
      * @throws Exception if an error occurs
      */
@@ -1635,7 +1635,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Float32Array}.
+     * Test Float32Array.
      *
      * @throws Exception if an error occurs
      */
@@ -1646,7 +1646,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Float64Array}.
+     * Test Float64Array.
      *
      * @throws Exception if an error occurs
      */
@@ -3235,7 +3235,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Int16Array}.
+     * Test Int16Array.
      *
      * @throws Exception if an error occurs
      */
@@ -3246,7 +3246,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Int32Array}.
+     * Test Int32Array.
      *
      * @throws Exception if an error occurs
      */
@@ -3257,7 +3257,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Int8Array}.
+     * Test Int8Array.
      *
      * @throws Exception if an error occurs
      */
@@ -6874,7 +6874,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint16Array}.
+     * Test Uint16Array.
      *
      * @throws Exception if an error occurs
      */
@@ -6885,7 +6885,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint32Array}.
+     * Test Uint32Array.
      *
      * @throws Exception if an error occurs
      */
@@ -6896,7 +6896,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8Array}.
+     * Test Uint8Array.
      *
      * @throws Exception if an error occurs
      */
@@ -6907,7 +6907,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.arrays.Uint8ClampedArray}.
+     * Test Uint8ClampedArray.
      *
      * @throws Exception if an error occurs
      */
