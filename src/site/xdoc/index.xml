@@ -54,14 +54,24 @@
         <section name="Where to find...">
             <p>
                 <dl>
+                    <dt>Latest release <date>Sep 11, 2018</date></dt>
+                    <dd>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.33/">version 2.33</a></p>
+                    </dd>
+
+                    <dt>Source code</dt>
+                    <dd>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit"><img src="./images/logos/github.png" alt="GitHub" height="73" width="60"></img></a></p>
+                    </dd>
+
+                    <dt>News</dt>
+                    <dd>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit"><img src="./images/logos/twitter.png" alt="Twitter" height="73" width="60"></img></a></p>
+                    </dd>
+
                     <dt>Latest build</dt>
                     <dd>
-                        <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a> 
-                    </dd>
-                    
-                    <dt>Latest release <date>July 28, 2018</date></dt>
-                    <dd>
-                        <a href="http://sourceforge.net/projects/htmlunit/files/htmlunit/2.32/">version 2.32</a>
+                        <p><a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a></p>
                     </dd>
                 </dl>
             </p>
