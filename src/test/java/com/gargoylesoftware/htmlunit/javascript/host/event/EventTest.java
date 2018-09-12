@@ -342,10 +342,53 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
-    public void typing_input() throws Exception {
+    public void typing_input_text() throws Exception {
         testTyping("<input type='text'", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    public void typing_input_password() throws Exception {
         testTyping("<input type='password'", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    public void typing_input_textarea() throws Exception {
         testTyping("<textarea", "</textarea>");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    public void typing_input_tel() throws Exception {
+        testTyping("<input type='tel'", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    public void typing_input_search() throws Exception {
+        testTyping("<input type='search'", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"123a4a", "1a2a3ab4ab1ab2ab3abc4abc"})
+    public void typing_input_number() throws Exception {
+        testTyping("<input type='number'", "");
     }
 
     /**

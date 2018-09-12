@@ -7,7 +7,20 @@
     </properties>
 
     <body>
-        <release version="2.33" date="xxxx, 2018" description="Bugfixes">
+        <release version="2.33" date="Sep 09, 2018" description="Source moved to GitHub, Reworked JS event listeners, Bugfixes">
+            <action type="update" dev="rbri">
+                Source repository is on GitHub now.
+            </action>
+            <action type="fix" dev="rbri" issue="256">
+                Input tel/search/number now fires the oninput event.
+            </action>
+            <action type="update" dev="rbri" issue="1984" due-to="Atsushi Nakagawa">
+                Reworked JS event listeners implementation; many incompatibilities with
+                all supported browsers are fixed.
+            </action>
+            <action type="update" dev="rbri">
+                Maven Fluido Skin used for the web page updated to version 1.7
+            </action>
             <action type="update" dev="rbri" issue="1986">
                 Improved calculation of the left offset.
             </action>

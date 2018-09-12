@@ -555,6 +555,9 @@ public abstract class HtmlElement extends DomElement {
         final WebClient webClient = page.getWebClient();
         if (this instanceof HtmlTextInput
                 || this instanceof HtmlTextArea
+                || this instanceof HtmlTelInput
+                || this instanceof HtmlNumberInput
+                || this instanceof HtmlSearchInput
                 || this instanceof HtmlPasswordInput) {
             fireEvent(new KeyboardEvent(this, Event.TYPE_INPUT, c,
                                         shiftPressed_ || isShiftNeeded, ctrlPressed_, altPressed_));
@@ -718,6 +721,9 @@ public abstract class HtmlElement extends DomElement {
 
         if (this instanceof HtmlTextInput
             || this instanceof HtmlTextArea
+            || this instanceof HtmlTelInput
+            || this instanceof HtmlNumberInput
+            || this instanceof HtmlSearchInput
             || this instanceof HtmlPasswordInput) {
             final Event input = new KeyboardEvent(this, Event.TYPE_INPUT, keyCode,
                     shiftPressed_, ctrlPressed_, altPressed_);
