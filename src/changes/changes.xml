@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.33" date="Sep 09, 2018" description="Source moved to GitHub, Reworked JS event listeners, Bugfixes">
+        <release version="2.33" date="Sep 12, 2018" description="Source moved to GitHub, Reworked JS event listeners, Bugfixes">
             <action type="update" dev="rbri">
                 Source repository is on GitHub now.
             </action>
