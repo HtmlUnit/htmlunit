@@ -7,6 +7,19 @@
     </properties>
 
     <body>
+        <release version="2.34" date="...., 2018" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="256">
+                Correct handling of content type 'no-gzip' and 'gzip-only-text/html'.
+            </action>
+            <action type="update" dev="rbri" issue="1984" due-to="Atsushi Nakagawa">
+                Reworked JS event listeners implementation; many incompatibilities with
+                all supported browsers are fixed.
+            </action>
+            <action type="update" dev="rbri">
+                Maven Fluido Skin used for the web page updated to version 1.7
+            </action>
+        </release>
+
         <release version="2.33" date="Sep 12, 2018" description="Source moved to GitHub, Reworked JS event listeners, Bugfixes">
             <action type="update" dev="rbri">
                 Source repository is on GitHub now.

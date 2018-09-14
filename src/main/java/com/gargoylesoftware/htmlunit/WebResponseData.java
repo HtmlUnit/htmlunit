@@ -91,7 +91,6 @@ public class WebResponseData implements Serializable {
 
     private InputStream getStream(final DownloadedContent downloadedContent,
                 final List<NameValuePair> headers) throws IOException {
-
         InputStream stream = downloadedContent_.getInputStream();
         if (downloadedContent.isEmpty()) {
             return stream;
@@ -99,7 +98,11 @@ public class WebResponseData implements Serializable {
 
         final String encoding = getHeader(headers, "content-encoding");
         if (encoding != null) {
-            if (StringUtils.contains(encoding, "gzip")) {
+            boolean isGzip = StringUtils.contains(encoding, "gzip") && !"no-gzip".equals(encoding);
+            if ("gzip-only-text/html".equals(encoding)) {
+                isGzip = "text/html".equals(getHeader(headers, "content-type"));
+            }
+            if (isGzip) {
                 try {
                     stream = new GZIPInputStream(stream);
                 }

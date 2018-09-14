@@ -95,6 +95,63 @@ public class WebResponseDataTest extends WebServerTestCase {
         testEmptyGZippedContent(HttpStatus.SC_NO_CONTENT, -1, null);
     }
 
+    /**
+     * Tests that gzipped content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void htmlEncodingGzipOnlyTextHtml() throws Exception {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(GZIPPED_FILE);
+        final byte[] zippedContent = IOUtils.toByteArray(stream);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip-only-text/html"));
+        headers.add(new NameValuePair("content-type", "text/html"));
+
+        final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
+        final String body = new String(data.getBody(), UTF_8);
+        assertTrue(StringUtils.contains(body, "Test"));
+    }
+
+    /**
+     * Tests that gzipped content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void binaryEncodingGzipOnlyTextHtml() throws Exception {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-png.img");
+        final byte[] zippedContent = IOUtils.toByteArray(stream);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip-only-text/html"));
+        headers.add(new NameValuePair("content-type", "image/png"));
+
+        final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
+        final byte[] bytes = IOUtils.toByteArray(data.getInputStream());
+        assertEquals(128, bytes.length);
+        assertEquals(137 - 256, bytes[0]);
+        assertEquals(80, bytes[1]);
+        assertEquals(78, bytes[2]);
+    }
+
+    /**
+     * Tests that gzipped content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void binaryEncodingNoGzip() throws Exception {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream("testfiles/xhtml.html");
+        final byte[] zippedContent = IOUtils.toByteArray(stream);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Encoding", "no-gzip"));
+        headers.add(new NameValuePair("content-type", "text/html"));
+
+        final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
+        final String body = new String(data.getBody(), UTF_8);
+        assertTrue(StringUtils.contains(body, "Test"));
+    }
+
     private static void testEmptyGZippedContent(final int statusCode, final int contentLength,
                 final String contentType) throws Exception {
         final List<NameValuePair> headers = new ArrayList<>();
