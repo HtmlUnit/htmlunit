@@ -55,10 +55,13 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -503,7 +506,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
-            final Server server = new Server(PORT);
+            final Server server = buildServer(PORT);
 
             final WebAppContext context = new WebAppContext();
             context.setContextPath("/");
@@ -537,7 +540,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            Server server = new Server(PORT2);
+            Server server = buildServer(PORT2);
             final WebAppContext context2 = new WebAppContext();
             context2.setContextPath("/");
             context2.setResourceBase("./");
@@ -546,7 +549,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             server.start();
             STATIC_SERVER2_ = server;
 
-            server = new Server(PORT3);
+            server = buildServer(PORT3);
             final WebAppContext context3 = new WebAppContext();
             context3.setContextPath("/");
             context3.setResourceBase("./");
@@ -1174,6 +1177,19 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 Thread.sleep(10);
             }
         }
+    }
+
+    // limit resource usage
+    private Server buildServer(final int port) {
+        final QueuedThreadPool threadPool = new QueuedThreadPool(4, 2);
+
+        final Server server = new Server(threadPool);
+
+        final ServerConnector connector = new ServerConnector(server);
+        connector.setPort(port);
+        server.setConnectors(new Connector[] {connector});
+
+        return server;
     }
 
     /**

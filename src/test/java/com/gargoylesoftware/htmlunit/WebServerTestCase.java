@@ -27,13 +27,16 @@ import org.eclipse.jetty.http.MimeTypes;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
+import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.util.security.Constraint;
+import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
@@ -70,7 +73,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = new Server(PORT);
+        server_ = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -139,7 +142,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     public static Server createWebServer(final int port, final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
 
-        final Server server = new Server(port);
+        final Server server = buildServer(port);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -192,7 +195,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = new Server(PORT);
+        server_ = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -319,7 +322,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
-            final Server server = new Server(PORT);
+            final Server server = buildServer(PORT);
 
             final WebAppContext context = new WebAppContext();
             context.setContextPath("/");
@@ -422,5 +425,17 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         webClient_ = null;
         alertHandler_ = null;
+    }
+
+    private static Server buildServer(final int port) {
+        final QueuedThreadPool threadPool = new QueuedThreadPool(4, 2);
+
+        final Server server = new Server(threadPool);
+
+        final ServerConnector connector = new ServerConnector(server);
+        connector.setPort(port);
+        server.setConnectors(new Connector[] {connector});
+
+        return server;
     }
 }
