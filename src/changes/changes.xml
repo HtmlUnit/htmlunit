@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes">
-            <action type="fix" dev="rbri" issue="256">
+            <action type="fix" dev="rbri">
                 Correct handling of content type 'no-gzip' and 'gzip-only-text/html'.
             </action>
             <action type="update" dev="rbri" issue="1984" due-to="Atsushi Nakagawa">
