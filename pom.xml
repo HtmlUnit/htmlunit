@@ -213,7 +213,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.10.0</version>
+                <version>1.11.1</version>
                 <configuration>
                     <tag>${project.name}-${project.version}</tag>
                     <message>Release ${project.version}</message>
@@ -276,6 +276,8 @@
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
+
+                                <exclude>**/general/*.java</exclude>
                             </excludes>
                             <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
