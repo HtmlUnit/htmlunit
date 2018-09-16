@@ -41,6 +41,8 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      */
     @Before
     public void setup() throws Exception {
+        // we have to stop all servers running already to free the port
+        WebDriverTestCase.stopWebServers();
         startWebServer("src/test/resources/testfiles/noproxyroot/");
 
         proxyWebServer_ = createWebServer(PORT2, "src/test/resources/testfiles/proxyroot/", null, null, null);
