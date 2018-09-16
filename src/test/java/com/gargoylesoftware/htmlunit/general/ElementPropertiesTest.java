@@ -531,7 +531,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "animate(),append(),attachShadow(),attributes,attributeStyleMap,"
+    @Alerts(CHROME = "animate(),append(),attachShadow(),attributes,attributeStyleMap,"
                 + "childElementCount,children,classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),computedStyleMap(),createShadowRoot(),"
                 + "firstElementChild,getAttribute(),getAttributeNames(),getAttributeNode(),"
@@ -545,8 +545,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),requestPointerLock(),"
                 + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),"
                 + "scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
-                + "setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,webkitMatchesSelector(),"
-                + "webkitRequestFullScreen(),webkitRequestFullscreen()",
+                + "setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),"
+                + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
             FF52 = "animate(),append(),attributes,childElementCount,children,classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
@@ -613,8 +613,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scroll(),scrollBy(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTo(),scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),"
-                + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,tagName,"
-                + "webkitMatchesSelector(),webkitRequestFullScreen(),webkitRequestFullscreen()",
+                + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),shadowRoot,slot,"
+                + "tagName,toggleAttribute(),"
+                + "webkitMatchesSelector(),webkitRequestFullscreen(),webkitRequestFullScreen()",
             FF52 = "after(),animate(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -1207,7 +1208,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "captureStream(),getContext(),height,toBlob(),toDataURL(),width",
+    @Alerts(CHROME = "captureStream(),getContext(),height,toBlob(),"
+                    + "toDataURL(),transferControlToOffscreen(),width",
             FF = "captureStream(),getContext(),height,"
                     + "mozGetAsFile(),mozOpaque,mozPrintCallback,toBlob(),toDataURL(),width",
             IE = "getContext(),height,msToBlob(),toDataURL(),width",
@@ -2754,12 +2756,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "addTextTrack(),autoplay,buffered,"
                 + "canPlayType(),captureStream(),controls,controlsList,crossOrigin,currentSrc,currentTime,"
-                + "defaultMuted,defaultPlaybackRate,disableRemotePlayback,duration,"
+                + "defaultMuted,defaultPlaybackRate,disablePictureInPicture,disableRemotePlayback,duration,"
                 + "ended,error,HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,"
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
+                + "onenterpictureinpicture,onleavepictureinpicture,"
                 + "onwaitingforkey,pause(),paused,play(),playbackRate,played,"
-                + "poster,preload,readyState,remote,"
+                + "poster,preload,readyState,remote,requestPictureInPicture(),"
                 + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,"
                 + "textTracks,videoHeight,videoWidth,"
                 + "volume,webkitAudioDecodedByteCount,webkitDecodedFrameCount,"
@@ -3281,14 +3284,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "activeElement,adoptNode(),alinkColor,all,anchors,append(),applets,"
+    @Alerts(CHROME = "activeElement,adoptNode(),alinkColor,all,anchors,append(),applets,"
                 + "bgColor,body,captureEvents(),caretRangeFromPoint(),characterSet,"
                 + "charset,childElementCount,children,clear(),close(),compatMode,contentType,cookie,createAttribute(),"
                 + "createAttributeNS(),createCDATASection(),createComment(),createDocumentFragment(),createElement(),"
                 + "createElementNS(),createEvent(),createExpression(),createNodeIterator(),createNSResolver(),"
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),currentScript,"
                 + "defaultView,designMode,dir,doctype,documentElement,documentURI,domain,elementFromPoint(),"
-                + "elementsFromPoint(),embeds,evaluate(),execCommand(),exitPointerLock(),"
+                + "elementsFromPoint(),embeds,evaluate(),execCommand(),exitPictureInPicture(),exitPointerLock(),"
                 + "fgColor,firstElementChild,fonts,forms,"
                 + "getElementById(),getElementsByClassName(),getElementsByName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getSelection(),hasFocus(),head,hidden,images,implementation,importNode(),"
@@ -3305,7 +3308,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onresume,onscroll,onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvisibilitychange,onvolumechange,onwaiting,"
                 + "onwebkitfullscreenchange,"
-                + "onwebkitfullscreenerror,onwheel,open(),origin,plugins,pointerLockElement,"
+                + "onwebkitfullscreenerror,onwheel,open(),origin,pictureInPictureElement,pictureInPictureEnabled,"
+                + "plugins,pointerLockElement,"
                 + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
                 + "queryCommandValue(),querySelector(),querySelectorAll(),readyState,referrer,registerElement(),"
                 + "releaseEvents(),rootElement,"
