@@ -1216,8 +1216,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"1", "id2"},
-            CHROME = {"0"})
+    @Alerts({"1", "id2"})
     public void target() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

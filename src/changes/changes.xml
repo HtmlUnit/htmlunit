@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.34" date="...., 2018" description="Bugfixes">
+        <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 69">
             <action type="fix" dev="rbri">
                 Correct handling of content type 'no-gzip' and 'gzip-only-text/html'.
             </action>
