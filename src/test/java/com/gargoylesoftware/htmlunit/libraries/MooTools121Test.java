@@ -62,7 +62,15 @@ public class MooTools121Test extends WebDriverTestCase {
      */
     @AfterClass
     public static void zzz_stopServer() throws Exception {
-        SERVER_.stop();
+        try {
+            SERVER_.stop();
+            SERVER_.destroy();
+        }
+        catch (final Exception e) {
+            // try to find problem on jenkins
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     /**

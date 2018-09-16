@@ -160,9 +160,17 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
      */
     @AfterClass
     public static void zzz_stopServer() throws Exception {
-        if (SERVER_ != null) {
-            SERVER_.stop();
-            SERVER_ = null;
+        try {
+            if (SERVER_ != null) {
+                SERVER_.stop();
+                SERVER_.destroy();
+                SERVER_ = null;
+            }
+        }
+        catch (final Exception e) {
+            // try to find problem on jenkins
+            e.printStackTrace();
+            throw e;
         }
     }
 }

@@ -374,18 +374,44 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if it fails
      */
     protected static void stopWebServers() throws Exception {
-        if (STATIC_SERVER_ != null) {
-            STATIC_SERVER_.stop();
+        try {
+            if (STATIC_SERVER_ != null) {
+                STATIC_SERVER_.stop();
+                STATIC_SERVER_.destroy();
+                STATIC_SERVER_ = null;
+            }
         }
-        if (STATIC_SERVER2_ != null) {
-            STATIC_SERVER2_.stop();
+        catch (final Exception e) {
+            // try to find problem on jenkins
+            e.printStackTrace();
+            throw e;
         }
-        if (STATIC_SERVER3_ != null) {
-            STATIC_SERVER3_.stop();
+
+        try {
+            if (STATIC_SERVER2_ != null) {
+                STATIC_SERVER2_.stop();
+                STATIC_SERVER2_.destroy();
+                STATIC_SERVER2_ = null;
+            }
         }
-        STATIC_SERVER_ = null;
-        STATIC_SERVER2_ = null;
-        STATIC_SERVER3_ = null;
+        catch (final Exception e) {
+            // try to find problem on jenkins
+            e.printStackTrace();
+            throw e;
+        }
+
+        try {
+            if (STATIC_SERVER3_ != null) {
+                STATIC_SERVER3_.stop();
+                STATIC_SERVER3_.destroy();
+                STATIC_SERVER3_ = null;
+            }
+        }
+        catch (final Exception e) {
+            // try to find problem on jenkins
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     /**
