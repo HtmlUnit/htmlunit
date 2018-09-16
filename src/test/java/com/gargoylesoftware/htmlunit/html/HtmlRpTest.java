@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link HtmlRp}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlRpTest extends WebDriverTestCase {
@@ -33,7 +34,7 @@ public class HtmlRpTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline", "none"},
+    @Alerts(CHROME = {"", "none", "none"},
             FF = {"none", "none", "none"},
             IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {
@@ -59,6 +60,6 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "</ruby>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageWithAlerts2(html, 77777);
     }
 }

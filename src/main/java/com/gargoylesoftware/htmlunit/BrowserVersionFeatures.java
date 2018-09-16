@@ -1510,10 +1510,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     QUERYSELECTORALL_NOT_IN_QUIRKS,
 
-    /** Indicates {@code .querySelectorAll()} ignores {@code :target} condition. */
-    @BrowserFeature(CHROME)
-    QUERYSELECTORALL_NO_TARGET,
-
     /** IE throws a syntax error if a css3 pseudo selector is used on a detached node. */
     @BrowserFeature(IE)
     QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE,

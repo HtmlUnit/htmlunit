@@ -79,9 +79,6 @@ public class HtmlRp extends HtmlElement {
                 return DisplayStyle.EMPTY;
             }
         }
-        else {
-            return DisplayStyle.NONE;
-        }
-        return DisplayStyle.INLINE;
+        return DisplayStyle.NONE;
     }
 }
