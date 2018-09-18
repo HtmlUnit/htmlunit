@@ -36,6 +36,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -177,6 +179,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private boolean useRealBrowser_;
     private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
+    private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
 
     /**
      * The HtmlUnitDriver.
@@ -490,6 +493,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     return webClient;
                 }
             };
+            webDriver_.setExecutor(EXECUTOR_POOL);
         }
         return webDriver_;
     }
