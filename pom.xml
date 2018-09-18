@@ -276,8 +276,6 @@
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
-
-                                <exclude>**/general/*.java</exclude>
                             </excludes>
                             <argLine>-Xms128m -Xmx512m -Dsun.reflect.noInflation=true</argLine>
                             <systemPropertyVariables>
