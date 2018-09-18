@@ -6334,7 +6334,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function OffscreenCanvas() { [native code] }")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }

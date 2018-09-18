@@ -240,7 +240,9 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
+    @Alerts(CHROME = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2012 "
+                + "\u0645\u064a\u0644\u0627\u062f\u064a 4:00:00 \u0635",
+            FF60 = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0662 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
             FF52 = "\u0627\u0644\u062E\u0645\u064A\u0633\u060C \u0662\u0660 \u062F\u064A\u0633\u0645\u0628\u0631"
@@ -310,6 +312,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0662\u0660\u200F/\u0661\u0662\u200F/\u0662\u0660\u0661\u0662",
+            CHROME = "20\u200f/12\u200f/2012",
             IE = "\u200F\u0660\u0667\u200F/\u200F\u0660\u0662\u200F/\u200F\u0661\u0664\u0663\u0664")
     public void format_ar() throws Exception {
         test("new Intl.DateTimeFormat('ar').format(date)");

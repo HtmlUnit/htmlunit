@@ -1333,7 +1333,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
+    @Alerts(DEFAULT = {"", "none"},
             FF = {"none", "none"},
             IE = {"inline", "inline"})
     public void rp() throws Exception {
