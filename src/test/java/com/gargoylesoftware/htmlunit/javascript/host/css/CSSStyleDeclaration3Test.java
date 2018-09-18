@@ -218,9 +218,9 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"transparent", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll"},
-            CHROME = {"rgba(0, 0, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll"},
-            FF60 = {"rgba(0, 0, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll"})
+    @Alerts(DEFAULT = {"transparent", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
+            CHROME = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"},
+            FF60 = {"rgba(0, 0, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"})
     public void backgroundCssImage() throws Exception {
         backgroundCss("url(myImage.png)");
     }
@@ -305,7 +305,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"rgb(255, 0, 0)", "url(\"http://localhost:12345/myImage.png\")", "repeat", "0% 0%", "scroll"})
+    @Alerts({"rgb(255, 0, 0)", "url(\"§§URL§§myImage.png\")", "repeat", "0% 0%", "scroll"})
     public void backgroundCssMixed() throws Exception {
         backgroundCss("red url(\"myImage.png\")");
     }
