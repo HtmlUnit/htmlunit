@@ -277,7 +277,7 @@ public final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", ff(""), chrome("0px")),
+        BLOCK_SIZE("blockSize", "block-size", ff(""), chrome("322px")),
 
         /** The style property {@code block-size}. */
         BLOCK_SIZE_("block-size", "block-size", ff("")),
@@ -286,49 +286,49 @@ public final class StyleAttributes {
         BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
         /** The style property {@code borderBlockEnd}. */
-        BORDER_BLOCK_END("borderBlockEnd", "border-block-end", ff("")),
+        BORDER_BLOCK_END("borderBlockEnd", "border-block-end", chrome("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block-end}. */
         BORDER_BLOCK_END_("border-block-end", "border-block-end", ff("")),
 
         /** The style property {@code borderBlockEndColor}. */
-        BORDER_BLOCK_END_COLOR("borderBlockEndColor", "border-block-end-color", ff("")),
+        BORDER_BLOCK_END_COLOR("borderBlockEndColor", "border-block-end-color", chrome("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block-end-color}. */
         BORDER_BLOCK_END_COLOR_("border-block-end-color", "border-block-end-color", ff("")),
 
         /** The style property {@code borderBlockEndStyle}. */
-        BORDER_BLOCK_END_STYLE("borderBlockEndStyle", "border-block-end-style", ff("")),
+        BORDER_BLOCK_END_STYLE("borderBlockEndStyle", "border-block-end-style", chrome("none"), ff("")),
 
         /** The style property {@code border-block-end-style}. */
         BORDER_BLOCK_END_STYLE_("border-block-end-style", "border-block-end-style", ff("")),
 
         /** The style property {@code borderBlockEndWidth}. */
-        BORDER_BLOCK_END_WIDTH("borderBlockEndWidth", "border-block-end-width", ff("")),
+        BORDER_BLOCK_END_WIDTH("borderBlockEndWidth", "border-block-end-width", chrome("0px"), ff("")),
 
         /** The style property {@code border-block-end-width}. */
         BORDER_BLOCK_END_WIDTH_("border-block-end-width", "border-block-end-width", ff("")),
 
         /** The style property {@code borderBlockStart}. */
-        BORDER_BLOCK_START("borderBlockStart", "border-block-start", ff("")),
+        BORDER_BLOCK_START("borderBlockStart", "border-block-start", chrome("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block-start}. */
         BORDER_BLOCK_START_("border-block-start", "border-block-start", ff("")),
 
         /** The style property {@code borderBlockStartColor}. */
-        BORDER_BLOCK_START_COLOR("borderBlockStartColor", "border-block-start-color", ff("")),
+        BORDER_BLOCK_START_COLOR("borderBlockStartColor", "border-block-start-color", chrome("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-block-start-color}. */
         BORDER_BLOCK_START_COLOR_("border-block-start-color", "border-block-start-color", ff("")),
 
         /** The style property {@code borderBlockStartStyle}. */
-        BORDER_BLOCK_START_STYLE("borderBlockStartStyle", "border-block-start-style", ff("")),
+        BORDER_BLOCK_START_STYLE("borderBlockStartStyle", "border-block-start-style", chrome("none"), ff("")),
 
         /** The style property {@code border-block-start-style}. */
         BORDER_BLOCK_START_STYLE_("border-block-start-style", "border-block-start-style", ff("")),
 
         /** The style property {@code borderBlockStartWidth}. */
-        BORDER_BLOCK_START_WIDTH("borderBlockStartWidth", "border-block-start-width", ff("")),
+        BORDER_BLOCK_START_WIDTH("borderBlockStartWidth", "border-block-start-width", chrome("0px"), ff("")),
 
         /** The style property {@code border-block-start-width}. */
         BORDER_BLOCK_START_WIDTH_("border-block-start-width", "border-block-start-width", ff("")),
@@ -426,49 +426,50 @@ public final class StyleAttributes {
         BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ffBelow60("1 1 1 1"), ff60up("1")),
 
         /** The style property {@code borderInlineEnd}. */
-        BORDER_INLINE_END("borderInlineEnd", "border-inline-end", ff("")),
+        BORDER_INLINE_END("borderInlineEnd", "border-inline-end", chrome("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline-end}. */
         BORDER_INLINE_END_("border-inline-end", "border-inline-end", ff("")),
 
         /** The style property {@code borderInlineEndColor}. */
-        BORDER_INLINE_END_COLOR("borderInlineEndColor", "border-inline-end-color", ff("")),
+        BORDER_INLINE_END_COLOR("borderInlineEndColor", "border-inline-end-color", chrome("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline-end-color}. */
         BORDER_INLINE_END_COLOR_("border-inline-end-color", "border-inline-end-color", ff("")),
 
         /** The style property {@code borderInlineEndStyle}. */
-        BORDER_INLINE_END_STYLE("borderInlineEndStyle", "border-inline-end-style", ff("")),
+        BORDER_INLINE_END_STYLE("borderInlineEndStyle", "border-inline-end-style", chrome("none"), ff("")),
 
         /** The style property {@code border-inline-end-style}. */
         BORDER_INLINE_END_STYLE_("border-inline-end-style", "border-inline-end-style", ff("")),
 
         /** The style property {@code borderInlineEndWidth}. */
-        BORDER_INLINE_END_WIDTH("borderInlineEndWidth", "border-inline-end-width", ff("")),
+        BORDER_INLINE_END_WIDTH("borderInlineEndWidth", "border-inline-end-width", chrome("0px"), ff("")),
 
         /** The style property {@code border-inline-end-width}. */
         BORDER_INLINE_END_WIDTH_("border-inline-end-width", "border-inline-end-width", ff("")),
 
         /** The style property {@code borderInlineStart}. */
-        BORDER_INLINE_START("borderInlineStart", "border-inline-start", ff("")),
+        BORDER_INLINE_START("borderInlineStart", "border-inline-start", chrome("0px none rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline-start}. */
         BORDER_INLINE_START_("border-inline-start", "border-inline-start", ff("")),
 
         /** The style property {@code borderInlineStartColor}. */
-        BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color", ff("")),
+        BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color",
+                chrome("rgb(0, 0, 0)"), ff("")),
 
         /** The style property {@code border-inline-start-color}. */
         BORDER_INLINE_START_COLOR_("border-inline-start-color", "border-inline-start-color", ff("")),
 
         /** The style property {@code borderInlineStartStyle}. */
-        BORDER_INLINE_START_STYLE("borderInlineStartStyle", "border-inline-start-style", ff("")),
+        BORDER_INLINE_START_STYLE("borderInlineStartStyle", "border-inline-start-style", chrome("none"), ff("")),
 
         /** The style property {@code border-inline-start-style}. */
         BORDER_INLINE_START_STYLE_("border-inline-start-style", "border-inline-start-style", ff("")),
 
         /** The style property {@code borderInlineStartWidth}. */
-        BORDER_INLINE_START_WIDTH("borderInlineStartWidth", "border-inline-start-width", ff("")),
+        BORDER_INLINE_START_WIDTH("borderInlineStartWidth", "border-inline-start-width", chrome("0px"), ff("")),
 
         /** The style property {@code border-inline-start-width}. */
         BORDER_INLINE_START_WIDTH_("border-inline-start-width", "border-inline-start-width", ff("")),
@@ -1230,13 +1231,13 @@ public final class StyleAttributes {
         MARGIN("margin", "margin", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code marginBlockEnd}. */
-        MARGIN_BLOCK_END("marginBlockEnd", "margin-block-end", ff("")),
+        MARGIN_BLOCK_END("marginBlockEnd", "margin-block-end", chrome("0px"), ff("")),
 
         /** The style property {@code margin-block-end}. */
         MARGIN_BLOCK_END_("margin-block-end", "margin-block-end", ff("")),
 
         /** The style property {@code marginBlockStart}. */
-        MARGIN_BLOCK_START("marginBlockStart", "margin-block-start", ff("")),
+        MARGIN_BLOCK_START("marginBlockStart", "margin-block-start", chrome("0px"), ff("")),
 
         /** The style property {@code margin-block-start}. */
         MARGIN_BLOCK_START_("margin-block-start", "margin-block-start", ff("")),
@@ -1248,13 +1249,13 @@ public final class StyleAttributes {
         MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff("0px")),
 
         /** The style property {@code marginInlineEnd}. */
-        MARGIN_INLINE_END("marginInlineEnd", "margin-inline-end", ff("")),
+        MARGIN_INLINE_END("marginInlineEnd", "margin-inline-end", chrome("0px"), ff("")),
 
         /** The style property {@code margin-inline-end}. */
         MARGIN_INLINE_END_("margin-inline-end", "margin-inline-end", ff("")),
 
         /** The style property {@code marginInlineStart}. */
-        MARGIN_INLINE_START("marginInlineStart", "margin-inline-start", ff("")),
+        MARGIN_INLINE_START("marginInlineStart", "margin-inline-start", chrome("0px"), ff("")),
 
         /** The style property {@code margin-inline-start}. */
         MARGIN_INLINE_START_("margin-inline-start", "margin-inline-start", ff("")),
@@ -2378,13 +2379,13 @@ public final class StyleAttributes {
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
 
         /** The style property {@code paddingBlockEnd}. */
-        PADDING_BLOCK_END("paddingBlockEnd", "padding-block-end", ff("")),
+        PADDING_BLOCK_END("paddingBlockEnd", "padding-block-end", chrome("0px"), ff("")),
 
         /** The style property {@code padding-block-end}. */
         PADDING_BLOCK_END_("padding-block-end", "padding-block-end", ff("")),
 
         /** The style property {@code paddingBlockStart}. */
-        PADDING_BLOCK_START("paddingBlockStart", "padding-block-start", ff("")),
+        PADDING_BLOCK_START("paddingBlockStart", "padding-block-start", chrome("0px"), ff("")),
 
         /** The style property {@code padding-block-start}. */
         PADDING_BLOCK_START_("padding-block-start", "padding-block-start", ff("")),
@@ -2396,13 +2397,13 @@ public final class StyleAttributes {
         PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff("0px")),
 
         /** The style property {@code paddingInlineEnd}. */
-        PADDING_INLINE_END("paddingInlineEnd", "padding-inline-end", ff("")),
+        PADDING_INLINE_END("paddingInlineEnd", "padding-inline-end", chrome("0px"), ff("")),
 
         /** The style property {@code padding-inline-end}. */
         PADDING_INLINE_END_("padding-inline-end", "padding-inline-end", ff("")),
 
         /** The style property {@code paddingInlineStart}. */
-        PADDING_INLINE_START("paddingInlineStart", "padding-inline-start", ff("")),
+        PADDING_INLINE_START("paddingInlineStart", "padding-inline-start", chrome("0px"), ff("")),
 
         /** The style property {@code padding-inline-start}. */
         PADDING_INLINE_START_("padding-inline-start", "padding-inline-start", ff("")),
@@ -2586,6 +2587,75 @@ public final class StyleAttributes {
         /** The style property {@code scroll-behavior}. */
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff("auto")),
 
+        /** The style property {@code scrollMargin}. */
+        SCROLL_MARGIN("scrollMargin", "scroll-margin", chrome("0px")),
+
+        /** The style property {@code scrollMarginBlock}. */
+        SCROLL_MARGIN_BLOCK("scrollMarginBlock", "scroll-margin-block", chrome("0px")),
+
+        /** The style property {@code scrollMarginBlockEnd}. */
+        SCROLL_MARGIN_BLOCK_END("scrollMarginBlockEnd", "scroll-margin-block-end", chrome("0px")),
+
+        /** The style property {@code scrollMarginBlockStart}. */
+        SCROLL_MARGIN_BLOCK_START("scrollMarginBlockStart", "scroll-margin-block-start", chrome("0px")),
+
+        /** The style property {@code scrollMarginBottom}. */
+        SCROLL_MARGIN_BOTTOM("scrollMarginBottom", "scroll-margin-bottom", chrome("0px")),
+
+        /** The style property {@code scrollMarginInline}. */
+        SCROLL_MARGIN_INLINE("scrollMarginInline", "scroll-margin-inline", chrome("0px")),
+
+        /** The style property {@code scrollMarginInlineEnd}. */
+        SCROLL_MARGIN_INLINE_END("scrollMarginInlineEnd", "scroll-margin-inline-end", chrome("0px")),
+
+        /** The style property {@code scrollMarginInlineStart}. */
+        SCROLL_MARGIN_INLINE_START("scrollMarginInlineStart", "scroll-margin-inline-start", chrome("0px")),
+
+        /** The style property {@code scrollMarginLeft}. */
+        SCROLL_MARGIN_LEFT("scrollMarginLeft", "scroll-margin-left", chrome("0px")),
+
+        /** The style property {@code scrollMarginRight}. */
+        SCROLL_MARGIN_RIGHT("scrollMarginRight", "scroll-margin-right", chrome("0px")),
+
+        /** The style property {@code scrollMarginTop}. */
+        SCROLL_MARGIN_TOP("scrollMarginTop", "scroll-margin-top", chrome("0px")),
+
+        /** The style property {@code scrollPadding}. */
+        SCROLL_PADDING("scrollPadding", "scroll-padding", chrome("auto")),
+
+        /** The style property {@code scrollPaddingBlock}. */
+        SCROLL_PADDING_BLOCK("scrollPaddingBlock", "scroll-padding-block", chrome("auto")),
+
+        /** The style property {@code scrollPaddingBlockEnd}. */
+        SCROLL_PADDING_BLOCK_END("scrollPaddingBlockEnd", "scroll-padding-block-end", chrome("auto")),
+
+        /** The style property {@code scrollPaddingBlockStart}. */
+        SCROLL_PADDING_BLOCK_START("scrollPaddingBlockStart", "scroll-padding-block-start", chrome("auto")),
+
+        /** The style property {@code scrollPaddingBottom}. */
+        SCROLL_PADDING_BOTTOM("scrollPaddingBottom", "scroll-padding-bottom", chrome("auto")),
+
+        /** The style property {@code scrollPaddingInline}. */
+        SCROLL_PADDING_INLINE("scrollPaddingInline", "scroll-padding-inline", chrome("auto")),
+
+        /** The style property {@code scrollPaddingInlineEnd}. */
+        SCROLL_PADDING_INLINE_END("scrollPaddingInlineEnd", "scroll-padding-inline-end", chrome("auto")),
+
+        /** The style property {@code scrollPaddingInlineStart}. */
+        SCROLL_PADDING_INLINE_START("scrollPaddingInlineStart", "scroll-padding-inline-start", chrome("auto")),
+
+        /** The style property {@code scrollPaddingLeft}. */
+        SCROLL_PADDING_LEFT("scrollPaddingLeft", "scroll-padding-left", chrome("auto")),
+
+        /** The style property {@code scrollPaddingRight}. */
+        SCROLL_PADDING_RIGHT("scrollPaddingRight", "scroll-padding-right", chrome("auto")),
+
+        /** The style property {@code scrollPaddingTop}. */
+        SCROLL_PADDING_TOP("scrollPaddingTop", "scroll-padding-top", chrome("auto")),
+
+        /** The style property {@code scrollSnapAlign}. */
+        SCROLL_SNAP_ALIGN("scrollSnapAlign", "scroll-snap-align", chrome("none")),
+
         /** The style property {@code scrollSnapCoordinate}. */
         SCROLL_SNAP_COORDINATE("scrollSnapCoordinate", "scroll-snap-coordinate", ff("none")),
 
@@ -2610,8 +2680,11 @@ public final class StyleAttributes {
         /** The style property {@code scroll-snap-points-y}. */
         SCROLL_SNAP_POINTS_Y_("scroll-snap-points-y", "scroll-snap-points-y", ff("none")),
 
+        /** The style property {@code scrollSnapStop}. */
+        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chrome("normal")),
+
         /** The style property {@code scrollSnapType}. */
-        SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", ff("")),
+        SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", chrome("none"), ff("")),
 
         /** The style property {@code scroll-snap-type}. */
         SCROLL_SNAP_TYPE_("scroll-snap-type", "scroll-snap-type", ff("")),

@@ -60,6 +60,6 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "</ruby>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 77777);
+        loadPageWithAlerts2(html);
     }
 }
