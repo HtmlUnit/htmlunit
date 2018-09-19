@@ -53,6 +53,11 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
             Pattern.compile(".*Stopping server.\r\r?\n"),
             Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
+
+            // Quercus
+            Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r\n"),
+            Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r\n"),
+            Pattern.compile(".*Quercus finished initialization in \\d*ms\r\n")
     };
 
     /**

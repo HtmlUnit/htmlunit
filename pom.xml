@@ -939,6 +939,12 @@
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>quercus</artifactId>
+            <version>4.0.45</version>
+            <scope>test</scope>
+        </dependency>
         <!-- WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
