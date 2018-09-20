@@ -53,7 +53,7 @@ public class MooTools121Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @BeforeClass
-    public static void aaa_startSesrver() throws Exception {
+    public static void startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/mootools/1.2.1", null);
     }
 
@@ -61,15 +61,11 @@ public class MooTools121Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @AfterClass
-    public static void zzz_stopServer() throws Exception {
-        try {
+    public static void stopServer() throws Exception {
+        if (SERVER_ != null) {
             SERVER_.stop();
             SERVER_.destroy();
-        }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
+            SERVER_ = null;
         }
     }
 

@@ -43,7 +43,7 @@ public class Prototype150rc1Test extends PrototypeTestBase {
      * @throws Exception if an error occurs
      */
     @BeforeClass
-    public static void aaa_startSesrver() throws Exception {
+    public static void startSesrver() throws Exception {
         SERVER_ = WebServerTestCase.createWebServer("src/test/resources/libraries/prototype/1.5.0-rc1/", null);
     }
 

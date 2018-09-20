@@ -62,18 +62,11 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
     @Override
     @After
     public void tearDown() throws Exception {
-        try {
-            if (proxyWebServer_ != null) {
-                proxyWebServer_.stop();
-                proxyWebServer_.destroy();
-            }
-            proxyWebServer_ = null;
+        if (proxyWebServer_ != null) {
+            proxyWebServer_.stop();
+            proxyWebServer_.destroy();
         }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
-        }
+        proxyWebServer_ = null;
 
         super.tearDown();
     }

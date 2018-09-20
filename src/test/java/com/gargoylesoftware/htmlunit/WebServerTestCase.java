@@ -223,17 +223,10 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     @After
     public void tearDown() throws Exception {
-        try {
-            if (server_ != null) {
-                server_.stop();
-                server_.destroy();
-                server_ = null;
-            }
-        }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
+        if (server_ != null) {
+            server_.stop();
+            server_.destroy();
+            server_ = null;
         }
 
         stopWebServer();
@@ -365,17 +358,10 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if it fails
      */
     protected static void stopWebServer() throws Exception {
-        try {
-            if (STATIC_SERVER_ != null) {
-                STATIC_SERVER_.stop();
-                STATIC_SERVER_.destroy();
-                STATIC_SERVER_ = null;
-            }
-        }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
+        if (STATIC_SERVER_ != null) {
+            STATIC_SERVER_.stop();
+            STATIC_SERVER_.destroy();
+            STATIC_SERVER_ = null;
         }
     }
 

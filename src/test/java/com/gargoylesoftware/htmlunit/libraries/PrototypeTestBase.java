@@ -170,15 +170,11 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @AfterClass
-    public static void zzz_stopServer() throws Exception {
-        try {
+    public static void stopServer() throws Exception {
+        if (SERVER_ != null) {
             SERVER_.stop();
             SERVER_.destroy();
-        }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
+            SERVER_ = null;
         }
     }
 

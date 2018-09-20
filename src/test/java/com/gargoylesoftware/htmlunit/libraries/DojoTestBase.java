@@ -185,7 +185,7 @@ public abstract class DojoTestBase extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Before
-    public void aaa_startSesrver() throws Exception {
+    public void startSesrver() throws Exception {
         if (SERVER_ == null) {
             SERVER_ = WebServerTestCase.createWebServer("src/test/resources/"
                         + BASE_FILE_PATH + "/" + getVersion(), null);
@@ -196,18 +196,11 @@ public abstract class DojoTestBase extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @AfterClass
-    public static void zzz_stopServer() throws Exception {
-        try {
-            if (SERVER_ != null) {
-                SERVER_.stop();
-                SERVER_.destroy();
-                SERVER_ = null;
-            }
-        }
-        catch (final Exception e) {
-            // try to find problem on jenkins
-            e.printStackTrace();
-            throw e;
+    public static void stopServer() throws Exception {
+        if (SERVER_ != null) {
+            SERVER_.stop();
+            SERVER_.destroy();
+            SERVER_ = null;
         }
     }
 }
