@@ -14,10 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -38,8 +38,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 @RunWith(BrowserRunner.class)
 public class HttpWebConnection3Test extends WebDriverTestCase {
 
-    private PrimitiveWebServer primitiveWebServer_;
-
     /**
      * @throws Exception if the test fails
      */
@@ -58,28 +56,18 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + "Hi";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
-        primitiveWebServer_.start();
-        final WebDriver driver = getWebDriver();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+            final WebDriver driver = getWebDriver();
 
-        driver.get("http://localhost:" + PORT);
-        final String request = primitiveWebServer_.getRequests().get(0);
-        final String[] headers = request.split("\\r\\n");
-        final String[] result = new String[headers.length - 1];
-        for (int i = 0; i < result.length; i++) {
-            final String header = headers[i + 1];
-            result[i] = header.substring(0, header.indexOf(':'));
-        }
-        assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void stopServer() throws Exception {
-        if (primitiveWebServer_ != null) {
-            primitiveWebServer_.stop();
+            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            final String request = primitiveWebServer.getRequests().get(0);
+            final String[] headers = request.split("\\r\\n");
+            final String[] result = new String[headers.length - 1];
+            for (int i = 0; i < result.length; i++) {
+                final String header = headers[i + 1];
+                result[i] = header.substring(0, header.indexOf(':'));
+            }
+            assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
         }
     }
 
@@ -106,30 +94,30 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + htmlResponse;
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
-        primitiveWebServer_.start();
-        final WebDriver driver = getWebDriver();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+            final WebDriver driver = getWebDriver();
 
-        driver.get("http://localhost:" + PORT);
-        driver.findElement(By.linkText("Click me")).click();
+            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            driver.findElement(By.linkText("Click me")).click();
 
-        final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
-        wait.until(currentUrlContains("2.html"));
+            final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+            wait.until(currentUrlContains("2.html"));
 
-        int index = 1;
-        String request;
-        do {
-            request = primitiveWebServer_.getRequests().get(index++);
+            int index = 1;
+            String request;
+            do {
+                request = primitiveWebServer.getRequests().get(index++);
+            }
+            while (request.contains("/favicon.ico"));
+
+            final String[] headers = request.split("\\r\\n");
+            final String[] result = new String[headers.length - 1];
+            for (int i = 0; i < result.length; i++) {
+                final String header = headers[i + 1];
+                result[i] = header.substring(0, header.indexOf(':'));
+            }
+            assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
         }
-        while (request.contains("/favicon.ico"));
-
-        final String[] headers = request.split("\\r\\n");
-        final String[] result = new String[headers.length - 1];
-        for (int i = 0; i < result.length; i++) {
-            final String header = headers[i + 1];
-            result[i] = header.substring(0, header.indexOf(':'));
-        }
-        assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
     }
 
     /**
@@ -157,9 +145,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts("§§URL§§?????")
     // seems to work only when running alone
     public void locationUTF() throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
-                + "Location: " +  URL_FIRST + "\u0623\u0647\u0644\u0627\u064b" + "\r\n"
+                + "Location: " +  url + "\u0623\u0647\u0644\u0627\u064b" + "\r\n"
                 + "\r\n";
 
         final String response2 = "HTTP/1.1 200 OK\r\n"
@@ -168,17 +158,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "\r\n"
                 + "Hi";
 
-        expandExpectedAlertsVariables(URL_FIRST);
+        expandExpectedAlertsVariables(new URL(url));
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+            final WebDriver driver = getWebDriver();
+            driver.get(url);
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+            assertTrue(driver.getPageSource().contains("Hi"));
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
-        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-        assertTrue(driver.getPageSource().contains("Hi"));
-
-        assertEquals(2, primitiveWebServer_.getRequests().size());
+            assertEquals(2, primitiveWebServer.getRequests().size());
+        }
     }
 
     /**
@@ -189,10 +178,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
     public void locationQueryUTF8Encoded() throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
                 + "Location: "
-                    +  URL_FIRST
+                    +  url
                     + "test?"
                     + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
                     + "\r\n"
@@ -204,17 +195,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "\r\n"
                 + "Hi";
 
-        expandExpectedAlertsVariables(URL_FIRST);
+        expandExpectedAlertsVariables(new URL(url));
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+            final WebDriver driver = getWebDriver();
+            driver.get(url);
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+            assertTrue(driver.getPageSource().contains("Hi"));
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
-        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-        assertTrue(driver.getPageSource().contains("Hi"));
-
-        assertEquals(2, primitiveWebServer_.getRequests().size());
+            assertEquals(2, primitiveWebServer.getRequests().size());
+        }
     }
 
     /**
@@ -225,10 +215,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts("§§URL§§%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
     public void locationUTF8Encoded() throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
         final String response = "HTTP/1.1 302 Found\r\n"
                 + "Content-Length: 0\r\n"
                 + "Location: "
-                    +  URL_FIRST
+                    +  url
                     + URLEncoder.encode("\u0623\u0647\u0644\u0627\u064b", "UTF-8")
                     + "\r\n"
                 + "\r\n";
@@ -239,17 +231,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "\r\n"
                 + "Hi";
 
-        expandExpectedAlertsVariables(URL_FIRST);
+        expandExpectedAlertsVariables(new URL(url));
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response, response2);
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+            final WebDriver driver = getWebDriver();
+            driver.get(url);
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+            assertTrue(driver.getPageSource().contains("Hi"));
 
-        final WebDriver driver = getWebDriver();
-        driver.get(URL_FIRST.toExternalForm());
-        assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-        assertTrue(driver.getPageSource().contains("Hi"));
-
-        assertEquals(2, primitiveWebServer_.getRequests().size());
+            assertEquals(2, primitiveWebServer.getRequests().size());
+        }
     }
 
     /**
@@ -264,13 +255,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "Content-Length: 0\r\n"
                 + "\r\n";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+            final WebDriver driver = getWebDriver();
 
-        final WebDriver driver = getWebDriver();
-
-        driver.get("http://localhost:" + PORT + "?para=%u65E5");
-        assertTrue(primitiveWebServer_.getRequests().get(0),
-                    primitiveWebServer_.getRequests().get(0).contains("para=%u65E5"));
+            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER + "?para=%u65E5");
+            assertTrue(primitiveWebServer.getRequests().get(0),
+                        primitiveWebServer.getRequests().get(0).contains("para=%u65E5"));
+        }
     }
 }

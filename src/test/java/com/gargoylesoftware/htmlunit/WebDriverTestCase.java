@@ -513,6 +513,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
             stopWebServers();
         }
+
         LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
             final Server server = buildServer(PORT);

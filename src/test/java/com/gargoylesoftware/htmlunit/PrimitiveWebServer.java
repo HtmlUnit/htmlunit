@@ -15,9 +15,11 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.CharArrayWriter;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -33,7 +35,7 @@ import java.util.List;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class PrimitiveWebServer {
+public class PrimitiveWebServer implements Closeable {
 
     private final int port_;
     private final String firstResponse_;
@@ -45,31 +47,57 @@ public class PrimitiveWebServer {
     /**
      * Constructs a new SimpleWebServer.
      *
-     * @param port the port
      * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @throws IOException in case of error
      */
-    public PrimitiveWebServer(final int port, final String defaultResponse) {
-        this(port, defaultResponse, null);
+    public PrimitiveWebServer(final String defaultResponse) throws IOException {
+        this(null, defaultResponse, null);
     }
 
     /**
      * Constructs a new SimpleWebServer.
      *
-     * @param port the port
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @throws IOException in case of error
      */
-    public PrimitiveWebServer(final int port, final String firstResponse, final String otherResponse) {
-        port_ = port;
+    public PrimitiveWebServer(final String firstResponse, final String otherResponse)
+            throws IOException {
+        this(null, firstResponse, otherResponse);
+    }
+
+    /**
+     * Constructs a new SimpleWebServer.
+     *
+     * @param charset the charset
+     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
+     * @throws IOException in case of error
+     */
+    public PrimitiveWebServer(final Charset charset, final String firstResponse, final String otherResponse)
+            throws IOException {
+        port_ = WebTestCase.PORT_PRIMITIVE_SERVER;
         firstResponse_ = firstResponse;
         otherResponse_ = otherResponse;
+        if (charset != null) {
+            charset_ = charset;
+        }
+
+        try {
+            start();
+        }
+        catch (final BindException e) {
+            final BindException ex = new BindException("Port " + port_ + " already in use (Bind failed)");
+            ex.initCause(e);
+            throw ex;
+        }
     }
 
     /**
      * Starts the server.
      * @throws IOException if an error occurs
      */
-    public void start() throws IOException {
+    private void start() throws IOException {
         server_ = new ServerSocket(port_);
         new Thread(new Runnable() {
 
@@ -131,7 +159,8 @@ public class PrimitiveWebServer {
      * Stops the server.
      * @throws IOException if an error occurs
      */
-    public void stop() throws IOException {
+    @Override
+    public void close() throws IOException {
         server_.close();
     }
 
@@ -148,12 +177,5 @@ public class PrimitiveWebServer {
      */
     public void clearRequests() {
         requests_.clear();
-    }
-
-    /**
-     * @param charset the charset
-     */
-    public void setCharset(final Charset charset) {
-        charset_ = charset;
     }
 }

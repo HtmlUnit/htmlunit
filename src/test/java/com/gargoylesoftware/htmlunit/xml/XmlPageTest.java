@@ -114,7 +114,9 @@ public class XmlPageTest extends WebServerTestCase {
         final StringWebResponse response = new StringWebResponse(xml, new URL("http://www.test.com"));
         final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
-        assertEquals(expected, ((DomElement) xmlPage.getFirstByXPath("//msg")).asText());
+        final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
+        assertNotNull(msg);
+        assertEquals(expected, msg.asText());
     }
 
     /**

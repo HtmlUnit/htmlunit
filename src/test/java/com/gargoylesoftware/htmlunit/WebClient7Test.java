@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -38,19 +37,6 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient7Test extends WebDriverTestCase {
-
-    private PrimitiveWebServer primitiveWebServer_;
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void stopServer() throws Exception {
-        if (primitiveWebServer_ != null) {
-            primitiveWebServer_.stop();
-        }
-        shutDownAll();
-    }
 
     /**
      * Test that the path and query string are encoded to be valid.
@@ -134,6 +120,8 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void testRequestUrlEncoding(final String url) throws Exception {
+        final URL baseUrl = new URL("http://localhost:" + PORT_PRIMITIVE_SERVER + "/");
+
         final String html = "<html>"
                 + "<head><title>foo</title></head>"
                 + "<body></body></html>";
@@ -145,16 +133,15 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+            final WebDriver driver = getWebDriver();
 
-        final WebDriver driver = getWebDriver();
+            driver.get(new URL(baseUrl, url).toString());
+            String reqUrl = primitiveWebServer.getRequests().get(0);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-        driver.get(new URL(URL_FIRST, url).toString());
-        String reqUrl = primitiveWebServer_.getRequests().get(0);
-        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-        assertEquals(getExpectedAlerts()[0], reqUrl);
+            assertEquals(getExpectedAlerts()[0], reqUrl);
+        }
     }
 
     /**
@@ -433,6 +420,8 @@ public class WebClient7Test extends WebDriverTestCase {
             final String addHeader,
             final String addHtml,
             final boolean click) throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
         String html = "<html>\n"
                 + "<head><title>foo</title>\n";
         if (!header) {
@@ -462,21 +451,20 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "Connection: close\r\n"
                 + "\r\n";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
-        primitiveWebServer_.setCharset(Charset.forName(charset));
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer =
+                new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
+            final WebDriver driver = getWebDriver();
 
-        final WebDriver driver = getWebDriver();
+            driver.get(url);
+            if (click) {
+                driver.findElement(By.id("myLink")).click();
+            }
 
-        driver.get(URL_FIRST.toString());
-        if (click) {
-            driver.findElement(By.id("myLink")).click();
+            String reqUrl = primitiveWebServer.getRequests().get(1);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+            assertEquals(getExpectedAlerts()[0], reqUrl);
         }
-
-        String reqUrl = primitiveWebServer_.getRequests().get(1);
-        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-        assertEquals(getExpectedAlerts()[0], reqUrl);
     }
 
     /**
@@ -502,6 +490,8 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void framesetUrlEncoding(final String charset) throws Exception {
+        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
+
         final String html = "<html>\n"
                 + "<frameset><frame src='test.html?k\u00F6nig'></frameset>\n"
                 + "</html>";
@@ -517,18 +507,17 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "Connection: close\r\n"
                 + "\r\n";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, firstResponse, secondResponse);
-        primitiveWebServer_.setCharset(Charset.forName(charset));
-        primitiveWebServer_.start();
+        try (PrimitiveWebServer primitiveWebServer =
+                new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
+            final WebDriver driver = getWebDriver();
 
-        final WebDriver driver = getWebDriver();
+            driver.get(url);
 
-        driver.get(URL_FIRST.toString());
+            String reqUrl = primitiveWebServer.getRequests().get(1);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-        String reqUrl = primitiveWebServer_.getRequests().get(1);
-        reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-        assertEquals(getExpectedAlerts()[0], reqUrl);
+            assertEquals(getExpectedAlerts()[0], reqUrl);
+        }
     }
 
 //    HtmlApplet.java

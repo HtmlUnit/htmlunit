@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,11 +31,10 @@ import org.junit.runner.RunWith;
  * Tests for binary content.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class BinaryPageTest extends WebServerTestCase {
-
-    private PrimitiveWebServer primitiveWebServer_;
 
     /**
      * @throws Exception if the test fails
@@ -131,21 +129,11 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        primitiveWebServer_ = new PrimitiveWebServer(PORT, response);
-        primitiveWebServer_.start();
-        final WebClient client = getWebClient();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+            final WebClient client = getWebClient();
 
-        final TextPage page = client.getPage(URL_FIRST + "chunked");
-        assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @After
-    public void stopServer() throws Exception {
-        if (primitiveWebServer_ != null) {
-            primitiveWebServer_.stop();
+            final TextPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER + "/" + "chunked");
+            assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
         }
     }
 }
