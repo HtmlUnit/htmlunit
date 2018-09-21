@@ -2397,7 +2397,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:12345/img/",
+    @Alerts(DEFAULT = "§§URL§§img/",
             IE = "undefined")
     public void baseURI_withBaseTag_absolutePath() throws Exception {
         final String html = "<html>\n"
@@ -2410,14 +2410,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:12345/path/to/img",
+    @Alerts(DEFAULT = "§§URL§§path/to/img",
             IE = "undefined")
     public void baseURI_withBaseTag_relativePath() throws Exception {
         final String html = "<html>\n"
@@ -2430,14 +2430,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:12345/path/to/img/",
+    @Alerts(DEFAULT = "§§URL§§path/to/img/",
             IE = "undefined")
     public void baseURI_withBaseTag_relativePath_slash() throws Exception {
         final String html = "<html>\n"
@@ -2450,14 +2450,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:12345/path/img",
+    @Alerts(DEFAULT = "§§URL§§path/img",
             IE = "undefined")
     public void baseURI_withBaseTag_relativePath_parent() throws Exception {
         final String html = "<html>\n"
@@ -2470,14 +2470,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "http://localhost:12345/img",
+    @Alerts(DEFAULT = "§§URL§§img",
             IE = "undefined")
     public void baseURI_withBaseTag_relativePath_strange() throws Exception {
         final String html = "<html>\n"
@@ -2490,7 +2490,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html, new URL("http://localhost:12345/path/to/page.html"));
+        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
     }
 
     /**

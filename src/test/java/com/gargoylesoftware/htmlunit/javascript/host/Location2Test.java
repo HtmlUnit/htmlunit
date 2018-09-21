@@ -605,7 +605,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"supported", "onhashchange http://localhost:12345/#1  http://localhost:12345/"},
+    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1  §§URL§§"},
             IE = {"supported", "onhashchange undefined  undefined"})
     public void onHashChange() throws Exception {
         final String html =
@@ -624,6 +624,8 @@ public class Location2Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <a id='click' href='#1'>change hash</a>\n"
             + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
 
         final WebDriver driver = loadPage2(html);
         verifyAlerts(driver, getExpectedAlerts()[0]);
