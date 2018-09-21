@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -55,9 +56,9 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
 
             // Quercus
-            Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r\n"),
-            Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r\n"),
-            Pattern.compile(".*Quercus finished initialization in \\d*ms\r\n")
+            Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
+            Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r?\n"),
+            Pattern.compile(".*Quercus finished initialization in \\d*ms\r?\n")
     };
 
     /**
@@ -92,8 +93,12 @@ public class ErrorOutputChecker implements TestRule {
 
             if (!output.isEmpty()) {
                 if (output.contains("ChromeDriver")) {
-                    throw new RuntimeException("Outdated ChromeDriver version: " + output);
+                    throw new RuntimeException("Outdated Chrome driver version: " + output);
                 }
+                if (output.contains("geckodriver")) {
+                    throw new RuntimeException("Outdated Gecko driver version: " + output);
+                }
+                output = StringUtils.replaceEach(output, new String[] {"\n", "\r"}, new String[]{"\\n", "\\r"});
                 throw new RuntimeException("Test has produced output to System.err: " + output);
             }
         }
