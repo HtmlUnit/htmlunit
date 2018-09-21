@@ -21,6 +21,7 @@ import java.util.function.Predicate;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -87,11 +88,14 @@ public abstract class HostParentOf extends WebDriverTestCase {
      */
     protected void test(final String parent, final String child) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>" + (getBrowserVersion().isIE() ? "Blank Page" : "New Tab") + "</title><script>\n"
+            + "<html>\n"
+            + "<head>\n"
+            + "<title>-</title>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(isParentOf(" + parent + ", " + child + "));\n"
-            + "    } catch(e) { alert('false'); }\n"
+            + "      document.title = isParentOf(" + parent + ", " + child + ");\n"
+            + "    } catch(e) { document.title = 'false'; }\n"
             + "  }\n"
 
             + "  /*\n"
@@ -104,7 +108,8 @@ public abstract class HostParentOf extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
