@@ -78,10 +78,13 @@ public class HtmlFileInput2Test extends WebServerTestCase {
      */
     @Test
     public void fileInput() throws Exception {
-        String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").getPath();
-        final File file = new File(path);
+        final URL fileURL = getClass().getClassLoader().getResource("testfiles/tiny-png.img");
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
         testFileInput(file);
 
+        String path = fileURL.getPath();
         if (path.startsWith("file:")) {
             path = path.substring("file:".length());
         }
@@ -329,7 +332,6 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HtmlFileInput fileInput = f.getInputByName("image");
 
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
-
         final File file = new File(fileURL.toURI());
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
@@ -367,9 +369,9 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     @Test
     public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
-        final File file = new File(new URI(path));
-        assertTrue(file.exists());
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
         servlets.put("/upload2", Upload2Servlet.class);
@@ -408,9 +410,9 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final String path = getClass().getClassLoader().getResource(filename).toExternalForm();
-        final File file = new File(new URI(path));
-        assertTrue(file.exists());
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         final WebClient client = getWebClient();
         final HtmlPage firstPage = client.getPage(URL_FIRST + "upload1");
