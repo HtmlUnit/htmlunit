@@ -135,18 +135,12 @@ public class WebClient7Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebDriver driver = getWebDriver();
-            try {
-                driver.get(new URL(baseUrl, url).toString());
-                String reqUrl = primitiveWebServer.getRequests().get(0);
-                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-                assertEquals(getExpectedAlerts()[0], reqUrl);
-            }
-            finally {
-                // this is done by @After also but we like to close the client
-                // before closing our web server to avoid TIME_WAIT state on unix machines
-                releaseResources();
-            }
+            driver.get(new URL(baseUrl, url).toString());
+            String reqUrl = primitiveWebServer.getRequests().get(0);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+            assertEquals(getExpectedAlerts()[0], reqUrl);
         }
     }
 
@@ -461,22 +455,15 @@ public class WebClient7Test extends WebDriverTestCase {
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final WebDriver driver = getWebDriver();
 
-            try {
-                driver.get(url);
-                if (click) {
-                    driver.findElement(By.id("myLink")).click();
-                }
-
-                String reqUrl = primitiveWebServer.getRequests().get(1);
-                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-                assertEquals(getExpectedAlerts()[0], reqUrl);
+            driver.get(url);
+            if (click) {
+                driver.findElement(By.id("myLink")).click();
             }
-            finally {
-                // this is done by @After also but we like to close the client
-                // before closing our web server to avoid TIME_WAIT state on unix machines
-                releaseResources();
-            }
+
+            String reqUrl = primitiveWebServer.getRequests().get(1);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+            assertEquals(getExpectedAlerts()[0], reqUrl);
         }
     }
 
@@ -524,19 +511,12 @@ public class WebClient7Test extends WebDriverTestCase {
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final WebDriver driver = getWebDriver();
 
-            try {
-                driver.get(url);
+            driver.get(url);
 
-                String reqUrl = primitiveWebServer.getRequests().get(1);
-                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+            String reqUrl = primitiveWebServer.getRequests().get(1);
+            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-                assertEquals(getExpectedAlerts()[0], reqUrl);
-            }
-            finally {
-                // this is done by @After also but we like to close the client
-                // before closing our web server to avoid TIME_WAIT state on unix machines
-                releaseResources();
-            }
+            assertEquals(getExpectedAlerts()[0], reqUrl);
         }
     }
 

@@ -110,7 +110,6 @@ public class PrimitiveWebServer implements Closeable {
         }
         catch (final BindException e) {
             System.out.println("bind failed " + e.getMessage());
-            // e.printStackTrace();
             try {
                 Thread.sleep(1000);
             }
