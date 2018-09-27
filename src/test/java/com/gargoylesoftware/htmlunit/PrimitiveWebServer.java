@@ -103,8 +103,21 @@ public class PrimitiveWebServer implements Closeable {
         server_ = new ServerSocket();
         System.out.println("getReuseAddress "  + server_.getReuseAddress());
         server_.setReuseAddress(true);
-        server_.bind(new InetSocketAddress(port_));
         System.out.println("getReuseAddress "  + server_.getReuseAddress());
+
+        try {
+            server_.bind(new InetSocketAddress(port_));
+        }
+        catch (final BindException e) {
+            e.printStackTrace();
+            try {
+                Thread.sleep(1000);
+            }
+            catch (final InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            server_.bind(new InetSocketAddress(port_));
+        }
         System.out.println("getLocalPort "  + server_.getLocalPort());
 
         new Thread(new Runnable() {
