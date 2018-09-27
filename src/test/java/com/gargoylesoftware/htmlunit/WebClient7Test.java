@@ -143,7 +143,9 @@ public class WebClient7Test extends WebDriverTestCase {
                 assertEquals(getExpectedAlerts()[0], reqUrl);
             }
             finally {
-                shutDownAll();
+                // this is done by @After also but we like to close the client
+                // before closing our web server to avoid TIME_WAIT state on unix machines
+                releaseResources();
             }
         }
     }
@@ -471,6 +473,8 @@ public class WebClient7Test extends WebDriverTestCase {
                 assertEquals(getExpectedAlerts()[0], reqUrl);
             }
             finally {
+                // this is done by @After also but we like to close the client
+                // before closing our web server to avoid TIME_WAIT state on unix machines
                 releaseResources();
             }
         }
@@ -529,6 +533,8 @@ public class WebClient7Test extends WebDriverTestCase {
                 assertEquals(getExpectedAlerts()[0], reqUrl);
             }
             finally {
+                // this is done by @After also but we like to close the client
+                // before closing our web server to avoid TIME_WAIT state on unix machines
                 releaseResources();
             }
         }
