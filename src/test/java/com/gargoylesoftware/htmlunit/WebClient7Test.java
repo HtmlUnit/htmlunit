@@ -135,12 +135,16 @@ public class WebClient7Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebDriver driver = getWebDriver();
+            try {
+                driver.get(new URL(baseUrl, url).toString());
+                String reqUrl = primitiveWebServer.getRequests().get(0);
+                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-            driver.get(new URL(baseUrl, url).toString());
-            String reqUrl = primitiveWebServer.getRequests().get(0);
-            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-            assertEquals(getExpectedAlerts()[0], reqUrl);
+                assertEquals(getExpectedAlerts()[0], reqUrl);
+            }
+            finally {
+                shutDownAll();
+            }
         }
     }
 
@@ -455,15 +459,20 @@ public class WebClient7Test extends WebDriverTestCase {
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get(url);
-            if (click) {
-                driver.findElement(By.id("myLink")).click();
+            try {
+                driver.get(url);
+                if (click) {
+                    driver.findElement(By.id("myLink")).click();
+                }
+
+                String reqUrl = primitiveWebServer.getRequests().get(1);
+                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+                assertEquals(getExpectedAlerts()[0], reqUrl);
             }
-
-            String reqUrl = primitiveWebServer.getRequests().get(1);
-            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-            assertEquals(getExpectedAlerts()[0], reqUrl);
+            finally {
+                releaseResources();
+            }
         }
     }
 
@@ -511,12 +520,17 @@ public class WebClient7Test extends WebDriverTestCase {
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get(url);
+            try {
+                driver.get(url);
 
-            String reqUrl = primitiveWebServer.getRequests().get(1);
-            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+                String reqUrl = primitiveWebServer.getRequests().get(1);
+                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
 
-            assertEquals(getExpectedAlerts()[0], reqUrl);
+                assertEquals(getExpectedAlerts()[0], reqUrl);
+            }
+            finally {
+                releaseResources();
+            }
         }
     }
 

@@ -132,8 +132,15 @@ public class BinaryPageTest extends WebServerTestCase {
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebClient client = getWebClient();
 
-            final TextPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER + "/" + "chunked");
-            assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
+            try {
+                final TextPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER + "/" + "chunked");
+                assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
+            }
+            finally {
+                // this is done by after also but we like to close the client
+                // before our web server
+                releaseResources();
+            }
         }
     }
 }

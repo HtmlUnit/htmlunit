@@ -59,15 +59,20 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
-            final String request = primitiveWebServer.getRequests().get(0);
-            final String[] headers = request.split("\\r\\n");
-            final String[] result = new String[headers.length - 1];
-            for (int i = 0; i < result.length; i++) {
-                final String header = headers[i + 1];
-                result[i] = header.substring(0, header.indexOf(':'));
+            try {
+                driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+                final String request = primitiveWebServer.getRequests().get(0);
+                final String[] headers = request.split("\\r\\n");
+                final String[] result = new String[headers.length - 1];
+                for (int i = 0; i < result.length; i++) {
+                    final String header = headers[i + 1];
+                    result[i] = header.substring(0, header.indexOf(':'));
+                }
+                assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
             }
-            assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
+            finally {
+                shutDownAll();
+            }
         }
     }
 
@@ -97,26 +102,31 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
-            driver.findElement(By.linkText("Click me")).click();
+            try {
+                driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+                driver.findElement(By.linkText("Click me")).click();
 
-            final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
-            wait.until(currentUrlContains("2.html"));
+                final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
+                wait.until(currentUrlContains("2.html"));
 
-            int index = 1;
-            String request;
-            do {
-                request = primitiveWebServer.getRequests().get(index++);
+                int index = 1;
+                String request;
+                do {
+                    request = primitiveWebServer.getRequests().get(index++);
+                }
+                while (request.contains("/favicon.ico"));
+
+                final String[] headers = request.split("\\r\\n");
+                final String[] result = new String[headers.length - 1];
+                for (int i = 0; i < result.length; i++) {
+                    final String header = headers[i + 1];
+                    result[i] = header.substring(0, header.indexOf(':'));
+                }
+                assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
             }
-            while (request.contains("/favicon.ico"));
-
-            final String[] headers = request.split("\\r\\n");
-            final String[] result = new String[headers.length - 1];
-            for (int i = 0; i < result.length; i++) {
-                final String header = headers[i + 1];
-                result[i] = header.substring(0, header.indexOf(':'));
+            finally {
+                shutDownAll();
             }
-            assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
         }
     }
 
@@ -162,11 +172,17 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
             final WebDriver driver = getWebDriver();
-            driver.get(url);
-            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-            assertTrue(driver.getPageSource().contains("Hi"));
 
-            assertEquals(2, primitiveWebServer.getRequests().size());
+            try {
+                driver.get(url);
+                assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+                assertTrue(driver.getPageSource().contains("Hi"));
+
+                assertEquals(2, primitiveWebServer.getRequests().size());
+            }
+            finally {
+                releaseResources();
+            }
         }
     }
 
@@ -199,11 +215,16 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
             final WebDriver driver = getWebDriver();
-            driver.get(url);
-            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-            assertTrue(driver.getPageSource().contains("Hi"));
 
-            assertEquals(2, primitiveWebServer.getRequests().size());
+            try {
+                driver.get(url);
+                assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+                assertTrue(driver.getPageSource().contains("Hi"));
+                assertEquals(2, primitiveWebServer.getRequests().size());
+            }
+            finally {
+                releaseResources();
+            }
         }
     }
 
@@ -235,11 +256,17 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
             final WebDriver driver = getWebDriver();
-            driver.get(url);
-            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
-            assertTrue(driver.getPageSource().contains("Hi"));
 
-            assertEquals(2, primitiveWebServer.getRequests().size());
+            try {
+                driver.get(url);
+                assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+                assertTrue(driver.getPageSource().contains("Hi"));
+
+                assertEquals(2, primitiveWebServer.getRequests().size());
+            }
+            finally {
+                releaseResources();
+            }
         }
     }
 
@@ -258,9 +285,14 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER + "?para=%u65E5");
-            assertTrue(primitiveWebServer.getRequests().get(0),
-                        primitiveWebServer.getRequests().get(0).contains("para=%u65E5"));
+            try {
+                driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER + "?para=%u65E5");
+                assertTrue(primitiveWebServer.getRequests().get(0),
+                            primitiveWebServer.getRequests().get(0).contains("para=%u65E5"));
+            }
+            finally {
+                shutDownAll();
+            }
         }
     }
 }
