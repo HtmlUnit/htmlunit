@@ -831,26 +831,27 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final String whitespaceFilename = "white space.txt";
-        String path = getClass().getClassLoader().getResource(whitespaceFilename).toExternalForm();
-        File file = new File(new URI(path));
-        assertTrue(file.exists());
+        final URL whitespaceFileURL = getClass().getClassLoader().getResource(whitespaceFilename);
+        assertNotNull("Resource '" + whitespaceFilename + "' not found", whitespaceFileURL);
+        final File whitespaceFile = new File(whitespaceFileURL.toURI());
+        assertTrue("File '" + whitespaceFile.getAbsolutePath() + "' does not exist", whitespaceFile.exists());
 
-        String url = "file://" + file.getCanonicalPath();
+        String url = "file://" + whitespaceFile.getCanonicalPath();
         Page page = client.getPage(url);
         assertEquals("the name of this file contains a blank", page.getWebResponse().getContentAsString());
 
         // encode the whitespace
-        url = "file://" + file.getCanonicalPath().replace(" ", "%20");
+        url = "file://" + whitespaceFile.getCanonicalPath().replace(" ", "%20");
         page = client.getPage(url);
         assertEquals("the name of this file contains a blank", page.getWebResponse().getContentAsString());
 
         final String unicodeFilename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
+        final URL unicodeFileURL = getClass().getClassLoader().getResource(unicodeFilename);
+        assertNotNull("Resource '" + unicodeFilename + "' not found", unicodeFileURL);
+        final File unicodeFile = new File(unicodeFileURL.toURI());
+        assertTrue("File '" + unicodeFile.getAbsolutePath() + "' does not exist", unicodeFile.exists());
 
-        path = getClass().getClassLoader().getResource(unicodeFilename).toExternalForm();
-        file = new File(new URI(path));
-        assertTrue(file.exists());
-
-        url = "file://" + file.getCanonicalPath();
+        url = "file://" + unicodeFile.getCanonicalPath();
         page = client.getPage(url);
         assertEquals("", page.getWebResponse().getContentAsString());
 

@@ -57,7 +57,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"addBehavior not available", "http://localhost:12345/"})
+    @Alerts({"addBehavior not available", "§§URL§§"})
     public void addBehaviorDefaultHomePage() throws Exception {
         final String html1 =
             "<html>\n"
@@ -98,6 +98,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, html2);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         final String[] alerts = getExpectedAlerts();
         setExpectedAlerts(ArrayUtils.subarray(alerts, 0, alerts.length - 1));
         final HtmlPage page = loadPageWithAlerts(html1, URL_FIRST, 1000);
