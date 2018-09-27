@@ -324,8 +324,8 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLBodyElement]", "http://localhost:12345/#", "http://localhost:12345/#"},
-            IE = {"null", "http://localhost:12345/#", "http://localhost:12345/#"})
+    @Alerts(DEFAULT = {"[object HTMLBodyElement]", "§§URL§§#", "§§URL§§#"},
+            IE = {"null", "§§URL§§#", "§§URL§§#"})
     @NotYetImplemented(IE)
     public void activeElement_iframe() throws Exception {
         final String html =
@@ -361,6 +361,8 @@ public class Document2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL("http://example.com/frame1.html"), "");
 
         final WebDriver driver = loadPage2(html);
+
+        expandExpectedAlertsVariables(URL_FIRST);
         verifyAlerts(driver, getExpectedAlerts()[0]);
 
         driver.findElement(By.id("insert")).click();
