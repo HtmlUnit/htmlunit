@@ -692,7 +692,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"ok", "4", "http://localhost:12345"},
+    @Alerts(DEFAULT = {"ok", "4", "§§URL§§"},
             IE = {"ok", "4", "<null>"})
     public void baseUrlAbsoluteRequestOtherUrl() throws Exception {
         final String html = "<html><head>\n"
@@ -720,6 +720,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "text/xml",
                                            UTF_8, responseHeaders);
 
+        expandExpectedAlertsVariables("http://localhost:" + PORT);
         final WebDriver driver = loadPage2(html);
         verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
 
@@ -736,7 +737,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"ok", "4", "http://localhost:12345"},
+    @Alerts(DEFAULT = {"ok", "4", "§§URL§§"},
             IE = {"ok", "4", "<null>"})
     public void baseUrlRelativeRequest() throws Exception {
         final String html = "<html><head>\n"
@@ -763,6 +764,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "OK",
                                            "text/xml",
                                            UTF_8, responseHeaders);
+
+        expandExpectedAlertsVariables("http://localhost:" + PORT);
         final WebDriver driver = loadPage2(html);
         verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
 
