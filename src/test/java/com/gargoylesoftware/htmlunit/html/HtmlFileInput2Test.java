@@ -332,13 +332,23 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         fileInput.setFiles(new File(fileURL.getPath()));
         f.getInputByName("mysubmit").click();
-        final KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+
+        assertEquals(2, webConnection.getLastParameters().size());
+        KeyDataPair pair = (KeyDataPair) webConnection.getLastParameters().get(0);
+        if ("mysubmit".equals(pair.getName())) {
+            pair = (KeyDataPair) webConnection.getLastParameters().get(1);
+        }
         assertNotNull(pair.getFile());
         assertFalse("Content type: " + pair.getMimeType(), "text/webtest".equals(pair.getMimeType()));
 
         fileInput.setContentType("text/webtest");
         f.getInputByName("mysubmit").click();
-        final KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
+
+        assertEquals(2, webConnection.getLastParameters().size());
+        KeyDataPair pair2 = (KeyDataPair) webConnection.getLastParameters().get(0);
+        if ("mysubmit".equals(pair2.getName())) {
+            pair2 = (KeyDataPair) webConnection.getLastParameters().get(1);
+        }
         assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getMimeType());
     }
