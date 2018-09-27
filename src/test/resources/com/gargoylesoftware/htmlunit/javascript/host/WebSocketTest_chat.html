@@ -21,9 +21,7 @@
     var room = {
         join : function(name) {
             this._username = name;
-            //var location = document.location.toString().replace('http://',
-            //        'ws://').replace('https://', 'wss://');
-            var location = "ws://localhost:12345/"
+            var location = "ws://" + window.location.hostname + ":" + window.location.port;
             this._ws = new WebSocket(location);
             this._ws.onopen = this._onopen;
             this._ws.onmessage = this._onmessage;

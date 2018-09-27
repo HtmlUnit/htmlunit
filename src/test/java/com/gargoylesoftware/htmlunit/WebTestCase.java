@@ -605,11 +605,19 @@ public abstract class WebTestCase {
      * @param url the URL to expand
      */
     protected void expandExpectedAlertsVariables(final URL url) {
+        expandExpectedAlertsVariables(url.toExternalForm());
+    }
+
+    /**
+     * Expand "§§URL§§" to the provided URL in the expected alerts.
+     * @param url the URL to expand
+     */
+    protected void expandExpectedAlertsVariables(final String url) {
         if (expectedAlerts_ == null) {
             throw new IllegalStateException("You must annotate the test class with '@RunWith(BrowserRunner.class)'");
         }
         for (int i = 0; i < expectedAlerts_.length; i++) {
-            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url.toExternalForm());
+            expectedAlerts_[i] = expectedAlerts_[i].replaceAll("§§URL§§", url);
         }
     }
 

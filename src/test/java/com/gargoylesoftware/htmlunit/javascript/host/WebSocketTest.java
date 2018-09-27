@@ -60,8 +60,8 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"ws://localhost:12345/", "", "0", "blob"},
-            FF = {"ws://localhost:12345/", "", "3", "blob"})
+    @Alerts(DEFAULT = {"§§URL§§", "", "0", "blob"},
+            FF = {"§§URL§§", "", "3", "blob"})
     @NotYetImplemented({CHROME, IE})
     public void initial() throws Exception {
         final String html = "<html><head><script>\n"
@@ -75,14 +75,17 @@ public class WebSocketTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        expandExpectedAlertsVariables("ws://localhost:" + PORT + "/");
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object WebSocket]", "ws://localhost:12345/"})
+    @Alerts({"[object WebSocket]", "§§URL§§"})
     public void earlyConstruction() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -96,7 +99,10 @@ public class WebSocketTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        expandExpectedAlertsVariables("ws://localhost:" + PORT + "/");
+        final WebDriver driver = loadPage2(html);
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
@@ -372,10 +378,10 @@ public class WebSocketTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"onOpenListener", "onOpen",
-                "onMessageTextListener", "server_text", "ws://localhost:12345", "", "null",
-                "onMessageText", "server_text", "ws://localhost:12345", "", "null",
-                "onMessageBinaryListener", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
-                "onMessageBinary", "[object ArrayBuffer]", "ws://localhost:12345", "", "null",
+                "onMessageTextListener", "server_text", "§§URL§§", "", "null",
+                "onMessageText", "server_text", "§§URL§§", "", "null",
+                "onMessageBinaryListener", "[object ArrayBuffer]", "§§URL§§", "", "null",
+                "onMessageBinary", "[object ArrayBuffer]", "§§URL§§", "", "null",
                 "onCloseListener code: 1000  wasClean: true",
                 "onClose code: 1000  wasClean: true"},
             IE = {"onOpenListener", "onOpen",
@@ -402,6 +408,7 @@ public class WebSocketTest extends WebDriverTestCase {
         }
         while (text.length() > 0 && counter++ < 10);
 
+        expandExpectedAlertsVariables("ws://localhost:" + PORT);
         assertEquals(String.join("\n", getExpectedAlerts()), text);
         stopWebServers();
     }
