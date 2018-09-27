@@ -109,6 +109,7 @@ public class PrimitiveWebServer implements Closeable {
             server_.bind(new InetSocketAddress(port_));
         }
         catch (final BindException e) {
+            System.out.println("bind failed");
             e.printStackTrace();
             try {
                 Thread.sleep(1000);
@@ -116,6 +117,7 @@ public class PrimitiveWebServer implements Closeable {
             catch (final InterruptedException e1) {
                 e1.printStackTrace();
             }
+            System.out.println("bind tired again");
             server_.bind(new InetSocketAddress(port_));
         }
         System.out.println("getLocalPort "  + server_.getLocalPort());
