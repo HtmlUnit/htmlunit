@@ -370,6 +370,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
     public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
         final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
         final URL fileURL = getClass().getClassLoader().getResource(filename);
+        assertNotNull("Resource '" + filename + "' not found", fileURL);
         final File file = new File(fileURL.toURI());
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
