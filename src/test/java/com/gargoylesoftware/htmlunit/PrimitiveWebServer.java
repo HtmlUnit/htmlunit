@@ -99,6 +99,8 @@ public class PrimitiveWebServer implements Closeable {
      */
     private void start() throws IOException {
         server_ = new ServerSocket(port_);
+        server_.setReuseAddress(true);
+
         new Thread(new Runnable() {
 
             @Override
@@ -161,7 +163,6 @@ public class PrimitiveWebServer implements Closeable {
      */
     @Override
     public void close() throws IOException {
-        server_.setReuseAddress(true);
         server_.close();
     }
 
