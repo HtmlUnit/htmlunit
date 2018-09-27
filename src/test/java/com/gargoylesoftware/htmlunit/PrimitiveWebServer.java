@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.BindException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -98,8 +99,9 @@ public class PrimitiveWebServer implements Closeable {
      * @throws IOException if an error occurs
      */
     private void start() throws IOException {
-        server_ = new ServerSocket(port_);
+        server_ = new ServerSocket();
         server_.setReuseAddress(true);
+        server_.bind(new InetSocketAddress(port_));
 
         new Thread(new Runnable() {
 
