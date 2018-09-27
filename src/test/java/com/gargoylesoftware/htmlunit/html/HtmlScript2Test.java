@@ -396,7 +396,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("أهلاً")
+    @Alerts("\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627"
+            + "\u064b\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627\u064b")
     public void incorrectCharset() throws Exception {
         final String html
             = "<html><head>\n"
@@ -406,7 +407,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         final String script = new String(ByteOrderMark.UTF_8.getBytes())
-                + "alert('أهلاً');";
+                + "alert('" + "\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627"
+                            + "\u064b\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627\u064b" + "');";
         getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
         loadPageWithAlerts2(html);
     }
