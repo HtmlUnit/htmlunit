@@ -6336,6 +6336,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function OffscreenCanvas() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }

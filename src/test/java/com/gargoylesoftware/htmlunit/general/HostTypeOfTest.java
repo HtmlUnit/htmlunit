@@ -4210,6 +4210,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function")
+    @NotYetImplemented(CHROME)
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
