@@ -330,7 +330,10 @@ public class HtmlFileInput2Test extends WebServerTestCase {
 
         final URL fileURL = getClass().getClassLoader().getResource("testfiles/empty.png");
 
-        fileInput.setFiles(new File(fileURL.getPath()));
+        final File file = new File(fileURL.getPath());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exit", file.exists());
+
+        fileInput.setFiles(file);
         f.getInputByName("mysubmit").click();
 
         assertEquals(2, webConnection.getLastParameters().size());
