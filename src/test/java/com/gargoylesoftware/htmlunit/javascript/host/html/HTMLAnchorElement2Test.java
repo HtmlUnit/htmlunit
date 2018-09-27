@@ -903,7 +903,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
-                "http://localhost:12345/", "http://srv/htmlunit.org"})
+                "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

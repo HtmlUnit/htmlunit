@@ -94,7 +94,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
-                "http://localhost:12345/", "http://srv/htmlunit.org"})
+                "§§URL§§", "http://srv/htmlunit.org"})
     @BuggyWebDriver(FF)
     public void focus() throws Exception {
         final String html =
