@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
- * Tests against external websites, this should be done once every while.
+ * Tests against external web sites, this should be done once every while.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -55,6 +55,15 @@ public class ExternalTest {
     static String GECKO_DRIVER_ = "0.22.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.14.0.0";
+
+    /**
+     * Tests the current environment matches the expected setup.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void testEnvironment() throws Exception {
+        assertEquals("en_US", Locale.getDefault().toString());
+    }
 
     /**
      * Tests that POM dependencies are the latest.
@@ -109,7 +118,7 @@ public class ExternalTest {
      */
     @Test
     public void assertChromeDriver() throws Exception {
-        try (WebClient webClient = getWebClient()) {
+        try (WebClient webClient = buildWebClient()) {
             final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
@@ -122,7 +131,7 @@ public class ExternalTest {
      */
     @Test
     public void assertGeckoDriver() throws Exception {
-        try (WebClient webClient = getWebClient()) {
+        try (WebClient webClient = buildWebClient()) {
             try {
                 final HtmlPage page = webClient.getPage("https://github.com/mozilla/geckodriver/releases/latest");
                 final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
@@ -154,7 +163,7 @@ public class ExternalTest {
             }
             assertNotNull(version);
             if (version.contains("SNAPSHOT")) {
-                try (WebClient webClient = getWebClient()) {
+                try (WebClient webClient = buildWebClient()) {
                     final XmlPage page = webClient.getPage("https://oss.sonatype.org/content/repositories/snapshots/"
                             + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                     final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
@@ -177,7 +186,7 @@ public class ExternalTest {
         if (!url.endsWith("/")) {
             url += "/";
         }
-        try (WebClient webClient = getWebClient()) {
+        try (WebClient webClient = buildWebClient()) {
             webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
             final HtmlPage page = webClient.getPage(url);
             for (final HtmlAnchor anchor : page.getAnchors()) {
@@ -254,7 +263,7 @@ public class ExternalTest {
         return line.substring(line.indexOf('>') + 1, line.lastIndexOf('<'));
     }
 
-    private static WebClient getWebClient() {
+    private static WebClient buildWebClient() {
         final WebClient webClient = new WebClient();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         return webClient;
@@ -264,7 +273,7 @@ public class ExternalTest {
      * Returns if now we are in different week than the last finished build one.
      */
     private static boolean isDifferentWeek() throws Exception {
-        try (WebClient webClient = getWebClient()) {
+        try (WebClient webClient = buildWebClient()) {
             HtmlPage page = webClient.getPage("https://ci.canoo.com/teamcity/viewLog.html"
                     + "?buildTypeId=HtmlUnit_FastBuild&buildId=lastSuccessful");
             page = page.getAnchorByText("Log in as guest").click();
