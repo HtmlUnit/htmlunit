@@ -565,15 +565,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
             final WebClient client = getWebClient();
 
-            try {
-                final HtmlPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER);
-                assertEquals("visible text", page.asText());
-            }
-            finally {
-                // this is done by after also but we like to close the client
-                // before our web server
-                releaseResources();
-            }
+            final HtmlPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            assertEquals("visible text", page.asText());
         }
     }
 

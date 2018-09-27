@@ -49,9 +49,9 @@ public class PrimitiveWebServer implements Closeable {
      * Constructs a new SimpleWebServer.
      *
      * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws IOException in case of error
+     * @throws Exception in case of error
      */
-    public PrimitiveWebServer(final String defaultResponse) throws IOException {
+    public PrimitiveWebServer(final String defaultResponse) throws Exception {
         this(null, defaultResponse, null);
     }
 
@@ -60,10 +60,10 @@ public class PrimitiveWebServer implements Closeable {
      *
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws IOException in case of error
+     * @throws Exception in case of error
      */
     public PrimitiveWebServer(final String firstResponse, final String otherResponse)
-            throws IOException {
+            throws Exception {
         this(null, firstResponse, otherResponse);
     }
 
@@ -73,10 +73,10 @@ public class PrimitiveWebServer implements Closeable {
      * @param charset the charset
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws IOException in case of error
+     * @throws Exception in case of error
      */
     public PrimitiveWebServer(final Charset charset, final String firstResponse, final String otherResponse)
-            throws IOException {
+            throws Exception {
         port_ = WebTestCase.PORT_PRIMITIVE_SERVER;
         firstResponse_ = firstResponse;
         otherResponse_ = otherResponse;
@@ -97,29 +97,19 @@ public class PrimitiveWebServer implements Closeable {
     /**
      * Starts the server.
      * @throws IOException if an error occurs
+     * @throws InterruptedException  if an error occurs
      */
-    private void start() throws IOException {
-        System.out.println(" ---- " + System.currentTimeMillis() + " - " + Thread.currentThread().getId());
+    private void start() throws IOException, InterruptedException {
         server_ = new ServerSocket();
-        System.out.println("getReuseAddress "  + server_.getReuseAddress());
         server_.setReuseAddress(true);
-        System.out.println("getReuseAddress "  + server_.getReuseAddress());
 
         try {
             server_.bind(new InetSocketAddress(port_));
         }
-        catch (final BindException e) {
-            System.out.println("bind failed " + e.getMessage());
-            try {
-                Thread.sleep(1000);
-            }
-            catch (final InterruptedException e1) {
-                e1.printStackTrace();
-            }
-            System.out.println("bind tired again");
+        catch (final BindException be) {
+            Thread.sleep(1000);
             server_.bind(new InetSocketAddress(port_));
         }
-        System.out.println("bind sucess - getLocalPort "  + server_.getLocalPort());
 
         new Thread(new Runnable() {
 
