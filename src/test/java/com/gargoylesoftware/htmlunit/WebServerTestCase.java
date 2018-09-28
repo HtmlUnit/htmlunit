@@ -431,7 +431,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     }
 
     private static Server buildServer(final int port) {
-        final QueuedThreadPool threadPool = new QueuedThreadPool(4, 2);
+        final QueuedThreadPool threadPool = new QueuedThreadPool(10, 2);
 
         final Server server = new Server(threadPool);
 

@@ -393,6 +393,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         collectedHeaders_.clear();
+        STATE_ = 0;
         final WebClient client = getWebClient();
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -400,11 +401,12 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
 
         final HtmlPage page = client.getPage(URL_FIRST + "content.html");
         final DomElement elem = page.getElementById("doIt");
+        while (STATE_ < 1) {
+            Thread.sleep(42);
+        }
         ((HtmlSubmitInput) elem).click();
 
-        assertEquals(0, client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME));
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(DEFAULT_WAIT_TIME));
-
+        client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
         assertEquals(collectedHeaders_.toString(), 2, collectedHeaders_.size());
 
         String headers = collectedHeaders_.get(0);
@@ -423,6 +425,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     }
 
     static final List<String> collectedHeaders_ = Collections.synchronizedList(new ArrayList<String>());
+    static int STATE_ = 0;
 
     /**
      * First servlet for {@link #testNoContent()}.
@@ -472,9 +475,12 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final String header = headers(request);
+            STATE_ = 1;
             try {
                 // do not return before the form request is also sent
-                Thread.sleep(666);
+                while (STATE_ < 2) {
+                    Thread.sleep(42);
+                }
             }
             catch (final InterruptedException e) {
                 e.printStackTrace();
@@ -506,6 +512,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             final String header = headers(request);
+            STATE_ = 2;
 
             final String html = "<html><head></head>\n"
                     + "<body>\n"
