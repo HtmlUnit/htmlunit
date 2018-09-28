@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
@@ -78,16 +79,23 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         if ("script".equals(child)) {
             childString += "</" + child + ">";
         }
-        loadPageWithAlerts2("<html><head>\n"
+
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<title>-</title>\n"
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "  document.title = e == null ? e : e.childNodes.length;\n"
                 + "}\n"
                 + "</script>\n"
-                + "</head><body onload='test()'>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
                 + parentString + childString + suffix
-                + "</body></html>");
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**
