@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -127,6 +128,20 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Override
     protected boolean isWebClientCached() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isWebClientHistoryRequired() {
+        return false;
+    }
+
+    @After
+    public void after() {
+        parent_ = null;
+        child_ = null;
     }
 
     /**
