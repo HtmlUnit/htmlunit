@@ -393,7 +393,6 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         collectedHeaders_.clear();
-System.out.println("------------------------------------------");
         final WebClient client = getWebClient();
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
@@ -404,8 +403,8 @@ System.out.println("------------------------------------------");
         ((HtmlSubmitInput) elem).click();
 
         assertEquals(0, client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME));
+        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(DEFAULT_WAIT_TIME));
 
-System.out.println("------------------------------------------ " + collectedHeaders_.toString());
         assertEquals(collectedHeaders_.toString(), 2, collectedHeaders_.size());
 
         String headers = collectedHeaders_.get(0);
@@ -472,9 +471,7 @@ System.out.println("------------------------------------------ " + collectedHead
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-System.out.println("AjaxHeaderServlet 1");
             final String header = headers(request);
-System.out.println("AjaxHeaderServlet 2" + header);
             try {
                 // do not return before the form request is also sent
                 Thread.sleep(666);
@@ -483,13 +480,11 @@ System.out.println("AjaxHeaderServlet 2" + header);
                 e.printStackTrace();
             }
 
-System.out.println("AjaxHeaderServlet 3");
             collectedHeaders_.add("Ajax: " + header);
             response.setContentType("text/plain");
             final Writer writer = response.getWriter();
             writer.write(header);
             writer.flush();
-System.out.println("AjaxHeaderServlet 4");
         }
     }
 
@@ -510,9 +505,7 @@ System.out.println("AjaxHeaderServlet 4");
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-System.out.println("FormHeaderServlet 1");
             final String header = headers(request);
-System.out.println("FormHeaderServlet 2" + header);
 
             final String html = "<html><head></head>\n"
                     + "<body>\n"
@@ -524,7 +517,6 @@ System.out.println("FormHeaderServlet 2" + header);
             final Writer writer = response.getWriter();
             writer.write(html);
             writer.flush();
-System.out.println("FormHeaderServlet 3");
         }
     }
 
