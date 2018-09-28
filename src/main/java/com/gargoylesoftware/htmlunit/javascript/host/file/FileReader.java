@@ -97,7 +97,9 @@ public class FileReader extends EventTarget {
     public void readAsDataURL(final Object object) throws IOException {
         readyState_ = LOADING;
         final java.io.File file = ((File) object).getFile();
+System.out.println(file.getAbsolutePath());
         String contentType = Files.probeContentType(file.toPath());
+System.out.println(contentType);
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             FileUtils.copyFile(file, bos);
 

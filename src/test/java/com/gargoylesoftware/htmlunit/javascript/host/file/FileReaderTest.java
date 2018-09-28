@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.file;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
@@ -151,8 +152,13 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String path = new File("src/test/resources/testfiles/tiny-png.img").getCanonicalPath();
-        driver.findElement(By.tagName("input")).sendKeys(path);
+        final String filename = "testfiles/tiny-png.img";
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        assertNotNull("Resource '" + filename + "' not found", fileURL);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -189,8 +195,13 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String path = new File("src/test/resources/testfiles/empty.png").getCanonicalPath();
-        driver.findElement(By.tagName("input")).sendKeys(path);
+        final String filename = "testfiles/empty.png";
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        assertNotNull("Resource '" + filename + "' not found", fileURL);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -274,8 +285,13 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String path = new File("src/test/resources/testfiles/tiny-png.img").getCanonicalPath();
-        driver.findElement(By.tagName("input")).sendKeys(path);
+        final String filename = "testfiles/tiny-png.img";
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        assertNotNull("Resource '" + filename + "' not found", fileURL);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
         verifyAlerts(driver, getExpectedAlerts());
     }
 
@@ -311,8 +327,13 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String path = new File("src/test/resources/testfiles/empty.png").getCanonicalPath();
-        driver.findElement(By.tagName("input")).sendKeys(path);
+        final String filename = "testfiles/empty.png";
+        final URL fileURL = getClass().getClassLoader().getResource(filename);
+        assertNotNull("Resource '" + filename + "' not found", fileURL);
+        final File file = new File(fileURL.toURI());
+        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
+
+        driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
         verifyAlerts(driver, getExpectedAlerts());
     }
 }
