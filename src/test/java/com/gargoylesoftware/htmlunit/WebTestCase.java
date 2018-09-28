@@ -140,11 +140,6 @@ public abstract class WebTestCase {
     public static final String PROPERTY_GENERATE_TESTPAGES
         = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
 
-    private BrowserVersion browserVersion_;
-
-    private String[] expectedAlerts_;
-    private MockWebConnection mockWebConnection_;
-
     /** To be documented. */
     protected static final BrowserVersion FLAG_ALL_BROWSERS
         = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.BEST_SUPPORTED)
@@ -153,6 +148,10 @@ public abstract class WebTestCase {
 
     /** To be documented. */
     protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<>();
+
+    private BrowserVersion browserVersion_;
+    private String[] expectedAlerts_;
+    private MockWebConnection mockWebConnection_;
     private String generateTest_content_;
     private List<String> generateTest_expectedAlerts_;
     private boolean generateTest_notYetImplemented_;
@@ -654,6 +653,11 @@ public abstract class WebTestCase {
      */
     @After
     public void generateTestForWebDriver() throws IOException {
+        // cleanup
+        browserVersion_ = null;
+        expectedAlerts_ = null;
+        mockWebConnection_ = null;
+
         if (generateTest_content_ != null && !generateTest_notYetImplemented_) {
             final File targetDir = new File("target/generated_tests");
             targetDir.mkdirs();
@@ -683,6 +687,9 @@ public abstract class WebTestCase {
                 }
             }
         }
+        generateTest_content_ = null;
+        generateTest_expectedAlerts_ = null;
+        generateTest_testName_ = null;
     }
 
     /**

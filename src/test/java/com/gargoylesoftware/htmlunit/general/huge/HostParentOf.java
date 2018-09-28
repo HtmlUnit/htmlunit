@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 import org.openqa.selenium.WebDriver;
@@ -120,4 +121,9 @@ public abstract class HostParentOf extends WebDriverTestCase {
         return true;
     }
 
+    @After
+    public void after() {
+        parent_ = null;
+        child_ = null;
+    }
 }

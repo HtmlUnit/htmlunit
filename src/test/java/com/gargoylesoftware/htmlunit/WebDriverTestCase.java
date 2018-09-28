@@ -176,10 +176,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
 
-    private boolean useRealBrowser_;
-    private Boolean useStandards_;
     private static Boolean LAST_TEST_MockWebConnection_;
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
+
+    private boolean useRealBrowser_;
+    private Boolean useStandards_;
 
     /**
      * The HtmlUnitDriver.
