@@ -114,6 +114,7 @@ public class FileReader extends EventTarget {
             }
             else {
                 contentType = Files.probeContentType(file.toPath());
+System.out.println(getBrowserVersion().getNickname() + " - " + file.getName() + " - '" + contentType + "'");
             }
 
             if (getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
