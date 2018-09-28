@@ -562,7 +562,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the History size limit. HtmlUnit uses SoftReferences&lt;Page&gt; for
      * storing the pages that are part of the history. If you like to fine tune this
-     * you can use {@link #getHistoryPageCacheLimit()} to limit the number of page references
+     * you can use {@link #setHistoryPageCacheLimit(int)} to limit the number of page references
      * stored by the history.
      * @param historySizeLimit maximum number of pages in history
      */
