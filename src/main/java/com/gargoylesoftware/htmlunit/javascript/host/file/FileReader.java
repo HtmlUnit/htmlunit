@@ -107,28 +107,34 @@ public class FileReader extends EventTarget {
             final BrowserVersion browserVersion = getBrowserVersion();
 
             result_ = "data:";
-            final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
-            if (!value.isEmpty() || includeConentType) {
-                String contentType;
+
+            String contentType;
+            if (value.isEmpty()) {
+                contentType = URLConnection.guessContentTypeFromName(file.getName());
+            }
+            else {
+                contentType = Files.probeContentType(file.toPath());
+            }
+
+            if (getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
                 if (value.isEmpty()) {
-                    contentType = URLConnection.guessContentTypeFromName(file.getName());
+                    result_ = "null";
                 }
                 else {
-                    contentType = Files.probeContentType(file.toPath());
+                    if (contentType != null) {
+                        result_ += contentType;
+                    }
+                    result_ += ";base64," + value;
                 }
-
-                if (contentType == null) {
-                    if (includeConentType) {
+            }
+            else {
+                final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
+                if (!value.isEmpty() || includeConentType) {
+                    if (contentType == null) {
                         contentType = "application/octet-stream";
                     }
-                    else {
-                        contentType = "";
-                    }
+                    result_ += contentType + ";base64," + value;
                 }
-                result_ += contentType + ";base64," + value;
-            }
-            if (value.isEmpty() && getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
-                result_ = "null";
             }
         }
         readyState_ = DONE;

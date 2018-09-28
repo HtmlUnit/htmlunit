@@ -117,11 +117,11 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAADjghFsAAAAGXRFWHRTb2"
-                + "Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASUVORK5CYII=",
-            FF = "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAAD"
-                + "jghFsAAAAGXRFWHRTb2Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASU"
-                + "VORK5CYII=")
+    @Alerts(DEFAULT = "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABl"
+                + "BMVEX+1K8AAADjghFsAAAAGXRFWHRTb2Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAA"
+                + "D//wMAAAIAAcx+i34AAAAASUVORK5CYII=",
+            IE = "data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAADjghFsAAAAGXRFWHRTb2"
+                + "Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASUVORK5CYII=")
     public void readAsDataURLUnknown() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -148,7 +148,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        final String filename = "testfiles/tiny-png.img";
+        final String filename = "testfiles/tiny-png.zyx";
         final URL fileURL = getClass().getClassLoader().getResource(filename);
         assertNotNull("Resource '" + filename + "' not found", fileURL);
         final File file = new File(fileURL.toURI());
