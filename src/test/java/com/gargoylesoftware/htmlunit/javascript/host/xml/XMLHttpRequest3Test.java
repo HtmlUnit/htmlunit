@@ -398,14 +398,11 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(100));
-
         final HtmlPage page = client.getPage(URL_FIRST + "content.html");
         final DomElement elem = page.getElementById("doIt");
         ((HtmlSubmitInput) elem).click();
 
-        Thread.sleep(DEFAULT_WAIT_TIME); // wait a bit to be sure, both request are out
-        assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
+        assertEquals(0, client.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME));
 
         assertEquals(collectedHeaders_.toString(), 2, collectedHeaders_.size());
 
