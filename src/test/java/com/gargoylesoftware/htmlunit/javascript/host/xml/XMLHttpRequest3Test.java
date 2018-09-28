@@ -404,14 +404,22 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final DomElement elem = page.getElementById("doIt");
         ((HtmlSubmitInput) elem).click();
 
-        Thread.sleep(400); // wait a bit to be sure, both request are out
+        Thread.sleep(DEFAULT_WAIT_TIME); // wait a bit to be sure, both request are out
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
 
+        assertEquals(2, collectedHeaders_.size());
+
         String headers = collectedHeaders_.get(0);
+        if (!headers.startsWith("Form: ")) {
+            headers = collectedHeaders_.get(1);
+        }
         assertTrue(headers, headers.startsWith("Form: "));
         assertFalse(headers, headers.contains("Html-Unit=is great,;"));
 
-        headers = collectedHeaders_.get(1);
+        headers = collectedHeaders_.get(0);
+        if (!headers.startsWith("Ajax: ")) {
+            headers = collectedHeaders_.get(1);
+        }
         assertTrue(headers, headers.startsWith("Ajax: "));
         assertTrue(headers, headers.contains("Html-Unit=is great,;"));
     }

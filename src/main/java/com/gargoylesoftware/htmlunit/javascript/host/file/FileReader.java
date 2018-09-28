@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.nio.file.Files;
 
 import org.apache.commons.codec.binary.Base64;
@@ -97,9 +98,7 @@ public class FileReader extends EventTarget {
     public void readAsDataURL(final Object object) throws IOException {
         readyState_ = LOADING;
         final java.io.File file = ((File) object).getFile();
-System.out.println(file.getAbsolutePath());
-        String contentType = Files.probeContentType(file.toPath());
-System.out.println(contentType);
+
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
             FileUtils.copyFile(file, bos);
 
@@ -110,6 +109,14 @@ System.out.println(contentType);
             result_ = "data:";
             final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
             if (!value.isEmpty() || includeConentType) {
+                String contentType;
+                if (value.isEmpty()) {
+                    contentType = URLConnection.guessContentTypeFromName(file.getName());
+                }
+                else {
+                    contentType = Files.probeContentType(file.toPath());
+                }
+
                 if (contentType == null) {
                     if (includeConentType) {
                         contentType = "application/octet-stream";
