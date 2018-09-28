@@ -57,6 +57,7 @@
     <suppress checks="MethodName" files="HostParentOfHTest.java"/>
     <suppress checks="MethodName" files="HostParentOfITest.java"/>
     <suppress checks="MethodName" files="HostParentOfMTest.java"/>
+    <suppress checks="MethodName" files="HostParentOfNTest.java"/>
     <suppress checks="MethodName" files="HostParentOfPTest.java"/>
     <suppress checks="MethodName" files="HostParentOfSTest.java"/>
     <suppress checks="MethodName" files="HostParentOfTTest.java"/>
