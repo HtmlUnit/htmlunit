@@ -407,7 +407,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         Thread.sleep(DEFAULT_WAIT_TIME); // wait a bit to be sure, both request are out
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
 
-        assertEquals(2, collectedHeaders_.size());
+        assertEquals(collectedHeaders_.toString(), 2, collectedHeaders_.size());
 
         String headers = collectedHeaders_.get(0);
         if (!headers.startsWith("Form: ")) {
