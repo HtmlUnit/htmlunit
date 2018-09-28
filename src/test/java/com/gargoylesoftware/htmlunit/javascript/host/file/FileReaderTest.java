@@ -26,8 +26,6 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.annotations.BuildServerDiscrepancy;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -124,8 +122,6 @@ public class FileReaderTest extends WebDriverTestCase {
             FF = "data:application/octet-stream;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAABlBMVEX+1K8AAAD"
                 + "jghFsAAAAGXRFWHRTb2Z0d2FyZQBHcmFwaGljQ29udmVydGVyNV1I7gAAABBJREFUeJxiYAAAAAD//wMAAAIAAcx+i34AAAAASU"
                 + "VORK5CYII=")
-    @NotYetImplemented
-    @BuildServerDiscrepancy
     public void readAsDataURLUnknown() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
