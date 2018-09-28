@@ -114,7 +114,9 @@ public class FileReader extends EventTarget {
             }
             else {
                 contentType = Files.probeContentType(file.toPath());
-System.out.println(getBrowserVersion().getNickname() + " - " + file.getName() + " - '" + contentType + "'");
+                // this is a bit weak, on linux we get different results
+                // e.g. 'application/octet-stream' for a file with random bits
+                // instead of null on windows
             }
 
             if (getBrowserVersion().hasFeature(JS_FILEREADER_EMPTY_NULL)) {
