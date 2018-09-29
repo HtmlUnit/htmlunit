@@ -327,7 +327,7 @@
                             <includes>
                                 <include>**/huge/*.java</include>
                             </includes>
-                            <argLine>-Xms1024m -Xmx1024m</argLine>
+                            <argLine>-Xms1024m -Xmx1536m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
