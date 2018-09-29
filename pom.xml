@@ -333,6 +333,8 @@
                                 <include>**/huge/HostParentOfATest.java</include>
                                 <include>**/huge/HostParentOfBTest.java</include>
                                 <include>**/huge/HostParentOfCTest.java</include>
+
+                                <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
                             <argLine>-Xms1024m -Xmx1536m</argLine>
                             <systemPropertyVariables>
