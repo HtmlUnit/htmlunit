@@ -325,8 +325,10 @@
                         <version>2.22.0</version>
                         <configuration>
                             <includes>
-                                <!-- <include>**/huge/*.java</include> -->
+                                <!-- <include>**/huge/*.java</include>
                                 <include>**/huge/ElementClosesElementTest.java</include>
+                                -->
+                                <include>**/huge/HostParentOfATest.java</include>
                             </includes>
                             <argLine>-Xms1024m -Xmx1536m</argLine>
                             <systemPropertyVariables>
