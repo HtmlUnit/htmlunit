@@ -470,7 +470,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 @Override
                 protected WebClient newWebClient(final BrowserVersion version) {
                     final WebClient webClient = super.newWebClient(version);
-                    if (!isWebClientHistoryRequired()) {
+                    if (isWebClientCached()) {
                         webClient.getOptions().setHistorySizeLimit(0);
                     }
                     return webClient;
@@ -1324,17 +1324,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected boolean isWebClientCached() {
         return false;
-    }
-
-    /**
-     * Whether {@link WebClient} history is used for the tests.
-     *
-     * <p>This is needed to be {@code true} for huge test class, to save memory and performance.
-     *
-     * @return whether {@link WebClient} supports history
-     */
-    protected boolean isWebClientHistoryRequired() {
-        return true;
     }
 
     /**

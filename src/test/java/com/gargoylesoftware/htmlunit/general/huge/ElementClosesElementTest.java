@@ -130,14 +130,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isWebClientHistoryRequired() {
-        return false;
-    }
-
     @After
     public void after() {
         parent_ = null;
