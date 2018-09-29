@@ -328,8 +328,9 @@
                                 <!-- <include>**/huge/*.java</include>
                                 <include>**/huge/ElementClosesElementTest.java</include>
                                 <include>**/huge/HostParentOfATest.java</include>
-                                -->
                                 <include>**/huge/HostParentOfBTest.java</include>
+                                -->
+                                <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
                             <argLine>-Xms1024m -Xmx1536m</argLine>
                             <systemPropertyVariables>
