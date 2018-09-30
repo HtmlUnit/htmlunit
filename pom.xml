@@ -369,7 +369,7 @@
             <id>only-huge-tests-h-l</id>
             <activation>
                 <property>
-                    <name>onlyHuge</name>
+                    <name>onlyHugeHL</name>
                 </property>
             </activation>
             <build>
@@ -384,7 +384,6 @@
                                 <include>**/huge/HostParentOfITest.java</include>
                             </includes>
                             <argLine>-Xms512m -Xmx1024m</argLine>
-                            <useFile>false</useFile>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
