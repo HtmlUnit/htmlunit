@@ -314,7 +314,7 @@
             <id>only-huge-tests-a-c</id>
             <activation>
                 <property>
-                    <name>onlyHuge</name>
+                    <name>onlyHugeAC</name>
                 </property>
             </activation>
             <build>
@@ -343,7 +343,7 @@
             <id>only-huge-tests-d-g</id>
             <activation>
                 <property>
-                    <name>onlyHuge</name>
+                    <name>onlyHugeDG</name>
                 </property>
             </activation>
             <build>
