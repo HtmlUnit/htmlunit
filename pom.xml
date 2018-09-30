@@ -330,7 +330,6 @@
                                 <include>**/huge/HostParentOfCTest.java</include>
                             </includes>
                             <argLine>-Xms512m -Xmx1024m</argLine>
-                            <useFile>false</useFile>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
@@ -358,7 +357,6 @@
                                 <include>**/huge/HostParentOfFTest.java</include>
                             </includes>
                             <argLine>-Xms512m -Xmx1024m</argLine>
-                            <useFile>false</useFile>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
                             </systemPropertyVariables>
