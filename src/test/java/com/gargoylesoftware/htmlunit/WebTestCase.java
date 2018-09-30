@@ -654,7 +654,6 @@ public abstract class WebTestCase {
     @After
     public void generateTestForWebDriver() throws IOException {
         // cleanup
-        browserVersion_ = null;
         expectedAlerts_ = null;
         mockWebConnection_ = null;
 
