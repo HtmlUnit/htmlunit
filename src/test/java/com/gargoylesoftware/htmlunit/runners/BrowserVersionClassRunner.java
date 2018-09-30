@@ -18,8 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -214,23 +212,11 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
-    private List<FrameworkMethod> testMethods_;
-
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
-        if (testMethods_ != null) {
-            return testMethods_;
-        }
         final List<FrameworkMethod> methods = new ArrayList<>(super.computeTestMethods());
-        final Comparator<FrameworkMethod> comparator = new Comparator<FrameworkMethod>() {
-            @Override
-            public int compare(final FrameworkMethod fm1, final FrameworkMethod fm2) {
-                return fm1.getName().compareTo(fm2.getName());
-            }
-        };
-        Collections.sort(methods, comparator);
-        testMethods_ = methods;
-        return testMethods_;
+        methods.sort((FrameworkMethod fm1, FrameworkMethod fm2) -> fm1.getName().compareTo(fm2.getName()));
+        return methods;
     }
 
     /**

@@ -121,8 +121,7 @@ public class BrowserParameterizedRunner extends Suite {
 
         verifyDefaultMEthod();
 
-        final Parameters parameters = getParametersMethod().getAnnotation(
-                Parameters.class);
+        final Parameters parameters = getParametersMethod().getAnnotation(Parameters.class);
 
         final List<TestWithParameters> tests = createTestsForParameters(
                 allParameters(), parameters.name());
