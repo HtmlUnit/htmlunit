@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import java.util.Collection;
@@ -219,6 +220,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("true")
+    @NotYetImplemented(CHROME)
     public void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");
