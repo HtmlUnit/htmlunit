@@ -130,6 +130,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         return true;
     }
 
+    /**
+     * Cleanup.
+     */
     @After
     public void after() {
         parent_ = null;

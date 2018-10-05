@@ -121,6 +121,9 @@ public abstract class HostParentOf extends WebDriverTestCase {
         return true;
     }
 
+    /**
+     * Cleanup.
+     */
     @After
     public void after() {
         parent_ = null;
