@@ -52,7 +52,7 @@ public class ExternalTest {
     /** Chrome driver. */
     static String CHROME_DRIVER_ = "2.42";
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.22.0";
+    static String GECKO_DRIVER_ = "0.23.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.14.0.0";
 

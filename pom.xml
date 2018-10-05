@@ -21,7 +21,7 @@
         <selenium.version>3.14.0</selenium.version>
         <htmlunitdriver.version>2.32.1</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.12</checkstyle.version>
+        <checkstyle.version>8.13</checkstyle.version>
     </properties>
 
     <build>
@@ -998,13 +998,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.4</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
