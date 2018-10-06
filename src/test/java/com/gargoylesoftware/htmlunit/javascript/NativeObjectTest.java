@@ -42,19 +42,13 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
+    @Alerts({"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
                 "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
                 "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
                 "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
                 "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
                 "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function",
-                "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"},
-            FF52 = {"assign: undefined", "constructor: function", "create: undefined", "defineProperties: undefined",
-                "defineProperty: undefined", "freeze: undefined", "getOwnPropertyDescriptor: undefined",
-                "getOwnPropertyNames: undefined", "getPrototypeOf: undefined", "hasOwnProperty: function",
-                "isExtensible: undefined", "isFrozen: undefined", "isPrototypeOf: function", "isSealed: undefined",
-                "keys: undefined", "preventExtensions: undefined", "propertyIsEnumerable: function", "seal: undefined",
-                "toLocaleString: function", "toString: function", "valueOf: function", "__defineGetter__: function"})
+                "__defineSetter__: function", "__lookupGetter__: function", "__lookupSetter__: function"})
     public void common() throws Exception {
         final String[] methods = {"assign", "constructor", "create", "defineProperties", "defineProperty", "freeze",
             "getOwnPropertyDescriptor", "getOwnPropertyNames", "getPrototypeOf", "hasOwnProperty", "isExtensible",
