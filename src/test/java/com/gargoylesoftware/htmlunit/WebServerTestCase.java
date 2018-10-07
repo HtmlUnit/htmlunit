@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.net.BindException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -89,7 +90,14 @@ public abstract class WebServerTestCase extends WebTestCase {
         handlers.setHandlers(new Handler[]{resourceHandler, context});
         server_.setHandler(handlers);
         server_.setHandler(resourceHandler);
-        server_.start();
+
+        try {
+            server_.start();
+        }
+        catch (final BindException be) {
+            Thread.sleep(1000);
+            server_.start();
+        }
     }
 
     /**
@@ -214,7 +222,14 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
         context.setClassLoader(loader);
         server_.setHandler(context);
-        server_.start();
+
+        try {
+            server_.start();
+        }
+        catch (final BindException be) {
+            Thread.sleep(1000);
+            server_.start();
+        }
     }
 
     /**
