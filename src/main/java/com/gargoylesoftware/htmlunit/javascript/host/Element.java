@@ -657,7 +657,7 @@ public class Element extends Node {
                     return false;
                 }
                 String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
-                if (classAttribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
+                if (classAttribute == ATTRIBUTE_NOT_DEFINED) {
                     return false; // probably better performance as most of elements won't have a class attribute
                 }
 

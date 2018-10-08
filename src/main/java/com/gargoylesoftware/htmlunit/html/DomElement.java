@@ -1705,7 +1705,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      * {@inheritDoc}
      */
     @Override
-    public Set<java.util.Map.Entry<String, DomAttr>> entrySet() {
+    public Set<Map.Entry<String, DomAttr>> entrySet() {
         return map_.entrySet();
     }
 

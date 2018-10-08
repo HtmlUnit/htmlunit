@@ -111,7 +111,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      */
     @Override
     public short getNodeType() {
-        return org.w3c.dom.Node.DOCUMENT_NODE;
+        return DOCUMENT_NODE;
     }
 
     /**

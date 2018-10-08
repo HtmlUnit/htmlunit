@@ -1060,7 +1060,7 @@ public class CSSStyleSheet extends StyleSheet {
         cssRulesIndexFix_.clear();
 
         final CSSRuleListImpl ruleList = (CSSRuleListImpl) getWrappedSheet().getCssRules();
-        final List<org.w3c.dom.css.CSSRule> rules = ruleList.getRules();
+        final List<CSSRule> rules = ruleList.getRules();
         int pos = 0;
         for (CSSRule rule : rules) {
             if (rule instanceof org.w3c.dom.css.CSSCharsetRule) {

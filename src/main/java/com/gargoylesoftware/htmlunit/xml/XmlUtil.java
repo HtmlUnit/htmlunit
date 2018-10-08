@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.w3c.dom.Node.ELEMENT_NODE;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -446,7 +447,7 @@ public final class XmlUtil {
             final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
             for (int i = 0; i < fNodeCount; i++) {
                 final int type = deferredDocument.getNodeType(i, false);
-                if (type == org.w3c.dom.Node.ELEMENT_NODE) {
+                if (type == ELEMENT_NODE) {
                     int attrIndex = deferredDocument.getNodeExtra(i, false);
                     final List<String> attributes = new ArrayList<>();
                     map.put(i, attributes);
