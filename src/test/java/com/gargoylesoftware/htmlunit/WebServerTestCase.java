@@ -184,7 +184,14 @@ public abstract class WebServerTestCase extends WebTestCase {
         else {
             server.setHandler(context);
         }
-        server.start();
+
+        try {
+            server.start();
+        }
+        catch (final BindException be) {
+            Thread.sleep(1000);
+            server.start();
+        }
         return server;
     }
 
@@ -362,7 +369,15 @@ public abstract class WebServerTestCase extends WebTestCase {
 
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
-            server.start();
+
+            try {
+                server.start();
+            }
+            catch (final BindException be) {
+                Thread.sleep(1000);
+                server.start();
+            }
+
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
