@@ -46,6 +46,67 @@ public class DateTimeFormatTest extends WebDriverTestCase {
         test("Intl");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"zh-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
+                "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"zh-Hans-CN", "gregory", "latn", "UTC", "undefined", "undefined", "undefined",
+                    "numeric", "numeric", "numeric", "undefined", "undefined", "undefined", "undefined"})
+    @NotYetImplemented
+    public void resolvedOptionsValues() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
+                + "    var options = region1.resolvedOptions();\n"
+                + "    alert(options.locale);\n"
+                + "    alert(options.calendar);\n"
+                + "    alert(options.numberingSystem);\n"
+                + "    alert(options.timeZone);\n"
+                + "    alert(options.hour12);\n"
+                + "    alert(options.weekday);\n"
+                + "    alert(options.era);\n"
+                + "    alert(options.year);\n"
+                + "    alert(options.month);\n"
+                + "    alert(options.day);\n"
+                + "    alert(options.hour);\n"
+                + "    alert(options.minute);\n"
+                + "    alert(options.second);\n"
+                + "    alert(options.timeZoneName);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object Object]")
+    public void resolvedOptions() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + "  function test() {\n"
+                + "    var region1 = new Intl.DateTimeFormat('zh-CN', { timeZone: 'UTC' });\n"
+                + "    var options = region1.resolvedOptions();\n"
+                + "    alert(options);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
     private void test(final String... string) throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
@@ -1819,5 +1880,4 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     public void format_zh_tw() throws Exception {
         test("new Intl.DateTimeFormat('zh-TW').format(date)");
     }
-
 }

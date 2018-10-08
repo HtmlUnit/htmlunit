@@ -322,6 +322,16 @@ public class DateTimeFormat extends SimpleScriptable {
     }
 
     /**
+     * @return A new object with properties reflecting the locale and date and time formatting options
+     * computed during the initialization of the given {@code DateTimeFormat} object.
+     */
+    @JsxFunction
+    public Scriptable resolvedOptions() {
+        final Scriptable object = Context.getCurrentContext().newObject(getParentScope());
+        return object;
+    }
+
+    /**
      * Helper.
      */
     static final class DateTimeFormatHelper {
