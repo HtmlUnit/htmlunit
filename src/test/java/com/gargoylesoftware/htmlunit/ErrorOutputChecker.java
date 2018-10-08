@@ -45,6 +45,9 @@ public class ErrorOutputChecker implements TestRule {
             // GeckoDriver
             Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
                                 + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
+            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
+                    + ".*\\n.*\\r\\n.*TLS certificate errors will be ignored for this session\\r\\n"),
+
             // ie
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + ExternalTest.IE_DRIVER_.replace(".", "\\.") + "\r?\n"
