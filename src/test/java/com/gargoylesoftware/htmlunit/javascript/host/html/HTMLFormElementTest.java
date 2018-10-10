@@ -1489,4 +1489,103 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void notRequired() throws Exception {
+        required("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void required() throws Exception {
+        required("required");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredEmpty() throws Exception {
+        required("required=''");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredBlank() throws Exception {
+        required("required=' '");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredTrue() throws Exception {
+        required("required=true");
+        required("required='true'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredFalse() throws Exception {
+        required("required=false");
+        required("required='false'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredArbitrary() throws Exception {
+        required("required='Arbitrary'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void requiredRequired() throws Exception {
+        required("required='required'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void required(final String req) throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input name='test' value='' " + req + " >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
 }
