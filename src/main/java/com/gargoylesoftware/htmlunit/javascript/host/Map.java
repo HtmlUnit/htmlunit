@@ -277,6 +277,9 @@ public class Map extends SimpleScriptable implements SymbolScriptable {
         if (thisArg instanceof Scriptable) {
             thisArgument = (Scriptable) thisArg;
         }
+        else if (Context.getCurrentContext().isStrictMode()) {
+            thisArgument = Undefined.SCRIPTABLE_UNDEFINED;
+        }
         else {
             thisArgument = getWindow();
         }

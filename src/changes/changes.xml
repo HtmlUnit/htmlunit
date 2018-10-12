@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 69">
+            <action type="fix" dev="rbri">
+                Map and Set forEach() are using undefined as this context in strict mode.
+            </action>
             <action type="add" dev="rbri">
                 Stub impl of DateTimeFormat.resolvedOptions() added.
             </action>

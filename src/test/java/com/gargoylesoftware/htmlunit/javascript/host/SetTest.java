@@ -14,15 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -310,7 +306,8 @@ public class SetTest extends WebDriverTestCase {
             IE = {})
     public void forEach() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function logElement(value1, value2, s) {\n"
             + "  alert(value1);\n"
             + "  alert(value2);\n"
@@ -321,7 +318,40 @@ public class SetTest extends WebDriverTestCase {
             + "  var mySet = new Set(['ab', undefined, null]);\n"
             + "  mySet.forEach(logElement);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "undefined",
+            "undefined", "undefined", "[object Set]", "undefined",
+            "null", "null", "[object Set]", "undefined"},
+            IE = {})
+    public void forEachStrict() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + "function logElement(value1, value2, s) {\n"
+            + "  alert(value1);\n"
+            + "  alert(value2);\n"
+            + "  alert(s);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "  var mySet = new Set(['ab', undefined, null]);\n"
+            + "  mySet.forEach(logElement);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
@@ -334,7 +364,6 @@ public class SetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
             "null", "null", "[object Set]", "hello"},
             IE = {})
-    @NotYetImplemented({CHROME, FF})
     public void forEachThis() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

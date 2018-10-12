@@ -366,7 +366,8 @@ public class MapTest extends WebDriverTestCase {
             IE = {})
     public void forEach() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function logElement(value, key, m) {\n"
             + "  alert(value);\n"
             + "  alert(key);\n"
@@ -379,7 +380,43 @@ public class MapTest extends WebDriverTestCase {
             + "  myMap.forEach(logElement);\n"
              + "}catch(e){alert(e)}"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"value1", "key1", "[object Map]", "undefined",
+            "[object Object]", "key2", "[object Map]", "undefined",
+            "null", "key3", "[object Map]", "undefined",
+            "undefined", "key4", "[object Map]", "undefined"},
+            IE = {})
+    public void forEachStrict() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "'use strict';\n"
+            + "function logElement(value, key, m) {\n"
+            + "  alert(value);\n"
+            + "  alert(key);\n"
+            + "  alert(m);\n"
+            + "  alert(this);\n"
+            + "}\n"
+            + "function test() {\n"
+            + "try {"
+            + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
+            + "  myMap.forEach(logElement);\n"
+             + "}catch(e){alert(e)}"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
