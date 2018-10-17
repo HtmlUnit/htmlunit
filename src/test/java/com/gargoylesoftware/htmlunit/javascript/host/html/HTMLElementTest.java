@@ -1080,6 +1080,26 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test setting innerHTML should reset style cache.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setInnerHTMLResetsStyle() throws Exception {
+        final String html = "<html><head></head>\n"
+                + "<body>\n"
+                + "<div id='testDiv'></div>\n"
+                + "<script language='javascript'>\n"
+                + "    var node = document.getElementById('testDiv');\n"
+                + "    var height = node.offsetHeight;\n"
+                + "    node.innerHTML = 'HtmlUnit';\n"
+                + "    alert(height < node.offsetHeight);\n"
+                + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test getting <code>outerHTML</code> of a <code>div</code> (block).
      * @throws Exception if the test fails
      */
@@ -4681,5 +4701,4 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebElement element = driver.findElement(By.id("child"));
         assertFalse(element.isDisplayed());
     }
-
 }

@@ -1971,6 +1971,21 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * Clears the computed styles for a specific {@link Element}
+     * and all parent elements.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStylesUpToRoot(final Element element) {
+        cssPropertiesCache_.remove(element);
+
+        Element parent = element.getParentElement();
+        while (parent != null) {
+            cssPropertiesCache_.remove(parent);
+            parent = parent.getParentElement();
+        }
+    }
+
+    /**
      * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
      * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
      * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
