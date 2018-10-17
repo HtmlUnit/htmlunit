@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
+            <action type="fix" dev="rbri"  issue="1995" due-to="Joerg Werner">
+                Fix calculation of absolute url from relative one if dots present.
+            </action>
             <action type="fix" dev="rbri" issue="1993">
                 Setting the innerHtml has to clear the computed styles to force recalculation
                 based on the new content.
