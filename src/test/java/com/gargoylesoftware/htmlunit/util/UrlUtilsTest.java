@@ -224,6 +224,11 @@ public class UrlUtilsTest extends SimpleWebTestCase {
         assertEquals("http://a/./g",         UrlUtils.resolveUrl(baseUrl, "/./g"));
         assertEquals("http://a/g",        UrlUtils.resolveUrl(baseUrl, "/../g"));
 
+        assertEquals("http://a/g",           UrlUtils.resolveUrl(baseUrl, "/../../g"));
+        assertEquals("http://a/.g",          UrlUtils.resolveUrl(baseUrl, "/.g"));
+        assertEquals("http://a/..g",         UrlUtils.resolveUrl(baseUrl, "/..g"));
+        assertEquals("http://a/...g",        UrlUtils.resolveUrl(baseUrl, "/...g"));
+
         assertEquals("http://a/b/c/g.",      UrlUtils.resolveUrl(baseUrl, "g."));
         assertEquals("http://a/b/c/.g",      UrlUtils.resolveUrl(baseUrl, ".g"));
         assertEquals("http://a/b/c/g..",     UrlUtils.resolveUrl(baseUrl, "g.."));

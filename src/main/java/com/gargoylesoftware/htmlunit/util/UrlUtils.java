@@ -923,11 +923,16 @@ public final class UrlUtils {
     }
 
     /**
-     * "/.." at the beginning should be removed as browsers do (not in RFC)
+     * "../" after the leading "/" should be removed as browsers do (not in RFC)
      */
     private static String removeLeadingSlashPoints(String path) {
-        while (path.startsWith("/..")) {
-            path = path.substring(3);
+        int i = 1;
+        while (path.startsWith("../", i)) {
+            i = i + 3;
+        }
+
+        if (i > 1) {
+            path = "/" + path.substring(i);
         }
 
         return path;
