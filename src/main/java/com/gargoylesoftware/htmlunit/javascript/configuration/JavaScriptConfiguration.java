@@ -81,7 +81,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
 import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
-import com.gargoylesoftware.htmlunit.javascript.host.budget.BudgetService;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
@@ -422,7 +421,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         BarProp.class, BaseAudioContext.class,
         BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
         Blob.class, BlobEvent.class, BroadcastChannel.class,
-        BudgetService.class,
         Cache.class, CacheStorage.class,
         CanvasCaptureMediaStream.class, CanvasCaptureMediaStreamTrack.class,
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
