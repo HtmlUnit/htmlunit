@@ -723,8 +723,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function BudgetService() { [native code] }")
+    @Alerts("exception")
     public void budgetService() throws Exception {
         test("BudgetService");
     }
