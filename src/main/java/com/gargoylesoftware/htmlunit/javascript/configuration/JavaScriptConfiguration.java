@@ -81,6 +81,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
 import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Atomics;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.SharedArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
@@ -411,10 +413,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class, ApplicationCacheErrorEvent.class,
-
-        // disabled because of Spectre:
-        // Atomics.class,
-
+        Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
@@ -528,11 +527,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCSessionDescription.class, RTCStatsReport.class, Screen.class, ScreenOrientation.class,
         ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
-        ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
-
-        // disabled because of Spectre:
-        // SharedArrayBuffer.class,
-
+        ServiceWorkerRegistration.class, ShadowRoot.class,
+        SharedArrayBuffer.class,
         SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,

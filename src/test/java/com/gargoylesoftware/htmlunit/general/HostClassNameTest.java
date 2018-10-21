@@ -325,7 +325,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "object Atomics")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -7493,7 +7494,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function SharedArrayBuffer() { [native code] }")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }

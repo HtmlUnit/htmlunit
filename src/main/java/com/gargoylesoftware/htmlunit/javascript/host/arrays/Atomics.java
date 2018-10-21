@@ -14,13 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
  * A JavaScript object for {@code Atomics}.
  *
  * @author Ronald Brill
  */
-//disabled because of Spectre: @JsxClass(CHROME)
+@JsxClass(CHROME)
 public class Atomics extends SimpleScriptable {
 }

@@ -1808,7 +1808,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "171",
+    @Alerts(CHROME = "169",
             FF = "141",
             IE = "143")
     @NotYetImplemented(CHROME)

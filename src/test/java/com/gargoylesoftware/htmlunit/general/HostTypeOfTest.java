@@ -189,7 +189,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -4971,7 +4972,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }

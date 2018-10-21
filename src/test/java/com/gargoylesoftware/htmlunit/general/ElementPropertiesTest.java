@@ -2330,7 +2330,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "async,charset,crossOrigin,defer,event,htmlFor,integrity,noModule,src,text,type",
+    @Alerts(CHROME = "async,charset,crossOrigin,defer,event,htmlFor,"
+                        + "integrity,noModule,referrerPolicy,src,text,type",
+            FF60 = "async,charset,crossOrigin,defer,event,htmlFor,"
+                        + "integrity,noModule,src,text,type",
             FF52 = "async,charset,crossOrigin,defer,event,htmlFor,integrity,src,text,type",
             IE = "async,charset,defer,event,htmlFor,src,text,type",
             EDGE = "async,charset,defer,event,htmlFor,src,text,type")
