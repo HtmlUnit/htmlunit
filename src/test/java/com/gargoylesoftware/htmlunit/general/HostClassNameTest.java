@@ -326,7 +326,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "object Atomics")
+            CHROME = "[object Atomics]")
     public void atomics() throws Exception {
         test("Atomics");
     }

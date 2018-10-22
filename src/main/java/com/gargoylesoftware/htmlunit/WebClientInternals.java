@@ -27,14 +27,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
  * Represents a ways to get notified about internal objects.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebClientInternals implements Serializable {
 
-    private final WebClient webClient_;
     private Collection<Listener> listeners_;
 
-    WebClientInternals(final WebClient webClient) {
-        webClient_ = webClient;
+    WebClientInternals() {
     }
 
     /**

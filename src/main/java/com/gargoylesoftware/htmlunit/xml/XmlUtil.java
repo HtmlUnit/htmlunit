@@ -15,7 +15,11 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.w3c.dom.Node.CDATA_SECTION_NODE;
+import static org.w3c.dom.Node.COMMENT_NODE;
 import static org.w3c.dom.Node.ELEMENT_NODE;
+import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
+import static org.w3c.dom.Node.TEXT_NODE;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -354,25 +358,25 @@ public final class XmlUtil {
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);
             switch (child.getNodeType()) {
-                case Node.ELEMENT_NODE:
+                case ELEMENT_NODE:
                     final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
                     dest.appendChild(childXml);
                     copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
                     break;
 
-                case Node.TEXT_NODE:
+                case TEXT_NODE:
                     dest.appendChild(new DomText(page, child.getNodeValue()));
                     break;
 
-                case Node.CDATA_SECTION_NODE:
+                case CDATA_SECTION_NODE:
                     dest.appendChild(new DomCDataSection(page, child.getNodeValue()));
                     break;
 
-                case Node.COMMENT_NODE:
+                case COMMENT_NODE:
                     dest.appendChild(new DomComment(page, child.getNodeValue()));
                     break;
 
-                case Node.PROCESSING_INSTRUCTION_NODE:
+                case PROCESSING_INSTRUCTION_NODE:
                     dest.appendChild(new DomProcessingInstruction(page, child.getNodeName(), child.getNodeValue()));
                     break;
 

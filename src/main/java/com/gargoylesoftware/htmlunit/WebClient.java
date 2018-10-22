@@ -204,7 +204,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
-    private WebClientInternals internals_ = new WebClientInternals(this);
+    private WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
