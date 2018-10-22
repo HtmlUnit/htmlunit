@@ -323,9 +323,8 @@ public class Promise extends SimpleScriptable {
                 }
             }
         }
-        else {
-            // TODO
-        }
+        // TODO handle the other cases
+
         returnPromise.race_ = race;
 
         returnPromise.settleAll(window);

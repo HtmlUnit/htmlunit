@@ -78,10 +78,6 @@ public class MSXMLJavaScriptEnvironment {
                 final Scriptable parentPrototype = prototypesPerJSName.get(config.getExtendedClassName());
                 prototype.setPrototype(parentPrototype);
             }
-            else {
-//                prototype.setPrototype(objectPrototype);
-//                prototype.setPrototype(fallbackCaller);
-            }
         }
 
         prototypes_ = prototypes;
