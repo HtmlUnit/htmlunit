@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -96,7 +97,7 @@ public class ExternalTest {
     private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
         for ( ; i < lines.size(); i++) {
             final String line = lines.get(i).trim();
-            if (!line.startsWith("<!--")) {
+            if (StringUtils.isNotBlank(line) && !line.startsWith("<!--")) {
                 if ("</properties>".equals(line)) {
                     break;
                 }

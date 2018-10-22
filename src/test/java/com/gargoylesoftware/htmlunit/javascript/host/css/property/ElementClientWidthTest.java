@@ -1811,7 +1811,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Alerts(CHROME = "169",
             FF = "141",
             IE = "143")
-    @NotYetImplemented(CHROME)
     public void inputSelect() throws Exception {
         loadPageWithAlerts2(testInput("select"));
     }

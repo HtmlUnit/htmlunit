@@ -22,7 +22,7 @@
         <selenium.version>3.14.0</selenium.version>
         <htmlunitdriver.version>2.33.0</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.13</checkstyle.version>
+        <checkstyle.version>8.14</checkstyle.version>
         <pmd.version>6.8.0</pmd.version>
     </properties>
 
@@ -242,7 +242,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.1.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
