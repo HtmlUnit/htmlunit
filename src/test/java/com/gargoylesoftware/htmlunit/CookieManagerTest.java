@@ -369,6 +369,23 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "cookie1=1",
+            IE = "cookie1=1; cookie2=2")
+    public void cookieExpires_GMT() throws Exception {
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie",
+                                                "cookie1=1;expires=Sun Jan 20 2042 17:45:00 GMT+0800 (CST)"));
+        responseHeader.add(new NameValuePair("Set-Cookie",
+                                                "cookie2=2;expires=Sun Jan 20 2004 17:45:00 GMT+0800 (CST)"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", "text/html", responseHeader);
+
+        loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
      * Test some formating errors.
      * @throws Exception if the test fails
      */

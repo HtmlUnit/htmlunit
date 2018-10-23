@@ -46,16 +46,18 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
 
     // simplified patterns from BrowserCompatSpec, with yy patterns before similar yyyy patterns
     private static final String[] DEFAULT_DATE_PATTERNS = new String[] {
+        "EEE MMM dd yyyy HH mm ss 'GMT'Z",
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",
         "EEE dd MMM yy HH mm ss z ",
         "EEE dd MMM yyyy HH mm ss z ",
         "EEE dd MM yy HH mm ss z ",
-        "EEE dd MM yyyy HH mm ss z "
+        "EEE dd MM yyyy HH mm ss z ",
     };
 
     private static final String[] EXTENDED_DATE_PATTERNS_1 = new String[] {
+        "EEE MMM dd yyyy HH mm ss 'GMT'Z",
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",
@@ -67,6 +69,7 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
     };
 
     private static final String[] EXTENDED_DATE_PATTERNS_2 = new String[] {
+        "EEE MMM dd yyyy HH mm ss 'GMT'Z",
         "EEE dd MMM yy HH mm ss zzz",
         "EEE dd MMM yyyy HH mm ss zzz",
         "EEE MMM d HH mm ss yyyy",
@@ -75,7 +78,7 @@ final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
         "EEE dd MM yy HH mm ss z ",
         "EEE dd MM yyyy HH mm ss z ",
         "EEE dd MMM yy HH MM ss z",
-        "MMM dd yy HH mm ss",
+        "MMM dd yy HH mm ss"
     };
 
     private final BrowserVersion browserVersion_;

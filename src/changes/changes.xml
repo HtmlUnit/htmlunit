@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
+            <action type="fix" dev="rbri"  issue="1998" due-to="Rural Hunter">
+                Browsers are supporting GMT time format for cookie expires parsing.
+            </action>
             <action type="fix" dev="rbri"  issue="1995" due-to="Joerg Werner">
                 Fix calculation of absolute url from relative one if dots present.
             </action>
