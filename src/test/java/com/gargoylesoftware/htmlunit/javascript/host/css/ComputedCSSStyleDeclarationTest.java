@@ -1430,6 +1430,44 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "18",
+            FF = "20")
+    public void offsetHeight_with_child() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'><div>foo</div></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("81")
+    @NotYetImplemented
+    public void offsetHeight_with_childHeight() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('div1').offsetHeight);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1'><iframe height='77'>foo</iframe></div>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"true", "false"})
     public void offsetHeight_setting_height() throws Exception {
         final String html = "<html><head>\n"

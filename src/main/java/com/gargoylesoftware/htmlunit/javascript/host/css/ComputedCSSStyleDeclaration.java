@@ -1175,21 +1175,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height_.intValue();
         }
 
-        int height = getEmptyHeight();
-        if (height == 0) {
-            height_ = Integer.valueOf(0);
-            return 0;
-        }
-
         if (super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();
             if (contentHeight > 0) {
-                height = contentHeight;
+                height_ = Integer.valueOf(contentHeight);
+                return height_;
             }
         }
 
-        height_ = Integer.valueOf(height);
-        return height;
+        height_ = Integer.valueOf(getEmptyHeight());
+        return height_;
     }
 
     /**
