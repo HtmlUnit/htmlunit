@@ -38,9 +38,9 @@ import org.junit.runners.model.TestClass;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -212,11 +212,17 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
+    // caching this methods is required by eclipse
+    // without this it is not possible to run a single test
+    private List<FrameworkMethod> testMethods_;
+
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
-        final List<FrameworkMethod> methods = new ArrayList<>(super.computeTestMethods());
-        methods.sort((FrameworkMethod fm1, FrameworkMethod fm2) -> fm1.getName().compareTo(fm2.getName()));
-        return methods;
+        if (testMethods_ == null) {
+            testMethods_ = new ArrayList<>(super.computeTestMethods());
+        }
+
+        return testMethods_;
     }
 
     /**
