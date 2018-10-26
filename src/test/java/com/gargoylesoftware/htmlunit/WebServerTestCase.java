@@ -53,8 +53,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public abstract class WebServerTestCase extends WebTestCase {
+
+    /** Timeout used when waiting for successful bind. */
+    public static final int BIND_TIMEOUT = 2000;
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
@@ -91,13 +95,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         server_.setHandler(handlers);
         server_.setHandler(resourceHandler);
 
-        try {
-            server_.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.start();
-        }
+        startServer(server_);
     }
 
     /**
@@ -185,13 +183,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             server.setHandler(context);
         }
 
-        try {
-            server.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server.start();
-        }
+        startServer(server);
         return server;
     }
 
@@ -230,13 +222,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setClassLoader(loader);
         server_.setHandler(context);
 
-        try {
-            server_.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.start();
-        }
+        startServer(server_);
     }
 
     /**
@@ -370,17 +356,27 @@ public abstract class WebServerTestCase extends WebTestCase {
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
 
-            try {
-                server.start();
-            }
-            catch (final BindException be) {
-                Thread.sleep(1000);
-                server.start();
-            }
-
+            startServer(server);
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
+    }
+
+    private static void startServer(final Server server) throws Exception {
+        final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server.start();
+                return;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw e;
+                }
+                Thread.sleep(200);
+            }
+        }
     }
 
     /**

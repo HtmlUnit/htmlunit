@@ -103,12 +103,19 @@ public class PrimitiveWebServer implements Closeable {
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
-        try {
-            server_.bind(new InetSocketAddress(port_));
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.bind(new InetSocketAddress(port_));
+        final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server_.bind(new InetSocketAddress(port_));
+                break;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw e;
+                }
+                Thread.sleep(200);
+            }
         }
 
         new Thread(new Runnable() {
