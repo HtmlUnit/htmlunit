@@ -171,8 +171,7 @@ public class HostParentOfBTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
+    @Alerts("false")
     public void _BudgetService_BudgetService() throws Exception {
         test("BudgetService", "BudgetService");
     }
