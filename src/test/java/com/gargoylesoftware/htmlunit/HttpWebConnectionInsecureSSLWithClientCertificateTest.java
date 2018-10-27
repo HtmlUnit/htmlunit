@@ -64,7 +64,7 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-        WebServerTestCase.tryBind(() -> localServer_.start());
+        WebServerTestCase.tryBind(localServer_.getServer().getLocalPort(), () -> localServer_.start());
     }
 
     private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {

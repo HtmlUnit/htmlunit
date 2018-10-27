@@ -25,7 +25,6 @@ import java.util.Map;
 
 import javax.servlet.Servlet;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,11 +38,10 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class SocksProxyTest extends WebServerTestCase {
-
-    private InsecureHttpsServer localServer_;
 
     /**
      * @throws Exception if an error occurs
@@ -92,14 +90,18 @@ public class SocksProxyTest extends WebServerTestCase {
     }
 
     private void doHttpsTest(final WebClient webClient) throws Exception {
-        localServer_ = new InsecureHttpsServer(SocksProxyTestServlet.HTML);
-        WebServerTestCase.tryBind(() -> localServer_.start());
+        final InsecureHttpsServer server = new InsecureHttpsServer(SocksProxyTestServlet.HTML);
+        try {
+            WebServerTestCase.tryBind(server.getPort(), () -> server.start());
+            webClient.getOptions().setUseInsecureSSL(true);
 
-        webClient.getOptions().setUseInsecureSSL(true);
-
-        final String url = "https://" + localServer_.getHostName() + ":" + localServer_.getPort();
-        final HtmlPage page = webClient.getPage(url);
-        assertEquals("hello", page.getTitleText());
+            final String url = "https://" + server.getHostName() + ":" + server.getPort();
+            final HtmlPage page = webClient.getPage(url);
+            assertEquals("hello", page.getTitleText());
+        }
+        finally {
+            server.stop();
+        }
     }
 
     private static void assumeSocksProxyInUse() {
@@ -127,20 +129,6 @@ public class SocksProxyTest extends WebServerTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
-     */
-    @Override
-    @After
-    public void tearDown() throws Exception {
-        if (localServer_ != null) {
-            localServer_.stop();
-        }
-        localServer_ = null;
-
-        super.tearDown();
-    }
-
-    /**
      * Helper class to deliver content.
      */
     public static class SocksProxyTestServlet extends ServletContentWrapper {
@@ -153,5 +141,4 @@ public class SocksProxyTest extends WebServerTestCase {
             super(HTML);
         }
     }
-
 }

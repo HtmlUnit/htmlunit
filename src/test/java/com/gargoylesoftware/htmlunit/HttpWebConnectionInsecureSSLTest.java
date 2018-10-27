@@ -39,7 +39,7 @@ public class HttpWebConnectionInsecureSSLTest extends SimpleWebTestCase {
     @Before
     public void setUp() throws Exception {
         localServer_ = new InsecureHttpsServer();
-        WebServerTestCase.tryBind(() -> localServer_.start());
+        localServer_.start();
     }
 
     /**

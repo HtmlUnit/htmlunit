@@ -107,7 +107,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         server_.setHandler(handlers);
         server_.setHandler(resourceHandler);
 
-        tryBind(() -> server_.start());
+        tryBind(PORT, () -> server_.start());
     }
 
     /**
@@ -195,7 +195,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             server.setHandler(context);
         }
 
-        tryBind(() -> server.start());
+        tryBind(port, () -> server.start());
         return server;
     }
 
@@ -234,7 +234,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setClassLoader(loader);
         server_.setHandler(context);
 
-        tryBind(() -> server_.start());
+        tryBind(PORT, () -> server_.start());
     }
 
     /**
@@ -368,7 +368,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
 
-            tryBind(() -> server.start());
+            tryBind(PORT, () -> server.start());
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
@@ -376,10 +376,11 @@ public abstract class WebServerTestCase extends WebTestCase {
 
     /**
      * Starts the server; handles BindExceptions and retries.
+     * @param port the port only used for the error message
      * @param binder the lambda to start the server
      * @throws Exception in case of error
      */
-    public static void tryBind(final Binder binder) throws Exception {
+    public static void tryBind(final int port, final Binder binder) throws Exception {
         final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
 
         while (true) {
@@ -389,7 +390,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
             catch (final BindException e) {
                 if (System.currentTimeMillis() > maxWait) {
-                    throw e;
+                    throw (BindException) new BindException("Port " + port + "is already in use").initCause(e);
                 }
                 Thread.sleep(200);
             }

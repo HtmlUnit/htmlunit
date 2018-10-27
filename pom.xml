@@ -148,6 +148,12 @@
                 <version>3.0.1</version>
                 <configuration>
                     <additionalparam>--allow-script-in-comments</additionalparam>
+                    <links>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>http://commons.apache.org/logging/apidocs/</link>
+                        <link>http://commons.apache.org/codec/apidocs/</link>
+                        <link>http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/</link>
+                    </links>
                 </configuration>
                 <executions>
                     <execution>

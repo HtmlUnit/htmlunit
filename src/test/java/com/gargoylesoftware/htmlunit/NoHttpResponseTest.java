@@ -79,7 +79,7 @@ public class NoHttpResponseTest {
             final WebDriver driver = getWebDriver();
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            WebServerTestCase.tryBind(() -> miniServer.start());
+            WebServerTestCase.tryBind(PORT, () -> miniServer.start());
             try {
                 driver.get(URL_FIRST.toString());
                 driver.findElement(By.id("loginButton")).click();
@@ -107,7 +107,7 @@ public class NoHttpResponseTest {
             MiniServer.configureDropConnection(mockWebConnection, new URL(URL_FIRST, "page2?textfield="));
 
             final MiniServer miniServer = new MiniServer(PORT, mockWebConnection);
-            WebServerTestCase.tryBind(() -> miniServer.start());
+            WebServerTestCase.tryBind(PORT, () -> miniServer.start());
             try {
                 final HtmlPage page = getWebClient().getPage(URL_FIRST);
                 page.getElementById("loginButton").click();
