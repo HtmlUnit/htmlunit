@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public abstract class WebServerTestCase extends WebTestCase {
 
     /** Timeout used when waiting for successful bind. */
-    public static final int BIND_TIMEOUT = 2000;
+    public static final int BIND_TIMEOUT = 1000;
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
@@ -362,7 +362,12 @@ public abstract class WebServerTestCase extends WebTestCase {
         MockWebConnectionServlet.setMockconnection(mockConnection);
     }
 
-    private static void startServer(final Server server) throws Exception {
+    /**
+     * Starts the server; handles BindExceptions and retries.
+     * @param server the server to start
+     * @throws Exception in case of error
+     */
+    public static void startServer(final Server server) throws Exception {
         final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
 
         while (true) {

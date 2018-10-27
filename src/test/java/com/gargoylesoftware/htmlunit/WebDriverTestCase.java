@@ -548,7 +548,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
             }
             server.setHandler(context);
-            server.start();
+            WebServerTestCase.startServer(server);
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
@@ -560,7 +560,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context2.setResourceBase("./");
             context2.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context2);
-            server.start();
+            WebServerTestCase.startServer(server);
             STATIC_SERVER2_ = server;
 
             server = buildServer(PORT3);
@@ -569,7 +569,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context3.setResourceBase("./");
             context3.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context3);
-            server.start();
+            WebServerTestCase.startServer(server);
             STATIC_SERVER3_ = server;
             /*
              * The mock connection servlet call sit under both servers, so long as tests
