@@ -93,7 +93,7 @@ public class SocksProxyTest extends WebServerTestCase {
 
     private void doHttpsTest(final WebClient webClient) throws Exception {
         localServer_ = new InsecureHttpsServer(SocksProxyTestServlet.HTML);
-        localServer_.start();
+        WebServerTestCase.tryBind(() -> localServer_.start());
 
         webClient.getOptions().setUseInsecureSSL(true);
 

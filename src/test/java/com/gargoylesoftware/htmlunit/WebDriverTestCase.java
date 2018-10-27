@@ -548,29 +548,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
             }
             server.setHandler(context);
-            WebServerTestCase.startServer(server);
+            WebServerTestCase.tryBind(() -> server.start());
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            Server server = buildServer(PORT2);
+            final Server server2 = buildServer(PORT2);
             final WebAppContext context2 = new WebAppContext();
             context2.setContextPath("/");
             context2.setResourceBase("./");
             context2.addServlet(MockWebConnectionServlet.class, "/*");
-            server.setHandler(context2);
-            WebServerTestCase.startServer(server);
-            STATIC_SERVER2_ = server;
+            server2.setHandler(context2);
+            WebServerTestCase.tryBind(() -> server2.start());
+            STATIC_SERVER2_ = server2;
 
-            server = buildServer(PORT3);
+            final Server server3 = buildServer(PORT3);
             final WebAppContext context3 = new WebAppContext();
             context3.setContextPath("/");
             context3.setResourceBase("./");
             context3.addServlet(MockWebConnectionServlet.class, "/*");
-            server.setHandler(context3);
-            WebServerTestCase.startServer(server);
-            STATIC_SERVER3_ = server;
+            server3.setHandler(context3);
+            WebServerTestCase.tryBind(() -> server3.start());
+            STATIC_SERVER3_ = server3;
             /*
              * The mock connection servlet call sit under both servers, so long as tests
              * keep the URLs distinct.

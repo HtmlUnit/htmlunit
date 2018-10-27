@@ -112,8 +112,7 @@ public class InsecureHttpsServer {
             };
             localServer_.register("*", handler);
         }
-
-        localServer_.start();
+        WebServerTestCase.tryBind(() -> localServer_.start());
     }
 
     /**

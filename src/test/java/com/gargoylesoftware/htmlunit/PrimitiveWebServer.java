@@ -96,27 +96,13 @@ public class PrimitiveWebServer implements Closeable {
 
     /**
      * Starts the server.
-     * @throws IOException if an error occurs
-     * @throws InterruptedException  if an error occurs
+     * @throws Exception if an error occurs
      */
-    private void start() throws IOException, InterruptedException {
+    private void start() throws Exception {
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
-        final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
-
-        while (true) {
-            try {
-                server_.bind(new InetSocketAddress(port_));
-                break;
-            }
-            catch (final BindException e) {
-                if (System.currentTimeMillis() > maxWait) {
-                    throw e;
-                }
-                Thread.sleep(200);
-            }
-        }
+        WebServerTestCase.tryBind(() -> server_.bind(new InetSocketAddress(port_)));
 
         new Thread(new Runnable() {
 
