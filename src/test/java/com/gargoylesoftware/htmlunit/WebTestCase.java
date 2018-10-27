@@ -71,17 +71,17 @@ public abstract class WebTestCase {
     private static final Locale SAVE_LOCALE = Locale.getDefault();
 
     /** The listener port for the web server. */
-    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22345"));
+    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
 
     /** The second listener port for the web server, used for cross-origin tests. */
-    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22346"));
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "12346"));
 
     /** The third listener port for the web server, used for cross-origin tests. */
-    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22347"));
+    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "12347"));
 
     /** The listener port used for our primitive server tests. */
     public static final int PORT_PRIMITIVE_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_primitive", "22348"));
+                                                        System.getProperty("htmlunit.test.port_primitive", "12348"));
 
     /** The SOCKS proxy host to use for SOCKS proxy tests. */
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
