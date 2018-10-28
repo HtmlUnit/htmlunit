@@ -1102,7 +1102,8 @@ public class Element extends Node {
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the id value for this element.
+     * @param newId the newId value for this element
      */
     @JsxSetter({CHROME, FF})
     public void setId(final String newId) {

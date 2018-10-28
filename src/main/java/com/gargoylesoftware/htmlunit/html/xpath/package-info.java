@@ -14,6 +14,6 @@
  */
 
 /**
- * XPath adapter implementation for the Htmlunit DOM.
+ * XPath adapter implementation for the HtmlUnit DOM.
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
