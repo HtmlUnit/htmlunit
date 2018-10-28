@@ -92,7 +92,7 @@ public class SocksProxyTest extends WebServerTestCase {
     private void doHttpsTest(final WebClient webClient) throws Exception {
         final InsecureHttpsServer server = new InsecureHttpsServer(SocksProxyTestServlet.HTML);
         try {
-            WebServerTestCase.tryBind(-1, () -> server.start());
+            server.start();
             webClient.getOptions().setUseInsecureSSL(true);
 
             final String url = "https://" + server.getHostName() + ":" + server.getPort();

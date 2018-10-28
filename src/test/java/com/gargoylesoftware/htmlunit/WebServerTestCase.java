@@ -57,18 +57,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public abstract class WebServerTestCase extends WebTestCase {
 
-    /**
-     * Helper to be able to use lambda expressions for server start code.
-     */
-    @FunctionalInterface
-    public interface Binder {
-        /**
-         * The worker method.
-         * @throws Exception in case of error
-         */
-        void bind() throws Exception;
-    }
-
     /** Timeout used when waiting for successful bind. */
     public static final int BIND_TIMEOUT = 1000;
 
@@ -107,7 +95,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         server_.setHandler(handlers);
         server_.setHandler(resourceHandler);
 
-        tryBind(PORT, () -> server_.start());
+        tryStart(PORT, server_);
     }
 
     /**
@@ -195,7 +183,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             server.setHandler(context);
         }
 
-        tryBind(port, () -> server.start());
+        tryStart(port, server);
         return server;
     }
 
@@ -234,7 +222,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         context.setClassLoader(loader);
         server_.setHandler(context);
 
-        tryBind(PORT, () -> server_.start());
+        tryStart(PORT, server_);
     }
 
     /**
@@ -368,7 +356,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
 
-            tryBind(PORT, () -> server.start());
+            tryStart(PORT, server);
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
@@ -377,15 +365,15 @@ public abstract class WebServerTestCase extends WebTestCase {
     /**
      * Starts the server; handles BindExceptions and retries.
      * @param port the port only used for the error message
-     * @param binder the lambda to start the server
+     * @param server the server to start
      * @throws Exception in case of error
      */
-    public static void tryBind(final int port, final Binder binder) throws Exception {
+    public static void tryStart(final int port, final Server server) throws Exception {
         final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
 
         while (true) {
             try {
-                binder.bind();
+                server.start();
                 return;
             }
             catch (final BindException e) {

@@ -102,7 +102,7 @@ public class PrimitiveWebServer implements Closeable {
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
-        WebServerTestCase.tryBind(port_, () -> server_.bind(new InetSocketAddress(port_)));
+        server_.bind(new InetSocketAddress(port_));
 
         new Thread(new Runnable() {
 

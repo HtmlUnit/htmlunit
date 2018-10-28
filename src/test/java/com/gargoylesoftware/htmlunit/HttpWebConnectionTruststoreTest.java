@@ -63,7 +63,7 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-        WebServerTestCase.tryBind(-1, () -> localServer_.start());
+        localServer_.start();
     }
 
     private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {

@@ -161,12 +161,7 @@ public class MiniServer extends Thread {
 
     @Override
     public synchronized void start() {
-        try {
-            WebServerTestCase.tryBind(port_, () -> super.start());
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+        super.start();
 
         // wait until the listener on the port has been started to be sure
         // that the main thread doesn't perform the first request before the listener is ready
