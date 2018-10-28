@@ -112,7 +112,7 @@ public class InsecureHttpsServer {
             };
             localServer_.register("*", handler);
         }
-        WebServerTestCase.tryBind(getPort(), () -> localServer_.start());
+        WebServerTestCase.tryBind(-1, () -> localServer_.start());
     }
 
     /**
@@ -120,7 +120,10 @@ public class InsecureHttpsServer {
      * @throws Exception in case of exception
      */
     public void stop() throws Exception {
-        localServer_.shutDown();
+        if (localServer_ != null) {
+            localServer_.shutDown();
+        }
+        localServer_ = null;
     }
 
     /**
