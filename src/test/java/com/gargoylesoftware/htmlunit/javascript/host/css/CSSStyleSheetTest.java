@@ -1046,6 +1046,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_width_invalid() throws Exception {
+        mediaRule("screen and (max-width: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_width() throws Exception {
         mediaRule("screen and (min-width: 10000px)");
     }
@@ -1059,6 +1068,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_width_match() throws Exception {
         mediaRule("screen and (min-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_width_invalid() throws Exception {
+        mediaRule("screen and (min-width: 5kilo)");
     }
 
     /**
@@ -1084,6 +1102,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_device_width_invalid() throws Exception {
+        mediaRule("screen and (max-device-width: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_width() throws Exception {
         mediaRule("screen and (min-device-width: 10000px)");
     }
@@ -1095,6 +1122,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({"none", "1"})
     public void mediaRule_min_device_width_match() throws Exception {
         mediaRule("screen and (min-device-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_device_width_invalid() throws Exception {
+        mediaRule("screen and (min-device-width: 5kilo)");
     }
 
     /**
@@ -1122,6 +1158,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_height_invalid() throws Exception {
+        mediaRule("screen and (max-height: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_height() throws Exception {
         mediaRule("screen and (min-height: 10000px)");
     }
@@ -1135,6 +1180,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_height_match() throws Exception {
         mediaRule("screen and (min-height: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_height_invalid() throws Exception {
+        mediaRule("screen and (min-height: 5kilo)");
     }
 
     /**
@@ -1160,6 +1214,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_device_height_invalid() throws Exception {
+        mediaRule("screen and (max-device-height: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_height() throws Exception {
         mediaRule("screen and (min-device-height: 10000px)");
     }
@@ -1171,6 +1234,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({"none", "1"})
     public void mediaRule_min_device_height_match() throws Exception {
         mediaRule("screen and (min-device-height: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_device_height_invalid() throws Exception {
+        mediaRule("screen and (min-device-height: 5kilo)");
     }
 
     /**
@@ -1191,6 +1263,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_resolution_match() throws Exception {
         mediaRule("screen and (resolution: 96dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_resolution_invalid() throws Exception {
+        mediaRule("screen and (resolution: 5kilo)");
     }
 
     /**
@@ -1218,6 +1299,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_resolution_invalid() throws Exception {
+        mediaRule("screen and (max-resolution: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_resolution() throws Exception {
         mediaRule("screen and (min-resolution: 10000dpi)");
     }
@@ -1231,6 +1321,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_resolution_match() throws Exception {
         mediaRule("screen and (min-resolution: 10dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_resolution_invalid() throws Exception {
+        mediaRule("screen and (min-resolution: 5kilo)");
     }
 
     /**
