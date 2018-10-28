@@ -70,29 +70,31 @@ public abstract class WebTestCase {
     /** save the environment */
     private static final Locale SAVE_LOCALE = Locale.getDefault();
 
+    // 12346 seems to be in use on our CI server
+
     /** The listener port for the web server. */
-    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "12345"));
+    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22222"));
 
     /** The second listener port for the web server, used for cross-origin tests. */
-    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "12346"));
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22223"));
 
     /** The third listener port for the web server, used for cross-origin tests. */
-    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "12347"));
+    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22224"));
 
     /** The listener port used for our primitive server tests. */
     public static final int PORT_PRIMITIVE_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_primitive", "12348"));
+                                                        System.getProperty("htmlunit.test.port_primitive", "22225"));
 
     /** The listener port used for our proxy tests. */
     public static final int PORT_PROXY_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_proxy", "12349"));
-
-    /** The SOCKS proxy host to use for SOCKS proxy tests. */
-    public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
+                                                        System.getProperty("htmlunit.test.port_proxy", "22226"));
 
     /** The SOCKS proxy port to use for SOCKS proxy tests. */
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
-            System.getProperty("htmlunit.test.socksproxy.port", "55555"));
+            System.getProperty("htmlunit.test.socksproxy.port", "22227"));
+
+    /** The SOCKS proxy host to use for SOCKS proxy tests. */
+    public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
     /** Succeeds the SOCKS proxy tests (for windows) . */
     public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
