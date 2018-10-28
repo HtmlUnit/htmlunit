@@ -45,12 +45,13 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
         WebDriverTestCase.stopWebServers();
         startWebServer("src/test/resources/testfiles/noproxyroot/");
 
-        proxyWebServer_ = createWebServer(PORT2, "src/test/resources/testfiles/proxyroot/", null, null, null);
-        WebServerTestCase.tryBind(PORT2, () -> proxyWebServer_.start());
+        proxyWebServer_ = createWebServer(PORT_PROXY_SERVER,
+                                            "src/test/resources/testfiles/proxyroot/", null, null, null);
+        WebServerTestCase.tryBind(PORT_PROXY_SERVER, () -> proxyWebServer_.start());
 
         final WebClient webClient = getWebClient();
 
-        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT2);
+        final ProxyConfig proxy = new ProxyConfig(SOCKS_PROXY_HOST, PORT_PROXY_SERVER);
         proxy.addHostsToProxyBypass("127.0.0.1");
         webClient.getOptions().setProxyConfig(proxy);
     }
@@ -80,8 +81,8 @@ public class HttpWebConnectionProxyTest extends WebServerTestCase {
      */
     @Test
     public void proxySettingsAreNotUsedForSubsequentRequestToNonProxyHosts() throws Exception {
-        URL resourceUrl = new URL("http://localhost:" + PORT2 + "/response.txt");
-        TextPage page = getWebClient().getPage(UrlUtils.getUrlWithNewPort(resourceUrl, PORT2));
+        URL resourceUrl = new URL("http://localhost:" + PORT_PROXY_SERVER + "/response.txt");
+        TextPage page = getWebClient().getPage(UrlUtils.getUrlWithNewPort(resourceUrl, PORT_PROXY_SERVER));
         assertEquals("proxy should have been used", "proxy-response", page.getContent().trim());
 
         resourceUrl = new URL("http://127.0.0.1:" + PORT + "/response.txt");

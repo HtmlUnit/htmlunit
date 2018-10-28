@@ -83,6 +83,10 @@ public abstract class WebTestCase {
     public static final int PORT_PRIMITIVE_SERVER = Integer.parseInt(
                                                         System.getProperty("htmlunit.test.port_primitive", "12348"));
 
+    /** The listener port used for our proxy tests. */
+    public static final int PORT_PROXY_SERVER = Integer.parseInt(
+                                                        System.getProperty("htmlunit.test.port_proxy", "12349"));
+
     /** The SOCKS proxy host to use for SOCKS proxy tests. */
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 

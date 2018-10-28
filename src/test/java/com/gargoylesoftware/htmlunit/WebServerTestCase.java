@@ -390,7 +390,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
             catch (final BindException e) {
                 if (System.currentTimeMillis() > maxWait) {
-                    throw (BindException) new BindException("Port " + port + "is already in use").initCause(e);
+                    throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
                 }
                 Thread.sleep(200);
             }
