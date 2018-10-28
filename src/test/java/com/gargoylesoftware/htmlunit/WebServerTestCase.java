@@ -78,7 +78,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = buildServer(PORT);
+        final Server server = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -92,10 +92,11 @@ public abstract class WebServerTestCase extends WebTestCase {
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
-        server_.setHandler(handlers);
-        server_.setHandler(resourceHandler);
+        server.setHandler(handlers);
+        server.setHandler(resourceHandler);
 
-        tryStart(PORT, server_);
+        tryStart(PORT, server);
+        server_ = server;
     }
 
     /**
@@ -202,7 +203,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = buildServer(PORT);
+        final Server server = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -220,9 +221,10 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        server_.setHandler(context);
+        server.setHandler(context);
 
-        tryStart(PORT, server_);
+        tryStart(PORT, server);
+        server_ = server;
     }
 
     /**
@@ -378,6 +380,10 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
             catch (final BindException e) {
                 if (System.currentTimeMillis() > maxWait) {
+                    // destroy the server to free all associated resources
+                    server.stop();
+                    server.destroy();
+
                     throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
                 }
                 Thread.sleep(200);
