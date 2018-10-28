@@ -48,28 +48,6 @@ public class PrimitiveWebServer implements Closeable {
     /**
      * Constructs a new SimpleWebServer.
      *
-     * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws Exception in case of error
-     */
-    public PrimitiveWebServer(final String defaultResponse) throws Exception {
-        this(null, defaultResponse, null);
-    }
-
-    /**
-     * Constructs a new SimpleWebServer.
-     *
-     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws Exception in case of error
-     */
-    public PrimitiveWebServer(final String firstResponse, final String otherResponse)
-            throws Exception {
-        this(null, firstResponse, otherResponse);
-    }
-
-    /**
-     * Constructs a new SimpleWebServer.
-     *
      * @param charset the charset
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
@@ -175,6 +153,14 @@ public class PrimitiveWebServer implements Closeable {
      */
     public List<String> getRequests() {
         return requests_;
+    }
+
+    /**
+     * Returns the port.
+     * @return the port
+     */
+    public int getPort() {
+        return port_;
     }
 
     /**

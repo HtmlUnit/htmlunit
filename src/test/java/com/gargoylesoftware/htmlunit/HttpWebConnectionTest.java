@@ -562,10 +562,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "\r\n"
                 + "<html><body><p>visible text</p></body></html>";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebClient client = getWebClient();
 
-            final HtmlPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            final HtmlPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort());
             assertEquals("visible text", page.asText());
         }
     }

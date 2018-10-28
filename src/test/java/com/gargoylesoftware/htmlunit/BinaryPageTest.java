@@ -129,10 +129,10 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebClient client = getWebClient();
 
-            final TextPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER + "/" + "chunked");
+            final TextPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort() + "/" + "chunked");
             assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
         }
     }

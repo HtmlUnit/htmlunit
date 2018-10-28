@@ -120,8 +120,6 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void testRequestUrlEncoding(final String url) throws Exception {
-        final URL baseUrl = new URL("http://localhost:" + PORT_PRIMITIVE_SERVER + "/");
-
         final String html = "<html>"
                 + "<head><title>foo</title></head>"
                 + "<body></body></html>";
@@ -133,7 +131,8 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
+            final URL baseUrl = new URL("http://localhost:" + primitiveWebServer.getPort() + "/");
             final WebDriver driver = getWebDriver();
 
             driver.get(new URL(baseUrl, url).toString());
@@ -420,7 +419,6 @@ public class WebClient7Test extends WebDriverTestCase {
             final String addHeader,
             final String addHtml,
             final boolean click) throws Exception {
-        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
 
         String html = "<html>\n"
                 + "<head><title>foo</title>\n";
@@ -453,6 +451,7 @@ public class WebClient7Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer =
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
+            final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
@@ -490,8 +489,6 @@ public class WebClient7Test extends WebDriverTestCase {
     }
 
     private void framesetUrlEncoding(final String charset) throws Exception {
-        final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
-
         final String html = "<html>\n"
                 + "<frameset><frame src='test.html?k\u00F6nig'></frameset>\n"
                 + "</html>";
@@ -509,6 +506,7 @@ public class WebClient7Test extends WebDriverTestCase {
 
         try (PrimitiveWebServer primitiveWebServer =
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
+            final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
