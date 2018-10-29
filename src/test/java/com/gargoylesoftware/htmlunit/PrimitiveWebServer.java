@@ -62,14 +62,7 @@ public class PrimitiveWebServer implements Closeable {
             charset_ = charset;
         }
 
-        try {
-            start();
-        }
-        catch (final BindException e) {
-            final BindException ex = new BindException("Port " + port_ + " already in use (Bind failed)");
-            ex.initCause(e);
-            throw ex;
-        }
+        start();
     }
 
     /**
@@ -80,7 +73,20 @@ public class PrimitiveWebServer implements Closeable {
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
-        server_.bind(new InetSocketAddress(port_));
+        final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server_.bind(new InetSocketAddress(port_));
+                break;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw (BindException) new BindException("Port " + port_ + " is already in use").initCause(e);
+                }
+                Thread.sleep(200);
+            }
+        }
 
         new Thread(new Runnable() {
 
@@ -129,10 +135,10 @@ public class PrimitiveWebServer implements Closeable {
                     }
                 }
                 catch (final SocketException e) {
-                    //ignore
+                    // ignore
                 }
-                catch (final IOException e) {
-                    e.printStackTrace();
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
