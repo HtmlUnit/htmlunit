@@ -527,6 +527,44 @@ public class PromiseTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"true", "[object Object]"},
+            IE = "")
+    public void resolveThenablesWithoutThen() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = Promise.resolve({ id: 17 });\n"
+            + "        log(p1 instanceof Promise);\n"
+            + "\n"
+            + "        p1.then(function(v) {\n"
+            + "            log(v);\n"
+            + "        }, function(e) {\n"
+            + "            log('failure');\n"
+            + "        });\n"
+            + "      }\n"
+            + "    }\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(200);
+        final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"done", "1", "2"},
             IE = {})
     public void thenChanining() throws Exception {

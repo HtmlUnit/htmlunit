@@ -9,6 +9,9 @@
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
             <action type="fix" dev="rbri">
+                Fix Promise.resolve() called with an object having no 'then' slot.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix handling of invalid values in media queries.
             </action>
             <action type="fix" dev="rbri" issue="1998" due-to="Rural Hunter">
