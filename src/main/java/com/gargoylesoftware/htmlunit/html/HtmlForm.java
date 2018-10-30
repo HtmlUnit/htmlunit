@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -71,6 +73,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Anton Demydenko
  */
 public class HtmlForm extends HtmlElement {
+    private static final Log LOG = LogFactory.getLog(HtmlForm.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
@@ -218,6 +221,8 @@ public class HtmlForm extends HtmlElement {
         boolean valid = true;
         for (HtmlElement element : getFormHtmlElementDescendants()) {
             if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
+                LOG.info("Form validation faild; element '" + (HtmlInput) element
+                            + "' was not valid. Submit cancelled.");
                 valid = false;
                 break;
             }
