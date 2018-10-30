@@ -15,11 +15,6 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.w3c.dom.Node.CDATA_SECTION_NODE;
-import static org.w3c.dom.Node.COMMENT_NODE;
-import static org.w3c.dom.Node.ELEMENT_NODE;
-import static org.w3c.dom.Node.PROCESSING_INSTRUCTION_NODE;
-import static org.w3c.dom.Node.TEXT_NODE;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -358,25 +353,25 @@ public final class XmlUtil {
         for (int i = 0; i < nodeChildren.getLength(); i++) {
             final Node child = nodeChildren.item(i);
             switch (child.getNodeType()) {
-                case ELEMENT_NODE:
+                case Node.ELEMENT_NODE:
                     final DomNode childXml = createFrom(page, child, handleXHTMLAsHTML, attributesOrderMap);
                     dest.appendChild(childXml);
                     copy(page, child, childXml, handleXHTMLAsHTML, attributesOrderMap);
                     break;
 
-                case TEXT_NODE:
+                case Node.TEXT_NODE:
                     dest.appendChild(new DomText(page, child.getNodeValue()));
                     break;
 
-                case CDATA_SECTION_NODE:
+                case Node.CDATA_SECTION_NODE:
                     dest.appendChild(new DomCDataSection(page, child.getNodeValue()));
                     break;
 
-                case COMMENT_NODE:
+                case Node.COMMENT_NODE:
                     dest.appendChild(new DomComment(page, child.getNodeValue()));
                     break;
 
-                case PROCESSING_INSTRUCTION_NODE:
+                case Node.PROCESSING_INSTRUCTION_NODE:
                     dest.appendChild(new DomProcessingInstruction(page, child.getNodeName(), child.getNodeValue()));
                     break;
 
@@ -451,7 +446,7 @@ public final class XmlUtil {
             final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
             for (int i = 0; i < fNodeCount; i++) {
                 final int type = deferredDocument.getNodeType(i, false);
-                if (type == ELEMENT_NODE) {
+                if (type == Node.ELEMENT_NODE) {
                     int attrIndex = deferredDocument.getNodeExtra(i, false);
                     final List<String> attributes = new ArrayList<>();
                     map.put(i, attributes);

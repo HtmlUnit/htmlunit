@@ -1233,9 +1233,9 @@ public class HtmlPage extends SgmlPage {
             }
 
             final ContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine()).getContextFactory();
-            final ScriptResult result = cf.call(cx -> jsNode.fireEvent(event));
+            cf.call(cx -> jsNode.fireEvent(event));
 
-            if (!isOnbeforeunloadAccepted(this, event, result)) {
+            if (!isOnbeforeunloadAccepted(this, event)) {
                 return false;
             }
         }
@@ -1266,9 +1266,9 @@ public class HtmlPage extends SgmlPage {
                     // load events, propagates up to Document but not Window.  The "load" event for
                     // <frameset> on the other hand, like that of <body>, is handled above where it is
                     // fired against Document and directed to Window.
-                    final ScriptResult result = frame.fireEvent(event);
+                    frame.fireEvent(event);
 
-                    if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event, result)) {
+                    if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                         return false;
                     }
                 }
@@ -1287,7 +1287,7 @@ public class HtmlPage extends SgmlPage {
         return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
     }
 
-    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event, final ScriptResult result) {
+    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
         if (event instanceof BeforeUnloadEvent) {
             final BeforeUnloadEvent beforeUnloadEvent = (BeforeUnloadEvent) event;
             if (beforeUnloadEvent.isBeforeUnloadMessageSet()) {

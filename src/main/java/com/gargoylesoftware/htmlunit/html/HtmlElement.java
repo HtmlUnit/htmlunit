@@ -212,7 +212,7 @@ public abstract class HtmlElement extends DomElement {
             notifyAttributeChangeListeners(event, this, oldAttributeValue, notifyMutationObservers);
         }
 
-        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, oldAttributeValue);
     }
 
     /**
@@ -250,8 +250,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event,
-            final HtmlPage htmlPage, final boolean mappedElement,
-            final String qualifiedName, final String attributeValue, final String oldAttributeValue) {
+            final HtmlPage htmlPage, final boolean mappedElement, final String oldAttributeValue) {
         if (mappedElement) {
             htmlPage.addMappedElement(this);
         }
@@ -298,7 +297,7 @@ public abstract class HtmlElement extends DomElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attribute.getValue(), oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, oldAttributeValue);
 
         return result;
     }

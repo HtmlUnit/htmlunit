@@ -352,19 +352,19 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");
+                "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         EDGE.plugins_.add(flash);
