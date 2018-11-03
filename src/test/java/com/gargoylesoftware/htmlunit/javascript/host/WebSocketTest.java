@@ -61,6 +61,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts({"§§URL§§", "", "0", "blob"})
     public void initialNoServerAvailable() throws Exception {
+        assertWebServersStopped();
+
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"

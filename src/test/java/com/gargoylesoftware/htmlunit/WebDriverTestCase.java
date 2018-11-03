@@ -52,6 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.security.ConstraintMapping;
@@ -67,6 +68,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
@@ -171,10 +173,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Map<BrowserVersion, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
 
     private static Server STATIC_SERVER_;
+    private static String STATIC_SERVER_STARTER_;
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
+    private static String STATIC_SERVER2_STARTER_;
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
+    private static String STATIC_SERVER3_STARTER_;
 
     private static Boolean LAST_TEST_MockWebConnection_;
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
@@ -377,6 +382,16 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Stops all WebServers.
      * @throws Exception if it fails
      */
+    protected static void assertWebServersStopped() throws Exception {
+        Assert.assertNull(STATIC_SERVER_STARTER_, STATIC_SERVER_);
+        Assert.assertNull(STATIC_SERVER2_STARTER_, STATIC_SERVER2_);
+        Assert.assertNull(STATIC_SERVER3_STARTER_, STATIC_SERVER3_);
+    }
+
+    /**
+     * Stops all WebServers.
+     * @throws Exception if it fails
+     */
     protected static void stopWebServers() throws Exception {
         if (STATIC_SERVER_ != null) {
             STATIC_SERVER_.stop();
@@ -549,6 +564,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
             server.setHandler(context);
             WebServerTestCase.tryStart(PORT, server);
+
+            STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
@@ -561,6 +578,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context2.addServlet(MockWebConnectionServlet.class, "/*");
             server2.setHandler(context2);
             WebServerTestCase.tryStart(PORT2, server2);
+
+            STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
             STATIC_SERVER2_ = server2;
 
             final Server server3 = buildServer(PORT3);
@@ -570,6 +589,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             context3.addServlet(MockWebConnectionServlet.class, "/*");
             server3.setHandler(context3);
             WebServerTestCase.tryStart(PORT3, server3);
+
+            STATIC_SERVER3_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer3Starter"));
             STATIC_SERVER3_ = server3;
             /*
              * The mock connection servlet call sit under both servers, so long as tests
@@ -618,6 +639,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (STATIC_SERVER2_ != null) {
             STATIC_SERVER2_.stop();
         }
+        STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
         STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets, null);
     }
 
@@ -637,6 +659,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         stopWebServers();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
 
+        STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
         STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets, handler);
     }
 
