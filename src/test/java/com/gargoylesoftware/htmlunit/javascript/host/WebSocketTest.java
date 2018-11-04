@@ -59,10 +59,8 @@ public class WebSocketTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"§§URL§§", "", "0", "blob"})
+    @Alerts({"§§URL§§", "", "blob"})
     public void initialNoServerAvailable() throws Exception {
-        assertWebServersStopped();
-
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -71,7 +69,9 @@ public class WebSocketTest extends WebDriverTestCase {
             + "    var ws = new WebSocket(location);\n"
             + "    alert(ws.url);\n"
             + "    alert(ws.protocol);\n"
-            + "    alert(ws.readyState);\n"
+            // this makes our test instable because the real connect is
+            // done by an executor and maybe already finished
+            // + "    alert(ws.readyState);\n"
             + "    alert(ws.binaryType);\n"
             + "  }\n"
             + "</script>\n"
