@@ -9,6 +9,10 @@
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
             <action type="fix" dev="rbri">
+                Improved support for insecure socket connections; InsecureTrustManager now
+                extends X509ExtendedTrustManager instead of implementing only X509TrustManager.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix Promise.resolve() called with an object having no 'then' slot.
             </action>
             <action type="fix" dev="rbri">
