@@ -18,9 +18,9 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <jetty.version>9.4.12.v20180830</jetty.version>
-        <selenium.version>3.141.0</selenium.version>
-        <htmlunitdriver.version>2.33.1</htmlunitdriver.version>
+        <jetty.version>9.4.13.v20181111</jetty.version>
+        <selenium.version>3.141.5</selenium.version>
+        <htmlunitdriver.version>2.33.2</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.14</checkstyle.version>
         <pmd.version>6.9.0</pmd.version>
@@ -259,11 +259,10 @@
                     </instructions>
                 </configuration>
             </plugin>
-<!--
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.2.0</version>
+                <version>1.3.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -272,7 +271,6 @@
                     </execution>
                 </executions>
             </plugin>
--->
             </plugins>
         <extensions>
             <extension>
