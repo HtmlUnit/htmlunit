@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <jetty.version>9.4.13.v20181111</jetty.version>
+        <jetty.version>9.4.14.v20181114</jetty.version>
         <selenium.version>3.141.5</selenium.version>
         <htmlunitdriver.version>2.33.2</htmlunitdriver.version>
         <!-- As a property, as it is included in Checkstyle build -->
