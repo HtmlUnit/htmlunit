@@ -126,10 +126,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final char c, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
     }
 
@@ -137,10 +134,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final int keyCode, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 
