@@ -298,6 +298,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <excludes>
                                 <exclude>**/libraries/*.java</exclude>
                                 <exclude>**/huge/*.java</exclude>
@@ -325,6 +327,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/libraries/*.java</include>
                             </includes>
@@ -351,6 +355,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/ElementClosesElementTest.java</include>
                             </includes>
@@ -377,6 +383,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfATest.java</include>
                                 <include>**/huge/HostParentOfBTest.java</include>
@@ -405,6 +413,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfDTest.java</include>
                                 <include>**/huge/HostParentOfFTest.java</include>
@@ -432,6 +442,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfHTest.java</include>
                                 <include>**/huge/HostParentOfITest.java</include>
@@ -459,6 +471,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfMTest.java</include>
                                 <include>**/huge/HostParentOfNTest.java</include>
@@ -486,6 +500,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfPTest.java</include>
                             </includes>
@@ -512,6 +528,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfSTest.java</include>
                             </includes>
@@ -538,6 +556,8 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.22.1</version>
                         <configuration>
+                            <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                            <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/huge/HostParentOfTTest.java</include>
                                 <include>**/huge/HostParentOfWTest.java</include>
