@@ -260,6 +260,7 @@
                     </instructions>
                 </configuration>
             </plugin>
+<!-- makes trouble on jenkins
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
@@ -272,7 +273,8 @@
                     </execution>
                 </executions>
             </plugin>
-            </plugins>
+ -->
+        </plugins>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
