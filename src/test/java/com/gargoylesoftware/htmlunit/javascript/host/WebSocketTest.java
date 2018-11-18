@@ -195,21 +195,23 @@ public class WebSocketTest extends WebDriverTestCase {
             assertVisible("joined", driver);
 
             final WebElement chatE = driver.findElement(By.id("chat"));
-            int counter = 0;
+            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
             do {
                 Thread.sleep(100);
             }
-            while (chatE.getText().isEmpty() && counter++ < 10);
+            while (chatE.getText().length() <= firstResponse.length() && System.currentTimeMillis() < maxWait);
 
             assertEquals(firstResponse, chatE.getText());
 
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
-            counter = 0;
+
+            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
             do {
                 Thread.sleep(100);
             }
-            while (!chatE.getText().contains(secondResponse) && counter++ < 10);
+            while (!chatE.getText().contains(secondResponse) && System.currentTimeMillis() < maxWait);
 
             assertEquals(firstResponse + "\n" + secondResponse, chatE.getText());
         }
@@ -306,6 +308,8 @@ public class WebSocketTest extends WebDriverTestCase {
     @Test
     @Alerts({": myname=My value!1", ": myname=My value!2"})
     public void cookies() throws Exception {
+        final String[] expected = getExpectedAlerts();
+
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new CookiesWebSocketHandler());
         try {
@@ -315,22 +319,23 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.findElement(By.id("username")).sendKeys("Browser");
             driver.findElement(By.id("joinB")).click();
             final WebElement chatE = driver.findElement(By.id("chat"));
-            int counter = 0;
+
+            long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
             do {
                 Thread.sleep(100);
             }
-            while (chatE.getText().isEmpty() && counter++ < 10);
+            while (chatE.getText().length() <= expected[0].length() && System.currentTimeMillis() < maxWait);
 
-            final String[] expected = getExpectedAlerts();
             assertEquals(expected[0], chatE.getText());
 
             driver.findElement(By.id("phrase")).sendKeys("Hope you are fine!");
             driver.findElement(By.id("sendB")).click();
-            counter = 0;
+
+            maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
             do {
                 Thread.sleep(100);
             }
-            while (!chatE.getText().contains(expected[1]) && counter++ < 10);
+            while (!chatE.getText().contains(expected[1]) && System.currentTimeMillis() < maxWait);
 
             assertEquals(expected[0] + "\n" + expected[1], chatE.getText());
         }
@@ -406,6 +411,9 @@ public class WebSocketTest extends WebDriverTestCase {
                 "onClose code: 1005  wasClean: true"})
     @NotYetImplemented(IE)
     public void events() throws Exception {
+        expandExpectedAlertsVariables("ws://localhost:" + PORT);
+        final String expected = String.join("\n", getExpectedAlerts());
+
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
             null, null, new EventsWebSocketHandler());
         try {
@@ -413,17 +421,17 @@ public class WebSocketTest extends WebDriverTestCase {
             driver.get(URL_FIRST + "WebSocketTest_events.html");
 
             final WebElement logElement = driver.findElement(By.id("log"));
-            int counter = 0;
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
             String text;
             do {
                 Thread.sleep(100);
 
                 text = logElement.getAttribute("value").trim().replaceAll("\r", "");
             }
-            while (text.length() > 0 && counter++ < 10);
+            while (text.length() <= expected.length() && System.currentTimeMillis() < maxWait);
 
-            expandExpectedAlertsVariables("ws://localhost:" + PORT);
-            assertEquals(String.join("\n", getExpectedAlerts()), text);
+            assertEquals(expected, text);
         }
         finally {
             stopWebServers();

@@ -59,7 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public abstract class WebServerTestCase extends WebTestCase {
 
     /** Timeout used when waiting for successful bind. */
-    public static final int BIND_TIMEOUT = 2000;
+    public static final int BIND_TIMEOUT = 1000;
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
