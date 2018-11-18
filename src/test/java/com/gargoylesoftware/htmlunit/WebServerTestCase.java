@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.io.IOException;
 import java.net.BindException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -387,6 +388,23 @@ public abstract class WebServerTestCase extends WebTestCase {
                     throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
                 }
                 Thread.sleep(200);
+            }
+            catch (final IOException e) {
+                // looks like newer jetty already catches the bind exception
+                final Throwable cause = e.getCause();
+                if (cause != null && cause instanceof BindException) {
+                    if (System.currentTimeMillis() > maxWait) {
+                        // destroy the server to free all associated resources
+                        server.stop();
+                        server.destroy();
+
+                        throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
+                    }
+                    Thread.sleep(200);
+                }
+                else {
+                    throw e;
+                }
             }
         }
     }
