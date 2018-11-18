@@ -21,7 +21,7 @@
         <jetty.version>9.4.14.v20181114</jetty.version>
         <selenium.version>3.141.59</selenium.version>
         <htmlunitdriver.version>2.33.3</htmlunitdriver.version>
-        <htmlunitcssparser.version>1.3-SNAPSHOT</htmlunitcssparser.version>
+        <htmlunitcssparser.version>1.3.0-SNAPSHOT</htmlunitcssparser.version>
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.14</checkstyle.version>
         <pmd.version>6.9.0</pmd.version>
