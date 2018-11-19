@@ -47,7 +47,8 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 
 /**
- * The process for {@link HtmlElement#doType(char, boolean, boolean)}.
+ * The processor for {@link HtmlElement#doType(char, boolean)}
+ * and {@link HtmlElement#doType(int, boolean)}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill
