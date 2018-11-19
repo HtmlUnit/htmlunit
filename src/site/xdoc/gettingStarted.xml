@@ -152,7 +152,7 @@ public void getElements() throws Exception {
             <subsection name="XPath queries">
                 <p>
                     XPath is the suggested way for more complex searches, a brief tutorial can be found in
-                    <a href="http://www.w3schools.com/XPath/default.asp">W3Schools</a>
+                    <a href="https://www.w3schools.com/xml/xpath_intro.asp">W3Schools</a>
                 </p>
                 <source><![CDATA[
 @Test
