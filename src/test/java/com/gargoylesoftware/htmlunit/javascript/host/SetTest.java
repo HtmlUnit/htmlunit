@@ -368,7 +368,6 @@ public class SetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"ab", "ab", "[object Set]", "hello", "undefined", "undefined", "[object Set]", "hello",
             "null", "null", "[object Set]", "hello"},
             IE = {})
-    @NotYetImplemented({CHROME, FF})
     public void forEachThis() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

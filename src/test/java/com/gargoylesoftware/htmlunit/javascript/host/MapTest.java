@@ -14,15 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -431,7 +429,6 @@ public class MapTest extends WebDriverTestCase {
             "null", "key3", "[object Map]", "hello",
             "undefined", "key4", "[object Map]", "hello"},
             IE = {})
-    @NotYetImplemented({CHROME, FF})
     public void forEachThis() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
