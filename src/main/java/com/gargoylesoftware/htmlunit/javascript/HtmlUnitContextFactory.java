@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_CONS
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PRE_WIDTH_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
@@ -266,12 +265,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     @Override
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
-        if (browserVersion_.hasFeature(JS_PRE_WIDTH_STRING)) {
-            cx.setLanguageVersion(Context.VERSION_1_8);
-        }
-        else {
-            cx.setLanguageVersion(Context.VERSION_ES6);
-        }
+        cx.setLanguageVersion(Context.VERSION_ES6);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);
