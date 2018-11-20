@@ -64,7 +64,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.PushSubscriptionOptions;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
@@ -75,8 +74,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Touch;
 import com.gargoylesoftware.htmlunit.javascript.host.TouchList;
 import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
-import com.gargoylesoftware.htmlunit.javascript.host.WeakMap;
-import com.gargoylesoftware.htmlunit.javascript.host.WeakSet;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
@@ -489,7 +486,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, LocalMediaStream.class,
-        Location.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
+        Location.class,
         MediaDeviceInfo.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -528,7 +525,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class,
-        Set.class,
         ShadowRoot.class, SharedArrayBuffer.class,
         SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
@@ -579,7 +575,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         UIEvent.class,
         URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
-        VTTCue.class, WaveShaperNode.class, WeakMap.class, WeakSet.class, WebGL2RenderingContext.class,
+        VTTCue.class, WaveShaperNode.class, WebGL2RenderingContext.class,
         WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
         WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class,
         WebGLQuery.class,

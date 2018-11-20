@@ -135,7 +135,8 @@ public class Iterator extends SimpleScriptable {
         if (!(scriptable instanceof SymbolScriptable)) {
             return false;
         }
-        final Object iterator = ((SymbolScriptable) scriptable).get(SymbolKey.ITERATOR, scriptable);
+
+        final Object iterator = ScriptableObject.getProperty(scriptable, SymbolKey.ITERATOR);
         if (iterator == Scriptable.NOT_FOUND) {
             return false;
         }
@@ -160,7 +161,7 @@ public class Iterator extends SimpleScriptable {
         if (obj instanceof Scriptable) {
             // handle user defined iterator
             final Scriptable scriptableIterator = (Scriptable) obj;
-            final Object nextFunct = scriptableIterator.get(ES6Iterator.NEXT_METHOD, (Scriptable) obj);
+            final Object nextFunct = ScriptableObject.getProperty(scriptableIterator, ES6Iterator.NEXT_METHOD);
             if (!(nextFunct instanceof BaseFunction)) {
                 throw ScriptRuntime.typeError("undefined is not a function");
             }
