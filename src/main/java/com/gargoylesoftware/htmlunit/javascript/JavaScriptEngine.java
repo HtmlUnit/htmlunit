@@ -463,6 +463,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
             ((IdFunctionObject) ScriptableObject.getProperty(window, "Object")).delete("assign");
+
+            // TODO
+            deleteProperties(window, "WeakSet");
         }
         deleteProperties(window, "isXMLName");
 

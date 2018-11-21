@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -36,6 +39,7 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "one"},
             IE = {"false", "undefined"})
+    @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -58,6 +62,7 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = {"false"})
+    @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -81,6 +86,7 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -148,6 +154,7 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "value2"},
             IE = {"undefined", "undefined"})
+    @NotYetImplemented(IE)
     public void get() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

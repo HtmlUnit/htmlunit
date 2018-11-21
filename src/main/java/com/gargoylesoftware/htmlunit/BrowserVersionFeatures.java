@@ -1085,10 +1085,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
-    /** Map ignores the argument constructor. */
-    @BrowserFeature(IE)
-    JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT,
-
     /** Indicates that an empty media list is represented by the string 'all'. */
     @BrowserFeature(IE)
     JS_MEDIA_LIST_ALL,
@@ -1245,10 +1241,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
 
-    /** Set ignores the constructor argument. */
-    @BrowserFeature(IE)
-    JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT,
-
     /** Whether to get any property from the items first. */
     @BrowserFeature(IE)
     JS_STORAGE_GET_FROM_ITEMS,
@@ -1374,10 +1366,6 @@ public enum BrowserVersionFeatures {
     /** Setting the property align to arbitrary values is allowed. */
     @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
-
-    /** WeakMap ignores the constructor argument. */
-    @BrowserFeature(IE)
-    JS_WEAKMAP_CONSTRUCTOR_IGNORE_ARGUMENT,
 
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
