@@ -1804,7 +1804,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "175",
+    @Alerts(CHROME = "173",
             FF = "143",
             IE = "145")
     @NotYetImplemented
