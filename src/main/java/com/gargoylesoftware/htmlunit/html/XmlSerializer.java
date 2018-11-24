@@ -61,7 +61,23 @@ class XmlSerializer {
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         outputDir_ = new File(file.getParentFile(), fileName);
-        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), ISO_8859_1);
+
+        // don't use asXml here because we have to sync the encoding from the
+        // header with the one used by the writer
+        final DomElement node = page.getDocumentElement();
+        Charset charsetName = ISO_8859_1;
+        builder_.setLength(0);
+        indent_.setLength(0);
+        if (page.isHtmlPage()) {
+            charsetName = page.getCharset();
+            if (charsetName != null && node instanceof HtmlHtml) {
+                builder_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
+            }
+        }
+        printXml(node);
+        final String response = builder_.toString();
+        builder_.setLength(0);
+        FileUtils.writeStringToFile(outputFile, response, charsetName);
     }
 
     /**
