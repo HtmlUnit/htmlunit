@@ -1798,7 +1798,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
             CHROME = {"Old = Old\ninnerText", "New = New cell value"},
             IE = {"Old = Old \ninnerText", "New = New cell value"})
-    @NotYetImplemented({FF, CHROME})
+    @NotYetImplemented(FF)
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
