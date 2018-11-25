@@ -1348,25 +1348,28 @@ public class CSSStyleSheet extends StyleSheet {
 
     private static float pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
         final int dpi;
-        switch (cssValue.getPrimitiveType()) {
-            case CSSPrimitiveValue.CSS_PX:
+        switch (cssValue.getLexicalUnitType()) {
+            case PIXEL:
                 return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
-            case CSSPrimitiveValue.CSS_EMS:
+            case EM:
                 // hard coded default for the moment 16px = 1 em
                 return 16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EMS);
-            case CSSPrimitiveValue.CSS_PERCENTAGE:
+            case PERCENTAGE:
                 // hard coded default for the moment 16px = 100%
                 return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PERCENTAGE);
-            case CSSPrimitiveValue.CSS_EXS:
+            case EX:
                 // hard coded default for the moment 16px = 100%
                 return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EXS);
-            case CSSPrimitiveValue.CSS_MM:
+            case REM:
+                // hard coded default for the moment 16px = 100%
+                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EXS);
+            case MILLIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
                 return (dpi / 25.4f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_MM);
-            case CSSPrimitiveValue.CSS_CM:
+            case CENTIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
                 return (dpi / 254f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_CM);
-            case CSSPrimitiveValue.CSS_PT:
+            case POINT:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
                 return (dpi / 72f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PT);
             default:
