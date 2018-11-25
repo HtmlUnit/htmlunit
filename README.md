@@ -22,7 +22,7 @@ For maven, you would add:
 
 [Latest CI build][2]
 
-##Features
+## Features
 * Support for the HTTP and HTTPS protocols
 * Support for cookies
 * Ability to specify whether failing responses from the server should throw exceptions or should be returned as pages of the appropriate type (based on content type)
