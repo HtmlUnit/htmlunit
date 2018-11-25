@@ -69,7 +69,7 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
             </p>
             <p>
                 Use the latest released version at least, if not the
-                <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">
+                <a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">
                 latest snapshot</a>.
             </p>
         </section>

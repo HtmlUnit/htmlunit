@@ -54,9 +54,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>Sep 12, 2018</date></dt>
+                    <dt>Latest release <date>Nov 25, 2018</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.33/">version 2.33</a></p>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.34/">version 2.34</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -71,7 +71,7 @@
 
                     <dt>Latest build</dt>
                     <dd>
-                        <p><a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server (Log in as 'guest')</a></p>
+                        <p><a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">Jenkins build server</a></p>
                     </dd>
                 </dl>
             </p>
