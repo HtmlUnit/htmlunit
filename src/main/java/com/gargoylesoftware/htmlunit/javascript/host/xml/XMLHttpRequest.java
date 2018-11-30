@@ -199,14 +199,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
-            }
-            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
-            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
-            if (LOG.isDebugEnabled()) {
+
+                // do the decompilation an the debug output before the call, because the
+                // handler might deregister itself
                 if (context == null) {
                     context = Context.getCurrentContext();
                 }
                 LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
+            }
+
+            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
+            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
+
+            if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
