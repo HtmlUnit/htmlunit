@@ -60,7 +60,6 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -1014,9 +1013,11 @@ public class HtmlPage extends SgmlPage {
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
-        final BrowserVersion browser = client.getBrowserVersion();
-        final WebRequest request = new WebRequest(url, browser.getScriptAcceptHeader());
+        final WebRequest request = new WebRequest(url);
+        // copy all headers from the referring request
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
+        // at least overwrite this headers
+        request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
         request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
 
         // our cache is a bit strange;
