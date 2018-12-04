@@ -303,9 +303,8 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
-        final WebRequest request = new WebRequest(url, method);
-        request.setAdditionalHeader(HttpHeader.ACCEPT, browser.getHtmlAcceptHeader());
-        request.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, "gzip, deflate");
+        final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader());
+        request.setHttpMethod(method);
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));

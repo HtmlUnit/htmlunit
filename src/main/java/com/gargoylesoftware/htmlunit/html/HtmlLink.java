@@ -226,14 +226,12 @@ public class HtmlLink extends HtmlElement {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
 
-        final WebRequest request = new WebRequest(url);
+        final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
+        final WebRequest request = new WebRequest(url, accept);
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
 
         request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
-
-        final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
-        request.setAdditionalHeader(HttpHeader.ACCEPT, accept);
 
         return request;
     }
