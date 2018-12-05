@@ -38,6 +38,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -979,6 +980,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         verifyAlerts(maxWaitTime, driver, expectedAlerts);
         return driver;
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
+        String actual = null;
+        while (System.currentTimeMillis() < maxWait) {
+            actual = func.get();
+
+            if (StringUtils.equals(expected, actual)) {
+                break;
+            }
+
+            Thread.sleep(50);
+        }
+
+        assertEquals(expected, actual);
     }
 
     /**
