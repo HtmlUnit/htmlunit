@@ -1547,6 +1547,35 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void requestHeaderDoNotOverwriteWebRequestAcceptHeader() throws Exception {
+        final String content = "<html></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
+
+        client.getPage(URL_FIRST);
+        assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
+        assertNotEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
+
+        final WebRequest wr = new WebRequest(URL_FIRST, "application/pdf");
+        client.getPage(wr);
+        assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
+
+        client.addRequestHeader(HttpHeader.ACCEPT, "image/png");
+        client.getPage(wr);
+        assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
+
+        wr.removeAdditionalHeader(HttpHeader.ACCEPT);
+        client.getPage(wr);
+        assertEquals("image/png", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
+    }
+
+    /**
      * Test that content type is looked in a case insensitive way.
      * Cf <a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045</a>:
      * "All media type values, subtype values, and parameter names as defined
