@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
+            <action type="update" dev="rbri">
+                Another Rhino update; Array.fill, Array.keys, Array.entries, and Array.values is now supported.
+            </action>
             <action type="fix" dev="rbri">
                 HtmlPage.save(File) and XmlSerializer.save(SgmlPage, File) are using the correct file encoding.
             </action>
