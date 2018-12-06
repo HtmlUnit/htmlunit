@@ -265,7 +265,18 @@ public class CSSStyleSheet extends StyleSheet {
             final WebRequest request;
             final WebResponse response;
             final WebClient client = page.getWebClient();
-            if (link != null) {
+            if (link == null) {
+                // Use href.
+                final String accept = client.getBrowserVersion().getCssAcceptHeader();
+                request = new WebRequest(new URL(url), accept);
+                request.setAdditionalHeader(HttpHeader.REFERER, uri);
+
+                // our cache is a bit strange;
+                // loadWebResponse check the cache for the web response
+                // AND also fixes the request url for the following cache lookups
+                response = client.loadWebResponse(request);
+            }
+            else {
                 // Use link.
                 request = link.getWebRequest();
 
@@ -281,17 +292,6 @@ public class CSSStyleSheet extends StyleSheet {
                 // loadWebResponse check the cache for the web response
                 // AND also fixes the request url for the following cache lookups
                 response = link.getWebResponse(true, request);
-            }
-            else {
-                // Use href.
-                final String accept = client.getBrowserVersion().getCssAcceptHeader();
-                request = new WebRequest(new URL(url), accept);
-                request.setAdditionalHeader(HttpHeader.REFERER, uri);
-
-                // our cache is a bit strange;
-                // loadWebResponse check the cache for the web response
-                // AND also fixes the request url for the following cache lookups
-                response = client.loadWebResponse(request);
             }
 
             // now we can look into the cache with the fixed request for

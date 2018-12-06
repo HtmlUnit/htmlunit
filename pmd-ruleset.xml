@@ -10,6 +10,8 @@
     <rule ref="category/java/bestpractices.xml" />
 
     <rule ref="category/java/codestyle.xml">
+        <exclude name="AvoidFinalLocalVariable"/>
+        <exclude name="UnnecessaryConstructor"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="LongVariable"/>
         <exclude name="OnlyOneReturn"/>
@@ -29,6 +31,8 @@
 
     <rule ref="category/java/errorprone.xml">
         <exclude name="AvoidDuplicateLiterals"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="MissingSerialVersionUID"/>
     </rule>
 
     <rule ref="category/java/multithreading.xml" />

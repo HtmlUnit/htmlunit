@@ -400,19 +400,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     private String getStyleAttribute(final Definition name1, final Definition name2) {
         final String value;
-        if (styleDeclaration_ != null) {
-            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
-            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
-
-            if ("".equals(value1) && "".equals(value2)) {
-                return "";
-            }
-            if (!"".equals(value1) && "".equals(value2)) {
-                return value1;
-            }
-            value = value2;
-        }
-        else {
+        if (styleDeclaration_ == null) {
             final StyleElement element1 = getStyleElement(name1.getAttributeName());
             final StyleElement element2 = getStyleElement(name2.getAttributeName());
 
@@ -431,6 +419,18 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
                 value = element2.getValue();
             }
+        }
+        else {
+            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
+            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
+
+            if ("".equals(value1) && "".equals(value2)) {
+                return "";
+            }
+            if (!"".equals(value1) && "".equals(value2)) {
+                return value1;
+            }
+            value = value2;
         }
 
         final String[] values = StringUtils.split(value);
@@ -1344,11 +1344,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
             if (browserVersion.hasFeature(CSS_ZINDEX_TYPE_INTEGER) || !lineHeight.equals(defaultLineHeight)) {
                 newFont.append('/');
-                if (!lineHeight.equals(defaultLineHeight)) {
-                    newFont.append(lineHeight);
+                if (lineHeight.equals(defaultLineHeight)) {
+                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
                 }
                 else {
-                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
+                    newFont.append(lineHeight);
                 }
             }
 

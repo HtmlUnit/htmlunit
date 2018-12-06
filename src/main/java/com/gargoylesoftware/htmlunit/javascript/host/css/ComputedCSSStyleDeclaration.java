@@ -1438,32 +1438,31 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private int getTopForAbsolutePositionWithInheritance() {
-        int top = 0;
         final String t = getTopWithInheritance();
 
         if (!AUTO.equals(t)) {
             // No need to calculate displacement caused by sibling nodes.
-            top = pixelValue(t);
+            return pixelValue(t);
         }
-        else {
-            final String b = getBottomWithInheritance();
 
-            if (!AUTO.equals(b)) {
-                // Estimate the vertical displacement caused by *all* siblings.
-                // This is very rough, and doesn't even take position or display types into account.
-                // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
-                top = 0;
-                DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
-                while (child != null) {
-                    if (child instanceof HtmlElement && child.mayBeDisplayed()) {
-                        top += 20;
-                    }
-                    child = child.getNextSibling();
+        final String b = getBottomWithInheritance();
+        if (!AUTO.equals(b)) {
+            // Estimate the vertical displacement caused by *all* siblings.
+            // This is very rough, and doesn't even take position or display types into account.
+            // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
+            int top = 0;
+            DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
+            while (child != null) {
+                if (child instanceof HtmlElement && child.mayBeDisplayed()) {
+                    top += 20;
                 }
-                top -= pixelValue(b);
+                child = child.getNextSibling();
             }
+            top -= pixelValue(b);
+            return top;
         }
-        return top;
+
+        return 0;
     }
 
     /**
