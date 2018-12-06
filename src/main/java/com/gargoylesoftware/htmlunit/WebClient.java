@@ -25,7 +25,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -36,6 +35,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -1256,7 +1256,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         String contentType = URLConnection.guessContentTypeFromName(fileName);
         if (contentType == null) {
-            try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+            try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(file.toPath()))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
             }
             catch (final IOException e) {

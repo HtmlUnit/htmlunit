@@ -20,14 +20,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -726,7 +727,7 @@ public class HttpWebConnection implements WebConnection {
                         // we have exceeded the max for memory, let's write everything to a temporary file
                         final File file = File.createTempFile("htmlunit", ".tmp");
                         file.deleteOnExit();
-                        try (FileOutputStream fos = new FileOutputStream(file)) {
+                        try (OutputStream fos = Files.newOutputStream(file.toPath())) {
                             bos.writeTo(fos); // what we have already read
                             IOUtils.copyLarge(is, fos); // what remains from the server response
                         }
