@@ -43,7 +43,7 @@ public final class HttpHeader {
 
     /** Accept. */
     public static final String ACCEPT = "Accept";
-    /** accept. */
+    /** Accept-LC. */
     public static final String ACCEPT_LC = "accept";
 
     /** Accept-Language. */
