@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-import javax.script.ScriptContext;
-
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
@@ -179,15 +177,6 @@ public interface WebWindow extends Serializable {
      * @param outerHeight the outer height
      */
     void setOuterHeight(int outerHeight);
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns the {@link ScriptContext}
-     *
-     * @return the {@link ScriptContext}
-     */
-    ScriptContext getScriptContext();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

@@ -14,8 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
 import java.io.IOException;
@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.script.ScriptContext;
-import javax.script.SimpleScriptContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,7 +54,6 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private transient Object scriptObject_;
-    private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
@@ -339,14 +335,6 @@ public abstract class WebWindowImpl implements WebWindow {
     @Override
     public void setOuterHeight(final int outerHeight) {
         outerHeight_ = outerHeight;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ScriptContext getScriptContext() {
-        return scriptContext_;
     }
 
     @Override
