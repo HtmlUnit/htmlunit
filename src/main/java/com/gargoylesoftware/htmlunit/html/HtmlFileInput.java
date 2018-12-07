@@ -111,7 +111,7 @@ public class HtmlFileInput extends HtmlInput {
             keyDataPair.setData(data_);
             list.add(keyDataPair);
         }
-        return list.toArray(new NameValuePair[list.size()]);
+        return list.toArray(new NameValuePair[0]);
     }
 
     /**

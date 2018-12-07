@@ -246,7 +246,7 @@ public class WebResponse implements Serializable {
                 }
             }
             catch (final IOException e) {
-                LOG.warn(e);
+                LOG.warn(e.getMessage(), e);
             }
         }
         return null;

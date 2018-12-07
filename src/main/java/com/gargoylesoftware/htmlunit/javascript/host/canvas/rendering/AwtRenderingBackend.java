@@ -137,11 +137,11 @@ public class AwtRenderingBackend implements RenderingBackend {
         int index = 0;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                final Color c = new Color(image_.getRGB(sx + x, sy + y), true);
-                array[index++] = (byte) c.getRed();
-                array[index++] = (byte) c.getGreen();
-                array[index++] = (byte) c.getBlue();
-                array[index++] = (byte) c.getAlpha();
+                final int color = image_.getRGB(sx + x, sy + y);
+                array[index++] = (byte) ((color & 0xff0000) >> 16);
+                array[index++] = (byte) ((color & 0xff00) >> 8);
+                array[index++] = (byte) (color & 0xff);
+                array[index++] = (byte) ((color & 0xff000000) >>> 24);
             }
         }
         return array;

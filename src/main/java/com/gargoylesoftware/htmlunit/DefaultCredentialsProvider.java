@@ -235,17 +235,15 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * We have to create a factory class, so that credentials can be serialized correctly.
      */
     private static class UsernamePasswordCredentialsFactory implements CredentialsFactory, Serializable {
-        private String username_;
-        private String password_;
+        private static UsernamePasswordCredentials INSTANCE_ = null;
 
         UsernamePasswordCredentialsFactory(final String username, final String password) {
-            username_ = username;
-            password_ = password;
+            INSTANCE_ = new UsernamePasswordCredentials(username, password);
         }
 
         @Override
         public Credentials getInstance() {
-            return new UsernamePasswordCredentials(username_, password_);
+            return INSTANCE_;
         }
 
         @Override
@@ -258,22 +256,16 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * We have to create a factory class, so that credentials can be serialized correctly.
      */
     private static class NTCredentialsFactory implements CredentialsFactory, Serializable {
-        private String username_;
-        private String password_;
-        private String workstation_;
-        private String domain_;
+        private static NTCredentials INSTANCE_ = null;
 
         NTCredentialsFactory(final String username, final String password, final String workstation,
                 final String domain) {
-            username_ = username;
-            password_ = password;
-            workstation_ = workstation;
-            domain_ = domain;
+            INSTANCE_ = new NTCredentials(username, password, workstation, domain);
         }
 
         @Override
         public Credentials getInstance() {
-            return new NTCredentials(username_, password_, workstation_, domain_);
+            return INSTANCE_;
         }
 
         @Override

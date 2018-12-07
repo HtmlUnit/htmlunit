@@ -87,6 +87,9 @@ public final class EncodingSniffer {
         new byte[] {'t', 'T'}
     };
 
+    private static final byte[] WHITESPACE = new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E};
+    private static final byte[] COMMENT_END = new byte[] {'-', '-', '>'};
+
     /** <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a> */
     private static final Map<String, String> ENCODING_FROM_LABEL;
     static {
@@ -684,7 +687,7 @@ public final class EncodingSniffer {
     static Charset sniffEncodingFromMetaTag(final byte[] bytes) {
         for (int i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, COMMENT_START)) {
-                i = indexOfSubArray(bytes, new byte[] {'-', '-', '>'}, i);
+                i = indexOfSubArray(bytes, COMMENT_END, i);
                 if (i == -1) {
                     break;
                 }
@@ -720,7 +723,7 @@ public final class EncodingSniffer {
                 }
             }
             else if (i + 1 < bytes.length && bytes[i] == '<' && Character.isLetter(bytes[i + 1])) {
-                i = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E});
+                i = skipToAnyOf(bytes, i, WHITESPACE);
                 if (i == -1) {
                     break;
                 }
