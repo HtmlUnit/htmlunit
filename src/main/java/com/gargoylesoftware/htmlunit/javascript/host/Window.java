@@ -160,6 +160,21 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Window extends EventTarget implements Function, AutoCloseable {
 
+    private static final class AnimationFrame {
+        private long id_;
+        private Function callback_;
+
+        private AnimationFrame(final long id, final Function callback) {
+            id_ = id;
+            callback_ = callback;
+        }
+
+        private void animate() {
+
+            System.out.println("animate");
+        }
+    }
+
     /**
      * Cache computed styles when possible, because their calculation is very expensive.
      * We use a weak hash map because we don't want this cache to be the only reason
@@ -276,6 +291,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
 
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
+
+    private final transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
     /**
      * Creates an instance.
@@ -815,6 +832,26 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
+     * Invokes all the animation callbacks registered for this window by
+     * calling {@link #requestAnimationFrame(Object)} once.
+     */
+    public void animateAnimationsFrames() {
+        final List<AnimationFrame> animationFrames = new ArrayList<>(animationFrames_);
+        animationFrames_.clear();
+
+        final double now = System.nanoTime() / 1_000_000d;
+        final Object[] args = new Object[] {now};
+
+        final WebWindow ww = getWindow().getWebWindow();
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
+
+        for (AnimationFrame animationFrame : animationFrames) {
+            jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(),
+                        animationFrame.callback_, this, getParentScope(), args);
+        }
+    }
+
+    /**
      * Dummy implementation for {@code requestAnimationFrame}.
      * @param callback the function to call when it's time to update the animation
      * @return an identification id
@@ -822,8 +859,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public int requestAnimationFrame(final Object callback) {
-        // nothing for now
-        return 1;
+        if (callback instanceof Function) {
+            final int id = animationFrames_.size();
+            final AnimationFrame animationFrame = new AnimationFrame(id, (Function) callback);
+            animationFrames_.add(animationFrame);
+            return id;
+        }
+        return -1;
     }
 
     /**
@@ -833,7 +875,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
-        // nothing for now
+        LOG.info("Window.requestAnimationFrame() not yet implemented");
     }
 
     /**

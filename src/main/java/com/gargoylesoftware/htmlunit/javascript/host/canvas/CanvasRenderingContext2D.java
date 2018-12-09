@@ -22,6 +22,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageReader;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -47,6 +50,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class CanvasRenderingContext2D extends SimpleScriptable {
+
+    private static final Log LOG = LogFactory.getLog(CanvasRenderingContext2D.class);
+
     private final HTMLCanvasElement canvas_;
     private RenderingBackend renderingBackend_;
 
@@ -83,6 +89,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxGetter
     public Object getFillStyle() {
+        LOG.info("CanvasRenderingContext2D.getFillStyle() not yet implemented");
         return null;
     }
 
@@ -101,6 +108,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxGetter
     public Object getStrokeStyle() {
+        LOG.info("CanvasRenderingContext2D.getStrokeStyle() not yet implemented");
         return null;
     }
 
@@ -110,7 +118,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxSetter
     public void setStrokeStyle(final Object strokeStyle) {
-        //empty
+        LOG.info("CanvasRenderingContext2D.setStrokeStyle() not yet implemented");
     }
 
     /**
@@ -119,7 +127,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxGetter
     public double getLineWidth() {
-        return 0;
+        return getRenderingBackend().getLineWidth();
     }
 
     /**
@@ -128,7 +136,12 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
-        //empty
+        if (lineWidth != Undefined.instance) {
+            final double width = Context.toNumber(lineWidth);
+            if (!Double.isNaN(width)) {
+                getRenderingBackend().setLineWidth((int) width);
+            }
+        }
     }
 
     /**
@@ -137,6 +150,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxGetter
     public double getGlobalAlpha() {
+        LOG.info("CanvasRenderingContext2D.getGlobalAlpha() not yet implemented");
         return 0;
     }
 
@@ -146,7 +160,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxSetter
     public void setGlobalAlpha(final Object globalAlpha) {
-        //empty
+        LOG.info("CanvasRenderingContext2D.setGlobalAlpha() not yet implemented");
     }
 
     /**
@@ -161,7 +175,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void arc(final double x, final double y, final double radius, final double startAngle,
                 final double endAngle, final boolean anticlockwise) {
-        //empty
+        LOG.info("CanvasRenderingContext2D.arc() not yet implemented");
     }
 
     /**
@@ -175,7 +189,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void arcTo(final double x1, final double y1, final double x2, final double y2,
                 final double radius) {
-        //empty
+        LOG.info("CanvasRenderingContext2D.arcTo() not yet implemented");
     }
 
     /**
@@ -183,7 +197,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void beginPath() {
-        //empty
+        getRenderingBackend().beginPath();
     }
 
     /**
@@ -198,7 +212,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y,
             final double x, final double y) {
-        //empty
+        getRenderingBackend().bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
     }
 
     /**
@@ -218,7 +232,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void clip() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.clip() not yet implemented");
     }
 
     /**
@@ -226,7 +240,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void closePath() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.closePath() not yet implemented");
     }
 
     /**
@@ -234,7 +248,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void createImageData() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.createImageData() not yet implemented");
     }
 
     /**
@@ -261,7 +275,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void createPattern() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.createPattern() not yet implemented");
     }
 
     /**
@@ -368,7 +382,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
                     final double radiusX, final double radiusY,
                     final double rotation, final double startAngle, final double endAngle,
                     final boolean anticlockwise) {
-        //empty
+        LOG.info("CanvasRenderingContext2D.ellipse() not yet implemented");
     }
 
     /**
@@ -376,7 +390,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void fill() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.fill() not yet implemented");
     }
 
     /**
@@ -423,7 +437,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void getLineDash() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.getLineDash() not yet implemented");
     }
 
     /**
@@ -431,7 +445,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void getLineData() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.getLineData() not yet implemented");
     }
 
     /**
@@ -439,7 +453,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void isPointInPath() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.isPointInPath() not yet implemented");
     }
 
     /**
@@ -449,7 +463,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void lineTo(final double x, final double y) {
-        //empty
+        getRenderingBackend().lineTo(x, y);
     }
 
     /**
@@ -482,7 +496,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void moveTo(final double x, final double y) {
-        //empty
+        getRenderingBackend().moveTo(x, y);
     }
 
     /**
@@ -490,7 +504,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void putImageData() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.putImageData() not yet implemented");
     }
 
     /**
@@ -503,7 +517,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void quadraticCurveTo(final double controlPointX, final double controlPointY,
             final double endPointX, final double endPointY) {
-        //empty
+        getRenderingBackend().quadraticCurveTo(controlPointX, controlPointY, endPointX, endPointY);
     }
 
     /**
@@ -515,7 +529,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void rect(final double x, final double y, final double w, final double h) {
-        //empty
+        getRenderingBackend().rect(x, y, w, h);
     }
 
     /**
@@ -523,15 +537,16 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void restore() {
-        //empty
+        getRenderingBackend().restore();
     }
 
     /**
-     * Dummy placeholder.
+     * Adds a rotation to the transformation matrix.
+     * @param angle the angle
      */
     @JsxFunction
-    public void rotate() {
-        //empty
+    public void rotate(final double angle) {
+        getRenderingBackend().rotate(angle);
     }
 
     /**
@@ -539,7 +554,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void save() {
-        //empty
+        getRenderingBackend().save();
     }
 
     /**
@@ -549,7 +564,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void scale(final Object x, final Object y) {
-      //empty
+        LOG.info("CanvasRenderingContext2D.scale() not yet implemented");
     }
 
     /**
@@ -557,15 +572,24 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void setLineDash() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.setLineDash() not yet implemented");
     }
 
     /**
-     * Dummy placeholder.
+     * Resets (overrides) the current transformation to the identity matrix,
+     * and then invokes a transformation described by the arguments of this method.
+     * This lets you scale, rotate, translate (move), and skew the context.
+     * @param m11 Horizontal scaling. A value of 1 results in no scaling
+     * @param m12 Vertical skewing
+     * @param m21 Horizontal skewing
+     * @param m22 Vertical scaling. A value of 1 results in no scaling
+     * @param dx Horizontal translation (moving)
+     * @param dy Vertical translation (moving).
      */
     @JsxFunction
-    public void setTransform() {
-        //empty
+    public void setTransform(final double m11, final double m12,
+                    final double m21, final double m22, final double dx, final double dy) {
+        getRenderingBackend().setTransform(m11, m12, m21, m22, dx, dy);
     }
 
     /**
@@ -573,7 +597,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void stroke() {
-        //empty
+        getRenderingBackend().stroke();
     }
 
     /**
@@ -593,15 +617,24 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void strokeText() {
-        //empty
+        LOG.info("CanvasRenderingContext2D.strokeText() not yet implemented");
     }
 
     /**
-     * Dummy placeholder.
+     * Multiplies the current transformation with the matrix described by the
+     * arguments of this method. This lets you scale, rotate, translate (move),
+     * and skew the context.
+     * @param m11 Horizontal scaling. A value of 1 results in no scaling
+     * @param m12 Vertical skewing
+     * @param m21 Horizontal skewing
+     * @param m22 Vertical scaling. A value of 1 results in no scaling
+     * @param dx Horizontal translation (moving)
+     * @param dy Vertical translation (moving).
      */
     @JsxFunction
-    public void transform() {
-        //empty
+    public void transform(final double m11, final double m12,
+                    final double m21, final double m22, final double dx, final double dy) {
+        getRenderingBackend().transform(m11, m12, m21, m22, dx, dy);
     }
 
     /**
@@ -610,8 +643,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param y the translation distance in the vertical direction
      */
     @JsxFunction
-    public void translate(final Object x, final Object y) {
-      // empty
+    public void translate(final int x, final int y) {
+        getRenderingBackend().translate(x, y);
     }
 
     /**

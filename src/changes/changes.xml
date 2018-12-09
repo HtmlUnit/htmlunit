@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
+            <action type="add" dev="rbri">
+                New method Window.animateAnimationsFrames(). Use this to force one animation cycle.
+            </action>
+            <action type="add" dev="rbri">
+                Huge improvement for CanvasRenderingContext2D; we have working path handling and transformations now.
+            </action>
             <action type="update" dev="rbri">
                 Another Rhino update; Array.fill, Array.keys, Array.entries, and Array.values is now supported.
             </action>
