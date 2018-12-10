@@ -17,6 +17,7 @@
         <exclude name="LongVariable"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="TooManyStaticImports"/>
+        <exclude name="UseUnderscoresInNumericLiterals"/>
         <exclude name="UnnecessaryConstructor"/>
         <exclude name="UselessParentheses"/>
     </rule>
@@ -29,6 +30,7 @@
     <rule ref="category/java/documentation.xml">
         <exclude name="CommentSize"/>
         <exclude name="CommentRequired"/>
+        <exclude name="UncommentedEmptyConstructor"/>
     </rule>
 
     <rule ref="category/java/errorprone.xml">
