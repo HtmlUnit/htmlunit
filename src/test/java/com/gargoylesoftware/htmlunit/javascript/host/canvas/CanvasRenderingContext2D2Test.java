@@ -608,4 +608,145 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 
         loadPageWithAlerts(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVR42mNgGErgP"
+            + "4V41MChYOAoGAWjYOgCAGnPX6EKEWk8AAAAAElFTkSuQmCC")
+    public void rectFill() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.rect(2, 2, 16, 6);\n"
+            + "      context.fill();\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAc0lEQVR42mNgGAVDEvBQ07ASIH4"
+            + "NxBzUMCwBiB8DsQa1XAcyzINahikA8XMgZqGWgSZQF+IDv0mN2c9ALIJDXgWIT5PqynYgng7EAl"
+            + "A+KKZ1oOIg17uQaiALVPNrqAHfgfg2EC+GGkw24IBGEs9oHh+iAAAZGRFncAWu2AAAAABJRU5ErkJggg==")
+    public void arcStroke() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.arc(10, 10, 4, 0, 4.3);\n"
+            + "      context.stroke();\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAb0lEQVR42mNgGAWjgAeIG4D4"
+            + "MhD/B+LbQNwOFSfLsMNAvBmITaB8HSBeDcTnyTG0AWoYNrAa6lKSwGWoy7ABDaj3SQKgMBPA"
+            + "IccBlR9YF1I9DEGxeBopljmgLgMZdp2SpNMANQCWDrvJNWwUDBAAAFFYGYXPy8e+AAAAAElF"
+            + "TkSuQmCC")
+    public void arcCircleStroke() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.arc(10, 10, 4, 0, 2 * Math.PI);\n"
+            + "      context.stroke();\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAATklEQVR42mNgGAVDEsgAcQIQNwBxDh"
+            + "ALUGIYCxC/BuLdQNwOxN1AfB+IfSgxlAONbwDEj4FYgprBAPL+ZGoaqADE76kdWf9H0+soGDEAADmG"
+            + "CbQK8bPUAAAAAElFTkSuQmCC")
+    public void arcAnticlockwiseStroke() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.arc(10, 10, 4, 0, 4.3, true);\n"
+            + "      context.stroke();\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("data:image/png;base64,"
+            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAb0lEQVR42mNgGAWjgAeIG4D4"
+            + "MhD/B+LbQNwOFSfLsMNAvBmITaB8HSBeDcTnyTG0AWoYNrAa6lKSwGWoy7ABDaj3SQKgMBPA"
+            + "IccBlR9YF1I9DEGxeBopljmgLgMZdp2SpNMANQCWDrvJNWwUDBAAAFFYGYXPy8e+AAAAAElF"
+            + "TkSuQmCC")
+    public void arcCircleAnticlockwiseStroke() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var canvas = document.getElementById('myCanvas');\n"
+            + "    if (canvas.getContext) {\n"
+            + "      var context = canvas.getContext('2d');\n"
+            + "      context.arc(10, 10, 4, 0, 2 * Math.PI, true);\n"
+            + "      context.stroke();\n"
+            + "      alert(canvas.toDataURL());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+            + "</body></html>";
+
+        loadPageWithAlerts(html);
+    }
 }

@@ -168,11 +168,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             id_ = id;
             callback_ = callback;
         }
-
-        private void animate() {
-
-            System.out.println("animate");
-        }
     }
 
     /**
@@ -834,8 +829,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     /**
      * Invokes all the animation callbacks registered for this window by
      * calling {@link #requestAnimationFrame(Object)} once.
+     * @return the number of pending animation callbacks
      */
-    public void animateAnimationsFrames() {
+    public int animateAnimationsFrames() {
         final List<AnimationFrame> animationFrames = new ArrayList<>(animationFrames_);
         animationFrames_.clear();
 
@@ -849,10 +845,11 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(),
                         animationFrame.callback_, this, getParentScope(), args);
         }
+        return animationFrames_.size();
     }
 
     /**
-     * Dummy implementation for {@code requestAnimationFrame}.
+     * Add callback to the list of animationFrames.
      * @param callback the function to call when it's time to update the animation
      * @return an identification id
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
@@ -869,13 +866,21 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Dummy implementation for {@code cancelAnimationFrame}.
+     * Remove the callback from the list of animationFrames.
      * @param requestId the ID value returned by the call to window.requestAnimationFrame()
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
     @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
-        LOG.info("Window.requestAnimationFrame() not yet implemented");
+        final int id = (int) Context.toNumber(requestId);
+
+        final Iterator<AnimationFrame> frames = animationFrames_.iterator();
+        while (frames.hasNext()) {
+            final Window.AnimationFrame animationFrame = (Window.AnimationFrame) frames.next();
+            if (animationFrame.id_ == id) {
+                frames.remove();
+            }
+        }
     }
 
     /**

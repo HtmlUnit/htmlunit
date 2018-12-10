@@ -48,6 +48,18 @@ public interface RenderingBackend {
             double x, double y);
 
     /**
+     * Adds a circular arc to the current sub-path.
+     * @param x the x
+     * @param y the y
+     * @param radius the radius
+     * @param startAngle the start angle
+     * @param endAngle the end angle
+     * @param anticlockwise is anti-clockwise
+     */
+    void arc(double x, double y, double radius, double startAngle,
+                double endAngle, boolean anticlockwise);
+
+    /**
      * Paints the specified rectangular area.
      * @param x the x
      * @param y the y
@@ -74,6 +86,11 @@ public interface RenderingBackend {
      * @throws IOException in case o problems
      */
     String encodeToString(String type) throws IOException;
+
+    /**
+     * Fills the current or given path with the current fillStyle.
+     */
+    void fill();
 
     /**
      * Paints the specified rectangular area.
@@ -165,6 +182,12 @@ public interface RenderingBackend {
      * @param fillStyle the {@code fillStyle} property
      */
     void setFillStyle(String fillStyle);
+
+    /**
+     * Sets the {@code strokeStyle} property.
+     * @param strokeStyle the {@code strokeStyle} property
+     */
+    void setStrokeStyle(String strokeStyle);
 
     /**
      * Returns the {@code lineWidth} property.

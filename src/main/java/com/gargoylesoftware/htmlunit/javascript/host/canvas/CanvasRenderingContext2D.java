@@ -117,8 +117,8 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      * @param strokeStyle the {@code strokeStyle} property
      */
     @JsxSetter
-    public void setStrokeStyle(final Object strokeStyle) {
-        LOG.info("CanvasRenderingContext2D.setStrokeStyle() not yet implemented");
+    public void setStrokeStyle(final String strokeStyle) {
+        getRenderingBackend().setStrokeStyle(strokeStyle);
     }
 
     /**
@@ -175,7 +175,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     @JsxFunction
     public void arc(final double x, final double y, final double radius, final double startAngle,
                 final double endAngle, final boolean anticlockwise) {
-        LOG.info("CanvasRenderingContext2D.arc() not yet implemented");
+        getRenderingBackend().arc(x, y, radius, startAngle, endAngle, anticlockwise);
     }
 
     /**
@@ -390,7 +390,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public void fill() {
-        LOG.info("CanvasRenderingContext2D.fill() not yet implemented");
+        getRenderingBackend().fill();
     }
 
     /**
