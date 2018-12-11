@@ -45,12 +45,15 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
     @Override
     public void malformedScriptURL(final HtmlPage page, final String url,
                 final MalformedURLException malformedURLException) {
-        LOG.error("Unable to build URL for script src tag [" + url + "]", malformedURLException);
+        if (LOG.isErrorEnabled()) {
+            LOG.error("Unable to build URL for script src tag [" + url + "]", malformedURLException);
+        }
     }
 
     @Override
     public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
-        LOG.error("Error loading JavaScript from [" + scriptUrl + "].", exception);
+        if (LOG.isErrorEnabled()) {
+            LOG.error("Error loading JavaScript from [" + scriptUrl + "].", exception);
+        }
     }
-
 }

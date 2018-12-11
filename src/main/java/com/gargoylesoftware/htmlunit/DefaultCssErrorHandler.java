@@ -38,7 +38,9 @@ public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
      */
     @Override
     public void error(final CSSParseException exception) {
-        LOG.warn("CSS error: " + buildMessage(exception));
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSS error: " + buildMessage(exception));
+        }
     }
 
     /**
@@ -46,7 +48,9 @@ public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
      */
     @Override
     public void fatalError(final CSSParseException exception) {
-        LOG.warn("CSS fatal error: " + buildMessage(exception));
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSS fatal error: " + buildMessage(exception));
+        }
     }
 
     /**
@@ -54,7 +58,9 @@ public class DefaultCssErrorHandler implements CSSErrorHandler, Serializable {
      */
     @Override
     public void warning(final CSSParseException exception) {
-        LOG.warn("CSS warning: " + buildMessage(exception));
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSS warning: " + buildMessage(exception));
+        }
     }
 
     /**

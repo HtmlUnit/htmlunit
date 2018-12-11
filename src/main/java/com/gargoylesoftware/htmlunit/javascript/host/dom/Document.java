@@ -675,8 +675,10 @@ public class Document extends Node {
 
             if (browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_STRICT)
                   && (tagName.contains("<") || tagName.contains(">"))) {
-                LOG.info("createElement: Provided string '"
-                            + tagName + "' contains an invalid character; '<' and '>' are not allowed");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("createElement: Provided string '"
+                                + tagName + "' contains an invalid character; '<' and '>' are not allowed");
+                }
                 throw Context.reportRuntimeError("String contains an invalid character");
             }
             else if (tagName.startsWith("<") && tagName.endsWith(">")) {
@@ -684,7 +686,9 @@ public class Document extends Node {
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
                 if (!matcher.matches()) {
-                    LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
+                    }
                     throw Context.reportRuntimeError("String contains an invalid character");
                 }
             }
@@ -1104,7 +1108,9 @@ public class Document extends Node {
         if (!hasCommand(cmd, false)) {
             return false;
         }
-        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        }
         return true;
     }
 

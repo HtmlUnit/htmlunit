@@ -168,7 +168,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             mark = mark.replace("\"", "\\\"");
         }
         appendToJSFile("tab[tab.length] = \"" + mark + "\";\n");
-        LOG.info("--- " + mark + " ---");
+        if (LOG.isInfoEnabled()) {
+            LOG.info("--- " + mark + " ---");
+        }
     }
 
     /**
@@ -193,7 +195,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
 
         final URL url = response.getWebRequest().getUrl();
-        LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
+        }
 
         final StringBuilder bduiler = new StringBuilder();
         bduiler.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
@@ -334,7 +338,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final File summary = new File(reportFolder_, "index.html");
         FileUtils.copyURLToFile(indexResource, summary);
 
-        LOG.info("Summary will be in " + summary.getAbsolutePath());
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Summary will be in " + summary.getAbsolutePath());
+        }
     }
 
     File getReportFolder() {
