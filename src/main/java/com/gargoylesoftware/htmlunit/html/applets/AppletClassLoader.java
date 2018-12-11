@@ -49,9 +49,11 @@ public class AppletClassLoader extends URLClassLoader {
         super(new URL[0], parent);
 
         if (window.getWebWindow().getWebClient().getOptions().isUseInsecureSSL()) {
-            LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."
-                    + " If you like to load applet archives from a SSL/HTTPS connection you have to configure"
-                    + " your jvm to accept untrusted certificate for SSL/HTTPS connections also.");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."
+                        + " If you like to load applet archives from a SSL/HTTPS connection you have to configure"
+                        + " your jvm to accept untrusted certificate for SSL/HTTPS connections also.");
+            }
         }
 
         try {

@@ -312,7 +312,9 @@ public class AwtRenderingBackend implements RenderingBackend {
                 color = (Color) f.get(null);
             }
             catch (final Exception e) {
-                LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                }
                 color = Color.black;
             }
         }
@@ -344,7 +346,9 @@ public class AwtRenderingBackend implements RenderingBackend {
                 color = (Color) f.get(null);
             }
             catch (final Exception e) {
-                LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                }
                 color = Color.black;
             }
         }

@@ -127,7 +127,9 @@ public class ActiveXObject extends SimpleScriptable {
             }
         }
 
-        LOG.warn("Automation server can't create object for '" + activeXName + "'.");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Automation server can't create object for '" + activeXName + "'.");
+        }
         throw Context.reportRuntimeError("Automation server can't create object for '" + activeXName + "'.");
     }
 

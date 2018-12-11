@@ -326,24 +326,32 @@ public class CSSStyleSheet extends StyleSheet {
         }
         catch (final FailingHttpStatusCodeException e) {
             // Got a 404 response or something like that; behave nicely.
-            LOG.error("Exception loading " + uri, e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Exception loading " + uri, e);
+            }
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
-            LOG.error("IOException loading " + uri, e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("IOException loading " + uri, e);
+            }
             final InputSource source = new InputSource(new StringReader(""));
             sheet = new CSSStyleSheet(element, source, uri);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
-            LOG.error("RuntimeException loading " + uri, e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("RuntimeException loading " + uri, e);
+            }
             throw Context.reportRuntimeError("Exception: " + e);
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.
-            LOG.error("Exception loading " + uri, e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Exception loading " + uri, e);
+            }
             throw Context.reportRuntimeError("Exception: " + e);
         }
         return sheet;
@@ -444,7 +452,9 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
 
             default:
-                LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
+                }
                 return false;
         }
     }
@@ -532,7 +542,9 @@ public class CSSStyleSheet extends StyleSheet {
                         (PseudoClassCondition) condition, element, fromQuerySelectorAll);
 
             default:
-                LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
+                }
                 return false;
         }
     }
@@ -862,7 +874,9 @@ public class CSSStyleSheet extends StyleSheet {
             ss = parser.parseStyleSheet(source, null);
         }
         catch (final Throwable t) {
-            LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
+            }
             ss = new CSSStyleSheetImpl();
         }
         return ss;
@@ -888,7 +902,9 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
         catch (final Throwable t) {
-            LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + t.getMessage(), t);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + t.getMessage(), t);
+            }
             selectors = new SelectorListImpl();
         }
         return selectors;
@@ -917,7 +933,9 @@ public class CSSStyleSheet extends StyleSheet {
             return media;
         }
         catch (final Exception e) {
-            LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
+            }
         }
 
         media = new MediaListImpl(null);
@@ -1332,8 +1350,10 @@ public class CSSStyleSheet extends StyleSheet {
                             }
                         }
                         else {
-                            LOG.warn("CSSValue '" + property.getValue().getCssText()
-                                        + "' not supported for feature 'orientation'.");
+                            if (LOG.isWarnEnabled()) {
+                                LOG.warn("CSSValue '" + property.getValue().getCssText()
+                                            + "' not supported for feature 'orientation'.");
+                            }
                             return false;
                         }
                         break;
@@ -1375,7 +1395,10 @@ public class CSSStyleSheet extends StyleSheet {
             default:
                 break;
         }
-        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSSValue '" + cssValue.getCssText()
+                        + "' has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
+        }
         return -1;
     }
 
@@ -1393,7 +1416,9 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
 
-        LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', or 'dppx' value.");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', or 'dppx' value.");
+        }
         return -1;
     }
 
@@ -1445,7 +1470,10 @@ public class CSSStyleSheet extends StyleSheet {
                 return isValidSelector(gas.getSelector(), documentMode, domNode)
                         && isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
             default:
-                LOG.warn("Unhandled CSS selector type '" + selector.getSelectorType() + "'. Accepting it silently.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unhandled CSS selector type '"
+                                + selector.getSelectorType() + "'. Accepting it silently.");
+                }
                 return true; // at least in a first time to break less stuff
         }
     }
@@ -1490,7 +1518,10 @@ public class CSSStyleSheet extends StyleSheet {
                 }
                 return CSS3_PSEUDO_CLASSES.contains(value);
             default:
-                LOG.warn("Unhandled CSS condition type '" + condition.getConditionType() + "'. Accepting it silently.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unhandled CSS condition type '"
+                                + condition.getConditionType() + "'. Accepting it silently.");
+                }
                 return true;
         }
     }

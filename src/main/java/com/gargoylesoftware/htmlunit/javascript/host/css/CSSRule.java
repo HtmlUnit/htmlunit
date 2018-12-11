@@ -175,12 +175,16 @@ public class CSSRule extends SimpleScriptable {
                 if (unknownRule.getCssText().startsWith("@keyframes")) {
                     return new CSSKeyframesRule(stylesheet, (org.w3c.dom.css.CSSUnknownRule) rule);
                 }
-                LOG.warn("Unknown CSSRule " + rule.getClass().getName()
-                        + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unknown CSSRule " + rule.getClass().getName()
+                            + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                }
                 break;
             default:
-                LOG.warn("CSSRule " + rule.getClass().getName()
-                        + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("CSSRule " + rule.getClass().getName()
+                            + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+                }
         }
 
         return null;
