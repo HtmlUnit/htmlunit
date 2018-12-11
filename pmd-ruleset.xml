@@ -13,6 +13,8 @@
         <exclude name="AtLeastOneConstructor"/>
         <exclude name="AvoidFinalLocalVariable"/>
         <exclude name="AtLeastOneConstructor"/>
+        <exclude name="ClassNamingConventions"/>
+        <exclude name="CommentDefaultAccessModifier"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="LongVariable"/>
         <exclude name="OnlyOneReturn"/>

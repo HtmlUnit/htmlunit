@@ -160,6 +160,49 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class Window extends EventTarget implements Function, AutoCloseable {
 
+    private static final Log LOG = LogFactory.getLog(Window.class);
+
+    /** To be documented. */
+    @JsxConstant(CHROME)
+    public static final short TEMPORARY = 0;
+
+    /** To be documented. */
+    @JsxConstant(CHROME)
+    public static final short PERSISTENT = 1;
+
+    /**
+     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
+     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
+     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
+     */
+    private static final int MIN_TIMER_DELAY = 1;
+
+    private Document document_;
+    private DocumentProxy documentProxy_;
+    private Navigator navigator_;
+    private WebWindow webWindow_;
+    private WindowProxy windowProxy_;
+    private Screen screen_;
+    private History history_;
+    private Location location_;
+    private ScriptableObject console_;
+    private ApplicationCache applicationCache_;
+    private Selection selection_;
+    private Event currentEvent_;
+    private String status_ = "";
+    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
+    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
+    private Object controllers_;
+    private Object opener_;
+    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
+    private Crypto crypto_;
+
+    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
+
+    private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
+
+    private final transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
+
     private static final class AnimationFrame {
         private long id_;
         private Function callback_;
@@ -245,49 +288,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             return computedStyles_.remove(element);
         }
     }
-
-    private static final Log LOG = LogFactory.getLog(Window.class);
-
-    /** To be documented. */
-    @JsxConstant(CHROME)
-    public static final short TEMPORARY = 0;
-
-    /** To be documented. */
-    @JsxConstant(CHROME)
-    public static final short PERSISTENT = 1;
-
-    /**
-     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
-     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
-     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
-     */
-    private static final int MIN_TIMER_DELAY = 1;
-
-    private Document document_;
-    private DocumentProxy documentProxy_;
-    private Navigator navigator_;
-    private WebWindow webWindow_;
-    private WindowProxy windowProxy_;
-    private Screen screen_;
-    private History history_;
-    private Location location_;
-    private ScriptableObject console_;
-    private ApplicationCache applicationCache_;
-    private Selection selection_;
-    private Event currentEvent_;
-    private String status_ = "";
-    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
-    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
-    private Object controllers_;
-    private Object opener_;
-    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
-    private Crypto crypto_;
-
-    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
-
-    private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
-
-    private final transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
     /**
      * Creates an instance.

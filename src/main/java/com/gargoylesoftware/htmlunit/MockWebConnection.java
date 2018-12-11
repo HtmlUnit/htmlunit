@@ -44,6 +44,12 @@ public class MockWebConnection implements WebConnection {
 
     private static final Log LOG = LogFactory.getLog(MockWebConnection.class);
 
+    private final Map<String, RawResponseData> responseMap_ = new HashMap<>(10);
+    private RawResponseData defaultResponse_;
+    private WebRequest lastRequest_;
+    private int requestCount_ = 0;
+    private final List<URL> requestedUrls_ = Collections.synchronizedList(new ArrayList<URL>());
+
     /**
      * Contains the raw data configured for a response.
      */
@@ -147,12 +153,6 @@ public class MockWebConnection implements WebConnection {
             return charset_;
         }
     }
-
-    private final Map<String, RawResponseData> responseMap_ = new HashMap<>(10);
-    private RawResponseData defaultResponse_;
-    private WebRequest lastRequest_;
-    private int requestCount_ = 0;
-    private final List<URL> requestedUrls_ = Collections.synchronizedList(new ArrayList<URL>());
 
     /**
      * {@inheritDoc}

@@ -37,6 +37,12 @@ public class RegExpJsToJavaConverter {
 
     private static final String DIGITS = "0123456789";
 
+    private Tape tape_;
+    private boolean insideCharClass_;
+    private boolean insideRepetition_;
+    private Deque<Subexpresion> parsingSubexpressions_;
+    private List<Subexpresion> subexpressions_;
+
     /**
      * Helper to encapsulate the transformations.
      */
@@ -142,12 +148,6 @@ public class RegExpJsToJavaConverter {
             end_ = -1;
         }
     }
-
-    private Tape tape_;
-    private boolean insideCharClass_;
-    private boolean insideRepetition_;
-    private Deque<Subexpresion> parsingSubexpressions_;
-    private List<Subexpresion> subexpressions_;
 
     /**
      * Initiate the FSM.

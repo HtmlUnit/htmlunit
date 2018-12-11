@@ -52,6 +52,8 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private static final Log LOG = LogFactory.getLog(HtmlUnitRegExpProxy.class);
+    /** Pattern cache */
+    private static final Map<String, Pattern> PATTENS = new HashMap<>();
 
     private final RegExpProxy wrapped_;
     private final BrowserVersion browserVersion_;
@@ -407,9 +409,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     public Scriptable wrapRegExp(final Context cx, final Scriptable scope, final Object compiled) {
         return wrapped_.wrapRegExp(cx, scope, compiled);
     }
-
-    /** Pattern cache */
-    private static final Map<String, Pattern> PATTENS = new HashMap<>();
 
     private static class RegExpData {
         private final boolean global_;

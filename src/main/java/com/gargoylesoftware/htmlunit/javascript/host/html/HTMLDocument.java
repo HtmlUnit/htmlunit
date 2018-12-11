@@ -113,6 +113,7 @@ public class HTMLDocument extends Document {
     private boolean writeInCurrentDocument_ = true;
 
     private boolean closePostponedAction_;
+    private boolean executionExternalPostponed_;
 
     /**
      * The constructor.
@@ -263,8 +264,6 @@ public class HTMLDocument extends Document {
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }
-
-    private boolean executionExternalPostponed_;
 
     /**
      * This a hack!!! A cleaner way is welcome.

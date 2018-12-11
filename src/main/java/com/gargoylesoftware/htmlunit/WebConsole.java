@@ -34,6 +34,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebConsole implements Serializable {
 
+    private Formatter formatter_ = new DefaultFormatter();
+    private Logger logger_ = new DefaultLogger();
+
     /**
      * A simple logging interface abstracting logging APIs.
      */
@@ -166,9 +169,6 @@ public class WebConsole implements Serializable {
          */
         String parameterAsFloat(Object o);
     }
-
-    private Formatter formatter_ = new DefaultFormatter();
-    private Logger logger_ = new DefaultLogger();
 
     /**
      * Sets the Formatter.

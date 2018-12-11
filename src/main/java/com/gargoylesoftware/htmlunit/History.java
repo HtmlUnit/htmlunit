@@ -39,6 +39,24 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class History implements Serializable {
 
+    /** The window to which this navigation history belongs. */
+    private final WebWindow window_;
+
+    /**
+     * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using
+     * explicit boolean parameters in the various methods that load new pages), but it does the job for now -- without
+     * any new API cruft.
+     */
+    private transient ThreadLocal<Boolean> ignoreNewPages_;
+
+    /**
+     * The {@link History.HistoryEntry}s in this navigation history.
+     */
+    private final List<HistoryEntry> entries_ = new ArrayList<>();
+
+    /** The current index within the list of pages which make up this navigation history. */
+    private int index_ = -1;
+
     /**
      * The single entry in the history.
      */
@@ -106,24 +124,6 @@ public class History implements Serializable {
             state_ = state;
         }
     }
-
-    /** The window to which this navigation history belongs. */
-    private final WebWindow window_;
-
-    /**
-     * Whether or not to ignore calls to {@link #addPage(Page)}; this is a bit hackish (we should probably be using
-     * explicit boolean parameters in the various methods that load new pages), but it does the job for now -- without
-     * any new API cruft.
-     */
-    private transient ThreadLocal<Boolean> ignoreNewPages_;
-
-    /**
-     * The {@link History.HistoryEntry}s in this navigation history.
-     */
-    private final List<HistoryEntry> entries_ = new ArrayList<>();
-
-    /** The current index within the list of pages which make up this navigation history. */
-    private int index_ = -1;
 
     /**
      * Creates a new navigation history for the specified window.
