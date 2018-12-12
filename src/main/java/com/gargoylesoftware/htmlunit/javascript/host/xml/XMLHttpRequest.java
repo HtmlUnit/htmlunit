@@ -396,8 +396,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return document;
             }
             catch (final IOException e) {
-                LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
-                        + e.getMessage());
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
+                            + e.getMessage());
+                }
                 return null;
             }
         }
@@ -422,8 +424,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getStatusCode();
         }
 
-        LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
+                + state_ + ").");
+        }
         return 0;
     }
 
@@ -440,8 +444,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getStatusMessage();
         }
 
-        LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -481,8 +487,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return builder.toString();
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -500,8 +508,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getResponseHeaderValue(headerName);
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -555,7 +565,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
             }
             catch (final IllegalArgumentException e) {
-                LOG.info("Incorrect HTTP Method '" + method + "'");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Incorrect HTTP Method '" + method + "'");
+                }
                 return;
             }
 
@@ -573,7 +585,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webRequest_ = request;
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            }
             return;
         }
         // Async stays a boolean.
@@ -906,8 +920,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
         if (!isAuthorizedHeader(name)) {
-            LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
-                + ": it is a restricted header");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
+                    + ": it is a restricted header");
+            }
             return;
         }
 

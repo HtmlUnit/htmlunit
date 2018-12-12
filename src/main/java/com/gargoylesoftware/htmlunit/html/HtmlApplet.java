@@ -324,9 +324,11 @@ public class HtmlApplet extends HtmlElement {
                 applet_.start();
             }
             catch (final ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                LOG.error("Loading applet '" + appletClassName + "' failed\n"
-                        + "    " + e.toString()
-                        + "\n    Classpath:\n" + appletClassLoader.info());
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Loading applet '" + appletClassName + "' failed\n"
+                            + "    " + e.toString()
+                            + "\n    Classpath:\n" + appletClassLoader.info());
+                }
                 throw new RuntimeException(e);
             }
         }

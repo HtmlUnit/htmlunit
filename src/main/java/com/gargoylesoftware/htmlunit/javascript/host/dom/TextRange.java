@@ -185,7 +185,9 @@ public class TextRange extends SimpleScriptable {
     @JsxFunction
     public int moveStart(final String unit, final Object count) {
         if (!"character".equals(unit)) {
-            LOG.warn("moveStart('" + unit + "') is not yet supported");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("moveStart('" + unit + "') is not yet supported");
+            }
             return 0;
         }
         int c = 1;
@@ -222,7 +224,9 @@ public class TextRange extends SimpleScriptable {
     @JsxFunction
     public int moveEnd(final String unit, final Object count) {
         if (!"character".equals(unit)) {
-            LOG.warn("moveEnd('" + unit + "') is not yet supported");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("moveEnd('" + unit + "') is not yet supported");
+            }
             return 0;
         }
         int c = 1;

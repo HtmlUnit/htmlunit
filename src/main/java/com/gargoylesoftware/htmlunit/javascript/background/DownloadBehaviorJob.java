@@ -78,7 +78,9 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
             });
         }
         catch (final IOException e) {
-            LOG.error("Behavior #default#download: Cannot download " + url_, e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Behavior #default#download: Cannot download " + url_, e);
+            }
         }
     }
 }

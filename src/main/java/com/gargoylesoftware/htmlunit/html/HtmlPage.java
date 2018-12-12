@@ -957,7 +957,9 @@ public class HtmlPage extends SgmlPage {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
             final String protocol = scriptURL.getProtocol();
             if ("javascript".equals(protocol)) {
-                LOG.info("Ignoring script src [" + srcAttribute + "]");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Ignoring script src [" + srcAttribute + "]");
+                }
                 return JavaScriptLoadResult.NOOP;
             }
             if (!"http".equals(protocol) && !"https".equals(protocol)
@@ -1293,8 +1295,10 @@ public class HtmlPage extends SgmlPage {
             if (beforeUnloadEvent.isBeforeUnloadMessageSet()) {
                 final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
                 if (handler == null) {
-                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
-                            + " but no onbeforeunload handler installed.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                                + " but no onbeforeunload handler installed.");
+                    }
                 }
                 else {
                     final String message = Context.toString(beforeUnloadEvent.getReturnValue());
@@ -1336,7 +1340,9 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString);
             }
             catch (final NumberFormatException e) {
-                LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                }
                 return;
             }
             url = getUrl();
@@ -1347,12 +1353,16 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
-                LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                }
                 return;
             }
             index = refreshString.toLowerCase(Locale.ROOT).indexOf("url=", index);
             if (index == -1) {
-                LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                }
                 return;
             }
             final StringBuilder builder = new StringBuilder(refreshString.substring(index + 4));
@@ -1372,7 +1382,9 @@ public class HtmlPage extends SgmlPage {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    LOG.error("Malformed URL in refresh string: " + refreshString, e);
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Malformed URL in refresh string: " + refreshString, e);
+                    }
                     throw e;
                 }
             }
@@ -2361,7 +2373,9 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlElement getElementFromPoint(final int x, final int y) {
         if (elementFromPointHandler_ == null) {
-            LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            }
             if (x <= 0 || y <= 0) {
                 return null;
             }

@@ -171,13 +171,17 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                         incomingSession_ = connectFuture.get();
                     }
                     catch (final Exception e) {
-                        LOG.error("WS connect error for url '" + url + "':", e);
+                        if (LOG.isErrorEnabled()) {
+                            LOG.error("WS connect error for url '" + url + "':", e);
+                        }
                     }
                 }
             });
         }
         catch (final Exception e) {
-            LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+            }
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
         }
     }

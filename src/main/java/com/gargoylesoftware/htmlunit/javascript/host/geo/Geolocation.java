@@ -174,7 +174,9 @@ public class Geolocation extends SimpleScriptable {
             }
         }
         else {
-            LOG.error("Operating System not supported: " + os);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Operating System not supported: " + os);
+            }
         }
     }
 

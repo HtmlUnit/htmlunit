@@ -290,7 +290,9 @@ public class HtmlArea extends HtmlElement {
             }
         }
         catch (final NumberFormatException e) {
-            LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
+            }
         }
 
         final Rectangle2D rectangle = new Rectangle2D.Double(leftX, topY,
@@ -334,7 +336,9 @@ public class HtmlArea extends HtmlElement {
             }
         }
         catch (final NumberFormatException e) {
-            LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
+            }
         }
 
         path.closePath();
