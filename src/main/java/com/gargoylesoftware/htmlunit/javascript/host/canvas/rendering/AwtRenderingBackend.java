@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -172,7 +173,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();
-            return new String(new Base64().encode(imageBytes));
+            return new String(new Base64().encode(imageBytes), StandardCharsets.US_ASCII);
         }
     }
 

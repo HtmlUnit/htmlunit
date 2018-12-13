@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 import org.apache.commons.codec.binary.Base64;
@@ -103,7 +104,7 @@ public class FileReader extends EventTarget {
             FileUtils.copyFile(file, bos);
 
             final byte[] bytes = bos.toByteArray();
-            final String value = new String(new Base64().encode(bytes));
+            final String value = new String(new Base64().encode(bytes), StandardCharsets.US_ASCII);
             final BrowserVersion browserVersion = getBrowserVersion();
 
             result_ = "data:";

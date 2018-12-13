@@ -17,6 +17,7 @@
         <exclude name="CommentDefaultAccessModifier"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="LongVariable"/>
+        <exclude name="MethodNamingConventions"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="TooManyStaticImports"/>
         <exclude name="UseUnderscoresInNumericLiterals"/>
