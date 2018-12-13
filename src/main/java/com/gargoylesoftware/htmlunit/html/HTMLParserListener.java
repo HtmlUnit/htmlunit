@@ -70,7 +70,7 @@ public interface HTMLParserListener {
  */
 class SimpleHTMLParserListener implements HTMLParserListener {
 
-    private static final Log LOG = LogFactory.getLog(HTMLParserListener.class);
+    private static final Log LOG = LogFactory.getLog(SimpleHTMLParserListener.class);
 
     @Override
     public void error(final String message, final URL url, final String html,
@@ -87,18 +87,18 @@ class SimpleHTMLParserListener implements HTMLParserListener {
     private static String format(final String message, final URL url, final String html,
             final int line, final int column) {
         final StringBuilder builder = new StringBuilder(message);
-        builder.append(" (");
-        builder.append(url.toExternalForm());
-        builder.append(" ");
-        builder.append(line);
-        builder.append(":");
-        builder.append(column);
+        builder.append(" (")
+                .append(url.toExternalForm())
+                .append(' ')
+                .append(line)
+                .append(':')
+                .append(column);
         if (null != html) {
-            builder.append(" htmlSnippet: '");
-            builder.append(html);
-            builder.append("'");
+            builder.append(" htmlSnippet: '")
+                    .append(html)
+                    .append("'");
         }
-        builder.append(")");
+        builder.append(')');
         return builder.toString();
     }
 }

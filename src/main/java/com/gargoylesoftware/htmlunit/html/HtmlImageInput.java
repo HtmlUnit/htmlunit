@@ -19,10 +19,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_NAM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -238,9 +239,9 @@ public class HtmlImageInput extends HtmlInput {
     public void saveAs(final File file) throws IOException {
         downloadImageIfNeeded();
         if (null != imageWebResponse_) {
-            try (FileOutputStream fileOut = new FileOutputStream(file);
+            try (OutputStream fos = Files.newOutputStream(file.toPath());
                     InputStream inputStream = imageWebResponse_.getContentAsStream()) {
-                IOUtils.copy(inputStream, fileOut);
+                IOUtils.copy(inputStream, fos);
             }
         }
     }

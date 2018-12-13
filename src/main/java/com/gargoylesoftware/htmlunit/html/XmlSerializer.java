@@ -17,11 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -224,7 +225,7 @@ class XmlSerializer {
             }
             else {
                 try (InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
-                    try (FileOutputStream fos = new FileOutputStream(file)) {
+                    try (OutputStream fos = Files.newOutputStream(file.toPath())) {
                         IOUtils.copyLarge(is, fos);
                     }
                 }

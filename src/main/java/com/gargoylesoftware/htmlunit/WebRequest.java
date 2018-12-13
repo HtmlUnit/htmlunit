@@ -437,14 +437,13 @@ public class WebRequest implements Serializable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getClass().getSimpleName());
-        builder.append("[<");
-        builder.append("url=\"" + url_ + '"');
-        builder.append(", " + httpMethod_);
-        builder.append(", " + encodingType_);
-        builder.append(", " + requestParameters_);
-        builder.append(", " + additionalHeaders_);
-        builder.append(", " + credentials_);
-        builder.append(">]");
+        builder.append("[<url=\"").append(url_).append('"')
+                .append(", ").append(httpMethod_)
+                .append(", ").append(encodingType_)
+                .append(", ").append(requestParameters_)
+                .append(", ").append(additionalHeaders_)
+                .append(", ").append(credentials_)
+                .append(">]");
         return builder.toString();
     }
 

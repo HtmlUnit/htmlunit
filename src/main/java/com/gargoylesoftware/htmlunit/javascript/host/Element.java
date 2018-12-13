@@ -1036,7 +1036,7 @@ public class Element extends Node {
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = scriptObject;
             }
-            builder.append("<").append(tag);
+            builder.append('<').append(tag);
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
@@ -1045,19 +1045,19 @@ public class Element extends Node {
 
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                builder.append(' ').append(name).append("=");
-                builder.append("\"");
+                builder.append(' ').append(name).append('=');
+                builder.append('\"');
                 builder.append(value);
-                builder.append("\"");
+                builder.append('\"');
             }
-            builder.append(">");
+            builder.append('>');
             // Add the children.
             final boolean isHtml = html
                     && !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
             printChildren(builder, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
-                builder.append("</").append(tag).append(">");
+                builder.append("</").append(tag).append('>');
             }
         }
         else {
@@ -1073,7 +1073,7 @@ public class Element extends Node {
                             i--;
                         }
                         builder.setLength(i + 1);
-                        builder.append("\n");
+                        builder.append('\n');
                     }
                 }
                 if (!"script".equals(element.getTagName())) {

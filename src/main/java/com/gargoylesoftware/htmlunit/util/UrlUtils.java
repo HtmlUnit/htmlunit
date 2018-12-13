@@ -485,27 +485,26 @@ public final class UrlUtils {
     private static URL createNewUrl(final String protocol, final String userInfo, final String host, final int port,
             final String path, final String ref, final String query) throws MalformedURLException {
         final StringBuilder s = new StringBuilder();
-        s.append(protocol);
-        s.append("://");
+        s.append(protocol).append("://");
         if (userInfo != null) {
-            s.append(userInfo).append("@");
+            s.append(userInfo).append('@');
         }
         s.append(host);
         if (port != -1) {
-            s.append(":").append(port);
+            s.append(':').append(port);
         }
         if (path != null && !path.isEmpty()) {
             if (!('/' == path.charAt(0))) {
-                s.append("/");
+                s.append('/');
             }
             s.append(path);
         }
         if (query != null) {
-            s.append("?").append(query);
+            s.append('?').append(query);
         }
         if (ref != null) {
             if (ref.isEmpty() || ref.charAt(0) != '#') {
-                s.append("#");
+                s.append('#');
             }
             s.append(ref);
         }
@@ -542,8 +541,7 @@ public final class UrlUtils {
         }
 
         final StringBuilder s = new StringBuilder(len);
-        s.append(protocol);
-        s.append(":");
+        s.append(protocol).append(':');
         if (authority != null && !authority.isEmpty()) {
             s.append("//");
             s.append(authority);
@@ -557,7 +555,7 @@ public final class UrlUtils {
         }
         if (ref != null) {
             if (ref.isEmpty() || ref.charAt(0) != '#') {
-                s.append("#");
+                s.append('#');
             }
             s.append(ref);
         }
@@ -1085,17 +1083,16 @@ public final class UrlUtils {
      */
     public static String normalize(final URL url) {
         final StringBuilder result = new StringBuilder();
-
-        result.append(url.getProtocol());
-        result.append("://");
-        result.append(url.getHost());
-        result.append(':');
-        result.append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
+        result.append(url.getProtocol())
+                .append("://")
+                .append(url.getHost())
+                .append(':')
+                .append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
 
         // Compare the files.
         String f = url.getFile();
         if (f.isEmpty()) {
-            result.append("/");
+            result.append('/');
         }
         else {
             if (f.indexOf('.') > 0) {
