@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -137,7 +137,7 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF52)
     public void form() throws Exception {
         test("form.html");
     }
