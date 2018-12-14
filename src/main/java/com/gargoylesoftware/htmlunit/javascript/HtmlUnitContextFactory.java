@@ -59,7 +59,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private Debugger debugger_;
     private final ErrorReporter errorReporter_;
     private final WrapFactory wrapFactory_ = new HtmlUnitWrapFactory();
-    private boolean deminifyFunctionCode_ = false;
+    private boolean deminifyFunctionCode_;
 
     /**
      * Creates a new instance of HtmlUnitContextFactory.

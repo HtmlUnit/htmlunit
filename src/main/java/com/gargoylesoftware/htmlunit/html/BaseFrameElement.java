@@ -55,9 +55,9 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
     private FrameWindow enclosedWindow_;
-    private boolean contentLoaded_ = false;
-    private boolean createdByJavascript_ = false;
-    private boolean loadSrcWhenAddedToPage_ = false;
+    private boolean contentLoaded_;
+    private boolean createdByJavascript_;
+    private boolean loadSrcWhenAddedToPage_;
 
     /**
      * Creates an instance of BaseFrame.

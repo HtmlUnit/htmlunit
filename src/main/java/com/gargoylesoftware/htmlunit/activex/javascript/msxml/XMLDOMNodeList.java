@@ -78,7 +78,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
     /**
      * IE provides a way of enumerating through some element collections; this counter supports that functionality.
      */
-    private int currentIndex_ = 0;
+    private int currentIndex_;
 
     /**
      * Creates an instance.

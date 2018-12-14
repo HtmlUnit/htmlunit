@@ -38,9 +38,9 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
     private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
 
-    private volatile boolean shutdown_ = false;
+    private volatile boolean shutdown_;
 
-    private transient Thread eventLoopThread_ = null;
+    private transient Thread eventLoopThread_;
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptExecutor.class);

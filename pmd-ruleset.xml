@@ -13,6 +13,7 @@
         <exclude name="AtLeastOneConstructor"/>
         <exclude name="AvoidFinalLocalVariable"/>
         <exclude name="AtLeastOneConstructor"/>
+        <exclude name="CallSuperInConstructor"/>
         <exclude name="ClassNamingConventions"/>
         <exclude name="CommentDefaultAccessModifier"/>
         <exclude name="FieldNamingConventions"/>
@@ -20,6 +21,7 @@
         <exclude name="MethodNamingConventions"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="TooManyStaticImports"/>
+        <exclude name="UnnecessaryLocalBeforeReturn"/>
         <exclude name="UseUnderscoresInNumericLiterals"/>
         <exclude name="UnnecessaryConstructor"/>
         <exclude name="UselessParentheses"/>
@@ -43,7 +45,11 @@
     </rule>
 
     <rule ref="category/java/multithreading.xml" />
-    <rule ref="category/java/performance.xml" />
+
+    <rule ref="category/java/performance.xml">
+        <exclude name="AvoidUsingShortType"/>
+    </rule>
+
     <rule ref="category/java/security.xml" />
 
 </ruleset>

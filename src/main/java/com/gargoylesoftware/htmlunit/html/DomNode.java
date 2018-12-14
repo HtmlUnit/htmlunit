@@ -1336,7 +1336,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected class ChildIterator implements Iterator<DomNode> {
 
         private DomNode nextNode_ = firstChild_;
-        private DomNode currentNode_ = null;
+        private DomNode currentNode_;
 
         /** {@inheritDoc} */
         @Override

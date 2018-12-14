@@ -56,7 +56,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<>();
 
-    private transient JavaScriptJob currentlyRunningJob_ = null;
+    private transient JavaScriptJob currentlyRunningJob_;
 
     /** A counter used to generate the IDs assigned to {@link JavaScriptJob}s. */
     private static final AtomicInteger NEXT_JOB_ID_ = new AtomicInteger(1);

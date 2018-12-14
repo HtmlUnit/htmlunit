@@ -162,6 +162,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
+    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
+    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
+            "style",
+            "class",
+            "height",
+            "width"));
+
     /** To be documented. */
     @JsxConstant(CHROME)
     public static final short TEMPORARY = 0;
@@ -1969,13 +1976,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public int getMozPaintCount() {
         return 0;
     }
-
-    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
-    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
-            "style",
-            "class",
-            "height",
-            "width"));
 
     private static final class Filter {
         private final boolean includeFormFields_;

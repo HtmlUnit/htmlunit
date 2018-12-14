@@ -43,7 +43,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
 
     private final org.w3c.dom.NamedNodeMap attributes_;
 
-    private int currentIndex_ = 0;
+    private int currentIndex_;
 
     /**
      * Creates an instance.

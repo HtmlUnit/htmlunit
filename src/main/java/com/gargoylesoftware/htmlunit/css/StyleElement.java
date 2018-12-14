@@ -39,7 +39,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     public static final String PRIORITY_IMPORTANT = "important";
 
     /** The current style element index. */
-    private static long ElementIndex_ = 0;
+    private static long ElementIndex_;
 
     private final String name_;
     private final String value_;

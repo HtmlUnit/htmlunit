@@ -303,6 +303,6 @@ class InsecureTrustManager extends X509ExtendedTrustManager {
         if (acceptedIssuers_.isEmpty()) {
             return new X509Certificate[0];
         }
-        return acceptedIssuers_.toArray(new X509Certificate[acceptedIssuers_.size()]);
+        return acceptedIssuers_.toArray(new X509Certificate[0]);
     }
 }
