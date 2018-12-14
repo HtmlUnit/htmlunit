@@ -447,7 +447,7 @@ public class HTMLDocument extends Document {
                 message.append(StringUtils.abbreviateMiddle(content, ".", 100));
                 message.append("' (scriptTagCount: " + scriptTagCount);
                 message.append(" tagState: " + tagState);
-                message.append(")");
+                message.append(')');
                 LOG.debug(message.toString());
             }
             return false;
@@ -493,7 +493,7 @@ public class HTMLDocument extends Document {
             }
             if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
                 builder.append(cookie.getName());
-                builder.append("=");
+                builder.append('=');
             }
             builder.append(cookie.getValue());
         }

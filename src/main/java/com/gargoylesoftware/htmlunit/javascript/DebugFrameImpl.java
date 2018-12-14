@@ -79,7 +79,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
 
             final String line = getFirstLine(cx);
             final String source = getSourceName(cx);
-            sb.append(source).append(":").append(line).append(" ");
+            sb.append(source).append(':').append(line).append(' ');
 
             Scriptable parent = activation.getParentScope();
             while (parent != null) {
@@ -87,7 +87,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                 parent = parent.getParentScope();
             }
             final String functionName = getFunctionName(thisObj);
-            sb.append(functionName).append("(");
+            sb.append(functionName).append('(');
             final int nbParams = functionOrScript_.getParamCount();
             for (int i = 0; i < nbParams; i++) {
                 final String argAsString;
@@ -102,7 +102,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                     sb.append(", ");
                 }
             }
-            sb.append(")");
+            sb.append(')');
 
             LOG.trace(sb);
         }

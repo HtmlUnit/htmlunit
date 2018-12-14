@@ -567,7 +567,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
             if (builder.length() != 0) {
-                builder.append(" ");
+                builder.append(' ');
             }
             builder.append(e.getName());
             builder.append(": ");
@@ -578,7 +578,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 builder.append(" !");
                 builder.append(prio);
             }
-            builder.append(";");
+            builder.append(';');
         }
         final String value = builder.toString();
         setAttribute("style", value);

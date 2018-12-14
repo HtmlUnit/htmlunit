@@ -298,7 +298,7 @@ public class URLSearchParams extends SimpleScriptable {
             paramStr.append(delim);
             delim = "&";
             paramStr.append(param.getKey());
-            paramStr.append("=");
+            paramStr.append('=');
             // TODO: need to encode value
             final String value = param.getValue();
             if (value != null) {

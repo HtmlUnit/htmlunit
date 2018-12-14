@@ -321,7 +321,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             bduiler.append("'" + header.getName() + "': '" + escapeJSString(header.getValue()) + "', ");
         }
         bduiler.delete(bduiler.length() - 2, bduiler.length());
-        bduiler.append("}");
+        bduiler.append('}');
         return bduiler.toString();
     }
 

@@ -572,7 +572,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
                 builder.append(currentOption.asText());
             }
             if (i.hasNext()) {
-                builder.append("\n");
+                builder.append('\n');
             }
         }
 

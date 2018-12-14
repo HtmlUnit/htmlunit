@@ -214,7 +214,7 @@ public class XMLSerializer extends SimpleScriptable {
                 builder.append(optionalPrefix);
                 if (builder.charAt(builder.length() - 1) != ' '
                     && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING)) {
-                    builder.append(" ");
+                    builder.append(' ');
                 }
                 builder.append("/>");
             }

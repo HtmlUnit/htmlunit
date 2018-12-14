@@ -96,7 +96,7 @@ class SimpleHTMLParserListener implements HTMLParserListener {
         if (null != html) {
             builder.append(" htmlSnippet: '")
                     .append(html)
-                    .append("'");
+                    .append('\'');
         }
         builder.append(')');
         return builder.toString();

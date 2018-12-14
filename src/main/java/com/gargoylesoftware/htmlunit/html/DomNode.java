@@ -925,7 +925,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 // because this is a strange case we like to provide as many info as possible
                 msg.append(" class: '");
                 msg.append(page.getClass().getName());
-                msg.append("'");
+                msg.append('\'');
                 try {
                     msg.append(" url: '").append(page.getUrl()).append('\'');
                     msg.append(" content: ");

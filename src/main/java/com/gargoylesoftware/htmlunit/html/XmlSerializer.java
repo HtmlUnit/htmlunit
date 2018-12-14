@@ -112,7 +112,7 @@ class XmlSerializer {
                 builder_.append("/>").append('\n');
             }
             else {
-                builder_.append(">").append('\n');
+                builder_.append('>').append('\n');
                 for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
                     indent_.append("  ");
                     if (child instanceof DomElement) {
@@ -170,7 +170,7 @@ class XmlSerializer {
         final Map<String, DomAttr> attributes = readAttributes(node);
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            builder_.append(" ");
+            builder_.append(' ');
             builder_.append(entry.getKey());
             builder_.append("=\"");
             final String value = entry.getValue().getNodeValue();

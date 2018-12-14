@@ -179,7 +179,7 @@ public class DOMTokenList extends SimpleScriptable {
             if (from > 0) {
                 result.append(value, 0, from);
                 if (to < value.length()) {
-                    result.append(" ");
+                    result.append(' ');
                 }
             }
             result.append(value, to, value.length());
