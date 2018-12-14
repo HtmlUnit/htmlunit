@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.BindException;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -62,7 +63,25 @@ public class MiniServer extends Thread {
     @Override
     public void run() {
         try {
-            serverSocket_ = new ServerSocket(port_);
+            final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
+            while (true) {
+                try {
+                    serverSocket_ = new ServerSocket(port_);
+                    break;
+                }
+                catch (final BindException e) {
+                    if (System.currentTimeMillis() > maxWait) {
+                        throw (BindException) new BindException("Port " + port_ + " is already in use").initCause(e);
+                    }
+                    try {
+                        Thread.sleep(200);
+                    }
+                    catch (final InterruptedException ie) {
+                        LOG.error(ie.getMessage(), ie);
+                    }
+                }
+            }
+
             started_.set(true);
             LOG.info("Starting listening on port " + port_);
             while (!shutdown_) {
@@ -154,7 +173,9 @@ public class MiniServer extends Thread {
      */
     public void shutDown() throws InterruptedException, IOException {
         shutdown_ = true;
-        serverSocket_.close();
+        if (serverSocket_ != null) {
+            serverSocket_.close();
+        }
         interrupt();
         join(5000);
     }
