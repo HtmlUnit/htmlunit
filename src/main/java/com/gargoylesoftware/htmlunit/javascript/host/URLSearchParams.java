@@ -86,8 +86,8 @@ public class URLSearchParams extends SimpleScriptable {
 
         // TODO: encoding
         final String[] parts = StringUtils.split(params, '&');
-        for (int i = 0; i < parts.length; i++) {
-            params_.add(splitQueryParameter(parts[i]));
+        for (String part : parts) {
+            params_.add(splitQueryParameter(part));
         }
     }
 

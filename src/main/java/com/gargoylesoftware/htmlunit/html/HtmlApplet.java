@@ -276,9 +276,8 @@ public class HtmlApplet extends HtmlElement {
             final List<URL> archiveUrls = new LinkedList<>();
             String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
-                for (int i = 0; i < archives.length; i++) {
-                    final String tmpArchive = archives[i].trim();
-                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                for (String tmpArchive : archives) {
+                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                     appletClassLoader.addArchiveToClassPath(archiveUrl);
@@ -287,9 +286,8 @@ public class HtmlApplet extends HtmlElement {
             }
             archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
             if (null != archives) {
-                for (int i = 0; i < archives.length; i++) {
-                    final String tmpArchive = archives[i].trim();
-                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive);
+                for (String tmpArchive : archives) {
+                    final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
                     final URL archiveUrl = UrlUtils.toUrlUnsafe(tempUrl);
 
                     appletClassLoader.addArchiveToClassPath(archiveUrl);

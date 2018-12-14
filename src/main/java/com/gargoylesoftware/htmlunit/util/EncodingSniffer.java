@@ -1010,8 +1010,8 @@ public final class EncodingSniffer {
         for (int x = 0; x < sought.length; x++) {
             final byte[] possibilities = sought[x];
             boolean match = false;
-            for (int y = 0; y < possibilities.length; y++) {
-                if (bytes[i + x] == possibilities[y]) {
+            for (byte possibility : possibilities) {
+                if (bytes[i + x] == possibility) {
                     match = true;
                     break;
                 }

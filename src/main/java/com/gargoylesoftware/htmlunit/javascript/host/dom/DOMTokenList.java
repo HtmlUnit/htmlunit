@@ -86,8 +86,8 @@ public class DOMTokenList extends SimpleScriptable {
         final String[] parts = StringUtils.split(value, whitespaceChars());
         if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
             final HashSet<String> elements = new HashSet<>(parts.length);
-            for (int i = 0; i < parts.length; i++) {
-                elements.add(parts[i]);
+            for (String part : parts) {
+                elements.add(part);
             }
             return elements.size();
         }
