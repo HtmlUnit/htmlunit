@@ -108,6 +108,7 @@ public class BackgroundJavaScriptFactory {
         return new BasicJavaScriptJob(initialDelay, period) {
             @Override
             public void run() {
+                super.run();
                 runnable.run();
             }
         };

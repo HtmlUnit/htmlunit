@@ -33,6 +33,8 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
 
     private final boolean executeAsap_;
 
+    private long threadId_ = -1;
+
     /**
      * The time at which this job should be executed.
      * Note: the browser will make its best effort to execute the job at the target
@@ -157,4 +159,14 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
         targetExecutionTime_ = targetExecutionTime;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public long getExecutingThreadId() {
+        return threadId_;
+    }
+
+    @Override
+    public void run() {
+        threadId_ = Thread.currentThread().getId();
+    }
 }

@@ -358,6 +358,7 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void run() {
+                super.run();
                 final Context cx = Context.enter();
                 try {
                     Function toExecute = null;

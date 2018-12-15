@@ -83,6 +83,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(100)) {
             @Override
             public void run() {
+                super.run();
                 count.increment();
             }
         };
@@ -105,6 +106,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(5, Integer.valueOf(200)) {
             @Override
             public void run() {
+                super.run();
                 if (count.intValue() == 0) {
                     try {
                         Thread.sleep(200);
@@ -135,6 +137,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(5, null) {
             @Override
             public void run() {
+                super.run();
                 count.increment();
             }
         };
@@ -154,6 +157,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
             @Override
             public void run() {
+                super.run();
                 count.increment();
                 if (count.intValue() >= 5) {
                     manager_.removeJob(id.intValue());
@@ -174,6 +178,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(50, Integer.valueOf(50)) {
             @Override
             public void run() {
+                super.run();
                 count.increment();
                 if (count.intValue() >= 5) {
                     manager_.removeAllJobs();
@@ -194,6 +199,7 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job = new BasicJavaScriptJob(50, null) {
             @Override
             public void run() {
+                super.run();
                 count.setValue(manager_.getJobCount());
             }
         };
@@ -209,6 +215,7 @@ public class JavaScriptJobManagerMinimalTest {
             // Long job
             @Override
             public void run() {
+                super.run();
                 try {
                     Thread.sleep(500);
                 }
@@ -253,13 +260,15 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job1 = new BasicJavaScriptJob(50, null) {
             @Override
             public void run() {
-            // Empty.
+                super.run();
+                // Empty.
             }
         };
         final JavaScriptJob job2 = new BasicJavaScriptJob(1000, null) {
             @Override
             public void run() {
-            // Empty.
+                super.run();
+                // Empty.
             }
         };
         assertEquals(0, manager_.getJobCount());
@@ -301,6 +310,7 @@ public class JavaScriptJobManagerMinimalTest {
             // This job takes 30ms to complete.
             @Override
             public void run() {
+                super.run();
                 try {
                     Thread.sleep(30);
                 }
@@ -312,7 +322,8 @@ public class JavaScriptJobManagerMinimalTest {
         final JavaScriptJob job2 = new BasicJavaScriptJob(60, null) {
             @Override
             public void run() {
-            // Empty.
+                super.run();
+                // Empty.
             }
         };
         assertEquals(0, manager_.getJobCount());

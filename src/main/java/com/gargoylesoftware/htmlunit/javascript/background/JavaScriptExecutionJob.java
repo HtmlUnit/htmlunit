@@ -58,6 +58,8 @@ abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
     /** {@inheritDoc} */
     @Override
     public void run() {
+        super.run();
+
         final WebWindow w = window_.get();
         if (w == null) {
             // The window has been garbage collected! No need to execute, obviously.
