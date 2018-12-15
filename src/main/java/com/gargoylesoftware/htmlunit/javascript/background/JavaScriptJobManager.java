@@ -76,6 +76,14 @@ public interface JavaScriptJobManager extends Serializable {
     void removeAllJobs();
 
     /**
+     * Removes all jobs from the execution queue.
+     * This waits some time for the currently running job to canesl
+     * @param timeoutMillis the max wait time for the job to finish
+     * @return true if the job is cancelled, false if still running
+     */
+    boolean removeAllJobs(long timeoutMillis);
+
+    /**
      * Stops the specified job and removes it from the execution queue, not even allowing the job to finish if it is
      * currently executing.
      * @param id the ID of the job to be stopped
