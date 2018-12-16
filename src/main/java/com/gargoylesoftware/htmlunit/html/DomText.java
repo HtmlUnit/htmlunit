@@ -225,4 +225,12 @@ public class DomText extends DomCharacterData implements Text {
         initDoTypeProcessor();
         selectionDelegate_.setSelectionStart(getData().length());
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
+    }
 }

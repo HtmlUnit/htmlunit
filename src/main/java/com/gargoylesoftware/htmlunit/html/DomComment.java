@@ -81,4 +81,12 @@ public class DomComment extends DomCharacterData implements Comment {
     public String toString() {
         return asXml();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
+    }
 }
