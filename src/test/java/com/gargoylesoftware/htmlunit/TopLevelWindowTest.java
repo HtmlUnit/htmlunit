@@ -127,11 +127,6 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
             }
             /** {@inheritDoc} */
             @Override
-            public boolean removeAllJobs(final long timeoutMillis) {
-                return false;
-            }
-            /** {@inheritDoc} */
-            @Override
             public int getJobCount() {
                 return jobCount.intValue();
             }

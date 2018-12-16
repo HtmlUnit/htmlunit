@@ -201,8 +201,7 @@ public abstract class WebWindowImpl implements WebWindow {
         if (LOG.isDebugEnabled()) {
             LOG.debug("destroyChildren");
         }
-        // improve the timeout handling here
-        getJobManager().removeAllJobs(Math.max(60_000, getWebClient().getJavaScriptTimeout()));
+        getJobManager().removeAllJobs();
 
         // try to deal with js thread adding a new window in between
         while (!childWindows_.isEmpty()) {

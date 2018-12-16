@@ -180,38 +180,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     /** {@inheritDoc} */
     @Override
-    public synchronized boolean removeAllJobs(final long timeoutMillis) {
-        if (currentlyRunningJob_ != null) {
-            cancelledJobs_.add(currentlyRunningJob_.getId());
-        }
-        for (final JavaScriptJob job : scheduledJobsQ_) {
-            cancelledJobs_.add(job.getId());
-        }
-        scheduledJobsQ_.clear();
-
-        if (currentlyRunningJob_ != null) {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("Waiting for the current job to finish (will wait max " + timeoutMillis + " millis).");
-            }
-
-            final long end = System.currentTimeMillis() + timeoutMillis;
-            synchronized (this) {
-                while (currentlyRunningJob_ != null && System.currentTimeMillis() < end) {
-                    try {
-                        wait(50);
-                    }
-                    catch (final InterruptedException e) {
-                        LOG.error("InterruptedException while in currentlyRunningJob_", e);
-                    }
-                }
-            }
-        }
-        notify();
-        return currentlyRunningJob_ != null;
-    }
-
-    /** {@inheritDoc} */
-    @Override
     public int waitForJobs(final long timeoutMillis) {
         final boolean debug = LOG.isDebugEnabled();
         if (debug) {
