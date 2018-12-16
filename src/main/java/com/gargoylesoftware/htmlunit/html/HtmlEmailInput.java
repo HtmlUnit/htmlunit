@@ -51,6 +51,14 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(String newValue) {
         if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
             newValue = "";

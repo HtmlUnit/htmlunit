@@ -54,6 +54,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected boolean isSubmittableByEnter() {
         return true;
     }

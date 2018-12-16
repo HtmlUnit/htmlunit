@@ -42,6 +42,14 @@ public class HtmlRangeInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(final String newValue) {
         try {
             final int value = Integer.parseInt(newValue);

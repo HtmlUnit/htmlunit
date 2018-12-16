@@ -181,6 +181,14 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
      * @see HtmlInput#reset()
      */
     @Override

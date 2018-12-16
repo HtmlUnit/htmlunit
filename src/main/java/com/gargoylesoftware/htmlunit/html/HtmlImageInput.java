@@ -168,6 +168,14 @@ public class HtmlImageInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
      * {@inheritDoc} Also sets the value to the new default value, just like IE.
      * @see SubmittableElement#setDefaultValue(String)
      */

@@ -419,18 +419,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * {@inheritDoc} The default implementation is empty; only checkboxes and radio buttons
-     * really care what the default checked value is.
-     * @see SubmittableElement#setDefaultChecked(boolean)
-     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
-     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
-     */
-    @Override
-    public void setDefaultChecked(final boolean defaultChecked) {
-        // Empty.
-    }
-
-    /**
      * {@inheritDoc} The default implementation returns {@code false}; only checkboxes and
      * radio buttons really care what the default checked value is.
      * @see SubmittableElement#isDefaultChecked()

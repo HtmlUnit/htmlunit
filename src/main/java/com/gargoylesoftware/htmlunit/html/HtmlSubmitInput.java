@@ -95,6 +95,14 @@ public class HtmlSubmitInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
      * {@inheritDoc} This method <b>does nothing</b> for submit input elements.
      * @see SubmittableElement#reset()
      */

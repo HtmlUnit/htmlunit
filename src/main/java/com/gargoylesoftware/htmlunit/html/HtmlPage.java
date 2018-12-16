@@ -2546,4 +2546,20 @@ public class HtmlPage extends SgmlPage {
             originalCharset_ = Charset.forName(charsetName);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
+    }
 }

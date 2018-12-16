@@ -177,6 +177,14 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(final String newValue) {
         try {
             if (!newValue.isEmpty()) {

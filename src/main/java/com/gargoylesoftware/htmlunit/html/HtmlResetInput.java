@@ -91,6 +91,14 @@ public class HtmlResetInput extends HtmlInput {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
      * {@inheritDoc} This method <b>does nothing</b> for reset input elements.
      * @see SubmittableElement#reset()
      */

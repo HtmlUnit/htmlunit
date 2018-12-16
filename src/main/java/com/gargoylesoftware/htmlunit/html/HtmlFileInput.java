@@ -89,6 +89,14 @@ public class HtmlFileInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NameValuePair[] getSubmitNameValuePairs() {
         if (files_ == null || files_.length == 0) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, (Charset) null)};

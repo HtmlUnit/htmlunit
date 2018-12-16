@@ -71,6 +71,14 @@ public class HtmlHiddenInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean mayBeDisplayed() {
         return false;
     }

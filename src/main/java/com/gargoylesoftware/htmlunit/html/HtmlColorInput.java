@@ -48,6 +48,14 @@ public class HtmlColorInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(final String newValue) {
         if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START) || isValid(newValue)) {
             super.setValueAttribute(newValue);

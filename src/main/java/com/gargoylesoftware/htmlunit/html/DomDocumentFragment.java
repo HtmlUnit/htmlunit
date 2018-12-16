@@ -75,4 +75,20 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     public boolean isAttachedToPage() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
+    }
 }

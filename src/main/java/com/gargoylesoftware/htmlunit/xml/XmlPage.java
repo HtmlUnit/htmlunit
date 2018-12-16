@@ -157,6 +157,14 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
+    public void initialize() throws IOException {
+        // nothing to do here
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean hasCaseSensitiveTagNames() {
         return true;
     }
@@ -377,5 +385,21 @@ public class XmlPage extends SgmlPage {
     @Override
     protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
     }
 }

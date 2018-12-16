@@ -20,6 +20,7 @@
         <exclude name="LongVariable"/>
         <exclude name="MethodNamingConventions"/>
         <exclude name="OnlyOneReturn"/>
+        <exclude name="ShortVariable"/>
         <exclude name="TooManyStaticImports"/>
         <exclude name="UnnecessaryLocalBeforeReturn"/>
         <exclude name="UseUnderscoresInNumericLiterals"/>

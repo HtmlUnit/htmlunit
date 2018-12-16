@@ -435,14 +435,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    public void setPrefix(final String prefix) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean hasChildNodes() {
         return firstChild_ != null;
     }
@@ -865,14 +857,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     @Override
     public String getNodeValue() {
         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setNodeValue(final String value) {
-        // Default behavior is to do nothing, overridden in some subclasses
     }
 
     /**

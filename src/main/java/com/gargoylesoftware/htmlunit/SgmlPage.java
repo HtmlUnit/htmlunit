@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Comparator;
@@ -86,14 +85,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     @Override
     public WebResponse getWebResponse() {
         return webResponse_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initialize() throws IOException {
-        // nothing to do here
     }
 
     /**

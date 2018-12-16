@@ -47,6 +47,14 @@ public class HtmlDateInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(final String newValue) {
         try {
             if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {

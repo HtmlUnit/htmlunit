@@ -1504,6 +1504,14 @@ public class DomElement extends DomNamespaceNode implements Element {
             throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
 }
 
 /**
@@ -1743,5 +1751,4 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public Collection<DomAttr> values() {
         return map_.values();
     }
-
 }

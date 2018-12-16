@@ -121,4 +121,11 @@ public class DomProcessingInstruction extends DomNode implements ProcessingInstr
         printWriter.print("?>");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
+    }
 }
