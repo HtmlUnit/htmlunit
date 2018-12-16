@@ -116,7 +116,7 @@ public final class HeaderUtils {
         if (value != null) {
             final Matcher matcher = pattern.matcher(value);
             if (matcher.matches()) {
-                return Long.valueOf(matcher.group(1));
+                return Long.parseLong(matcher.group(1));
             }
         }
 
