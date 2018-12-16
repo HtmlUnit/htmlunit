@@ -1621,23 +1621,26 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     public void setIntervalShouldNotBeExecutedBeforeHandlers() throws Exception {
         final String html
-            = "<html><body><script>\n"
-            + "var id;\n"
-            + "function stop() {\n"
-            + "  window.stopIt = true;\n"
-            + "  clearInterval(id);\n"
-            + "}\n"
-            + "for (var i = 0; i < 1000; i++) {\n"
-            + "  var handler = function(e) {\n"
-            + "    if (window.stopIt) {\n"
-            + "      e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
-            + "    }\n"
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  var id;\n"
+
+            + "  function stop() {\n"
+            + "    window.stopIt = true;\n"
+            + "    clearInterval(id);\n"
             + "  }\n"
-            + "  window.addEventListener('click', handler, false);\n"
-            + "}\n"
+
+            + "  for (var i = 0; i < 1000; i++) {\n"
+            + "    var handler = function(e) {\n"
+            + "      if (window.stopIt) {\n"
+            + "        e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
+            + "      }\n"
+            + "    }\n"
+            + "    window.addEventListener('click', handler, false);\n"
+            + "  }\n"
             + "</script>\n"
             + "<form action='page2' method='post'>\n"
-            + "<input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
+            + "  <input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
             + "</form>\n"
             + "</body></html>";
 
