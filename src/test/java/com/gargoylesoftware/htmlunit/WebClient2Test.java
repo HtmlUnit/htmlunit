@@ -281,7 +281,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "<body>\n"
             + "  <script>\n"
             + "    function loadExtraContent() {\n"
-            + "      for (var i = 0; i < 100; i++) {\n"
+            + "      for (var i = 0; i < 1000; i++) {\n"
             + "        var p = document.createElement('p');\n"
             + "        p.innerHTML = 'new content';\n"
             + "        var body = document.querySelector('body');\n"
@@ -314,10 +314,10 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // Load page 1. Has a setTimeout(...) function
         HtmlPage page = client.getPage(URL_FIRST);
+        Thread.sleep(100);
 
         // Immediately load page 2. Timeout function was triggered already
         page = client.getPage(URL_SECOND);
-
         client.waitForBackgroundJavaScriptStartingBefore(100);
 
         // Fails: return 98 (about) instead of 1
