@@ -105,7 +105,7 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     public void setSrc(final String src) {
         final HtmlElement img = getDomNodeOrDie();
-        img.setAttribute("src", src);
+        img.setAttribute(DomElement.SRC_ATTRIBUTE, src);
     }
 
     /**

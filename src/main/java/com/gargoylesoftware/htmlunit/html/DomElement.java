@@ -76,6 +76,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     private static final Log LOG = LogFactory.getLog(DomElement.class);
 
+    /** src. */
+    public static final String SRC_ATTRIBUTE = "src";
+
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
 

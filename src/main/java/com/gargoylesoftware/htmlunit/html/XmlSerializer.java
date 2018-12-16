@@ -207,8 +207,8 @@ class XmlSerializer {
     }
 
     private Map<String, DomAttr> getAttributesFor(final BaseFrameElement frame) throws IOException {
-        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, "src");
-        final DomAttr srcAttr = map.get("src");
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, DomElement.SRC_ATTRIBUTE);
+        final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
         if (srcAttr == null) {
             return map;
         }
@@ -267,8 +267,8 @@ class XmlSerializer {
     }
 
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
-        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
-        final DomAttr srcAttr = map.get("src");
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, DomElement.SRC_ATTRIBUTE);
+        final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
         if (srcAttr != null && StringUtils.isNotBlank(srcAttr.getValue())) {
             final WebResponse response = image.getWebResponse(true);
 

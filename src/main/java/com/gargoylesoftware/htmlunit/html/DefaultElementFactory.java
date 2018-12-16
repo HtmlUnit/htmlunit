@@ -356,7 +356,7 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlFrame.TAG_NAME:
                 if (attributeMap != null) {
-                    final DomAttr srcAttribute = attributeMap.get("src");
+                    final DomAttr srcAttribute = attributeMap.get(DomElement.SRC_ATTRIBUTE);
                     if (srcAttribute != null) {
                         srcAttribute.setValue(srcAttribute.getValue().trim());
                     }
@@ -415,7 +415,7 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlInlineFrame.TAG_NAME:
                 if (attributeMap != null) {
-                    final DomAttr srcAttribute = attributeMap.get("src");
+                    final DomAttr srcAttribute = attributeMap.get(DomElement.SRC_ATTRIBUTE);
                     if (srcAttribute != null) {
                         srcAttribute.setValue(srcAttribute.getValue().trim());
                     }

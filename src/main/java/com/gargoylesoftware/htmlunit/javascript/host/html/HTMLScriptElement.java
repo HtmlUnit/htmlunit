@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -82,7 +83,7 @@ public class HTMLScriptElement extends HTMLElement {
      */
     @JsxSetter
     public void setSrc(final String src) {
-        getDomNodeOrDie().setAttribute("src", src);
+        getDomNodeOrDie().setAttribute(DomElement.SRC_ATTRIBUTE, src);
     }
 
     /**

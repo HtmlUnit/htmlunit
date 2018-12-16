@@ -344,7 +344,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @param attribute the new value of the {@code src} attribute
      */
     public final void setSrcAttribute(final String attribute) {
-        setAttribute("src", attribute);
+        setAttribute(SRC_ATTRIBUTE, attribute);
     }
 
     /**
@@ -353,14 +353,14 @@ public abstract class BaseFrameElement extends HtmlElement {
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObserver) {
-        if (null != attributeValue && "src".equals(qualifiedName)) {
+        if (null != attributeValue && SRC_ATTRIBUTE.equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObserver);
 
-        if ("src".equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
@@ -377,13 +377,13 @@ public abstract class BaseFrameElement extends HtmlElement {
     public Attr setAttributeNode(final Attr attribute) {
         final String qualifiedName = attribute.getName();
         String attributeValue = null;
-        if ("src".equals(qualifiedName)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName)) {
             attributeValue = attribute.getValue().trim();
         }
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }

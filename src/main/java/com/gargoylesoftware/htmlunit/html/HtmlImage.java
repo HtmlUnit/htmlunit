@@ -130,7 +130,7 @@ public class HtmlImage extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
                 super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
@@ -198,7 +198,7 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute("src")) {
+        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
             onloadProcessed_ = true;
             boolean loadSuccessful = false;
             if (!getSrcAttribute().isEmpty()) {

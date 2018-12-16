@@ -197,7 +197,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         // special additional processing for the 'src'
-        if (namespaceURI != null || !"src".equals(qualifiedName)) {
+        if (namespaceURI != null || !SRC_ATTRIBUTE.equals(qualifiedName)) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
