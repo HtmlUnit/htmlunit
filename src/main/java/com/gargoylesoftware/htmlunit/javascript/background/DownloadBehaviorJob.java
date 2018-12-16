@@ -62,8 +62,6 @@ final class DownloadBehaviorJob extends BasicJavaScriptJob {
      */
     @Override
     public void run() {
-        super.run();
-
         final Scriptable scope = callback_.getParentScope();
         final WebRequest request = new WebRequest(url_);
         try {

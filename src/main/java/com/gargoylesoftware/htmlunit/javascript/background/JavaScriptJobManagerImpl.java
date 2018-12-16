@@ -189,8 +189,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         scheduledJobsQ_.clear();
 
-        if (currentlyRunningJob_ != null
-                && currentlyRunningJob_.getExecutingThreadId() != Thread.currentThread().getId()) {
+        if (currentlyRunningJob_ != null) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Waiting for the current job to finish (will wait max " + timeoutMillis + " millis).");
             }
@@ -205,11 +204,6 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                         LOG.error("InterruptedException while in currentlyRunningJob_", e);
                     }
                 }
-            }
-
-            if (currentlyRunningJob_ != null) {
-                throw new RuntimeException(
-                        "Waiting for the current job did not finisch finish (wait max " + timeoutMillis + " millis).");
             }
         }
         notify();

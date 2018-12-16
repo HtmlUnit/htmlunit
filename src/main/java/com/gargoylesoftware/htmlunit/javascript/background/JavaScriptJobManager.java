@@ -77,7 +77,7 @@ public interface JavaScriptJobManager extends Serializable {
 
     /**
      * Removes all jobs from the execution queue.
-     * This waits some time for the currently running job to cancel.
+     * This waits some time for the currently running job to canesl
      * @param timeoutMillis the max wait time for the job to finish
      * @return true if the job is cancelled, false if still running
      */

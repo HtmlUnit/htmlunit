@@ -33,8 +33,6 @@ final class JavascriptXMLHttpRequestJob extends BasicJavaScriptJob {
 
     @Override
     public void run() {
-        super.run();
-
         contextFactory_.call(action_);
     }
 

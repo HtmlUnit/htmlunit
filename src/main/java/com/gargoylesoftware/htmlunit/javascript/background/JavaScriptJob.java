@@ -64,10 +64,4 @@ public interface JavaScriptJob extends Runnable, Comparable<JavaScriptJob> {
      * @return {@code true} if has to be executed ASAP
      */
     boolean isExecuteAsap();
-
-    /**
-     * Returns the thread that processes this.
-     * @return the thread id
-     */
-    long getExecutingThreadId();
 }
