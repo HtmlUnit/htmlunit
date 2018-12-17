@@ -618,11 +618,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
-        for (final String propertyName : propertyMap.keySet()) {
-            final PropertyInfo info = propertyMap.get(propertyName);
+        for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
+            final PropertyInfo info = propertyEntry.getValue();
             final Method readMethod = info.getReadMethod();
             final Method writeMethod = info.getWriteMethod();
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
+            scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
     }
 
