@@ -1678,7 +1678,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void setIncorrectnessListener(final IncorrectnessListener listener) {
         if (listener == null) {
-            throw new NullPointerException("Null incorrectness listener.");
+            throw new IllegalArgumentException("Null is not a valid IncorrectnessListener");
         }
         incorrectnessListener_ = listener;
     }
@@ -1708,7 +1708,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void setAjaxController(final AjaxController newValue) {
         if (newValue == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException("Null is not a valid AjaxController");
         }
         ajaxController_ = newValue;
     }

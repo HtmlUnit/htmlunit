@@ -597,13 +597,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
-        final BrowserVersion browser = getBrowserVersion();
-        if (browser.hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                && "about".equals(newUrl.getProtocol())) {
-            return false;
-        }
-
-        return true;
+        return !(getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
+                    && "about".equals(newUrl.getProtocol()));
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {

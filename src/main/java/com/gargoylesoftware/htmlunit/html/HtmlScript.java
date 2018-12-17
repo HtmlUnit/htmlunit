@@ -462,11 +462,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
 
-        if (!getPage().isAncestorOf(this)) {
-            return false;
-        }
-
-        return true;
+        return getPage().isAncestorOf(this);
     }
 
     /**

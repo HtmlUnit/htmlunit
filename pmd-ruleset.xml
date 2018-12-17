@@ -29,8 +29,10 @@
     </rule>
 
     <rule ref="category/java/design.xml">
+        <exclude name="CyclomaticComplexity"/>
         <exclude name="ExcessiveClassLength"/>
         <exclude name="LawOfDemeter"/>
+        <exclude name="NPathComplexity"/>
     </rule>
 
     <rule ref="category/java/documentation.xml">

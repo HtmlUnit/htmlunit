@@ -63,7 +63,7 @@ public final class XPathUtils {
     @SuppressWarnings("unchecked")
     public static <T> List<T> getByXPath(final DomNode node, final String xpathExpr, final PrefixResolver resolver) {
         if (xpathExpr == null) {
-            throw new NullPointerException("Null is not a valid XPath expression");
+            throw new IllegalArgumentException("Null is not a valid XPath expression");
         }
 
         PROCESS_XPATH_.set(Boolean.TRUE);

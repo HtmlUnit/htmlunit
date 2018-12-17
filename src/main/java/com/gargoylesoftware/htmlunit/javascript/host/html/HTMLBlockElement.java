@@ -97,10 +97,7 @@ public class HTMLBlockElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        if ("KEYGEN".equals(getNodeName()) && getBrowserVersion().hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN)) {
-            return true;
-        }
-        return false;
+        return getBrowserVersion().hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN) && "KEYGEN".equals(getNodeName());
     }
 
     /**

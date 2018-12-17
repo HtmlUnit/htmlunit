@@ -1067,11 +1067,8 @@ public final class UrlUtils {
                 // ignore
             }
         }
-        if (!(f1 == f2 || (f1 != null && f1.equals(f2)))) {
-            return false;
-        }
 
-        return true;
+        return f1 == f2 || (f1 != null && f1.equals(f2));
     }
 
     /**

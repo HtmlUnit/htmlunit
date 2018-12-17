@@ -479,11 +479,8 @@ public class HtmlForm extends HtmlElement {
                 return false;
             }
         }
-        if (HtmlButton.TAG_NAME.equals(tagName)) {
-            return false;
-        }
 
-        return true;
+        return !HtmlButton.TAG_NAME.equals(tagName);
     }
 
     /**
