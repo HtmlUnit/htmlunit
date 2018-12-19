@@ -210,14 +210,16 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             MAX_WIDTH.getAttributeName()
             ));
 
+    static final String NONE = "none";
     static final String AUTO = "auto";
     static final String STATIC = "static";
     static final String INHERIT = "inherit";
     private static final String INITIAL = "initial";
-    private static final String RELATIVE = "relative";
-    private static final String FIXED = "fixed";
-    private static final String ABSOLUTE = "absolute";
+    static final String RELATIVE = "relative";
+    static final String FIXED = "fixed";
+    static final String ABSOLUTE = "absolute";
     private static final String REPEAT = "repeat";
+    static final String BLOCK = "block";
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
@@ -671,7 +673,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
-                    return backgroundInitial && !isComputed ? INITIAL : "none";
+                    return backgroundInitial && !isComputed ? INITIAL : NONE;
                 }
                 if (isComputed) {
                     try {
@@ -2891,7 +2893,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return whether the token is a border style or not
      */
     private static boolean isBorderStyle(final String token) {
-        return "none".equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
+        return NONE.equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
             || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
             || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
             || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)

@@ -486,7 +486,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderRightStyle() {
-        return defaultIfEmpty(super.getBorderRightStyle(), "none", null);
+        return defaultIfEmpty(super.getBorderRightStyle(), NONE, null);
     }
 
     /**
@@ -510,7 +510,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getBorderTopStyle() {
-        return defaultIfEmpty(super.getBorderTopStyle(), "none", null);
+        return defaultIfEmpty(super.getBorderTopStyle(), NONE, null);
     }
 
     /**
@@ -596,7 +596,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         case "table-row-group":
                         case "list-item":
                         case "ruby":
-                            return "block";
+                            return BLOCK;
 
                         default:
                     }
@@ -768,7 +768,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxHeight() {
-        return defaultIfEmpty(super.getMaxHeight(), "none", null);
+        return defaultIfEmpty(super.getMaxHeight(), NONE, null);
     }
 
     /**
@@ -776,7 +776,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getMaxWidth() {
-        return defaultIfEmpty(super.getMaxWidth(), "none", null);
+        return defaultIfEmpty(super.getMaxWidth(), NONE, null);
     }
 
     /**
@@ -930,7 +930,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWidth() {
-        if ("none".equals(getDisplay())) {
+        if (NONE.equals(getDisplay())) {
             return AUTO;
         }
 
@@ -950,7 +950,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             public String get(final ComputedCSSStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
-                    if ("absolute".equals(getStyleAttribute(POSITION, true))) {
+                    if (ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
                         final String content = getDomNodeOrDie().getTextContent();
                         // do this only for small content
                         // at least for empty div's this is more correct
@@ -1018,7 +1018,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final String display = getDisplay();
-        if ("none".equals(display)) {
+        if (NONE.equals(display)) {
             width_ = Integer.valueOf(0);
             return 0;
         }
@@ -1039,11 +1039,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width not explicitly set.
             final String cssFloat = getCssFloat();
             if ("right".equals(cssFloat) || "left".equals(cssFloat)
-                    || "absolute".equals(getStyleAttribute(POSITION, true))) {
+                    || ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = node.getTextContent().length() * getBrowserVersion().getPixesPerChar();
             }
-            else if ("block".equals(display)) {
+            else if (BLOCK.equals(display)) {
                 if (element instanceof HTMLBodyElement) {
                     width = windowWidth - 16;
                 }
@@ -1205,7 +1205,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        if ("none".equals(getDisplay())) {
+        if (NONE.equals(getDisplay())) {
             height2_ = Integer.valueOf(0);
             return 0;
         }
@@ -1302,10 +1302,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement e = (HTMLElement) scriptObj;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String pos = style.getPositionWithInheritance();
-                    if (STATIC.equals(pos) || "relative".equals(pos)) {
+                    if (STATIC.equals(pos) || RELATIVE.equals(pos)) {
                         lastFlowing = style;
                     }
-                    else if ("absolute".equals(pos)) {
+                    else if (ABSOLUTE.equals(pos)) {
                         styles.add(style);
                     }
                 }
@@ -1367,7 +1367,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int top = 0;
         if (null == top_) {
             final String p = getPositionWithInheritance();
-            if ("absolute".equals(p)) {
+            if (ABSOLUTE.equals(p)) {
                 top = getTopForAbsolutePositionWithInheritance();
             }
             else {
@@ -1381,15 +1381,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
                         // only previous block elements are counting
                         final String display = style.getDisplay();
-                        if ("block".equals(display)) {
+                        if (BLOCK.equals(display)) {
                             int prevTop = 0;
                             if (style.top_ == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
-                                if ("absolute".equals(prevPosition)) {
+                                if (ABSOLUTE.equals(prevPosition)) {
                                     prevTop += style.getTopForAbsolutePositionWithInheritance();
                                 }
                                 else {
-                                    if ("relative".equals(prevPosition)) {
+                                    if (RELATIVE.equals(prevPosition)) {
                                         final String t = style.getTopWithInheritance();
                                         prevTop += pixelValue(t);
                                     }
@@ -1408,7 +1408,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     prev = prev.getPreviousSibling();
                 }
                 // If the position is relative, we also need to add the specified "top" displacement.
-                if ("relative".equals(p)) {
+                if (RELATIVE.equals(p)) {
                     final String t = getTopWithInheritance();
                     top += pixelValue(t);
                 }
@@ -1478,24 +1478,24 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String r = getRightWithInheritance();
 
         int left;
-        if ("absolute".equals(p) && !AUTO.equals(l)) {
+        if (ABSOLUTE.equals(p) && !AUTO.equals(l)) {
             // No need to calculate displacement caused by sibling nodes.
             left = pixelValue(l);
         }
-        else if ("absolute".equals(p) && !AUTO.equals(r)) {
+        else if (ABSOLUTE.equals(p) && !AUTO.equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
             final int parentWidth = style.getCalculatedWidth(false, false);
             left = parentWidth - pixelValue(r);
         }
-        else if ("fixed".equals(p) && !AUTO.equals(r)) {
+        else if (FIXED.equals(p) && !AUTO.equals(r)) {
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
             final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
             left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
         }
-        else if ("fixed".equals(p) && AUTO.equals(l)) {
+        else if (FIXED.equals(p) && AUTO.equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
@@ -1515,10 +1515,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement e = (HTMLElement) prevScriptable;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String d = style.getDisplay();
-                    if ("block".equals(d)) {
+                    if (BLOCK.equals(d)) {
                         break;
                     }
-                    else if (!"none".equals(d)) {
+                    else if (!NONE.equals(d)) {
                         left += style.getCalculatedWidth(true, true);
                     }
                 }
@@ -1716,7 +1716,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getPaddingHorizontal() {
         if (paddingHorizontal_ == null) {
             paddingHorizontal_ =
-                Integer.valueOf("none".equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue());
+                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue());
         }
         return paddingHorizontal_.intValue();
     }
@@ -1724,7 +1724,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getPaddingVertical() {
         if (paddingVertical_ == null) {
             paddingVertical_ =
-                Integer.valueOf("none".equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue());
+                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue());
         }
         return paddingVertical_.intValue();
     }
@@ -1764,7 +1764,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getBorderHorizontal() {
         if (borderHorizontal_ == null) {
             borderHorizontal_ =
-                Integer.valueOf("none".equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue());
+                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue());
         }
         return borderHorizontal_.intValue();
     }
@@ -1772,7 +1772,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private int getBorderVertical() {
         if (borderVertical_ == null) {
             borderVertical_ =
-                Integer.valueOf("none".equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue());
+                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue());
         }
         return borderVertical_.intValue();
     }
