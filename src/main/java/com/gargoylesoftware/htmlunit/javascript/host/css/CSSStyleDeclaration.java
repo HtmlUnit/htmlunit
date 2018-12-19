@@ -2996,11 +2996,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (value.length() < 2) {
             return i;
         }
-
         if (value.endsWith("px")) {
-            // nothing to do
+            return i;
         }
-        else if (value.endsWith("em")) {
+
+        if (value.endsWith("em")) {
             i = i * 16;
         }
         else if (value.endsWith("%")) {
