@@ -43,16 +43,16 @@ public class External extends SimpleScriptable {
     /**
      * Empty implementation.
      */
-    @JsxFunction(IE)
-    public void AutoCompleteSaveForm() {
+    @JsxFunction(value = IE, functionName = "AutoCompleteSaveForm")
+    public void autoCompleteSaveForm() {
         // dummy
     }
 
     /**
      * Empty implementation.
      */
-    @JsxFunction
-    public void AddSearchProvider() {
+    @JsxFunction(functionName = "AddSearchProvider")
+    public void addSearchProvider() {
         // dummy
     }
 
@@ -60,8 +60,8 @@ public class External extends SimpleScriptable {
      * Empty implementation.
      * @return 0
      */
-    @JsxFunction
-    public int IsSearchProviderInstalled() {
+    @JsxFunction(functionName = "IsSearchProviderInstalled")
+    public int isSearchProviderInstalled() {
         return 0;
     }
 }
