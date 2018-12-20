@@ -337,7 +337,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.TimeRanges;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VTTCue;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VideoPlaybackQuality;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
-import com.gargoylesoftware.htmlunit.javascript.host.media.webkitMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.WebkitMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIAccess;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInput;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInputMap;
@@ -377,9 +377,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammar;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammarList;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechGrammar;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechGrammarList;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechRecognition;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.*;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerContainer;
@@ -585,9 +585,9 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
         WebKitAnimationEvent.class,
-        WebKitCSSMatrix.class, webkitMediaStream.class, WebKitMutationObserver.class,
-        webkitRTCPeerConnection.class, webkitSpeechGrammar.class,
-        webkitSpeechGrammarList.class, webkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
+        WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
+        webkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
+        WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
         webkitSpeechRecognitionEvent.class, WebKitTransitionEvent.class, webkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,

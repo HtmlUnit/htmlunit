@@ -16,23 +16,23 @@ package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code webkitSpeechRecognition}.
+ * A JavaScript object for {@code webkitSpeechGrammarList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class webkitSpeechRecognition extends EventTarget {
+@JsxClass(value = CHROME, className = "webkitSpeechGrammarList")
+public class WebkitSpeechGrammarList extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public webkitSpeechRecognition() {
+    public WebkitSpeechGrammarList() {
     }
-
 }

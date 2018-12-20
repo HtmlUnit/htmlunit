@@ -21,17 +21,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code webkitSpeechGrammarList}.
+ * A JavaScript object for {@code webkitSpeechGrammar}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class webkitSpeechGrammarList extends SimpleScriptable {
+@JsxClass(value = CHROME, className = "webkitSpeechGrammar")
+public class WebkitSpeechGrammar extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public webkitSpeechGrammarList() {
+    public WebkitSpeechGrammar() {
     }
 }

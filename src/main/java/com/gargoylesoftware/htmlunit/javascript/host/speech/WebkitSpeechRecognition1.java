@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.media;
+package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 
@@ -21,17 +21,19 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code webkitMediaStream}.
+ * A JavaScript object for {@code webkitSpeechRecognition}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class webkitMediaStream extends EventTarget {
+@JsxClass(value = CHROME, className = "webkitSpeechRecognition")
+public class WebkitSpeechRecognition extends EventTarget {
 
     /**
-     * Creates an instance.
+     * Creates a new instance.
      */
     @JsxConstructor
-    public webkitMediaStream() {
+    public WebkitSpeechRecognition() {
     }
+
 }
