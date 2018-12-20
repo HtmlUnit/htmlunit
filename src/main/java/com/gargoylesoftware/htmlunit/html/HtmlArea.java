@@ -47,12 +47,17 @@ import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlArea extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(HtmlArea.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "area";
+
+    private static final String SHAPE_RECT = "rect";
+    private static final String SHAPE_CIRCLE = "circle";
+    private static final String SHAPE_POLY = "poly";
 
     /**
      * Creates a new instance.
@@ -219,23 +224,23 @@ public class HtmlArea extends HtmlElement {
      * @return {@code true} if the point is contained in this area
      */
     boolean containsPoint(final int x, final int y) {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ROOT);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
 
         if ("default".equals(shape) && getCoordsAttribute() != null) {
             return true;
         }
 
-        if ("rect".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
             final Rectangle2D rectangle = parseRect();
             return rectangle.contains(x, y);
         }
 
-        if ("circle".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
             final Ellipse2D ellipse = parseCircle();
             return ellipse.contains(x, y);
         }
 
-        if ("poly".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
             final GeneralPath path = parsePoly();
             return path.contains(x, y);
         }
@@ -346,23 +351,23 @@ public class HtmlArea extends HtmlElement {
     }
 
     private boolean isEmpty() {
-        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), "rect").toLowerCase(Locale.ROOT);
+        final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
 
         if ("default".equals(shape) && getCoordsAttribute() != null) {
             return false;
         }
 
-        if ("rect".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
             final Rectangle2D rectangle = parseRect();
             return rectangle.isEmpty();
         }
 
-        if ("circle".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
             final Ellipse2D ellipse = parseCircle();
             return ellipse.isEmpty();
         }
 
-        if ("poly".equals(shape) && getCoordsAttribute() != null) {
+        if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
             return false;
         }
 
