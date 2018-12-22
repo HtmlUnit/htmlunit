@@ -95,6 +95,7 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -262,7 +263,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @param declaration the style declaration
      * @param selector the selector determining that the style applies to this element
      */
-    public void applyStyleFromSelector(final org.w3c.dom.css.CSSStyleDeclaration declaration, final Selector selector) {
+    public void applyStyleFromSelector(final CSSStyleDeclarationImpl declaration, final Selector selector) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = selector.getSelectorSpecificity();
         for (int i = 0; i < declaration.getLength(); i++) {

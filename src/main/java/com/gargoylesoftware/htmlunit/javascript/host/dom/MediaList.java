@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 @JsxClass
 public class MediaList extends SimpleScriptable {
 
-    private final org.w3c.dom.stylesheets.MediaList wrappedList_;
+    private final MediaListImpl wrappedList_;
 
     /**
      * Creates a new instance.
@@ -55,7 +55,7 @@ public class MediaList extends SimpleScriptable {
      * @param parent the parent style
      * @param wrappedList the wrapped media list that this host object exposes
      */
-    public MediaList(final CSSStyleSheet parent, final org.w3c.dom.stylesheets.MediaList wrappedList) {
+    public MediaList(final CSSStyleSheet parent, final MediaListImpl wrappedList) {
         wrappedList_ = wrappedList;
         setParentScope(parent);
         setPrototype(getPrototype(getClass()));

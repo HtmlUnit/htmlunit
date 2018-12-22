@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.w3c.dom.css.CSSCharsetRule;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -26,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link CSSCharsetRule}.
  *
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CSSCharsetRuleTest extends WebDriverTestCase {

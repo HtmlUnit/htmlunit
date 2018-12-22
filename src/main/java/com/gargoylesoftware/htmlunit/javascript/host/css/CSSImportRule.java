@@ -18,6 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
+import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -49,7 +52,7 @@ public class CSSImportRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSImportRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSImportRule rule) {
+    protected CSSImportRule(final CSSStyleSheet stylesheet, final CSSImportRuleImpl rule) {
         super(stylesheet, rule);
     }
 
@@ -70,7 +73,7 @@ public class CSSImportRule extends CSSRule {
     public MediaList getMedia() {
         if (media_ == null) {
             final CSSStyleSheet parent = getParentStyleSheet();
-            final org.w3c.dom.stylesheets.MediaList ml = getImportRule().getMedia();
+            final MediaListImpl ml = getImportRule().getMedia();
             media_ = new MediaList(parent, ml);
         }
         return media_;
@@ -85,7 +88,7 @@ public class CSSImportRule extends CSSRule {
         if (importedStylesheet_ == null) {
             final CSSStyleSheet owningSheet = getParentStyleSheet();
             final HTMLElement ownerNode = owningSheet.getOwnerNode();
-            final org.w3c.dom.css.CSSStyleSheet importedStylesheet = getImportRule().getStyleSheet();
+            final CSSStyleSheetImpl importedStylesheet = getImportRule().getStyleSheet();
             importedStylesheet_ = new CSSStyleSheet(ownerNode, importedStylesheet, owningSheet.getUri());
         }
         return importedStylesheet_;
@@ -95,8 +98,8 @@ public class CSSImportRule extends CSSRule {
      * Returns the wrapped rule, as an import rule.
      * @return the wrapped rule, as an import rule
      */
-    private org.w3c.dom.css.CSSImportRule getImportRule() {
-        return (org.w3c.dom.css.CSSImportRule) getRule();
+    private CSSImportRuleImpl getImportRule() {
+        return (CSSImportRuleImpl) getRule();
     }
 
 }

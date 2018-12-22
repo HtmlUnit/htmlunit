@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -54,7 +55,7 @@ public class CSSStyleRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSStyleRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSStyleRule rule) {
+    protected CSSStyleRule(final CSSStyleSheet stylesheet, final CSSStyleRuleImpl rule) {
         super(stylesheet, rule);
     }
 
@@ -64,7 +65,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxGetter
     public String getSelectorText() {
-        String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
+        String selectorText = ((CSSStyleRuleImpl) getRule()).getSelectorText();
         final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
@@ -90,7 +91,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxSetter
     public void setSelectorText(final String selectorText) {
-        ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
+        ((CSSStyleRuleImpl) getRule()).setSelectorText(selectorText);
     }
 
     /**
@@ -99,7 +100,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
+        return new CSSStyleDeclaration(getParentScope(), ((CSSStyleRuleImpl) getRule()).getStyle());
     }
 
     /**

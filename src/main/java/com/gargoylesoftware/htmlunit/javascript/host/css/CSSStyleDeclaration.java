@@ -123,6 +123,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -234,7 +235,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private Element jsElement_;
 
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
-    private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
+    private CSSStyleDeclarationImpl styleDeclaration_;
 
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
@@ -277,7 +278,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param parentScope the parent scope to use
      * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final org.w3c.dom.css.CSSStyleDeclaration styleDeclaration) {
+    CSSStyleDeclaration(final Scriptable parentScope, final CSSStyleDeclarationImpl styleDeclaration) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         styleDeclaration_ = styleDeclaration;
@@ -2599,10 +2600,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 throw new RuntimeException(e);
             }
         }
-        org.w3c.dom.css.CSSValue cssValue = styleDeclaration_.getPropertyCSSValue(name);
+        CSSValueImpl cssValue = styleDeclaration_.getPropertyCSSValue(name);
         if (cssValue == null) {
             final CSSValueImpl newValue = new CSSValueImpl(null, false);
-            newValue.setFloatValue(CSSPrimitiveValue.CSS_PX, 0);
+            newValue.setFloatValue(0);
             cssValue = newValue;
         }
 
@@ -2613,7 +2614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             cssValue.setCssText(formatedCssText);
         }
 
-        return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
+        return new CSSPrimitiveValue(jsElement_, (CSSValueImpl) cssValue);
     }
 
     /**

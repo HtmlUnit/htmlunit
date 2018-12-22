@@ -47,17 +47,17 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSImportRule;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.stylesheets.MediaList;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
@@ -118,6 +118,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -145,7 +146,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
     /** The parsed stylesheet which this host object wraps. */
-    private final org.w3c.dom.css.CSSStyleSheet wrapped_;
+    private final CSSStyleSheetImpl wrapped_;
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
@@ -155,10 +156,10 @@ public class CSSStyleSheet extends StyleSheet {
     private List<Integer> cssRulesIndexFix_;
 
     /** The CSS import rules and their corresponding stylesheets. */
-    private final Map<CSSImportRule, CSSStyleSheet> imports_ = new HashMap<>();
+    private final Map<CSSImportRuleImpl, CSSStyleSheet> imports_ = new HashMap<>();
 
     /** cache parsed media strings */
-    private static final transient Map<String, MediaList> media_ = new HashMap<>();
+    private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private String uri_;
@@ -211,7 +212,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
-    public CSSStyleSheet(final HTMLElement element, final org.w3c.dom.css.CSSStyleSheet wrapped, final String uri) {
+    public CSSStyleSheet(final HTMLElement element, final CSSStyleSheetImpl wrapped, final String uri) {
         setParentScope(element.getWindow());
         setPrototype(getPrototype(CSSStyleSheet.class));
         wrapped_ = wrapped;
@@ -223,7 +224,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the wrapped stylesheet.
      * @return the wrapped stylesheet
      */
-    public org.w3c.dom.css.CSSStyleSheet getWrappedSheet() {
+    public CSSStyleSheetImpl getWrappedSheet() {
         return wrapped_;
     }
 
@@ -244,7 +245,7 @@ public class CSSStyleSheet extends StyleSheet {
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
                 selects(getRuleIndex(), this, browser, e, pseudoElement, false);
         for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
-            final org.w3c.dom.css.CSSStyleDeclaration dec = entry.getRule().getStyle();
+            final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
         }
     }
@@ -298,9 +299,9 @@ public class CSSStyleSheet extends StyleSheet {
             // a cached script
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
-            if (fromCache instanceof org.w3c.dom.css.CSSStyleSheet) {
+            if (fromCache instanceof CSSStyleSheetImpl) {
                 uri = request.getUrl().toExternalForm();
-                sheet = new CSSStyleSheet(element, (org.w3c.dom.css.CSSStyleSheet) fromCache, uri);
+                sheet = new CSSStyleSheet(element, (CSSStyleSheetImpl) fromCache, uri);
             }
             else {
                 uri = response.getWebRequest().getUrl().toExternalForm();
@@ -865,8 +866,8 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the CSS to be parsed
      * @return the stylesheet parsed from the specified input source
      */
-    private org.w3c.dom.css.CSSStyleSheet parseCSS(final InputSource source) {
-        org.w3c.dom.css.CSSStyleSheet ss;
+    private CSSStyleSheetImpl parseCSS(final InputSource source) {
+        CSSStyleSheetImpl ss;
         try {
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
@@ -917,8 +918,8 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the media to be parsed
      * @return the media parsed from the specified input source
      */
-    static MediaList parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
-        MediaList media = media_.get(mediaString);
+    static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
+        MediaListImpl media = media_.get(mediaString);
         if (media != null) {
             return media;
         }
@@ -1078,10 +1079,10 @@ public class CSSStyleSheet extends StyleSheet {
         cssRulesIndexFix_.clear();
 
         final CSSRuleListImpl ruleList = (CSSRuleListImpl) getWrappedSheet().getCssRules();
-        final List<CSSRule> rules = ruleList.getRules();
+        final List<AbstractCSSRuleImpl> rules = ruleList.getRules();
         int pos = 0;
-        for (CSSRule rule : rules) {
-            if (rule instanceof org.w3c.dom.css.CSSCharsetRule) {
+        for (AbstractCSSRuleImpl rule : rules) {
+            if (rule instanceof CSSCharsetRuleImpl) {
                 cssRulesIndexFix_.add(pos);
                 continue;
             }
@@ -1209,7 +1210,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final MediaList mediaList = parseMedia(webClient.getCssErrorHandler(), media);
+        final MediaListImpl mediaList = parseMedia(webClient.getCssErrorHandler(), media);
         return isActive(this, mediaList);
     }
 
@@ -1235,7 +1236,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param mediaList the media list
      * @return whether the specified {@link MediaList} is active or not
      */
-    static boolean isActive(final SimpleScriptable scriptable, final MediaList mediaList) {
+    static boolean isActive(final SimpleScriptable scriptable, final MediaListImpl mediaList) {
         if (mediaList.getLength() == 0) {
             return true;
         }
@@ -1370,28 +1371,28 @@ public class CSSStyleSheet extends StyleSheet {
         final int dpi;
         switch (cssValue.getLexicalUnitType()) {
             case PIXEL:
-                return cssValue.getFloatValue(CSSPrimitiveValue.CSS_PX);
+                return cssValue.getFloatValue();
             case EM:
                 // hard coded default for the moment 16px = 1 em
-                return 16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EMS);
+                return 16f * cssValue.getFloatValue();
             case PERCENTAGE:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PERCENTAGE);
+                return 0.16f * cssValue.getFloatValue();
             case EX:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EXS);
+                return 0.16f * cssValue.getFloatValue();
             case REM:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_EXS);
+                return 0.16f * cssValue.getFloatValue();
             case MILLIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 25.4f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_MM);
+                return (dpi / 25.4f) * cssValue.getFloatValue();
             case CENTIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 254f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_CM);
+                return (dpi / 254f) * cssValue.getFloatValue();
             case POINT:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 72f) * cssValue.getFloatValue(CSSPrimitiveValue.CSS_PT);
+                return (dpi / 72f) * cssValue.getFloatValue();
             default:
                 break;
         }
@@ -1403,16 +1404,16 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static float resolutionValue(final CSSValueImpl cssValue) {
-        if (cssValue.getPrimitiveType() == CSSPrimitiveValue.CSS_DIMENSION) {
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
             final String text = cssValue.getCssText();
             if (text.endsWith("dpi")) {
-                return cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+                return cssValue.getFloatValue();
             }
             if (text.endsWith("dpcm")) {
-                return 2.54f * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+                return 2.54f * cssValue.getFloatValue();
             }
             if (text.endsWith("dppx")) {
-                return 96 * cssValue.getFloatValue(CSSPrimitiveValue.CSS_DIMENSION);
+                return 96 * cssValue.getFloatValue();
             }
         }
 
@@ -1551,9 +1552,8 @@ public class CSSStyleSheet extends StyleSheet {
     private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList,
             final Set<String> alreadyProcessing) {
 
-        for (CSSRule rule : ruleList.getRules()) {
-            final short ruleType = rule.getType();
-            if (CSSRule.STYLE_RULE == ruleType) {
+        for (AbstractCSSRuleImpl rule : ruleList.getRules()) {
+            if (rule instanceof CSSStyleRuleImpl) {
                 final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
                 final SelectorList selectors = styleRule.getSelectors();
                 for (Selector selector : selectors) {
@@ -1578,9 +1578,9 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
             }
-            else if (CSSRule.IMPORT_RULE == ruleType) {
+            else if (rule instanceof CSSImportRuleImpl) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                final MediaList mediaList = importRule.getMedia();
+                final MediaListImpl mediaList = importRule.getMedia();
 
                 CSSStyleSheet sheet = imports_.get(importRule);
                 if (sheet == null) {
@@ -1591,7 +1591,7 @@ public class CSSStyleSheet extends StyleSheet {
                 }
 
                 if (!alreadyProcessing.contains(sheet.getUri())) {
-                    final CSSRuleList sheetRuleList = sheet.getWrappedSheet().getCssRules();
+                    final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
                     alreadyProcessing.add(sheet.getUri());
 
                     if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
@@ -1602,9 +1602,9 @@ public class CSSStyleSheet extends StyleSheet {
                     }
                 }
             }
-            else if (CSSRule.MEDIA_RULE == ruleType) {
+            else if (rule instanceof CSSMediaRuleImpl) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-                final MediaList mediaList = mediaRule.getMedia();
+                final MediaListImpl mediaList = mediaRule.getMedia();
                 if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                     index(index, (CSSRuleListImpl) mediaRule.getCssRules(), alreadyProcessing);
                 }

@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -54,7 +55,7 @@ public class CSSFontFaceRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSFontFaceRule rule) {
+    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final CSSFontFaceRuleImpl rule) {
         super(stylesheet, rule);
     }
 

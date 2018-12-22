@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.StringReader;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -65,7 +66,7 @@ public class HTMLStyleElement extends HTMLElement {
         final String css = style.getTextContent();
 
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
-        final org.w3c.dom.css.CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+        final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(css);
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                 .getUrl().toExternalForm();
         if (cached != null) {

@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -27,6 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code CSSGroupingRule}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF, EDGE})
 @JsxClass(isJSObject = false, value = IE)
@@ -44,7 +46,7 @@ public class CSSGroupingRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSGroupingRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSMediaRule rule) {
+    protected CSSGroupingRule(final CSSStyleSheet stylesheet, final CSSMediaRuleImpl rule) {
         super(stylesheet, rule);
     }
 

@@ -18,8 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
-import org.w3c.dom.stylesheets.MediaList;
-
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -31,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * A JavaScript object for {@code MediaQueryList}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class MediaQueryList extends EventTarget {
@@ -69,7 +69,7 @@ public class MediaQueryList extends EventTarget {
     @JsxGetter
     public boolean isMatches() {
         final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-        final MediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
+        final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
         return CSSStyleSheet.isActive(this, mediaList);
     }
 

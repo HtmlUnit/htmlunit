@@ -20,8 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.stylesheets.MediaList;
 
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -103,7 +103,7 @@ public class StyleSheetList extends SimpleScriptable {
                     return true;
                 }
                 final WebClient webClient = getWindow().getWebWindow().getWebClient();
-                final MediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
+                final MediaListImpl mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
                 return CSSStyleSheet.isActive(this, mediaList);
             }
         }

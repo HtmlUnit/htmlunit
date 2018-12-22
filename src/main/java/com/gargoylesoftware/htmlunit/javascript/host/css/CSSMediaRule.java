@@ -18,13 +18,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 
 /**
- * A JavaScript object for a {@link org.w3c.dom.css.CSSMediaRule}.
+ * A JavaScript object for a {@link CSSMediaRuleImpl}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -46,7 +48,7 @@ public class CSSMediaRule extends CSSConditionRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSMediaRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSMediaRule rule) {
+    protected CSSMediaRule(final CSSStyleSheet stylesheet, final CSSMediaRuleImpl rule) {
         super(stylesheet, rule);
     }
 
@@ -58,7 +60,7 @@ public class CSSMediaRule extends CSSConditionRule {
     public MediaList getMedia() {
         if (media_ == null) {
             final CSSStyleSheet parent = getParentStyleSheet();
-            final org.w3c.dom.stylesheets.MediaList ml = getMediaRule().getMedia();
+            final MediaListImpl ml = getMediaRule().getMedia();
             media_ = new MediaList(parent, ml);
         }
         return media_;
@@ -68,7 +70,7 @@ public class CSSMediaRule extends CSSConditionRule {
      * Returns the wrapped rule, as a media rule.
      * @return the wrapped rule, as a media rule
      */
-    private org.w3c.dom.css.CSSMediaRule getMediaRule() {
-        return (org.w3c.dom.css.CSSMediaRule) getRule();
+    private CSSMediaRuleImpl getMediaRule() {
+        return (CSSMediaRuleImpl) getRule();
     }
 }

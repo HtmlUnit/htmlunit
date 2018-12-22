@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
