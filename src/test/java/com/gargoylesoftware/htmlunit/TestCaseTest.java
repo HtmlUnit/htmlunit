@@ -18,16 +18,17 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 
 /**
  * Tests for various test cases.
@@ -37,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
  */
 public final class TestCaseTest {
 
-    private List<String> allClassNames_;
+    private Set<String> allClassNames_;
 
     /**
      * Tests that all test cases with the pattern used by
@@ -65,7 +66,7 @@ public final class TestCaseTest {
                         if (line.contains("(\"xmp\")")) {
                             final String relativePath = file.getAbsolutePath().substring(
                                     new File(".").getAbsolutePath().length() - 1);
-                            checkLines(relativePath, line, lines, "xmp", HtmlPageTest.HTML_TAGS_);
+                            checkLines(relativePath, line, lines, "xmp", new HashSet<String>(HtmlPageTest.HTML_TAGS_));
                         }
                         else if (line.contains("(\"ClientRect\")")) {
                             final String relativePath = file.getAbsolutePath().substring(
@@ -83,22 +84,34 @@ public final class TestCaseTest {
      * @return the list
      * @throws Exception if an error occurs.
      */
-    public static List<String> getAllClassNames() throws Exception {
-        final Field field = JavaScriptConfiguration.class.getDeclaredField("CLASSES_");
-        field.setAccessible(true);
+    public static Set<String> getAllClassNames() throws Exception {
+        final Set<String> names = new HashSet<>();
 
-        final List<String> list = new ArrayList<>();
-        for (final Class<?> c : (Class<?>[]) field.get(null)) {
-            final String name = c.getSimpleName();
-            list.add(name);
+        JavaScriptConfiguration jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_60);
+        for (ClassConfiguration config : jsConfig.getAll()) {
+            names.add(config.getClassName());
         }
-        list.add(Intl.class.getSimpleName());
-        list.add("Error");
-        return list;
+
+        jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.FIREFOX_52);
+        for (ClassConfiguration config : jsConfig.getAll()) {
+            names.add(config.getClassName());
+        }
+
+        jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.CHROME);
+        for (ClassConfiguration config : jsConfig.getAll()) {
+            names.add(config.getClassName());
+        }
+
+        jsConfig = JavaScriptConfiguration.getInstance(BrowserVersion.INTERNET_EXPLORER);
+        for (ClassConfiguration config : jsConfig.getAll()) {
+            names.add(config.getClassName());
+        }
+
+        return names;
     }
 
     private static void checkLines(final String relativePath, final String line, final List<String> lines,
-            final String elementName, final List<String> allElements) {
+            final String elementName, final Set<String> allElements) {
         final List<String> allExpectedLines = new ArrayList<>();
         for (final String element : allElements) {
             allExpectedLines.add(line.replace(elementName, element));
