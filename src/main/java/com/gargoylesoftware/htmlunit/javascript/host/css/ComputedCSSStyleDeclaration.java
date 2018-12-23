@@ -96,6 +96,7 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -266,8 +267,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public void applyStyleFromSelector(final CSSStyleDeclarationImpl declaration, final Selector selector) {
         final BrowserVersion browserVersion = getBrowserVersion();
         final SelectorSpecificity specificity = selector.getSelectorSpecificity();
-        for (int i = 0; i < declaration.getLength(); i++) {
-            final String name = declaration.item(i);
+        for (Property prop : declaration.getProperties()) {
+            final String name = prop.getName();
             if (!browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX) || !"z-index".equals(name)) {
                 final String value = declaration.getPropertyValue(name);
                 final String priority = declaration.getPropertyPriority(name);
