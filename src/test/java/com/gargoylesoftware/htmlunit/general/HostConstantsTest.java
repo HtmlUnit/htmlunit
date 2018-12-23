@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,7 +57,7 @@ public class HostConstantsTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = TestCaseTest.getAllClassNames();
+        final Set<String> strings = TestCaseTest.getAllClassNames();
         for (final String host : strings) {
             if (!"Audio".equals(host)) {
                 list.add(new Object[] {host});
