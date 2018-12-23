@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 70">
+            <action type="update" dev="rbri">
+                Major cleanup of the htmlunit-cssparser; all the references to the w3c classes are removed.
+                This avoid a lot of instanceof/cast processing and will make it simpler to enhance the parser
+                in the future.
+            </action>
             <action type="add" dev="rbri">
                 New method Window.animateAnimationsFrames(). Use this to force one animation cycle.
             </action>
