@@ -45,20 +45,13 @@ public class HtmlMeta extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
+        // Handles the cookies specified in meta tags,
+        // like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
-            performSetCookie();
+            final WebClient client = page.getWebClient();
+            final URL url = page.getUrl();
+            client.addCookie(getContentAttribute(), url, this);
         }
-    }
-
-    /**
-     * Handles the cookies specified in meta tags,
-     * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
-     */
-    protected void performSetCookie() {
-        final SgmlPage page = getPage();
-        final WebClient client = page.getWebClient();
-        final URL url = page.getUrl();
-        client.addCookie(getContentAttribute(), url, this);
     }
 
     /**

@@ -48,8 +48,8 @@ public class BeforeUnloadEvent extends Event {
      * Creates a new event instance.
      */
     public BeforeUnloadEvent() {
-        setEventType("");
-        setReturnValue("");
+        setType("");
+        returnValue_ = "";
     }
 
     /**
