@@ -145,7 +145,7 @@ public class BrowserVersionFeaturesTest  {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     unusedCheck(file, unusedFeatures);
                 }
                 else if (file.getName().endsWith(".java")) {

@@ -110,7 +110,7 @@ public class CodeStyleTest {
         final File[] children = dir.listFiles();
         if (children != null) {
             for (final File child : children) {
-                if (child.isDirectory() && !".svn".equals(child.getName())) {
+                if (child.isDirectory() && !".git".equals(child.getName())) {
                     addAll(child, files);
                 }
                 else {
@@ -268,7 +268,7 @@ public class CodeStyleTest {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     if (recursive) {
                         processXML(file, true);
                     }
@@ -644,26 +644,39 @@ public class CodeStyleTest {
         if (relativePath.contains("main") && relativePath.contains("host")) {
             String fileName = relativePath.substring(0, relativePath.length() - 5);
             fileName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
-            if (!fileName.endsWith("2")) {
-                boolean failureFound = false;
-                for (final String line : lines) {
-                    if (line.startsWith(" * ")) {
-                        int p0 = line.indexOf("{@code ");
-                        if (p0 != -1) {
-                            p0 = p0 + "{@code ".length();
-                            final int p1 = line.indexOf('}', p0 + 1);
-                            final String name = line.substring(p0, p1);
-                            if (!name.equals(fileName)) {
-                                failureFound = true;
+            String wrongName = null;
+            for (final String line : lines) {
+                if (line.startsWith(" * ")) {
+                    int p0 = line.indexOf("{@code ");
+                    if (p0 != -1) {
+                        p0 = p0 + "{@code ".length();
+                        final int p1 = line.indexOf('}', p0 + 1);
+                        final String name = line.substring(p0, p1);
+                        if (!name.equals(fileName)) {
+                            wrongName = name;
+                        }
+                    }
+                }
+                else if (line.startsWith("@JsxClass")) {
+                    int p0 = line.indexOf("className = \"");
+                    if (p0 != -1) {
+                        p0 = p0 + "className = \"".length();
+                        final int p1 = line.indexOf("\"", p0 + 1);
+                        String name = line.substring(p0, p1);
+                        // JsxClass starts with lower case
+                        if (Character.isLowerCase(name.charAt(0))) {
+                            name = StringUtils.capitalize(name);
+                            if (name.equals(fileName)) {
+                                wrongName = null;
                             }
                         }
                     }
-                    else if (line.startsWith("public class")) {
-                        if (failureFound) {
-                            addFailure("Incorrect host class in " + relativePath);
-                        }
-                        return;
+                }
+                else if (line.startsWith("public class")) {
+                    if (wrongName != null) {
+                        addFailure("Incorrect host class '" + wrongName + "' in " + relativePath);
                     }
+                    return;
                 }
             }
         }
@@ -917,7 +930,7 @@ public class CodeStyleTest {
 
         for (final File file : files) {
             if (file.isDirectory()) {
-                if (!".svn".equals(file.getName())) {
+                if (!".git".equals(file.getName())) {
                     testTests(file);
                 }
             }

@@ -79,7 +79,7 @@ public class HostTestsTest {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     collectionObjectNames(file, set);
                 }
                 else if (file.getName().endsWith(".java")) {

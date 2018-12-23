@@ -53,7 +53,7 @@ public class NotYetImplementedTest {
                 final String fileName = file.getName();
                 if (file.isDirectory()
                         && !"huge".equals(fileName)
-                        && !".svn".equals(fileName)) {
+                        && !".git".equals(fileName)) {
                     process(file);
                 }
                 else {

@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
  * Tests for various test cases.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class TestCaseTest {
 
@@ -55,7 +56,7 @@ public final class TestCaseTest {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     generateTestForHtmlElements(file);
                 }
                 else if (file.getName().endsWith(".java")) {

@@ -64,7 +64,7 @@ public class CodeChecker {
 
     private void process(final File dir) throws Exception {
         for (final File file : dir.listFiles()) {
-            if (file.isDirectory() && !file.getName().equals(".svn")) {
+            if (file.isDirectory() && !file.getName().equals(".git")) {
                 process(file);
             }
             else {

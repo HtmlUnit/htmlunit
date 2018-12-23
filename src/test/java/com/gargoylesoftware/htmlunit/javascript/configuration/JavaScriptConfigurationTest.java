@@ -229,7 +229,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 if (name.endsWith(".class")) {
                     list.add(packageName + '.' + name.substring(0, name.length() - 6));
                 }
-                else if (file.isDirectory() && !".svn".equals(file.getName())) {
+                else if (file.isDirectory() && !".git".equals(file.getName())) {
                     addClasses(file, packageName + '.' + file.getName(), list);
                 }
             }
