@@ -67,7 +67,6 @@ import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
-import com.gargoylesoftware.css.parser.condition.PseudoClassCondition;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
@@ -525,8 +524,7 @@ public class CSSStyleSheet extends StyleSheet {
                 return false;
 
             case PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion,
-                        (PseudoClassCondition) condition, element, fromQuerySelectorAll);
+                return selectsPseudoClass(browserVersion, condition, element, fromQuerySelectorAll);
 
             default:
                 if (LOG.isErrorEnabled()) {
@@ -598,7 +596,7 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final PseudoClassCondition condition, final DomElement element, final boolean fromQuerySelectorAll) {
+            final Condition condition, final DomElement element, final boolean fromQuerySelectorAll) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Object sobj = element.getPage().getScriptableObject();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
@@ -1478,8 +1476,7 @@ public class CSSStyleSheet extends StyleSheet {
             case CLASS_CONDITION:
                 return true;
             case PSEUDO_CLASS_CONDITION:
-                final PseudoClassCondition pcc = (PseudoClassCondition) condition;
-                String value = pcc.getValue();
+                String value = condition.getValue();
                 if (value.endsWith(")")) {
                     if (value.endsWith("()")) {
                         return false;
@@ -1498,7 +1495,7 @@ public class CSSStyleSheet extends StyleSheet {
                 }
 
                 if ("nth-child()".equals(value)) {
-                    final String arg = StringUtils.substringBetween(pcc.getValue(), "(", ")").trim();
+                    final String arg = StringUtils.substringBetween(condition.getValue(), "(", ")").trim();
                     return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
                             || NTH_NUMERIC.matcher(arg).matches()
                             || NTH_COMPLEX.matcher(arg).matches();
