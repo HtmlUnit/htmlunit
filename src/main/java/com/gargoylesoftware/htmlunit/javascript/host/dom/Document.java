@@ -1133,10 +1133,6 @@ public class Document extends Node {
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
-        if (!(getPage() instanceof HtmlPage)) {
-            // TODO: implement XmlPage.getUrl
-            return "";
-        }
         return getPage().getUrl().toExternalForm();
     }
 

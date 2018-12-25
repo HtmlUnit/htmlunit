@@ -268,6 +268,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      */
     @Override
     public URL getUrl() {
+        final WebResponse wr = getWebResponse();
+        if (null == wr) {
+            return WebClient.URL_ABOUT_BLANK;
+        }
         return getWebResponse().getWebRequest().getUrl();
     }
 

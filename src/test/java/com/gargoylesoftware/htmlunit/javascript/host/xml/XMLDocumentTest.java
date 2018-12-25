@@ -1037,4 +1037,26 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "about:blank",
+            IE = "§§URL§§")
+    @NotYetImplemented(IE)
+    public void url() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
+            + "    alert(doc.URL);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
