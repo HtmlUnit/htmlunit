@@ -33,10 +33,8 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
-    // TODO: is there utility in not having these as transient?
     private final transient WeakReference<WebClient> webClient_;
-
-    private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
+    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
 
     private volatile boolean shutdown_;
 
@@ -51,6 +49,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      */
     public DefaultJavaScriptExecutor(final WebClient webClient) {
         webClient_ = new WeakReference<>(webClient);
+        jobManagerList_ = new LinkedList<>();
     }
 
     /**
@@ -190,13 +189,14 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
         final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
         for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager manager = weakReference.get();
-            if (null != manager) {
+            if (null != weakReference.get()) {
                 managers.add(weakReference);
             }
         }
         managers.add(new WeakReference<>(newJobManager));
-        jobManagerList_ = managers;
+
+        jobManagerList_.clear();
+        jobManagerList_.addAll(managers);
     }
 
     /** Notes that this thread has been shutdown. */
