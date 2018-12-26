@@ -105,14 +105,17 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     protected JavaScriptJobManager getJobManagerWithEarliestJob() {
         JavaScriptJobManager javaScriptJobManager = null;
         JavaScriptJob earliestJob = null;
-        // iterate over the list and find the earliest job to run.
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager jobManager = weakReference.get();
-            if (jobManager != null) {
-                final JavaScriptJob newJob = jobManager.getEarliestJob();
-                if (newJob != null && (earliestJob == null || earliestJob.compareTo(newJob) > 0)) {
-                    earliestJob = newJob;
-                    javaScriptJobManager = jobManager;
+
+        synchronized (jobManagerList_) {
+            // iterate over the list and find the earliest job to run.
+            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+                final JavaScriptJobManager jobManager = weakReference.get();
+                if (jobManager != null) {
+                    final JavaScriptJob newJob = jobManager.getEarliestJob();
+                    if (newJob != null && (earliestJob == null || earliestJob.compareTo(newJob) > 0)) {
+                        earliestJob = newJob;
+                        javaScriptJobManager = jobManager;
+                    }
                 }
             }
         }
@@ -179,24 +182,24 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         }
     }
 
-    private synchronized void updateJobMangerList(final JavaScriptJobManager newJobManager) {
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager manager = weakReference.get();
-            if (newJobManager == manager) {
-                return;
-            }
-        }
-
+    private void updateJobMangerList(final JavaScriptJobManager newJobManager) {
         final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            if (null != weakReference.get()) {
-                managers.add(weakReference);
+        synchronized (jobManagerList_) {
+            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+                final JavaScriptJobManager manager = weakReference.get();
+                if (newJobManager == manager) {
+                    return;
+                }
+                if (null != weakReference.get()) {
+                    managers.add(weakReference);
+                }
             }
-        }
-        managers.add(new WeakReference<>(newJobManager));
 
-        jobManagerList_.clear();
-        jobManagerList_.addAll(managers);
+            managers.add(new WeakReference<>(newJobManager));
+
+            jobManagerList_.clear();
+            jobManagerList_.addAll(managers);
+        }
     }
 
     /** Notes that this thread has been shutdown. */
@@ -206,6 +209,8 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         killThread();
 
         webClient_.clear();
-        jobManagerList_.clear();
+        synchronized (jobManagerList_) {
+            jobManagerList_.clear();
+        }
     }
 }
