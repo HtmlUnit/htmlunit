@@ -382,25 +382,14 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {30=[CHROME, FF52, FF60]}.
+     * Test {30=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            IE = "0")
     public void core__isPlainObject_Symbol_() throws Exception {
         runTest("core: isPlainObject(Symbol)");
-    }
-
-    /**
-     * Test {30=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    @NotYetImplemented(IE)
-    public void skippedcore__isPlainObject_Symbol_() throws Exception {
-        runTest("skippedcore: isPlainObject(Symbol)");
     }
 
     /**
@@ -414,24 +403,14 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {32=[CHROME, FF52, FF60]}.
+     * Test {32=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            FF = "1")
+    @Alerts(DEFAULT = "1",
+            IE = "0")
     public void core__isPlainObject_Object_assign______() throws Exception {
         runTest("core: isPlainObject(Object.assign(...))");
-    }
-
-    /**
-     * Test {32=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    public void skippedcore__isPlainObject_Object_assign______() throws Exception {
-        runTest("skippedcore: isPlainObject(Object.assign(...))");
     }
 
     /**
@@ -1414,7 +1393,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({FF52, IE})
+    @NotYetImplemented({ FF52, IE })
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
@@ -1522,25 +1501,14 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {142=[CHROME, FF52, FF60]}.
+     * Test {142=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            FF = "1")
+    @Alerts(DEFAULT = "1",
+            IE = "0")
     public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
-    }
-
-    /**
-     * Test {142=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    @NotYetImplemented(IE)
-    public void skippeddeferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
-        runTest("skippeddeferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
     }
 
     /**
@@ -1549,7 +1517,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({ CHROME, FF })
     public void deferred__jQuery_Deferred_exceptionHook() throws Exception {
         runTest("deferred: jQuery.Deferred.exceptionHook");
     }
@@ -1620,7 +1588,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("68")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({ CHROME, FF })
     public void deferred__jQuery_when_thenable____like_Promise_resolve() throws Exception {
         runTest("deferred: jQuery.when(thenable) - like Promise.resolve");
     }
@@ -1631,7 +1599,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("196")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({ CHROME, FF })
     public void deferred__jQuery_when_a__b____like_Promise_all() throws Exception {
         runTest("deferred: jQuery.when(a, b) - like Promise.all");
     }
@@ -1757,24 +1725,14 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {164=[CHROME, FF52, FF60]}.
+     * Test {164=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            IE = "0")
     public void deprecated__type_for__Symbol_() throws Exception {
         runTest("deprecated: type for `Symbol`");
-    }
-
-    /**
-     * Test {164=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    public void skippeddeprecated__type_for__Symbol_() throws Exception {
-        runTest("skippeddeprecated: type for `Symbol`");
     }
 
     /**
@@ -1798,68 +1756,38 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {167=[CHROME, FF52, FF60]}.
+     * Test {167=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "1",
-            FF = "1")
-    @NotYetImplemented({CHROME, FF})
+    @Alerts(DEFAULT = "1",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF })
     public void deprecated__isFunction_GeneratorFunction_() throws Exception {
         runTest("deprecated: isFunction(GeneratorFunction)");
     }
 
     /**
-     * Test {167=[IE]}.
+     * Test {168=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "0")
-    public void skippeddeprecated__isFunction_GeneratorFunction_() throws Exception {
-        runTest("skippeddeprecated: isFunction(GeneratorFunction)");
-    }
-
-    /**
-     * Test {168=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(CHROME = "1",
-            FF = "1")
-    @NotYetImplemented({CHROME, FF})
+    @Alerts(DEFAULT = "1",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF })
     public void deprecated__isFunction_AsyncFunction_() throws Exception {
         runTest("deprecated: isFunction(AsyncFunction)");
     }
 
     /**
-     * Test {168=[IE]}.
+     * Test {169=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "0")
-    public void skippeddeprecated__isFunction_AsyncFunction_() throws Exception {
-        runTest("skippeddeprecated: isFunction(AsyncFunction)");
-    }
-
-    /**
-     * Test {169=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(CHROME = "2",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            IE = "0")
     public void deprecated__isFunction_custom___toStringTag_() throws Exception {
         runTest("deprecated: isFunction(custom @@toStringTag)");
-    }
-
-    /**
-     * Test {169=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    public void skippeddeprecated__isFunction_custom___toStringTag_() throws Exception {
-        runTest("skippeddeprecated: isFunction(custom @@toStringTag)");
     }
 
     /**
@@ -1913,25 +1841,14 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {175=[CHROME, FF52, FF60]}.
+     * Test {175=[CHROME, FF52, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "2",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            IE = "0")
     public void deprecated__isNumeric_Symbol_() throws Exception {
         runTest("deprecated: isNumeric(Symbol)");
-    }
-
-    /**
-     * Test {175=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    @NotYetImplemented(IE)
-    public void skippeddeprecated__isNumeric_Symbol_() throws Exception {
-        runTest("skippeddeprecated: isNumeric(Symbol)");
     }
 
     /**
@@ -2472,7 +2389,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({ CHROME, FF })
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
@@ -4690,22 +4607,12 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {452=[IE]}.
+     * Test {452=[IE], 453=[CHROME, FF52, FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "0")
-    public void skippedtraversing__contents___for__template____remains_inert() throws Exception {
-        runTest("skippedtraversing: contents() for <template /> remains inert");
-    }
-
-    /**
-     * Test {453=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(CHROME = "2",
-            FF = "2")
+    @Alerts(DEFAULT = "2",
+            IE = "0")
     public void traversing__contents___for__template____remains_inert() throws Exception {
         runTest("traversing: contents() for <template /> remains inert");
     }
@@ -5763,27 +5670,27 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {560=[IE], 561=[FF52]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(FF52 = "0",
-            IE = "0")
-    @NotYetImplemented(FF52)
-    public void skippedmanipulation__html_script_type_module_() throws Exception {
-        runTest("skippedmanipulation: html(script type module)");
-    }
-
-    /**
-     * Test {561=[CHROME, FF60]}.
+     * Test {560=[IE], 561=[CHROME, FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "4",
-            FF60 = "4")
-    @NotYetImplemented({CHROME, FF60})
+            FF60 = "4",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF60 })
     public void manipulation__html_script_type_module_() throws Exception {
         runTest("manipulation: html(script type module)");
+    }
+
+    /**
+     * Test {561=[FF52]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF52 = "0")
+    @NotYetImplemented(FF52)
+    public void skippedmanipulation__html_script_type_module_() throws Exception {
+        runTest("skippedmanipulation: html(script type module)");
     }
 
     /**
@@ -6870,22 +6777,13 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {668=[IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(IE = "0")
-    public void skippedcss__css___customProperty_() throws Exception {
-        runTest("skippedcss: css(--customProperty)");
-    }
-
-    /**
-     * Test {669=[CHROME, FF52, FF60]}.
+     * Test {668=[IE], 669=[CHROME, FF52, FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts(CHROME = "8",
-            FF = "10")
+            FF = "10",
+            IE = "0")
     @NotYetImplemented
     public void css__css___customProperty_() throws Exception {
         runTest("css: css(--customProperty)");
@@ -8388,7 +8286,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("27")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({ CHROME, FF })
     public void effects__show__() throws Exception {
         runTest("effects: show()");
     }
