@@ -16,14 +16,9 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-import static org.junit.Assert.fail;
 
-import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -50,54 +45,6 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     @Override
     public String getVersion() {
         return "1.8.2";
-    }
-
-    /**
-     * Runs the specified test.
-     * @param testName the test name
-     * @throws Exception if an error occurs
-     */
-    @Override
-    protected void runTest(final String testName) throws Exception {
-        final int testNumber = readTestNumber(testName);
-        if (testNumber == -1) {
-            assertEquals("Test number not found for: " + testName, 0, getExpectedAlerts().length);
-            return;
-        }
-        final long runTime = 60 * DEFAULT_WAIT_TIME;
-        final long endTime = System.currentTimeMillis() + runTime;
-
-        try {
-            final WebDriver webdriver = getWebDriver();
-            final String url = URL_FIRST + "jquery/test/index.html?testNumber=" + testNumber;
-            webdriver.get(url);
-
-            final WebElement status = webdriver.findElement(By.id("qunit-testresult"));
-            while (!status.getText().startsWith("Tests completed")) {
-                Thread.sleep(100);
-
-                if (System.currentTimeMillis() > endTime) {
-                    fail("Test #" + testNumber + " runs too long (longer than " + runTime / 1000 + "s)");
-                }
-            }
-
-            final WebElement output = webdriver.findElement(By.id("qunit-test-output0"));
-            String result = output.getText();
-            result = result.substring(0, result.indexOf("Rerun")).trim();
-            final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
-            if (!expected.contains(result)) {
-                System.out.println("-> " + webdriver.findElement(By.id("qunit-tests")).getText());
-                fail(new ComparisonFailure("", expected, result).getMessage());
-            }
-        }
-        catch (final Exception e) {
-            e.printStackTrace();
-            Throwable t = e;
-            while ((t = t.getCause()) != null) {
-                t.printStackTrace();
-            }
-            throw e;
-        }
     }
 
     /**

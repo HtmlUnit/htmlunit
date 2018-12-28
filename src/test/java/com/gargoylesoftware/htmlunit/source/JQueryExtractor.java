@@ -43,7 +43,7 @@ import org.apache.commons.lang3.reflect.MethodUtils;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
+import com.gargoylesoftware.htmlunit.libraries.JQuery3x3x1Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish
@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.libraries.JQuery1x11x3Test;
  * @author Ronald Brill
  */
 public final class JQueryExtractor {
+    private static final String RERUN_ID = "Rerun [";
 
     private JQueryExtractor() {
     }
@@ -72,17 +73,17 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
-        final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
-
-        // final String browser = "FF60";
-        // final String browser = "FF52";
-        // final String browser = "CHROME";
-        // final String browser = "IE";
+        // final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
+        final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        // extractExpectations(new File(baseDir, browser + ".out"), new File(baseDir, "results." + browser + ".txt"));
+        for (String browser : new String[] {"CHROME", "FF60", "FF52", "IE"}) {
+            final File out = new File(baseDir, browser + ".out");
+            final File results = new File(baseDir, "results." + browser + ".txt");
+            // extractExpectations(out, results);
+        }
         generateTestCases(testClass, baseDir);
     }
 
@@ -101,12 +102,28 @@ public final class JQueryExtractor {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
-                    final int endPos = line.indexOf("Rerun");
+                    // for jQuery 3.3.1 we have patched the test output
+                    // to make the hash visible
+                    if (line.contains(RERUN_ID)) {
+                        final int start = line.indexOf(RERUN_ID) + RERUN_ID.length();
+                        final int end = line.indexOf(']', start);
+                        final String testId = line.substring(start, end);
+
+                        line = line.substring(0, line.indexOf(RERUN_ID)).trim();
+                        final String prefix = "" + testNumber + ".";
+                        if (line.startsWith(prefix)) {
+                            line = line.substring(prefix.length());
+                        }
+                        line = "" + testNumber + '.' + ' ' + line + " [" + testId + ']';
+                        writer.write(line + System.lineSeparator());
+                        testNumber++;
+                    }
+
                     // the test number is at least for 1.11.3 no longer part of the output
                     // instead a ordered list is used by qunit
                     // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
-                    if (endPos > -1) {
-                        line = line.substring(0, endPos);
+                    else if (line.indexOf("Rerun") > -1) {
+                        line = line.substring(0, line.indexOf("Rerun"));
                         writer.write(line + System.lineSeparator());
                         testNumber++;
                     }
@@ -380,8 +397,11 @@ public final class JQueryExtractor {
 
     static class Expectation {
 
-        private static final Pattern pattern_ = Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+(, \\d+, \\d+)?)\\)");
+        private static final Pattern pattern_ =
+                Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+(, \\d+, \\d+)?)\\) \\[([0-9a-f]{8})\\]");
+
         private final int line_;
+        private final String testId_;
         private final String testName_;
         private final String testResult_;
 
@@ -398,10 +418,15 @@ public final class JQueryExtractor {
 
             testName_ = matcher.group(2).trim();
             testResult_ = matcher.group(3);
+            testId_ = matcher.group(4);
         }
 
         public int getLine() {
             return line_;
+        }
+
+        public String getTestId() {
+            return testId_;
         }
 
         public String getTestName() {
