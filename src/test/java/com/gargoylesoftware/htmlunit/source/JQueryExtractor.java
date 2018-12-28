@@ -82,8 +82,9 @@ public final class JQueryExtractor {
         for (String browser : new String[] {"CHROME", "FF60", "FF52", "IE"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
-            // extractExpectations(out, results);
+            extractExpectations(out, results);
         }
+
         generateTestCases(testClass, baseDir);
     }
 
@@ -102,9 +103,13 @@ public final class JQueryExtractor {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     line = line.trim();
+
                     // for jQuery 3.3.1 we have patched the test output
                     // to make the hash visible
                     if (line.contains(RERUN_ID)) {
+                        // cleanup ie output
+                        line = line.replace(".skipped", ".");
+
                         final int start = line.indexOf(RERUN_ID) + RERUN_ID.length();
                         final int end = line.indexOf(']', start);
                         final String testId = line.substring(start, end);

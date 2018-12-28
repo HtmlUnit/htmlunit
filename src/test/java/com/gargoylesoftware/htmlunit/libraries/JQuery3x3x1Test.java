@@ -15,6 +15,10 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,8 +61,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
         for (int i = 0; i < lines.length; i++) {
             final String line = lines[i];
             final int pos = line.indexOf(testName);
-            if (pos != -1
-                    && line.indexOf('(', pos + testName.length() + 3) == -1) {
+            if (pos != -1 && line.indexOf("skipped") == -1) {
                 final int start = line.lastIndexOf('[') + 1;
                 return line.substring(start, start + 8);
             }
@@ -395,6 +398,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts(IE = "0")
+    @NotYetImplemented(IE)
     public void skippedcore__isPlainObject_Symbol_() throws Exception {
         runTest("skippedcore: isPlainObject(Symbol)");
     }
@@ -1400,7 +1404,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented
     public void deferred__jQuery_Deferred_then___filtering__done_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (done)");
     }
@@ -1411,6 +1414,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
+    @NotYetImplemented({FF52, IE})
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
@@ -1421,7 +1425,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented
+    @NotYetImplemented(FF52)
     public void deferred__jQuery_Deferred_catch() throws Exception {
         runTest("deferred: jQuery.Deferred.catch");
     }
@@ -1442,6 +1446,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented(FF52)
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
@@ -1533,6 +1538,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts(IE = "0")
+    @NotYetImplemented(IE)
     public void skippeddeferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
         runTest("skippeddeferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
     }
@@ -1543,7 +1549,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void deferred__jQuery_Deferred_exceptionHook() throws Exception {
         runTest("deferred: jQuery.Deferred.exceptionHook");
     }
@@ -1614,7 +1620,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("68")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void deferred__jQuery_when_thenable____like_Promise_resolve() throws Exception {
         runTest("deferred: jQuery.when(thenable) - like Promise.resolve");
     }
@@ -1625,7 +1631,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("196")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void deferred__jQuery_when_a__b____like_Promise_all() throws Exception {
         runTest("deferred: jQuery.when(a, b) - like Promise.all");
     }
@@ -1798,7 +1804,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void deprecated__isFunction_GeneratorFunction_() throws Exception {
         runTest("deprecated: isFunction(GeneratorFunction)");
     }
@@ -1820,7 +1826,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "1",
             FF = "1")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF})
     public void deprecated__isFunction_AsyncFunction_() throws Exception {
         runTest("deprecated: isFunction(AsyncFunction)");
     }
@@ -1923,6 +1929,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts(IE = "0")
+    @NotYetImplemented(IE)
     public void skippeddeprecated__isNumeric_Symbol_() throws Exception {
         runTest("skippeddeprecated: isNumeric(Symbol)");
     }
@@ -2465,6 +2472,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
+    @NotYetImplemented({CHROME, FF})
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
@@ -2755,6 +2763,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("26")
+    @NotYetImplemented
     public void attributes__val__() throws Exception {
         runTest("attributes: val()");
     }
@@ -5760,6 +5769,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(FF52 = "0",
             IE = "0")
+    @NotYetImplemented(FF52)
     public void skippedmanipulation__html_script_type_module_() throws Exception {
         runTest("skippedmanipulation: html(script type module)");
     }
@@ -5771,7 +5781,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(CHROME = "4",
             FF60 = "4")
-    @NotYetImplemented
+    @NotYetImplemented({CHROME, FF60})
     public void manipulation__html_script_type_module_() throws Exception {
         runTest("manipulation: html(script type module)");
     }
@@ -6345,6 +6355,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("42")
+    @NotYetImplemented(IE)
     public void css__css_String_Hash_() throws Exception {
         runTest("css: css(String|Hash)");
     }
@@ -6387,6 +6398,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("19")
+    @NotYetImplemented(IE)
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
@@ -8376,6 +8388,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("27")
+    @NotYetImplemented({CHROME, FF})
     public void effects__show__() throws Exception {
         runTest("effects: show()");
     }
@@ -8386,6 +8399,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("30")
+    @NotYetImplemented(IE)
     public void effects__show_Number____inline_hidden() throws Exception {
         runTest("effects: show(Number) - inline hidden");
     }
@@ -8396,6 +8410,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("30")
+    @NotYetImplemented(IE)
     public void effects__show_Number____cascade_hidden() throws Exception {
         runTest("effects: show(Number) - cascade hidden");
     }
@@ -8498,6 +8513,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented(IE)
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
@@ -9385,6 +9401,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
+    @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
         runTest("effects: non-px animation handles non-numeric start (#11971)");
     }
@@ -9595,6 +9612,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("40")
+    @NotYetImplemented(IE)
     public void effects__Show_hide_toggle_and_display__inline() throws Exception {
         runTest("effects: Show/hide/toggle and display: inline");
     }
