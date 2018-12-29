@@ -86,6 +86,9 @@ public class JQuery3x3x1Test extends JQueryTestBase {
         final WebElement output = webdriver.findElement(By.id("qunit-test-output-" + testNumber));
         String result = output.getText();
         result = result.substring(0, result.indexOf("Rerun")).trim();
+        if (result.startsWith("skipped")) {
+            result = result.substring(6);
+        }
         return result;
     }
 
@@ -1393,7 +1396,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ FF52, IE })
+    @NotYetImplemented({ CHROME, IE })
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
@@ -1404,7 +1407,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({ CHROME, FF60 })
     public void deferred__jQuery_Deferred_catch() throws Exception {
         runTest("deferred: jQuery.Deferred.catch");
     }
@@ -1425,7 +1428,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented(FF52)
+    @NotYetImplemented({ CHROME, FF52 })
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
@@ -1496,6 +1499,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
+    @NotYetImplemented(FF)
     public void deferred__jQuery_Deferred_then___spec_compatibility() throws Exception {
         runTest("deferred: jQuery.Deferred.then - spec compatibility");
     }
@@ -2389,7 +2393,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF60 })
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
