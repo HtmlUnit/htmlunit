@@ -87,7 +87,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
         String result = output.getText();
         result = result.substring(0, result.indexOf("Rerun")).trim();
         if (result.startsWith("skipped")) {
-            result = result.substring(6);
+            result = result.substring(7);
         }
         return result;
     }
