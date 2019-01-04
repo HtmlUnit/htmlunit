@@ -1998,6 +1998,18 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            IE = "false")
+    public void _OfflineResourceList_OfflineResourceList() throws Exception {
+        test("OfflineResourceList", "OfflineResourceList");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _Option_HTMLOptionElement() throws Exception {
         // although Option != HTMLOptionElement, they seem to be synonyms!!!

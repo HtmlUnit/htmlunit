@@ -337,6 +337,16 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    public void _DOMRect_DOMRect() throws Exception {
+        test("DOMRect", "DOMRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
         test("DOMRectReadOnly", "DOMRectReadOnly");
     }
@@ -4013,6 +4023,17 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_OfflineAudioContext() throws Exception {
         test("EventTarget", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            IE = "false")
+    public void _EventTarget_OfflineResourceList() throws Exception {
+        test("EventTarget", "OfflineResourceList");
     }
 
     /**
