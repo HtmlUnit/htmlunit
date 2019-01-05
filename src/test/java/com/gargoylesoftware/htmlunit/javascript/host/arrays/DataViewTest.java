@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link DataView}.
+ * Tests for DataView.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
