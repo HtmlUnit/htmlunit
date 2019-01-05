@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,12 +136,15 @@ public class HtmlUnitContextFactory extends ContextFactory {
      */
     private class TimeoutContext extends Context {
         private long startTime_;
+
         protected TimeoutContext(final ContextFactory factory) {
             super(factory);
         }
+
         public void startClock() {
             startTime_ = System.currentTimeMillis();
         }
+
         public void terminateScriptIfNecessary() {
             if (timeout_ > 0) {
                 final long currentTime = System.currentTimeMillis();
@@ -152,6 +155,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 }
             }
         }
+
         @Override
         protected Script compileString(String source, final Evaluator compiler,
                 final ErrorReporter compilationErrorReporter, final String sourceName,
