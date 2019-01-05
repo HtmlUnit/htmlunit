@@ -1474,6 +1474,9 @@ public class CSSStyleSheet extends StyleSheet {
             case ONE_OF_ATTRIBUTE_CONDITION:
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
             case CLASS_CONDITION:
+            case PREFIX_ATTRIBUTE_CONDITION:
+            case SUBSTRING_ATTRIBUTE_CONDITION:
+            case SUFFIX_ATTRIBUTE_CONDITION:
                 return true;
             case PSEUDO_CLASS_CONDITION:
                 String value = condition.getValue();
