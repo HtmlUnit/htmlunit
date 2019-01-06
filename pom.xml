@@ -346,8 +346,10 @@
                             <useSystemClassLoader>false</useSystemClassLoader>
                             <includes>
                                 <include>**/libraries/*.java</include>
-                                <exclude>**/JQuery3x3x1Test.java</exclude>
                             </includes>
+                            <excludes>
+                                <exclude>**/libraries/JQuery3x3x1Test.java</exclude>
+                            </excludes>
                             <argLine>-Xms128m -Xmx512m</argLine>
                             <systemPropertyVariables>
                                 <htmlunit.maven>maven</htmlunit.maven>
