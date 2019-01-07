@@ -27,6 +27,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -148,13 +149,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60,
-        BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+    private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
+            Arrays.asList(BrowserVersion.CHROME,
+                    BrowserVersion.FIREFOX_60,
+                    BrowserVersion.FIREFOX_52,
+                    BrowserVersion.INTERNET_EXPLORER,
+                    BrowserVersion.EDGE));
 
     /**
      * Browsers which run by default.
      */
-    public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
+    private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
         {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60, BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
@@ -240,6 +245,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         return BROWSERS_PROPERTIES_;
+    }
+
+    /**
+     * @return the list of supported browsers
+     */
+    public static List<BrowserVersion> allBrowsers() {
+        return ALL_BROWSERS_;
     }
 
     /**

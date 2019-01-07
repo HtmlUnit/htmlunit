@@ -7199,7 +7199,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    public void WebGLSampler() throws Exception {
+    public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
 

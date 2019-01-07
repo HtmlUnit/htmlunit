@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 
 import org.junit.Test;
@@ -84,7 +86,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
             final File file = new File(System.getProperty("user.home"), "htmlunit-embed.bin");
             element.saveAs(file);
             final long length = file.length();
-            file.delete();
+            assertTrue(file.delete());
             assertTrue(length > 0);
         }
     }

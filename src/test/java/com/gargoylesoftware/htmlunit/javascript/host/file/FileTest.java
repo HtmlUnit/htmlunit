@@ -87,7 +87,7 @@ public class FileTest extends WebDriverTestCase {
 
             // do not use millis here because different file systems
             // have different precisions
-            tstFile.setLastModified(1437920507000L);
+            assertTrue(tstFile.setLastModified(1437920507000L));
 
             final String path = tstFile.getCanonicalPath();
             driver.findElement(By.name("fileupload")).sendKeys(path);

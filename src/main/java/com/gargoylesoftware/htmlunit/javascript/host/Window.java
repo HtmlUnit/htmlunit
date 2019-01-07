@@ -1791,8 +1791,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     /**
      * An undocumented IE function.
      */
-    @JsxFunction(IE)
-    public void CollectGarbage() {
+    @JsxFunction(value = IE, functionName = "CollectGarbage")
+    public void collectGarbage() {
         // Empty.
     }
 
@@ -2132,8 +2132,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
      * @return "JScript"
      */
-    @JsxFunction(IE)
-    public String ScriptEngine() {
+    @JsxFunction(value = IE, functionName = "ScriptEngine")
+    public String scriptEngine() {
         return "JScript";
     }
 
@@ -2142,8 +2142,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
      * @return the build version
      */
-    @JsxFunction(IE)
-    public int ScriptEngineBuildVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineBuildVersion")
+    public int scriptEngineBuildVersion() {
         return 12345;
     }
 
@@ -2152,8 +2152,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
      * @return the major version
      */
-    @JsxFunction(IE)
-    public int ScriptEngineMajorVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineMajorVersion")
+    public int scriptEngineMajorVersion() {
         return getBrowserVersion().getBrowserVersionNumeric();
     }
 
@@ -2162,7 +2162,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
      * @return the minor version
      */
-    @JsxFunction(IE)
+    @JsxFunction(value = IE, functionName = "scriptEngineMinorVersion")
     public int ScriptEngineMinorVersion() {
         return 0;
     }

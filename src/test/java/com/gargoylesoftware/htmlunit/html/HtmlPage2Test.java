@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -547,7 +548,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
             assertTrue(FileUtils.readFileToString(file, ISO_8859_1).contains("</textarea>"));
         }
         finally {
-            file.delete();
+            assertTrue(file.delete());
         }
     }
 }

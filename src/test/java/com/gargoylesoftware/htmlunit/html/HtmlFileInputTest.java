@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -335,7 +336,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             driver.findElement(By.id("mySubmit")).click();
         }
         finally {
-            tmpFile.delete();
+            assertTrue(tmpFile.delete());
         }
 
         final String pageSource = driver.getPageSource();
@@ -986,7 +987,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
-        tmpFile.delete();
+        assertTrue(tmpFile.delete());
 
         verifyAlerts(driver, getExpectedAlerts());
     }
