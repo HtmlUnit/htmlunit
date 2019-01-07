@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 70">
-            <action type="add" dev="rbri">
+            <action type="add" dev="rbri" issue="2007">
                 FileReader.readAsText() added.
             </action>
             <action type="update" dev="rbri">
