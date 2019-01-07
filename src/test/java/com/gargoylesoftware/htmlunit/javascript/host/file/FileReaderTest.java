@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
@@ -333,5 +334,335 @@ public class FileReaderTest extends WebDriverTestCase {
 
         driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsText() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0]);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsTextEncodingNull() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0], null);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsTextEncodingUndefined() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0], undefined);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsTextEncodingUnknown() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0], 'Unknown');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsTextUtf8() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0], 'utf-8');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Html \u00dcnit")
+    public void readAsTextIso88591() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0], 'iso-8859-1');\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "Html \u00dcnit", Charset.forName("ISO-8859-1"));
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"", "0"})
+    public void readAsTextEmpty() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      var files = document.testForm.fileupload.files;\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        alert(reader.result);\n"
+            + "        alert(reader.result.length);\n"
+            + "      };\n"
+            + "      reader.readAsText(files[0]);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body>\n"
+            + "  <form name='testForm'>\n"
+            + "    <input type='file' id='fileupload' name='fileupload'>\n"
+            + "  </form>\n"
+            + "  <button id='testBtn' onclick='test()'>Tester</button>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitReadAsTextTest", ".txt");
+        try {
+            FileUtils.write(tstFile, "", StandardCharsets.UTF_8);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.name("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            verifyAlerts(driver, getExpectedAlerts());
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
     }
 }

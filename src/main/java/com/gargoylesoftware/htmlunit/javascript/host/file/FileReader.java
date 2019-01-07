@@ -20,11 +20,17 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -36,8 +42,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
@@ -48,6 +56,8 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
  */
 @JsxClass
 public class FileReader extends EventTarget {
+
+    private static final Log LOG = LogFactory.getLog(FileReader.class);
 
     /** No data has been loaded yet. */
     @JsxConstant
@@ -167,6 +177,45 @@ public class FileReader extends EventTarget {
             buffer.setPrototype(ScriptableObject.getClassPrototype(getWindow(), buffer.getClassName()));
 
             result_ = buffer;
+        }
+        readyState_ = DONE;
+
+        final Event event = new Event(this, Event.TYPE_LOAD);
+        fireEvent(event);
+    }
+
+    /**
+     * Reads the contents of the specified {@link Blob} or {@link File}.
+     * When the read operation is complete, the readyState is changed to DONE,
+     * the loaded event is triggered, and the result attribute contains the
+     * contents of the file as a text string.
+     * @param object the {@link Blob} or {@link File} from which to read
+     * @param encoding the encoding
+     * @throws IOException if an error occurs
+     */
+    @JsxFunction
+    public void readAsText(final Object object, final Object encoding) throws IOException {
+        readyState_ = LOADING;
+        final java.io.File file = ((File) object).getFile();
+        Charset charset = StandardCharsets.UTF_8;
+        if (encoding != null && !Undefined.isUndefined(encoding)) {
+            final String encAsString = Context.toString(encoding);
+            if (StringUtils.isNotBlank(encAsString)) {
+                try {
+                    charset = Charsets.toCharset(encAsString.trim().toLowerCase());
+                }
+                catch (final UnsupportedCharsetException e) {
+                    LOG.warn("FileReader readAsText was called with an unsupported encoding '"
+                                + encoding + "'. Using UTF-8 instead.");
+                }
+            }
+        }
+
+        try {
+            result_ = FileUtils.readFileToString(file, charset);
+        }
+        catch (final IOException e) {
+            LOG.warn("FileReader readAsText can't read the file.", e);
         }
         readyState_ = DONE;
 
