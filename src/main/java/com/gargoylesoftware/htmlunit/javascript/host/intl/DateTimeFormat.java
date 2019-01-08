@@ -208,7 +208,8 @@ public class DateTimeFormat extends SimpleScriptable {
         IE_FORMATS_.put("iw", ddSlash);
         IE_FORMATS_.put("it-CH", ddDot);
         IE_FORMATS_.put("ja", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
-        IE_FORMATS_.put("ja-JP-u-ca-japanese", "\u200E平成\u200E \u200Eyy\u200E年\u200EMM\u200E月\u200Edd\u200E日");
+        IE_FORMATS_.put("ja-JP-u-ca-japanese",
+                            "\u200E\u5E73\u6210\u200E \u200Eyy\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
         IE_FORMATS_.put("ko", "\u200EYYYY\u200E\uB144 \u200EMM\u200E\uC6D4 \u200Edd\u200E\uC77C");
         IE_FORMATS_.put("lt", yyyyDot);
         IE_FORMATS_.put("mt", ddSlash);
