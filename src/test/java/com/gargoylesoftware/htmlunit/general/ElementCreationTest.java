@@ -1685,7 +1685,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLUnknownElement]")
-    public void DocumentCompatibleInfo() throws Exception {
+    public void documentCompatibleInfo() throws Exception {
         test("DocumentCompatibleInfo");
     }
 
@@ -1915,7 +1915,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLUnknownElement]")
-    public void Storage() throws Exception {
+    public void storage() throws Exception {
         test("Storage");
     }
 
@@ -1933,7 +1933,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLUnknownElement]")
-    public void TextNode() throws Exception {
+    public void textNode() throws Exception {
         test("TextNode");
     }
 
@@ -1942,7 +1942,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLUnknownElement]")
-    public void TextRange() throws Exception {
+    public void textRange() throws Exception {
         test("TextRange");
     }
 
@@ -1951,7 +1951,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLUnknownElement]")
-    public void TextRectangle() throws Exception {
+    public void textRectangle() throws Exception {
         test("TextRectangle");
     }
 

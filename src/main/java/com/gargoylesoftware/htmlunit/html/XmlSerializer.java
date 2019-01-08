@@ -347,7 +347,7 @@ class XmlSerializer {
             else {
                 fileName = name;
             }
-            outputDir_.mkdirs();
+            FileUtils.forceMkdir(outputDir_);
             final File f = new File(outputDir_, fileName);
             if (f.createNewFile()) {
                 return f;
