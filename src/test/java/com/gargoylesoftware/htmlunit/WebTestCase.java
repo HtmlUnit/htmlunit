@@ -665,7 +665,7 @@ public abstract class WebTestCase {
 
         if (generateTest_content_ != null && !generateTest_notYetImplemented_) {
             final File targetDir = new File("target/generated_tests");
-            assertTrue(targetDir.mkdirs());
+            FileUtils.forceMkdir(targetDir);
 
             final File outFile = new File(targetDir, generateTest_testName_);
 
