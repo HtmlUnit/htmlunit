@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -348,7 +347,7 @@ class XmlSerializer {
             else {
                 fileName = name;
             }
-            assertTrue(outputDir_.mkdirs());
+            outputDir_.mkdirs();
             final File f = new File(outputDir_, fileName);
             if (f.createNewFile()) {
                 return f;
