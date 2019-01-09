@@ -2162,8 +2162,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
      * @return the minor version
      */
-    @JsxFunction(value = IE, functionName = "scriptEngineMinorVersion")
-    public int ScriptEngineMinorVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineMinorVersion")
+    public int scriptEngineMinorVersion() {
         return 0;
     }
 

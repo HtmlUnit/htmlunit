@@ -1201,7 +1201,7 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.52</version>
+            <version>4.0.53</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
