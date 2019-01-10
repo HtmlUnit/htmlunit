@@ -1200,4 +1200,36 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * {@link https://github.com/HtmlUnit/htmlunit/issues/11}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("inside script.js")
+    public void loadScriptDynamicallyAdded() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var script = document.createElement('script');\n"
+            + "        script.type = 'text/javascript';\n"
+            + "        script.async = true;\n"
+            + "        script.src = 'script.js';\n"
+
+            + "        var s = document.getElementsByTagName('script')[0];\n"
+            + "        s.parentNode.insertBefore(script, s);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='myTextarea' cols='40'></textarea>\n"
+            + "  </body></html>";
+
+        final String js = "alert('inside script.js');";
+
+        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+
+        loadPageWithAlerts2(html);
+    }
 }
