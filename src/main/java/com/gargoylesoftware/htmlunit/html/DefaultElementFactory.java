@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_BLO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.KEYGEN_AS_SELECT;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -753,7 +753,7 @@ class DefaultElementFactory implements ElementFactory {
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
         Map<String, DomAttr> attributeMap = null;
         if (attributes != null) {
-            attributeMap = new HashMap<>(attributes.getLength());
+            attributeMap = new LinkedHashMap<>(attributes.getLength());
             for (int i = 0; i < attributes.getLength(); i++) {
                 final String qName = attributes.getQName(i);
                 // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
