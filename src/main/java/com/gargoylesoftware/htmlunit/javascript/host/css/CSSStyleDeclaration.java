@@ -2614,7 +2614,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             cssValue.setCssText(formatedCssText);
         }
 
-        return new CSSPrimitiveValue(jsElement_, (CSSValueImpl) cssValue);
+        return new CSSPrimitiveValue(jsElement_, cssValue);
     }
 
     /**

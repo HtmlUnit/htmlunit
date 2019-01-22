@@ -616,6 +616,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @JsxGetter
+    @Override
     public Element getDocumentElement() {
         implicitCloseIfNecessary();
         return super.getDocumentElement();
@@ -818,7 +819,7 @@ public class HTMLDocument extends Document {
         };
     }
 
-    private List<DomNode> getItComputeElements(final HtmlPage page, final String name,
+    private static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
             final boolean forIDAndOrName, final boolean alsoFrames) {
         final List<DomElement> elements;
         if (forIDAndOrName) {

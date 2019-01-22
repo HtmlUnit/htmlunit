@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -633,9 +634,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         prepareRequest(content);
 
         final Window w = getWindow();
-        final WebClient client = w.getWebWindow().getWebClient();
+        final WebWindow ww = w.getWebWindow();
+        final WebClient client = ww.getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
-        final HtmlPage page = (HtmlPage) w.getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) ww.getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());
@@ -682,7 +684,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
-            jobID_ = w.getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = ww.getJobManager().addJob(job, page);
         }
     }
 

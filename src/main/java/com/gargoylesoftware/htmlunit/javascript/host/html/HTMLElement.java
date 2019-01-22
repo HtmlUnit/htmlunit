@@ -2044,6 +2044,7 @@ public class HTMLElement extends Element {
      * @return the {@code onwheel} event handler for this element
      */
     @JsxGetter({CHROME, FF60})
+    @Override
     public Function getOnwheel() {
         return super.getOnwheel();
     }
@@ -2053,6 +2054,7 @@ public class HTMLElement extends Element {
      * @param onwheel the {@code onwheel} event handler for this element
      */
     @JsxSetter({CHROME, FF60})
+    @Override
     public void setOnwheel(final Object onwheel) {
         super.setOnwheel(onwheel);
     }
@@ -2063,6 +2065,7 @@ public class HTMLElement extends Element {
      * if false, events can also fire at descendants of this element
      */
     @JsxFunction(IE)
+    @Override
     public void setCapture(final boolean retargetToElement) {
         super.setCapture(retargetToElement);
     }
@@ -2072,6 +2075,7 @@ public class HTMLElement extends Element {
      * @return true for success
      */
     @JsxFunction(IE)
+    @Override
     public boolean releaseCapture() {
         return super.releaseCapture();
     }

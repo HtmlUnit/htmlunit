@@ -71,7 +71,7 @@ public class MediaList extends SimpleScriptable {
         if (index < 0 || index >= getLength()) {
             return null;
         }
-        final MediaQuery mq = ((MediaListImpl) wrappedList_).mediaQuery(index);
+        final MediaQuery mq = wrappedList_.mediaQuery(index);
         return mq.toString();
     }
 

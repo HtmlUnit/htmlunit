@@ -99,6 +99,7 @@ public class BeforeUnloadEvent extends Event {
      * @return the return value associated with the event
      */
     @JsxGetter
+    @Override
     public Object getReturnValue() {
         return returnValue_;
     }
@@ -108,6 +109,7 @@ public class BeforeUnloadEvent extends Event {
      * @param returnValue the return value associated with the event
      */
     @JsxSetter
+    @Override
     public void setReturnValue(final Object returnValue) {
         returnValue_ = returnValue;
     }

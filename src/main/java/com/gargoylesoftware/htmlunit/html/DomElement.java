@@ -1410,7 +1410,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         final EventTarget jsElt = getScriptableObject();
         final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final ScriptResult result = (ScriptResult) cf.call(cx -> jsElt.fireEvent(event));
+        final ScriptResult result = cf.call(cx -> jsElt.fireEvent(event));
         if (event.isAborted(result)) {
             preventDefault();
         }

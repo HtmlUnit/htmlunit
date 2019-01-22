@@ -211,8 +211,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         final int width = metrics.stringWidth(text);
         final int ascent = metrics.getAscent();
 
-        final float posX = (float) (x - width / 2);
-        final float posY = (float) (y + ascent / 2);
+        final float posX = x - width / 2;
+        final float posY = y + ascent / 2;
 
         graphics2D_.setTransform(transformation_);
         graphics2D_.setColor(fillColor_);
@@ -359,6 +359,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public int getLineWidth() {
         return lineWidth_;
     }
@@ -366,6 +367,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void restore() {
         if (savedStates_.isEmpty()) {
             return;
@@ -377,6 +379,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void rotate(final double angle) {
         transformation_.rotate(angle);
     }
@@ -384,6 +387,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void save() {
         savedStates_.push(new SaveState(this));
         reset();
@@ -392,6 +396,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setLineWidth(final int lineWidth) {
         lineWidth_ = lineWidth;
     }
@@ -399,6 +404,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setTransform(final double m11, final double m12,
                     final double m21, final double m22, final double dx, final double dy) {
         transformation_ = new AffineTransform(m11, m12, m21, m22, dx, dy);

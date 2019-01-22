@@ -883,7 +883,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
 
         final Iterator<AnimationFrame> frames = animationFrames_.iterator();
         while (frames.hasNext()) {
-            final Window.AnimationFrame animationFrame = (Window.AnimationFrame) frames.next();
+            final Window.AnimationFrame animationFrame = frames.next();
             if (animationFrame.id_ == id) {
                 frames.remove();
             }

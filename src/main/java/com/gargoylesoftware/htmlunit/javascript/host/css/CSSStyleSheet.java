@@ -1062,7 +1062,7 @@ public class CSSStyleSheet extends StyleSheet {
         cssRules_.clearRules();
         cssRulesIndexFix_.clear();
 
-        final CSSRuleListImpl ruleList = (CSSRuleListImpl) getWrappedSheet().getCssRules();
+        final CSSRuleListImpl ruleList = getWrappedSheet().getCssRules();
         final List<AbstractCSSRuleImpl> rules = ruleList.getRules();
         int pos = 0;
         for (AbstractCSSRuleImpl rule : rules) {
@@ -1083,7 +1083,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         // reset our index also
-        ((CSSStyleSheetImpl) getWrappedSheet()).resetRuleIndex();
+        getWrappedSheet().resetRuleIndex();
     }
 
     private int fixIndex(int index) {
@@ -1226,7 +1226,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         for (int i = 0; i < mediaList.getLength(); i++) {
-            final MediaQuery mediaQuery = ((MediaListImpl) mediaList).mediaQuery(i);
+            final MediaQuery mediaQuery = mediaList.mediaQuery(i);
             boolean isActive = isActive(scriptable, mediaQuery);
             if (mediaQuery.isNot()) {
                 isActive = !isActive;
@@ -1245,77 +1245,77 @@ public class CSSStyleSheet extends StyleSheet {
                 final float val;
                 switch (property.getName()) {
                     case "max-width":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-width":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-width":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-width":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-height":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-height":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-height":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val < scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
-                        val = pixelValue((CSSValueImpl) property.getValue(), scriptable);
+                        val = pixelValue(property.getValue(), scriptable);
                         if (val == -1 || val > scriptable.getWindow().getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "resolution":
-                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        val = resolutionValue(property.getValue());
                         if (val == -1 || Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "max-resolution":
-                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        val = resolutionValue(property.getValue());
                         if (val == -1 || val < scriptable.getWindow().getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "min-resolution":
-                        val = resolutionValue((CSSValueImpl) property.getValue());
+                        val = resolutionValue(property.getValue());
                         if (val == -1 || val > scriptable.getWindow().getScreen().getDeviceXDPI()) {
                             return false;
                         }
@@ -1522,12 +1522,12 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private CSSStyleSheetImpl.CSSStyleSheetRuleIndex getRuleIndex() {
-        final CSSStyleSheetImpl styleSheet = (CSSStyleSheetImpl) getWrappedSheet();
+        final CSSStyleSheetImpl styleSheet = getWrappedSheet();
         CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
 
         if (index == null) {
             index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
-            final CSSRuleListImpl ruleList = (CSSRuleListImpl) styleSheet.getCssRules();
+            final CSSRuleListImpl ruleList = styleSheet.getCssRules();
             index(index, ruleList, new HashSet<String>());
 
             styleSheet.setRuleIndex(index);
@@ -1581,10 +1581,10 @@ public class CSSStyleSheet extends StyleSheet {
                     alreadyProcessing.add(sheet.getUri());
 
                     if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
-                        index(index, (CSSRuleListImpl) sheetRuleList, alreadyProcessing);
+                        index(index, sheetRuleList, alreadyProcessing);
                     }
                     else {
-                        index(index.addMedia(mediaList), (CSSRuleListImpl) sheetRuleList, alreadyProcessing);
+                        index(index.addMedia(mediaList), sheetRuleList, alreadyProcessing);
                     }
                 }
             }
@@ -1592,10 +1592,10 @@ public class CSSStyleSheet extends StyleSheet {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
                 final MediaListImpl mediaList = mediaRule.getMedia();
                 if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
-                    index(index, (CSSRuleListImpl) mediaRule.getCssRules(), alreadyProcessing);
+                    index(index, mediaRule.getCssRules(), alreadyProcessing);
                 }
                 else {
-                    index(index.addMedia(mediaList), (CSSRuleListImpl) mediaRule.getCssRules(), alreadyProcessing);
+                    index(index.addMedia(mediaList), mediaRule.getCssRules(), alreadyProcessing);
                 }
             }
         }
