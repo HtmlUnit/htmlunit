@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -76,6 +79,68 @@ public class RhinoTest extends WebDriverTestCase {
             + "  }\n"
 
             + "  alert(isStrict());\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void isStrict_argumentsCallee() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  'use strict'\n"
+
+            + "  function isStrict() {\n"
+            + "    try { arguments.callee } catch(e) { return true; };"
+            + "    return false;\n"
+            + "  }\n"
+
+            + "  alert(isStrict());\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true"},
+            IE = {"true.constructor", "1.constructor", "test.constructor"})
+    @NotYetImplemented({CHROME, FF})
+    public void isStrict_constructor() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  'use strict'\n"
+
+            + "  function Foo () {}\n"
+
+            + "  try {\n"
+            + "    true.constructor = Foo;\n"
+            + "    alert('true.constructor');\n"
+            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+
+            + "  try {\n"
+            + "    var o = 1;\n"
+            + "    o.constructor = Foo;\n"
+            + "    alert('1.constructor');\n"
+            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+
+            + "  try {\n"
+            + "    'test'.constructor = Foo;\n"
+            + "    alert('test.constructor');\n"
+            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+
             + "</script>\n"
             + "</body></html>";
 
