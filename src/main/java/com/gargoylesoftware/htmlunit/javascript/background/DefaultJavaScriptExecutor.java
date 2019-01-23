@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,7 +37,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     private final transient WeakReference<WebClient> webClient_;
     private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
 
-    private volatile boolean shutdown_;
+    private final transient AtomicBoolean shutdown_;
 
     private transient Thread eventLoopThread_;
 
@@ -50,6 +51,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     public DefaultJavaScriptExecutor(final WebClient webClient) {
         webClient_ = new WeakReference<>(webClient);
         jobManagerList_ = new LinkedList<>();
+        shutdown_ = new AtomicBoolean();
     }
 
     /**
@@ -129,7 +131,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
-        while (!shutdown_ && !Thread.currentThread().isInterrupted() && webClient_.get() != null) {
+        while (!shutdown_.get() && !Thread.currentThread().isInterrupted() && webClient_.get() != null) {
             final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
 
             if (jobManager != null) {
@@ -155,7 +157,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             }
 
             // check for cancel
-            if (shutdown_ || Thread.currentThread().isInterrupted() || webClient_.get() == null) {
+            if (shutdown_.get() || Thread.currentThread().isInterrupted() || webClient_.get() == null) {
                 break;
             }
 
@@ -205,7 +207,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     /** Notes that this thread has been shutdown. */
     @Override
     public void shutdown() {
-        shutdown_ = true;
+        shutdown_.set(true);
         killThread();
 
         webClient_.clear();

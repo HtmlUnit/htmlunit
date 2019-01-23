@@ -115,12 +115,10 @@ public class EventListenersContainer implements Serializable {
                 // Insert the placeholder and set the handler
                 return withPropertyHandler(propertyHandler).addListener(EVENT_HANDLER_PLACEHOLDER, false);
             }
-            else {
-                if (handler_ == null) {
-                    return this;
-                }
-                return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
+            if (handler_ == null) {
+                return this;
             }
+            return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
         }
 
         private TypeContainer withPropertyHandler(final Function propertyHandler) {

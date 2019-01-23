@@ -299,9 +299,7 @@ public class Cache implements Serializable {
             }
             return cachedEntry;
         }
-        else {
-            entries_.remove(UrlUtils.normalize(url));
-        }
+        entries_.remove(UrlUtils.normalize(url));
         return null;
     }
 

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import java.io.Serializable;
-
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -25,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Kostadin Chikov
  * @author Ronald Brill
  */
-public interface JavaScriptExecutor extends Runnable, Serializable {
+public interface JavaScriptExecutor extends Runnable {
 
     /**
      * Register a window with the eventLoop.

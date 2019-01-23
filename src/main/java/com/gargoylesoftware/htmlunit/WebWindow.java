@@ -177,25 +177,4 @@ public interface WebWindow extends Serializable {
      * @param outerHeight the outer height
      */
     void setOuterHeight(int outerHeight);
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns a thread local object.
-     *
-     * @param key the object key
-     *
-     * @return the thread local object
-     */
-    Object getThreadLocal(Object key);
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Puts a thread local object by {@code key}.
-     *
-     * @param key the object key
-     * @param value the object value
-     */
-    void putThreadLocal(Object key, Object value);
 }

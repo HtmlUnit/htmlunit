@@ -136,7 +136,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             else {
                 client_ = new WebSocketClient();
             }
-            client_.setCookieStore(new WebSocketCookieStore(webClient));
+            client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
 
             final WebSocketPolicy policy = client_.getPolicy();
             int size = webClient.getOptions().getWebSocketMaxBinaryMessageSize();

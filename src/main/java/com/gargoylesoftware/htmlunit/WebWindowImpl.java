@@ -22,9 +22,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,7 +57,6 @@ public abstract class WebWindowImpl implements WebWindow {
     private String name_ = "";
     private final History history_ = new History(this);
     private boolean closed_;
-    private Map<Object, Object> threadLocalMap_;
 
     private int innerHeight_;
     private int outerHeight_;
@@ -335,22 +332,6 @@ public abstract class WebWindowImpl implements WebWindow {
     @Override
     public void setOuterHeight(final int outerHeight) {
         outerHeight_ = outerHeight;
-    }
-
-    @Override
-    public final Object getThreadLocal(final Object key) {
-        if (threadLocalMap_ == null) {
-            return null;
-        }
-        return threadLocalMap_.get(key);
-    }
-
-    @Override
-    public final synchronized void putThreadLocal(final Object key, final Object value) {
-        if (threadLocalMap_ == null) {
-            threadLocalMap_ = new HashMap<>();
-        }
-        threadLocalMap_.put(key, value);
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 70">
+            <action type="update" dev="rbri">
+                JavaScriptExecutor is no longer serializable.
+            </action>
             <action type="add" dev="rbri" issue="2007">
                 FileReader.readAsText() added.
             </action>
