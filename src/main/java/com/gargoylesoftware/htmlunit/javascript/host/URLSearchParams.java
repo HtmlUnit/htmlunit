@@ -91,7 +91,7 @@ public class URLSearchParams extends SimpleScriptable {
         }
     }
 
-    private Entry<String, String> splitQueryParameter(final String singleParam) {
+    private static Entry<String, String> splitQueryParameter(final String singleParam) {
         final int idx = singleParam.indexOf('=');
         if (idx > -1) {
             final String key = singleParam.substring(0, idx);
@@ -125,6 +125,7 @@ public class URLSearchParams extends SimpleScriptable {
      * @param name The name of the parameter to be deleted.
      */
     @JsxFunction
+    @Override
     public void delete(final String name) {
         final Iterator<Entry<String, String>> iter = params_.iterator();
         while (iter.hasNext()) {

@@ -58,6 +58,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -240,7 +241,7 @@ public class Document extends Node {
     /**
      * Static counter for {@link #uniqueID_}.
      */
-    private static int UniqueID_Counter_ = 1;
+    private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private Window window_;
     private DOMImplementation implementation_;
@@ -1122,7 +1123,7 @@ public class Document extends Node {
     @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_++;
+            uniqueID_ = "ms__id" + UniqueID_Counter_.getAndIncrement();
         }
         return uniqueID_;
     }
