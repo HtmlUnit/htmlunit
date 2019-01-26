@@ -1403,7 +1403,6 @@ public class WebClient implements Serializable, AutoCloseable {
             catch (final NoHttpResponseException e) {
                 return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
             }
-            getCache().cacheIfPossible(webRequest, webResponse, null);
         }
 
         // Continue according to the HTTP status code.
@@ -1472,6 +1471,9 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
+        if (fromCache == null) {
+            getCache().cacheIfPossible(webRequest, webResponse, null);
+        }
         return webResponse;
     }
 

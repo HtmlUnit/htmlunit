@@ -124,7 +124,7 @@ public class Cache implements Serializable {
      */
     public boolean cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
         if (isCacheable(request, response)) {
-            final URL url = response.getWebRequest().getUrl();
+            final URL url = request.getUrl();
             if (url == null) {
                 return false;
             }

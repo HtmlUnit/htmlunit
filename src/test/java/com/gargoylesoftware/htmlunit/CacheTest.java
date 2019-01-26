@@ -323,9 +323,51 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", "text/css", headers);
 
         client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+    }
+
+    /**
+     * Check for correct caching if the css request gets redirected.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cssIsCachedIfUrlWasRedirected() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body onload='document.styleSheets.item(0); document.styleSheets.item(1);'>x</body>\n"
+            + "</html>";
+
+        final String css = ".x { color: red; }";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final URL cssUrl = new URL(URL_FIRST, "foo.css");
+        final URL redirectUrl = new URL(URL_FIRST, "fooContent.css");
+
+        List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", redirectUrl.toExternalForm()));
+        connection.setResponse(cssUrl, "", 301, "Redirect", null, headers);
+
+        headers = Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(redirectUrl, css, 200, "OK", "text/css", headers);
+
+        client.getPage(pageUrl);
+        client.getPage(pageUrl);
+
+        // page1.html - foo.css - fooContent.css - page1.html
+        assertEquals(4, connection.getRequestCount());
+        // foo.css - fooContent.css
         assertEquals(2, client.getCache().getSize());
     }
 
