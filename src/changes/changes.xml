@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 70">
+            <action type="update" dev="rbri">
+                Avoid the try to add a response to cache if the response is already from cache or an redirect.
+            </action>
+            <action type="fix" dev="rbri" issue="14">
+                Fix caching for redirected calls.
+            </action>
             <action type="fix" dev="rbri" issue="258">
                 Some fixes for broken attribute processing done in neko-htmlunit.
             </action>
