@@ -19,6 +19,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -58,7 +59,7 @@ public class DOMParser extends SimpleScriptable {
         if (type == null || Undefined.instance == type) {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
-        if (!"text/html".equals(type) && !"text/xml".equals(type) && !"application/xml".equals(type)
+        if (!MimeType.TEXT_HTML.equals(type) && !MimeType.TEXT_XML.equals(type) && !"application/xml".equals(type)
             && !"application/xhtml+xml".equals(type) && !"image/svg+xml".equals(type)) {
             throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
         }

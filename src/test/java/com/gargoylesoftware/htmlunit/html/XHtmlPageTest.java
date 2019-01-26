@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link XHtmlPage}.
@@ -56,7 +57,7 @@ public class XHtmlPageTest extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(actual));
 
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, html, "text/xml");
+        conn.setResponse(URL_FIRST, html, MimeType.TEXT_XML);
         client.setWebConnection(conn);
 
         final XHtmlPage page = client.getPage(URL_FIRST);
@@ -83,13 +84,13 @@ public class XHtmlPageTest extends SimpleWebTestCase {
             + "</head><body><span id='j_id216:outtext'>Echo Hello World</span></body></html>";
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(content, 200, "OK", "text/xml");
+        webConnection.setDefaultResponse(content, 200, "OK", MimeType.TEXT_XML);
         client.setWebConnection(webConnection);
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
         assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
-        assertEquals("text/xml", page.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
         assertTrue(XHtmlPage.class.isInstance(page));
     }
 

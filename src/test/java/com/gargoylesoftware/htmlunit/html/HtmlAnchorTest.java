@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -630,7 +631,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "  <a href='" + href + "' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(html, "text/html", UTF_8);
+        getMockWebConnection().setDefaultResponse(html, MimeType.TEXT_HTML, UTF_8);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, URL_FIRST);

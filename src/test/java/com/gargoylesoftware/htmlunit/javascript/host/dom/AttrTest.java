@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -406,7 +407,7 @@ public class AttrTest extends WebDriverTestCase {
             + "<div testAttr='test'></div>"
             + "</xml>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 }

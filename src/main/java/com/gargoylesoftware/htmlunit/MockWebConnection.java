@@ -28,6 +28,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -323,7 +324,7 @@ public class MockWebConnection implements WebConnection {
      * @param content the content to return
      */
     public void setResponse(final URL url, final String content) {
-        setResponse(url, content, 200, "OK", "text/html", null);
+        setResponse(url, content, 200, "OK", MimeType.TEXT_HTML, null);
     }
 
     /**
@@ -403,7 +404,7 @@ public class MockWebConnection implements WebConnection {
      * @param content the content to return
      */
     public void setDefaultResponse(final String content) {
-        setDefaultResponse(content, 200, "OK", "text/html");
+        setDefaultResponse(content, 200, "OK", MimeType.TEXT_HTML);
     }
 
     /**

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link HtmlFrame}.
@@ -163,7 +164,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClientWithMockWebConnection();
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setDefaultResponse(failingHtml, 404, "Not Found", "text/html");
+        webConnection.setDefaultResponse(failingHtml, 404, "Not Found", MimeType.TEXT_HTML);
         webConnection.setResponse(URL_FIRST, firstHtml);
         webConnection.setResponse(URL_SECOND, secondHtml);
         webConnection.setResponse(URL_THIRD, thirdHtml);

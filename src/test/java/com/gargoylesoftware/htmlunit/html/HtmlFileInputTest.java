@@ -46,6 +46,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -356,7 +357,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write("<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
@@ -380,7 +381,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {

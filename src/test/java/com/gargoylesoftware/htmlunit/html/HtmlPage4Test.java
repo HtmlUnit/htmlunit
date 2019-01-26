@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -83,7 +84,7 @@ public class HtmlPage4Test extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             final Writer writer = resp.getWriter();
-            resp.setContentType("text/html");
+            resp.setContentType(MimeType.TEXT_HTML);
             final String response = "<html>\n"
                     + "<body>\n"
                     + "  <form action='two.html' method='post'>\n"
@@ -100,7 +101,7 @@ public class HtmlPage4Test extends WebServerTestCase {
          */
         @Override
         protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
-            resp.setContentType("text/html");
+            resp.setContentType(MimeType.TEXT_HTML);
             final StringBuilder builder = new StringBuilder();
             builder.append(counter_++).append("\n");
             builder.append(req.getMethod()).append("\n");

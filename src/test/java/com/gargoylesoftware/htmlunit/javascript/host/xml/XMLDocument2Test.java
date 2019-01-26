@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -244,7 +245,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -277,7 +278,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "    <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -305,7 +306,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -341,7 +342,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -368,7 +369,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -402,7 +403,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
              + "  <foofoo name='second'>something else</foofoo>\n"
              + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -426,7 +427,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
               "<!DOCTYPE dtd [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>\n"
             + "<a><b>1</b><b>2</b></a>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -457,7 +458,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
               "<!DOCTYPE dtd [ <!ELEMENT a (b+)> <!ELEMENT b (#PCDATA)> ]>\n"
             + "<a><b>1</b><b>2</b></a>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -484,7 +485,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -518,7 +519,7 @@ public class XMLDocument2Test extends WebDriverTestCase {
             + "  <foofoo name='second'>something else</foofoo>\n"
             + "</foo>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 

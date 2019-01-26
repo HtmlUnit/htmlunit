@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -106,16 +107,16 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         }
 
         switch (contentType) {
-            case "text/html":
+            case MimeType.TEXT_HTML:
             case "image/svg+xml":
                 return PageType.HTML;
 
             case "text/javascript":
             case "application/x-javascript":
-            case "application/javascript":
+            case MimeType.APPLICATION_JAVASCRIPT:
                 return PageType.JAVASCRIPT;
 
-            case "text/xml":
+            case MimeType.TEXT_XML:
             case "application/xml":
             case "text/vnd.wap.wml":
                 return PageType.XML;
@@ -200,14 +201,14 @@ public class DefaultPageCreator implements PageCreator, Serializable {
 
             final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ROOT);
             if (asAsciiString.contains("<HTML")) {
-                return "text/html";
+                return MimeType.TEXT_HTML;
             }
             else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
                     || startsWith(bytes, markerUTF16LE_)) {
                 return "text/plain";
             }
             else if (asAsciiString.trim().startsWith("<SCRIPT>")) {
-                return "application/javascript";
+                return MimeType.APPLICATION_JAVASCRIPT;
             }
             else if (isBinary(bytes)) {
                 return "application/octet-stream";

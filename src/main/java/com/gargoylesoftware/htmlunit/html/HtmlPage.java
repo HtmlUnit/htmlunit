@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -1047,7 +1048,7 @@ public class HtmlPage extends SgmlPage {
 
         //http://www.ietf.org/rfc/rfc4329.txt
         final String contentType = response.getContentType();
-        if (!"application/javascript".equalsIgnoreCase(contentType)
+        if (!MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(contentType)
             && !"application/ecmascript".equalsIgnoreCase(contentType)) {
             // warn about obsolete or not supported content types
             if ("text/javascript".equals(contentType)

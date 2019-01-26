@@ -477,7 +477,7 @@ public final class EncodingSniffer {
      * @return {@code true} if the specified HTTP response headers indicate an HTML response
      */
     static boolean isHtml(final List<NameValuePair> headers) {
-        return contentTypeEndsWith(headers, "text/html");
+        return contentTypeEndsWith(headers, MimeType.TEXT_HTML);
     }
 
     /**
@@ -487,7 +487,7 @@ public final class EncodingSniffer {
      * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
     static boolean isXml(final List<NameValuePair> headers) {
-        return contentTypeEndsWith(headers, "text/xml", "application/xml", "text/vnd.wap.wml", "+xml");
+        return contentTypeEndsWith(headers, MimeType.TEXT_XML, "application/xml", "text/vnd.wap.wml", "+xml");
     }
 
     /**

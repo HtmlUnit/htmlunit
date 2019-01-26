@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -56,7 +57,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final String errorContent = "<html><head><title>ERROR 500</title></head><body></body></html>";
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, errorContent, 500, "BOOM", "text/html", emptyList);
+        webConnection.setResponse(URL_SECOND, errorContent, 500, "BOOM", MimeType.TEXT_HTML, emptyList);
 
         // test script exception
         String content = "<html><head><title>Throw JavaScript Error</title>\n"
@@ -133,7 +134,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final CollectingJavaScriptErrorListener javaScriptErrorListener = new CollectingJavaScriptErrorListener();
         webClient.setJavaScriptErrorListener(javaScriptErrorListener);
 
-        getMockWebConnection().setDefaultResponse("", 500, "Server Error", "text/html");
+        getMockWebConnection().setDefaultResponse("", 500, "Server Error", MimeType.TEXT_HTML);
 
         final String html = "<html><head>\n"
             + "<script src='notExisting.js' type='text/javascript'></script></head>\n"

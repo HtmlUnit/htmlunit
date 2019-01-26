@@ -35,6 +35,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link History}.
@@ -132,7 +133,7 @@ public class HistoryTest extends WebDriverTestCase {
             throws ServletException, IOException {
 
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write(
                     "<html>\n"
                     + "<body>\n"
@@ -161,7 +162,7 @@ public class HistoryTest extends WebDriverTestCase {
             throws ServletException, IOException {
 
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             writer.write("POST<br>\n");
             for (final Enumeration<String> en = request.getParameterNames(); en.hasMoreElements();) {
@@ -184,7 +185,7 @@ public class HistoryTest extends WebDriverTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
                 throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             writer.write("GET<br>\n");
         }

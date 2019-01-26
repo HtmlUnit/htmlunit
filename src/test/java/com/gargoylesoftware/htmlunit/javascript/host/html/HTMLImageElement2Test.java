@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -190,7 +191,7 @@ public class HTMLImageElement2Test extends SimpleWebTestCase {
         final String html = "<html><body><img src='" + URL_SECOND + "' onload='alert(1)'></body></html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, "foo", 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
 
         loadPageWithAlerts(html);
 

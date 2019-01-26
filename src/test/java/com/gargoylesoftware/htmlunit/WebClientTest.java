@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -317,7 +318,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 return super.getResponse(webRequest);
             }
         };
-        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
+        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", MimeType.TEXT_HTML, headers);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage page = webClient.getPage(new WebRequest(URL_FIRST, HttpMethod.POST));
@@ -524,7 +525,7 @@ public class WebClientTest extends SimpleWebTestCase {
             public WebResponse getResponse(final WebRequest webRequest) throws IOException {
                 ++count_;
                 if (count_ < nbRedirections) {
-                    setResponse(url, firstContent, 302, "Redirect needed " + count_, "text/html", headers);
+                    setResponse(url, firstContent, 302, "Redirect needed " + count_, MimeType.TEXT_HTML, headers);
                     return super.getResponse(webRequest);
                 }
                 else if (count_ == nbRedirections) {
@@ -537,7 +538,7 @@ public class WebClientTest extends SimpleWebTestCase {
                 }
             }
         };
-        webConnection.setResponse(url, firstContent, 302, "Redirect needed", "text/html", headers);
+        webConnection.setResponse(url, firstContent, 302, "Redirect needed", MimeType.TEXT_HTML, headers);
         webClient.setWebConnection(webConnection);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 
@@ -562,7 +563,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.setWebConnection(conn);
 
         final List<NameValuePair> headers = asList(new NameValuePair("Location", URL_SECOND.toString()));
-        conn.setResponse(URL_FIRST, "", statusCode, "", "text/html", headers);
+        conn.setResponse(URL_FIRST, "", statusCode, "", MimeType.TEXT_HTML, headers);
         conn.setResponse(URL_SECOND, "<html><body>abc</body></html>");
 
         final WebRequest request = new WebRequest(URL_FIRST);
@@ -615,7 +616,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", newLocation));
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", "text/html", headers);
+        webConnection.setResponse(URL_FIRST, firstContent, statusCode, "Some error", MimeType.TEXT_HTML, headers);
         webConnection.setResponse(new URL(newLocation), secondContent);
 
         webClient.setWebConnection(webConnection);
@@ -796,7 +797,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = client.getPage(url);
 
         assertEquals(htmlContent, page.getWebResponse().getContentAsString());
-        assertEquals("text/html", page.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_HTML, page.getWebResponse().getContentType());
         assertEquals(200, page.getWebResponse().getStatusCode());
         assertEquals("foo", page.getTitleText());
 
@@ -806,7 +807,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page2 = client.getPage(url2);
 
         assertEquals(htmlContent, page2.getWebResponse().getContentAsString());
-        assertEquals("text/html", page2.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_HTML, page2.getWebResponse().getContentType());
         assertEquals(200, page2.getWebResponse().getStatusCode());
         assertEquals("foo", page2.getTitleText());
 
@@ -816,7 +817,7 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page3 = client.getPage(url3);
 
         assertEquals(htmlContent, page3.getWebResponse().getContentAsString());
-        assertEquals("text/html", page3.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_HTML, page3.getWebResponse().getContentType());
         assertEquals(200, page3.getWebResponse().getStatusCode());
         assertEquals("foo", page3.getTitleText());
     }
@@ -1144,7 +1145,7 @@ public class WebClientTest extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = new MockWebConnection();
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", "text/html", emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 500, "BOOM", MimeType.TEXT_HTML, emptyList);
         webClient.setWebConnection(webConnection);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);
@@ -1239,7 +1240,7 @@ public class WebClientTest extends SimpleWebTestCase {
             final String location2 = "http://hostToByPass/foo.html";
             final List<NameValuePair> headers = Collections.singletonList(new NameValuePair("Location", location2));
             final MockWebConnection webConnection = new MockWebConnection();
-            webConnection.setResponse(URL_FIRST, html, 302, "Some error", "text/html", headers);
+            webConnection.setResponse(URL_FIRST, html, 302, "Some error", MimeType.TEXT_HTML, headers);
             webConnection.setResponse(new URL(location2), "<html><head><title>2nd page</title></head></html>");
             webClient.setWebConnection(webConnection);
 
@@ -1430,7 +1431,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
         assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
         assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
-        assertEquals("empty.js", "application/javascript", c.guessContentType(getTestFile("empty.js")));
+        assertEquals("empty.js", MimeType.APPLICATION_JAVASCRIPT, c.guessContentType(getTestFile("empty.js")));
         assertEquals("empty.css", "text/css", c.guessContentType(getTestFile("empty.css")));
 
         // test real files with bad file suffix
@@ -1441,8 +1442,8 @@ public class WebClientTest extends SimpleWebTestCase {
         // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
         // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
         assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
-        assertEquals("xhtml.htm", "text/html", c.guessContentType(getTestFile("xhtml.htm")));
-        assertEquals("xhtml.html", "text/html", c.guessContentType(getTestFile("xhtml.html")));
+        assertEquals("xhtml.htm", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.htm")));
+        assertEquals("xhtml.html", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.html")));
         assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
     }
 
@@ -1750,7 +1751,7 @@ public class WebClientTest extends SimpleWebTestCase {
         conn.setResponse(URL_FIRST, html);
 
         final String css = ".foo { color: green; }";
-        conn.setResponse(URL_SECOND, css, 200, "OK", "text/css", new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, css, 200, "OK", MimeType.TEXT_CSS, new ArrayList<NameValuePair>());
 
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));

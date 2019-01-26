@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -53,7 +54,7 @@ public final class SgmlPageTest extends WebServerTestCase {
 
             final List<NameValuePair> headers = new ArrayList<>();
             headers.add(new NameValuePair("Expires", formatDate(DateUtils.addHours(new Date(), 1))));
-            getMockWebConnection().setDefaultResponse("something", 200, "Ok", "text/html", headers);
+            getMockWebConnection().setDefaultResponse("something", 200, "Ok", MimeType.TEXT_HTML, headers);
             startWebServer(getMockWebConnection());
 
             webClient.getPage(URL_FIRST);

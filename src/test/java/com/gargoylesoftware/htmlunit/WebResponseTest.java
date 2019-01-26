@@ -39,6 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -116,7 +117,7 @@ public class WebResponseTest extends WebServerTestCase {
         final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(HttpHeader.CONTENT_TYPE, cntTypeHeader));
-        conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
+        conn.setDefaultResponse("<html/>", 200, "OK", MimeType.TEXT_HTML, headers);
         final WebClient webClient = getWebClient();
         webClient.setWebConnection(conn);
 
@@ -148,7 +149,7 @@ public class WebResponseTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.setHeader("some_header", "some_value");
             final Writer writer = response.getWriter();
             writer.write("<html/>");
@@ -162,7 +163,7 @@ public class WebResponseTest extends WebServerTestCase {
     public void getContentAsStringIllegalCharset() throws Exception {
         final MockWebConnection conn = new MockWebConnection();
         final List<NameValuePair> headers = new ArrayList<>();
-        conn.setDefaultResponse("<html/>", 200, "OK", "text/html", headers);
+        conn.setDefaultResponse("<html/>", 200, "OK", MimeType.TEXT_HTML, headers);
         final WebClient webClient = getWebClient();
         webClient.setWebConnection(conn);
 
@@ -190,7 +191,7 @@ public class WebResponseTest extends WebServerTestCase {
 
             final byte[] encoded = bos.toByteArray();
 
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.setCharacterEncoding(UTF_8.name());
             response.setStatus(200);
             response.setContentLength(encoded.length);

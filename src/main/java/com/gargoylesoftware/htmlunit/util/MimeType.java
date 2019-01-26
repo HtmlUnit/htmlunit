@@ -21,8 +21,19 @@ import java.util.Map;
 /**
  * Utility holding information about association between MIME type and file extensions.
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public final class MimeType {
+
+    /** "application/javascript". */
+    public static final String APPLICATION_JAVASCRIPT = "application/javascript";
+    /** "text/css". */
+    public static final String TEXT_CSS = "text/css";
+    /** "text/html". */
+    public static final String TEXT_HTML = "text/html";
+    /** "text/xml". */
+    public static final String TEXT_XML = "text/xml";
+
     private static final Map<String, String> type2extension = buildMap();
 
     private static Map<String, String> buildMap() {
@@ -34,8 +45,8 @@ public final class MimeType {
         map.put("image/jpeg", "jpeg");
         map.put("image/png", "png");
         map.put("image/svg+xml", "svg");
-        map.put("text/css", "css");
-        map.put("text/html", "html");
+        map.put(TEXT_CSS, "css");
+        map.put(MimeType.TEXT_HTML, "html");
         map.put("text/plain", "txt");
         map.put("image/x-icon", "ico");
         return map;

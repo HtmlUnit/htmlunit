@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -81,7 +82,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</body></html>";
         final String css = "#d { color: green }";
 
-        getMockWebConnection().setResponse(cssUrl, css, "text/css");
+        getMockWebConnection().setResponse(cssUrl, css, MimeType.TEXT_CSS);
         loadPageWithAlerts2(html, pageUrl, 1000000);
     }
 
@@ -103,7 +104,7 @@ public class CSSImportRuleTest extends WebDriverTestCase {
             + "</body></html>";
         final String css = "#d { color: rgb(0, 128, 0); }";
 
-        getMockWebConnection().setResponse(URL_SECOND, css, "text/css");
+        getMockWebConnection().setResponse(URL_SECOND, css, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html);
     }
@@ -130,8 +131,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final URL urlPage = URL_FIRST;
         final URL urlCss1 = new URL(urlPage, "dir1/dir2/file1.css");
         final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
-        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
-        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+        getMockWebConnection().setResponse(urlCss1, css1, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss2, css2, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, urlPage);
     }
@@ -160,8 +161,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final URL urlPage = URL_FIRST;
         final URL urlCss1 = new URL(urlPage, "dir1/dir2/file1.css");
         final URL urlCss2 = new URL(urlPage, "dir1/dir2/file2.css");
-        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
-        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
+        getMockWebConnection().setResponse(urlCss1, css1, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss2, css2, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, urlPage);
     }
@@ -208,11 +209,11 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final URL urlCss3 = new URL(urlPage, "dir1/dir2/file3.css");
         final URL urlCss4 = new URL(urlPage, "dir1/dir2/file4.css");
         final URL urlCss5 = new URL(urlPage, "dir1/dir2/file5.css");
-        getMockWebConnection().setResponse(urlCss1, css1, "text/css");
-        getMockWebConnection().setResponse(urlCss2, css2, "text/css");
-        getMockWebConnection().setResponse(urlCss3, css3, "text/css");
-        getMockWebConnection().setResponse(urlCss4, css4, "text/css");
-        getMockWebConnection().setResponse(urlCss5, css5, "text/css");
+        getMockWebConnection().setResponse(urlCss1, css1, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss2, css2, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss3, css3, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss4, css4, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(urlCss5, css5, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, urlPage);
     }
@@ -247,8 +248,8 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         final String screenCss = "#d { font-size: 42px; }";
         final String printCss  = "#d { font-size: 13px; }";
 
-        getMockWebConnection().setResponse(URL_SECOND, screenCss, "text/css");
-        getMockWebConnection().setResponse(URL_THIRD, printCss, "text/css");
+        getMockWebConnection().setResponse(URL_SECOND, screenCss, MimeType.TEXT_CSS);
+        getMockWebConnection().setResponse(URL_THIRD, printCss, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, 70000);
     }

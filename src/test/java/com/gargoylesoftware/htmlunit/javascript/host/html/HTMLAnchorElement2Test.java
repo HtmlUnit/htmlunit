@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -997,7 +998,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
 
             for (final Enumeration<String> en = request.getHeaderNames(); en.hasMoreElements();) {
                 final String key = en.nextElement();

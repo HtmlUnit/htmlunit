@@ -45,6 +45,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -670,7 +671,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", "text/html", responseHeaders);
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
 
         loadPageWithAlerts2(URL_FIRST);
     }
@@ -2009,7 +2010,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2088,7 +2089,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, UTF_8);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2106,7 +2107,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, UTF_8);
         driver.findElement(By.id("myId")).click();
         String actualQuery = driver.getCurrentUrl();
         actualQuery = actualQuery.substring(actualQuery.indexOf('?'));

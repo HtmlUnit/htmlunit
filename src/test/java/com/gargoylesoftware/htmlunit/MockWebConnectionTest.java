@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link MockWebConnection}.
@@ -44,7 +45,7 @@ public class MockWebConnectionTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, html, "text/html", UTF_8);
+        webConnection.setResponse(URL_FIRST, html, MimeType.TEXT_HTML, UTF_8);
         client.setWebConnection(webConnection);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("\u00A3", page.getBody().asText());

@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -621,7 +622,7 @@ public class DomNodeTest extends SimpleWebTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_FIRST, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_FIRST, xml, MimeType.TEXT_XML);
         final WebClient client = getWebClientWithMockWebConnection();
         final XmlPage page = (XmlPage) client.getPage(URL_FIRST);
 

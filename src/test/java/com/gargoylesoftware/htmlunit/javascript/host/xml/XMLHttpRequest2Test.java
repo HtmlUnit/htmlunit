@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationServlet;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -230,7 +231,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @Alerts({"1", "bla", "someAttr", "someValue", "true", "foo", "2", "fi1"})
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void responseXML() throws Exception {
-        testResponseXML("text/xml");
+        testResponseXML(MimeType.TEXT_XML);
         testResponseXML(null);
     }
 
@@ -347,7 +348,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_THIRD, "<bla/>", "text/xml");
+        getMockWebConnection().setResponse(URL_THIRD, "<bla/>", MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -389,7 +390,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         final String xml = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<body><iframe></iframe></body></html>";
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -524,7 +525,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -565,7 +566,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<content>blah</content>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -606,7 +607,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "<content>blah</content>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html, 2000);
     }
 
@@ -639,7 +640,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "<empty/>",
                                            200,
                                            "OK",
-                                           "text/xml",
+                                           MimeType.TEXT_XML,
                                            UTF_8, responseHeaders);
         loadPageWithAlerts2(html);
     }
@@ -673,7 +674,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "<empty/>",
                                            200,
                                            "OK",
-                                           "text/xml",
+                                           MimeType.TEXT_XML,
                                            UTF_8, responseHeaders);
 
         final WebDriver driver = loadPage2(html);
@@ -717,7 +718,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "<empty/>",
                                            200,
                                            "OK",
-                                           "text/xml",
+                                           MimeType.TEXT_XML,
                                            UTF_8, responseHeaders);
 
         expandExpectedAlertsVariables("http://localhost:" + PORT);
@@ -762,7 +763,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                                            "<empty/>",
                                            200,
                                            "OK",
-                                           "text/xml",
+                                           MimeType.TEXT_XML,
                                            UTF_8, responseHeaders);
 
         expandExpectedAlertsVariables("http://localhost:" + PORT);
@@ -838,7 +839,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "  </body>\n"
                         + "</html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -898,7 +899,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
             final byte[] encoded = bos.toByteArray();
 
-            response.setContentType("text/xml");
+            response.setContentType(MimeType.TEXT_XML);
             response.setCharacterEncoding(UTF_8.name());
             response.setStatus(200);
             response.setContentLength(encoded.length);
@@ -999,7 +1000,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "  </body>\n"
                         + "</html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -1045,7 +1046,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                         + "  </body>\n"
                         + "</html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, "<xml></xml>", MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }

@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequestTest.StreamingServlet;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link XMLHttpRequest}.
@@ -174,7 +175,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         };
         conn.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
-        conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
+        conn.setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
@@ -218,7 +219,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content);
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
-        conn.setResponse(urlPage2, "<foo/>\n", "text/xml");
+        conn.setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
 
@@ -451,7 +452,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
                     + "  </form>\n"
                     + "</body></html>";
 
-            res.setContentType("text/html");
+            res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
             writer.write(html);
         }
@@ -520,7 +521,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
                     + "</body></html>";
 
             collectedHeaders_.add("Form: " + header);
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             writer.write(html);
             writer.flush();

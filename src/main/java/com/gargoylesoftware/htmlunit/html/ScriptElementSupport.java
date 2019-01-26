@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -246,7 +247,7 @@ public final class ScriptElementSupport {
                 return true;
             }
 
-            if ("application/javascript".equalsIgnoreCase(typeAttribute)
+            if (MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(typeAttribute)
                             || "application/ecmascript".equalsIgnoreCase(typeAttribute)
                             || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
                 return true;

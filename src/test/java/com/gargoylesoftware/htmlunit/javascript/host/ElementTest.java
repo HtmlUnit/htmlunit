@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link Element}.
@@ -75,7 +76,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -106,7 +107,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -133,7 +134,7 @@ public class ElementTest extends WebDriverTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -182,7 +183,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </control>\n"
             + "</responsexml>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -211,7 +212,7 @@ public class ElementTest extends WebDriverTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -300,7 +301,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -330,7 +331,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -693,7 +694,7 @@ public class ElementTest extends WebDriverTestCase {
             + "</html>"
             + "</xml>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -763,7 +764,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1017,7 +1018,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 

@@ -248,7 +248,8 @@ public class ExternalTest {
         return false;
     }
 
-    private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
+    private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
+            @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
         return false;
     }
 

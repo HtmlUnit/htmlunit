@@ -224,13 +224,13 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (isJavaScript(contentType)) {
             return ".js";
         }
-        else if ("text/html".equals(contentType)) {
+        else if (MimeType.TEXT_HTML.equals(contentType)) {
             return ".html";
         }
-        else if ("text/css".equals(contentType)) {
+        else if (MimeType.TEXT_CSS.equals(contentType)) {
             return ".css";
         }
-        else if ("text/xml".equals(contentType)) {
+        else if (MimeType.TEXT_XML.equals(contentType)) {
             return ".xml";
         }
         else if ("image/gif".equals(contentType)) {

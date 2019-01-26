@@ -35,6 +35,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -111,7 +112,7 @@ public class HTMLParser3Test extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             if (HEADER_ENCODING_ != null) {
                 response.setCharacterEncoding(HEADER_ENCODING_.name());
             }

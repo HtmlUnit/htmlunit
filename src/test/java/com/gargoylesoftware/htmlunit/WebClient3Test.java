@@ -35,6 +35,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -375,7 +376,7 @@ public class WebClient3Test extends WebDriverTestCase {
                 + "</body></html>\n";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", "text/html", new ArrayList<NameValuePair>());
+        conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
 
         loadPageWithAlerts2(URL_FIRST, 42);
     }
@@ -534,7 +535,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @NotYetImplemented
     public void javascriptContentDetectorContentTypeApplicationJavascript() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
-        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", "application/javascript");
+        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(URL_FIRST);
     }
 }

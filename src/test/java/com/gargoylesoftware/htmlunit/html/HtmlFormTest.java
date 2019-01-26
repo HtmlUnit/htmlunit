@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -1141,7 +1142,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final WebClient client = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
 
-        String contentType = "text/html";
+        String contentType = MimeType.TEXT_HTML;
         if (headerCharset != null) {
             contentType += ";charset=" + headerCharset;
         }

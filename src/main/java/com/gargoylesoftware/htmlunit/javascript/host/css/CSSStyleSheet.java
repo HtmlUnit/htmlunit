@@ -111,6 +111,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -273,7 +274,7 @@ public class CSSStyleSheet extends StyleSheet {
 
                 if (element.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
                     final String type = link.getTypeAttribute();
-                    if (StringUtils.isNotBlank(type) && !"text/css".equals(type)) {
+                    if (StringUtils.isNotBlank(type) && !MimeType.TEXT_CSS.equals(type)) {
                         final InputSource source = new InputSource(new StringReader(""));
                         return new CSSStyleSheet(element, source, uri);
                     }
@@ -301,7 +302,7 @@ public class CSSStyleSheet extends StyleSheet {
 
                 final InputSource source;
                 final String contentType = response.getContentType();
-                if (StringUtils.isEmpty(contentType) || "text/css".equals(contentType)) {
+                if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
                     source = new InputSource(response.getContentAsStream(), response.getContentCharset().name());
                 }
                 else {

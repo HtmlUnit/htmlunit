@@ -53,6 +53,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -909,7 +910,7 @@ public class WindowTest extends SimpleWebTestCase {
             0x01, 0x00, 0x3b});
 
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "image/gif", emptyList);
         webClient.setWebConnection(webConnection);
 
@@ -968,7 +969,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String secondContent = "Hello World";
 
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/plain", emptyList);
         webClient.setWebConnection(webConnection);
 
@@ -1027,8 +1028,8 @@ public class WindowTest extends SimpleWebTestCase {
         final String secondContent = "<junk></junk>\n";
 
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
-        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/xml", emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, emptyList);
+        webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", MimeType.TEXT_XML, emptyList);
         webClient.setWebConnection(webConnection);
 
         final HtmlPage firstPage = webClient.getPage(URL_FIRST);
@@ -1057,7 +1058,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
-        assertEquals("text/xml", secondPage.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_XML, secondPage.getWebResponse().getContentType());
 
         assertEquals(2, events.size());
 
@@ -1086,7 +1087,7 @@ public class WindowTest extends SimpleWebTestCase {
         final String secondContent = "var x=1;\n";
 
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", emptyList);
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, emptyList);
         webConnection.setResponse(URL_SECOND, secondContent, 200, "OK", "text/javascript", emptyList);
         webClient.setWebConnection(webConnection);
 
@@ -1176,7 +1177,7 @@ public class WindowTest extends SimpleWebTestCase {
         final HtmlAnchor anchor = firstPage.getHtmlElementById("link");
         final Page secondPage = anchor.click();
         assertEquals("First", firstPage.getTitleText());
-        assertEquals("text/html", secondPage.getWebResponse().getContentType());
+        assertEquals(MimeType.TEXT_HTML, secondPage.getWebResponse().getContentType());
 
         assertEquals(2, events.size());
 

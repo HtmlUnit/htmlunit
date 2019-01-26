@@ -30,6 +30,7 @@ import org.apache.commons.io.FilenameUtils;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -242,10 +243,10 @@ public final class BrowserVersion implements Serializable {
             138, 139, 140, 142, 142, 143, 144, 145, 147};
 
         // default file upload mime types
-        CHROME.registerUploadMimeType("html", "text/html");
-        CHROME.registerUploadMimeType("htm", "text/html");
-        CHROME.registerUploadMimeType("css", "text/css");
-        CHROME.registerUploadMimeType("xml", "text/xml");
+        CHROME.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        CHROME.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        CHROME.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        CHROME.registerUploadMimeType("xml", MimeType.TEXT_XML);
         CHROME.registerUploadMimeType("gif", "image/gif");
         CHROME.registerUploadMimeType("jpeg", "image/jpeg");
         CHROME.registerUploadMimeType("jpg", "image/jpeg");
@@ -268,10 +269,10 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("txt", "text/plain");
         CHROME.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_60.registerUploadMimeType("html", "text/html");
-        FIREFOX_60.registerUploadMimeType("htm", "text/html");
-        FIREFOX_60.registerUploadMimeType("css", "text/css");
-        FIREFOX_60.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_60.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_60.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_60.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_60.registerUploadMimeType("xml", MimeType.TEXT_XML);
         FIREFOX_60.registerUploadMimeType("gif", "image/gif");
         FIREFOX_60.registerUploadMimeType("jpeg", "image/jpeg");
         FIREFOX_60.registerUploadMimeType("jpg", "image/jpeg");
@@ -291,10 +292,10 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("txt", "text/plain");
         FIREFOX_60.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_52.registerUploadMimeType("html", "text/html");
-        FIREFOX_52.registerUploadMimeType("htm", "text/html");
-        FIREFOX_52.registerUploadMimeType("css", "text/css");
-        FIREFOX_52.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_52.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_52.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_52.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_52.registerUploadMimeType("xml", MimeType.TEXT_XML);
         FIREFOX_52.registerUploadMimeType("gif", "image/gif");
         FIREFOX_52.registerUploadMimeType("jpeg", "image/jpeg");
         FIREFOX_52.registerUploadMimeType("jpg", "image/jpeg");
@@ -314,10 +315,10 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.registerUploadMimeType("txt", "text/plain");
         FIREFOX_52.registerUploadMimeType("text", "text/plain");
 
-        INTERNET_EXPLORER.registerUploadMimeType("html", "text/html");
-        INTERNET_EXPLORER.registerUploadMimeType("htm", "text/html");
-        INTERNET_EXPLORER.registerUploadMimeType("css", "text/css");
-        INTERNET_EXPLORER.registerUploadMimeType("xml", "text/xml");
+        INTERNET_EXPLORER.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        INTERNET_EXPLORER.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        INTERNET_EXPLORER.registerUploadMimeType("xml", MimeType.TEXT_XML);
         INTERNET_EXPLORER.registerUploadMimeType("gif", "image/gif");
         INTERNET_EXPLORER.registerUploadMimeType("jpeg", "image/jpeg");
         INTERNET_EXPLORER.registerUploadMimeType("jpg", "image/jpeg");
@@ -332,10 +333,10 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
 
-        EDGE.registerUploadMimeType("html", "text/html");
-        EDGE.registerUploadMimeType("htm", "text/html");
-        EDGE.registerUploadMimeType("css", "text/css");
-        EDGE.registerUploadMimeType("xml", "text/xml");
+        EDGE.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        EDGE.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        EDGE.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        EDGE.registerUploadMimeType("xml", MimeType.TEXT_XML);
         EDGE.registerUploadMimeType("gif", "image/gif");
         EDGE.registerUploadMimeType("jpeg", "image/jpeg");
         EDGE.registerUploadMimeType("jpg", "image/jpeg");

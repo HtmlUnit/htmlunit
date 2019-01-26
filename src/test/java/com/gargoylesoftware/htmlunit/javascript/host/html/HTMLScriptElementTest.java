@@ -24,6 +24,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -79,7 +80,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         final String js = "document.getElementById('myTextarea').value += '4 ';";
 
-        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(html);
     }
 
@@ -1228,7 +1229,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         final String js = "alert('inside script.js');";
 
-        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html);
     }

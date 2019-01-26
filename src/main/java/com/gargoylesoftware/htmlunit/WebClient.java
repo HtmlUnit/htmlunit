@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
@@ -1210,7 +1211,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (!file.exists()) {
             // construct 404
             final List<NameValuePair> compiledHeaders = new ArrayList<>();
-            compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html"));
+            compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML));
             final WebResponseData responseData =
                 new WebResponseData(
                     TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
@@ -1248,10 +1249,10 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // Java's mime type map does not know these in JDK8.
         if (fileName.endsWith(".js")) {
-            return "application/javascript";
+            return MimeType.APPLICATION_JAVASCRIPT;
         }
         if (fileName.toLowerCase(Locale.ROOT).endsWith(".css")) {
-            return "text/css";
+            return MimeType.TEXT_CSS;
         }
 
         String contentType = URLConnection.guessContentTypeFromName(fileName);

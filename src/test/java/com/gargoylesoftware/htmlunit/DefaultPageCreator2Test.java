@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link DefaultPageCreator}.
@@ -31,14 +32,14 @@ public class DefaultPageCreator2Test extends WebTestCase {
      */
     @Test
     public void determinePageType() {
-        assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("text/html"));
+        assertEquals(PageType.HTML, DefaultPageCreator.determinePageType(MimeType.TEXT_HTML));
         assertEquals(PageType.HTML, DefaultPageCreator.determinePageType("image/svg+xml"));
 
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("text/javascript"));
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/x-javascript"));
         assertEquals(PageType.JAVASCRIPT, DefaultPageCreator.determinePageType("application/javascript"));
 
-        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.TEXT_XML));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xhtml+xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/vnd.wap.wml"));

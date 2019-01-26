@@ -120,7 +120,7 @@ public class EncodingSnifferTest {
         contentType(null, "");
         contentType(null, " \t \n ");
         contentType(null, "foo");
-        contentType(null, "text/html");
+        contentType(null, MimeType.TEXT_HTML);
         contentType(null, "\n text/html \t");
         contentType(null, "\n text/html ; char \t");
         contentType(null, "\n text/html ; charset \t");

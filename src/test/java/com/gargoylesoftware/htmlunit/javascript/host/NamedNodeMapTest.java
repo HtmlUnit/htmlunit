@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
@@ -170,7 +171,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
 
         final String xml = "<blah name='y'></blah>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -219,7 +220,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
 
         final String xml = "<test></test>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 

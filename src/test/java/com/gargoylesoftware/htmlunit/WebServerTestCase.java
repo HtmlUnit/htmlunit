@@ -45,6 +45,7 @@ import org.junit.After;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.
@@ -88,7 +89,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
         final MimeTypes mimeTypes = new MimeTypes();
-        mimeTypes.addMimeMapping("js", "application/javascript");
+        mimeTypes.addMimeMapping("js", MimeType.APPLICATION_JAVASCRIPT);
         resourceHandler.setMimeTypes(mimeTypes);
 
         final HandlerList handlers = new HandlerList();
@@ -303,7 +304,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPage(final String html, final URL url) throws Exception {
-        return loadPage(html, url, "text/html", ISO_8859_1);
+        return loadPage(html, url, MimeType.TEXT_HTML, ISO_8859_1);
     }
 
     /**

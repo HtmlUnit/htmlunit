@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -94,7 +95,7 @@ public final class DomElement2Test extends SimpleWebTestCase {
         final String xml = "<events>\n"
                 + "  <something/>\n"
                 + "</events>";
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         getWebClient().setWebConnection(getMockWebConnection());
         final XmlPage page = getWebClient().getPage(URL_FIRST);
         final DomElement root = page.getDocumentElement();

@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Unit tests for {@link HTMLObjectElement}.
@@ -78,7 +79,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
                     + "<object classid='CLSID:test'/>\n"
                     + "</html>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 }

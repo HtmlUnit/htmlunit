@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link Document}.
@@ -2528,7 +2529,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -2561,7 +2562,7 @@ public class DocumentTest extends WebDriverTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }

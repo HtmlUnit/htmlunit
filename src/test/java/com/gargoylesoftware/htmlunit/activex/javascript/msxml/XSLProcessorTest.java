@@ -28,6 +28,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -83,7 +84,7 @@ public class XSLProcessorTest extends WebDriverTestCase {
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xsl, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xsl, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -149,8 +150,8 @@ public class XSLProcessorTest extends WebDriverTestCase {
             + "  </xsl:template>\n"
             + "</xsl:stylesheet>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
-        getMockWebConnection().setResponse(urlThird, xsl, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        getMockWebConnection().setResponse(urlThird, xsl, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(createTestHTML(html));
     }

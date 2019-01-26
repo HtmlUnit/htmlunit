@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -132,10 +133,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(URL_FIRST, "style1.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style3.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style4.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style3.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style4.css"), "", MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
@@ -174,12 +175,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", MimeType.TEXT_HTML);
         conn.setResponse(new URL(URL_FIRST, "style3.css"), "div { color: red; }", "text/plain");
         conn.setResponse(new URL(URL_FIRST, "style4.css"), "div { color: red; }", "");
-        conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", MimeType.TEXT_HTML);
         conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", "text/plain");
         conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
@@ -981,7 +982,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  alert(document.styleSheets.length);\n"
             + "</script></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", "text/css");
+        getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", MimeType.TEXT_CSS);
         loadPageWithAlerts2(html);
     }
 
@@ -1446,12 +1447,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), bigContent, 200, "OK", "text/css", headers2);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), bigContent, 200, "OK", MimeType.TEXT_CSS, headers2);
         conn.setResponse(new URL(URL_FIRST, "second.html"), html2);
 
         final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Location", "style2.css"));
-        conn.setResponse(new URL(URL_FIRST, "style.css"), "", 302, "Moved", "text/css", headers1);
+        conn.setResponse(new URL(URL_FIRST, "style.css"), "", 302, "Moved", MimeType.TEXT_CSS, headers1);
 
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "test.html"));
         driver.findElement(By.linkText("second page")).click();

@@ -31,6 +31,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -866,7 +867,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "A B  C\tD\n"
             + "</root>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         tester_create(test);
     }
 
@@ -979,7 +980,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
-        getMockWebConnection().setDefaultResponse("<root/>", "text/xml");
+        getMockWebConnection().setDefaultResponse("<root/>", MimeType.TEXT_XML);
         loadPageWithAlerts2(createTestHTML(html));
     }
 
@@ -1893,7 +1894,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(createTestHTML(html));
     }
 }

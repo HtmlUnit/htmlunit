@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -423,7 +424,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             if (request.getCookies() == null || request.getCookies().length == 0) {
                 writer.write("No Cookies");
@@ -469,7 +470,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write(String.valueOf(request.getRemotePort()));
         }
     }

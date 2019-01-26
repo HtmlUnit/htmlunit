@@ -27,6 +27,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -200,7 +201,7 @@ public class Document2Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse(
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\"><div id='child'> </div></html>",
-                200, "OK", "text/xml");
+                200, "OK", MimeType.TEXT_XML);
 
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><title>foo</title><script>\n"
@@ -242,7 +243,7 @@ public class Document2Test extends WebDriverTestCase {
         conn.setDefaultResponse(
                 "<?xml version=\"1.0\"?><html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
                 + "<div id='child'><div id='child2'><div id='child3'>-</div></div></div></html>",
-                200, "OK", "text/xml");
+                200, "OK", MimeType.TEXT_XML);
 
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><title>foo</title><script>\n"
