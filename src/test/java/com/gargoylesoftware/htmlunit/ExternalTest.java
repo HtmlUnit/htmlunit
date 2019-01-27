@@ -124,7 +124,7 @@ public class ExternalTest {
      * Tests that we use the latest gecko driver.
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     public void assertGeckoDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
             try {
