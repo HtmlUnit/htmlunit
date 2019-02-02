@@ -32,6 +32,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -128,6 +129,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -383,7 +385,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public String btoa(final String stringToEncode) {
-        return new String(Base64.encodeBase64(stringToEncode.getBytes()));
+        final int l = stringToEncode.length();
+        for (int i = 0; i < l; i++) {
+            if (stringToEncode.charAt(i) > 255) {
+                throw new EvaluatorException("Function btoa supports only latin1 characters");
+            }
+        }
+        return new String(Base64.encodeBase64(stringToEncode.getBytes(StandardCharsets.ISO_8859_1)));
     }
 
     /**
@@ -393,7 +401,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public String atob(final String encodedData) {
-        return new String(Base64.decodeBase64(encodedData.getBytes()));
+        final int l = encodedData.length();
+        for (int i = 0; i < l; i++) {
+            if (encodedData.charAt(i) > 255) {
+                throw new EvaluatorException("Function atob supports only latin1 characters");
+            }
+        }
+        return new String(Base64.decodeBase64(encodedData.getBytes(StandardCharsets.ISO_8859_1)));
     }
 
     /**

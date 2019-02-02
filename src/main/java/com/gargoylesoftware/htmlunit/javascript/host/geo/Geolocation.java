@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -193,7 +194,7 @@ public class Geolocation extends SimpleScriptable {
         return builder.toString().trim();
     }
 
-    String getWifiStringWindows() {
+    static String getWifiStringWindows() {
         final StringBuilder builder = new StringBuilder();
         try {
             final List<String> lines = runCommand("netsh wlan show networks mode=bssid");
@@ -247,7 +248,8 @@ public class Geolocation extends SimpleScriptable {
     private static List<String> runCommand(final String command) throws IOException {
         final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(p.getInputStream(), Charset.defaultCharset()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);

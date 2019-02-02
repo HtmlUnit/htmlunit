@@ -159,6 +159,77 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void atobUnicode() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    window.btoa('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    window.atob('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"CSAe", "\t \u001e"})
+    public void atobControlChar() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa('\\t \\u001e');\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"bnVsbA==", "null"})
+    public void atobNull() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa(null);\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"dW5kZWZpbmVk", "undefined"})
+    public void atobUndefined() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa(undefined);\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Rhino and Nashorn define some properties in the top scope (see ScriptRuntime and lazilyNames in Rhino),
      * and we don't need them.
      *
