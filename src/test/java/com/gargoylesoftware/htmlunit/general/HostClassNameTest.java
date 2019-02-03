@@ -7821,8 +7821,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function SpeechSynthesisErrorEvent() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "function SpeechSynthesisErrorEvent() {\n    [native code]\n}",
+            CHROME = "function SpeechSynthesisErrorEvent() { [native code] }",
+            IE = "exception")
     public void speechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisErrorEvent");
     }
@@ -10705,8 +10706,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function AnimationEvent() { [native code] }")
+    @Alerts(DEFAULT = "exception")
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }
@@ -10907,8 +10907,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function TransitionEvent() { [native code] }")
+    @Alerts(DEFAULT = "exception")
     public void webKitTransitionEvent() throws Exception {
         test("WebKitTransitionEvent");
     }

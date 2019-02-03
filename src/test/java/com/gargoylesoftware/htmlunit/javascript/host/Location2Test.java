@@ -826,6 +826,7 @@ public class Location2Test extends WebDriverTestCase {
 
         // click an anchor with onclick which sets frame.location
         driver.findElement(By.id("jsLink")).click();
+        Thread.sleep(100);
         assertEquals(5, conn.getRequestCount());
         lastAdditionalHeaders = conn.getLastAdditionalHeaders();
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));

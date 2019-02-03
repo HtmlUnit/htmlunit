@@ -637,6 +637,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
+            CHROME = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da() throws Exception {
         test("new Intl.DateTimeFormat('da').format(date)");
@@ -647,6 +648,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
+            CHROME = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da_dk() throws Exception {
         test("new Intl.DateTimeFormat('da-DK').format(date)");

@@ -960,10 +960,10 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 + "Transfer-Encoding: chunked\n"
                 + "Server: Jetty(XXX)\n\n"},
             CHROME = {"", "",
-                "date XYZ GMT\r\n"
-                + "server: Jetty(XXX)\r\n"
-                + "transfer-encoding: chunked\r\n"
-                + "content-type: text/xml;charset=iso-8859-1\r\n"},
+                "date XYZ GMT\n"
+                + "server: Jetty(XXX)\n"
+                + "transfer-encoding: chunked\n"
+                + "content-type: text/xml;charset=iso-8859-1\n"},
             FF60 = {"", "",
                 "Content-Type: text/xml;charset=iso-8859-1\n"
                 + "Date XYZ GMT\n"

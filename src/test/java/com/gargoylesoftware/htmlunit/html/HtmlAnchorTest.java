@@ -592,7 +592,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Alerts(IE = "click href click doubleClick ",
             CHROME = "click href click href doubleClick ",
             FF = "click href click doubleClick href ")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(FF)
     @NotYetImplemented({FF, IE})
     public void doubleClick() throws Exception {
         final String html =

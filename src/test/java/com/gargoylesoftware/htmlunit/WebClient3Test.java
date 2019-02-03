@@ -131,7 +131,9 @@ public class WebClient3Test extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST, "foo.png?cb=%%RANDOM_NUMBER%%");
         loadPage2("", url);
 
-        assertEquals(url, getMockWebConnection().getLastWebRequest().getUrl());
+        // real browsers do not send this request
+        // 'Unable to parse URI query'
+        assertEquals(0, getMockWebConnection().getRequestCount());
     }
 
     /**

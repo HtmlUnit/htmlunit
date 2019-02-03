@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.selenium;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
@@ -348,7 +350,7 @@ public class TypingTest extends SeleniumTest {
                 "keydown (target) a pressed; removing keyup (body)"},
             IE = {"keydown (target) keyup (target) keyup (body)",
                 "keydown (target) a pressed; removing"})
-    @BuggyWebDriver
+    @BuggyWebDriver({FF, IE})
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 

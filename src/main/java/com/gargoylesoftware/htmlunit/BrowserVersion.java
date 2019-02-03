@@ -127,7 +127,7 @@ public final class BrowserVersion implements Serializable {
         // FF60
         FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
-        FIREFOX_60.buildId_ = "20181203164059";
+        FIREFOX_60.buildId_ = "20190124141046";
         FIREFOX_60.productSub_ = "20100101";
         FIREFOX_60.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -211,8 +211,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
