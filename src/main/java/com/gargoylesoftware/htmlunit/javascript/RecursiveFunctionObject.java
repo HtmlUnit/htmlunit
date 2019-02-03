@@ -116,14 +116,8 @@ public class RecursiveFunctionObject extends FunctionObject {
             case "webkitSpeechRecognition":
                 return "SpeechRecognition";
 
-            case "WebKitAnimationEvent":
-                return "AnimationEvent";
-
             case "WebKitMutationObserver":
                 return "MutationObserver";
-
-            case "WebKitTransitionEvent":
-                return "TransitionEvent";
 
             case "webkitMediaStream":
                 return "MediaStream";

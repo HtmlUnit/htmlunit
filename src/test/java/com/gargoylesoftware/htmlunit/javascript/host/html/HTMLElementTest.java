@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -1796,7 +1797,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
             IE = {"Old = Old \ninnerText", "New = New cell value"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({CHROME, FF})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3412,7 +3413,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         mergeAttributesTest("i2, false");
     }
 
-    private void mergeAttributesTest(final String params, final String... expectedAlerts) throws Exception {
+    private void mergeAttributesTest(final String params) throws Exception {
         final String html
             = "<input type='text' id='i' />\n"
             + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"

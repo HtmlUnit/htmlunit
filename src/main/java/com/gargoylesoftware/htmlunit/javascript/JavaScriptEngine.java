@@ -293,16 +293,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
 
             switch (hostClassSimpleName) {
-                case "WebKitAnimationEvent":
-                    prototype = prototypesPerJSName.get("AnimationEvent");
-                    break;
-
                 case "WebKitMutationObserver":
                     prototype = prototypesPerJSName.get("MutationObserver");
-                    break;
-
-                case "WebKitTransitionEvent":
-                    prototype = prototypesPerJSName.get("TransitionEvent");
                     break;
 
                 case "webkitURL":
@@ -333,9 +325,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
 
-                    if ("WebKitAnimationEvent".equals(hostClassSimpleName)
-                            || "WebKitMutationObserver".equals(hostClassSimpleName)
-                            || "WebKitTransitionEvent".equals(hostClassSimpleName)
+                    if ("WebKitMutationObserver".equals(hostClassSimpleName)
                             || "webkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
