@@ -47,22 +47,22 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short OBSOLETE = 5;
 
     private short status_ = UNCACHED;

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.speech;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -25,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.SpeechSynthesisEvent;
  *
  * @author Ronald Brill
  */
-@JsxClass(FF)
+@JsxClass({CHROME, FF})
 public class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
 
     /**

@@ -50,37 +50,37 @@ public class SVGFEBlendElement extends SVGElement {
     @JsxConstant
     public static final int SVG_FEBLEND_MODE_LIGHTEN = 5;
     /** The constant {@code SVG_FEBLEND_MODE_OVERLAY}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_OVERLAY = 6;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR_DODGE}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_COLOR_DODGE = 7;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR_BURN}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_COLOR_BURN = 8;
     /** The constant {@code SVG_FEBLEND_MODE_HARD_LIGHT}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_HARD_LIGHT = 9;
     /** The constant {@code SVG_FEBLEND_MODE_SOFT_LIGHT}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_SOFT_LIGHT = 10;
     /** The constant {@code SVG_FEBLEND_MODE_DIFFERENCE}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_DIFFERENCE = 11;
     /** The constant {@code SVG_FEBLEND_MODE_EXCLUSION}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_EXCLUSION = 12;
     /** The constant {@code SVG_FEBLEND_MODE_HUE}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_HUE = 13;
     /** The constant {@code SVG_FEBLEND_MODE_SATURATION}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_SATURATION = 14;
     /** The constant {@code SVG_FEBLEND_MODE_COLOR}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_COLOR = 15;
     /** The constant {@code SVG_FEBLEND_MODE_LUMINOSITY}. */
-    @JsxConstant(FF)
+    @JsxConstant({CHROME, FF})
     public static final int SVG_FEBLEND_MODE_LUMINOSITY = 16;
 
     /**
