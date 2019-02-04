@@ -163,15 +163,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Document_SVGDocument() throws Exception {
-        test("Document", "SVGDocument");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _Document_XMLDocument() throws Exception {
         test("Document", "XMLDocument");
@@ -347,17 +338,28 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
-        test("DOMRectReadOnly", "DOMRectReadOnly");
+    public void _DOMRectList_DOMRectList() throws Exception {
+        test("DOMRectList", "DOMRectList");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _DOMRequest_DOMCursor() throws Exception {
-        test("DOMRequest", "DOMCursor");
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _DOMRectReadOnly_DOMRect() throws Exception {
+        test("DOMRectReadOnly", "DOMRect");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _DOMRectReadOnly_DOMRectReadOnly() throws Exception {
+        test("DOMRectReadOnly", "DOMRectReadOnly");
     }
 
     /**
@@ -1270,15 +1272,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts("true")
     public void _Element_SVGAElement() throws Exception {
         test("Element", "SVGAElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Element_SVGAltGlyphElement() throws Exception {
-        test("Element", "SVGAltGlyphElement");
     }
 
     /**
@@ -2313,24 +2306,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Event_MozContactChangeEvent() throws Exception {
-        test("Event", "MozContactChangeEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Event_MozSettingsEvent() throws Exception {
-        test("Event", "MozSettingsEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _Event_MSGestureEvent() throws Exception {
@@ -2565,16 +2540,6 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _Event_WebKitAnimationEvent() throws Exception {
-        test("Event", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     public void _Event_webkitSpeechRecognitionError() throws Exception {
         test("Event", "webkitSpeechRecognitionError");
     }
@@ -2587,16 +2552,6 @@ public class HostParentOfDTest extends HostParentOf {
             CHROME = "true")
     public void _Event_webkitSpeechRecognitionEvent() throws Exception {
         test("Event", "webkitSpeechRecognitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _Event_WebKitTransitionEvent() throws Exception {
-        test("Event", "WebKitTransitionEvent");
     }
 
     /**
@@ -4081,6 +4036,16 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void _EventTarget_PaymentResponse() throws Exception {
+        test("EventTarget", "PaymentResponse");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "true",
             FF52 = "false",
             IE = "false")
@@ -4304,15 +4269,6 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _EventTarget_SVGAltGlyphElement() throws Exception {
-        test("EventTarget", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _EventTarget_SVGAnimateElement() throws Exception {
@@ -4407,15 +4363,6 @@ public class HostParentOfDTest extends HostParentOf {
             CHROME = "true")
     public void _EventTarget_SVGDiscardElement() throws Exception {
         test("EventTarget", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _EventTarget_SVGDocument() throws Exception {
-        test("EventTarget", "SVGDocument");
     }
 
     /**
@@ -5194,6 +5141,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF60 = "true")
     @NotYetImplemented(FF52)
     public void _Event_SpeechSynthesisErrorEvent() throws Exception {

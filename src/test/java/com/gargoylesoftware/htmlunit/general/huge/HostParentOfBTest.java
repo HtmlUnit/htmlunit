@@ -166,13 +166,4 @@ public class HostParentOfBTest extends HostParentOf {
     public void _BroadcastChannel_BroadcastChannel() throws Exception {
         test("BroadcastChannel", "BroadcastChannel");
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _BudgetService_BudgetService() throws Exception {
-        test("BudgetService", "BudgetService");
-    }
 }

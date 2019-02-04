@@ -348,15 +348,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGAltGlyphElement_SVGAltGlyphElement() throws Exception {
-        test("SVGAltGlyphElement", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGAngle_SVGAngle() throws Exception {
         test("SVGAngle", "SVGAngle");
@@ -645,27 +636,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGDocument_SVGDocument() throws Exception {
-        test("SVGDocument", "SVGDocument");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGElement_SVGAElement() throws Exception {
         test("SVGElement", "SVGAElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGElement_SVGAltGlyphElement() throws Exception {
-        test("SVGElement", "SVGAltGlyphElement");
     }
 
     /**
@@ -1711,15 +1684,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGGraphicsElement_SVGAltGlyphElement() throws Exception {
-        test("SVGGraphicsElement", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _SVGGraphicsElement_SVGCircleElement() throws Exception {
@@ -2653,15 +2617,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGTextContentElement_SVGAltGlyphElement() throws Exception {
-        test("SVGTextContentElement", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGTextContentElement_SVGTextContentElement() throws Exception {
         test("SVGTextContentElement", "SVGTextContentElement");
@@ -2719,15 +2674,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGTextPathElement_SVGTextPathElement() throws Exception {
         test("SVGTextPathElement", "SVGTextPathElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGTextPositioningElement_SVGAltGlyphElement() throws Exception {
-        test("SVGTextPositioningElement", "SVGAltGlyphElement");
     }
 
     /**

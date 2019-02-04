@@ -105,25 +105,6 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _AnimationEvent_WebKitAnimationEvent() throws Exception {
-        test("AnimationEvent", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _AppBannerPromptResult_AppBannerPromptResult() throws Exception {
-        test("AppBannerPromptResult", "AppBannerPromptResult");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             FF = "false")
     public void _ApplicationCache_ApplicationCache() throws Exception {

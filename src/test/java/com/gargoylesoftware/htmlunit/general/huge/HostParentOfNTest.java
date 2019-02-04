@@ -1121,16 +1121,6 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Node_SVGAltGlyphElement() throws Exception {
-        test("Node", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Node_SVGAnimateElement() throws Exception {
@@ -1229,16 +1219,6 @@ public class HostParentOfNTest extends HostParentOf {
             CHROME = "true")
     public void _Node_SVGDiscardElement() throws Exception {
         test("Node", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_SVGDocument() throws Exception {
-        test("Node", "SVGDocument");
     }
 
     /**
