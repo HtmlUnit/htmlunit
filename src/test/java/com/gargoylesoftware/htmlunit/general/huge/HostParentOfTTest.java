@@ -231,16 +231,6 @@ public class HostParentOfTTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _TransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("TransitionEvent", "WebKitTransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _TreeWalker_TreeWalker() throws Exception {
         test("TreeWalker", "TreeWalker");
