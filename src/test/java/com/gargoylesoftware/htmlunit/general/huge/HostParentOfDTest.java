@@ -338,6 +338,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented({CHROME, FF60})
     public void _DOMRectList_DOMRectList() throws Exception {
         test("DOMRectList", "DOMRectList");
     }
@@ -348,6 +349,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented({CHROME, FF60})
     public void _DOMRectReadOnly_DOMRect() throws Exception {
         test("DOMRectReadOnly", "DOMRect");
     }
