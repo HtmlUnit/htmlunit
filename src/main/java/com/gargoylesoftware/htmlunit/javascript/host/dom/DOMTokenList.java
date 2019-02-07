@@ -37,9 +37,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -208,9 +210,11 @@ public class DOMTokenList extends SimpleScriptable {
     public boolean toggle(final String token) {
         if (contains(token)) {
             remove(token);
+            clearStyleCache();
             return false;
         }
         add(token);
+        clearStyleCache();
         return true;
     }
 
@@ -303,5 +307,14 @@ public class DOMTokenList extends SimpleScriptable {
 
     private boolean isWhitespache(final int ch) {
         return whitespaceChars().indexOf(ch) > -1;
+    }
+
+    private void clearStyleCache() {
+        if ("class".equals(attributeName_)) {
+            final ScriptableObject scriptableObject = getDomNodeOrDie().getScriptableObject();
+            if (scriptableObject instanceof Element) {
+                getWindow().clearComputedStyles((Element) scriptableObject);
+            }
+        }
     }
 }

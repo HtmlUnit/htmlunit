@@ -831,4 +831,33 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"none", "block"})
+    public void toggleStyleCheck() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<style>\n"
+            + "  #d1.hidden { display: none; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('d1');\n"
+            + "  var list = div1.classList;\n"
+
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  list.toggle('hidden');\n"
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "}\n"
+            + "</script>"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' class='hidden'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
