@@ -363,4 +363,47 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "1"})
+    public void newAudioNodeType() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio();\n"
+            + "    alert(a);\n"
+            + "    alert(a.nodeType);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "AUDIO"})
+    public void newAudioNodeName() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio();\n"
+            + "    alert(a);\n"
+            + "    alert(a.nodeName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
