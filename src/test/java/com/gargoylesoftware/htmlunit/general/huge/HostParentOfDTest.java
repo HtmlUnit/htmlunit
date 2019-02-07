@@ -338,7 +338,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented({CHROME, FF})
     public void _DOMRectList_DOMRectList() throws Exception {
         test("DOMRectList", "DOMRectList");
     }

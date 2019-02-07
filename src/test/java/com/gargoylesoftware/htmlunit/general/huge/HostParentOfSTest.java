@@ -216,6 +216,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
+    @NotYetImplemented(CHROME)
     public void _SpeechSynthesisEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisErrorEvent");
     }
