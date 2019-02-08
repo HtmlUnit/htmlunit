@@ -9,7 +9,7 @@
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 72">
             <action type="fix" dev="rbri" issue="17">
-                ClassList.toggle should clear the style cache.
+                ClassList.toggle/add/remove should take care of the HtmlAttributeChangeListener.
             </action>
             <action type="fix" dev="rbri" issue="2010">
                 Audio node created from js now supports nodeType and nodeName property.

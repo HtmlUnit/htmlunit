@@ -622,6 +622,35 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"block", "none"})
+    public void addStyleCheck() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<style>\n"
+            + "  #d1.hidden { display: none; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('d1');\n"
+            + "  var list = div1.classList;\n"
+
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  list.add('hidden');\n"
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "}\n"
+            + "</script>"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' class='nice'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"a b", "2", "exception", "2", "a b"})
     public void removeEmpty() throws Exception {
         remove("a b", "");
@@ -780,6 +809,34 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({ "none", "block"})
+    public void removeStyleCheck() throws Exception {
+        final String html
+            = "<html><head><title>First</title>\n"
+            + "<style>\n"
+            + "  #d1.hidden { display: none; }\n"
+            + "</style>\n"
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var div1 = document.getElementById('d1');\n"
+            + "  var list = div1.classList;\n"
+
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "  list.remove('hidden');\n"
+            + "  alert(getComputedStyle(div1, null).display);\n"
+            + "}\n"
+            + "</script>"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='d1' class='hidden'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html, 700000);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true"})
     public void toggle() throws Exception {
         final String html
@@ -836,7 +893,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"none", "block"})
+    @Alerts({"none", "block", "none"})
     public void toggleStyleCheck() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"
@@ -847,8 +904,11 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  var div1 = document.getElementById('d1');\n"
             + "  var list = div1.classList;\n"
-
             + "  alert(getComputedStyle(div1, null).display);\n"
+
+            + "  list.toggle('hidden');\n"
+            + "  alert(getComputedStyle(div1, null).display);\n"
+
             + "  list.toggle('hidden');\n"
             + "  alert(getComputedStyle(div1, null).display);\n"
             + "}\n"
