@@ -833,6 +833,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, 700000);
     }
+
     /**
      * @throws Exception if the test fails
      */
