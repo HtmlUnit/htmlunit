@@ -112,14 +112,12 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public String child_;
 
     /**
-     * The default test.
-     * @throws Exception if an error occurs
+     * Cleanup.
      */
-    @Test
-    @Alerts("1")
-    @Default
-    public void closes() throws Exception {
-        test(parent_, child_);
+    @After
+    public void after() {
+        parent_ = null;
+        child_ = null;
     }
 
     /**
@@ -128,15 +126,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Override
     protected boolean isWebClientCached() {
         return true;
-    }
-
-    /**
-     * Cleanup.
-     */
-    @After
-    public void after() {
-        parent_ = null;
-        child_ = null;
     }
 
     /**
@@ -2081,6 +2070,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _area_slot() throws Exception {
+        test("area", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _area_small() throws Exception {
         test("area", "small");
     }
@@ -2155,6 +2153,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _area_sup() throws Exception {
         test("area", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _area_svg() throws Exception {
+        test("area", "svg");
     }
 
     /**
@@ -4077,6 +4084,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _base_slot() throws Exception {
+        test("base", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _base_small() throws Exception {
         test("base", "small");
     }
@@ -4151,6 +4167,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _base_sup() throws Exception {
         test("base", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _base_svg() throws Exception {
+        test("base", "svg");
     }
 
     /**
@@ -5337,6 +5362,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _basefont_slot() throws Exception {
+        test("basefont", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _basefont_small() throws Exception {
         test("basefont", "small");
     }
@@ -5411,6 +5445,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _basefont_sup() throws Exception {
         test("basefont", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _basefont_svg() throws Exception {
+        test("basefont", "svg");
     }
 
     /**
@@ -6965,6 +7008,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _bgsound_slot() throws Exception {
+        test("bgsound", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _bgsound_small() throws Exception {
         test("bgsound", "small");
     }
@@ -7039,6 +7091,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _bgsound_sup() throws Exception {
         test("bgsound", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _bgsound_svg() throws Exception {
+        test("bgsound", "svg");
     }
 
     /**
@@ -8709,6 +8770,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
+    public void _body_slot() throws Exception {
+        test("body", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
     public void _body_small() throws Exception {
         test("body", "small");
     }
@@ -8783,6 +8853,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("2")
     public void _body_sup() throws Exception {
         test("body", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _body_svg() throws Exception {
+        test("body", "svg");
     }
 
     /**
@@ -9915,6 +9994,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _br_slot() throws Exception {
+        test("br", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _br_small() throws Exception {
         test("br", "small");
     }
@@ -9989,6 +10077,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _br_sup() throws Exception {
         test("br", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _br_svg() throws Exception {
+        test("br", "svg");
     }
 
     /**
@@ -11562,6 +11659,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _caption_slot() throws Exception {
+        test("caption", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _caption_small() throws Exception {
         test("caption", "small");
     }
@@ -11636,6 +11742,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _caption_sup() throws Exception {
         test("caption", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _caption_svg() throws Exception {
+        test("caption", "svg");
     }
 
     /**
@@ -13375,6 +13490,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _col_slot() throws Exception {
+        test("col", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _col_small() throws Exception {
         test("col", "small");
     }
@@ -13449,6 +13573,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _col_sup() throws Exception {
         test("col", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _col_svg() throws Exception {
+        test("col", "svg");
     }
 
     /**
@@ -14636,6 +14769,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _colgroup_slot() throws Exception {
+        test("colgroup", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _colgroup_small() throws Exception {
         test("colgroup", "small");
     }
@@ -14710,6 +14852,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _colgroup_sup() throws Exception {
         test("colgroup", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _colgroup_svg() throws Exception {
+        test("colgroup", "svg");
     }
 
     /**
@@ -16012,6 +16163,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1")
+    public void _command_slot() throws Exception {
+        test("command", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "1")
     public void _command_small() throws Exception {
         test("command", "small");
     }
@@ -16094,6 +16255,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             FF = "1")
     public void _command_sup() throws Exception {
         test("command", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "1")
+    public void _command_svg() throws Exception {
+        test("command", "svg");
     }
 
     /**
@@ -19728,6 +19899,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _embed_slot() throws Exception {
+        test("embed", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _embed_small() throws Exception {
         test("embed", "small");
     }
@@ -19802,6 +19982,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _embed_sup() throws Exception {
         test("embed", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _embed_svg() throws Exception {
+        test("embed", "svg");
     }
 
     /**
@@ -22081,6 +22270,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _frame_slot() throws Exception {
+        test("frame", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _frame_small() throws Exception {
         test("frame", "small");
     }
@@ -22155,6 +22353,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _frame_sup() throws Exception {
         test("frame", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _frame_svg() throws Exception {
+        test("frame", "svg");
     }
 
     /**
@@ -23342,6 +23549,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _frameset_slot() throws Exception {
+        test("frameset", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _frameset_small() throws Exception {
         test("frameset", "small");
     }
@@ -23416,6 +23632,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _frameset_sup() throws Exception {
         test("frameset", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _frameset_svg() throws Exception {
+        test("frameset", "svg");
     }
 
     /**
@@ -26031,6 +26256,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _head_slot() throws Exception {
+        test("head", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _head_small() throws Exception {
         test("head", "small");
     }
@@ -26105,6 +26339,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _head_sup() throws Exception {
         test("head", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _head_svg() throws Exception {
+        test("head", "svg");
     }
 
     /**
@@ -27476,6 +27719,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _hr_slot() throws Exception {
+        test("hr", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _hr_small() throws Exception {
         test("hr", "small");
     }
@@ -27550,6 +27802,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _hr_sup() throws Exception {
         test("hr", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _hr_svg() throws Exception {
+        test("hr", "svg");
     }
 
     /**
@@ -27728,6 +27989,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_a() throws Exception {
         test("html", "a");
     }
@@ -27737,6 +27999,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_abbr() throws Exception {
         test("html", "abbr");
     }
@@ -27746,6 +28009,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_acronym() throws Exception {
         test("html", "acronym");
     }
@@ -27755,6 +28019,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_address() throws Exception {
         test("html", "address");
     }
@@ -27764,6 +28029,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_applet() throws Exception {
         test("html", "applet");
     }
@@ -27773,6 +28039,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_area() throws Exception {
         test("html", "area");
     }
@@ -27782,6 +28049,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_article() throws Exception {
         test("html", "article");
     }
@@ -27791,6 +28059,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_aside() throws Exception {
         test("html", "aside");
     }
@@ -27800,6 +28069,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_audio() throws Exception {
         test("html", "audio");
     }
@@ -27809,6 +28079,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_b() throws Exception {
         test("html", "b");
     }
@@ -27818,6 +28089,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_base() throws Exception {
         test("html", "base");
     }
@@ -27827,6 +28099,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_basefont() throws Exception {
         test("html", "basefont");
     }
@@ -27836,6 +28109,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_bdi() throws Exception {
         test("html", "bdi");
     }
@@ -27845,6 +28119,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_bdo() throws Exception {
         test("html", "bdo");
     }
@@ -27854,6 +28129,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_bgsound() throws Exception {
         test("html", "bgsound");
     }
@@ -27863,6 +28139,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_big() throws Exception {
         test("html", "big");
     }
@@ -27872,6 +28149,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_blink() throws Exception {
         test("html", "blink");
     }
@@ -27881,6 +28159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_blockquote() throws Exception {
         test("html", "blockquote");
     }
@@ -27890,6 +28169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_body() throws Exception {
         test("html", "body");
     }
@@ -27899,6 +28179,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_br() throws Exception {
         test("html", "br");
     }
@@ -27908,6 +28189,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_button() throws Exception {
         test("html", "button");
     }
@@ -27917,6 +28199,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_canvas() throws Exception {
         test("html", "canvas");
     }
@@ -27926,6 +28209,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_caption() throws Exception {
         test("html", "caption");
     }
@@ -27935,6 +28219,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_center() throws Exception {
         test("html", "center");
     }
@@ -27944,6 +28229,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_cite() throws Exception {
         test("html", "cite");
     }
@@ -27953,6 +28239,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_code() throws Exception {
         test("html", "code");
     }
@@ -27962,6 +28249,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_col() throws Exception {
         test("html", "col");
     }
@@ -27971,6 +28259,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_colgroup() throws Exception {
         test("html", "colgroup");
     }
@@ -27980,6 +28269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_command() throws Exception {
         test("html", "command");
     }
@@ -27989,6 +28279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_content() throws Exception {
         test("html", "content");
     }
@@ -27998,6 +28289,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_data() throws Exception {
         test("html", "data");
     }
@@ -28007,6 +28299,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_datalist() throws Exception {
         test("html", "datalist");
     }
@@ -28016,6 +28309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dd() throws Exception {
         test("html", "dd");
     }
@@ -28025,6 +28319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_del() throws Exception {
         test("html", "del");
     }
@@ -28034,6 +28329,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_details() throws Exception {
         test("html", "details");
     }
@@ -28043,6 +28339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dfn() throws Exception {
         test("html", "dfn");
     }
@@ -28052,6 +28349,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dialog() throws Exception {
         test("html", "dialog");
     }
@@ -28061,6 +28359,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dir() throws Exception {
         test("html", "dir");
     }
@@ -28070,6 +28369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_div() throws Exception {
         test("html", "div");
     }
@@ -28079,6 +28379,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dl() throws Exception {
         test("html", "dl");
     }
@@ -28088,6 +28389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_dt() throws Exception {
         test("html", "dt");
     }
@@ -28097,6 +28399,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_em() throws Exception {
         test("html", "em");
     }
@@ -28106,6 +28409,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_embed() throws Exception {
         test("html", "embed");
     }
@@ -28115,6 +28419,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_fieldset() throws Exception {
         test("html", "fieldset");
     }
@@ -28124,6 +28429,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_figcaption() throws Exception {
         test("html", "figcaption");
     }
@@ -28133,6 +28439,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_figure() throws Exception {
         test("html", "figure");
     }
@@ -28142,6 +28449,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_font() throws Exception {
         test("html", "font");
     }
@@ -28151,6 +28459,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_footer() throws Exception {
         test("html", "footer");
     }
@@ -28160,6 +28469,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_form() throws Exception {
         test("html", "form");
     }
@@ -28169,6 +28479,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_frame() throws Exception {
         test("html", "frame");
     }
@@ -28178,6 +28489,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_frameset() throws Exception {
         test("html", "frameset");
     }
@@ -28187,6 +28499,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h1() throws Exception {
         test("html", "h1");
     }
@@ -28196,6 +28509,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h2() throws Exception {
         test("html", "h2");
     }
@@ -28205,6 +28519,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h3() throws Exception {
         test("html", "h3");
     }
@@ -28214,6 +28529,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h4() throws Exception {
         test("html", "h4");
     }
@@ -28223,6 +28539,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h5() throws Exception {
         test("html", "h5");
     }
@@ -28232,6 +28549,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_h6() throws Exception {
         test("html", "h6");
     }
@@ -28241,6 +28559,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_head() throws Exception {
         test("html", "head");
     }
@@ -28250,6 +28569,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_header() throws Exception {
         test("html", "header");
     }
@@ -28259,6 +28579,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_hr() throws Exception {
         test("html", "hr");
     }
@@ -28268,6 +28589,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_html() throws Exception {
         test("html", "html");
     }
@@ -28277,6 +28599,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_i() throws Exception {
         test("html", "i");
     }
@@ -28286,6 +28609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_iframe() throws Exception {
         test("html", "iframe");
     }
@@ -28295,6 +28619,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_image() throws Exception {
         test("html", "image");
     }
@@ -28304,6 +28629,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_img() throws Exception {
         test("html", "img");
     }
@@ -28313,6 +28639,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_input() throws Exception {
         test("html", "input");
     }
@@ -28322,6 +28649,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_ins() throws Exception {
         test("html", "ins");
     }
@@ -28331,6 +28659,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_isindex() throws Exception {
         test("html", "isindex");
     }
@@ -28340,6 +28669,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_kbd() throws Exception {
         test("html", "kbd");
     }
@@ -28349,6 +28679,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_keygen() throws Exception {
         test("html", "keygen");
     }
@@ -28358,6 +28689,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_label() throws Exception {
         test("html", "label");
     }
@@ -28367,6 +28699,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_layer() throws Exception {
         test("html", "layer");
     }
@@ -28376,6 +28709,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_legend() throws Exception {
         test("html", "legend");
     }
@@ -28385,6 +28719,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_li() throws Exception {
         test("html", "li");
     }
@@ -28394,6 +28729,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_link() throws Exception {
         test("html", "link");
     }
@@ -28403,6 +28739,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_listing() throws Exception {
         test("html", "listing");
     }
@@ -28412,6 +28749,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_main() throws Exception {
         test("html", "main");
     }
@@ -28421,6 +28759,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_map() throws Exception {
         test("html", "map");
     }
@@ -28430,6 +28769,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_mark() throws Exception {
         test("html", "mark");
     }
@@ -28439,6 +28779,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_marquee() throws Exception {
         test("html", "marquee");
     }
@@ -28448,6 +28789,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_menu() throws Exception {
         test("html", "menu");
     }
@@ -28457,6 +28799,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_menuitem() throws Exception {
         test("html", "menuitem");
     }
@@ -28466,6 +28809,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_meta() throws Exception {
         test("html", "meta");
     }
@@ -28475,6 +28819,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_meter() throws Exception {
         test("html", "meter");
     }
@@ -28484,6 +28829,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_multicol() throws Exception {
         test("html", "multicol");
     }
@@ -28493,6 +28839,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_nav() throws Exception {
         test("html", "nav");
     }
@@ -28502,6 +28849,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_nextid() throws Exception {
         test("html", "nextid");
     }
@@ -28511,6 +28859,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_nobr() throws Exception {
         test("html", "nobr");
     }
@@ -28520,6 +28869,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_noembed() throws Exception {
         test("html", "noembed");
     }
@@ -28529,6 +28879,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_noframes() throws Exception {
         test("html", "noframes");
     }
@@ -28538,6 +28889,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_nolayer() throws Exception {
         test("html", "nolayer");
     }
@@ -28547,6 +28899,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_noscript() throws Exception {
         test("html", "noscript");
     }
@@ -28556,6 +28909,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_object() throws Exception {
         test("html", "object");
     }
@@ -28565,6 +28919,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_ol() throws Exception {
         test("html", "ol");
     }
@@ -28574,6 +28929,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_optgroup() throws Exception {
         test("html", "optgroup");
     }
@@ -28583,6 +28939,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_option() throws Exception {
         test("html", "option");
     }
@@ -28592,6 +28949,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_output() throws Exception {
         test("html", "output");
     }
@@ -28601,6 +28959,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_p() throws Exception {
         test("html", "p");
     }
@@ -28610,6 +28969,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_param() throws Exception {
         test("html", "param");
     }
@@ -28619,6 +28979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_picture() throws Exception {
         test("html", "picture");
     }
@@ -28628,6 +28989,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_plaintext() throws Exception {
         test("html", "plaintext");
     }
@@ -28637,6 +28999,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_pre() throws Exception {
         test("html", "pre");
     }
@@ -28646,6 +29009,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_progress() throws Exception {
         test("html", "progress");
     }
@@ -28655,6 +29019,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_q() throws Exception {
         test("html", "q");
     }
@@ -28664,6 +29029,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_rp() throws Exception {
         test("html", "rp");
     }
@@ -28673,6 +29039,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_rt() throws Exception {
         test("html", "rt");
     }
@@ -28682,6 +29049,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_ruby() throws Exception {
         test("html", "ruby");
     }
@@ -28691,6 +29059,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_s() throws Exception {
         test("html", "s");
     }
@@ -28700,6 +29069,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_samp() throws Exception {
         test("html", "samp");
     }
@@ -28709,7 +29079,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented(EDGE)
+    @NotYetImplemented
     public void _html_script() throws Exception {
         test("html", "script");
     }
@@ -28719,6 +29089,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_section() throws Exception {
         test("html", "section");
     }
@@ -28728,6 +29099,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_select() throws Exception {
         test("html", "select");
     }
@@ -28737,6 +29109,17 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
+    public void _html_slot() throws Exception {
+        test("html", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    @NotYetImplemented
     public void _html_small() throws Exception {
         test("html", "small");
     }
@@ -28746,6 +29129,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_source() throws Exception {
         test("html", "source");
     }
@@ -28755,6 +29139,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_span() throws Exception {
         test("html", "span");
     }
@@ -28764,6 +29149,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_strike() throws Exception {
         test("html", "strike");
     }
@@ -28773,6 +29159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_strong() throws Exception {
         test("html", "strong");
     }
@@ -28782,6 +29169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_style() throws Exception {
         test("html", "style");
     }
@@ -28791,6 +29179,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_sub() throws Exception {
         test("html", "sub");
     }
@@ -28800,6 +29189,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_summary() throws Exception {
         test("html", "summary");
     }
@@ -28809,6 +29199,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_sup() throws Exception {
         test("html", "sup");
     }
@@ -28818,6 +29209,17 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
+    public void _html_svg() throws Exception {
+        test("html", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("3")
+    @NotYetImplemented
     public void _html_table() throws Exception {
         test("html", "table");
     }
@@ -28827,6 +29229,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_tbody() throws Exception {
         test("html", "tbody");
     }
@@ -28836,6 +29239,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_td() throws Exception {
         test("html", "td");
     }
@@ -28845,6 +29249,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_template() throws Exception {
         test("html", "template");
     }
@@ -28854,6 +29259,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_textarea() throws Exception {
         test("html", "textarea");
     }
@@ -28863,6 +29269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_tfoot() throws Exception {
         test("html", "tfoot");
     }
@@ -28872,6 +29279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_th() throws Exception {
         test("html", "th");
     }
@@ -28881,6 +29289,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_thead() throws Exception {
         test("html", "thead");
     }
@@ -28890,6 +29299,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_time() throws Exception {
         test("html", "time");
     }
@@ -28899,6 +29309,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_title() throws Exception {
         test("html", "title");
     }
@@ -28908,6 +29319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_tr() throws Exception {
         test("html", "tr");
     }
@@ -28917,6 +29329,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_track() throws Exception {
         test("html", "track");
     }
@@ -28926,6 +29339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_tt() throws Exception {
         test("html", "tt");
     }
@@ -28935,6 +29349,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_u() throws Exception {
         test("html", "u");
     }
@@ -28944,6 +29359,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_ul() throws Exception {
         test("html", "ul");
     }
@@ -28953,6 +29369,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_var() throws Exception {
         test("html", "var");
     }
@@ -28962,6 +29379,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_video() throws Exception {
         test("html", "video");
     }
@@ -28971,6 +29389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_wbr() throws Exception {
         test("html", "wbr");
     }
@@ -28980,6 +29399,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("3")
+    @NotYetImplemented
     public void _html_xmp() throws Exception {
         test("html", "xmp");
     }
@@ -30182,6 +30602,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _image_slot() throws Exception {
+        test("image", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _image_small() throws Exception {
         test("image", "small");
     }
@@ -30256,6 +30685,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _image_sup() throws Exception {
         test("image", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _image_svg() throws Exception {
+        test("image", "svg");
     }
 
     /**
@@ -31443,6 +31881,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _img_slot() throws Exception {
+        test("img", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _img_small() throws Exception {
         test("img", "small");
     }
@@ -31517,6 +31964,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _img_sup() throws Exception {
         test("img", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _img_svg() throws Exception {
+        test("img", "svg");
     }
 
     /**
@@ -32704,6 +33160,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _input_slot() throws Exception {
+        test("input", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _input_small() throws Exception {
         test("input", "small");
     }
@@ -32778,6 +33243,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _input_sup() throws Exception {
         test("input", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _input_svg() throws Exception {
+        test("input", "svg");
     }
 
     /**
@@ -34605,6 +35079,18 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             CHROME = "1",
             FF60 = "1")
+    @NotYetImplemented({FF52, IE})
+    public void _isindex_svg() throws Exception {
+        test("isindex", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            CHROME = "1",
+            FF60 = "1")
     @NotYetImplemented({FF52, IE, EDGE})
     public void _isindex_table() throws Exception {
         test("isindex", "table");
@@ -36137,6 +36623,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2")
+    public void _keygen_slot() throws Exception {
+        test("keygen", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "2")
     public void _keygen_small() throws Exception {
         test("keygen", "small");
     }
@@ -36219,6 +36715,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             FF = "2")
     public void _keygen_sup() throws Exception {
         test("keygen", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            FF = "2")
+    public void _keygen_svg() throws Exception {
+        test("keygen", "svg");
     }
 
     /**
@@ -38170,6 +38676,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _link_slot() throws Exception {
+        test("link", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _link_small() throws Exception {
         test("link", "small");
     }
@@ -38244,6 +38759,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _link_sup() throws Exception {
         test("link", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _link_svg() throws Exception {
+        test("link", "svg");
     }
 
     /**
@@ -40719,6 +41243,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _meta_slot() throws Exception {
+        test("meta", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _meta_small() throws Exception {
         test("meta", "small");
     }
@@ -40793,6 +41326,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _meta_sup() throws Exception {
         test("meta", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _meta_svg() throws Exception {
+        test("meta", "svg");
     }
 
     /**
@@ -44743,6 +45285,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _param_slot() throws Exception {
+        test("param", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _param_small() throws Exception {
         test("param", "small");
     }
@@ -44817,6 +45368,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _param_sup() throws Exception {
         test("param", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _param_svg() throws Exception {
+        test("param", "svg");
     }
 
     /**
@@ -47092,6 +47652,190 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("2")
+    public void _slot_area() throws Exception {
+        test("slot", "area");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_base() throws Exception {
+        test("slot", "base");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_basefont() throws Exception {
+        test("slot", "basefont");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_bgsound() throws Exception {
+        test("slot", "bgsound");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_br() throws Exception {
+        test("slot", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            FF = "1")
+    public void _slot_command() throws Exception {
+        test("slot", "command");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_embed() throws Exception {
+        test("slot", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_hr() throws Exception {
+        test("slot", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_image() throws Exception {
+        test("slot", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_img() throws Exception {
+        test("slot", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_input() throws Exception {
+        test("slot", "input");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1",
+            FF60 = "1")
+    @NotYetImplemented({FF52, IE})
+    public void _slot_isindex() throws Exception {
+        test("slot", "isindex");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_keygen() throws Exception {
+        test("slot", "keygen");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_link() throws Exception {
+        test("slot", "link");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_meta() throws Exception {
+        test("slot", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_param() throws Exception {
+        test("slot", "param");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_script() throws Exception {
+        test("slot", "script");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_source() throws Exception {
+        test("slot", "source");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_track() throws Exception {
+        test("slot", "track");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
+    public void _slot_wbr() throws Exception {
+        test("slot", "wbr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("2")
     public void _small_area() throws Exception {
         test("small", "area");
     }
@@ -48286,6 +49030,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _source_slot() throws Exception {
+        test("source", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _source_small() throws Exception {
         test("source", "small");
     }
@@ -48360,6 +49113,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _source_sup() throws Exception {
         test("source", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _source_svg() throws Exception {
+        test("source", "svg");
     }
 
     /**
@@ -49648,6 +50410,406 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _svg_b() throws Exception {
+        test("svg", "b");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_big() throws Exception {
+        test("svg", "big");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_blockquote() throws Exception {
+        test("svg", "blockquote");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_body() throws Exception {
+        test("svg", "body");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_br() throws Exception {
+        test("svg", "br");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_center() throws Exception {
+        test("svg", "center");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_code() throws Exception {
+        test("svg", "code");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dd() throws Exception {
+        test("svg", "dd");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_div() throws Exception {
+        test("svg", "div");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dl() throws Exception {
+        test("svg", "dl");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_dt() throws Exception {
+        test("svg", "dt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_em() throws Exception {
+        test("svg", "em");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_embed() throws Exception {
+        test("svg", "embed");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h1() throws Exception {
+        test("svg", "h1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h2() throws Exception {
+        test("svg", "h2");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h3() throws Exception {
+        test("svg", "h3");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h4() throws Exception {
+        test("svg", "h4");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h5() throws Exception {
+        test("svg", "h5");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_h6() throws Exception {
+        test("svg", "h6");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_head() throws Exception {
+        test("svg", "head");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_hr() throws Exception {
+        test("svg", "hr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_i() throws Exception {
+        test("svg", "i");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_img() throws Exception {
+        test("svg", "img");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_li() throws Exception {
+        test("svg", "li");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_listing() throws Exception {
+        test("svg", "listing");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_menu() throws Exception {
+        test("svg", "menu");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_meta() throws Exception {
+        test("svg", "meta");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_nobr() throws Exception {
+        test("svg", "nobr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ol() throws Exception {
+        test("svg", "ol");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_p() throws Exception {
+        test("svg", "p");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_pre() throws Exception {
+        test("svg", "pre");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ruby() throws Exception {
+        test("svg", "ruby");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_s() throws Exception {
+        test("svg", "s");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_small() throws Exception {
+        test("svg", "small");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_span() throws Exception {
+        test("svg", "span");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_strike() throws Exception {
+        test("svg", "strike");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_strong() throws Exception {
+        test("svg", "strong");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_sub() throws Exception {
+        test("svg", "sub");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @NotYetImplemented
+    public void _svg_sup() throws Exception {
+        test("svg", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_table() throws Exception {
+        test("svg", "table");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_tt() throws Exception {
+        test("svg", "tt");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_u() throws Exception {
+        test("svg", "u");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_ul() throws Exception {
+        test("svg", "ul");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _svg_var() throws Exception {
+        test("svg", "var");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _table_a() throws Exception {
         test("table", "a");
     }
@@ -50487,6 +51649,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _table_slot() throws Exception {
+        test("table", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _table_small() throws Exception {
         test("table", "small");
     }
@@ -50553,6 +51724,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _table_sup() throws Exception {
         test("table", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _table_svg() throws Exception {
+        test("table", "svg");
     }
 
     /**
@@ -51762,6 +52942,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _tbody_svg() throws Exception {
+        test("tbody", "svg");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _tbody_table() throws Exception {
         test("tbody", "table");
     }
@@ -52943,6 +54132,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _td_slot() throws Exception {
+        test("td", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _td_small() throws Exception {
         test("td", "small");
     }
@@ -53017,6 +54215,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _td_sup() throws Exception {
         test("td", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _td_svg() throws Exception {
+        test("td", "svg");
     }
 
     /**
@@ -54287,7 +55494,6 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "2")
-    @NotYetImplemented(IE)
     public void _template_script() throws Exception {
         test("template", "script");
     }
@@ -54310,6 +55516,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "1")
     public void _template_select() throws Exception {
         test("template", "select");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "1")
+    public void _template_slot() throws Exception {
+        test("template", "slot");
     }
 
     /**
@@ -54400,6 +55616,16 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             IE = "1")
     public void _template_sup() throws Exception {
         test("template", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "1")
+    public void _template_svg() throws Exception {
+        test("template", "svg");
     }
 
     /**
@@ -55608,6 +56834,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _tfoot_slot() throws Exception {
+        test("tfoot", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _tfoot_small() throws Exception {
         test("tfoot", "small");
     }
@@ -55682,6 +56917,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _tfoot_sup() throws Exception {
         test("tfoot", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tfoot_svg() throws Exception {
+        test("tfoot", "svg");
     }
 
     /**
@@ -56870,6 +58114,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _th_slot() throws Exception {
+        test("th", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _th_small() throws Exception {
         test("th", "small");
     }
@@ -56944,6 +58197,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _th_sup() throws Exception {
         test("th", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _th_svg() throws Exception {
+        test("th", "svg");
     }
 
     /**
@@ -58132,6 +59394,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _thead_slot() throws Exception {
+        test("thead", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _thead_small() throws Exception {
         test("thead", "small");
     }
@@ -58206,6 +59477,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _thead_sup() throws Exception {
         test("thead", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _thead_svg() throws Exception {
+        test("thead", "svg");
     }
 
     /**
@@ -59779,6 +61059,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("null")
+    public void _tr_slot() throws Exception {
+        test("tr", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
     public void _tr_small() throws Exception {
         test("tr", "small");
     }
@@ -59853,6 +61142,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("null")
     public void _tr_sup() throws Exception {
         test("tr", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void _tr_svg() throws Exception {
+        test("tr", "svg");
     }
 
     /**
@@ -61040,6 +62338,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _track_slot() throws Exception {
+        test("track", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _track_small() throws Exception {
         test("track", "small");
     }
@@ -61114,6 +62421,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _track_sup() throws Exception {
         test("track", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _track_svg() throws Exception {
+        test("track", "svg");
     }
 
     /**
@@ -63226,6 +64542,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
+    public void _wbr_slot() throws Exception {
+        test("wbr", "slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
     public void _wbr_small() throws Exception {
         test("wbr", "small");
     }
@@ -63300,6 +64625,15 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("0")
     public void _wbr_sup() throws Exception {
         test("wbr", "sup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void _wbr_svg() throws Exception {
+        test("wbr", "svg");
     }
 
     /**
@@ -63474,1207 +64808,13 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * The default test.
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0")
-    public void _area_slot() throws Exception {
-        test("area", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _base_slot() throws Exception {
-        test("base", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _basefont_slot() throws Exception {
-        test("basefont", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _bgsound_slot() throws Exception {
-        test("bgsound", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _body_slot() throws Exception {
-        test("body", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _br_slot() throws Exception {
-        test("br", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _caption_slot() throws Exception {
-        test("caption", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _col_slot() throws Exception {
-        test("col", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _colgroup_slot() throws Exception {
-        test("colgroup", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            FF = "1")
-    public void _command_slot() throws Exception {
-        test("command", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _embed_slot() throws Exception {
-        test("embed", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _frame_slot() throws Exception {
-        test("frame", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _frameset_slot() throws Exception {
-        test("frameset", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _head_slot() throws Exception {
-        test("head", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _hr_slot() throws Exception {
-        test("hr", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("3")
-    public void _html_slot() throws Exception {
-        test("html", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _image_slot() throws Exception {
-        test("image", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _img_slot() throws Exception {
-        test("img", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _input_slot() throws Exception {
-        test("input", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            FF = "2")
-    public void _keygen_slot() throws Exception {
-        test("keygen", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _link_slot() throws Exception {
-        test("link", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _meta_slot() throws Exception {
-        test("meta", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _param_slot() throws Exception {
-        test("param", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _source_slot() throws Exception {
-        test("source", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _table_slot() throws Exception {
-        test("table", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _td_slot() throws Exception {
-        test("td", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            IE = "1")
-    public void _template_slot() throws Exception {
-        test("template", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _tfoot_slot() throws Exception {
-        test("tfoot", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _th_slot() throws Exception {
-        test("th", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _thead_slot() throws Exception {
-        test("thead", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _tr_slot() throws Exception {
-        test("tr", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _track_slot() throws Exception {
-        test("track", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _wbr_slot() throws Exception {
-        test("wbr", "slot");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_area() throws Exception {
-        test("slot", "area");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_base() throws Exception {
-        test("slot", "base");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_basefont() throws Exception {
-        test("slot", "basefont");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_bgsound() throws Exception {
-        test("slot", "bgsound");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_br() throws Exception {
-        test("slot", "br");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "2",
-            FF = "1")
-    public void _slot_command() throws Exception {
-        test("slot", "command");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_embed() throws Exception {
-        test("slot", "embed");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_hr() throws Exception {
-        test("slot", "hr");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_image() throws Exception {
-        test("slot", "image");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_img() throws Exception {
-        test("slot", "img");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_input() throws Exception {
-        test("slot", "input");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "2",
-            CHROME = "1",
-            FF60 = "1")
-    @NotYetImplemented({FF52, IE})
-    public void _slot_isindex() throws Exception {
-        test("slot", "isindex");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_keygen() throws Exception {
-        test("slot", "keygen");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_link() throws Exception {
-        test("slot", "link");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_meta() throws Exception {
-        test("slot", "meta");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_param() throws Exception {
-        test("slot", "param");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_script() throws Exception {
-        test("slot", "script");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_source() throws Exception {
-        test("slot", "source");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_track() throws Exception {
-        test("slot", "track");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _slot_wbr() throws Exception {
-        test("slot", "wbr");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _area_svg() throws Exception {
-        test("area", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _base_svg() throws Exception {
-        test("base", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _basefont_svg() throws Exception {
-        test("basefont", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _bgsound_svg() throws Exception {
-        test("bgsound", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("2")
-    public void _body_svg() throws Exception {
-        test("body", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _br_svg() throws Exception {
-        test("br", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _caption_svg() throws Exception {
-        test("caption", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _col_svg() throws Exception {
-        test("col", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _colgroup_svg() throws Exception {
-        test("colgroup", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            FF = "1")
-    public void _command_svg() throws Exception {
-        test("command", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _embed_svg() throws Exception {
-        test("embed", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _frame_svg() throws Exception {
-        test("frame", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _frameset_svg() throws Exception {
-        test("frameset", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _head_svg() throws Exception {
-        test("head", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _hr_svg() throws Exception {
-        test("hr", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("3")
-    public void _html_svg() throws Exception {
-        test("html", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _image_svg() throws Exception {
-        test("image", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _img_svg() throws Exception {
-        test("img", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _input_svg() throws Exception {
-        test("input", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "1",
-            FF60 = "1")
-    @NotYetImplemented({FF52, IE})
-    public void _isindex_svg() throws Exception {
-        test("isindex", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            FF = "2")
-    public void _keygen_svg() throws Exception {
-        test("keygen", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _link_svg() throws Exception {
-        test("link", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _meta_svg() throws Exception {
-        test("meta", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _param_svg() throws Exception {
-        test("param", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _source_svg() throws Exception {
-        test("source", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_b() throws Exception {
-        test("svg", "b");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_big() throws Exception {
-        test("svg", "big");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_blockquote() throws Exception {
-        test("svg", "blockquote");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_body() throws Exception {
-        test("svg", "body");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_br() throws Exception {
-        test("svg", "br");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_center() throws Exception {
-        test("svg", "center");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_code() throws Exception {
-        test("svg", "code");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_dd() throws Exception {
-        test("svg", "dd");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_div() throws Exception {
-        test("svg", "div");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_dl() throws Exception {
-        test("svg", "dl");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_dt() throws Exception {
-        test("svg", "dt");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_em() throws Exception {
-        test("svg", "em");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_embed() throws Exception {
-        test("svg", "embed");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h1() throws Exception {
-        test("svg", "h1");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h2() throws Exception {
-        test("svg", "h2");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h3() throws Exception {
-        test("svg", "h3");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h4() throws Exception {
-        test("svg", "h4");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h5() throws Exception {
-        test("svg", "h5");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_h6() throws Exception {
-        test("svg", "h6");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_head() throws Exception {
-        test("svg", "head");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_hr() throws Exception {
-        test("svg", "hr");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_i() throws Exception {
-        test("svg", "i");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_img() throws Exception {
-        test("svg", "img");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_li() throws Exception {
-        test("svg", "li");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_listing() throws Exception {
-        test("svg", "listing");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_menu() throws Exception {
-        test("svg", "menu");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_meta() throws Exception {
-        test("svg", "meta");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_nobr() throws Exception {
-        test("svg", "nobr");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_ol() throws Exception {
-        test("svg", "ol");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_p() throws Exception {
-        test("svg", "p");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_pre() throws Exception {
-        test("svg", "pre");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_ruby() throws Exception {
-        test("svg", "ruby");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_s() throws Exception {
-        test("svg", "s");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_small() throws Exception {
-        test("svg", "small");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_span() throws Exception {
-        test("svg", "span");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    @NotYetImplemented
-    public void _svg_strike() throws Exception {
-        test("svg", "strike");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    @NotYetImplemented
-    public void _svg_strong() throws Exception {
-        test("svg", "strong");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    @NotYetImplemented
-    public void _svg_sub() throws Exception {
-        test("svg", "sub");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    @NotYetImplemented
-    public void _svg_sup() throws Exception {
-        test("svg", "sup");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_table() throws Exception {
-        test("svg", "table");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_tt() throws Exception {
-        test("svg", "tt");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_u() throws Exception {
-        test("svg", "u");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_ul() throws Exception {
-        test("svg", "ul");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _svg_var() throws Exception {
-        test("svg", "var");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _table_svg() throws Exception {
-        test("table", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _tbody_svg() throws Exception {
-        test("tbody", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _td_svg() throws Exception {
-        test("td", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "0",
-            IE = "1")
-    public void _template_svg() throws Exception {
-        test("template", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _tfoot_svg() throws Exception {
-        test("tfoot", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _th_svg() throws Exception {
-        test("th", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _thead_svg() throws Exception {
-        test("thead", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("null")
-    public void _tr_svg() throws Exception {
-        test("tr", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _track_svg() throws Exception {
-        test("track", "svg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void _wbr_svg() throws Exception {
-        test("wbr", "svg");
+    @Alerts("1")
+    @Default
+    public void closes() throws Exception {
+        test(parent_, child_);
     }
 }
