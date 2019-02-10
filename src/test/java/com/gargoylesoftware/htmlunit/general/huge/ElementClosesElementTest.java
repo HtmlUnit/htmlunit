@@ -54286,7 +54286,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            IE = "1")
+            IE = "2")
     @NotYetImplemented(IE)
     public void _template_script() throws Exception {
         test("template", "script");
