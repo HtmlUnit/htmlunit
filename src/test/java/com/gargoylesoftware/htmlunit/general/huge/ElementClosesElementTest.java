@@ -27727,7 +27727,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_a() throws Exception {
         test("html", "a");
     }
@@ -27736,7 +27736,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_abbr() throws Exception {
         test("html", "abbr");
     }
@@ -27745,7 +27745,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_acronym() throws Exception {
         test("html", "acronym");
     }
@@ -27754,7 +27754,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_address() throws Exception {
         test("html", "address");
     }
@@ -27763,7 +27763,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_applet() throws Exception {
         test("html", "applet");
     }
@@ -27772,7 +27772,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_area() throws Exception {
         test("html", "area");
     }
@@ -27781,7 +27781,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_article() throws Exception {
         test("html", "article");
     }
@@ -27790,7 +27790,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_aside() throws Exception {
         test("html", "aside");
     }
@@ -27799,7 +27799,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_audio() throws Exception {
         test("html", "audio");
     }
@@ -27808,7 +27808,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_b() throws Exception {
         test("html", "b");
     }
@@ -27817,7 +27817,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_base() throws Exception {
         test("html", "base");
     }
@@ -27826,7 +27826,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_basefont() throws Exception {
         test("html", "basefont");
     }
@@ -27835,7 +27835,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_bdi() throws Exception {
         test("html", "bdi");
     }
@@ -27844,7 +27844,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_bdo() throws Exception {
         test("html", "bdo");
     }
@@ -27853,7 +27853,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_bgsound() throws Exception {
         test("html", "bgsound");
     }
@@ -27862,7 +27862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_big() throws Exception {
         test("html", "big");
     }
@@ -27871,7 +27871,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_blink() throws Exception {
         test("html", "blink");
     }
@@ -27880,7 +27880,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_blockquote() throws Exception {
         test("html", "blockquote");
     }
@@ -27889,7 +27889,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_body() throws Exception {
         test("html", "body");
     }
@@ -27898,7 +27898,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_br() throws Exception {
         test("html", "br");
     }
@@ -27907,7 +27907,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_button() throws Exception {
         test("html", "button");
     }
@@ -27916,7 +27916,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_canvas() throws Exception {
         test("html", "canvas");
     }
@@ -27925,7 +27925,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_caption() throws Exception {
         test("html", "caption");
     }
@@ -27934,7 +27934,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_center() throws Exception {
         test("html", "center");
     }
@@ -27943,7 +27943,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_cite() throws Exception {
         test("html", "cite");
     }
@@ -27952,7 +27952,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_code() throws Exception {
         test("html", "code");
     }
@@ -27961,7 +27961,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_col() throws Exception {
         test("html", "col");
     }
@@ -27970,7 +27970,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_colgroup() throws Exception {
         test("html", "colgroup");
     }
@@ -27979,7 +27979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_command() throws Exception {
         test("html", "command");
     }
@@ -27988,7 +27988,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_content() throws Exception {
         test("html", "content");
     }
@@ -27997,7 +27997,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_data() throws Exception {
         test("html", "data");
     }
@@ -28006,7 +28006,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_datalist() throws Exception {
         test("html", "datalist");
     }
@@ -28015,7 +28015,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dd() throws Exception {
         test("html", "dd");
     }
@@ -28024,7 +28024,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_del() throws Exception {
         test("html", "del");
     }
@@ -28033,7 +28033,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_details() throws Exception {
         test("html", "details");
     }
@@ -28042,7 +28042,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dfn() throws Exception {
         test("html", "dfn");
     }
@@ -28051,7 +28051,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dialog() throws Exception {
         test("html", "dialog");
     }
@@ -28060,7 +28060,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dir() throws Exception {
         test("html", "dir");
     }
@@ -28069,7 +28069,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_div() throws Exception {
         test("html", "div");
     }
@@ -28078,7 +28078,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dl() throws Exception {
         test("html", "dl");
     }
@@ -28087,7 +28087,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_dt() throws Exception {
         test("html", "dt");
     }
@@ -28096,7 +28096,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_em() throws Exception {
         test("html", "em");
     }
@@ -28105,7 +28105,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_embed() throws Exception {
         test("html", "embed");
     }
@@ -28114,7 +28114,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_fieldset() throws Exception {
         test("html", "fieldset");
     }
@@ -28123,7 +28123,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_figcaption() throws Exception {
         test("html", "figcaption");
     }
@@ -28132,7 +28132,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_figure() throws Exception {
         test("html", "figure");
     }
@@ -28141,7 +28141,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_font() throws Exception {
         test("html", "font");
     }
@@ -28150,7 +28150,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_footer() throws Exception {
         test("html", "footer");
     }
@@ -28159,7 +28159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_form() throws Exception {
         test("html", "form");
     }
@@ -28168,7 +28168,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_frame() throws Exception {
         test("html", "frame");
     }
@@ -28177,7 +28177,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_frameset() throws Exception {
         test("html", "frameset");
     }
@@ -28186,7 +28186,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h1() throws Exception {
         test("html", "h1");
     }
@@ -28195,7 +28195,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h2() throws Exception {
         test("html", "h2");
     }
@@ -28204,7 +28204,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h3() throws Exception {
         test("html", "h3");
     }
@@ -28213,7 +28213,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h4() throws Exception {
         test("html", "h4");
     }
@@ -28222,7 +28222,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h5() throws Exception {
         test("html", "h5");
     }
@@ -28231,7 +28231,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_h6() throws Exception {
         test("html", "h6");
     }
@@ -28240,7 +28240,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_head() throws Exception {
         test("html", "head");
     }
@@ -28249,7 +28249,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_header() throws Exception {
         test("html", "header");
     }
@@ -28258,7 +28258,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_hr() throws Exception {
         test("html", "hr");
     }
@@ -28267,7 +28267,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_html() throws Exception {
         test("html", "html");
     }
@@ -28276,7 +28276,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_i() throws Exception {
         test("html", "i");
     }
@@ -28285,7 +28285,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_iframe() throws Exception {
         test("html", "iframe");
     }
@@ -28294,7 +28294,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_image() throws Exception {
         test("html", "image");
     }
@@ -28303,7 +28303,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_img() throws Exception {
         test("html", "img");
     }
@@ -28312,7 +28312,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_input() throws Exception {
         test("html", "input");
     }
@@ -28321,7 +28321,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_ins() throws Exception {
         test("html", "ins");
     }
@@ -28330,7 +28330,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_isindex() throws Exception {
         test("html", "isindex");
     }
@@ -28339,7 +28339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_kbd() throws Exception {
         test("html", "kbd");
     }
@@ -28348,7 +28348,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_keygen() throws Exception {
         test("html", "keygen");
     }
@@ -28357,7 +28357,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_label() throws Exception {
         test("html", "label");
     }
@@ -28366,7 +28366,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_layer() throws Exception {
         test("html", "layer");
     }
@@ -28375,7 +28375,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_legend() throws Exception {
         test("html", "legend");
     }
@@ -28384,7 +28384,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_li() throws Exception {
         test("html", "li");
     }
@@ -28393,7 +28393,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_link() throws Exception {
         test("html", "link");
     }
@@ -28402,7 +28402,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_listing() throws Exception {
         test("html", "listing");
     }
@@ -28411,7 +28411,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_main() throws Exception {
         test("html", "main");
     }
@@ -28420,7 +28420,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_map() throws Exception {
         test("html", "map");
     }
@@ -28429,7 +28429,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_mark() throws Exception {
         test("html", "mark");
     }
@@ -28438,7 +28438,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_marquee() throws Exception {
         test("html", "marquee");
     }
@@ -28447,7 +28447,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_menu() throws Exception {
         test("html", "menu");
     }
@@ -28456,7 +28456,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_menuitem() throws Exception {
         test("html", "menuitem");
     }
@@ -28465,7 +28465,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_meta() throws Exception {
         test("html", "meta");
     }
@@ -28474,7 +28474,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_meter() throws Exception {
         test("html", "meter");
     }
@@ -28483,7 +28483,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_multicol() throws Exception {
         test("html", "multicol");
     }
@@ -28492,7 +28492,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_nav() throws Exception {
         test("html", "nav");
     }
@@ -28501,7 +28501,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_nextid() throws Exception {
         test("html", "nextid");
     }
@@ -28510,7 +28510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_nobr() throws Exception {
         test("html", "nobr");
     }
@@ -28519,7 +28519,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_noembed() throws Exception {
         test("html", "noembed");
     }
@@ -28528,7 +28528,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_noframes() throws Exception {
         test("html", "noframes");
     }
@@ -28537,7 +28537,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_nolayer() throws Exception {
         test("html", "nolayer");
     }
@@ -28546,7 +28546,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_noscript() throws Exception {
         test("html", "noscript");
     }
@@ -28555,7 +28555,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_object() throws Exception {
         test("html", "object");
     }
@@ -28564,7 +28564,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_ol() throws Exception {
         test("html", "ol");
     }
@@ -28573,7 +28573,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_optgroup() throws Exception {
         test("html", "optgroup");
     }
@@ -28582,7 +28582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_option() throws Exception {
         test("html", "option");
     }
@@ -28591,7 +28591,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_output() throws Exception {
         test("html", "output");
     }
@@ -28600,7 +28600,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_p() throws Exception {
         test("html", "p");
     }
@@ -28609,7 +28609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_param() throws Exception {
         test("html", "param");
     }
@@ -28618,7 +28618,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_picture() throws Exception {
         test("html", "picture");
     }
@@ -28627,7 +28627,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_plaintext() throws Exception {
         test("html", "plaintext");
     }
@@ -28636,7 +28636,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_pre() throws Exception {
         test("html", "pre");
     }
@@ -28645,7 +28645,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_progress() throws Exception {
         test("html", "progress");
     }
@@ -28654,7 +28654,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_q() throws Exception {
         test("html", "q");
     }
@@ -28663,7 +28663,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_rp() throws Exception {
         test("html", "rp");
     }
@@ -28672,7 +28672,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_rt() throws Exception {
         test("html", "rt");
     }
@@ -28681,7 +28681,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_ruby() throws Exception {
         test("html", "ruby");
     }
@@ -28690,7 +28690,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_s() throws Exception {
         test("html", "s");
     }
@@ -28699,7 +28699,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_samp() throws Exception {
         test("html", "samp");
     }
@@ -28708,7 +28708,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     @NotYetImplemented(EDGE)
     public void _html_script() throws Exception {
         test("html", "script");
@@ -28718,7 +28718,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_section() throws Exception {
         test("html", "section");
     }
@@ -28727,7 +28727,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_select() throws Exception {
         test("html", "select");
     }
@@ -28736,7 +28736,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_small() throws Exception {
         test("html", "small");
     }
@@ -28745,7 +28745,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_source() throws Exception {
         test("html", "source");
     }
@@ -28754,7 +28754,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_span() throws Exception {
         test("html", "span");
     }
@@ -28763,7 +28763,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_strike() throws Exception {
         test("html", "strike");
     }
@@ -28772,7 +28772,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_strong() throws Exception {
         test("html", "strong");
     }
@@ -28781,7 +28781,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_style() throws Exception {
         test("html", "style");
     }
@@ -28790,7 +28790,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_sub() throws Exception {
         test("html", "sub");
     }
@@ -28799,7 +28799,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_summary() throws Exception {
         test("html", "summary");
     }
@@ -28808,7 +28808,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_sup() throws Exception {
         test("html", "sup");
     }
@@ -28817,7 +28817,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_table() throws Exception {
         test("html", "table");
     }
@@ -28826,7 +28826,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_tbody() throws Exception {
         test("html", "tbody");
     }
@@ -28835,7 +28835,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_td() throws Exception {
         test("html", "td");
     }
@@ -28844,7 +28844,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_template() throws Exception {
         test("html", "template");
     }
@@ -28853,7 +28853,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_textarea() throws Exception {
         test("html", "textarea");
     }
@@ -28862,7 +28862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_tfoot() throws Exception {
         test("html", "tfoot");
     }
@@ -28871,7 +28871,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_th() throws Exception {
         test("html", "th");
     }
@@ -28880,7 +28880,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_thead() throws Exception {
         test("html", "thead");
     }
@@ -28889,7 +28889,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_time() throws Exception {
         test("html", "time");
     }
@@ -28898,7 +28898,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_title() throws Exception {
         test("html", "title");
     }
@@ -28907,7 +28907,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_tr() throws Exception {
         test("html", "tr");
     }
@@ -28916,7 +28916,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_track() throws Exception {
         test("html", "track");
     }
@@ -28925,7 +28925,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_tt() throws Exception {
         test("html", "tt");
     }
@@ -28934,7 +28934,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_u() throws Exception {
         test("html", "u");
     }
@@ -28943,7 +28943,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_ul() throws Exception {
         test("html", "ul");
     }
@@ -28952,7 +28952,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_var() throws Exception {
         test("html", "var");
     }
@@ -28961,7 +28961,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_video() throws Exception {
         test("html", "video");
     }
@@ -28970,7 +28970,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_wbr() throws Exception {
         test("html", "wbr");
     }
@@ -28979,7 +28979,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_xmp() throws Exception {
         test("html", "xmp");
     }
@@ -63613,7 +63613,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_slot() throws Exception {
         test("html", "slot");
     }
@@ -64097,7 +64097,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("3")
     public void _html_svg() throws Exception {
         test("html", "svg");
     }
