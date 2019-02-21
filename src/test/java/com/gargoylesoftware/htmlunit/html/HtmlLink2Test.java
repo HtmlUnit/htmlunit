@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -311,5 +312,52 @@ public class HtmlLink2Test extends WebDriverTestCase {
         Thread.sleep(200);
         final String text = driver.findElement(By.id("log")).getAttribute("value").trim().replaceAll("\r", "");
         assertEquals(String.join("\n", getExpectedAlerts()), text);
+    }
+
+    /**
+     * Test for issue #2011.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"§§URL§§sample?string=a&int=1", "/sample?string=a&int=1"})
+    public void testEntityRefWithoutSemicolon() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <a id='target' href='/sample?string=a&int=1'>/sample?string=a&int=1</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement element = driver.findElement(By.id("target"));
+
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("href"));
+        assertEquals(getExpectedAlerts()[1], element.getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"§§URL§§sample?string=a&iexcl=1", "/sample?string=a\u00A1=1"})
+    public void testEntityRefWithoutSemicolonReplaceInAttrib() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <a id='target' href='/sample?string=a&iexcl=1'>/sample?string=a&iexcl=1</a>\n"
+            + "</body>\n"
+            + "</html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+
+        final WebElement element = driver.findElement(By.id("target"));
+
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("href"));
+        assertEquals(getExpectedAlerts()[1], element.getText());
     }
 }

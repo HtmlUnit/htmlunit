@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 72">
+            <action type="fix" dev="rbri" issue="2011">
+                Neko-HtmlUnit parser: entity reference handling rewritten according to the spec.
+                All specified character references are now supported and a bunch of fixes where
+                also made for numeric references.
+            </action>
             <action type="fix" dev="rbri" issue="17">
                 ClassList.toggle/add/remove should take care of the HtmlAttributeChangeListener.
             </action>
