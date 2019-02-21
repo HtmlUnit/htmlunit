@@ -1096,7 +1096,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§foo?a=1&copy=2&prod=3")
-    @NotYetImplemented
     public void incompleteEntities() throws Exception {
         final String html = "<html><head>\n"
             + "<title>Test document</title>\n"
