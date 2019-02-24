@@ -376,8 +376,10 @@ public final class XmlUtil {
                     break;
 
                 default:
-                    LOG.warn("NodeType " + child.getNodeType()
-                        + " (" + child.getNodeName() + ") is not yet supported.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("NodeType " + child.getNodeType()
+                            + " (" + child.getNodeName() + ") is not yet supported.");
+                    }
             }
         }
     }

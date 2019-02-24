@@ -703,8 +703,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return;
         }
         if (!isAuthorizedHeader(name)) {
-            LOG.warn("Ignoring XMLHTTPRequest.setRequestHeader for " + name
-                + ": it is a restricted header");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Ignoring XMLHTTPRequest.setRequestHeader for " + name
+                        + ": it is a restricted header");
+            }
             return;
         }
 

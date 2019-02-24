@@ -371,7 +371,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final String stringMessage = Context.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
-            LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            }
         }
         else {
             handler.handleAlert(document_.getPage(), stringMessage);
@@ -419,8 +421,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public boolean confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
-            LOG.warn("window.confirm(\""
-                    + message + "\") no confirm handler installed, simulating the OK button");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.confirm(\""
+                        + message + "\") no confirm handler installed, simulating the OK button");
+            }
             return true;
         }
         return handler.handleConfirm(document_.getPage(), message);
@@ -436,7 +440,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public String prompt(final String message, Object defaultValue) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
-            LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            }
             return null;
         }
         if (defaultValue == Undefined.instance) {
@@ -577,7 +583,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             return new URL(urlString);
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            }
             return null;
         }
     }

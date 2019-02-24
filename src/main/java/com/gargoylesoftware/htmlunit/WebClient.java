@@ -567,7 +567,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (getOptions().isPrintContentOnFailingStatusCode()) {
             final int statusCode = webResponse.getStatusCode();
             final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-            if (!successful) {
+            if (!successful && LOG.isInfoEnabled()) {
                 final String contentType = webResponse.getContentType();
                 LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
                 LOG.info(webResponse.getContentAsString());
@@ -2228,7 +2228,9 @@ public class WebClient implements Serializable, AutoCloseable {
         for (int i = queue.size() - 1; i >= 0; --i) {
             final LoadJob loadJob = queue.get(i);
             if (loadJob.isOutdated()) {
-                LOG.info("No usage of download: " + loadJob);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + loadJob);
+                }
                 continue;
             }
 
@@ -2271,7 +2273,9 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
             }
             else {
-                LOG.info("No usage of download: " + loadJob);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + loadJob);
+                }
             }
         }
     }

@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 
+import com.gargoylesoftware.htmlunit.NotYetImplementedException;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
@@ -63,7 +64,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public AudioClip getAudioClip(final URL url) {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.getAudioClip(URL)");
     }
 
     /**
@@ -71,7 +72,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public Image getImage(final URL url) {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.getImage(URL)");
     }
 
     /**
@@ -79,7 +80,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public InputStream getStream(final String key) {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.getStream(String)");
     }
 
     /**
@@ -87,7 +88,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public Iterator<String> getStreamKeys() {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.getStreamKeys()");
     }
 
     /**
@@ -95,7 +96,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public void setStream(final String key, final InputStream stream) throws IOException {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.setStream(String, InputStream)");
     }
 
     /**
@@ -103,7 +104,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public void showDocument(final URL url) {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.showDocument(URL)");
     }
 
     /**
@@ -111,7 +112,7 @@ public class AppletContextImpl implements AppletContext {
      */
     @Override
     public void showDocument(final URL url, final String target) {
-        throw new RuntimeException("Not yet implemented!");
+        throw new NotYetImplementedException("AppletContextImpl.showDocument(URL, String)");
     }
 
     /**
