@@ -1244,7 +1244,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final String fileName = file.getName();
         if (fileName.endsWith(".xhtml")) {
             // Java's mime type map returns application/xml in JDK8.
-            return "application/xhtml+xml";
+            return MimeType.APPLICATION_XHTML;
         }
 
         // Java's mime type map does not know these in JDK8.

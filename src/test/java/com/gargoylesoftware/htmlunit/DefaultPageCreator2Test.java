@@ -41,7 +41,7 @@ public class DefaultPageCreator2Test extends WebTestCase {
 
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.TEXT_XML));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xml"));
-        assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/xhtml+xml"));
+        assertEquals(PageType.XML, DefaultPageCreator.determinePageType(MimeType.APPLICATION_XHTML));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("text/vnd.wap.wml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.mozilla.xul+xml"));
         assertEquals(PageType.XML, DefaultPageCreator.determinePageType("application/vnd.wap.xhtml+xml"));

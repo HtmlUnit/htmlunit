@@ -346,12 +346,13 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final HtmlPage page = (HtmlPage) getPage();
 
         final String src = getSrcAttribute();
-        if (src.equals(SLASH_SLASH_COLON)) {
-            executeEvent(Event.TYPE_ERROR);
-            return;
-        }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
+            if (src.equals(SLASH_SLASH_COLON)) {
+                executeEvent(Event.TYPE_ERROR);
+                return;
+            }
+
             if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="[url]"></script>
                 if (LOG.isDebugEnabled()) {

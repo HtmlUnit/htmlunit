@@ -60,7 +60,7 @@ public class DOMParser extends SimpleScriptable {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
         if (!MimeType.TEXT_HTML.equals(type) && !MimeType.TEXT_XML.equals(type) && !"application/xml".equals(type)
-            && !"application/xhtml+xml".equals(type) && !"image/svg+xml".equals(type)) {
+            && !MimeType.APPLICATION_XHTML.equals(type) && !"image/svg+xml".equals(type)) {
             throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
         }
 

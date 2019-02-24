@@ -232,6 +232,7 @@ public final class HTMLParser {
             // xml content is different
             if (xhtml) {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
+                domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
             }
         }
         catch (final Exception e) {

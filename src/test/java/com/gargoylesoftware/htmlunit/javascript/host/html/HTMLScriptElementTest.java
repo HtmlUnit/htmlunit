@@ -15,17 +15,19 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -193,6 +195,106 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "world", "-"})
+    public void scriptInCdataXHtml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "world", "-"})
+    public void scriptInCdataXml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
+        verifyAlerts(777777, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "-"})
+    public void scriptInCdataHtml() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageWithAlerts2(html);
     }
 

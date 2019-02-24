@@ -1444,7 +1444,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("xhtml.php", "application/xml", c.guessContentType(getTestFile("xhtml.php")));
         assertEquals("xhtml.htm", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.htm")));
         assertEquals("xhtml.html", MimeType.TEXT_HTML, c.guessContentType(getTestFile("xhtml.html")));
-        assertEquals("xhtml.xhtml", "application/xhtml+xml", c.guessContentType(getTestFile("xhtml.xhtml")));
+        assertEquals("xhtml.xhtml", MimeType.APPLICATION_XHTML, c.guessContentType(getTestFile("xhtml.xhtml")));
     }
 
     /**
