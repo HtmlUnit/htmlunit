@@ -323,13 +323,13 @@ public class TextRange extends SimpleScriptable {
      * @param textLength the text length
      * @return the moveBy amount constrained to the text length
      */
-    protected int constrainMoveBy(int moveBy, final int current, final int textLength) {
+    private static int constrainMoveBy(final int moveBy, final int current, final int textLength) {
         final int to = current + moveBy;
         if (to < 0) {
-            moveBy -= to;
+            return moveBy - to;
         }
-        else if (to >= textLength) {
-            moveBy -= to - textLength;
+        if (to >= textLength) {
+            return moveBy - (to - textLength);
         }
         return moveBy;
     }

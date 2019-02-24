@@ -292,11 +292,11 @@ public final class UrlUtils {
      * @param anchor the anchor string to encode and escape
      * @return the encoded and escaped anchor string
      */
-    public static String encodeAnchor(String anchor) {
-        if (anchor != null) {
-            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
+    public static String encodeAnchor(final String anchor) {
+        if (anchor == null) {
+            return null;
         }
-        return anchor;
+        return encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
     }
 
     /**
@@ -305,11 +305,11 @@ public final class UrlUtils {
      * @param hash the anchor string to encode and escape
      * @return the encoded and escaped anchor string
      */
-    public static String encodeHash(String hash) {
-        if (hash != null) {
-            hash = encode(hash, HASH_ALLOWED_CHARS, UTF_8);
+    public static String encodeHash(final String hash) {
+        if (hash == null) {
+            return null;
         }
-        return hash;
+        return encode(hash, HASH_ALLOWED_CHARS, UTF_8);
     }
 
     /**
@@ -923,14 +923,14 @@ public final class UrlUtils {
     /**
      * "../" after the leading "/" should be removed as browsers do (not in RFC)
      */
-    private static String removeLeadingSlashPoints(String path) {
+    private static String removeLeadingSlashPoints(final String path) {
         int i = 1;
         while (path.startsWith("../", i)) {
             i = i + 3;
         }
 
         if (i > 1) {
-            path = "/" + path.substring(i);
+            return "/" + path.substring(i);
         }
 
         return path;
