@@ -1123,7 +1123,7 @@ public class Document extends Node {
     @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_.getAndIncrement();
+            uniqueID_ = "ms__id" + Document.UniqueID_Counter_.getAndIncrement();
         }
         return uniqueID_;
     }

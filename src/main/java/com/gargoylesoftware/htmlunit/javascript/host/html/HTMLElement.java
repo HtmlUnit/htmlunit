@@ -845,7 +845,9 @@ public class HTMLElement extends Element {
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
-            LOG.warn("Unimplemented behavior: " + behavior);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Unimplemented behavior: " + behavior);
+            }
             return BEHAVIOR_ID_UNKNOWN;
         }
     }
@@ -889,7 +891,9 @@ public class HTMLElement extends Element {
                 behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
-                LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                }
         }
     }
 
@@ -1260,7 +1264,7 @@ public class HTMLElement extends Element {
     @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_.incrementAndGet();
+            uniqueID_ = "ms__id" + HTMLElement.UniqueID_Counter_.incrementAndGet();
         }
         return uniqueID_;
     }

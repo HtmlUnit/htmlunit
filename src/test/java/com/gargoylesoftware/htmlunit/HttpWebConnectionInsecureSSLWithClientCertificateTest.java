@@ -120,15 +120,18 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     @Test
     public void insecureSSL_clientCertificatesInputStream() throws Exception {
         final WebClient webClient = getWebClient();
-        final InputStream certificateInputStream = getClass().getClassLoader()
-                .getResourceAsStream("insecureSSL.keystore");
-        final byte[] certificateBytes = new byte[2048];
-        certificateInputStream.read(certificateBytes);
-        final InputStream is = new ByteArrayInputStream(certificateBytes);
-        webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
-        webClient.getOptions().setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
-                + ':' + localServer_.getServer().getLocalPort()
-                + "/random/100");
+        try (InputStream certificateInputStream = getClass().getClassLoader()
+                .getResourceAsStream("insecureSSL.keystore")) {
+            final byte[] certificateBytes = new byte[2048];
+            certificateInputStream.read(certificateBytes);
+
+            try (InputStream is = new ByteArrayInputStream(certificateBytes);) {
+                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
+                webClient.getOptions().setUseInsecureSSL(true);
+                webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
+                        + ':' + localServer_.getServer().getLocalPort()
+                        + "/random/100");
+            }
+        }
     }
 }

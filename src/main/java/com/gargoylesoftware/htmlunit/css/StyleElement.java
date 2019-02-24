@@ -74,7 +74,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      */
     public StyleElement(final String name, final String value, final String priority,
             final SelectorSpecificity specificity) {
-        this(name, value, priority, specificity, ElementIndex_.incrementAndGet());
+        this(name, value, priority, specificity, StyleElement.ElementIndex_.incrementAndGet());
     }
 
     /**

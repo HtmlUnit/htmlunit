@@ -53,9 +53,11 @@ public class StandardsTestClass extends TestClass {
             }
             // Fields are ignored
         }
-        for (final Class<? extends Annotation> key : methodsForAnnotations.keySet()) {
+        for (final  Map.Entry<Class<? extends Annotation>,
+                List<FrameworkMethod>> methodsEntry : methodsForAnnotations.entrySet()) {
+            final Class<? extends Annotation> key = methodsEntry.getKey();
             if (key == Test.class) {
-                final List<FrameworkMethod> methods = methodsForAnnotations.get(key);
+                final List<FrameworkMethod> methods = methodsEntry.getValue();
                 final List<FrameworkMethod> newMethods = new ArrayList<>(methods.size() * 2);
                 for (final FrameworkMethod m : methods) {
                     newMethods.add(new StandardsFrameworkMethod(m.getMethod(), false));

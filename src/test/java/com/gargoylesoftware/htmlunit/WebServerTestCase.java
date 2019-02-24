@@ -242,7 +242,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
 
         stopWebServer();
-        LAST_TEST_MockWebConnection_ = null;
+        WebServerTestCase.LAST_TEST_MockWebConnection_ = null;
     }
 
     /**

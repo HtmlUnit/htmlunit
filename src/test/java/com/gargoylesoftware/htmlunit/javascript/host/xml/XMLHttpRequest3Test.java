@@ -394,7 +394,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         startWebServer("./", null, servlets);
 
         collectedHeaders_.clear();
-        STATE_ = 0;
+        XMLHttpRequest3Test.STATE_ = 0;
         final WebClient client = getWebClient();
 
         final List<String> collectedAlerts = Collections.synchronizedList(new ArrayList<String>());
