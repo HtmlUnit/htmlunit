@@ -727,9 +727,10 @@ public final class EncodingSniffer {
                 if (i == -1) {
                     break;
                 }
-                Attribute att;
-                while ((att = getAttribute(bytes, i)) != null) {
+                Attribute att = getAttribute(bytes, i);
+                while (att != null) {
                     i = att.getUpdatedIndex();
+                    att = getAttribute(bytes, i);
                 }
             }
             else if (i + 2 < bytes.length && bytes[i] == '<' && bytes[i + 1] == '/' && Character.isLetter(bytes[i + 2])) {
@@ -737,9 +738,10 @@ public final class EncodingSniffer {
                 if (i == -1) {
                     break;
                 }
-                Attribute attribute;
-                while ((attribute = getAttribute(bytes, i)) != null) {
+                Attribute attribute = getAttribute(bytes, i);
+                while (attribute != null) {
                     i = attribute.getUpdatedIndex();
+                    attribute = getAttribute(bytes, i);
                 }
             }
             else if (matches(bytes, i, OTHER_START)) {

@@ -167,7 +167,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 @Override
                 public void run() {
                     try {
-                        readyState_ = CONNECTING;
+                        setReadyState(CONNECTING);
                         incomingSession_ = connectFuture.get();
                     }
                     catch (final Exception e) {
@@ -297,6 +297,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
         return readyState_;
     }
 
+    private void setReadyState(final int readyState) {
+        readyState_ = readyState;
+    }
+
     /**
      * @return the url
      */
@@ -418,7 +422,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketConnect(session);
             }
             super.onWebSocketConnect(session);
-            readyState_ = OPEN;
+            setReadyState(OPEN);
             outgoingSession_ = session;
 
             final Event openEvent = new Event();
@@ -433,7 +437,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketClose(statusCode, reason);
             }
             super.onWebSocketClose(statusCode, reason);
-            readyState_ = CLOSED;
+            setReadyState(CLOSED);
             outgoingSession_ = null;
 
             final CloseEvent closeEvent = new CloseEvent();
@@ -481,7 +485,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketError(cause);
             }
             super.onWebSocketError(cause);
-            readyState_ = CLOSED;
+            setReadyState(CLOSED);
             outgoingSession_ = null;
 
             final Event errorEvent = new Event();
