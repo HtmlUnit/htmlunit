@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.34" date="...., 2019" description="Bugfixes, CHROME 72">
+            <action type="fix" dev="rbri">
+                CSS declarations in CDATA sections are not processed for XHtml and Xml pages.
+            </action>
+            <action type="fix" dev="rbri" issue="2012">
+                Script code in CDATA sections are not processed for XHtml and Xml pages.
+            </action>
             <action type="fix" dev="rbri" issue="2011">
                 Neko-HtmlUnit parser: entity reference handling rewritten according to the spec.
                 All specified character references are now supported and a bunch of fixes where

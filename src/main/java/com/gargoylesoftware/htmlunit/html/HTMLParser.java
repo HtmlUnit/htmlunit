@@ -233,6 +233,7 @@ public final class HTMLParser {
             if (xhtml) {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
                 domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
+                domBuilder.setFeature(HTMLScanner.STYLE_STRIP_CDATA_DELIMS, true);
             }
         }
         catch (final Exception e) {

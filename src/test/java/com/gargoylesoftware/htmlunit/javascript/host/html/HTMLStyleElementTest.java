@@ -14,11 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -310,6 +315,148 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "  <div id='myDiv' class='abc'>abcd</div>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"rgb(0, 0, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 255)"})
+    public void styleInCdataXHtml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head>\n"
+            + "  <style>\n"
+            + "    //<![CDATA[\n"
+            + "      #one {color: red;}\n"
+            + "    //]]>\n"
+            + "  </style>\n"
+            + "  <style>/*<![CDATA[*/ #two {color: green;} /*]]>*/</style>\n"
+            + "  <style>\n"
+            + "    <![CDATA[\n"
+            + "      #three {color: blue;}\n"
+            + "    ]]>\n"
+            + "  </style>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var div = document.getElementById('one');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('two');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('three');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='one'>one</div>\n"
+            + "  <div id='two'>two</div>\n"
+            + "  <div id='three'>three</div>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"rgb(0, 0, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 255)"})
+    public void scriptInCdataXml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head>\n"
+            + "  <style>\n"
+            + "    //<![CDATA[\n"
+            + "      #one {color: red;}\n"
+            + "    //]]>\n"
+            + "  </style>\n"
+            + "  <style>/*<![CDATA[*/ #two {color: green;} /*]]>*/</style>\n"
+            + "  <style>\n"
+            + "    <![CDATA[\n"
+            + "      #three {color: blue;}\n"
+            + "    ]]>\n"
+            + "  </style>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var div = document.getElementById('one');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('two');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('three');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='one'>one</div>\n"
+            + "  <div id='two'>two</div>\n"
+            + "  <div id='three'>three</div>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"rgb(0, 0, 0)", "rgb(0, 128, 0)", "rgb(0, 0, 0)"})
+    public void scriptInCdataHtml() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <style>\n"
+            + "    //<![CDATA[\n"
+            + "      #one {color: red;}\n"
+            + "    //]]>\n"
+            + "  </style>\n"
+            + "  <style>/*<![CDATA[*/ #two {color: green;} /*]]>*/</style>\n"
+            + "  <style>\n"
+            + "    <![CDATA[\n"
+            + "      #three {color: blue;}\n"
+            + "    ]]>\n"
+            + "  </style>\n"
+            + "  <script>\n"
+            + "    function doTest() {\n"
+            + "      var div = document.getElementById('one');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('two');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      div = document.getElementById('three');\n"
+            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <div id='one'>one</div>\n"
+            + "  <div id='two'>two</div>\n"
+            + "  <div id='three'>three</div>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageWithAlerts2(html);
     }
 }
