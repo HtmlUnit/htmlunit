@@ -202,7 +202,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"hello", "world", "-"})
+    @Alerts({"hello", "hello", "world", "-"})
     public void scriptInCdataXHtml() throws Exception {
         final String html =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -216,6 +216,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    //<![CDATA[\n"
             + "    alert('hello');\n"
             + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
             + "  </script>\n"
             + "  <script>\n"
             + "    <![CDATA[\n"
@@ -237,7 +240,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"hello", "world", "-"})
+    @Alerts({"hello", "hello", "world", "-"})
     public void scriptInCdataXml() throws Exception {
         final String html =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -253,6 +256,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    //]]>\n"
             + "  </script>\n"
             + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "  </script>\n"
+            + "  <script>\n"
             + "    <![CDATA[\n"
             + "    alert('world');\n"
             + "    ]]>\n"
@@ -265,14 +271,14 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
                 .getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
-        verifyAlerts(777777, driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"hello", "-"})
+    @Alerts({"hello", "hello", "-"})
     public void scriptInCdataHtml() throws Exception {
         final String html =
             "<html>\n"
@@ -282,6 +288,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "    //<![CDATA[\n"
             + "    alert('hello');\n"
             + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
             + "  </script>\n"
             + "  <script>\n"
             + "    <![CDATA[\n"
