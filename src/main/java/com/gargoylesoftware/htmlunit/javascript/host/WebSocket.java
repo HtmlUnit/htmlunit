@@ -32,6 +32,8 @@ import org.eclipse.jetty.websocket.api.WebSocketPolicy;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -125,12 +127,14 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     private WebSocket(final String url, final Window window) {
         try {
-            containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            final WebWindow webWindow = window.getWebWindow();
+            containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
             setParentScope(window);
             setDomNode(containingPage_.getDocumentElement(), false);
 
-            final WebClient webClient = window.getWebWindow().getWebClient();
-            if (webClient.getOptions().isUseInsecureSSL()) {
+            final WebClient webClient = webWindow.getWebClient();
+            final WebClientOptions options = webClient.getOptions();
+            if (options.isUseInsecureSSL()) {
                 client_ = new WebSocketClient(new SslContextFactory(true), null, null);
             }
             else {
@@ -139,19 +143,19 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
 
             final WebSocketPolicy policy = client_.getPolicy();
-            int size = webClient.getOptions().getWebSocketMaxBinaryMessageSize();
+            int size = options.getWebSocketMaxBinaryMessageSize();
             if (size > 0) {
                 policy.setMaxBinaryMessageSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxBinaryMessageBufferSize();
+            size = options.getWebSocketMaxBinaryMessageBufferSize();
             if (size > 0) {
                 policy.setMaxBinaryMessageBufferSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxTextMessageSize();
+            size = options.getWebSocketMaxTextMessageSize();
             if (size > 0) {
                 policy.setMaxTextMessageSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxTextMessageBufferSize();
+            size = options.getWebSocketMaxTextMessageBufferSize();
             if (size > 0) {
                 policy.setMaxTextMessageBufferSize(size);
             }
