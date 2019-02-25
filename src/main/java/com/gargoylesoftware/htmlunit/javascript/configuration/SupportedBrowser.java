@@ -27,9 +27,6 @@ public enum SupportedBrowser {
     /** Internet Explorer 11. */
     IE,
 
-    /** Edge. */
-    EDGE,
-
     /** All versions of Firefox. */
     FF,
 

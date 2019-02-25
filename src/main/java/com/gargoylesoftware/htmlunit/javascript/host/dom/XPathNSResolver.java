@@ -15,14 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
 import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
@@ -32,7 +30,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClass(EDGE)
 @JsxClass(isJSObject = false, value = CHROME)
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
@@ -41,7 +38,6 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public XPathNSResolver() {
     }
 

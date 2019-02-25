@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -544,13 +543,13 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
 
     /** Dates format pattern 2. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature(CHROME)
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
     /** Indicates that the path is extracted from the location.
      * Sample: from the location /foo/boo only /foo is used.
      */
-    @BrowserFeature({IE, EDGE})
+    @BrowserFeature(IE)
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
     /** domain '.org' is handled as 'org'. */
@@ -561,7 +560,7 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
@@ -1102,7 +1101,7 @@ public enum BrowserVersionFeatures {
     JS_MENU_TYPE_PASS,
 
     /** Indicates if the String representation of a native function is without newline. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature(CHROME)
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
     /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
@@ -1175,7 +1174,7 @@ public enum BrowserVersionFeatures {
     JS_PROPERTY_DESCRIPTOR_NEW_LINE,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
@@ -1277,7 +1276,7 @@ public enum BrowserVersionFeatures {
     JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
 
     /** Supports Symbol. */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     JS_SYMBOL,
 
     /** The width cell height does not return negative values. */

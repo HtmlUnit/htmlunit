@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -41,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass(className = "DOMRectList", isJSObject = false, value = CHROME)
 @JsxClass(isJSObject = false, value = FF)
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 public class ClientRectList extends SimpleScriptable {
 
     private final List<ClientRect> clientRects_;
@@ -49,7 +48,7 @@ public class ClientRectList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE})
+    @JsxConstructor(CHROME)
     public ClientRectList() {
         clientRects_ = new ArrayList<>();
     }

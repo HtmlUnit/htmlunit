@@ -58,10 +58,6 @@ public class ErrorOutputChecker implements TestRule {
                     + ExternalTest.IE_DRIVER_.replace(".", "\\.") + "\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
-            // edge
-            Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
-            Pattern.compile(".*Stopping server.\r\r?\n"),
-            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
 
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),

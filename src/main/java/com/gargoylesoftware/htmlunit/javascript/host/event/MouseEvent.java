@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.LinkedList;
@@ -117,7 +116,7 @@ public class MouseEvent extends UIEvent {
     /**
      * Used to build the prototype.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public MouseEvent() {
         screenX_ = Integer.valueOf(0);
         screenY_ = Integer.valueOf(0);

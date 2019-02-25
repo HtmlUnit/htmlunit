@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -304,7 +303,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public boolean hasAttributes() {
         return super.hasAttributes();
     }
@@ -427,7 +426,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -436,7 +435,7 @@ public class Element extends Node {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -1096,7 +1095,7 @@ public class Element extends Node {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public String getId() {
         return getDomNodeOrDie().getId();
     }
@@ -1242,7 +1241,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1251,7 +1250,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1260,7 +1259,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
@@ -1953,7 +1952,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public void remove() {
         super.remove();
     }
@@ -2026,7 +2025,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String selectorString = (String) args[0];

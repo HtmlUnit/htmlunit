@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -85,8 +84,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -114,7 +111,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    chrome.bin=/path/to/chromedriver                     [Unix-like]
    ff52.bin=/usr/bin/firefox                            [Unix-like]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
    </pre>
  * The file could contain some properties:
@@ -153,8 +149,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             Arrays.asList(BrowserVersion.CHROME,
                     BrowserVersion.FIREFOX_60,
                     BrowserVersion.FIREFOX_52,
-                    BrowserVersion.INTERNET_EXPLORER,
-                    BrowserVersion.EDGE));
+                    BrowserVersion.INTERNET_EXPLORER));
 
     /**
      * Browsers which run by default.
@@ -166,7 +161,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String CHROME_BIN_;
-    private static String EDGE_BIN_;
     private static String IE_BIN_;
     private static String FF60_BIN_;
     private static String FF52_BIN_;
@@ -223,7 +217,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
                             .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
-                    EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF60_BIN_ = properties.getProperty("ff60.bin");
                     FF52_BIN_ = properties.getProperty("ff52.bin");
@@ -385,13 +378,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Closes the real Edge browser drivers.
-     */
-    protected static void shutDownRealEdge() {
-        shutDownReal(EDGE);
-    }
-
-    /**
      * Stops all WebServers.
      * @throws Exception if it fails
      */
@@ -471,13 +457,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new ChromeDriver(options);
             }
 
-            if (BrowserVersion.EDGE == getBrowserVersion()) {
-                if (EDGE_BIN_ != null) {
-                    System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, EDGE_BIN_);
-                }
-                return new EdgeDriver();
-            }
-
             if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
                 // disable the new marionette interface because it requires ff47 or more
                 System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
@@ -527,9 +506,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
             return BrowserType.IE;
-        }
-        if (browserVersion == BrowserVersion.EDGE) {
-            return BrowserType.EDGE;
         }
         return BrowserType.CHROME;
     }
@@ -934,7 +910,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private void resizeIfNeeded(final WebDriver driver) {
         final Dimension size = driver.manage().window().getSize();
         if (size.getWidth() != 1272 || size.getHeight() != 768) {
-            // only resize if needed because it may be quite expensive (e.g. Edge)
+            // only resize if needed because it may be quite expensive (e.g. IE)
             driver.manage().window().setSize(new Dimension(1272, 768));
         }
     }
@@ -1161,17 +1137,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         while (collectedAlerts.size() < alertsLength && System.currentTimeMillis() < maxWait) {
             try {
                 final Alert alert = driver.switchTo().alert();
-                String text = alert.getText();
-
-                if (useRealBrowser() && getBrowserVersion().isEdge()) {
-                    // EdgeDriver reads empty strings as null -> harmonize
-                    if (text == null) {
-                        text = "";
-                    }
-
-                    // alerts for real Edge need some time until they may be accepted
-                    Thread.sleep(100);
-                }
+                final String text = alert.getText();
 
                 collectedAlerts.add(text);
                 alert.accept();
@@ -1184,12 +1150,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     if (getBrowserVersion().isIE()) {
                         // alerts for real IE are really slow
                         maxWait += 5000;
-                    }
-                    else if (getBrowserVersion().isEdge()) {
-                        // closing one alert and opening the next one takes some time in real Edge
-                        // (most probably due to the 'nice' fade animations...)
-                        Thread.sleep(500);
-                        maxWait += 800;
                     }
                 }
             }

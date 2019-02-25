@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.css.parser.CSSException;
@@ -45,7 +44,7 @@ public class DocumentFragment extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public DocumentFragment() {
     }
 
@@ -129,7 +128,7 @@ public class DocumentFragment extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

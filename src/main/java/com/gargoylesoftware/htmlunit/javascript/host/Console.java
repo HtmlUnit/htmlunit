@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSOLE_HANDLE_WINDOW;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -31,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -50,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Andrea Martino
  */
 @JsxClass(isJSObject = false, value = {FF, CHROME})
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
@@ -61,7 +59,6 @@ public class Console extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public Console() {
     }
 

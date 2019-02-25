@@ -492,8 +492,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1",
-            EDGE = "first=1")
+            IE = "first=1")
     public void setCookieSubPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;path=/foo/blah"));
@@ -512,8 +511,7 @@ public class CookieManagerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "first=1; second=2",
-            IE = "first=1",
-            EDGE = "first=1")
+            IE = "first=1")
     public void setCookieDifferentPath() throws Exception {
         final List<NameValuePair> responseHeader1 = new ArrayList<>();
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; path=/foo/blah"));

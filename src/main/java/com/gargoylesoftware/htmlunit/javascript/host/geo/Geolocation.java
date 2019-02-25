@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -42,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -53,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 @JsxClass(isJSObject = false, value = {CHROME, FF})
 public class Geolocation extends SimpleScriptable {
 
@@ -69,7 +67,6 @@ public class Geolocation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(EDGE)
     public Geolocation() {
     }
 

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -41,13 +40,13 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlApplet.class, value = {FF52, IE, EDGE})
+@JsxClass(domClass = HtmlApplet.class, value = {FF52, IE})
 public class HTMLAppletElement extends HTMLElement {
 
     /**
      * The constructor.
      */
-    @JsxConstructor({FF52, EDGE})
+    @JsxConstructor(FF52)
     public HTMLAppletElement() {
     }
 

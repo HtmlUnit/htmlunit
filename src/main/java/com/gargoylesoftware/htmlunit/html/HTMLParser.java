@@ -622,20 +622,15 @@ public final class HTMLParser {
                     if (content.startsWith("IE=")) {
                         final String mode = content.substring(3).trim();
                         final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
-                        if ("edge".equals(mode)) {
-                            ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
+                        try {
+                            int value = Integer.parseInt(mode);
+                            if (value > version) {
+                                value = version;
+                            }
+                            ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
                         }
-                        else {
-                            try {
-                                int value = Integer.parseInt(mode);
-                                if (value > version) {
-                                    value = version;
-                                }
-                                ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
-                            }
-                            catch (final Exception e) {
-                                // ignore
-                            }
+                        catch (final Exception e) {
+                            // ignore
                         }
                     }
                 }

@@ -111,9 +111,6 @@ public final class BrowserVersion implements Serializable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(67, "Chrome");
 
-    /** Microsoft Edge. Work In Progress!!! */
-    public static final BrowserVersion EDGE = new BrowserVersion(14, "Edge");
-
     /**
      * The best supported browser version at the moment.
      */
@@ -200,15 +197,6 @@ public final class BrowserVersion implements Serializable {
             89, 90, 91, 92, 93, 94, 95, 97, 98, 99, 100, 101, 102, 103, 105, 106, 107, 108, 109, 110, 112, 113, 114,
             115, 116, 117, 118, 120, 121, 122, 123, 124, 125, 126, 128, 129, 130, 131, 132, 133, 135, 136, 137, 138,
             139, 140, 141, 143, 144, 145, 146, 147};
-
-        // EDGE
-        EDGE.applicationVersion_ = "5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-        EDGE.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
-        EDGE.cssAcceptHeader_ = "text/css, */*";
-        EDGE.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
-        EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
 
         // CHROME
         CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.81 Safari/537.36";
@@ -333,24 +321,6 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
 
-        EDGE.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        EDGE.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        EDGE.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        EDGE.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        EDGE.registerUploadMimeType("gif", "image/gif");
-        EDGE.registerUploadMimeType("jpeg", "image/jpeg");
-        EDGE.registerUploadMimeType("jpg", "image/jpeg");
-        EDGE.registerUploadMimeType("mp4", "video/mp4");
-        EDGE.registerUploadMimeType("m4v", "video/mp4");
-        EDGE.registerUploadMimeType("m4a", "audio/mp4");
-        EDGE.registerUploadMimeType("mp3", "audio/mpeg");
-        EDGE.registerUploadMimeType("ogm", "video/x-ogm");
-        EDGE.registerUploadMimeType("ogg", "application/ogg");
-        EDGE.registerUploadMimeType("wav", "audio/wav");
-        EDGE.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("xht", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("txt", "text/plain");
-
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll"); //NOPMD
@@ -363,12 +333,6 @@ public final class BrowserVersion implements Serializable {
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
-
-        flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"); //NOPMD
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        EDGE.plugins_.add(flash);
     }
 
     private final int browserVersionNumeric_;
@@ -435,11 +399,8 @@ public final class BrowserVersion implements Serializable {
         else if (isFirefox()) {
             expectedBrowser = SupportedBrowser.FF60;
         }
-        else if (isIE()) {
-            expectedBrowser = SupportedBrowser.IE;
-        }
         else {
-            expectedBrowser = SupportedBrowser.EDGE;
+            expectedBrowser = SupportedBrowser.IE;
         }
 
         for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
@@ -496,15 +457,6 @@ public final class BrowserVersion implements Serializable {
      */
     public boolean isChrome() {
         return getNickname().startsWith("Chrome");
-    }
-
-    /**
-     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
-     * version of Microsoft Edge.
-     * @return whether or not this version is a version of an Edge browser
-     */
-    public boolean isEdge() {
-        return getNickname().startsWith("Edge");
     }
 
     /**

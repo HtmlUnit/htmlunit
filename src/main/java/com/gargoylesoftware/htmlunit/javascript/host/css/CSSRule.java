@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -54,7 +53,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant({FF52, IE, EDGE})
+    @JsxConstant({FF52, IE})
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -154,7 +153,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60, EDGE})
+    @JsxConstructor({CHROME, FF60})
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;

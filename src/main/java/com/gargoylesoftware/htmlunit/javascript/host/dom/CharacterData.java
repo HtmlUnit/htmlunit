@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOM_CDATA_DELETE_THROWS_NEGATIVE_COUNT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
@@ -45,7 +44,7 @@ public class CharacterData extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public CharacterData() {
     }
 
@@ -183,7 +182,7 @@ public class CharacterData extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public void remove() {
         super.remove();
     }

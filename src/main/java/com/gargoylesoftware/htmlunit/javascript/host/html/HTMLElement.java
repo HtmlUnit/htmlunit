@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -164,7 +163,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBig.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBold.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF, EDGE})
+@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlCitation.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlCode.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlDefinition.class, value = {CHROME, FF})
@@ -388,7 +387,7 @@ public class HTMLElement extends Element {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLElement() {
     }
 

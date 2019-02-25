@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff60up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;

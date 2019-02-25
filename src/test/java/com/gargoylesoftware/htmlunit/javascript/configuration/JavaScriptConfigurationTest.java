@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_52;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
@@ -262,7 +261,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     public void obsoleteJsxClasses() {
         final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX_60);
         final BrowserVersion[] browsers = new BrowserVersion[]
-        {FIREFOX_60, FIREFOX_52, CHROME, INTERNET_EXPLORER, EDGE};
+        {FIREFOX_60, FIREFOX_52, CHROME, INTERNET_EXPLORER};
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;

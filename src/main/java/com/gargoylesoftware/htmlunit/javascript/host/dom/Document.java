@@ -38,7 +38,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -321,7 +320,7 @@ public class Document extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public Document() {
     }
 
@@ -925,7 +924,7 @@ public class Document extends Node {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({CHROME, IE, EDGE})
+    @JsxGetter({CHROME, IE})
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         final Page page = getPage();
@@ -2012,7 +2011,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

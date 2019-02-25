@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.io.IOException;
@@ -59,7 +58,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public CanvasRenderingContext2D() {
         canvas_ = null;
         renderingBackend_ = null;

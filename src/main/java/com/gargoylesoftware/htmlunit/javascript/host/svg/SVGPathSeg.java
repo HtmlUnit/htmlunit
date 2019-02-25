@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -29,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF52, IE, EDGE})
+@JsxClass({FF52, IE})
 public class SVGPathSeg extends SimpleScriptable {
 
     /** The constant {@code PATHSEG_UNKNOWN}. */
@@ -96,7 +95,7 @@ public class SVGPathSeg extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({FF52, EDGE})
+    @JsxConstructor(FF52)
     public SVGPathSeg() {
     }
 

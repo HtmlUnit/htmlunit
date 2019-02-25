@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -28,7 +27,7 @@ import com.gargoylesoftware.htmlunit.svg.SvgForeignObject;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-@JsxClass(domClass = SvgForeignObject.class, value = {FF, CHROME, EDGE})
+@JsxClass(domClass = SvgForeignObject.class, value = {FF, CHROME})
 public class SVGForeignObjectElement extends SVGGraphicsElement {
 
     /**

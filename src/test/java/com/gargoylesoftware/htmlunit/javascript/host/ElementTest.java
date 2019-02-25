@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -709,8 +708,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_PRECEDING, "
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
-            IE = {"prototype found", ""},
-            EDGE = {"prototype found", ""})
+            IE = {"prototype found", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1123,10 +1121,8 @@ public class ElementTest extends WebDriverTestCase {
                         "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             CHROME = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"},
-            EDGE = {"function Element() { [native code] }", "[object ElementPrototype]",
-                        "function Element() { [native code] }"})
-    @NotYetImplemented({FF, IE, EDGE})
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+    @NotYetImplemented({FF, IE})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1159,10 +1155,8 @@ public class ElementTest extends WebDriverTestCase {
                         "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
                         "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"},
-            EDGE = {"function Element() { [native code] }", "[object ElementPrototype]",
-                        "function Element() { [native code] }"})
-    @NotYetImplemented({FF, IE, EDGE})
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+    @NotYetImplemented({FF, IE})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

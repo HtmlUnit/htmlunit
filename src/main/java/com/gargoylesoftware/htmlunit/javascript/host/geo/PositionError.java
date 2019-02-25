@@ -14,20 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code PositionError}.
  *
  * @author Ahmed Ashour
  */
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 public class PositionError extends SimpleScriptable {
 
     /** The constant for {@code PERMISSION_DENIED}. */
@@ -43,7 +41,6 @@ public class PositionError extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public PositionError() {
     }
 }

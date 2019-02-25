@@ -28,9 +28,6 @@ public enum BrowserName {
     /** Internet Explorer. */
     IE,
 
-    /** Edge. */
-    EDGE,
-
     /** Firefox. */
     FF
 

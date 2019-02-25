@@ -321,11 +321,10 @@ public final class JQueryExtractor {
                         Collections.sort(browserNames);
 
                         // TODO dirty hack
-                        if (browserNames.size() == 4
+                        if (browserNames.size() == 3
                                 && browserNames.contains("CHROME")
                                 && browserNames.contains("FF")
-                                && browserNames.contains("IE")
-                                && browserNames.contains("EDGE")) {
+                                && browserNames.contains("IE")) {
                             System.out.println("    @NotYetImplemented");
                         }
                         else {

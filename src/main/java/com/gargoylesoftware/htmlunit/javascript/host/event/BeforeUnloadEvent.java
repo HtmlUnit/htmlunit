@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_BEFORE_UNLOAD_RETURN_VALUE_IS_HTML5_LIKE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -55,7 +54,7 @@ public class BeforeUnloadEvent extends Event {
     /**
      * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public void jConstructor() {
         Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }

@@ -6976,8 +6976,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            EDGE = "function")
+            FF = "function")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
     }

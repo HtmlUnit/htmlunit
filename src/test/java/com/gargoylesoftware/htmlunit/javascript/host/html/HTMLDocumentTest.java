@@ -33,7 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -636,11 +635,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         // TODO When ran with the IEDriver the IE is in a mysterious state after this test and cannot be restored
         // to normal in an automatic way.
         // All following tests will break until you restart your PC.
-        // TODO When ran with the EdgeDriver the Edge is in a mysterious state after this test and cannot be restored
-        // to normal in an automatic way.
-        // All following tests will break until you clear the complete cache of the Edge.
-        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))
-            && !(getWebDriver() instanceof EdgeDriver && "Edge".equals(getBrowserVersion().getNickname()))) {
+        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))) {
             responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
             testLastModified(responseHeaders);
 
