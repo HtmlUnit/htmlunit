@@ -378,8 +378,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return wrapped_.compileRegExp(cx, source, flags);
         }
         catch (final Exception e) {
-            LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
-                + "Replacing with a '####shouldNotFindAnything###'");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
+                    + "Replacing with a '####shouldNotFindAnything###'");
+            }
             return wrapped_.compileRegExp(cx, "####shouldNotFindAnything###", "");
         }
     }

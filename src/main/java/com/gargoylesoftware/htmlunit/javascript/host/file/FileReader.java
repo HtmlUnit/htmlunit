@@ -205,8 +205,10 @@ public class FileReader extends EventTarget {
                     charset = Charsets.toCharset(encAsString.trim().toLowerCase());
                 }
                 catch (final UnsupportedCharsetException e) {
-                    LOG.warn("FileReader readAsText was called with an unsupported encoding '"
-                                + encoding + "'. Using UTF-8 instead.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("FileReader readAsText was called with an unsupported encoding '"
+                                    + encoding + "'. Using UTF-8 instead.");
+                    }
                 }
             }
         }

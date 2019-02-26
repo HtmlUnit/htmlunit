@@ -221,7 +221,9 @@ public class HtmlForm extends HtmlElement {
         boolean valid = true;
         for (HtmlElement element : getFormHtmlElementDescendants()) {
             if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
-                LOG.info("Form validation faild; element '" + element + "' was not valid. Submit cancelled.");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Form validation faild; element '" + element + "' was not valid. Submit cancelled.");
+                }
                 valid = false;
                 break;
             }

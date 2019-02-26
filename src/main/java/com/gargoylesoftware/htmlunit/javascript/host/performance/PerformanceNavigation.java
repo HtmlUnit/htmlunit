@@ -99,7 +99,9 @@ public class PerformanceNavigation extends SimpleScriptable {
             return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
         }
         catch (final ParseException e) {
-            LOG.warn("Failed parsingJSON '" + jsonString + "' reason: " + e.getMessage());
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Failed parsingJSON '" + jsonString + "' reason: " + e.getMessage());
+            }
         }
         return null;
     }

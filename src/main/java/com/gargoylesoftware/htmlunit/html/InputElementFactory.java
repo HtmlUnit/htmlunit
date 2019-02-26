@@ -189,7 +189,9 @@ public final class InputElementFactory implements ElementFactory {
                 break;
 
             default:
-                LOG.info("Bad input type: \"" + type + "\", creating a text input");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Bad input type: \"" + type + "\", creating a text input");
+                }
                 result = new HtmlTextInput(qualifiedName, page, attributeMap);
                 break;
         }
