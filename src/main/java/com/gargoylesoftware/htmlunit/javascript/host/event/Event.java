@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -236,9 +235,7 @@ public class Event extends SimpleScriptable {
         }
         else if (TYPE_LOAD.equals(type)) {
             bubbles_ = false;
-            if (getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
-                cancelable_ = false;
-            }
+            cancelable_ = false;
         }
         else if (TYPE_ERROR.equals(type)) {
             // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error

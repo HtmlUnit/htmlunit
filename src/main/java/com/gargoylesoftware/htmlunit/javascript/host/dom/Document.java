@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WH
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_APPLETS_NODELIST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
@@ -671,10 +670,7 @@ public class Document extends Node {
     public Object createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            final BrowserVersion browserVersion = getBrowserVersion();
-
-            if (browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_STRICT)
-                  && (tagName.contains("<") || tagName.contains(">"))) {
+            if (tagName.contains("<") || tagName.contains(">")) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("createElement: Provided string '"
                                 + tagName + "' contains an invalid character; '<' and '>' are not allowed");

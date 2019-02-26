@@ -197,10 +197,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, IE})
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,
 
-    /** <code>Event.cancelable</code> is false in 'onload' event handler. */
-    @BrowserFeature({CHROME, FF, IE})
-    EVENT_ONLOAD_CANCELABLE_FALSE,
-
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)
     EVENT_ONLOAD_INTERNAL_JAVASCRIPT,
@@ -709,10 +705,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
 
-    /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({CHROME, FF, IE})
-    JS_DOCUMENT_CREATE_ELEMENT_STRICT,
-
     /** The browser supports the design mode 'Inherit'. */
     @BrowserFeature(IE)
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
@@ -880,11 +872,6 @@ public enum BrowserVersionFeatures {
     /** The Enumerator constructor throws an exception if called with HtmlCollections as parameter. */
     @BrowserFeature(IE)
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
-
-    /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({CHROME, FF,
-        IE})
-    JS_ENUM_NUMBERS_FIRST,
 
     /** Javascript {@code Error.captureStackTrace}. */
     @BrowserFeature(CHROME)

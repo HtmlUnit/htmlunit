@@ -2230,7 +2230,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "BackCompat", "function", "function"},
             IE = {"11", "BackCompat", "function", "function"})
-    @NotYetImplemented(IE)
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }

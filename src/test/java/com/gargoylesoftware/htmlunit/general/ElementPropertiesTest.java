@@ -389,6 +389,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "appendData(),data,deleteData(),insertData(),length,replaceData(),replaceWholeText(),splitText(),"
                 + "substringData(),"
                 + "wholeText")
+    @NotYetImplemented(IE)
     public void text() throws Exception {
         testString("document.createTextNode('some text'), unknown");
     }

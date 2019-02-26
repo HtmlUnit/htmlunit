@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARGUMENTS_READ_ONLY_ACCESSED_FROM_FUNCTION;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_CONSTRUCTION_PROPERTIES;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUM_NUMBERS_FIRST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LAST_LINE_CONTAINING_UNCOMMENTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
@@ -349,7 +348,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             case Context.FEATURE_HTMLUNIT_FUNCTION_DECLARED_FORWARD_IN_BLOCK:
                 return true;
             case Context.FEATURE_HTMLUNIT_ENUM_NUMBERS_FIRST:
-                return browserVersion_.hasFeature(JS_ENUM_NUMBERS_FIRST);
+                return true;
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NAME:
                 return browserVersion_.hasFeature(JS_PROPERTY_DESCRIPTOR_NAME);
             case Context.FEATURE_HTMLUNIT_MEMBERBOX_NEWLINE:

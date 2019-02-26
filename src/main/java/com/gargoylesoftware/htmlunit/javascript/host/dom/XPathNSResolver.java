@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.apache.xml.utils.PrefixResolver;
 
@@ -30,7 +31,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClass(isJSObject = false, value = CHROME)
+@JsxClass(isJSObject = false, value = {CHROME, FF})
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Node element_;
