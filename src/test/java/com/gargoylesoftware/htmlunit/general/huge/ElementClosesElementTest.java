@@ -15707,7 +15707,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             FF52 = "2",
             FF60 = "1")
-    @NotYetImplemented({FF52})
+    @NotYetImplemented(FF52)
     public void _command_isindex() throws Exception {
         test("command", "isindex");
     }
@@ -51227,7 +51227,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = "0",
             FF60 = "0")
-    @NotYetImplemented({FF52})
+    @NotYetImplemented(FF52)
     public void _table_isindex() throws Exception {
         test("table", "isindex");
     }
