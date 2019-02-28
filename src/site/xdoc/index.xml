@@ -54,9 +54,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>Nov 25, 2018</date></dt>
+                    <dt>Latest release <date>Feb 28, 2019</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.34/">version 2.34</a></p>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.34.0/">version 2.34.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
