@@ -7,6 +7,8 @@
     </properties>
 
     <body>
+        <release version="2.35.0" date="...., 2019" description="Bugfixes">
+        </release>
         <release version="2.34.0" date="Feb 28, 2019" description="Bugfixes, CHROME 72, CSSParser cleanup">
             <action type="fix" dev="rbri">
                 CSS declarations in CDATA sections are not processed for XHtml and Xml pages.
