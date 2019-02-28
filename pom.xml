@@ -678,8 +678,8 @@
         </plugins>
     </reporting>
     <issueManagement>
-        <system>SourceForge2</system>
-        <url>http://sourceforge.net/p/htmlunit/bugs/</url>
+        <system>GitHub</system>
+        <url>https://github.com/HtmlUnit/htmlunit/issues</url>
     </issueManagement>
     <inceptionYear>2002</inceptionYear>
     <licenses>
