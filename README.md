@@ -9,7 +9,7 @@ It is typically used for testing purposes or to retrieve information from web si
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.33 / Sep 12, 2018
+### Latest release Version 2.34.0 / Feb 28, 2019
 [Download from Sourceforge][1]
 
 For maven, you would add:
@@ -17,7 +17,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.33</version>
+        <version>2.34.0</version>
     </dependency>
 
 [Latest CI build][2]
