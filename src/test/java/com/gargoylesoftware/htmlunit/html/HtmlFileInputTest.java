@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -132,6 +131,15 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
     public void contentTypeJpg() throws Exception {
         contentType("jpg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:image/png", "charset"})
+    public void contentTypePng() throws Exception {
+        contentType("png");
     }
 
     /**
@@ -382,21 +390,22 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_HTML);
-            final Writer writer = response.getWriter();
-            if (ServletFileUpload.isMultipartContent(request)) {
-                try {
-                    final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : upload.parseRequest(request)) {
-                        if ("myInput".equals(item.getFieldName())) {
-                            writer.write("CONTENT_TYPE:" + item.getContentType());
+            try (Writer writer = response.getWriter()) {
+                if (ServletFileUpload.isMultipartContent(request)) {
+                    try {
+                        final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+                        for (final FileItem item : upload.parseRequest(request)) {
+                            if ("myInput".equals(item.getFieldName())) {
+                                writer.write("CONTENT_TYPE:" + item.getContentType());
+                            }
                         }
                     }
-                }
-                catch (final FileUploadBase.SizeLimitExceededException e) {
-                    writer.write("SizeLimitExceeded");
-                }
-                catch (final Exception e) {
-                    writer.write("error");
+                    catch (final FileUploadBase.SizeLimitExceededException e) {
+                        writer.write("SizeLimitExceeded");
+                    }
+                    catch (final Exception e) {
+                        writer.write("error");
+                    }
                 }
             }
         }

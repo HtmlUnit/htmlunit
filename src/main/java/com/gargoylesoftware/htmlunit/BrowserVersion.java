@@ -238,6 +238,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("gif", "image/gif");
         CHROME.registerUploadMimeType("jpeg", "image/jpeg");
         CHROME.registerUploadMimeType("jpg", "image/jpeg");
+        CHROME.registerUploadMimeType("png", "image/png");
         CHROME.registerUploadMimeType("webp", "image/webp");
         CHROME.registerUploadMimeType("mp4", "video/mp4");
         CHROME.registerUploadMimeType("m4v", "video/mp4");
@@ -264,6 +265,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("gif", "image/gif");
         FIREFOX_60.registerUploadMimeType("jpeg", "image/jpeg");
         FIREFOX_60.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_60.registerUploadMimeType("png", "image/png");
         FIREFOX_60.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_60.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_60.registerUploadMimeType("m4a", "audio/mp4");
@@ -290,6 +292,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_52.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_52.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_52.registerUploadMimeType("png", "image/png");
         FIREFOX_52.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX_52.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX_52.registerUploadMimeType("ogm", "video/x-ogm");
@@ -310,6 +313,7 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("gif", "image/gif");
         INTERNET_EXPLORER.registerUploadMimeType("jpeg", "image/jpeg");
         INTERNET_EXPLORER.registerUploadMimeType("jpg", "image/jpeg");
+        INTERNET_EXPLORER.registerUploadMimeType("png", "image/png");
         INTERNET_EXPLORER.registerUploadMimeType("mp4", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4v", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4a", "audio/mp4");
