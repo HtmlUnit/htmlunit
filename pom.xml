@@ -28,7 +28,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.18</checkstyle.version>
-        <spotbugs.version>3.1.11</spotbugs.version>
+        <spotbugs.version>3.1.12</spotbugs.version>
         <pmd.version>6.12.0</pmd.version>
     </properties>
 
