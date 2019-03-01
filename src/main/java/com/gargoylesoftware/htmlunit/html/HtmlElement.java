@@ -635,9 +635,9 @@ public abstract class HtmlElement extends DomElement {
                 textInput.setSelectionStart(textInput.getText().length());
             }
             else {
-                final DomNode domNode = getDoTypeNode();
-                if (domNode instanceof DomText) {
-                    ((DomText) domNode).moveSelectionToEnd();
+                final DomText domText = getDoTypeNode();
+                if (domText != null) {
+                    domText.moveSelectionToEnd();
                 }
             }
         }
@@ -770,17 +770,9 @@ public abstract class HtmlElement extends DomElement {
      * @param lastType is this the last character to type
      */
     protected void doType(final char c, final boolean lastType) {
-        final DomNode domNode = getDoTypeNode();
-        if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(c, this, lastType);
-        }
-        else if (domNode instanceof HtmlElement) {
-            try {
-                ((HtmlElement) domNode).type(c, lastType);
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
+        final DomText domText = getDoTypeNode();
+        if (domText != null) {
+            domText.doType(c, this, lastType);
         }
     }
 
@@ -793,12 +785,9 @@ public abstract class HtmlElement extends DomElement {
      * @param lastType is this the last to type
      */
     protected void doType(final int keyCode, final boolean lastType) {
-        final DomNode domNode = getDoTypeNode();
-        if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(keyCode, this, lastType);
-        }
-        else if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).type(keyCode, true, true, true, lastType);
+        final DomText domText = getDoTypeNode();
+        if (domText != null) {
+            domText.doType(keyCode, this, lastType);
         }
     }
 
@@ -806,29 +795,25 @@ public abstract class HtmlElement extends DomElement {
      * Returns the node to type into.
      * @return the node
      */
-    private DomNode getDoTypeNode() {
-        DomNode node = null;
+    private DomText getDoTypeNode() {
         final HTMLElement scriptElement = getScriptableObject();
         if (scriptElement.isIsContentEditable()
                 || "on".equals(((Document) scriptElement.getOwnerDocument()).getDesignMode())) {
-            final DomNodeList<DomNode> children = getChildNodes();
-            if (!children.isEmpty()) {
+
+            DomNodeList<DomNode> children = getChildNodes();
+            while (!children.isEmpty()) {
                 final DomNode lastChild = children.get(children.size() - 1);
                 if (lastChild instanceof DomText) {
-                    node = lastChild;
+                    return (DomText) lastChild;
                 }
-                else if (lastChild instanceof HtmlElement) {
-                    node = lastChild;
-                }
+                children = lastChild.getChildNodes();
             }
 
-            if (node == null) {
-                final DomText domText = new DomText(getPage(), "");
-                appendChild(domText);
-                node = domText;
-            }
+            final DomText domText = new DomText(getPage(), "");
+            appendChild(domText);
+            return domText;
         }
-        return node;
+        return null;
     }
 
     /**

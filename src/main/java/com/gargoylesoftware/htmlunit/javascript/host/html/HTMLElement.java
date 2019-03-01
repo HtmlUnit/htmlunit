@@ -2119,7 +2119,8 @@ public class HTMLElement extends Element {
         if ("true".equals(attribute)) {
             return true;
         }
-        else if ("inherit".equals(attribute)) {
+
+        if ("inherit".equals(attribute)) {
             final DomNode parent = getDomNodeOrDie().getParentNode();
             if (parent != null) {
                 final Object parentScriptable = parent.getScriptableObject();
