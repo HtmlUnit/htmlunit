@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.35.0" date="...., 2019" description="Bugfixes">
+        <release version="2.34.1" date="March 4, 2019" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix insert position for elements with contenteditable='true'.
+            </action>
             <action type="fix" dev="rbri" issue="18">
                 Send 'image/png' as mime type when uploading a png file.
             </action>
