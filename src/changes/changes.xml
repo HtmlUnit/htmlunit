@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.34.1" date="...., 2019" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="1923">
+                Input element with type date now stores the value typed in.
+            </action>
+        </release>
+
         <release version="2.34.1" date="March 4, 2019" description="Bugfixes">
             <action type="fix" dev="rbri">
                 Fix insert position for elements with contenteditable='true'.

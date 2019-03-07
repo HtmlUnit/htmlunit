@@ -14,17 +14,23 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlDateInput}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlDateInputTest extends WebDriverTestCase {
@@ -57,4 +63,32 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("2018-03-22")
+    @BuggyWebDriver(CHROME)
+    public void typeInto() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + "  function test() {\n"
+              + "    var input = document.getElementById('input');\n"
+              + "    alert(input.value);\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</head>\n"
+              + "<body>\n"
+              + "  <input id='input' type='date'>\n"
+              + "  <button id='tester' onclick='test()'>Test</button>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("input")).sendKeys("2018-03-22");
+        driver.findElement(By.id("tester")).click();
+
+        verifyAlerts(driver, getExpectedAlerts());
+    }
 }
