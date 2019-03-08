@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "input" where type is "range".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlRangeInput extends HtmlInput {
 
@@ -35,7 +36,9 @@ public class HtmlRangeInput extends HtmlInput {
     HtmlRangeInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        setValueAttribute("50");
+        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED) {
+            setValueAttribute("50");
+        }
     }
 
     /**
@@ -44,6 +47,15 @@ public class HtmlRangeInput extends HtmlInput {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultValue(final String defaultValue) {
+        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
+        setDefaultValue(defaultValue, modifyValue);
     }
 
     /**

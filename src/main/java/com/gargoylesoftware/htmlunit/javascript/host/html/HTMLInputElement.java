@@ -487,6 +487,24 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
+     * Gets the {@code step} property.
+     * @return the {@code step} property
+     */
+    @JsxGetter
+    public String getStep() {
+        return getDomNodeOrDie().getAttributeDirect("step");
+    }
+
+    /**
+     * Sets the {@code step} property.
+     * @param step the {@code step} property
+     */
+    @JsxSetter
+    public void setStep(final String step) {
+        getDomNodeOrDie().setAttribute("step", step);
+    }
+
+    /**
      * Gets the value of {@code readOnly} attribute.
      * @return the readOnly attribute
      */
