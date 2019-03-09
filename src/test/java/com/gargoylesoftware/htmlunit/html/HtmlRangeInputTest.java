@@ -242,4 +242,70 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"50----", "50--100-0-", "5--10-0-", "4--7-0-",
+                "2--7--4-", "4.3--7.01-1.3-"})
+    public void valueDependsOnMinMax() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    for (i = 1; i <= 6; i++) {\n"
+            + "        var input = document.getElementById('testId' + i);\n"
+            + "        alert(input.value + '-' + input.defaultValue"
+                            + " + '-' + input.max + '-' + input.min"
+                            + " + '-' + input.step);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='range' id='testId1'>\n"
+            + "  <input type='range' id='testId2' min='0' max='100'>\n"
+            + "  <input type='range' id='testId3' min='0' max='10'>\n"
+            + "  <input type='range' id='testId4' min='0' max='7'>\n"
+            + "  <input type='range' id='testId5' min='-4' max='7'>\n"
+            + "  <input type='range' id='testId6' min='1.3' max='7.01'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html, 77777);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"41-42-1234-2-13", "5-5-10-2-1", "6-5-10-2-2"})
+    public void properties() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    for (i = 1; i <= 3; i++) {\n"
+            + "        var input = document.getElementById('testId' + i);\n"
+            + "        alert(input.value + '-' + input.defaultValue"
+                            + " + '-' + input.max + '-' + input.min"
+                            + " + '-' + input.step);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='range' id='testId1'"
+                        + " min='2' max='1234' value='42' step='13'>\n"
+            + "  <input type='range' id='testId2'"
+                        + " min='2' max='10' value='5' step='1'>\n"
+            + "  <input type='range' id='testId3'"
+                        + " min='2' max='10' value='5' step='2'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
