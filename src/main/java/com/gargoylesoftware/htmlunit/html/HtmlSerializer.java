@@ -131,29 +131,28 @@ public class HtmlSerializer {
         return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
     }
 
-    private static String trim(String string) {
-        int length = string.length();
+    private static String trim(final String string) {
+        final int length = string.length();
+        if (length == 0) {
+            return string;
+        }
 
         int start = 0;
         while (start != length && isSpace(string.charAt(start))) {
             start++;
         }
-        if (start != 0) {
-            string = string.substring(start);
-            length = string.length();
+        if (start == length) {
+            return "";
         }
 
-        if (length != 0) {
-            int end = length;
-            while (end != 0 && isSpace(string.charAt(end - 1))) {
-                end--;
-            }
-            if (end != length) {
-                string = string.substring(0, end);
-            }
+        int end = length;
+        while (end > start && isSpace(string.charAt(end - 1))) {
+            end--;
         }
-
-        return string;
+        if (end == length && start == 0) {
+            return string;
+        }
+        return string.substring(start, end);
     }
 
     private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
