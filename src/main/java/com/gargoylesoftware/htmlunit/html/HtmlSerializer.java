@@ -67,39 +67,39 @@ public class HtmlSerializer {
      * @param text the text to clean up
      * @return the new text
      */
-    protected String cleanUp(String text) {
+    protected String cleanUp(final String text) {
         // ignore <br/> at the end of a block
-        text = reduceWhitespace(text);
-        text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
-        final String ls = System.lineSeparator();
-        text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);
-        text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
+        String resultText = reduceWhitespace(text);
 
-        return text;
+        final String ls = System.lineSeparator();
+        resultText = StringUtils.replaceEach(resultText,
+                new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
+                new String[] {" ", ls, ls, "\t"});
+
+        return resultText;
     }
 
-    private static String reduceWhitespace(String text) {
-        text = trim(text);
+    private static String reduceWhitespace(final String text) {
+        String resultText = trim(text);
 
         // remove white spaces before or after block separators
-        text = reduceWhiteSpaceAroundBlockSeparator(text);
+        resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
 
         // remove leading block separators
-        while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
+            resultText = resultText.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
 
         // remove trailing block separators
-        while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        while (resultText.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
+            resultText = resultText.substring(0, resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
         }
-        text = trim(text);
+        resultText = trim(resultText);
 
-        final StringBuilder builder = new StringBuilder(text.length());
+        final StringBuilder builder = new StringBuilder(resultText.length());
 
         boolean whitespace = false;
-        for (final char ch : text.toCharArray()) {
+        for (final char ch : resultText.toCharArray()) {
 
             // Translate non-breaking space to regular space.
             if (ch == (char) 160) {
