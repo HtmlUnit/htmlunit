@@ -44,6 +44,8 @@ public class ErrorOutputChecker implements TestRule {
                     + "Only local connections are allowed\\.\r?\n"
                     + "Please protect ports used by ChromeDriver and related test "
                             + "frameworks to prevent access by malicious code\\.\r?\n"),
+            Pattern.compile(".*\\sorg.openqa.selenium.remote.ProtocolHandshake createSession\r?\n"),
+            Pattern.compile("INFO: Detected dialect: OSS\r?\n"),
 
             // GeckoDriver
             Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
