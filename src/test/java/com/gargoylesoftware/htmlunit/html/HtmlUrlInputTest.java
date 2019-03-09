@@ -22,11 +22,13 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlUrlInput}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUrlInputTest extends WebDriverTestCase {
@@ -47,5 +49,30 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("foo"));
         input.sendKeys("hello");
         assertEquals("hello", input.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='url' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

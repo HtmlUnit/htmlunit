@@ -23,6 +23,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlSearchInput}.
@@ -51,5 +52,30 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         assertEquals("", input.getAttribute("value"));
         input.sendKeys(Keys.BACK_SPACE);
         assertEquals("", input.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='search' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }
