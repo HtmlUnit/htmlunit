@@ -275,7 +275,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html, 77777);
+        loadPageWithAlerts2(html);
     }
 
     /**
