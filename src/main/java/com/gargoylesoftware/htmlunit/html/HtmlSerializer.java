@@ -86,9 +86,11 @@ public class HtmlSerializer {
         resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
 
         // remove leading block separators
-        while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            resultText = resultText.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        int start = 0;
+        while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
+            start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
         }
+        resultText = resultText.substring(start);
 
         // remove trailing block separators
         while (resultText.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
