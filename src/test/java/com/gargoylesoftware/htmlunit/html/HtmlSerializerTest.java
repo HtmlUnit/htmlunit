@@ -87,6 +87,22 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializer#cleanUp(String)}.
      */
     @Test
+    public void cleanUp2() {
+        final String ls = System.lineSeparator();
+        final HtmlSerializer serializer = new HtmlSerializer();
+
+        assertEquals("a", serializer.cleanUp("a"
+                                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR
+                                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR));
+        assertEquals("a", serializer.cleanUp("a"
+                                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR + "  "
+                                        + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR));
+    }
+
+    /**
+     * Test {@link HtmlSerializer#cleanUp(String)}.
+     */
+    @Test
     public void cleanUpPerformanceWhitespace() {
         final HtmlSerializer serializer = new HtmlSerializer();
 
@@ -113,11 +129,14 @@ public class HtmlSerializerTest {
 
         final String text = StringUtils.repeat(" x " + HtmlSerializer.AS_TEXT_BLOCK_SEPARATOR, 20_000);
 
+        final String ls = System.lineSeparator();
+        final String expected = StringUtils.repeat("x" + ls, 20_000).trim();
+
         final long time = System.currentTimeMillis();
-        serializer.cleanUp(text);
+        assertEquals(expected, serializer.cleanUp(text));
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 1_000);
+        assertTrue("cleanUp() took too much time", runTime < 400);
     }
 
     /**

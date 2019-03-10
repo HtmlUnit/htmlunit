@@ -90,12 +90,14 @@ public class HtmlSerializer {
         while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
             start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
         }
-        resultText = resultText.substring(start);
 
         // remove trailing block separators
-        while (resultText.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            resultText = resultText.substring(0, resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+        while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
+            end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
         }
+        resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+
         resultText = trim(resultText);
 
         final StringBuilder builder = new StringBuilder(resultText.length());
