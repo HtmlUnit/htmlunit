@@ -112,6 +112,7 @@ public class XMLSerializer extends SimpleScriptable {
         if (root == null) {
             return "";
         }
+
         if (root instanceof Document) {
             root = ((Document) root).getDocumentElement();
         }
@@ -122,6 +123,7 @@ public class XMLSerializer extends SimpleScriptable {
             }
             root = root.getFirstChild();
         }
+
         if (root instanceof Element) {
             final StringBuilder builder = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
@@ -136,6 +138,7 @@ public class XMLSerializer extends SimpleScriptable {
 
             return builder.toString();
         }
+
         if (root instanceof CDATASection
             && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
             final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
@@ -201,7 +204,7 @@ public class XMLSerializer extends SimpleScriptable {
                     break;
 
                 default:
-
+                    break;
             }
         }
         if (!startTagClosed) {

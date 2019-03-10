@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclarat
  * A helper class for handling font attributes of {@link ComputedCSSStyleDeclaration}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 final class ComputedFont {
 
@@ -27,14 +28,15 @@ final class ComputedFont {
     static final int LINE_HEIGHT_INDEX = 4;
     static final int FONT_FAMILY_INDEX = 5;
 
-    static String[] getDetails(String font, final boolean handleSpaceAfterSlash) {
-        while (font.contains("  ")) {
-            font = font.replace("  ", " ");
+    static String[] getDetails(final String font, final boolean handleSpaceAfterSlash) {
+        String fontName = font;
+        while (fontName.contains("  ")) {
+            fontName = fontName.replace("  ", " ");
         }
-        if (!handleSpaceAfterSlash && font.contains("/ ")) {
+        if (!handleSpaceAfterSlash && fontName.contains("/ ")) {
             return null;
         }
-        final String[] tokens = font.split(" ");
+        final String[] tokens = fontName.split(" ");
         if (tokens.length > 1) {
             final String[] fontSizeDetails = getFontSizeDetails(tokens[tokens.length - 2]);
             if (fontSizeDetails == null) {

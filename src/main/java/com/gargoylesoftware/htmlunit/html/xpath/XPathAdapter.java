@@ -64,25 +64,23 @@ class XPathAdapter {
      * @param attributeCaseSensitive whether or not the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
-    XPathAdapter(String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
-        ErrorListener errorListener, final boolean caseSensitive, final boolean attributeCaseSensitive)
+    XPathAdapter(final String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
+        final ErrorListener errorListener, final boolean caseSensitive, final boolean attributeCaseSensitive)
                 throws TransformerException {
 
         initFunctionTable();
 
-        if (errorListener == null) {
-            errorListener = new DefaultErrorHandler();
+        ErrorListener errListener = errorListener;
+        if (errListener == null) {
+            errListener = new DefaultErrorHandler();
         }
-
-        exprString = preProcessXPath(exprString, caseSensitive, attributeCaseSensitive);
-
-        final XPathParser parser = new XPathParser(errorListener, locator);
+        final XPathParser parser = new XPathParser(errListener, locator);
         final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
 
-        parser.initXPath(compiler, exprString, prefixResolver);
+        final String expression = preProcessXPath(exprString, caseSensitive, attributeCaseSensitive);
+        parser.initXPath(compiler, expression, prefixResolver);
 
         final Expression expr = compiler.compile(0);
-
         mainExp_ = expr;
 
         if (locator instanceof ExpressionNode) {
@@ -99,34 +97,39 @@ class XPathAdapter {
      * @param attributeCaseSensitive whether or not the attributes should be case-sensitive
      * @return the processed XPath expression
      */
-    private static String preProcessXPath(String xpath, final boolean caseSensitive,
+    private static String preProcessXPath(final String xpath, final boolean caseSensitive,
             final boolean attributeCaseSensitive) {
+
+        String path;
         if (!caseSensitive) {
-            final char[] charArray = xpath.toCharArray();
-            processOutsideBrackets(charArray);
-            xpath = new String(charArray);
+            path = processOutsideBrackets(xpath);
+        }
+        else {
+            path = xpath;
         }
 
         if (!attributeCaseSensitive) {
-            final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(xpath);
+            final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(path);
             while (matcher.find()) {
                 final String attribute = matcher.group(1);
-                xpath = xpath.replace(attribute, attribute.toLowerCase(Locale.ROOT));
+                path = path.replace(attribute, attribute.toLowerCase(Locale.ROOT));
             }
         }
 
-        return xpath;
+        return path;
     }
 
     /**
      * Lower case any character outside the brackets.
-     * @param array the array to change
+     * @param xpath the XPath expression to change
      */
-    private static void processOutsideBrackets(final char[] array) {
-        final int length = array.length;
+    private static String processOutsideBrackets(final String xpath) {
+        final char[] charArray = xpath.toCharArray();
+
+        final int length = charArray.length;
         int insideBrackets = 0;
         for (int i = 0; i < length; i++) {
-            final char ch = array[i];
+            final char ch = charArray[i];
             switch (ch) {
                 case '[':
                 case '(':
@@ -140,10 +143,11 @@ class XPathAdapter {
 
                 default:
                     if (insideBrackets == 0) {
-                        array[i] = Character.toLowerCase(ch);
+                        charArray[i] = Character.toLowerCase(ch);
                     }
             }
         }
+        return new String(charArray);
     }
 
     /**
