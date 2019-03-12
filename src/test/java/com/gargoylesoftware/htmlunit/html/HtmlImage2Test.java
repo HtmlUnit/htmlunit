@@ -92,6 +92,33 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("1")
+    public void loadImageBrokenUrl() throws Exception {
+        loadImage("src='rbri://nowhere'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void loadImageAboutBlank() throws Exception {
+        loadImage("src='about:blank'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void loadImageAboutX() throws Exception {
+        loadImage("src='about:x'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "2",
             IE = "1")
     @NotYetImplemented(IE)

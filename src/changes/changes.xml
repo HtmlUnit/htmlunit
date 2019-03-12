@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.34.1" date="...., 2019" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Invalid urls with the about protocol (e.g. about:htmlunit) are now throwing a MalformedURLException
+                to be handled like any other IOException.
+            </action>
             <action type="fix" dev="rbri" issue="19">
                 HtmlRangeInput improvements.
             </action>

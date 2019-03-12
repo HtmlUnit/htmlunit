@@ -1172,10 +1172,10 @@ public class WebClient implements Serializable, AutoCloseable {
         }
     }
 
-    private static WebResponse makeWebResponseForAboutUrl(final URL url) {
+    private static WebResponse makeWebResponseForAboutUrl(final URL url) throws MalformedURLException {
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
         if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
-            throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
+            throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
         }
         return new StringWebResponse("", URL_ABOUT_BLANK);
     }
