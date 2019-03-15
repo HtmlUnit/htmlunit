@@ -1840,7 +1840,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 normalizedPseudo = normalizedPseudo.substring(1);
             }
             else if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
-                    && !normalizedPseudo.startsWith(":")) {
+                    && normalizedPseudo.charAt(0) != ':') {
                 normalizedPseudo = ":" + normalizedPseudo;
             }
         }
