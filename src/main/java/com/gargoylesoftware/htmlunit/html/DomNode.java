@@ -1909,7 +1909,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see HtmlScript#processImportNode(com.gargoylesoftware.htmlunit.javascript.host.dom.Document)
      */
     public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.dom.Document doc) {
-        // empty default impl
+        page_ = (SgmlPage) doc.getDomNodeOrDie();
     }
 
     /**

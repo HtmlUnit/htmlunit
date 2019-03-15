@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.util.Iterator;
@@ -47,6 +48,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
@@ -165,6 +167,69 @@ public class HtmlImage extends HtmlElement {
 
         super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
                 notifyMutationObservers);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void processImportNode(final Document doc) {
+
+        URL oldUrl = null;
+        final String src = getSrcAttribute();
+        HtmlPage htmlPage = getHtmlPageOrNull();
+        try {
+            if (htmlPage != null) {
+                oldUrl = htmlPage.getFullyQualifiedUrl(src);
+            }
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+
+        super.processImportNode(doc);
+
+        URL url = null;
+        htmlPage = getHtmlPageOrNull();
+        try {
+            if (htmlPage != null) {
+                url = htmlPage.getFullyQualifiedUrl(src);
+            }
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+
+        if (oldUrl == null || !oldUrl.equals(url)) {
+            // image has to be reloaded
+            lastClickX_ = 0;
+            lastClickY_ = 0;
+            imageWebResponse_ = null;
+            imageData_ = null;
+            width_ = -1;
+            height_ = -1;
+            downloaded_ = false;
+            isComplete_ = false;
+            onloadProcessed_ = false;
+            createdByJavascript_ = true;
+        }
+
+        doOnLoad();
+
+        if (htmlPage == null) {
+            return; // nothing to do if embedded in XML code
+        }
+
+        if (htmlPage.getWebClient().getOptions().isDownloadImages()) {
+            try {
+                downloadImageIfNeeded();
+            }
+            catch (final IOException e) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Unable to download image for element " + this);
+                }
+            }
+        }
     }
 
     /**
@@ -456,17 +521,20 @@ public class HtmlImage extends HtmlElement {
         if (!downloaded_) {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
-            if (!"".equals(src)
-                    && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
-                final HtmlPage page = (HtmlPage) getPage();
-                final WebClient webclient = page.getWebClient();
 
-                final URL url = page.getFullyQualifiedUrl(src);
-                final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
-                final WebRequest request = new WebRequest(url, accept);
-                request.setCharset(page.getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
-                imageWebResponse_ = webclient.loadWebResponse(request);
+            if (!"".equals(src)) {
+                final HtmlPage page = (HtmlPage) getPage();
+                final WebClient webClient = page.getWebClient();
+
+                if (!(webClient.getBrowserVersion().hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)
+                        && StringUtils.isBlank(src))) {
+                    final URL url = page.getFullyQualifiedUrl(src);
+                    final String accept = webClient.getBrowserVersion().getImgAcceptHeader();
+                    final WebRequest request = new WebRequest(url, accept);
+                    request.setCharset(page.getCharset());
+                    request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+                    imageWebResponse_ = webClient.loadWebResponse(request);
+                }
             }
 
             if (imageData_ != null) {

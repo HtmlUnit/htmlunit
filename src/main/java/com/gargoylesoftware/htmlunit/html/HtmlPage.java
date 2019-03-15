@@ -2279,7 +2279,7 @@ public class HtmlPage extends SgmlPage {
         if (base_ == null) {
             baseUrl = getUrl();
             final WebWindow window = getEnclosingWindow();
-            final boolean frame = window != window.getTopWindow();
+            final boolean frame = window != null && window != window.getTopWindow();
             if (frame) {
                 final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());

@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -558,6 +561,157 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<html><head><title>test</title></head>"
+            + "<body><p>This is a new paragraph.</p></body></html>")
+    public void createHTMLDocumentAddParagraph() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('test');\n"
+                + "      var p = doc.createElement('p');\n"
+                + "      p.innerHTML = 'This is a new paragraph.';\n"
+                + "      doc.body.appendChild(p);"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("<html><head><title>test</title></head><body><p>Hello</p></body></html>")
+    public void createHTMLDocumentInnerAddParagraph() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('test');\n"
+                + "      doc.body.innerHTML = '<p>Hello</p>';\n"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<html><head><title>test</title></head><body><img src=\"x\" onerror=\"alert(1)\"></body></html>",
+            IE = "<html><head><title>test</title></head><body><img onerror=\"alert(1)\" src=\"x\"></body></html>")
+    @NotYetImplemented(IE)
+    public void createHTMLDocumentInnerAddImg() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var doc = document.implementation.createHTMLDocument('test');\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
+                + "      alert(doc.documentElement.outerHTML);\n"
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"before", "1"})
+    @NotYetImplemented
+    public void createHTMLDocumentInnerAddImgAddDocToIframe() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var frame = document.getElementById('theFrame');\n"
+
+                + "      var doc = document.implementation.createHTMLDocument('test');\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
+
+                         // Copy the new HTML document into the frame
+                + "      var destDocument = frame.contentDocument;\n"
+                + "      var srcNode = doc.documentElement;\n"
+                + "      var newNode = destDocument.importNode(srcNode, true);\n"
+                + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
+                + "      alert('before');\n"
+
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <iframe id='theFrame' src='about:blank' />"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Can be removed if the one before works.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void createHTMLDocumentInnerAddImgAddDocToIframe1() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "  function test() {\n"
+                + "    try {\n"
+                + "      var frame = document.getElementById('theFrame');\n"
+
+                + "      var doc = document.implementation.createHTMLDocument('test');\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
+
+                         // Copy the new HTML document into the frame
+                + "      var destDocument = frame.contentDocument;\n"
+                + "      var srcNode = doc.documentElement;\n"
+                + "      var newNode = destDocument.importNode(srcNode, true);\n"
+                + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
+
+                + "    } catch(e) { alert('exception'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <iframe id='theFrame' src='about:blank' />"
                 + "</body></html>";
 
         loadPageWithAlerts2(html);

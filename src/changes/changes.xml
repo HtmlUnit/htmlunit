@@ -9,6 +9,18 @@
     <body>
         <release version="2.34.1" date="...., 2019" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Image handler are processed (again) if an image is imported into a new document.
+            </action>
+            <action type="fix" dev="rbri">
+                Page of the imported node fixed when importing.
+            </action>
+            <action type="fix" dev="rbri" issue="2008">
+                There is no need for a window if constructing a new event handler.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix NPE when getting the baseUrl from a page created using DOMImplementation.createHTMLDocument().
+            </action>
+            <action type="fix" dev="rbri">
                 Invalid urls with the about protocol (e.g. about:htmlunit) are now throwing a MalformedURLException
                 to be handled like any other IOException.
             </action>
