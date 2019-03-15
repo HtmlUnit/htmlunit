@@ -214,8 +214,6 @@ public class HtmlImage extends HtmlElement {
             createdByJavascript_ = true;
         }
 
-        doOnLoad();
-
         if (htmlPage == null) {
             return; // nothing to do if embedded in XML code
         }
