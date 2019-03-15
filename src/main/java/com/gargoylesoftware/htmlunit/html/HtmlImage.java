@@ -174,7 +174,6 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     public void processImportNode(final Document doc) {
-
         URL oldUrl = null;
         final String src = getSrcAttribute();
         HtmlPage htmlPage = getHtmlPageOrNull();
