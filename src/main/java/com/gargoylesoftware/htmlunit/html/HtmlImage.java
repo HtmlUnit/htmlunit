@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "img".
@@ -199,7 +200,7 @@ public class HtmlImage extends HtmlElement {
             // ignore
         }
 
-        if (oldUrl == null || !oldUrl.equals(url)) {
+        if (oldUrl == null || !UrlUtils.sameFile(oldUrl, url)) {
             // image has to be reloaded
             lastClickX_ = 0;
             lastClickY_ = 0;
