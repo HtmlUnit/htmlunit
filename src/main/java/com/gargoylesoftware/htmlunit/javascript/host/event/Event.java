@@ -638,12 +638,13 @@ public class Event extends SimpleScriptable {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder("Event ");
-        builder.append(getType());
-        builder.append(" (");
-        builder.append("Current Target: ");
-        builder.append(currentTarget_);
-        builder.append(");");
+        final StringBuilder builder = new StringBuilder(40);
+        builder.append("Event ")
+            .append(getType())
+            .append(" (")
+            .append("Current Target: ")
+            .append(currentTarget_)
+            .append(");");
         return builder.toString();
     }
 

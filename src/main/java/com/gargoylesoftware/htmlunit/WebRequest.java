@@ -435,7 +435,7 @@ public class WebRequest implements Serializable {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder(100);
         builder.append(getClass().getSimpleName());
         builder.append("[<url=\"").append(url_).append('"')
                 .append(", ").append(httpMethod_)

@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class AppletClassLoader extends URLClassLoader {
 
     private static final Log LOG = LogFactory.getLog(AppletClassLoader.class);
-    private final StringBuilder info_ = new StringBuilder();
+    private final StringBuilder info_ = new StringBuilder(40);
 
     /**
      * The constructor.

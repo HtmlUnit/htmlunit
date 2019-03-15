@@ -309,7 +309,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
-        final StringBuilder status = new StringBuilder();
+        final StringBuilder status = new StringBuilder(110);
         final String lineSeparator = System.lineSeparator();
         status.append("------ JavaScript job status -----");
         status.append(lineSeparator);
