@@ -823,7 +823,7 @@ public class CSSStyleSheet extends StyleSheet {
                 a = -1;
             }
             else {
-                if (value.startsWith("+")) {
+                if (value.charAt(0) == '+') {
                     value = value.substring(1);
                 }
                 a = NumberUtils.toInt(value, 1);
@@ -831,7 +831,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         String value = nth.substring(nIndex + 1).trim();
-        if (value.startsWith("+")) {
+        if (value.charAt(0) == '+') {
             value = value.substring(1);
         }
         final int b = NumberUtils.toInt(value, 0);

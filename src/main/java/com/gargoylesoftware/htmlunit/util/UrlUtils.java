@@ -1137,7 +1137,7 @@ public final class UrlUtils {
                 buffer.append(port);
             }
         }
-        if (path == null || !path.startsWith("/")) {
+        if (path == null || path.charAt(0) != '/') {
             buffer.append('/');
         }
         if (path != null) {

@@ -677,7 +677,7 @@ public class Document extends Node {
                 }
                 throw Context.reportRuntimeError("String contains an invalid character");
             }
-            else if (tagName.startsWith("<") && tagName.endsWith(">")) {
+            else if (tagName.charAt(0) == '<' && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
