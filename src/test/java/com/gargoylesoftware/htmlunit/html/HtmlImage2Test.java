@@ -74,7 +74,9 @@ public class HtmlImage2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE = "1")
+    @NotYetImplemented(IE)
     public void loadImage() throws Exception {
         loadImage("src='img.jpg'");
     }
@@ -138,8 +140,6 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
-            + "    img.width + img.width;\n"
-            + "    img.height + img.height;\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
