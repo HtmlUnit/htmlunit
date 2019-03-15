@@ -141,7 +141,8 @@ public class Iterator extends SimpleScriptable {
             return false;
         }
 
-        final Object obj = ((BaseFunction) iterator).call(context, thisObj.getParentScope(), scriptable, new Object[0]);
+        final Object obj = ((BaseFunction) iterator)
+                .call(context, thisObj.getParentScope(), scriptable, ScriptRuntime.emptyArgs);
 
         if (obj instanceof Iterator) {
             final Iterator it = (Iterator) obj;
@@ -166,7 +167,7 @@ public class Iterator extends SimpleScriptable {
                 throw ScriptRuntime.typeError("undefined is not a function");
             }
             final Object nextObj = ((BaseFunction) nextFunct)
-                    .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+                    .call(context, thisObj.getParentScope(), scriptableIterator, ScriptRuntime.emptyArgs);
 
             ScriptableObject next = (ScriptableObject) nextObj;
             boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
@@ -176,7 +177,7 @@ public class Iterator extends SimpleScriptable {
                 processor.accept(value);
 
                 next = (ScriptableObject) ((BaseFunction) nextFunct)
-                        .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+                        .call(context, thisObj.getParentScope(), scriptableIterator, ScriptRuntime.emptyArgs);
                 done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
                 value = next.get(ES6Iterator.VALUE_PROPERTY);
             }
