@@ -24,7 +24,7 @@
         <htmlunitdriver.version>2.34.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.3.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.34.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.34.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.34.2-SNAPSHOT</htmlunitcorejs.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.18</checkstyle.version>

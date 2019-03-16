@@ -9,6 +9,18 @@
     <body>
         <release version="2.34.1" date="...., 2019" description="Bugfixes">
             <action type="fix" dev="rbri">
+                core-js: some array length border cases fixed
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: array length null/undefined fixed
+            </action>
+            <action type="add" dev="rbri">
+                core-js: array includes added
+            </action>
+            <action type="add" dev="rbri">
+                core-js: array padStart and padEnd added
+            </action>
+            <action type="fix" dev="rbri">
                 Image handler are processed (again) if an image is imported into a new document.
             </action>
             <action type="fix" dev="rbri">
