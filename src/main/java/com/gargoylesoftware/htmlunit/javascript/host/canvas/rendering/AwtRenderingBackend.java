@@ -304,7 +304,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
                 (int) (Float.parseFloat(colors[3]) * 255));
         }
-        else if (tmpFillStyle.charAt(0) == '#') {
+        else if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
             color = Color.decode(tmpFillStyle);
         }
         else {
@@ -338,7 +338,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
                 (int) (Float.parseFloat(colors[3]) * 255));
         }
-        else if (tmpFillStyle.charAt(0) == '#') {
+        else if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
             color = Color.decode(tmpFillStyle);
         }
         else {

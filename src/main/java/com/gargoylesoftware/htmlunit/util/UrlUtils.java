@@ -494,7 +494,7 @@ public final class UrlUtils {
             s.append(':').append(port);
         }
         if (path != null && !path.isEmpty()) {
-            if (!('/' == path.charAt(0))) {
+            if ('/' != path.charAt(0)) {
                 s.append('/');
             }
             s.append(path);
@@ -1137,7 +1137,7 @@ public final class UrlUtils {
                 buffer.append(port);
             }
         }
-        if (path == null || path.charAt(0) != '/') {
+        if (path == null || path.isEmpty() || path.charAt(0) != '/') {
             buffer.append('/');
         }
         if (path != null) {
