@@ -2306,7 +2306,7 @@ public class HtmlPage extends SgmlPage {
                     else if (href.startsWith("//")) {
                         baseUrl = new URL(String.format("%s:%s", url.getProtocol(), href));
                     }
-                    else if (href.charAt(0) == '/') {
+                    else if (href.length() > 0 && href.charAt(0) == '/') {
                         final int port = Window.getPort(url);
                         baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
                     }
