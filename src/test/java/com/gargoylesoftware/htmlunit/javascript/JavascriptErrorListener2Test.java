@@ -14,17 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
@@ -45,29 +40,7 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
-
-            @Override
-            public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
-                // nothing
-            }
-
-            @Override
-            public void malformedScriptURL(final HtmlPage page, final String url,
-                    final MalformedURLException malformedURLException) {
-                // nothing
-            }
-
-            @Override
-            public void scriptException(final HtmlPage page, final ScriptException scriptException) {
-                scriptExceptions.append(scriptException.getCause() + "\n");
-            }
-
-            @Override
-            public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
-                // nothing
-            }
-        });
+        webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());
 
         final String html = "<html><body><script>while (</script></body></html>";
         getMockWebConnection().setDefaultResponse(html);
