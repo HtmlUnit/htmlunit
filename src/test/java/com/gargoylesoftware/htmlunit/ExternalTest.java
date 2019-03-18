@@ -47,7 +47,9 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "2.46";
+    static String CHROME_DRIVER_ = "73.0.3683.68";
+    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_73";
+
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.24.0";
     /** IE driver. */
@@ -114,7 +116,7 @@ public class ExternalTest {
     @Test
     public void assertChromeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
-            final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            final AbstractPage page = webClient.getPage(CHROME_DRIVER_URL_);
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
         }

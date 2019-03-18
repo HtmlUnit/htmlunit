@@ -2504,7 +2504,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF52 = "function External() {\n    [native code]\n}")
+            FF52 = "function External() {\n    [native code]\n}",
+            CHROME = "function External() { [native code] }")
     public void external() throws Exception {
         test("External");
     }

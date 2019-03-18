@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.34.1" date="...., 2019" description="Bugfixes">
+        <release version="2.34.1" date="...., 2019" description="Bugfixes, CHROME 73">
             <action type="fix" dev="rbri">
                 core-js: some array length border cases fixed
             </action>
