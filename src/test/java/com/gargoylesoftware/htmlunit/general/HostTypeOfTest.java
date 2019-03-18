@@ -1513,7 +1513,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
+            FF52 = "function",
+            CHROME = "function")
     public void external() throws Exception {
         test("External");
     }
