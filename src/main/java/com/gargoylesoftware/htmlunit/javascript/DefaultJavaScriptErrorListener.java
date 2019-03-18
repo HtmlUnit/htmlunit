@@ -25,8 +25,8 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
- * Default implementation of {@link JavaScriptErrorListener} that does only
- * logging in some cases.
+ * Default implementation of {@link JavaScriptErrorListener} that does
+ * default logging.
  *
  * @author Ronald Brill
  */
@@ -34,14 +34,30 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
 
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptErrorListener.class);
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void scriptException(final HtmlPage page, final ScriptException scriptException) {
+        if (LOG.isErrorEnabled()) {
+            LOG.error("Error during JavaScript execution", scriptException);
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
+        if (LOG.isErrorEnabled()) {
+            LOG.error("Timeout during JavaScript execution after "
+                        + executionTime + "ms; allowed only " + allowedTime + "ms");
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void malformedScriptURL(final HtmlPage page, final String url,
                 final MalformedURLException malformedURLException) {
@@ -50,10 +66,41 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
         if (LOG.isErrorEnabled()) {
             LOG.error("Error loading JavaScript from [" + scriptUrl + "].", exception);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void warn(final String message, final String sourceName,
+            final int line, final String lineSource, final int lineOffset) {
+        if (LOG.isWarnEnabled()) {
+            LOG.warn(format("warning", message, sourceName, line, lineSource, lineOffset));
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void error(final String message, final String sourceName,
+            final int line, final String lineSource, final int lineOffset) {
+        if (LOG.isErrorEnabled()) {
+            LOG.error(format("error", message, sourceName, line, lineSource, lineOffset));
+        }
+    }
+
+    private static String format(final String prefix, final String message, final String sourceName,
+            final int line, final String lineSource, final int lineOffset) {
+        return prefix + ": message=[" + message + "] sourceName=[" + sourceName + "] line=[" + line
+                + "] lineSource=[" + lineSource + "] lineOffset=[" + lineOffset + "]";
     }
 }

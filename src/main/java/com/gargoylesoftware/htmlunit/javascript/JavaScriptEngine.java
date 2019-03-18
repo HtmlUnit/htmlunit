@@ -984,8 +984,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
-        // Log the error; ScriptException instances provide good debug info.
-        LOG.info("Caught script exception", scriptException);
     }
 
     /**

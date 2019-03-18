@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_LA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -33,6 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
 import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -47,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
  * @author Andre Soereng
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public class HtmlUnitContextFactory extends ContextFactory {
 
@@ -56,7 +60,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
     private final BrowserVersion browserVersion_;
     private long timeout_;
     private Debugger debugger_;
-    private final ErrorReporter errorReporter_;
     private final WrapFactory wrapFactory_ = new HtmlUnitWrapFactory();
     private boolean deminifyFunctionCode_;
 
@@ -68,7 +71,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
     public HtmlUnitContextFactory(final WebClient webClient) {
         webClient_ = webClient;
         browserVersion_ = webClient.getBrowserVersion();
-        errorReporter_ = new StrictErrorReporter();
     }
 
     /**
@@ -276,7 +278,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         // Set threshold on how often we want to receive the callbacks
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
 
-        configureErrorReporter(cx);
+        cx.setErrorReporter(new HtmlUnitErrorReporter(webClient_.getJavaScriptErrorListener()));
         cx.setWrapFactory(wrapFactory_);
 
         if (debugger_ != null) {
@@ -289,15 +291,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setMaximumInterpreterStackDepth(10_000);
 
         return cx;
-    }
-
-    /**
-     * Configures the {@link ErrorReporter} on the context.
-     * @param context the context to configure
-     * @see Context#setErrorReporter(ErrorReporter)
-     */
-    protected void configureErrorReporter(final Context context) {
-        context.setErrorReporter(errorReporter_);
     }
 
     /**
@@ -357,6 +350,72 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 return browserVersion_.hasFeature(JS_ARRAY_CONSTRUCTION_PROPERTIES);
             default:
                 return super.hasFeature(cx, featureIndex);
+        }
+    }
+
+    private static final class HtmlUnitErrorReporter implements ErrorReporter, Serializable {
+
+        private final JavaScriptErrorListener javaScriptErrorListener_;
+
+        /**
+         * Ctor.
+         *
+         * @param javaScriptErrorListener the listener to be used
+         */
+        HtmlUnitErrorReporter(final JavaScriptErrorListener javaScriptErrorListener) {
+            javaScriptErrorListener_ = javaScriptErrorListener;
+        }
+
+        /**
+         * Logs a warning.
+         *
+         * @param message the message to be displayed
+         * @param sourceName the name of the source file
+         * @param line the line number
+         * @param lineSource the source code that failed
+         * @param lineOffset the line offset
+         */
+        @Override
+        public void warning(
+                final String message, final String sourceName, final int line,
+                final String lineSource, final int lineOffset) {
+            javaScriptErrorListener_.warn(message, sourceName, line, lineSource, lineOffset);
+        }
+
+        /**
+         * Logs an error.
+         *
+         * @param message the message to be displayed
+         * @param sourceName the name of the source file
+         * @param line the line number
+         * @param lineSource the source code that failed
+         * @param lineOffset the line offset
+         */
+        @Override
+        public void error(final String message, final String sourceName, final int line,
+                final String lineSource, final int lineOffset) {
+            javaScriptErrorListener_.error(message, sourceName, line, lineSource, lineOffset);
+
+            throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
+        }
+
+        /**
+         * Logs a runtime error.
+         *
+         * @param message the message to be displayed
+         * @param sourceName the name of the source file
+         * @param line the line number
+         * @param lineSource the source code that failed
+         * @param lineOffset the line offset
+         * @return an evaluator exception
+         */
+        @Override
+        public EvaluatorException runtimeError(
+                final String message, final String sourceName, final int line,
+                final String lineSource, final int lineOffset) {
+            javaScriptErrorListener_.error(message, sourceName, line, lineSource, lineOffset);
+
+            return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
     }
 }
