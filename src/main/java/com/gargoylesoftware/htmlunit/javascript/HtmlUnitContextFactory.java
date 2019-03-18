@@ -273,7 +273,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setLanguageVersion(Context.VERSION_ES6);
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
-        cx.setOptimizationLevel(9);
+        cx.setOptimizationLevel(-1);
 
         // Set threshold on how often we want to receive the callbacks
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
@@ -288,7 +288,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         // register custom RegExp processing
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx), browserVersion_));
 
-        // cx.setMaximumInterpreterStackDepth(10_000);
+        cx.setMaximumInterpreterStackDepth(10_000);
 
         return cx;
     }
