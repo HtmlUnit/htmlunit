@@ -561,7 +561,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038.
+     * Regression test for
+     * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1689798&group_id=47038">448</a>.
      * In href, "this" should be the window and not the link.
      * @throws Exception if the test fails
      */

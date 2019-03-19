@@ -1639,7 +1639,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug 3030247: expired cookie was saved.
-     * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
+     * @see <a href="http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266">1139</a>
      * @throws Exception if the test fails
      */
     @Test

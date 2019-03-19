@@ -123,7 +123,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     }
 
     /**
-     * We couldn't document.write() script elements that contained the '<' character...
+     * We couldn't document.write() script elements that contained the '&lt;' character...
      * @exception Exception if the test fails
      */
     @Test
@@ -193,8 +193,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
     /**
      * Regression test for bug 2884585.
-     * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 <script src="..."... written
-     * by document.write was not loaded and executed after the </script>
+     * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 &lt;script src="..."... written
+     * by document.write was not loaded and executed after the &lt;/script>
      * when the page was loaded as result of a click.
      * @throws Exception if the test fails
      */

@@ -90,7 +90,7 @@ public class GeolocationTest extends WebServerTestCase {
     }
 
     /**
-     * Helper class for {@link #getCurrentPosition()}.
+     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
      */
     public static class GetCurrentPositionTestServlet extends ServletContentWrapper {
         /**
@@ -128,7 +128,7 @@ public class GeolocationTest extends WebServerTestCase {
     }
 
     /**
-     * Helper class for {@link #getCurrentPosition()}.
+     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
      */
     public static class BrowserLocationServlet extends HttpServlet {
 
