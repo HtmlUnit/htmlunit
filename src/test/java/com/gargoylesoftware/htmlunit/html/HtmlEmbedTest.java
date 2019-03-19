@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 
 import org.junit.Test;

@@ -18,8 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
@@ -40,7 +42,12 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());
+        webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener() {
+            @Override
+            public void scriptException(final HtmlPage page, final ScriptException scriptException) {
+                scriptExceptions.append(scriptException.getCause() + "\n");
+            }
+        });
 
         final String html = "<html><body><script>while (</script></body></html>";
         getMockWebConnection().setDefaultResponse(html);
