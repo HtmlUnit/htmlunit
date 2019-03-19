@@ -9,6 +9,9 @@
     <body>
         <release version="2.34.1" date="...., 2019" description="Bugfixes, CHROME 73, reworked javascript logging">
             <action type="update" dev="rbri">
+                Logging documentation updated.
+            </action>
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: JavaScriptErrorListener interface defines two new methods
                 warn(String, String, int, String, int) and error(String, String, int, String, int).
                 Please add an implementation to your own implementations of this interface.
