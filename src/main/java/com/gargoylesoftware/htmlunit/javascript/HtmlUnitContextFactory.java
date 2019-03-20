@@ -394,7 +394,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         @Override
         public void error(final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
-            javaScriptErrorListener_.error(message, sourceName, line, lineSource, lineOffset);
+            // no need to log here, this is only used to create the exception
+            // the exception gets logged if not catched later on
 
             throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
@@ -413,8 +414,8 @@ public class HtmlUnitContextFactory extends ContextFactory {
         public EvaluatorException runtimeError(
                 final String message, final String sourceName, final int line,
                 final String lineSource, final int lineOffset) {
-            javaScriptErrorListener_.error(message, sourceName, line, lineSource, lineOffset);
-
+            // no need to log here, this is only used to create the exception
+            // the exception gets logged if not catched later on
             return new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
     }
