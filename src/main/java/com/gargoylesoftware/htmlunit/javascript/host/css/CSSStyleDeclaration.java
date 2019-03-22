@@ -2602,7 +2602,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         CSSValueImpl cssValue = styleDeclaration_.getPropertyCSSValue(name);
         if (cssValue == null) {
             final CSSValueImpl newValue = new CSSValueImpl(null, false);
-            newValue.setFloatValue(0);
+            newValue.setDoubleValue(0);
             cssValue = newValue;
         }
 

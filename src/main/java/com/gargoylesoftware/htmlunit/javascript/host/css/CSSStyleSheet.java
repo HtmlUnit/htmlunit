@@ -1242,7 +1242,7 @@ public class CSSStyleSheet extends StyleSheet {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
-                final float val;
+                final double val;
                 switch (property.getName()) {
                     case "max-width":
                         val = pixelValue(property.getValue(), scriptable);
@@ -1351,32 +1351,32 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static float pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
+    private static double pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
         final int dpi;
         switch (cssValue.getLexicalUnitType()) {
             case PIXEL:
-                return cssValue.getFloatValue();
+                return cssValue.getDoubleValue();
             case EM:
                 // hard coded default for the moment 16px = 1 em
-                return 16f * cssValue.getFloatValue();
+                return 16f * cssValue.getDoubleValue();
             case PERCENTAGE:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue();
+                return 0.16f * cssValue.getDoubleValue();
             case EX:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue();
+                return 0.16f * cssValue.getDoubleValue();
             case REM:
                 // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getFloatValue();
+                return 0.16f * cssValue.getDoubleValue();
             case MILLIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 25.4f) * cssValue.getFloatValue();
+                return (dpi / 25.4f) * cssValue.getDoubleValue();
             case CENTIMETER:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 254f) * cssValue.getFloatValue();
+                return (dpi / 254f) * cssValue.getDoubleValue();
             case POINT:
                 dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 72f) * cssValue.getFloatValue();
+                return (dpi / 72f) * cssValue.getDoubleValue();
             default:
                 break;
         }
@@ -1387,17 +1387,17 @@ public class CSSStyleSheet extends StyleSheet {
         return -1;
     }
 
-    private static float resolutionValue(final CSSValueImpl cssValue) {
+    private static double resolutionValue(final CSSValueImpl cssValue) {
         if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
             final String text = cssValue.getCssText();
             if (text.endsWith("dpi")) {
-                return cssValue.getFloatValue();
+                return cssValue.getDoubleValue();
             }
             if (text.endsWith("dpcm")) {
-                return 2.54f * cssValue.getFloatValue();
+                return 2.54f * cssValue.getDoubleValue();
             }
             if (text.endsWith("dppx")) {
-                return 96 * cssValue.getFloatValue();
+                return 96 * cssValue.getDoubleValue();
             }
         }
 
