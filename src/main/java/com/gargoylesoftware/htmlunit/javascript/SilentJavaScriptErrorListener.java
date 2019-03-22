@@ -49,9 +49,4 @@ public class SilentJavaScriptErrorListener implements JavaScriptErrorListener, S
     public void warn(final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
     }
-
-    @Override
-    public void error(final String message, final String sourceName,
-            final int line, final String lineSource, final int lineOffset) {
-    }
 }

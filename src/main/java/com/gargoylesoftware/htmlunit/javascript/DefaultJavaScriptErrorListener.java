@@ -87,17 +87,6 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void error(final String message, final String sourceName,
-            final int line, final String lineSource, final int lineOffset) {
-        if (LOG.isErrorEnabled()) {
-            LOG.error(format("error", message, sourceName, line, lineSource, lineOffset));
-        }
-    }
-
     private static String format(final String prefix, final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
         return prefix + ": message=[" + message + "] sourceName=[" + sourceName + "] line=[" + line

@@ -28,28 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 public interface JavaScriptErrorListener {
 
     /**
-     * Informs about a javascript warning.
-     *
-     * @param message the message to be displayed
-     * @param sourceName the name of the source file
-     * @param line the line number
-     * @param lineSource the source code that failed
-     * @param lineOffset the line offset
-     */
-    void warn(String message, String sourceName, int line, String lineSource, int lineOffset);
-
-    /**
-     * Informs about a javascript error.
-     *
-     * @param message the message to be displayed
-     * @param sourceName the name of the source file
-     * @param line the line number
-     * @param lineSource the source code that failed
-     * @param lineOffset the line offset
-     */
-    void error(String message, String sourceName, int line, String lineSource, int lineOffset);
-
-    /**
      * Informs about a javascript exceptions.
      *
      * @param page the page that causes the problem
@@ -83,4 +61,15 @@ public interface JavaScriptErrorListener {
      * @param exception the occurred exception
      */
     void loadScriptError(HtmlPage page, URL scriptUrl, Exception exception);
+
+    /**
+     * Informs about a javascript warning.
+     *
+     * @param message the message to be displayed
+     * @param sourceName the name of the source file
+     * @param line the line number
+     * @param lineSource the source code that failed
+     * @param lineOffset the line offset
+     */
+    void warn(String message, String sourceName, int line, String lineSource, int lineOffset);
 }

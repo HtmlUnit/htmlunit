@@ -396,7 +396,6 @@ public class HtmlUnitContextFactory extends ContextFactory {
                 final String lineSource, final int lineOffset) {
             // no need to log here, this is only used to create the exception
             // the exception gets logged if not catched later on
-
             throw new EvaluatorException(message, sourceName, line, lineSource, lineOffset);
         }
 
