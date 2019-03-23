@@ -1032,9 +1032,9 @@ public class CSSStyleSheet extends StyleSheet {
     public int insertRule(final String rule, final int position) {
         try {
             initCssRules();
-            final int result = wrapped_.insertRule(rule, fixIndex(position));
+            wrapped_.insertRule(rule, fixIndex(position));
             refreshCssRules();
-            return result;
+            return position;
         }
         catch (final DOMException e) {
             // in case of error try with an empty rule
@@ -1042,9 +1042,9 @@ public class CSSStyleSheet extends StyleSheet {
             if (pos > -1) {
                 final String newRule = rule.substring(0, pos) + "{}";
                 try {
-                    final int result = wrapped_.insertRule(newRule, fixIndex(position));
+                    wrapped_.insertRule(newRule, fixIndex(position));
                     refreshCssRules();
-                    return result;
+                    return position;
                 }
                 catch (final DOMException ex) {
                     throw Context.throwAsScriptRuntimeEx(ex);
@@ -1590,7 +1590,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
             else if (rule instanceof CSSMediaRuleImpl) {
                 final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
-                final MediaListImpl mediaList = mediaRule.getMedia();
+                final MediaListImpl mediaList = mediaRule.getMediaList();
                 if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                     index(index, mediaRule.getCssRules(), alreadyProcessing);
                 }

@@ -59,7 +59,7 @@ public class CSSMediaRule extends CSSConditionRule {
     public MediaList getMedia() {
         if (media_ == null) {
             final CSSStyleSheet parent = getParentStyleSheet();
-            final MediaListImpl ml = getMediaRule().getMedia();
+            final MediaListImpl ml = getMediaRule().getMediaList();
             media_ = new MediaList(parent, ml);
         }
         return media_;
