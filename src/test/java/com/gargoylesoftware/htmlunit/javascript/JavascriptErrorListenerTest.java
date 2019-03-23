@@ -115,7 +115,6 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getWarnings());
-        assertEquals("", javaScriptErrorListener.getErrors());
         assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
                 + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
@@ -180,7 +179,6 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getWarnings());
-        assertEquals("", javaScriptErrorListener.getErrors());
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: 'unknown'",
@@ -208,7 +206,6 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getWarnings());
-        assertEquals("", javaScriptErrorListener.getErrors());
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("", javaScriptErrorListener.getMalformedScriptURLErrors());
@@ -218,7 +215,6 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
 class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
     private final StringBuilder warnings_ = new StringBuilder();
-    private final StringBuilder errors_ = new StringBuilder();
     private final StringBuilder scriptExceptions_ = new StringBuilder();
     private final StringBuilder timeoutErrors_ = new StringBuilder();
     private final StringBuilder loadScriptErrors_ = new StringBuilder();
@@ -228,12 +224,6 @@ class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
     public void warn(final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
         warnings_.append(message);
-    }
-
-    @Override
-    public void error(final String message, final String sourceName,
-            final int line, final String lineSource, final int lineOffset) {
-        errors_.append(message);
     }
 
     @Override
@@ -259,10 +249,6 @@ class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
 
     public String getWarnings() {
         return warnings_.toString();
-    }
-
-    public String getErrors() {
-        return errors_.toString();
     }
 
     public String getScriptExceptions() {
