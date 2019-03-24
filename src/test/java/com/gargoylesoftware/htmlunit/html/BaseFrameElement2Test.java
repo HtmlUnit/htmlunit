@@ -61,4 +61,22 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void doNotLoopEndless() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe src='&#8221'></iframe>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+
+        loadPage2(html);
+    }
 }

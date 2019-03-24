@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -173,14 +176,16 @@ public abstract class BaseFrameElement extends HtmlElement {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
-            if (isAlreadyLoadedByAncestor(url)) {
+
+            final WebRequest request = new WebRequest(url);
+            request.setCharset(getPage().getCharset());
+            request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
+
+            if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
             try {
-                final WebRequest request = new WebRequest(url);
-                request.setCharset(getPage().getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {
@@ -194,14 +199,19 @@ public abstract class BaseFrameElement extends HtmlElement {
     /**
      * Test if the provided URL is the one of one of the parents which would cause an infinite loop.
      * @param url the URL to test
+     * @param charset the request charset
      * @return {@code false} if no parent has already this URL
      */
-    private boolean isAlreadyLoadedByAncestor(final URL url) {
+    private boolean isAlreadyLoadedByAncestor(final URL url, final Charset charset) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (UrlUtils.sameFile(url, window.getEnclosedPage().getUrl())) {
+            final URL encUrl = UrlUtils.encodeUrl(url,
+                    window.getWebClient().getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
+                    charset);
+            if (UrlUtils.sameFile(encUrl, window.getEnclosedPage().getUrl())) {
                 return true;
             }
+
             if (window == window.getParentWindow()) {
                 // TODO: should getParentWindow() return null on top windows?
                 window = null;
