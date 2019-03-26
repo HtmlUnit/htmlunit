@@ -110,7 +110,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"7-7---", "7-7---", "4-7---", "4-7---"})
+    @Alerts({"7-7---", "7-7---", "4-7---", "4-7---", "4-2---", "4-2---"})
     public void resetByClick() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -135,7 +135,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
-            + "    range.defaultValue = '2';\n"
+            + "    input.defaultValue = '2';\n"
             + "    alert(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
@@ -160,7 +160,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"7-7---", "7-7---", "4-7---", "4-7---"})
+    @Alerts({"7-7---", "7-7---", "4-7---", "4-7---", "4-2---", "4-2---"})
     public void resetByJS() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
