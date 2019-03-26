@@ -5165,6 +5165,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF52 = "true")
     public void _External_External() throws Exception {
         test("External", "External");
