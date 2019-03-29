@@ -18,8 +18,8 @@
                 Logging documentation updated.
             </action>
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: JavaScriptErrorListener interface defines two new methods
-                warn(String, String, int, String, int) and error(String, String, int, String, int).
+                INCOMPATIBLE CHANGE: JavaScriptErrorListener interface defines one new method
+                warn(String, String, int, String, int).
                 Please add an implementation to your own implementations of this interface.
             </action>
             <action type="update" dev="rbri">

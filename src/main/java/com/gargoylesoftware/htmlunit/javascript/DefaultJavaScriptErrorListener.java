@@ -83,13 +83,15 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
     public void warn(final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
         if (LOG.isWarnEnabled()) {
-            LOG.warn(format("warning", message, sourceName, line, lineSource, lineOffset));
-        }
-    }
+            final StringBuilder msg = new StringBuilder()
+                    .append("warning: message=[").append(message)
+                    .append("] sourceName=[").append(sourceName)
+                    .append("] line=[").append(line)
+                    .append("] lineSource=[").append(lineSource)
+                    .append("] lineOffset=[").append(lineOffset)
+                    .append("]");
 
-    private static String format(final String prefix, final String message, final String sourceName,
-            final int line, final String lineSource, final int lineOffset) {
-        return prefix + ": message=[" + message + "] sourceName=[" + sourceName + "] line=[" + line
-                + "] lineSource=[" + lineSource + "] lineOffset=[" + lineOffset + "]";
+            LOG.warn(msg.toString());
+        }
     }
 }
