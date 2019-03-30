@@ -274,8 +274,14 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        if (!getPage().getWebClient().getOptions().isCssEnabled()
+        final WebClient webClient = getPage().getWebClient();
+        if (!webClient.getOptions().isCssEnabled()
                 || !StyleSheetList.isStyleSheetLink(this)) {
+
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Link type '" + getRelAttribute() + "' not supported.");
+            }
+
             return;
         }
 
@@ -287,7 +293,7 @@ public class HtmlLink extends HtmlElement {
             }
         };
 
-        final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
+        final AbstractJavaScriptEngine<?> engine = webClient.getJavaScriptEngine();
         if (postponed) {
             engine.addPostponedAction(action);
         }
