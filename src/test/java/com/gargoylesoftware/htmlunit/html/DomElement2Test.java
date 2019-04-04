@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -94,7 +95,7 @@ public final class DomElement2Test extends SimpleWebTestCase {
         final String xml = "<events>\n"
                 + "  <something/>\n"
                 + "</events>";
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         getWebClient().setWebConnection(getMockWebConnection());
         final XmlPage page = getWebClient().getPage(URL_FIRST);
         final DomElement root = page.getDocumentElement();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,6 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.ranges.Range;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -90,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -958,7 +958,9 @@ public class HtmlPage extends SgmlPage {
             scriptURL = getFullyQualifiedUrl(srcAttribute);
             final String protocol = scriptURL.getProtocol();
             if ("javascript".equals(protocol)) {
-                LOG.info("Ignoring script src [" + srcAttribute + "]");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Ignoring script src [" + srcAttribute + "]");
+                }
                 return JavaScriptLoadResult.NOOP;
             }
             if (!"http".equals(protocol) && !"https".equals(protocol)
@@ -1014,11 +1016,12 @@ public class HtmlPage extends SgmlPage {
         final WebRequest referringRequest = getWebResponse().getWebRequest();
 
         final WebClient client = getWebClient();
-        final BrowserVersion browser = client.getBrowserVersion();
-        final WebRequest request = new WebRequest(url, browser.getScriptAcceptHeader());
+        final WebRequest request = new WebRequest(url);
+        // copy all headers from the referring request
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
-        request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
+        // at least overwrite this headers
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
+        request.setAdditionalHeader(HttpHeader.REFERER, referringRequest.getUrl().toString());
 
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
@@ -1045,7 +1048,7 @@ public class HtmlPage extends SgmlPage {
 
         //http://www.ietf.org/rfc/rfc4329.txt
         final String contentType = response.getContentType();
-        if (!"application/javascript".equalsIgnoreCase(contentType)
+        if (!MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(contentType)
             && !"application/ecmascript".equalsIgnoreCase(contentType)) {
             // warn about obsolete or not supported content types
             if ("text/javascript".equals(contentType)
@@ -1233,9 +1236,9 @@ public class HtmlPage extends SgmlPage {
             }
 
             final ContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine()).getContextFactory();
-            final ScriptResult result = cf.call(cx -> jsNode.fireEvent(event));
+            cf.call(cx -> jsNode.fireEvent(event));
 
-            if (!isOnbeforeunloadAccepted(this, event, result)) {
+            if (!isOnbeforeunloadAccepted(this, event)) {
                 return false;
             }
         }
@@ -1266,9 +1269,9 @@ public class HtmlPage extends SgmlPage {
                     // load events, propagates up to Document but not Window.  The "load" event for
                     // <frameset> on the other hand, like that of <body>, is handled above where it is
                     // fired against Document and directed to Window.
-                    final ScriptResult result = frame.fireEvent(event);
+                    frame.fireEvent(event);
 
-                    if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event, result)) {
+                    if (!isOnbeforeunloadAccepted((HtmlPage) frame.getPage(), event)) {
                         return false;
                     }
                 }
@@ -1287,14 +1290,16 @@ public class HtmlPage extends SgmlPage {
         return executeEventHandlersIfNeeded(Event.TYPE_BEFORE_UNLOAD);
     }
 
-    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event, final ScriptResult result) {
+    private boolean isOnbeforeunloadAccepted(final HtmlPage page, final Event event) {
         if (event instanceof BeforeUnloadEvent) {
             final BeforeUnloadEvent beforeUnloadEvent = (BeforeUnloadEvent) event;
             if (beforeUnloadEvent.isBeforeUnloadMessageSet()) {
                 final OnbeforeunloadHandler handler = getWebClient().getOnbeforeunloadHandler();
                 if (handler == null) {
-                    LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
-                            + " but no onbeforeunload handler installed.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("document.onbeforeunload() returned a string in event.returnValue,"
+                                + " but no onbeforeunload handler installed.");
+                    }
                 }
                 else {
                     final String message = Context.toString(beforeUnloadEvent.getReturnValue());
@@ -1336,7 +1341,9 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString);
             }
             catch (final NumberFormatException e) {
-                LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no ';' but not a number): " + refreshString, e);
+                }
                 return;
             }
             url = getUrl();
@@ -1347,12 +1354,16 @@ public class HtmlPage extends SgmlPage {
                 time = Double.parseDouble(refreshString.substring(0, index).trim());
             }
             catch (final NumberFormatException e) {
-                LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (no valid number before ';') " + refreshString, e);
+                }
                 return;
             }
             index = refreshString.toLowerCase(Locale.ROOT).indexOf("url=", index);
             if (index == -1) {
-                LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Malformed refresh string (found ';' but no 'url='): " + refreshString);
+                }
                 return;
             }
             final StringBuilder builder = new StringBuilder(refreshString.substring(index + 4));
@@ -1372,7 +1383,9 @@ public class HtmlPage extends SgmlPage {
                     url = getFullyQualifiedUrl(urlString);
                 }
                 catch (final MalformedURLException e) {
-                    LOG.error("Malformed URL in refresh string: " + refreshString, e);
+                    if (LOG.isErrorEnabled()) {
+                        LOG.error("Malformed URL in refresh string: " + refreshString, e);
+                    }
                     throw e;
                 }
             }
@@ -2266,7 +2279,7 @@ public class HtmlPage extends SgmlPage {
         if (base_ == null) {
             baseUrl = getUrl();
             final WebWindow window = getEnclosingWindow();
-            final boolean frame = window != window.getTopWindow();
+            final boolean frame = window != null && window != window.getTopWindow();
             if (frame) {
                 final boolean frameSrcIsNotSet = baseUrl == WebClient.URL_ABOUT_BLANK;
                 final boolean frameSrcIsJs = "javascript".equals(baseUrl.getProtocol());
@@ -2293,7 +2306,7 @@ public class HtmlPage extends SgmlPage {
                     else if (href.startsWith("//")) {
                         baseUrl = new URL(String.format("%s:%s", url.getProtocol(), href));
                     }
-                    else if (href.startsWith("/")) {
+                    else if (href.length() > 0 && href.charAt(0) == '/') {
                         final int port = Window.getPort(url);
                         baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
                     }
@@ -2361,7 +2374,9 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlElement getElementFromPoint(final int x, final int y) {
         if (elementFromPointHandler_ == null) {
-            LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("ElementFromPointHandler was not specicifed for " + this);
+            }
             if (x <= 0 || y <= 0) {
                 return null;
             }
@@ -2531,5 +2546,21 @@ public class HtmlPage extends SgmlPage {
         if (charsetName != null) {
             originalCharset_ = Charset.forName(charsetName);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
     }
 }

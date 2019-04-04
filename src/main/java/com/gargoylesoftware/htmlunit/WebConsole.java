@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,9 @@ import org.apache.commons.logging.LogFactory;
  * @author Andrea Martino
  */
 public class WebConsole implements Serializable {
+
+    private Formatter formatter_ = new DefaultFormatter();
+    private Logger logger_ = new DefaultLogger();
 
     /**
      * A simple logging interface abstracting logging APIs.
@@ -166,9 +169,6 @@ public class WebConsole implements Serializable {
          */
         String parameterAsFloat(Object o);
     }
-
-    private Formatter formatter_ = new DefaultFormatter();
-    private Logger logger_ = new DefaultLogger();
 
     /**
      * Sets the Formatter.

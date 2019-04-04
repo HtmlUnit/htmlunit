@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public final class XPathUtils {
     @SuppressWarnings("unchecked")
     public static <T> List<T> getByXPath(final DomNode node, final String xpathExpr, final PrefixResolver resolver) {
         if (xpathExpr == null) {
-            throw new NullPointerException("Null is not a valid XPath expression");
+            throw new IllegalArgumentException("Null is not a valid XPath expression");
         }
 
         PROCESS_XPATH_.set(Boolean.TRUE);

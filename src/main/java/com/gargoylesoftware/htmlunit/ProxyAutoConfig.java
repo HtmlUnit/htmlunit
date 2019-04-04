@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://lib.ru/WEBMASTER/proxy-live.txt">PAC file format</a>
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class ProxyAutoConfig {
+    private static final String TIMEZONE_GMT = "GMT";
 
     private ProxyAutoConfig() {
     }
@@ -212,10 +214,11 @@ public final class ProxyAutoConfig {
      */
     public static boolean weekdayRange(final String wd1, Object wd2, final Object gmt) {
         TimeZone timezone = TimeZone.getDefault();
-        if ("GMT".equals(Context.toString(gmt)) || "GMT".equals(Context.toString(wd2))) {
-            timezone = TimeZone.getTimeZone("GMT");
+        if (TIMEZONE_GMT.equals(Context.toString(gmt))
+                || TIMEZONE_GMT.equals(Context.toString(wd2))) {
+            timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
-        if (wd2 == Undefined.instance || "GMT".equals(Context.toString(wd2))) {
+        if (wd2 == Undefined.instance || TIMEZONE_GMT.equals(Context.toString(wd2))) {
             wd2 = wd1;
         }
         final Calendar calendar = Calendar.getInstance(timezone);
@@ -252,8 +255,8 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if ("GMT".equals(Context.toString(values[length]))) {
-                timezone = TimeZone.getTimeZone("GMT");
+            if (TIMEZONE_GMT.equals(Context.toString(values[length]))) {
+                timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
             else if (values[length] != Undefined.instance) {
@@ -397,8 +400,8 @@ public final class ProxyAutoConfig {
         //actual values length
         int length;
         for (length = values.length - 1; length >= 0; length--) {
-            if ("GMT".equals(Context.toString(values[length]))) {
-                timezone = TimeZone.getTimeZone("GMT");
+            if (TIMEZONE_GMT.equals(Context.toString(values[length]))) {
+                timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
             else if (values[length] != Undefined.instance) {

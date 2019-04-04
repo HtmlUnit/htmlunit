@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -474,7 +475,7 @@ public class XMLDOMAttributeTest extends WebDriverTestCase {
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_URL_FUNCTION;
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(createTestHTML(html));
     }
 }

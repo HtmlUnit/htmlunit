@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final char c, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
     }
 
@@ -66,10 +63,7 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final int keyCode, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 
@@ -183,6 +177,14 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput {
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
     }
 
     /**

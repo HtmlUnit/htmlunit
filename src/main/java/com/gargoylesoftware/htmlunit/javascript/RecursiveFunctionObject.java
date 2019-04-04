@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 }
             }
         }
-        return objects.toArray(new Object[objects.size()]);
+        return objects.toArray(new Object[0]);
     }
 
     /**
@@ -116,14 +116,8 @@ public class RecursiveFunctionObject extends FunctionObject {
             case "webkitSpeechRecognition":
                 return "SpeechRecognition";
 
-            case "WebKitAnimationEvent":
-                return "AnimationEvent";
-
             case "WebKitMutationObserver":
                 return "MutationObserver";
-
-            case "WebKitTransitionEvent":
-                return "TransitionEvent";
 
             case "webkitMediaStream":
                 return "MediaStream";

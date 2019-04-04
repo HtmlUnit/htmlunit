@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.Annotation;
@@ -108,9 +107,6 @@ public abstract class AbstractJavaScriptConfiguration {
             else if (browser.isIE()) {
                 expectedBrowser = IE;
             }
-            else if (browser.isEdge()) {
-                expectedBrowser = EDGE;
-            }
             else if (browser.isFirefox52()) {
                 expectedBrowser = FF52;
             }
@@ -147,9 +143,7 @@ public abstract class AbstractJavaScriptConfiguration {
                     extendedClassName = superClass.getSimpleName();
                 }
 
-                for (int i = 0; i < jsxClassValues.length; i++) {
-                    final JsxClass jsxClass = jsxClassValues[i];
-
+                for (JsxClass jsxClass : jsxClassValues) {
                     if (jsxClass != null && isSupported(jsxClass.value(), expectedBrowser)) {
                         domClasses.add(jsxClass.domClass());
                         if (jsxClass.isJSObject()) {

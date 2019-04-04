@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,6 +88,14 @@ public class HtmlResetInput extends HtmlInput {
         }
         super.doClickStateUpdate(shiftKey, ctrlKey);
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
     }
 
     /**

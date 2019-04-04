@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
@@ -62,7 +63,7 @@ public class HTMLCollection2Test extends SimpleWebTestCase {
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, firstContent);
-        conn.setResponse(URL_SECOND, secondContent, "text/xml");
+        conn.setResponse(URL_SECOND, secondContent, MimeType.TEXT_XML);
         client.setWebConnection(conn);
 
         client.getPage(URL_FIRST);

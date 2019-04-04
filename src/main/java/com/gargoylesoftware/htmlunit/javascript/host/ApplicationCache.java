@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -42,27 +41,27 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/offline_resources_in_firefox">Offline Resources in Firefox</a>
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
-@JsxClass({CHROME, IE, EDGE})
+@JsxClass({CHROME, IE})
 @JsxClass(className = "OfflineResourceList", value = FF)
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short UNCACHED = 0;
     /** The application cache is not in the process of being updated. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short IDLE = 1;
     /** The application cache manifest is being fetched and checked for updates. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short CHECKING = 2;
     /** Resources are being downloaded to be added to the cache. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short DOWNLOADING = 3;
     /** There is a new version of the application cache available. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short UPDATEREADY = 4;
     /** The application cache group is now obsolete. */
-    @JsxConstant({CHROME, IE})
+    @JsxConstant
     public static final short OBSOLETE = 5;
 
     private short status_ = UNCACHED;
@@ -70,7 +69,7 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public ApplicationCache() {
     }
 

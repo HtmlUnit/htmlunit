@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,6 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.FIREFOX_52);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
-        browsers.add(BrowserVersion.EDGE);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
             int useCount = 0;
@@ -109,9 +108,6 @@ public class BrowserVersionFeaturesTest  {
         if (browser == BrowserVersion.CHROME) {
             return SupportedBrowser.CHROME;
         }
-        if (browser == BrowserVersion.INTERNET_EXPLORER) {
-            return SupportedBrowser.IE;
-        }
         if (browser == BrowserVersion.FIREFOX_60) {
             return SupportedBrowser.FF60;
         }
@@ -119,7 +115,7 @@ public class BrowserVersionFeaturesTest  {
             return SupportedBrowser.FF52;
         }
 
-        return SupportedBrowser.EDGE;
+        return SupportedBrowser.IE;
     }
 
     /**
@@ -145,7 +141,7 @@ public class BrowserVersionFeaturesTest  {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     unusedCheck(file, unusedFeatures);
                 }
                 else if (file.getName().endsWith(".java")) {

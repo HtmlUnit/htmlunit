@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
 
     private transient ArrayList<Integer> cancelledJobs_ = new ArrayList<>();
 
-    private transient JavaScriptJob currentlyRunningJob_ = null;
+    private transient JavaScriptJob currentlyRunningJob_;
 
     /** A counter used to generate the IDs assigned to {@link JavaScriptJob}s. */
     private static final AtomicInteger NEXT_JOB_ID_ = new AtomicInteger(1);
@@ -309,7 +309,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
      */
     @Override
     public synchronized String jobStatusDump(final JavaScriptJobFilter filter) {
-        final StringBuilder status = new StringBuilder();
+        final StringBuilder status = new StringBuilder(110);
         final String lineSeparator = System.lineSeparator();
         status.append("------ JavaScript job status -----");
         status.append(lineSeparator);

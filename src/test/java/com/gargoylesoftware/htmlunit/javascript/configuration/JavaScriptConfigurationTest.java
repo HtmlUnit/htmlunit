@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_52;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
@@ -229,7 +228,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 if (name.endsWith(".class")) {
                     list.add(packageName + '.' + name.substring(0, name.length() - 6));
                 }
-                else if (file.isDirectory() && !".svn".equals(file.getName())) {
+                else if (file.isDirectory() && !".git".equals(file.getName())) {
                     addClasses(file, packageName + '.' + file.getName(), list);
                 }
             }
@@ -262,7 +261,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     public void obsoleteJsxClasses() {
         final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX_60);
         final BrowserVersion[] browsers = new BrowserVersion[]
-        {FIREFOX_60, FIREFOX_52, CHROME, INTERNET_EXPLORER, EDGE};
+        {FIREFOX_60, FIREFOX_52, CHROME, INTERNET_EXPLORER};
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -246,8 +246,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     return doc;
                 }
                 catch (final IOException e) {
-                    LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
-                            + e.getMessage());
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
+                                + e.getMessage());
+                    }
                     return null;
                 }
             }
@@ -271,8 +273,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return webResponse_.getStatusCode();
         }
 
-        LOG.error("XMLHTTPRequest.status was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHTTPRequest.status was retrieved without a response available (readyState: "
+                + state_ + ").");
+        }
         return 0;
     }
 
@@ -289,8 +293,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return webResponse_.getStatusMessage();
         }
 
-        LOG.error("XMLHTTPRequest.statusText was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHTTPRequest.statusText was retrieved without a response available (readyState: "
+                    + state_ + ").");
+        }
         return null;
     }
 
@@ -320,8 +326,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return builder.append("\r\n").toString();
         }
 
-        LOG.error("XMLHTTPRequest.getAllResponseHeaders() was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHTTPRequest.getAllResponseHeaders() was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -349,8 +357,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return value;
         }
 
-        LOG.error("XMLHTTPRequest.getResponseHeader(..) was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHTTPRequest.getResponseHeader(..) was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -420,11 +430,15 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             webRequest_ = request;
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to initialize XMLHTTPRequest using malformed URL '" + urlAsString + "'.");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to initialize XMLHTTPRequest using malformed URL '" + urlAsString + "'.");
+            }
             return;
         }
         catch (final IllegalArgumentException e) {
-            LOG.error("Unable to initialize XMLHTTPRequest using illegal argument '" + e.getMessage() + "'.");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to initialize XMLHTTPRequest using illegal argument '" + e.getMessage() + "'.");
+            }
             webRequest_ = null;
         }
         // Async stays a boolean.
@@ -689,8 +703,10 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             return;
         }
         if (!isAuthorizedHeader(name)) {
-            LOG.warn("Ignoring XMLHTTPRequest.setRequestHeader for " + name
-                + ": it is a restricted header");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Ignoring XMLHTTPRequest.setRequestHeader for " + name
+                        + ": it is a restricted header");
+            }
             return;
         }
 

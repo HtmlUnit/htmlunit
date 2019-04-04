@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,20 +45,13 @@ public class HtmlMeta extends HtmlElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
+        // Handles the cookies specified in meta tags,
+        // like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
-            performSetCookie();
+            final WebClient client = page.getWebClient();
+            final URL url = page.getUrl();
+            client.addCookie(getContentAttribute(), url, this);
         }
-    }
-
-    /**
-     * Handles the cookies specified in meta tags,
-     * like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
-     */
-    protected void performSetCookie() {
-        final SgmlPage page = getPage();
-        final WebClient client = page.getWebClient();
-        final URL url = page.getUrl();
-        client.addCookie(getContentAttribute(), url, this);
     }
 
     /**

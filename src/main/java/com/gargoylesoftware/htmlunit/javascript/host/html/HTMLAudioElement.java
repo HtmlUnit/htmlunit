@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,14 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAudio;
+import com.gargoylesoftware.htmlunit.html.HtmlMedia;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
  * The JavaScript object {@code HTMLAudioElement}.
@@ -35,8 +37,30 @@ public class HTMLAudioElement extends HTMLMediaElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLAudioElement() {
     }
 
+    /**
+     * Gets the JavaScript property {@code nodeType} for the current node.
+     * @return the node type
+     */
+    @JsxGetter
+    @Override
+    public short getNodeType() {
+        return Node.ELEMENT_NODE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    @Override
+    public String getNodeName() {
+        final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
+        if (element == null) {
+            return "AUDIO";
+        }
+        return element.getNodeName();
+    }
 }

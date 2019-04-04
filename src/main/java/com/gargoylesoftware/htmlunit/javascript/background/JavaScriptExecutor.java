@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.background;
 
-import java.io.Serializable;
-
 import com.gargoylesoftware.htmlunit.WebWindow;
 
 /**
@@ -25,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  * @author Kostadin Chikov
  * @author Ronald Brill
  */
-public interface JavaScriptExecutor extends Runnable, Serializable {
+public interface JavaScriptExecutor extends Runnable {
 
     /**
      * Register a window with the eventLoop.

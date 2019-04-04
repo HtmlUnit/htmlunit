@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -130,6 +131,15 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"CONTENT_TYPE:image/jpeg", "charset"})
     public void contentTypeJpg() throws Exception {
         contentType("jpg");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"CONTENT_TYPE:image/png", "charset"})
+    public void contentTypePng() throws Exception {
+        contentType("png");
     }
 
     /**
@@ -335,7 +345,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             driver.findElement(By.id("mySubmit")).click();
         }
         finally {
-            tmpFile.delete();
+            assertTrue(tmpFile.delete());
         }
 
         final String pageSource = driver.getPageSource();
@@ -355,7 +365,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write("<html>\n"
                 + "<body>\n"
                 + "<form action='upload2' method='post' enctype='multipart/form-data'>\n"
@@ -379,22 +389,23 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
-            final Writer writer = response.getWriter();
-            if (ServletFileUpload.isMultipartContent(request)) {
-                try {
-                    final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-                    for (final FileItem item : upload.parseRequest(request)) {
-                        if ("myInput".equals(item.getFieldName())) {
-                            writer.write("CONTENT_TYPE:" + item.getContentType());
+            response.setContentType(MimeType.TEXT_HTML);
+            try (Writer writer = response.getWriter()) {
+                if (ServletFileUpload.isMultipartContent(request)) {
+                    try {
+                        final ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
+                        for (final FileItem item : upload.parseRequest(request)) {
+                            if ("myInput".equals(item.getFieldName())) {
+                                writer.write("CONTENT_TYPE:" + item.getContentType());
+                            }
                         }
                     }
-                }
-                catch (final FileUploadBase.SizeLimitExceededException e) {
-                    writer.write("SizeLimitExceeded");
-                }
-                catch (final Exception e) {
-                    writer.write("error");
+                    catch (final FileUploadBase.SizeLimitExceededException e) {
+                        writer.write("SizeLimitExceeded");
+                    }
+                    catch (final Exception e) {
+                        writer.write("error");
+                    }
                 }
             }
         }
@@ -986,7 +997,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
-        tmpFile.delete();
+        assertTrue(tmpFile.delete());
 
         verifyAlerts(driver, getExpectedAlerts());
     }
@@ -1117,5 +1128,30 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebElement e = driver.findElement(By.id("f"));
         e.sendKeys(absolutePath);
         assertEquals(getExpectedAlerts()[0], e.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='file' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

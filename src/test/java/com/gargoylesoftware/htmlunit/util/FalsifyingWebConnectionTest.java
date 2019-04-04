@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
                 if ("www.google-analytics.com".equals(request.getUrl().getHost())) {
-                    return createWebResponse(request, "", "application/javascript"); // -> empty script
+                    return createWebResponse(request, "", MimeType.APPLICATION_JAVASCRIPT); // -> empty script
                 }
                 return super.getResponse(request);
             }
@@ -117,7 +117,7 @@ public class FalsifyingWebConnectionTest extends SimpleWebTestCase {
             @Override
             public WebResponse getResponse(final WebRequest request) throws IOException {
                 if (request.getUrl().getPath().endsWith(".js")) {
-                    return createWebResponse(request, "", "text/html", 500, "Application Error");
+                    return createWebResponse(request, "", MimeType.TEXT_HTML, 500, "Application Error");
                 }
                 return super.getResponse(request);
             }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,6 +151,77 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var data = window.btoa('Hello World!');\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void atobUnicode() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  try {\n"
+            + "    window.btoa('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "  try {\n"
+            + "    window.atob('I \\u2661 Unicode!');\n"
+            + "  } catch(e) {alert('exception')}\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"CSAe", "\t \u001e"})
+    public void atobControlChar() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa('\\t \\u001e');\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"bnVsbA==", "null"})
+    public void atobNull() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa(null);\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"dW5kZWZpbmVk", "undefined"})
+    public void atobUndefined() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa(undefined);\n"
             + "  alert(data);\n"
             + "  alert(atob(data));\n"
             + "</script>\n"
@@ -657,7 +728,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "133", "true", "true", "10"},
             FF = {"true", "true", "94", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -753,7 +824,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"636", "1256", "619", "1239"},
+    @Alerts(CHROME = {"635", "1262", "618", "1245"},
             FF60 = {"674", "1258", "657", "1241"},
             FF52 = {"674", "1258", "657", "1241"},
             IE = {"705", "1256", "688", "1239"})
@@ -1621,23 +1692,26 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     public void setIntervalShouldNotBeExecutedBeforeHandlers() throws Exception {
         final String html
-            = "<html><body><script>\n"
-            + "var id;\n"
-            + "function stop() {\n"
-            + "  window.stopIt = true;\n"
-            + "  clearInterval(id);\n"
-            + "}\n"
-            + "for (var i = 0; i < 1000; i++) {\n"
-            + "  var handler = function(e) {\n"
-            + "    if (window.stopIt) {\n"
-            + "      e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
-            + "    }\n"
+            = "<html><body>\n"
+            + "<script>\n"
+            + "  var id;\n"
+
+            + "  function stop() {\n"
+            + "    window.stopIt = true;\n"
+            + "    clearInterval(id);\n"
             + "  }\n"
-            + "  window.addEventListener('click', handler, false);\n"
-            + "}\n"
+
+            + "  for (var i = 0; i < 1000; i++) {\n"
+            + "    var handler = function(e) {\n"
+            + "      if (window.stopIt) {\n"
+            + "        e.preventDefault ?  e.preventDefault() : e.returnValue = false;\n"
+            + "      }\n"
+            + "    }\n"
+            + "    window.addEventListener('click', handler, false);\n"
+            + "  }\n"
             + "</script>\n"
             + "<form action='page2' method='post'>\n"
-            + "<input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
+            + "  <input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
             + "</form>\n"
             + "</body></html>";
 

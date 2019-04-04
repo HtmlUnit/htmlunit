@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -347,7 +348,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("", JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse("", MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(html);
     }
 
@@ -409,7 +410,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
         final String script = new String(ByteOrderMark.UTF_8.getBytes())
                 + "alert('" + "\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627"
                             + "\u064b\u0623\u0647\u0644\u0627\u064b\u0623\u0647\u0644\u0627\u064b" + "');";
-        getMockWebConnection().setResponse(URL_SECOND, script, "application/javascript", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, script, MimeType.APPLICATION_JAVASCRIPT, UTF_8);
         loadPageWithAlerts2(html);
     }
 

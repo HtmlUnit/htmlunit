@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 /**
  * A JavaScript object for {@code OfflineAudioContext}.
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, EDGE})
+@JsxClass({CHROME, FF})
 public class OfflineAudioContext extends BaseAudioContext {
 
     /**
@@ -35,5 +35,14 @@ public class OfflineAudioContext extends BaseAudioContext {
      */
     @JsxConstructor
     public OfflineAudioContext() {
+    }
+
+    /**
+     * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/OfflineAudioContext/startRendering">
+     * MDN OfflineAudioContext#startRendering</a>
+     */
+    @JsxFunction
+    public void startRendering() {
+        // only a dummy
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -100,7 +101,7 @@ public class WebResponseData implements Serializable {
         if (encoding != null) {
             boolean isGzip = StringUtils.contains(encoding, "gzip") && !"no-gzip".equals(encoding);
             if ("gzip-only-text/html".equals(encoding)) {
-                isGzip = "text/html".equals(getHeader(headers, "content-type"));
+                isGzip = MimeType.TEXT_HTML.equals(getHeader(headers, "content-type"));
             }
             if (isGzip) {
                 try {

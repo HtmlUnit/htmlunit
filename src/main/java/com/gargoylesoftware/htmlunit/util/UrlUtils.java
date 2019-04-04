@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -292,11 +292,11 @@ public final class UrlUtils {
      * @param anchor the anchor string to encode and escape
      * @return the encoded and escaped anchor string
      */
-    public static String encodeAnchor(String anchor) {
-        if (anchor != null) {
-            anchor = encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
+    public static String encodeAnchor(final String anchor) {
+        if (anchor == null) {
+            return null;
         }
-        return anchor;
+        return encode(anchor, ANCHOR_ALLOWED_CHARS, UTF_8);
     }
 
     /**
@@ -305,11 +305,11 @@ public final class UrlUtils {
      * @param hash the anchor string to encode and escape
      * @return the encoded and escaped anchor string
      */
-    public static String encodeHash(String hash) {
-        if (hash != null) {
-            hash = encode(hash, HASH_ALLOWED_CHARS, UTF_8);
+    public static String encodeHash(final String hash) {
+        if (hash == null) {
+            return null;
         }
-        return hash;
+        return encode(hash, HASH_ALLOWED_CHARS, UTF_8);
     }
 
     /**
@@ -485,27 +485,26 @@ public final class UrlUtils {
     private static URL createNewUrl(final String protocol, final String userInfo, final String host, final int port,
             final String path, final String ref, final String query) throws MalformedURLException {
         final StringBuilder s = new StringBuilder();
-        s.append(protocol);
-        s.append("://");
+        s.append(protocol).append("://");
         if (userInfo != null) {
-            s.append(userInfo).append("@");
+            s.append(userInfo).append('@');
         }
         s.append(host);
         if (port != -1) {
-            s.append(":").append(port);
+            s.append(':').append(port);
         }
         if (path != null && !path.isEmpty()) {
-            if (!('/' == path.charAt(0))) {
-                s.append("/");
+            if ('/' != path.charAt(0)) {
+                s.append('/');
             }
             s.append(path);
         }
         if (query != null) {
-            s.append("?").append(query);
+            s.append('?').append(query);
         }
         if (ref != null) {
             if (ref.isEmpty() || ref.charAt(0) != '#') {
-                s.append("#");
+                s.append('#');
             }
             s.append(ref);
         }
@@ -542,8 +541,7 @@ public final class UrlUtils {
         }
 
         final StringBuilder s = new StringBuilder(len);
-        s.append(protocol);
-        s.append(":");
+        s.append(protocol).append(':');
         if (authority != null && !authority.isEmpty()) {
             s.append("//");
             s.append(authority);
@@ -557,7 +555,7 @@ public final class UrlUtils {
         }
         if (ref != null) {
             if (ref.isEmpty() || ref.charAt(0) != '#') {
-                s.append("#");
+                s.append('#');
             }
             s.append(ref);
         }
@@ -925,14 +923,14 @@ public final class UrlUtils {
     /**
      * "../" after the leading "/" should be removed as browsers do (not in RFC)
      */
-    private static String removeLeadingSlashPoints(String path) {
+    private static String removeLeadingSlashPoints(final String path) {
         int i = 1;
         while (path.startsWith("../", i)) {
             i = i + 3;
         }
 
         if (i > 1) {
-            path = "/" + path.substring(i);
+            return "/" + path.substring(i);
         }
 
         return path;
@@ -1069,11 +1067,8 @@ public final class UrlUtils {
                 // ignore
             }
         }
-        if (!(f1 == f2 || (f1 != null && f1.equals(f2)))) {
-            return false;
-        }
 
-        return true;
+        return f1 == f2 || (f1 != null && f1.equals(f2));
     }
 
     /**
@@ -1085,17 +1080,16 @@ public final class UrlUtils {
      */
     public static String normalize(final URL url) {
         final StringBuilder result = new StringBuilder();
-
-        result.append(url.getProtocol());
-        result.append("://");
-        result.append(url.getHost());
-        result.append(':');
-        result.append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
+        result.append(url.getProtocol())
+                .append("://")
+                .append(url.getHost())
+                .append(':')
+                .append((url.getPort() != -1) ? url.getPort() : url.getDefaultPort());
 
         // Compare the files.
         String f = url.getFile();
         if (f.isEmpty()) {
-            result.append("/");
+            result.append('/');
         }
         else {
             if (f.indexOf('.') > 0) {
@@ -1143,7 +1137,7 @@ public final class UrlUtils {
                 buffer.append(port);
             }
         }
-        if (path == null || !path.startsWith("/")) {
+        if (path == null || path.isEmpty() || path.charAt(0) != '/') {
             buffer.append('/');
         }
         if (path != null) {

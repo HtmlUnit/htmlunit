@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,10 +129,10 @@ public class BinaryPageTest extends WebServerTestCase {
             + "Z\r\n"
             + "0\r\n\r\n";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebClient client = getWebClient();
 
-            final TextPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER + "/" + "chunked");
+            final TextPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort() + "/" + "chunked");
             assertEquals("ABCDEFGHIJKLMNOPQRSTUVWXYZ", page.getContent());
         }
     }

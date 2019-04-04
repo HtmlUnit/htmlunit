@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
-import org.w3c.dom.css.CSSStyleSheet;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.htmlunit.util.HeaderUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Daniel Gredler
  * @author Ahmed Ashour
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
 public class Cache implements Serializable {
 
@@ -123,7 +124,7 @@ public class Cache implements Serializable {
      */
     public boolean cacheIfPossible(final WebRequest request, final WebResponse response, final Object toCache) {
         if (isCacheable(request, response)) {
-            final URL url = response.getWebRequest().getUrl();
+            final URL url = request.getUrl();
             if (url == null) {
                 return false;
             }
@@ -148,7 +149,7 @@ public class Cache implements Serializable {
      * @param css the CSS snippet from which <tt>styleSheet</tt> is derived
      * @param styleSheet the parsed version of <tt>css</tt>
      */
-    public void cache(final String css, final CSSStyleSheet styleSheet) {
+    public void cache(final String css, final CSSStyleSheetImpl styleSheet) {
         final Entry entry = new Entry(css, null, styleSheet);
         entries_.put(entry.key_, entry);
         deleteOverflow();
@@ -298,9 +299,7 @@ public class Cache implements Serializable {
             }
             return cachedEntry;
         }
-        else {
-            entries_.remove(UrlUtils.normalize(url));
-        }
+        entries_.remove(UrlUtils.normalize(url));
         return null;
     }
 
@@ -348,7 +347,7 @@ public class Cache implements Serializable {
      * @param css the CSS snippet whose cached stylesheet is sought
      * @return the cached stylesheet corresponding to the specified CSS snippet
      */
-    public CSSStyleSheet getCachedStyleSheet(final String css) {
+    public CSSStyleSheetImpl getCachedStyleSheet(final String css) {
         final Entry cachedEntry = entries_.get(css);
         if (cachedEntry == null) {
             return null;
@@ -356,7 +355,7 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             cachedEntry.touch();
         }
-        return (CSSStyleSheet) cachedEntry.value_;
+        return (CSSStyleSheetImpl) cachedEntry.value_;
     }
 
     /**

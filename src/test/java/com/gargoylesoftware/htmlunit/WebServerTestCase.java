@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.io.IOException;
 import java.net.BindException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -44,6 +45,7 @@ import org.junit.After;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.
@@ -53,8 +55,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 public abstract class WebServerTestCase extends WebTestCase {
+
+    /** Timeout used when waiting for successful bind. */
+    public static final int BIND_TIMEOUT = 1000;
 
     private Server server_;
     private static Boolean LAST_TEST_MockWebConnection_;
@@ -74,7 +80,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = buildServer(PORT);
+        final Server server = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -83,21 +89,16 @@ public abstract class WebServerTestCase extends WebTestCase {
         final ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setResourceBase(resourceBase);
         final MimeTypes mimeTypes = new MimeTypes();
-        mimeTypes.addMimeMapping("js", "application/javascript");
+        mimeTypes.addMimeMapping("js", MimeType.APPLICATION_JAVASCRIPT);
         resourceHandler.setMimeTypes(mimeTypes);
 
         final HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
-        server_.setHandler(handlers);
-        server_.setHandler(resourceHandler);
+        server.setHandler(handlers);
+        server.setHandler(resourceHandler);
 
-        try {
-            server_.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.start();
-        }
+        tryStart(PORT, server);
+        server_ = server;
     }
 
     /**
@@ -185,13 +186,7 @@ public abstract class WebServerTestCase extends WebTestCase {
             server.setHandler(context);
         }
 
-        try {
-            server.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server.start();
-        }
+        tryStart(port, server);
         return server;
     }
 
@@ -210,7 +205,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         if (server_ != null) {
             throw new IllegalStateException("startWebServer() can not be called twice");
         }
-        server_ = buildServer(PORT);
+        final Server server = buildServer(PORT);
 
         final WebAppContext context = new WebAppContext();
         context.setContextPath("/");
@@ -228,15 +223,10 @@ public abstract class WebServerTestCase extends WebTestCase {
             }
         }
         context.setClassLoader(loader);
-        server_.setHandler(context);
+        server.setHandler(context);
 
-        try {
-            server_.start();
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.start();
-        }
+        tryStart(PORT, server);
+        server_ = server;
     }
 
     /**
@@ -252,7 +242,7 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
 
         stopWebServer();
-        LAST_TEST_MockWebConnection_ = null;
+        WebServerTestCase.LAST_TEST_MockWebConnection_ = null;
     }
 
     /**
@@ -314,7 +304,7 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final HtmlPage loadPage(final String html, final URL url) throws Exception {
-        return loadPage(html, url, "text/html", ISO_8859_1);
+        return loadPage(html, url, MimeType.TEXT_HTML, ISO_8859_1);
     }
 
     /**
@@ -370,17 +360,54 @@ public abstract class WebServerTestCase extends WebTestCase {
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
 
-            try {
-                server.start();
-            }
-            catch (final BindException be) {
-                Thread.sleep(1000);
-                server.start();
-            }
-
+            tryStart(PORT, server);
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.setMockconnection(mockConnection);
+    }
+
+    /**
+     * Starts the server; handles BindExceptions and retries.
+     * @param port the port only used for the error message
+     * @param server the server to start
+     * @throws Exception in case of error
+     */
+    public static void tryStart(final int port, final Server server) throws Exception {
+        final long maxWait = System.currentTimeMillis() + BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server.start();
+                return;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    // destroy the server to free all associated resources
+                    server.stop();
+                    server.destroy();
+
+                    throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
+                }
+                Thread.sleep(200);
+            }
+            catch (final IOException e) {
+                // looks like newer jetty already catches the bind exception
+                final Throwable cause = e.getCause();
+                if (cause != null && cause instanceof BindException) {
+                    if (System.currentTimeMillis() > maxWait) {
+                        // destroy the server to free all associated resources
+                        server.stop();
+                        server.destroy();
+
+                        throw (BindException) new BindException("Port " + port + " is already in use").initCause(e);
+                    }
+                    Thread.sleep(200);
+                }
+                else {
+                    throw e;
+                }
+            }
+        }
     }
 
     /**

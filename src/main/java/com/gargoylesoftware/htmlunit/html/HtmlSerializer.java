@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,39 +67,43 @@ public class HtmlSerializer {
      * @param text the text to clean up
      * @return the new text
      */
-    protected String cleanUp(String text) {
+    protected String cleanUp(final String text) {
         // ignore <br/> at the end of a block
-        text = reduceWhitespace(text);
-        text = StringUtils.replace(text, AS_TEXT_BLANK, " ");
-        final String ls = System.lineSeparator();
-        text = StringUtils.replace(text, AS_TEXT_NEW_LINE, ls);
-        text = StringUtils.replace(text, AS_TEXT_BLOCK_SEPARATOR, ls);
-        text = StringUtils.replace(text, AS_TEXT_TAB, "\t");
+        String resultText = reduceWhitespace(text);
 
-        return text;
+        final String ls = System.lineSeparator();
+        resultText = StringUtils.replaceEach(resultText,
+                new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
+                new String[] {" ", ls, ls, "\t"});
+
+        return resultText;
     }
 
-    private static String reduceWhitespace(String text) {
-        text = trim(text);
+    private static String reduceWhitespace(final String text) {
+        String resultText = trim(text);
 
         // remove white spaces before or after block separators
-        text = reduceWhiteSpaceAroundBlockSeparator(text);
+        resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
 
         // remove leading block separators
-        while (text.startsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        int start = 0;
+        while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
+            start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
         }
 
         // remove trailing block separators
-        while (text.endsWith(AS_TEXT_BLOCK_SEPARATOR)) {
-            text = text.substring(0, text.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+        int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+        while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
+            end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
         }
-        text = trim(text);
+        resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
 
-        final StringBuilder builder = new StringBuilder(text.length());
+        resultText = trim(resultText);
+
+        final StringBuilder builder = new StringBuilder(resultText.length());
 
         boolean whitespace = false;
-        for (final char ch : text.toCharArray()) {
+        for (final char ch : resultText.toCharArray()) {
 
             // Translate non-breaking space to regular space.
             if (ch == (char) 160) {
@@ -131,29 +135,28 @@ public class HtmlSerializer {
         return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
     }
 
-    private static String trim(String string) {
-        int length = string.length();
+    private static String trim(final String string) {
+        final int length = string.length();
+        if (length == 0) {
+            return string;
+        }
 
         int start = 0;
         while (start != length && isSpace(string.charAt(start))) {
             start++;
         }
-        if (start != 0) {
-            string = string.substring(start);
-            length = string.length();
+        if (start == length) {
+            return "";
         }
 
-        if (length != 0) {
-            int end = length;
-            while (end != 0 && isSpace(string.charAt(end - 1))) {
-                end--;
-            }
-            if (end != length) {
-                string = string.substring(0, end);
-            }
+        int end = length;
+        while (end > start && isSpace(string.charAt(end - 1))) {
+            end--;
         }
-
-        return string;
+        if (end == length && start == 0) {
+            return string;
+        }
+        return string.substring(start, end);
     }
 
     private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {

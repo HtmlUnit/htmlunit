@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,9 +36,9 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLSocket;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+import javax.net.ssl.X509ExtendedTrustManager;
 
 import org.apache.http.HttpHost;
 import org.apache.http.conn.ConnectTimeoutException;
@@ -107,7 +107,7 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                 protocol = "SSL";
             }
             final SSLContext sslContext = SSLContext.getInstance(protocol);
-            sslContext.init(getKeyManagers(options), new TrustManager[]{new InsecureTrustManager()}, null);
+            sslContext.init(getKeyManagers(options), new X509ExtendedTrustManager[] {new InsecureTrustManager()}, null);
 
             return new HtmlUnitSSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE,
                                             useInsecureSSL, sslClientProtocols, sslClientCipherSuites);
@@ -240,8 +240,9 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
  *
  * @author Daniel Gredler
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
-class InsecureTrustManager implements X509TrustManager {
+class InsecureTrustManager extends X509ExtendedTrustManager {
     private final Set<X509Certificate> acceptedIssuers_ = new HashSet<>();
 
     /**
@@ -262,6 +263,34 @@ class InsecureTrustManager implements X509TrustManager {
         acceptedIssuers_.addAll(Arrays.asList(chain));
     }
 
+    @Override
+    public void checkClientTrusted(final X509Certificate[] chain,
+                    final String authType, final Socket socket) throws CertificateException {
+        // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
+    }
+
+    @Override
+    public void checkClientTrusted(final X509Certificate[] chain,
+                    final String authType, final SSLEngine sslEngine) throws CertificateException {
+        // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
+    }
+
+    @Override
+    public void checkServerTrusted(final X509Certificate[] chain,
+                    final String authType, final Socket socket) throws CertificateException {
+        // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
+    }
+
+    @Override
+    public void checkServerTrusted(final X509Certificate[] chain,
+                    final String authType, final SSLEngine sslEngine) throws CertificateException {
+        // Everyone is trusted!
+        acceptedIssuers_.addAll(Arrays.asList(chain));
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -274,6 +303,6 @@ class InsecureTrustManager implements X509TrustManager {
         if (acceptedIssuers_.isEmpty()) {
             return new X509Certificate[0];
         }
-        return acceptedIssuers_.toArray(new X509Certificate[acceptedIssuers_.size()]);
+        return acceptedIssuers_.toArray(new X509Certificate[0]);
     }
 }

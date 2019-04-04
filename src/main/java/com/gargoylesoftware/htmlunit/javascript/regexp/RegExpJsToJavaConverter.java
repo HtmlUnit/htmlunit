@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,12 @@ import java.util.List;
 public class RegExpJsToJavaConverter {
 
     private static final String DIGITS = "0123456789";
+
+    private Tape tape_;
+    private boolean insideCharClass_;
+    private boolean insideRepetition_;
+    private Deque<Subexpresion> parsingSubexpressions_;
+    private List<Subexpresion> subexpressions_;
 
     /**
      * Helper to encapsulate the transformations.
@@ -142,12 +148,6 @@ public class RegExpJsToJavaConverter {
             end_ = -1;
         }
     }
-
-    private Tape tape_;
-    private boolean insideCharClass_;
-    private boolean insideRepetition_;
-    private Deque<Subexpresion> parsingSubexpressions_;
-    private List<Subexpresion> subexpressions_;
 
     /**
      * Initiate the FSM.

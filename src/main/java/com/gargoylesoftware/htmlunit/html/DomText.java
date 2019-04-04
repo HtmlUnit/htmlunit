@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -168,16 +168,11 @@ public class DomText extends DomCharacterData implements Text {
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
-     * @param startAtEnd whether typing should start at the text end or not
      * @param htmlElement the element in which typing occurs
      * @param lastType is this the last character to type
      */
-    protected void doType(final char c, final boolean startAtEnd, final HtmlElement htmlElement,
-            final boolean lastType) {
+    protected void doType(final char c, final HtmlElement htmlElement, final boolean lastType) {
         initDoTypeProcessor();
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getData().length());
-        }
         doTypeProcessor_.doType(getData(), selectionDelegate_, c, htmlElement, lastType);
     }
 
@@ -185,16 +180,11 @@ public class DomText extends DomCharacterData implements Text {
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      *
      * @param keyCode the key code wish to simulate typing
-     * @param startAtEnd whether typing should start at the text end or not
      * @param htmlElement the element in which typing occurs
      * @param lastType is this the last character to type
      */
-    protected void doType(final int keyCode, final boolean startAtEnd, final HtmlElement htmlElement,
-            final boolean lastType) {
+    protected void doType(final int keyCode, final HtmlElement htmlElement, final boolean lastType) {
         initDoTypeProcessor();
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getData().length());
-        }
         doTypeProcessor_.doType(getData(), selectionDelegate_, keyCode, htmlElement, lastType);
     }
 
@@ -226,5 +216,21 @@ public class DomText extends DomCharacterData implements Text {
         doTypeProcessor_ = new DoTypeProcessor(this);
 
         return newnode;
+    }
+
+    /**
+     * Moves the selection to the end.
+     */
+    public void moveSelectionToEnd() {
+        initDoTypeProcessor();
+        selectionDelegate_.setSelectionStart(getData().length());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -26,8 +27,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 /**
  * A JavaScript object for {@code CSSValue}.
  *
- * @see org.w3c.dom.css.CSSValue
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(FF)
 public class CSSValue extends SimpleScriptable {
@@ -65,7 +66,7 @@ public class CSSValue extends SimpleScriptable {
     /**
      * The wrapped CSS value.
      */
-    private org.w3c.dom.css.CSSValue wrappedCssValue_;
+    private CSSValueImpl wrappedCssValue_;
 
     /**
      * Creates an instance.
@@ -78,7 +79,7 @@ public class CSSValue extends SimpleScriptable {
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
-    CSSValue(final Element element, final org.w3c.dom.css.CSSValue cssValue) {
+    CSSValue(final Element element, final CSSValueImpl cssValue) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         setDomNode(element.getDomNodeOrNull(), false);

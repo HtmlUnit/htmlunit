@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,7 +90,7 @@ public class GeolocationTest extends WebServerTestCase {
     }
 
     /**
-     * Helper class for {@link #getCurrentPosition()}.
+     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
      */
     public static class GetCurrentPositionTestServlet extends ServletContentWrapper {
         /**
@@ -128,7 +128,7 @@ public class GeolocationTest extends WebServerTestCase {
     }
 
     /**
-     * Helper class for {@link #getCurrentPosition()}.
+     * Helper class for {@link GeolocationTest#getCurrentPosition(boolean)}.
      */
     public static class BrowserLocationServlet extends HttpServlet {
 

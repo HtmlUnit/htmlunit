@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -591,7 +592,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Alerts(IE = "click href click doubleClick ",
             CHROME = "click href click href doubleClick ",
             FF = "click href click doubleClick href ")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(FF)
     @NotYetImplemented({FF, IE})
     public void doubleClick() throws Exception {
         final String html =
@@ -630,7 +631,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "  <a href='" + href + "' id='myLink'>Click me</a>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse(html, "text/html", UTF_8);
+        getMockWebConnection().setDefaultResponse(html, MimeType.TEXT_HTML, UTF_8);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html, URL_FIRST);

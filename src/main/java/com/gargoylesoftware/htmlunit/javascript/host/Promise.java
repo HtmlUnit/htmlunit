@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine.KEY_STARTING_SCOPE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.ArrayDeque;
@@ -50,7 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, EDGE})
+@JsxClass({CHROME, FF})
 public class Promise extends SimpleScriptable {
 
     private enum PromiseState { PENDING, FULFILLED, REJECTED }
@@ -86,7 +85,8 @@ public class Promise extends SimpleScriptable {
     @JsxConstructor
     public Promise(final Object object) {
         if (!(object instanceof Function)) {
-            throw ScriptRuntime.typeError("Promise resolver is not a function");
+            throw ScriptRuntime.typeError("Promise resolver '"
+                        + ScriptRuntime.toString(object) + "' is not a function");
         }
 
         final Function fun = (Function) object;
@@ -178,7 +178,15 @@ public class Promise extends SimpleScriptable {
             final Object arg = args[0];
             if (arg instanceof NativeObject) {
                 final NativeObject nativeObject = (NativeObject) arg;
-                promise = new Promise(nativeObject.get("then", nativeObject));
+                final Object thenFunction = nativeObject.get("then", nativeObject);
+                if (thenFunction != NOT_FOUND) {
+                    promise = new Promise(thenFunction);
+                }
+                else {
+                    promise = new Promise();
+                    promise.value_ = arg;
+                    promise.state_ = state;
+                }
             }
             else {
                 promise = new Promise();
@@ -323,9 +331,8 @@ public class Promise extends SimpleScriptable {
                 }
             }
         }
-        else {
-            // TODO
-        }
+        // TODO handle the other cases
+
         returnPromise.race_ = race;
 
         returnPromise.settleAll(window);

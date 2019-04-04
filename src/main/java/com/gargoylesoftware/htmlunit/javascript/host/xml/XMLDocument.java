@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.io.IOException;
@@ -78,7 +77,7 @@ public class XMLDocument extends Document {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public XMLDocument() {
         this(null);
     }

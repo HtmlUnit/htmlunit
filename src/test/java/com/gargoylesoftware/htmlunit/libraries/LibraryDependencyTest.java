@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -74,7 +75,7 @@ public class LibraryDependencyTest extends WebDriverTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
         webConnection.setResponse(URL_SECOND, secondHtml);
-        webConnection.setResponse(URL_THIRD, prototype, "application/javascript");
+        webConnection.setResponse(URL_THIRD, prototype, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(firstHtml, 10_000);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
 
             final String line = getFirstLine(cx);
             final String source = getSourceName(cx);
-            sb.append(source).append(":").append(line).append(" ");
+            sb.append(source).append(':').append(line).append(' ');
 
             Scriptable parent = activation.getParentScope();
             while (parent != null) {
@@ -87,7 +87,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                 parent = parent.getParentScope();
             }
             final String functionName = getFunctionName(thisObj);
-            sb.append(functionName).append("(");
+            sb.append(functionName).append('(');
             final int nbParams = functionOrScript_.getParamCount();
             for (int i = 0; i < nbParams; i++) {
                 final String argAsString;
@@ -102,7 +102,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                     sb.append(", ");
                 }
             }
-            sb.append(")");
+            sb.append(')');
 
             LOG.trace(sb);
         }
@@ -144,16 +144,22 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         if (LOG.isTraceEnabled()) {
             if (t instanceof JavaScriptException) {
                 final JavaScriptException e = (JavaScriptException) t;
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                    + " Exception thrown: " + Context.toString(e.details()));
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                        + " Exception thrown: " + Context.toString(e.details()));
+                }
             }
             else if (t instanceof EcmaError) {
                 final EcmaError e = (EcmaError) t;
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
-                    + " Exception thrown: " + Context.toString(e.details()));
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx)
+                        + " Exception thrown: " + Context.toString(e.details()));
+                }
             }
             else {
-                LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
+                if (LOG.isTraceEnabled()) {
+                    LOG.trace(getSourceName(cx) + ":" + getFirstLine(cx) + " Exception thrown: " + t.getCause());
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -25,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 /**
  * A JavaScript object for {@code CSSPrimitiveValue}.
  *
- * @see org.w3c.dom.css.CSSPrimitiveValue
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @JsxClass(FF)
 public class CSSPrimitiveValue extends CSSValue {
@@ -213,7 +214,7 @@ public class CSSPrimitiveValue extends CSSValue {
     @JsxConstant
     public static final short CSS_RGBCOLOR = org.w3c.dom.css.CSSPrimitiveValue.CSS_RGBCOLOR;
 
-    private org.w3c.dom.css.CSSPrimitiveValue wrappedCssPrimitiveValue_;
+    private CSSValueImpl wrappedCssValueImpl_;
 
     /**
      * Creates an instance.
@@ -226,12 +227,12 @@ public class CSSPrimitiveValue extends CSSValue {
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
      */
-    CSSPrimitiveValue(final Element element, final org.w3c.dom.css.CSSPrimitiveValue cssValue) {
+    CSSPrimitiveValue(final Element element, final CSSValueImpl cssValue) {
         super(element, cssValue);
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
         setDomNode(element.getDomNodeOrNull(), false);
-        wrappedCssPrimitiveValue_ = cssValue;
+        wrappedCssValueImpl_ = cssValue;
     }
 
     /**
@@ -241,6 +242,6 @@ public class CSSPrimitiveValue extends CSSValue {
      */
     @JsxFunction
     public double getFloatValue(final int unitType) {
-        return wrappedCssPrimitiveValue_.getFloatValue((short) unitType);
+        return wrappedCssValueImpl_.getDoubleValue();
     }
 }

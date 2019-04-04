@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -48,7 +47,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  * @author Atsushi Nakagawa
  */
-@JsxClass({CHROME, FF, EDGE})
+@JsxClass({CHROME, FF})
 @JsxClass(isJSObject = false, value = IE)
 public class EventTarget extends SimpleScriptable {
 
@@ -136,12 +135,10 @@ public class EventTarget extends SimpleScriptable {
             }
 
             // The load event has some unnatural behavior that we need to handle specially
-            if (Event.TYPE_LOAD.equals(event.getType())) {
-                // The load event for other elements target that element and but path only
-                // up to Document and not Window, so do nothing here
-                // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
-            }
-            else {
+            // The load event for other elements target that element and but path only
+            // up to Document and not Window, so do nothing here
+            // (see Note in https://www.w3.org/TR/DOM-Level-3-Events/#event-type-load)
+            if (!Event.TYPE_LOAD.equals(event.getType())) {
                 // Add Window if the the propagation path reached Document
                 if (propagationPath.get(propagationPath.size() - 1) instanceof Document) {
                     propagationPath.add(window);

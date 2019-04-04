@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -69,7 +70,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, content1);
-        conn.setResponse(URL_SECOND, content2, 200, "OK", "text/html", headers);
+        conn.setResponse(URL_SECOND, content2, 200, "OK", MimeType.TEXT_HTML, headers);
         client.setWebConnection(conn);
         assertTrue(attachments.isEmpty());
 
@@ -85,7 +86,7 @@ public class AttachmentTest extends SimpleWebTestCase {
         final WebResponse attachmentResponse = attachedPage.getWebResponse();
         final InputStream attachmentStream = attachmentResponse.getContentAsStream();
         HttpWebConnectionTest.assertEquals(new ByteArrayInputStream(content2.getBytes()), attachmentStream);
-        assertEquals("text/html", attachmentResponse.getContentType());
+        assertEquals(MimeType.TEXT_HTML, attachmentResponse.getContentType());
         assertEquals(200, attachmentResponse.getStatusCode());
         assertEquals(URL_SECOND, attachmentResponse.getWebRequest().getUrl());
     }
@@ -106,7 +107,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Content-Disposition", "attachment;filename=\"hello.html\""));
-        conn.setResponse(URL_FIRST, content, 200, "OK", "text/html", headers1);
+        conn.setResponse(URL_FIRST, content, 200, "OK", MimeType.TEXT_HTML, headers1);
         client.getPage(URL_FIRST);
         final Attachment result = attachments.get(0);
         assertEquals(result.getSuggestedFilename(), "hello.html");

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -122,7 +123,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     }
 
     /**
-     * We couldn't document.write() script elements that contained the '<' character...
+     * We couldn't document.write() script elements that contained the '&lt;' character...
      * @exception Exception if the test fails
      */
     @Test
@@ -192,8 +193,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
 
     /**
      * Regression test for bug 2884585.
-     * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 <script src="..."... written
-     * by document.write was not loaded and executed after the </script>
+     * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 &lt;script src="..."... written
+     * by document.write was not loaded and executed after the &lt;/script>
      * when the page was loaded as result of a click.
      * @throws Exception if the test fails
      */
@@ -214,7 +215,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse("window.foo = 'Hello'", MimeType.APPLICATION_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.linkText("a link")).click();
         driver.findElement(By.id("clickMe")).click();
@@ -386,7 +387,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</form></body></html>";
 
         final String script = "document.write(\"<div id='div1'>hello</div>\");\n";
-        getMockWebConnection().setDefaultResponse(script, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(script, MimeType.APPLICATION_JAVASCRIPT);
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, "First");
@@ -429,7 +430,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String js = "document.write('from external script');\n"
                     + "document.title = 'done';";
 
-        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
         final WebDriver driver = loadPage2(html);
 
         assertTitle(driver, "done");

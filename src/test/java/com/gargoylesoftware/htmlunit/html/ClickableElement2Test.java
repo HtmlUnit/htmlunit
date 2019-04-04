@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
@@ -64,7 +63,7 @@ public class ClickableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("click click dblclick ")
-    @BuggyWebDriver({CHROME, FF52})
+    @BuggyWebDriver(FF52)
     public void dblClick() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

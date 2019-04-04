@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff60up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -658,14 +658,14 @@ public final class StyleAttributes {
         COLOR_ADJUST_("color-adjust", "color-adjust", ff("economy")),
 
         /** The style property {@code colorInterpolation}. */
-        COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("sRGB")),
+        COLOR_INTERPOLATION("colorInterpolation", "color-interpolation", ff("srgb"), chrome("srgb")),
 
         /** The style property {@code color-interpolation}. */
         COLOR_INTERPOLATION_("color-interpolation", "color-interpolation", ff("srgb")),
 
         /** The style property {@code colorInterpolationFilters}. */
         COLOR_INTERPOLATION_FILTERS("colorInterpolationFilters",
-                "color-interpolation-filters", ff("linearrgb"), ie(""), chrome("linearRGB")),
+                "color-interpolation-filters", ff("linearrgb"), ie(""), chrome("linearrgb")),
 
         /** The style property {@code color-interpolation-filters}. */
         COLOR_INTERPOLATION_FILTERS_("color-interpolation-filters", "color-interpolation-filters", ff("linearrgb")),
@@ -2448,7 +2448,7 @@ public final class StyleAttributes {
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff("auto")),
 
         /** The style property {@code paintOrder}. */
-        PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chrome("fill stroke markers")),
+        PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chrome("normal")),
 
         /** The style property {@code paint-order}. */
         PAINT_ORDER_("paint-order", "paint-order", ff("normal")),

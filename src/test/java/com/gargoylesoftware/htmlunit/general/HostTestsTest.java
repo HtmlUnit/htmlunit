@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class HostTestsTest {
         final File[] files = dir.listFiles();
         if (files != null) {
             for (final File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
+                if (file.isDirectory() && !".git".equals(file.getName())) {
                     collectionObjectNames(file, set);
                 }
                 else if (file.getName().endsWith(".java")) {

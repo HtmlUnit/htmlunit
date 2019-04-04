@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.general.huge;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.After;
@@ -46,7 +47,7 @@ public abstract class HostParentOf extends WebDriverTestCase {
      */
     protected static Collection<Object[]> data(final Predicate<String> predicate)  throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = TestCaseTest.getAllClassNames();
+        final Set<String> strings = TestCaseTest.getAllClassNames();
         for (final String parent : strings) {
             if (predicate.test(parent)) {
                 for (final String child : strings) {

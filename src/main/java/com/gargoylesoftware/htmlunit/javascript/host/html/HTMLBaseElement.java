@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBASE_HREF_DEFAULT_EMPTY;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBase;
@@ -38,7 +37,7 @@ public class HTMLBaseElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLBaseElement() {
     }
 

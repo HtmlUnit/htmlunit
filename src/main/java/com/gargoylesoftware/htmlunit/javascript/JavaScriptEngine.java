@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -293,16 +293,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
 
             switch (hostClassSimpleName) {
-                case "WebKitAnimationEvent":
-                    prototype = prototypesPerJSName.get("AnimationEvent");
-                    break;
-
                 case "WebKitMutationObserver":
                     prototype = prototypesPerJSName.get("MutationObserver");
-                    break;
-
-                case "WebKitTransitionEvent":
-                    prototype = prototypesPerJSName.get("TransitionEvent");
                     break;
 
                 case "webkitURL":
@@ -333,9 +325,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
                     }
 
-                    if ("WebKitAnimationEvent".equals(hostClassSimpleName)
-                            || "WebKitMutationObserver".equals(hostClassSimpleName)
-                            || "WebKitTransitionEvent".equals(hostClassSimpleName)
+                    if ("WebKitMutationObserver".equals(hostClassSimpleName)
                             || "webkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
@@ -463,6 +453,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
             ((IdFunctionObject) ScriptableObject.getProperty(window, "Object")).delete("assign");
+
+            // TODO
+            deleteProperties(window, "WeakSet");
         }
         deleteProperties(window, "isXMLName");
 
@@ -615,11 +608,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     private static void configureProperties(final ClassConfiguration config, final ScriptableObject scriptable) {
         final Map<String, PropertyInfo> propertyMap = config.getPropertyMap();
-        for (final String propertyName : propertyMap.keySet()) {
-            final PropertyInfo info = propertyMap.get(propertyName);
+        for (final Entry<String, PropertyInfo> propertyEntry : propertyMap.entrySet()) {
+            final PropertyInfo info = propertyEntry.getValue();
             final Method readMethod = info.getReadMethod();
             final Method writeMethod = info.getWriteMethod();
-            scriptable.defineProperty(propertyName, null, readMethod, writeMethod, ScriptableObject.EMPTY);
+            scriptable.defineProperty(propertyEntry.getKey(), null, readMethod, writeMethod, ScriptableObject.EMPTY);
         }
     }
 
@@ -991,8 +984,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
-        // Log the error; ScriptException instances provide good debug info.
-        LOG.info("Caught script exception", scriptException);
     }
 
     /**

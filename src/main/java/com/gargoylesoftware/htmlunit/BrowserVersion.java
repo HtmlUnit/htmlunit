@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.apache.commons.io.FilenameUtils;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
 import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Objects of this class represent one specific version of a given browser. Predefined
@@ -110,9 +111,6 @@ public final class BrowserVersion implements Serializable {
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(67, "Chrome");
 
-    /** Microsoft Edge. Work In Progress!!! */
-    public static final BrowserVersion EDGE = new BrowserVersion(14, "Edge");
-
     /**
      * The best supported browser version at the moment.
      */
@@ -126,7 +124,7 @@ public final class BrowserVersion implements Serializable {
         // FF60
         FIREFOX_60.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_60.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:60.0) Gecko/20100101 Firefox/60.0";
-        FIREFOX_60.buildId_ = "20180621121604";
+        FIREFOX_60.buildId_ = "20190124141046";
         FIREFOX_60.productSub_ = "20100101";
         FIREFOX_60.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
@@ -200,18 +198,9 @@ public final class BrowserVersion implements Serializable {
             115, 116, 117, 118, 120, 121, 122, 123, 124, 125, 126, 128, 129, 130, 131, 132, 133, 135, 136, 137, 138,
             139, 140, 141, 143, 144, 145, 146, 147};
 
-        // EDGE
-        EDGE.applicationVersion_ = "5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-        EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
-
-        EDGE.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
-        EDGE.cssAcceptHeader_ = "text/css, */*";
-        EDGE.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
-        EDGE.scriptAcceptHeader_ = "application/javascript, */*;q=0.8";
-
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -242,13 +231,14 @@ public final class BrowserVersion implements Serializable {
             138, 139, 140, 142, 142, 143, 144, 145, 147};
 
         // default file upload mime types
-        CHROME.registerUploadMimeType("html", "text/html");
-        CHROME.registerUploadMimeType("htm", "text/html");
-        CHROME.registerUploadMimeType("css", "text/css");
-        CHROME.registerUploadMimeType("xml", "text/xml");
+        CHROME.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        CHROME.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        CHROME.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        CHROME.registerUploadMimeType("xml", MimeType.TEXT_XML);
         CHROME.registerUploadMimeType("gif", "image/gif");
         CHROME.registerUploadMimeType("jpeg", "image/jpeg");
         CHROME.registerUploadMimeType("jpg", "image/jpeg");
+        CHROME.registerUploadMimeType("png", "image/png");
         CHROME.registerUploadMimeType("webp", "image/webp");
         CHROME.registerUploadMimeType("mp4", "video/mp4");
         CHROME.registerUploadMimeType("m4v", "video/mp4");
@@ -268,13 +258,14 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("txt", "text/plain");
         CHROME.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_60.registerUploadMimeType("html", "text/html");
-        FIREFOX_60.registerUploadMimeType("htm", "text/html");
-        FIREFOX_60.registerUploadMimeType("css", "text/css");
-        FIREFOX_60.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_60.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_60.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_60.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_60.registerUploadMimeType("xml", MimeType.TEXT_XML);
         FIREFOX_60.registerUploadMimeType("gif", "image/gif");
         FIREFOX_60.registerUploadMimeType("jpeg", "image/jpeg");
         FIREFOX_60.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_60.registerUploadMimeType("png", "image/png");
         FIREFOX_60.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_60.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_60.registerUploadMimeType("m4a", "audio/mp4");
@@ -291,16 +282,17 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("txt", "text/plain");
         FIREFOX_60.registerUploadMimeType("text", "text/plain");
 
-        FIREFOX_52.registerUploadMimeType("html", "text/html");
-        FIREFOX_52.registerUploadMimeType("htm", "text/html");
-        FIREFOX_52.registerUploadMimeType("css", "text/css");
-        FIREFOX_52.registerUploadMimeType("xml", "text/xml");
+        FIREFOX_52.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_52.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_52.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_52.registerUploadMimeType("xml", MimeType.TEXT_XML);
         FIREFOX_52.registerUploadMimeType("gif", "image/gif");
         FIREFOX_52.registerUploadMimeType("jpeg", "image/jpeg");
         FIREFOX_52.registerUploadMimeType("jpg", "image/jpeg");
         FIREFOX_52.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_52.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_52.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_52.registerUploadMimeType("png", "image/png");
         FIREFOX_52.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX_52.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX_52.registerUploadMimeType("ogm", "video/x-ogm");
@@ -314,13 +306,14 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.registerUploadMimeType("txt", "text/plain");
         FIREFOX_52.registerUploadMimeType("text", "text/plain");
 
-        INTERNET_EXPLORER.registerUploadMimeType("html", "text/html");
-        INTERNET_EXPLORER.registerUploadMimeType("htm", "text/html");
-        INTERNET_EXPLORER.registerUploadMimeType("css", "text/css");
-        INTERNET_EXPLORER.registerUploadMimeType("xml", "text/xml");
+        INTERNET_EXPLORER.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        INTERNET_EXPLORER.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        INTERNET_EXPLORER.registerUploadMimeType("xml", MimeType.TEXT_XML);
         INTERNET_EXPLORER.registerUploadMimeType("gif", "image/gif");
         INTERNET_EXPLORER.registerUploadMimeType("jpeg", "image/jpeg");
         INTERNET_EXPLORER.registerUploadMimeType("jpg", "image/jpeg");
+        INTERNET_EXPLORER.registerUploadMimeType("png", "image/png");
         INTERNET_EXPLORER.registerUploadMimeType("mp4", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4v", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4a", "audio/mp4");
@@ -332,42 +325,18 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
 
-        EDGE.registerUploadMimeType("html", "text/html");
-        EDGE.registerUploadMimeType("htm", "text/html");
-        EDGE.registerUploadMimeType("css", "text/css");
-        EDGE.registerUploadMimeType("xml", "text/xml");
-        EDGE.registerUploadMimeType("gif", "image/gif");
-        EDGE.registerUploadMimeType("jpeg", "image/jpeg");
-        EDGE.registerUploadMimeType("jpg", "image/jpeg");
-        EDGE.registerUploadMimeType("mp4", "video/mp4");
-        EDGE.registerUploadMimeType("m4v", "video/mp4");
-        EDGE.registerUploadMimeType("m4a", "audio/mp4");
-        EDGE.registerUploadMimeType("mp3", "audio/mpeg");
-        EDGE.registerUploadMimeType("ogm", "video/x-ogm");
-        EDGE.registerUploadMimeType("ogg", "application/ogg");
-        EDGE.registerUploadMimeType("wav", "audio/wav");
-        EDGE.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("xht", "application/xhtml+xml");
-        EDGE.registerUploadMimeType("txt", "text/plain");
-
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         FIREFOX_52.plugins_.add(flash);
 
         flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx");
+                "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
         INTERNET_EXPLORER.plugins_.add(flash);
-
-        flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx");
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        EDGE.plugins_.add(flash);
     }
 
     private final int browserVersionNumeric_;
@@ -434,11 +403,8 @@ public final class BrowserVersion implements Serializable {
         else if (isFirefox()) {
             expectedBrowser = SupportedBrowser.FF60;
         }
-        else if (isIE()) {
-            expectedBrowser = SupportedBrowser.IE;
-        }
         else {
-            expectedBrowser = SupportedBrowser.EDGE;
+            expectedBrowser = SupportedBrowser.IE;
         }
 
         for (final BrowserVersionFeatures features : BrowserVersionFeatures.values()) {
@@ -495,15 +461,6 @@ public final class BrowserVersion implements Serializable {
      */
     public boolean isChrome() {
         return getNickname().startsWith("Chrome");
-    }
-
-    /**
-     * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
-     * version of Microsoft Edge.
-     * @return whether or not this version is a version of an Edge browser
-     */
-    public boolean isEdge() {
-        return getNickname().startsWith("Edge");
     }
 
     /**

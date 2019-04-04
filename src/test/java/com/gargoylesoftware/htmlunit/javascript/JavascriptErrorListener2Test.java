@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,6 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.javascript;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,27 +42,10 @@ public class JavascriptErrorListener2Test extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         webClient.getOptions().setThrowExceptionOnScriptError(false);
-        webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
-
-            @Override
-            public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
-                // nothing
-            }
-
-            @Override
-            public void malformedScriptURL(final HtmlPage page, final String url,
-                    final MalformedURLException malformedURLException) {
-                // nothing
-            }
-
+        webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener() {
             @Override
             public void scriptException(final HtmlPage page, final ScriptException scriptException) {
                 scriptExceptions.append(scriptException.getCause() + "\n");
-            }
-
-            @Override
-            public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
-                // nothing
             }
         });
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -1080,6 +1081,26 @@ public class HTMLElementTest extends WebDriverTestCase {
     }
 
     /**
+     * Test setting innerHTML should reset style cache.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void setInnerHTMLResetsStyle() throws Exception {
+        final String html = "<html><head></head>\n"
+                + "<body>\n"
+                + "<div id='testDiv'></div>\n"
+                + "<script language='javascript'>\n"
+                + "    var node = document.getElementById('testDiv');\n"
+                + "    var height = node.offsetHeight;\n"
+                + "    node.innerHTML = 'HtmlUnit';\n"
+                + "    alert(height < node.offsetHeight);\n"
+                + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * Test getting <code>outerHTML</code> of a <code>div</code> (block).
      * @throws Exception if the test fails
      */
@@ -1774,10 +1795,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
-            FF = {"Old = Old\n\ninnerText", "New = New cell value"},
+    @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
             IE = {"Old = Old \ninnerText", "New = New cell value"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({CHROME, FF})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3393,7 +3413,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         mergeAttributesTest("i2, false");
     }
 
-    private void mergeAttributesTest(final String params, final String... expectedAlerts) throws Exception {
+    private void mergeAttributesTest(final String params) throws Exception {
         final String html
             = "<input type='text' id='i' />\n"
             + "<input type='text' id='i2' name='i2' style='color:red' onclick='alert(1)' custom1='a' />\n"
@@ -4681,5 +4701,4 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebElement element = driver.findElement(By.id("child"));
         assertFalse(element.isDisplayed());
     }
-
 }

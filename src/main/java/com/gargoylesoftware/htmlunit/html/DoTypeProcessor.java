@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,8 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 
 /**
- * The process for {@link HtmlElement#doType(char, boolean, boolean)}.
+ * The processor for {@link HtmlElement#doType(char, boolean)}
+ * and {@link HtmlElement#doType(int, boolean)}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

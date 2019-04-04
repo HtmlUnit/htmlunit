@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,6 +52,8 @@ import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
 public class HtmlUnitRegExpProxy extends RegExpImpl {
 
     private static final Log LOG = LogFactory.getLog(HtmlUnitRegExpProxy.class);
+    /** Pattern cache */
+    private static final Map<String, Pattern> PATTENS = new HashMap<>();
 
     private final RegExpProxy wrapped_;
     private final BrowserVersion browserVersion_;
@@ -376,8 +378,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return wrapped_.compileRegExp(cx, source, flags);
         }
         catch (final Exception e) {
-            LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
-                + "Replacing with a '####shouldNotFindAnything###'");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("compileRegExp() threw for >" + source + "<, flags: >" + flags + "<. "
+                    + "Replacing with a '####shouldNotFindAnything###'");
+            }
             return wrapped_.compileRegExp(cx, "####shouldNotFindAnything###", "");
         }
     }
@@ -407,9 +411,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
     public Scriptable wrapRegExp(final Context cx, final Scriptable scope, final Object compiled) {
         return wrapped_.wrapRegExp(cx, scope, compiled);
     }
-
-    /** Pattern cache */
-    private static final Map<String, Pattern> PATTENS = new HashMap<>();
 
     private static class RegExpData {
         private final boolean global_;

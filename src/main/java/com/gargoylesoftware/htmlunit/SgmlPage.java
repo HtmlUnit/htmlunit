@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Comparator;
@@ -86,14 +85,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     @Override
     public WebResponse getWebResponse() {
         return webResponse_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initialize() throws IOException {
-        // nothing to do here
     }
 
     /**
@@ -277,6 +268,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      */
     @Override
     public URL getUrl() {
+        final WebResponse wr = getWebResponse();
+        if (null == wr) {
+            return WebClient.URL_ABOUT_BLANK;
+        }
         return getWebResponse().getWebRequest().getUrl();
     }
 

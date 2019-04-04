@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,7 +112,6 @@ public class InsecureHttpsServer {
             };
             localServer_.register("*", handler);
         }
-
         localServer_.start();
     }
 
@@ -121,7 +120,10 @@ public class InsecureHttpsServer {
      * @throws Exception in case of exception
      */
     public void stop() throws Exception {
-        localServer_.shutDown();
+        if (localServer_ != null) {
+            localServer_.shutDown();
+        }
+        localServer_ = null;
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -62,7 +63,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse("inexistent", 404, "Not Found", "text/html");
+        webConnection.setDefaultResponse("inexistent", 404, "Not Found", MimeType.TEXT_HTML);
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
@@ -170,7 +171,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, js, JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(URL_SECOND, js, MimeType.APPLICATION_JAVASCRIPT);
         client.setWebConnection(conn);
 
         final List<String> actual = new ArrayList<>();
@@ -243,7 +244,8 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         final ArrayList<NameValuePair> headers = new ArrayList<>();
-        conn.setResponse(URL_SECOND, (String) null, HttpStatus.SC_NO_CONTENT, "No Content", JAVASCRIPT_MIME_TYPE,
+        conn.setResponse(URL_SECOND, (String) null, HttpStatus.SC_NO_CONTENT, "No Content",
+                MimeType.APPLICATION_JAVASCRIPT,
                 headers);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
@@ -311,9 +313,10 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         client.getOptions().setThrowExceptionOnFailingStatusCode(throwOnFailingStatusCode);
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(URL_SECOND, "var foo;", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(URL_THIRD, "varrrr foo;", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(fourOhFour, "", 404, "Missing", JAVASCRIPT_MIME_TYPE, new ArrayList<NameValuePair>());
+        conn.setResponse(URL_SECOND, "var foo;", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(URL_THIRD, "varrrr foo;", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(fourOhFour, "", 404, "Missing", MimeType.APPLICATION_JAVASCRIPT,
+                new ArrayList<NameValuePair>());
         client.setWebConnection(conn);
         final List<String> actual = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(actual));

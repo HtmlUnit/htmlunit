@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -212,7 +213,7 @@ public abstract class HtmlElement extends DomElement {
             notifyAttributeChangeListeners(event, this, oldAttributeValue, notifyMutationObservers);
         }
 
-        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attributeValue, oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, oldAttributeValue);
     }
 
     /**
@@ -250,8 +251,7 @@ public abstract class HtmlElement extends DomElement {
     }
 
     private void fireAttributeChangeImpl(final HtmlAttributeChangeEvent event,
-            final HtmlPage htmlPage, final boolean mappedElement,
-            final String qualifiedName, final String attributeValue, final String oldAttributeValue) {
+            final HtmlPage htmlPage, final boolean mappedElement, final String oldAttributeValue) {
         if (mappedElement) {
             htmlPage.addMappedElement(this);
         }
@@ -298,7 +298,7 @@ public abstract class HtmlElement extends DomElement {
 
         final Attr result = super.setAttributeNode(attribute);
 
-        fireAttributeChangeImpl(event, htmlPage, mappedElement, qualifiedName, attribute.getValue(), oldAttributeValue);
+        fireAttributeChangeImpl(event, htmlPage, mappedElement, oldAttributeValue);
 
         return result;
     }
@@ -495,7 +495,7 @@ public abstract class HtmlElement extends DomElement {
      * @exception IOException if an IO error occurs
      */
     public Page type(final char c) throws IOException {
-        return type(c, false, true);
+        return type(c, true);
     }
 
     /**
@@ -510,7 +510,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
-    private Page type(final char c, final boolean startAtEnd, final boolean lastType)
+    private Page type(final char c, final boolean lastType)
         throws IOException {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
             return getPage();
@@ -548,7 +548,7 @@ public abstract class HtmlElement extends DomElement {
 
             if ((shiftDown == null || !shiftDown.isAborted(shiftDownResult))
                     && !keyPress.isAborted(keyPressResult)) {
-                doType(c, startAtEnd, lastType);
+                doType(c, lastType);
             }
         }
 
@@ -611,7 +611,7 @@ public abstract class HtmlElement extends DomElement {
      * @return the page that occupies this window after typing
      */
     public Page type(final int keyCode) {
-        return type(keyCode, false, true, true, true, true);
+        return type(keyCode, true, true, true, true);
     }
 
     /**
@@ -628,11 +628,24 @@ public abstract class HtmlElement extends DomElement {
         Page page = null;
 
         final List<Object[]> keys = keyboard.getKeys();
+
+        if (keyboard.isStartAtEnd()) {
+            if (this instanceof SelectableTextInput) {
+                final SelectableTextInput textInput = (SelectableTextInput) this;
+                textInput.setSelectionStart(textInput.getText().length());
+            }
+            else {
+                final DomText domText = getDoTypeNode();
+                if (domText != null) {
+                    domText.moveSelectionToEnd();
+                }
+            }
+        }
+
         for (int i = 0; i < keys.size(); i++) {
             final Object[] entry = keys.get(i);
-            final boolean startAtEnd = i == 0 && keyboard.isStartAtEnd();
             if (entry.length == 1) {
-                type((char) entry[0], startAtEnd, i == keys.size() - 1);
+                type((char) entry[0], i == keys.size() - 1);
             }
             else {
                 final int key = (int) entry[0];
@@ -665,10 +678,10 @@ public abstract class HtmlElement extends DomElement {
 
                         default:
                     }
-                    page = type(key, startAtEnd, true, keyPress, keyUp, i == keys.size() - 1);
+                    page = type(key, true, keyPress, keyUp, i == keys.size() - 1);
                 }
                 else {
-                    page = type(key, startAtEnd, false, false, true, i == keys.size() - 1);
+                    page = type(key, false, false, true, i == keys.size() - 1);
                 }
             }
         }
@@ -676,7 +689,7 @@ public abstract class HtmlElement extends DomElement {
         return page;
     }
 
-    private Page type(final int keyCode, final boolean startAtEnd,
+    private Page type(final int keyCode,
                     final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp,
                     final boolean lastType) {
         if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
@@ -716,7 +729,7 @@ public abstract class HtmlElement extends DomElement {
 
         if (keyDown != null && !keyDown.isAborted(keyDownResult)
                 && (keyPress == null || !keyPress.isAborted(keyPressResult))) {
-            doType(keyCode, startAtEnd, lastType);
+            doType(keyCode, lastType);
         }
 
         if (this instanceof HtmlTextInput
@@ -754,21 +767,12 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
-     * @param startAtEnd whether typing should start at the text end or not
      * @param lastType is this the last character to type
      */
-    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
-        final DomNode domNode = getDoTypeNode();
-        if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(c, startAtEnd, this, lastType);
-        }
-        else if (domNode instanceof HtmlElement) {
-            try {
-                ((HtmlElement) domNode).type(c, startAtEnd, lastType);
-            }
-            catch (final IOException e) {
-                throw new RuntimeException(e);
-            }
+    protected void doType(final char c, final boolean lastType) {
+        final DomText domText = getDoTypeNode();
+        if (domText != null) {
+            domText.doType(c, this, lastType);
         }
     }
 
@@ -778,16 +782,12 @@ public abstract class HtmlElement extends DomElement {
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing
-     * @param startAtEnd whether typing should start at the text end or not
      * @param lastType is this the last to type
      */
-    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
-        final DomNode domNode = getDoTypeNode();
-        if (domNode instanceof DomText) {
-            ((DomText) domNode).doType(keyCode, startAtEnd, this, lastType);
-        }
-        else if (domNode instanceof HtmlElement) {
-            ((HtmlElement) domNode).type(keyCode, startAtEnd, true, true, true, lastType);
+    protected void doType(final int keyCode, final boolean lastType) {
+        final DomText domText = getDoTypeNode();
+        if (domText != null) {
+            domText.doType(keyCode, this, lastType);
         }
     }
 
@@ -795,29 +795,25 @@ public abstract class HtmlElement extends DomElement {
      * Returns the node to type into.
      * @return the node
      */
-    private DomNode getDoTypeNode() {
-        DomNode node = null;
+    private DomText getDoTypeNode() {
         final HTMLElement scriptElement = getScriptableObject();
         if (scriptElement.isIsContentEditable()
                 || "on".equals(((Document) scriptElement.getOwnerDocument()).getDesignMode())) {
-            final DomNodeList<DomNode> children = getChildNodes();
-            if (!children.isEmpty()) {
+
+            DomNodeList<DomNode> children = getChildNodes();
+            while (!children.isEmpty()) {
                 final DomNode lastChild = children.get(children.size() - 1);
                 if (lastChild instanceof DomText) {
-                    node = lastChild;
+                    return (DomText) lastChild;
                 }
-                else if (lastChild instanceof HtmlElement) {
-                    node = lastChild;
-                }
+                children = lastChild.getChildNodes();
             }
 
-            if (node == null) {
-                final DomText domText = new DomText(getPage(), "");
-                appendChild(domText);
-                node = domText;
-            }
+            final DomText domText = new DomText(getPage(), "");
+            appendChild(domText);
+            return domText;
         }
-        return node;
+        return null;
     }
 
     /**
@@ -1224,7 +1220,7 @@ public abstract class HtmlElement extends DomElement {
         // at the moment StringUtils.replaceChars returns the org string
         // if nothing to replace was found but the doc implies, that we
         // can't trust on this in the future
-        final String attrib = getAttributeDirect("src");
+        final String attrib = getAttributeDirect(SRC_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == attrib) {
             return attrib;
         }

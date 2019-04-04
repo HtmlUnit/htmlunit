@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -218,8 +218,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Shockwave Flash not available",
             FF52 = {"Shockwave Flash", "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll"},
-            IE = {"Shockwave Flash", "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"},
-            EDGE = {"Shockwave Flash", "Shockwave Flash 18.0 r0", "18.0.0.232", "Flash.ocx"})
+            IE = {"Shockwave Flash", "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"})
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -256,8 +255,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "exception",
-            EDGE = "exception")
+            CHROME = "exception")
     public void taintEnabled() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -385,7 +383,7 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF60 = "20180621121604",
+            FF60 = "20190124141046",
             FF52 = "20180621064021")
     public void buildID() throws Exception {
         final String html
@@ -407,8 +405,7 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"Google Inc.", ""},
             FF = {"", ""},
-            IE = {"", "undefined"},
-            EDGE = {"", ""})
+            IE = {"", "undefined"})
     public void vendor() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

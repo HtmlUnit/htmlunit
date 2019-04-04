@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.script.ScriptContext;
-import javax.script.SimpleScriptContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,13 +52,11 @@ public abstract class WebWindowImpl implements WebWindow {
     private WebClient webClient_;
     private Page enclosedPage_;
     private transient Object scriptObject_;
-    private transient ScriptContext scriptContext_ = new SimpleScriptContext();
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
     private final History history_ = new History(this);
     private boolean closed_;
-    private Map<Object, Object> threadLocalMap_;
 
     private int innerHeight_;
     private int outerHeight_;
@@ -80,27 +73,22 @@ public abstract class WebWindowImpl implements WebWindow {
         webClient_ = webClient;
         jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
 
-        boolean plus16 = false;
         innerHeight_ = 605;
+        innerWidth_ = 1256;
         if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63)) {
             outerHeight_ = innerHeight_ + 63;
-            plus16 = true;
+            outerWidth_ = innerWidth_ + 16;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94)) {
             outerHeight_ = innerHeight_ + 94;
+            outerWidth_ = innerWidth_ + 14;
         }
-        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132)) {
-            outerHeight_ = innerHeight_ + 132;
-            plus16 = true;
+        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133)) {
+            outerHeight_ = innerHeight_ + 133;
+            outerWidth_ = innerWidth_ + 10;
         }
         else {
             outerHeight_ = innerHeight_ + 115;
-        }
-        innerWidth_ = 1256;
-        if (plus16) {
-            outerWidth_ = innerWidth_ + 16;
-        }
-        else {
             outerWidth_ = innerWidth_ + 14;
         }
     }
@@ -344,30 +332,6 @@ public abstract class WebWindowImpl implements WebWindow {
     @Override
     public void setOuterHeight(final int outerHeight) {
         outerHeight_ = outerHeight;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ScriptContext getScriptContext() {
-        return scriptContext_;
-    }
-
-    @Override
-    public final Object getThreadLocal(final Object key) {
-        if (threadLocalMap_ == null) {
-            return null;
-        }
-        return threadLocalMap_.get(key);
-    }
-
-    @Override
-    public final synchronized void putThreadLocal(final Object key, final Object value) {
-        if (threadLocalMap_ == null) {
-            threadLocalMap_ = new HashMap<>();
-        }
-        threadLocalMap_.put(key, value);
     }
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {

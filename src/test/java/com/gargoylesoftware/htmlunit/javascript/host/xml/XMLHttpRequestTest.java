@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -105,7 +106,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         setExpectedAlerts(UNINITIALIZED, LOADING, COMPLETED, xml);
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -171,7 +172,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  <body></body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -227,7 +228,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
         final WebDriver driver = loadPage2(html);
 
         final String expected = String.join("\n", getExpectedAlerts());
@@ -288,7 +289,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<res></res>", "text/xml");
+        getMockWebConnection().setDefaultResponse("<res></res>", MimeType.TEXT_XML);
         final WebDriver driver = loadPage2(html);
 
         final String expected = String.join("\n", getExpectedAlerts());
@@ -336,7 +337,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String xml = "<a>b</a>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         final WebDriver driver = loadPage2(html);
 
         final String expected = String.join("\n", getExpectedAlerts());
@@ -400,7 +401,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</xml>";
 
         setExpectedAlerts(COMPLETED, xml);
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -451,7 +452,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<html></html>", "text/html");
+        getMockWebConnection().setDefaultResponse("<html></html>", MimeType.TEXT_HTML);
         loadPageWithAlerts2(html);
     }
 
@@ -477,7 +478,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setDefaultResponse("<note/>", "text/xml");
+        getMockWebConnection().setDefaultResponse("<note/>", MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -589,7 +590,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-            "text/xml");
+            MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -925,7 +926,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<update>hijklmn</update>\n"
             + "</updates>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -945,7 +946,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<body onload='test()'></body></html>";
 
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
-        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", "text/xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
         loadPage2(html);
 
         final WebRequest request = getMockWebConnection().getLastWebRequest();
@@ -1007,7 +1008,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1056,7 +1057,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1104,7 +1105,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</body>"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1137,7 +1138,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String response = "ol\u00E9";
         final byte[] responseBytes = response.getBytes(UTF_8);
 
-        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", "text/html",
+        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_HTML,
             new ArrayList<NameValuePair>());
         loadPageWithAlerts2(html);
     }
@@ -1150,7 +1151,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
             resp.setStatus(200);
-            resp.addHeader(HttpHeader.CONTENT_TYPE, "text/html");
+            resp.addHeader(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML);
             try {
                 for (int i = 0; i < 10; i++) {
                     resp.getOutputStream().print(String.valueOf(i));
@@ -1241,7 +1242,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1282,7 +1283,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</html>\n"
             + "</xml>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1434,7 +1435,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String xml = "<abc></abc>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1470,7 +1471,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String xml = "<abc></abc>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1508,7 +1509,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String xml = "<abc></abc>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1544,7 +1545,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         final String xml = "<abc></abc>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1612,7 +1613,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<content2>sdgxsdgx2</content2>\n"
             + "</xml2>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         setExpectedAlerts(ArrayUtils.add(getExpectedAlerts(), xml));
         loadPageWithAlerts2(html);
     }
@@ -1626,8 +1627,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",
-                        "function () { [native code] }",
-                        "function () { [native code] }",
+                        "function get onreadystatechange() { [native code] }",
+                        "function set onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
                     "\nfunction onreadystatechange() {\n    [native code]\n}\n",
@@ -1674,7 +1675,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                         "true", "true"},
             CHROME = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",
-                        "function () { [native code] }",
+                        "function set onreadystatechange() { [native code] }",
                         "true", "true"},
             IE = {"[object Object]", "undefined", "undefined",
                     "function() { return !0 }",

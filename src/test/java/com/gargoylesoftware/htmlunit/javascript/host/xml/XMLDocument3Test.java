@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -65,7 +66,7 @@ public class XMLDocument3Test extends WebDriverTestCase {
             + "<something>\u064A\u0627 \u0644\u064A\u064A\u064A\u064A\u064A\u064A\u0644</something>";
 
         final List<NameValuePair> emptyList = Collections.emptyList();
-        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", "text/xml", emptyList);
+        getMockWebConnection().setResponse(URL_SECOND, xml.getBytes("UTF-8"), 200, "OK", MimeType.TEXT_XML, emptyList);
 
         loadPageWithAlerts2(html);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
-    private final Map<AuthScopeProxy, CredentialsFactory> credentialsMap_ = new HashMap<>();
+    private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
     /**
      * Adds credentials for the specified username/password for any host/port/realm combination.
@@ -98,21 +98,13 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
-        final CredentialsFactory factory;
-        if (credentials instanceof UsernamePasswordCredentials) {
-            final UsernamePasswordCredentials userCredentials = (UsernamePasswordCredentials) credentials;
-            factory = new UsernamePasswordCredentialsFactory(userCredentials.getUserName(),
-                        userCredentials.getPassword());
+
+        if ((credentials instanceof UsernamePasswordCredentials) || (credentials instanceof NTCredentials)) {
+            credentialsMap_.put(new AuthScopeProxy(authscope), credentials);
+            return;
         }
-        else if (credentials instanceof NTCredentials) {
-            final NTCredentials ntCredentials = (NTCredentials) credentials;
-            factory = new NTCredentialsFactory(ntCredentials.getUserName(), ntCredentials.getPassword(),
-                    ntCredentials.getWorkstation(), ntCredentials.getDomain());
-        }
-        else {
-            throw new IllegalArgumentException("Unsupported Credential type: " + credentials.getClass().getName());
-        }
-        credentialsMap_.put(new AuthScopeProxy(authscope), factory);
+
+        throw new IllegalArgumentException("Unsupported Credential type: " + credentials.getClass().getName());
     }
 
     /**
@@ -122,27 +114,22 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param authscope the {@link AuthScope authentication scope}
      * @return the credentials
      */
-    private static Credentials matchCredentials(final Map<AuthScopeProxy, CredentialsFactory> map,
-            final AuthScope authscope) {
-        final CredentialsFactory factory = map.get(new AuthScopeProxy(authscope));
-        Credentials creds = null;
-        if (factory == null) {
+    private static Credentials matchCredentials(final Map<AuthScopeProxy, Credentials> map, final AuthScope authscope) {
+        Credentials creds = map.get(new AuthScopeProxy(authscope));
+        if (creds == null) {
             int bestMatchFactor = -1;
-            AuthScope bestMatch = null;
+            AuthScopeProxy bestMatch = null;
             for (final AuthScopeProxy proxy : map.keySet()) {
                 final AuthScope current = proxy.getAuthScope();
                 final int factor = authscope.match(current);
                 if (factor > bestMatchFactor) {
                     bestMatchFactor = factor;
-                    bestMatch = current;
+                    bestMatch = proxy;
                 }
             }
             if (bestMatch != null) {
-                creds = map.get(new AuthScopeProxy(bestMatch)).getInstance();
+                creds = map.get(bestMatch);
             }
-        }
-        else {
-            creds = factory.getInstance();
         }
         return creds;
     }
@@ -202,18 +189,22 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     private static class AuthScopeProxy implements Serializable {
         private AuthScope authScope_;
+
         AuthScopeProxy(final AuthScope authScope) {
             authScope_ = authScope;
         }
+
         public AuthScope getAuthScope() {
             return authScope_;
         }
+
         private void writeObject(final ObjectOutputStream stream) throws IOException {
             stream.writeObject(authScope_.getHost());
             stream.writeInt(authScope_.getPort());
             stream.writeObject(authScope_.getRealm());
             stream.writeObject(authScope_.getScheme());
         }
+
         private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
             final String host = (String) stream.readObject();
             final int port = stream.readInt();
@@ -221,72 +212,15 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             final String scheme = (String) stream.readObject();
             authScope_ = new AuthScope(host, port, realm, scheme);
         }
+
         @Override
         public int hashCode() {
             return authScope_.hashCode();
         }
+
         @Override
         public boolean equals(final Object obj) {
             return obj instanceof AuthScopeProxy && authScope_.equals(((AuthScopeProxy) obj).getAuthScope());
         }
     }
-
-    /**
-     * We have to create a factory class, so that credentials can be serialized correctly.
-     */
-    private static class UsernamePasswordCredentialsFactory implements CredentialsFactory, Serializable {
-        private String username_;
-        private String password_;
-
-        UsernamePasswordCredentialsFactory(final String username, final String password) {
-            username_ = username;
-            password_ = password;
-        }
-
-        @Override
-        public Credentials getInstance() {
-            return new UsernamePasswordCredentials(username_, password_);
-        }
-
-        @Override
-        public String toString() {
-            return getInstance().toString();
-        }
-    }
-
-    /**
-     * We have to create a factory class, so that credentials can be serialized correctly.
-     */
-    private static class NTCredentialsFactory implements CredentialsFactory, Serializable {
-        private String username_;
-        private String password_;
-        private String workstation_;
-        private String domain_;
-
-        NTCredentialsFactory(final String username, final String password, final String workstation,
-                final String domain) {
-            username_ = username;
-            password_ = password;
-            workstation_ = workstation;
-            domain_ = domain;
-        }
-
-        @Override
-        public Credentials getInstance() {
-            return new NTCredentials(username_, password_, workstation_, domain_);
-        }
-
-        @Override
-        public String toString() {
-            return getInstance().toString();
-        }
-    }
-
-    /**
-     * Factory class interface
-     */
-    private interface CredentialsFactory {
-        Credentials getInstance();
-    }
-
 }

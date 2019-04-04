@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,14 +47,7 @@ public final class ArrayCustom {
         if (arrayLike instanceof Scriptable) {
             final Scriptable scriptable = (Scriptable) arrayLike;
             final Object length = scriptable.get("length", scriptable);
-            if (length != Scriptable.NOT_FOUND) {
-                final int size = (int) Context.toNumber(length);
-                array = new Object[size];
-                for (int i = 0; i < size; i++) {
-                    array[i] = scriptable.get(i, scriptable);
-                }
-            }
-            else {
+            if (length == Scriptable.NOT_FOUND) {
                 final List<Object> list = new ArrayList<>();
                 if (Iterator.iterate(context, thisObj, scriptable,
                     value -> {
@@ -63,6 +56,13 @@ public final class ArrayCustom {
                         }
                     })) {
                     array = list.toArray();
+                }
+            }
+            else {
+                final int size = (int) Context.toNumber(length);
+                array = new Object[size];
+                for (int i = 0; i < size; i++) {
+                    array[i] = scriptable.get(i, scriptable);
                 }
             }
         }

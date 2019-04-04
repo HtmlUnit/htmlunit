@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECTOR_TEXT_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -24,6 +23,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -45,7 +45,7 @@ public class CSSStyleRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60, EDGE})
+    @JsxConstructor({CHROME, FF60})
     public CSSStyleRule() {
     }
 
@@ -54,7 +54,7 @@ public class CSSStyleRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSStyleRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSStyleRule rule) {
+    protected CSSStyleRule(final CSSStyleSheet stylesheet, final CSSStyleRuleImpl rule) {
         super(stylesheet, rule);
     }
 
@@ -64,7 +64,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxGetter
     public String getSelectorText() {
-        String selectorText = ((org.w3c.dom.css.CSSStyleRule) getRule()).getSelectorText();
+        String selectorText = ((CSSStyleRuleImpl) getRule()).getSelectorText();
         final Matcher m = SELECTOR_PARTS_PATTERN.matcher(selectorText);
         final StringBuffer sb = new StringBuffer();
         while (m.find()) {
@@ -90,7 +90,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxSetter
     public void setSelectorText(final String selectorText) {
-        ((org.w3c.dom.css.CSSStyleRule) getRule()).setSelectorText(selectorText);
+        ((CSSStyleRuleImpl) getRule()).setSelectorText(selectorText);
     }
 
     /**
@@ -99,7 +99,7 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        return new CSSStyleDeclaration(getParentScope(), ((org.w3c.dom.css.CSSStyleRule) getRule()).getStyle());
+        return new CSSStyleDeclaration(getParentScope(), ((CSSStyleRuleImpl) getRule()).getStyle());
     }
 
     /**

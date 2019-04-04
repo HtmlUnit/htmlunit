@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
@@ -219,7 +220,7 @@ public class WebClient4Test extends WebServerTestCase {
             response.setStatus(HttpServletResponse.SC_USE_PROXY);
             //Won't matter!
             //response.setHeader("Location", "http://www.google.com");
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             writer.write("<html><body>Going anywhere?</body></html>");
         }
@@ -250,7 +251,7 @@ public class WebClient4Test extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
-            res.setContentType("text/html");
+            res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
             writer.write("<html><body><form action='test2'>\n"
                     + "<input id='submit' type='submit' value='submit'></input>\n"
@@ -301,7 +302,7 @@ public class WebClient4Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
             if (first_) {
                 first_ = false;
-                res.setContentType("text/html");
+                res.setContentType(MimeType.TEXT_HTML);
                 final Writer writer = res.getWriter();
                 writer.write("<html><body>foo</body></html>");
             }
@@ -351,7 +352,7 @@ public class WebClient4Test extends WebServerTestCase {
             catch (final InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            res.setContentType("text/html");
+            res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
             writer.write("<html><head><title>hello</title></head><body>foo</body></html>");
         }
@@ -386,7 +387,7 @@ public class WebClient4Test extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
-            res.setContentType("text/html");
+            res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
             writer.write("<html><head>\n"
                     + "  <meta http-equiv='refresh' content='0;URL=test2'>\n"
@@ -403,7 +404,7 @@ public class WebClient4Test extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
-            res.setContentType("text/html");
+            res.setContentType(MimeType.TEXT_HTML);
             final Writer writer = res.getWriter();
             writer.write("<html><head>\n"
                     + "  <meta http-equiv='refresh' content='0;URL=test1'>\n"

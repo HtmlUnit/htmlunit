@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -356,7 +356,7 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlFrame.TAG_NAME:
                 if (attributeMap != null) {
-                    final DomAttr srcAttribute = attributeMap.get("src");
+                    final DomAttr srcAttribute = attributeMap.get(DomElement.SRC_ATTRIBUTE);
                     if (srcAttribute != null) {
                         srcAttribute.setValue(srcAttribute.getValue().trim());
                     }
@@ -415,7 +415,7 @@ class DefaultElementFactory implements ElementFactory {
 
             case HtmlInlineFrame.TAG_NAME:
                 if (attributeMap != null) {
-                    final DomAttr srcAttribute = attributeMap.get("src");
+                    final DomAttr srcAttribute = attributeMap.get(DomElement.SRC_ATTRIBUTE);
                     if (srcAttribute != null) {
                         srcAttribute.setValue(srcAttribute.getValue().trim());
                     }

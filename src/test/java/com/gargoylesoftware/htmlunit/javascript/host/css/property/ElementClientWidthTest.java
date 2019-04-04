@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1808,10 +1808,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "171",
+    @Alerts(CHROME = "169",
             FF = "141",
             IE = "143")
-    @NotYetImplemented(CHROME)
     public void inputSelect() throws Exception {
         loadPageWithAlerts2(testInput("select"));
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -46,9 +47,11 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "2.42";
+    static String CHROME_DRIVER_ = "73.0.3683.68";
+    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_73";
+
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.23.0";
+    static String GECKO_DRIVER_ = "0.24.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.14.0.0";
 
@@ -96,7 +99,7 @@ public class ExternalTest {
     private static void processProperties(final List<String> lines, int i, final Map<String, String> map) {
         for ( ; i < lines.size(); i++) {
             final String line = lines.get(i).trim();
-            if (!line.startsWith("<!--")) {
+            if (StringUtils.isNotBlank(line) && !line.startsWith("<!--")) {
                 if ("</properties>".equals(line)) {
                     break;
                 }
@@ -113,7 +116,7 @@ public class ExternalTest {
     @Test
     public void assertChromeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
-            final AbstractPage page = webClient.getPage("https://chromedriver.storage.googleapis.com/LATEST_RELEASE");
+            final AbstractPage page = webClient.getPage(CHROME_DRIVER_URL_);
             final String pageContent = page.getWebResponse().getContentAsString().trim();
             assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
         }
@@ -247,7 +250,8 @@ public class ExternalTest {
         return false;
     }
 
-    private static boolean isIgnored(final String groupId, final String artifactId, final String version) {
+    private static boolean isIgnored(@SuppressWarnings("unused") final String groupId,
+            @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
         return false;
     }
 

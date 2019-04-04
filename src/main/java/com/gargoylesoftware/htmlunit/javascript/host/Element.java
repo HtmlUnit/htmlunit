@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -304,7 +303,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public boolean hasAttributes() {
         return super.hasAttributes();
     }
@@ -427,7 +426,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -436,7 +435,7 @@ public class Element extends Node {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -913,10 +912,10 @@ public class Element extends Node {
         }
 
         domNode.removeAllChildren();
+        getWindow().clearComputedStylesUpToRoot(this);
 
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
-
             final String valueAsString = Context.toString(value);
             parseHtmlSnippet(domNode, valueAsString);
         }
@@ -1036,7 +1035,7 @@ public class Element extends Node {
             if (scriptObject instanceof HTMLElement) {
                 htmlElement = scriptObject;
             }
-            builder.append("<").append(tag);
+            builder.append('<').append(tag);
             // Add the attributes. IE does not use quotes, FF does.
             for (final DomAttr attr : element.getAttributesMap().values()) {
                 if (!attr.getSpecified()) {
@@ -1045,19 +1044,19 @@ public class Element extends Node {
 
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                builder.append(' ').append(name).append("=");
-                builder.append("\"");
+                builder.append(' ').append(name).append('=');
+                builder.append('\"');
                 builder.append(value);
-                builder.append("\"");
+                builder.append('\"');
             }
-            builder.append(">");
+            builder.append('>');
             // Add the children.
             final boolean isHtml = html
                     && !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
             printChildren(builder, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
-                builder.append("</").append(tag).append(">");
+                builder.append("</").append(tag).append('>');
             }
         }
         else {
@@ -1073,7 +1072,7 @@ public class Element extends Node {
                             i--;
                         }
                         builder.setLength(i + 1);
-                        builder.append("\n");
+                        builder.append('\n');
                     }
                 }
                 if (!"script".equals(element.getTagName())) {
@@ -1096,13 +1095,14 @@ public class Element extends Node {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public String getId() {
         return getDomNodeOrDie().getId();
     }
 
     /**
-     * {@inheritDoc}
+     * Sets the id value for this element.
+     * @param newId the newId value for this element
      */
     @JsxSetter({CHROME, FF})
     public void setId(final String newId) {
@@ -1241,7 +1241,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1250,7 +1250,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1259,7 +1259,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
@@ -1952,7 +1952,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public void remove() {
         super.remove();
     }
@@ -2025,7 +2025,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, FF, EDGE})
+    @JsxFunction({CHROME, FF})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String selectorString = (String) args[0];

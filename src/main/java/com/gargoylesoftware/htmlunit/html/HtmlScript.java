@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -197,7 +198,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         // special additional processing for the 'src'
-        if (namespaceURI != null || !"src".equals(qualifiedName)) {
+        if (namespaceURI != null || !SRC_ATTRIBUTE.equals(qualifiedName)) {
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
@@ -345,12 +346,13 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         final HtmlPage page = (HtmlPage) getPage();
 
         final String src = getSrcAttribute();
-        if (src.equals(SLASH_SLASH_COLON)) {
-            executeEvent(Event.TYPE_ERROR);
-            return;
-        }
 
         if (src != ATTRIBUTE_NOT_DEFINED) {
+            if (src.equals(SLASH_SLASH_COLON)) {
+                executeEvent(Event.TYPE_ERROR);
+                return;
+            }
+
             if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="[url]"></script>
                 if (LOG.isDebugEnabled()) {
@@ -462,11 +464,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         // If the script's root ancestor node is not the page, then the script is not a part of the page.
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
 
-        if (!getPage().isAncestorOf(this)) {
-            return false;
-        }
-
-        return true;
+        return getPage().isAncestorOf(this);
     }
 
     /**
@@ -492,7 +490,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                 return true;
             }
 
-            if ("application/javascript".equalsIgnoreCase(typeAttribute)
+            if (MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(typeAttribute)
                             || "application/ecmascript".equalsIgnoreCase(typeAttribute)
                             || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
                 return true;

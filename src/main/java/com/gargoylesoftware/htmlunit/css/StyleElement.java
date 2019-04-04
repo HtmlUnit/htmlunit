@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 
@@ -39,7 +40,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
     public static final String PRIORITY_IMPORTANT = "important";
 
     /** The current style element index. */
-    private static long ElementIndex_ = 0;
+    private static final AtomicLong ElementIndex_ = new AtomicLong();
 
     private final String name_;
     private final String value_;
@@ -73,7 +74,7 @@ public class StyleElement implements Comparable<StyleElement>, Serializable {
      */
     public StyleElement(final String name, final String value, final String priority,
             final SelectorSpecificity specificity) {
-        this(name, value, priority, specificity, ElementIndex_++);
+        this(name, value, priority, specificity, StyleElement.ElementIndex_.incrementAndGet());
     }
 
     /**

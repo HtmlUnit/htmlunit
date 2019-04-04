@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -145,10 +145,6 @@ public class BrowserParameterizedRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.INTERNET_EXPLORER, true, tests));
                 }
-                if (browsers.contains("edge")) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.EDGE, true, tests));
-                }
             }
 
             if (browsers.contains("hu-chrome")) {
@@ -166,10 +162,6 @@ public class BrowserParameterizedRunner extends Suite {
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER, false, tests));
-            }
-            if (browsers.contains("hu-edge")) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.EDGE, false, tests));
             }
         }
         else {

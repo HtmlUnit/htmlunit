@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,6 +48,14 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
     HtmlPasswordInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
     }
 
     /**
@@ -126,10 +134,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final char c, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
     }
 
@@ -137,10 +142,7 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput 
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final int keyCode, final boolean startAtEnd, final boolean lastType) {
-        if (startAtEnd) {
-            selectionDelegate_.setSelectionStart(getValueAttribute().length());
-        }
+    protected void doType(final int keyCode, final boolean lastType) {
         doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 

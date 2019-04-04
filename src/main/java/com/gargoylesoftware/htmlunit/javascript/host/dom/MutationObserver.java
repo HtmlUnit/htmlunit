@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,6 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
 
     private Function function_;
     private Node node_;
-    private boolean childList_;
     private boolean attaributes_;
     private boolean attributeOldValue_;
     private NativeArray attributeFilter_;
@@ -90,13 +89,14 @@ public class MutationObserver extends SimpleScriptable implements HtmlAttributeC
         node_ = node;
         attaributes_ = Boolean.TRUE.equals(options.get("attributes"));
         attributeOldValue_ = Boolean.TRUE.equals(options.get("attributeOldValue"));
-        childList_ = Boolean.TRUE.equals(options.get("childList"));
         characterData_ = Boolean.TRUE.equals(options.get("characterData"));
         characterDataOldValue_ = Boolean.TRUE.equals(options.get("characterDataOldValue"));
         subtree_ = Boolean.TRUE.equals(options.get("subtree"));
         attributeFilter_ = (NativeArray) options.get("attributeFilter");
 
-        if (!attaributes_ && !childList_ && !characterData_) {
+        final boolean childList = Boolean.TRUE.equals(options.get("childList"));
+
+        if (!attaributes_ && !childList && !characterData_) {
             throw Context.throwAsScriptRuntimeEx(new IllegalArgumentException(
                         "One of childList, attributes, od characterData must be set"));
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1121,16 +1121,6 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _Node_SVGAltGlyphElement() throws Exception {
-        test("Node", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _Node_SVGAnimateElement() throws Exception {
@@ -1229,16 +1219,6 @@ public class HostParentOfNTest extends HostParentOf {
             CHROME = "true")
     public void _Node_SVGDiscardElement() throws Exception {
         test("Node", "SVGDiscardElement");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _Node_SVGDocument() throws Exception {
-        test("Node", "SVGDocument");
     }
 
     /**
@@ -1991,6 +1971,18 @@ public class HostParentOfNTest extends HostParentOf {
             IE = "false")
     public void _OfflineAudioContext_OfflineAudioContext() throws Exception {
         test("OfflineAudioContext", "OfflineAudioContext");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            CHROME = "false",
+            IE = "false")
+    public void _OfflineResourceList_OfflineResourceList() throws Exception {
+        test("OfflineResourceList", "OfflineResourceList");
     }
 
     /**

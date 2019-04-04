@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,6 +75,9 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 public class DomElement extends DomNamespaceNode implements Element {
 
     private static final Log LOG = LogFactory.getLog(DomElement.class);
+
+    /** src. */
+    public static final String SRC_ATTRIBUTE = "src";
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");
@@ -567,7 +570,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final SortedSet<StyleElement> sortedValues = new TreeSet<>(styleMap.values());
         for (final StyleElement e : sortedValues) {
             if (builder.length() != 0) {
-                builder.append(" ");
+                builder.append(' ');
             }
             builder.append(e.getName());
             builder.append(": ");
@@ -578,7 +581,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 builder.append(" !");
                 builder.append(prio);
             }
-            builder.append(";");
+            builder.append(';');
         }
         final String value = builder.toString();
         setAttribute("style", value);
@@ -1407,7 +1410,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         final EventTarget jsElt = getScriptableObject();
         final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final ScriptResult result = (ScriptResult) cf.call(cx -> jsElt.fireEvent(event));
+        final ScriptResult result = cf.call(cx -> jsElt.fireEvent(event));
         if (event.isAborted(result)) {
             preventDefault();
         }
@@ -1500,6 +1503,14 @@ public class DomElement extends DomNamespaceNode implements Element {
         catch (final IOException e) {
             throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
     }
 }
 
@@ -1740,5 +1751,4 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public Collection<DomAttr> values() {
         return map_.values();
     }
-
 }

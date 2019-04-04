@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,6 +112,7 @@ public class XMLSerializer extends SimpleScriptable {
         if (root == null) {
             return "";
         }
+
         if (root instanceof Document) {
             root = ((Document) root).getDocumentElement();
         }
@@ -122,6 +123,7 @@ public class XMLSerializer extends SimpleScriptable {
             }
             root = root.getFirstChild();
         }
+
         if (root instanceof Element) {
             final StringBuilder builder = new StringBuilder();
             final DomNode node = root.getDomNodeOrDie();
@@ -136,6 +138,7 @@ public class XMLSerializer extends SimpleScriptable {
 
             return builder.toString();
         }
+
         if (root instanceof CDATASection
             && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_ROOT_CDATA_AS_ESCAPED_TEXT)) {
             final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
@@ -201,7 +204,7 @@ public class XMLSerializer extends SimpleScriptable {
                     break;
 
                 default:
-
+                    break;
             }
         }
         if (!startTagClosed) {
@@ -214,7 +217,7 @@ public class XMLSerializer extends SimpleScriptable {
                 builder.append(optionalPrefix);
                 if (builder.charAt(builder.length() - 1) != ' '
                     && getBrowserVersion().hasFeature(JS_XML_SERIALIZER_BLANK_BEFORE_SELF_CLOSING)) {
-                    builder.append(" ");
+                    builder.append(' ');
                 }
                 builder.append("/>");
             }

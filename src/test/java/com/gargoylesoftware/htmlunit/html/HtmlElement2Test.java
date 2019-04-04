@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -334,5 +336,53 @@ public class HtmlElement2Test extends WebDriverTestCase {
         final String xml = "<html xmlns=\"http://www.w3.org/1999/xhtml\"></html>";
         getMockWebConnection().setResponse(URL_SECOND, xml, "application/xml");
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello-world")
+    @BuggyWebDriver({CHROME, FF60})
+    public void typeAtEndOfEditableDiv() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myInput').value);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myButton' type='button' onclick='test()'>\n"
+            + "  <div id='myInput' contenteditable='true'>Hello</div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement div = driver.findElement(By.id("myInput"));
+        div.sendKeys("-world");
+
+        assertEquals(getExpectedAlerts()[0], div.getText());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("Hello-world")
+    @BuggyWebDriver({CHROME, FF60})
+    public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('myInput').value);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myButton' type='button' onclick='test()'>\n"
+            + "  <div id='myInput' contenteditable='true'><p>Hello</p></div>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement div = driver.findElement(By.id("myInput"));
+        div.sendKeys("-world");
+
+        assertEquals(getExpectedAlerts()[0], div.getText());
     }
 }

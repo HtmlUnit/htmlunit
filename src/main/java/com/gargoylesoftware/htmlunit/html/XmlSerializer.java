@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -61,7 +62,23 @@ class XmlSerializer {
         }
         fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         outputDir_ = new File(file.getParentFile(), fileName);
-        FileUtils.writeStringToFile(outputFile, asXml(page.getDocumentElement()), ISO_8859_1);
+
+        // don't use asXml here because we have to sync the encoding from the
+        // header with the one used by the writer
+        final DomElement node = page.getDocumentElement();
+        Charset charsetName = ISO_8859_1;
+        builder_.setLength(0);
+        indent_.setLength(0);
+        if (page.isHtmlPage()) {
+            charsetName = page.getCharset();
+            if (charsetName != null && node instanceof HtmlHtml) {
+                builder_.append("<?xml version=\"1.0\" encoding=\"").append(charsetName).append("\"?>").append('\n');
+            }
+        }
+        printXml(node);
+        final String response = builder_.toString();
+        builder_.setLength(0);
+        FileUtils.writeStringToFile(outputFile, response, charsetName);
     }
 
     /**
@@ -95,7 +112,7 @@ class XmlSerializer {
                 builder_.append("/>").append('\n');
             }
             else {
-                builder_.append(">").append('\n');
+                builder_.append('>').append('\n');
                 for (DomNode child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
                     indent_.append("  ");
                     if (child instanceof DomElement) {
@@ -153,7 +170,7 @@ class XmlSerializer {
         final Map<String, DomAttr> attributes = readAttributes(node);
 
         for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-            builder_.append(" ");
+            builder_.append(' ');
             builder_.append(entry.getKey());
             builder_.append("=\"");
             final String value = entry.getValue().getNodeValue();
@@ -190,8 +207,8 @@ class XmlSerializer {
     }
 
     private Map<String, DomAttr> getAttributesFor(final BaseFrameElement frame) throws IOException {
-        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, "src");
-        final DomAttr srcAttr = map.get("src");
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(frame, DomElement.SRC_ATTRIBUTE);
+        final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
         if (srcAttr == null) {
             return map;
         }
@@ -208,7 +225,7 @@ class XmlSerializer {
             }
             else {
                 try (InputStream is = enclosedPage.getWebResponse().getContentAsStream()) {
-                    try (FileOutputStream fos = new FileOutputStream(file)) {
+                    try (OutputStream fos = Files.newOutputStream(file.toPath())) {
                         IOUtils.copyLarge(is, fos);
                     }
                 }
@@ -250,8 +267,8 @@ class XmlSerializer {
     }
 
     protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
-        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, "src");
-        final DomAttr srcAttr = map.get("src");
+        final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, DomElement.SRC_ATTRIBUTE);
+        final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
         if (srcAttr != null && StringUtils.isNotBlank(srcAttr.getValue())) {
             final WebResponse response = image.getWebResponse(true);
 
@@ -330,7 +347,7 @@ class XmlSerializer {
             else {
                 fileName = name;
             }
-            outputDir_.mkdirs();
+            FileUtils.forceMkdir(outputDir_);
             final File f = new File(outputDir_, fileName);
             if (f.createNewFile()) {
                 return f;

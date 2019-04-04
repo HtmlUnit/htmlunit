@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -435,16 +435,15 @@ public class WebRequest implements Serializable {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder(100);
         builder.append(getClass().getSimpleName());
-        builder.append("[<");
-        builder.append("url=\"" + url_ + '"');
-        builder.append(", " + httpMethod_);
-        builder.append(", " + encodingType_);
-        builder.append(", " + requestParameters_);
-        builder.append(", " + additionalHeaders_);
-        builder.append(", " + credentials_);
-        builder.append(">]");
+        builder.append("[<url=\"").append(url_).append('"')
+                .append(", ").append(httpMethod_)
+                .append(", ").append(encodingType_)
+                .append(", ").append(requestParameters_)
+                .append(", ").append(additionalHeaders_)
+                .append(", ").append(credentials_)
+                .append(">]");
         return builder.toString();
     }
 

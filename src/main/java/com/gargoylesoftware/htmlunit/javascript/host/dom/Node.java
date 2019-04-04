@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NODE_INSERT_BEFORE_REF_OPTIONAL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -149,7 +148,7 @@ public class Node extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public Node() {
         // Empty.
     }
@@ -701,7 +700,7 @@ public class Node extends EventTarget {
      * Returns the Base URI as a string.
      * @return the Base URI as a string
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public String getBaseURI() {
         return getDomNodeOrDie().getBaseURI();
     }

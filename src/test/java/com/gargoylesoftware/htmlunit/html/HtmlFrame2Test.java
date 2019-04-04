@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,6 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.html;
-
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 
 import java.net.URL;
 
@@ -96,12 +94,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "second [object HTMLFormElement] third [object HTMLFormElement] "
-                        + "parent [object HTMLFormElement]",
-            CHROME = "second undefined third [object HTMLFormElement] "
+    @Alerts("second [object HTMLFormElement] third [object HTMLFormElement] "
                         + "parent [object HTMLFormElement]")
-    // real FF sometimes alerts 'third' before 'second'
-    @NotYetImplemented(CHROME)
+    // real FF/CHROME sometimes alerts 'third' before 'second'
     public void postponeLoading() throws Exception {
         final String html = "<FRAMESET rows='50%,*' "
                 + "onload=\"document.title += ' parent ' + window.parent.frames['third'].document.frm\">\n"

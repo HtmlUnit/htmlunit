@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,11 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
- * Wrapper for the HTML element "audio".
+ * Wrapper for the HTML element "Audio".
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlAudio extends HtmlMedia {
 
@@ -30,7 +31,7 @@ public class HtmlAudio extends HtmlMedia {
     public static final String TAG_NAME = "audio";
 
     /**
-     * Creates an instance of HtmlAudio
+     * Creates an instance of HtmlAudio.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the HtmlPage that contains this element

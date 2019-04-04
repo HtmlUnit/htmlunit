@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,7 +116,7 @@ public final class HeaderUtils {
         if (value != null) {
             final Matcher matcher = pattern.matcher(value);
             if (matcher.matches()) {
-                return Long.valueOf(matcher.group(1));
+                return Long.parseLong(matcher.group(1));
             }
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,5 +60,23 @@ public class BaseFrameElement2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void doNotLoopEndless() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <iframe src='&#8221'></iframe>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse(html);
+
+        loadPage2(html);
     }
 }

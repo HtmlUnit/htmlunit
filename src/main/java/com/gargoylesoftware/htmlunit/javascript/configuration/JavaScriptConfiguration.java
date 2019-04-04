@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.PushSubscriptionOptions;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.ScreenOrientation;
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
 import com.gargoylesoftware.htmlunit.javascript.host.SharedWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.SimpleArray;
 import com.gargoylesoftware.htmlunit.javascript.host.Storage;
@@ -75,13 +74,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.Touch;
 import com.gargoylesoftware.htmlunit.javascript.host.TouchList;
 import com.gargoylesoftware.htmlunit.javascript.host.URL;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
-import com.gargoylesoftware.htmlunit.javascript.host.WeakMap;
-import com.gargoylesoftware.htmlunit.javascript.host.WeakSet;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
 import com.gargoylesoftware.htmlunit.javascript.host.webkitURL;
-import com.gargoylesoftware.htmlunit.javascript.host.budget.BudgetService;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.Atomics;
+import com.gargoylesoftware.htmlunit.javascript.host.arrays.SharedArrayBuffer;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasCaptureMediaStreamTrack;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasGradient;
@@ -252,8 +250,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.TransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitAnimationEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.WebKitTransitionEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionError;
 import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionEvent;
@@ -339,7 +335,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.TimeRanges;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VTTCue;
 import com.gargoylesoftware.htmlunit.javascript.host.media.VideoPlaybackQuality;
 import com.gargoylesoftware.htmlunit.javascript.host.media.WaveShaperNode;
-import com.gargoylesoftware.htmlunit.javascript.host.media.webkitMediaStream;
+import com.gargoylesoftware.htmlunit.javascript.host.media.WebkitMediaStream;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIAccess;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInput;
 import com.gargoylesoftware.htmlunit.javascript.host.media.midi.MIDIInputMap;
@@ -379,9 +375,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisErrorEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisUtterance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesisVoice;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammar;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechGrammarList;
-import com.gargoylesoftware.htmlunit.javascript.host.speech.webkitSpeechRecognition;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechGrammar;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechGrammarList;
+import com.gargoylesoftware.htmlunit.javascript.host.speech.WebkitSpeechRecognition;
 import com.gargoylesoftware.htmlunit.javascript.host.svg.*;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorker;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.ServiceWorkerContainer;
@@ -412,17 +408,13 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class, ApplicationCacheErrorEvent.class,
-
-        // disabled because of Spectre:
-        // Atomics.class,
-
+        Atomics.class,
         Attr.class, Audio.class, AudioBuffer.class,
         AudioBufferSourceNode.class, AudioContext.class, AudioDestinationNode.class, AudioListener.class,
         AudioNode.class, AudioParam.class, AudioProcessingEvent.class, AudioScheduledSourceNode.class,
         BarProp.class, BaseAudioContext.class,
         BatteryManager.class, BeforeInstallPromptEvent.class, BeforeUnloadEvent.class, BiquadFilterNode.class,
         Blob.class, BlobEvent.class, BroadcastChannel.class,
-        BudgetService.class,
         Cache.class, CacheStorage.class,
         CanvasCaptureMediaStream.class, CanvasCaptureMediaStreamTrack.class,
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
@@ -492,7 +484,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, LocalMediaStream.class,
-        Location.class, com.gargoylesoftware.htmlunit.javascript.host.Map.class,
+        Location.class,
         MediaDeviceInfo.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
@@ -530,11 +522,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         RTCSessionDescription.class, RTCStatsReport.class, Screen.class, ScreenOrientation.class,
         ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
-        ServiceWorkerRegistration.class, Set.class, ShadowRoot.class,
-
-        // disabled because of Spectre:
-        // SharedArrayBuffer.class,
-
+        ServiceWorkerRegistration.class,
+        ShadowRoot.class, SharedArrayBuffer.class,
         SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
@@ -584,7 +573,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         UIEvent.class,
         URL.class,
         URLSearchParams.class, UserProximityEvent.class, ValidityState.class, VideoPlaybackQuality.class,
-        VTTCue.class, WaveShaperNode.class, WeakMap.class, WeakSet.class, WebGL2RenderingContext.class,
+        VTTCue.class, WaveShaperNode.class, WebGL2RenderingContext.class,
         WEBGL_compressed_texture_s3tc.class, WEBGL_debug_renderer_info.class, WebGLActiveInfo.class, WebGLBuffer.class,
         WebGLContextEvent.class, WebGLFramebuffer.class, WebGLProgram.class,
         WebGLQuery.class,
@@ -593,11 +582,10 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLSampler.class, WebGLShader.class, WebGLShaderPrecisionFormat.class, WebGLSync.class,
         WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
-        WebKitAnimationEvent.class,
-        WebKitCSSMatrix.class, webkitMediaStream.class, WebKitMutationObserver.class,
-        webkitRTCPeerConnection.class, webkitSpeechGrammar.class,
-        webkitSpeechGrammarList.class, webkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
-        webkitSpeechRecognitionEvent.class, WebKitTransitionEvent.class, webkitURL.class,
+        WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
+        webkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
+        WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
+        webkitSpeechRecognitionEvent.class, webkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,

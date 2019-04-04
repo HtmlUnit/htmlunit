@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -27,6 +26,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -38,6 +38,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -52,6 +53,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.security.ConstraintMapping;
@@ -67,6 +69,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
@@ -81,8 +84,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -110,7 +111,6 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
    chrome.bin=/path/to/chromedriver                     [Unix-like]
    ff52.bin=/usr/bin/firefox                            [Unix-like]
    ie.bin=C:\\path\\to\\32bit\\IEDriverServer.exe       [Windows]
-   edge.bin=C:\\path\\to\\MicrosoftWebDriver.exe        [Windows]
    autofix=true
    </pre>
  * The file could contain some properties:
@@ -145,20 +145,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * All browsers supported.
      */
-    public static BrowserVersion[] ALL_BROWSERS_ = {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60,
-        BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER, BrowserVersion.EDGE};
+    private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
+            Arrays.asList(BrowserVersion.CHROME,
+                    BrowserVersion.FIREFOX_60,
+                    BrowserVersion.FIREFOX_52,
+                    BrowserVersion.INTERNET_EXPLORER));
 
     /**
      * Browsers which run by default.
      */
-    public static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
+    private static BrowserVersion[] DEFAULT_RUNNING_BROWSERS_ =
         {BrowserVersion.CHROME, BrowserVersion.FIREFOX_60, BrowserVersion.FIREFOX_52, BrowserVersion.INTERNET_EXPLORER};
 
     private static final Log LOG = LogFactory.getLog(WebDriverTestCase.class);
 
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String CHROME_BIN_;
-    private static String EDGE_BIN_;
     private static String IE_BIN_;
     private static String FF60_BIN_;
     private static String FF52_BIN_;
@@ -171,10 +173,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Map<BrowserVersion, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
 
     private static Server STATIC_SERVER_;
+    private static String STATIC_SERVER_STARTER_;
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
+    private static String STATIC_SERVER2_STARTER_;
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
+    private static String STATIC_SERVER3_STARTER_;
 
     private static Boolean LAST_TEST_MockWebConnection_;
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
@@ -212,7 +217,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     BROWSERS_PROPERTIES_ = new HashSet<>(Arrays.asList(browsersValue.replaceAll(" ", "")
                             .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
-                    EDGE_BIN_ = properties.getProperty("edge.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
                     FF60_BIN_ = properties.getProperty("ff60.bin");
                     FF52_BIN_ = properties.getProperty("ff52.bin");
@@ -234,6 +238,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
         return BROWSERS_PROPERTIES_;
+    }
+
+    /**
+     * @return the list of supported browsers
+     */
+    public static List<BrowserVersion> allBrowsers() {
+        return ALL_BROWSERS_;
     }
 
     /**
@@ -367,10 +378,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Closes the real Edge browser drivers.
+     * Stops all WebServers.
+     * @throws Exception if it fails
      */
-    protected static void shutDownRealEdge() {
-        shutDownReal(EDGE);
+    protected static void assertWebServersStopped() throws Exception {
+        Assert.assertNull(STATIC_SERVER_STARTER_, STATIC_SERVER_);
+        Assert.assertNull(STATIC_SERVER2_STARTER_, STATIC_SERVER2_);
+        Assert.assertNull(STATIC_SERVER3_STARTER_, STATIC_SERVER3_);
     }
 
     /**
@@ -443,13 +457,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 return new ChromeDriver(options);
             }
 
-            if (BrowserVersion.EDGE == getBrowserVersion()) {
-                if (EDGE_BIN_ != null) {
-                    System.setProperty(EdgeDriverService.EDGE_DRIVER_EXE_PROPERTY, EDGE_BIN_);
-                }
-                return new EdgeDriver();
-            }
-
             if (BrowserVersion.FIREFOX_52 == getBrowserVersion()) {
                 // disable the new marionette interface because it requires ff47 or more
                 System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
@@ -500,9 +507,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
             return BrowserType.IE;
         }
-        if (browserVersion == BrowserVersion.EDGE) {
-            return BrowserType.EDGE;
-        }
         return BrowserType.CHROME;
     }
 
@@ -548,29 +552,35 @@ public abstract class WebDriverTestCase extends WebTestCase {
                         EnumSet.of(DispatcherType.INCLUDE, DispatcherType.REQUEST));
             }
             server.setHandler(context);
-            server.start();
+            WebServerTestCase.tryStart(PORT, server);
+
+            STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
             STATIC_SERVER_ = server;
         }
         MockWebConnectionServlet.MockConnection_ = mockConnection;
 
         if (STATIC_SERVER2_ == null && needThreeConnections()) {
-            Server server = buildServer(PORT2);
+            final Server server2 = buildServer(PORT2);
             final WebAppContext context2 = new WebAppContext();
             context2.setContextPath("/");
             context2.setResourceBase("./");
             context2.addServlet(MockWebConnectionServlet.class, "/*");
-            server.setHandler(context2);
-            server.start();
-            STATIC_SERVER2_ = server;
+            server2.setHandler(context2);
+            WebServerTestCase.tryStart(PORT2, server2);
 
-            server = buildServer(PORT3);
+            STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
+            STATIC_SERVER2_ = server2;
+
+            final Server server3 = buildServer(PORT3);
             final WebAppContext context3 = new WebAppContext();
             context3.setContextPath("/");
             context3.setResourceBase("./");
             context3.addServlet(MockWebConnectionServlet.class, "/*");
-            server.setHandler(context3);
-            server.start();
-            STATIC_SERVER3_ = server;
+            server3.setHandler(context3);
+            WebServerTestCase.tryStart(PORT3, server3);
+
+            STATIC_SERVER3_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer3Starter"));
+            STATIC_SERVER3_ = server3;
             /*
              * The mock connection servlet call sit under both servers, so long as tests
              * keep the URLs distinct.
@@ -618,6 +628,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         if (STATIC_SERVER2_ != null) {
             STATIC_SERVER2_.stop();
         }
+        STATIC_SERVER2_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServer2Starter"));
         STATIC_SERVER2_ = WebServerTestCase.createWebServer(PORT2, resourceBase, classpath, servlets, null);
     }
 
@@ -637,6 +648,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         stopWebServers();
         LAST_TEST_MockWebConnection_ = Boolean.FALSE;
 
+        STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
         STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets, handler);
     }
 
@@ -898,7 +910,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private void resizeIfNeeded(final WebDriver driver) {
         final Dimension size = driver.manage().window().getSize();
         if (size.getWidth() != 1272 || size.getHeight() != 768) {
-            // only resize if needed because it may be quite expensive (e.g. Edge)
+            // only resize if needed because it may be quite expensive (e.g. IE)
             driver.manage().window().setSize(new Dimension(1272, 768));
         }
     }
@@ -956,6 +968,29 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
         verifyAlerts(maxWaitTime, driver, expectedAlerts);
         return driver;
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @throws Exception in case of failure
+     */
+    protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
+        final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
+        String actual = null;
+        while (System.currentTimeMillis() < maxWait) {
+            actual = func.get();
+
+            if (StringUtils.equals(expected, actual)) {
+                break;
+            }
+
+            Thread.sleep(50);
+        }
+
+        assertEquals(expected, actual);
     }
 
     /**
@@ -1102,17 +1137,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         while (collectedAlerts.size() < alertsLength && System.currentTimeMillis() < maxWait) {
             try {
                 final Alert alert = driver.switchTo().alert();
-                String text = alert.getText();
-
-                if (useRealBrowser() && getBrowserVersion().isEdge()) {
-                    // EdgeDriver reads empty strings as null -> harmonize
-                    if (text == null) {
-                        text = "";
-                    }
-
-                    // alerts for real Edge need some time until they may be accepted
-                    Thread.sleep(100);
-                }
+                final String text = alert.getText();
 
                 collectedAlerts.add(text);
                 alert.accept();
@@ -1125,12 +1150,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     if (getBrowserVersion().isIE()) {
                         // alerts for real IE are really slow
                         maxWait += 5000;
-                    }
-                    else if (getBrowserVersion().isEdge()) {
-                        // closing one alert and opening the next one takes some time in real Edge
-                        // (most probably due to the 'nice' fade animations...)
-                        Thread.sleep(500);
-                        maxWait += 800;
                     }
                 }
             }

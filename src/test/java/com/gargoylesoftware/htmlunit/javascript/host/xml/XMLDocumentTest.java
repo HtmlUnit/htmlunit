@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -178,7 +179,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -214,7 +215,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -280,7 +281,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -310,7 +311,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -347,7 +348,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </ns1:book>\n"
             + "</ns1:books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -380,7 +381,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -415,7 +416,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -527,7 +528,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  <element>\n"
             + "</root>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -680,7 +681,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
 
         final String xml = "<order><book><title/></book><cd/><dvd/></order>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.xml"), xml, "text/xml");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.xml"), xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -713,7 +714,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -749,7 +750,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -870,7 +871,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -910,7 +911,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </books>\n"
             + "</soap:Envelope>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -941,7 +942,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -973,7 +974,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  <status>OK</status>\n"
             + "</response>";
 
-        getMockWebConnection().setResponse(URL_SECOND, xml, "text/xml");
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1010,7 +1011,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "  <rect id=\"rect\" width=\"50\" height=\"50\" fill=\"green\" onclick=\"alert(document)\"/>\n"
             + "</svg>";
-        final WebDriver driver = loadPage2(svg, URL_FIRST, "text/xml", ISO_8859_1);
+        final WebDriver driver = loadPage2(svg, URL_FIRST, MimeType.TEXT_XML, ISO_8859_1);
         driver.findElement(By.id("rect")).click();
 
         verifyAlerts(driver, getExpectedAlerts());
@@ -1030,6 +1031,28 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "    var node = doc.createAttribute('myAttr');\n"
             + "    alert(node.name);\n"
             + "    alert(node.value);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "about:blank",
+            IE = "§§URL§§")
+    @NotYetImplemented(IE)
+    public void url() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
+            + "    alert(doc.URL);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='tester'></div>\n"

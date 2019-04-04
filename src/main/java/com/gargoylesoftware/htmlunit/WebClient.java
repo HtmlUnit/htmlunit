@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -36,6 +35,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ConcurrentModificationException;
@@ -91,6 +91,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
@@ -204,7 +205,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
-    private WebClientInternals internals_ = new WebClientInternals(this);
+    private WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     private static final WebResponseData responseDataNoHttpResponse_ = new WebResponseData(
@@ -566,7 +567,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (getOptions().isPrintContentOnFailingStatusCode()) {
             final int statusCode = webResponse.getStatusCode();
             final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-            if (!successful) {
+            if (!successful && LOG.isInfoEnabled()) {
                 final String contentType = webResponse.getContentType();
                 LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
                 LOG.info(webResponse.getContentAsString());
@@ -1171,10 +1172,10 @@ public class WebClient implements Serializable, AutoCloseable {
         }
     }
 
-    private static WebResponse makeWebResponseForAboutUrl(final URL url) {
+    private static WebResponse makeWebResponseForAboutUrl(final URL url) throws MalformedURLException {
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
         if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
-            throw new IllegalArgumentException(url + " is not supported, only about:blank is supported now.");
+            throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
         }
         return new StringWebResponse("", URL_ABOUT_BLANK);
     }
@@ -1210,7 +1211,7 @@ public class WebClient implements Serializable, AutoCloseable {
         if (!file.exists()) {
             // construct 404
             final List<NameValuePair> compiledHeaders = new ArrayList<>();
-            compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html"));
+            compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML));
             final WebResponseData responseData =
                 new WebResponseData(
                     TextUtil.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
@@ -1243,20 +1244,20 @@ public class WebClient implements Serializable, AutoCloseable {
         final String fileName = file.getName();
         if (fileName.endsWith(".xhtml")) {
             // Java's mime type map returns application/xml in JDK8.
-            return "application/xhtml+xml";
+            return MimeType.APPLICATION_XHTML;
         }
 
         // Java's mime type map does not know these in JDK8.
         if (fileName.endsWith(".js")) {
-            return "application/javascript";
+            return MimeType.APPLICATION_JAVASCRIPT;
         }
         if (fileName.toLowerCase(Locale.ROOT).endsWith(".css")) {
-            return "text/css";
+            return MimeType.TEXT_CSS;
         }
 
         String contentType = URLConnection.guessContentTypeFromName(fileName);
         if (contentType == null) {
-            try (InputStream inputStream = new BufferedInputStream(new FileInputStream(file))) {
+            try (InputStream inputStream = new BufferedInputStream(Files.newInputStream(file.toPath()))) {
                 contentType = URLConnection.guessContentTypeFromStream(inputStream);
             }
             catch (final IOException e) {
@@ -1403,7 +1404,6 @@ public class WebClient implements Serializable, AutoCloseable {
             catch (final NoHttpResponseException e) {
                 return new WebResponse(responseDataNoHttpResponse_, webRequest, 0);
             }
-            getCache().cacheIfPossible(webRequest, webResponse, null);
         }
 
         // Continue according to the HTTP status code.
@@ -1472,6 +1472,9 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
+        if (fromCache == null) {
+            getCache().cacheIfPossible(webRequest, webResponse, null);
+        }
         return webResponse;
     }
 
@@ -1678,7 +1681,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void setIncorrectnessListener(final IncorrectnessListener listener) {
         if (listener == null) {
-            throw new NullPointerException("Null incorrectness listener.");
+            throw new IllegalArgumentException("Null is not a valid IncorrectnessListener");
         }
         incorrectnessListener_ = listener;
     }
@@ -1708,7 +1711,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void setAjaxController(final AjaxController newValue) {
         if (newValue == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException("Null is not a valid AjaxController");
         }
         ajaxController_ = newValue;
     }
@@ -2225,7 +2228,9 @@ public class WebClient implements Serializable, AutoCloseable {
         for (int i = queue.size() - 1; i >= 0; --i) {
             final LoadJob loadJob = queue.get(i);
             if (loadJob.isOutdated()) {
-                LOG.info("No usage of download: " + loadJob);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + loadJob);
+                }
                 continue;
             }
 
@@ -2268,7 +2273,9 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
             }
             else {
-                LOG.info("No usage of download: " + loadJob);
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("No usage of download: " + loadJob);
+                }
             }
         }
     }

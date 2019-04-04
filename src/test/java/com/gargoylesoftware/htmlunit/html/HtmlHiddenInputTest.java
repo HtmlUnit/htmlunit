@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -308,6 +308,31 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "  <input type='text' id='testId' value='initial'>\n"
             + "</form>\n"
             + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='hidden' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageWithAlerts2(html);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.utils.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -71,6 +73,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Anton Demydenko
  */
 public class HtmlForm extends HtmlElement {
+    private static final Log LOG = LogFactory.getLog(HtmlForm.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
@@ -218,6 +221,9 @@ public class HtmlForm extends HtmlElement {
         boolean valid = true;
         for (HtmlElement element : getFormHtmlElementDescendants()) {
             if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Form validation faild; element '" + element + "' was not valid. Submit cancelled.");
+                }
                 valid = false;
                 break;
             }
@@ -298,9 +304,8 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
-        final WebRequest request = new WebRequest(url, method);
-        request.setAdditionalHeader(HttpHeader.ACCEPT, browser.getHtmlAcceptHeader());
-        request.setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, "gzip, deflate");
+        final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader());
+        request.setHttpMethod(method);
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
@@ -475,11 +480,8 @@ public class HtmlForm extends HtmlElement {
                 return false;
             }
         }
-        if (HtmlButton.TAG_NAME.equals(tagName)) {
-            return false;
-        }
 
-        return true;
+        return !HtmlButton.TAG_NAME.equals(tagName);
     }
 
     /**

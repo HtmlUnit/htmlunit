@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.background;
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,14 +34,12 @@ import com.gargoylesoftware.htmlunit.WebWindow;
  */
 public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
 
-    // TODO: is there utility in not having these as transient?
     private final transient WeakReference<WebClient> webClient_;
+    private final transient List<WeakReference<JavaScriptJobManager>> jobManagerList_;
 
-    private transient List<WeakReference<JavaScriptJobManager>> jobManagerList_ = new LinkedList<>();
+    private final transient AtomicBoolean shutdown_;
 
-    private volatile boolean shutdown_ = false;
-
-    private transient Thread eventLoopThread_ = null;
+    private transient Thread eventLoopThread_;
 
     /** Logging support. */
     private static final Log LOG = LogFactory.getLog(DefaultJavaScriptExecutor.class);
@@ -51,6 +50,8 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      */
     public DefaultJavaScriptExecutor(final WebClient webClient) {
         webClient_ = new WeakReference<>(webClient);
+        jobManagerList_ = new LinkedList<>();
+        shutdown_ = new AtomicBoolean();
     }
 
     /**
@@ -106,14 +107,17 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
     protected JavaScriptJobManager getJobManagerWithEarliestJob() {
         JavaScriptJobManager javaScriptJobManager = null;
         JavaScriptJob earliestJob = null;
-        // iterate over the list and find the earliest job to run.
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager jobManager = weakReference.get();
-            if (jobManager != null) {
-                final JavaScriptJob newJob = jobManager.getEarliestJob();
-                if (newJob != null && (earliestJob == null || earliestJob.compareTo(newJob) > 0)) {
-                    earliestJob = newJob;
-                    javaScriptJobManager = jobManager;
+
+        synchronized (jobManagerList_) {
+            // iterate over the list and find the earliest job to run.
+            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+                final JavaScriptJobManager jobManager = weakReference.get();
+                if (jobManager != null) {
+                    final JavaScriptJob newJob = jobManager.getEarliestJob();
+                    if (newJob != null && (earliestJob == null || earliestJob.compareTo(newJob) > 0)) {
+                        earliestJob = newJob;
+                        javaScriptJobManager = jobManager;
+                    }
                 }
             }
         }
@@ -127,7 +131,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         // this has to be a multiple of 10ms
         // otherwise the VM has to fight with the OS to get such small periods
         final long sleepInterval = 10;
-        while (!shutdown_ && !Thread.currentThread().isInterrupted() && webClient_.get() != null) {
+        while (!shutdown_.get() && !Thread.currentThread().isInterrupted() && webClient_.get() != null) {
             final JavaScriptJobManager jobManager = getJobManagerWithEarliestJob();
 
             if (jobManager != null) {
@@ -153,7 +157,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
             }
 
             // check for cancel
-            if (shutdown_ || Thread.currentThread().isInterrupted() || webClient_.get() == null) {
+            if (shutdown_.get() || Thread.currentThread().isInterrupted() || webClient_.get() == null) {
                 break;
             }
 
@@ -180,32 +184,35 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         }
     }
 
-    private synchronized void updateJobMangerList(final JavaScriptJobManager newJobManager) {
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager manager = weakReference.get();
-            if (newJobManager == manager) {
-                return;
-            }
-        }
-
+    private void updateJobMangerList(final JavaScriptJobManager newJobManager) {
         final List<WeakReference<JavaScriptJobManager>> managers = new LinkedList<>();
-        for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
-            final JavaScriptJobManager manager = weakReference.get();
-            if (null != manager) {
-                managers.add(weakReference);
+        synchronized (jobManagerList_) {
+            for (WeakReference<JavaScriptJobManager> weakReference : jobManagerList_) {
+                final JavaScriptJobManager manager = weakReference.get();
+                if (newJobManager == manager) {
+                    return;
+                }
+                if (null != weakReference.get()) {
+                    managers.add(weakReference);
+                }
             }
+
+            managers.add(new WeakReference<>(newJobManager));
+
+            jobManagerList_.clear();
+            jobManagerList_.addAll(managers);
         }
-        managers.add(new WeakReference<>(newJobManager));
-        jobManagerList_ = managers;
     }
 
     /** Notes that this thread has been shutdown. */
     @Override
     public void shutdown() {
-        shutdown_ = true;
+        shutdown_.set(true);
         killThread();
 
         webClient_.clear();
-        jobManagerList_.clear();
+        synchronized (jobManagerList_) {
+            jobManagerList_.clear();
+        }
     }
 }

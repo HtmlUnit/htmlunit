@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link HtmlFileInput}.
@@ -445,7 +446,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file'><br>\n"
@@ -467,7 +468,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             if (ServletFileUpload.isMultipartContent(request)) {
                 try {
@@ -543,7 +544,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write("<html>\n"
                 + "<body><form action='upload2' method='post' enctype='multipart/form-data'>\n"
                 + "Name: <input name='myInput' type='file' multiple><br>\n"
@@ -564,7 +565,7 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
             request.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             final BufferedReader reader = request.getReader();
             String line;

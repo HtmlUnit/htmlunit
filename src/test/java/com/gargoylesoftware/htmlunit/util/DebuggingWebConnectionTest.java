@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,13 +78,13 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
      */
     @Test
     public void chooseExtension() throws Exception {
-        assertEquals(".html", DebuggingWebConnection.chooseExtension("text/html"));
+        assertEquals(".html", DebuggingWebConnection.chooseExtension(MimeType.TEXT_HTML));
 
         assertEquals(".js", DebuggingWebConnection.chooseExtension("text/javascript"));
 
-        assertEquals(".css", DebuggingWebConnection.chooseExtension("text/css"));
+        assertEquals(".css", DebuggingWebConnection.chooseExtension(MimeType.TEXT_CSS));
 
-        assertEquals(".xml", DebuggingWebConnection.chooseExtension("text/xml"));
+        assertEquals(".xml", DebuggingWebConnection.chooseExtension(MimeType.TEXT_XML));
 
         assertEquals(".txt", DebuggingWebConnection.chooseExtension("text/plain"));
     }
@@ -104,7 +104,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
         final MockWebConnection mockConnection = new MockWebConnection();
         final List<NameValuePair> responseHeaders = Arrays.asList(
             new NameValuePair("Content-Encoding", "gzip"));
-        mockConnection.setResponse(URL_FIRST, baos.toByteArray(), 200, "OK", "application/javascript",
+        mockConnection.setResponse(URL_FIRST, baos.toByteArray(), 200, "OK", MimeType.APPLICATION_JAVASCRIPT,
             responseHeaders);
 
         final String dirName = "test-" + getClass().getSimpleName();

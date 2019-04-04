@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -59,7 +60,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
      */
     @Test
     public void failureByGetPage() throws Exception {
-        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         final WebClient client = getWebClientWithMockWebConnection();
         try {
             client.getPage(URL_FIRST);
@@ -78,7 +79,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
     @Test
     public void failureByClickLink() throws Exception {
         final String html = "<html><body><a href='doesntExist'>go</a></body></html>";
-        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebClient client = getWebClientWithMockWebConnection();
         try {
@@ -102,7 +103,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
                 + "  <input name='button' type='submit' id='mySubmit'/>\n"
                 + "</form>\n"
                 + "</body></html>";
-        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", "text/html");
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebClient client = getWebClientWithMockWebConnection();
         try {

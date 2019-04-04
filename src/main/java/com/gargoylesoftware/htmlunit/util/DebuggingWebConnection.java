@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,15 @@ package com.gargoylesoftware.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
+import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -168,7 +169,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             mark = mark.replace("\"", "\\\"");
         }
         appendToJSFile("tab[tab.length] = \"" + mark + "\";\n");
-        LOG.info("--- " + mark + " ---");
+        if (LOG.isInfoEnabled()) {
+            LOG.info("--- " + mark + " ---");
+        }
     }
 
     /**
@@ -181,11 +184,11 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         throws IOException {
         counter_++;
         final String extension = chooseExtension(response.getContentType());
-        final File f = createFile(request.getUrl(), extension);
+        final File file = createFile(request.getUrl(), extension);
         int length = 0;
         try (InputStream input = response.getContentAsStream()) {
-            try (OutputStream output = new FileOutputStream(f)) {
-                length = IOUtils.copy(input, output);
+            try (OutputStream fos = Files.newOutputStream(file.toPath())) {
+                length = IOUtils.copy(input, fos);
             }
             catch (final EOFException e) {
                 // ignore
@@ -193,21 +196,23 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
 
         final URL url = response.getWebRequest().getUrl();
-        LOG.info("Created file " + f.getAbsolutePath() + " for response " + counter_ + ": " + url);
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Created file " + file.getAbsolutePath() + " for response " + counter_ + ": " + url);
+        }
 
         final StringBuilder bduiler = new StringBuilder();
-        bduiler.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ");
-        bduiler.append("fileName: '" + f.getName() + "', ");
-        bduiler.append("contentType: '" + response.getContentType() + "', ");
-        bduiler.append("method: '" + request.getHttpMethod().name() + "', ");
+        bduiler.append("tab[tab.length] = {code: " + response.getStatusCode() + ", ")
+                .append("fileName: '" + file.getName() + "', ")
+                .append("contentType: '" + response.getContentType() + "', ")
+                .append("method: '" + request.getHttpMethod().name() + "', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
             bduiler.append("postParameters: " + nameValueListToJsMap(request.getRequestParameters()) + ", ");
         }
-        bduiler.append("url: '" + escapeJSString(url.toString()) + "', ");
-        bduiler.append("loadTime: " + response.getLoadTime() + ", ");
-        bduiler.append("responseSize: " + length + ", ");
-        bduiler.append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()));
-        bduiler.append("};\n");
+        bduiler.append("url: '" + escapeJSString(url.toString()) + "', ")
+                .append("loadTime: " + response.getLoadTime() + ", ")
+                .append("responseSize: " + length + ", ")
+                .append("responseHeaders: " + nameValueListToJsMap(response.getResponseHeaders()))
+                .append("};\n");
         appendToJSFile(bduiler.toString());
     }
 
@@ -219,13 +224,13 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         if (isJavaScript(contentType)) {
             return ".js";
         }
-        else if ("text/html".equals(contentType)) {
+        else if (MimeType.TEXT_HTML.equals(contentType)) {
             return ".html";
         }
-        else if ("text/css".equals(contentType)) {
+        else if (MimeType.TEXT_CSS.equals(contentType)) {
             return ".css";
         }
-        else if ("text/xml".equals(contentType)) {
+        else if (MimeType.TEXT_XML.equals(contentType)) {
             return ".xml";
         }
         else if ("image/gif".equals(contentType)) {
@@ -263,7 +268,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
     }
 
     private void appendToJSFile(final String str) throws IOException {
-        try (FileWriter jsFileWriter = new FileWriter(javaScriptFile_, true)) {
+        try (BufferedWriter jsFileWriter = Files.newBufferedWriter(javaScriptFile_.toPath(), StandardCharsets.UTF_8)) {
             jsFileWriter.write(str);
         }
     }
@@ -316,7 +321,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
             bduiler.append("'" + header.getName() + "': '" + escapeJSString(header.getValue()) + "', ");
         }
         bduiler.delete(bduiler.length() - 2, bduiler.length());
-        bduiler.append("}");
+        bduiler.append('}');
         return bduiler.toString();
     }
 
@@ -334,7 +339,9 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         final File summary = new File(reportFolder_, "index.html");
         FileUtils.copyURLToFile(indexResource, summary);
 
-        LOG.info("Summary will be in " + summary.getAbsolutePath());
+        if (LOG.isInfoEnabled()) {
+            LOG.info("Summary will be in " + summary.getAbsolutePath());
+        }
     }
 
     File getReportFolder() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSOLE_HANDLE_WINDOW;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -31,7 +30,6 @@ import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
@@ -50,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Andrea Martino
  */
 @JsxClass(isJSObject = false, value = {FF, CHROME})
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
@@ -61,7 +59,6 @@ public class Console extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public Console() {
     }
 
@@ -287,7 +284,7 @@ public class Console extends SimpleScriptable {
     private static class ConsoleFormatter implements Formatter {
 
         private static void appendNativeArray(final NativeArray a, final StringBuilder sb, final int level) {
-            sb.append("[");
+            sb.append('[');
             if (level < 3) {
                 for (int i = 0; i < a.size(); i++) {
                     if (i > 0) {
@@ -299,7 +296,7 @@ public class Console extends SimpleScriptable {
                     }
                 }
             }
-            sb.append("]");
+            sb.append(']');
         }
 
         private static void appendNativeObject(final NativeObject obj, final StringBuilder sb, final int level) {
@@ -308,9 +305,9 @@ public class Console extends SimpleScriptable {
                 // root level Firefox puts brackets outside it. This is not the
                 // case when a native object is printed as part of an array or
                 // inside another object.
-                sb.append("(");
+                sb.append('(');
             }
-            sb.append("{");
+            sb.append('{');
             if (level < 3) {
                 final Object[] ids = obj.getIds();
                 if (ids != null && ids.length > 0) {
@@ -320,15 +317,15 @@ public class Console extends SimpleScriptable {
                             sb.append(", ");
                         }
                         sb.append(key);
-                        sb.append(":");
+                        sb.append(':');
                         appendValue(obj.get(key), sb, level + 1);
                         needsSeparator = true;
                     }
                 }
             }
-            sb.append("}");
+            sb.append('}');
             if (level == 0) {
-                sb.append(")");
+                sb.append(')');
             }
         }
 
@@ -349,13 +346,13 @@ public class Console extends SimpleScriptable {
          */
         private static void appendValue(final Object val, final StringBuilder sb, final int level) {
             if (val instanceof NativeFunction) {
-                sb.append("(");
+                sb.append('(');
                 // Remove unnecessary new lines and spaces from the function
                 final Pattern p = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*",
                         Pattern.MULTILINE);
                 final Matcher m = p.matcher(((NativeFunction) val).toString());
                 sb.append(m.replaceAll(" ").trim());
-                sb.append(")");
+                sb.append(')');
             }
             else if (val instanceof BaseFunction) {
                 sb.append("function ");
@@ -372,7 +369,7 @@ public class Console extends SimpleScriptable {
                 if (level == 0) {
                     sb.append("[object ");
                     sb.append(((Delegator) val).getDelegee().getClassName());
-                    sb.append("]");
+                    sb.append(']');
                 }
                 else {
                     sb.append("({})");
@@ -382,7 +379,7 @@ public class Console extends SimpleScriptable {
                 if (level == 0) {
                     sb.append("[object ");
                     sb.append(((SimpleScriptable) val).getClassName());
-                    sb.append("]");
+                    sb.append(']');
                 }
                 else {
                     sb.append("({})");
@@ -415,7 +412,7 @@ public class Console extends SimpleScriptable {
          */
         private static String quote(final CharSequence s) {
             final StringBuilder sb = new StringBuilder();
-            sb.append("\"");
+            sb.append('\"');
             for (int i = 0; i < s.length(); i++) {
                 final char ch = s.charAt(i);
                 switch (ch) {
@@ -449,7 +446,7 @@ public class Console extends SimpleScriptable {
                         }
                 }
             }
-            sb.append("\"");
+            sb.append('\"');
             return sb.toString();
         }
 
@@ -497,7 +494,7 @@ public class Console extends SimpleScriptable {
                 final StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < ((NativeArray) o).size(); i++) {
                     if (i > 0) {
-                        sb.append(",");
+                        sb.append(',');
                     }
                     sb.append(formatToString(((NativeArray) o).get(i)));
                 }

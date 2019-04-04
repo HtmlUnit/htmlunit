@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "value1"},
             IE = {"1", "undefined"})
+    @NotYetImplemented(IE)
     public void get() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -211,6 +213,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "0")
+    @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -230,6 +233,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "0")
+    @NotYetImplemented(IE)
     public void constructorInt32Array() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -254,6 +258,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "0")
+    @NotYetImplemented(IE)
     public void constructorStringParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -277,6 +282,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             IE = "0")
+    @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -300,6 +306,7 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             IE = "0")
+    @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -364,6 +371,7 @@ public class MapTest extends WebDriverTestCase {
             "null", "key3", "[object Map]", "[object Window]",
             "undefined", "key4", "[object Map]", "[object Window]"},
             IE = {})
+    @NotYetImplemented(IE)
     public void forEach() throws Exception {
         final String html
             = "<html><head>\n"
@@ -397,6 +405,7 @@ public class MapTest extends WebDriverTestCase {
             "null", "key3", "[object Map]", "undefined",
             "undefined", "key4", "[object Map]", "undefined"},
             IE = {})
+    @NotYetImplemented(IE)
     public void forEachStrict() throws Exception {
         final String html
             = "<html><head>\n"
@@ -431,7 +440,7 @@ public class MapTest extends WebDriverTestCase {
             "null", "key3", "[object Map]", "hello",
             "undefined", "key4", "[object Map]", "hello"},
             IE = {})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented(IE)
     public void forEachThis() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"
@@ -486,6 +495,7 @@ public class MapTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"value1", "undefined", "[object Map]", "[object Window]",
             "[object Object]", "key2", "[object Map]", "[object Window]"},
             IE = {})
+    @NotYetImplemented(IE)
     public void forEach_withElision() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

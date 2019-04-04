@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NAVIGATOR_DO_NOT_TRACK_UNSPECIFIED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -51,7 +50,7 @@ public class Navigator extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public Navigator() {
     }
 
@@ -159,7 +158,7 @@ public class Navigator extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public String getProductSub() {
         return getBrowserVersion().getProductSub();
     }
@@ -293,7 +292,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code vendorSub} property.
      * @return the {@code vendorSub} property
      */
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public String getVendorSub() {
         return "";
     }

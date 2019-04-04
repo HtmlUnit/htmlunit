@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
             final File file = new File(System.getProperty("user.home"), "htmlunit-embed.bin");
             element.saveAs(file);
             final long length = file.length();
-            file.delete();
+            assertTrue(file.delete());
             assertTrue(length > 0);
         }
     }

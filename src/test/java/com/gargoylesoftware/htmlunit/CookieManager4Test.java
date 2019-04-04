@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -124,7 +125,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c3=3; Domain=." + DOMAIN + ":" + PORT + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final URL firstUrl = new URL(URL_HOST1);
         loadPageWithAlerts2(firstUrl);
@@ -152,7 +153,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
 
@@ -184,7 +185,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST2));
 
@@ -214,7 +215,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST3));
 
@@ -245,7 +246,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c12=12; Domain=htmlunit; Path=/"));
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST4));
 
@@ -408,7 +409,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=" + DOMAIN + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=" + DOMAIN + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final URL firstUrl = new URL(URL_HOST1);
 
@@ -425,7 +426,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "Ok",
-                "text/html", responseHeader);
+                MimeType.TEXT_HTML, responseHeader);
 
         final URL firstUrl = new URL(URL_HOST1);
 
@@ -445,7 +446,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c1=1; Domain=host1." + DOMAIN + "; Path=/"));
         responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN + "; Path=/"));
 
-        getMockWebConnection().setDefaultResponse(html, 200, "Ok", "text/html", responseHeader);
+        getMockWebConnection().setDefaultResponse(html, 200, "Ok", MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver webDriver = getWebDriver();
         webDriver.manage().deleteAllCookies();
@@ -474,10 +475,11 @@ public class CookieManager4Test extends WebDriverTestCase {
         responseHeader.add(new NameValuePair("Set-Cookie", "c2=2; Domain=.host1." + DOMAIN
                                                 + "; path=/; expires=Fri, 04-Feb-2022 09:00:32 GMT"));
 
-        getMockWebConnection().setDefaultResponse(html, 200, "Ok", "text/html", responseHeader);
+        getMockWebConnection().setDefaultResponse(html, 200, "Ok", MimeType.TEXT_HTML, responseHeader);
 
         responseHeader.add(new NameValuePair("Location", URL_HOST1 + "next.html"));
-        getMockWebConnection().setResponse(new URL(URL_HOST1), "redirect", 301, "Ok", "text/html", responseHeader);
+        getMockWebConnection().setResponse(new URL(URL_HOST1), "redirect", 301, "Ok", MimeType.TEXT_HTML,
+                responseHeader);
 
         final WebDriver webDriver = getWebDriver();
         webDriver.manage().deleteAllCookies();
@@ -514,7 +516,7 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(URL_HOST1);
-        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
     }
@@ -544,7 +546,7 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(URL_HOST3);
-        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
     }
@@ -570,7 +572,7 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE);
         final URL firstUrl = new URL(URL_HOST1);
-        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", "text/html", responseHeader1);
+        getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
         loadPageWithAlerts2(firstUrl);
     }
@@ -629,7 +631,7 @@ public class CookieManager4Test extends WebDriverTestCase {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", cookie1));
         responseHeader.add(new NameValuePair("Set-Cookie", cookie2));
-        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "OK", "text/html",
+        getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
                 responseHeader);
 
         loadPageWithAlerts2(url);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WH
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_APPLETS_NODELIST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ELEMENT_STRICT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
@@ -38,7 +37,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -58,6 +56,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -240,7 +239,7 @@ public class Document extends Node {
     /**
      * Static counter for {@link #uniqueID_}.
      */
-    private static int UniqueID_Counter_ = 1;
+    private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private Window window_;
     private DOMImplementation implementation_;
@@ -320,7 +319,7 @@ public class Document extends Node {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public Document() {
     }
 
@@ -671,20 +670,21 @@ public class Document extends Node {
     public Object createElement(String tagName) {
         Object result = NOT_FOUND;
         try {
-            final BrowserVersion browserVersion = getBrowserVersion();
-
-            if (browserVersion.hasFeature(JS_DOCUMENT_CREATE_ELEMENT_STRICT)
-                  && (tagName.contains("<") || tagName.contains(">"))) {
-                LOG.info("createElement: Provided string '"
-                            + tagName + "' contains an invalid character; '<' and '>' are not allowed");
+            if (tagName.contains("<") || tagName.contains(">")) {
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("createElement: Provided string '"
+                                + tagName + "' contains an invalid character; '<' and '>' are not allowed");
+                }
                 throw Context.reportRuntimeError("String contains an invalid character");
             }
-            else if (tagName.startsWith("<") && tagName.endsWith(">")) {
+            else if (tagName.length() > 0 && tagName.charAt(0) == '<' && tagName.endsWith(">")) {
                 tagName = tagName.substring(1, tagName.length() - 1);
 
                 final Matcher matcher = TAG_NAME_PATTERN.matcher(tagName);
                 if (!matcher.matches()) {
-                    LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("createElement: Provided string '" + tagName + "' contains an invalid character");
+                    }
                     throw Context.reportRuntimeError("String contains an invalid character");
                 }
             }
@@ -920,7 +920,7 @@ public class Document extends Node {
      * Returns this document's {@code body} element.
      * @return this document's {@code body} element
      */
-    @JsxGetter({CHROME, IE, EDGE})
+    @JsxGetter({CHROME, IE})
     @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         final Page page = getPage();
@@ -1104,7 +1104,9 @@ public class Document extends Node {
         if (!hasCommand(cmd, false)) {
             return false;
         }
-        LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Nothing done for execCommand(" + cmd + ", ...) (feature not implemented)");
+        }
         return true;
     }
 
@@ -1116,7 +1118,7 @@ public class Document extends Node {
     @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_++;
+            uniqueID_ = "ms__id" + Document.UniqueID_Counter_.getAndIncrement();
         }
         return uniqueID_;
     }
@@ -1127,10 +1129,6 @@ public class Document extends Node {
      */
     @JsxGetter(propertyName = "URL")
     public String getURL() {
-        if (!(getPage() instanceof HtmlPage)) {
-            // TODO: implement XmlPage.getUrl
-            return "";
-        }
         return getPage().getUrl().toExternalForm();
     }
 
@@ -2009,7 +2007,7 @@ public class Document extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF, EDGE})
+    @JsxGetter({CHROME, FF})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -435,14 +435,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    public void setPrefix(final String prefix) {
-        // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean hasChildNodes() {
         return firstChild_ != null;
     }
@@ -871,14 +863,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
-    public void setNodeValue(final String value) {
-        // Default behavior is to do nothing, overridden in some subclasses
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DomNode cloneNode(final boolean deep) {
         final DomNode newnode;
         try {
@@ -925,7 +909,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 // because this is a strange case we like to provide as many info as possible
                 msg.append(" class: '");
                 msg.append(page.getClass().getName());
-                msg.append("'");
+                msg.append('\'');
                 try {
                     msg.append(" url: '").append(page.getUrl()).append('\'');
                     msg.append(" content: ");
@@ -1336,7 +1320,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected class ChildIterator implements Iterator<DomNode> {
 
         private DomNode nextNode_ = firstChild_;
-        private DomNode currentNode_ = null;
+        private DomNode currentNode_;
 
         /** {@inheritDoc} */
         @Override
@@ -1925,7 +1909,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see HtmlScript#processImportNode(com.gargoylesoftware.htmlunit.javascript.host.dom.Document)
      */
     public void processImportNode(final com.gargoylesoftware.htmlunit.javascript.host.dom.Document doc) {
-        // empty default impl
+        page_ = (SgmlPage) doc.getDomNodeOrDie();
     }
 
     /**

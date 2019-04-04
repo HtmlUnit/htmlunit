@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -52,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 @JsxClass(isJSObject = false, value = {CHROME, FF})
 public class Geolocation extends SimpleScriptable {
 
@@ -68,7 +67,6 @@ public class Geolocation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(EDGE)
     public Geolocation() {
     }
 
@@ -174,7 +172,9 @@ public class Geolocation extends SimpleScriptable {
             }
         }
         else {
-            LOG.error("Operating System not supported: " + os);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Operating System not supported: " + os);
+            }
         }
     }
 
@@ -191,7 +191,7 @@ public class Geolocation extends SimpleScriptable {
         return builder.toString().trim();
     }
 
-    String getWifiStringWindows() {
+    static String getWifiStringWindows() {
         final StringBuilder builder = new StringBuilder();
         try {
             final List<String> lines = runCommand("netsh wlan show networks mode=bssid");
@@ -245,7 +245,8 @@ public class Geolocation extends SimpleScriptable {
     private static List<String> runCommand(final String command) throws IOException {
         final List<String> list = new ArrayList<>();
         final Process p = Runtime.getRuntime().exec(command);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(p.getInputStream(), Charset.defaultCharset()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line);

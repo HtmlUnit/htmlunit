@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -137,7 +137,7 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF52)
     public void form() throws Exception {
         test("form.html");
     }

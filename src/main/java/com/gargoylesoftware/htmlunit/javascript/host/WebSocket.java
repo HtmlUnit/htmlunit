@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,8 @@ import org.eclipse.jetty.websocket.api.WebSocketPolicy;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -125,33 +127,35 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      */
     private WebSocket(final String url, final Window window) {
         try {
-            containingPage_ = (HtmlPage) window.getWebWindow().getEnclosedPage();
+            final WebWindow webWindow = window.getWebWindow();
+            containingPage_ = (HtmlPage) webWindow.getEnclosedPage();
             setParentScope(window);
             setDomNode(containingPage_.getDocumentElement(), false);
 
-            final WebClient webClient = window.getWebWindow().getWebClient();
-            if (webClient.getOptions().isUseInsecureSSL()) {
+            final WebClient webClient = webWindow.getWebClient();
+            final WebClientOptions options = webClient.getOptions();
+            if (options.isUseInsecureSSL()) {
                 client_ = new WebSocketClient(new SslContextFactory(true), null, null);
             }
             else {
                 client_ = new WebSocketClient();
             }
-            client_.setCookieStore(new WebSocketCookieStore(webClient));
+            client_.getHttpClient().setCookieStore(new WebSocketCookieStore(webClient));
 
             final WebSocketPolicy policy = client_.getPolicy();
-            int size = webClient.getOptions().getWebSocketMaxBinaryMessageSize();
+            int size = options.getWebSocketMaxBinaryMessageSize();
             if (size > 0) {
                 policy.setMaxBinaryMessageSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxBinaryMessageBufferSize();
+            size = options.getWebSocketMaxBinaryMessageBufferSize();
             if (size > 0) {
                 policy.setMaxBinaryMessageBufferSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxTextMessageSize();
+            size = options.getWebSocketMaxTextMessageSize();
             if (size > 0) {
                 policy.setMaxTextMessageSize(size);
             }
-            size = webClient.getOptions().getWebSocketMaxTextMessageBufferSize();
+            size = options.getWebSocketMaxTextMessageBufferSize();
             if (size > 0) {
                 policy.setMaxTextMessageBufferSize(size);
             }
@@ -167,17 +171,21 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 @Override
                 public void run() {
                     try {
-                        readyState_ = CONNECTING;
+                        setReadyState(CONNECTING);
                         incomingSession_ = connectFuture.get();
                     }
                     catch (final Exception e) {
-                        LOG.error("WS connect error for url '" + url + "':", e);
+                        if (LOG.isErrorEnabled()) {
+                            LOG.error("WS connect error for url '" + url + "':", e);
+                        }
                     }
                 }
             });
         }
         catch (final Exception e) {
-            LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+            if (LOG.isErrorEnabled()) {
+                LOG.error("WebSocket Error: 'url' parameter '" + url + "' is invalid.", e);
+            }
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter '" + url + "' is invalid.");
         }
     }
@@ -291,6 +299,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     @JsxGetter
     public int getReadyState() {
         return readyState_;
+    }
+
+    private void setReadyState(final int readyState) {
+        readyState_ = readyState;
     }
 
     /**
@@ -414,7 +426,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketConnect(session);
             }
             super.onWebSocketConnect(session);
-            readyState_ = OPEN;
+            setReadyState(OPEN);
             outgoingSession_ = session;
 
             final Event openEvent = new Event();
@@ -429,7 +441,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketClose(statusCode, reason);
             }
             super.onWebSocketClose(statusCode, reason);
-            readyState_ = CLOSED;
+            setReadyState(CLOSED);
             outgoingSession_ = null;
 
             final CloseEvent closeEvent = new CloseEvent();
@@ -477,7 +489,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
                 listener_.onWebSocketError(cause);
             }
             super.onWebSocketError(cause);
-            readyState_ = CLOSED;
+            setReadyState(CLOSED);
             outgoingSession_ = null;
 
             final Event errorEvent = new Event();

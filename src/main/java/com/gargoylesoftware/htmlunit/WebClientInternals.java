@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,14 +27,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
  * Represents a ways to get notified about internal objects.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class WebClientInternals implements Serializable {
 
-    private final WebClient webClient_;
     private Collection<Listener> listeners_;
 
-    WebClientInternals(final WebClient webClient) {
-        webClient_ = webClient;
+    WebClientInternals() {
     }
 
     /**

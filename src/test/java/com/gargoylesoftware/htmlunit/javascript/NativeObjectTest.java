@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -234,6 +234,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
+    @NotYetImplemented(IE)
     public void getPrototypeOfString() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -257,6 +258,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
+    @NotYetImplemented(IE)
     public void getPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -280,6 +282,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "exception")
+    @NotYetImplemented(IE)
     public void getPrototypeOfBoolean() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -303,6 +306,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             IE = "exception")
+    @NotYetImplemented(IE)
     public void getTypeOfPrototypeOfNumber() throws Exception {
         final String html = ""
             + "<html><head>\n"

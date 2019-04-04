@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -265,5 +265,62 @@ public class WebClient2Test extends SimpleWebTestCase {
         assertEquals(domain, cookie.getDomain());
         assertEquals(secure, cookie.isSecure());
         assertEquals(date, cookie.getExpires());
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @NotYetImplemented
+    public void makeSureTheCurrentJobHasEndedBeforeReplaceWindowPage() throws Exception {
+        final String htmlContent1
+            = "<html>\n"
+            + "<head>"
+            + "  <title>Page 1</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    function loadExtraContent() {\n"
+            + "      for (var i = 0; i < 1000; i++) {\n"
+            + "        var p = document.createElement('p');\n"
+            + "        p.innerHTML = 'new content';\n"
+            + "        var body = document.querySelector('body');\n"
+            + "        if (body) { body.appendChild(p); }\n"
+            + "      }\n"
+            + "    }\n"
+
+            + "    setTimeout(loadExtraContent, 1);"
+            + "  </script>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String htmlContent2
+            = "<html>\n"
+            + "<head>"
+            + "  <title>Page 2</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <h1>Page2</h1>\n"
+            + "  <p>This is page 2</p>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(htmlContent1);
+        webConnection.setResponse(URL_SECOND, htmlContent2);
+        client.setWebConnection(webConnection);
+
+        // Load page 1. Has a setTimeout(...) function
+        HtmlPage page = client.getPage(URL_FIRST);
+        Thread.sleep(100);
+
+        // Immediately load page 2. Timeout function was triggered already
+        page = client.getPage(URL_SECOND);
+        client.waitForBackgroundJavaScriptStartingBefore(100);
+
+        // Fails: return 98 (about) instead of 1
+        assertEquals(1, page.querySelectorAll("p").size());
     }
 }

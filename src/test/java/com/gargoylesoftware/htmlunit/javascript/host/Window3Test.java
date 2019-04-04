@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1851,7 +1851,7 @@ public class Window3Test extends WebDriverTestCase {
 
         // Image loads are usually asynchronous in browsers and ordering of these results are somewhat coincidental.
         //
-        // Chrome/FF/Edge appears be synchronizing 'body.onload' so that it comes after all image loads, while Chrome
+        // Chrome/FF appears be synchronizing 'body.onload' so that it comes after all image loads, while Chrome
         // alone also seems to be synchronizing 'DOMContentLoaded' so that it fires before image loads.  IE11 is a mess
         // with no clear synchronization between 'body.onload' and image loads.
         //
@@ -2282,7 +2282,7 @@ public class Window3Test extends WebDriverTestCase {
             //                  log('window: stop propagation & return false');
             //                  event.stopPropagation(); return false }, true)
 
-            // In Chrome/Edge, this sets event.returnValue to 'false'
+            // In Chrome, this sets event.returnValue to 'false'
             // which is synonymous with setting 'event.defaultPrevented'
             // In FF/IE11, event.returnValue is settable but does not appear to be used for anything
             + "  a3.addEventListener('click', function (event) {"
@@ -2310,7 +2310,7 @@ public class Window3Test extends WebDriverTestCase {
             //+ "      var a = event.returnValue, p = event.defaultPrevented; b = true;"
             //+ "      log('property: prevented=' + p + ' returnValue: ' + a + ' -> true'); event.returnValue = b }\n"
             // These shows setting event.returnValue cannot be set to a non-boolean
-            // value in Chrome/Edge but can in (FF/IE11)
+            // value in Chrome but can in (FF/IE11)
             + "  a3.addEventListener('click', function (event) {"
             + "        var a = event.returnValue, p = event.defaultPrevented, b = 'x'; event.returnValue = b;"
             + "        log('listener: prevented=' + p + ' returnValue: ' + a "

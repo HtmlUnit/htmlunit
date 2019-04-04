@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,9 +38,9 @@ import org.junit.runners.model.TestClass;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -84,9 +84,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.EDGE) {
-                    expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
-                }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                     expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
                 }
@@ -111,9 +108,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             else {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
-                }
-                else if (browserVersion_ == BrowserVersion.EDGE) {
-                    expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                     expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
@@ -212,11 +206,17 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         return String.format("%s%s [%s]", prefix, className + '.' + method.getName(), browserString);
     }
 
+    // caching this methods is required by eclipse
+    // without this it is not possible to run a single test
+    private List<FrameworkMethod> testMethods_;
+
     @Override
     protected List<FrameworkMethod> computeTestMethods() {
-        final List<FrameworkMethod> methods = new ArrayList<>(super.computeTestMethods());
-        methods.sort((FrameworkMethod fm1, FrameworkMethod fm2) -> fm1.getName().compareTo(fm2.getName()));
-        return methods;
+        if (testMethods_ == null) {
+            testMethods_ = new ArrayList<>(super.computeTestMethods());
+        }
+
+        return testMethods_;
     }
 
     /**
@@ -246,12 +246,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             switch (browser) {
                 case IE:
                     if (browserVersion_.isIE()) {
-                        return true;
-                    }
-                    break;
-
-                case EDGE:
-                    if (browserVersion_.isEdge()) {
                         return true;
                     }
                     break;

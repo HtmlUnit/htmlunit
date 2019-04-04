@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -29,14 +29,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, EDGE})
+@JsxClass({CHROME, FF})
 @JsxClass(isJSObject = false, value = IE)
 public class CSSConditionRule extends CSSGroupingRule {
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60, EDGE})
+    @JsxConstructor({CHROME, FF60})
     public CSSConditionRule() {
     }
 
@@ -45,7 +45,7 @@ public class CSSConditionRule extends CSSGroupingRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSConditionRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSMediaRule rule) {
+    protected CSSConditionRule(final CSSStyleSheet stylesheet, final CSSMediaRuleImpl rule) {
         super(stylesheet, rule);
     }
 

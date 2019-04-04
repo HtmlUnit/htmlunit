@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,10 +56,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + "Hi";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
             final String request = primitiveWebServer.getRequests().get(0);
             final String[] headers = request.split("\\r\\n");
             final String[] result = new String[headers.length - 1];
@@ -94,10 +94,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + htmlResponse;
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.linkText("Click me")).click();
 
             final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
@@ -160,7 +160,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
@@ -198,7 +198,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
@@ -234,7 +234,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response, response2)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
@@ -257,10 +257,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "Content-Length: 0\r\n"
                 + "\r\n";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
-            driver.get("http://localhost:" + PORT_PRIMITIVE_SERVER + "?para=%u65E5");
+            driver.get("http://localhost:" + primitiveWebServer.getPort() + "?para=%u65E5");
             assertTrue(primitiveWebServer.getRequests().get(0),
                         primitiveWebServer.getRequests().get(0).contains("para=%u65E5"));
         }

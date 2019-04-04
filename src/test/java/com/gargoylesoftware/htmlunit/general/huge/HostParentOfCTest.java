@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -660,24 +660,6 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _CSSRule_CSSViewportRule() throws Exception {
-        test("CSSRule", "CSSViewportRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CSSRule_MozCSSKeyframesRule() throws Exception {
-        test("CSSRule", "MozCSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _CSSRuleList_CSSRuleList() throws Exception {
         test("CSSRuleList", "CSSRuleList");
@@ -768,15 +750,6 @@ public class HostParentOfCTest extends HostParentOf {
             FF = "true")
     public void _CSSValueList_CSSValueList() throws Exception {
         test("CSSValueList", "CSSValueList");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _CSSViewportRule_CSSViewportRule() throws Exception {
-        test("CSSViewportRule", "CSSViewportRule");
     }
 
     /**

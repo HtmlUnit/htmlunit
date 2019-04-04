@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -135,12 +135,14 @@ public class Iterator extends SimpleScriptable {
         if (!(scriptable instanceof SymbolScriptable)) {
             return false;
         }
-        final Object iterator = ((SymbolScriptable) scriptable).get(SymbolKey.ITERATOR, scriptable);
+
+        final Object iterator = ScriptableObject.getProperty(scriptable, SymbolKey.ITERATOR);
         if (iterator == Scriptable.NOT_FOUND) {
             return false;
         }
 
-        final Object obj = ((BaseFunction) iterator).call(context, thisObj.getParentScope(), scriptable, new Object[0]);
+        final Object obj = ((BaseFunction) iterator)
+                .call(context, thisObj.getParentScope(), scriptable, ScriptRuntime.emptyArgs);
 
         if (obj instanceof Iterator) {
             final Iterator it = (Iterator) obj;
@@ -160,12 +162,12 @@ public class Iterator extends SimpleScriptable {
         if (obj instanceof Scriptable) {
             // handle user defined iterator
             final Scriptable scriptableIterator = (Scriptable) obj;
-            final Object nextFunct = scriptableIterator.get(ES6Iterator.NEXT_METHOD, (Scriptable) obj);
+            final Object nextFunct = ScriptableObject.getProperty(scriptableIterator, ES6Iterator.NEXT_METHOD);
             if (!(nextFunct instanceof BaseFunction)) {
                 throw ScriptRuntime.typeError("undefined is not a function");
             }
             final Object nextObj = ((BaseFunction) nextFunct)
-                    .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+                    .call(context, thisObj.getParentScope(), scriptableIterator, ScriptRuntime.emptyArgs);
 
             ScriptableObject next = (ScriptableObject) nextObj;
             boolean done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
@@ -175,7 +177,7 @@ public class Iterator extends SimpleScriptable {
                 processor.accept(value);
 
                 next = (ScriptableObject) ((BaseFunction) nextFunct)
-                        .call(context, thisObj.getParentScope(), scriptableIterator, new Object[0]);
+                        .call(context, thisObj.getParentScope(), scriptableIterator, ScriptRuntime.emptyArgs);
                 done = (boolean) next.get(ES6Iterator.DONE_PROPERTY);
                 value = next.get(ES6Iterator.VALUE_PROPERTY);
             }

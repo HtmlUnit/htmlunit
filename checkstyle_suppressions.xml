@@ -25,7 +25,7 @@
     <suppress checks="LineLength" files="HtmlUnitRegExpProxyTest.java"/>
     <suppress checks="LineLength" files="JQuery1x8x2Test.java"/>
     <suppress checks="LineLength" files="JQuery1x11x3Test.java"/>
-    <suppress checks="LineLength" files="JQuery1x12x0Test.java"/>
+    <suppress checks="LineLength" files="JQuery3x3x1Test.java"/>
     <suppress checks="LineLength" files="Node.java" lines="1-30"/>
     <suppress checks="LineLength" files="NodeTest.java" lines="1-30"/>
     <suppress checks="LineLength" files="XMLDOMNamedNodeMap.java"/>

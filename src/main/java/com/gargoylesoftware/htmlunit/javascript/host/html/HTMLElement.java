@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -39,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -163,7 +163,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBig.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBold.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF, EDGE})
+@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlCitation.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlCode.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlDefinition.class, value = {CHROME, FF})
@@ -227,7 +227,7 @@ public class HTMLElement extends Element {
     /**
      * Static counter for {@link #uniqueID_}.
      */
-    private static int UniqueID_Counter_ = 1;
+    private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private final Set<String> behaviors_ = new HashSet<>();
     private String uniqueID_;
@@ -387,7 +387,7 @@ public class HTMLElement extends Element {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLElement() {
     }
 
@@ -844,7 +844,9 @@ public class HTMLElement extends Element {
             return BEHAVIOR_ID_DOWNLOAD;
         }
         else {
-            LOG.warn("Unimplemented behavior: " + behavior);
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Unimplemented behavior: " + behavior);
+            }
             return BEHAVIOR_ID_UNKNOWN;
         }
     }
@@ -888,7 +890,9 @@ public class HTMLElement extends Element {
                 behaviors_.remove(BEHAVIOR_DOWNLOAD);
                 break;
             default:
-                LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Unexpected behavior id: " + id + ". Ignoring.");
+                }
         }
     }
 
@@ -1259,7 +1263,7 @@ public class HTMLElement extends Element {
     @JsxGetter(IE)
     public String getUniqueID() {
         if (uniqueID_ == null) {
-            uniqueID_ = "ms__id" + UniqueID_Counter_++;
+            uniqueID_ = "ms__id" + HTMLElement.UniqueID_Counter_.incrementAndGet();
         }
         return uniqueID_;
     }
@@ -2044,6 +2048,7 @@ public class HTMLElement extends Element {
      * @return the {@code onwheel} event handler for this element
      */
     @JsxGetter({CHROME, FF60})
+    @Override
     public Function getOnwheel() {
         return super.getOnwheel();
     }
@@ -2053,6 +2058,7 @@ public class HTMLElement extends Element {
      * @param onwheel the {@code onwheel} event handler for this element
      */
     @JsxSetter({CHROME, FF60})
+    @Override
     public void setOnwheel(final Object onwheel) {
         super.setOnwheel(onwheel);
     }
@@ -2063,6 +2069,7 @@ public class HTMLElement extends Element {
      * if false, events can also fire at descendants of this element
      */
     @JsxFunction(IE)
+    @Override
     public void setCapture(final boolean retargetToElement) {
         super.setCapture(retargetToElement);
     }
@@ -2072,6 +2079,7 @@ public class HTMLElement extends Element {
      * @return true for success
      */
     @JsxFunction(IE)
+    @Override
     public boolean releaseCapture() {
         return super.releaseCapture();
     }
@@ -2111,7 +2119,8 @@ public class HTMLElement extends Element {
         if ("true".equals(attribute)) {
             return true;
         }
-        else if ("inherit".equals(attribute)) {
+
+        if ("inherit".equals(attribute)) {
             final DomNode parent = getDomNodeOrDie().getParentNode();
             if (parent != null) {
                 final Object parentScriptable = parent.getScriptableObject();

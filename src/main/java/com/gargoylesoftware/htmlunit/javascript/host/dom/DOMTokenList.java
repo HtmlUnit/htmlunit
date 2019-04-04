@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_REMOVE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import java.util.HashSet;
@@ -60,7 +59,7 @@ public class DOMTokenList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public DOMTokenList() {
     }
 
@@ -86,8 +85,8 @@ public class DOMTokenList extends SimpleScriptable {
         final String[] parts = StringUtils.split(value, whitespaceChars());
         if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
             final HashSet<String> elements = new HashSet<>(parts.length);
-            for (int i = 0; i < parts.length; i++) {
-                elements.add(parts[i]);
+            for (String part : parts) {
+                elements.add(part);
             }
             return elements.size();
         }
@@ -179,7 +178,7 @@ public class DOMTokenList extends SimpleScriptable {
             if (from > 0) {
                 result.append(value, 0, from);
                 if (to < value.length()) {
-                    result.append(" ");
+                    result.append(' ');
                 }
             }
             result.append(value, to, value.length());
@@ -270,9 +269,9 @@ public class DOMTokenList extends SimpleScriptable {
         DomAttr attr = (DomAttr) domNode.getAttributes().getNamedItem(attributeName_);
         if (null == attr) {
             attr = domNode.getPage().createAttribute(attributeName_);
-            domNode.setAttributeNode(attr);
         }
         attr.setValue(value);
+        domNode.setAttributeNode(attr);
     }
 
     private int position(final String value, final String token) {

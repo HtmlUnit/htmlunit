@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
 import java.io.StringReader;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -46,7 +46,7 @@ public class HTMLStyleElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLStyleElement() {
     }
 
@@ -65,7 +65,7 @@ public class HTMLStyleElement extends HTMLElement {
         final String css = style.getTextContent();
 
         final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
-        final org.w3c.dom.css.CSSStyleSheet cached = cache.getCachedStyleSheet(css);
+        final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(css);
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                 .getUrl().toExternalForm();
         if (cached != null) {

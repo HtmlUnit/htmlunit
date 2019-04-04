@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,25 +108,25 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     }
 
     private void test(final String... string) throws Exception {
-        String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+        final StringBuilder html = new StringBuilder(HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));\n"
-            + "    try {\n";
+            + "    try {\n");
         for (int i = 0; i < string.length - 1; i++) {
-            html += string[i] + "\n";
+            html.append(string[i]).append("\n");
         }
-        html +=
+        html.append(
             "      alert(" + string[string.length - 1] + ");\n"
             + "    } catch(e) {alert('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "</body></html>";
+            + "</body></html>");
 
         try {
-            loadPageWithAlerts2(html);
+            loadPageWithAlerts2(html.toString());
         }
         catch (final ComparisonFailure e) {
             final String msg = e.getMessage();
@@ -637,6 +637,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
+            CHROME = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da() throws Exception {
         test("new Intl.DateTimeFormat('da').format(date)");
@@ -647,6 +648,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20/12/2012",
+            CHROME = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da_dk() throws Exception {
         test("new Intl.DateTimeFormat('da-DK').format(date)");

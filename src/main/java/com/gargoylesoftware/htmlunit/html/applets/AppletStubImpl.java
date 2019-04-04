@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.applet.AppletStub;
 import java.net.URL;
 import java.util.HashMap;
 
+import com.gargoylesoftware.htmlunit.NotYetImplementedException;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -94,7 +95,6 @@ public class AppletStubImpl implements AppletStub {
      */
     @Override
     public boolean isActive() {
-        throw new RuntimeException(
-                "Not yet implemented! (com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl.isActive())");
+        throw new NotYetImplementedException("AppletStubImpl.isActive()");
     }
 }

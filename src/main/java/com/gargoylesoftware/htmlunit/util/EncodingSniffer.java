@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,6 +86,9 @@ public final class EncodingSniffer {
         new byte[] {'e', 'E'},
         new byte[] {'t', 'T'}
     };
+
+    private static final byte[] WHITESPACE = new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E};
+    private static final byte[] COMMENT_END = new byte[] {'-', '-', '>'};
 
     /** <a href="http://encoding.spec.whatwg.org/#encodings">Reference</a> */
     private static final Map<String, String> ENCODING_FROM_LABEL;
@@ -474,7 +477,7 @@ public final class EncodingSniffer {
      * @return {@code true} if the specified HTTP response headers indicate an HTML response
      */
     static boolean isHtml(final List<NameValuePair> headers) {
-        return contentTypeEndsWith(headers, "text/html");
+        return contentTypeEndsWith(headers, MimeType.TEXT_HTML);
     }
 
     /**
@@ -484,7 +487,7 @@ public final class EncodingSniffer {
      * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
     static boolean isXml(final List<NameValuePair> headers) {
-        return contentTypeEndsWith(headers, "text/xml", "application/xml", "text/vnd.wap.wml", "+xml");
+        return contentTypeEndsWith(headers, MimeType.TEXT_XML, "application/xml", "text/vnd.wap.wml", "+xml");
     }
 
     /**
@@ -684,7 +687,7 @@ public final class EncodingSniffer {
     static Charset sniffEncodingFromMetaTag(final byte[] bytes) {
         for (int i = 0; i < bytes.length; i++) {
             if (matches(bytes, i, COMMENT_START)) {
-                i = indexOfSubArray(bytes, new byte[] {'-', '-', '>'}, i);
+                i = indexOfSubArray(bytes, COMMENT_END, i);
                 if (i == -1) {
                     break;
                 }
@@ -720,13 +723,14 @@ public final class EncodingSniffer {
                 }
             }
             else if (i + 1 < bytes.length && bytes[i] == '<' && Character.isLetter(bytes[i + 1])) {
-                i = skipToAnyOf(bytes, i, new byte[] {0x09, 0x0A, 0x0C, 0x0D, 0x20, 0x3E});
+                i = skipToAnyOf(bytes, i, WHITESPACE);
                 if (i == -1) {
                     break;
                 }
-                Attribute att;
-                while ((att = getAttribute(bytes, i)) != null) {
+                Attribute att = getAttribute(bytes, i);
+                while (att != null) {
                     i = att.getUpdatedIndex();
+                    att = getAttribute(bytes, i);
                 }
             }
             else if (i + 2 < bytes.length && bytes[i] == '<' && bytes[i + 1] == '/' && Character.isLetter(bytes[i + 2])) {
@@ -734,9 +738,10 @@ public final class EncodingSniffer {
                 if (i == -1) {
                     break;
                 }
-                Attribute attribute;
-                while ((attribute = getAttribute(bytes, i)) != null) {
+                Attribute attribute = getAttribute(bytes, i);
+                while (attribute != null) {
                     i = attribute.getUpdatedIndex();
+                    attribute = getAttribute(bytes, i);
                 }
             }
             else if (matches(bytes, i, OTHER_START)) {
@@ -1007,8 +1012,8 @@ public final class EncodingSniffer {
         for (int x = 0; x < sought.length; x++) {
             final byte[] possibilities = sought[x];
             boolean match = false;
-            for (int y = 0; y < possibilities.length; y++) {
-                if (bytes[i + x] == possibilities[y]) {
+            for (byte possibility : possibilities) {
+                if (bytes[i + x] == possibility) {
                     match = true;
                     break;
                 }

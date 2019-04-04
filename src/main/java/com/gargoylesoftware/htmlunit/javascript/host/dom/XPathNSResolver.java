@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,13 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
@@ -32,8 +31,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlUtil;
  * @author Ahmed Ashour
  * @author Chuck Dumont
  */
-@JsxClass(EDGE)
-@JsxClass(isJSObject = false, value = CHROME)
+@JsxClass(isJSObject = false, value = {CHROME, FF})
 public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
 
     private Node element_;
@@ -41,7 +39,6 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public XPathNSResolver() {
     }
 

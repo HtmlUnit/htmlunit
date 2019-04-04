@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
  * A JavaScript object for {@code Atomics}.
  *
  * @author Ronald Brill
  */
-//disabled because of Spectre: @JsxClass(CHROME)
+@JsxClass(CHROME)
 public class Atomics extends SimpleScriptable {
 }

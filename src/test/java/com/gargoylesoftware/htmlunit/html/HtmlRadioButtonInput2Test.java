@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -530,7 +531,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1167,5 +1168,30 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         assertTrue(radio2.isSelected());
         assertFalse(radio3.isSelected());
         assertTrue(radio4.isSelected());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

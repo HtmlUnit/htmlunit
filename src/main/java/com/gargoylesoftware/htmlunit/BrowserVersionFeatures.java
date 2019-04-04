@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -197,10 +196,6 @@ public enum BrowserVersionFeatures {
     /** <code>Event.bubbles</code> and <code>Event.cancelable</code> are false in 'onhashchange' event handler. */
     @BrowserFeature({CHROME, IE})
     EVENT_ONHASHCHANGE_BUBBLES_FALSE,
-
-    /** <code>Event.cancelable</code> is false in 'onload' event handler. */
-    @BrowserFeature({CHROME, FF, IE})
-    EVENT_ONLOAD_CANCELABLE_FALSE,
 
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)
@@ -544,13 +539,13 @@ public enum BrowserVersionFeatures {
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_1,
 
     /** Dates format pattern 2. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature(CHROME)
     HTTP_COOKIE_EXTENDED_DATE_PATTERNS_2,
 
     /** Indicates that the path is extracted from the location.
      * Sample: from the location /foo/boo only /foo is used.
      */
-    @BrowserFeature({IE, EDGE})
+    @BrowserFeature(IE)
     HTTP_COOKIE_EXTRACT_PATH_FROM_LOCATION,
 
     /** domain '.org' is handled as 'org'. */
@@ -561,7 +556,7 @@ public enum BrowserVersionFeatures {
      * instead of 2000 (Two digits years are interpreted as 20xx
      * if before 1970 and as 19xx otherwise).
      */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     HTTP_COOKIE_START_DATE_1970,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
@@ -709,10 +704,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that document.createAttribute converts the local name to lowercase. */
     @BrowserFeature({CHROME, FF})
     JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE,
-
-    /** Javascript function document.createElement accepts only tag names. */
-    @BrowserFeature({CHROME, FF, IE})
-    JS_DOCUMENT_CREATE_ELEMENT_STRICT,
 
     /** The browser supports the design mode 'Inherit'. */
     @BrowserFeature(IE)
@@ -881,11 +872,6 @@ public enum BrowserVersionFeatures {
     /** The Enumerator constructor throws an exception if called with HtmlCollections as parameter. */
     @BrowserFeature(IE)
     JS_ENUMERATOR_CONSTRUCTOR_THROWS,
-
-    /** Indicates that for(x in y) should enumerate the numbers first. */
-    @BrowserFeature({CHROME, FF,
-        IE})
-    JS_ENUM_NUMBERS_FIRST,
 
     /** Javascript {@code Error.captureStackTrace}. */
     @BrowserFeature(CHROME)
@@ -1085,10 +1071,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
-    /** Map ignores the argument constructor. */
-    @BrowserFeature(IE)
-    JS_MAP_CONSTRUCTOR_IGNORE_ARGUMENT,
-
     /** Indicates that an empty media list is represented by the string 'all'. */
     @BrowserFeature(IE)
     JS_MEDIA_LIST_ALL,
@@ -1106,7 +1088,7 @@ public enum BrowserVersionFeatures {
     JS_MENU_TYPE_PASS,
 
     /** Indicates if the String representation of a native function is without newline. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature(CHROME)
     JS_NATIVE_FUNCTION_TOSTRING_COMPACT,
 
     /** Indicates if the String representation of a native function begins and ends with a {@code \n}.*/
@@ -1179,7 +1161,7 @@ public enum BrowserVersionFeatures {
     JS_PROPERTY_DESCRIPTOR_NEW_LINE,
 
     /** Support {@code Reflect}. */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     JS_REFLECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
@@ -1245,10 +1227,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE,
 
-    /** Set ignores the constructor argument. */
-    @BrowserFeature(IE)
-    JS_SET_CONSTRUCTOR_IGNORE_ARGUMENT,
-
     /** Whether to get any property from the items first. */
     @BrowserFeature(IE)
     JS_STORAGE_GET_FROM_ITEMS,
@@ -1285,7 +1263,7 @@ public enum BrowserVersionFeatures {
     JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED,
 
     /** Supports Symbol. */
-    @BrowserFeature({CHROME, FF, EDGE})
+    @BrowserFeature({CHROME, FF})
     JS_SYMBOL,
 
     /** The width cell height does not return negative values. */
@@ -1375,10 +1353,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
-    /** WeakMap ignores the constructor argument. */
-    @BrowserFeature(IE)
-    JS_WEAKMAP_CONSTRUCTOR_IGNORE_ARGUMENT,
-
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
     @BrowserFeature({CHROME, FF})
@@ -1419,7 +1393,7 @@ public enum BrowserVersionFeatures {
      * Difference of window.outer/inner height is 89.
      */
     @BrowserFeature(CHROME)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133,
 
     /**
      * Difference of window.outer/inner height is 63.

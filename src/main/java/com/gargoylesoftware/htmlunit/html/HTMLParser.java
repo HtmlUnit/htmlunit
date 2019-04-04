@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -232,6 +232,8 @@ public final class HTMLParser {
             // xml content is different
             if (xhtml) {
                 domBuilder.setFeature(HTMLScanner.ALLOW_SELFCLOSING_TAGS, true);
+                domBuilder.setFeature(HTMLScanner.SCRIPT_STRIP_CDATA_DELIMS, true);
+                domBuilder.setFeature(HTMLScanner.STYLE_STRIP_CDATA_DELIMS, true);
             }
         }
         catch (final Exception e) {
@@ -620,20 +622,15 @@ public final class HTMLParser {
                     if (content.startsWith("IE=")) {
                         final String mode = content.substring(3).trim();
                         final int version = page_.getWebClient().getBrowserVersion().getBrowserVersionNumeric();
-                        if ("edge".equals(mode)) {
-                            ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(version);
+                        try {
+                            int value = Integer.parseInt(mode);
+                            if (value > version) {
+                                value = version;
+                            }
+                            ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
                         }
-                        else {
-                            try {
-                                int value = Integer.parseInt(mode);
-                                if (value > version) {
-                                    value = version;
-                                }
-                                ((HTMLDocument) page_.getScriptableObject()).forceDocumentMode(value);
-                            }
-                            catch (final Exception e) {
-                                // ignore
-                            }
+                        catch (final Exception e) {
+                            // ignore
                         }
                     }
                 }

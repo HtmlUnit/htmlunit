@@ -7,7 +7,162 @@
     </properties>
 
     <body>
-        <release version="2.34" date="...., 2018" description="Bugfixes, CHROME 69">
+        <release version="2.34.1" date="...., 2019" description="Bugfixes, CHROME 73, reworked javascript logging">
+            <action type="fix" dev="rbri" issue="#22">
+                Fix an error in the url circle detection when loading frame content.
+            </action>
+            <action type="fix" dev="rbri">
+                Avoid scientific notation when converting float back to strings (CSSParser)
+            </action>
+            <action type="update" dev="rbri">
+                Logging documentation updated.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: JavaScriptErrorListener interface defines one new method
+                warn(String, String, int, String, int).
+                Please add an implementation to your own implementations of this interface.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: DefaultJavaScriptErrorListener now logs all messages.
+            </action>
+            <action type="add" dev="rbri">
+                Class SilentJavaScriptErrorListener added.
+            </action>
+            <action type="fix" dev="rbri">
+                JavaScriptErrorListener is no longer saved from the HtmlUnitContextFactory to be sure
+                to use always the currently configured one.
+            </action>
+            <action type="remove" dev="rbri">
+                Class com.gargoylesoftware.htmlunit.javascript.StrictErrorHandler removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Class com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter removed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: some array length border cases fixed
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: array length null/undefined fixed
+            </action>
+            <action type="add" dev="rbri">
+                core-js: array includes added
+            </action>
+            <action type="add" dev="rbri">
+                core-js: array padStart and padEnd added
+            </action>
+            <action type="fix" dev="rbri">
+                Image handler are processed (again) if an image is imported into a new document.
+            </action>
+            <action type="fix" dev="rbri">
+                Page of the imported node fixed when importing.
+            </action>
+            <action type="fix" dev="rbri" issue="2008">
+                There is no need for a window if constructing a new event handler.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix NPE when getting the baseUrl from a page created using DOMImplementation.createHTMLDocument().
+            </action>
+            <action type="fix" dev="rbri">
+                Invalid urls with the about protocol (e.g. about:htmlunit) are now throwing a MalformedURLException
+                to be handled like any other IOException.
+            </action>
+            <action type="fix" dev="rbri" issue="19">
+                HtmlRangeInput improvements.
+            </action>
+            <action type="fix" dev="rbri" issue="1923">
+                Input element with type date now stores the value typed in.
+            </action>
+        </release>
+
+        <release version="2.34.1" date="March 4, 2019" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix insert position for elements with contenteditable='true'.
+            </action>
+            <action type="fix" dev="rbri" issue="18">
+                Send 'image/png' as mime type when uploading a png file.
+            </action>
+        </release>
+
+        <release version="2.34.0" date="Feb 28, 2019" description="Bugfixes, CHROME 72, CSSParser cleanup">
+            <action type="fix" dev="rbri">
+                CSS declarations in CDATA sections are not processed for XHtml and Xml pages.
+            </action>
+            <action type="fix" dev="rbri" issue="2012">
+                Script code in CDATA sections are not processed for XHtml and Xml pages.
+            </action>
+            <action type="fix" dev="rbri" issue="2011">
+                Neko-HtmlUnit parser: entity reference handling rewritten according to the spec.
+                All specified character references are now supported and a bunch of fixes where
+                also made for numeric references.
+            </action>
+            <action type="fix" dev="rbri" issue="17">
+                ClassList.toggle/add/remove should take care of the HtmlAttributeChangeListener.
+            </action>
+            <action type="fix" dev="rbri" issue="2010">
+                Audio node created from js now supports nodeType and nodeName property.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpClient to 4.5.7.
+            </action>
+            <action type="update" dev="rbri">
+                Avoid the try to add a response to cache if the response is already from cache or an redirect.
+            </action>
+            <action type="fix" dev="rbri" issue="14">
+                Fix caching for redirected calls.
+            </action>
+            <action type="fix" dev="rbri" issue="258">
+                Some fixes for broken attribute processing done in neko-htmlunit.
+            </action>
+            <action type="update" dev="rbri">
+                JavaScriptExecutor is no longer serializable.
+            </action>
+            <action type="add" dev="rbri" issue="2007">
+                FileReader.readAsText() added.
+            </action>
+            <action type="update" dev="rbri">
+                Major cleanup of the htmlunit-cssparser; all the references to the w3c classes are removed.
+                This avoid a lot of instanceof/cast processing and will make it simpler to enhance the parser
+                in the future.
+            </action>
+            <action type="add" dev="rbri">
+                New method Window.animateAnimationsFrames(). Use this to force one animation cycle.
+            </action>
+            <action type="add" dev="rbri">
+                Huge improvement for CanvasRenderingContext2D; we have working path handling and transformations now.
+            </action>
+            <action type="update" dev="rbri">
+                Another Rhino update; Array.fill, Array.keys, Array.entries, and Array.values is now supported.
+            </action>
+            <action type="fix" dev="rbri">
+                HtmlPage.save(File) and XmlSerializer.save(SgmlPage, File) are using the correct file encoding.
+            </action>
+            <action type="fix" dev="rbri" issue="#1989">
+                No longer fail if the generated bytecode for method exceeds 64K limit;
+                we (Rhino) will fall back to the interpreter mode.
+            </action>
+            <action type="update" dev="rbri">
+                We are using the Map/Set/WeakMap/WeakMap implementation from Rhino now, our own impl is gone.
+            </action>
+            <action type="fix" dev="rbri">
+                Improved support for insecure socket connections; InsecureTrustManager now
+                extends X509ExtendedTrustManager instead of implementing only X509TrustManager.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix Promise.resolve() called with an object having no 'then' slot.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix handling of invalid values in media queries.
+            </action>
+            <action type="fix" dev="rbri" issue="1998" due-to="Rural Hunter">
+                Browsers are supporting GMT time format for cookie expires parsing.
+            </action>
+            <action type="fix" dev="rbri" issue="1995" due-to="Joerg Werner">
+                Fix calculation of absolute url from relative one if dots present.
+            </action>
+            <action type="fix" dev="rbri" issue="1993">
+                Setting the innerHtml has to clear the computed styles to force recalculation
+                based on the new content.
+            </action>
             <action type="fix" dev="rbri">
                 Map and Set forEach() are using undefined as this context in strict mode.
             </action>

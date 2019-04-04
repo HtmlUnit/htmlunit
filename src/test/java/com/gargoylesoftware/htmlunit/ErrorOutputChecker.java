@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,24 +39,28 @@ public class ErrorOutputChecker implements TestRule {
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
             // chrome
-            Pattern.compile("Starting ChromeDriver " + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
-                    + "\\.[0-9]+ ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
-                    + "Only local connections are allowed\\.\r?\n"),
+            Pattern.compile("Starting ChromeDriver "
+                    + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
+                    + " ?\\(?[0-9a-f]*\\)? on port \\d*\r?\n"
+                    + "Only local connections are allowed\\.\r?\n"
+                    + "Please protect ports used by ChromeDriver and related test "
+                            + "frameworks to prevent access by malicious code\\.\r?\n"),
+            Pattern.compile(".*\\sorg.openqa.selenium.remote.ProtocolHandshake createSession\r?\n"),
+            Pattern.compile("INFO: Detected dialect: OSS\r?\n"),
+
             // GeckoDriver
             Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
                                 + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n.*\\r\\n.*TLS certificate errors will be ignored for this session\\r\\n"),
+            Pattern.compile("Unable to read VR Path Registry from .*\\r\\n"
+                    + ".*\\r\\n"),
 
             // ie
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
                     + ExternalTest.IE_DRIVER_.replace(".", "\\.") + "\r?\n"
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
-            // edge
-            Pattern.compile(".*Listening on http://localhost:\\d*/ \r\r?\n"),
-            Pattern.compile(".*Stopping server.\r\r?\n"),
-            Pattern.compile(".*ProtocolHandshake createSession\r?\n(INFO|INFORMATION): Detected dialect: .*\r?\n"),
 
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,7 +127,9 @@ public class ActiveXObject extends SimpleScriptable {
             }
         }
 
-        LOG.warn("Automation server can't create object for '" + activeXName + "'.");
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("Automation server can't create object for '" + activeXName + "'.");
+        }
         throw Context.reportRuntimeError("Automation server can't create object for '" + activeXName + "'.");
     }
 

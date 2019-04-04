@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -590,37 +590,7 @@ public class HostParentOfMTest extends HostParentOf {
     }
 
     /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _MozContactChangeEvent_MozContactChangeEvent() throws Exception {
-        test("MozContactChangeEvent", "MozContactChangeEvent");
-    }
-
-    /**
      * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _MozCSSKeyframesRule_MozCSSKeyframesRule() throws Exception {
-        test("MozCSSKeyframesRule", "MozCSSKeyframesRule");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _MozPowerManager_MozPowerManager() throws Exception {
-        test("MozPowerManager", "MozPowerManager");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
      */
     @Test
     @Alerts(DEFAULT = "false",
@@ -649,16 +619,6 @@ public class HostParentOfMTest extends HostParentOf {
             FF = "true")
     public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription", "mozRTCSessionDescription");
-    }
-
-    /**
-     * @throws Exception
-     *             if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _MozSettingsEvent_MozSettingsEvent() throws Exception {
-        test("MozSettingsEvent", "MozSettingsEvent");
     }
 
     /**

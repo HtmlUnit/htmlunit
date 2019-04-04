@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -113,11 +112,12 @@ public class HTMLDocument extends Document {
     private boolean writeInCurrentDocument_ = true;
 
     private boolean closePostponedAction_;
+    private boolean executionExternalPostponed_;
 
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLDocument() {
     }
 
@@ -263,8 +263,6 @@ public class HTMLDocument extends Document {
         }
         throw Context.reportRuntimeError("Function can't be used detached from document");
     }
-
-    private boolean executionExternalPostponed_;
 
     /**
      * This a hack!!! A cleaner way is welcome.
@@ -448,7 +446,7 @@ public class HTMLDocument extends Document {
                 message.append(StringUtils.abbreviateMiddle(content, ".", 100));
                 message.append("' (scriptTagCount: " + scriptTagCount);
                 message.append(" tagState: " + tagState);
-                message.append(")");
+                message.append(')');
                 LOG.debug(message.toString());
             }
             return false;
@@ -494,7 +492,7 @@ public class HTMLDocument extends Document {
             }
             if (!HtmlUnitBrowserCompatCookieSpec.EMPTY_COOKIE_NAME.equals(cookie.getName())) {
                 builder.append(cookie.getName());
-                builder.append("=");
+                builder.append('=');
             }
             builder.append(cookie.getValue());
         }
@@ -617,6 +615,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @JsxGetter
+    @Override
     public Element getDocumentElement() {
         implicitCloseIfNecessary();
         return super.getDocumentElement();
@@ -819,7 +818,7 @@ public class HTMLDocument extends Document {
         };
     }
 
-    private List<DomNode> getItComputeElements(final HtmlPage page, final String name,
+    private static List<DomNode> getItComputeElements(final HtmlPage page, final String name,
             final boolean forIDAndOrName, final boolean alsoFrames) {
         final List<DomElement> elements;
         if (forIDAndOrName) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -27,13 +26,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF52, IE, EDGE})
+@JsxClass({FF52, IE})
 public class SVGPathSegCurvetoQuadraticSmoothRel extends SVGPathSeg {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({FF52, EDGE})
+    @JsxConstructor(FF52)
     public SVGPathSegCurvetoQuadraticSmoothRel() {
     }
 

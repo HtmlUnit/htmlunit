@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -265,26 +265,6 @@ public class HostParentOfWTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true")
-    public void _WebKitAnimationEvent_AnimationEvent() throws Exception {
-        test("WebKitAnimationEvent", "AnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitAnimationEvent_WebKitAnimationEvent() throws Exception {
-        test("WebKitAnimationEvent", "WebKitAnimationEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
     @NotYetImplemented(CHROME)
     public void _WebKitCSSMatrix_DOMMatrix() throws Exception {
         test("WebKitCSSMatrix", "DOMMatrix");
@@ -410,26 +390,6 @@ public class HostParentOfWTest extends HostParentOf {
             CHROME = "true")
     public void _webkitSpeechRecognitionEvent_webkitSpeechRecognitionEvent() throws Exception {
         test("webkitSpeechRecognitionEvent", "webkitSpeechRecognitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitTransitionEvent_TransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "TransitionEvent");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true")
-    public void _WebKitTransitionEvent_WebKitTransitionEvent() throws Exception {
-        test("WebKitTransitionEvent", "WebKitTransitionEvent");
     }
 
     /**

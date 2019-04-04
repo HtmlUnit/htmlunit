@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -42,8 +43,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1<>5", "5<>2", "1<>2", "5<>1", "2<>1", "1<>1", "5<>9"},
+            CHROME = {"5<>1", "2<>5", "2<>5", "2<>1", "1<>2", "1<>1", "9<>2"},
             IE = {"5<>1", "2<>5", "2<>1", "2<>5", "1<>5", "1<>2", "1<>1", "9<>5"})
-    @NotYetImplemented(IE)
+    @NotYetImplemented({CHROME, IE})
     public void sortSteps() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

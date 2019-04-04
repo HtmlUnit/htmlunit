@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.selenium;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
@@ -36,6 +38,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
  * TypingTest.java</a>.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class TypingTest extends SeleniumTest {
@@ -347,7 +350,7 @@ public class TypingTest extends SeleniumTest {
                 "keydown (target) a pressed; removing keyup (body)"},
             IE = {"keydown (target) keyup (target) keyup (body)",
                 "keydown (target) a pressed; removing"})
-    @BuggyWebDriver
+    @BuggyWebDriver({FF52, IE})
     public void canSafelyTypeOnElementThatIsRemovedFromTheDomOnKeyPress() {
         final WebDriver driver = getWebDriver("/key_tests/remove_on_keypress.html");
 
@@ -368,5 +371,36 @@ public class TypingTest extends SeleniumTest {
     private static String getValueText(final WebElement el) {
         // Standardize on \n and strip any trailing whitespace.
         return el.getAttribute("value").replace("\r\n", "\n").trim();
+    }
+
+    /**
+     * If the first typed character is prevented by preventing it's
+     * KeyPress-Event, the remaining string should still be appended and NOT
+     * prepended.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typePreventedCharacterFirst() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function stopEnterKey(evt) {\n"
+            + "    var evt = evt || window.event;\n"
+            + "    if (evt && evt.keyCode === 13)\n"
+            + "    {\n"
+            + "      evt.preventDefault()\n"
+            + "    }\n"
+            + "  }\n"
+            + "  window.document.onkeypress = stopEnterKey;\n"
+            + "</script></head>\n"
+            + "<body>\n"
+            + "  <input id='myInput' type='text' value='Hello'>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement input = driver.findElement(By.id("myInput"));
+        input.sendKeys("World");
+
+        assertEquals("'World' should be appended.", "HelloWorld", input.getAttribute("value"));
     }
 }

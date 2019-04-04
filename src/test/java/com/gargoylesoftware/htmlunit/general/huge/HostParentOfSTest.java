@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
+    @Alerts(DEFAULT = "false",
+            CHROME = "true")
     public void _SharedArrayBuffer_SharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer", "SharedArrayBuffer");
     }
@@ -203,8 +204,8 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SpeechSynthesisErrorEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisErrorEvent", "SpeechSynthesisErrorEvent");
     }
@@ -215,6 +216,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true")
+    @NotYetImplemented(CHROME)
     public void _SpeechSynthesisEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisErrorEvent");
     }
@@ -341,15 +343,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGAElement_SVGAElement() throws Exception {
         test("SVGAElement", "SVGAElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGAltGlyphElement_SVGAltGlyphElement() throws Exception {
-        test("SVGAltGlyphElement", "SVGAltGlyphElement");
     }
 
     /**
@@ -644,27 +637,9 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGDocument_SVGDocument() throws Exception {
-        test("SVGDocument", "SVGDocument");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGElement_SVGAElement() throws Exception {
         test("SVGElement", "SVGAElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGElement_SVGAltGlyphElement() throws Exception {
-        test("SVGElement", "SVGAltGlyphElement");
     }
 
     /**
@@ -1710,15 +1685,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGGraphicsElement_SVGAltGlyphElement() throws Exception {
-        test("SVGGraphicsElement", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
     public void _SVGGraphicsElement_SVGCircleElement() throws Exception {
@@ -2652,15 +2618,6 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("false")
-    public void _SVGTextContentElement_SVGAltGlyphElement() throws Exception {
-        test("SVGTextContentElement", "SVGAltGlyphElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("true")
     public void _SVGTextContentElement_SVGTextContentElement() throws Exception {
         test("SVGTextContentElement", "SVGTextContentElement");
@@ -2718,15 +2675,6 @@ public class HostParentOfSTest extends HostParentOf {
     @Alerts("true")
     public void _SVGTextPathElement_SVGTextPathElement() throws Exception {
         test("SVGTextPathElement", "SVGTextPathElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("false")
-    public void _SVGTextPositioningElement_SVGAltGlyphElement() throws Exception {
-        test("SVGTextPositioningElement", "SVGAltGlyphElement");
     }
 
     /**

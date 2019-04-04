@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -359,6 +359,50 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <audio id='a1'/>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "1"})
+    public void newAudioNodeType() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio();\n"
+            + "    alert(a);\n"
+            + "    alert(a.nodeType);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLAudioElement]", "AUDIO"})
+    public void newAudioNodeName() throws Exception {
+        final String html = ""
+            + "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var a = new Audio();\n"
+            + "    alert(a);\n"
+            + "    alert(a.nodeName);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);

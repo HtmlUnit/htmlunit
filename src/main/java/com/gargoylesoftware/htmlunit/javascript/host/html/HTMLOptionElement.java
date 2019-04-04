@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.xml.sax.helpers.AttributesImpl;
@@ -56,7 +55,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param defaultSelected Whether the option is initially selected
      * @param selected the current selection state of the option
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public void jsConstructor(final String newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();

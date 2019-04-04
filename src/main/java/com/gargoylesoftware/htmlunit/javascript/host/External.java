@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -29,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(FF52)
+@JsxClass({CHROME, FF52})
 @JsxClass(isJSObject = false)
 public class External extends SimpleScriptable {
 
@@ -43,16 +44,16 @@ public class External extends SimpleScriptable {
     /**
      * Empty implementation.
      */
-    @JsxFunction(IE)
-    public void AutoCompleteSaveForm() {
+    @JsxFunction(value = IE, functionName = "AutoCompleteSaveForm")
+    public void autoCompleteSaveForm() {
         // dummy
     }
 
     /**
      * Empty implementation.
      */
-    @JsxFunction
-    public void AddSearchProvider() {
+    @JsxFunction(functionName = "AddSearchProvider")
+    public void addSearchProvider() {
         // dummy
     }
 
@@ -60,8 +61,8 @@ public class External extends SimpleScriptable {
      * Empty implementation.
      * @return 0
      */
-    @JsxFunction
-    public int IsSearchProviderInstalled() {
+    @JsxFunction(functionName = "IsSearchProviderInstalled")
+    public int isSearchProviderInstalled() {
         return 0;
     }
 }

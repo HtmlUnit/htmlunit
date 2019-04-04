@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,12 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.w3c.dom.stylesheets.MediaList;
-
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
@@ -31,15 +28,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * A JavaScript object for {@code StyleMedia}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(isJSObject = false, value = CHROME)
-@JsxClass({IE, EDGE})
+@JsxClass(IE)
 public class StyleMedia extends SimpleScriptable {
 
     /**
      * Default constructor.
      */
-    @JsxConstructor(EDGE)
     public StyleMedia() {
     }
 
@@ -60,7 +57,7 @@ public class StyleMedia extends SimpleScriptable {
     @JsxFunction
     public boolean matchMedium(final String media) {
         final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-        final MediaList mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
+        final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
         return CSSStyleSheet.isActive(this, mediaList);
     }
 

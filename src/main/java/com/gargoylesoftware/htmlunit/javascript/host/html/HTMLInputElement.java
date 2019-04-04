@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -84,7 +83,7 @@ public class HTMLInputElement extends FormField {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public HTMLInputElement() {
     }
 
@@ -485,6 +484,24 @@ public class HTMLInputElement extends FormField {
     @JsxSetter
     public void setMax(final String max) {
         getDomNodeOrDie().setAttribute("max", max);
+    }
+
+    /**
+     * Gets the {@code step} property.
+     * @return the {@code step} property
+     */
+    @JsxGetter
+    public String getStep() {
+        return getDomNodeOrDie().getAttributeDirect("step");
+    }
+
+    /**
+     * Sets the {@code step} property.
+     * @param step the {@code step} property
+     */
+    @JsxSetter
+    public void setStep(final String step) {
+        getDomNodeOrDie().setAttribute("step", step);
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
@@ -49,6 +50,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts("1")
     public void loadImageWithoutSource() throws Exception {
         loadImage("");
+        loadImageInnerHtml("");
+        loadImageImportNodeHtml("");
     }
 
     /**
@@ -58,6 +61,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts("1")
     public void loadImageEmptySource() throws Exception {
         loadImage("src=''");
+        loadImageInnerHtml("src=''");
+        loadImageImportNodeHtml("src=''");
     }
 
     /**
@@ -68,15 +73,21 @@ public class HtmlImage2Test extends WebDriverTestCase {
             FF = "2")
     public void loadImageBlankSource() throws Exception {
         loadImage("src=' '");
+        loadImageInnerHtml("src=' '");
+        loadImageImportNodeHtml("src=' '");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            IE = "1")
+    @NotYetImplemented(IE)
     public void loadImage() throws Exception {
         loadImage("src='img.jpg'");
+        loadImageInnerHtml("src='img.jpg'");
+        loadImageImportNodeHtml("src='img.jpg'");
     }
 
     /**
@@ -86,6 +97,51 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @Alerts("2")
     public void loadImageUnknown() throws Exception {
         loadImage("src='unknown'");
+        loadImageInnerHtml("src='unknown'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1")
+    @NotYetImplemented(CHROME)
+    public void loadImageUnknown2() throws Exception {
+        loadImageImportNodeHtml("src='unknown'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void loadImageBrokenUrl() throws Exception {
+        loadImage("src='rbri://nowhere'");
+        loadImageInnerHtml("src='rbri://nowhere'");
+        loadImageImportNodeHtml("src='rbri://nowhere'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void loadImageAboutBlank() throws Exception {
+        loadImage("src='about:blank'");
+        loadImageInnerHtml("src='about:blank'");
+        loadImageImportNodeHtml("src='about:blank'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void loadImageAboutX() throws Exception {
+        loadImage("src='about:x'");
+        loadImageInnerHtml("src='about:x'");
+        loadImageImportNodeHtml("src='about:x'");
     }
 
     /**
@@ -97,6 +153,19 @@ public class HtmlImage2Test extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void loadImageWrongType() throws Exception {
         loadImage("src='" + URL_FIRST + "'");
+        loadImageInnerHtml("src='" + URL_FIRST + "'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1",
+            IE = "1")
+    @NotYetImplemented({CHROME, IE})
+    public void loadImageWrongType2() throws Exception {
+        loadImageImportNodeHtml("src='" + URL_FIRST + "'");
     }
 
     private void loadImage(final String src) throws Exception {
@@ -111,20 +180,90 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "<script>\n"
             + "  function test() {\n"
             + "    var img = document.getElementById('myImage');\n"
-            + "    img.width + img.width;\n"
-            + "    img.height + img.height;\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <img id='myImage' " + src + " >\n"
             + "</body></html>";
 
+        final int count = getMockWebConnection().getRequestCount();
         final WebDriver driver = getWebDriver();
         if (driver instanceof HtmlUnitDriver) {
             ((HtmlUnitDriver) driver).setDownloadImages(true);
         }
         loadPage2(html);
-        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - count);
+    }
+
+    private void loadImageInnerHtml(final String src) throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var tester = document.getElementById('tester');\n"
+            + "    tester.innerHTML = \"<img id='myImage' " + src + " >\";\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <button id='test' onclick='test()'>Test</button>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        driver.findElement(By.id("test")).click();
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - count);
+    }
+
+    private void loadImageImportNodeHtml(final String src) throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_FIRST, "img.jpg");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var tester = document.getElementById('tester');\n"
+
+            + "    var doc = document.implementation.createHTMLDocument('test');\n"
+            + "    doc.body.innerHTML = \"<img id='myImage' " + src + " >\";\n"
+
+            + "    var srcNode = doc.getElementById('myImage');\n"
+            + "    var newNode = document.importNode(srcNode, true);\n"
+            + "    document.body.replaceChild(newNode, tester);\n"
+            + "    alert('before');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body>\n"
+            + "  <button id='test' onclick='test()'>Test</button>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+        final WebDriver driver = getWebDriver();
+        if (driver instanceof HtmlUnitDriver) {
+            ((HtmlUnitDriver) driver).setDownloadImages(true);
+        }
+        loadPage2(html);
+
+        driver.findElement(By.id("test")).click();
+        verifyAlerts(driver, "before");
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount() - count);
     }
 
     /**

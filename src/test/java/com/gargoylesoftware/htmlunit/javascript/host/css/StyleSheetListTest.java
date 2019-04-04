@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -94,7 +95,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         final String css = "div {color:red}";
 
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
         loadPageWithAlerts2(html);
     }
 
@@ -163,7 +164,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <body onload='test()'>abc</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", "text/html");
+        getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPageWithAlerts2(html);
     }
 
@@ -191,11 +192,11 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         final String css = "";
 
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, "0"));
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
+        getMockWebConnection().setDefaultResponse(css, 200, "OK", MimeType.TEXT_CSS, headers);
 
         loadPageWithAlerts2(html);
     }
@@ -224,10 +225,10 @@ public class StyleSheetListTest extends WebDriverTestCase {
 
         final String css = "div {color:red}";
 
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
-        getMockWebConnection().setDefaultResponse(css, 200, "OK", "text/css", headers);
+        getMockWebConnection().setDefaultResponse(css, 200, "OK", MimeType.TEXT_CSS, headers);
 
         loadPageWithAlerts2(html);
     }
@@ -265,7 +266,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "</html>";
 
         final String css = "div {color:red}";
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html);
     }
@@ -295,7 +296,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "</html>";
 
         final String css = "div {color:red}";
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html);
     }
@@ -323,7 +324,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
               + "</html>";
 
         final String css = "div {color:red}";
-        getMockWebConnection().setDefaultResponse(css, "text/css");
+        getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html);
     }

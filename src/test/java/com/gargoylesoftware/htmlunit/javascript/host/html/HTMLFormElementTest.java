@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1094,8 +1095,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     public void enctype_incorrect() throws Exception {
-        enctypeTest("text/html", "post", "application/x-www-form-urlencoded");
-        enctypeTest("text/html", "get", null);
+        enctypeTest(MimeType.TEXT_HTML, "post", "application/x-www-form-urlencoded");
+        enctypeTest(MimeType.TEXT_HTML, "get", null);
     }
 
     /**
@@ -1220,7 +1221,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
                 + "<script>alert('page" + i + "');</script>\n"
                 + "</head></html>";
             connection.setResponse(new URL(URL_FIRST, "foo" + i), htmlX);
-            connection.setResponse(new URL(URL_FIRST, "script" + i + ".js"), "", JAVASCRIPT_MIME_TYPE);
+            connection.setResponse(new URL(URL_FIRST, "script" + i + ".js"), "", MimeType.APPLICATION_JAVASCRIPT);
         }
         final String[] expectedRequests = getExpectedAlerts();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -132,10 +133,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(URL_FIRST, "style1.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style3.css"), "", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style4.css"), "", "text/css");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style3.css"), "", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style4.css"), "", MimeType.TEXT_CSS);
 
         loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
     }
@@ -174,12 +175,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "</html>";
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", MimeType.TEXT_HTML);
         conn.setResponse(new URL(URL_FIRST, "style3.css"), "div { color: red; }", "text/plain");
         conn.setResponse(new URL(URL_FIRST, "style4.css"), "div { color: red; }", "");
-        conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", "text/css");
-        conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", "text/html");
+        conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", MimeType.TEXT_CSS);
+        conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", MimeType.TEXT_HTML);
         conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", "text/plain");
         conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
@@ -981,7 +982,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  alert(document.styleSheets.length);\n"
             + "</script></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", "text/css");
+        getMockWebConnection().setResponse(URL_SECOND, "div { display: none }", MimeType.TEXT_CSS);
         loadPageWithAlerts2(html);
     }
 
@@ -1046,6 +1047,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_width_invalid() throws Exception {
+        mediaRule("screen and (max-width: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_width() throws Exception {
         mediaRule("screen and (min-width: 10000px)");
     }
@@ -1059,6 +1069,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_width_match() throws Exception {
         mediaRule("screen and (min-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_width_invalid() throws Exception {
+        mediaRule("screen and (min-width: 5kilo)");
     }
 
     /**
@@ -1084,6 +1103,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_device_width_invalid() throws Exception {
+        mediaRule("screen and (max-device-width: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_width() throws Exception {
         mediaRule("screen and (min-device-width: 10000px)");
     }
@@ -1095,6 +1123,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({"none", "1"})
     public void mediaRule_min_device_width_match() throws Exception {
         mediaRule("screen and (min-device-width: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_device_width_invalid() throws Exception {
+        mediaRule("screen and (min-device-width: 5kilo)");
     }
 
     /**
@@ -1122,6 +1159,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_height_invalid() throws Exception {
+        mediaRule("screen and (max-height: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_height() throws Exception {
         mediaRule("screen and (min-height: 10000px)");
     }
@@ -1135,6 +1181,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_height_match() throws Exception {
         mediaRule("screen and (min-height: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_height_invalid() throws Exception {
+        mediaRule("screen and (min-height: 5kilo)");
     }
 
     /**
@@ -1160,6 +1215,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_device_height_invalid() throws Exception {
+        mediaRule("screen and (max-device-height: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_device_height() throws Exception {
         mediaRule("screen and (min-device-height: 10000px)");
     }
@@ -1171,6 +1235,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts({"none", "1"})
     public void mediaRule_min_device_height_match() throws Exception {
         mediaRule("screen and (min-device-height: 123px)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_device_height_invalid() throws Exception {
+        mediaRule("screen and (min-device-height: 5kilo)");
     }
 
     /**
@@ -1191,6 +1264,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_resolution_match() throws Exception {
         mediaRule("screen and (resolution: 96dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_resolution_invalid() throws Exception {
+        mediaRule("screen and (resolution: 5kilo)");
     }
 
     /**
@@ -1218,6 +1300,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"block", "1"})
+    public void mediaRule_max_resolution_invalid() throws Exception {
+        mediaRule("screen and (max-resolution: 5kilo)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
     public void mediaRule_min_resolution() throws Exception {
         mediaRule("screen and (min-resolution: 10000dpi)");
     }
@@ -1231,6 +1322,15 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void mediaRule_min_resolution_match() throws Exception {
         mediaRule("screen and (min-resolution: 10dpi)");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"block", "1"})
+    public void mediaRule_min_resolution_invalid() throws Exception {
+        mediaRule("screen and (min-resolution: 5kilo)");
     }
 
     /**
@@ -1347,12 +1447,12 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         final String bigContent = ".someRed { color: red; }" + StringUtils.repeat(' ', maxInMemory);
-        conn.setResponse(new URL(URL_FIRST, "style2.css"), bigContent, 200, "OK", "text/css", headers2);
+        conn.setResponse(new URL(URL_FIRST, "style2.css"), bigContent, 200, "OK", MimeType.TEXT_CSS, headers2);
         conn.setResponse(new URL(URL_FIRST, "second.html"), html2);
 
         final List<NameValuePair> headers1 = new ArrayList<>();
         headers1.add(new NameValuePair("Location", "style2.css"));
-        conn.setResponse(new URL(URL_FIRST, "style.css"), "", 302, "Moved", "text/css", headers1);
+        conn.setResponse(new URL(URL_FIRST, "style.css"), "", 302, "Moved", MimeType.TEXT_CSS, headers1);
 
         final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "test.html"));
         driver.findElement(By.linkText("second page")).click();

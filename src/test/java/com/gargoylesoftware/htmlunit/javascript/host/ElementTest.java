@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -27,6 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link Element}.
@@ -75,7 +75,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -106,7 +106,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -133,7 +133,7 @@ public class ElementTest extends WebDriverTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -182,7 +182,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </control>\n"
             + "</responsexml>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -211,7 +211,7 @@ public class ElementTest extends WebDriverTestCase {
 
         final String xml = "<books><book><title>Immortality</title><author>John Smith</author></book></books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -300,7 +300,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -330,7 +330,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -693,7 +693,7 @@ public class ElementTest extends WebDriverTestCase {
             + "</html>"
             + "</xml>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -708,8 +708,7 @@ public class ElementTest extends WebDriverTestCase {
                     + "DOCUMENT_POSITION_PRECEDING, "
                     + "DOCUMENT_POSITION_FOLLOWING, DOCUMENT_POSITION_CONTAINS, DOCUMENT_POSITION_CONTAINED_BY, "
                     + "DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC, "},
-            IE = {"prototype found", ""},
-            EDGE = {"prototype found", ""})
+            IE = {"prototype found", ""})
     public void enumeratedProperties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -763,7 +762,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1017,7 +1016,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </book>\n"
             + "</books>";
 
-        getMockWebConnection().setDefaultResponse(xml, "text/xml");
+        getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
         loadPageWithAlerts2(html);
     }
 
@@ -1122,10 +1121,8 @@ public class ElementTest extends WebDriverTestCase {
                         "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
             CHROME = {"function Element() { [native code] }", "[object Element]",
                         "function Element() { [native code] }"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"},
-            EDGE = {"function Element() { [native code] }", "[object ElementPrototype]",
-                        "function Element() { [native code] }"})
-    @NotYetImplemented({FF, IE, EDGE})
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+    @NotYetImplemented({FF, IE})
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
@@ -1158,10 +1155,8 @@ public class ElementTest extends WebDriverTestCase {
                         "function Element() { [native code] }"},
             FF = {"function Element() {\n    [native code]\n}",
                         "[object ElementPrototype]", "function Element() {\n    [native code]\n}"},
-            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"},
-            EDGE = {"function Element() { [native code] }", "[object ElementPrototype]",
-                        "function Element() { [native code] }"})
-    @NotYetImplemented({FF, IE, EDGE})
+            IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
+    @NotYetImplemented({FF, IE})
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -230,7 +231,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
             }
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/xml");
+            response.setContentType(MimeType.TEXT_XML);
             String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";
@@ -476,7 +477,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 response.setHeader("Access-Control-Allow-Origin", ACCESS_CONTROL_ALLOW_ORIGIN_);
             }
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/xml");
+            response.setContentType(MimeType.TEXT_XML);
             final Writer writer = response.getWriter();
 
             final String origin = request.getHeader(HttpHeader.ORIGIN);
@@ -881,10 +882,10 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    }\n"
                 + "  }\n";
 
-        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
         final String xml = "<xml><content>blah</content></xml>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), xml, "text/xml");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), xml, MimeType.TEXT_XML);
 
         loadPageWithAlerts2(html);
     }
@@ -907,7 +908,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 response.setHeader("Access-Control-Allow-Credentials", ACCESS_CONTROL_ALLOW_CREDENTIALS_);
             }
             response.setCharacterEncoding(UTF_8.name());
-            response.setContentType("text/xml");
+            response.setContentType(MimeType.TEXT_XML);
             String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";

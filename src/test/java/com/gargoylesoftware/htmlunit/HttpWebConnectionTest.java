@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
 
 /**
@@ -423,7 +424,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             final Writer writer = response.getWriter();
             if (request.getCookies() == null || request.getCookies().length == 0) {
                 writer.write("No Cookies");
@@ -469,7 +470,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
          */
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-            response.setContentType("text/html");
+            response.setContentType(MimeType.TEXT_HTML);
             response.getWriter().write(String.valueOf(request.getRemotePort()));
         }
     }
@@ -562,10 +563,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 + "\r\n"
                 + "<html><body><p>visible text</p></body></html>";
 
-        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(response)) {
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebClient client = getWebClient();
 
-            final HtmlPage page = client.getPage("http://localhost:" + PORT_PRIMITIVE_SERVER);
+            final HtmlPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort());
             assertEquals("visible text", page.asText());
         }
     }

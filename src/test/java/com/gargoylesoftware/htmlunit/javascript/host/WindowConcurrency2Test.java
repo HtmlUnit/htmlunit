@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,7 @@ public class WindowConcurrency2Test extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        Thread.sleep(100);
-        final String info = driver.findElement(By.id("d")).getText();
-        assertEquals(getExpectedAlerts()[0], info);
+
+        verifyAlerts(() -> driver.findElement(By.id("d")).getText(), getExpectedAlerts()[0]);
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_CANCELABLE_FALSE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -237,9 +235,7 @@ public class Event extends SimpleScriptable {
         }
         else if (TYPE_LOAD.equals(type)) {
             bubbles_ = false;
-            if (getBrowserVersion().hasFeature(EVENT_ONLOAD_CANCELABLE_FALSE)) {
-                cancelable_ = false;
-            }
+            cancelable_ = false;
         }
         else if (TYPE_ERROR.equals(type)) {
             // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error
@@ -280,7 +276,7 @@ public class Event extends SimpleScriptable {
      * @param type the event type
      * @param details the event details (optional)
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public void jsConstructor(final String type, final ScriptableObject details) {
         boolean bubbles = false;
         boolean cancelable = false;
@@ -325,7 +321,7 @@ public class Event extends SimpleScriptable {
      * Returns the object that fired the event.
      * @return the object that fired the event
      */
-    @JsxGetter({IE, CHROME, EDGE})
+    @JsxGetter({IE, CHROME})
     public Object getSrcElement() {
         return srcElement_;
     }
@@ -642,12 +638,13 @@ public class Event extends SimpleScriptable {
      */
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder("Event ");
-        builder.append(getType());
-        builder.append(" (");
-        builder.append("Current Target: ");
-        builder.append(currentTarget_);
-        builder.append(");");
+        final StringBuilder builder = new StringBuilder(40);
+        builder.append("Event ")
+            .append(getType())
+            .append(" (")
+            .append("Current Target: ")
+            .append(currentTarget_)
+            .append(");");
         return builder.toString();
     }
 

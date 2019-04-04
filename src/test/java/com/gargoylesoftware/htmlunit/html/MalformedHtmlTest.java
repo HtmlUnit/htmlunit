@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1096,7 +1096,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§foo?a=1&copy=2&prod=3")
-    @NotYetImplemented
     public void incompleteEntities() throws Exception {
         final String html = "<html><head>\n"
             + "<title>Test document</title>\n"

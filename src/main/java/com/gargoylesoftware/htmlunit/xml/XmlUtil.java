@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.xml;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.w3c.dom.Node.ELEMENT_NODE;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -377,8 +376,10 @@ public final class XmlUtil {
                     break;
 
                 default:
-                    LOG.warn("NodeType " + child.getNodeType()
-                        + " (" + child.getNodeName() + ") is not yet supported.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("NodeType " + child.getNodeType()
+                            + " (" + child.getNodeName() + ") is not yet supported.");
+                    }
             }
         }
     }
@@ -447,7 +448,7 @@ public final class XmlUtil {
             final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
             for (int i = 0; i < fNodeCount; i++) {
                 final int type = deferredDocument.getNodeType(i, false);
-                if (type == ELEMENT_NODE) {
+                if (type == Node.ELEMENT_NODE) {
                     int attrIndex = deferredDocument.getNodeExtra(i, false);
                     final List<String> attributes = new ArrayList<>();
                     map.put(i, attributes);

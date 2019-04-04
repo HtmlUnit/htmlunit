@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -1141,7 +1142,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final WebClient client = getWebClientWithMockWebConnection();
         final MockWebConnection webConnection = getMockWebConnection();
 
-        String contentType = "text/html";
+        String contentType = MimeType.TEXT_HTML;
         if (headerCharset != null) {
             contentType += ";charset=" + headerCharset;
         }

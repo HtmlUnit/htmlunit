@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -185,7 +185,9 @@ public class TextRange extends SimpleScriptable {
     @JsxFunction
     public int moveStart(final String unit, final Object count) {
         if (!"character".equals(unit)) {
-            LOG.warn("moveStart('" + unit + "') is not yet supported");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("moveStart('" + unit + "') is not yet supported");
+            }
             return 0;
         }
         int c = 1;
@@ -222,7 +224,9 @@ public class TextRange extends SimpleScriptable {
     @JsxFunction
     public int moveEnd(final String unit, final Object count) {
         if (!"character".equals(unit)) {
-            LOG.warn("moveEnd('" + unit + "') is not yet supported");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("moveEnd('" + unit + "') is not yet supported");
+            }
             return 0;
         }
         int c = 1;
@@ -319,13 +323,13 @@ public class TextRange extends SimpleScriptable {
      * @param textLength the text length
      * @return the moveBy amount constrained to the text length
      */
-    protected int constrainMoveBy(int moveBy, final int current, final int textLength) {
+    private static int constrainMoveBy(final int moveBy, final int current, final int textLength) {
         final int to = current + moveBy;
         if (to < 0) {
-            moveBy -= to;
+            return moveBy - to;
         }
-        else if (to >= textLength) {
-            moveBy -= to - textLength;
+        if (to >= textLength) {
+            return moveBy - (to - textLength);
         }
         return moveBy;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,6 +89,14 @@ public class HtmlFileInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public NameValuePair[] getSubmitNameValuePairs() {
         if (files_ == null || files_.length == 0) {
             return new NameValuePair[] {new KeyDataPair(getNameAttribute(), null, null, null, (Charset) null)};
@@ -111,7 +119,7 @@ public class HtmlFileInput extends HtmlInput {
             keyDataPair.setData(data_);
             list.add(keyDataPair);
         }
-        return list.toArray(new NameValuePair[list.size()]);
+        return list.toArray(new NameValuePair[0]);
     }
 
     /**

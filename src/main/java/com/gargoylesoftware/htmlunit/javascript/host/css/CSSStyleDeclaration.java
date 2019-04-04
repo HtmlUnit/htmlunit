@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_VALU
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
@@ -123,6 +122,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -210,14 +210,16 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             MAX_WIDTH.getAttributeName()
             ));
 
+    static final String NONE = "none";
     static final String AUTO = "auto";
     static final String STATIC = "static";
     static final String INHERIT = "inherit";
     private static final String INITIAL = "initial";
-    private static final String RELATIVE = "relative";
-    private static final String FIXED = "fixed";
-    private static final String ABSOLUTE = "absolute";
+    static final String RELATIVE = "relative";
+    static final String FIXED = "fixed";
+    static final String ABSOLUTE = "absolute";
     private static final String REPEAT = "repeat";
+    static final String BLOCK = "block";
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
@@ -232,7 +234,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private Element jsElement_;
 
     /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
-    private org.w3c.dom.css.CSSStyleDeclaration styleDeclaration_;
+    private CSSStyleDeclarationImpl styleDeclaration_;
 
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
@@ -256,7 +258,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public CSSStyleDeclaration() {
     }
 
@@ -275,7 +277,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param parentScope the parent scope to use
      * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final org.w3c.dom.css.CSSStyleDeclaration styleDeclaration) {
+    CSSStyleDeclaration(final Scriptable parentScope, final CSSStyleDeclarationImpl styleDeclaration) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         styleDeclaration_ = styleDeclaration;
@@ -304,7 +306,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                     }
                 }
                 catch (final ParseException e) {
-                    LOG.warn("Invalid behavior: '" + behavior + "'.");
+                    if (LOG.isWarnEnabled()) {
+                        LOG.warn("Invalid behavior: '" + behavior + "'.");
+                    }
                 }
             }
         }
@@ -400,19 +404,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     private String getStyleAttribute(final Definition name1, final Definition name2) {
         final String value;
-        if (styleDeclaration_ != null) {
-            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
-            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
-
-            if ("".equals(value1) && "".equals(value2)) {
-                return "";
-            }
-            if (!"".equals(value1) && "".equals(value2)) {
-                return value1;
-            }
-            value = value2;
-        }
-        else {
+        if (styleDeclaration_ == null) {
             final StyleElement element1 = getStyleElement(name1.getAttributeName());
             final StyleElement element2 = getStyleElement(name2.getAttributeName());
 
@@ -431,6 +423,18 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
                 value = element2.getValue();
             }
+        }
+        else {
+            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
+            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
+
+            if ("".equals(value1) && "".equals(value2)) {
+                return "";
+            }
+            if (!"".equals(value1) && "".equals(value2)) {
+                return value1;
+            }
+            value = value2;
         }
 
         final String[] values = StringUtils.split(value);
@@ -669,7 +673,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 final boolean isComputed = getClass() != CSSStyleDeclaration.class;
                 final boolean backgroundInitial = getBrowserVersion().hasFeature(CSS_BACKGROUND_INITIAL);
                 if (value == null) {
-                    return backgroundInitial && !isComputed ? INITIAL : "none";
+                    return backgroundInitial && !isComputed ? INITIAL : NONE;
                 }
                 if (isComputed) {
                     try {
@@ -1344,11 +1348,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
             if (browserVersion.hasFeature(CSS_ZINDEX_TYPE_INTEGER) || !lineHeight.equals(defaultLineHeight)) {
                 newFont.append('/');
-                if (!lineHeight.equals(defaultLineHeight)) {
-                    newFont.append(lineHeight);
+                if (lineHeight.equals(defaultLineHeight)) {
+                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
                 }
                 else {
-                    newFont.append(LINE_HEIGHT.getDefaultComputedValue(browserVersion));
+                    newFont.append(lineHeight);
                 }
             }
 
@@ -2573,7 +2577,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxFunction(FF)
     public CSSValue getPropertyCSSValue(final String name) {
-        LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        if (LOG.isInfoEnabled()) {
+            LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");
+        }
+
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {
@@ -2592,10 +2599,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 throw new RuntimeException(e);
             }
         }
-        org.w3c.dom.css.CSSValue cssValue = styleDeclaration_.getPropertyCSSValue(name);
+        CSSValueImpl cssValue = styleDeclaration_.getPropertyCSSValue(name);
         if (cssValue == null) {
             final CSSValueImpl newValue = new CSSValueImpl(null, false);
-            newValue.setFloatValue(CSSPrimitiveValue.CSS_PX, 0);
+            newValue.setDoubleValue(0);
             cssValue = newValue;
         }
 
@@ -2606,7 +2613,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             cssValue.setCssText(formatedCssText);
         }
 
-        return new CSSPrimitiveValue(jsElement_, (org.w3c.dom.css.CSSPrimitiveValue) cssValue);
+        return new CSSPrimitiveValue(jsElement_, cssValue);
     }
 
     /**
@@ -2886,7 +2893,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return whether the token is a border style or not
      */
     private static boolean isBorderStyle(final String token) {
-        return "none".equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
+        return NONE.equalsIgnoreCase(token) || "hidden".equalsIgnoreCase(token)
             || "dotted".equalsIgnoreCase(token) || "dashed".equalsIgnoreCase(token)
             || "solid".equalsIgnoreCase(token) || "double".equalsIgnoreCase(token)
             || "groove".equalsIgnoreCase(token) || "ridge".equalsIgnoreCase(token)
@@ -2989,11 +2996,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         if (value.length() < 2) {
             return i;
         }
-
         if (value.endsWith("px")) {
-            // nothing to do
+            return i;
         }
-        else if (value.endsWith("em")) {
+
+        if (value.endsWith("em")) {
             i = i * 16;
         }
         else if (value.endsWith("%")) {

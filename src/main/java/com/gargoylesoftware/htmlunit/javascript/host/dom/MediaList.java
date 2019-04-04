@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_MEDIA_LIST_EMPTY_STRING;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
@@ -40,12 +39,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 @JsxClass
 public class MediaList extends SimpleScriptable {
 
-    private final org.w3c.dom.stylesheets.MediaList wrappedList_;
+    private final MediaListImpl wrappedList_;
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public MediaList() {
         wrappedList_ = null;
     }
@@ -55,7 +54,7 @@ public class MediaList extends SimpleScriptable {
      * @param parent the parent style
      * @param wrappedList the wrapped media list that this host object exposes
      */
-    public MediaList(final CSSStyleSheet parent, final org.w3c.dom.stylesheets.MediaList wrappedList) {
+    public MediaList(final CSSStyleSheet parent, final MediaListImpl wrappedList) {
         wrappedList_ = wrappedList;
         setParentScope(parent);
         setPrototype(getPrototype(getClass()));
@@ -71,7 +70,7 @@ public class MediaList extends SimpleScriptable {
         if (index < 0 || index >= getLength()) {
             return null;
         }
-        final MediaQuery mq = ((MediaListImpl) wrappedList_).mediaQuery(index);
+        final MediaQuery mq = wrappedList_.mediaQuery(index);
         return mq.toString();
     }
 

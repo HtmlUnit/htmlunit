@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
@@ -199,14 +200,19 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state);
-            }
-            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
-            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
-            if (LOG.isDebugEnabled()) {
+
+                // do the decompilation an the debug output before the call, because the
+                // handler might deregister itself
                 if (context == null) {
                     context = Context.getCurrentContext();
                 }
                 LOG.debug("onreadystatechange handler: " + context.decompileFunction(stateChangeHandler_, 4));
+            }
+
+            final Object[] params = new Event[] {new Event(this, Event.TYPE_READY_STATE_CHANGE)};
+            jsEngine.callFunction(containingPage_, stateChangeHandler_, scope, this, params);
+
+            if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onreadystatechange handler for state " + state + ". Done.");
             }
         }
@@ -391,8 +397,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 return document;
             }
             catch (final IOException e) {
-                LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
-                        + e.getMessage());
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Failed parsing XML document " + webResponse_.getWebRequest().getUrl() + ": "
+                            + e.getMessage());
+                }
                 return null;
             }
         }
@@ -417,8 +425,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getStatusCode();
         }
 
-        LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.status was retrieved without a response available (readyState: "
+                + state_ + ").");
+        }
         return 0;
     }
 
@@ -435,8 +445,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getStatusMessage();
         }
 
-        LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.statusText was retrieved without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -476,8 +488,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return builder.toString();
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.getAllResponseHeaders() was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -495,8 +509,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             return webResponse_.getResponseHeaderValue(headerName);
         }
 
-        LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
-            + state_ + ").");
+        if (LOG.isErrorEnabled()) {
+            LOG.error("XMLHttpRequest.getAllResponseHeaders(..) was called without a response available (readyState: "
+                + state_ + ").");
+        }
         return null;
     }
 
@@ -550,7 +566,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
             }
             catch (final IllegalArgumentException e) {
-                LOG.info("Incorrect HTTP Method '" + method + "'");
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Incorrect HTTP Method '" + method + "'");
+                }
                 return;
             }
 
@@ -568,7 +586,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webRequest_ = request;
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Unable to initialize XMLHttpRequest using malformed URL '" + url + "'.");
+            }
             return;
         }
         // Async stays a boolean.
@@ -578,13 +598,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     private boolean isAllowCrossDomainsFor(final URL newUrl) {
-        final BrowserVersion browser = getBrowserVersion();
-        if (browser.hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
-                && "about".equals(newUrl.getProtocol())) {
-            return false;
-        }
-
-        return true;
+        return !(getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
+                    && "about".equals(newUrl.getProtocol()));
     }
 
     private boolean isSameOrigin(final URL originUrl, final URL newUrl) {
@@ -619,9 +634,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         prepareRequest(content);
 
         final Window w = getWindow();
-        final WebClient client = w.getWebWindow().getWebClient();
+        final WebWindow ww = w.getWebWindow();
+        final WebClient client = ww.getWebClient();
         final AjaxController ajaxController = client.getAjaxController();
-        final HtmlPage page = (HtmlPage) w.getWebWindow().getEnclosedPage();
+        final HtmlPage page = (HtmlPage) ww.getEnclosedPage();
         final boolean synchron = ajaxController.processSynchron(page, webRequest_, async_);
         if (synchron) {
             doSend(Context.getCurrentContext());
@@ -668,7 +684,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Starting XMLHttpRequest thread for asynchronous request");
             }
-            jobID_ = w.getWebWindow().getJobManager().addJob(job, page);
+            jobID_ = ww.getJobManager().addJob(job, page);
         }
     }
 
@@ -901,8 +917,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxFunction
     public void setRequestHeader(final String name, final String value) {
         if (!isAuthorizedHeader(name)) {
-            LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
-                + ": it is a restricted header");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("Ignoring XMLHttpRequest.setRequestHeader for " + name
+                    + ": it is a restricted header");
+            }
             return;
         }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class NotYetImplementedTest {
                 final String fileName = file.getName();
                 if (file.isDirectory()
                         && !"huge".equals(fileName)
-                        && !".svn".equals(fileName)) {
+                        && !".git".equals(fileName)) {
                     process(file);
                 }
                 else {
@@ -158,7 +158,6 @@ public class NotYetImplementedTest {
         int countFF60 = 0;
         int countFF52 = 0;
         int countChrome = 0;
-        // int countEdge = 0;
         for (final String entry : entries_) {
             final String[] values = entry.split(";");
             final String file = values[0];
@@ -213,15 +212,11 @@ public class NotYetImplementedTest {
             if (browser.contains("CHROME")) {
                 countChrome++;
             }
-            // if (browser.contains("EDGE")) {
-            //     countEdge++;
-            // }
             if (browser.contains("All")) {
                 countIE++;
                 countFF60++;
                 countFF52++;
                 countChrome++;
-                // countEdge++;
             }
         }
         builder.append("</table>\n").append("</body></html>");
@@ -252,11 +247,6 @@ public class NotYetImplementedTest {
         overview.append("    <td class='numeric'>").append(Integer.toString(countChrome)).append("</td>\n");
         overview.append("    <td>for Chrome</td>\n");
         overview.append("  </tr>\n");
-
-        // overview.append("  <tr>\n");
-        // overview.append("    <td class='numeric'>").append(Integer.toString(countEdge)).append("</td>\n");
-        // overview.append("    <td>for Edge</td>\n");
-        // overview.append("  </tr>\n");
 
         overview.append("</table>\n");
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -56,7 +57,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         final String errorContent = "<html><head><title>ERROR 500</title></head><body></body></html>";
         final List<NameValuePair> emptyList = Collections.emptyList();
-        webConnection.setResponse(URL_SECOND, errorContent, 500, "BOOM", "text/html", emptyList);
+        webConnection.setResponse(URL_SECOND, errorContent, 500, "BOOM", MimeType.TEXT_HTML, emptyList);
 
         // test script exception
         String content = "<html><head><title>Throw JavaScript Error</title>\n"
@@ -113,6 +114,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
             + "<body></body></html>";
         loadPage(html);
 
+        assertEquals("", javaScriptErrorListener.getWarnings());
         assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
                 + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
@@ -133,7 +135,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         final CollectingJavaScriptErrorListener javaScriptErrorListener = new CollectingJavaScriptErrorListener();
         webClient.setJavaScriptErrorListener(javaScriptErrorListener);
 
-        getMockWebConnection().setDefaultResponse("", 500, "Server Error", "text/html");
+        getMockWebConnection().setDefaultResponse("", 500, "Server Error", MimeType.TEXT_HTML);
 
         final String html = "<html><head>\n"
             + "<script src='notExisting.js' type='text/javascript'></script></head>\n"
@@ -176,6 +178,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         loadPage(html);
 
+        assertEquals("", javaScriptErrorListener.getWarnings());
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("unknown://nowhere, java.net.MalformedURLException: unknown protocol: 'unknown'",
@@ -202,6 +205,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         loadPage(html);
 
+        assertEquals("", javaScriptErrorListener.getWarnings());
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals("", javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("", javaScriptErrorListener.getMalformedScriptURLErrors());
@@ -210,10 +214,17 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 }
 
 class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
+    private final StringBuilder warnings_ = new StringBuilder();
     private final StringBuilder scriptExceptions_ = new StringBuilder();
     private final StringBuilder timeoutErrors_ = new StringBuilder();
     private final StringBuilder loadScriptErrors_ = new StringBuilder();
     private final StringBuilder malformedScriptURLErrors_ = new StringBuilder();
+
+    @Override
+    public void warn(final String message, final String sourceName,
+            final int line, final String lineSource, final int lineOffset) {
+        warnings_.append(message);
+    }
 
     @Override
     public void loadScriptError(final HtmlPage page, final URL scriptUrl, final Exception exception) {
@@ -234,6 +245,10 @@ class CollectingJavaScriptErrorListener implements JavaScriptErrorListener {
     @Override
     public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
         timeoutErrors_.append("Timeout allowed: " + allowedTime);
+    }
+
+    public String getWarnings() {
+        return warnings_.toString();
     }
 
     public String getScriptExceptions() {

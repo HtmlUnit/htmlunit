@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,25 +70,31 @@ public abstract class WebTestCase {
     /** save the environment */
     private static final Locale SAVE_LOCALE = Locale.getDefault();
 
+    // 12346 seems to be in use on our CI server
+
     /** The listener port for the web server. */
-    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22345"));
+    public static final int PORT = Integer.parseInt(System.getProperty("htmlunit.test.port", "22222"));
 
     /** The second listener port for the web server, used for cross-origin tests. */
-    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22346"));
+    public static final int PORT2 = Integer.parseInt(System.getProperty("htmlunit.test.port2", "22223"));
 
     /** The third listener port for the web server, used for cross-origin tests. */
-    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22347"));
+    public static final int PORT3 = Integer.parseInt(System.getProperty("htmlunit.test.port3", "22224"));
 
     /** The listener port used for our primitive server tests. */
     public static final int PORT_PRIMITIVE_SERVER = Integer.parseInt(
-                                                        System.getProperty("htmlunit.test.port_primitive", "22348"));
+                                                        System.getProperty("htmlunit.test.port_primitive", "22225"));
 
-    /** The SOCKS proxy host to use for SOCKS proxy tests. */
-    public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
+    /** The listener port used for our proxy tests. */
+    public static final int PORT_PROXY_SERVER = Integer.parseInt(
+                                                        System.getProperty("htmlunit.test.port_proxy", "22226"));
 
     /** The SOCKS proxy port to use for SOCKS proxy tests. */
     public static final int SOCKS_PROXY_PORT = Integer.parseInt(
-            System.getProperty("htmlunit.test.socksproxy.port", "55555"));
+            System.getProperty("htmlunit.test.socksproxy.port", "22227"));
+
+    /** The SOCKS proxy host to use for SOCKS proxy tests. */
+    public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
     /** Succeeds the SOCKS proxy tests (for windows) . */
     public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
@@ -127,11 +133,6 @@ public abstract class WebTestCase {
      * Constant for the base URL for cross-origin tests.
      */
     public static final URL URL_CROSS_ORIGIN_BASE;
-
-    /**
-     * The content type for JavaScript.
-     */
-    public static final String JAVASCRIPT_MIME_TYPE = "application/javascript";
 
     /**
      * The name of the system property used to determine if files should be generated
@@ -659,7 +660,7 @@ public abstract class WebTestCase {
 
         if (generateTest_content_ != null && !generateTest_notYetImplemented_) {
             final File targetDir = new File("target/generated_tests");
-            targetDir.mkdirs();
+            FileUtils.forceMkdir(targetDir);
 
             final File outFile = new File(targetDir, generateTest_testName_);
 

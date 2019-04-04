@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,28 +48,6 @@ public class PrimitiveWebServer implements Closeable {
     /**
      * Constructs a new SimpleWebServer.
      *
-     * @param defaultResponse the default response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws Exception in case of error
-     */
-    public PrimitiveWebServer(final String defaultResponse) throws Exception {
-        this(null, defaultResponse, null);
-    }
-
-    /**
-     * Constructs a new SimpleWebServer.
-     *
-     * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
-     * @throws Exception in case of error
-     */
-    public PrimitiveWebServer(final String firstResponse, final String otherResponse)
-            throws Exception {
-        this(null, firstResponse, otherResponse);
-    }
-
-    /**
-     * Constructs a new SimpleWebServer.
-     *
      * @param charset the charset
      * @param firstResponse the first response, must contain the full response (to start with "HTTP/1.1 200 OK")
      * @param otherResponse the subsequent response, must contain the full response (to start with "HTTP/1.1 200 OK")
@@ -84,31 +62,30 @@ public class PrimitiveWebServer implements Closeable {
             charset_ = charset;
         }
 
-        try {
-            start();
-        }
-        catch (final BindException e) {
-            final BindException ex = new BindException("Port " + port_ + " already in use (Bind failed)");
-            ex.initCause(e);
-            throw ex;
-        }
+        start();
     }
 
     /**
      * Starts the server.
-     * @throws IOException if an error occurs
-     * @throws InterruptedException  if an error occurs
+     * @throws Exception if an error occurs
      */
-    private void start() throws IOException, InterruptedException {
+    private void start() throws Exception {
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
-        try {
-            server_.bind(new InetSocketAddress(port_));
-        }
-        catch (final BindException be) {
-            Thread.sleep(1000);
-            server_.bind(new InetSocketAddress(port_));
+        final long maxWait = System.currentTimeMillis() + WebServerTestCase.BIND_TIMEOUT;
+
+        while (true) {
+            try {
+                server_.bind(new InetSocketAddress(port_));
+                break;
+            }
+            catch (final BindException e) {
+                if (System.currentTimeMillis() > maxWait) {
+                    throw (BindException) new BindException("Port " + port_ + " is already in use").initCause(e);
+                }
+                Thread.sleep(200);
+            }
         }
 
         new Thread(new Runnable() {
@@ -158,10 +135,10 @@ public class PrimitiveWebServer implements Closeable {
                     }
                 }
                 catch (final SocketException e) {
-                    //ignore
+                    // ignore
                 }
-                catch (final IOException e) {
-                    e.printStackTrace();
+                catch (final Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         }).start();
@@ -182,6 +159,14 @@ public class PrimitiveWebServer implements Closeable {
      */
     public List<String> getRequests() {
         return requests_;
+    }
+
+    /**
+     * Returns the port.
+     * @return the port
+     */
+    public int getPort() {
+        return port_;
     }
 
     /**

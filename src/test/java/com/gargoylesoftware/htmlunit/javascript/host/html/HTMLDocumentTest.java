@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -45,6 +44,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 @RunWith(BrowserRunner.class)
 public class HTMLDocumentTest extends WebDriverTestCase {
     /** jQuery selectors that aren't CSS selectors. */
-    public static final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
+    static final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
         "*#__sizzle__ div.submenu-last:last", "div:animated", "div:animated", "*:button", "*:checkbox", "div:even",
         "*:file", "div:first", "td:gt(4)", "div:has(p)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
         ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
@@ -635,11 +635,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         // TODO When ran with the IEDriver the IE is in a mysterious state after this test and cannot be restored
         // to normal in an automatic way.
         // All following tests will break until you restart your PC.
-        // TODO When ran with the EdgeDriver the Edge is in a mysterious state after this test and cannot be restored
-        // to normal in an automatic way.
-        // All following tests will break until you clear the complete cache of the Edge.
-        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))
-            && !(getWebDriver() instanceof EdgeDriver && "Edge".equals(getBrowserVersion().getNickname()))) {
+        if (!(getWebDriver() instanceof InternetExplorerDriver && "IE".equals(getBrowserVersion().getNickname()))) {
             responseHeaders.add(new NameValuePair("Last-Modified", "Fri, 16 Oct 2009 13:59:47 GMT"));
             testLastModified(responseHeaders);
 
@@ -670,7 +666,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", "text/html", responseHeaders);
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
 
         loadPageWithAlerts2(URL_FIRST);
     }
@@ -1643,7 +1639,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug 3030247: expired cookie was saved.
-     * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
+     * @see <a href="http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266">1139</a>
      * @throws Exception if the test fails
      */
     @Test
@@ -2009,7 +2005,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", ISO_8859_1);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, ISO_8859_1);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2088,7 +2084,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, UTF_8);
         verifyAlerts(driver, expectedAlerts);
     }
 
@@ -2106,7 +2102,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html, URL_FIRST, "text/html", UTF_8);
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, UTF_8);
         driver.findElement(By.id("myId")).click();
         String actualQuery = driver.getCurrentUrl();
         actualQuery = actualQuery.substring(actualQuery.indexOf('?'));
@@ -2234,7 +2230,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "BackCompat", "function", "function"},
             IE = {"11", "BackCompat", "function", "function"})
-    @NotYetImplemented(IE)
     public void documentMode_metaIEEdge() throws Exception {
         documentMode("", "  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n");
     }

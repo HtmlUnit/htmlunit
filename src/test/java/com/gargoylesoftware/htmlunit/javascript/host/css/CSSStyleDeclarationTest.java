@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2664,7 +2664,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     public void styleAttributes() throws Exception {
         final List<String> allProperties = new ArrayList<>();
-        for (final BrowserVersion browserVersion : ALL_BROWSERS_) {
+        for (final BrowserVersion browserVersion : allBrowsers()) {
             final ClassConfiguration config
                 = AbstractJavaScriptConfiguration.getClassConfiguration(CSSStyleDeclaration.class, browserVersion);
             for (final Definition definition : StyleAttributes.getDefinitions(browserVersion)) {
@@ -2718,17 +2718,18 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         final List<String> cssLines = FileUtils.readLines(new File(cssFolder, "CSSStyleDeclaration.java"), ISO_8859_1);
         final List<String> computedLines = FileUtils.readLines(new File(cssFolder, "ComputedCSSStyleDeclaration.java"),
                 ISO_8859_1);
-        for (final String propertyName : propertyMap.keySet()) {
-            final PropertyInfo info = propertyMap.get(propertyName);
+        for (final Map.Entry<String, PropertyInfo> entry : propertyMap.entrySet()) {
+            final PropertyInfo info = entry.getValue();
             if (info.getReadMethod() == null) {
-                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no getter for " + propertyName);
+                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no getter for " + entry.getKey());
             }
-            if (info.getWriteMethod() == null && !"length".equals(propertyName)) {
-                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no setter for " + propertyName);
+            if (info.getWriteMethod() == null && !"length".equals(entry.getKey())) {
+                fail(browserVersion.getNickname() + " CSSStyleDeclaration: no setter for " + entry.getKey());
             }
             if (isDefaultGetter(cssLines, info) && isDefaultSetter(cssLines, info)
                     && isDefaultGetterComputed(computedLines, info)) {
-                fail(browserVersion.getNickname() + " CSSStyleDeclaration: default implementation for " + propertyName);
+                fail(browserVersion.getNickname()
+                        + " CSSStyleDeclaration: default implementation for " + entry.getKey());
             }
         }
     }

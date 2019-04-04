@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -124,20 +124,24 @@ public class XmlPage extends SgmlPage {
                 node_ = document.getFirstChild();
             }
             catch (final SAXException e) {
-                LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
-                        + ": " + e.getMessage());
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Failed parsing XML document " + webResponse.getWebRequest().getUrl()
+                            + ": " + e.getMessage());
+                }
                 if (!ignoreSAXException) {
                     throw new IOException(e.getMessage());
                 }
             }
         }
         catch (final ParserConfigurationException e) {
-            if (null == webResponse) {
-                LOG.warn("Failed parsing XML empty document: " + e.getMessage());
-            }
-            else {
-                LOG.warn("Failed parsing XML empty document " + webResponse.getWebRequest().getUrl()
-                    + ": " + e.getMessage());
+            if (LOG.isWarnEnabled()) {
+                if (null == webResponse) {
+                    LOG.warn("Failed parsing XML empty document: " + e.getMessage());
+                }
+                else {
+                    LOG.warn("Failed parsing XML empty document " + webResponse.getWebRequest().getUrl()
+                        + ": " + e.getMessage());
+                }
             }
         }
 
@@ -151,6 +155,14 @@ public class XmlPage extends SgmlPage {
         for (Node node = node_; node != null; node = node.getNextSibling()) {
             XmlUtil.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize() throws IOException {
+        // nothing to do here
     }
 
     /**
@@ -377,5 +389,21 @@ public class XmlPage extends SgmlPage {
     @Override
     protected void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
     }
 }

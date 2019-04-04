@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,10 +97,7 @@ public class HTMLBlockElement extends HTMLElement {
      */
     @Override
     protected boolean isEndTagForbidden() {
-        if ("KEYGEN".equals(getNodeName()) && getBrowserVersion().hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN)) {
-            return true;
-        }
-        return false;
+        return getBrowserVersion().hasFeature(HTMLKEYGEN_END_TAG_FORBIDDEN) && "KEYGEN".equals(getNodeName());
     }
 
     /**

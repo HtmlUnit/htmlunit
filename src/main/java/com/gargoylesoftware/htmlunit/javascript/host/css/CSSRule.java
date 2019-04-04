@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
@@ -24,6 +23,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
+import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
+import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
+import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
+import com.gargoylesoftware.css.dom.CSSUnknownRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -46,7 +53,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSUnknownRule}.
      */
-    @JsxConstant({FF52, IE, EDGE})
+    @JsxConstant({FF52, IE})
     public static final short UNKNOWN_RULE              = org.w3c.dom.css.CSSRule.UNKNOWN_RULE;
 
     /**
@@ -141,12 +148,12 @@ public class CSSRule extends SimpleScriptable {
 
     private final CSSStyleSheet stylesheet_;
 
-    private final org.w3c.dom.css.CSSRule rule_;
+    private final AbstractCSSRuleImpl rule_;
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60, EDGE})
+    @JsxConstructor({CHROME, FF60})
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;
@@ -158,29 +165,36 @@ public class CSSRule extends SimpleScriptable {
      * @param rule the wrapped rule
      * @return a CSSRule subclass according to the rule type
      */
-    public static CSSRule create(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
-        switch (rule.getType()) {
-            case STYLE_RULE:
-                return new CSSStyleRule(stylesheet, (org.w3c.dom.css.CSSStyleRule) rule);
-            case IMPORT_RULE:
-                return new CSSImportRule(stylesheet, (org.w3c.dom.css.CSSImportRule) rule);
-//            case CHARSET_RULE:
-//                return new CSSCharsetRule(stylesheet, (org.w3c.dom.css.CSSCharsetRule) rule);
-            case MEDIA_RULE:
-                return new CSSMediaRule(stylesheet, (org.w3c.dom.css.CSSMediaRule) rule);
-            case FONT_FACE_RULE:
-                return new CSSFontFaceRule(stylesheet, (org.w3c.dom.css.CSSFontFaceRule) rule);
-            case UNKNOWN_RULE:
-                final org.w3c.dom.css.CSSUnknownRule unknownRule = (org.w3c.dom.css.CSSUnknownRule) rule;
-                if (unknownRule.getCssText().startsWith("@keyframes")) {
-                    return new CSSKeyframesRule(stylesheet, (org.w3c.dom.css.CSSUnknownRule) rule);
-                }
+    public static CSSRule create(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
+        if (rule instanceof CSSStyleRuleImpl) {
+            return new CSSStyleRule(stylesheet, (CSSStyleRuleImpl) rule);
+        }
+        if (rule instanceof CSSImportRuleImpl) {
+            return new CSSImportRule(stylesheet, (CSSImportRuleImpl) rule);
+        }
+//        if (rule instanceof CSSCharsetRuleImpl) {
+//            return new CSSCharsetRule(stylesheet, (CSSCharsetRuleImpl) rule);
+//        }
+        if (rule instanceof CSSMediaRuleImpl) {
+            return new CSSMediaRule(stylesheet, (CSSMediaRuleImpl) rule);
+        }
+        if (rule instanceof CSSFontFaceRuleImpl) {
+            return new CSSFontFaceRule(stylesheet, (CSSFontFaceRuleImpl) rule);
+        }
+        if (rule instanceof CSSUnknownRuleImpl) {
+            final CSSUnknownRuleImpl unknownRule = (CSSUnknownRuleImpl) rule;
+            if (unknownRule.getCssText().startsWith("@keyframes")) {
+                return new CSSKeyframesRule(stylesheet, (CSSUnknownRuleImpl) rule);
+            }
+            if (LOG.isWarnEnabled()) {
                 LOG.warn("Unknown CSSRule " + rule.getClass().getName()
                         + " is not yet supported; rule content: '" + rule.getCssText() + "'");
-                break;
-            default:
-                LOG.warn("CSSRule " + rule.getClass().getName()
-                        + " is not yet supported; rule content: '" + rule.getCssText() + "'");
+            }
+        }
+
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSSRule " + rule.getClass().getName()
+                    + " is not yet supported; rule content: '" + rule.getCssText() + "'");
         }
 
         return null;
@@ -191,7 +205,7 @@ public class CSSRule extends SimpleScriptable {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSRule rule) {
+    protected CSSRule(final CSSStyleSheet stylesheet, final AbstractCSSRuleImpl rule) {
         stylesheet_ = stylesheet;
         rule_ = rule;
         setParentScope(stylesheet);
@@ -204,7 +218,29 @@ public class CSSRule extends SimpleScriptable {
      */
     @JsxGetter
     public short getType() {
-        return rule_.getType();
+        if (rule_ instanceof CSSCharsetRuleImpl) {
+            return CSSRule.CHARSET_RULE;
+        }
+        if (rule_ instanceof CSSFontFaceRuleImpl) {
+            return CSSRule.FONT_FACE_RULE;
+        }
+        if (rule_ instanceof CSSImportRuleImpl) {
+            return CSSRule.IMPORT_RULE;
+        }
+        if (rule_ instanceof CSSMediaRuleImpl) {
+            return CSSRule.MEDIA_RULE;
+        }
+        if (rule_ instanceof CSSPageRuleImpl) {
+            return CSSRule.PAGE_RULE;
+        }
+        if (rule_ instanceof CSSStyleRuleImpl) {
+            return CSSRule.STYLE_RULE;
+        }
+        if (rule_ instanceof CSSUnknownRuleImpl) {
+            return CSSRule.UNKNOWN_RULE;
+        }
+
+        return CSSRule.UNKNOWN_RULE;
     }
 
     /**
@@ -242,7 +278,7 @@ public class CSSRule extends SimpleScriptable {
      */
     @JsxGetter
     public CSSRule getParentRule() {
-        final org.w3c.dom.css.CSSRule parentRule = rule_.getParentRule();
+        final AbstractCSSRuleImpl parentRule = rule_.getParentRule();
         if (parentRule != null) {
             return CSSRule.create(stylesheet_, parentRule);
         }
@@ -253,7 +289,7 @@ public class CSSRule extends SimpleScriptable {
      * Returns the wrapped rule.
      * @return the wrapped rule.
      */
-    protected org.w3c.dom.css.CSSRule getRule() {
+    protected AbstractCSSRuleImpl getRule() {
         return rule_;
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CRLF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_NO_CRLF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -45,7 +45,7 @@ public class CSSFontFaceRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60, EDGE})
+    @JsxConstructor({CHROME, FF60})
     public CSSFontFaceRule() {
     }
 
@@ -54,7 +54,7 @@ public class CSSFontFaceRule extends CSSRule {
      * @param stylesheet the Stylesheet of this rule.
      * @param rule the wrapped rule
      */
-    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final org.w3c.dom.css.CSSFontFaceRule rule) {
+    protected CSSFontFaceRule(final CSSStyleSheet stylesheet, final CSSFontFaceRuleImpl rule) {
         super(stylesheet, rule);
     }
 

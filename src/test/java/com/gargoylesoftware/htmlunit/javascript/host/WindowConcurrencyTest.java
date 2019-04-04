@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,17 +26,13 @@ import org.junit.Test;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -56,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Brad Clarke
  * @author Daniel Gredler
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class WindowConcurrencyTest extends SimpleWebTestCase {
 
@@ -514,79 +505,5 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
             };
             page1.getBody().appendChild(elt);
         }
-    }
-
-    /**
-     * As of HtmlUnit-2,11 snapshot from 20.08.2012, following exception was occurring in background processing:
-     * >net.sourceforge.htmlunit.corejs.javascript.EcmaError: ReferenceError: "foo" is not defined.<.
-     * The cause was that the setTimeout was executed even once the page was unloaded. Strangely, loading
-     * directly the second page didn't allow to reproduce the problem.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void cleanSetTimeout() throws Exception {
-        final String page1 = "<html><body>\n"
-            + "<a id=it href='" + URL_SECOND + "'>link</a>\n"
-            + "</body></html>";
-
-        final String html = "<html><body>\n"
-            + "<form action='foo2' name='waitform'></form>\n"
-            + "<script>\n"
-            + "function foo() {\n"
-            + "  setTimeout('foo()', 10);\n"
-            + "}\n"
-            + "function t() {\n"
-            + "  setTimeout('foo()', 10);\n"
-            + "  document.waitform.submit();\n"
-            + "}\n"
-            + "t();\n"
-            + "</script>\n"
-            + "</body></html>";
-
-        final MockWebConnection mockWebConnection = new MockWebConnection() {
-            @Override
-            public WebResponse getResponse(final WebRequest request) throws IOException {
-                try {
-                    Thread.sleep(50); // causes the background job to be scheduled in this time
-                }
-                catch (final InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                return super.getResponse(request);
-            }
-        };
-        mockWebConnection.setDefaultResponse("<html></html>");
-
-        mockWebConnection.setResponse(URL_FIRST, page1);
-        mockWebConnection.setResponse(URL_SECOND, html);
-
-        client_.setWebConnection(mockWebConnection);
-        final List<ScriptException> scriptExceptions = new ArrayList<>();
-        client_.setJavaScriptErrorListener(new JavaScriptErrorListener() {
-
-            @Override
-            public void loadScriptError(final HtmlPage htmlPage, final URL scriptUrl,
-                    final Exception exception) {
-            }
-
-            @Override
-            public void malformedScriptURL(final HtmlPage htmlPage, final String url,
-                    final MalformedURLException malformedURLException) {
-            }
-
-            @Override
-            public void scriptException(final HtmlPage htmlPage, final ScriptException scriptException) {
-                scriptExceptions.add(scriptException);
-            }
-
-            @Override
-            public void timeoutError(final HtmlPage htmlPage, final long allowedTime, final long executionTime) {
-            }
-        });
-
-        final HtmlPage page = client_.getPage(URL_FIRST);
-        page.getElementById("it").click();
-        Thread.sleep(500);
-        assertThat(scriptExceptions, is(Collections.<ScriptException>emptyList()));
     }
 }

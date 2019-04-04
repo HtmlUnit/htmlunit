@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -62,13 +63,13 @@ public class HtmlEmbed extends HtmlElement {
         final HtmlPage page = (HtmlPage) getPage();
         final WebClient webclient = page.getWebClient();
 
-        final URL url = page.getFullyQualifiedUrl(getAttributeDirect("src"));
+        final URL url = page.getFullyQualifiedUrl(getAttributeDirect(SRC_ATTRIBUTE));
         final WebRequest request = new WebRequest(url);
         request.setCharset(page.getCharset());
         request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
-        try (FileOutputStream fos = new FileOutputStream(file);
+        try (OutputStream fos = Files.newOutputStream(file.toPath());
                 InputStream content =  webResponse.getContentAsStream()) {
             IOUtils.copy(content, fos);
         }

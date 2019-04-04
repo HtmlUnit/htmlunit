@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,5 +74,21 @@ public class DomDocumentFragment extends DomNode implements DocumentFragment {
     @Override
     public boolean isAttachedToPage() {
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setNodeValue(final String value) {
+        // Default behavior is to do nothing, overridden in some subclasses
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrefix(final String prefix) {
+        // Empty.
     }
 }

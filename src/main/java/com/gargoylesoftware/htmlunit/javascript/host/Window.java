@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -32,6 +31,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -128,6 +128,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
+import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
@@ -159,6 +160,66 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass
 public class Window extends EventTarget implements Function, AutoCloseable {
+
+    private static final Log LOG = LogFactory.getLog(Window.class);
+
+    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
+    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
+            "style",
+            "class",
+            "height",
+            "width"));
+
+    /** To be documented. */
+    @JsxConstant(CHROME)
+    public static final short TEMPORARY = 0;
+
+    /** To be documented. */
+    @JsxConstant(CHROME)
+    public static final short PERSISTENT = 1;
+
+    /**
+     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
+     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
+     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
+     */
+    private static final int MIN_TIMER_DELAY = 1;
+
+    private Document document_;
+    private DocumentProxy documentProxy_;
+    private Navigator navigator_;
+    private WebWindow webWindow_;
+    private WindowProxy windowProxy_;
+    private Screen screen_;
+    private History history_;
+    private Location location_;
+    private ScriptableObject console_;
+    private ApplicationCache applicationCache_;
+    private Selection selection_;
+    private Event currentEvent_;
+    private String status_ = "";
+    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
+    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
+    private Object controllers_;
+    private Object opener_;
+    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
+    private Crypto crypto_;
+
+    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
+
+    private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
+
+    private final transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
+
+    private static final class AnimationFrame {
+        private long id_;
+        private Function callback_;
+
+        private AnimationFrame(final long id, final Function callback) {
+            id_ = id;
+            callback_ = callback;
+        }
+    }
 
     /**
      * Cache computed styles when possible, because their calculation is very expensive.
@@ -236,47 +297,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         }
     }
 
-    private static final Log LOG = LogFactory.getLog(Window.class);
-
-    /** To be documented. */
-    @JsxConstant(CHROME)
-    public static final short TEMPORARY = 0;
-
-    /** To be documented. */
-    @JsxConstant(CHROME)
-    public static final short PERSISTENT = 1;
-
-    /**
-     * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
-     * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
-     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
-     */
-    private static final int MIN_TIMER_DELAY = 1;
-
-    private Document document_;
-    private DocumentProxy documentProxy_;
-    private Navigator navigator_;
-    private WebWindow webWindow_;
-    private WindowProxy windowProxy_;
-    private Screen screen_;
-    private History history_;
-    private Location location_;
-    private ScriptableObject console_;
-    private ApplicationCache applicationCache_;
-    private Selection selection_;
-    private Event currentEvent_;
-    private String status_ = "";
-    private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
-    private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
-    private Object controllers_;
-    private Object opener_;
-    private Object top_ = NOT_FOUND; // top can be set from JS to any value!
-    private Crypto crypto_;
-
-    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
-
-    private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
-
     /**
      * Creates an instance.
      */
@@ -292,7 +312,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
         throw ScriptRuntime.typeError("Illegal constructor");
@@ -350,7 +370,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         final String stringMessage = Context.toString(message);
         final AlertHandler handler = getWebWindow().getWebClient().getAlertHandler();
         if (handler == null) {
-            LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.alert(\"" + stringMessage + "\") no alert handler installed");
+            }
         }
         else {
             handler.handleAlert(document_.getPage(), stringMessage);
@@ -364,7 +386,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public String btoa(final String stringToEncode) {
-        return new String(Base64.encodeBase64(stringToEncode.getBytes()));
+        final int l = stringToEncode.length();
+        for (int i = 0; i < l; i++) {
+            if (stringToEncode.charAt(i) > 255) {
+                throw new EvaluatorException("Function btoa supports only latin1 characters");
+            }
+        }
+        return new String(Base64.encodeBase64(stringToEncode.getBytes(StandardCharsets.ISO_8859_1)));
     }
 
     /**
@@ -374,7 +402,13 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxFunction
     public String atob(final String encodedData) {
-        return new String(Base64.decodeBase64(encodedData.getBytes()));
+        final int l = encodedData.length();
+        for (int i = 0; i < l; i++) {
+            if (encodedData.charAt(i) > 255) {
+                throw new EvaluatorException("Function atob supports only latin1 characters");
+            }
+        }
+        return new String(Base64.decodeBase64(encodedData.getBytes(StandardCharsets.ISO_8859_1)));
     }
 
     /**
@@ -386,8 +420,10 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public boolean confirm(final String message) {
         final ConfirmHandler handler = getWebWindow().getWebClient().getConfirmHandler();
         if (handler == null) {
-            LOG.warn("window.confirm(\""
-                    + message + "\") no confirm handler installed, simulating the OK button");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.confirm(\""
+                        + message + "\") no confirm handler installed, simulating the OK button");
+            }
             return true;
         }
         return handler.handleConfirm(document_.getPage(), message);
@@ -403,7 +439,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public String prompt(final String message, Object defaultValue) {
         final PromptHandler handler = getWebWindow().getWebClient().getPromptHandler();
         if (handler == null) {
-            LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("window.prompt(\"" + message + "\") no prompt handler installed");
+            }
             return null;
         }
         if (defaultValue == Undefined.instance) {
@@ -544,7 +582,9 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             return new URL(urlString);
         }
         catch (final MalformedURLException e) {
-            LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            if (LOG.isWarnEnabled()) {
+                LOG.error("Unable to create URL for openWindow: relativeUrl=[" + urlString + "]", e);
+            }
             return null;
         }
     }
@@ -815,25 +855,60 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     }
 
     /**
-     * Dummy implementation for {@code requestAnimationFrame}.
+     * Invokes all the animation callbacks registered for this window by
+     * calling {@link #requestAnimationFrame(Object)} once.
+     * @return the number of pending animation callbacks
+     */
+    public int animateAnimationsFrames() {
+        final List<AnimationFrame> animationFrames = new ArrayList<>(animationFrames_);
+        animationFrames_.clear();
+
+        final double now = System.nanoTime() / 1_000_000d;
+        final Object[] args = new Object[] {now};
+
+        final WebWindow ww = getWindow().getWebWindow();
+        final JavaScriptEngine jsEngine = (JavaScriptEngine) ww.getWebClient().getJavaScriptEngine();
+
+        for (AnimationFrame animationFrame : animationFrames) {
+            jsEngine.callFunction((HtmlPage) ww.getEnclosedPage(),
+                        animationFrame.callback_, this, getParentScope(), args);
+        }
+        return animationFrames_.size();
+    }
+
+    /**
+     * Add callback to the list of animationFrames.
      * @param callback the function to call when it's time to update the animation
      * @return an identification id
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame">MDN Doc</a>
      */
     @JsxFunction
     public int requestAnimationFrame(final Object callback) {
-        // nothing for now
-        return 1;
+        if (callback instanceof Function) {
+            final int id = animationFrames_.size();
+            final AnimationFrame animationFrame = new AnimationFrame(id, (Function) callback);
+            animationFrames_.add(animationFrame);
+            return id;
+        }
+        return -1;
     }
 
     /**
-     * Dummy implementation for {@code cancelAnimationFrame}.
+     * Remove the callback from the list of animationFrames.
      * @param requestId the ID value returned by the call to window.requestAnimationFrame()
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cancelAnimationFrame">MDN Doc</a>
      */
     @JsxFunction
     public void cancelAnimationFrame(final Object requestId) {
-        // nothing for now
+        final int id = (int) Context.toNumber(requestId);
+
+        final Iterator<AnimationFrame> frames = animationFrames_.iterator();
+        while (frames.hasNext()) {
+            final Window.AnimationFrame animationFrame = frames.next();
+            if (animationFrame.id_ == id) {
+                frames.remove();
+            }
+        }
     }
 
     /**
@@ -1737,8 +1812,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     /**
      * An undocumented IE function.
      */
-    @JsxFunction(IE)
-    public void CollectGarbage() {
+    @JsxFunction(value = IE, functionName = "CollectGarbage")
+    public void collectGarbage() {
         // Empty.
     }
 
@@ -1765,7 +1840,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 normalizedPseudo = normalizedPseudo.substring(1);
             }
             else if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
-                    && !normalizedPseudo.startsWith(":")) {
+                    && normalizedPseudo.length() > 0 && normalizedPseudo.charAt(0) != ':') {
                 normalizedPseudo = ":" + normalizedPseudo;
             }
         }
@@ -1923,13 +1998,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         return 0;
     }
 
-    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
-    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
-            "style",
-            "class",
-            "height",
-            "width"));
-
     private static final class Filter {
         private final boolean includeFormFields_;
 
@@ -1968,6 +2036,21 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     public void clearComputedStyles(final Element element) {
         cssPropertiesCache_.remove(element);
+    }
+
+    /**
+     * Clears the computed styles for a specific {@link Element}
+     * and all parent elements.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStylesUpToRoot(final Element element) {
+        cssPropertiesCache_.remove(element);
+
+        Element parent = element.getParentElement();
+        while (parent != null) {
+            cssPropertiesCache_.remove(parent);
+            parent = parent.getParentElement();
+        }
     }
 
     /**
@@ -2070,8 +2153,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/efy5bay1.aspx">MSDN doc</a>
      * @return "JScript"
      */
-    @JsxFunction(IE)
-    public String ScriptEngine() {
+    @JsxFunction(value = IE, functionName = "ScriptEngine")
+    public String scriptEngine() {
         return "JScript";
     }
 
@@ -2080,8 +2163,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/yftk84kt.aspx">MSDN doc</a>
      * @return the build version
      */
-    @JsxFunction(IE)
-    public int ScriptEngineBuildVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineBuildVersion")
+    public int scriptEngineBuildVersion() {
         return 12345;
     }
 
@@ -2090,8 +2173,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/x7cbaet3.aspx">MSDN doc</a>
      * @return the major version
      */
-    @JsxFunction(IE)
-    public int ScriptEngineMajorVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineMajorVersion")
+    public int scriptEngineMajorVersion() {
         return getBrowserVersion().getBrowserVersionNumeric();
     }
 
@@ -2100,8 +2183,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/wzaz8hhz.aspx">MSDN doc</a>
      * @return the minor version
      */
-    @JsxFunction(IE)
-    public int ScriptEngineMinorVersion() {
+    @JsxFunction(value = IE, functionName = "ScriptEngineMinorVersion")
+    public int scriptEngineMinorVersion() {
         return 0;
     }
 

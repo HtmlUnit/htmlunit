@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_INV
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -46,7 +48,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Wrapper for the HTML element "img".
@@ -129,7 +133,7 @@ public class HtmlImage extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        if ("src".equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
             final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
             if (!oldValue.equals(value)) {
                 super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
@@ -167,6 +171,66 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void processImportNode(final Document doc) {
+        URL oldUrl = null;
+        final String src = getSrcAttribute();
+        HtmlPage htmlPage = getHtmlPageOrNull();
+        try {
+            if (htmlPage != null) {
+                oldUrl = htmlPage.getFullyQualifiedUrl(src);
+            }
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+
+        super.processImportNode(doc);
+
+        URL url = null;
+        htmlPage = getHtmlPageOrNull();
+        try {
+            if (htmlPage != null) {
+                url = htmlPage.getFullyQualifiedUrl(src);
+            }
+        }
+        catch (final MalformedURLException e) {
+            // ignore
+        }
+
+        if (oldUrl == null || !UrlUtils.sameFile(oldUrl, url)) {
+            // image has to be reloaded
+            lastClickX_ = 0;
+            lastClickY_ = 0;
+            imageWebResponse_ = null;
+            imageData_ = null;
+            width_ = -1;
+            height_ = -1;
+            downloaded_ = false;
+            isComplete_ = false;
+            onloadProcessed_ = false;
+            createdByJavascript_ = true;
+        }
+
+        if (htmlPage == null) {
+            return; // nothing to do if embedded in XML code
+        }
+
+        if (htmlPage.getWebClient().getOptions().isDownloadImages()) {
+            try {
+                downloadImageIfNeeded();
+            }
+            catch (final IOException e) {
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Unable to download image for element " + this);
+                }
+            }
+        }
+    }
+
+    /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
      * <p>Executes this element's <tt>onload</tt> or <tt>onerror</tt> handler. This method downloads the image
@@ -197,7 +261,7 @@ public class HtmlImage extends HtmlElement {
             return;
         }
 
-        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute("src")) {
+        if ((hasEventHandlers("onload") || hasEventHandlers("onerror")) && hasAttribute(SRC_ATTRIBUTE)) {
             onloadProcessed_ = true;
             boolean loadSuccessful = false;
             if (!getSrcAttribute().isEmpty()) {
@@ -455,17 +519,20 @@ public class HtmlImage extends HtmlElement {
         if (!downloaded_) {
             // HTMLIMAGE_BLANK_SRC_AS_EMPTY
             final String src = getSrcAttribute();
-            if (!"".equals(src)
-                    && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
-                final HtmlPage page = (HtmlPage) getPage();
-                final WebClient webclient = page.getWebClient();
 
-                final URL url = page.getFullyQualifiedUrl(src);
-                final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
-                final WebRequest request = new WebRequest(url, accept);
-                request.setCharset(page.getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
-                imageWebResponse_ = webclient.loadWebResponse(request);
+            if (!"".equals(src)) {
+                final HtmlPage page = (HtmlPage) getPage();
+                final WebClient webClient = page.getWebClient();
+
+                if (!(webClient.getBrowserVersion().hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)
+                        && StringUtils.isBlank(src))) {
+                    final URL url = page.getFullyQualifiedUrl(src);
+                    final String accept = webClient.getBrowserVersion().getImgAcceptHeader();
+                    final WebRequest request = new WebRequest(url, accept);
+                    request.setCharset(page.getCharset());
+                    request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
+                    imageWebResponse_ = webClient.loadWebResponse(request);
+                }
             }
 
             if (imageData_ != null) {
@@ -579,9 +646,9 @@ public class HtmlImage extends HtmlElement {
     public void saveAs(final File file) throws IOException {
         downloadImageIfNeeded();
         if (null != imageWebResponse_) {
-            try (FileOutputStream fileOut = new FileOutputStream(file);
+            try (OutputStream fos = Files.newOutputStream(file.toPath());
                     InputStream inputStream = imageWebResponse_.getContentAsStream()) {
-                IOUtils.copy(inputStream, fileOut);
+                IOUtils.copy(inputStream, fos);
             }
         }
     }

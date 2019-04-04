@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -189,7 +189,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "object")
     public void atomics() throws Exception {
         test("Atomics");
     }
@@ -449,8 +450,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void budgetService() throws Exception {
         test("BudgetService");
     }
@@ -1513,7 +1513,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF52 = "function")
+            FF52 = "function",
+            CHROME = "function")
     public void external() throws Exception {
         test("External");
     }
@@ -4972,7 +4973,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }
@@ -5106,8 +5108,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void speechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisErrorEvent");
     }
@@ -6975,8 +6977,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
-            EDGE = "function")
+            FF = "function")
     public void videoPlaybackQuality() throws Exception {
         test("VideoPlaybackQuality");
     }
@@ -7198,7 +7199,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    public void WebGLSampler() throws Exception {
+    public void webGLSampler() throws Exception {
         test("WebGLSampler");
     }
 
@@ -7276,8 +7277,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webKitAnimationEvent() throws Exception {
         test("WebKitAnimationEvent");
     }
@@ -7466,8 +7466,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function")
+    @Alerts("undefined")
     public void webKitTransitionEvent() throws Exception {
         test("WebKitTransitionEvent");
     }

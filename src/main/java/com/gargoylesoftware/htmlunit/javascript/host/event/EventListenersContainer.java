@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,14 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class EventListenersContainer implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(EventListenersContainer.class);
+
+    // Refactoring note: This seems ad-hoc..  Shouldn't synchronization be orchestrated between
+    // JS thread and main thread at a much higher layer?  Anyways, to preserve behaviour of prior
+    // coding where 'synchronized' was used more explicitly, we're using a ConcurrentHashMap here
+    // and using ConcurrentMap.compute() to mutate below so that mutations are atomic.  This for
+    // example avoids the case where two concurrent addListener()s can result in either being lost.
+    private final ConcurrentMap<String, TypeContainer> typeContainers_ = new ConcurrentHashMap<>();
+    private final EventTarget jsNode_;
 
     private static class TypeContainer implements Serializable {
         public static final TypeContainer EMPTY = new TypeContainer();
@@ -107,12 +115,10 @@ public class EventListenersContainer implements Serializable {
                 // Insert the placeholder and set the handler
                 return withPropertyHandler(propertyHandler).addListener(EVENT_HANDLER_PLACEHOLDER, false);
             }
-            else {
-                if (handler_ == null) {
-                    return this;
-                }
-                return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
+            if (handler_ == null) {
+                return this;
             }
+            return removeListener(EVENT_HANDLER_PLACEHOLDER, false).withPropertyHandler(null);
         }
 
         private TypeContainer withPropertyHandler(final Function propertyHandler) {
@@ -184,14 +190,6 @@ public class EventListenersContainer implements Serializable {
             return new TypeContainer(capturingListeners_, bubblingListeners_, atTargetListeners_, handler_);
         }
     }
-
-    // Refactoring note: This seems ad-hoc..  Shouldn't synchronization be orchestrated between
-    // JS thread and main thread at a much higher layer?  Anyways, to preserve behaviour of prior
-    // coding where 'synchronized' was used more explicitly, we're using a ConcurrentHashMap here
-    // and using ConcurrentMap.compute() to mutate below so that mutations are atomic.  This for
-    // example avoids the case where two concurrent addListener()s can result in either being lost.
-    private final ConcurrentMap<String, TypeContainer> typeContainers_ = new ConcurrentHashMap<>();
-    private final EventTarget jsNode_;
 
     /**
      * The constructor.

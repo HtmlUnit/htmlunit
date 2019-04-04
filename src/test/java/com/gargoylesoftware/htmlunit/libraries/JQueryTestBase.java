@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,8 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     protected void runTest(final String testName) throws Exception {
-        final int testNumber = readTestNumber(testName);
-        if (testNumber == -1) {
+        final String testNumber = readTestNumber(testName);
+        if (testNumber == null) {
             assertEquals("Test number not found for: " + testName, 0, getExpectedAlerts().length);
             return;
         }
@@ -65,7 +65,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
 
         try {
             final WebDriver webdriver = getWebDriver();
-            final String url = URL_FIRST + "jquery/test/index.html?dev&testNumber=" + testNumber;
+            final String url = buildUrl(testNumber);
             webdriver.get(url);
 
             while (!getResultElementText(webdriver).startsWith("Tests completed")) {
@@ -76,9 +76,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
                 }
             }
 
-            final WebElement output = webdriver.findElement(By.id("qunit-test-output0"));
-            String result = output.getText();
-            result = result.substring(0, result.indexOf("Rerun")).trim();
+            final String result = getResultDetailElementText(webdriver, testNumber);
             final String expected = testName + " (" + getExpectedAlerts()[0] + ")";
             if (!expected.contains(result)) {
                 System.out.println("--------------------------------------------");
@@ -129,7 +127,7 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
      * @return the test number
      * @throws Exception in case of problems
      */
-    protected int readTestNumber(final String testName) throws Exception {
+    protected String readTestNumber(final String testName) throws Exception {
         final String testResults = loadExpectation("/libraries/jQuery/"
                                         + getVersion() + "/expectations/results", ".txt");
         final String[] lines = testResults.split("\n");
@@ -138,11 +136,31 @@ public abstract class JQueryTestBase extends WebDriverTestCase {
             final int pos = line.indexOf(testName);
             if (pos != -1
                     && line.indexOf('(', pos + testName.length() + 3) == -1) {
-                return i + 1;
+                return Integer.toString(i + 1);
             }
         }
 
-        return -1;
+        return null;
+    }
+
+    /**
+     * @param testNumber the number of the test to run
+     * @return the test url
+     */
+    protected String buildUrl(final String testNumber) {
+        return URL_FIRST + "jquery/test/index.html?dev&testNumber=" + testNumber;
+    }
+
+    /**
+     * @param webdriver the web driver
+     * @param testNumber the number of the test to run
+     * @return the test result details
+     */
+    protected String getResultDetailElementText(final WebDriver webdriver, final String testNumber) {
+        final WebElement output = webdriver.findElement(By.id("qunit-test-output0"));
+        String result = output.getText();
+        result = result.substring(0, result.indexOf("Rerun")).trim();
+        return result;
     }
 
     /**

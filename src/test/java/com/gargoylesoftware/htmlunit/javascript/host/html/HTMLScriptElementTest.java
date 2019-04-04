@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,19 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Unit tests for {@link HTMLScriptElement}.
@@ -79,7 +82,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         final String js = "document.getElementById('myTextarea').value += '4 ';";
 
-        getMockWebConnection().setDefaultResponse(js, JAVASCRIPT_MIME_TYPE);
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(html);
     }
 
@@ -192,6 +195,115 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "hello", "world", "-"})
+    public void scriptInCdataXHtml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "hello", "world", "-"})
+    public void scriptInCdataXml() throws Exception {
+        final String html =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<!DOCTYPE html PUBLIC \n"
+            + "  \"-//W3C//DTD XHTML 1.0 Strict//EN\" \n"
+            + "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
+            + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
+        final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
+        verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"hello", "hello", "-"})
+    public void scriptInCdataHtml() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <script>\n"
+            + "    //<![CDATA[\n"
+            + "    alert('hello');\n"
+            + "    //]]>\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "  </script>\n"
+            + "  <script>\n"
+            + "    <![CDATA[\n"
+            + "    alert('world');\n"
+            + "    ]]>\n"
+            + "  </script>\n"
+            + "  <script>alert('-');</script>\n"
+            + "</body></html>";
+
+        if (getWebDriver() instanceof HtmlUnitDriver) {
+            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
+                .getOptions().setThrowExceptionOnScriptError(false);
+        }
         loadPageWithAlerts2(html);
     }
 
@@ -1197,6 +1309,38 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "");
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * {@link https://github.com/HtmlUnit/htmlunit/issues/11}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("inside script.js")
+    public void loadScriptDynamicallyAdded() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + "      function test() {\n"
+            + "        var script = document.createElement('script');\n"
+            + "        script.type = 'text/javascript';\n"
+            + "        script.async = true;\n"
+            + "        script.src = 'script.js';\n"
+
+            + "        var s = document.getElementsByTagName('script')[0];\n"
+            + "        s.parentNode.insertBefore(script, s);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <textarea id='myTextarea' cols='40'></textarea>\n"
+            + "  </body></html>";
+
+        final String js = "alert('inside script.js');";
+
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageWithAlerts2(html);
     }

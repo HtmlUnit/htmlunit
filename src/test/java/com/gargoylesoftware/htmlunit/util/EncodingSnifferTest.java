@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,7 +120,7 @@ public class EncodingSnifferTest {
         contentType(null, "");
         contentType(null, " \t \n ");
         contentType(null, "foo");
-        contentType(null, "text/html");
+        contentType(null, MimeType.TEXT_HTML);
         contentType(null, "\n text/html \t");
         contentType(null, "\n text/html ; char \t");
         contentType(null, "\n text/html ; charset \t");

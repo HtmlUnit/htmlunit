@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.stylesheets.MediaList;
 
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -103,7 +102,7 @@ public class StyleSheetList extends SimpleScriptable {
                     return true;
                 }
                 final WebClient webClient = getWindow().getWebWindow().getWebClient();
-                final MediaList mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
+                final MediaListImpl mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
                 return CSSStyleSheet.isActive(this, mediaList);
             }
         }
@@ -113,7 +112,7 @@ public class StyleSheetList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF, EDGE})
+    @JsxConstructor({CHROME, FF})
     public StyleSheetList() {
     }
 

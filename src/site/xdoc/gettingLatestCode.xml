@@ -13,15 +13,14 @@
     <body>
         <section name="Introduction">
             <p>
-                At any time, all the code in SVN should be compilable and should pass all the unit tests.  There
+                At any time, all the code in the git repository should be compilable and should pass all the unit tests.  There
                 is no guarantee that it will be full featured - this is a work in progress.
             </p>
         </section>
 
         <section name="Latest build">
             <p>
-            You can download the latest build from our <a href="https://ci.canoo.com/teamcity/viewLog.html?buildTypeId=HtmlUnit_FastBuild&amp;buildId=lastSuccessful&amp;tab=artifacts">Build server</a> 
-            kindly hosted by <a href="http://www.canoo.com">Canoo AG</a>.
+            You can download the latest build from our <a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">Build server</a>.
             </p>
         </section>
 
@@ -50,14 +49,10 @@
             </p>
         </section>
 
-        <section name="Checking out SVN repository">
+        <section name="The source code repository">
             <p>
-            Another way to get the latest code is through SVN.
-            Create a directory for HtmlUnit (for instance c:\htmlunit or ~/htmlunit).  Change to that directory and execute the
-            following commands.
+            The source code is hosted at <a href="https://github.com/HtmlUnit/htmlunit">GitHub</a>.
             </p>
-            <source><![CDATA[
-svn co http://svn.code.sf.net/p/htmlunit/code/trunk/htmlunit/ .]]></source>
         </section>
 
         <section name="Compiling the code">

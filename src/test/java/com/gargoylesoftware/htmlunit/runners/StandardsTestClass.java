@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,9 +53,11 @@ public class StandardsTestClass extends TestClass {
             }
             // Fields are ignored
         }
-        for (final Class<? extends Annotation> key : methodsForAnnotations.keySet()) {
+        for (final  Map.Entry<Class<? extends Annotation>,
+                List<FrameworkMethod>> methodsEntry : methodsForAnnotations.entrySet()) {
+            final Class<? extends Annotation> key = methodsEntry.getKey();
             if (key == Test.class) {
-                final List<FrameworkMethod> methods = methodsForAnnotations.get(key);
+                final List<FrameworkMethod> methods = methodsEntry.getValue();
                 final List<FrameworkMethod> newMethods = new ArrayList<>(methods.size() * 2);
                 for (final FrameworkMethod m : methods) {
                     newMethods.add(new StandardsFrameworkMethod(m.getMethod(), false));

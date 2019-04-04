@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,6 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
         serverSSLContext.init(keyManagers, trustManagers, null);
 
         localServer_ = new LocalTestServer(serverSSLContext);
-
         localServer_.start();
     }
 
@@ -121,15 +120,18 @@ public class HttpWebConnectionInsecureSSLWithClientCertificateTest extends Simpl
     @Test
     public void insecureSSL_clientCertificatesInputStream() throws Exception {
         final WebClient webClient = getWebClient();
-        final InputStream certificateInputStream = getClass().getClassLoader()
-                .getResourceAsStream("insecureSSL.keystore");
-        final byte[] certificateBytes = new byte[2048];
-        certificateInputStream.read(certificateBytes);
-        final InputStream is = new ByteArrayInputStream(certificateBytes);
-        webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
-        webClient.getOptions().setUseInsecureSSL(true);
-        webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
-                + ':' + localServer_.getServer().getLocalPort()
-                + "/random/100");
+        try (InputStream certificateInputStream = getClass().getClassLoader()
+                .getResourceAsStream("insecureSSL.keystore")) {
+            final byte[] certificateBytes = new byte[2048];
+            certificateInputStream.read(certificateBytes);
+
+            try (InputStream is = new ByteArrayInputStream(certificateBytes);) {
+                webClient.getOptions().setSSLClientCertificate(is, "nopassword", "jks");
+                webClient.getOptions().setUseInsecureSSL(true);
+                webClient.getPage("https://" + localServer_.getServer().getInetAddress().getHostName()
+                        + ':' + localServer_.getServer().getLocalPort()
+                        + "/random/100");
+            }
+        }
     }
 }

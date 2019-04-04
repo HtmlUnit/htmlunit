@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,7 @@ public class EventHandler extends BaseFunction {
 
         jsSnippet_ = "function on" + eventName + "(event) {" + jsSnippet + "\n}";
 
-        final ScriptableObject w = node.getPage().getEnclosingWindow().getScriptableObject();
-        final Scriptable function = (Scriptable) w.get("Function", w);
-        setPrototype(function.getPrototype());
+        setPrototype(ScriptableObject.getClassPrototype(node.getScriptableObject(), "Function"));
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link HTMLDocument}'s write(ln) function.
@@ -91,7 +92,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         final String script = "document.getElementById('iframe').src = '" + URL_SECOND + "';\n";
-        webConnection.setResponse(new URL("http://script/"), script, JAVASCRIPT_MIME_TYPE);
+        webConnection.setResponse(new URL("http://script/"), script, MimeType.APPLICATION_JAVASCRIPT);
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -223,12 +224,12 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
-        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", JAVASCRIPT_MIME_TYPE);
-        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", JAVASCRIPT_MIME_TYPE);
+        conn.setResponse(new URL(URL_FIRST, "a.js"), "log(1)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "b.js"), "log(4)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "c.js"), "log(5)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "d.js"), "log(10)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "e.js"), "log(11)", MimeType.APPLICATION_JAVASCRIPT);
+        conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", MimeType.APPLICATION_JAVASCRIPT);
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
         assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asText().trim());
@@ -323,7 +324,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         final MockWebConnection webConnection = new MockWebConnection();
         client.setWebConnection(webConnection);
         webConnection.setDefaultResponse(html);
-        webConnection.setResponse(scriptUrl, "alert('foo');\n", JAVASCRIPT_MIME_TYPE);
+        webConnection.setResponse(scriptUrl, "alert('foo');\n", MimeType.APPLICATION_JAVASCRIPT);
 
         final List<String> collectedAlerts = new ArrayList<>();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));

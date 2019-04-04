@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -123,6 +124,7 @@ public class Dojo102Test extends DojoTestBase {
      * @throws Exception if an error occurs
      */
     @Test
+    @NotYetImplemented(CHROME)
     public void tests_basehtml() throws Exception {
         test("tests._base.html");
         // tests._base.html_rtl

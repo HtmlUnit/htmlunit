@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,9 +58,9 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
     private FrameWindow enclosedWindow_;
-    private boolean contentLoaded_ = false;
-    private boolean createdByJavascript_ = false;
-    private boolean loadSrcWhenAddedToPage_ = false;
+    private boolean contentLoaded_;
+    private boolean createdByJavascript_;
+    private boolean loadSrcWhenAddedToPage_;
 
     /**
      * Creates an instance of BaseFrame.
@@ -173,18 +176,22 @@ public abstract class BaseFrameElement extends HtmlElement {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
-            if (isAlreadyLoadedByAncestor(url)) {
+
+            final WebRequest request = new WebRequest(url);
+            request.setCharset(getPage().getCharset());
+            request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
+
+            if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + src + "]. Ignored.");
                 return;
             }
             try {
-                final WebRequest request = new WebRequest(url);
-                request.setCharset(getPage().getCharset());
-                request.setAdditionalHeader(HttpHeader.REFERER, getPage().getUrl().toExternalForm());
                 getPage().getEnclosingWindow().getWebClient().getPage(enclosedWindow_, request);
             }
             catch (final IOException e) {
-                LOG.error("IOException when getting content for " + getTagName() + ": url=[" + url + "]", e);
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("IOException when getting content for " + getTagName() + ": url=[" + url + "]", e);
+                }
             }
         }
     }
@@ -192,14 +199,19 @@ public abstract class BaseFrameElement extends HtmlElement {
     /**
      * Test if the provided URL is the one of one of the parents which would cause an infinite loop.
      * @param url the URL to test
+     * @param charset the request charset
      * @return {@code false} if no parent has already this URL
      */
-    private boolean isAlreadyLoadedByAncestor(final URL url) {
+    private boolean isAlreadyLoadedByAncestor(final URL url, final Charset charset) {
         WebWindow window = getPage().getEnclosingWindow();
         while (window != null) {
-            if (UrlUtils.sameFile(url, window.getEnclosedPage().getUrl())) {
+            final URL encUrl = UrlUtils.encodeUrl(url,
+                    window.getWebClient().getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING),
+                    charset);
+            if (UrlUtils.sameFile(encUrl, window.getEnclosedPage().getUrl())) {
                 return true;
             }
+
             if (window == window.getParentWindow()) {
                 // TODO: should getParentWindow() return null on top windows?
                 window = null;
@@ -342,7 +354,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @param attribute the new value of the {@code src} attribute
      */
     public final void setSrcAttribute(final String attribute) {
-        setAttribute("src", attribute);
+        setAttribute(SRC_ATTRIBUTE, attribute);
     }
 
     /**
@@ -351,14 +363,14 @@ public abstract class BaseFrameElement extends HtmlElement {
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObserver) {
-        if (null != attributeValue && "src".equals(qualifiedName)) {
+        if (null != attributeValue && SRC_ATTRIBUTE.equals(qualifiedName)) {
             attributeValue = attributeValue.trim();
         }
 
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObserver);
 
-        if ("src".equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && WebClient.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
@@ -375,13 +387,13 @@ public abstract class BaseFrameElement extends HtmlElement {
     public Attr setAttributeNode(final Attr attribute) {
         final String qualifiedName = attribute.getName();
         String attributeValue = null;
-        if ("src".equals(qualifiedName)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName)) {
             attributeValue = attribute.getValue().trim();
         }
 
         final Attr result = super.setAttributeNode(attribute);
 
-        if ("src".equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
+        if (SRC_ATTRIBUTE.equals(qualifiedName) && !WebClient.ABOUT_BLANK.equals(attributeValue)) {
             if (isAttachedToPage()) {
                 loadSrc();
             }

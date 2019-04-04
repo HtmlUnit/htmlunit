@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,12 +86,12 @@ public class URLSearchParams extends SimpleScriptable {
 
         // TODO: encoding
         final String[] parts = StringUtils.split(params, '&');
-        for (int i = 0; i < parts.length; i++) {
-            params_.add(splitQueryParameter(parts[i]));
+        for (String part : parts) {
+            params_.add(splitQueryParameter(part));
         }
     }
 
-    private Entry<String, String> splitQueryParameter(final String singleParam) {
+    private static Entry<String, String> splitQueryParameter(final String singleParam) {
         final int idx = singleParam.indexOf('=');
         if (idx > -1) {
             final String key = singleParam.substring(0, idx);
@@ -125,6 +125,7 @@ public class URLSearchParams extends SimpleScriptable {
      * @param name The name of the parameter to be deleted.
      */
     @JsxFunction
+    @Override
     public void delete(final String name) {
         final Iterator<Entry<String, String>> iter = params_.iterator();
         while (iter.hasNext()) {
@@ -298,7 +299,7 @@ public class URLSearchParams extends SimpleScriptable {
             paramStr.append(delim);
             delim = "&";
             paramStr.append(param.getKey());
-            paramStr.append("=");
+            paramStr.append('=');
             // TODO: need to encode value
             final String value = param.getValue();
             if (value != null) {

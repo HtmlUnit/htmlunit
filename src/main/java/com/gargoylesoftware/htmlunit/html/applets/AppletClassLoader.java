@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 public class AppletClassLoader extends URLClassLoader {
 
     private static final Log LOG = LogFactory.getLog(AppletClassLoader.class);
-    private final StringBuilder info_ = new StringBuilder();
+    private final StringBuilder info_ = new StringBuilder(40);
 
     /**
      * The constructor.
@@ -49,9 +49,11 @@ public class AppletClassLoader extends URLClassLoader {
         super(new URL[0], parent);
 
         if (window.getWebWindow().getWebClient().getOptions().isUseInsecureSSL()) {
-            LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."
-                    + " If you like to load applet archives from a SSL/HTTPS connection you have to configure"
-                    + " your jvm to accept untrusted certificate for SSL/HTTPS connections also.");
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("AppletClassLoader: your WebClient accepts ssl connections without certificate checking."
+                        + " If you like to load applet archives from a SSL/HTTPS connection you have to configure"
+                        + " your jvm to accept untrusted certificate for SSL/HTTPS connections also.");
+            }
         }
 
         try {

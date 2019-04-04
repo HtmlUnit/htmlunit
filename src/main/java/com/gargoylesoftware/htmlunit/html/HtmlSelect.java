@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -572,7 +572,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
                 builder.append(currentOption.asText());
             }
             if (i.hasNext()) {
-                builder.append("\n");
+                builder.append('\n');
             }
         }
 

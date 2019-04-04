@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -124,8 +125,10 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
-        connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), script1, 200, "ok",
+                MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), script2, 200, "ok",
+                MimeType.APPLICATION_JAVASCRIPT, headers);
 
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
@@ -179,8 +182,8 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), script1,
-                200, "ok", JAVASCRIPT_MIME_TYPE, headers);
-        getMockWebConnection().setDefaultResponse(script2, 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+                200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
+        getMockWebConnection().setDefaultResponse(script2, 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -247,8 +250,8 @@ public class CacheTest extends SimpleWebTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo1.js"), "",
-                200, "ok", "text/css", headers);
-        getMockWebConnection().setDefaultResponse("", 200, "ok", "text/css", headers);
+                200, "ok", MimeType.TEXT_CSS, headers);
+        getMockWebConnection().setDefaultResponse("", 200, "ok", MimeType.TEXT_CSS, headers);
 
         final WebClient webClient = getWebClientWithMockWebConnection();
 
@@ -290,8 +293,8 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
-        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo1.js"), ";", 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo2.js"), ";", 200, "ok", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(1, client.getCache().getSize());
@@ -323,9 +326,51 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.TEXT_CSS, headers);
 
         client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+    }
+
+    /**
+     * Check for correct caching if the css request gets redirected.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cssIsCachedIfUrlWasRedirected() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body onload='document.styleSheets.item(0); document.styleSheets.item(1);'>x</body>\n"
+            + "</html>";
+
+        final String css = ".x { color: red; }";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final URL cssUrl = new URL(URL_FIRST, "foo.css");
+        final URL redirectUrl = new URL(URL_FIRST, "fooContent.css");
+
+        List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Location", redirectUrl.toExternalForm()));
+        connection.setResponse(cssUrl, "", 301, "Redirect", null, headers);
+
+        headers = Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(redirectUrl, css, 200, "OK", MimeType.TEXT_CSS, headers);
+
+        client.getPage(pageUrl);
+        client.getPage(pageUrl);
+
+        // page1.html - foo.css - fooContent.css - page1.html
+        assertEquals(4, connection.getRequestCount());
+        // foo.css - fooContent.css
         assertEquals(2, client.getCache().getSize());
     }
 
@@ -383,7 +428,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(0, client.getCache().getSize());
@@ -416,7 +461,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
@@ -454,7 +499,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
@@ -494,7 +539,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final URL pageUrl = new URL(URL_FIRST, "page1.html");
         connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
-        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", JAVASCRIPT_MIME_TYPE, headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
 
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());

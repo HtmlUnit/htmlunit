@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,12 @@ public interface SubmittableElement {
 
     /**
      * Sets the default checked state to use when this element gets reset, if applicable.
+     * The default implementation is empty; only checkboxes and radio buttons
+     * really care what the default checked value is.
+     * @see SubmittableElement#setDefaultChecked(boolean)
+     * @see HtmlRadioButtonInput#setDefaultChecked(boolean)
+     * @see HtmlCheckBoxInput#setDefaultChecked(boolean)
+     *
      * @param defaultChecked the default checked state to use when this element gets reset, if applicable
      */
     void setDefaultChecked(boolean defaultChecked);

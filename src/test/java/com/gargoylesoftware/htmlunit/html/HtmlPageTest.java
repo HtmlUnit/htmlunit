@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,6 +57,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.HtmlElementTest.HtmlAttributeChangeListenerTestImpl;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -849,7 +850,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", "text/html", Collections
+        webConnection.setResponse(URL_FIRST, firstContent, 200, "OK", MimeType.TEXT_HTML, Collections
                 .singletonList(new NameValuePair("Refresh", "2;URL=" + URL_SECOND)));
         webConnection.setResponse(URL_SECOND, secondContent);
         client.setWebConnection(webConnection);
@@ -1019,7 +1020,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, UTF_8), 200, "OK", "text/html");
+        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

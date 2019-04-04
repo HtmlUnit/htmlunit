@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -231,7 +232,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         headers.add(new NameValuePair(HttpHeader.CONTENT_LENGTH, String.valueOf(content.length)));
 
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, content, 404, "OK", "text/html", headers);
+        conn.setResponse(URL_FIRST, content, 404, "OK", MimeType.TEXT_HTML, headers);
 
         // only check that no exception is thrown
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);
@@ -248,7 +249,7 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
         final List<NameValuePair> headers = Arrays.asList(new NameValuePair("Location", URL_SECOND.toString()),
                 new NameValuePair("Content-Encoding", "gzip"));
         final MockWebConnection conn = getMockWebConnection();
-        conn.setResponse(URL_FIRST, "12", 302, "Some error", "text/html", headers);
+        conn.setResponse(URL_FIRST, "12", 302, "Some error", MimeType.TEXT_HTML, headers);
         conn.setResponse(URL_SECOND, html);
 
         final WebDriver driver = loadPageWithAlerts2(URL_FIRST);

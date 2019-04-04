@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2018 Gargoyle Software Inc.
+ * Copyright (c) 2002-2019 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -31,7 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, FF60})
-@JsxClass(isJSObject = false, value = {IE, FF52, EDGE})
+@JsxClass(isJSObject = false, value = {IE, FF52})
 public class SVGGeometryElement extends SVGGraphicsElement {
 
     /**
