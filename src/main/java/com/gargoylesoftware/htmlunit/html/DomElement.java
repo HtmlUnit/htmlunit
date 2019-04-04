@@ -925,10 +925,25 @@ public class DomElement extends DomNamespaceNode implements Element {
         final SgmlPage page = getPage();
         page.getWebClient().setCurrentWindow(page.getEnclosingWindow());
 
-        if ((!ignoreVisibility && !isDisplayed())
-                || !(page instanceof HtmlPage)
-                || this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
-            return (P) page;
+        if (!ignoreVisibility) {
+            if (!(page instanceof HtmlPage)) {
+                return (P) page;
+            }
+
+            if (!isDisplayed()) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Calling click() ignored because the target element '" + toString()
+                                    + "' is not displayed.");
+                }
+                return (P) page;
+            }
+
+            if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Calling click() ignored because the target element '" + toString() + "' is disabled.");
+                }
+                return (P) page;
+            }
         }
 
         synchronized (page) {
