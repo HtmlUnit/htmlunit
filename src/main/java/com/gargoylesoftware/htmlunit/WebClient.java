@@ -1483,7 +1483,14 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param wrs the <tt>WebRequestSettings</tt> instance to modify
      */
     private void addDefaultHeaders(final WebRequest wrs) {
-        // Add standard HtmlUnit headers.
+        // Add user-specified headers to the web request if not present there yet.
+        requestHeaders_.forEach((name, value) -> {
+            if (!wrs.isAdditionalHeader(name)) {
+                wrs.setAdditionalHeader(name, value);
+            }
+        });
+
+        // Add standard HtmlUnit headers to the web request if still not present there yet.
         if (!wrs.isAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE)) {
             wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getBrowserLanguage());
         }
@@ -1491,13 +1498,6 @@ public class WebClient implements Serializable, AutoCloseable {
                 && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
             wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
         }
-
-        // Add user-specified headers last so that they can override HtmlUnit defaults.
-        requestHeaders_.forEach((name, value) -> {
-            if (!wrs.isAdditionalHeader(name)) {
-                wrs.setAdditionalHeader(name, value);
-            }
-        });
     }
 
     /**
