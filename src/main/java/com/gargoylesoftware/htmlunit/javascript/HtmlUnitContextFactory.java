@@ -340,6 +340,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
             return null;
         }
     }
+
     /**
      * {@inheritDoc}
      */
