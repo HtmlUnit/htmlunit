@@ -32,6 +32,7 @@
             <item name="Use Windows" href="/window-howto.html"/>
             <item name="Use JavaScript" href="/javascript-howto.html"/>
             <item name="Use ActiveX" href="/activeX-howto.html"/>
+            <item name="All the details" href="/details.html"/>
         </menu>
         <menu name="User docs">
             <item name="Logging" href="/logging.html"/>
