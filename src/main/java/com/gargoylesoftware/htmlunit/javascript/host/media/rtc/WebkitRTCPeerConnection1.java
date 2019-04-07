@@ -27,12 +27,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  */
 @JsxClass(value = CHROME, className = "webkitRTCPeerConnection")
-public class WebkitRTCPeerConnection extends EventTarget {
+public class WebkitRTCPeerConnection1 extends EventTarget {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public WebkitRTCPeerConnection() {
+    public WebkitRTCPeerConnection1() {
     }
 }

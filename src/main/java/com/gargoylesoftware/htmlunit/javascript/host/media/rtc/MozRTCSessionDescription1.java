@@ -27,12 +27,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(value = FF, className = "mozRTCSessionDescription")
-public class MozRTCSessionDescription extends SimpleScriptable {
+public class MozRTCSessionDescription1 extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public MozRTCSessionDescription() {
+    public MozRTCSessionDescription1() {
     }
 }

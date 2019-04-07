@@ -27,12 +27,12 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  */
 @JsxClass(value = FF, className = "mozRTCPeerConnection")
-public class MozRTCPeerConnection extends EventTarget {
+public class MozRTCPeerConnection1 extends EventTarget {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public MozRTCPeerConnection() {
+    public MozRTCPeerConnection1() {
     }
 }
