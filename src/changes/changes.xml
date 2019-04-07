@@ -8,6 +8,13 @@
 
     <body>
         <release version="2.34.1" date="...., 2019" description="Bugfixes, CHROME 73, reworked javascript logging">
+            <action type="update" dev="rbri" issue="#24">
+                StackOverflowError during javascript processing are now handled like other javascript errors.
+                Only the JavaScriptErrorListener gets informed.
+            </action>
+            <action type="update" dev="rbri" issue="#27" due-to="Joerg Werner">
+                Make the processing of request headers more correct and document the general idea.
+            </action>
             <action type="update" dev="rbri" issue="#28">
                 Log a warning, if click() is a no-op because the target element is disabled or not displayed.
             </action>

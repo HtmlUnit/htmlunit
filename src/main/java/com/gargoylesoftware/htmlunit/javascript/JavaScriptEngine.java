@@ -713,7 +713,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         };
 
-        return (Script) getContextFactory().call(action);
+        return (Script) getContextFactory().callSecured(action, owningPage);
     }
 
     /**
@@ -762,7 +762,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             }
         };
 
-        return getContextFactory().call(action);
+        return getContextFactory().callSecured(action, page);
     }
 
     /**
@@ -811,7 +811,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 return cx.decompileFunction(function, 2);
             }
         };
-        return getContextFactory().call(action);
+        return getContextFactory().callSecured(action, page);
     }
 
     private static Scriptable getScope(final HtmlPage page, final DomNode node) {

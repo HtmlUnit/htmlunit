@@ -79,6 +79,7 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -93,7 +94,6 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -1235,8 +1235,9 @@ public class HtmlPage extends SgmlPage {
                 jsNode = window.getScriptableObject();
             }
 
-            final ContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine()).getContextFactory();
-            cf.call(cx -> jsNode.fireEvent(event));
+            final HtmlUnitContextFactory cf = ((JavaScriptEngine) getWebClient().getJavaScriptEngine())
+                                                    .getContextFactory();
+            cf.callSecured(cx -> jsNode.fireEvent(event), this);
 
             if (!isOnbeforeunloadAccepted(this, event)) {
                 return false;

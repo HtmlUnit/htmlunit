@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -63,8 +64,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * @author Ahmed Ashour
@@ -1424,8 +1423,8 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final EventTarget jsElt = getScriptableObject();
-        final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final ScriptResult result = cf.call(cx -> jsElt.fireEvent(event));
+        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+        final ScriptResult result = cf.callSecured(cx -> jsElt.fireEvent(event), getHtmlPageOrNull());
         if (event.isAborted(result)) {
             preventDefault();
         }

@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_D
 import java.io.Serializable;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptPreProcessor;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
 import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
@@ -320,6 +322,24 @@ public class HtmlUnitContextFactory extends ContextFactory {
         return super.doTopCall(callable, cx, scope, thisObj, args);
     }
 
+    /**
+     * Same as {@link ContextFactory}{@link #call(ContextAction)} but with handling
+     * of some exceptions.
+     *
+     * @param <T> return type of the action
+     * @param action the contextAction
+     * @param page the page
+     * @return the result of the call
+     */
+    public final <T> T callSecured(final ContextAction<T> action, final HtmlPage page) {
+        try {
+            return call(action);
+        }
+        catch (final StackOverflowError e) {
+            webClient_.getJavaScriptErrorListener().scriptException(page, new ScriptException(page, e));
+            return null;
+        }
+    }
     /**
      * {@inheritDoc}
      */
