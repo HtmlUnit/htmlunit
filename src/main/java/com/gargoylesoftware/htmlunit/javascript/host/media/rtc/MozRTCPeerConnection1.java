@@ -14,24 +14,25 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code webkitRTCPeerConnection}.
+ * A JavaScript object for {@code mozRTCPeerConnection}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class webkitRTCPeerConnection extends EventTarget {
+@JsxClass(value = FF, className = "mozRTCPeerConnection")
+public class MozRTCPeerConnection extends EventTarget {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public webkitRTCPeerConnection() {
+    public MozRTCPeerConnection() {
     }
 }

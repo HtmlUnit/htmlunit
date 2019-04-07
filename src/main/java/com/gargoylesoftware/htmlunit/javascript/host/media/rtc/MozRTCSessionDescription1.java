@@ -16,22 +16,23 @@ package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code mozRTCPeerConnection}.
+ * A JavaScript object for {@code mozRTCSessionDescription}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(FF)
-public class mozRTCPeerConnection extends EventTarget {
+@JsxClass(value = FF, className = "mozRTCSessionDescription")
+public class MozRTCSessionDescription extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public mozRTCPeerConnection() {
+    public MozRTCSessionDescription() {
     }
 }

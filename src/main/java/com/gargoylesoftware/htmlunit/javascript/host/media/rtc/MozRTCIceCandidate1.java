@@ -24,14 +24,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code mozRTCIceCandidate}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(FF)
-public class mozRTCIceCandidate extends SimpleScriptable {
+@JsxClass(value = FF, className = "mozRTCIceCandidate")
+public class MozRTCIceCandidate extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public mozRTCIceCandidate() {
+    public MozRTCIceCandidate() {
     }
 }
