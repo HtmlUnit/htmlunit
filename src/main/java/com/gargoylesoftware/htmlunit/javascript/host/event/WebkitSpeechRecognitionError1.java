@@ -23,15 +23,16 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code webkitSpeechRecognitionError}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class webkitSpeechRecognitionError extends Event {
+@JsxClass(value = CHROME, className = "webkitSpeechRecognitionError")
+public class WebkitSpeechRecognitionError1 extends Event {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public webkitSpeechRecognitionError() {
+    public WebkitSpeechRecognitionError1() {
     }
 
 }

@@ -251,8 +251,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.UserProximityEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionError;
-import com.gargoylesoftware.htmlunit.javascript.host.event.webkitSpeechRecognitionEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.event.WebkitSpeechRecognitionError1;
+import com.gargoylesoftware.htmlunit.javascript.host.event.WebkitSpeechRecognitionEvent1;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Headers;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Request;
 import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
@@ -584,8 +584,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
         WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
         WebkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
-        WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
-        webkitSpeechRecognitionEvent.class, webkitURL.class,
+        WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, WebkitSpeechRecognitionError1.class,
+        WebkitSpeechRecognitionEvent1.class, webkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,
