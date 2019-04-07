@@ -351,10 +351,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
 import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.RTCStatsReport;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCIceCandidate1;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCPeerConnection1;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCSessionDescription1;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.WebkitRTCPeerConnection1;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCIceCandidate;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCPeerConnection;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.MozRTCSessionDescription;
+import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.WebkitRTCPeerConnection;
 import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentAddress;
 import com.gargoylesoftware.htmlunit.javascript.host.payment.PaymentRequest;
@@ -495,7 +495,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozRTCIceCandidate1.class, MozRTCPeerConnection1.class, MozRTCSessionDescription1.class,
+        MouseWheelEvent.class, MozRTCIceCandidate.class, MozRTCPeerConnection.class, MozRTCSessionDescription.class,
         MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class, Namespace.class,
         NamespaceCollection.class,
@@ -583,7 +583,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebGLTexture.class, WebGLTransformFeedback.class,
         WebGLUniformLocation.class, WebGLVertexArrayObject.class,
         WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
-        WebkitRTCPeerConnection1.class, WebkitSpeechGrammar.class,
+        WebkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, webkitSpeechRecognitionError.class,
         webkitSpeechRecognitionEvent.class, webkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,

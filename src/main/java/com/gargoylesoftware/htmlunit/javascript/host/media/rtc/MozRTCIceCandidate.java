@@ -21,18 +21,18 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code mozRTCSessionDescription}.
+ * A JavaScript object for {@code mozRTCIceCandidate}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = FF, className = "mozRTCSessionDescription")
-public class MozRTCSessionDescription1 extends SimpleScriptable {
+@JsxClass(value = FF, className = "mozRTCIceCandidate")
+public class MozRTCIceCandidate extends SimpleScriptable {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public MozRTCSessionDescription1() {
+    public MozRTCIceCandidate() {
     }
 }
