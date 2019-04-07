@@ -465,7 +465,6 @@ public final class HTMLParser {
 
             try {
                 setFeature(FEATURE_AUGMENTATIONS, true);
-                setProperty("http://cyberneko.org/html/properties/names/elems", "default");
                 if (!webClient.getBrowserVersion().hasFeature(HTML_ATTRIBUTE_LOWER_CASE)) {
                     setProperty("http://cyberneko.org/html/properties/names/attrs", "no-change");
                 }
