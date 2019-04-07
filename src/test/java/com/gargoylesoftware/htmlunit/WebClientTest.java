@@ -1522,10 +1522,15 @@ public class WebClientTest extends SimpleWebTestCase {
     }
 
     /**
+     * Request - Client - Default Headers.
+     *
      * @throws Exception if something goes wrong
      */
     @Test
-    public void requestHeaderDoNotOverwriteExisting() throws Exception {
+    public void requestHeaderOverwritesClient() throws Exception {
+        final String fromRequest = "from request";
+        final String fromClient = "from client";
+
         final String content = "<html></html>";
         final WebClient client = getWebClient();
 
@@ -1533,18 +1538,47 @@ public class WebClientTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_FIRST);
-        assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
-        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        final WebRequest wr = new WebRequest(URL_FIRST);
+        client .getPage(wr);
+        assertNotEquals(fromRequest, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        assertNotEquals(fromClient, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
 
-        client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, "foo value");
-        client.getPage(URL_FIRST);
-        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        // request overwrites default
+        wr.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, fromRequest);
+        client .getPage(wr);
+        assertEquals(fromRequest, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        assertNotEquals(fromClient, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
 
-        client.removeRequestHeader(HttpHeader.ACCEPT_LANGUAGE);
-        client.getPage(URL_FIRST);
-        assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
-        assertNotEquals("foo value", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        // request overwrites client
+        client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, fromClient);
+        client .getPage(wr);
+        assertEquals(fromRequest, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+        assertNotEquals(fromClient, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+    }
+
+    /**
+     * Request - Client - Default Headers.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void clientHeaderOverwritesDefault() throws Exception {
+        final String fromClient = "from client";
+
+        final String content = "<html></html>";
+        final WebClient client = getWebClient();
+
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(content);
+        client.setWebConnection(webConnection);
+
+        client .getPage(URL_FIRST);
+        assertNotEquals(fromClient, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
+
+        // client overwrites default
+        client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, fromClient);
+        client .getPage(URL_FIRST);
+        assertEquals(fromClient, webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT_LANGUAGE));
     }
 
     /**
@@ -1559,18 +1593,22 @@ public class WebClientTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
+        // default accept header
         client.getPage(URL_FIRST);
         assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
         assertNotEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request with accept header
         final WebRequest wr = new WebRequest(URL_FIRST, "application/pdf");
         client.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request has an accept header use the one from the request
         client.addRequestHeader(HttpHeader.ACCEPT, "image/png");
         client.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request has no longer an accept header use the one from the client
         wr.removeAdditionalHeader(HttpHeader.ACCEPT);
         client.getPage(wr);
         assertEquals("image/png", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
@@ -1588,19 +1626,23 @@ public class WebClientTest extends SimpleWebTestCase {
         webConnection.setDefaultResponse(content);
         client.setWebConnection(webConnection);
 
+        // default accept header
         client.getPage(URL_FIRST);
         assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
         assertNotEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request with accept header
         final WebRequest wr = new WebRequest(URL_FIRST, HttpMethod.GET);
         wr.setAdditionalHeader(HttpHeader.ACCEPT, "application/pdf");
         client.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request has an accept header use the one from the request
         client.addRequestHeader(HttpHeader.ACCEPT, "image/png");
         client.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
+        // request has no longer an accept header use the one from the client
         wr.removeAdditionalHeader(HttpHeader.ACCEPT);
         client.getPage(wr);
         assertEquals("image/png", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));

@@ -364,14 +364,15 @@ public class WebRequest implements Serializable {
      * @param name the name of the additional HTTP header
      * @param value the value of the additional HTTP header
      */
-    public void setAdditionalHeader(String name, final String value) {
+    public void setAdditionalHeader(final String name, final String value) {
+        String newKey = name;
         for (final String key : additionalHeaders_.keySet()) {
             if (name.equalsIgnoreCase(key)) {
-                name = key;
+                newKey = key;
                 break;
             }
         }
-        additionalHeaders_.put(name, value);
+        additionalHeaders_.put(newKey, value);
     }
 
     /**
