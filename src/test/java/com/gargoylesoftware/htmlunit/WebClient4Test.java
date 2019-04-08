@@ -31,12 +31,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link WebClient} that run with BrowserRunner.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class WebClient4Test extends WebServerTestCase {
@@ -338,6 +340,59 @@ public class WebClient4Test extends WebServerTestCase {
     }
 
     /**
+     * Make sure cookies set for the request are overwriting the cookieManager.
+     *
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void requestHeaderCookieFromRequest() throws Exception {
+        final String content = "<html></html>";
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(content);
+
+        startWebServer(webConnection);
+
+        final WebClient client = getWebClient();
+
+        // no cookie sent
+        client.getPage(URL_FIRST);
+        assertNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+
+        // process web request with cookie
+        WebRequest wr = new WebRequest(URL_FIRST, HttpMethod.GET);
+        wr.setAdditionalHeader(HttpHeader.COOKIE, "yummy_cookie=choco");
+        client.getPage(wr);
+        assertEquals("yummy_cookie=choco", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+
+        // add cookie to the cookie manager and test if sent
+        final CookieManager mgr = client.getCookieManager();
+        mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_key", "my_value", "/", null, false));
+        wr = new WebRequest(URL_FIRST, HttpMethod.GET);
+        client.getPage(wr);
+        assertEquals("my_key=my_value", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+
+        // request page again, now the the request provides his own cookies
+        wr = new WebRequest(URL_FIRST, HttpMethod.GET);
+        wr.setAdditionalHeader(HttpHeader.COOKIE, "yummy_cookie=choco");
+        client.getPage(wr);
+        assertEquals("yummy_cookie=choco", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+
+        // request page again, now the the request provides his own cookies as part of a map
+        wr = new WebRequest(URL_FIRST, HttpMethod.GET);
+        final Map<String, String> headers = new HashMap<>();
+        headers.put("accept-language", "es-ES,es;q=0.9");
+        headers.put(HttpHeader.COOKIE, "tasty_cookie=strawberry");
+        wr.setAdditionalHeaders(headers);
+        client.getPage(wr);
+        assertEquals("tasty_cookie=strawberry", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+
+        // and finally to make sure the cookies from the store are still there
+        wr = new WebRequest(URL_FIRST, HttpMethod.GET);
+        client.getPage(wr);
+        assertEquals("my_key=my_value", webConnection.getLastAdditionalHeaders().get(HttpHeader.COOKIE));
+    }
+
+    /**
      * Servlet for {@link #timeout()}.
      */
     public static class DelayDeliverServlet extends HttpServlet {
@@ -411,5 +466,4 @@ public class WebClient4Test extends WebServerTestCase {
                     + "</head><body>foo</body></html>");
         }
     }
-
 }
