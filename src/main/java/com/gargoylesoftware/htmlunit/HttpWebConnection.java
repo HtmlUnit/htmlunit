@@ -776,6 +776,7 @@ public class HttpWebConnection implements WebConnection {
             host.append(Integer.toString(port));
         }
 
+        // make sure the headers are added in the right order
         final String userAgent = webClient_.getBrowserVersion().getUserAgent();
         final String[] headerNames = webClient_.getBrowserVersion().getHeaderNamesOrdered();
         if (headerNames != null) {
@@ -786,20 +787,35 @@ public class HttpWebConnection implements WebConnection {
                 else if (HttpHeader.USER_AGENT.equals(header)) {
                     list.add(new UserAgentHeaderHttpRequestInterceptor(userAgent));
                 }
-                else if (HttpHeader.ACCEPT.equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new AcceptHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                else if (HttpHeader.ACCEPT.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new AcceptHeaderHttpRequestInterceptor(headerValue));
+                    }
                 }
-                else if (HttpHeader.ACCEPT_LANGUAGE.equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new AcceptLanguageHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                else if (HttpHeader.ACCEPT_LANGUAGE.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new AcceptLanguageHeaderHttpRequestInterceptor(headerValue));
+                    }
                 }
-                else if (HttpHeader.ACCEPT_ENCODING.equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new AcceptEncodingHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                else if (HttpHeader.ACCEPT_ENCODING.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new AcceptEncodingHeaderHttpRequestInterceptor(headerValue));
+                    }
                 }
-                else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new UpgradeInsecureRequestHeaderHttpRequestInterceptor(headerValue));
+                    }
                 }
-                else if (HttpHeader.REFERER.equals(header) && requestHeaders.get(header) != null) {
-                    list.add(new RefererHeaderHttpRequestInterceptor(requestHeaders.get(header)));
+                else if (HttpHeader.REFERER.equals(header)) {
+                    final String headerValue = webRequest.getAdditionalHeader(header);
+                    if (headerValue != null) {
+                        list.add(new RefererHeaderHttpRequestInterceptor(headerValue));
+                    }
                 }
                 else if (HttpHeader.CONNECTION.equals(header)) {
                     list.add(new RequestClientConnControl());

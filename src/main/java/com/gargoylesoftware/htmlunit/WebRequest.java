@@ -360,6 +360,22 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Returns the header value associated with this name.
+     * @param name the name of the additional HTTP header
+     * @return the value or null
+     */
+    public String getAdditionalHeader(final String name) {
+        String newKey = name;
+        for (final String key : additionalHeaders_.keySet()) {
+            if (name.equalsIgnoreCase(key)) {
+                newKey = key;
+                break;
+            }
+        }
+        return additionalHeaders_.get(newKey);
+    }
+
+    /**
      * Sets the specified name/value pair in the additional HTTP headers.
      * @param name the name of the additional HTTP header
      * @param value the value of the additional HTTP header
