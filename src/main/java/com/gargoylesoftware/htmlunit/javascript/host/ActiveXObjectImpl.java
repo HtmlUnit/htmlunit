@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 
 /**
  * An implementation of native ActiveX components using <a href="http://jacob-project.wiki.sourceforge.net/">Jacob</a>.
@@ -163,6 +164,11 @@ public class ActiveXObjectImpl extends SimpleScriptable {
 
                 @Override
                 public void put(final String arg0, final Scriptable arg1, final Object arg2) {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public void put(final Symbol arg0, final Scriptable arg1, final Object arg2) {
                     throw new UnsupportedOperationException();
                 }
 
