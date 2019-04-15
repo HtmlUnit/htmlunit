@@ -26,7 +26,8 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  *
- * @see https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator
+ * @see <a href="https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator">
+ *          https://code.google.com/p/v8/source/browse#svn%2Ftrunk%2Ftest%2Fintl%2Fbreak-iterator</a>
  */
 @RunWith(BrowserRunner.class)
 public class V8BreakIteratorTest extends WebDriverTestCase {

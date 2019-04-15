@@ -457,7 +457,7 @@ public class WindowConcurrencyTest extends SimpleWebTestCase {
 
     /**
      * Regression test for
-     * <a href="http://sourceforge.net/support/tracker.php?aid=2820051>bug 2820051</a>.
+     * <a href="http://sourceforge.net/support/tracker.php?aid=2820051">bug 2820051</a>.
      * @throws Exception if the test fails
      */
     @Test

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Uint16Array}.
+ * Tests for Uint16Array.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

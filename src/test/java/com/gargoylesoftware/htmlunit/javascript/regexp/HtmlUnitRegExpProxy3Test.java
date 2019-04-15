@@ -62,8 +62,8 @@ public class HtmlUnitRegExpProxy3Test {
 
     /**
      * Verifies that back references in character classes are removed.
-     * @see #jqueryPseudo()
-     * @see #ignoreBackReferenceInCharacterClass()
+     * @see HtmlUnitRegExpProxyTest#jqueryPseudo()
+     * @see HtmlUnitRegExpProxyTest#ignoreBackReferenceInCharacterClass()
      */
     @Test
     public void removeBackReferencesInCharacterClasses() {
@@ -74,7 +74,7 @@ public class HtmlUnitRegExpProxy3Test {
 
     /**
      * Verifies that character without need are "un-escaped".
-     * @see #backslash()
+     * @see HtmlUnitRegExpProxyTest#backslash()
      */
     @Test
     public void unescapeIllegallyEscapedChars() {

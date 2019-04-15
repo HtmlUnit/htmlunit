@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Uint8Array}.
+ * Tests for Uint8Array.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

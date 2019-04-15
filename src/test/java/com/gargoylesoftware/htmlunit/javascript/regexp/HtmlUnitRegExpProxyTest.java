@@ -1000,7 +1000,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     /**
-     * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 & 8.
+     * Test from Prototype suite running very fast with Java 6 but taking ages with Java 7 &amp; 8.
      * @throws Exception if an error occurs
      */
     @Test(timeout = 1000)

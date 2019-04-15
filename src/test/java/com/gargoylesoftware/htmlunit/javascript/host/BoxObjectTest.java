@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Unit tests for {@link BoxObject}.
+ * Unit tests for BoxObject.
  *
  * @author Daniel Gredler
  * @author Ahmed Ashour

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Uint8ClampedArray}.
+ * Tests for Uint8ClampedArray.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

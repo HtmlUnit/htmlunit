@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Float64Array}.
+ * Tests for Float64Array.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

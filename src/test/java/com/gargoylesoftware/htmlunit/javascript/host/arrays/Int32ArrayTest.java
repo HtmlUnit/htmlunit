@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Int32Array}.
+ * Tests for Int32Array.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

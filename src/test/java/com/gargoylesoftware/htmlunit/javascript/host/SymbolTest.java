@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
 /**
- * Tests for {@link Symbol}.
+ * Tests for Symbol.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link Float32Array}.
+ * Tests for Float32Array.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

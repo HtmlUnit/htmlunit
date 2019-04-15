@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link WeakMap}.
+ * Tests for WeakMap.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
