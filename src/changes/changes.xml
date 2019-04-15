@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.34.1" date="...., 2019" description="Bugfixes, CHROME 73, reworked javascript logging">
+        <release version="2.35.0" date="April 15, 2019" description="Bugfixes, CHROME 73, reworked javascript logging">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.9.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpClient to 4.5.8.
+            </action>
             <action type="update" dev="rbri" issue="#24">
                 StackOverflowError during javascript processing are now handled like other javascript errors.
                 Only the JavaScriptErrorListener gets informed.
