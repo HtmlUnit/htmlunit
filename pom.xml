@@ -22,9 +22,9 @@
         <selenium.version>3.141.59</selenium.version>
 
         <htmlunitdriver.version>2.34.0</htmlunitdriver.version>
-        <htmlunitcssparser.version>1.4.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitneko.version>2.35.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitcorejs.version>2.34.2-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitcssparser.version>1.4.0</htmlunitcssparser.version>
+        <htmlunitneko.version>2.35.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.35.0</htmlunitcorejs.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>8.19</checkstyle.version>
@@ -1089,7 +1089,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
+            <version>3.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
