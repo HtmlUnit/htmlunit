@@ -9,7 +9,7 @@ It is typically used for testing purposes or to retrieve information from web si
 ### Project News
 [HtmlUnit@Twitter][3]
 
-### Latest release Version 2.34.1 / March 4, 2019
+### Latest release Version 2.35.0 / April 15, 2019
 [Download from Sourceforge][1]
 
 For maven, you would add:
@@ -45,5 +45,5 @@ This project is licensed under the Apache 2.0 License
 
 
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.33/ "HtmlUnit on sourceforge"
-[2]: http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/ "HtmlUnit CI"
+[2]: http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"

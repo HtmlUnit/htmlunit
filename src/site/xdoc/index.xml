@@ -54,9 +54,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>March 4, 2019</date></dt>
+                    <dt>Latest release <date>April 15, 2019</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.34.1/">version 2.34.1</a></p>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.35.0/">version 2.35.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -71,7 +71,7 @@
 
                     <dt>Latest build / CI server</dt>
                     <dd>
-                        <p><a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">Jenkins build server</a></p>
+                        <p><a href="http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/">Jenkins build server</a></p>
                     </dd>
                 </dl>
             </p>

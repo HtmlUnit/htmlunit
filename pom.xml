@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.34.2-SNAPSHOT</version>
+    <version>2.35.0</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -699,7 +699,7 @@
     </scm>
     <ciManagement>
         <system>Jenkins</system>
-        <url>http://83.169.43.181/jenkins/view/HtmlUnit/</url>
+        <url>http://167.86.92.69/jenkins/view/HtmlUnit/</url>
     </ciManagement>
     <mailingLists>
         <mailingList>

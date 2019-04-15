@@ -69,7 +69,7 @@ net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call met
             </p>
             <p>
                 Use the latest released version at least, if not the
-                <a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">
+                <a href="http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/">
                 latest snapshot</a>.
             </p>
         </section>

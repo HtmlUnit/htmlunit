@@ -20,7 +20,7 @@
             </p>
             <p>
                 Before reporting an error, make sure that you are up to the latest version of the software.  If
-                you can, get the <a href="http://83.169.43.181/jenkins/view/HtmlUnit/job/HtmlUnit/">latest snapshot</a>,
+                you can, get the <a href="http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/">latest snapshot</a>,
                 or build it from the sources yourself to see if the error still occurs.  Check the 
                 <a href="dependencies.html">dependencies</a> to be sure that you have all the required jar files.
                 Also, review the list of bugs and recently closed bugs to see if someone else has already reported
