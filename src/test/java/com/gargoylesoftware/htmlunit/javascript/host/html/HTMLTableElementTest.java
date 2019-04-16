@@ -542,7 +542,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
 
     /**
      * Tests string default values.
-     * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038.
+     * See <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1538136&group_id=47038">issue 370</a>.
      * Currently not working for FF as HtmlUnit's object names don't map to FF ones.
      * @throws Exception if the test fails
      */

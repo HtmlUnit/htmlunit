@@ -453,7 +453,7 @@ public class Event2Test extends WebDriverTestCase {
     /**
      * Verifies that in IE, the <tt>shiftKey</tt>, <tt>ctrlKey</tt> and <tt>altKey</tt>
      * event attributes are defined for all events, but <tt>metaKey</tt> is not defined
-     * for any events.<br/>
+     * for any events.
      * Verifies that in FF, the <tt>shiftKey</tt>, <tt>ctrlKey</tt>, <tt>altKey</tt> and
      * <tt>metaKey</tt> attributes are defined for mouse events only.
      * @throws Exception if an error occurs

@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <jetty.version>9.4.15.v20190215</jetty.version>
+        <jetty.version>9.4.16.v20190411</jetty.version>
         <selenium.version>3.141.59</selenium.version>
 
         <htmlunitdriver.version>2.34.0</htmlunitdriver.version>
@@ -1096,12 +1096,12 @@
             <artifactId>commons-text</artifactId>
             <version>1.6</version>
             <exclusions>
-              <exclusion>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-              </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
             </exclusions>
-          </dependency>
+        </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>

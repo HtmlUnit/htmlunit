@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Unit tests for {@link HTMLTextElement}.
+ * Unit tests for text property.
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)

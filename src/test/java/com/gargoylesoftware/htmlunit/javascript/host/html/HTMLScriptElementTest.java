@@ -87,7 +87,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
+     * Test for bug
+     * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038">issue 514</a>.
      * @throws Exception if the test fails
      */
     @Test
@@ -160,7 +161,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038.
+     * Test for bug
+     * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1782719&group_id=47038">issue 514</a>.
      * @throws Exception if the test fails
      */
     @Test
@@ -924,7 +926,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
     /**
      * Regression test for bug 47038.
-     * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=3403860&group_id=47038
+     * <a href="http://sourceforge.net/tracker/?func=detail&atid=448266&aid=3403860&group_id=47038">issue</a>
      * @throws Exception if the test fails
      */
     @Test
@@ -1314,7 +1316,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     /**
-     * {@link https://github.com/HtmlUnit/htmlunit/issues/11}.
+     * <a href="https://github.com/HtmlUnit/htmlunit/issues/11">issue #11</a>.
      * @throws Exception if an error occurs
      */
     @Test

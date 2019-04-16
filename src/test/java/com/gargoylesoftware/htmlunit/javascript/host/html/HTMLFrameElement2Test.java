@@ -244,8 +244,8 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     }
 
     /**
-     * Illustrates problem of issue #2314485.
-     * See https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2314485&group_id=47038
+     * Illustrates problem of issue #729.
+     * See <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2314485&group_id=47038">issue 729</a>
      * @throws Exception if the test fails
      */
     @Test

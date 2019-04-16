@@ -429,7 +429,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     static int STATE_ = 0;
 
     /**
-     * First servlet for {@link #testNoContent()}.
+     * First servlet for testNoContent().
      */
     public static class ContentServlet extends HttpServlet {
         /**
@@ -459,7 +459,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #setRequestHeader()}.
+     * Servlet for setRequestHeader().
      */
     public static class AjaxHeaderServlet extends HttpServlet {
         /**
@@ -496,7 +496,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
     }
 
     /**
-     * Servlet for {@link #setRequestHeader()}.
+     * Servlet for setRequestHeader().
      */
     public static class FormHeaderServlet extends HttpServlet {
         /**

@@ -1703,7 +1703,7 @@ public class DocumentTest extends WebDriverTestCase {
 
     /**
      * Test the ReadyState.
-     * http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266
+     * <a href="http://sourceforge.net/tracker/?func=detail&aid=3030247&group_id=47038&atid=448266">issue 1139</a>
      * @throws Exception if the test fails
      */
     @Test

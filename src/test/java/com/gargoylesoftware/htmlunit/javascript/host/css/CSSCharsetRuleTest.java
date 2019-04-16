@@ -17,12 +17,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link CSSCharsetRule}.
+ * Tests for {@link CSSCharsetRuleImpl}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill

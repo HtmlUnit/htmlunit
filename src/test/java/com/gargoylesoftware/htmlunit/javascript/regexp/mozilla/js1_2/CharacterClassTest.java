@@ -110,7 +110,7 @@ public class CharacterClassTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests '123*&$abc'.match(new RegExp('[*&$]{3}')).
+     * Tests '123*&amp;$abc'.match(new RegExp('[*&amp;$]{3}')).
      * @throws Exception if the test fails
      */
     @Test
@@ -140,7 +140,7 @@ public class CharacterClassTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests 'abc#$%def%&*@ghi)(*&'.match(new RegExp('[^a-z]{4}')).
+     * Tests 'abc#$%def%&amp;*@ghi)(*&amp;'.match(new RegExp('[^a-z]{4}')).
      * @throws Exception if the test fails
      */
     @Test
@@ -150,7 +150,7 @@ public class CharacterClassTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests 'abc#$%def%&*@ghi)(*&'.match(/[^a-z]{4}/).
+     * Tests 'abc#$%def%&amp;*@ghi)(*&amp;'.match(/[^a-z]{4}/).
      * @throws Exception if the test fails
      */
     @Test

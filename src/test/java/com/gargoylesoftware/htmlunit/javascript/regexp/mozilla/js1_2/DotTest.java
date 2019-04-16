@@ -60,7 +60,7 @@ public class DotTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests 'this is a *&^%$# test'.match(new RegExp('.+')).
+     * Tests 'this is a *&amp;^%$# test'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
@@ -100,7 +100,7 @@ public class DotTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests '`1234567890-=~!@#$%^&*()_+'.match(new RegExp('.+')).
+     * Tests '`1234567890-=~!@#$%^&amp;*()_+'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
@@ -110,7 +110,7 @@ public class DotTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests '|\\[{]};:\"\',<>.?/'.match(new RegExp('.+')).
+     * Tests '|\\[{]};:\"\',&lt;&gt;.?/'.match(new RegExp('.+')).
      * @throws Exception if the test fails
      */
     @Test
@@ -120,7 +120,7 @@ public class DotTest extends WebDriverTestCase {
     }
 
     /**
-     * Tests '|\\[{]};:\"\',<>.?/'.match(/.+/).
+     * Tests '|\\[{]};:\"\',&lt;&gt;.?/'.match(/.+/).
      * @throws Exception if the test fails
      */
     @Test

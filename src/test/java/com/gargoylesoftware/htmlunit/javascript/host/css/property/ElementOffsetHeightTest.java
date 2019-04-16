@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link ComputedHeight}.
+ * Tests for ComputedHeight.
  *
  * @author Ahmed Ashour
  */

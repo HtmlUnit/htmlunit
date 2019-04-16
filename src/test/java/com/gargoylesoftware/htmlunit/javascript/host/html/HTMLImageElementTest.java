@@ -398,7 +398,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     /**
      * Test image's width and height.
      * Regression test for bug
-     * http://sourceforge.net/tracker/?func=detail&atid=448266&aid=2861064&group_id=47038
+     * <a href="http://sourceforge.net/tracker/?func=detail&atid=448266&aid=2861064&group_id=47038">issue 915</a>
      * @throws Exception if the test fails
      */
     @Test

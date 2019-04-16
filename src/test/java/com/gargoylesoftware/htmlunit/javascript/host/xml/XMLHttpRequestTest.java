@@ -955,7 +955,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Test for bug https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038.
+     * Test for bug
+     * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038">issue 515</a>.
      * @throws Exception if an error occurs
      */
     @Test

@@ -808,7 +808,7 @@ public class FormDataTest extends WebDriverTestCase {
     }
 
     /**
-     * Servlet for {@link #post()}.
+     * Servlet for post().
      */
     public static class PostServlet extends HttpServlet {
 
