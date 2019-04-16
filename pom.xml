@@ -699,7 +699,7 @@
     </scm>
     <ciManagement>
         <system>Jenkins</system>
-        <url>http://167.86.92.69/jenkins/view/HtmlUnit/</url>
+        <url>http://167.86.92.69/job/HtmlUnit/</url>
     </ciManagement>
     <mailingLists>
         <mailingList>

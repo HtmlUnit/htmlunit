@@ -20,7 +20,7 @@
 
         <section name="Latest build">
             <p>
-            You can download the latest build from our <a href="http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/">Build server</a>.
+            You can download the latest build from our <a href="http://167.86.92.69/job/HtmlUnit/">Build server</a>.
             </p>
         </section>
 

@@ -71,7 +71,7 @@
 
                     <dt>Latest build / CI server</dt>
                     <dd>
-                        <p><a href="http://167.86.92.69/jenkins/view/HtmlUnit/job/HtmlUnit/">Jenkins build server</a></p>
+                        <p><a href="http://167.86.92.69/job/HtmlUnit/">Jenkins build server</a></p>
                     </dd>
                 </dl>
             </p>
