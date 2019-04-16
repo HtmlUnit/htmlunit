@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
 
 /**
  * Tests for {@link ActiveXObject}.
@@ -75,7 +76,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
     }
 
     /**
-     * Returns true if Jacob is installed, so we can use {@link WebClient#setActiveXNative(boolean)}.
+     * Returns true if Jacob is installed, so we can use {@link WebClientOptions#setActiveXNative(boolean)}.
      * @return whether Jacob is installed or not
      */
     public static boolean isJacobInstalled() {

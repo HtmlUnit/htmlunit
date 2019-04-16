@@ -561,7 +561,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for IE specific properties attribute.text & attribute.xml.
+     * Regression test for IE specific properties attribute.text &amp; attribute.xml.
      * @throws Exception if the test fails
      */
     @Test

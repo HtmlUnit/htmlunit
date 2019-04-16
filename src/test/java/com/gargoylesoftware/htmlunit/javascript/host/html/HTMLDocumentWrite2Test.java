@@ -194,7 +194,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     /**
      * Regression test for bug 2884585.
      * As of HtmlUnit-2.7-SNAPSHOT 17.01.2010 &lt;script src="..."... written
-     * by document.write was not loaded and executed after the &lt;/script>
+     * by document.write was not loaded and executed after the &lt;/script&gt;
      * when the page was loaded as result of a click.
      * @throws Exception if the test fails
      */
