@@ -94,10 +94,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         if (expected == null && actual == null) {
             return;
         }
-        if (expected == null || actual == null) {
+        if (expected == null || expected.length < length) {
             fail(message);
         }
-        if (expected.length < length || actual.length < length) {
+        if (actual == null || actual.length < length) {
             fail(message);
         }
         for (int i = 0; i < length; i++) {
