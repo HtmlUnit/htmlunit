@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.function.Supplier;
+import java.util.logging.Level;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -90,7 +91,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
@@ -454,6 +458,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
                 final ChromeOptions options = new ChromeOptions();
                 options.addArguments("--lang=en-US");
+
+                final LoggingPreferences logPrefs = new LoggingPreferences();
+                logPrefs.enable(LogType.BROWSER, Level.INFO);
+                options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+
                 return new ChromeDriver(options);
             }
 

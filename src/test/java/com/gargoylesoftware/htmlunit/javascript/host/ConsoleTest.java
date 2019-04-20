@@ -14,11 +14,22 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.Logs;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -137,5 +148,39 @@ public class ConsoleTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver({FF, IE})
+    public void simpleString() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  for (i = 0; i < 4; i++) {\n"
+            + "    console.log('test log ' + i);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        final int count = logEntryList.size();
+        assertTrue(count > 0);
+
+        long timestamp = 0;
+        for (int i = 0; i < 4; i++) {
+            final LogEntry logEntry = logEntryList.get(i);
+            assertTrue(logEntry.getMessage(), logEntry.getMessage().contains("test log " + i));
+            assertTrue(logEntry.getTimestamp() >= timestamp);
+            timestamp = logEntry.getTimestamp();
+        }
     }
 }
