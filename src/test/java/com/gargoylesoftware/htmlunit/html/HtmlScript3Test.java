@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ronald Brill
  */
-// @RunWith(BrowserParameterizedRunner.class)
+@RunWith(BrowserParameterizedRunner.class)
 public class HtmlScript3Test extends WebDriverTestCase {
 
     private static final String BOM_UTF_16LE = "BOMUTF16LE";
