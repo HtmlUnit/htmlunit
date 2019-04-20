@@ -21,7 +21,7 @@
         <jetty.version>9.4.16.v20190411</jetty.version>
         <selenium.version>3.141.59</selenium.version>
 
-        <htmlunitdriver.version>2.34.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.35.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.4.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.35.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.35.0</htmlunitcorejs.version>
