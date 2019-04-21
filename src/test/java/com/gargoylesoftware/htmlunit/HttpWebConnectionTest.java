@@ -233,7 +233,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
             @Override
-            protected HttpClientBuilder createHttpClient() {
+            protected HttpClientBuilder createHttpClientBuilder() {
                 tabCalled[0] = true;
                 return HttpClientBuilder.create();
             }
