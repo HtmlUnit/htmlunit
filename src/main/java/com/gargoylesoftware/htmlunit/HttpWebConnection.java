@@ -97,6 +97,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
@@ -167,14 +168,14 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public WebResponse getResponse(final WebRequest request) throws IOException {
-        final URL url = request.getUrl();
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
-        final HttpContext httpContext = getHttpContext();
 
         if (connectionManager_ == null) {
             connectionManager_ = createConnectionManager(builder);
         }
         builder.setConnectionManager(connectionManager_);
+        // this is done in createHttpClientBuilder() already
+        // builder.setConnectionManagerShared(true);
 
         HttpUriRequest httpMethod = null;
         try {
@@ -182,21 +183,26 @@ public class HttpWebConnection implements WebConnection {
                 httpMethod = makeHttpMethod(request, builder);
             }
             catch (final URISyntaxException e) {
-                throw new IOException("Unable to create URI from URL: " + url.toExternalForm()
+                throw new IOException("Unable to create URI from URL: " + request.getUrl().toExternalForm()
                         + " (reason: " + e.getMessage() + ")", e);
             }
             final HttpHost hostConfiguration = getHostConfiguration(request);
             final long startTime = System.currentTimeMillis();
 
+            final HttpContext httpContext = getHttpContext();
             HttpResponse httpResponse = null;
             try {
-                httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
+                try (CloseableHttpClient closeableHttpClient = builder.build()) {
+                    httpResponse = closeableHttpClient.execute(hostConfiguration, httpMethod, httpContext);
+                }
             }
             catch (final SSLPeerUnverifiedException s) {
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
-                    httpResponse = builder.build().execute(hostConfiguration, httpMethod, httpContext);
+                    try (CloseableHttpClient closeableHttpClient = builder.build()) {
+                        httpResponse = closeableHttpClient.execute(hostConfiguration, httpMethod, httpContext);
+                    }
                 }
                 else {
                     throw s;
@@ -514,9 +520,10 @@ public class HttpWebConnection implements WebConnection {
      * @return the initialized HTTP client
      */
     protected HttpClientBuilder getHttpClientBuilder() {
-        HttpClientBuilder builder = httpClientBuilder_.get(Thread.currentThread());
+        final Thread currentThread = Thread.currentThread();
+        HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
         if (builder == null) {
-            builder = createHttpClient();
+            builder = createHttpClientBuilder();
 
             // this factory is required later
             // to be sure this is done, we do it outside the createHttpClient() call
@@ -527,7 +534,7 @@ public class HttpWebConnection implements WebConnection {
 
             builder.setDefaultCookieStore(new HtmlUnitCookieStore(webClient_.getCookieManager()));
             builder.setUserAgent(webClient_.getBrowserVersion().getUserAgent());
-            httpClientBuilder_.put(Thread.currentThread(), builder);
+            httpClientBuilder_.put(currentThread, builder);
         }
 
         return builder;
@@ -551,12 +558,14 @@ public class HttpWebConnection implements WebConnection {
      * some tracking; see feature request 1438216).
      * @return the <tt>HttpClientBuilder</tt> that will be used by this WebConnection
      */
-    protected HttpClientBuilder createHttpClient() {
+    protected HttpClientBuilder createHttpClientBuilder() {
         final HttpClientBuilder builder = HttpClientBuilder.create();
         builder.setRedirectStrategy(new HtmlUnitRedirectStrategie());
         configureTimeout(builder, getTimeout());
         configureHttpsScheme(builder);
         builder.setMaxConnPerRoute(6);
+
+        builder.setConnectionManagerShared(true);
         return builder;
     }
 
@@ -606,6 +615,7 @@ public class HttpWebConnection implements WebConnection {
                 || options.getSSLClientProtocols() != usedOptions_.getSSLClientProtocols()
                 || options.getProxyConfig() != usedOptions_.getProxyConfig()) {
             configureHttpsScheme(httpClientBuilder);
+
             if (connectionManager_ != null) {
                 connectionManager_.shutdown();
                 connectionManager_ = null;
@@ -1003,10 +1013,8 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public void close() {
-        final Thread current = Thread.currentThread();
-        if (httpClientBuilder_.get(current) != null) {
-            httpClientBuilder_.remove(current);
-        }
+        httpClientBuilder_.clear();
+
         if (connectionManager_ != null) {
             connectionManager_.shutdown();
             connectionManager_ = null;
