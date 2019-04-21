@@ -23,6 +23,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -30,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -75,6 +77,8 @@ public class ExternalTest {
     public void pom() throws Exception {
         final Map<String, String> properties = new HashMap<>();
         final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
+
+        final List<String> wrongVersions = new LinkedList<String>();
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.trim().equals("<properties>")) {
@@ -88,9 +92,18 @@ public class ExternalTest {
                     if (version.startsWith("${")) {
                         version = properties.get(version.substring(2, version.length() - 1));
                     }
-                    assertVersion(groupId, artifactId, version);
+                    try {
+                        assertVersion(groupId, artifactId, version);
+                    }
+                    catch (final AssertionError e) {
+                        wrongVersions.add(e.getMessage());
+                    }
                 }
             }
+        }
+
+        if (wrongVersions.size() > 0) {
+            Assert.fail(String.join("\n ", wrongVersions));
         }
 
         assertVersion("org.sonatype.oss", "oss-parent", "9");
