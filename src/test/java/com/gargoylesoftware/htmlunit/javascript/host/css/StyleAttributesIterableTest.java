@@ -40,6 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 @ToRunWithRealBrowsers
 public class StyleAttributesIterableTest extends WebDriverTestCase {
 
+    private static int ServerRestartCount_ = 0;
+
     /**
      * Returns the parameterized data.
      * @return the parameterized data
@@ -83,6 +85,12 @@ public class StyleAttributesIterableTest extends WebDriverTestCase {
     }
 
     private void test(final String propertyName) throws Exception {
+        ServerRestartCount_++;
+        if (ServerRestartCount_ == 200) {
+            stopWebServers();
+            ServerRestartCount_ = 0;
+        }
+
         final String html =
             "<html><head><script>\n"
             + "  function test() {\n"
