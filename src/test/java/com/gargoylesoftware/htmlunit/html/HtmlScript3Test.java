@@ -24,6 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.lang3.ArrayUtils;
@@ -52,6 +53,8 @@ public class HtmlScript3Test extends WebDriverTestCase {
     private static final String BOM_UTF_16LE = "BOMUTF16LE";
     private static final String BOM_UTF_16BE = "BOMUTF16BE";
     private static final String BOM_UTF_8 = "BOMUTF8";
+
+    private static final AtomicInteger serverRestartCount = new AtomicInteger();
 
     private enum TestCharset {
         UTF8("UTF8", UTF_8),
@@ -208,8 +211,12 @@ public class HtmlScript3Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final String[] expectedAlerts = getExpectedAlerts();
         try {
-            final WebDriver driver = loadPage2(html, URL_FIRST,
-                                        htmlContentType, htmlResponseCharset, null);
+            final int count = serverRestartCount.incrementAndGet();
+            if (count == 400) {
+                stopWebServers();
+                serverRestartCount.set(0);
+            }
+            final WebDriver driver = loadPage2(html, URL_FIRST, htmlContentType, htmlResponseCharset, null);
 
             if (expectedAlerts.length == 1) {
                 final List<String> actualAlerts = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts.length);
