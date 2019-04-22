@@ -63,7 +63,6 @@ public abstract class WebServerTestCase extends WebTestCase {
     public static final int BIND_TIMEOUT = 1000;
 
     private Server server_;
-    private static Boolean LAST_TEST_MockWebConnection_;
     private static Server STATIC_SERVER_;
     private WebClient webClient_;
     private CollectingAlertHandler alertHandler_ = new CollectingAlertHandler();
@@ -242,7 +241,6 @@ public abstract class WebServerTestCase extends WebTestCase {
         }
 
         stopWebServer();
-        WebServerTestCase.LAST_TEST_MockWebConnection_ = null;
     }
 
     /**
@@ -331,10 +329,6 @@ public abstract class WebServerTestCase extends WebTestCase {
      * @throws Exception if a problem occurs
      */
     protected void startWebServer(final MockWebConnection mockConnection) throws Exception {
-        if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
-            stopWebServer();
-        }
-        LAST_TEST_MockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
             final Server server = buildServer(PORT);
 
