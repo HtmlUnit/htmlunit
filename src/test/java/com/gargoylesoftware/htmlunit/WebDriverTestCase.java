@@ -185,7 +185,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Server STATIC_SERVER3_;
     private static String STATIC_SERVER3_STARTER_;
 
-    private static Boolean LAST_TEST_MockWebConnection_;
+    private static Boolean LAST_TEST_UsesMockWebConnection_;
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
 
     private boolean useRealBrowser_;
@@ -323,7 +323,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
         shutDownRealBrowsers();
 
         stopWebServers();
-        LAST_TEST_MockWebConnection_ = null;
     }
 
     /**
@@ -413,6 +412,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             STATIC_SERVER3_.destroy();
             STATIC_SERVER3_ = null;
         }
+        LAST_TEST_UsesMockWebConnection_ = null;
     }
 
     /**
@@ -527,11 +527,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected void startWebServer(final MockWebConnection mockConnection, final Charset serverCharset)
             throws Exception {
-        if (Boolean.FALSE.equals(LAST_TEST_MockWebConnection_)) {
+        if (Boolean.FALSE.equals(LAST_TEST_UsesMockWebConnection_)) {
             stopWebServers();
         }
 
-        LAST_TEST_MockWebConnection_ = Boolean.TRUE;
+        LAST_TEST_UsesMockWebConnection_ = Boolean.TRUE;
         if (STATIC_SERVER_ == null) {
             final Server server = buildServer(PORT);
 
@@ -655,7 +655,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
         stopWebServers();
-        LAST_TEST_MockWebConnection_ = Boolean.FALSE;
+        LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;
 
         STATIC_SERVER_STARTER_ = ExceptionUtils.getStackTrace(new Throwable("StaticServerStarter"));
         STATIC_SERVER_ = WebServerTestCase.createWebServer(PORT, resourceBase, classpath, servlets, handler);
