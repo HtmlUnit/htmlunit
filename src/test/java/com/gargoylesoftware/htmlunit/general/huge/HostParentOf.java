@@ -39,6 +39,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  */
 public abstract class HostParentOf extends WebDriverTestCase {
 
+    private static int ServerRestartCount_ = 0;
+
     /**
      * Returns the parameterized data.
      * @param predicate the predicate, which determines whether or not to include the parent
@@ -110,6 +112,11 @@ public abstract class HostParentOf extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
+        ServerRestartCount_++;
+        if (ServerRestartCount_ == 200) {
+            stopWebServers();
+            ServerRestartCount_ = 0;
+        }
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
