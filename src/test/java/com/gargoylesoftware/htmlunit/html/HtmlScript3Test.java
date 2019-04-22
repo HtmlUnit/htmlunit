@@ -157,12 +157,12 @@ public class HtmlScript3Test extends WebDriverTestCase {
             final String bom) throws Exception {
 
         // use always a different url to avoid caching effects
-        final URL cssUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
 
         String html
             = "<html><head>\n"
             + "  <script type='text/javascript'>window.onerror=function(msg) { alert(msg); }</script>"
-            + "  <script src='" + cssUrl + "'";
+            + "  <script src='" + scriptUrl + "'";
         if (charsetAttribute != null) {
             html = html + " charset='" + charsetAttribute.getCharset().name().toLowerCase() + "'";
         }
@@ -195,7 +195,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
         else if (BOM_UTF_16LE.equals(bom)) {
             script = ArrayUtils.addAll(ByteOrderMark.UTF_16LE.getBytes(), js.getBytes(StandardCharsets.UTF_16LE));
         }
-        getMockWebConnection().setResponse(cssUrl, script, 200, "OK", scriptContentType, null);
+        getMockWebConnection().setResponse(scriptUrl, script, 200, "OK", scriptContentType, null);
 
         String htmlContentType = MimeType.TEXT_HTML;
         if (charsetHtmlResponse != null) {
