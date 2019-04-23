@@ -48,6 +48,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 @RunWith(BrowserParameterizedRunner.class)
 public class ElementClosesElementTest extends WebDriverTestCase {
 
+    private static int ServerRestartCount_ = 0;
+
     /**
      * Returns the parameterized data.
      * @return the parameterized data
@@ -94,6 +96,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
                 + parentString + childString + suffix
                 + "</body></html>";
 
+        ServerRestartCount_++;
+        if (ServerRestartCount_ == 200) {
+            stopWebServers();
+            ServerRestartCount_ = 0;
+        }
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
     }
