@@ -152,19 +152,14 @@ public class HtmlLabel extends HtmlElement {
         // first the click on the label
         final P page = super.click(event, ignoreVisibility);
 
-        // not sure which page we should return
-        final P response;
-
         // then the click on the referenced element
         final HtmlElement element = getReferencedElement();
-        if (element != null) {
-            response = element.click(false, false, false, false, true, true);
-        }
-        else {
-            response = page;
+        if (element == null || element.isDisabledElementAndDisabled()) {
+            return page;
         }
 
-        return response;
+        // not sure which page we should return
+        return element.click(false, false, false, false, true, true);
     }
 
     /**

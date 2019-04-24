@@ -898,6 +898,13 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
+     * @return true if this is an {@link DisabledElement} and disabled
+     */
+    protected boolean isDisabledElementAndDisabled() {
+        return this instanceof DisabledElement && ((DisabledElement) this).isDisabled();
+    }
+
+    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Simulates clicking on this element, returning the page in the window that has the focus
@@ -937,7 +944,7 @@ public class DomElement extends DomNamespaceNode implements Element {
                 return (P) page;
             }
 
-            if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+            if (isDisabledElementAndDisabled()) {
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Calling click() ignored because the target element '" + toString() + "' is disabled.");
                 }
@@ -1010,8 +1017,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
         final SgmlPage page = getPage();
 
-        if ((!ignoreVisibility && !isDisplayed())
-                || (this instanceof DisabledElement && ((DisabledElement) this).isDisabled())) {
+        if ((!ignoreVisibility && !isDisplayed()) || isDisabledElementAndDisabled()) {
             return (P) page;
         }
 
@@ -1132,7 +1138,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     @SuppressWarnings("unchecked")
     public <P extends Page> P dblClick(final boolean shiftKey, final boolean ctrlKey, final boolean altKey)
         throws IOException {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (isDisabledElementAndDisabled()) {
             return (P) getPage();
         }
 

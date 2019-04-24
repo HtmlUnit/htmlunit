@@ -512,7 +512,7 @@ public abstract class HtmlElement extends DomElement {
      */
     private Page type(final char c, final boolean lastType)
         throws IOException {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (isDisabledElementAndDisabled()) {
             return getPage();
         }
 
@@ -692,7 +692,7 @@ public abstract class HtmlElement extends DomElement {
     private Page type(final int keyCode,
                     final boolean fireKeyDown, final boolean fireKeyPress, final boolean fireKeyUp,
                     final boolean lastType) {
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (isDisabledElementAndDisabled()) {
             return getPage();
         }
 
@@ -1279,7 +1279,7 @@ public abstract class HtmlElement extends DomElement {
             return this instanceof SubmittableElement || getTabIndex() != null;
         }
 
-        if (this instanceof DisabledElement && ((DisabledElement) this).isDisabled()) {
+        if (isDisabledElementAndDisabled()) {
             return false;
         }
 

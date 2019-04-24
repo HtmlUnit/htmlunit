@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
+import java.util.Arrays;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -72,6 +78,92 @@ public class HtmlLabelTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("label1")).click();
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "labelclick,textfocus,textclick,",
+            FF52 = "textfocus,labelclick,textclick,",
+            IE = "labelclick,textclick,textfocus,")
+    @NotYetImplemented({FF52, IE})
+    public void clickForSetFocusToInput() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1' "
+                    + "onclick='debug(\"labelclick\")' onfocus='debug(\"labelfocus\")'>Focus input</label>\n"
+            + "  <input type='text' id='text1' onclick='debug(\"textclick\")' onfocus='debug(\"textfocus\")'>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("labelclick,")
+    public void clickForSetFocusToDisabledInput() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='text1' "
+                    + "onclick='debug(\"labelclick\")' onfocus='debug(\"labelfocus\")'>Focus input</label>\n"
+            + "  <input type='text' id='text1' disabled='disabled' "
+                    + "onclick='debug(\"textclick\")' onfocus='debug(\"textfocus\")'>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("labelclick,")
+    public void clickForSetFocusToDisabledCheckbox() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function debug(string) {\n"
+            + "    document.getElementById('myTextarea').value += string + ',';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <label id='label1' for='check1' "
+                    + "onclick='debug(\"labelclick\")' onfocus='debug(\"labelfocus\")'>Focus input</label>\n"
+            + "  <input type='checkbox' id='check1' disabled='disabled' "
+                    + "onclick='debug(\"checkclick\")' onfocus='debug(\"checkfocus\")'>\n"
+            + "  <textarea id='myTextarea'></textarea>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("label1")).click();
+
+        assertEquals(Arrays.asList(getExpectedAlerts()).toString(),
+                '[' + driver.findElement(By.id("myTextarea")).getAttribute("value") + ']');
     }
 
     /**
