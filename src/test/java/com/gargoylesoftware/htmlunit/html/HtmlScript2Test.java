@@ -565,4 +565,31 @@ public class HtmlScript2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 "
+            + "21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39")
+    public void scriptExecutionOrder() throws Exception {
+        final StringBuilder html = new StringBuilder();
+        html.append("<html>\n<head>\n");
+        int i = 0;
+        for ( ; i < 20; i++) {
+            html.append("  <script type='text/javascript'>document.title += ' ")
+                .append(Integer.toString(i))
+                .append("'</script>\n");
+        }
+        html.append("</head>\n<body>\n");
+        for ( ; i < 40; i++) {
+            html.append("  <script type='text/javascript'>document.title += ' ")
+                .append(Integer.toString(i))
+                .append("'</script>\n");
+        }
+        html.append("</body>\n</html>");
+
+        final WebDriver driver = loadPage2(html.toString());
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
 }
