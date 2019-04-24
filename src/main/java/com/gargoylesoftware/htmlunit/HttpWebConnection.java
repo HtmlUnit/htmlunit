@@ -170,13 +170,6 @@ public class HttpWebConnection implements WebConnection {
     public WebResponse getResponse(final WebRequest request) throws IOException {
         final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder());
 
-        if (connectionManager_ == null) {
-            connectionManager_ = createConnectionManager(builder);
-        }
-        builder.setConnectionManager(connectionManager_);
-        // this is done in createHttpClientBuilder() already
-        // builder.setConnectionManagerShared(true);
-
         HttpUriRequest httpMethod = null;
         try {
             try {
@@ -626,6 +619,12 @@ public class HttpWebConnection implements WebConnection {
         if (timeout != usedOptions_.getTimeout()) {
             configureTimeout(httpClientBuilder, timeout);
         }
+
+        if (connectionManager_ == null) {
+            connectionManager_ = createConnectionManager(httpClientBuilder);
+        }
+        httpClientBuilder.setConnectionManager(connectionManager_);
+
         return httpClientBuilder;
     }
 
