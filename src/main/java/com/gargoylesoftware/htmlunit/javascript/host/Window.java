@@ -392,7 +392,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 throw new EvaluatorException("Function btoa supports only latin1 characters");
             }
         }
-        return new String(Base64.encodeBase64(stringToEncode.getBytes(StandardCharsets.ISO_8859_1)));
+        final byte[] bytes = stringToEncode.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(Base64.encodeBase64(bytes), StandardCharsets.UTF_8);
     }
 
     /**
@@ -408,7 +409,8 @@ public class Window extends EventTarget implements Function, AutoCloseable {
                 throw new EvaluatorException("Function atob supports only latin1 characters");
             }
         }
-        return new String(Base64.decodeBase64(encodedData.getBytes(StandardCharsets.ISO_8859_1)));
+        final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(Base64.decodeBase64(bytes), StandardCharsets.UTF_8);
     }
 
     /**
