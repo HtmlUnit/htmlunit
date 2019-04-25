@@ -108,6 +108,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -187,12 +188,14 @@ public class CSSStyleSheet extends StyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
-        setParentScope(element.getWindow());
+        final Window win = element.getWindow();
+
+        setParentScope(win);
         setPrototype(getPrototype(CSSStyleSheet.class));
         if (source != null) {
             source.setURI(uri);
         }
-        wrapped_ = parseCSS(source);
+        wrapped_ = parseCSS(source, win.getWebWindow().getWebClient());
         uri_ = uri;
         ownerNode_ = element;
     }
@@ -204,16 +207,18 @@ public class CSSStyleSheet extends StyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final String styleSheet, final String uri) {
+        final Window win = element.getWindow();
+
         CSSStyleSheetImpl css = null;
         try (InputSource source = new InputSource(new StringReader(styleSheet))) {
             source.setURI(uri);
-            css = parseCSS(source);
+            css = parseCSS(source, win.getWebWindow().getWebClient());
         }
         catch (final IOException e) {
             LOG.error(e.getMessage(), e);
         }
 
-        setParentScope(element.getWindow());
+        setParentScope(win);
         setPrototype(getPrototype(CSSStyleSheet.class));
         wrapped_ = css;
         uri_ = uri;
@@ -872,12 +877,13 @@ public class CSSStyleSheet extends StyleSheet {
      * returns an empty stylesheet.
      *
      * @param source the source from which to retrieve the CSS to be parsed
+     * @param client the client
      * @return the stylesheet parsed from the specified input source
      */
-    private CSSStyleSheetImpl parseCSS(final InputSource source) {
+    private CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
         CSSStyleSheetImpl ss;
         try {
-            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
+            final CSSErrorHandler errorHandler = client.getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             ss = parser.parseStyleSheet(source, null);
