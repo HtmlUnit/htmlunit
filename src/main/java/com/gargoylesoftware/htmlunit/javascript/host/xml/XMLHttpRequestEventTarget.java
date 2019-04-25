@@ -14,26 +14,64 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code XMLHttpRequestEventTarget}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass
 public class XMLHttpRequestEventTarget extends EventTarget {
 
+    private Function loadHandler_;
+    private Function errorHandler_;
+
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
     public XMLHttpRequestEventTarget() {
     }
 
+    /**
+     * Returns the event handler that fires on load.
+     * @return the event handler that fires on load
+     */
+    @JsxGetter
+    public Function getOnload() {
+        return loadHandler_;
+    }
+
+    /**
+     * Sets the event handler that fires on load.
+     * @param loadHandler the event handler that fires on load
+     */
+    @JsxSetter
+    public void setOnload(final Function loadHandler) {
+        loadHandler_ = loadHandler;
+    }
+
+    /**
+     * Returns the event handler that fires on error.
+     * @return the event handler that fires on error
+     */
+    @JsxGetter
+    public Function getOnerror() {
+        return errorHandler_;
+    }
+
+    /**
+     * Sets the event handler that fires on error.
+     * @param errorHandler the event handler that fires on error
+     */
+    @JsxSetter
+    public void setOnerror(final Function errorHandler) {
+        errorHandler_ = errorHandler;
+    }
 }

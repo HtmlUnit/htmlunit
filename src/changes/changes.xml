@@ -9,6 +9,12 @@
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes">
             <action type="fix" dev="rbri">
+                XMLHttpRequestEventTarget has no ctor.
+            </action>
+            <action type="update" dev="rbri">
+                Properties onError and onLoad moved from XMLHttpRequest up to XMLHttpRequestEventTarget.
+            </action>
+            <action type="fix" dev="rbri">
                 Clicking a label with a valid for attribute does not forward the click to the target
                 if the target is disabled.
             </action>

@@ -135,8 +135,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     private int state_;
     private Function stateChangeHandler_;
-    private Function loadHandler_;
-    private Function errorHandler_;
     private WebRequest webRequest_;
     private boolean async_;
     private int jobID_;
@@ -235,8 +233,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            if (loadHandler_ != null) {
-                jsEngine.callFunction(containingPage_, loadHandler_, loadHandler_.getParentScope(), this, params);
+            final Function onLoad = getOnload();
+            if (onLoad != null) {
+                jsEngine.callFunction(containingPage_, onLoad, onLoad.getParentScope(), this, params);
             }
 
             List<Scriptable> handlers = getEventListenersContainer().getListeners(Event.TYPE_LOAD, false);
@@ -262,49 +261,14 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Returns the event handler that fires on load.
-     * @return the event handler that fires on load
-     */
-    @JsxGetter
-    public Function getOnload() {
-        return loadHandler_;
-    }
-
-    /**
-     * Sets the event handler that fires on load.
-     * @param loadHandler the event handler that fires on load
-     */
-    @JsxSetter
-    public void setOnload(final Function loadHandler) {
-        loadHandler_ = loadHandler;
-    }
-
-    /**
-     * Returns the event handler that fires on error.
-     * @return the event handler that fires on error
-     */
-    @JsxGetter
-    public Function getOnerror() {
-        return errorHandler_;
-    }
-
-    /**
-     * Sets the event handler that fires on error.
-     * @param errorHandler the event handler that fires on error
-     */
-    @JsxSetter
-    public void setOnerror(final Function errorHandler) {
-        errorHandler_ = errorHandler;
-    }
-
-    /**
      * Invokes the onerror handler if one has been set.
      * @param context the context within which the onerror handler is to be invoked;
      *                if {@code null}, the current thread's context is used.
      */
     private void processError(Context context) {
-        if (errorHandler_ != null) {
-            final Scriptable scope = errorHandler_.getParentScope();
+        final Function onError = getOnerror();
+        if (onError != null) {
+            final Scriptable scope = onError.getParentScope();
             final JavaScriptEngine jsEngine = (JavaScriptEngine) containingPage_.getWebClient().getJavaScriptEngine();
 
             final Object[] params = new Event[] {new ProgressEvent(this, Event.TYPE_ERROR)};
@@ -312,12 +276,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Calling onerror handler");
             }
-            jsEngine.callFunction(containingPage_, errorHandler_, this, scope, params);
+            jsEngine.callFunction(containingPage_, onError, this, scope, params);
             if (LOG.isDebugEnabled()) {
                 if (context == null) {
                     context = Context.getCurrentContext();
                 }
-                LOG.debug("onerror handler: " + context.decompileFunction(errorHandler_, 4));
+                LOG.debug("onerror handler: " + context.decompileFunction(onError, 4));
                 LOG.debug("Calling onerror handler done.");
             }
         }
