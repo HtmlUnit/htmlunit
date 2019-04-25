@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTI
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -44,7 +43,6 @@ import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
@@ -1854,7 +1852,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final CheckErrorHandler errorHandler = new CheckErrorHandler();
         parser.setErrorHandler(errorHandler);
 
-        final SelectorList selectorList = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+        final SelectorList selectorList = parser.parseSelectors(selectors);
         // in case of error parseSelectors returns null
         if (errorHandler.errorDetected()) {
             throw new CSSException("Invalid selectors: " + selectors);

@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
@@ -197,6 +198,29 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
+     * Creates a new stylesheet representing the CSS stylesheet for the specified input source.
+     * @param element the owning node
+     * @param styleSheet the source which contains the CSS stylesheet which this stylesheet host object represents
+     * @param uri this stylesheet's URI (used to resolved contained @import rules)
+     */
+    public CSSStyleSheet(final HTMLElement element, final String styleSheet, final String uri) {
+        CSSStyleSheetImpl css = null;
+        try (InputSource source = new InputSource(new StringReader(styleSheet))) {
+            source.setURI(uri);
+            css = parseCSS(source);
+        }
+        catch (final IOException e) {
+            LOG.error(e.getMessage(), e);
+        }
+
+        setParentScope(element.getWindow());
+        setPrototype(getPrototype(CSSStyleSheet.class));
+        wrapped_ = css;
+        uri_ = uri;
+        ownerNode_ = element;
+    }
+
+    /**
      * Creates a new stylesheet representing the specified CSS stylesheet.
      * @param element the owning node
      * @param wrapped the CSS stylesheet which this stylesheet host object represents
@@ -274,8 +298,7 @@ public class CSSStyleSheet extends StyleSheet {
                 if (element.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
                     final String type = link.getTypeAttribute();
                     if (StringUtils.isNotBlank(type) && !MimeType.TEXT_CSS.equals(type)) {
-                        final InputSource source = new InputSource(new StringReader(""));
-                        return new CSSStyleSheet(element, source, uri);
+                        return new CSSStyleSheet(element, "", uri);
                     }
                 }
 
@@ -299,15 +322,19 @@ public class CSSStyleSheet extends StyleSheet {
                 client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
                 // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
 
-                final InputSource source;
                 final String contentType = response.getContentType();
                 if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
-                    source = new InputSource(response.getContentAsStream(), response.getContentCharset().name());
+                    try (InputSource source =
+                            new InputSource(
+                                    new InputStreamReader(response.getContentAsStream(),
+                                                            response.getContentCharset().name()))) {
+                        source.setURI(uri);
+                        sheet = new CSSStyleSheet(element, source, uri);
+                    }
                 }
                 else {
-                    source = new InputSource(new StringReader(""));
+                    sheet = new CSSStyleSheet(element, "", uri);
                 }
-                sheet = new CSSStyleSheet(element, source, uri);
 
                 // cache the style sheet
                 if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
@@ -320,16 +347,14 @@ public class CSSStyleSheet extends StyleSheet {
             if (LOG.isErrorEnabled()) {
                 LOG.error("Exception loading " + uri, e);
             }
-            final InputSource source = new InputSource(new StringReader(""));
-            sheet = new CSSStyleSheet(element, source, uri);
+            sheet = new CSSStyleSheet(element, "", uri);
         }
         catch (final IOException e) {
             // Got a basic IO error; behave nicely.
             if (LOG.isErrorEnabled()) {
                 LOG.error("IOException loading " + uri, e);
             }
-            final InputSource source = new InputSource(new StringReader(""));
-            sheet = new CSSStyleSheet(element, source, uri);
+            sheet = new CSSStyleSheet(element, "", uri);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
@@ -776,8 +801,7 @@ public class CSSStyleSheet extends StyleSheet {
                     final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
                     parser.setErrorHandler(errorHandler);
                     try {
-                        final SelectorList selectorList
-                            = parser.parseSelectors(new InputSource(new StringReader(selectors)));
+                        final SelectorList selectorList = parser.parseSelectors(selectors);
                         if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
                             throw new CSSException("Invalid selectors: " + selectors);
                         }
@@ -874,7 +898,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param source the source from which to retrieve the selectors to be parsed
      * @return the selectors parsed from the specified input source
      */
-    public SelectorList parseSelectors(final InputSource source) {
+    public SelectorList parseSelectors(final String source) {
         SelectorList selectors;
         try {
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
@@ -888,7 +912,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
         catch (final Throwable t) {
             if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS selectors from '" + toString(source) + "': " + t.getMessage(), t);
+                LOG.error("Error parsing CSS selectors from '" + source + "': " + t.getMessage(), t);
             }
             selectors = new SelectorListImpl();
         }
@@ -912,8 +936,7 @@ public class CSSStyleSheet extends StyleSheet {
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
 
-            final InputSource source = new InputSource(new StringReader(mediaString));
-            media = new MediaListImpl(parser.parseMedia(source));
+            media = new MediaListImpl(parser.parseMedia(mediaString));
             media_.put(mediaString, media);
             return media;
         }
@@ -947,6 +970,7 @@ public class CSSStyleSheet extends StyleSheet {
             return "";
         }
         catch (final IOException e) {
+            LOG.error(e.getMessage(), e);
             return "";
         }
     }

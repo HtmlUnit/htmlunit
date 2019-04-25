@@ -18,10 +18,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
-import java.io.StringReader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -40,6 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 @JsxClass(domClass = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
+
+    private static final Log LOG = LogFactory.getLog(HTMLStyleElement.class);
 
     private CSSStyleSheet sheet_;
 
@@ -72,8 +74,7 @@ public class HTMLStyleElement extends HTMLElement {
             sheet_ = new CSSStyleSheet(this, cached, uri);
         }
         else {
-            final InputSource source = new InputSource(new StringReader(css));
-            sheet_ = new CSSStyleSheet(this, source, uri);
+            sheet_ = new CSSStyleSheet(this, css, uri);
             cache.cache(css, sheet_.getWrappedSheet());
         }
 

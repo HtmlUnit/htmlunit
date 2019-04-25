@@ -101,7 +101,6 @@ import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.io.StringReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -126,7 +125,6 @@ import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -2584,16 +2582,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         // following is a hack, just to have basic support for getPropertyCSSValue
         // TODO: rework the whole CSS processing here! we should *always* parse the style!
         if (styleDeclaration_ == null) {
-            final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
-                    .getUrl().toExternalForm();
             final String styleAttribute = jsElement_.getDomNodeOrDie().getAttributeDirect("style");
-            final InputSource source = new InputSource(new StringReader(styleAttribute));
-            source.setURI(uri);
             final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
             final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
             parser.setErrorHandler(errorHandler);
             try {
-                styleDeclaration_ = parser.parseStyleDeclaration(source);
+                styleDeclaration_ = parser.parseStyleDeclaration(styleAttribute);
             }
             catch (final IOException e) {
                 throw new RuntimeException(e);

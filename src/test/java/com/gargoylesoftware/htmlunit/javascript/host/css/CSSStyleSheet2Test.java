@@ -14,13 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import java.io.StringReader;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -87,7 +84,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
     }
 
     private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
-        return sheet.parseSelectors(new InputSource(new StringReader(rule))).get(0);
+        return sheet.parseSelectors(rule).get(0);
     }
 
     /**
@@ -156,10 +153,10 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final BrowserVersion browserVersion = getBrowserVersion();
         final CSSStyleSheet sheet = host.getSheet();
 
-        Selector selector = sheet.parseSelectors(new InputSource(new StringReader("#d\\:e"))).get(0);
+        Selector selector = sheet.parseSelectors("#d\\:e").get(0);
         assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false));
 
-        selector = sheet.parseSelectors(new InputSource(new StringReader("#d-e"))).get(0);
+        selector = sheet.parseSelectors("#d-e").get(0);
         assertTrue(CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false));
     }
 
@@ -215,7 +212,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
         final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final CSSStyleSheet sheet = host.getSheet();
-        final Selector selector = sheet.parseSelectors(new InputSource(new StringReader(css))).get(0);
+        final Selector selector = sheet.parseSelectors(css).get(0);
         assertEquals(selectBody,
                 CSSStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false));
         assertEquals(selectDivD,

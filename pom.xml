@@ -22,7 +22,7 @@
         <selenium.version>3.141.59</selenium.version>
 
         <htmlunitdriver.version>2.35.1</htmlunitdriver.version>
-        <htmlunitcssparser.version>1.4.0</htmlunitcssparser.version>
+        <htmlunitcssparser.version>1.5.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitneko.version>2.35.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.35.0</htmlunitcorejs.version>
 
