@@ -880,7 +880,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param client the client
      * @return the stylesheet parsed from the specified input source
      */
-    private CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
+    private static CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
         CSSStyleSheetImpl ss;
         try {
             final CSSErrorHandler errorHandler = client.getCssErrorHandler();

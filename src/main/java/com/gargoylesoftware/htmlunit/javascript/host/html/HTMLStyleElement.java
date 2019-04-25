@@ -18,9 +18,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -40,8 +37,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 @JsxClass(domClass = HtmlStyle.class)
 public class HTMLStyleElement extends HTMLElement {
-
-    private static final Log LOG = LogFactory.getLog(HTMLStyleElement.class);
 
     private CSSStyleSheet sheet_;
 
