@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.nio.charset.Charset;
-
 /**
  * An element which can handle scripts.
  *
@@ -54,14 +52,4 @@ public interface ScriptElement {
      * or an empty string if that attribute isn't defined.
      */
     String getCharsetAttribute();
-
-    /**
-     * Returns the {@link Charset}.
-     *
-     * @return the {@link Charset}
-     * @deprecated as of 2.27, not used
-     */
-    @Deprecated
-    Charset getCharset();
-
 }

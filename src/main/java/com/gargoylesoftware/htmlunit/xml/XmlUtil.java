@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.xml;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -78,14 +75,6 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
  * @author Frank Danek
  */
 public final class XmlUtil {
-
-    /**
-     * Default encoding used.
-     *
-     * @deprecated as of 2.26, use {@link java.nio.charset.StandardCharsets#UTF_8}
-     */
-    @Deprecated
-    public static final Charset DEFAULT_CHARSET = UTF_8;
 
     private static final Log LOG = LogFactory.getLog(XmlUtil.class);
 

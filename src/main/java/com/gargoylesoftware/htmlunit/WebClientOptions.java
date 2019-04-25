@@ -342,20 +342,6 @@ public class WebClientOptions implements Serializable {
      * @return {@code true} if the content of the resulting document will be printed to
      *         the console in the event of a failing response code
      * @see #setPrintContentOnFailingStatusCode
-     * @deprecated as of 2.27, please use {@link #isPrintContentOnFailingStatusCode()}
-     */
-    @Deprecated
-    public boolean getPrintContentOnFailingStatusCode() {
-        return printContentOnFailingStatusCode_;
-    }
-
-    /**
-     * Returns {@code true} if the content of the resulting document will be printed to
-     * the console in the event of a failing response code.
-     *
-     * @return {@code true} if the content of the resulting document will be printed to
-     *         the console in the event of a failing response code
-     * @see #setPrintContentOnFailingStatusCode
      */
     public boolean isPrintContentOnFailingStatusCode() {
         return printContentOnFailingStatusCode_;

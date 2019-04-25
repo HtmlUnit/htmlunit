@@ -103,18 +103,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * {@inheritDoc}
-     *
-     * @deprecated as of 2.27, not used
-     */
-    @Override
-    @Deprecated
-    public final Charset getCharset() {
-        final String charsetName = getCharsetAttribute();
-        return EncodingSniffer.toCharset(charsetName);
-    }
-
-    /**
      * Returns the value of the attribute {@code type}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.

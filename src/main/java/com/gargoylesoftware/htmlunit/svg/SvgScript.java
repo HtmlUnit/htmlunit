@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +22,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.ScriptElementSupport;
-import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 
 /**
  * Wrapper for the SVG element {@code script}.
@@ -97,17 +95,6 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public final String getCharsetAttribute() {
         return getAttributeDirect("charset");
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @deprecated as of 2.27, not used
-     */
-    @Override
-    @Deprecated
-    public final Charset getCharset() {
-        return EncodingSniffer.toCharset(getCharsetAttribute());
     }
 
     /**

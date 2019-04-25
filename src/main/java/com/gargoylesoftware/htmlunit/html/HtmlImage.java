@@ -718,15 +718,6 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * @return true if the image was successfully downloaded
-     * @deprecated as of 2.26, please use {@link #isComplete()} instead
-     */
-    @Deprecated
-    public boolean getComplete() {
-        return isComplete();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
