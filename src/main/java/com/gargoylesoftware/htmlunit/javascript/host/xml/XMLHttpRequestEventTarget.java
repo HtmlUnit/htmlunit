@@ -14,12 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@code XMLHttpRequestEventTarget}.
@@ -37,6 +42,14 @@ public class XMLHttpRequestEventTarget extends EventTarget {
      * Creates an instance.
      */
     public XMLHttpRequestEventTarget() {
+    }
+
+    /**
+     * @return the constructed object
+     */
+    @JsxConstructor({CHROME, FF})
+    public static XMLHttpRequestEventTarget ctor() {
+        throw ScriptRuntime.typeError("Illegal constructor.");
     }
 
     /**
