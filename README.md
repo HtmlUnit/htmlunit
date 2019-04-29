@@ -17,7 +17,7 @@ For maven, you would add:
     <dependency>
         <groupId>net.sourceforge.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
-        <version>2.34.1</version>
+        <version>2.35.0</version>
     </dependency>
 
 [Latest CI build][2]
@@ -44,6 +44,6 @@ For maven, you would add:
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.33/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.35.0/ "HtmlUnit on sourceforge"
 [2]: http://167.86.92.69/job/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
