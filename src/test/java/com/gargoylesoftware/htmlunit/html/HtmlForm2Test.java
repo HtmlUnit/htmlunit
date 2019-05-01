@@ -314,7 +314,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+    @Alerts(CHROME = "text/html,application/xhtml+xml,application/xml;q=0.9,"
+                    + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
             FF = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             IE = "text/html, application/xhtml+xml, */*")
     public void acceptHeader() throws Exception {

@@ -49,8 +49,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public class ExternalTest {
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "73.0.3683.68";
-    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_73";
+    static String CHROME_DRIVER_ = "74.0.3729.6";
+    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_74";
 
     /** Gecko driver. */
     static String GECKO_DRIVER_ = "0.24.0";

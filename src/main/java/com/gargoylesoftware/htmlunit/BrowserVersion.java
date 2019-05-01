@@ -199,8 +199,8 @@ public final class BrowserVersion implements Serializable {
             139, 140, 141, 143, 144, 145, 146, 147};
 
         // CHROME
-        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36";
-        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36";
+        CHROME.applicationVersion_ = "5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36";
+        CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -217,7 +217,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
-        CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
+        CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3";
         CHROME.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";

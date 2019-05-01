@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -589,11 +588,10 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(IE = "click href click doubleClick ",
-            CHROME = "click href click href doubleClick ",
-            FF = "click href click doubleClick href ")
+    @Alerts(DEFAULT = "click href click doubleClick href ",
+            IE = "click href click doubleClick ")
     @BuggyWebDriver(FF)
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented
     public void doubleClick() throws Exception {
         final String html =
               "<html>\n"

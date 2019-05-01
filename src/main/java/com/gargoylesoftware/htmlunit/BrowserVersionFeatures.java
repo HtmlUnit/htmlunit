@@ -1594,12 +1594,8 @@ public enum BrowserVersionFeatures {
     XHR_OPEN_ALLOW_EMTPY_URL,
 
     /** Indicates that the content charset is used for response parsing. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, CHROME})
     XHR_USE_CONTENT_CHARSET,
-
-    /** Indicates that the request uses the charset from the requesting page. */
-    @BrowserFeature(CHROME)
-    XHR_USE_DEFAULT_CHARSET_FROM_PAGE,
 
     /** Indicates that the "*" pattern is allowed when withCredential is enabled. */
     @BrowserFeature(IE)

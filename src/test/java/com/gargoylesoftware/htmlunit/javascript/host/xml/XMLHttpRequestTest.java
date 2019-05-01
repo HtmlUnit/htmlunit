@@ -848,7 +848,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "40644",
-            CHROME = {"233", "187", "8222"},
             IE = {})
     public void overrideMimeType_charset_wrong() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk

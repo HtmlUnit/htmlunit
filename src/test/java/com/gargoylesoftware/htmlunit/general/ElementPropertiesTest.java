@@ -1608,7 +1608,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             CHROME = "align,allow,allowFullscreen,allowPaymentRequest,contentDocument,contentWindow,"
-                + "csp,frameBorder,getSVGDocument(),height,"
+                + "csp,featurePolicy,frameBorder,getSVGDocument(),height,"
                 + "longDesc,marginHeight,marginWidth,name,referrerPolicy,sandbox,scrolling,src,srcdoc,"
                 + "width",
             IE = "align,border,contentDocument,contentWindow,frameBorder,frameSpacing,getSVGDocument(),height,"
@@ -3136,7 +3136,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),currentScript,"
                 + "defaultView,designMode,dir,doctype,documentElement,documentURI,domain,elementFromPoint(),"
                 + "elementsFromPoint(),embeds,evaluate(),execCommand(),"
-                + "exitFullscreen(),exitPictureInPicture(),exitPointerLock(),"
+                + "exitFullscreen(),exitPictureInPicture(),exitPointerLock(),featurePolicy,"
                 + "fgColor,firstElementChild,fonts,forms,fullscreen,fullscreenElement,fullscreenEnabled,"
                 + "getElementById(),getElementsByClassName(),getElementsByName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getSelection(),hasFocus(),head,hidden,images,implementation,importNode(),"

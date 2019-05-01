@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_CO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_DEFAULT_CHARSET_FROM_PAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_WITHCREDENTIALS_ALLOW_ORIGIN_ALL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -70,7 +69,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -758,12 +756,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     if (index != -1) {
                         charsetName = overriddenMimeType_.substring(index + "charset=".length());
                     }
-                    Charset charset = EncodingSniffer.toCharset(charsetName);
-                    if (charset == null
-                            && getBrowserVersion().hasFeature(XHR_USE_DEFAULT_CHARSET_FROM_PAGE)) {
-                        final HTMLDocument doc = containingPage_.getScriptableObject();
-                        charset = Charset.forName(doc.getDefaultCharset());
-                    }
+                    final Charset charset = EncodingSniffer.toCharset(charsetName);
                     final String charsetNameFinal = charsetName;
                     final Charset charsetFinal = charset;
                     webResponse_ = new WebResponseWrapper(webResponse) {
