@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <jetty.version>9.4.17.v20190418</jetty.version>
+        <jetty.version>9.4.18.v20190429</jetty.version>
         <selenium.version>3.141.59</selenium.version>
 
         <htmlunitdriver.version>2.35.1</htmlunitdriver.version>
@@ -27,9 +27,9 @@
         <htmlunitcorejs.version>2.35.0</htmlunitcorejs.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.19</checkstyle.version>
+        <checkstyle.version>8.20</checkstyle.version>
         <spotbugs.version>3.1.12</spotbugs.version>
-        <pmd.version>6.13.0</pmd.version>
+        <pmd.version>6.14.0</pmd.version>
     </properties>
 
     <build>
