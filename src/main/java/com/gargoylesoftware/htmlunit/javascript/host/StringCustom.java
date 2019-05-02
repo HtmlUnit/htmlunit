@@ -22,5 +22,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
  */
 public final class StringCustom {
 
-    private StringCustom() { }
+    private StringCustom() {
+    }
 }

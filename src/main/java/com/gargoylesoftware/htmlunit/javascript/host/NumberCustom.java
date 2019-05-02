@@ -33,7 +33,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public final class NumberCustom {
 
-    private NumberCustom() { }
+    private NumberCustom() {
+    }
 
     /**
      * Returns a string with a language sensitive representation of this number.

@@ -33,7 +33,8 @@ import java.nio.charset.Charset;
 public final class TextUtil {
 
     /** Private constructor to prevent instantiation. */
-    private TextUtil() { }
+    private TextUtil() {
+    }
 
     /**
      * Convert a string into an input stream.

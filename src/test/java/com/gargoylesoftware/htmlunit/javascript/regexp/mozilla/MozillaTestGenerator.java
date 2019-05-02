@@ -29,7 +29,8 @@ import org.apache.commons.io.FileUtils;
  */
 public final class MozillaTestGenerator {
 
-    private MozillaTestGenerator() { }
+    private MozillaTestGenerator() {
+    }
 
     /**
      * Outputs java test case for the specified JavaScript source.

@@ -30,7 +30,8 @@ import org.apache.commons.io.FileUtils;
  */
 public final class Patch {
 
-    private Patch() { }
+    private Patch() {
+    }
 
     /**
      * Checks the @author tag in the files touched by the specified patch.

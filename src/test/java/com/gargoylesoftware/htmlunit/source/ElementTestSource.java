@@ -29,7 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  */
 public final class ElementTestSource {
 
-    private ElementTestSource() { }
+    private ElementTestSource() {
+    }
 
     /**
      * Generate test case for each one HTML elements.

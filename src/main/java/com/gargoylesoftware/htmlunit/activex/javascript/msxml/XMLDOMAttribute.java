@@ -44,7 +44,8 @@ public class XMLDOMAttribute extends XMLDOMNode {
     /**
      * Creates an instance.
      */
-    public XMLDOMAttribute() { }
+    public XMLDOMAttribute() {
+    }
 
     /**
      * Returns a node list containing the child nodes.

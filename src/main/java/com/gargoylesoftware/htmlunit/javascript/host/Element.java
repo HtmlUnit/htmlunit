@@ -1228,14 +1228,18 @@ public class Element extends Node {
      * is just to prevent scripts that call that method from failing
      */
     @JsxFunction({CHROME, FF})
-    public void scrollIntoView() { /* do nothing at the moment */ }
+    public void scrollIntoView() {
+        /* do nothing at the moment */
+    }
 
     /**
      * Implement the {@code scrollIntoViewIfNeeded()} JavaScript function but don't actually do
      * anything.
      */
     @JsxFunction(CHROME)
-    public void scrollIntoViewIfNeeded() { /* do nothing at the moment */ }
+    public void scrollIntoViewIfNeeded() {
+        /* do nothing at the moment */
+    }
 
     /**
      * {@inheritDoc}

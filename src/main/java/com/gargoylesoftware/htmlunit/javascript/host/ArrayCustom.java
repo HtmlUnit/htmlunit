@@ -30,7 +30,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 public final class ArrayCustom {
 
-    private ArrayCustom() { }
+    private ArrayCustom() {
+    }
 
     /**
      * Creates a new Array instance from an array-like or iterable object.

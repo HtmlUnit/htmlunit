@@ -37,7 +37,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public final class DateCustom {
 
-    private DateCustom() { }
+    private DateCustom() {
+    }
 
     /**
      * Converts a date to a string, returning the "date" portion using the operating system's locale's conventions.

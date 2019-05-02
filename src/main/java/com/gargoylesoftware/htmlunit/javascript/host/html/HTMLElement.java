@@ -1253,7 +1253,9 @@ public class HTMLElement extends Element {
      */
     @Override
     @JsxFunction(IE)
-    public void scrollIntoView() { /* do nothing at the moment */ }
+    public void scrollIntoView() {
+        /* do nothing at the moment */
+    }
 
     /**
      * Retrieves an auto-generated, unique identifier for the object.
