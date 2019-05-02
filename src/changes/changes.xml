@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 74">
+            <action type="fix" dev="rbri" issue="#38">
+                neko: Handle the (invalid) comment close tag '--!>' like the valid one regarding to the
+                spec (https://html.spec.whatwg.org/multipage/parsing.html#comment-end-bang-state)
+            </action>
             <action type="fix" dev="rbri">
                 XMLHttpRequestEventTarget has no ctor.
             </action>

@@ -1346,4 +1346,31 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"out", "\n    <!-- yy --!>\n    alert('out');\n  "})
+    public void incorrectlyClosedComment() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script id='testScript'>\n"
+            + "    <!-- yy --!>\n"
+            + "    alert('out');\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <!-- xx -->\n"
+
+            + "  <script >\n"
+            + "    alert(document.getElementById('testScript').innerHTML);\n"
+            + "  </script>\n"
+
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageWithAlerts2(html);
+    }
 }
