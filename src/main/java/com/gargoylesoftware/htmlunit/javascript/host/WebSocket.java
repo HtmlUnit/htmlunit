@@ -135,7 +135,10 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final WebClient webClient = webWindow.getWebClient();
             final WebClientOptions options = webClient.getOptions();
             if (options.isUseInsecureSSL()) {
-                client_ = new WebSocketClient(new SslContextFactory.Client(true), null, null);
+                client_ = new WebSocketClient(new SslContextFactory(true), null, null);
+                // still use the deprecated method here to be backward compatible with older jersey versions
+                // see https://github.com/HtmlUnit/htmlunit/issues/36
+                // client_ = new WebSocketClient(new SslContextFactory.Client(true), null, null);
             }
             else {
                 client_ = new WebSocketClient();
