@@ -858,6 +858,8 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "null",
+            CHROME = "§§URL§§a.html?p1=sieben&p2")
     public void reloadGet() throws Exception {
         final String html =
               "<html>\n"
@@ -883,13 +885,21 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals("sieben", params.get(0).getValue());
         assertEquals("p2", params.get(1).getName());
         assertEquals("", params.get(1).getValue());
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF)
+    @Alerts(DEFAULT = {"null", "§§URL§§/"},
+            CHROME = {"§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"})
+    @BuggyWebDriver(FF) // FF opens a confirmation window
     public void reloadPost() throws Exception {
         final String form =
                 "<html>\n"
@@ -936,9 +946,10 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals("urlParam", params.get(3).getName());
         assertEquals("urlVal", params.get(3).getValue());
 
+        expandExpectedAlertsVariables("http://localhost:" + PORT);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        // assertEquals("http://localhost:" + PORT, additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(URL_SECOND + "a.html?urlParam=urlVal", additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
     }
 }

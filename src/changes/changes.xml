@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 74">
+            <action type="fix" dev="rbri" issue="2015">
+                Fix the referrer and origin header when the request was created from window.location.reload().
+            </action>
             <action type="add" dev="rbri">
                 AudioContext.createBufferSource and a simple AudioContext.decodeAudioData added.
             </action>
@@ -29,7 +32,7 @@
                 if the target is disabled.
             </action>
             <action type="update" dev="rbri">
-                Code cleanup and some resourde handling fixes for HttpWebConnection.
+                Code cleanup and some resource handling fixes for HttpWebConnection.
             </action>
         </release>
 

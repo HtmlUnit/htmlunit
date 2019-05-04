@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_H
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_IS_DECODED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_HREF_HASH_IS_ENCODED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LOCATION_RELOAD_REFERRER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_ABOUT_BLANK_HAS_BLANK_PATH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -135,12 +136,10 @@ public class Location extends SimpleScriptable {
         final HtmlPage htmlPage = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
-        String referer = htmlPage.getUrl().toExternalForm();
-        request.setAdditionalHeader(HttpHeader.REFERER, referer);
-
-        referer = UrlUtils.getUrlWithNewQuery(htmlPage.getUrl(), null).toExternalForm();
-        referer = StringUtils.stripEnd(referer, "/");
-        request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
+        if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
+            final String referer = htmlPage.getUrl().toExternalForm();
+            request.setAdditionalHeader(HttpHeader.REFERER, referer);
+        }
 
         final WebWindow webWindow = window_.getWebWindow();
         webWindow.getWebClient().download(webWindow, "", request, true, false, "JS location.reload");

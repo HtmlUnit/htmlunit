@@ -1071,6 +1071,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_LOCATION_HREF_HASH_IS_ENCODED,
 
+    /** Reload sends a referrer header. */
+    @BrowserFeature(CHROME)
+    JS_LOCATION_RELOAD_REFERRER,
+
     /** Indicates that an empty media list is represented by the string 'all'. */
     @BrowserFeature(IE)
     JS_MEDIA_LIST_ALL,
