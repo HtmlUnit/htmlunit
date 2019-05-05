@@ -122,9 +122,13 @@ public final class ClassConfiguration {
             }
             constants_.add(new ConstantInfo(name, value, flag));
         }
-        catch (final Exception e) {
-            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: "
-                + getHostClass().getName());
+        catch (final NoSuchFieldException e) {
+            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: " + getHostClass().getName()
+                    + "reason: " + e.getMessage());
+        }
+        catch (final IllegalAccessException e) {
+            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: " + getHostClass().getName()
+                    + "reason: " + e.getMessage());
         }
     }
 
