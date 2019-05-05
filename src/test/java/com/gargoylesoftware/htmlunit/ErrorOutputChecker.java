@@ -62,6 +62,10 @@ public class ErrorOutputChecker implements TestRule {
                     + "Listening on port \\d*\r?\n"
                     + "Only local connections are allowed\r?\n"),
 
+            // jetty
+            Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
+            Pattern.compile(".*INFO:oej.*\r?\n"),
+
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
             Pattern.compile(".*QuercusServlet starting as QuercusServletImpl\r?\n"),

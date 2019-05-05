@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -49,13 +50,16 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.appender.WriterAppender;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.DefaultCredentialsProvider2Test.InMemoryAppender;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -355,24 +359,31 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     @Alerts(DEFAULT = "Host",
             IE = {})
     public void hostHeaderFirst() throws Exception {
-        final Logger logger = Logger.getLogger("org.apache.http.headers");
+        final Logger logger = (Logger) LogManager.getLogger("org.apache.http.headers");
         final Level oldLevel = logger.getLevel();
-        logger.setLevel(Level.DEBUG);
+        Configurator.setLevel(logger.getName(), Level.DEBUG);
 
-        final InMemoryAppender appender = new InMemoryAppender();
-        logger.addAppender(appender);
+        final StringWriter stringWriter = new StringWriter();
+        final PatternLayout layout = PatternLayout.newBuilder().withPattern("%msg%n").build();
+
+        final WriterAppender writerAppender = WriterAppender.newBuilder().setName("writeLogger").setTarget(stringWriter)
+                .setLayout(layout).build();
+        writerAppender.start();
+
+        logger.addAppender(writerAppender);
         try {
             startWebServer("./");
 
             final WebClient webClient = getWebClient();
             webClient.getPage(URL_FIRST + "LICENSE.txt");
+            final String[] messages = StringUtils.split(stringWriter.toString(), "\n");
             for (int i = 0; i < getExpectedAlerts().length; i++) {
-                assertTrue(appender.getMessages().get(i + 1).contains(getExpectedAlerts()[i]));
+                assertTrue(messages[i + 1].contains(getExpectedAlerts()[i]));
             }
         }
         finally {
-            logger.removeAppender(appender);
-            logger.setLevel(oldLevel);
+            logger.removeAppender(writerAppender);
+            Configurator.setLevel(logger.getName(), oldLevel);
         }
     }
 

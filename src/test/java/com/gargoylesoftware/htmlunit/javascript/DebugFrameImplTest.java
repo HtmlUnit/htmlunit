@@ -20,12 +20,11 @@ import java.io.StringWriter;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Layout;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.WriterAppender;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.appender.WriterAppender;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.junit.After;
 import org.junit.Test;
 
@@ -42,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebConnection;
  */
 public class DebugFrameImplTest extends SimpleWebTestCase {
 
-    private final Logger loggerDebugFrameImpl_ = Logger.getLogger(DebugFrameImpl.class);
+    private final Logger loggerDebugFrameImpl_ = (Logger) LogManager.getLogger(DebugFrameImpl.class);
 
     private Level originalLogLevel_;
     private WebClient client_;
@@ -54,6 +53,7 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
     public DebugFrameImplTest() throws Exception {
         client_ = new WebClient(BrowserVersion.FIREFOX_60);
         ((JavaScriptEngine) client_.getJavaScriptEngine()).getContextFactory().setDebugger(new DebuggerImpl());
+
         originalLogLevel_ = loggerDebugFrameImpl_.getLevel();
         loggerDebugFrameImpl_.setLevel(Level.TRACE);
     }
@@ -100,17 +100,21 @@ public class DebugFrameImplTest extends SimpleWebTestCase {
         final String expectedLog = IOUtils.toString(getClass().getResourceAsStream("debugFrameImplTest.txt"),
                 ISO_8859_1);
 
-        final StringWriter sw = new StringWriter();
-        final Layout layout = new PatternLayout("%m%n");
-        final Appender appender = new WriterAppender(layout, sw);
-        loggerDebugFrameImpl_.addAppender(appender);
+        final StringWriter stringWriter = new StringWriter();
+        final PatternLayout layout = PatternLayout.newBuilder().withPattern("%msg%n").build();
+
+        final WriterAppender writerAppender = WriterAppender.newBuilder().setName("writeLogger").setTarget(stringWriter)
+                .setLayout(layout).build();
+        writerAppender.start();
+
+        loggerDebugFrameImpl_.addAppender(writerAppender);
         try {
             client_.getPage(url);
         }
         finally {
-            loggerDebugFrameImpl_.removeAppender(appender);
+            loggerDebugFrameImpl_.removeAppender(writerAppender);
         }
 
-        assertEquals(expectedLog, sw.toString());
+        assertEquals(expectedLog, stringWriter.toString());
     }
 }

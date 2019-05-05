@@ -17,14 +17,16 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
+import java.io.StringWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.log4j.AppenderSkeleton;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggingEvent;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.appender.WriterAppender;
+import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -96,66 +98,33 @@ public class DefaultCredentialsProvider2Test extends WebServerTestCase {
      */
     @Test
     public void basicAuthentication_singleAuthenticaiton() throws Exception {
-        final Logger logger = Logger.getLogger("org.apache.http.headers");
+        final Logger logger = (Logger) LogManager.getLogger("org.apache.http.headers");
         final Level oldLevel = logger.getLevel();
-        logger.setLevel(Level.DEBUG);
+        Configurator.setLevel(logger.getName(), Level.DEBUG);
 
-        final InMemoryAppender appender = new InMemoryAppender();
-        logger.addAppender(appender);
+        final StringWriter stringWriter = new StringWriter();
+        final PatternLayout layout = PatternLayout.newBuilder().withPattern("%msg%n").build();
+
+        final WriterAppender writerAppender = WriterAppender.newBuilder().setName("writeLogger").setTarget(stringWriter)
+                .setLayout(layout).build();
+        writerAppender.start();
+
+        logger.addAppender(writerAppender);
         try {
             ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
 
             loadPage("Hi There");
-            int unauthorizedCount = 0;
-            for (final String message : appender.getMessages()) {
-                if (message.contains("HTTP/1.1 401")) {
-                    unauthorizedCount++;
-                }
-            }
+            int unauthorizedCount = StringUtils.countMatches(stringWriter.toString(), "HTTP/1.1 401");
+            assertEquals(1, unauthorizedCount);
+
+            // and again
+            loadPage("Hi There");
+            unauthorizedCount = StringUtils.countMatches(stringWriter.toString(), "HTTP/1.1 401");
             assertEquals(1, unauthorizedCount);
         }
         finally {
-            logger.removeAppender(appender);
-            logger.setLevel(oldLevel);
-        }
-    }
-
-    /**
-     * An in memory appender, used to save all logged messages in memory.
-     */
-    public static class InMemoryAppender extends AppenderSkeleton {
-
-        private List<String> messages_ = new ArrayList<>();
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void append(final LoggingEvent event) {
-            messages_.add(event.getMessage().toString());
-        }
-
-        /**
-         * Returns the saved messages.
-         * @return the saved messages
-         */
-        public List<String> getMessages() {
-            return messages_;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void close() {
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean requiresLayout() {
-            return false;
+            logger.removeAppender(writerAppender);
+            Configurator.setLevel(logger.getName(), oldLevel);
         }
     }
 
