@@ -168,7 +168,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private boolean attachedToPage_;
 
-    private final Object listeners_lock_ = new Serializable() { };
+    private final transient Object listeners_lock_ = new Object();
 
     /** The listeners which are to be notified of characterData change. */
     private Collection<CharacterDataChangeListener> characterDataListeners_;
