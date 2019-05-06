@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
@@ -168,7 +169,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     private boolean attachedToPage_;
 
-    private final transient Object listeners_lock_ = new Object();
+    private transient Object listeners_lock_ = new Object();
 
     /** The listeners which are to be notified of characterData change. */
     private Collection<CharacterDataChangeListener> characterDataListeners_;
@@ -1986,4 +1987,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return (DomElement) node;
     }
 
+    private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        listeners_lock_ = new Object();
+    }
 }

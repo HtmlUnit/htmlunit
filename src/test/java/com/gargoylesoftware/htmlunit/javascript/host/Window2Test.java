@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link Window}. The only difference with {@link WindowTest} is that these
@@ -1552,6 +1553,7 @@ public class Window2Test extends WebDriverTestCase {
             + "<input id='it' type='submit' onclick='setTimeout(stop, 0)'>\n"
             + "</form>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();
@@ -1714,6 +1716,7 @@ public class Window2Test extends WebDriverTestCase {
             + "  <input id='it' type='submit' onclick='id = setInterval(stop, 0)'>\n"
             + "</form>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("it")).click();

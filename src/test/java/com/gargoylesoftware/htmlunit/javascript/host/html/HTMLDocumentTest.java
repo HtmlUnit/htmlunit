@@ -2101,6 +2101,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "</head><body>\n"
             + "  <a id='myId' href='test?\u00E8=\u00E8'>test</a>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_HTML, UTF_8);
         driver.findElement(By.id("myId")).click();

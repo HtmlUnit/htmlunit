@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Unit tests for {@link BrowserVersion}.
@@ -155,6 +156,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "  <img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -181,6 +183,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -201,6 +204,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -221,6 +225,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -247,6 +252,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         loadPage2(html);
 
         assertEquals(2, getMockWebConnection().getRequestCount());
@@ -273,6 +279,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final int requests = getMockWebConnection().getRequestCount();
         loadPage2(html);
@@ -302,6 +309,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final int requests = getMockWebConnection().getRequestCount();
         loadPage2(html);
@@ -333,6 +341,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final int requests = getMockWebConnection().getRequestCount();
         loadPage2(html);
@@ -364,6 +373,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final int requests = getMockWebConnection().getRequestCount();
         loadPage2(html);

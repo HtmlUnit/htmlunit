@@ -425,6 +425,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
                 + "</form>\n"
                 + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(htmlContent);
         String path = getClass().getClassLoader().getResource("realm.properties").toExternalForm();
@@ -454,6 +455,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
                 + "</form>\n"
                 + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(htmlContent);
         driver.findElement(By.id("mySubmit")).click();
@@ -482,6 +484,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
                 + "</form>\n"
                 + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(htmlContent);
 
@@ -510,6 +513,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "<input type='submit' value='Upload' id='mySubmit'>\n"
                 + "</form>\n"
                 + "</body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(htmlContent);
 

@@ -26,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -180,6 +181,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "  myWorker.onmessage = function(e) {};\n"
                 + "  alert(typeof myWorker.onmessage);\n"
                 + "</script></body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -199,6 +201,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "    alert(myWorker.onmessage);\n"
                 + "  } catch(e) { alert('exception ' + e.name); }\n"
                 + "</script></body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -218,6 +221,7 @@ public class WorkerTest extends WebDriverTestCase {
                 + "    alert(myWorker.onmessage);\n"
                 + "  } catch(e) { alert('exception ' + e.name); }\n"
                 + "</script></body></html>\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

@@ -78,6 +78,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'></body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 

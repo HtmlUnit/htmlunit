@@ -188,6 +188,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             // send
             + "xhr.send();\n"
             + "alert('sent 1');\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         tester(test);
     }

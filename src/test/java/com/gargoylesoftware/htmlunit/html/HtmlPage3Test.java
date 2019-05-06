@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -292,6 +293,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <a id='testLink' href='path'>click me</a>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         final WebDriver webDriver = loadPage2(html, URL_SECOND);
         webDriver.findElement(By.id("testLink")).click();
         assertEquals(expected, webDriver.getCurrentUrl());

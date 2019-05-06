@@ -214,6 +214,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body></body>\n</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final int expectedRequests = Integer.parseInt(getExpectedAlerts()[0]);
         setExpectedAlerts(Arrays.copyOfRange(getExpectedAlerts(), 1, getExpectedAlerts().length));

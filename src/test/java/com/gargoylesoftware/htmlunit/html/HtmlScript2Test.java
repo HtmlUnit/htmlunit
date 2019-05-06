@@ -463,6 +463,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
                 + "<body onload='alert(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

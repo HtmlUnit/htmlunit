@@ -358,6 +358,7 @@ public class Document2Test extends WebDriverTestCase {
                 + "  </script>\n"
                 + "</body>\n"
                 + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         getMockWebConnection().setResponse(new URL("http://example.com/frame1.html"), "");
 

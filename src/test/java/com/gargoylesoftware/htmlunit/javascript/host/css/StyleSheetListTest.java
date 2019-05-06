@@ -62,6 +62,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "    <style>div.y { color: green; }</style>\n"
             + "  </body>\n"
             + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

@@ -29,6 +29,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -638,6 +639,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         final WebElement field = driver.findElement(By.id("t"));

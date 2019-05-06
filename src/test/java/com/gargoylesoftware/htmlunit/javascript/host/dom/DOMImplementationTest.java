@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link DOMImplementation}.
@@ -713,6 +714,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "<body onload='test()'>\n"
                 + "  <iframe id='theFrame' src='about:blank' />"
                 + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
