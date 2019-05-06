@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -77,6 +78,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "<body>\n"
                 + "</body>\n"
                 + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPageWithAlerts2(html);
         final String text = driver.findElement(By.id("l")).getText();
@@ -202,6 +204,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "<body onload='alert(\"body onLoad\")'>\n"
                 + "</body>\n"
                 + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -307,6 +310,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
                 + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
                 + "</body>\n"
                 + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
@@ -351,6 +355,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
             + "  <a id='target' href='/sample?string=a&iexcl=1'>/sample?string=a&iexcl=1</a>\n"
             + "</body>\n"
             + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
