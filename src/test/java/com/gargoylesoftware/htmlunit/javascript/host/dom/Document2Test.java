@@ -312,6 +312,7 @@ public class Document2Test extends WebDriverTestCase {
             + "<body>\n"
             + "  <input id='text1' onclick='test()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         verifyAlerts(driver, getExpectedAlerts()[0]);
