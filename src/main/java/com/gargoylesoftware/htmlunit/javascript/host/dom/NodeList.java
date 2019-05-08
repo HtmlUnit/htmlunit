@@ -20,14 +20,18 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -168,17 +172,22 @@ public class NodeList extends AbstractList {
     @JsxFunction({CHROME, FF})
     public void forEach(final Object callback) {
         final List<DomNode> nodes = getElements();
-        final Context context = Context.enter();
-        try {
-            final Function function = (Function) callback;
-            final Scriptable scope = getParentScope();
-            for (int i = 0; i < nodes.size(); i++) {
-                function.call(context, scope, this, new Object[] {
-                        nodes.get(i).getScriptableObject(), i, this});
+
+        final WebClient client = getWindow().getWebWindow().getWebClient();
+        final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+
+        final ContextAction<Object> contextAction = new ContextAction<Object>() {
+            @Override
+            public Object run(final Context cx) {
+                final Function function = (Function) callback;
+                final Scriptable scope = getParentScope();
+                for (int i = 0; i < nodes.size(); i++) {
+                    function.call(cx, scope, NodeList.this, new Object[] {
+                            nodes.get(i).getScriptableObject(), i, this});
+                }
+                return null;
             }
-        }
-        finally {
-            Context.exit();
-        }
+        };
+        cf.call(contextAction);
     }
 }

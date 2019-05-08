@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BasicJavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -32,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
@@ -357,68 +361,79 @@ public class Promise extends SimpleScriptable {
 
             @Override
             public void run() {
-                final Context cx = Context.enter();
-                try {
-                    Function toExecute = null;
-                    if (thisPromise.state_ == PromiseState.FULFILLED && onFulfilled instanceof Function) {
-                        toExecute = (Function) onFulfilled;
-                    }
-                    else if (thisPromise.state_ == PromiseState.REJECTED && onRejected instanceof Function) {
-                        toExecute = (Function) onRejected;
-                    }
+                final WebClient client = window.getWebWindow().getWebClient();
+                final HtmlUnitContextFactory cf = ((JavaScriptEngine) client
+                        .getJavaScriptEngine()).getContextFactory();
 
-                    try {
-                        final Object callbackResult;
-                        if (toExecute == null) {
-                            final Promise dummy = new Promise();
-                            dummy.state_ = thisPromise.state_;
-                            dummy.value_ = thisPromise.value_;
-                            callbackResult = dummy;
+                final ContextAction<Object> contextAction = new ContextAction<Object>() {
+                    @Override
+                    public Object run(final Context cx) {
+                        Function toExecute = null;
+                        if (thisPromise.state_ == PromiseState.FULFILLED && onFulfilled instanceof Function) {
+                            toExecute = (Function) onFulfilled;
                         }
-                        else {
-                            // KEY_STARTING_SCOPE maintains a stack of scopes
-                            @SuppressWarnings("unchecked")
-                            Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
-                            if (null == stack) {
-                                stack = new ArrayDeque<>();
-                                cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
-                            }
-                            stack.push(window);
-                            try {
-                                callbackResult = toExecute.call(cx, window, thisPromise, new Object[] {value_});
-                            }
-                            finally {
-                                stack.pop();
-                            }
+                        else if (thisPromise.state_ == PromiseState.REJECTED && onRejected instanceof Function) {
+                            toExecute = (Function) onRejected;
+                        }
 
-                            window.getWebWindow().getWebClient().getJavaScriptEngine().processPostponedActions();
-                        }
-                        if (callbackResult instanceof Promise) {
-                            final Promise resultPromise = (Promise) callbackResult;
-                            if (resultPromise.state_ == PromiseState.FULFILLED) {
-                                returnPromise.settle(true, resultPromise.value_, window);
-                            }
-                            else if (resultPromise.state_ == PromiseState.REJECTED) {
-                                returnPromise.settle(false, resultPromise.value_, window);
+                        try {
+                            final Object callbackResult;
+                            if (toExecute == null) {
+                                final Promise dummy = new Promise();
+                                dummy.state_ = thisPromise.state_;
+                                dummy.value_ = thisPromise.value_;
+                                callbackResult = dummy;
                             }
                             else {
-                                if (resultPromise.dependentPromises_ == null) {
-                                    resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
+                                // KEY_STARTING_SCOPE maintains a stack of scopes
+                                @SuppressWarnings("unchecked")
+                                Deque<Scriptable> stack = (Deque<Scriptable>) cx.getThreadLocal(KEY_STARTING_SCOPE);
+                                if (null == stack) {
+                                    stack = new ArrayDeque<>();
+                                    cx.putThreadLocal(KEY_STARTING_SCOPE, stack);
                                 }
-                                resultPromise.dependentPromises_.add(returnPromise);
+                                stack.push(window);
+                                try {
+                                    if (ScriptRuntime.hasTopCall(cx)) {
+                                        callbackResult = toExecute.call(cx, window, thisPromise, new Object[] {value_});
+                                    }
+                                    else {
+                                        callbackResult = ScriptRuntime.doTopCall(toExecute, cx, window, thisPromise,
+                                                                            new Object[] {value_}, cx.isStrictMode());
+                                    }
+                                }
+                                finally {
+                                    stack.pop();
+                                }
+
+                                window.getWebWindow().getWebClient().getJavaScriptEngine().processPostponedActions();
+                            }
+                            if (callbackResult instanceof Promise) {
+                                final Promise resultPromise = (Promise) callbackResult;
+                                if (resultPromise.state_ == PromiseState.FULFILLED) {
+                                    returnPromise.settle(true, resultPromise.value_, window);
+                                }
+                                else if (resultPromise.state_ == PromiseState.REJECTED) {
+                                    returnPromise.settle(false, resultPromise.value_, window);
+                                }
+                                else {
+                                    if (resultPromise.dependentPromises_ == null) {
+                                        resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
+                                    }
+                                    resultPromise.dependentPromises_.add(returnPromise);
+                                }
+                            }
+                            else {
+                                returnPromise.settle(true, callbackResult, window);
                             }
                         }
-                        else {
-                            returnPromise.settle(true, callbackResult, window);
+                        catch (final JavaScriptException e) {
+                            returnPromise.settle(false, e.getValue(), window);
                         }
+                        return null;
                     }
-                    catch (final JavaScriptException e) {
-                        returnPromise.settle(false, e.getValue(), window);
-                    }
-                }
-                finally {
-                    Context.exit();
-                }
+                };
+                cf.call(contextAction);
             }
 
             /** {@inheritDoc} */

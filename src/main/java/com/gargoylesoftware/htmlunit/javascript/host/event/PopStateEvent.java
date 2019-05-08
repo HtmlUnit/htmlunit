@@ -19,12 +19,16 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -74,17 +78,22 @@ public class PopStateEvent extends Event {
         if (state instanceof NativeObject && getBrowserVersion().hasFeature(JS_POP_STATE_EVENT_CLONE_STATE)) {
             final NativeObject old = (NativeObject) state;
             final NativeObject newState = new NativeObject();
-            Context.enter();
-            try {
-                for (final Object o : ScriptableObject.getPropertyIds(old)) {
-                    final String property = Context.toString(o);
-                    newState.defineProperty(property, ScriptableObject.getProperty(old, property),
-                            ScriptableObject.EMPTY);
+
+            final WebClient client = getWindow().getWebWindow().getWebClient();
+            final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+
+            final ContextAction<Object> contextAction = new ContextAction<Object>() {
+                @Override
+                public Object run(final Context cx) {
+                    for (final Object o : ScriptableObject.getPropertyIds(old)) {
+                        final String property = Context.toString(o);
+                        newState.defineProperty(property, ScriptableObject.getProperty(old, property),
+                                ScriptableObject.EMPTY);
+                    }
+                    return null;
                 }
-            }
-            finally {
-                Context.exit();
-            }
+            };
+            cf.call(contextAction);
             state_ = newState;
         }
         else {
