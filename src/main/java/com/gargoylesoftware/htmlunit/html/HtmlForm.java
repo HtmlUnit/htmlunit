@@ -317,8 +317,13 @@ public class HtmlForm extends HtmlElement {
 
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
-            referer = StringUtils.stripEnd(referer, "/");
-            request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
+            URL pageUrl = htmlPage.getUrl();
+            try { // RFC 6454
+                request.setAdditionalHeader(HttpHeader.ORIGIN,
+                        new URL(pageUrl.getProtocol(), pageUrl.getHost(), pageUrl.getPort(), "").toString());
+            } catch (MalformedURLException e) {
+                throw new IllegalArgumentException("Not a valid url: " + pageUrl);
+            }
         }
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {

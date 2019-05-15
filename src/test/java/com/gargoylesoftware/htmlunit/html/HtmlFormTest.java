@@ -33,6 +33,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserVersionFeatures;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpHeader;
@@ -1013,6 +1014,40 @@ public class HtmlFormTest extends SimpleWebTestCase {
 
         final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
         assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Origin' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    public void submit_originHeader() throws Exception {
+        final WebClient client = getWebClientWithMockWebConnection();
+        if (!client.getBrowserVersion().hasFeature(BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN)) {
+            return; // skip
+        }
+
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='post' action='" + URL_SECOND + "'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+
+        URL url = new URL(URL_FIRST, "/path?query");
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(url, firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        final HtmlPage firstPage = client.getPage(url);
+        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
+
+        button.click();
+
+        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        assertEquals(new URL(url.getProtocol(), url.getHost(), url.getPort(), "").toString(),
+                lastAdditionalHeaders.get(HttpHeader.ORIGIN));
     }
 
     /**
