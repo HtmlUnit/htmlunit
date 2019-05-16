@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -308,6 +309,73 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(1, requestedParams.size());
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
+    }
+
+    /**
+     * Tests the 'Origin' and 'Referer' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"null", "§§URL§§"})
+    public void originRefererHeaderGet() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form method='get' action='" + URL_SECOND + "'>\n"
+            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondHtml = "<html><body></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(new URL(URL_FIRST, "/path?query"), firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(new ById("mySubmit")).click();
+
+        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Origin' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"null", "§§URL§§/"},
+            CHROME = {"§§URL§§", "§§URL§§/"})
+    public void originRefererHeaderPost() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <form method='post' action='" + URL_SECOND + "'>\n"
+            + "    <input id='mySubmit' type='submit' value='Submit'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+        final String secondHtml = "<html><body></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setResponse(new URL(URL_FIRST, "/path?query"), firstHtml);
+        webConnection.setResponse(URL_SECOND, secondHtml);
+
+        String url = URL_FIRST.toExternalForm();
+        url = url.substring(0, url.length() - 1);
+        expandExpectedAlertsVariables(url);
+        final WebDriver driver = loadPage2(firstHtml);
+
+        driver.findElement(new ById("mySubmit")).click();
+
+        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[1], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
