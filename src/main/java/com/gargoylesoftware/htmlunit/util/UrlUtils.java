@@ -471,6 +471,16 @@ public final class UrlUtils {
     }
 
     /**
+     * Creates and returns a new URL identical to the specified URL, ignoring path, protocol and query.
+     * @param u the URL on which to base the returned URL
+     * @return a new URL identical to the specified URL, ignoring path, protocol and query
+     * @throws MalformedURLException if there is a problem creating the new URL
+     */
+    public static URL getUrlWithProtocolAndAuthority(final URL u) throws MalformedURLException {
+        return createNewUrl(u.getProtocol(), u.getAuthority(), null, null, null);
+    }
+
+    /**
      * Creates a new URL based on the specified fragments.
      * @param protocol the protocol to use (may not be {@code null})
      * @param userInfo the user info to use (may be {@code null})

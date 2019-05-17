@@ -166,6 +166,40 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getUrlWithProtocolAndAuthority() throws Exception {
+        URL a = new URL("http://my.home.com/index.html?query#ref");
+        URL b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com/folder/index.html?query#ref");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com/folder/subfolder/index.html");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com?query");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com/");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+
+        a = new URL("http://my.home.com/#href");
+        b = UrlUtils.getUrlWithProtocolAndAuthority(a);
+        assertEquals("http://my.home.com", b.toExternalForm());
+    }
+
+    /**
      * Test {@link UrlUtils#resolveUrl(String, String)} with the normal examples taken from
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a> Section 5.1.
      */

@@ -316,7 +316,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"null", "§§URL§§"})
+    @Alerts({"null", "§§URL§§path?query"})
     public void originRefererHeaderGet() throws Exception {
         final String firstHtml
             = "<html>\n"
@@ -330,11 +330,11 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final String secondHtml = "<html><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(new URL(URL_FIRST, "/path?query"), firstHtml);
+        final URL requestUrl = new URL(URL_FIRST, "/path?query");
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPage2(firstHtml);
+        final WebDriver driver = loadPage2(firstHtml, requestUrl);
 
         driver.findElement(new ById("mySubmit")).click();
 
@@ -348,8 +348,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"null", "§§URL§§/"},
-            CHROME = {"§§URL§§", "§§URL§§/"})
+    @Alerts(DEFAULT = {"null", "§§URL§§/path?query"},
+            CHROME = {"§§URL§§", "§§URL§§/path?query"})
     public void originRefererHeaderPost() throws Exception {
         final String firstHtml
             = "<html>\n"
@@ -363,13 +363,13 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final String secondHtml = "<html><body></body></html>";
 
         final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(new URL(URL_FIRST, "/path?query"), firstHtml);
+        final URL requestUrl = new URL(URL_FIRST, "/path?query");
         webConnection.setResponse(URL_SECOND, secondHtml);
 
         String url = URL_FIRST.toExternalForm();
         url = url.substring(0, url.length() - 1);
         expandExpectedAlertsVariables(url);
-        final WebDriver driver = loadPage2(firstHtml);
+        final WebDriver driver = loadPage2(firstHtml, requestUrl);
 
         driver.findElement(new ById("mySubmit")).click();
 

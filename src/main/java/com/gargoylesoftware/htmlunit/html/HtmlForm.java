@@ -312,13 +312,19 @@ public class HtmlForm extends HtmlElement {
         }
         request.setCharset(enc);
 
-        String referer = htmlPage.getUrl().toExternalForm();
-        request.setAdditionalHeader(HttpHeader.REFERER, referer);
+        request.setAdditionalHeader(HttpHeader.REFERER, htmlPage.getUrl().toExternalForm());
 
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
-            referer = StringUtils.stripEnd(referer, "/");
-            request.setAdditionalHeader(HttpHeader.ORIGIN, referer);
+            try {
+                request.setAdditionalHeader(HttpHeader.ORIGIN,
+                        UrlUtils.getUrlWithProtocolAndAuthority(htmlPage.getUrl()).toExternalForm());
+            }
+            catch (final MalformedURLException e) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.info("Invalid origin url '" + htmlPage.getUrl() + "'");
+                }
+            }
         }
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE)) {
