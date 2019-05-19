@@ -1132,7 +1132,11 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @JsxGetter
     public int getLength() {
-        return getFrames().getLength();
+        final HTMLCollection frames = getFrames();
+        if (frames != null) {
+            return frames.getLength();
+        }
+        return 0;
     }
 
     /**
@@ -1140,8 +1144,11 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @return the live collection of frames contained by this window
      */
     private HTMLCollection getFrames() {
-        final HtmlPage page = (HtmlPage) getWebWindow().getEnclosedPage();
-        return new HTMLCollectionFrames(page);
+        final Page page = getWebWindow().getEnclosedPage();
+        if (page instanceof HtmlPage) {
+            return new HTMLCollectionFrames((HtmlPage) page);
+        }
+        return null;
     }
 
     /**
@@ -1596,12 +1603,12 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      */
     @Override
     public Object get(final int index, final Scriptable start) {
-        if (getWebWindow() == null) {
+        if (index < 0 || getWebWindow() == null) {
             return Undefined.instance;
         }
 
         final HTMLCollection frames = getFrames();
-        if (index < 0 || index >= frames.getLength()) {
+        if (frames == null || index >= frames.getLength()) {
             return Undefined.instance;
         }
         return frames.item(Integer.valueOf(index));
