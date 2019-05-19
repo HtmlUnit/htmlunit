@@ -32,7 +32,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_L
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.reflect.Member;
+import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -60,7 +60,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
-import com.gargoylesoftware.htmlunit.javascript.host.ArrayCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
@@ -279,7 +278,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final Member jsConstructor = config.getJsConstructor();
+            final Executable jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
@@ -469,10 +468,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             ((ScriptableObject) ScriptableObject.getProperty(window, "Object")).delete("getOwnPropertySymbols");
         }
 
-        if (browserVersion.hasFeature(JS_ARRAY_FROM)) {
-            final ScriptableObject arrayPrototype = (ScriptableObject) ScriptRuntime.name(context, window, "Array");
-            arrayPrototype.defineFunctionProperties(new String[] {"from"},
-                    ArrayCustom.class, ScriptableObject.DONTENUM);
+        if (!browserVersion.hasFeature(JS_ARRAY_FROM)) {
+            removePrototypeProperties(window, "Array", "from");
         }
 
         final ScriptableObject numberPrototype

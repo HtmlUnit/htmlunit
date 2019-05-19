@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
+import java.lang.reflect.Executable;
 import java.lang.reflect.Member;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -44,7 +45,7 @@ public class RecursiveFunctionObject extends FunctionObject {
      * @param methodOrConstructor a {@link Member} that defines the object
      * @param scope the enclosing scope of function
      */
-    public RecursiveFunctionObject(final String name, final Member methodOrConstructor,
+    public RecursiveFunctionObject(final String name, final Executable methodOrConstructor,
             final Scriptable scope) {
         super(name, methodOrConstructor, scope);
     }

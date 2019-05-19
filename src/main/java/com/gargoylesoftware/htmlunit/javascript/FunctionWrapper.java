@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
@@ -98,11 +97,6 @@ public class FunctionWrapper implements Function {
     @Override
     public void put(final String name, final Scriptable start, final Object value) {
         wrapped_.put(name, wrapped_, value);
-    }
-
-    @Override
-    public void put(final Symbol symbol, final Scriptable start, final Object value) {
-        wrapped_.put(symbol, wrapped_, value);
     }
 
     /**
