@@ -21,7 +21,7 @@
         <htmlunitdriver.version>2.35.1</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitneko.version>2.36.0-SNAPSHOT</htmlunitneko.version>
-        <htmlunitcorejs.version>2.35.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.36.0-SNAPSHOT</htmlunitcorejs.version>
 
         <jetty.version>9.4.18.v20190429</jetty.version>
         <log4j.version>2.11.2</log4j.version>
