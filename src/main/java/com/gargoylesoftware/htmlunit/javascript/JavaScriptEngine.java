@@ -424,20 +424,23 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
-        removePrototypeProperties(window, "String", "equals", "equalsIgnoreCase");
+        final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "String");
+        deleteProperties(stringPrototype, "equals", "equalsIgnoreCase");
+
+        final ScriptableObject numberPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Number");
+        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
+
         if (!browserVersion.hasFeature(STRING_INCLUDES)) {
-            removePrototypeProperties(window, "String", "includes");
+            deleteProperties(stringPrototype, "includes");
         }
         if (!browserVersion.hasFeature(STRING_REPEAT)) {
-            removePrototypeProperties(window, "String", "repeat");
+            deleteProperties(stringPrototype, "repeat");
         }
         if (!browserVersion.hasFeature(STRING_STARTS_ENDS_WITH)) {
-            removePrototypeProperties(window, "String", "startsWith");
-            removePrototypeProperties(window, "String", "endsWith");
+            deleteProperties(stringPrototype, "startsWith", "endsWith");
         }
         if (!browserVersion.hasFeature(STRING_TRIM_LEFT_RIGHT)) {
-            removePrototypeProperties(window, "String", "trimLeft");
-            removePrototypeProperties(window, "String", "trimRight");
+            deleteProperties(stringPrototype, "trimLeft", "trimRight");
         }
 
         // only FF has toSource
@@ -445,10 +448,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             deleteProperties(window, "uneval");
             removePrototypeProperties(window, "Object", "toSource");
             removePrototypeProperties(window, "Array", "toSource");
-            removePrototypeProperties(window, "Date", "toSource");
+            deleteProperties(datePrototype, "toSource");
             removePrototypeProperties(window, "Function", "toSource");
-            removePrototypeProperties(window, "Number", "toSource");
-            removePrototypeProperties(window, "String", "toSource");
+            deleteProperties(numberPrototype, "toSource");
+            deleteProperties(stringPrototype, "toSource");
         }
         if (browserVersion.hasFeature(JS_WINDOW_ACTIVEXOBJECT_HIDDEN)) {
             ((IdFunctionObject) ScriptableObject.getProperty(window, "Object")).delete("assign");
@@ -460,7 +463,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         NativeFunctionToStringFunction.installFix(window, webClient.getBrowserVersion());
 
-        final ScriptableObject datePrototype = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Date");
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
 
@@ -469,11 +471,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         if (!browserVersion.hasFeature(JS_ARRAY_FROM)) {
-            removePrototypeProperties(window, "Array", "from");
+            deleteProperties((ScriptableObject) ScriptableObject.getProperty(window, "Array"), "from", "of");
         }
 
-        final ScriptableObject numberPrototype
-            = (ScriptableObject) ScriptableObject.getClassPrototype(window, "Number");
         numberPrototype.defineFunctionProperties(new String[] {"toLocaleString"},
                 NumberCustom.class, ScriptableObject.DONTENUM);
 

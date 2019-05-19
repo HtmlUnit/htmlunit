@@ -2015,4 +2015,29 @@ public class NativeArrayTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "3",
+            IE = "not supported")
+    public void of() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  if (Array.of) {\n"
+            + "    var arr = Array.of(1, 2, 3);;\n"
+            + "    alert(arr.length);\n"
+            + "  } else {\n"
+            + "    alert('not supported');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
