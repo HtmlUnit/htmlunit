@@ -46,14 +46,25 @@
             log('onOpenListener');
         },
 
-        _onopen : function() {
+        _onopen : function(e) {
             log('onOpen');
+            log(e.type);
+            log(e.target);
+            log(e.srcElement);
+            log(e.data);
+            log(e.origin);
+            log(e.lastEventId);
+            log(e.source);
+
             room._send('text');
         },
 
         _onmessageListener : function(e) {
             if (e.data === 'server_text') {
                 log('onMessageTextListener');
+                log(e.type);
+                log(e.target);
+                log(e.srcElement);
                 log(e.data);
                 log(e.origin);
                 log(e.lastEventId);
@@ -61,6 +72,9 @@
             }
             else if(ab2str(e.data) === 'server_binary') {
                 log('onMessageBinaryListener');
+                log(e.type);
+                log(e.target);
+                log(e.srcElement);
                 log(e.data);
                 log(e.origin);
                 log(e.lastEventId);
@@ -74,6 +88,9 @@
         _onmessage : function(e) {
             if (e.data === 'server_text') {
                 log('onMessageText');
+                log(e.type);
+                log(e.target);
+                log(e.srcElement);
                 log(e.data);
                 log(e.origin);
                 log(e.lastEventId);
@@ -83,6 +100,9 @@
             }
             else if(ab2str(e.data) === 'server_binary') {
                 log('onMessageBinary');
+                log(e.type);
+                log(e.target);
+                log(e.srcElement);
                 log(e.data);
                 log(e.origin);
                 log(e.lastEventId);
