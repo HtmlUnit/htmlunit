@@ -435,7 +435,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             final Event openEvent = new Event();
             openEvent.setType(Event.TYPE_OPEN);
             fire(openEvent);
-            callFunction(openHandler_, ArrayUtils.EMPTY_OBJECT_ARRAY);
+            callFunction(openHandler_, new Object[] {openEvent});
         }
 
         @Override
