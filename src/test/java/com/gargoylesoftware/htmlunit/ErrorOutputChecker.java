@@ -64,7 +64,6 @@ public class ErrorOutputChecker implements TestRule {
 
             // jetty
             Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
-            Pattern.compile(".*INFO:oej.*\r?\n"),
 
             // Quercus
             Pattern.compile(".*com.caucho.quercus.servlet.QuercusServlet initImpl\r?\n"),
