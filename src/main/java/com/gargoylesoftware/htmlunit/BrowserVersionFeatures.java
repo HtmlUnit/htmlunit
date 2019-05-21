@@ -1560,6 +1560,13 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     URL_MISSING_SLASHES,
 
+    /** Set the origin property for web socket events. */
+    @BrowserFeature({CHROME, FF})
+    WEBSOCKET_ORIGIN_SET,
+
+    /** Set the srcElement property for web socket events. */
+    @BrowserFeature({CHROME, IE})
+    WEBSOCKET_SRC_ELEMENT_SET,
     /** Execute window events. */
     @BrowserFeature(IE)
     WINDOW_EXECUTE_EVENTS,

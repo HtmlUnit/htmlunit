@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 74">
+            <action type="fix" dev="rbri" issue="#43" due-to="James Kleeh">
+                WebSocket onOpen event handler is called with the event as parameter.
+            </action>
+            <action type="fix" dev="rbri">
+                WebSocket events are initialized with correct srcElement and origin.
+            </action>
             <action type="update" dev="rbri">
                 Cleanup our logging setup; slf4j dependencies removed, log4j2 is now used for all the tests
                 of log output.
