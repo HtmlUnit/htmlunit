@@ -107,6 +107,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  function " + CREATE_XMLHTTPREQUEST_FUNCTION_NAME + "() {\n"
             + "    return new ActiveXObject('" + activeXName + "');\n"
             + "  }\n";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(createTestHTML(html));
     }
