@@ -1176,8 +1176,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
 
-    /** Javascript script tags supports the 'for' and the 'event' attribute.
+    /**
+     * Javascript script tags handles a 204 (no content) response for the src
+     * attrib as error.
      */
+    @BrowserFeature(IE)
+    JS_SCRIPT_HANDLE_204_AS_ERROR,
+
+    /** Javascript script tags supports the 'for' and the 'event' attribute. */
     @BrowserFeature(IE)
     JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW,
 

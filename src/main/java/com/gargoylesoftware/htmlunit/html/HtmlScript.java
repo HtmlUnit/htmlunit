@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONLOAD_INTERNAL_JAVASCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSCRIPT_TRIM_TYPE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_HANDLE_204_AS_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW;
 
 import java.io.PrintWriter;
@@ -369,6 +370,15 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
                         executeEvent(Event.TYPE_ERROR);
+                    }
+                    else if (result == JavaScriptLoadResult.NO_CONTENT) {
+                        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+                        if (browserVersion.hasFeature(JS_SCRIPT_HANDLE_204_AS_ERROR)) {
+                            executeEvent(Event.TYPE_ERROR);
+                        }
+                        else {
+                            executeEvent(Event.TYPE_LOAD);
+                        }
                     }
                 }
                 catch (final FailingHttpStatusCodeException e) {

@@ -20,6 +20,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.net.URL;
 
 import org.apache.commons.io.ByteOrderMark;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -349,6 +350,36 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("", MimeType.APPLICATION_JAVASCRIPT);
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"load"},
+            IE = {"error"})
+    public void addEventListener_NoContent() throws Exception {
+        // use always a different url to avoid caching effects
+        final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var s1 = document.createElement('script');\n"
+            + "    s1.src = '" + scriptUrl + "';\n"
+            + "    s1.addEventListener('load', function() {alert('load')}, false);\n"
+            + "    s1.addEventListener('error', function() {alert('error')}, false);\n"
+            + "    document.body.insertBefore(s1, document.body.firstChild);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        getMockWebConnection().setResponse(scriptUrl, (String) null, HttpStatus.SC_NO_CONTENT, "No Content",
+                                                MimeType.APPLICATION_JAVASCRIPT, null);
         loadPageWithAlerts2(html);
     }
 

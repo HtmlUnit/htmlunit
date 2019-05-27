@@ -927,6 +927,8 @@ public class HtmlPage extends SgmlPage {
     enum JavaScriptLoadResult {
         /** The load was aborted and nothing was done. */
         NOOP,
+        /** The load was aborted and nothing was done. */
+        NO_CONTENT,
         /** The external JavaScript file was downloaded and compiled successfully. */
         SUCCESS,
         /** The external JavaScript file was not downloaded successfully. */
@@ -984,6 +986,9 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
         }
         catch (final FailingHttpStatusCodeException e) {
+            if (e.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+                return JavaScriptLoadResult.NO_CONTENT;
+            }
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
             throw e;
         }
@@ -1040,9 +1045,12 @@ public class HtmlPage extends SgmlPage {
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
         final int statusCode = response.getStatusCode();
-        final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-        final boolean noContent = statusCode == HttpStatus.SC_NO_CONTENT;
-        if (!successful || noContent) {
+        if (statusCode == HttpStatus.SC_NO_CONTENT) {
+            throw new FailingHttpStatusCodeException(response);
+        }
+
+        if (statusCode < HttpStatus.SC_OK
+                || statusCode >= HttpStatus.SC_MULTIPLE_CHOICES) {
             throw new IOException("Unable to download JavaScript from '" + url + "' (status " + statusCode + ").");
         }
 

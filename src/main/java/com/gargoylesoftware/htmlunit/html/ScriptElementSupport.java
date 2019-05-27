@@ -146,7 +146,7 @@ public final class ScriptElementSupport {
                         charset = page.getCharset();
                     }
                     final JavaScriptLoadResult result = page.loadExternalJavaScriptFile(src, charset);
-                    if (result == JavaScriptLoadResult.SUCCESS) {
+                    if (result == JavaScriptLoadResult.SUCCESS || result == JavaScriptLoadResult.NO_CONTENT) {
                         executeEvent(element, Event.TYPE_LOAD);
                     }
                     else if (result == JavaScriptLoadResult.DOWNLOAD_ERROR) {
