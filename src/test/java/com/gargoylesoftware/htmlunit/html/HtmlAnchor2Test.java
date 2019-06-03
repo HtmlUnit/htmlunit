@@ -760,4 +760,25 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         assertEquals(2, getWebClient().getTopLevelWindows().size());
         assertEquals("First", secondPage.getTitleText());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void asText_getTextContent() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <a href='localhost' id='a2'>\n"
+            + "    <span>Last Name</span>, <span>First Name</span>\n"
+            + "  </a>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlAnchor anchor = page.getHtmlElementById("a2");
+
+        assertEquals("Last Name, First Name", anchor.asText());
+        assertEquals("\n    Last Name, First Name\n  ", anchor.getTextContent());
+    }
 }
