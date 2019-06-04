@@ -279,7 +279,8 @@ public class HtmlLink extends HtmlElement {
                 || !StyleSheetList.isStyleSheetLink(this)) {
 
             if (LOG.isWarnEnabled()) {
-                LOG.warn("Link type '" + getRelAttribute() + "' not supported.");
+                LOG.warn("Link type '" + getRelAttribute() + "' not supported ("
+                            + asXml().replaceAll("\\r|\\n", "") + ")");
             }
 
             return;
