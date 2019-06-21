@@ -218,6 +218,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     static final String ABSOLUTE = "absolute";
     private static final String REPEAT = "repeat";
     static final String BLOCK = "block";
+    static final String INLINE = "inline";
 
     private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();

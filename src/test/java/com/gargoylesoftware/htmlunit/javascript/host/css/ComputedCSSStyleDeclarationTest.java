@@ -1661,6 +1661,30 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void offsetTopTableRows() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <table>\n"
+            + "    <tr id='row1'><td>row1</td></tr>\n"
+            + "    <tr id='row2'><td>row2</td></tr>\n"
+            + "</table>\n"
+
+            + "<script>\n"
+            + "  var r1 = document.getElementById('row1');\n"
+            + "  var r2 = document.getElementById('row2');\n"
+            + "  alert(r2.offsetTop > r1.offsetTop);\n"
+            + "</script>\n"
+
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "undefined",
             IE = "1")
     public void custom() throws Exception {

@@ -1383,7 +1383,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
                         // only previous block elements are counting
                         final String display = style.getDisplay();
-                        if (BLOCK.equals(display)) {
+                        if (!INLINE.equals(display) && !NONE.equals(display)) {
                             int prevTop = 0;
                             if (style.top_ == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
