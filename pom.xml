@@ -23,7 +23,7 @@
         <htmlunitneko.version>2.36.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.36.0-SNAPSHOT</htmlunitcorejs.version>
 
-        <jetty.version>9.4.18.v20190429</jetty.version>
+        <jetty.version>9.4.19.v20190610</jetty.version>
         <log4j.version>2.11.2</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>3.1.11</version>
+                <version>3.1.12</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -303,7 +303,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.3.2</version>
+                <version>3.3.3</version>
             </extension>
         </extensions>
     </build>
@@ -1106,12 +1106,12 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.5.8</version>
+            <version>4.5.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.8</version>
+            <version>4.5.9</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -1219,7 +1219,7 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.60</version>
+            <version>4.0.62</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
