@@ -1065,12 +1065,14 @@ public class EventTest extends WebDriverTestCase {
                         "false", "boolean",
                         "undefined", "undefined",
                         "test", "string",
+                        "0", "number",
                         "0", "number"},
             CHROME = {"true", "boolean",
-                        "false", "boolean",
-                        "false", "boolean",
                         "true", "boolean",
-                        "false", "boolean"})
+                        "true", "boolean",
+                        "true", "boolean",
+                        "true", "boolean",
+                        "true", "boolean"})
     public void returnValueSetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1093,6 +1095,10 @@ public class EventTest extends WebDriverTestCase {
             + "      alert(typeof event.returnValue);\n"
 
             + "      event.returnValue = 0;\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event.preventDefault();\n"
             + "      alert(event.returnValue);\n"
             + "      alert(typeof event.returnValue);\n"
             + "    } catch (e) { alert('exception') }\n"
