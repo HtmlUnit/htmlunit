@@ -1411,6 +1411,8 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
+                com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -1434,6 +1436,8 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
+                com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -1456,6 +1460,8 @@ public class Window3Test extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
+                com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -1758,6 +1764,8 @@ public class Window3Test extends WebDriverTestCase {
             + "  <script src='missing.txt' onload='log(\"element 2 onload\")' "
                                         + "onerror='log(\"element 2 onerror\")'></script>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found",
+                com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         Thread.sleep(200);
@@ -2239,11 +2247,11 @@ public class Window3Test extends WebDriverTestCase {
                 "property: return false",
                 "listener: return true",
                 "listener: prevented=false returnValue: true -> false (false)",
-                "listener: prevented=true returnValue: false -> true (true)",
-                "listener: prevented=false returnValue: true -> preventDefault() (false)",
+                "listener: prevented=true returnValue: false -> true (false)",
+                "listener: prevented=true returnValue: false -> preventDefault() (false)",
                 "property: prevented=true returnValue: false -> return true",
-                "listener: prevented=true returnValue: false -> x (true)",
-                "listener: prevented=false returnValue: true -> null (false)"})
+                "listener: prevented=true returnValue: false -> x (false)",
+                "listener: prevented=true returnValue: false -> null (false)"})
     public void stopPropagation() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
