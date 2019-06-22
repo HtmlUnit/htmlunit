@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -182,6 +183,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "  </script>\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 
@@ -337,6 +340,8 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
             + "    alert(myDivStyle.backgroundAttachment);\n"
             + "  </script>\n"
             + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

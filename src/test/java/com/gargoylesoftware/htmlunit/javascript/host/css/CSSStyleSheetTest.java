@@ -728,6 +728,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "visible\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 

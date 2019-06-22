@@ -2628,7 +2628,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,height,load(),loop,mediaKeys,muted,NETWORK_EMPTY,"
                 + "NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,networkState,onencrypted,"
                 + "onenterpictureinpicture,onleavepictureinpicture,"
-                + "onwaitingforkey,pause(),paused,play(),playbackRate,played,"
+                + "onwaitingforkey,pause(),paused,play(),playbackRate,played,playsInline,"
                 + "poster,preload,readyState,remote,requestPictureInPicture(),"
                 + "seekable,seeking,setMediaKeys(),setSinkId(),sinkId,src,srcObject,"
                 + "textTracks,videoHeight,videoWidth,"

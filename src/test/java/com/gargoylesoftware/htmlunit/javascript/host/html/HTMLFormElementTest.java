@@ -458,6 +458,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 
@@ -677,6 +679,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 
@@ -707,6 +711,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
+
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

@@ -1623,6 +1623,8 @@ public class DocumentTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 
@@ -1789,6 +1791,8 @@ public class DocumentTest extends WebDriverTestCase {
             + "    <button name='myButton'>foo</button>\n"
             + "  </form>\n"
             + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }

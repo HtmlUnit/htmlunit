@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -327,6 +328,8 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     public void clickFiresOnMouseDown() throws Exception {
         final String html = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
@@ -341,6 +344,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Alerts("1")
     public void clickFiresOnMouseUp() throws Exception {
         final String html = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
+
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
@@ -358,6 +364,9 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
             + "</body></html>";
+
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("myInput")).click();
 

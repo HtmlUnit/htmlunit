@@ -343,6 +343,8 @@ public class HtmlImage2Test extends WebDriverTestCase {
             final URL urlImage = new URL(URL_FIRST, "img.jpg");
             final List<NameValuePair> emptyList = Collections.emptyList();
             getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+
+            getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
         }
 
         final String html = "<html><head><title>Page A</title></head>\n"
