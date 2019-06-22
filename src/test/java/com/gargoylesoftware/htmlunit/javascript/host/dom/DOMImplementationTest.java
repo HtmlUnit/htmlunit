@@ -680,6 +680,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "  <iframe id='theFrame' src='about:blank' />"
                 + "</body></html>";
 
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 
