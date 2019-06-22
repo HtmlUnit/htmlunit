@@ -121,7 +121,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -565,8 +564,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getDisplay(final boolean ignoreBlockIfNotAttached) {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
-        final Element elem = getElement();
-        final DomElement domElem = elem.getDomNodeOrDie();
+        final DomElement domElem = getElement().getDomNodeOrDie();
         boolean changeValueIfEmpty = false;
         if (!domElem.isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
@@ -1383,7 +1381,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
                         // only previous block elements are counting
                         final String display = style.getDisplay();
-                        if (!INLINE.equals(display) && !NONE.equals(display)) {
+                        if (isBlock(display)) {
                             int prevTop = 0;
                             if (style.top_ == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
@@ -1437,6 +1435,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         return top;
+    }
+
+    private static boolean isBlock(final String display) {
+        return display != null
+                && !INLINE.equals(display)
+                && !NONE.equals(display);
     }
 
     private int getTopForAbsolutePositionWithInheritance() {
@@ -1508,16 +1512,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             left = 0;
             DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
             while (prev != null) {
-                if (prev instanceof HtmlTableRow) {
-                    break;
-                }
-
                 final Scriptable prevScriptable = prev.getScriptableObject();
                 if (prevScriptable instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) prevScriptable;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final String d = style.getDisplay();
-                    if (BLOCK.equals(d)) {
+                    if (isBlock(d)) {
                         break;
                     }
                     else if (!NONE.equals(d)) {

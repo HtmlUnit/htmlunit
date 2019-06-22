@@ -1668,12 +1668,59 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  <table>\n"
             + "    <tr id='row1'><td>row1</td></tr>\n"
             + "    <tr id='row2'><td>row2</td></tr>\n"
-            + "</table>\n"
+            + "  </table>\n"
 
             + "<script>\n"
             + "  var r1 = document.getElementById('row1');\n"
             + "  var r2 = document.getElementById('row2');\n"
             + "  alert(r2.offsetTop > r1.offsetTop);\n"
+            + "</script>\n"
+
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void offsetTopListItems() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <ul>\n"
+            + "    <li id='li1'>row1</li>\n"
+            + "    <li id='li2'>row2</li>\n"
+            + "  </ul>\n"
+
+            + "<script>\n"
+            + "  var li1 = document.getElementById('li1');\n"
+            + "  var li2 = document.getElementById('li2');\n"
+            + "  alert(li2.offsetTop > li1.offsetTop);\n"
+            + "</script>\n"
+
+            + "</body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void offsetLeftAfterTable() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "  <table>\n"
+            + "    <tr><td>abcdefghijklmnopqrstuvwxyz</td></tr>\n"
+            + "  </table>\n"
+            + "  <div id='mydiv'>Heho</div>\n"
+
+            + "<script>\n"
+            + "  var d1 = document.getElementById('mydiv');\n"
+            + "  alert(d1.offsetLeft < 10);\n"
             + "</script>\n"
 
             + "</body>\n"
