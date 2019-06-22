@@ -205,6 +205,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     EVENT_ONMESSAGE_DEFAULT_DATA_NULL,
 
+    /** MessageEvent . */
+    @BrowserFeature(IE)
+    EVENT_ONMESSAGE_INIT_ACCEPTS_ANY_PORT,
+
     /** Does not trigger "onmousedown" event handler for the select options. */
     @BrowserFeature(IE)
     EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT,

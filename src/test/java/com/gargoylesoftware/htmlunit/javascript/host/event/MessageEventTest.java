@@ -14,15 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -127,12 +124,9 @@ public class MessageEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
-                            "-http://localhost:", "-2", "-[object Window]"},
-            FF = "exception",
+    @Alerts(DEFAULT = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
-    @NotYetImplemented(FF)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -147,7 +141,7 @@ public class MessageEventTest extends WebDriverTestCase {
             + "  try {\n"
             + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
             + "    dump(e);\n"
-            + "  } catch (e) { document.title += 'exception'; }\n"
+            + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
             + "  alert('no initMessageEvent');\n"
             + "}\n"
