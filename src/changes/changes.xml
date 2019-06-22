@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 74">
+        <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 75">
+            <action type="fix" dev="rbri" issue="#48">
+                Improved offsetTop calculation.
+            </action>
             <action type="fix" dev="rbri">
                 Trigger the correct event listener if a script tag points to an url that returns 204 (no content).
             </action>
