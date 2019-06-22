@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -225,6 +226,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "<img src='foo.gif' id='anImage'/>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver driver = loadPage2(html);
         final WebElement image = driver.findElement(By.id("anImage"));
@@ -664,6 +666,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "    <img id='myImageWithoutAlt' src='" + URL_SECOND + "'>\n"
             + "  </body>\n"
             + "</html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+
         loadPageWithAlerts2(html);
     }
 

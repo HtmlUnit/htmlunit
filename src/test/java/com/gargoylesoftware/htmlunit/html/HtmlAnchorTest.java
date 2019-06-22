@@ -398,6 +398,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "  <a id='myImgAnchor'><img src='test.png' /></a>\n"
             + "  <a id='myImgTxtAnchor'>ab<img src='test.png' />cd</a>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
@@ -434,6 +435,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "  <a id='myImgAnchor'><img src='test.png' /></a>\n"
             + "  <a id='myImgTxtAnchor'><img src='test.png' />a<img src='test.png' /></a>\n"
             + "</body></html>";
+        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         loadPageWithAlerts2(html);
     }
