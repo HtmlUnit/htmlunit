@@ -131,8 +131,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF = "function Animation() {\n    [native code]\n}")
+    @Alerts(DEFAULT = "function Animation() {\n    [native code]\n}",
+            CHROME = "function Animation() { [native code] }",
+            IE = "exception")
     public void animation() throws Exception {
         test("Animation");
     }
@@ -4804,7 +4805,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function KeyframeEffect() { [native code] }")
     public void keyframeEffect() throws Exception {
         test("KeyframeEffect");
     }

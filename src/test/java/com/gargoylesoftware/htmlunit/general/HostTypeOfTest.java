@@ -93,8 +93,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void animation() throws Exception {
         test("Animation");
     }
@@ -3326,7 +3326,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function")
     public void keyframeEffect() throws Exception {
         test("KeyframeEffect");
     }

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -25,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ronald Brill
  */
-@JsxClass(FF)
+@JsxClass({CHROME, FF})
 public class Animation extends SimpleScriptable {
 
     /**
