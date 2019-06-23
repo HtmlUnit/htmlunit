@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -663,7 +664,7 @@ public class Event extends SimpleScriptable {
      */
     @JsxGetter(CHROME)
     public Object getReturnValue() {
-        return true;
+        return !preventDefault_;
     }
 
     /**
@@ -671,5 +672,6 @@ public class Event extends SimpleScriptable {
      */
     @JsxSetter(CHROME)
     public void setReturnValue(final Object newValue) {
+        preventDefault_ = !ScriptRuntime.toBoolean(newValue);
     }
 }
