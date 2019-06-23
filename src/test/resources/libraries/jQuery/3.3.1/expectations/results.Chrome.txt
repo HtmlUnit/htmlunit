@@ -59,7 +59,7 @@
 59. core: jQuery.each(Object,Function) (23) [5889c4d8]
 60. core: jQuery.each/map(undefined/null,Function) (1) [8a0df372]
 61. core: JIT compilation does not interfere with length retrieval (gh-2145) (4) [35566d78]
-62. core: jQuery.makeArray (1, 14, 15) [696f93f8]
+62. core: jQuery.makeArray (15) [696f93f8]
 63. core: jQuery.inArray (3) [bb7b4e61]
 64. core: jQuery.isEmptyObject (2) [f2b417cf]
 65. core: jQuery.parseHTML (23) [b2541bcb]

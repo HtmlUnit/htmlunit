@@ -711,8 +711,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "15",
-            CHROME = "1, 14, 15")
+    @Alerts("15")
     @NotYetImplemented(CHROME)
     public void core__jQuery_makeArray() throws Exception {
         runTest("core: jQuery.makeArray");
