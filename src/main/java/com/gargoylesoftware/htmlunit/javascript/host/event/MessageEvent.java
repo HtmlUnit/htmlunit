@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMESSAGE_DEFAULT_DATA_NULL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONMESSAGE_INIT_ACCEPTS_ANY_PORT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
@@ -145,9 +144,10 @@ public class MessageEvent extends Event {
         lastEventId_ = lastEventId;
         source_ = source;
 
-        if (getBrowserVersion().hasFeature(EVENT_ONMESSAGE_INIT_ACCEPTS_ANY_PORT)
-                || ports instanceof NativeArray
-                || (ports instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) ports, "length"))) {
+        if (ports == null
+            || Undefined.isUndefined(ports)
+            || ports instanceof NativeArray
+            || (ports instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) ports, "length"))) {
             ports_ = ports;
         }
         else {
