@@ -48,6 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The scope for the execution of {@link Worker}s.
@@ -111,7 +112,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
     @JsxFunction
     public void postMessage(final Object message) {
         final MessageEvent event = new MessageEvent();
-        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "", owningWindow_, null);
+        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
+                                    owningWindow_, Undefined.instance);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
@@ -140,7 +142,8 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
 
     void messagePosted(final Object message) {
         final MessageEvent event = new MessageEvent();
-        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "", owningWindow_, null);
+        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin_, "",
+                                    owningWindow_, Undefined.instance);
         event.setParentScope(owningWindow_);
         event.setPrototype(owningWindow_.getPrototype(event.getClass()));
 
