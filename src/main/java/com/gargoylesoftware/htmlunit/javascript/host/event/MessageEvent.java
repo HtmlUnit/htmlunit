@@ -144,8 +144,7 @@ public class MessageEvent extends Event {
         lastEventId_ = lastEventId;
         source_ = source;
 
-        if (ports == null
-            || Undefined.isUndefined(ports)
+        if (Undefined.isUndefined(ports)
             || ports instanceof NativeArray
             || (ports instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) ports, "length"))) {
             ports_ = ports;

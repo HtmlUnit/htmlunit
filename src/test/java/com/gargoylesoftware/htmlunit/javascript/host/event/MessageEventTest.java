@@ -14,12 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -127,6 +131,7 @@ public class MessageEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
                             "-http://localhost:", "-undefined", "-[object Window]"})
+    @NotYetImplemented(IE)
     public void initMessageEventPortsNull() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
         if (expectedAlerts.length > 4) {
@@ -140,6 +145,41 @@ public class MessageEventTest extends WebDriverTestCase {
             + "if (e.initMessageEvent) {\n"
             + "  try {\n"
             + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, null);\n"
+            + "    dump(e);\n"
+            + "  } catch (e) { document.title += 'exception '; }\n"
+            + "} else {\n"
+            + "  alert('no initMessageEvent');\n"
+            + "}\n"
+            + DUMP_EVENT_FUNCTION
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+                        "-http://localhost:", "-2", "-[object Window]"},
+            FF52 = "exception",
+            IE = {"-[object MessageEvent]", "-message", "-true", "-true", "-hello",
+                            "-http://localhost:", "-undefined", "-[object Window]"})
+    @NotYetImplemented(FF52)
+    public void initMessageEventPortsUndefined() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        if (expectedAlerts.length > 4) {
+            expectedAlerts[5] += PORT;
+            setExpectedAlerts(expectedAlerts);
+        }
+
+        final String origin = "http://localhost:" + PORT;
+        final String html = "<html><body><script>\n"
+            + "var e = document.createEvent('MessageEvent');\n"
+            + "if (e.initMessageEvent) {\n"
+            + "  try {\n"
+            + "    e.initMessageEvent('message', true, true, 'hello', '" + origin + "', 2, window, undefined);\n"
             + "    dump(e);\n"
             + "  } catch (e) { document.title += 'exception '; }\n"
             + "} else {\n"
