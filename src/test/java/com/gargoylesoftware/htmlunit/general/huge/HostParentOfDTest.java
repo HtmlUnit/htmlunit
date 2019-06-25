@@ -2590,6 +2590,7 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true",
             FF60 = "true")
     @NotYetImplemented(FF60)
     public void _EventTarget_Animation() throws Exception {
