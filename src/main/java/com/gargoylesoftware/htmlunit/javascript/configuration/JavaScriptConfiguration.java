@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.GamepadButton;
 import com.gargoylesoftware.htmlunit.javascript.host.History;
 import com.gargoylesoftware.htmlunit.javascript.host.ImageBitmap;
 import com.gargoylesoftware.htmlunit.javascript.host.InstallTrigger;
+import com.gargoylesoftware.htmlunit.javascript.host.KeyframeEffect;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
@@ -483,8 +484,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         InputDeviceCapabilities.class, InputEvent.class,
         InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
-        KeyboardEvent.class, LocalMediaStream.class,
-        Location.class,
+        KeyboardEvent.class, KeyframeEffect.class,
+        LocalMediaStream.class, Location.class,
         MediaDeviceInfo.class,
         MediaDevices.class, MediaElementAudioSourceNode.class, MediaEncryptedEvent.class, MediaError.class,
         MediaKeyError.class, MediaKeyMessageEvent.class, MediaKeys.class, MediaKeySession.class,
