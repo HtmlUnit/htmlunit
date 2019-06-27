@@ -175,7 +175,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.AnimationEvent}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent}.
      *
      * @throws Exception if the test fails
      */

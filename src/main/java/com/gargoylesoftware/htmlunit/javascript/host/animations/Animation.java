@@ -12,26 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.animations;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
- * A JavaScript object for {@code KeyframeEffect}.
+ * A JavaScript object for {@code Animation}.
  *
  * @author Ronald Brill
  */
-@JsxClass(CHROME)
-public class KeyframeEffect extends EventTarget {
+@JsxClass({CHROME, FF})
+public class Animation extends EventTarget {
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor
-    public KeyframeEffect() {
+    public Animation() {
     }
 }

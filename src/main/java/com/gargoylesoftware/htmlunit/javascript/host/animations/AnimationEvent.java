@@ -12,27 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package com.gargoylesoftware.htmlunit.javascript.host.animations;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
- * A JavaScript object for {@code Animation}.
+ * A JavaScript object for {@code AnimationEvent}.
  *
- * @author Ronald Brill
+ * @author Ahmed Ashour
  */
-@JsxClass({CHROME, FF})
-public class Animation extends EventTarget {
+@JsxClass
+public class AnimationEvent extends Event {
 
     /**
-     * Creates a new instance.
+     * Default constructor.
      */
-    @JsxConstructor
-    public Animation() {
+    @JsxConstructor({CHROME, FF})
+    public AnimationEvent() {
     }
 }
