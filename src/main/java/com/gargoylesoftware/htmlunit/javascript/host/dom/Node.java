@@ -330,7 +330,7 @@ public class Node extends EventTarget {
 
             // extract refChild
             final DomNode refChildNode;
-            if (refChildObject == Undefined.instance) {
+            if (Undefined.isUndefined(refChildObject)) {
                 if (args.length == 2 || getBrowserVersion().hasFeature(JS_NODE_INSERT_BEFORE_REF_OPTIONAL)) {
                     refChildNode = null;
                 }

@@ -75,7 +75,7 @@ public class HTMLAllCollection extends HTMLCollection {
         if (index instanceof String) {
             final String name = (String) index;
             final Object result = namedItem(name);
-            if (null != result && Undefined.instance != result) {
+            if (null != result && !Undefined.isUndefined(result)) {
                 return result;
             }
             numb = Double.NaN;
@@ -189,7 +189,7 @@ public class HTMLAllCollection extends HTMLCollection {
         }
 
         final Object value = super.call(cx, scope, thisObj, args);
-        if (nullIfNotFound && value == Undefined.instance) {
+        if (nullIfNotFound && Undefined.isUndefined(value)) {
             return null;
         }
         return value;

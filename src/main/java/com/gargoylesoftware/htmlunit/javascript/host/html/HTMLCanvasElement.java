@@ -137,7 +137,7 @@ public class HTMLCanvasElement extends HTMLElement {
     public String toDataURL(final Object type) {
         if (context2d_ != null) {
             String typeInUse = type.toString();
-            if (type == Undefined.instance) {
+            if (Undefined.isUndefined(type)) {
                 typeInUse = null;
             }
             return context2d_.toDataURL(typeInUse);
