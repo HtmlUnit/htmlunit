@@ -85,7 +85,7 @@ public class ActiveXObject extends SimpleScriptable {
             throw Context.reportRuntimeError(
                     "ActiveXObject Error: constructor must have one or two String parameters.");
         }
-        if (args[0] == Undefined.instance) {
+        if (Undefined.isUndefined(args[0])) {
             throw Context.reportRuntimeError("ActiveXObject Error: constructor parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {

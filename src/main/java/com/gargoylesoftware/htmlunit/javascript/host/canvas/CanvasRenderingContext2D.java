@@ -135,7 +135,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxSetter
     public void setLineWidth(final Object lineWidth) {
-        if (lineWidth != Undefined.instance) {
+        if (!Undefined.isUndefined(lineWidth)) {
             final double width = Context.toNumber(lineWidth);
             if (!Double.isNaN(width)) {
                 getRenderingBackend().setLineWidth((int) width);
@@ -321,7 +321,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
         Integer dHeightI = null;
         Integer sWidthI = null;
         Integer sHeightI = null;
-        if (dx != Undefined.instance) {
+        if (!Undefined.isUndefined(dx)) {
             dxI = ((Number) dx).intValue();
             dyI = ((Number) dy).intValue();
             dWidthI = ((Number) dWidth).intValue();
@@ -331,7 +331,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             dxI = sx;
             dyI = sy;
         }
-        if (sWidth != Undefined.instance) {
+        if (!Undefined.isUndefined(sWidth)) {
             sWidthI = ((Number) sWidth).intValue();
             sHeightI = ((Number) sHeight).intValue();
         }
@@ -472,7 +472,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
      */
     @JsxFunction
     public TextMetrics measureText(final Object text) {
-        if (text == null || Undefined.instance == text) {
+        if (text == null || Undefined.isUndefined(text)) {
             throw Context.throwAsScriptRuntimeEx(
                     new RuntimeException("Missing argument for CanvasRenderingContext2D.measureText()."));
         }

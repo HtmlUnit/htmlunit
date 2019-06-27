@@ -261,7 +261,7 @@ public class DOMImplementation extends SimpleScriptable {
      */
     @JsxFunction
     public HTMLDocument createHTMLDocument(final Object titleObj) {
-        if (titleObj == Undefined.instance
+        if (Undefined.isUndefined(titleObj)
                 && getBrowserVersion().hasFeature(JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE)) {
             throw Context.reportRuntimeError("Title is required");
         }
@@ -283,7 +283,7 @@ public class DOMImplementation extends SimpleScriptable {
         final HTMLHeadElement head = (HTMLHeadElement) document.createElement("head");
         html.appendChild(head);
 
-        if (titleObj != Undefined.instance) {
+        if (!Undefined.isUndefined(titleObj)) {
             final HTMLTitleElement title = (HTMLTitleElement) document.createElement("title");
             head.appendChild(title);
             title.setTextContent(Context.toString(titleObj));

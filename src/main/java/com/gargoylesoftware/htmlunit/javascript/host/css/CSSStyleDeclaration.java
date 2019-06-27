@@ -2532,7 +2532,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             return;
         }
         // undefined
-        if (Undefined.instance.equals(zIndex)) {
+        if (Undefined.isUndefined(zIndex)) {
             return;
         }
 

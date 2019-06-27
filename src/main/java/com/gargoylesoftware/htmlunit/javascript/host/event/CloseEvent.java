@@ -73,7 +73,7 @@ public class CloseEvent extends Event {
         String reason = "";
         boolean wasClean = false;
 
-        if (details != null && details != Undefined.instance) {
+        if (details != null && !Undefined.isUndefined(details)) {
             final Double detailCode = (Double) details.get("code");
             if (detailCode != null) {
                 code = detailCode.intValue();

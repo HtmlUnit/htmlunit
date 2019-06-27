@@ -273,7 +273,7 @@ public class EventListenersContainer implements Serializable {
         final Function handler;
 
         // Otherwise, ignore silently.
-        if (value == Undefined.instance || !(value instanceof Function)) {
+        if (Undefined.isUndefined(value) || !(value instanceof Function)) {
             handler = null;
         }
         else {

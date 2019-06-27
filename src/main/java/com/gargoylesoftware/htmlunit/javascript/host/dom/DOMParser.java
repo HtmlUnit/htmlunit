@@ -56,7 +56,7 @@ public class DOMParser extends SimpleScriptable {
      */
     @JsxFunction
     public XMLDocument parseFromString(final String str, final Object type) {
-        if (type == null || Undefined.instance == type) {
+        if (type == null || Undefined.isUndefined(type)) {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
         if (!MimeType.TEXT_HTML.equals(type) && !MimeType.TEXT_XML.equals(type) && !"application/xml".equals(type)
