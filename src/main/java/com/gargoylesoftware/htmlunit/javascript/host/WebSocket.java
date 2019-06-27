@@ -216,7 +216,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             throw Context.reportRuntimeError(
                     "WebSocket Error: constructor must have one or two String parameters.");
         }
-        if (args[0] == Undefined.instance) {
+        if (Undefined.isUndefined(args[0])) {
             throw Context.reportRuntimeError("WebSocket Error: 'url' parameter is undefined.");
         }
         if (!(args[0] instanceof String)) {

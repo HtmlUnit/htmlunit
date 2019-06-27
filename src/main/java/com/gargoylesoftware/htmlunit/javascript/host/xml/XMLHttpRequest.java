@@ -495,7 +495,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
         // async defaults to true if not specified
         boolean async = true;
-        if (asyncParam != Undefined.instance) {
+        if (!Undefined.isUndefined(asyncParam)) {
             async = ScriptRuntime.toBoolean(asyncParam);
         }
 
@@ -535,11 +535,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
 
             // password is ignored if no user defined
-            if (user != null && user != Undefined.instance) {
+            if (user != null && !Undefined.isUndefined(user)) {
                 final String userCred = user.toString();
 
                 String passwordCred = "";
-                if (password != null && password != Undefined.instance) {
+                if (password != null && !Undefined.isUndefined(password)) {
                     passwordCred = password.toString();
                 }
 
@@ -659,7 +659,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             && (HttpMethod.POST == webRequest_.getHttpMethod()
                     || HttpMethod.PUT == webRequest_.getHttpMethod()
                     || HttpMethod.PATCH == webRequest_.getHttpMethod())
-            && content != Undefined.instance) {
+            && !Undefined.isUndefined(content)) {
             if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
             }

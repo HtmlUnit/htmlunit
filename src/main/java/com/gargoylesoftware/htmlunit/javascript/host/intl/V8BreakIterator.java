@@ -64,7 +64,7 @@ public class V8BreakIterator extends SimpleScriptable {
         else if (locales instanceof String) {
             locale = new Locale(locales.toString());
         }
-        else if (locales != Undefined.instance) {
+        else if (!Undefined.isUndefined(locales)) {
             throw Context.throwAsScriptRuntimeEx(new Exception("Unknown type " + locales.getClass().getName()));
         }
 

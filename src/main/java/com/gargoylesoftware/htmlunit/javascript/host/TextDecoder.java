@@ -353,7 +353,7 @@ public class TextDecoder extends SimpleScriptable {
      */
     @JsxConstructor
     public TextDecoder(final Object encoding) {
-        if (Undefined.instance == encoding) {
+        if (Undefined.isUndefined(encoding)) {
             return;
         }
 
@@ -384,7 +384,7 @@ public class TextDecoder extends SimpleScriptable {
      */
     @JsxFunction
     public String decode(final Object buffer) {
-        if (Undefined.instance == buffer) {
+        if (Undefined.isUndefined(buffer)) {
             return "";
         }
 

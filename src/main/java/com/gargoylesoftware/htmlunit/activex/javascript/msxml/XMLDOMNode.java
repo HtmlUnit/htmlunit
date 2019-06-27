@@ -443,7 +443,7 @@ public class XMLDOMNode extends MSXMLScriptable {
             }
             final DomNode refChildNode;
             // IE accepts non standard calls with only one arg
-            if (refChildObject == Undefined.instance) {
+            if (Undefined.isUndefined(refChildObject)) {
                 if (args.length > 1) {
                     throw Context.reportRuntimeError("Invalid argument.");
                 }

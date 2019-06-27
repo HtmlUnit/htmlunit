@@ -71,7 +71,7 @@ public class URLSearchParams extends SimpleScriptable {
         // TODO: Pass in a record
         // new URLSearchParams({"foo" : 1 , "bar" : 2});
 
-        if (Undefined.instance == params || null == params) {
+        if (params == null || Undefined.isUndefined(params)) {
             return;
         }
 

@@ -61,7 +61,7 @@ public class URL extends SimpleScriptable {
     @JsxConstructor({CHROME, FF})
     public URL(final String url, final Object base) {
         String baseStr = null;
-        if (Undefined.instance != base) {
+        if (!Undefined.isUndefined(base)) {
             baseStr = Context.toString(base);
         }
 

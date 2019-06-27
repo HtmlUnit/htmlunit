@@ -191,7 +191,7 @@ public class TextRange extends SimpleScriptable {
             return 0;
         }
         int c = 1;
-        if (count != Undefined.instance) {
+        if (!Undefined.isUndefined(count)) {
             c = (int) Context.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()
@@ -230,7 +230,7 @@ public class TextRange extends SimpleScriptable {
             return 0;
         }
         int c = 1;
-        if (count != Undefined.instance) {
+        if (!Undefined.isUndefined(count)) {
             c = (int) Context.toNumber(count);
         }
         if (range_.getStartContainer() == range_.getEndContainer()

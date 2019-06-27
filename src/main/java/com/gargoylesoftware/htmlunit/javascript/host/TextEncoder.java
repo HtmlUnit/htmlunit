@@ -61,7 +61,7 @@ public class TextEncoder extends SimpleScriptable {
      */
     @JsxFunction
     public NativeUint8Array encode(final Object toEncode) {
-        if (Undefined.instance == toEncode) {
+        if (Undefined.isUndefined(toEncode)) {
             final NativeUint8Array result = new NativeUint8Array(0);
             result.setParentScope(getParentScope());
             result.setPrototype(ScriptableObject.getClassPrototype(getWindow(this), result.getClassName()));

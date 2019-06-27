@@ -446,7 +446,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             }
             return null;
         }
-        if (defaultValue == Undefined.instance) {
+        if (Undefined.isUndefined(defaultValue)) {
             defaultValue = null;
         }
         else {
@@ -522,15 +522,15 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     public WindowProxy open(final Object url, final Object name, final Object features,
             final Object replace) {
         String urlString = null;
-        if (url != Undefined.instance) {
+        if (!Undefined.isUndefined(url)) {
             urlString = Context.toString(url);
         }
         String windowName = "";
-        if (name != Undefined.instance) {
+        if (!Undefined.isUndefined(name)) {
             windowName = Context.toString(name);
         }
         String featuresString = null;
-        if (features != Undefined.instance) {
+        if (!Undefined.isUndefined(features)) {
             featuresString = Context.toString(features);
         }
         final WebClient webClient = getWebWindow().getWebClient();
@@ -543,7 +543,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         }
 
         boolean replaceCurrentEntryInBrowsingHistory = false;
-        if (replace != Undefined.instance) {
+        if (!Undefined.isUndefined(replace)) {
             replaceCurrentEntryInBrowsingHistory = Context.toBoolean(replace);
         }
         if ((featuresString != null || replaceCurrentEntryInBrowsingHistory) && LOG.isDebugEnabled()) {
@@ -1098,7 +1098,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     @JsxSetter
     public void setOpener(final Object newValue) {
         if (getBrowserVersion().hasFeature(JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT)
-            && newValue != null && newValue != Undefined.instance && !(newValue instanceof Window)) {
+            && newValue != null && !Undefined.isUndefined(newValue) && !(newValue instanceof Window)) {
             throw Context.reportRuntimeError("Can't set opener to something other than a window!");
         }
         opener_ = newValue;
