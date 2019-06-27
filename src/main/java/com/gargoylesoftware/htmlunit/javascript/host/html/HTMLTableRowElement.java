@@ -141,7 +141,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @JsxFunction
     public Object insertCell(final Object index) {
         int position = -1;
-        if (index != Undefined.instance) {
+        if (!Undefined.isUndefined(index)) {
             position = (int) Context.toNumber(index);
         }
         final HtmlTableRow htmlRow = (HtmlTableRow) getDomNodeOrDie();
@@ -170,7 +170,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
     @JsxFunction
     public void deleteCell(final Object index) {
         int position = -1;
-        if (index != Undefined.instance) {
+        if (!Undefined.isUndefined(index)) {
             position = (int) Context.toNumber(index);
         }
         else if (getBrowserVersion().hasFeature(JS_TABLE_ROW_DELETE_CELL_REQUIRES_INDEX)) {

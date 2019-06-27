@@ -110,7 +110,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
     @Override
     public boolean has(final int index, final Scriptable start) {
         final Object found = get(index, start);
-        if (Undefined.instance != found && Scriptable.NOT_FOUND != found) {
+        if (!Undefined.isUndefined(found) && Scriptable.NOT_FOUND != found) {
             return true;
         }
         return super.has(index, start);

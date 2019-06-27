@@ -90,7 +90,7 @@ public class MessageEvent extends Event {
 
         String origin = "";
         String lastEventId = "";
-        if (details != null && details != Undefined.instance) {
+        if (details != null && !Undefined.isUndefined(details)) {
             data_ = details.get("data");
 
             final String detailOrigin = (String) details.get(HttpHeader.ORIGIN_LC);

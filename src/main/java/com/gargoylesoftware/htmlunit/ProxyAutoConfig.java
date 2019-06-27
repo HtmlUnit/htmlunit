@@ -218,7 +218,7 @@ public final class ProxyAutoConfig {
                 || TIMEZONE_GMT.equals(Context.toString(wd2))) {
             timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
         }
-        if (wd2 == Undefined.instance || TIMEZONE_GMT.equals(Context.toString(wd2))) {
+        if (Undefined.isUndefined(wd2) || TIMEZONE_GMT.equals(Context.toString(wd2))) {
             wd2 = wd1;
         }
         final Calendar calendar = Calendar.getInstance(timezone);
@@ -259,7 +259,7 @@ public final class ProxyAutoConfig {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
-            else if (values[length] != Undefined.instance) {
+            else if (!Undefined.isUndefined(values[length])) {
                 length++;
                 break;
             }
@@ -404,7 +404,7 @@ public final class ProxyAutoConfig {
                 timezone = TimeZone.getTimeZone(TIMEZONE_GMT);
                 break;
             }
-            else if (values[length] != Undefined.instance) {
+            else if (!Undefined.isUndefined(values[length])) {
                 length++;
                 break;
             }

@@ -61,7 +61,7 @@ public class PopStateEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        if (details != null && details != Undefined.instance) {
+        if (details != null && !Undefined.isUndefined(details)) {
             state_ = details.get("state");
         }
     }

@@ -130,7 +130,7 @@ public class HTMLSelectElement extends FormField {
     @JsxFunction
     public Object item(final int index) {
         final Object option = getOptions().item(index);
-        if (option == Undefined.instance) {
+        if (Undefined.isUndefined(option)) {
             return null;
         }
         return option;

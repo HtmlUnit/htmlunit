@@ -67,6 +67,6 @@ public final class ScriptResult {
      * @return {@code true} if <tt>scriptResult</tt> is undefined (there was no return value)
      */
     public static boolean isUndefined(final ScriptResult scriptResult) {
-        return scriptResult != null && scriptResult.getJavaScriptResult() instanceof Undefined;
+        return scriptResult != null && Undefined.isUndefined(scriptResult.getJavaScriptResult());
     }
 }

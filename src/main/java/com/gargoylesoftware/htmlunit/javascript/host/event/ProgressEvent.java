@@ -51,7 +51,7 @@ public class ProgressEvent extends Event {
     public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
-        if (details != null && details != Undefined.instance) {
+        if (details != null && !Undefined.isUndefined(details)) {
             final Object lengthComputable = details.get("lengthComputable");
             if (lengthComputable instanceof Boolean) {
                 lengthComputable_ = (Boolean) lengthComputable;

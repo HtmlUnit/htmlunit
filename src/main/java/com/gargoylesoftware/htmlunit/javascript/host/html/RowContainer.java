@@ -103,7 +103,7 @@ public class RowContainer extends HTMLElement {
     @JsxFunction
     public Object insertRow(final Object index) {
         int rowIndex = -1;
-        if (index != Undefined.instance) {
+        if (!Undefined.isUndefined(index)) {
             rowIndex = (int) Context.toNumber(index);
         }
         final HTMLCollection rows = (HTMLCollection) getRows();
