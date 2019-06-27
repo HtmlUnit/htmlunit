@@ -29,7 +29,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlBaseFont.class, value = {IE})
+@JsxClass(domClass = HtmlBaseFont.class, value = IE)
 public class HTMLBaseFontElement extends HTMLElement {
 
     /**

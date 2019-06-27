@@ -66,7 +66,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Enumerator not supported",
-            IE = {"exception"})
+            IE = "exception")
     public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -96,7 +96,7 @@ public class EnumeratorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Enumerator not supported",
-            IE = {"exception"})
+            IE = "exception")
     public void basicEnumeratorWrongType() throws Exception {
         final String html
             = "<html><head><script>\n"
