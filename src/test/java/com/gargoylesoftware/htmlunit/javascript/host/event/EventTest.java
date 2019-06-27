@@ -1108,4 +1108,28 @@ public class EventTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "false"})
+    public void preventDefault() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      alert(event.cancelable);\n"
+            + "      alert(event.defaultPrevented);\n"
+
+            + "      event.preventDefault();\n"
+            + "      alert(event.defaultPrevented);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
