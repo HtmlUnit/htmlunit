@@ -213,8 +213,8 @@ public class HostParentOfSTest extends HostParentOf {
     /**
      * @throws Exception if the test fails
      */
-    @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _SpeechSynthesisEvent_SpeechSynthesisErrorEvent() throws Exception {
         test("SpeechSynthesisEvent", "SpeechSynthesisErrorEvent");
     }
