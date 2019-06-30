@@ -366,6 +366,17 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
+            CHROME = "true")
+    public void KeyframeEffect_KeyframeEffect() throws Exception {
+        test("KeyframeEffect", "KeyframeEffect");
+    }
+
+    /**
+     * @throws Exception
+     *             if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
             FF = "true")
     public void _LocalMediaStream_LocalMediaStream() throws Exception {
         test("LocalMediaStream", "LocalMediaStream");
