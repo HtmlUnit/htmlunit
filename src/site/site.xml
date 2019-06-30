@@ -39,7 +39,7 @@
             <item name="FAQ" href="/faq.html"/>
         </menu>
         <menu name="Support">
-            <item name="Mailing lists" href="/mail-lists.html"/>
+            <item name="Mailing lists" href="https://sourceforge.net/p/htmlunit/mailman/"/>
             <item name="Professional support" href="/professionalSupport.html"/>
         </menu>
         <menu name="Developer docs">
