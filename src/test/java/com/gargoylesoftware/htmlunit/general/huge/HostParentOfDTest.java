@@ -2589,10 +2589,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            FF60 = "true")
-    @NotYetImplemented(FF60)
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_Animation() throws Exception {
         test("EventTarget", "Animation");
     }

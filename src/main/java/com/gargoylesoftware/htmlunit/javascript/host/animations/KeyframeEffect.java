@@ -16,9 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.animations;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 
+import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code KeyframeEffect}.
@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  */
 @JsxClass(CHROME)
-public class KeyframeEffect extends EventTarget {
+public class KeyframeEffect extends SimpleScriptable {
 
     /**
      * Creates a new instance.
