@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  *
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlTableHeaderCell.class, value = {IE})
+@JsxClass(domClass = HtmlTableHeaderCell.class, value = IE)
 public class HTMLTableHeaderCellElement extends HTMLTableCellElement {
 
     /**

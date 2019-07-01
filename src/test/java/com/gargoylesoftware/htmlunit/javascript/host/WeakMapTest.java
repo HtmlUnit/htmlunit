@@ -61,7 +61,7 @@ public class WeakMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = {"false"})
+            IE = "false")
     @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html

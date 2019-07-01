@@ -144,8 +144,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"7"},
-            IE = {"textLength not available"})
+    @Alerts(DEFAULT = "7",
+            IE = "textLength not available")
     public void textLength() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"

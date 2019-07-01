@@ -357,8 +357,8 @@ public class HtmlScript2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"load"},
-            IE = {"error"})
+    @Alerts(DEFAULT = "load",
+            IE = "error")
     public void addEventListener_NoContent() throws Exception {
         // use always a different url to avoid caching effects
         final URL scriptUrl = new URL(URL_SECOND, "" + System.currentTimeMillis() + ".js");

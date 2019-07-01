@@ -409,7 +409,7 @@ public class NativeArrayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"TypeError"},
+    @Alerts(DEFAULT = "TypeError",
             IE = "not supported")
     public void fromObject() throws Exception {
         final String html

@@ -92,7 +92,7 @@ public class NativeErrorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"string", "true"},
-            IE = {"undefined"})
+            IE = "undefined")
     public void stackNewErrorWithoutThrow() throws Exception {
         final String html
             = "<html><head><script>\n"

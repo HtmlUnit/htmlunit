@@ -736,7 +736,7 @@ public class TextDecoderTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"HtmlUnit"},
+    @Alerts(DEFAULT = "HtmlUnit",
             IE = "no TextDecoder")
     public void decode() throws Exception {
         final String html = "<html>\n"
