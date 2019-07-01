@@ -2514,9 +2514,9 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"},
-            FF = {"uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-"},
-            CHROME = {"complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-"})
+    @Alerts(DEFAULT = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
+            FF = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
+            CHROME = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     @NotYetImplemented({CHROME, FF})
     public void readyState() throws Exception {
         final String html = "<html>\n"

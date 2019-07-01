@@ -784,7 +784,7 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"activeElement BODY"},
+    @Alerts(DEFAULT = "activeElement BODY",
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented(IE)

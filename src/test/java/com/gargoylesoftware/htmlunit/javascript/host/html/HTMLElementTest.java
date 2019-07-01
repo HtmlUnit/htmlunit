@@ -1142,8 +1142,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"Outer = <p id=\"myNode\">New  cell value\n\n</p>"},
-            IE = {"Outer = <p id=\"myNode\">New  cell value\n\n"})
+    @Alerts(DEFAULT = "Outer = <p id=\"myNode\">New  cell value\n\n</p>",
+            IE = "Outer = <p id=\"myNode\">New  cell value\n\n")
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
