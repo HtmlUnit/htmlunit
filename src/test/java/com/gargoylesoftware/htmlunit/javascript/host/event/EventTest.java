@@ -1061,17 +1061,15 @@ public class EventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined",
-                        "false", "boolean",
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
                         "undefined", "undefined",
-                        "test", "string",
-                        "0", "number",
-                        "0", "number"},
-            CHROME = {"true", "boolean",
-                        "true", "boolean",
-                        "true", "boolean",
-                        "true", "boolean",
-                        "true", "boolean",
+                        "undefined", "undefined", "false - false",
+                        "undefined", "undefined"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean",
+                        "true", "boolean", "false - false",
                         "true", "boolean"})
     public void returnValueSetter() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1081,24 +1079,182 @@ public class EventTest extends WebDriverTestCase {
             + "      var event = document.createEvent('Event');\n"
             + "      alert(event.returnValue);\n"
             + "      alert(typeof event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
-            + "      event.returnValue = false;\n"
+            + "      event.initEvent('click', 'true', 'true');\n"
             + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-
-            + "      event.returnValue = undefined;\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-
-            + "      event.returnValue = 'test';\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-
-            + "      event.returnValue = 0;\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
             + "      event.preventDefault();\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event = document.createEvent('Event');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "      event.preventDefault();\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "    } catch (e) { alert('exception') }\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "false", "boolean",
+                        "undefined", "undefined", "false - false",
+                        "false", "boolean"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterFalse() throws Exception {
+        returnValueSetterUndefined("false");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "true", "boolean",
+                        "undefined", "undefined", "false - false",
+                        "true", "boolean"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterTrue() throws Exception {
+        returnValueSetterUndefined("true");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "test", "string",
+                        "undefined", "undefined", "false - false",
+                        "test", "string"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterString() throws Exception {
+        returnValueSetterUndefined("'test'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "0", "number",
+                        "undefined", "undefined", "false - false",
+                        "0", "number"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterZero() throws Exception {
+        returnValueSetterUndefined("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "1", "number",
+                        "undefined", "undefined", "false - false",
+                        "1", "number"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterOne() throws Exception {
+        returnValueSetterUndefined("1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "-1", "number",
+                        "undefined", "undefined", "false - false",
+                        "-1", "number"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterMinusOne() throws Exception {
+        returnValueSetterUndefined("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
+                        "undefined", "true - false",
+                        "undefined", "undefined",
+                        "undefined", "undefined", "false - false",
+                        "undefined", "undefined"},
+            CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"})
+    public void returnValueSetterUndefined() throws Exception {
+        returnValueSetterUndefined("undefined");
+    }
+
+    private void returnValueSetterUndefined(final String value) throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><title>foo</title><script>\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var event = document.createEvent('Event');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "      event.initEvent('click', 'true', 'true');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "      event.returnValue = " + value + ";\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+
+            + "      event = document.createEvent('Event');\n"
+            + "      alert(event.returnValue);\n"
+            + "      alert(typeof event.returnValue);\n"
+            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "      event.returnValue = " + value + ";\n"
             + "      alert(event.returnValue);\n"
             + "      alert(typeof event.returnValue);\n"
             + "    } catch (e) { alert('exception') }\n"
