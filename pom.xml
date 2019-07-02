@@ -18,7 +18,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <htmlunitdriver.version>2.35.1</htmlunitdriver.version>
+        <htmlunitdriver.version>2.36.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0-SNAPSHOT</htmlunitcssparser.version>
         <htmlunitneko.version>2.36.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.36.0-SNAPSHOT</htmlunitcorejs.version>
