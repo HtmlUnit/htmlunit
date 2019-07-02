@@ -130,7 +130,7 @@ public class MiniServer extends Thread {
         }
     }
 
-    private RawResponseData getResponseData(final String in) {
+    private RawResponseData getResponseData(final String in) throws IOException {
         final WebRequest request = parseRequest(in);
         if (request == null) {
             return null;

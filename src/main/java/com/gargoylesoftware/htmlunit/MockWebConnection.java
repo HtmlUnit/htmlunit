@@ -45,7 +45,8 @@ public class MockWebConnection implements WebConnection {
 
     private static final Log LOG = LogFactory.getLog(MockWebConnection.class);
 
-    private final Map<String, RawResponseData> responseMap_ = new HashMap<>(10);
+    private final Map<String, IOException> throwableMap_ = new HashMap<>();
+    private final Map<String, RawResponseData> responseMap_ = new HashMap<>();
     private RawResponseData defaultResponse_;
     private WebRequest lastRequest_;
     private int requestCount_;
@@ -168,8 +169,9 @@ public class MockWebConnection implements WebConnection {
      * Gets the raw response configured for the request.
      * @param request the request
      * @return the raw response
+     * @throws IOException if defined
      */
-    public RawResponseData getRawResponse(final WebRequest request) {
+    public RawResponseData getRawResponse(final WebRequest request) throws IOException {
         final URL url = request.getUrl();
 
         if (LOG.isDebugEnabled()) {
@@ -181,6 +183,11 @@ public class MockWebConnection implements WebConnection {
         requestedUrls_.add(url);
 
         String urlString = url.toExternalForm();
+        final IOException throwable = throwableMap_.get(urlString);
+        if (throwable != null) {
+            throw throwable;
+        }
+
         RawResponseData rawResponse = responseMap_.get(urlString);
         if (rawResponse == null) {
             // try to find without query params
@@ -281,6 +288,15 @@ public class MockWebConnection implements WebConnection {
         final RawResponseData responseEntry = buildRawResponseData(content, charset, statusCode, statusMessage,
                 contentType, headers);
         responseMap_.put(url.toExternalForm(), responseEntry);
+    }
+
+    /**
+     * Sets the exception that will be thrown when the specified URL is requested.
+     * @param url the URL that will force the exception
+     * @param throwable the Throwable
+     */
+    public void setThrowable(final URL url, final IOException throwable) {
+        throwableMap_.put(url.toExternalForm(), throwable);
     }
 
     /**

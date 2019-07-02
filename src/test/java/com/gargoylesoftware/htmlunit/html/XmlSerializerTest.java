@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import java.io.File;
+import java.net.URL;
+import java.net.UnknownHostException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,11 +27,13 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link XmlSerializer}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class XmlSerializerTest extends SimpleWebTestCase {
@@ -45,7 +49,62 @@ public class XmlSerializerTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void unsupportedProtocol() throws Exception {
+    public void notExistingLink() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<body>"
+                + "  <link rel='alternate' href='none.jpg'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        connection.setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+        connection.setResponse(URL_FIRST, html);
+        client.setWebConnection(connection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_XmlSerializerTest_notExistingLink.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unknownHostExceptionLink() throws Exception {
+        final URL imageUrl = new URL(URL_FIRST, "none.jpg");
+        final String html =
+                "<html>\n"
+                + "<body>"
+                + "  <link rel='alternate' href='" + imageUrl.toExternalForm() + "'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        connection.setThrowable(imageUrl, new UnknownHostException(imageUrl.toExternalForm()));
+        connection.setResponse(URL_FIRST, html);
+        client.setWebConnection(connection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_XmlSerializerTest_unknownHostExceptionLink.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unsupportedProtocolLink() throws Exception {
         final String html = "<html><head>"
                 + "<link rel='alternate' href='android-app://somehost'>\n"
                 + "</head></html>";
@@ -64,4 +123,84 @@ public class XmlSerializerTest extends SimpleWebTestCase {
         assertTrue(file.isFile());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void notExistingImage() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<body>"
+                + "  <img src='none.jpg'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        connection.setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+        connection.setResponse(URL_FIRST, html);
+        client.setWebConnection(connection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_XmlSerializerTest_notExistingImage.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unknownHostExceptionImage() throws Exception {
+        final URL imageUrl = new URL(URL_FIRST, "none.jpg");
+        final String html =
+                "<html>\n"
+                + "<body>"
+                + "  <img src='" + imageUrl.toExternalForm() + "'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        connection.setThrowable(imageUrl, new UnknownHostException(imageUrl.toExternalForm()));
+        connection.setResponse(URL_FIRST, html);
+        client.setWebConnection(connection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_XmlSerializerTest_unknownHostExceptionImage.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void unsupportedProtocolImage() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<body>"
+                + "  <img src='android-app://somehost'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+        final MockWebConnection connection = getMockWebConnection();
+        connection.setResponse(URL_FIRST, html);
+        client.setWebConnection(connection);
+
+        final HtmlPage page = client.getPage(URL_FIRST);
+
+        final File tmpFolder = tmpFolderProvider_.newFolder("hu");
+        final File file = new File(tmpFolder, "hu_XmlSerializerTest_unsupportedProtocolImage.html");
+        page.save(file);
+        assertTrue(file.exists());
+        assertTrue(file.isFile());
+    }
 }

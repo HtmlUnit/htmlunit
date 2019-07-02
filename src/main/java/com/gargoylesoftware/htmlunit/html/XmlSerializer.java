@@ -30,6 +30,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -46,6 +48,8 @@ class XmlSerializer {
 
     private static final String FILE_SEPARATOR = "/";
     private static final Pattern CREATE_FILE_PATTERN = Pattern.compile(".*/");
+
+    private static final Log LOG = LogFactory.getLog(XmlSerializer.class);
 
     private final StringBuilder builder_ = new StringBuilder();
     private final StringBuilder indent_ = new StringBuilder();
@@ -257,28 +261,50 @@ class XmlSerializer {
         if (hrefAttr != null && StringUtils.isNotBlank(hrefAttr.getValue())) {
             final String protocol = link.getWebRequest().getUrl().getProtocol();
             if ("http".equals(protocol) || "https".equals(protocol)) {
-                final File file = createFile(hrefAttr.getValue(), ".css");
-                FileUtils.writeStringToFile(file, link.getWebResponse(true, null).getContentAsString(), ISO_8859_1);
-                hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
+                try {
+                    final WebResponse response = link.getWebResponse(true, null);
+
+                    final File file = createFile(hrefAttr.getValue(), ".css");
+                    FileUtils.writeStringToFile(file, response.getContentAsString(), ISO_8859_1);
+                    hrefAttr.setValue(outputDir_.getName() + FILE_SEPARATOR + file.getName());
+                }
+                catch (final IOException e) {
+                    LOG.error("XmlSerializer: IOException while downloading link content from url '"
+                                + hrefAttr + "'", e);
+                }
+                catch (final IllegalStateException e) {
+                    LOG.error("XmlSerializer: IllegalStateException while downloading link content from url '"
+                                + hrefAttr + "'", e);
+                }
             }
         }
 
         return map;
     }
 
-    protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) throws IOException {
+    protected Map<String, DomAttr> getAttributesFor(final HtmlImage image) {
         final Map<String, DomAttr> map = createAttributesCopyWithClonedAttribute(image, DomElement.SRC_ATTRIBUTE);
         final DomAttr srcAttr = map.get(DomElement.SRC_ATTRIBUTE);
         if (srcAttr != null && StringUtils.isNotBlank(srcAttr.getValue())) {
-            final WebResponse response = image.getWebResponse(true);
+            try {
+                final WebResponse response = image.getWebResponse(true);
 
-            final File file = createFile(srcAttr.getValue(), "." + getSuffix(response));
-            try (InputStream inputStream = response.getContentAsStream()) {
-                FileUtils.copyInputStreamToFile(inputStream, file);
+                try (InputStream inputStream = response.getContentAsStream()) {
+                    final File file = createFile(srcAttr.getValue(), "." + getSuffix(response));
+                    FileUtils.copyInputStreamToFile(inputStream, file);
+
+                    final String valueOnFileSystem = outputDir_.getName() + FILE_SEPARATOR + file.getName();
+                    // this is the clone attribute node, not the original one of the page
+                    srcAttr.setValue(valueOnFileSystem);
+                }
             }
-
-            final String valueOnFileSystem = outputDir_.getName() + FILE_SEPARATOR + file.getName();
-            srcAttr.setValue(valueOnFileSystem); // this is the clone attribute node, not the original one of the page
+            catch (final IOException e) {
+                LOG.error("XmlSerializer: IOException while downloading image content from url '" + srcAttr + "'", e);
+            }
+            catch (final IllegalStateException e) {
+                LOG.error("XmlSerializer: IllegalStateException while downloading image content from url '"
+                            + srcAttr + "'", e);
+            }
         }
 
         return map;
