@@ -618,7 +618,9 @@ public class Event extends SimpleScriptable {
      */
     @JsxFunction
     public void preventDefault() {
-        preventDefault_ = true;
+        if (isCancelable()) {
+            preventDefault_ = true;
+        }
     }
 
     /**

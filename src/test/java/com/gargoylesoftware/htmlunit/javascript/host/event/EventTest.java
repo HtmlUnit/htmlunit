@@ -1233,59 +1233,110 @@ public class EventTest extends WebDriverTestCase {
 
     private void returnValueSetterUndefined(final String value) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = document.createEvent('Event');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title></title>\n"
+            + "    <script>\n"
+            + "      function log(msg) {\n"
+            + "        window.document.title += msg + ';';\n"
+            + "      }\n"
 
-            + "      event.initEvent('click', 'true', 'true');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var event = document.createEvent('Event');\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
-            + "      event.returnValue = " + value + ";\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
+            + "          event.initEvent('click', 'true', 'true');\n"
+            + "          log(event.returnValue);\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
-            + "      event = document.createEvent('Event');\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "      alert(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "          event.returnValue = " + value + ";\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
 
-            + "      event.returnValue = " + value + ";\n"
-            + "      alert(event.returnValue);\n"
-            + "      alert(typeof event.returnValue);\n"
-            + "    } catch (e) { alert('exception') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
+            + "          event = document.createEvent('Event');\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
-        loadPageWithAlerts2(html);
+            + "          event.returnValue = " + value + ";\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
+            + "        } catch (e) { log('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"false", "false", "false"})
+    @Alerts(DEFAULT = {"false - false", "true - false", "true - true",
+                        "false - false", "false - false", "false - false",
+                        "false - false", "true - false"},
+            IE = {"false - false", "true - false", "true - false",
+                    "false - false", "false - false", "false - false",
+                    "false - false", "true - false"})
+    @NotYetImplemented(IE = {"false - false", "true - false", "true - true",
+                    "false - false", "false - false", "false - false",
+                    "false - false", "true - false"})
     public void preventDefault() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
-            + "  function test() {\n"
-            + "    try {\n"
-            + "      var event = document.createEvent('Event');\n"
-            + "      alert(event.cancelable);\n"
-            + "      alert(event.defaultPrevented);\n"
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <title></title>\n"
+            + "    <script>\n"
+            + "      function log(msg) {\n"
+            + "        window.document.title += msg + ';';\n"
+            + "      }\n"
 
-            + "      event.preventDefault();\n"
-            + "      alert(event.defaultPrevented);\n"
-            + "    } catch (e) { alert('exception') }\n"
-            + "  }\n"
-            + "</script></head><body onload='test()'>\n"
-            + "</body></html>";
+            + "      function test() {\n"
+            + "        try {\n"
+            + "          var event = document.createEvent('Event');\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
 
-        loadPageWithAlerts2(html);
+            + "          event.initEvent('click', 'true', 'true');\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event.preventDefault();\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event = document.createEvent('Event');\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event.preventDefault();\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event = document.createEvent('Event');\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event.preventDefault();\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event.initEvent('click', 'true', 'true');\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+            + "        } catch (e) { log('exception') }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
+        assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
 }
