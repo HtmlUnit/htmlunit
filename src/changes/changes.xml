@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 75">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-text to 1.7.
+            </action>
             <action type="fix" dev="rbri" issue="#57">
                 HtmlPage.save(File) no longer fails if some linked resources are not available.
             </action>
