@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.36.0" date="xxxx, 2019" description="Bugfixes, CHROME 75">
+            <action type="add" dev="rbri" due-to="Le Stephane">
+                Add a save() method in TextPage, which knows to save in the same charset as was received in the response.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-text to 1.7.
             </action>

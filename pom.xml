@@ -1070,6 +1070,9 @@
         <contributor>
             <name>Hartmut Arlt</name>
         </contributor>
+        <contributor>
+            <name>Le Stephane</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
