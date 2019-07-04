@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * A generic page that will be returned for any text related content.
  * Specifically any content types that start with {@code text/}
@@ -42,5 +48,18 @@ public class TextPage extends AbstractPage {
      */
     public String getContent() {
         return getWebResponse().getContentAsString();
+    }
+
+    /**
+     * Saves the content of this page to a text file.
+     *
+     * @param file file to write this page into
+     * @throws IOException If an error occurs
+     */
+    public void save(final File file) throws IOException {
+        final Path savePath = file.toPath();
+        final String text = getContent();
+        final Charset charset = getWebResponse().getContentCharset();
+        Files.write(savePath, text.getBytes(charset));
     }
 }
