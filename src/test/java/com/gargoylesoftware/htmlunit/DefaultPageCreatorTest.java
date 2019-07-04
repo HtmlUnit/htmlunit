@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DefaultPageCreatorTest extends WebServerTestCase {
@@ -88,17 +89,18 @@ public class DefaultPageCreatorTest extends WebServerTestCase {
         @Override
         protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
             response.setContentType(request.getParameter("type"));
-            final Writer writer = response.getWriter();
-            final boolean doctype = request.getParameter("doctype") != null;
-            if (doctype) {
-                writer.write(XHTML_DOCTYPE);
+            try (Writer writer = response.getWriter()) {
+                final boolean doctype = request.getParameter("doctype") != null;
+                if (doctype) {
+                    writer.write(XHTML_DOCTYPE);
+                }
+                writer.write("<html");
+                final boolean ns = request.getParameter("ns") != null;
+                if (ns) {
+                    writer.write(" xmlns='http://www.w3.org/1999/xhtml'");
+                }
+                writer.write("><body>foo</body></html>");
             }
-            writer.write("<html");
-            final boolean ns = request.getParameter("ns") != null;
-            if (ns) {
-                writer.write(" xmlns='http://www.w3.org/1999/xhtml'");
-            }
-            writer.write("><body>foo</body></html>");
         }
     }
 
