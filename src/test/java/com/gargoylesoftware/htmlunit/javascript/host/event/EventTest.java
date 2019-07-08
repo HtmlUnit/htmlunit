@@ -1288,9 +1288,7 @@ public class EventTest extends WebDriverTestCase {
             IE = {"false - false", "true - false", "true - false",
                     "false - false", "false - false", "false - false",
                     "false - false", "true - false"})
-    @NotYetImplemented(IE = {"false - false", "true - false", "true - true",
-                    "false - false", "false - false", "false - false",
-                    "false - false", "true - false"})
+    @NotYetImplemented(IE)
     public void preventDefault() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
