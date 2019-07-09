@@ -83,7 +83,7 @@ public class WebConnectionWrapper implements WebConnection {
      * The default behavior of this method is to return {@link WebConnection#close()} on the wrapped connection object.
      */
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
         wrappedWebConnection_.close();
     }
 }

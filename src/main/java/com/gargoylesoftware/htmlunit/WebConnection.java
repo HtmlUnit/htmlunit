@@ -34,4 +34,6 @@ public interface WebConnection extends AutoCloseable {
      */
     WebResponse getResponse(WebRequest request) throws IOException;
 
+    @Override
+    void close() throws IOException;
 }
