@@ -320,10 +320,20 @@ public class DomNodeTest extends SimpleWebTestCase {
     @Test
     public void getByXPath() throws Exception {
         final String htmlContent
-            = "<html><head><title>my title</title></head><body>\n"
-            + "<div id='d1'><ul><li>foo 1</li><li>foo 2</li></ul></div>\n"
-            + "<div><span>bla</span></div>\n"
-            + "</body></html>";
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <title>my title</title>\n"
+            + "  </head>"
+            + "  <body>\n"
+            + "    <div id='d1'>\n"
+            + "      <ul>\n"
+            + "        <li>foo 1</li>\n"
+            + "        <li>foo 2</li>\n"
+            + "      </ul>\n"
+            + "    </div>\n"
+            + "    <div><span>bla</span></div>\n"
+            + "</body>\n"
+            + "</html>";
         final HtmlPage page = loadPage(htmlContent);
 
         final List<?> results = page.getByXPath("//title");
@@ -344,6 +354,31 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertEquals(lis, page.getByXPath("//ul/li"));
 
         assertEquals(2, div.<Number>getFirstByXPath("count(//li)").intValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getByXPathSelectedNode() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <title>my title</title>\n"
+            + "  </head>"
+            + "  <body>\n"
+            + "    <h1 id='outer_h1'>HtmlUnit</h1>\n"
+            + "    <div id='d1'>\n"
+            + "      <h1 id='h1'>HtmlUnit</h1>\n"
+            + "    </div>\n"
+            + "</body>\n"
+            + "</html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlDivision divNode = (HtmlDivision) page.getElementById("d1");
+
+        assertEquals(page.getElementById("h1"), divNode.getByXPath(".//h1").get(0));
+        assertEquals(page.getElementById("outer_h1"), divNode.getByXPath("//h1").get(0));
     }
 
     /**
