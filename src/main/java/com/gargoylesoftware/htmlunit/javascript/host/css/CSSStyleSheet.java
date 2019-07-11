@@ -65,6 +65,7 @@ import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
@@ -1382,33 +1383,37 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static double pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
-        final int dpi;
-        switch (cssValue.getLexicalUnitType()) {
-            case PIXEL:
-                return cssValue.getDoubleValue();
-            case EM:
-                // hard coded default for the moment 16px = 1 em
-                return 16f * cssValue.getDoubleValue();
-            case PERCENTAGE:
-                // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getDoubleValue();
-            case EX:
-                // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getDoubleValue();
-            case REM:
-                // hard coded default for the moment 16px = 100%
-                return 0.16f * cssValue.getDoubleValue();
-            case MILLIMETER:
-                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 25.4f) * cssValue.getDoubleValue();
-            case CENTIMETER:
-                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 254f) * cssValue.getDoubleValue();
-            case POINT:
-                dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
-                return (dpi / 72f) * cssValue.getDoubleValue();
-            default:
-                break;
+        final LexicalUnit.LexicalUnitType luType = cssValue.getLexicalUnitType();
+        if (luType != null) {
+            final int dpi;
+
+            switch (luType) {
+                case PIXEL:
+                    return cssValue.getDoubleValue();
+                case EM:
+                    // hard coded default for the moment 16px = 1 em
+                    return 16f * cssValue.getDoubleValue();
+                case PERCENTAGE:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case EX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case REM:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case MILLIMETER:
+                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    return (dpi / 25.4f) * cssValue.getDoubleValue();
+                case CENTIMETER:
+                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    return (dpi / 254f) * cssValue.getDoubleValue();
+                case POINT:
+                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    return (dpi / 72f) * cssValue.getDoubleValue();
+                default:
+                    break;
+            }
         }
         if (LOG.isWarnEnabled()) {
             LOG.warn("CSSValue '" + cssValue.getCssText()
