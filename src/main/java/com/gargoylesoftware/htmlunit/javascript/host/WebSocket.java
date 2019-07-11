@@ -366,7 +366,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
      * {@inheritDoc}
      */
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
         close(null, null);
     }
 
