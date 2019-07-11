@@ -552,7 +552,7 @@ public class HtmlImage extends HtmlElement {
         downloadImageIfNeeded();
         if (imageData_ == null) {
             if (null == imageWebResponse_) {
-                throw new IOException("No image response available (src=" + getSrcAttribute() + ")");
+                throw new IOException("No image response available (src='" + getSrcAttribute() + "')");
             }
             @SuppressWarnings("resource")
             final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
