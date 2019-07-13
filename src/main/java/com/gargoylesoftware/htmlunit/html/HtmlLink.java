@@ -275,14 +275,20 @@ public class HtmlLink extends HtmlElement {
         }
 
         final WebClient webClient = getPage().getWebClient();
-        if (!webClient.getOptions().isCssEnabled()
-                || !StyleSheetList.isStyleSheetLink(this)) {
-
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Link type '" + getRelAttribute() + "' not supported ("
-                            + asXml().replaceAll("\\r|\\n", "") + ")");
+        if (!StyleSheetList.isStyleSheetLink(this)) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
+                            + asXml().replaceAll("\\r|\\n", "") + ").");
             }
 
+            return;
+        }
+
+        if (!webClient.getOptions().isCssEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
+                            + asXml().replaceAll("\\r|\\n", "") + ").");
+            }
             return;
         }
 
