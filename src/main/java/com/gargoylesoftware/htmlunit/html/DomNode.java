@@ -1530,7 +1530,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Evaluates the specified XPath expression from this node, returning the matching elements.
-     * <br></br>
+     * <br>
      * Note: This implies that the ',' point to this node but the general axis like '//' are still
      * looking at the whole document. E.g. if you like to get all child h1 nodes from the current one
      * you have to use './/h1' instead of '//h1' because the later matches all h1 nodes of the#
