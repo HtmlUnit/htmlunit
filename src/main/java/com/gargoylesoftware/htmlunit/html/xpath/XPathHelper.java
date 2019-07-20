@@ -133,7 +133,7 @@ public final class XPathHelper {
             resolver = new HtmlUnitPrefixResolver(xpathExpressionContext);
         }
 
-        final boolean attributeCaseSensitive = caseSensitive || contextNode.getPage().hasCaseSensitiveTagNames();
+        final boolean attributeCaseSensitive = contextNode.getPage().hasCaseSensitiveTagNames() || caseSensitive;
         final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive, attributeCaseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
