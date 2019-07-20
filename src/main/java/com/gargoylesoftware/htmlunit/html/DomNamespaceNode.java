@@ -18,7 +18,7 @@ import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
 /**
@@ -71,7 +71,7 @@ public abstract class DomNamespaceNode extends DomNode {
     public String getNamespaceURI() {
         if (getPage().isHtmlPage() && !(getPage() instanceof XHtmlPage)
             && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)
-            && XPathUtils.isProcessingXPath()) {
+            && XPathHelper.isProcessingXPath()) {
             // for Xalan processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
             // the elements by XPath without needing to add the namespace to it
             return null;
@@ -85,7 +85,7 @@ public abstract class DomNamespaceNode extends DomNode {
     @Override
     public String getLocalName() {
         final boolean caseSensitive = getPage().hasCaseSensitiveTagNames();
-        if (!caseSensitive && XPathUtils.isProcessingXPath()) { // and this method was called from Xalan
+        if (!caseSensitive && XPathHelper.isProcessingXPath()) { // and this method was called from Xalan
             return localNameLC_;
         }
         return localName_;

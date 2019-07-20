@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DOM_NORMALIZE_REMOVE_CHILDREN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_ATTRIBUTE_CASE_SENSITIVE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XPATH_SELECTION_NAMESPACES;
 
 import java.io.IOException;
@@ -55,7 +56,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
-import com.gargoylesoftware.htmlunit.html.xpath.XPathUtils;
+import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
@@ -1584,7 +1585,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
             }
         }
-        return XPathUtils.getByXPath(this, xpathExpr, prefixResolver);
+        return XPathHelper.getByXPath(this, xpathExpr, prefixResolver, hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE));
     }
 
     /**
@@ -1597,7 +1598,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @see #getCanonicalXPath()
      */
     public List<?> getByXPath(final String xpathExpr, final PrefixResolver resolver) {
-        return XPathUtils.getByXPath(this, xpathExpr, resolver);
+        return XPathHelper.getByXPath(this, xpathExpr, resolver, hasFeature(XPATH_ATTRIBUTE_CASE_SENSITIVE));
     }
 
     /**

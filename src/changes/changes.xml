@@ -13,6 +13,9 @@
                 IOException instead of an Exception now.
             </action>
             <action type="update" dev="rbri">
+                Class XPathUtils renamed to XPathHelper.
+            </action>
+            <action type="update" dev="rbri">
                 Class XmlUtil renamed to XmlUtils and moved to com.gargoylesoftware.htmlunit.util.
             </action>
             <action type="update" dev="rbri">
