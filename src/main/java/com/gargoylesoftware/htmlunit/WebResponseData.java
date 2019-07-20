@@ -30,6 +30,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.brotli.dec.BrotliInputStream;
 
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -109,6 +110,24 @@ public class WebResponseData implements Serializable {
                 }
                 catch (final IOException e) {
                     LOG.error("Reading gzip encodec content failed.", e);
+                    stream.close();
+                    stream = IOUtils.toInputStream(
+                                "<html>\n"
+                                 + "<head><title>Problem loading page</title></head>\n"
+                                 + "<body>\n"
+                                 + "<h1>Content Encoding Error</h1>\n"
+                                 + "<p>The page you are trying to view cannot be shown because"
+                                 + " it uses an invalid or unsupported form of compression.</p>\n"
+                                 + "</body>\n"
+                                 + "</html>", ISO_8859_1);
+                }
+            }
+            else if ("br".equals(encoding)) {
+                try {
+                    stream = new BrotliInputStream(stream);
+                }
+                catch (final IOException e) {
+                    LOG.error("Reading Brotli encodec content failed.", e);
                     stream.close();
                     stream = IOUtils.toInputStream(
                                 "<html>\n"

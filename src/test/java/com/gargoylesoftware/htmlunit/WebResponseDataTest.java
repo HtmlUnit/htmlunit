@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 public class WebResponseDataTest extends WebServerTestCase {
 
     private static final String GZIPPED_FILE = "testfiles/test.html.gz";
+    private static final String BROTLI_FILE = "testfiles/test.html.brotli";
 
     /**
      * Tests that gzipped content is handled correctly.
@@ -184,7 +185,42 @@ public class WebResponseDataTest extends WebServerTestCase {
             data.getBody();
         }
         catch (final RuntimeException e) {
-            assertTrue(StringUtils.contains(e.getMessage(), "Not in GZIP format"));
+            assertTrue(e.getMessage(), StringUtils.contains(e.getMessage(), "Not in GZIP format"));
+        }
+    }
+
+    /**
+     * Tests that brotli encoded content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void brotliContent() throws Exception {
+        final InputStream stream = getClass().getClassLoader().getResourceAsStream(BROTLI_FILE);
+        final byte[] zippedContent = IOUtils.toByteArray(stream);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Encoding", "br"));
+
+        final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
+        final String body = new String(data.getBody(), UTF_8);
+        assertTrue(StringUtils.contains(body, "Test"));
+    }
+
+    /**
+     * Tests that broken gzipped content is handled correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void brokenBrotliContent() throws Exception {
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Content-Encoding", "br"));
+
+        final WebResponseData data = new WebResponseData("Plain Content".getBytes(), HttpStatus.SC_OK, "OK", headers);
+        try {
+            data.getBody();
+        }
+        catch (final RuntimeException e) {
+            assertTrue(e.getMessage(), StringUtils.contains(e.getMessage(), "Brotli stream decoding failed"));
         }
     }
 
