@@ -50,7 +50,6 @@ import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StringWebResponse;
-import com.gargoylesoftware.htmlunit.TextUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -59,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.TextUtils;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -1004,7 +1004,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertNotNull("xml document could not be parsed", page.asXml());
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        builder.parse(TextUtil.toInputStream(page.asXml()));
+        builder.parse(TextUtils.toInputStream(page.asXml()));
     }
 
     /**
@@ -1020,7 +1020,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtil.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
+        webConnection.setDefaultResponse(TextUtils.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

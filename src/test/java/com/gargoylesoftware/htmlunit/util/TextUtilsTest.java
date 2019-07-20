@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -25,12 +25,14 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+
 /**
- * Tests for {@link TextUtil}.
+ * Tests for {@link TextUtils}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public class TextUtilTest extends SimpleWebTestCase {
+public class TextUtilsTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -38,7 +40,7 @@ public class TextUtilTest extends SimpleWebTestCase {
     @Test
     public void toInputStream_null() throws Exception {
         try {
-            TextUtil.toInputStream(null);
+            TextUtils.toInputStream(null);
             fail("Expected NullPointerException");
         }
         catch (final NullPointerException e) {
@@ -62,7 +64,7 @@ public class TextUtilTest extends SimpleWebTestCase {
             final String input = entry[0];
             final String expectedResult = entry[1];
 
-            try (InputStream inputStream = TextUtil.toInputStream(input, encoding)) {
+            try (InputStream inputStream = TextUtils.toInputStream(input, encoding)) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, encoding))) {
                     assertEquals(expectedResult, reader.readLine());
                 }
@@ -75,17 +77,17 @@ public class TextUtilTest extends SimpleWebTestCase {
      */
     @Test
     public void stringToByteArray() throws Exception {
-        byte[] result = TextUtil.stringToByteArray(null, UTF_8);
+        byte[] result = TextUtils.stringToByteArray(null, UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("", UTF_8);
+        result = TextUtils.stringToByteArray("", UTF_8);
         assertEquals(0, result.length);
 
-        result = TextUtil.stringToByteArray("htmlunit", UTF_8);
+        result = TextUtils.stringToByteArray("htmlunit", UTF_8);
         assertEquals(8, result.length);
         assertEquals(104, result[0]);
 
-        result = TextUtil.stringToByteArray("htmlunit", null);
+        result = TextUtils.stringToByteArray("htmlunit", null);
         assertEquals(0, result.length);
     }
 

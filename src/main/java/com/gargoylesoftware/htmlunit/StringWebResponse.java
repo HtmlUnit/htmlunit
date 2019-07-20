@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.TextUtils;
 
 /**
  * A simple WebResponse created from a string. Content is assumed to be of type <tt>text/html</tt>.
@@ -67,7 +68,7 @@ public class StringWebResponse extends WebResponse {
      * @return a simple <tt>WebResponseData</tt> with defaults specified
      */
     private static WebResponseData getWebResponseData(final String contentString, final Charset charset) {
-        final byte[] content = TextUtil.stringToByteArray(contentString, charset);
+        final byte[] content = TextUtils.stringToByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html; charset=" + charset));
         return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);

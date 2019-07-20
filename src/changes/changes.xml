@@ -12,6 +12,12 @@
                 INCOMPATIBLE CHANGE: WebConnection.close() and WebConnectionWrapper.close() are throwing an
                 IOException instead of an Exception now.
             </action>
+            <action type="update" dev="rbri">
+                Class TextUtil renamed to TextUtils and moved to com.gargoylesoftware.htmlunit.util.
+            </action>
+            <action type="add" dev="rbri">
+                ArchUnit added.
+            </action>
             <action type="fix" dev="rbri" issue="#53">
                 Log no longer a warning for not supported link types. Instead log more detailed debug messages
                 for this case.

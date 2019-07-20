@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.TextUtils;
 
 /**
  * A fake {@link WebConnection} designed to mock out the actual HTTP connections.
@@ -102,7 +103,7 @@ public class MockWebConnection implements WebConnection {
                 content = new byte[] {};
             }
             else {
-                content = TextUtil.stringToByteArray(stringContent_, charset_);
+                content = TextUtils.stringToByteArray(stringContent_, charset_);
             }
             return new WebResponseData(content, statusCode_, statusMessage_, headers_);
         }

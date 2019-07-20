@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.gargoylesoftware.htmlunit.TextUtil;
+import com.gargoylesoftware.htmlunit.util.TextUtils;
 
 /**
  * A URLConnection for supporting JavaScript URLs.
@@ -56,7 +56,7 @@ public class JavaScriptURLConnection extends URLConnection {
      */
     @Override
     public InputStream getInputStream() {
-        return TextUtil.toInputStream(content_);
+        return TextUtils.toInputStream(content_);
     }
 
 }

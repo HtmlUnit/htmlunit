@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package com.gargoylesoftware.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -29,11 +29,12 @@ import java.nio.charset.Charset;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Brad Clarke
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public final class TextUtil {
+public final class TextUtils {
 
     /** Private constructor to prevent instantiation. */
-    private TextUtil() {
+    private TextUtils() {
     }
 
     /**
