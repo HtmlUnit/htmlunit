@@ -511,7 +511,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
 
-            final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader());
+            final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
+                                                                getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
             request.setAdditionalHeader(HttpHeader.REFERER, containingPage_.getUrl().toExternalForm());
 

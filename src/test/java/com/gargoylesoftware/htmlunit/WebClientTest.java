@@ -1587,30 +1587,31 @@ public class WebClientTest extends SimpleWebTestCase {
     @Test
     public void requestHeaderDoNotOverwriteWebRequestAcceptHeader() throws Exception {
         final String content = "<html></html>";
-        final WebClient client = getWebClient();
+        final WebClient webClient = getWebClient();
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setDefaultResponse(content);
-        client.setWebConnection(webConnection);
+        webClient.setWebConnection(webConnection);
 
         // default accept header
-        client.getPage(URL_FIRST);
+        webClient.getPage(URL_FIRST);
         assertNotNull(webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
         assertNotEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
         // request with accept header
-        final WebRequest wr = new WebRequest(URL_FIRST, "application/pdf");
-        client.getPage(wr);
+        final WebRequest wr = new WebRequest(URL_FIRST, "application/pdf",
+                                    webClient.getBrowserVersion().getAcceptEncodingHeader());
+        webClient.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
         // request has an accept header use the one from the request
-        client.addRequestHeader(HttpHeader.ACCEPT, "image/png");
-        client.getPage(wr);
+        webClient.addRequestHeader(HttpHeader.ACCEPT, "image/png");
+        webClient.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
         // request has no longer an accept header use the one from the client
         wr.removeAdditionalHeader(HttpHeader.ACCEPT);
-        client.getPage(wr);
+        webClient.getPage(wr);
         assertEquals("image/png", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
     }
 

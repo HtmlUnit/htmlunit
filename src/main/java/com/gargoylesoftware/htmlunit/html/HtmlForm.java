@@ -304,7 +304,8 @@ public class HtmlForm extends HtmlElement {
             throw new IllegalArgumentException("Not a valid url: " + actionUrl);
         }
 
-        final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader());
+        final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader(),
+                                                        browser.getAcceptEncodingHeader());
         request.setHttpMethod(method);
         request.setRequestParameters(parameters);
         if (HttpMethod.POST == method) {

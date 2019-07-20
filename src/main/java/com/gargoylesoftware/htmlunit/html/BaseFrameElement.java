@@ -94,8 +94,7 @@ public abstract class BaseFrameElement extends HtmlElement {
                 // put about:blank in the window to allow JS to run on this frame before the
                 // real content is loaded
                 final WebClient webClient = htmlPage.getWebClient();
-                final HtmlPage temporaryPage = webClient.getPage(enclosedWindow,
-                    new WebRequest(WebClient.URL_ABOUT_BLANK));
+                final HtmlPage temporaryPage = webClient.getPage(enclosedWindow, WebRequest.newAboutBlankRequest());
                 temporaryPage.setReadyState(READY_STATE_LOADING);
             }
         }

@@ -461,7 +461,8 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
-        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
+                                                          getBrowserVersion().getAcceptEncodingHeader());
         request.setCharset(UTF_8);
 
         return (P) getPage(getCurrentWindow().getTopWindow(), request);
@@ -883,7 +884,8 @@ public class WebClient implements Serializable, AutoCloseable {
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
         if (url != null) {
             try {
-                final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+                final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
+                                                                getBrowserVersion().getAcceptEncodingHeader());
                 request.setCharset(UTF_8);
 
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
@@ -1015,7 +1017,8 @@ public class WebClient implements Serializable, AutoCloseable {
         fireWindowOpened(new WebWindowEvent(window, WebWindowEvent.OPEN, null, null));
 
         final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
-        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader());
+        final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
+                                                        getBrowserVersion().getAcceptEncodingHeader());
         request.setCharset(UTF_8);
 
         if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER) && openerPage != null) {

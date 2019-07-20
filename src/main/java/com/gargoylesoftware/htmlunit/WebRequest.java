@@ -72,11 +72,21 @@ public class WebRequest implements Serializable {
      * Instantiates a {@link WebRequest} for the specified URL.
      * @param url the target URL
      * @param acceptHeader the accept header to use
+     * @param acceptEncodingHeader the accept encoding header to use
      */
-    public WebRequest(final URL url, final String acceptHeader) {
+    public WebRequest(final URL url, final String acceptHeader, final String acceptEncodingHeader) {
         setUrl(url);
         setAdditionalHeader(HttpHeader.ACCEPT, acceptHeader);
-        setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, "gzip, deflate");
+        if (acceptEncodingHeader != null) {
+            setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, acceptEncodingHeader);
+        }
+    }
+
+    /**
+     * @return a new request for about:blank
+     */
+    public static WebRequest newAboutBlankRequest() {
+        return new WebRequest(WebClient.URL_ABOUT_BLANK, "*/*", null);
     }
 
     /**
@@ -84,7 +94,7 @@ public class WebRequest implements Serializable {
      * @param url the target URL
      */
     public WebRequest(final URL url) {
-        this(url, "*/*");
+        this(url, "*/*", null);
     }
 
     /**
@@ -93,7 +103,7 @@ public class WebRequest implements Serializable {
      * @param submitMethod the HTTP submit method to use
      */
     public WebRequest(final URL url, final HttpMethod submitMethod) {
-        this(url);
+        this(url, "*/*", null);
         setHttpMethod(submitMethod);
     }
 

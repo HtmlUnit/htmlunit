@@ -288,8 +288,8 @@ public class CSSStyleSheet extends StyleSheet {
             final WebClient client = page.getWebClient();
             if (link == null) {
                 // Use href.
-                final String accept = client.getBrowserVersion().getCssAcceptHeader();
-                request = new WebRequest(new URL(url), accept);
+                final BrowserVersion browser = client.getBrowserVersion();
+                request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
                 request.setAdditionalHeader(HttpHeader.REFERER, uri);
 
                 // our cache is a bit strange;

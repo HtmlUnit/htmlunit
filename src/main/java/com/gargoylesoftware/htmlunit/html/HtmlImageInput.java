@@ -29,6 +29,7 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
@@ -220,14 +221,15 @@ public class HtmlImageInput extends HtmlInput {
             if (!"".equals(src)
                     && !(hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY) && StringUtils.isBlank(src))) {
                 final HtmlPage page = (HtmlPage) getPage();
-                final WebClient webclient = page.getWebClient();
+                final WebClient webClient = page.getWebClient();
 
                 final URL url = page.getFullyQualifiedUrl(src);
-                final String accept = webclient.getBrowserVersion().getImgAcceptHeader();
-                final WebRequest request = new WebRequest(url, accept);
+                final BrowserVersion browser = webClient.getBrowserVersion();
+                final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
+                                                                browser.getAcceptEncodingHeader());
                 request.setCharset(page.getCharset());
                 request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
-                imageWebResponse_ = webclient.loadWebResponse(request);
+                imageWebResponse_ = webClient.loadWebResponse(request);
             }
 
             if (imageData_ != null) {

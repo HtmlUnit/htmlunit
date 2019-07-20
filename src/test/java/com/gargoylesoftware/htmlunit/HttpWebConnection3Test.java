@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.fail;
+
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -117,6 +120,37 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 result[i] = header.substring(0, header.indexOf(':'));
             }
             assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(result).toString());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "gzip, deflate",
+            CHROME = "gzip, deflate, br")
+    public void acceptEncoding() throws Exception {
+        final String response = "HTTP/1.1 200 OK\r\n"
+            + "Content-Length: 2\r\n"
+            + "Content-Type: text/plain\r\n"
+            + "\r\n"
+            + "Hi";
+
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+            final String request = primitiveWebServer.getRequests().get(0);
+            final String[] headers = request.split("\\r\\n");
+            for (int i = 0; i < headers.length; i++) {
+                final String header = headers[i];
+                if (StringUtils.startsWithIgnoreCase(header, HttpHeader.ACCEPT_ENCODING_LC)) {
+                    final String value = header.substring(header.indexOf(':') + 1);
+                    assertEquals(getExpectedAlerts()[0], value.trim());
+                    return;
+                }
+            }
+            fail("No accept-encoding header found.");
         }
     }
 

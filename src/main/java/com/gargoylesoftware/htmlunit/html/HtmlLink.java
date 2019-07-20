@@ -25,6 +25,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -226,8 +227,8 @@ public class HtmlLink extends HtmlElement {
         final HtmlPage page = (HtmlPage) getPage();
         final URL url = page.getFullyQualifiedUrl(getHrefAttribute());
 
-        final String accept = page.getWebClient().getBrowserVersion().getCssAcceptHeader();
-        final WebRequest request = new WebRequest(url, accept);
+        final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+        final WebRequest request = new WebRequest(url, browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         request.setCharset(page.getCharset());
 

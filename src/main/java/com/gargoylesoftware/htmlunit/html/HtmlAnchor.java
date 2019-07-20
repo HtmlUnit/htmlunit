@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -145,7 +144,7 @@ public class HtmlAnchor extends HtmlElement {
                 final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
                 Page enclosedPage = win.getEnclosedPage();
                 if (enclosedPage == null) {
-                    win.getWebClient().getPage(win, new WebRequest(WebClient.URL_ABOUT_BLANK));
+                    win.getWebClient().getPage(win, WebRequest.newAboutBlankRequest());
                     enclosedPage = win.getEnclosedPage();
                 }
                 if (enclosedPage != null && enclosedPage.isHtmlPage()) {
@@ -168,7 +167,8 @@ public class HtmlAnchor extends HtmlElement {
             page.getWebClient().loadWebResponse(pingRequest);
         }
 
-        final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader());
+        final WebRequest webRequest = new WebRequest(url, browser.getHtmlAcceptHeader(),
+                                                            browser.getAcceptEncodingHeader());
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
 

@@ -217,6 +217,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
+        CHROME.acceptEncodingHeader_ = "gzip, deflate, br";
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3";
         CHROME.imgAcceptHeader_ = "image/webp,image/apng,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
@@ -359,6 +360,7 @@ public final class BrowserVersion implements Serializable {
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
     private final Set<PluginConfiguration> plugins_;
     private final Set<BrowserVersionFeatures> features_;
+    private String acceptEncodingHeader_;
     private String htmlAcceptHeader_;
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
@@ -379,6 +381,7 @@ public final class BrowserVersion implements Serializable {
         nickname_ = nickname;
 
         applicationName_ = NETSCAPE;
+        acceptEncodingHeader_ = "gzip, deflate";
         htmlAcceptHeader_ = "*/*";
         imgAcceptHeader_ = "*/*";
         cssAcceptHeader_ = "*/*";
@@ -619,6 +622,14 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the value used by the browser for the {@code Accept_Encoding} header.
+     * @return the accept encoding header string
+     */
+    public String getAcceptEncodingHeader() {
+        return acceptEncodingHeader_;
+    }
+
+    /**
      * Returns the value used by the browser for the {@code Accept} header if requesting a page.
      * @return the accept header string
      */
@@ -793,6 +804,7 @@ public final class BrowserVersion implements Serializable {
 
             workPiece_.buildId_ = version.getBuildId();
             workPiece_.productSub_ = version.getProductSub();
+            workPiece_.acceptEncodingHeader_ = version.getAcceptEncodingHeader();
             workPiece_.htmlAcceptHeader_ = version.getHtmlAcceptHeader();
             workPiece_.imgAcceptHeader_ = version.getImgAcceptHeader();
             workPiece_.cssAcceptHeader_ = version.getCssAcceptHeader();
@@ -930,6 +942,15 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setUserLanguage(final String userLanguage) {
             workPiece_.userLanguage_ = userLanguage;
+            return this;
+        }
+
+        /**
+         * @param acceptEncodingHeader the {@code Accept-Encoding} header
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setAcceptEncodingHeader(final String acceptEncodingHeader) {
+            workPiece_.acceptEncodingHeader_ = acceptEncodingHeader;
             return this;
         }
 

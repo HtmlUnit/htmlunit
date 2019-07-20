@@ -41,6 +41,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -523,12 +524,13 @@ public class HtmlImage extends HtmlElement {
             if (!"".equals(src)) {
                 final HtmlPage page = (HtmlPage) getPage();
                 final WebClient webClient = page.getWebClient();
+                final BrowserVersion browser = webClient.getBrowserVersion();
 
-                if (!(webClient.getBrowserVersion().hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)
+                if (!(browser.hasFeature(HTMLIMAGE_BLANK_SRC_AS_EMPTY)
                         && StringUtils.isBlank(src))) {
                     final URL url = page.getFullyQualifiedUrl(src);
-                    final String accept = webClient.getBrowserVersion().getImgAcceptHeader();
-                    final WebRequest request = new WebRequest(url, accept);
+                    final WebRequest request = new WebRequest(url, browser.getImgAcceptHeader(),
+                                                                    browser.getAcceptEncodingHeader());
                     request.setCharset(page.getCharset());
                     request.setAdditionalHeader(HttpHeader.REFERER, page.getUrl().toExternalForm());
                     imageWebResponse_ = webClient.loadWebResponse(request);
