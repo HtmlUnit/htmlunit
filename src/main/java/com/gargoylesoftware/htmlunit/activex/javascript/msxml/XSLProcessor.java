@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
+import com.gargoylesoftware.htmlunit.util.XmlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -210,7 +210,7 @@ public class XSLProcessor extends MSXMLScriptable {
             final SgmlPage parentPage = parent.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtil.appendChild(parentPage, parent, children.item(i), false);
+                XmlUtils.appendChild(parentPage, parent, children.item(i), false);
             }
         }
         else {

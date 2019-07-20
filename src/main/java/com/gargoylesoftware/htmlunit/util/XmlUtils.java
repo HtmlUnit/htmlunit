@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.xml;
+package com.gargoylesoftware.htmlunit.util;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -74,9 +75,9 @@ import com.gargoylesoftware.htmlunit.html.HTMLParser;
  * @author Chuck Dumont
  * @author Frank Danek
  */
-public final class XmlUtil {
+public final class XmlUtils {
 
-    private static final Log LOG = LogFactory.getLog(XmlUtil.class);
+    private static final Log LOG = LogFactory.getLog(XmlUtils.class);
 
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
@@ -107,7 +108,7 @@ public final class XmlUtil {
     /**
      * Utility class, hide constructor.
      */
-    private XmlUtil() {
+    private XmlUtils() {
         // Empty.
     }
 

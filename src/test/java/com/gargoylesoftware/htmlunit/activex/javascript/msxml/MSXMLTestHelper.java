@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public final class MSXMLTestUtil {
+public final class MSXMLTestHelper {
 
     /** Helper. */
     public static final String ACTIVEX_CHECK =
@@ -155,7 +155,7 @@ public final class MSXMLTestUtil {
             + "</body></html>";
     }
 
-    private MSXMLTestUtil() {
+    private MSXMLTestHelper() {
         super();
     }
 }

@@ -23,7 +23,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
+import com.gargoylesoftware.htmlunit.util.XmlUtils;
 
 /**
  * A JavaScript object for {@code XPathNSResolver}.
@@ -58,7 +58,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
      */
     @JsxFunction
     public String lookupNamespaceURI(final String prefix) {
-        return XmlUtil.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), prefix);
+        return XmlUtils.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), prefix);
     }
 
     /**
@@ -66,7 +66,7 @@ public class XPathNSResolver extends SimpleScriptable implements PrefixResolver 
      */
     @Override
     public String getBaseIdentifier() {
-        return XmlUtil.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), "");
+        return XmlUtils.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), "");
     }
 
     /**

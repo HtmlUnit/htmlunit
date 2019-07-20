@@ -43,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
+import com.gargoylesoftware.htmlunit.util.XmlUtils;
 
 /**
  * A page that will be returned for response with content type "text/xml".
@@ -83,7 +84,7 @@ public class XmlPage extends SgmlPage {
         super(null, enclosingWindow);
         node_ = node;
         if (node_ != null) {
-            XmlUtil.appendChild(this, this, node_, true);
+            XmlUtils.appendChild(this, this, node_, true);
         }
     }
 
@@ -120,7 +121,7 @@ public class XmlPage extends SgmlPage {
 
         try {
             try {
-                final Document document = XmlUtil.buildDocument(webResponse);
+                final Document document = XmlUtils.buildDocument(webResponse);
                 node_ = document.getFirstChild();
             }
             catch (final SAXException e) {
@@ -147,13 +148,13 @@ public class XmlPage extends SgmlPage {
 
         final Map<Integer, List<String>> attributesOrderMap;
         if (node_ != null && getWebClient().getBrowserVersion().hasFeature(JS_XML)) {
-            attributesOrderMap = XmlUtil.getAttributesOrderMap(node_.getOwnerDocument());
+            attributesOrderMap = XmlUtils.getAttributesOrderMap(node_.getOwnerDocument());
         }
         else {
             attributesOrderMap = null;
         }
         for (Node node = node_; node != null; node = node.getNextSibling()) {
-            XmlUtil.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
+            XmlUtils.appendChild(this, this, node, handleXHTMLAsHTML, attributesOrderMap);
         }
     }
 
@@ -387,7 +388,7 @@ public class XmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    protected void setDocumentType(final DocumentType type) {
+    public void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
     }
 

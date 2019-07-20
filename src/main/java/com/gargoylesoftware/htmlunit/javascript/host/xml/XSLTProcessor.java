@@ -43,8 +43,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.util.XmlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-import com.gargoylesoftware.htmlunit.xml.XmlUtil;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -172,7 +172,7 @@ public class XSLTProcessor extends SimpleScriptable {
             final SgmlPage parentPage = parent.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtil.appendChild(parentPage, parent, children.item(i), true);
+                XmlUtils.appendChild(parentPage, parent, children.item(i), true);
             }
         }
         else {
