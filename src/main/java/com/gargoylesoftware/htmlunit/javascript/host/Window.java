@@ -295,6 +295,11 @@ public class Window extends EventTarget implements Function, AutoCloseable {
         public synchronized Map<String, CSS2Properties> remove(final Element element) {
             return computedStyles_.remove(element);
         }
+
+        private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
+            in.defaultReadObject();
+            computedStyles_ = new WeakHashMap<>();
+        }
     }
 
     /**
