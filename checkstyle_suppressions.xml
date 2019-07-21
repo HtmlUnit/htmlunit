@@ -49,19 +49,7 @@
     <suppress checks="LineLength" files="XSLProcessorTest.java"/>
 
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfATest.java"/>
-    <suppress checks="MethodName" files="HostParentOfBTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfCTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfDTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfFTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfHTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfITest.java"/>
-    <suppress checks="MethodName" files="HostParentOfMTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfNTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfPTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfSTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfTTest.java"/>
-    <suppress checks="MethodName" files="HostParentOfWTest.java"/>
+    <suppress checks="MethodName" files="HostParentOf.Test.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
     <suppress checks="MethodName" files="HtmlScript3Test.java"/>
 
@@ -74,4 +62,6 @@
     <suppress checks="VisibilityModifier" files="HostParentOf.java"/>
     <suppress checks="VisibilityModifier" files="WebTestCase.java"/>
     <suppress checks="VisibilityModifier" files="WebDriverTestCase.java"/>
+
+    <suppress checks="HideUtilityClassConstructor" files="ArchitectureTest.java"/>
 </suppressions>
