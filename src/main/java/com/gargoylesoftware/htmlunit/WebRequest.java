@@ -76,10 +76,23 @@ public class WebRequest implements Serializable {
      */
     public WebRequest(final URL url, final String acceptHeader, final String acceptEncodingHeader) {
         setUrl(url);
-        setAdditionalHeader(HttpHeader.ACCEPT, acceptHeader);
+        if (acceptHeader != null) {
+            setAdditionalHeader(HttpHeader.ACCEPT, acceptHeader);
+        }
         if (acceptEncodingHeader != null) {
             setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, acceptEncodingHeader);
         }
+    }
+
+    /**
+     * Instantiates a {@link WebRequest} for the specified URL.
+     * @param url the target URL
+     * @param acceptHeader the accept header to use
+     * @deprecated as of 2.36.0, use {@link #WebRequest(URL, String, String)} instead
+     */
+    @Deprecated
+    public WebRequest(final URL url, final String acceptHeader) {
+        this(url, acceptHeader, "gzip, deflate");
     }
 
     /**

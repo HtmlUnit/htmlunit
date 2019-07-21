@@ -1290,7 +1290,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         if (page == null) {
-            page = getPage(webWindow, new WebRequest(WebClient.URL_ABOUT_BLANK));
+            page = getPage(webWindow, WebRequest.newAboutBlankRequest());
         }
         final ScriptResult r = page.executeJavaScript(url.toExternalForm(), "JavaScript URL", 1);
         if (r.getJavaScriptResult() == null || ScriptResult.isUndefined(r)) {
