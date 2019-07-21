@@ -99,7 +99,7 @@ public class WebRequest implements Serializable {
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {
-        return new WebRequest(WebClient.URL_ABOUT_BLANK, "*/*", null);
+        return new WebRequest(WebClient.URL_ABOUT_BLANK, "*/*", "gzip, deflate");
     }
 
     /**
@@ -107,7 +107,7 @@ public class WebRequest implements Serializable {
      * @param url the target URL
      */
     public WebRequest(final URL url) {
-        this(url, "*/*", null);
+        this(url, "*/*", "gzip, deflate");
     }
 
     /**
@@ -116,7 +116,7 @@ public class WebRequest implements Serializable {
      * @param submitMethod the HTTP submit method to use
      */
     public WebRequest(final URL url, final HttpMethod submitMethod) {
-        this(url, "*/*", null);
+        this(url);
         setHttpMethod(submitMethod);
     }
 
