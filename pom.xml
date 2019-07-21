@@ -1184,7 +1184,7 @@
             </exclusions>
         </dependency>
         <!-- archunit introduces a dependency to archunit
-             we have to add the forwarder to avoid setup warnings -->
+            we have to add the forwarder to avoid setup warnings -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

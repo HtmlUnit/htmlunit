@@ -433,7 +433,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "gzip, deflate",
             CHROME = "gzip, deflate, br")
-    @NotYetImplemented(CHROME)
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
