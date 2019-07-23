@@ -1111,14 +1111,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "false", "boolean",
+                        "false", "boolean", "true",
                         "undefined", "undefined", "false - false",
-                        "false", "boolean"},
+                        "false", "boolean", "true",
+                        "undefined", "undefined", "true - false",
+                        "false", "boolean", "true"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "false", "boolean",
+                        "false", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "false", "boolean", "false"})
     public void returnValueSetterFalse() throws Exception {
         returnValueSetterUndefined("false");
     }
@@ -1129,14 +1133,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "true", "boolean",
+                        "true", "boolean", "false",
                         "undefined", "undefined", "false - false",
-                        "true", "boolean"},
+                        "true", "boolean", "false",
+                        "undefined", "undefined", "true - false",
+                        "true", "boolean", "false"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "true", "boolean",
+                        "true", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "true", "boolean", "false"})
     public void returnValueSetterTrue() throws Exception {
         returnValueSetterUndefined("true");
     }
@@ -1147,14 +1155,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "test", "string",
+                        "test", "string", "false",
                         "undefined", "undefined", "false - false",
-                        "test", "string"},
+                        "test", "string", "false",
+                        "undefined", "undefined", "true - false",
+                        "test", "string", "false"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "true", "boolean",
+                        "true", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "true", "boolean", "false"})
     public void returnValueSetterString() throws Exception {
         returnValueSetterUndefined("'test'");
     }
@@ -1165,14 +1177,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "0", "number",
+                        "0", "number", "true",
                         "undefined", "undefined", "false - false",
-                        "0", "number"},
+                        "0", "number", "true",
+                        "undefined", "undefined", "true - false",
+                        "0", "number", "true"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "false", "boolean",
+                        "false", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "false", "boolean", "false"})
     public void returnValueSetterZero() throws Exception {
         returnValueSetterUndefined("0");
     }
@@ -1183,14 +1199,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "1", "number",
+                        "1", "number", "false",
                         "undefined", "undefined", "false - false",
-                        "1", "number"},
+                        "1", "number", "false",
+                        "undefined", "undefined", "true - false",
+                        "1", "number", "false"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "true", "boolean",
+                        "true", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "true", "boolean", "false"})
     public void returnValueSetterOne() throws Exception {
         returnValueSetterUndefined("1");
     }
@@ -1201,14 +1221,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "-1", "number",
+                        "-1", "number", "false",
                         "undefined", "undefined", "false - false",
-                        "-1", "number"},
+                        "-1", "number", "false",
+                        "undefined", "undefined", "true - false",
+                        "-1", "number", "false"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "true", "boolean",
+                        "true", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "true", "boolean", "false"})
     public void returnValueSetterMinusOne() throws Exception {
         returnValueSetterUndefined("-1");
     }
@@ -1219,14 +1243,18 @@ public class EventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "false - false",
                         "undefined", "true - false",
-                        "undefined", "undefined",
+                        "undefined", "undefined", "true",
                         "undefined", "undefined", "false - false",
-                        "undefined", "undefined"},
+                        "undefined", "undefined", "true",
+                        "undefined", "undefined", "true - false",
+                        "undefined", "undefined", "true"},
             CHROME = {"true", "boolean", "false - false",
                         "true", "true - false",
-                        "false", "boolean",
+                        "false", "boolean", "false",
                         "true", "boolean", "false - false",
-                        "true", "boolean"})
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "false", "boolean", "false"})
     public void returnValueSetterUndefined() throws Exception {
         returnValueSetterUndefined("undefined");
     }
@@ -1236,6 +1264,10 @@ public class EventTest extends WebDriverTestCase {
             + "<html>\n"
             + "  <head>\n"
             + "    <title></title>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div><a id='triggerClick' href='#'>click event</a></div>\n"
+
             + "    <script>\n"
             + "      function log(msg) {\n"
             + "        window.document.title += msg + ';';\n"
@@ -1256,6 +1288,9 @@ public class EventTest extends WebDriverTestCase {
             + "          log(event.returnValue);\n"
             + "          log(typeof event.returnValue);\n"
 
+            + "          event.returnValue = !event.returnValue;\n"
+            + "          log(event.returnValue);\n"
+
             + "          event = document.createEvent('Event');\n"
             + "          log(event.returnValue);\n"
             + "          log(typeof event.returnValue);\n"
@@ -1264,15 +1299,30 @@ public class EventTest extends WebDriverTestCase {
             + "          event.returnValue = " + value + ";\n"
             + "          log(event.returnValue);\n"
             + "          log(typeof event.returnValue);\n"
+
+            + "          event.returnValue = !event.returnValue;\n"
+            + "          log(event.returnValue);\n"
             + "        } catch (e) { log('exception') }\n"
             + "      }\n"
+
+            + "      triggerClick.addEventListener('click', function (event) {\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
+            + "          log(event.cancelable + ' - ' + event.defaultPrevented);\n"
+
+            + "          event.returnValue = " + value + ";\n"
+            + "          log(event.returnValue);\n"
+            + "          log(typeof event.returnValue);\n"
+
+            + "          event.returnValue = !event.returnValue;\n"
+            + "          log(event.returnValue);\n"
+            + "        });\n"
             + "    </script>\n"
-            + "  </head>\n"
-            + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
 
         final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("triggerClick")).click();
 
         final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);

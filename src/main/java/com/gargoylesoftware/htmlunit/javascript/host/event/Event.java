@@ -675,7 +675,10 @@ public class Event extends SimpleScriptable {
     @JsxSetter(CHROME)
     public void setReturnValue(final Object newValue) {
         if (isCancelable()) {
-            preventDefault_ = !ScriptRuntime.toBoolean(newValue);
+            final boolean bool = !ScriptRuntime.toBoolean(newValue);
+            if (bool) {
+                preventDefault_ = bool;
+            }
         }
     }
 }
