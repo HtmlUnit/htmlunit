@@ -48,7 +48,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Anton Demydenko
- */
+ * @author Ronald Brill
+*/
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
 
@@ -556,6 +557,40 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMaxAgeOverrulesExpiresCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Last-Modified", "Tue, 20 Feb 2018 10:00:00 GMT"));
+        headers.add(new NameValuePair("Expires", "0"));
+        headers.add(new NameValuePair("Cache-Control", "max-age=20"));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.css"), "", 200, "OK", MimeType.APPLICATION_JAVASCRIPT, headers);
+
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+        // resources should be still in cache
+        client.getPage(pageUrl);
+        assertEquals(2, client.getCache().getSize());
+        assertEquals(2, connection.getRequestCount());
+    }
+
+    /**
      * Ensures {@link WebResponse#cleanUp()} is called for overflow deleted entries.
      * @throws Exception if the test fails
      */
@@ -566,6 +601,7 @@ public class CacheTest extends SimpleWebTestCase {
         expect(response1.getWebRequest()).andReturn(request1);
         expectLastCall().atLeastOnce();
         expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
+        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
                 formatDate(DateUtils.addHours(new Date(), 1)));
@@ -574,6 +610,7 @@ public class CacheTest extends SimpleWebTestCase {
         final WebResponse response2 = createMock(WebResponse.class);
         expect(response2.getWebRequest()).andReturn(request2);
         expectLastCall().atLeastOnce();
+        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response2.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response2.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
@@ -601,6 +638,7 @@ public class CacheTest extends SimpleWebTestCase {
         final WebResponse response1 = createMock(WebResponse.class);
         expect(response1.getWebRequest()).andReturn(request1);
         expectLastCall().atLeastOnce();
+        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.LAST_MODIFIED)).andReturn(null);
         expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(

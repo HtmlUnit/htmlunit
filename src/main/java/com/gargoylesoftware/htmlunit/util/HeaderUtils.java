@@ -45,7 +45,7 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 'private' value
      */
     public static boolean containsPrivate(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_PRIVATE);
+        return containsCacheControlValue(response, CACHE_CONTROL_PRIVATE);
     }
 
     /**
@@ -53,7 +53,7 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 'public' value
      */
     public static boolean containsPublic(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_PUBLIC);
+        return containsCacheControlValue(response, CACHE_CONTROL_PUBLIC);
     }
 
     /**
@@ -61,7 +61,7 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 'no-store' value
      */
     public static boolean containsNoStore(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_NO_STORE);
+        return containsCacheControlValue(response, CACHE_CONTROL_NO_STORE);
     }
 
     /**
@@ -69,7 +69,7 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 'no-cache' value@return
      */
     public static boolean containsNoCache(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_NO_CACHE);
+        return containsCacheControlValue(response, CACHE_CONTROL_NO_CACHE);
     }
 
     /**
@@ -77,7 +77,7 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 's-maxage' value
      */
     public static boolean containsSMaxage(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_S_MAXAGE);
+        return containsCacheControlValue(response, CACHE_CONTROL_S_MAXAGE);
     }
 
     /**
@@ -85,7 +85,19 @@ public final class HeaderUtils {
      * @return if 'Cache-Control' header is present and contains 'max-age' value
      */
     public static boolean containsMaxAge(final WebResponse response) {
-        return containsValue(response, CACHE_CONTROL_MAX_AGE);
+        return containsCacheControlValue(response, CACHE_CONTROL_MAX_AGE);
+    }
+
+    /**
+     * @param response {@code WebResponse}
+     * @return if 'Cache-Control' header is present and contains 'max-age' value
+     */
+    public static boolean containsMaxAgeOrSMaxage(final WebResponse response) {
+        final String cacheControl = response.getResponseHeaderValue(HttpHeader.CACHE_CONTROL);
+        if (StringUtils.contains(cacheControl, CACHE_CONTROL_MAX_AGE)) {
+            return true;
+        }
+        return StringUtils.contains(cacheControl, CACHE_CONTROL_S_MAXAGE);
     }
 
     /**
@@ -93,7 +105,7 @@ public final class HeaderUtils {
      * @return value of 's-maxage' directive and 0 if it is absent
      */
     public static long sMaxage(final WebResponse response) {
-        if (containsValue(response, CACHE_CONTROL_S_MAXAGE)) {
+        if (containsCacheControlValue(response, CACHE_CONTROL_S_MAXAGE)) {
             return directiveValue(response, S_MAXAGE_HEADER_PATTERN);
         }
         return 0;
@@ -104,7 +116,7 @@ public final class HeaderUtils {
      * @return value of 'max-age' directive and 0 if it is absent
      */
     public static long maxAge(final WebResponse response) {
-        if (containsValue(response, CACHE_CONTROL_MAX_AGE)) {
+        if (containsCacheControlValue(response, CACHE_CONTROL_MAX_AGE)) {
             return directiveValue(response, MAX_AGE_HEADER_PATTERN);
         }
 
@@ -123,7 +135,7 @@ public final class HeaderUtils {
         return 0;
     }
 
-    private static boolean containsValue(final WebResponse response, final String value) {
+    private static boolean containsCacheControlValue(final WebResponse response, final String value) {
         final String cacheControl = response.getResponseHeaderValue(HttpHeader.CACHE_CONTROL);
         return StringUtils.contains(cacheControl, value);
     }

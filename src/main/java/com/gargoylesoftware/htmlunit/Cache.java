@@ -110,6 +110,42 @@ public class Cache implements Serializable {
         public void touch() {
             lastAccess_ = System.currentTimeMillis();
         }
+
+        /**
+         * <p>Check freshness return value if
+         * a) s-maxage specified
+         * b) max-age specified
+         * c) expired specified
+         * otherwise return {@code null}</p>
+         *
+         * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
+         *
+         * @param response
+         * @param createdAt
+         * @return freshnessLifetime
+         */
+        private boolean checkFreshness(final long now) {
+            long freshnessLifetime = 0;
+            if (!HeaderUtils.containsPrivate(response_) && HeaderUtils.containsSMaxage(response_)) {
+                // check s-maxage
+                freshnessLifetime = HeaderUtils.sMaxage(response_);
+            }
+            else if (HeaderUtils.containsMaxAge(response_)) {
+                // check max-age
+                freshnessLifetime = HeaderUtils.maxAge(response_);
+            }
+            else if (response_.getResponseHeaderValue(HttpHeader.EXPIRES) != null) {
+                final Date expires = parseDateHeader(response_, HttpHeader.EXPIRES);
+                if (expires != null) {
+                    // use the same logic as in isCacheableContent()
+                    return expires.getTime() - now > DELAY;
+                }
+            }
+            else {
+                return true;
+            }
+            return now - createdAt_ < freshnessLifetime * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_SECOND;
+        }
     }
 
     /**
@@ -206,7 +242,14 @@ public class Cache implements Serializable {
         }
 
         final Date lastModified = parseDateHeader(response, HttpHeader.LAST_MODIFIED);
-        final Date expires = parseDateHeader(response, HttpHeader.EXPIRES);
+
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires
+        // If there is a Cache-Control header with the max-age or s-maxage directive
+        // in the response, the Expires header is ignored.
+        Date expires = null;
+        if (!HeaderUtils.containsMaxAgeOrSMaxage(response)) {
+            expires = parseDateHeader(response, HttpHeader.EXPIRES);
+        }
 
         final long now = getCurrentTimestamp();
 
@@ -230,7 +273,7 @@ public class Cache implements Serializable {
      * @param headerName the header name
      * @return the specified date header of the specified response
      */
-    protected Date parseDateHeader(final WebResponse response, final String headerName) {
+    protected static Date parseDateHeader(final WebResponse response, final String headerName) {
         final String value = response.getResponseHeaderValue(headerName);
         if (value == null) {
             return null;
@@ -287,13 +330,15 @@ public class Cache implements Serializable {
         if (url == null) {
             return null;
         }
-        final Entry cachedEntry = entries_.get(UrlUtils.normalize(url));
+
+        final String normalizedUrl = UrlUtils.normalize(url);
+        final Entry cachedEntry = entries_.get(normalizedUrl);
         if (cachedEntry == null) {
             return null;
         }
 
         // check if object still fresh
-        if (checkFreshness(cachedEntry.response_, cachedEntry.createdAt_)) {
+        if (cachedEntry.checkFreshness(getCurrentTimestamp())) {
             synchronized (entries_) {
                 cachedEntry.touch();
             }
@@ -301,43 +346,6 @@ public class Cache implements Serializable {
         }
         entries_.remove(UrlUtils.normalize(url));
         return null;
-    }
-
-    /**
-     * <p>Check freshness return value if
-     * a) s-maxage specified
-     * b) max-age specified
-     * c) expired specified
-     * otherwise return {@code null}</p>
-     *
-     * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
-     *
-     * @param response
-     * @param createdAt
-     * @return freshnessLifetime
-     */
-    private boolean checkFreshness(final WebResponse response, final long createdAt) {
-        final long now = getCurrentTimestamp();
-        long freshnessLifetime = 0;
-        if (!HeaderUtils.containsPrivate(response) && HeaderUtils.containsSMaxage(response)) {
-            // check s-maxage
-            freshnessLifetime = HeaderUtils.sMaxage(response);
-        }
-        else if (HeaderUtils.containsMaxAge(response)) {
-            // check max-age
-            freshnessLifetime = HeaderUtils.maxAge(response);
-        }
-        else if (response.getResponseHeaderValue(HttpHeader.EXPIRES) != null) {
-            final Date expires = parseDateHeader(response, HttpHeader.EXPIRES);
-            if (expires != null) {
-                // use the same logic as in isCacheableContent()
-                return expires.getTime() - now > DELAY;
-            }
-        }
-        else {
-            return true;
-        }
-        return now - createdAt < freshnessLifetime * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_SECOND;
     }
 
     /**
