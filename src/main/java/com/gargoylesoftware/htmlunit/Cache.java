@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -124,7 +125,7 @@ public class Cache implements Serializable {
          * @param createdAt
          * @return freshnessLifetime
          */
-        private boolean checkFreshness(final long now) {
+        private boolean isStillFresh(final long now) {
             long freshnessLifetime = 0;
             if (!HeaderUtils.containsPrivate(response_) && HeaderUtils.containsSMaxage(response_)) {
                 // check s-maxage
@@ -179,7 +180,7 @@ public class Cache implements Serializable {
      * than requests and responses as is done above) because a) this allows us to cache inline CSS, b) CSS is
      * extremely expensive to parse, so we want to avoid it as much as possible, c) CSS files aren't usually
      * nearly as large as JavaScript files, so memory bloat won't be too bad, and d) caching on requests and
-     * responses requires checking dynamicity (see {@link #isCacheableContent(WebResponse)}), and headers often
+     * responses requires checking dynamically (see {@link #isCacheableContent(WebResponse)}), and headers often
      * aren't set up correctly, disallowing caching when in fact it should be allowed.
      *
      * @param css the CSS snippet from which <tt>styleSheet</tt> is derived
@@ -337,8 +338,7 @@ public class Cache implements Serializable {
             return null;
         }
 
-        // check if object still fresh
-        if (cachedEntry.checkFreshness(getCurrentTimestamp())) {
+        if (cachedEntry.isStillFresh(getCurrentTimestamp())) {
             synchronized (entries_) {
                 cachedEntry.touch();
             }
@@ -410,6 +410,24 @@ public class Cache implements Serializable {
                 }
             }
             entries_.clear();
+        }
+    }
+
+    /**
+     * Removes outdated entries from the cache.
+     */
+    public void clearOutdated() {
+        synchronized (entries_) {
+            final long now = getCurrentTimestamp();
+
+            final Iterator<Map.Entry<String, Entry>> iter = entries_.entrySet().iterator();
+            while (iter.hasNext()) {
+                final Map.Entry<String, Entry> entry = iter.next();
+                if (entry.getValue().response_ == null
+                        || !entry.getValue().isStillFresh(now)) {
+                    iter.remove();
+                }
+            }
         }
     }
 }

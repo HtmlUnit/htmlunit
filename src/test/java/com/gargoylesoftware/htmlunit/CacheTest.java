@@ -476,6 +476,12 @@ public class CacheTest extends SimpleWebTestCase {
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
         assertEquals(4, connection.getRequestCount());
+
+        // wait for max-age seconds + 1 for recache
+        Thread.sleep(2 * 1000);
+        client.getCache().clearOutdated();
+        assertEquals(0, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
     }
 
     /**
@@ -513,6 +519,12 @@ public class CacheTest extends SimpleWebTestCase {
         Thread.sleep(2 * 1000);
         client.getPage(pageUrl);
         assertEquals(2, client.getCache().getSize());
+        assertEquals(4, connection.getRequestCount());
+
+        // wait for s-maxage seconds + 1 for recache
+        Thread.sleep(2 * 1000);
+        client.getCache().clearOutdated();
+        assertEquals(0, client.getCache().getSize());
         assertEquals(4, connection.getRequestCount());
     }
 
