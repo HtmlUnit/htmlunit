@@ -6956,6 +6956,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function Proxy() { [native code] }",
             FF = "function Proxy() {\n    [native code]\n}",
             IE = "exception")
+    @NotYetImplemented({CHROME, FF})
     public void proxy() throws Exception {
         test("Proxy");
     }
