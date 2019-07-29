@@ -471,8 +471,7 @@ public class WebSocketTest extends WebDriverTestCase {
                 "onCloseListener code: 1006  wasClean: false",
                 "onClose code: 1006  wasClean: false"})
     public void eventsNoSocketServer() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
-            null, null, null);
+        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host", null, null, null);
         try {
             final WebDriver driver = getWebDriver();
             driver.get(URL_FIRST + "WebSocketTest_events.html");
@@ -481,7 +480,7 @@ public class WebSocketTest extends WebDriverTestCase {
             int counter = 0;
             String text;
             do {
-                Thread.sleep(100);
+                Thread.sleep(DEFAULT_WAIT_TIME);
 
                 text = logElement.getAttribute("value").trim().replaceAll("\r", "");
             }

@@ -177,13 +177,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static final Map<BrowserVersion, Integer> WEB_DRIVERS_REAL_BROWSERS_USAGE_COUNT = new HashMap<>();
 
     private static Server STATIC_SERVER_;
-    private static String STATIC_SERVER_STARTER_;
+    private static String STATIC_SERVER_STARTER_; // stack trace to save the server start code location
     // second server for cross-origin tests.
     private static Server STATIC_SERVER2_;
-    private static String STATIC_SERVER2_STARTER_;
+    private static String STATIC_SERVER2_STARTER_; // stack trace to save the server start code location
     // third server for multi-origin cross-origin tests.
     private static Server STATIC_SERVER3_;
-    private static String STATIC_SERVER3_STARTER_;
+    private static String STATIC_SERVER3_STARTER_; // stack trace to save the server start code location
 
     private static Boolean LAST_TEST_UsesMockWebConnection_;
     private static final Executor EXECUTOR_POOL = Executors.newFixedThreadPool(4);
@@ -381,7 +381,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Stops all WebServers.
+     * Asserts all static servers are null.
      * @throws Exception if it fails
      */
     protected static void assertWebServersStopped() throws Exception {
