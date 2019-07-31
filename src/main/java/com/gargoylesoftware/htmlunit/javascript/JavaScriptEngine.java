@@ -643,7 +643,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (webClient_ != null && webClient_.getOptions().isJavaScriptEnabled()) {
+        if (webClient_ != null) {
             if (javaScriptExecutor_ == null) {
                 javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
             }

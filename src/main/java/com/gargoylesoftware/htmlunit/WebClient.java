@@ -246,7 +246,9 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         webConnection_ = new HttpWebConnection(this); // this has to be done after the browser version was set
-        scriptEngine_ = new JavaScriptEngine(this);
+        if (getOptions().isJavaScriptEnabled()) {
+            scriptEngine_ = new JavaScriptEngine(this);
+        }
         loadQueue_ = new ArrayList<>();
 
         // The window must be constructed AFTER the script engine.
