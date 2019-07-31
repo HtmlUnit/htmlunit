@@ -179,7 +179,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
     /**
      * Returns the JavaScriptExecutor.
-     * @return the JavaScriptExecutor.
+     * @return the JavaScriptExecutor or null if javascript is disabled
+     *  or no executor was required so far.
      */
     public JavaScriptExecutor getJavaScriptExecutor() {
         return javaScriptExecutor_;
@@ -642,7 +643,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
-        if (webClient_ != null) {
+        if (webClient_ != null && webClient_.getOptions().isJavaScriptEnabled()) {
             if (javaScriptExecutor_ == null) {
                 javaScriptExecutor_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptExecutor(webClient_);
             }
