@@ -33,12 +33,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.ConsString;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -68,6 +70,44 @@ public class Console extends SimpleScriptable {
      */
     public void setWebWindow(final WebWindow webWindow) {
         webWindow_ = webWindow;
+    }
+
+    /**
+     * This method writes an error message to the console if the
+     * assertion is false. If the assertion is true, nothing happens.
+     * @param cx the JavaScript context
+     * @param thisObj the scriptable
+     * @param args the arguments passed into the method
+     * @param funObj the function
+     */
+    @JsxFunction(functionName = "assert")
+    public static void assertMethod(final Context cx, final Scriptable thisObj,
+        final Object[] args, final Function funObj) {
+        if (args.length < 1 || ScriptRuntime.toBoolean(args[0])) {
+            return;
+        }
+
+        if (args.length == 1) {
+            log(cx, thisObj, new String[] {"Assertion failed"}, null);
+            return;
+        }
+
+        final Object[] data;
+        final Object first = args[1];
+        if (first instanceof String
+                || first instanceof ConsString
+                || first instanceof ScriptableObject && ("String".equals(((Scriptable) first).getClassName()))) {
+            data = new Object[args.length - 1];
+            data[0] = "Assertion failed: " + first.toString();
+            System.arraycopy(args, 2, data, 1, data.length - 1);
+        }
+        else {
+            data = new Object[args.length];
+            data[0] = "Assertion failed:";
+            System.arraycopy(args, 1, data, 1, data.length - 1);
+        }
+
+        log(cx, thisObj, data, null);
     }
 
     /**
@@ -317,7 +357,7 @@ public class Console extends SimpleScriptable {
                             sb.append(", ");
                         }
                         sb.append(key);
-                        sb.append(':');
+                        sb.append(": ");
                         appendValue(obj.get(key), sb, level + 1);
                         needsSeparator = true;
                     }

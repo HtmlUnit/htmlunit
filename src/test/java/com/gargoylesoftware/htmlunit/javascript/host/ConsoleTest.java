@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -154,7 +151,7 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver({FF, IE})
+    @BuggyWebDriver
     public void simpleString() throws Exception {
         final String html
             = "<html>\n"
@@ -182,5 +179,142 @@ public class ConsoleTest extends WebDriverTestCase {
             assertTrue(logEntry.getTimestamp() >= timestamp);
             timestamp = logEntry.getTimestamp();
         }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void assertOnly() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  number = 1;\n"
+            + "  console.assert(number % 2 === 0);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        assertTrue(logEntry.getMessage(), logEntry.getMessage().contains("Assertion failed"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void assertString() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  number = 1;\n"
+            + "  console.assert(number % 2 === 0, 'the # is not even');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        assertTrue(logEntry.getMessage(), logEntry.getMessage().contains("Assertion failed: the # is not even"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void assertObject() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  number = 1;\n"
+            + "  console.assert(number % 2 === 0, {number: number, errorMsg: 'the # is not even'});\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        assertTrue(logEntry.getMessage(), logEntry.getMessage()
+                .contains("Assertion failed: ({number: 1.0, errorMsg: \"the # is not even\"})"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void assertObjects() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  number = 1;\n"
+            + "  console.assert(number % 2 === 0, {number: number}, {errorMsg: 'the # is not even'});\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        assertTrue(logEntry.getMessage(), logEntry.getMessage()
+                .contains("Assertion failed: ({number: 1.0}) ({errorMsg: \"the # is not even\"})"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void assertParams() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  console.assert(false, 'the word is %s', 'foo');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        assertTrue(logEntry.getMessage(), logEntry.getMessage()
+                .contains("Assertion failed: the word is foo"));
     }
 }
