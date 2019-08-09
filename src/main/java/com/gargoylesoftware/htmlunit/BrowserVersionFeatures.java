@@ -47,7 +47,7 @@ public enum BrowserVersionFeatures {
 
     /** Ignore target when {@code href} is a javascript snippet. */
     @BrowserFeature(CHROME)
-    ANCHOR_IGNORE_TARGET_FOR_JS_HREF,
+    ANCHOR_SEND_PING_REQUEST,
 
     /** Background image is 'initial'. */
     @BrowserFeature(CHROME)

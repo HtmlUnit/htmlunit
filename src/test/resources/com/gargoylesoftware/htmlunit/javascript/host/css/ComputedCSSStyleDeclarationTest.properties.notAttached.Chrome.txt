@@ -12,6 +12,7 @@ animationIterationCount=:
 animationName=:
 animationPlayState=:
 animationTimingFunction=:
+backdropFilter=:
 backfaceVisibility=:
 background=:
 backgroundAttachment=:
