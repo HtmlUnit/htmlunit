@@ -12,11 +12,11 @@
                 INCOMPATIBLE CHANGE: WebConnection.close() and WebConnectionWrapper.close() are throwing an
                 IOException instead of an Exception now.
             </action>
+            <action type="add" dev="rbri" issue="#66">
+                Console.assert(..) added.
+            </action>
             <action type="fix" dev="rbri" issue="#65">
                 Do not start the (Default)JavascriptExecutor if javascript is disabled for the client.
-            </action>
-            <action type="add" dev="rbri">
-                Console.assert(..) added.
             </action>
             <action type="add" dev="rbri">
                 New method com.gargoylesoftware.htmlunit.Cache.clearOutdated() to remove outdated entries.
