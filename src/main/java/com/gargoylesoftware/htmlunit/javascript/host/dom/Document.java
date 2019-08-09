@@ -32,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_D
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
@@ -354,20 +353,13 @@ public class Document extends Node {
     @JsxSetter
     public void setLocation(final String location) throws IOException {
         final Object event = getWindow().getEvent();
-        boolean setLocation = true;
         if (event instanceof UIEvent) {
             final Object target = ((UIEvent) event).getTarget();
             if (target instanceof HTMLAnchorElement) {
                 final String href = ((HTMLAnchorElement) target).getHref();
-                if (!href.isEmpty()
-                        && !getBrowserVersion().hasFeature(JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR)) {
-                    setLocation = false;
-                }
             }
         }
-        if (setLocation) {
-            window_.setLocation(location);
-        }
+        window_.setLocation(location);
     }
 
     /**

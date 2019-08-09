@@ -7283,6 +7283,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSctpTransport() { [native code] }")
+    @NotYetImplemented(CHROME)
     public void rtcSctpTransport() throws Exception {
         test("RTCSctpTransport");
     }
@@ -7294,6 +7295,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSessionDescription() { [native code] }",
             FF = "function RTCSessionDescription() {\n    [native code]\n}")
+    @NotYetImplemented(CHROME)
     public void rtcSessionDescription() throws Exception {
         test("RTCSessionDescription");
     }
