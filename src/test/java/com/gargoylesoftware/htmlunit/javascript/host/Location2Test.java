@@ -564,8 +564,7 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "foo3.html", "foo2.html"},
-            CHROME = {"", "foo2.html"})
+    @Alerts({"", "foo3.html", "foo2.html"})
     public void onlick_set_location_WithHref() throws Exception {
         final String html =
             "<html><head></head>\n"
@@ -575,6 +574,8 @@ public class Location2Test extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("");
         final WebDriver driver = loadPage2(html);
+
+        assertEquals(new String[] {}, getMockWebConnection().getRequestedUrls(URL_FIRST));
         driver.findElement(By.tagName("a")).click();
 
         assertEquals(getExpectedAlerts(), getMockWebConnection().getRequestedUrls(URL_FIRST));

@@ -24,7 +24,7 @@
         <htmlunitcorejs.version>2.36.0-SNAPSHOT</htmlunitcorejs.version>
 
         <jetty.version>9.4.19.v20190610</jetty.version>
-        <log4j.version>2.12.0</log4j.version>
+        <log4j.version>2.12.1</log4j.version>
         <slf4j.version>1.7.27</slf4j.version>
         <selenium.version>3.141.59</selenium.version>
 

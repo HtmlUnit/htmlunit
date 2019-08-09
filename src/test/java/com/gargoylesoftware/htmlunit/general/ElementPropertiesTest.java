@@ -1413,6 +1413,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,reportValidity(),reset(),submit(),"
                 + "target",
+            CHROME = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,length,method,name,"
+                    + "noValidate,reportValidity(),requestSubmit(),reset(),submit(),"
+                    + "target",
             IE = "acceptCharset,action,autocomplete,checkValidity(),elements,encoding,enctype,item(),length,method,"
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
@@ -3151,7 +3154,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,onpointerlockerror,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreadystatechange,onreset,onresize,"
-                + "onresume,onscroll,onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onresume,onscroll,onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,"
+                + "onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvisibilitychange,onvolumechange,onwaiting,"
                 + "onwebkitfullscreenchange,"
                 + "onwebkitfullscreenerror,onwheel,open(),pictureInPictureElement,pictureInPictureEnabled,"

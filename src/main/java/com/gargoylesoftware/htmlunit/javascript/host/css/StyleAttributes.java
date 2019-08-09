@@ -180,6 +180,9 @@ public final class StyleAttributes {
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
 
+        /** The style property {@code backdropFilter}. */
+        BACKDROP_FILTER("backdropFilter", "backdrop-filter", chrome("none")),
+
         /** The style property {@code backfaceVisibility}. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility",
                 ff("visible"), ie("visible"), chrome("visible")),
@@ -2358,7 +2361,7 @@ public final class StyleAttributes {
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
         /** The style property {@code overscrollBehavior}. */
-        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto auto"), ff60up("")),
+        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto"), ff60up("")),
 
         /** The style property {@code overscroll-behavior}. */
         OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff60up("")),

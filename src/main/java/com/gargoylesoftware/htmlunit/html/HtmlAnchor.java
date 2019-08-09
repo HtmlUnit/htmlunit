@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_EMPTY_HREF_NO_FILENAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_IGNORE_TARGET_FOR_JS_HREF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_PING_REQUEST;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -130,27 +130,22 @@ public class HtmlAnchor extends HtmlElement {
                 builder.append(ch);
             }
 
-            if (hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF) && !shiftKey && !ctrlKey) {
-                page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
+            final String target;
+            if (shiftKey || ctrlKey) {
+                target = "_blank";
             }
             else {
-                final String target;
-                if (shiftKey || ctrlKey) {
-                    target = "_blank";
-                }
-                else {
-                    target = page.getResolvedTarget(getTargetAttribute());
-                }
-                final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
-                Page enclosedPage = win.getEnclosedPage();
-                if (enclosedPage == null) {
-                    win.getWebClient().getPage(win, WebRequest.newAboutBlankRequest());
-                    enclosedPage = win.getEnclosedPage();
-                }
-                if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                    page = (HtmlPage) enclosedPage;
-                    page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
-                }
+                target = page.getResolvedTarget(getTargetAttribute());
+            }
+            final WebWindow win = page.getWebClient().openTargetWindow(page.getEnclosingWindow(), target, "_self");
+            Page enclosedPage = win.getEnclosedPage();
+            if (enclosedPage == null) {
+                win.getWebClient().getPage(win, WebRequest.newAboutBlankRequest());
+                enclosedPage = win.getEnclosedPage();
+            }
+            if (enclosedPage != null && enclosedPage.isHtmlPage()) {
+                page = (HtmlPage) enclosedPage;
+                page.executeJavaScript(builder.toString(), "javascript url", getStartLineNumber());
             }
             return;
         }
@@ -158,7 +153,7 @@ public class HtmlAnchor extends HtmlElement {
         final URL url = getTargetUrl(href, page);
 
         final BrowserVersion browser = page.getWebClient().getBrowserVersion();
-        if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_IGNORE_TARGET_FOR_JS_HREF)) {
+        if (ATTRIBUTE_NOT_DEFINED != getPingAttribute() && browser.hasFeature(ANCHOR_SEND_PING_REQUEST)) {
             final URL pingUrl = getTargetUrl(getPingAttribute(), page);
             final WebRequest pingRequest = new WebRequest(pingUrl, HttpMethod.POST);
             pingRequest.setAdditionalHeader(HttpHeader.PING_FROM, page.getUrl().toExternalForm());

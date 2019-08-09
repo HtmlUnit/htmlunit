@@ -451,8 +451,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "inner", "# "},
-            CHROME = {"0", "# inner", "main"})
+    @Alerts({"1", "inner", "# "})
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
@@ -473,8 +472,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "inner", "# "},
-            CHROME = {"0", "# inner", "main"})
+    @Alerts({"1", "inner", "# "})
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
@@ -486,8 +484,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"inner", "# main"},
-            CHROME = {"# inner", "main"})
+    @Alerts({"inner", "# main"})
     public void javascriptTargetTop() throws Exception {
         javascriptTarget("target='_top'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -496,8 +493,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"inner", "# main"},
-            CHROME = {"# inner", "main"})
+    @Alerts({"inner", "# main"})
     public void javascriptTargetParent() throws Exception {
         javascriptTarget("target='_parent'", 0, getExpectedAlerts()[0], getExpectedAlerts()[1]);
     }
@@ -506,8 +502,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"1", "inner", "# "},
-            CHROME = {"0", "# inner", "main"})
+    @Alerts({"1", "inner", "# "})
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",
@@ -529,7 +524,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         final String secondHtml
             = "<html>\n"
             + "<head><title>inner</title></head>\n"
-            + "<body  title='inner'>\n"
+            + "<body title='inner'>\n"
             + "  <a id='tester' " + target
                 + " href='javascript: try { document.body.setAttribute(\"title\", \"# \" + document.title); } "
                 + "catch(e) { alert(e); }'>no href</a>\n"
@@ -550,7 +545,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         assertEquals(frameAlerts, titleVal);
 
         final Set<String> windows = driver.getWindowHandles();
-        assertEquals(1 + newWindows, driver.getWindowHandles().size());
+        assertEquals(1 + newWindows, windows.size());
 
         if (newWindows > 0) {
             windows.remove(firstWindow);
