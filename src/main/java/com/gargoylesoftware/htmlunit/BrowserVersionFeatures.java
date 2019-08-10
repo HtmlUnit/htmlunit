@@ -721,10 +721,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
-    /** If setting the document.location inside onclick() of anchor element should be triggered. */
-    @BrowserFeature({IE, FF})
-    JS_DOCUMENT_SET_LOCATION_EXECUTED_IN_ANCHOR,
-
     /** createHTMLDucument requires a title. */
     @BrowserFeature(IE)
     JS_DOMIMPLEMENTATION_CREATE_HTMLDOCOMENT_REQUIRES_TITLE,
