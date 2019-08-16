@@ -29,10 +29,10 @@ For maven, you would add:
 * Support for submit methods POST and GET (as well as HEAD, DELETE, ...)
 * Ability to customize the request headers being sent to the server
 * Support for HTML responses
-** Wrapper for HTML pages that provides easy access to all information contained inside them
-** Support for submitting forms
-** Support for clicking links
-** Support for walking the DOM model of the HTML document
+  * Wrapper for HTML pages that provides easy access to all information contained inside them
+  * Support for submitting forms
+  * Support for clicking links
+  * Support for walking the DOM model of the HTML document
 * Proxy server support
 * Support for basic and NTLM authentication
 * Excellent JavaScript support (see the JavaScript section below)
