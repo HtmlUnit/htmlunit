@@ -23,9 +23,9 @@
         <htmlunitneko.version>2.36.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.36.0-SNAPSHOT</htmlunitcorejs.version>
 
-        <jetty.version>9.4.19.v20190610</jetty.version>
+        <jetty.version>9.4.20.v20190813</jetty.version>
         <log4j.version>2.12.1</log4j.version>
-        <slf4j.version>1.7.27</slf4j.version>
+        <slf4j.version>1.7.28</slf4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
