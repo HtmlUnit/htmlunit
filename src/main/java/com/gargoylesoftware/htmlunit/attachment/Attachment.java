@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.attachment;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
@@ -53,7 +54,7 @@ public class Attachment {
      */
     public String getSuggestedFilename() {
         final WebResponse response = page_.getWebResponse();
-        final String disp = response.getResponseHeaderValue("Content-Disposition");
+        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
         int start = disp.indexOf("filename=");
         if (start == -1) {
             return null;
@@ -81,7 +82,7 @@ public class Attachment {
      * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
      */
     public static boolean isAttachment(final WebResponse response) {
-        final String disp = response.getResponseHeaderValue("Content-Disposition");
+        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
         if (disp == null) {
             return false;
         }

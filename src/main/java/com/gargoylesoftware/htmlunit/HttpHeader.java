@@ -89,6 +89,9 @@ public final class HttpHeader {
     /** connection. */
     public static final String CONNECTION_LC = "connection";
 
+    /** Connection. */
+    public static final String CONTENT_DISPOSITION = "Content-Disposition";
+
     /** DNT. */
     public static final String DNT = "DNT";
 
