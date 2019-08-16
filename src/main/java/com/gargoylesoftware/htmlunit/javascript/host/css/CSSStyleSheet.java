@@ -1332,7 +1332,11 @@ public class CSSStyleSheet extends StyleSheet {
                         break;
 
                     case "resolution":
-                        val = resolutionValue(property.getValue());
+                        final CSSValueImpl propValue = property.getValue();
+                        val = resolutionValue(propValue);
+                        if (propValue == null) {
+                            return true;
+                        }
                         if (val == -1 || Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
                             return false;
                         }
@@ -1353,7 +1357,15 @@ public class CSSStyleSheet extends StyleSheet {
                         break;
 
                     case "orientation":
-                        final String orient = property.getValue().getCssText();
+                        final CSSValueImpl cssValue = property.getValue();
+                        if (cssValue == null) {
+                            if (LOG.isWarnEnabled()) {
+                                LOG.warn("CSSValue is null not supported for feature 'orientation'");
+                            }
+                            return true;
+                        }
+
+                        final String orient = cssValue.getCssText();
                         final WebWindow window = scriptable.getWindow().getWebWindow();
                         if ("portrait".equals(orient)) {
                             if (window.getInnerWidth() > window.getInnerHeight()) {
@@ -1383,6 +1395,13 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static double pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
+        if (cssValue == null) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
+            }
+            return -1;
+        }
+
         final LexicalUnit.LexicalUnitType luType = cssValue.getLexicalUnitType();
         if (luType != null) {
             final int dpi;
@@ -1423,6 +1442,13 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private static double resolutionValue(final CSSValueImpl cssValue) {
+        if (cssValue == null) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("CSSValue is null but has to be a 'dpi', 'dpcm', or 'dppx' value.");
+            }
+            return -1;
+        }
+
         if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
             final String text = cssValue.getCssText();
             if (text.endsWith("dpi")) {

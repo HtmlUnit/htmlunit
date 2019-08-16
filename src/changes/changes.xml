@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: WebConnection.close() and WebConnectionWrapper.close() are throwing an
                 IOException instead of an Exception now.
             </action>
+            <action type="fix" dev="rbri">
+                Correct handling of media properties without values.
+            </action>
             <action type="add" dev="rbri" issue="#66">
                 Console.assert(..) added.
             </action>
