@@ -81,7 +81,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
@@ -742,8 +742,8 @@ public class Document extends Node {
             throw Context.reportRuntimeError("XUL not available");
         }
 
-        if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
-                || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
+        if (Html.XHTML_NAMESPACE.equals(namespaceURI)
+                || Html.SVG_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
         }
         else {

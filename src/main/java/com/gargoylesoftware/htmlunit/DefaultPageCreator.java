@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -164,7 +165,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             case XML:
                 final SgmlPage sgmlPage = createXmlPage(webResponse, webWindow);
                 final DomElement doc = sgmlPage.getDocumentElement();
-                if (doc != null && HTMLParser.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
+                if (doc != null && Html.XHTML_NAMESPACE.equals(doc.getNamespaceURI())) {
                     return createXHtmlPage(webResponse, webWindow);
                 }
                 return sgmlPage;

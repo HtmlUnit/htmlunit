@@ -156,7 +156,7 @@ public abstract class HtmlElement extends DomElement {
      */
     protected HtmlElement(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        this(HTMLParser.XHTML_NAMESPACE, qualifiedName, page, attributes);
+        this(Html.XHTML_NAMESPACE, qualifiedName, page, attributes);
     }
 
     /**

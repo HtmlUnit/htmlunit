@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -439,8 +439,8 @@ public class XMLDOMDocument extends XMLDOMNode {
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             throw Context.reportRuntimeError("XUL not available");
         }
-        else if (HTMLParser.XHTML_NAMESPACE.equals(namespaceURI)
-                || HTMLParser.SVG_NAMESPACE.equals(namespaceURI)) {
+        else if (Html.XHTML_NAMESPACE.equals(namespaceURI)
+                || Html.SVG_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
         }
         else {

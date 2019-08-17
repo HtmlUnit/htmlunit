@@ -70,7 +70,7 @@ public abstract class DomNamespaceNode extends DomNode {
     @Override
     public String getNamespaceURI() {
         if (getPage().isHtmlPage() && !(getPage() instanceof XHtmlPage)
-            && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)
+            && Html.XHTML_NAMESPACE.equals(namespaceURI_)
             && XPathHelper.isProcessingXPath()) {
             // for Xalan processing we have to strip the 'default' XHTML namespace for HTML pages to be able to find
             // the elements by XPath without needing to add the namespace to it
@@ -137,7 +137,7 @@ public abstract class DomNamespaceNode extends DomNode {
         // we have to drop the XHtmlNamespace because we did this already
         // for the HTML document itself
         final SgmlPage page = (SgmlPage) doc.getDomNodeOrDie();
-        if (page.isHtmlPage() && !(page instanceof XHtmlPage) && HTMLParser.XHTML_NAMESPACE.equals(namespaceURI_)) {
+        if (page.isHtmlPage() && !(page instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI_)) {
             namespaceURI_ = null;
         }
     }

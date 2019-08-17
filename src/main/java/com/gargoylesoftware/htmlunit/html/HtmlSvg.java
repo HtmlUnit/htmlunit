@@ -39,6 +39,6 @@ public class HtmlSvg extends HtmlElement {
      */
     HtmlSvg(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(HTMLParser.SVG_NAMESPACE, qualifiedName, page, attributes);
+        super(Html.SVG_NAMESPACE, qualifiedName, page, attributes);
     }
 }

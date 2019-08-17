@@ -92,12 +92,6 @@ import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
  */
 public final class HTMLParser {
 
-    /** XHTML namespace. */
-    public static final String XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
-
-    /** SVG namespace. */
-    public static final String SVG_NAMESPACE = "http://www.w3.org/2000/svg";
-
     /**
      * The SVG factory.
      */
@@ -364,8 +358,8 @@ public final class HTMLParser {
         }
 
         if (namespaceURI == null || namespaceURI.isEmpty()
-            || XHTML_NAMESPACE.equals(namespaceURI)
-            || SVG_NAMESPACE.equals(namespaceURI)
+            || Html.XHTML_NAMESPACE.equals(namespaceURI)
+            || Html.SVG_NAMESPACE.equals(namespaceURI)
             || !qualifiedName.contains(":")) {
 
             String tagName = qualifiedName;
@@ -377,7 +371,7 @@ public final class HTMLParser {
                 tagName = tagName.substring(index + 1);
             }
             final ElementFactory factory;
-            if (svgSupport && !"svg".equals(tagName) && SVG_NAMESPACE.equals(namespaceURI)) {
+            if (svgSupport && !"svg".equals(tagName) && Html.SVG_NAMESPACE.equals(namespaceURI)) {
                 factory = SVG_FACTORY;
             }
             else {
@@ -581,7 +575,7 @@ public final class HTMLParser {
             }
 
             // Add the new node.
-            if (!(page_ instanceof XHtmlPage) && XHTML_NAMESPACE.equals(namespaceURI)) {
+            if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI)) {
                 namespaceURI = null;
             }
 
@@ -593,7 +587,7 @@ public final class HTMLParser {
 
             final ElementFactory factory = getElementFactory(page_, namespaceURI, qName, insideSvg_, false);
             if (factory == SVG_FACTORY) {
-                namespaceURI = SVG_NAMESPACE;
+                namespaceURI = Html.SVG_NAMESPACE;
             }
             final DomElement newElement = factory.createElementNS(page_, namespaceURI, qName, atts, true);
             newElement.setStartLocation(locator_.getLineNumber(), locator_.getColumnNumber());
