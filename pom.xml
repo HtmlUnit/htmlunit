@@ -11,7 +11,9 @@
         <url>http://www.GargoyleSoftware.com/</url>
     </organization>
     <packaging>jar</packaging>
-    <description>A headless browser intended for use in testing web-based applications.</description>
+    <description>
+        A headless browser intended for use in testing web-based applications.
+    </description>
     <url>http://htmlunit.sourceforge.net</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,7 +43,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <!-- Update the links reference in PDM and clover plugins when this changes -->
+                    <!-- Update the links reference in PDM plugin when this changes -->
                     <source>1.8</source>
                     <target>1.8</target>
                     <testExcludes>
