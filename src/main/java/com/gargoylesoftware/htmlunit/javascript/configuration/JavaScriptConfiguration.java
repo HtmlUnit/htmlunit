@@ -75,7 +75,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.WebSocket;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.XPathExpression;
-import com.gargoylesoftware.htmlunit.javascript.host.WebkitURL1;
+import com.gargoylesoftware.htmlunit.javascript.host.WebkitURL;
 import com.gargoylesoftware.htmlunit.javascript.host.animations.Animation;
 import com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.animations.KeyframeEffect;
@@ -585,7 +585,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         WebKitCSSMatrix.class, WebkitMediaStream.class, WebKitMutationObserver.class,
         WebkitRTCPeerConnection.class, WebkitSpeechGrammar.class,
         WebkitSpeechGrammarList.class, WebkitSpeechRecognition.class, WebkitSpeechRecognitionError.class,
-        WebkitSpeechRecognitionEvent.class, WebkitURL1.class,
+        WebkitSpeechRecognitionEvent.class, WebkitURL.class,
         WebSocket.class, WheelEvent.class, Window.class, Worker.class, XMLDocument.class,
         XMLHttpRequest.class, XMLHttpRequestEventTarget.class, XMLHttpRequestUpload.class, XMLSerializer.class,
         XPathEvaluator.class, XPathExpression.class,
