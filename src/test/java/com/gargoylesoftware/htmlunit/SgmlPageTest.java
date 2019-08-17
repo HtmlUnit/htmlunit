@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
-import com.gargoylesoftware.htmlunit.html.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -116,7 +116,7 @@ public final class SgmlPageTest extends WebServerTestCase {
 
         final HtmlPage page = loadPage(html);
 
-        final DomNodeList<DomElement> elements = page.getElementsByTagNameNS(HTMLParser.XHTML_NAMESPACE, "*");
+        final DomNodeList<DomElement> elements = page.getElementsByTagNameNS(Html.XHTML_NAMESPACE, "*");
 
         assertEquals(9, elements.getLength());
         validateDomNodeList(elements);
