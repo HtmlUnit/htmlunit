@@ -42,5 +42,23 @@ client .getPage(wr);
 ]]></source>
         </section>
 
+        <section name="Request headers">
+            <p>
+                A handler for attachments, which represent pages received from the server which contain
+                Content-Disposition=attachment headers. Normally pages are loaded inline: clicking on
+                a link, for example, loads the linked page in the current window. Attached pages are different
+                in that they are intended to be loaded outside of this flow: clicking on a link prompts the
+                user to either save the linked page, or open it outside of the current window, but does not
+                load the page in the current window.
+            </p>
+            <p>
+                HtmlUnit complies with the semantics described above when an <tt>AttachmentHandler</tt> has
+                been registered with the com.gargoylesoftware.htmlunit.WebClient via
+                com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler). When
+                no attachment handler has been registered with the <tt>WebClient</tt>, the semantics described
+                above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
+                are not registered with new <tt>WebClient</tt> instances.
+            </p>
+        </section>
     </body>
 </document>
