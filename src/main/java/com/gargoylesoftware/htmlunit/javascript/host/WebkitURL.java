@@ -26,12 +26,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(CHROME)
-public class webkitURL extends URL {
+public class WebkitURL1 extends URL {
 
     /**
      * Creates an instance.
      */
     @JsxConstructor
-    public webkitURL() {
+    public WebkitURL1() {
     }
 }
