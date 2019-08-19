@@ -16,7 +16,7 @@
                     a new one.
                 </p>
                 <p>
-                    If you know how to fix the problem then patches are gratefully accepted.
+                    If you know how to fix the problem then pull requests are gratefully accepted.
                 </p>
             </answer>
         </faq>
@@ -32,7 +32,7 @@
                     tracking database</a>. See the answer on bug reporting for why the database is preferred.
                 </p>
                 <p>
-                    If you're willing to write the feature yourself, you can always send us a patch.
+                    If you're willing to write the feature yourself, you can always send us a pull requests.
                 </p>
             </answer>
         </faq>
@@ -221,7 +221,7 @@ INFO: Redirect requested but followRedirects is disabled</source>
                     volunteers in their spare time.  If feature X is important to you 
                     and nobody seems to be working on it then perhaps you should consider 
                     writing it yourself and <a href="submittingPatches.html">submitting a 
-                    patch</a>.
+                    pull requests</a>.
                 </p>
             </answer>
         </faq>
