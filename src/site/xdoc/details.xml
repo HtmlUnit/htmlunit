@@ -42,7 +42,7 @@ client .getPage(wr);
 ]]></source>
         </section>
 
-        <section name="Request headers">
+        <section name="Attachments">
             <p>
                 A handler for attachments, which represent pages received from the server which contain
                 Content-Disposition=attachment headers. Normally pages are loaded inline: clicking on
