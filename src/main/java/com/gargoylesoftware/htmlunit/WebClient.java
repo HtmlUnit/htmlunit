@@ -518,7 +518,7 @@ public class WebClient implements Serializable, AutoCloseable {
             return webWindow.getEnclosedPage();
         }
 
-        if (attachmentHandler_ != null && Attachment.isAttachment(webResponse)) {
+        if (attachmentHandler_ != null && attachmentHandler_.isAttachment(webResponse)) {
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
             attachmentHandler_.handleAttachment(page);

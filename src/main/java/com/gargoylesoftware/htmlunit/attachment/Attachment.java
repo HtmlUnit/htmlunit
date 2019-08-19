@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class Attachment {
 
@@ -74,19 +75,4 @@ public class Attachment {
         }
         return disp.substring(start, end);
     }
-
-    /**
-     * Returns {@code true} if the specified response represents an attachment.
-     * @param response the response to check
-     * @return {@code true} if the specified response represents an attachment, {@code false} otherwise
-     * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
-     */
-    public static boolean isAttachment(final WebResponse response) {
-        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
-        if (disp == null) {
-            return false;
-        }
-        return disp.startsWith("attachment");
-    }
-
 }

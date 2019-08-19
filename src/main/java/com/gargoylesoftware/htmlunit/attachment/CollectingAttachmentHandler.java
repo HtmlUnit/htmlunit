@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public class CollectingAttachmentHandler implements AttachmentHandler {
 

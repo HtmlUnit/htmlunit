@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.attachment;
 
+import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * <p>A handler for attachments, which represent pages received from the server which contain
@@ -34,6 +36,7 @@ import com.gargoylesoftware.htmlunit.Page;
  * @author Bruce Chapman
  * @author Sudhan Moghe
  * @author Daniel Gredler
+ * @author Ronald Brill
  * @see com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler)
  * @see com.gargoylesoftware.htmlunit.WebClient#getAttachmentHandler()
  * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
@@ -46,4 +49,17 @@ public interface AttachmentHandler {
      */
     void handleAttachment(Page page);
 
+    /**
+     * Returns {@code true} if the specified response represents an attachment.
+     * @param response the response to check
+     * @return {@code true} if the specified response represents an attachment, {@code false} otherwise
+     * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
+     */
+    default public boolean isAttachment(final WebResponse response) {
+        final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
+        if (disp == null) {
+            return false;
+        }
+        return disp.startsWith("attachment");
+    }
 }
