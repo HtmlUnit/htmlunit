@@ -89,9 +89,14 @@
             </question>
             <answer>
                 <p>
-                    You can subclass HttpWebConnection and override getResponse() as:
+                    You can subclass WebConnectionWrapper and override getResponse() as:
             <source><![CDATA[
 
+    try (final WebClient webClient = new WebClient()) {
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        // set more options
+
+        // create a WebConnectionWrapper with an (subclassed) getResponse() impl
         new WebConnectionWrapper(webClient) {
 
             public WebResponse getResponse(WebRequest request) throws IOException {
@@ -99,7 +104,7 @@
                 if (request.getUrl().toExternalForm().contains("my_url")) {
                     String content = response.getContentAsString();
 
-                    //change content
+                    // intercept and/or change content
 
                     WebResponseData data = new WebResponseData(content.getBytes(),
                             response.getStatusCode(), response.getStatusMessage(), response.getResponseHeaders());
@@ -108,6 +113,10 @@
                 return response;
             }
         };
+
+        // use the client as usual
+        HtmlPage page = webClient.getPage(uri);
+    }
             ]]></source>
                 </p>
             </answer>

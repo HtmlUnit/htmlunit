@@ -55,7 +55,7 @@ public interface AttachmentHandler {
      * @return {@code true} if the specified response represents an attachment, {@code false} otherwise
      * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
      */
-    default public boolean isAttachment(final WebResponse response) {
+    default boolean isAttachment(final WebResponse response) {
         final String disp = response.getResponseHeaderValue(HttpHeader.CONTENT_DISPOSITION);
         if (disp == null) {
             return false;
