@@ -17,6 +17,9 @@
                 as default method. Based on this you can now overwrite the isAttachment(WebResponse)
                 implementation with your own.
             </action>
+            <action type="update" dev="rbri">
+                 FIREFOX_52 is deprecated.
+            </action>
             <action type="fix" dev="rbri">
                 Correct handling of media properties without values.
             </action>

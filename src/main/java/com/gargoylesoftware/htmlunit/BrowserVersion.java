@@ -102,7 +102,9 @@ public final class BrowserVersion implements Serializable {
     /**
      * Firefox 52 ESR.
      * @since 2.26
+     * @deprecated as of version 2.36.0
      */
+    @Deprecated
     public static final BrowserVersion FIREFOX_52 = new BrowserVersion(52, "FF52");
 
     /** Internet Explorer 11. */
