@@ -259,22 +259,23 @@ public class AttributesTest extends TestCase {
      * @throws Exception if the new object cannot be created
      */
     private DomElement getNewInstanceForClassUnderTest(final HtmlPage page) throws Exception {
+        final HTMLParser htmlParser = page.getWebClient().getPageCreator().getHtmlParser();
         final DomElement newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
-            newInstance = HTMLParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
+            newInstance = htmlParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
                     page, HtmlTableRow.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableHeaderCell.class) {
-            newInstance = HTMLParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
+            newInstance = htmlParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
                     page, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableDataCell.class) {
-            newInstance = HTMLParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
+            newInstance = htmlParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
                     page, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
             final String tagName = (String) classUnderTest_.getField("TAG_NAME").get(null);
-            newInstance = HTMLParser.getFactory(tagName).createElement(page, tagName, null);
+            newInstance = htmlParser.getFactory(tagName).createElement(page, tagName, null);
         }
 
         return newInstance;

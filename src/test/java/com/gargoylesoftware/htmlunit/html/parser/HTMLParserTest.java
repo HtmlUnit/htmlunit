@@ -54,7 +54,8 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final WebResponse webResponse = new StringWebResponse(
             "<html><head><title>TITLE</title></head><body><div>TEST</div></body></html>", URL_FIRST);
 
-        final HtmlPage page = HTMLParser.parseHtml(webResponse, webClient.getCurrentWindow());
+        final HtmlPage page = webClient.getPageCreator().getHtmlParser()
+                                            .parseHtml(webResponse, webClient.getCurrentWindow());
 
         final String stringVal = page.<HtmlDivision>getFirstByXPath("//div").getFirstChild().getNodeValue();
         assertEquals("TEST", stringVal);
@@ -150,7 +151,8 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final WebClient webClient = getWebClient();
         final WebResponse webResponse = new StringWebResponse(html, URL_FIRST);
 
-        final XHtmlPage page = HTMLParser.parseXHtml(webResponse, webClient.getCurrentWindow());
+        final XHtmlPage page = webClient.getPageCreator().getHtmlParser()
+                                    .parseXHtml(webResponse, webClient.getCurrentWindow());
 
         final DomElement col = page.getElementsByTagName("col").get(0);
         assertEquals(col.getParentNode().getNodeName(), HtmlTableColumnGroup.TAG_NAME);

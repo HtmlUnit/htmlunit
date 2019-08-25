@@ -30,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -224,8 +224,10 @@ public class HTMLOptionsCollection extends SimpleScriptable {
         }
         else {
             for (int i = currentLength; i < newLength; i++) {
-                final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
-                        htmlSelect_.getPage(), HtmlOption.TAG_NAME, null);
+                final SgmlPage page = htmlSelect_.getPage();
+                final HtmlOption option = (HtmlOption) page.getWebClient().getPageCreator().getHtmlParser()
+                                                        .getFactory(HtmlOption.TAG_NAME).createElement(
+                                                                        page, HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
                 if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING)) {
                     option.appendChild(new DomText(option.getPage(), ""));

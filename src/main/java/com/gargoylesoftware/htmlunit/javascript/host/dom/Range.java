@@ -25,7 +25,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
@@ -326,7 +325,8 @@ public class Range extends SimpleScriptable {
         final SgmlPage page = startContainer_.getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
-            HTMLParser.parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString);
+            page.getWebClient().getPageCreator().getHtmlParser()
+                    .parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString);
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);

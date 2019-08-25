@@ -47,7 +47,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -865,7 +864,7 @@ public class Element extends Node {
      */
     private static void parseHtmlSnippet(final DomNode target, final String source) {
         try {
-            HTMLParser.parseFragment(target, source);
+            target.getPage().getWebClient().getPageCreator().getHtmlParser().parseFragment(target, source);
         }
         catch (final IOException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);

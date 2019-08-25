@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode.DescendantElementsIterator;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -192,7 +191,8 @@ public class DomNodeTest extends SimpleWebTestCase {
         final DomNode node2 = page.getHtmlElementById("tag2");
         assertEquals("div", node2.getNodeName());
 
-        final DomNode node3 = HTMLParser.getFactory(HtmlSpan.TAG_NAME).createElement(
+        final DomNode node3 = page.getWebClient().getPageCreator().getHtmlParser()
+                                .getFactory(HtmlSpan.TAG_NAME).createElement(
                 page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
         assertEquals("span", page.getHtmlElementById("tag2").getTagName());
@@ -212,7 +212,8 @@ public class DomNodeTest extends SimpleWebTestCase {
 
         final AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(null, "id", "id", null, "newElt");
-        final DomNode newNode = HTMLParser.getFactory(HtmlDivision.TAG_NAME).createElement(
+        final DomNode newNode = page.getWebClient().getPageCreator().getHtmlParser()
+                                    .getFactory(HtmlDivision.TAG_NAME).createElement(
                 page, HtmlDivision.TAG_NAME, attributes);
         try {
             page.getHtmlElementById("newElt");

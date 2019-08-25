@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -80,6 +81,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static final byte[] markerUTF8_ = {(byte) 0xef, (byte) 0xbb, (byte) 0xbf};
     private static final byte[] markerUTF16BE_ = {(byte) 0xfe, (byte) 0xff};
     private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
+
+    private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
 
     /**
      * The different supported page types.
@@ -219,6 +222,14 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HTMLParser getHtmlParser() {
+        return htmlParser_;
+    }
+
+    /**
      * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4
      * @param bytes the bytes to check
      */
@@ -266,7 +277,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @throws IOException if the page could not be created
      */
     protected HtmlPage createHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return HTMLParser.parseHtml(webResponse, webWindow);
+        return htmlParser_.parseHtml(webResponse, webWindow);
     }
 
     /**
@@ -278,7 +289,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
      * @throws IOException if the page could not be created
      */
     protected XHtmlPage createXHtmlPage(final WebResponse webResponse, final WebWindow webWindow) throws IOException {
-        return HTMLParser.parseXHtml(webResponse, webWindow);
+        return htmlParser_.parseXHtml(webResponse, webWindow);
     }
 
     /**

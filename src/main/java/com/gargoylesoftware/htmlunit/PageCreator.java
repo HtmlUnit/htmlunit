@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.IOException;
 
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
+
 /**
  * Something that knows how to create a page object. It is also the responsibility
  * of the page creator to establish the relationship between the <code>webWindow</code>
@@ -35,7 +37,13 @@ public interface PageCreator {
      * @exception IOException If an io problem occurs
      * @return the new page
      */
-    Page createPage(WebResponse webResponse, WebWindow webWindow)
-        throws IOException;
+    Page createPage(WebResponse webResponse, WebWindow webWindow) throws IOException;
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return the HTMLParser in use
+     */
+    HTMLParser getHtmlParser();
 }
 

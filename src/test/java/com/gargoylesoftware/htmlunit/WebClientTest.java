@@ -56,6 +56,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -705,6 +707,9 @@ public class WebClientTest extends SimpleWebTestCase {
     /** A PageCreator that collects data. */
     private static class CollectingPageCreator implements PageCreator {
         private final List<Page> collectedPages_;
+
+        private static final HTMLParser htmlParser_ = new HtmlUnitNekoHtmlParser();
+
         /**
          * Creates an instance.
          * @param list the list that will contain the data
@@ -726,6 +731,11 @@ public class WebClientTest extends SimpleWebTestCase {
             webWindow.setEnclosedPage(page);
             collectedPages_.add(page);
             return page;
+        }
+
+        @Override
+        public HTMLParser getHtmlParser() {
+            return htmlParser_;
         }
     }
 

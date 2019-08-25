@@ -75,10 +75,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParserDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
@@ -149,7 +148,7 @@ public class HtmlPage extends SgmlPage {
 
     private static final Comparator<DomElement> documentPositionComparator = new DocumentPositionComparator();
 
-    private HtmlUnitDOMBuilder builder_;
+    private HTMLParserDOMBuilder domBuilder_;
     private transient Charset originalCharset_;
 
     private Map<String, SortedSet<DomElement>> idMap_
@@ -554,7 +553,8 @@ public class HtmlPage extends SgmlPage {
         if (tagName.indexOf(':') == -1) {
             tagName = tagName.toLowerCase(Locale.ROOT);
         }
-        return HTMLParser.getFactory(tagName).createElementNS(this, null, tagName, null, true);
+        return getWebClient().getPageCreator().getHtmlParser().getFactory(tagName)
+                    .createElementNS(this, null, tagName, null, true);
     }
 
     /**
@@ -562,8 +562,9 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public DomElement createElementNS(final String namespaceURI, final String qualifiedName) {
-        return HTMLParser.getElementFactory(this, namespaceURI, qualifiedName, false, true)
-            .createElementNS(this, namespaceURI, qualifiedName, null, true);
+        return getWebClient().getPageCreator().getHtmlParser()
+                .getElementFactory(this, namespaceURI, qualifiedName, false, true)
+                .createElementNS(this, namespaceURI, qualifiedName, null, true);
     }
 
     /**
@@ -2210,7 +2211,7 @@ public class HtmlPage extends SgmlPage {
      * @param string the HTML code to write in place
      */
     public void writeInParsedStream(final String string) {
-        builder_.pushInputString(string);
+        getDOMBuilder().pushInputString(string);
     }
 
     /**
@@ -2219,8 +2220,8 @@ public class HtmlPage extends SgmlPage {
      * Sets the builder to allow page to send content from document.write(ln) calls.
      * @param htmlUnitDOMBuilder the builder
      */
-    public void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
-        builder_ = htmlUnitDOMBuilder;
+    public void setDOMBuilder(final HTMLParserDOMBuilder htmlUnitDOMBuilder) {
+        domBuilder_ = htmlUnitDOMBuilder;
     }
 
     /**
@@ -2229,8 +2230,8 @@ public class HtmlPage extends SgmlPage {
      * Returns the current builder.
      * @return the current builder
      */
-    public HtmlUnitDOMBuilder getBuilder() {
-        return builder_;
+    public HTMLParserDOMBuilder getDOMBuilder() {
+        return domBuilder_;
     }
 
     /**

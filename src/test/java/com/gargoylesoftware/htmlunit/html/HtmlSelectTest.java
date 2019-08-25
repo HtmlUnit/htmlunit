@@ -33,7 +33,6 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 
 /**
  * Tests for {@link HtmlSelect}.
@@ -522,8 +521,8 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     }
 
     void appendOption(final HtmlSelect select, final String value) {
-        final HtmlOption option = (HtmlOption) HTMLParser.getFactory(HtmlOption.TAG_NAME).createElement(
-                select.getPage(), HtmlOption.TAG_NAME, null);
+        final HtmlOption option = (HtmlOption) select.getPage().getWebClient().getPageCreator().getHtmlParser()
+                    .getFactory(HtmlOption.TAG_NAME).createElement(select.getPage(), HtmlOption.TAG_NAME, null);
         option.setValueAttribute(value);
         option.setLabelAttribute(value);
         select.appendOption(option);

@@ -61,7 +61,6 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.Html;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -256,7 +255,7 @@ public final class XmlUtils {
         final String ns = source.getNamespaceURI();
         String localName = source.getLocalName();
         if (handleXHTMLAsHTML && Html.XHTML_NAMESPACE.equals(ns)) {
-            final ElementFactory factory = HTMLParser.getFactory(localName);
+            final ElementFactory factory = page.getWebClient().getPageCreator().getHtmlParser().getFactory(localName);
             return factory.createElementNS(page, ns, localName,
                     namedNodeMapToSaxAttributes(source.getAttributes(), attributesOrderMap, source));
         }
@@ -274,8 +273,9 @@ public final class XmlUtils {
 
         final String namespaceURI = source.getNamespaceURI();
         if (Html.SVG_NAMESPACE.equals(namespaceURI)) {
-            return HTMLParser.SVG_FACTORY.createElementNS(page, namespaceURI, qualifiedName,
-                    namedNodeMapToSaxAttributes(nodeAttributes, attributesOrderMap, source));
+            return page.getWebClient().getPageCreator().getHtmlParser().getSvgFactory()
+                    .createElementNS(page, namespaceURI, qualifiedName,
+                            namedNodeMapToSaxAttributes(nodeAttributes, attributesOrderMap, source));
         }
 
         final Map<String, DomAttr> attributes = new LinkedHashMap<>();
