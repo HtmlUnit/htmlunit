@@ -928,11 +928,13 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Allows the parser to notify the form of a field that doesn't belong to its DOM children
      * due to malformed HTML code
-     * @param element the form field
+     * @param field the form field
      */
-    void addLostChild(final HtmlElement field) {
+    public void addLostChild(final HtmlElement field) {
         lostChildren_.add(field);
         field.setOwningForm(this);
     }

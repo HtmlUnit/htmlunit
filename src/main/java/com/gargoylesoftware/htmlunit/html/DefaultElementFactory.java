@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+ *
  * Element factory which creates elements by calling the constructor on a
  * given {@link HtmlElement} subclass.
  * The constructor is expected to take 2 arguments of type
@@ -43,14 +45,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Ronald Brill
  * @author Frank Danek
  */
-class DefaultElementFactory implements ElementFactory {
+public class DefaultElementFactory implements ElementFactory {
 
     private static final String KEYGEN_ = "keygen";
 
-    /*
-     * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements
+    /**
+     * You can generate your own test cases by looking into ElementTestSource.generateTestForHtmlElements.
      */
-    static final List<String> SUPPORTED_TAGS_ = Arrays.asList(KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
+    public static final List<String> SUPPORTED_TAGS_ = Arrays.asList(
+            KEYGEN_, HtmlAbbreviated.TAG_NAME, HtmlAcronym.TAG_NAME,
             HtmlAnchor.TAG_NAME, HtmlAddress.TAG_NAME, HtmlApplet.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlArticle.TAG_NAME, HtmlAside.TAG_NAME, HtmlAudio.TAG_NAME,
             HtmlBackgroundSound.TAG_NAME, HtmlBase.TAG_NAME, HtmlBaseFont.TAG_NAME,

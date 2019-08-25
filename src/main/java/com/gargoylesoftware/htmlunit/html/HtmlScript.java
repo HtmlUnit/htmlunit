@@ -214,7 +214,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * the script itself, if necessary. {@inheritDoc}
      */
     @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         if (getOwnerDocument() instanceof XmlPage) {
             return;
         }

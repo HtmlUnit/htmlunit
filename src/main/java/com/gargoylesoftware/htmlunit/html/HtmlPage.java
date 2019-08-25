@@ -75,7 +75,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.HTMLParser.HtmlUnitDOMBuilder;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
+import com.gargoylesoftware.htmlunit.html.parser.HTMLParser.HtmlUnitDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -2108,20 +2109,26 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has started parsing some content for this page.
      */
-    void registerParsingStart() {
+    public void registerParsingStart() {
         parserCount_++;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has finished parsing some content for this page.
      */
-    void registerParsingEnd() {
+    public void registerParsingEnd() {
         parserCount_--;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      * to this page. Non-inline content is content that is parsed for the page, but not in the
      * same stream as the page itself -- basically anything other than <tt>document.write()</tt>
@@ -2131,25 +2138,31 @@ public class HtmlPage extends SgmlPage {
      * @return {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      *         to this page
      */
-    boolean isParsingHtmlSnippet() {
+    public boolean isParsingHtmlSnippet() {
         return snippetParserCount_ > 0;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has started parsing a non-inline HTML snippet.
      */
-    void registerSnippetParsingStart() {
+    public void registerSnippetParsingStart() {
         snippetParserCount_++;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has finished parsing a non-inline HTML snippet.
      */
-    void registerSnippetParsingEnd() {
+    public void registerSnippetParsingEnd() {
         snippetParserCount_--;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      * to this page. Inline content is content inserted into the parser stream dynamically
      * while the page is being parsed (i.e. <tt>document.write()</tt> or <tt>document.writeln()</tt>).
@@ -2157,21 +2170,25 @@ public class HtmlPage extends SgmlPage {
      * @return {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      *         to this page
      */
-    boolean isParsingInlineHtmlSnippet() {
+    public boolean isParsingInlineHtmlSnippet() {
         return inlineSnippetParserCount_ > 0;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has started parsing an inline HTML snippet.
      */
-    void registerInlineSnippetParsingStart() {
+    public void registerInlineSnippetParsingStart() {
         inlineSnippetParserCount_++;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Called by the HTML parser to let the page know that it has finished parsing an inline HTML snippet.
      */
-    void registerInlineSnippetParsingEnd() {
+    public void registerInlineSnippetParsingEnd() {
         inlineSnippetParserCount_--;
     }
 
@@ -2197,18 +2214,22 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Sets the builder to allow page to send content from document.write(ln) calls.
      * @param htmlUnitDOMBuilder the builder
      */
-    void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
+    public void setBuilder(final HtmlUnitDOMBuilder htmlUnitDOMBuilder) {
         builder_ = htmlUnitDOMBuilder;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the current builder.
      * @return the current builder
      */
-    HtmlUnitDOMBuilder getBuilder() {
+    public HtmlUnitDOMBuilder getBuilder() {
         return builder_;
     }
 
@@ -2239,7 +2260,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    protected void setDocumentType(final DocumentType type) {
+    public void setDocumentType(final DocumentType type) {
         super.setDocumentType(type);
     }
 

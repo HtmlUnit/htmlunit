@@ -79,7 +79,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
     @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         // Fix the size if necessary.
         int size;
         try {

@@ -285,7 +285,7 @@ public class HtmlObject extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         if (getOwnerDocument() instanceof XmlPage) {
             return;
         }

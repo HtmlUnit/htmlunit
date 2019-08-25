@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.html.parser;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_ATTRIBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COMMAND_TAG;
@@ -64,6 +64,30 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
+import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomDocumentType;
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.ElementFactory;
+import com.gargoylesoftware.htmlunit.html.FrameWindow;
+import com.gargoylesoftware.htmlunit.html.Html;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlMeta;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.InputElementFactory;
+import com.gargoylesoftware.htmlunit.html.SubmittableElement;
+import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
+import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
@@ -343,6 +367,8 @@ public final class HTMLParser {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Returns the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory.
      * @param page the page
      * @param namespaceURI the namespace URI
@@ -351,7 +377,7 @@ public final class HTMLParser {
      * @param svgSupport true if called from javascript createElementNS
      * @return the pre-registered element factory corresponding to the specified tag, or an UnknownElementFactory
      */
-    static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
+    public static ElementFactory getElementFactory(final SgmlPage page, final String namespaceURI,
             final String qualifiedName, final boolean insideSvg, final boolean svgSupport) {
         if (insideSvg) {
             return SVG_FACTORY;
@@ -386,11 +412,13 @@ public final class HTMLParser {
     }
 
     /**
-     * The parser and DOM builder. This class subclasses Xerces's AbstractSAXParser and implements
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * The parser and DOM builder. This class subclasses Xerces's AbstractSAXParser and implements.
      * the ContentHandler interface. Thus all parser APIs are kept private. The ContentHandler methods
      * consume SAX events to build the page DOM
      */
-    static final class HtmlUnitDOMBuilder extends AbstractSAXParser
+    public static final class HtmlUnitDOMBuilder extends AbstractSAXParser
             implements ContentHandler, LexicalHandler, HTMLTagBalancingListener {
 
         private enum HeadParsed { YES, SYNTHESIZED, NO }
@@ -505,13 +533,17 @@ public final class HTMLParser {
             return locator_;
         }
 
-        /** {@inheritDoc ContentHandler#setDocumentLocator} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void setDocumentLocator(final Locator locator) {
             locator_ = locator;
         }
 
-        /** {@inheritDoc ContentHandler#startDocument()} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void startDocument() throws SAXException {
         }
@@ -525,7 +557,9 @@ public final class HTMLParser {
             super.startElement(element, attributes, augs);
         }
 
-        /** {@inheritDoc ContentHandler#startElement(String,String,String,Attributes)} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void startElement(String namespaceURI, final String localName, String qName, final Attributes atts)
             throws SAXException {
@@ -748,7 +782,9 @@ public final class HTMLParser {
             super.endElement(element, augs);
         }
 
-        /** {@inheritDoc ContentHandler@endElement(String,String,String)} */
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public void endElement(final String namespaceURI, final String localName, final String qName)
             throws SAXException {

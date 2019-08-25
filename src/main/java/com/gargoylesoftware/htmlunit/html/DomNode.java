@@ -195,7 +195,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param startLineNumber the line number where the DOM node starts
      * @param startColumnNumber the column number where the DOM node starts
      */
-    void setStartLocation(final int startLineNumber, final int startColumnNumber) {
+    public void setStartLocation(final int startLineNumber, final int startColumnNumber) {
         startLineNumber_ = startLineNumber;
         startColumnNumber_ = startColumnNumber;
     }
@@ -206,7 +206,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param endLineNumber the line number where the DOM node ends
      * @param endColumnNumber the column number where the DOM node ends
      */
-    void setEndLocation(final int endLineNumber, final int endColumnNumber) {
+    public void setEndLocation(final int endLineNumber, final int endColumnNumber) {
         endLineNumber_ = endLineNumber;
         endColumnNumber_ = endColumnNumber;
     }
@@ -388,8 +388,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         previousSibling_ = previous;
     }
 
-    /** @param next set the nextSibling field value */
-    protected void setNextSibling(final DomNode next) {
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param next set the nextSibling field value
+     */
+    public void setNextSibling(final DomNode next) {
         nextSibling_ = next;
     }
 
@@ -551,10 +555,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Gets the ancestors of the node.
      * @return a list of the ancestors with the root at the first position
      */
-    protected List<Node> getAncestors() {
+    public List<Node> getAncestors() {
         final List<Node> list = new ArrayList<>();
         list.add(this);
 
@@ -1222,13 +1228,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Quietly removes this node and moves its children to the specified destination. "Quietly" means
      * that no node events are fired. This method is not appropriate for most use cases. It should
      * only be used in specific cases for HTML parsing hackery.
      *
      * @param destination the node to which this node's children should be moved before this node is removed
      */
-    void quietlyRemoveAndMoveChildrenTo(final DomNode destination) {
+    public void quietlyRemoveAndMoveChildrenTo(final DomNode destination) {
         if (destination.getPage() != getPage()) {
             throw new RuntimeException("Cannot perform quiet move on nodes from different pages.");
         }
@@ -1289,7 +1297,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         // Empty by default.
     }
 

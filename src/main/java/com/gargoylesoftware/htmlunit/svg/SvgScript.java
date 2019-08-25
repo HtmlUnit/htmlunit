@@ -102,7 +102,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      * the script itself, if necessary. {@inheritDoc}
      */
     @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         ScriptElementSupport.onAllChildrenAddedToPage(this, postponed);
     }
 }

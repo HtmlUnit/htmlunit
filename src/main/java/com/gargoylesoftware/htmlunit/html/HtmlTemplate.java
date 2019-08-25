@@ -64,7 +64,7 @@ public class HtmlTemplate extends HtmlElement {
      * Parsing of the children is done, we can move our children to the content.
      */
     @Override
-    protected void onAllChildrenAddedToPage(final boolean postponed) {
+    public void onAllChildrenAddedToPage(final boolean postponed) {
         while (getFirstChild() != null) {
             final DomNode child = getFirstChild();
             child.basicRemove();
