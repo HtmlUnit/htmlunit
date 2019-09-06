@@ -452,10 +452,10 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         }
 
         // If the script language is not JavaScript, we can't execute.
-        if (!isJavaScript(getTypeAttribute(), getLanguageAttribute())) {
-            final String t = getTypeAttribute();
-            final String l = getLanguageAttribute();
-            LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
+        final String t = getTypeAttribute();
+        final String l = getLanguageAttribute();
+        if (!ScriptElementSupport.isJavaScript(this, t, l)) {
+            LOG.warn("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
             return false;
         }
 
@@ -463,43 +463,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         // If it isn't yet part of the page, don't execute the script; it's probably just being cloned.
 
         return getPage().isAncestorOf(this);
-    }
-
-    /**
-     * Returns true if a script with the specified type and language attributes is actually JavaScript.
-     * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
-     * are content types case insensitive.<b>
-     * IE supports only a limited number of values for the type attribute. For testing you can
-     * use http://www.robinlionheart.com/stds/html4/scripts.
-     * @param typeAttribute the type attribute specified in the script tag
-     * @param languageAttribute the language attribute specified in the script tag
-     * @return true if the script is JavaScript
-     */
-    boolean isJavaScript(String typeAttribute, final String languageAttribute) {
-        final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-
-        if (browserVersion.hasFeature(HTMLSCRIPT_TRIM_TYPE)) {
-            typeAttribute = typeAttribute.trim();
-        }
-
-        if (StringUtils.isNotEmpty(typeAttribute)) {
-            if ("text/javascript".equalsIgnoreCase(typeAttribute)
-                    || "text/ecmascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-
-            if (MimeType.APPLICATION_JAVASCRIPT.equalsIgnoreCase(typeAttribute)
-                            || "application/ecmascript".equalsIgnoreCase(typeAttribute)
-                            || "application/x-javascript".equalsIgnoreCase(typeAttribute)) {
-                return true;
-            }
-            return false;
-        }
-
-        if (StringUtils.isNotEmpty(languageAttribute)) {
-            return StringUtils.startsWithIgnoreCase(languageAttribute, "javascript");
-        }
-        return true;
     }
 
     /**

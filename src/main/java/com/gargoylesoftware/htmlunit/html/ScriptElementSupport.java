@@ -44,9 +44,12 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 
 /**
+ * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+ *
  * A helper class to be used by elements which support {@link ScriptElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class ScriptElementSupport {
 
@@ -213,7 +216,7 @@ public final class ScriptElementSupport {
         final String t = element.getAttributeDirect("type");
         final String l = element.getAttributeDirect("language");
         if (!isJavaScript(element, t, l)) {
-            LOG.warn("Script is not JavaScript (type: " + t + ", language: " + l + "). Skipping execution.");
+            LOG.warn("Script is not JavaScript (type: '" + t + "', language: '" + l + "'). Skipping execution.");
             return false;
         }
 
@@ -234,7 +237,7 @@ public final class ScriptElementSupport {
      * @param languageAttribute the language attribute specified in the script tag
      * @return true if the script is JavaScript
      */
-    static boolean isJavaScript(final DomElement element, String typeAttribute, final String languageAttribute) {
+    public static boolean isJavaScript(final DomElement element, String typeAttribute, final String languageAttribute) {
         final BrowserVersion browserVersion = element.getPage().getWebClient().getBrowserVersion();
 
         if (browserVersion.hasFeature(HTMLSCRIPT_TRIM_TYPE)) {
