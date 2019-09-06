@@ -400,6 +400,32 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     /**
+     * Make sure display: none has no effect for xpath expressions
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getFirstByXPathDisplayNone() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "  <head>\n"
+            + "    <title>my title</title>\n"
+            + "  </head>"
+            + "  <body>\n"
+            + "    <div id='d1'><span style='display: none;'>bla</span></div>\n"
+            + "</body>\n"
+            + "</html>";
+        final HtmlPage page = loadPage(htmlContent);
+
+        HtmlElement span = page.getFirstByXPath("//div/span");
+        assertEquals("<span style=\"display: none;\">\r\n  bla\r\n</span>\r\n", span.asXml());
+        assertFalse(span.isDisplayed());
+
+        span = page.getFirstByXPath("//span[text()=\"bla\"]");
+        assertEquals("<span style=\"display: none;\">\r\n  bla\r\n</span>\r\n", span.asXml());
+        assertFalse(span.isDisplayed());
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
