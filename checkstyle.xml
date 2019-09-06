@@ -228,8 +228,6 @@
         <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
 
         <!-- module name="ParameterAssignment"/-->
-        <!-- module name="NoFinalizer"/-->
-        <!-- module name="SuperClone"/-->
         <module name="SuperFinalize"/>
 
         <!-- Checks for class design                         -->
