@@ -571,8 +571,7 @@ public class CodeStyleTest {
                 && !relativePath.contains("BrowserVersionFeatures.java")
                 && !relativePath.contains("DateTimeFormat.java")
                 && !relativePath.contains("Document.java")
-                && !relativePath.contains("HTMLDocument2.java")
-                && !relativePath.contains("NashornJavaScriptEngine.java")) {
+                && !relativePath.contains("HTMLDocument2.java")) {
             int index = 1;
             for (final String line : lines) {
                 if (line.contains(".isIE()")) {
@@ -594,7 +593,8 @@ public class CodeStyleTest {
                 && !relativePath.contains("BrowserConfiguration.java")
                 && !relativePath.contains("BrowserVersion.java")
                 && !relativePath.contains("Document.java")
-                && !relativePath.contains("HtmlUnitNekoHtmlParser.java")
+                && !relativePath.contains("HtmlUnitNekoDOMBuilder.java")
+                && !relativePath.contains("HtmlUnitValidatorDOMBuilder.java")
                 && !relativePath.contains("Window.java")
                 && !relativePath.contains("Window2.java")) {
             int index = 1;
