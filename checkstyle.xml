@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
     "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
     "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
@@ -30,6 +29,10 @@
 
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="LineLength">
+        <property name="max" value="120"/>
     </module>
 
     <!-- Prevent two spaces after @xxxx -->
@@ -118,10 +121,6 @@
         <module name="RightCurly">
             <property name="option" value="alone"/>
             <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, STATIC_INIT, INSTANCE_INIT"/>
-        </module>
-
-        <module name="LineLength">
-            <property name="max" value="120"/>
         </module>
 
         <module name="ConstantName">
@@ -220,11 +219,18 @@
         <module name="InnerAssignment"/>
         <module name="MissingSwitchDefault"/>
         <module name="EqualsAvoidNull"/>
+        <module name="MultipleVariableDeclarations"/>
 
         <module name="SimplifyBooleanReturn"/>
         <module name="SimplifyBooleanExpression"/>
 
         <module name="UnnecessaryParentheses"/>
+        <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
+
+        <!-- module name="ParameterAssignment"/-->
+        <!-- module name="NoFinalizer"/-->
+        <!-- module name="SuperClone"/-->
+        <module name="SuperFinalize"/>
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->

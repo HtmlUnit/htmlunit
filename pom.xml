@@ -31,7 +31,7 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.23</checkstyle.version>
+        <checkstyle.version>8.24</checkstyle.version>
         <spotbugs.version>3.1.12</spotbugs.version>
         <pmd.version>6.17.0</pmd.version>
     </properties>
@@ -1101,7 +1101,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.7</version>
+            <version>1.8</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>

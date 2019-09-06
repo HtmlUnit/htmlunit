@@ -99,10 +99,12 @@ public class MouseEvent extends UIEvent {
     public static final int BUTTON_RIGHT = 2;
 
     /** The event's screen coordinates; initially {@code null} and lazily initialized for performance reasons. */
-    private Integer screenX_, screenY_;
+    private Integer screenX_;
+    private Integer screenY_;
 
     /** The event's client coordinates; initially {@code null} and lazily initialized for performance reasons. */
-    private Integer clientX_, clientY_;
+    private Integer clientX_;
+    private Integer clientY_;
 
     /** The button code according to W3C (0: left button, 1: middle button, 2: right button). */
     private int button_;

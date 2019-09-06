@@ -70,8 +70,10 @@ public class Range extends SimpleScriptable {
     @JsxConstant
     public static final short END_TO_START = 3;
 
-    private Node startContainer_, endContainer_;
-    private int startOffset_, endOffset_;
+    private Node startContainer_;
+    private Node endContainer_;
+    private int startOffset_;
+    private int endOffset_;
 
     /**
      * Creates an instance.

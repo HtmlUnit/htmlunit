@@ -265,7 +265,12 @@ public final class ProxyAutoConfig {
             }
         }
 
-        final int day1, day2, month1, month2, year1, year2;
+        final int day1;
+        final int day2;
+        final int month1;
+        final int month2;
+        final int year1;
+        final int year2;
         final Calendar cal1;
         final Calendar cal2;
         switch (length) {
@@ -410,7 +415,12 @@ public final class ProxyAutoConfig {
             }
         }
 
-        final int hour1, hour2, min1, min2, second1, second2;
+        final int hour1;
+        final int hour2;
+        final int min1;
+        final int min2;
+        final int second1;
+        final int second2;
         final Calendar cal1;
         final Calendar cal2;
         switch (length) {
