@@ -88,8 +88,6 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
     private static final Map<String, ElementFactory> ELEMENT_FACTORIES = new HashMap<>();
 
     static {
-        ELEMENT_FACTORIES.put(HtmlInput.TAG_NAME, InputElementFactory.instance);
-
         final DefaultElementFactory defaultElementFactory = new DefaultElementFactory();
         for (final String tagName : DefaultElementFactory.SUPPORTED_TAGS_) {
             ELEMENT_FACTORIES.put(tagName, defaultElementFactory);

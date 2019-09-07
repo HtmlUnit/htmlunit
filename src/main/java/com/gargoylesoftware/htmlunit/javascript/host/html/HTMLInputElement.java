@@ -39,13 +39,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.html.InputElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -96,7 +96,7 @@ public class HTMLInputElement extends FormField {
         String type = getDomNodeOrDie().getTypeAttribute();
         final BrowserVersion browserVersion = getBrowserVersion();
         type = type.toLowerCase(Locale.ROOT);
-        if (!InputElementFactory.isSupported(type)) {
+        if (!isSupported(type)) {
             type = "text";
         }
         else if (!browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)) {
@@ -130,6 +130,44 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
+     * Returns whether the specified type is supported or not.
+     * @param type the type
+     * @return whether the specified type is supported or not
+     */
+    private static boolean isSupported(final String type) {
+        boolean supported = false;
+        switch (type) {
+            case "text":
+            case "submit":
+            case "checkbox":
+            case "radio":
+            case "hidden":
+            case "password":
+            case "image":
+            case "reset":
+            case "button":
+            case "file":
+            case "color":
+            case "date":
+            case "datetime-local":
+            case "email":
+            case "month":
+            case "number":
+            case "range":
+            case "search":
+            case "tel":
+            case "time":
+            case "url":
+            case "week":
+                supported = true;
+                break;
+
+            default:
+        }
+        return supported;
+    }
+
+    /**
      * Sets the value of the attribute {@code type}.
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
@@ -155,8 +193,7 @@ public class HTMLInputElement extends FormField {
 
             // create a new one only if we have a new type
             if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
-                final HtmlInput newInput = (HtmlInput) InputElementFactory.instance
-                        .createElement(input.getPage(), "input", attributes);
+                final HtmlInput newInput = (HtmlInput) new DefaultElementFactory().createElement(input.getPage(), HtmlInput.TAG_NAME, attributes);
 
                 if (input.wasCreatedByJavascript()) {
                     newInput.markAsCreatedByJavascript();

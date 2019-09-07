@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -40,12 +42,17 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * holding the initial attributes for the element.
  *
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
+ * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author David K. Taylor
+ * @author Dmitri Zoubkov
  * @author Ronald Brill
  * @author Frank Danek
  */
 public class DefaultElementFactory implements ElementFactory {
+
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(DefaultElementFactory.class);
 
     private static final String KEYGEN_ = "keygen";
 
@@ -75,7 +82,9 @@ public class DefaultElementFactory implements ElementFactory {
             HtmlHeading4.TAG_NAME, HtmlHeading5.TAG_NAME, HtmlHeading6.TAG_NAME,
             HtmlHorizontalRule.TAG_NAME, HtmlHtml.TAG_NAME, HtmlInlineFrame.TAG_NAME,
             HtmlInlineQuotation.TAG_NAME,
-            HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2, HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
+            HtmlImage.TAG_NAME, HtmlImage.TAG_NAME2,
+            HtmlInput.TAG_NAME,
+            HtmlInsertedText.TAG_NAME, HtmlIsIndex.TAG_NAME,
             HtmlItalic.TAG_NAME,
             HtmlKeyboard.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLayer.TAG_NAME,
             HtmlLegend.TAG_NAME, HtmlListing.TAG_NAME, HtmlListItem.TAG_NAME,
@@ -430,6 +439,10 @@ public class DefaultElementFactory implements ElementFactory {
                 element = new HtmlInlineQuotation(qualifiedName, page, attributeMap);
                 break;
 
+            case HtmlInput.TAG_NAME:
+                element = createInputElement(qualifiedName, page, attributeMap);
+                break;
+
             case HtmlInsertedText.TAG_NAME:
                 element = new HtmlInsertedText(qualifiedName, page, attributeMap);
                 break;
@@ -771,5 +784,119 @@ public class DefaultElementFactory implements ElementFactory {
             }
         }
         return attributeMap;
+    }
+
+    private HtmlElement createInputElement(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributeMap) {
+        String type = "";
+        if (attributeMap != null) {
+            for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
+                if ("type".equalsIgnoreCase(entry.getKey())) {
+                    type = entry.getValue().getValue();
+                }
+            }
+        }
+
+        final HtmlInput result;
+        switch (type.toLowerCase(Locale.ROOT)) {
+            case "":
+                // This not an illegal value, as it defaults to "text"
+                // cf http://www.w3.org/TR/REC-html40/interact/forms.html#adef-type-INPUT
+                // and the common browsers seem to treat it as a "text" input so we will as well.
+            case "text":
+                result = new HtmlTextInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "submit":
+                result = new HtmlSubmitInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "checkbox":
+                result = new HtmlCheckBoxInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "radio":
+                result = new HtmlRadioButtonInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "hidden":
+                result = new HtmlHiddenInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "password":
+                result = new HtmlPasswordInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "image":
+                result = new HtmlImageInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "reset":
+                result = new HtmlResetInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "button":
+                result = new HtmlButtonInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "file":
+                result = new HtmlFileInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "color":
+                result = new HtmlColorInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "date":
+                result = new HtmlDateInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "datetime-local":
+                result = new HtmlDateTimeLocalInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "email":
+                result = new HtmlEmailInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "month":
+                result = new HtmlMonthInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "number":
+                result = new HtmlNumberInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "range":
+                result = new HtmlRangeInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "search":
+                result = new HtmlSearchInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "tel":
+                result = new HtmlTelInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "time":
+                result = new HtmlTimeInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "url":
+                result = new HtmlUrlInput(qualifiedName, page, attributeMap);
+                break;
+
+            case "week":
+                result = new HtmlWeekInput(qualifiedName, page, attributeMap);
+                break;
+
+            default:
+                if (LOG.isInfoEnabled()) {
+                    LOG.info("Bad input type: \"" + type + "\", creating a text input");
+                }
+                result = new HtmlTextInput(qualifiedName, page, attributeMap);
+                break;
+        }
+        return result;
     }
 }
