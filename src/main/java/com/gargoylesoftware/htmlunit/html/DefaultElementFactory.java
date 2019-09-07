@@ -777,7 +777,7 @@ public class DefaultElementFactory implements ElementFactory {
             return null;
         }
 
-        Map<String, DomAttr> attributeMap = new LinkedHashMap<>(attributes.getLength());
+        final Map<String, DomAttr> attributeMap = new LinkedHashMap<>(attributes.getLength());
         for (int i = 0; i < attributes.getLength(); i++) {
             final String qName = attributes.getQName(i);
             // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
@@ -793,7 +793,8 @@ public class DefaultElementFactory implements ElementFactory {
         return attributeMap;
     }
 
-    private HtmlElement createInputElement(final String qualifiedName, final SgmlPage page, final Map<String, DomAttr> attributeMap) {
+    private HtmlElement createInputElement(final String qualifiedName, final SgmlPage page,
+                                                final Map<String, DomAttr> attributeMap) {
         String type = "";
         if (attributeMap != null) {
             for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
