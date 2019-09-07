@@ -400,7 +400,7 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     /**
-     * Make sure display: none has no effect for xpath expressions
+     * Make sure display: none has no effect for xpath expressions.
      * @throws Exception if the test fails
      */
     @Test
