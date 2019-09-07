@@ -65,8 +65,8 @@ public class HTMLOptionElement extends HTMLElement {
         }
 
         final HtmlOption htmlOption = (HtmlOption) page.getWebClient().getPageCreator().getHtmlParser()
-                                                    .getFactory(HtmlOption.TAG_NAME).createElement(
-                page, HtmlOption.TAG_NAME, attributes);
+                                                    .getFactory(HtmlOption.TAG_NAME)
+                                                    .createElement(page, HtmlOption.TAG_NAME, attributes);
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 
