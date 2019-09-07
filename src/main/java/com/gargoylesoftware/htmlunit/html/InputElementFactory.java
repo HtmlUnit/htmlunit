@@ -57,9 +57,7 @@ public final class InputElementFactory implements ElementFactory {
      * @return a new HtmlInput element
      */
     @Override
-    public HtmlElement createElement(
-            final SgmlPage page, final String tagName,
-            final Attributes attributes) {
+    public HtmlElement createElement(final SgmlPage page, final String tagName, final Attributes attributes) {
         return createElementNS(page, null, tagName, attributes);
     }
 
@@ -80,18 +78,14 @@ public final class InputElementFactory implements ElementFactory {
             final String qualifiedName, final Attributes attributes, final boolean asdf) {
 
         Map<String, DomAttr> attributeMap = DefaultElementFactory.toMap(page, attributes);
-        if (attributeMap == null) {
-            attributeMap = new HashMap<>();
-        }
 
-        String type = null;
-        for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
-            if ("type".equalsIgnoreCase(entry.getKey())) {
-                type = entry.getValue().getValue();
+        String type = "";
+        if (attributeMap != null) {
+            for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
+                if ("type".equalsIgnoreCase(entry.getKey())) {
+                    type = entry.getValue().getValue();
+                }
             }
-        }
-        if (type == null) {
-            type = "";
         }
 
         final HtmlInput result;
