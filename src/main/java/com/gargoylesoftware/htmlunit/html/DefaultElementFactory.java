@@ -767,20 +767,21 @@ public class DefaultElementFactory implements ElementFactory {
      * @return the map of attribute values for {@link HtmlElement}s
      */
     static Map<String, DomAttr> toMap(final SgmlPage page, final Attributes attributes) {
-        Map<String, DomAttr> attributeMap = null;
-        if (attributes != null) {
-            attributeMap = new LinkedHashMap<>(attributes.getLength());
-            for (int i = 0; i < attributes.getLength(); i++) {
-                final String qName = attributes.getQName(i);
-                // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
-                if (!attributeMap.containsKey(qName)) {
-                    String namespaceURI = attributes.getURI(i);
-                    if (namespaceURI != null && namespaceURI.isEmpty()) {
-                        namespaceURI = null;
-                    }
-                    final DomAttr newAttr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
-                    attributeMap.put(qName, newAttr);
+        if (attributes == null) {
+            return null;
+        }
+
+        Map<String, DomAttr> attributeMap = new LinkedHashMap<>(attributes.getLength());
+        for (int i = 0; i < attributes.getLength(); i++) {
+            final String qName = attributes.getQName(i);
+            // browsers consider only first attribute (ex: <div id='foo' id='something'>...</div>)
+            if (!attributeMap.containsKey(qName)) {
+                String namespaceURI = attributes.getURI(i);
+                if (namespaceURI != null && namespaceURI.isEmpty()) {
+                    namespaceURI = null;
                 }
+                final DomAttr newAttr = new DomAttr(page, namespaceURI, qName, attributes.getValue(i), true);
+                attributeMap.put(qName, newAttr);
             }
         }
         return attributeMap;
