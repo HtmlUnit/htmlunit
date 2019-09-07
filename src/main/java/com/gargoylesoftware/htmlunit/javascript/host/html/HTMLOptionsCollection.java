@@ -225,7 +225,8 @@ public class HTMLOptionsCollection extends SimpleScriptable {
         }
         else {
             final SgmlPage page = htmlSelect_.getPage();
-            final ElementFactory factory = page.getWebClient().getPageCreator().getHtmlParser().getFactory(HtmlOption.TAG_NAME);
+            final ElementFactory factory = page.getWebClient().getPageCreator()
+                                            .getHtmlParser().getFactory(HtmlOption.TAG_NAME);
             for (int i = currentLength; i < newLength; i++) {
                 final HtmlOption option = (HtmlOption) factory.createElement(page, HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);

@@ -146,6 +146,7 @@ public class AttributesTest extends TestCase {
         }
 
         supportedTags.remove("keygen");
+        supportedTags.remove("input");
 
         if (!supportedTags.isEmpty()) {
             throw new RuntimeException("Missing tag class(es) " + supportedTags);
