@@ -160,6 +160,7 @@ public class DefaultElementFactory implements ElementFactory {
             tagName = qualifiedName.substring(colonIndex + 1).toLowerCase(Locale.ROOT);
         }
 
+        boolean doBrowserCompatibilityCheck = checkBrowserCompatibility;
         switch (tagName) {
             case KEYGEN_:
                 final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
@@ -441,6 +442,7 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlInput.TAG_NAME:
                 element = createInputElement(qualifiedName, page, attributeMap);
+                doBrowserCompatibilityCheck = false;
                 break;
 
             case HtmlInsertedText.TAG_NAME:
@@ -685,6 +687,7 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlTableDataCell.TAG_NAME:
                 element = new HtmlTableDataCell(qualifiedName, page, attributeMap);
+                doBrowserCompatibilityCheck = false;
                 break;
 
             case HtmlTableFooter.TAG_NAME:
@@ -697,6 +700,7 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlTableHeaderCell.TAG_NAME:
                 element = new HtmlTableHeaderCell(qualifiedName, page, attributeMap);
+                doBrowserCompatibilityCheck = false;
                 break;
 
             case HtmlTableRow.TAG_NAME:
@@ -751,10 +755,12 @@ public class DefaultElementFactory implements ElementFactory {
                 throw new IllegalStateException("Cannot find HtmlElement for " + qualifiedName);
         }
 
-        final JavaScriptConfiguration config = page.getWebClient().getJavaScriptEngine().getJavaScriptConfiguration();
-        if (config != null && !"td".equals(tagName) && !"th".equals(tagName)
-                && checkBrowserCompatibility && config.getDomJavaScriptMapping().get(element.getClass()) == null) {
-            return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+        if (doBrowserCompatibilityCheck) {
+            final JavaScriptConfiguration config = page.getWebClient().getJavaScriptEngine().getJavaScriptConfiguration();
+            if (config != null 
+                    && config.getDomJavaScriptMapping().get(element.getClass()) == null) {
+                return UnknownElementFactory.instance.createElementNS(page, namespaceURI, qualifiedName, attributes);
+            }
         }
         return element;
     }
