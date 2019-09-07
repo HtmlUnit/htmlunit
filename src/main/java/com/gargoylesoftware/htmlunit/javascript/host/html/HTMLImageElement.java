@@ -82,7 +82,8 @@ public class HTMLImageElement extends HTMLElement {
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         final DomElement fake =
                 page.getWebClient().getPageCreator().getHtmlParser()
-                    .getFactory(HtmlImage.TAG_NAME).createElement(page, HtmlImage.TAG_NAME, new AttributesImpl());
+                    .getFactory(HtmlImage.TAG_NAME)
+                    .createElement(page, HtmlImage.TAG_NAME, null);
         setDomNode(fake);
     }
 

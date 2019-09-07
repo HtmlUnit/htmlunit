@@ -262,16 +262,16 @@ public class AttributesTest extends TestCase {
         final HTMLParser htmlParser = page.getWebClient().getPageCreator().getHtmlParser();
         final DomElement newInstance;
         if (classUnderTest_ == HtmlTableRow.class) {
-            newInstance = htmlParser.getFactory(HtmlTableRow.TAG_NAME).createElement(
-                    page, HtmlTableRow.TAG_NAME, null);
+            newInstance = htmlParser.getFactory(HtmlTableRow.TAG_NAME)
+                    .createElement(page, HtmlTableRow.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableHeaderCell.class) {
-            newInstance = htmlParser.getFactory(HtmlTableHeaderCell.TAG_NAME).createElement(
-                    page, HtmlTableHeaderCell.TAG_NAME, null);
+            newInstance = htmlParser.getFactory(HtmlTableHeaderCell.TAG_NAME)
+                    .createElement(page, HtmlTableHeaderCell.TAG_NAME, null);
         }
         else if (classUnderTest_ == HtmlTableDataCell.class) {
-            newInstance = htmlParser.getFactory(HtmlTableDataCell.TAG_NAME).createElement(
-                    page, HtmlTableDataCell.TAG_NAME, null);
+            newInstance = htmlParser.getFactory(HtmlTableDataCell.TAG_NAME)
+                    .createElement(page, HtmlTableDataCell.TAG_NAME, null);
         }
         else {
             final String tagName = (String) classUnderTest_.getField("TAG_NAME").get(null);

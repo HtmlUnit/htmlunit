@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
+import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -223,11 +224,10 @@ public class HTMLOptionsCollection extends SimpleScriptable {
             htmlSelect_.setOptionSize(newLength);
         }
         else {
+            final SgmlPage page = htmlSelect_.getPage();
+            final ElementFactory factory = page.getWebClient().getPageCreator().getHtmlParser().getFactory(HtmlOption.TAG_NAME);
             for (int i = currentLength; i < newLength; i++) {
-                final SgmlPage page = htmlSelect_.getPage();
-                final HtmlOption option = (HtmlOption) page.getWebClient().getPageCreator().getHtmlParser()
-                                                        .getFactory(HtmlOption.TAG_NAME).createElement(
-                                                                        page, HtmlOption.TAG_NAME, null);
+                final HtmlOption option = (HtmlOption) factory.createElement(page, HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
                 if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING)) {
                     option.appendChild(new DomText(option.getPage(), ""));

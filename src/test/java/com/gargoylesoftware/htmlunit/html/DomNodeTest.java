@@ -192,8 +192,8 @@ public class DomNodeTest extends SimpleWebTestCase {
         assertEquals("div", node2.getNodeName());
 
         final DomNode node3 = page.getWebClient().getPageCreator().getHtmlParser()
-                                .getFactory(HtmlSpan.TAG_NAME).createElement(
-                page, HtmlSpan.TAG_NAME, attributes);
+                                .getFactory(HtmlSpan.TAG_NAME)
+                                .createElement(page, HtmlSpan.TAG_NAME, attributes);
         node2.replace(node3);
         assertEquals("span", page.getHtmlElementById("tag2").getTagName());
     }
@@ -213,8 +213,8 @@ public class DomNodeTest extends SimpleWebTestCase {
         final AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(null, "id", "id", null, "newElt");
         final DomNode newNode = page.getWebClient().getPageCreator().getHtmlParser()
-                                    .getFactory(HtmlDivision.TAG_NAME).createElement(
-                page, HtmlDivision.TAG_NAME, attributes);
+                                    .getFactory(HtmlDivision.TAG_NAME)
+                                    .createElement(page, HtmlDivision.TAG_NAME, attributes);
         try {
             page.getHtmlElementById("newElt");
             fail("Element should not exist yet");
