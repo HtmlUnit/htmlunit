@@ -312,6 +312,10 @@
 
         <release version="2.33" date="Sep 12, 2018" description="Source moved to GitHub, Reworked JS event listeners, Bugfixes">
             <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: ScriptResult.getNewPage() is no longer available. You can use something like
+                webClient.getCurrentWindow().getEnclosedPage() instead.
+            </action>
+            <action type="update" dev="rbri">
                 Source repository is on GitHub now.
             </action>
             <action type="fix" dev="rbri" issue="256">
