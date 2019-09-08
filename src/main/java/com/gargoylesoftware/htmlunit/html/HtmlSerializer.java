@@ -33,18 +33,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @author Rob Kodey
  */
 public class HtmlSerializer {
-    /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
-    protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
-    private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
-
-    /** Indicates a new line. Will be rendered as line separator. */
-    protected static final String AS_TEXT_NEW_LINE = "§nl§";
-    private static final int AS_TEXT_NEW_LINE_LENGTH = AS_TEXT_NEW_LINE.length();
-
-    /** Indicates a non blank that can't be trimmed or reduced. */
-    protected static final String AS_TEXT_BLANK = "§blank§";
-    /** Indicates a tab. */
-    protected static final String AS_TEXT_TAB = "§tab§";
 
     private static final Pattern TEXT_AREA_PATTERN = Pattern.compile("\r?\n");
 
@@ -56,149 +44,11 @@ public class HtmlSerializer {
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
-        final StringBuilder builder = new StringBuilder();
+        final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
         appendNode(builder, node);
-        final String response = builder.toString();
-        return cleanUp(response);
+        return builder.getText();
     }
 
-    /**
-     * Reduce the whitespace and do some more cleanup.
-     * @param text the text to clean up
-     * @return the new text
-     */
-    protected String cleanUp(final String text) {
-        // ignore <br/> at the end of a block
-        String resultText = reduceWhitespace(text);
-
-        final String ls = System.lineSeparator();
-        resultText = StringUtils.replaceEach(resultText,
-                new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
-                new String[] {" ", ls, ls, "\t"});
-
-        return resultText;
-    }
-
-    private static String reduceWhitespace(final String text) {
-        String resultText = trim(text);
-
-        // remove white spaces before or after block separators
-        resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
-
-        // remove leading block separators
-        int start = 0;
-        while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
-            start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-        }
-
-        // remove trailing block separators
-        int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-        while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
-            end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-        }
-        resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
-
-        resultText = trim(resultText);
-
-        final StringBuilder builder = new StringBuilder(resultText.length());
-
-        boolean whitespace = false;
-        for (final char ch : resultText.toCharArray()) {
-
-            // Translate non-breaking space to regular space.
-            if (ch == (char) 160) {
-                builder.append(' ');
-                whitespace = false;
-            }
-            else {
-                if (whitespace) {
-                    if (!isSpace(ch)) {
-                        builder.append(ch);
-                        whitespace = false;
-                    }
-                }
-                else {
-                    if (isSpace(ch)) {
-                        whitespace = true;
-                        builder.append(' ');
-                    }
-                    else {
-                        builder.append(ch);
-                    }
-                }
-            }
-        }
-        return builder.toString();
-    }
-
-    private static boolean isSpace(final char ch) {
-        return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
-    }
-
-    private static String trim(final String string) {
-        final int length = string.length();
-        if (length == 0) {
-            return string;
-        }
-
-        int start = 0;
-        while (start != length && isSpace(string.charAt(start))) {
-            start++;
-        }
-        if (start == length) {
-            return "";
-        }
-
-        int end = length;
-        while (end > start && isSpace(string.charAt(end - 1))) {
-            end--;
-        }
-        if (end == length && start == 0) {
-            return string;
-        }
-        return string.substring(start, end);
-    }
-
-    private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
-        int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
-        if (p0 == -1) {
-            return text;
-        }
-
-        final int length = text.length();
-        if (length <= AS_TEXT_BLOCK_SEPARATOR_LENGTH) {
-            return text;
-        }
-
-        final StringBuilder result = new StringBuilder(length);
-        int start = 0;
-        while (p0 != -1) {
-            int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-            while (p0 != start && isSpace(text.charAt(p0 - 1))) {
-                p0--;
-            }
-            if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
-                p0 = p0 - AS_TEXT_NEW_LINE_LENGTH;
-            }
-            result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
-
-            while (p1 < length && isSpace(text.charAt(p1))) {
-                p1++;
-            }
-            start = p1;
-
-            // ignore duplicates
-            p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
-            while (p0 != -1 && p0 == start) {
-                start += AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-                p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
-            }
-        }
-        if (start < length) {
-            result.append(text.substring(start));
-        }
-        return result.toString();
-    }
 
     /**
      * Iterate over all Children and call appendNode() for every.
@@ -206,7 +56,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param node the node to process
      */
-    protected void appendChildren(final StringBuilder builder, final DomNode node) {
+    protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node) {
         for (final DomNode child : node.getChildren()) {
             appendNode(builder, child);
         }
@@ -219,7 +69,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param node the node to process
      */
-    protected void appendNode(final StringBuilder builder, final DomNode node) {
+    protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node) {
         if (node instanceof DomText) {
             appendText(builder, (DomText) node);
         }
@@ -301,7 +151,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param domNode the target to process
      */
-    protected void appendDomNode(final StringBuilder builder, final DomNode domNode) {
+    protected void appendDomNode(final HtmlSerializerTextBuilder builder, final DomNode domNode) {
         final boolean block;
         final Object scriptableObject = domNode.getScriptableObject();
         if (domNode instanceof HtmlBody) {
@@ -317,11 +167,11 @@ public class HtmlSerializer {
         }
 
         if (block) {
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
         }
         appendChildren(builder, domNode);
         if (block) {
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
         }
     }
 
@@ -331,7 +181,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlHiddenInput the target to process
      */
-    protected void appendHiddenInput(final StringBuilder builder, final HtmlHiddenInput htmlHiddenInput) {
+    protected void appendHiddenInput(final HtmlSerializerTextBuilder builder, final HtmlHiddenInput htmlHiddenInput) {
         // nothing to do
     }
 
@@ -341,7 +191,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlScript the target to process
      */
-    protected void appendScript(final StringBuilder builder, final HtmlScript htmlScript) {
+    protected void appendScript(final HtmlSerializerTextBuilder builder, final HtmlScript htmlScript) {
         // nothing to do
     }
 
@@ -351,7 +201,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlStyle the target to process
      */
-    protected void appendStyle(final StringBuilder builder, final HtmlStyle htmlStyle) {
+    protected void appendStyle(final HtmlSerializerTextBuilder builder, final HtmlStyle htmlStyle) {
         // nothing to do
     }
 
@@ -361,7 +211,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlNoScript the target to process
      */
-    protected void appendNoScript(final StringBuilder builder, final HtmlNoScript htmlNoScript) {
+    protected void appendNoScript(final HtmlSerializerTextBuilder builder, final HtmlNoScript htmlNoScript) {
         // nothing to do
     }
 
@@ -371,7 +221,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlNoFrames the target to process
      */
-    protected void appendNoFrames(final StringBuilder builder, final HtmlNoFrames htmlNoFrames) {
+    protected void appendNoFrames(final HtmlSerializerTextBuilder builder, final HtmlNoFrames htmlNoFrames) {
         // nothing to do
     }
 
@@ -381,7 +231,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlSubmitInput the target to process
      */
-    protected void appendSubmitInput(final StringBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
+    protected void appendSubmitInput(final HtmlSerializerTextBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
         builder.append(htmlSubmitInput.asText());
     }
 
@@ -391,7 +241,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlInput the target to process
      */
-    protected void appendInput(final StringBuilder builder, final HtmlInput htmlInput) {
+    protected void appendInput(final HtmlSerializerTextBuilder builder, final HtmlInput htmlInput) {
         builder.append(htmlInput.getValueAttribute());
     }
 
@@ -401,7 +251,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlResetInput the target to process
      */
-    protected void appendResetInput(final StringBuilder builder, final HtmlResetInput htmlResetInput) {
+    protected void appendResetInput(final HtmlSerializerTextBuilder builder, final HtmlResetInput htmlResetInput) {
         builder.append(htmlResetInput.asText());
     }
 
@@ -410,17 +260,17 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
      */
-    protected void appendUnorderedList(final StringBuilder builder, final HtmlUnorderedList htmlUnorderedList) {
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+    protected void appendUnorderedList(final HtmlSerializerTextBuilder builder, final HtmlUnorderedList htmlUnorderedList) {
+        builder.appendTextBlockSeparator();
         boolean first = true;
         for (final DomNode item : htmlUnorderedList.getChildren()) {
             if (!first) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
+                builder.appendTextBlockSeparator();
             }
             first = false;
             appendNode(builder, item);
         }
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+        builder.appendTextBlockSeparator();
     }
 
     /**
@@ -428,7 +278,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
      */
-    protected void appendTitle(final StringBuilder builder, final HtmlTitle htmlTitle) {
+    protected void appendTitle(final HtmlSerializerTextBuilder builder, final HtmlTitle htmlTitle) {
         // optimized version
         // for the title there is no need to check the visibility
         // of the containing dom text;
@@ -436,7 +286,7 @@ public class HtmlSerializer {
         final DomNode child = htmlTitle.getFirstChild();
         if (child instanceof DomText) {
             builder.append(((DomText) child).getData());
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
         }
     }
 
@@ -446,11 +296,11 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTableRow the target to process
      */
-    protected void appendTableRow(final StringBuilder builder, final HtmlTableRow htmlTableRow) {
+    protected void appendTableRow(final HtmlSerializerTextBuilder builder, final HtmlTableRow htmlTableRow) {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
             if (!first) {
-                builder.append(AS_TEXT_TAB);
+                builder.appendTextTab();
             }
             else {
                 first = false;
@@ -465,14 +315,10 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTextArea the target to process
      */
-    protected void appendTextArea(final StringBuilder builder, final HtmlTextArea htmlTextArea) {
+    protected void appendTextArea(final HtmlSerializerTextBuilder builder, final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
             String text = htmlTextArea.getText();
-            text = StringUtils.stripEnd(text, null);
-            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-            text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            builder.append(text);
+            builder.appendHtmlTextAreaText(text);
         }
     }
 
@@ -482,12 +328,12 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlTable the target to process
      */
-    protected void appendTable(final StringBuilder builder, final HtmlTable htmlTable) {
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+    protected void appendTable(final HtmlSerializerTextBuilder builder, final HtmlTable htmlTable) {
+        builder.appendTextBlockSeparator();
         final String caption = htmlTable.getCaptionText();
         if (caption != null) {
             builder.append(caption);
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
         }
 
         boolean first = true;
@@ -512,7 +358,7 @@ public class HtmlSerializer {
             }
         }
 
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+        builder.appendTextBlockSeparator();
     }
 
     /**
@@ -525,7 +371,7 @@ public class HtmlSerializer {
      * @param skipParent2 skip row if the parent is this
      * @return true if this was the first one
      */
-    protected boolean appendTableRows(final StringBuilder builder,
+    protected boolean appendTableRows(final HtmlSerializerTextBuilder builder,
             final List<HtmlTableRow> rows, boolean first, final TableRowGroup skipParent1,
             final TableRowGroup skipParent2) {
         for (final HtmlTableRow row : rows) {
@@ -533,7 +379,7 @@ public class HtmlSerializer {
                 continue;
             }
             if (!first) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
+                builder.appendTextBlockSeparator();
             }
             first = false;
             appendTableRow(builder, row);
@@ -547,7 +393,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlSelect the target to process
      */
-    protected void appendSelect(final StringBuilder builder, final HtmlSelect htmlSelect) {
+    protected void appendSelect(final HtmlSerializerTextBuilder builder, final HtmlSelect htmlSelect) {
         final List<HtmlOption> options;
         if (htmlSelect.isMultipleSelectEnabled()) {
             options = htmlSelect.getOptions();
@@ -560,7 +406,7 @@ public class HtmlSerializer {
             final HtmlOption currentOption = i.next();
             appendNode(builder, currentOption);
             if (i.hasNext()) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
+                builder.appendTextBlockSeparator();
             }
         }
     }
@@ -571,13 +417,13 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlOrderedList the OL element
      */
-    protected void appendOrderedList(final StringBuilder builder, final HtmlOrderedList htmlOrderedList) {
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+    protected void appendOrderedList(final HtmlSerializerTextBuilder builder, final HtmlOrderedList htmlOrderedList) {
+        builder.appendTextBlockSeparator();
         boolean first = true;
         int i = 1;
         for (final DomNode item : htmlOrderedList.getChildren()) {
             if (!first) {
-                builder.append(AS_TEXT_BLOCK_SEPARATOR);
+                builder.appendTextBlockSeparator();
             }
             first = false;
             if (item instanceof HtmlListItem) {
@@ -589,7 +435,7 @@ public class HtmlSerializer {
                 appendNode(builder, item);
             }
         }
-        builder.append(AS_TEXT_BLOCK_SEPARATOR);
+        builder.appendTextBlockSeparator();
     }
 
     /**
@@ -598,17 +444,12 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlPreformattedText the target to process
      */
-    protected void appendPreformattedText(final StringBuilder builder,
+    protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
             final HtmlPreformattedText htmlPreformattedText) {
         if (isVisible(htmlPreformattedText)) {
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
-            String text = htmlPreformattedText.getTextContent();
-            text = StringUtils.replace(text, "\t", AS_TEXT_TAB);
-            text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-            builder.append(text);
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
+            builder.appendHtmlPreformattedText(htmlPreformattedText.getTextContent());
+            builder.appendTextBlockSeparator();
         }
     }
 
@@ -618,15 +459,15 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlInlineFrame the target to process
      */
-    protected void appendInlineFrame(final StringBuilder builder,
+    protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame) {
         if (isVisible(htmlInlineFrame)) {
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
                 builder.append(((SgmlPage) page).asText());
             }
-            builder.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder.appendTextBlockSeparator();
         }
     }
 
@@ -636,7 +477,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param domText the target to process
      */
-    protected void appendText(final StringBuilder builder, final DomText domText) {
+    protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText) {
         final DomNode parent = domText.getParentNode();
         if (parent == null || parent instanceof HtmlTitle || isVisible(parent)) {
             builder.append(domText.getData());
@@ -649,7 +490,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param domComment the target to process
      */
-    protected void appendComment(final StringBuilder builder, final DomComment domComment) {
+    protected void appendComment(final HtmlSerializerTextBuilder builder, final DomComment domComment) {
         // nothing to do
     }
 
@@ -659,7 +500,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlApplet the target to process
      */
-    protected void appendApplet(final StringBuilder builder, final HtmlApplet htmlApplet) {
+    protected void appendApplet(final HtmlSerializerTextBuilder builder, final HtmlApplet htmlApplet) {
         // nothing to do
     }
 
@@ -669,8 +510,8 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlBreak the target to process
      */
-    protected void appendBreak(final StringBuilder builder, final HtmlBreak htmlBreak) {
-        builder.append(AS_TEXT_NEW_LINE);
+    protected void appendBreak(final HtmlSerializerTextBuilder builder, final HtmlBreak htmlBreak) {
+        builder.appendTextNewLine();
     }
 
     /**
@@ -679,7 +520,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlCheckBoxInput the target to process
      */
-    protected void doAppendCheckBoxInput(final StringBuilder builder, final HtmlCheckBoxInput htmlCheckBoxInput) {
+    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder, final HtmlCheckBoxInput htmlCheckBoxInput) {
         if (htmlCheckBoxInput.isChecked()) {
             builder.append("checked");
         }
@@ -694,7 +535,7 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlRadioButtonInput the target to process
      */
-    protected void doAppendRadioButtonInput(final StringBuilder builder,
+    protected void doAppendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput) {
         if (htmlRadioButtonInput.isChecked()) {
             builder.append("checked");
@@ -715,5 +556,197 @@ public class HtmlSerializer {
      */
     public void setIgnoreMaskedElements(final boolean ignore) {
         ignoreMaskedElements_ = ignore;
+    }
+
+    private static class HtmlSerializerTextBuilder {
+        /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
+        private static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
+        private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
+
+        /** Indicates a new line. Will be rendered as line separator. */
+        private static final String AS_TEXT_NEW_LINE = "§nl§";
+        private static final int AS_TEXT_NEW_LINE_LENGTH = AS_TEXT_NEW_LINE.length();
+
+        /** Indicates a non blank that can't be trimmed or reduced. */
+        private static final String AS_TEXT_BLANK = "§blank§";
+        /** Indicates a tab. */
+        private static final String AS_TEXT_TAB = "§tab§";
+
+        final StringBuilder builder_;
+
+        public HtmlSerializerTextBuilder() {
+            builder_ = new StringBuilder();
+        }
+
+        public void append(final String text) {
+            builder_.append(text);
+        }
+
+        public void appendTextBlockSeparator() {
+            builder_.append(AS_TEXT_BLOCK_SEPARATOR);
+        }
+
+        public void appendTextNewLine() {
+            builder_.append(AS_TEXT_NEW_LINE);
+        }
+        public void appendTextTab() {
+            builder_.append(AS_TEXT_TAB);
+        }
+
+        public void appendHtmlPreformattedText(final String content) {
+            String text = StringUtils.replace(content, "\t", AS_TEXT_TAB);
+            appendHtmlTextAreaText(text);
+        }
+
+        public void appendHtmlTextAreaText(final String content) {
+            String text = StringUtils.stripEnd(content, null);
+            text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
+            text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
+            text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
+            builder_.append(text);
+        }
+
+        public String getText() {
+            final String response = builder_.toString();
+            return cleanUp(response);
+        }
+
+        /**
+         * Reduce the whitespace and do some more cleanup.
+         * @param text the text to clean up
+         * @return the new text
+         */
+        protected String cleanUp(final String text) {
+            // ignore <br/> at the end of a block
+            String resultText = reduceWhitespace(text);
+
+            final String ls = System.lineSeparator();
+            resultText = StringUtils.replaceEach(resultText,
+                    new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
+                    new String[] {" ", ls, ls, "\t"});
+
+            return resultText;
+        }
+
+        private static String reduceWhitespace(final String text) {
+            String resultText = trim(text);
+
+            // remove white spaces before or after block separators
+            resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
+
+            // remove leading block separators
+            int start = 0;
+            while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
+                start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+            }
+
+            // remove trailing block separators
+            int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+            while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
+                end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+            }
+            resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+
+            resultText = trim(resultText);
+
+            final StringBuilder builder = new StringBuilder(resultText.length());
+
+            boolean whitespace = false;
+            for (final char ch : resultText.toCharArray()) {
+
+                // Translate non-breaking space to regular space.
+                if (ch == (char) 160) {
+                    builder.append(' ');
+                    whitespace = false;
+                }
+                else {
+                    if (whitespace) {
+                        if (!isSpace(ch)) {
+                            builder.append(ch);
+                            whitespace = false;
+                        }
+                    }
+                    else {
+                        if (isSpace(ch)) {
+                            whitespace = true;
+                            builder.append(' ');
+                        }
+                        else {
+                            builder.append(ch);
+                        }
+                    }
+                }
+            }
+            return builder.toString();
+        }
+
+        private static boolean isSpace(final char ch) {
+            return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
+        }
+
+        private static String trim(final String string) {
+            final int length = string.length();
+            if (length == 0) {
+                return string;
+            }
+
+            int start = 0;
+            while (start != length && isSpace(string.charAt(start))) {
+                start++;
+            }
+            if (start == length) {
+                return "";
+            }
+
+            int end = length;
+            while (end > start && isSpace(string.charAt(end - 1))) {
+                end--;
+            }
+            if (end == length && start == 0) {
+                return string;
+            }
+            return string.substring(start, end);
+        }
+
+        private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
+            int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+            if (p0 == -1) {
+                return text;
+            }
+
+            final int length = text.length();
+            if (length <= AS_TEXT_BLOCK_SEPARATOR_LENGTH) {
+                return text;
+            }
+
+            final StringBuilder result = new StringBuilder(length);
+            int start = 0;
+            while (p0 != -1) {
+                int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                while (p0 != start && isSpace(text.charAt(p0 - 1))) {
+                    p0--;
+                }
+                if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
+                    p0 = p0 - AS_TEXT_NEW_LINE_LENGTH;
+                }
+                result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
+
+                while (p1 < length && isSpace(text.charAt(p1))) {
+                    p1++;
+                }
+                start = p1;
+
+                // ignore duplicates
+                p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+                while (p0 != -1 && p0 == start) {
+                    start += AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                    p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+                }
+            }
+            if (start < length) {
+                result.append(text.substring(start));
+            }
+            return result.toString();
+        }
     }
 }
