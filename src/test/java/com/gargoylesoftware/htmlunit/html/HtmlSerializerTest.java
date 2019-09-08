@@ -37,7 +37,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void normalized() {
+    public void normalize() {
         final String ls = System.lineSeparator();
 
         HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
@@ -174,7 +174,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void cleanUp2() {
+    public void normalize2() {
         HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
         serializer.appendTextBlockSeparator();
@@ -193,7 +193,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void cleanUpPre() {
+    public void pre() {
         HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("  hello \t abc ", Mode.PRESERVE_BLANK_TAB_NEWLINE);
         assertEquals("  hello \t abc ", serializer.getText());
@@ -203,7 +203,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void cleanUpTextArea() {
+    public void textArea() {
         HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("  hello \t abc ", Mode.PRESERVE_BLANK_NEWLINE);
         assertEquals("  hello   abc", serializer.getText());
@@ -213,7 +213,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void cleanUpPerformanceWhitespace() {
+    public void performanceWhitespace() {
 
         final int length = 80_000;
         final char[] charArray = new char[length];
@@ -235,7 +235,7 @@ public class HtmlSerializerTest {
      * Test {@link HtmlSerializerTextBuilder}.
      */
     @Test
-    public void cleanUpPerformanceManyReplaces() {
+    public void performanceManyReplaces() {
         final String ls = System.lineSeparator();
         final String expected = StringUtils.repeat("x" + ls, 20_000).trim();
 

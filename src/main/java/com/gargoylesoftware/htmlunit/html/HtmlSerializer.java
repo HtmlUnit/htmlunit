@@ -560,7 +560,7 @@ public class HtmlSerializer {
     }
 
     protected static class HtmlSerializerTextBuilder {
-        protected enum Mode{
+        protected enum Mode {
             NORMALIZE,
             PRESERVE_BLANK_TAB_NEWLINE,
             PRESERVE_BLANK_NEWLINE
@@ -579,34 +579,53 @@ public class HtmlSerializer {
         /** Indicates a tab. */
         private static final String AS_TEXT_TAB = "§tab§";
 
-        final StringBuilder builder_;
+        private final StringBuilder builder_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
         }
 
         public void append(final String content, final Mode mode) {
-            String text;
-            switch (mode) {
-                case PRESERVE_BLANK_TAB_NEWLINE:
-                    text = StringUtils.replace(content, "\t", AS_TEXT_TAB);
-                    text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-                    text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-                    text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-                    builder_.append(text);
-                    break;
-    
-                case PRESERVE_BLANK_NEWLINE:
-                    text = StringUtils.stripEnd(content, null);
-                    text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
-                    text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
-                    text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-                    builder_.append(text);
-                    break;
-    
-                default:
-                    builder_.append(content);
-                    break;
+            if (mode == Mode.NORMALIZE) {
+                builder_.append(content);
+                return;
+            }
+
+            final int length = content.length();
+            if (length == 0) {
+                return;
+            }
+
+            boolean crFound = false;
+            for (int i = 0; i < length; i++) {
+                char c = content.charAt(i);
+
+                if (c == '\n') {
+                    builder_.append(AS_TEXT_NEW_LINE);
+                    crFound = false;
+                }
+                else {
+                    if (crFound) {
+                        builder_.append(AS_TEXT_NEW_LINE);
+                    }
+                    crFound = c == '\r';
+
+                    if (mode == Mode.PRESERVE_BLANK_TAB_NEWLINE && c == '\t') {
+                        builder_.append(AS_TEXT_TAB);
+                    }
+                    else if (c == ' ') {
+                        if (mode != Mode.PRESERVE_BLANK_NEWLINE || i + 1 != length) {
+                            builder_.append(AS_TEXT_BLANK);
+                        }
+                    }
+                    else {
+                        builder_.append(c);
+                    }
+                }
+            }
+
+            if (crFound) {
+                builder_.append(AS_TEXT_NEW_LINE);
             }
         }
 
