@@ -558,7 +558,7 @@ public class HtmlSerializer {
         ignoreMaskedElements_ = ignore;
     }
 
-    private static class HtmlSerializerTextBuilder {
+    protected static class HtmlSerializerTextBuilder {
         /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
         private static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
         private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
@@ -603,7 +603,7 @@ public class HtmlSerializer {
             text = TEXT_AREA_PATTERN.matcher(text).replaceAll(AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, "\r", AS_TEXT_NEW_LINE);
             text = StringUtils.replace(text, " ", AS_TEXT_BLANK);
-            builder_.append(text);
+            append(text);
         }
 
         public String getText() {
