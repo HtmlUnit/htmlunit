@@ -627,8 +627,7 @@ public class HtmlSerializer {
 
                 // preserve mode
                 if (c == '\n') {
-                    builder_.append(AS_TEXT_NEW_LINE);
-                    hasPreservedText_ = true;
+                    appendNewLine();
                     crFound = false;
                 }
                 else {
