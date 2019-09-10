@@ -729,9 +729,10 @@ public class HtmlSerializer {
                     end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
                 }
                 resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
+                resultText = trim(resultText);
             }
 
-            return trim(resultText);
+            return resultText;
         }
 
         private static boolean isSpace(final char ch) {
