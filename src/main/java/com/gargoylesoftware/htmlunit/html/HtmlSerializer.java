@@ -563,6 +563,12 @@ public class HtmlSerializer {
             PRESERVE_BLANK_NEWLINE
         }
 
+        protected enum State {
+            DEFAULT,
+            EMPTY,
+            BLANK_AT_END
+        }
+
         /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
         private static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
         private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
@@ -576,43 +582,77 @@ public class HtmlSerializer {
         /** Indicates a tab. */
         private static final String AS_TEXT_TAB = "§tab§";
 
+        private State state_;
         private final StringBuilder builder_;
+        private boolean hasPreservedText_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
+            state_ = State.EMPTY;
+            hasPreservedText_ = false;
         }
 
         public void append(final String content, final Mode mode) {
-            if (mode == Mode.NORMALIZE) {
-                builder_.append(content);
-                return;
-            }
-
             final int length = content.length();
             if (length == 0) {
                 return;
             }
 
             boolean crFound = false;
-            for (int i = 0; i < length; i++) {
-                char c = content.charAt(i);
+            int i = -1;
+            for (final char c : content.toCharArray()) {
+                i++;
+                if (mode == Mode.NORMALIZE) {
+                    if (isSpace(c)) {
+                        switch (state_) {
+                            case EMPTY:
+                            case BLANK_AT_END:
+                                break;
+                            default:
+                                builder_.append(' ');
+                                state_ = State.BLANK_AT_END;
+                                break;
+                            }
+                    }
+                    else if (c == (char) 160) {
+                        builder_.append(' ');
+                        state_ = State.DEFAULT;
+                    }
+                    else {
+                        builder_.append(c);
+                        state_ = State.DEFAULT;
+                    }
+                    continue;
+                }
 
+                // preserve mode
                 if (c == '\n') {
                     builder_.append(AS_TEXT_NEW_LINE);
+                    hasPreservedText_ = true;
                     crFound = false;
                 }
                 else {
                     if (crFound) {
-                        builder_.append(AS_TEXT_NEW_LINE);
+                        appendNewLine();
                     }
                     crFound = c == '\r';
 
-                    if (mode == Mode.PRESERVE_BLANK_TAB_NEWLINE && c == '\t') {
-                        builder_.append(AS_TEXT_TAB);
+                    if (c == '\t') {
+                        if (mode == Mode.PRESERVE_BLANK_TAB_NEWLINE) {
+                            appendTab();
+                        }
+                        else {
+                            builder_.append(' ');
+                        }
+                    }
+                    else if (c == (char) 160) {
+                        builder_.append(AS_TEXT_BLANK);
+                        hasPreservedText_ = true;
                     }
                     else if (c == ' ') {
                         if (mode != Mode.PRESERVE_BLANK_NEWLINE || i + 1 != length) {
                             builder_.append(AS_TEXT_BLANK);
+                            hasPreservedText_ = true;
                         }
                     }
                     else {
@@ -622,20 +662,28 @@ public class HtmlSerializer {
             }
 
             if (crFound) {
-                builder_.append(AS_TEXT_NEW_LINE);
+                appendNewLine();
+            }
+
+            if (mode != Mode.NORMALIZE) {
+                // reset state to empty to restart whitespace normalization afterwards
+                state_ = State.EMPTY;
             }
         }
 
         public void appendBlockSeparator() {
             builder_.append(AS_TEXT_BLOCK_SEPARATOR);
+            hasPreservedText_ = true;
         }
 
         public void appendNewLine() {
             builder_.append(AS_TEXT_NEW_LINE);
+            hasPreservedText_ = true;
         }
 
         public void appendTab() {
             builder_.append(AS_TEXT_TAB);
+            hasPreservedText_ = true;
         }
 
         public String getText() {
@@ -652,64 +700,38 @@ public class HtmlSerializer {
             // ignore <br/> at the end of a block
             String resultText = reduceWhitespace(text);
 
-            final String ls = System.lineSeparator();
-            resultText = StringUtils.replaceEach(resultText,
-                    new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
-                    new String[] {" ", ls, ls, "\t"});
+            if (hasPreservedText_) {
+                final String ls = System.lineSeparator();
+                resultText = StringUtils.replaceEach(resultText,
+                        new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
+                        new String[] {" ", ls, ls, "\t"});
+            }
 
             return resultText;
         }
 
-        private static String reduceWhitespace(final String text) {
+        private String reduceWhitespace(final String text) {
             String resultText = trim(text);
 
-            // remove white spaces before or after block separators
-            resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
-
-            // remove leading block separators
-            int start = 0;
-            while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
-                start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-            }
-
-            // remove trailing block separators
-            int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-            while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
-                end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-            }
-            resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
-
-            resultText = trim(resultText);
-
-            final StringBuilder builder = new StringBuilder(resultText.length());
-
-            boolean whitespace = false;
-            for (final char ch : resultText.toCharArray()) {
-
-                // Translate non-breaking space to regular space.
-                if (ch == (char) 160) {
-                    builder.append(' ');
-                    whitespace = false;
+            if (hasPreservedText_) {
+                // remove white spaces before or after block separators
+                resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
+    
+                // remove leading block separators
+                int start = 0;
+                while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
+                    start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
                 }
-                else {
-                    if (whitespace) {
-                        if (!isSpace(ch)) {
-                            builder.append(ch);
-                            whitespace = false;
-                        }
-                    }
-                    else {
-                        if (isSpace(ch)) {
-                            whitespace = true;
-                            builder.append(' ');
-                        }
-                        else {
-                            builder.append(ch);
-                        }
-                    }
+    
+                // remove trailing block separators
+                int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
+                    end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
                 }
+                resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
             }
-            return builder.toString();
+
+            return trim(resultText);
         }
 
         private static boolean isSpace(final char ch) {

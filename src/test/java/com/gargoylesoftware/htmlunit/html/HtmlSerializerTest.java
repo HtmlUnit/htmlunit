@@ -143,14 +143,6 @@ public class HtmlSerializerTest {
 
         serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.NORMALIZE);
-        serializer.append("§blank§", Mode.NORMALIZE);
-        serializer.append(" ", Mode.NORMALIZE);
-        serializer.append("§blank§", Mode.NORMALIZE);
-        serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a   x", serializer.getText());
-
-        serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
-        serializer.append("a", Mode.NORMALIZE);
         serializer.appendTab();
         serializer.append(" ", Mode.NORMALIZE);
         serializer.appendTab();
