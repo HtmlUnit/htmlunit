@@ -154,12 +154,22 @@ public class HtmlSerializerTest {
         assertEquals("abc", serializer.getText());
 
         serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        serializer.append("a     b \t\t\t c \r \r o \n\n\n", Mode.NORMALIZE);
+        assertEquals("a b c o", serializer.getText());
+    }
+
+    /**
+     * Test {@link HtmlSerializerTextBuilder}.
+     */
+    @Test
+    public void normalizeNbsp() {
+        HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("abc" + (char) 160 + "x", Mode.NORMALIZE);
         assertEquals("abc x", serializer.getText());
 
         serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
-        serializer.append("a     b \t\t\t c \r \r o \n\n\n", Mode.NORMALIZE);
-        assertEquals("a b c o", serializer.getText());
+        serializer.append((char) 160 + "x" + (char) 160, Mode.NORMALIZE);
+        assertEquals(" x ", serializer.getText());
     }
 
     /**
@@ -242,7 +252,7 @@ public class HtmlSerializerTest {
         assertEquals(expected, serializer.getText());
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 400);
+        assertTrue("cleanUp() took too much time", runTime < 200);
     }
 
     /**

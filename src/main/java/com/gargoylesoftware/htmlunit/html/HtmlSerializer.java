@@ -569,27 +569,29 @@ public class HtmlSerializer {
             BLANK_AT_END
         }
 
-        /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
-        private static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
-        private static final int AS_TEXT_BLOCK_SEPARATOR_LENGTH = AS_TEXT_BLOCK_SEPARATOR.length();
+        /** Indicates a block. Will be rendered as line separator; multiple block marks are ignored. */
+        private static final String BLOCK_SEPARATOR = "§bs§";
+        private static final int BLOCK_SEPARATOR_LENGTH = BLOCK_SEPARATOR.length();
 
         /** Indicates a new line. Will be rendered as line separator. */
-        private static final String AS_TEXT_NEW_LINE = "§nl§";
-        private static final int AS_TEXT_NEW_LINE_LENGTH = AS_TEXT_NEW_LINE.length();
+        private static final String NEW_LINE = "§nl§";
+        private static final int NEW_LINE_LENGTH = NEW_LINE.length();
 
         /** Indicates a non blank that can't be trimmed or reduced. */
-        private static final String AS_TEXT_BLANK = "§blank§";
+        private static final String BLANK = "§blank§";
         /** Indicates a tab. */
-        private static final String AS_TEXT_TAB = "§tab§";
+        private static final String TAB = "§tab§";
 
         private State state_;
         private final StringBuilder builder_;
+        private int trimRightPos_;
         private boolean hasPreservedText_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
             hasPreservedText_ = false;
+            trimRightPos_ = 0;
         }
 
         public void append(final String content, final Mode mode) {
@@ -598,10 +600,13 @@ public class HtmlSerializer {
                 return;
             }
 
+            String text = content; 
+            if (mode == Mode.PRESERVE_BLANK_NEWLINE) {
+                text = StringUtils.stripEnd(text, null);
+            }
+
             boolean crFound = false;
-            int i = -1;
-            for (final char c : content.toCharArray()) {
-                i++;
+            for (final char c : text.toCharArray()) {
                 if (mode == Mode.NORMALIZE) {
                     if (isSpace(c)) {
                         switch (state_) {
@@ -617,10 +622,12 @@ public class HtmlSerializer {
                     else if (c == (char) 160) {
                         builder_.append(' ');
                         state_ = State.DEFAULT;
+                        trimRightPos_ = builder_.length();
                     }
                     else {
                         builder_.append(c);
                         state_ = State.DEFAULT;
+                        trimRightPos_ = builder_.length();
                     }
                     continue;
                 }
@@ -645,19 +652,18 @@ public class HtmlSerializer {
                         }
                     }
                     else if (c == (char) 160) {
-                        builder_.append(AS_TEXT_BLANK);
+                        builder_.append(BLANK);
                         hasPreservedText_ = true;
                     }
                     else if (c == ' ') {
-                        if (mode != Mode.PRESERVE_BLANK_NEWLINE || i + 1 != length) {
-                            builder_.append(AS_TEXT_BLANK);
-                            hasPreservedText_ = true;
-                        }
+                        builder_.append(BLANK);
+                        hasPreservedText_ = true;
                     }
                     else {
                         builder_.append(c);
                     }
                 }
+                trimRightPos_ = builder_.length();
             }
 
             if (crFound) {
@@ -671,23 +677,29 @@ public class HtmlSerializer {
         }
 
         public void appendBlockSeparator() {
-            builder_.append(AS_TEXT_BLOCK_SEPARATOR);
+            builder_.append(BLOCK_SEPARATOR);
+            trimRightPos_ = builder_.length();
             hasPreservedText_ = true;
         }
 
         public void appendNewLine() {
-            builder_.append(AS_TEXT_NEW_LINE);
+            builder_.append(NEW_LINE);
+            trimRightPos_ = builder_.length();
             hasPreservedText_ = true;
         }
 
         public void appendTab() {
-            builder_.append(AS_TEXT_TAB);
+            builder_.append(TAB);
+            trimRightPos_ = builder_.length();
             hasPreservedText_ = true;
         }
 
         public String getText() {
-            final String response = builder_.toString();
-            return cleanUp(response);
+            String response = builder_.substring(0, trimRightPos_);
+            if (hasPreservedText_) {
+                response = cleanUp(response);
+            }
+            return response;
         }
 
         /**
@@ -699,37 +711,31 @@ public class HtmlSerializer {
             // ignore <br/> at the end of a block
             String resultText = reduceWhitespace(text);
 
-            if (hasPreservedText_) {
-                final String ls = System.lineSeparator();
-                resultText = StringUtils.replaceEach(resultText,
-                        new String[] {AS_TEXT_BLANK, AS_TEXT_NEW_LINE, AS_TEXT_BLOCK_SEPARATOR, AS_TEXT_TAB},
-                        new String[] {" ", ls, ls, "\t"});
-            }
+            final String ls = System.lineSeparator();
+            resultText = StringUtils.replaceEach(resultText,
+                    new String[] {BLANK, NEW_LINE, BLOCK_SEPARATOR, TAB},
+                    new String[] {" ", ls, ls, "\t"});
 
             return resultText;
         }
 
         private String reduceWhitespace(final String text) {
-            String resultText = trim(text);
+            // remove white spaces before or after block separators
+            String resultText = reduceWhiteSpaceAroundBlockSeparator(text);
 
-            if (hasPreservedText_) {
-                // remove white spaces before or after block separators
-                resultText = reduceWhiteSpaceAroundBlockSeparator(resultText);
-    
-                // remove leading block separators
-                int start = 0;
-                while (resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, start)) {
-                    start = start + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-                }
-    
-                // remove trailing block separators
-                int end = resultText.length() - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-                while (end > start && resultText.startsWith(AS_TEXT_BLOCK_SEPARATOR, end)) {
-                    end = end - AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-                }
-                resultText = resultText.substring(start, end + AS_TEXT_BLOCK_SEPARATOR_LENGTH);
-                resultText = trim(resultText);
+            // remove leading block separators
+            int start = 0;
+            while (resultText.startsWith(BLOCK_SEPARATOR, start)) {
+                start = start + BLOCK_SEPARATOR_LENGTH;
             }
+
+            // remove trailing block separators
+            int end = resultText.length() - BLOCK_SEPARATOR_LENGTH;
+            while (end > start && resultText.startsWith(BLOCK_SEPARATOR, end)) {
+                end = end - BLOCK_SEPARATOR_LENGTH;
+            }
+            resultText = resultText.substring(start, end + BLOCK_SEPARATOR_LENGTH);
+            resultText = trim(resultText);
 
             return resultText;
         }
@@ -763,27 +769,27 @@ public class HtmlSerializer {
         }
 
         private static String reduceWhiteSpaceAroundBlockSeparator(final String text) {
-            int p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR);
+            int p0 = text.indexOf(BLOCK_SEPARATOR);
             if (p0 == -1) {
                 return text;
             }
 
             final int length = text.length();
-            if (length <= AS_TEXT_BLOCK_SEPARATOR_LENGTH) {
+            if (length <= BLOCK_SEPARATOR_LENGTH) {
                 return text;
             }
 
             final StringBuilder result = new StringBuilder(length);
             int start = 0;
             while (p0 != -1) {
-                int p1 = p0 + AS_TEXT_BLOCK_SEPARATOR_LENGTH;
+                int p1 = p0 + BLOCK_SEPARATOR_LENGTH;
                 while (p0 != start && isSpace(text.charAt(p0 - 1))) {
                     p0--;
                 }
-                if (p0 >= AS_TEXT_NEW_LINE_LENGTH && text.startsWith(AS_TEXT_NEW_LINE, p0 - AS_TEXT_NEW_LINE_LENGTH)) {
-                    p0 = p0 - AS_TEXT_NEW_LINE_LENGTH;
+                if (p0 >= NEW_LINE_LENGTH && text.startsWith(NEW_LINE, p0 - NEW_LINE_LENGTH)) {
+                    p0 = p0 - NEW_LINE_LENGTH;
                 }
-                result.append(text.substring(start, p0)).append(AS_TEXT_BLOCK_SEPARATOR);
+                result.append(text.substring(start, p0)).append(BLOCK_SEPARATOR);
 
                 while (p1 < length && isSpace(text.charAt(p1))) {
                     p1++;
@@ -791,10 +797,10 @@ public class HtmlSerializer {
                 start = p1;
 
                 // ignore duplicates
-                p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+                p0 = text.indexOf(BLOCK_SEPARATOR, start);
                 while (p0 != -1 && p0 == start) {
-                    start += AS_TEXT_BLOCK_SEPARATOR_LENGTH;
-                    p0 = text.indexOf(AS_TEXT_BLOCK_SEPARATOR, start);
+                    start += BLOCK_SEPARATOR_LENGTH;
+                    p0 = text.indexOf(BLOCK_SEPARATOR, start);
                 }
             }
             if (start < length) {
