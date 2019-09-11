@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1594,5 +1595,110 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         driver.findElement(By.id("submit")).click();
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"second", "second"})
+    public void notRequiredFileInput() throws Exception {
+        requiredFileInput("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInput() throws Exception {
+        requiredFileInput("required");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputEmpty() throws Exception {
+        requiredFileInput("required=''");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputBlank() throws Exception {
+        requiredFileInput("required=' '");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputTrue() throws Exception {
+        requiredFileInput("required=true");
+        requiredFileInput("required='true'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputFalse() throws Exception {
+        requiredFileInput("required=false");
+        requiredFileInput("required='false'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputArbitrary() throws Exception {
+        requiredFileInput("required='Arbitrary'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first", "second"})
+    public void requiredFileInputRequired() throws Exception {
+        requiredFileInput("required='required'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void requiredFileInput(final String req) throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"'>\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input type='file' name='test' value='' " + req + " >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        loadPage2(html);
+        final WebElement e = driver.findElement(By.name("test"));
+        final String absolutePath = new File("pom.xml").getAbsolutePath();
+        e.sendKeys(absolutePath);
+        driver.findElement(By.id("submit")).click();
+        assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
 }

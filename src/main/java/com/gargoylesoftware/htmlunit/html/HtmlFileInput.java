@@ -204,4 +204,14 @@ public class HtmlFileInput extends HtmlInput {
     public File[] getFiles() {
         return files_;
     }
+
+    /**
+     * Returns whether this element satisfies all form validation constraints set.
+     * @return whether this element satisfies all form validation constraints set
+     */
+    @Override
+    public boolean isValid() {
+        return !isRequiredSupported() || getAttributeDirect("required") == ATTRIBUTE_NOT_DEFINED
+                || files_.length > 0;
+    }
 }
