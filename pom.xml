@@ -25,6 +25,7 @@
         <htmlunitneko.version>2.36.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.36.0</htmlunitcorejs.version>
 
+        <httpcomponents.version>4.5.10</httpcomponents.version>
         <jetty.version>9.4.20.v20190813</jetty.version>
         <log4j.version>2.12.1</log4j.version>
         <slf4j.version>1.7.28</slf4j.version>
@@ -1112,12 +1113,12 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.5.9</version>
+            <version>${httpcomponents.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.9</version>
+            <version>${httpcomponents.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>

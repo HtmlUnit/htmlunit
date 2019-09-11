@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.37.0" date="xxxx, 2019" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpComponents to 4.5.10.
+            </action>
+        </release>
         <release version="2.36.0" date="August 24, 2019" description="Bugfixes, CHROME 76, Brotli, FF52 deprecated">
             <action type="update" dev="rbri" due-to="Le Stephane">
                 INCOMPATIBLE CHANGE: WebConnection.close() and WebConnectionWrapper.close() are throwing an
