@@ -47,7 +47,6 @@ public class HtmlSerializer {
         return builder.getText();
     }
 
-
     /**
      * Iterate over all Children and call appendNode() for every.
      *
@@ -258,7 +257,8 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
      */
-    protected void appendUnorderedList(final HtmlSerializerTextBuilder builder, final HtmlUnorderedList htmlUnorderedList) {
+    protected void appendUnorderedList(final HtmlSerializerTextBuilder builder,
+                                          final HtmlUnorderedList htmlUnorderedList) {
         builder.appendBlockSeparator();
         boolean first = true;
         for (final DomNode item : htmlUnorderedList.getChildren()) {
@@ -315,8 +315,7 @@ public class HtmlSerializer {
      */
     protected void appendTextArea(final HtmlSerializerTextBuilder builder, final HtmlTextArea htmlTextArea) {
         if (isVisible(htmlTextArea)) {
-            String text = htmlTextArea.getText();
-            builder.append(text, Mode.PRESERVE_BLANK_NEWLINE);
+            builder.append(htmlTextArea.getText(), Mode.PRESERVE_BLANK_NEWLINE);
         }
     }
 
@@ -518,7 +517,8 @@ public class HtmlSerializer {
      * @param builder the StringBuilder to add to
      * @param htmlCheckBoxInput the target to process
      */
-    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder, final HtmlCheckBoxInput htmlCheckBoxInput) {
+    protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder,
+                                            final HtmlCheckBoxInput htmlCheckBoxInput) {
         if (htmlCheckBoxInput.isChecked()) {
             builder.append("checked", Mode.NORMALIZE);
         }
@@ -557,13 +557,19 @@ public class HtmlSerializer {
     }
 
     protected static class HtmlSerializerTextBuilder {
+        /** Mode */
         protected enum Mode {
+            /** Collapse whitespace. */
             NORMALIZE,
+
+            /** Preserve tab, blank, newline. */
             PRESERVE_BLANK_TAB_NEWLINE,
+
+            /** Preserve blank, newline. */
             PRESERVE_BLANK_NEWLINE
         }
 
-        protected enum State {
+        private enum State {
             DEFAULT,
             EMPTY,
             BLANK_AT_END
