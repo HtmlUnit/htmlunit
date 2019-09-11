@@ -202,7 +202,7 @@ public class HtmlSerializerTest {
      */
     @Test
     public void pre() {
-        HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("  hello \t abc ", Mode.PRESERVE_BLANK_TAB_NEWLINE);
         assertEquals("  hello \t abc ", serializer.getText());
     }
@@ -212,7 +212,7 @@ public class HtmlSerializerTest {
      */
     @Test
     public void textArea() {
-        HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("  hello \t abc ", Mode.PRESERVE_BLANK_NEWLINE);
         assertEquals("  hello   abc", serializer.getText());
     }
@@ -230,7 +230,7 @@ public class HtmlSerializerTest {
         final String text = new String(charArray);
 
         final long time = System.currentTimeMillis();
-        HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append(text, Mode.NORMALIZE);
         serializer.getText();
 

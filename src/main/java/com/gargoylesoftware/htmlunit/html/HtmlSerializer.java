@@ -557,7 +557,7 @@ public class HtmlSerializer {
     }
 
     protected static class HtmlSerializerTextBuilder {
-        /** Mode */
+        /** Mode. */
         protected enum Mode {
             /** Collapse whitespace. */
             NORMALIZE,
@@ -606,7 +606,7 @@ public class HtmlSerializer {
                 return;
             }
 
-            String text = content; 
+            String text = content;
             if (mode == Mode.PRESERVE_BLANK_NEWLINE) {
                 text = StringUtils.stripEnd(text, null);
             }
@@ -623,7 +623,7 @@ public class HtmlSerializer {
                                 builder_.append(' ');
                                 state_ = State.BLANK_AT_END;
                                 break;
-                            }
+                        }
                     }
                     else if (c == (char) 160) {
                         builder_.append(BLANK);
