@@ -170,6 +170,12 @@ public class HtmlSerializerTest {
         serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append((char) 160 + "x" + (char) 160, Mode.NORMALIZE);
         assertEquals(" x ", serializer.getText());
+
+        serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        serializer.appendBlockSeparator();
+        serializer.append((char) 160 + "x" + (char) 160, Mode.NORMALIZE);
+        serializer.appendBlockSeparator();
+        assertEquals(" x ", serializer.getText());
     }
 
     /**

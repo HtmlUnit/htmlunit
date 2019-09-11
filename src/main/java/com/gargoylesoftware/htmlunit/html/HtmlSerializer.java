@@ -626,7 +626,8 @@ public class HtmlSerializer {
                             }
                     }
                     else if (c == (char) 160) {
-                        builder_.append(' ');
+                        builder_.append(BLANK);
+                        hasPreservedText_ = true;
                         state_ = State.DEFAULT;
                         trimRightPos_ = builder_.length();
                     }
