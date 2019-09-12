@@ -572,7 +572,8 @@ public class HtmlSerializer {
         private enum State {
             DEFAULT,
             EMPTY,
-            BLANK_AT_END
+            BLANK_AT_END,
+            BLOCK_SEPARATOR_AT_END
         }
 
         /** Indicates a block. Will be rendered as line separator; multiple block marks are ignored. */
@@ -618,6 +619,7 @@ public class HtmlSerializer {
                         switch (state_) {
                             case EMPTY:
                             case BLANK_AT_END:
+                            case BLOCK_SEPARATOR_AT_END:
                                 break;
                             default:
                                 builder_.append(' ');
@@ -684,9 +686,12 @@ public class HtmlSerializer {
         }
 
         public void appendBlockSeparator() {
-            builder_.append(BLOCK_SEPARATOR);
-            trimRightPos_ = builder_.length();
-            hasPreservedText_ = true;
+            if (state_ != State.BLOCK_SEPARATOR_AT_END) {
+                builder_.append(BLOCK_SEPARATOR);
+                state_ = State.BLOCK_SEPARATOR_AT_END;
+                trimRightPos_ = builder_.length();
+                hasPreservedText_ = true;
+            }
         }
 
         public void appendNewLine() {
@@ -803,12 +808,7 @@ public class HtmlSerializer {
                 }
                 start = p1;
 
-                // ignore duplicates
                 p0 = text.indexOf(BLOCK_SEPARATOR, start);
-                while (p0 != -1 && p0 == start) {
-                    start += BLOCK_SEPARATOR_LENGTH;
-                    p0 = text.indexOf(BLOCK_SEPARATOR, start);
-                }
             }
             if (start < length) {
                 result.append(text.substring(start));
