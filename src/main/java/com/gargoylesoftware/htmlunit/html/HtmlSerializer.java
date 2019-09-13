@@ -579,28 +579,16 @@ public class HtmlSerializer {
             BLOCK_SEPARATOR_AT_END
         }
 
-        /** Indicates a block. Will be rendered as line separator; multiple block marks are ignored. */
-        private static final String BLOCK_SEPARATOR = "§bs§";
-        private static final int BLOCK_SEPARATOR_LENGTH = BLOCK_SEPARATOR.length();
-
-        /** Indicates a new line. Will be rendered as line separator. */
-        private static final String NEW_LINE = "§nl§";
-        private static final int NEW_LINE_LENGTH = NEW_LINE.length();
-
-        /** Indicates a non blank that can't be trimmed or reduced. */
-        private static final String BLANK = "§blank§";
-        /** Indicates a tab. */
-        private static final String TAB = "§tab§";
+        private static final String LINE_SEPARATOR = System.lineSeparator();
+        private static final int LINE_SEPARATOR_LENGTH = LINE_SEPARATOR.length();
 
         private State state_;
         private final StringBuilder builder_;
         private int trimRightPos_;
-        private boolean hasPreservedText_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
             state_ = State.EMPTY;
-            hasPreservedText_ = false;
             trimRightPos_ = 0;
         }
 
@@ -637,8 +625,7 @@ public class HtmlSerializer {
                         }
                     }
                     else if (c == (char) 160) {
-                        builder_.append(BLANK);
-                        hasPreservedText_ = true;
+                        builder_.append(' ');
                         state_ = State.DEFAULT;
                         trimRightPos_ = builder_.length();
                     }
@@ -678,8 +665,8 @@ public class HtmlSerializer {
                     else {
                         builder_.append(c);
                     }
+                    trimRightPos_ = builder_.length();
                 }
-                trimRightPos_ = builder_.length();
             }
 
             if (crFound) {
@@ -700,113 +687,63 @@ public class HtmlSerializer {
                     builder_.setLength(trimRightPos_);
                     if (builder_.length() == 0) {
                         state_ = State.EMPTY;
-                        hasPreservedText_ = false;
                     }
                     else {
-                        builder_.append(BLOCK_SEPARATOR);
+                        builder_.append(LINE_SEPARATOR);
                         state_ = State.BLOCK_SEPARATOR_AT_END;
-                        trimRightPos_ = builder_.length();
-                        hasPreservedText_ = true;
                     }
                     break;
                 case BLANK_AT_END_AFTER_NEWLINE:
-                    builder_.setLength(trimRightPos_ - NEW_LINE_LENGTH);
+                    builder_.setLength(trimRightPos_ - LINE_SEPARATOR_LENGTH);
                     if (builder_.length() == 0) {
                         state_ = State.EMPTY;
-                        hasPreservedText_ = false;
                     }
                     else {
-                        builder_.append(BLOCK_SEPARATOR);
+                        builder_.append(LINE_SEPARATOR);
                         state_ = State.BLOCK_SEPARATOR_AT_END;
-                        trimRightPos_ = builder_.length();
-                        hasPreservedText_ = true;
                     }
                     break;
                 case BLOCK_SEPARATOR_AT_END:
                     break;
                 case NEWLINE_AT_END:
-                    builder_.setLength(builder_.length() - NEW_LINE_LENGTH);
+                    builder_.setLength(builder_.length() - LINE_SEPARATOR_LENGTH);
                     if (builder_.length() == 0) {
                         state_ = State.EMPTY;
-                        hasPreservedText_ = false;
                     }
                     else {
-                        builder_.append(BLOCK_SEPARATOR);
+                        builder_.append(LINE_SEPARATOR);
                         state_ = State.BLOCK_SEPARATOR_AT_END;
-                        trimRightPos_ = builder_.length();
-                        hasPreservedText_ = true;
                     }
                     break;
                 default:
-                    builder_.append(BLOCK_SEPARATOR);
+                    builder_.append(LINE_SEPARATOR);
                     state_ = State.BLOCK_SEPARATOR_AT_END;
-                    trimRightPos_ = builder_.length();
-                    hasPreservedText_ = true;
                     break;
             }
         }
 
         public void appendNewLine() {
-            builder_.append(NEW_LINE);
+            builder_.append(LINE_SEPARATOR);
             state_ = State.NEWLINE_AT_END;
             trimRightPos_ = builder_.length();
-            hasPreservedText_ = true;
         }
 
         public void appendTab() {
-            builder_.append(TAB);
+            builder_.append('\t');
             trimRightPos_ = builder_.length();
-            hasPreservedText_ = true;
         }
 
         private void appendBlank() {
-            builder_.append(BLANK);
+            builder_.append(' ');
             trimRightPos_ = builder_.length();
-            hasPreservedText_ = true;
         }
 
         public String getText() {
-            if (hasPreservedText_) {
-                if (state_ == State.BLOCK_SEPARATOR_AT_END) {
-                    trimRightPos_ = trimRightPos_ - BLOCK_SEPARATOR_LENGTH;
-                }
-
-                String response = trim(0, trimRightPos_);
-
-                final String ls = System.lineSeparator();
-                response = StringUtils.replaceEach(response,
-                        new String[] {BLANK, NEW_LINE, BLOCK_SEPARATOR, TAB},
-                        new String[] {" ", ls, ls, "\t"});
-
-                return response;
-            }
-
             return builder_.substring(0, trimRightPos_);
         }
 
         private static boolean isSpace(final char ch) {
             return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
-        }
-
-        private String trim(final int startPos, final int endPos) {
-            final int length = endPos - startPos;
-            if (length == 0) {
-                return "";
-            }
-
-            int start = startPos;
-            while (start != endPos && isSpace(builder_.charAt(start))) {
-                start++;
-            }
-            if (start == endPos) {
-                return "";
-            }
-
-            int end = endPos;
-            while (end > start && isSpace(builder_.charAt(end - 1))) {
-                end--;
-            }
-            return builder_.substring(start, end);
         }
     }
 }
