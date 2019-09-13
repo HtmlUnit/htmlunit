@@ -248,7 +248,7 @@ public class HtmlSerializerTest {
 
         final long time = System.currentTimeMillis();
 
-        HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
 
         for (int i = 0; i < 20_000; i++) {
             serializer.append(" x ", Mode.NORMALIZE);
