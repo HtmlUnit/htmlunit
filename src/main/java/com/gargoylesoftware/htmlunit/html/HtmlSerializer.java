@@ -573,6 +573,8 @@ public class HtmlSerializer {
             DEFAULT,
             EMPTY,
             BLANK_AT_END,
+            BLANK_AT_END_AFTER_NEWLINE,
+            NEWLINE_AT_END,
             BLOCK_SEPARATOR_AT_END
         }
 
@@ -619,7 +621,12 @@ public class HtmlSerializer {
                         switch (state_) {
                             case EMPTY:
                             case BLANK_AT_END:
+                            case BLANK_AT_END_AFTER_NEWLINE:
                             case BLOCK_SEPARATOR_AT_END:
+                                break;
+                            case NEWLINE_AT_END:
+                                builder_.append(' ');
+                                state_ = State.BLANK_AT_END_AFTER_NEWLINE;
                                 break;
                             default:
                                 builder_.append(' ');
@@ -687,7 +694,13 @@ public class HtmlSerializer {
             switch (state_) {
                 case BLANK_AT_END:
                     builder_.setLength(trimRightPos_);
-                    removeTrailingLineSeparator();
+                    builder_.append(BLOCK_SEPARATOR);
+                    state_ = State.BLOCK_SEPARATOR_AT_END;
+                    trimRightPos_ = builder_.length();
+                    hasPreservedText_ = true;
+                    break;
+                case BLANK_AT_END_AFTER_NEWLINE:
+                    builder_.setLength(trimRightPos_ - NEW_LINE_LENGTH);
                     builder_.append(BLOCK_SEPARATOR);
                     state_ = State.BLOCK_SEPARATOR_AT_END;
                     trimRightPos_ = builder_.length();
@@ -695,8 +708,14 @@ public class HtmlSerializer {
                     break;
                 case BLOCK_SEPARATOR_AT_END:
                     break;
+                case NEWLINE_AT_END:
+                    builder_.setLength(builder_.length() - NEW_LINE_LENGTH);
+                    builder_.append(BLOCK_SEPARATOR);
+                    state_ = State.BLOCK_SEPARATOR_AT_END;
+                    trimRightPos_ = builder_.length();
+                    hasPreservedText_ = true;
+                    break;
                 default:
-                    removeTrailingLineSeparator();
                     builder_.append(BLOCK_SEPARATOR);
                     state_ = State.BLOCK_SEPARATOR_AT_END;
                     trimRightPos_ = builder_.length();
@@ -707,6 +726,7 @@ public class HtmlSerializer {
 
         public void appendNewLine() {
             builder_.append(NEW_LINE);
+            state_ = State.NEWLINE_AT_END;
             trimRightPos_ = builder_.length();
             hasPreservedText_ = true;
         }
@@ -792,17 +812,6 @@ public class HtmlSerializer {
                 return string;
             }
             return string.substring(start, end);
-        }
-
-        private void removeTrailingLineSeparator() {
-            final int length = builder_.length();
-            if (length < NEW_LINE_LENGTH) {
-                return;
-            }
-
-            if (builder_.indexOf(NEW_LINE, length - NEW_LINE_LENGTH) > -1) {
-                builder_.setLength(length - NEW_LINE_LENGTH);
-            }
         }
     }
 }
