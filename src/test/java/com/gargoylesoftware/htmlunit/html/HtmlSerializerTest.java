@@ -150,6 +150,18 @@ public class HtmlSerializerTest {
         assertEquals("a\t \tx", serializer.getText());
 
         serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
+        serializer.appendBlockSeparator();
+        serializer.append("\n", Mode.NORMALIZE);
+        serializer.appendBlockSeparator();
+        serializer.append("x", Mode.NORMALIZE);
+        serializer.appendBlockSeparator();
+        serializer.append("y", Mode.NORMALIZE);
+        serializer.appendNewLine();
+        serializer.appendBlockSeparator();
+        serializer.appendBlockSeparator();
+        assertEquals("x" + ls + "y", serializer.getText());
+
+        serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
         serializer.append("abc", Mode.NORMALIZE);
         assertEquals("abc", serializer.getText());
 
@@ -222,7 +234,7 @@ public class HtmlSerializerTest {
      */
     @Test
     public void performanceWhitespace() {
-        final int length = 80_000;
+        final int length = 100_000;
         final char[] charArray = new char[length];
         Arrays.fill(charArray, ' ');
         charArray[0] = 'a';
@@ -235,7 +247,7 @@ public class HtmlSerializerTest {
         serializer.getText();
 
         final long runTime = System.currentTimeMillis() - time;
-        assertTrue("cleanUp() took too much time", runTime < 1_000);
+        assertTrue("cleanUp() took too much time", runTime < 200);
     }
 
     /**
@@ -244,13 +256,13 @@ public class HtmlSerializerTest {
     @Test
     public void performanceManyReplaces() {
         final String ls = System.lineSeparator();
-        final String expected = StringUtils.repeat("x" + ls, 20_000).trim();
+        final String expected = StringUtils.repeat("x" + ls, 100_000).trim();
 
         final long time = System.currentTimeMillis();
 
         final HtmlSerializerTextBuilder serializer = new HtmlSerializer.HtmlSerializerTextBuilder();
 
-        for (int i = 0; i < 20_000; i++) {
+        for (int i = 0; i < 100_000; i++) {
             serializer.append(" x ", Mode.NORMALIZE);
             serializer.appendBlockSeparator();
         }

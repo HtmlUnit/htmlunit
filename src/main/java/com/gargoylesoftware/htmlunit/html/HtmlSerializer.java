@@ -707,6 +707,7 @@ public class HtmlSerializer {
                     break;
                 case NEWLINE_AT_END:
                     builder_.setLength(builder_.length() - LINE_SEPARATOR_LENGTH);
+                    trimRightPos_ = trimRightPos_ - LINE_SEPARATOR_LENGTH;
                     if (builder_.length() == 0) {
                         state_ = State.EMPTY;
                     }
