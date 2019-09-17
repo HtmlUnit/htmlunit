@@ -415,7 +415,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             }
         }
         final byte[] bytes = encodedData.getBytes(StandardCharsets.ISO_8859_1);
-        return new String(Base64.decodeBase64(bytes), StandardCharsets.UTF_8);
+        return new String(Base64.decodeBase64(bytes), StandardCharsets.ISO_8859_1);
     }
 
     /**

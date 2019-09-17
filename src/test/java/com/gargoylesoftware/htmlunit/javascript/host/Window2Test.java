@@ -183,6 +183,23 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"M8OuwqY=", "3\u00C3\u00AE\u00C2\u00A6"})
+    public void atobUnicodeOutput() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + "  var data = window.btoa('3\u00C3\u00AE\u00C2\u00A6');\n"
+            + "  alert(data);\n"
+            + "  alert(atob(data));\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"CSAe", "\t \u001e"})
     public void atobControlChar() throws Exception {
         final String html
