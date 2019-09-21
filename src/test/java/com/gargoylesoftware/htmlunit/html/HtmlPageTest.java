@@ -1916,4 +1916,32 @@ public class HtmlPageTest extends SimpleWebTestCase {
         page.addAutoCloseable(null);
         page.cleanUp();
     }
+
+    /**
+     * @exception Exception If the test fails
+     */
+    @Test
+    public void getBaseUrl() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>body</body>\n"
+                + "</html>";
+
+        HtmlPage page = loadPage(getBrowserVersion(), html, null, URL_FIRST);
+        assertEquals(URL_FIRST.toExternalForm(), page.getBaseURL().toExternalForm());
+
+        // see also com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocumentTest.baseURI_noBaseTag()
+        String path = "details/abc";
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
+
+        path = "details/abc?x=y&z=z";
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
+
+        path = "details/abc;jsessionid=42?x=y&z=z";
+        page = loadPage(getBrowserVersion(), html, null, new URL(URL_FIRST.toString() + path));
+        assertEquals(URL_FIRST.toExternalForm() + path, page.getBaseURL().toExternalForm());
+    }
 }
