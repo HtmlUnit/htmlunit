@@ -882,7 +882,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
-        final HtmlPage openerPage = (HtmlPage) opener.getEnclosedPage();
+        final Page openerPage = opener.getEnclosedPage();
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
