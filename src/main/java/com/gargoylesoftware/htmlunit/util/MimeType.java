@@ -37,7 +37,6 @@ public final class MimeType {
     public static final String TEXT_XML = "text/xml";
     /** "text/plain". */
     public static final String TEXT_PLAIN = "text/plain";
-    
 
     private static final Map<String, String> type2extension = buildMap();
 

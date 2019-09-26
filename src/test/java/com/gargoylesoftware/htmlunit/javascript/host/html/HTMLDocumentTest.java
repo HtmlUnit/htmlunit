@@ -2351,7 +2351,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            HtmlPage page = (HtmlPage ) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2373,7 +2373,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST.toString() + "details/abc");
         final WebDriver driver = loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            HtmlPage page = (HtmlPage ) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2395,7 +2395,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST.toString() + "?x=y&z=zz");
         final WebDriver driver = loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            HtmlPage page = (HtmlPage ) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2417,7 +2417,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST.toString() + "details/abc;jsessionid=42?x=y&z=zz");
         final WebDriver driver = loadPageWithAlerts2(html, url, DEFAULT_WAIT_TIME);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            HtmlPage page = (HtmlPage ) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
