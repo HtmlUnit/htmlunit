@@ -35,6 +35,9 @@ public final class MimeType {
     public static final String TEXT_HTML = "text/html";
     /** "text/xml". */
     public static final String TEXT_XML = "text/xml";
+    /** "text/plain". */
+    public static final String TEXT_PLAIN = "text/plain";
+    
 
     private static final Map<String, String> type2extension = buildMap();
 
@@ -49,7 +52,7 @@ public final class MimeType {
         map.put("image/svg+xml", "svg");
         map.put(TEXT_CSS, "css");
         map.put(MimeType.TEXT_HTML, "html");
-        map.put("text/plain", "txt");
+        map.put(TEXT_PLAIN, "txt");
         map.put("image/x-icon", "ico");
         return map;
     }

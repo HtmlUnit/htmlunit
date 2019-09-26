@@ -882,15 +882,16 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebWindow openWindow(final URL url, final String windowName, final WebWindow opener) {
         final WebWindow window = openTargetWindow(opener, windowName, TARGET_BLANK);
-        final Page openerPage = opener.getEnclosedPage();
         if (url != null) {
             try {
                 final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
                 request.setCharset(UTF_8);
 
+                final Page openerPage = opener.getEnclosedPage();
                 if (getBrowserVersion().hasFeature(DIALOGWINDOW_REFERER)
-                        && openerPage != null) {
+                        && openerPage != null
+                        && openerPage.getUrl() != null) {
                     final String referer = openerPage.getUrl().toExternalForm();
                     request.setAdditionalHeader(HttpHeader.REFERER, referer);
                 }

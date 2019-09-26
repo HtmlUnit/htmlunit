@@ -2128,6 +2128,22 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    public void openWindowFromTextContent() throws Exception {
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        client.setWebConnection(webConnection);
+        webConnection.setResponse(URL_FIRST, "some text", MimeType.TEXT_PLAIN);
+
+        client.getPage(URL_FIRST);
+        final WebWindow window = client.openWindow(URL_FIRST, "TestingWindow");
+        assertNotNull(window);
+        assertTrue(window.getEnclosedPage().toString(), window.getEnclosedPage() instanceof TextPage);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void cssErrorHandler() throws Exception {
         final WebClient client = getWebClient();
         assertTrue(client.getCssErrorHandler() instanceof DefaultCssErrorHandler);
