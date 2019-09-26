@@ -28,6 +28,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.util.MimeType;
+
 /**
  * Helper to work with data URLs.
  * @see <a href="http://www.ietf.org/rfc/rfc2397.txt">RFC2397</a>
@@ -37,7 +39,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class DataUrlDecoder {
     private static final Charset DEFAULT_CHARSET = US_ASCII;
-    private static final String DEFAULT_MEDIA_TYPE = "text/plain";
+    private static final String DEFAULT_MEDIA_TYPE = MimeType.TEXT_PLAIN;
     private final String mediaType_;
     private final Charset charset_;
     private byte[] content_;

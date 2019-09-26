@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -278,7 +279,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
 
         final MockWebConnection webConnection = getMockWebConnection();
 
-        webConnection.setDefaultResponse("hello", "text/plain");
+        webConnection.setDefaultResponse("hello", MimeType.TEXT_PLAIN);
 
         final HtmlPage page = loadPageWithAlerts(html);
 

@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.file.File}.
@@ -43,12 +44,12 @@ public class FileTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
-                            "1437920507000", "", "14", "text/plain"},
+                            "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             FF = {"1", "ScriptExceptionTest1.txt", "Sun Jul 26 2015 10:21:47 GMT-0400",
-                            "1437920507000", "", "14", "text/plain"},
+                            "1437920507000", "", "14", MimeType.TEXT_PLAIN},
             IE = {"1", "ScriptExceptionTest1.txt",
                             "Sun Jul 26 2015 10:21:47 GMT-0400 (Eastern Daylight Time)",
-                            "undefined", "undefined", "14", "text/plain"})
+                            "undefined", "undefined", "14", MimeType.TEXT_PLAIN})
     public void properties() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -98,7 +98,7 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getOptions().setPrintContentOnFailingStatusCode(false);
 
         final MockWebConnection webConnection = new MockWebConnection();
-        webConnection.setDefaultResponse(htmlContent, 401, "Credentials missing or just plain wrong", "text/plain");
+        webConnection.setDefaultResponse(htmlContent, 401, "Credentials missing or just plain wrong", MimeType.TEXT_PLAIN);
         client.setWebConnection(webConnection);
 
         try {
@@ -1690,7 +1690,7 @@ public class WebClientTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, content, "ApplicaTion/Xml");
         assertTrue(XmlPage.class.isInstance(client.getPage(URL_FIRST)));
 
-        webConnection.setResponse(URL_FIRST, content, "Text/Plain");
+        webConnection.setResponse(URL_FIRST, content, MimeType.TEXT_PLAIN);
         assertTrue(TextPage.class.isInstance(client.getPage(URL_FIRST)));
 
         webConnection.setResponse(URL_FIRST, "", "Text/JavaScript");

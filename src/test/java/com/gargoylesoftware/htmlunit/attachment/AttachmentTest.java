@@ -115,7 +115,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Content-Disposition", "attachment; filename=hello2.html; something=else"));
-        conn.setResponse(URL_SECOND, content, 200, "OK", "text/plain", headers2);
+        conn.setResponse(URL_SECOND, content, 200, "OK", MimeType.TEXT_PLAIN, headers2);
         client.getPage(URL_SECOND);
         final Attachment result2 = attachments.get(0);
         assertEquals(result2.getSuggestedFilename(), "hello2.html");
@@ -124,7 +124,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers3 = new ArrayList<>();
         headers3.add(new NameValuePair("Content-Disposition", "attachment; filename="));
-        conn.setResponse(URL_SECOND, content, 200, "OK", "text/plain", headers3);
+        conn.setResponse(URL_SECOND, content, 200, "OK", MimeType.TEXT_PLAIN, headers3);
         client.getPage(URL_SECOND);
         final Attachment result3 = attachments.get(0);
         assertNull(result3.getSuggestedFilename());
@@ -167,7 +167,7 @@ public class AttachmentTest extends SimpleWebTestCase {
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("");
-        conn.setResponse(URL_SECOND, "some text", 200, "OK", "text/plain", headers);
+        conn.setResponse(URL_SECOND, "some text", 200, "OK", MimeType.TEXT_PLAIN, headers);
 
         final HtmlPage page = loadPage(html);
         // download text attachment

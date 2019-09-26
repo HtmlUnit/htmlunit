@@ -253,7 +253,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts("text/plain")
     public void plainEnctype() throws Exception {
-        enctype("text/plain");
+        enctype(MimeType.TEXT_PLAIN);
     }
 
     private void enctype(final String encoding) throws Exception {
@@ -291,7 +291,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"text/plain", "application/x-www-form-urlencoded", "newEncoding"},
             IE = {"text/plain", "exception"})
     public void encodingProperty_textPlain() throws Exception {
-        doTestProperty("encoding", "enctype", "text/plain", "newEncoding");
+        doTestProperty("encoding", "enctype", MimeType.TEXT_PLAIN, "newEncoding");
     }
 
     /**

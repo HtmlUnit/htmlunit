@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -671,7 +672,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
             final String lcValue = value.toLowerCase(Locale.ROOT);
             return !(lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
                 || lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                || lcValue.startsWith("text/plain"));
+                || lcValue.startsWith(MimeType.TEXT_PLAIN));
         }
 
         return !(HttpHeader.ACCEPT_LC.equals(name)

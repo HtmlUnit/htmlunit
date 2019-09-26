@@ -58,6 +58,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -270,7 +271,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final String encoding = getHtmlForm().getEnctypeAttribute();
         if (!FormEncodingType.URL_ENCODED.getName().equals(encoding)
                 && !FormEncodingType.MULTIPART.getName().equals(encoding)
-                && !"text/plain".equals(encoding)) {
+                && !MimeType.TEXT_PLAIN.equals(encoding)) {
             return FormEncodingType.URL_ENCODED.getName();
         }
         return encoding;

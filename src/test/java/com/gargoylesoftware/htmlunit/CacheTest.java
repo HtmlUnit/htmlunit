@@ -401,7 +401,7 @@ public class CacheTest extends SimpleWebTestCase {
 
         final List<NameValuePair> headers =
             Collections.singletonList(new NameValuePair("Last-Modified", "Sun, 15 Jul 2007 20:46:27 GMT"));
-        connection.setResponse(new URL(URL_FIRST, "foo.txt"), "hello", 200, "OK", "text/plain", headers);
+        connection.setResponse(new URL(URL_FIRST, "foo.txt"), "hello", 200, "OK", MimeType.TEXT_PLAIN, headers);
 
         loadPageWithAlerts(html);
 

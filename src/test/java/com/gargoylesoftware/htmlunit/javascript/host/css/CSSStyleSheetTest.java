@@ -177,11 +177,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(new URL(URL_FIRST, "style1.css"), "div { color: red; }", MimeType.TEXT_CSS);
         conn.setResponse(new URL(URL_FIRST, "style2.css"), "div { color: red; }", MimeType.TEXT_HTML);
-        conn.setResponse(new URL(URL_FIRST, "style3.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(URL_FIRST, "style3.css"), "div { color: red; }", MimeType.TEXT_PLAIN);
         conn.setResponse(new URL(URL_FIRST, "style4.css"), "div { color: red; }", "");
         conn.setResponse(new URL(URL_FIRST, "style5.css"), "div { color: red; }", MimeType.TEXT_CSS);
         conn.setResponse(new URL(URL_FIRST, "style6.css"), "div { color: red; }", MimeType.TEXT_HTML);
-        conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", "text/plain");
+        conn.setResponse(new URL(URL_FIRST, "style7.css"), "div { color: red; }", MimeType.TEXT_PLAIN);
         conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
         loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));

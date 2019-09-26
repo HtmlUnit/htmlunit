@@ -200,7 +200,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         try (InputStream contentAsStream = webResponse.getContentAsStream()) {
             final byte[] bytes = read(contentAsStream, 500);
             if (bytes.length == 0) {
-                return "text/plain";
+                return MimeType.TEXT_PLAIN;
             }
 
             final String asAsciiString = new String(bytes, "ASCII").toUpperCase(Locale.ROOT);
@@ -209,7 +209,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             }
             else if (startsWith(bytes, markerUTF8_) || startsWith(bytes, markerUTF16BE_)
                     || startsWith(bytes, markerUTF16LE_)) {
-                return "text/plain";
+                return MimeType.TEXT_PLAIN;
             }
             else if (asAsciiString.trim().startsWith("<SCRIPT>")) {
                 return MimeType.APPLICATION_JAVASCRIPT;
@@ -218,7 +218,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return "application/octet-stream";
             }
         }
-        return "text/plain";
+        return MimeType.TEXT_PLAIN;
     }
 
     /**

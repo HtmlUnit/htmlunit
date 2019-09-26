@@ -130,7 +130,7 @@ public class HtmlFrameTest extends SimpleWebTestCase {
             + "<frameset cols='100%'>\n"
             + "  <frame src='foo.txt'>\n"
             + "</frameset></html>";
-        webConnection.setDefaultResponse("foo", 200, "OK", "text/plain");
+        webConnection.setDefaultResponse("foo", 200, "OK", MimeType.TEXT_PLAIN);
         webConnection.setResponse(URL_FIRST, html);
 
         final HtmlPage page = webClient.getPage(URL_FIRST);

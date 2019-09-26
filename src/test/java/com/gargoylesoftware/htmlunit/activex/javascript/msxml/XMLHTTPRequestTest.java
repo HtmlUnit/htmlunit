@@ -290,7 +290,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
-        getMockWebConnection().setResponse(URL_SECOND, "<root/>", "text/plain");
+        getMockWebConnection().setResponse(URL_SECOND, "<root/>", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(createTestHTML(html));
     }
 
@@ -346,7 +346,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
         final String response = "ol\u00E9";
         final byte[] responseBytes = response.getBytes(UTF_8);
 
-        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", "text/plain",
+        getMockWebConnection().setResponse(URL_SECOND, responseBytes, 200, "OK", MimeType.TEXT_PLAIN,
             new ArrayList<NameValuePair>());
         loadPageWithAlerts2(createTestHTML(html));
     }
@@ -423,7 +423,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             + "  }\n"
             + CREATE_XMLHTTPREQUEST_FUNCTION;
 
-        getMockWebConnection().setResponse(URL_SECOND, "<root/>", "text/plain");
+        getMockWebConnection().setResponse(URL_SECOND, "<root/>", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(createTestHTML(html));
     }
 

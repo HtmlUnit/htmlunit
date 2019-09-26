@@ -258,7 +258,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         final URL urlFoo = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-            "text/plain");
+                MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -310,7 +310,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
 
         final URL urlFoo = new URL(URL_FIRST, "foo.xml");
         getMockWebConnection().setResponse(urlFoo, "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-            "text/plain");
+                MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -418,7 +418,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "setTimeout(function() { alert('in timeout');}, 5);\n"
             + "</script></head><body></body></html>";
 
-        getMockWebConnection().setDefaultResponse("hello", "text/plain");
+        getMockWebConnection().setDefaultResponse("hello", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -454,7 +454,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "setTimeout(doTest, 10);\n"
             + "</script></head><body></body></html>";
 
-        getMockWebConnection().setDefaultResponse("hello", "text/plain");
+        getMockWebConnection().setDefaultResponse("hello", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html, 2000);
     }
 

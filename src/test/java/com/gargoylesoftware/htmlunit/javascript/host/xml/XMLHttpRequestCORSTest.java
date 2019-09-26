@@ -312,7 +312,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
             IE = {"4", "200", "null", "null", "null", "null"})
     public void preflight() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN);
 
         releaseResources();
         shutDownAll();
@@ -326,7 +326,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "text/plain;charset=utf-8");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN + ";charset=utf-8");
 
         releaseResources();
         shutDownAll();
@@ -398,7 +398,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             IE = {"4", "200", "null", "null", "null", "null"})
     //unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
-        doPreflightTestAllowedMethods(null, "text/plain");
+        doPreflightTestAllowedMethods(null, MimeType.TEXT_PLAIN);
 
         releaseResources();
         shutDownAll();

@@ -86,7 +86,7 @@ public class DebuggingWebConnectionTest extends SimpleWebTestCase {
 
         assertEquals(".xml", DebuggingWebConnection.chooseExtension(MimeType.TEXT_XML));
 
-        assertEquals(".txt", DebuggingWebConnection.chooseExtension("text/plain"));
+        assertEquals(".txt", DebuggingWebConnection.chooseExtension(MimeType.TEXT_PLAIN));
     }
 
     /**

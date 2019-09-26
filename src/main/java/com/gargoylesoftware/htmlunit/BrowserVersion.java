@@ -258,8 +258,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("xhtml", "application/xhtml+xml");
         CHROME.registerUploadMimeType("xht", "application/xhtml+xml");
         CHROME.registerUploadMimeType("xhtm", "application/xhtml+xml");
-        CHROME.registerUploadMimeType("txt", "text/plain");
-        CHROME.registerUploadMimeType("text", "text/plain");
+        CHROME.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        CHROME.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         FIREFOX_60.registerUploadMimeType("html", MimeType.TEXT_HTML);
         FIREFOX_60.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -282,8 +282,8 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("wav", "audio/wav");
         FIREFOX_60.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_60.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_60.registerUploadMimeType("txt", "text/plain");
-        FIREFOX_60.registerUploadMimeType("text", "text/plain");
+        FIREFOX_60.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        FIREFOX_60.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         FIREFOX_52.registerUploadMimeType("html", MimeType.TEXT_HTML);
         FIREFOX_52.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -306,8 +306,8 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_52.registerUploadMimeType("wav", "audio/wav");
         FIREFOX_52.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_52.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_52.registerUploadMimeType("txt", "text/plain");
-        FIREFOX_52.registerUploadMimeType("text", "text/plain");
+        FIREFOX_52.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        FIREFOX_52.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         INTERNET_EXPLORER.registerUploadMimeType("html", MimeType.TEXT_HTML);
         INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -326,7 +326,7 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("wav", "audio/wav");
         INTERNET_EXPLORER.registerUploadMimeType("xhtml", "application/xhtml+xml");
         INTERNET_EXPLORER.registerUploadMimeType("xht", "application/xhtml+xml");
-        INTERNET_EXPLORER.registerUploadMimeType("txt", "text/plain");
+        INTERNET_EXPLORER.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",

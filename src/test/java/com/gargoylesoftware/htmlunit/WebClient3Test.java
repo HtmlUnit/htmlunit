@@ -526,7 +526,7 @@ public class WebClient3Test extends WebDriverTestCase {
     @Test
     public void javascriptContentDetectorContentTypeTextPlain() throws Exception {
         final MockWebConnection conn = getMockWebConnection();
-        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", "text/plain");
+        conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(URL_FIRST);
     }
 

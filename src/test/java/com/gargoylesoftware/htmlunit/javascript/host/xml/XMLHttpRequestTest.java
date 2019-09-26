@@ -426,7 +426,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setDefaultResponse("bla bla", "text/plain");
+        getMockWebConnection().setDefaultResponse("bla bla", MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -726,7 +726,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml.txt");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-            "text/plain");
+            MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -755,7 +755,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final URL urlPage2 = new URL(URL_FIRST, "foo.xml.txt");
         getMockWebConnection().setResponse(urlPage2,
             "<bla someAttr='someValue'><foo><fi id='fi1'/><fi/></foo></bla>\n",
-            "text/plain");
+            MimeType.TEXT_PLAIN);
         loadPageWithAlerts2(html);
     }
 
@@ -783,7 +783,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -811,7 +811,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -839,7 +839,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -871,7 +871,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", "text/plain", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "\u9EC4", MimeType.TEXT_PLAIN, UTF_8);
         loadPageWithAlerts2(html);
     }
 
@@ -1201,7 +1201,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                 }
 
                 resp.setStatus(200);
-                resp.addHeader(HttpHeader.CONTENT_TYPE, "text/plain");
+                resp.addHeader(HttpHeader.CONTENT_TYPE, MimeType.TEXT_PLAIN);
                 resp.getOutputStream().print(authToken);
                 resp.flushBuffer();
             }
@@ -1381,7 +1381,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'></body></html>";
 
-        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", "text/plain", UTF_8);
+        getMockWebConnection().setResponse(URL_SECOND, "'\u9EC4'", MimeType.TEXT_PLAIN, UTF_8);
         loadPageWithAlerts2(html);
     }
 

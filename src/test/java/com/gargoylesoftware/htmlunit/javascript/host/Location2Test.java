@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -495,7 +496,7 @@ public class Location2Test extends WebDriverTestCase {
             + "</head>\n"
             + "<body></body></html>";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.txt"), "bla bla", "text/plain");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.txt"), "bla bla", MimeType.TEXT_PLAIN);
         final WebDriver driver = loadPage2(html, URL_FIRST);
         assertTrue(driver.getPageSource().contains("bla bla"));
     }

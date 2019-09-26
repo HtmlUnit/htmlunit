@@ -488,7 +488,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             }
 
             collectedHeaders_.add("Ajax: " + header);
-            response.setContentType("text/plain");
+            response.setContentType(MimeType.TEXT_PLAIN);
             final Writer writer = response.getWriter();
             writer.write(header);
             writer.flush();

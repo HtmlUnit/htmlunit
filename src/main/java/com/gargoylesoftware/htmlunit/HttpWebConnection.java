@@ -113,6 +113,7 @@ import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.httpclient.SocksConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -342,7 +343,7 @@ public class HttpWebConnection implements WebConnection {
                     }
                     else {
                         builder.addTextBody(pair.getName(), pair.getValue(),
-                                ContentType.create("text/plain", charset));
+                                ContentType.create(MimeType.TEXT_PLAIN, charset));
                     }
                 }
                 method.setEntity(builder.build());
