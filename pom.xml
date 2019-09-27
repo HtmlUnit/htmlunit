@@ -20,7 +20,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <htmlunitdriver.version>2.36.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.37.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.36.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.36.0</htmlunitcorejs.version>

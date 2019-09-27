@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -28,6 +29,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlBreakTest extends WebDriverTestCase {
@@ -59,16 +61,20 @@ public class HtmlBreakTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("Hello\nworld")
     public void asText() throws Exception {
         final String html = "<html><head>\n"
-            + "</head><body>\n"
+            + "</head><body id='tester'>\n"
             + "Hello<br/>world\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertEquals("Hello" + System.lineSeparator() + "world", page.getBody().asText());
+            assertEquals(getExpectedAlerts()[0], page.getBody().asText());
         }
     }
 }

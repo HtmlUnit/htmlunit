@@ -47,10 +47,13 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     public void asText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>"
+            + "<body>\n"
             + "<form id='form1'>\n"
             + "  <input type='number' name='foo' id='foo' value='123'>\n"
-            + "</form></body></html>";
+            + "</form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
 

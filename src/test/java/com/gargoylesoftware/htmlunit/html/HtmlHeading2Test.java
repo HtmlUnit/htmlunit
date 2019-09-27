@@ -38,6 +38,41 @@ public class HtmlHeading2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("A B C D E\nF G H\nafter h1\n"
+            + "A B C D E\nF G H\nafter h2\n"
+            + "A B C D E\nF G H\nafter h3\n"
+            + "A B C D E\nF G H\nafter h4\n"
+            + "A B C D E\nF G H\nafter h5\n"
+            + "A B C D E\nF G H\nafter h6")
+    public void asText() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head></head>\n"
+                + "<body id='tester'>\n"
+                + "<h1>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h1>after h1\n"
+                + "<h2>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h2>after h2\n"
+                + "<h3>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h3>after h3\n"
+                + "<h4>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h4>after h4\n"
+                + "<h5>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h5>after h5\n"
+                + "<h6>  A B  C\t \t  D \r\nE<br>F\nG \n H  </h6>after h6\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        // asText has to be in sync with WebDriver
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").asText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("[object HTMLHeadingElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"

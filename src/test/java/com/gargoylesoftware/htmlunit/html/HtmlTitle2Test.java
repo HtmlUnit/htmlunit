@@ -38,6 +38,31 @@ public class HtmlTitle2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("A B C D E<br>F G H")
+    public void getTitle() throws Exception {
+        final String html
+                = "<html>\n"
+                + "<head>"
+                +   "<title>  A B  C\t \t  D \r\nE<br>F\nG \n H  </title>"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+
+        // asText has to be in sync with WebDriver
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getTitleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("[object HTMLTitleElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head><title id='myId'>foo</title>\n"
