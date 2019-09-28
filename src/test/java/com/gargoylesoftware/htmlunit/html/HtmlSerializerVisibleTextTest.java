@@ -293,7 +293,7 @@ public class HtmlSerializerVisibleTextTest {
      */
     @Test
     public void normalizePre() {
-        HtmlSerializerTextBuilder serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append("  A B  C\t \t  D \r\nEF\nG \n H  ", Mode.NORMALIZE_PRE);
         assertEquals("  A B  C     D \nEF\nG \n H  ", serializer.getText());
     }
@@ -303,7 +303,7 @@ public class HtmlSerializerVisibleTextTest {
      */
     @Test
     public void normalizePreLine() {
-        HtmlSerializerTextBuilder serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
+        final HtmlSerializerTextBuilder serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append("  A B  C\t \t  D \r\nEF\nG \n H  ", Mode.NORMALIZE_PRE_LINE);
         assertEquals("A B C D \nEF\nG \n H", serializer.getText());
     }

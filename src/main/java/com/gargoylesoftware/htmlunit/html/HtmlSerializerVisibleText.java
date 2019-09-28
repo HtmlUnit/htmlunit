@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
  * Special serializer to generate the output we need
- * at least for selenium WebElement#getText()
+ * at least for selenium WebElement#getText().
  *
  * @author Ronald Brill
  */
@@ -342,7 +342,8 @@ public class HtmlSerializerVisibleText {
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
         if (isVisible(htmlTextArea)) {
-            builder.append(StringUtils.stripEnd(htmlTextArea.getText(), SPACES), whiteSpaceStyle(htmlTextArea, Mode.NORMALIZE_PRE));
+            builder.append(StringUtils.stripEnd(htmlTextArea.getText(), SPACES),
+                    whiteSpaceStyle(htmlTextArea, Mode.NORMALIZE_PRE));
         }
     }
 
@@ -602,7 +603,7 @@ public class HtmlSerializerVisibleText {
                 while (node != null) {
                     if (node instanceof Element) {
                         final ComputedCSSStyleDeclaration style = node.getWindow().getComputedStyle(node, null);
-                        String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+                        final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                         if (StringUtils.isNoneEmpty(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
                                 return Mode.NORMALIZE;
@@ -649,7 +650,7 @@ public class HtmlSerializerVisibleText {
 
             /**
              * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary 
+             * at newline characters, at <br>, and as necessary
              * to fill line boxes.
              */
             NORMALIZE_PRE_LINE
@@ -751,7 +752,7 @@ public class HtmlSerializerVisibleText {
                 }
             }
 
-           if (mode != Mode.NORMALIZE) {
+            if (mode != Mode.NORMALIZE) {
                 // reset state to empty to restart whitespace normalization afterwards
                 state_ = State.TRIM;
             }
@@ -823,7 +824,7 @@ public class HtmlSerializerVisibleText {
         }
 
         private static boolean isSpace(final char ch) {
-            return " \t\n\f\r".indexOf(ch) > - 1;
+            return " \t\n\f\r".indexOf(ch) > -1;
         }
     }
 }

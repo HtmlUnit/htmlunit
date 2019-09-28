@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInputTest extends WebDriverTestCase {
 
-
     /**
      * Verifies getVisibleText().
      * @throws Exception if the test fails
