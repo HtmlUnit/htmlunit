@@ -807,6 +807,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
+     * Returns a textual representation of this element in the same way as
+     * the selenium WebElement#getText() property does.<br>
+     * Note: this is different from asText
+     *
+     * @return a textual representation of this element that represents what would
+     *         be visible to the user if this page was shown in a web browser
+     */
+    public String getText() {
+        if (getPage() instanceof XmlPage) {
+            final XmlSerializer ser = new XmlSerializer();
+            return ser.asText(this);
+        }
+
+        final HtmlSerializerGetText ser = new HtmlSerializerGetText();
+        return ser.asText(this);
+    }
+
+    /**
      * Returns a string representation of the XML document from this element and all it's children (recursively).
      * The charset used is the current page encoding.
      * @return the XML string
