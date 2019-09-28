@@ -63,12 +63,4 @@ public class HtmlBreak extends HtmlElement {
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTextContent() {
-        return "\n";
-    }
 }
