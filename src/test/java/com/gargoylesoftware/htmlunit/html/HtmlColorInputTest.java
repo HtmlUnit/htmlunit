@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlColorInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies that a getText() returns the value string.
+     * Verifies getText().
      * @throws Exception if the test fails
      */
     @Test
@@ -54,7 +54,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertEquals(getExpectedAlerts()[0], page.getBody().getText());
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
 

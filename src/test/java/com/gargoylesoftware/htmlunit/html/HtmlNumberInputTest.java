@@ -26,6 +26,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -41,21 +42,29 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public class HtmlNumberInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies that a asText() returns an empty string.
+     * Verifies getText().
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    @Alerts("")
+    public void getText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='number' name='foo' id='foo' value='123'>\n"
-            + "</form></body></html>";
+            + "  <input type='number' name='tester' id='tester' value='123'>\n"
+            + "</form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
 
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 
     /**

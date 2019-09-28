@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSerializerGetText.HtmlSerializerTextBuilder.Mode;
+import com.gargoylesoftware.htmlunit.html.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  *
  * @author Ronald Brill
  */
-public class HtmlSerializerGetText {
+public class HtmlSerializerVisibleText {
     private static final String SPACES = " \t\n\f\r";
 
     /**
