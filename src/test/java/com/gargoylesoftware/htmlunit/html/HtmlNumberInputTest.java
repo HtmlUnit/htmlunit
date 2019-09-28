@@ -42,12 +42,12 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public class HtmlNumberInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies getText().
+     * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getText() throws Exception {
+    public void getVisibleText() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"

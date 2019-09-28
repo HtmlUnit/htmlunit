@@ -40,22 +40,31 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInputTest extends WebDriverTestCase {
 
+
     /**
-     * Verifies that a asText() returns the value string.
+     * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    @Alerts("")
+    public void getVisibleText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='password' name='foo' id='foo' value='bla'>\n"
-            + "</form></body></html>";
+            + "  <input type='password' name='tester' id='tester' value='bla'>\n"
+            + "</form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
 
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 
     /**

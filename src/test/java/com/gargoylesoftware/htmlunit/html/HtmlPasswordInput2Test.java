@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 
 /**
@@ -29,6 +30,26 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPasswordInput2Test extends SimpleWebTestCase {
+
+    /**
+     * Verifies that a asText() returns the value string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bla")
+    public void asText() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='password' name='tester' id='tester' value='bla'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(getExpectedAlerts()[0], page.getBody().asText());
+    }
 
     /**
      * How could this test be migrated to WebDriver? How to select the field's content?

@@ -33,12 +33,12 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlColorInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies getText().
+     * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("")
-    public void getText() throws Exception {
+    public void getVisibleText() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"
