@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -33,21 +33,29 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlColorInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies that a asText() returns the value string.
+     * Verifies that a getText() returns the value string.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    @Alerts("")
+    public void getText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='color' name='foo' id='foo' value='#ff0000'>\n"
-            + "</form></body></html>";
+            + "  <input type='color' name='tester' id='tester' value='#ff0000'>\n"
+            + "</form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
 
-        final WebElement input = driver.findElement(By.id("foo"));
-        assertEquals("", input.getText());
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getText());
+        }
     }
 
     /**
