@@ -7770,6 +7770,15 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("exception")
+    public void speechRecognitionErrorEvent() throws Exception {
+        test("SpeechRecognitionErrorEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
     public void speechRecognitionEvent() throws Exception {
         test("SpeechRecognitionEvent");
     }
@@ -10869,7 +10878,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function SpeechRecognitionError() { [native code] }")
+            CHROME = "function SpeechRecognitionErrorEvent() { [native code] }")
     public void webkitSpeechRecognitionError() throws Exception {
         test("webkitSpeechRecognitionError");
     }

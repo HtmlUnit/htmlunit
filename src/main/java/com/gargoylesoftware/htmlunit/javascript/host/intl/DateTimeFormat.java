@@ -157,7 +157,7 @@ public class DateTimeFormat extends SimpleScriptable {
 
         FF_60_FORMATS_.putAll(commonFormats);
 
-        CHROME_FORMATS_.put("be", yyyyDash);
+        CHROME_FORMATS_.put("be", mmSlash);
         CHROME_FORMATS_.put("da", ddDot);
         CHROME_FORMATS_.put("en-CA", yyyyDash);
         CHROME_FORMATS_.put("en-IE", ddSlash);
@@ -165,14 +165,16 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("en-PH", ddSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
         CHROME_FORMATS_.put("fr-CH", ddDot);
+        CHROME_FORMATS_.put("ga", mmSlash);
         CHROME_FORMATS_.put("hr", ddDotBlankDot);
         CHROME_FORMATS_.put("in-ID", ddSlash);
-        CHROME_FORMATS_.put("is", yyyyDash);
+        CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("iw", ddDot);
-        CHROME_FORMATS_.put("mk", yyyyDash);
+        CHROME_FORMATS_.put("mk", mmSlash);
+        CHROME_FORMATS_.put("mt", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sk", ddDotBlank);
-        CHROME_FORMATS_.put("sq", yyyyDash);
+        CHROME_FORMATS_.put("sq", mmSlash);
         CHROME_FORMATS_.put("sr", ddDotDot);
 
         IE_FORMATS_.put("ar", rightToLeft);

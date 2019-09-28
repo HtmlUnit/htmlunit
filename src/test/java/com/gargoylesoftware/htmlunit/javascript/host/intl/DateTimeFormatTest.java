@@ -554,7 +554,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_be() throws Exception {
@@ -565,7 +565,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_be_by() throws Exception {
@@ -1168,7 +1168,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_ga() throws Exception {
@@ -1179,7 +1179,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_ga_ie() throws Exception {
@@ -1260,7 +1260,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_is() throws Exception {
@@ -1271,7 +1271,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_is_is() throws Exception {
@@ -1412,7 +1412,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_mk() throws Exception {
@@ -1423,7 +1423,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_mk_mk() throws Exception {
@@ -1454,7 +1454,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt() throws Exception {
@@ -1465,7 +1465,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt_mt() throws Exception {
@@ -1665,7 +1665,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     public void format_sq() throws Exception {
@@ -1676,7 +1676,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "2012-12-20",
+    @Alerts(DEFAULT = "12/20/2012",
             FF = "20.12.2012",
             IE = "\u200E2012\u200E-\u200E12\u200E-\u200E20")
     public void format_sq_al() throws Exception {

@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.37.0" date="xxxx, 2019" description="Bugfixes">
+        <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 77">
             <action type="fix" dev="rbri" issue="#84">
                 WebClient#openWindow no longer throws a ClassCastException when called from a non html page.
             </action>
