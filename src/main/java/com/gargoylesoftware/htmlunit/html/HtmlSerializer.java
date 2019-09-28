@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  */
 public class HtmlSerializer {
 
+    private static final String SPACES = " \t\n\f\r";
     private boolean ignoreMaskedElements_ = true;
 
     /**
@@ -55,6 +56,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param node the node to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
         for (final DomNode child : node.getChildren()) {
@@ -68,6 +70,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param node the node to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
         if (node instanceof DomText) {
@@ -150,6 +153,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param domNode the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendDomNode(final HtmlSerializerTextBuilder builder,
             final DomNode domNode, final Mode mode) {
@@ -181,6 +185,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlHiddenInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendHiddenInput(final HtmlSerializerTextBuilder builder,
             final HtmlHiddenInput htmlHiddenInput, final Mode mode) {
@@ -192,6 +197,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlScript the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendScript(final HtmlSerializerTextBuilder builder,
             final HtmlScript htmlScript, final Mode mode) {
@@ -203,6 +209,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlStyle the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendStyle(final HtmlSerializerTextBuilder builder,
             final HtmlStyle htmlStyle, final Mode mode) {
@@ -214,6 +221,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlNoScript the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendNoScript(final HtmlSerializerTextBuilder builder,
             final HtmlNoScript htmlNoScript, final Mode mode) {
@@ -225,6 +233,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlNoFrames the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendNoFrames(final HtmlSerializerTextBuilder builder,
             final HtmlNoFrames htmlNoFrames, final Mode mode) {
@@ -236,6 +245,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlSubmitInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendSubmitInput(final HtmlSerializerTextBuilder builder,
             final HtmlSubmitInput htmlSubmitInput, final Mode mode) {
@@ -247,6 +257,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendInput(final HtmlSerializerTextBuilder builder,
             final HtmlInput htmlInput, final Mode mode) {
@@ -258,6 +269,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlResetInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendResetInput(final HtmlSerializerTextBuilder builder,
             final HtmlResetInput htmlResetInput, final Mode mode) {
@@ -268,6 +280,7 @@ public class HtmlSerializer {
      * Process {@link HtmlUnorderedList}.
      * @param builder the StringBuilder to add to
      * @param htmlUnorderedList the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendUnorderedList(final HtmlSerializerTextBuilder builder,
                     final HtmlUnorderedList htmlUnorderedList, final Mode mode) {
@@ -287,6 +300,7 @@ public class HtmlSerializer {
      * Process {@link HtmlTitle}.
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendTitle(final HtmlSerializerTextBuilder builder,
             final HtmlTitle htmlTitle, final Mode mode) {
@@ -306,6 +320,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlTableRow the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendTableRow(final HtmlSerializerTextBuilder builder,
             final HtmlTableRow htmlTableRow, final Mode mode) {
@@ -326,11 +341,12 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlTextArea the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
         if (isVisible(htmlTextArea)) {
-            builder.append(htmlTextArea.getText(), whiteSpaceStyle(htmlTextArea, Mode.NORMALIZE_PRE));
+            builder.append(StringUtils.stripEnd(htmlTextArea.getText(), SPACES), whiteSpaceStyle(htmlTextArea, Mode.NORMALIZE_PRE));
         }
     }
 
@@ -405,6 +421,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlSelect the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode) {
@@ -430,6 +447,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlOrderedList the OL element
+     * @param the {@link Mode} to use for processing
      */
     protected void appendOrderedList(final HtmlSerializerTextBuilder builder,
             final HtmlOrderedList htmlOrderedList, final Mode mode) {
@@ -458,6 +476,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlPreformattedText the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
             final HtmlPreformattedText htmlPreformattedText, final Mode mode) {
@@ -473,6 +492,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlInlineFrame the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame, final Mode mode) {
@@ -491,6 +511,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param domText the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
         final DomNode parent = domText.getParentNode();
@@ -504,6 +525,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param domComment the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendComment(final HtmlSerializerTextBuilder builder,
             final DomComment domComment, final Mode mode) {
@@ -515,6 +537,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlApplet the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendApplet(final HtmlSerializerTextBuilder builder,
             final HtmlApplet htmlApplet, final Mode mode) {
@@ -526,6 +549,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlBreak the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void appendBreak(final HtmlSerializerTextBuilder builder,
             final HtmlBreak htmlBreak, final Mode mode) {
@@ -537,6 +561,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlCheckBoxInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void doAppendCheckBoxInput(final HtmlSerializerTextBuilder builder,
                     final HtmlCheckBoxInput htmlCheckBoxInput, final Mode mode) {
@@ -553,6 +578,7 @@ public class HtmlSerializer {
      *
      * @param builder the StringBuilder to add to
      * @param htmlRadioButtonInput the target to process
+     * @param the {@link Mode} to use for processing
      */
     protected void doAppendRadioButtonInput(final HtmlSerializerTextBuilder builder,
             final HtmlRadioButtonInput htmlRadioButtonInput, final Mode mode) {
@@ -619,7 +645,8 @@ public class HtmlSerializer {
     protected static class HtmlSerializerTextBuilder {
         /** Mode. */
         protected enum Mode {
-            /** Sequences of white space are collapsed. Newline characters
+            /**
+             * Sequences of white space are collapsed. Newline characters
              * in the source are handled the same as other white space.
              * Lines are broken as necessary to fill line boxes.
              */
@@ -631,7 +658,8 @@ public class HtmlSerializer {
              */
             NORMALIZE_PRE,
 
-            /** Sequences of white space are collapsed. Lines are broken
+            /**
+             * Sequences of white space are collapsed. Lines are broken
              * at newline characters, at <br>, and as necessary 
              * to fill line boxes.
              */
@@ -806,7 +834,7 @@ public class HtmlSerializer {
         }
 
         private static boolean isSpace(final char ch) {
-            return ch == ' ' || ch == '\t' || ch == '\n' || ch == '\f' || ch == '\r';
+            return " \t\n\f\r".indexOf(ch) > - 1;
         }
     }
 }
