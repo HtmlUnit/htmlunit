@@ -16,28 +16,34 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link HtmlUnorderedList}.
  *
- * @author Ahmed Ashour
- * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlUnorderedListTest extends SimpleWebTestCase {
+public class HtmlUnorderedListTest extends WebDriverTestCase {
 
     /**
+     * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
-        final String html = "<html><head>\n"
-            + "</head>\n"
+    @Alerts("first item\nsecond item\nsomething without li node\nthird item")
+    public void getVisibleText() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
             + "<body>\n"
-            + "  <ul id='foo'>\n"
+            + "  <ul id='tester'>\n"
             + "    <li>first item</li>\n"
             + "    <li>second item</li>\n"
             + "something without li node\n"
@@ -45,34 +51,13 @@ public class HtmlUnorderedListTest extends SimpleWebTestCase {
             + "  </ul>\n"
             + "</body></html>";
 
-        final HtmlPage page = loadPage(html);
-        final HtmlElement node = page.getHtmlElementById("foo");
-        final String ls = System.lineSeparator();
-        final String expectedText = "first item" + ls
-            + "second item" + ls
-            + "something without li node" + ls
-            + "third item";
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
 
-        assertEquals(expectedText, node.asText());
-        assertEquals(expectedText, page.asText());
-    }
-
-    /**
-     * Browsers ignore closing information in a self closing UL tag.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void asXml() throws Exception {
-        final String content
-            = "<html><head></head>\n"
-            + "<body>\n"
-            + "  <ul id='myNode'></ul>\n"
-            + "foo\n"
-            + "</form></body></html>";
-        final HtmlPage page = loadPage(content);
-        final HtmlElement element = page.getHtmlElementById("myNode");
-
-        assertEquals("<ul id=\"myNode\">\r\n</ul>\r\n", element.asXml());
-        assertTrue(page.asXml().contains("</ul>"));
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 }

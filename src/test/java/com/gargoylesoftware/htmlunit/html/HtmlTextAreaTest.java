@@ -114,6 +114,31 @@ public class HtmlTextAreaTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    public void asText() throws Exception {
+        final String html = "<html><head>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<textarea id='tester'> foo \n bar\r\n test\r a "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlElement node = page.getHtmlElementById("tester");
+        final String ls = System.lineSeparator();
+        final String expectedText = " foo " + ls
+            + " bar" + ls
+            + " test" + ls
+            + " a <p>html snippet</p>";
+
+        assertEquals(expectedText, node.asText());
+        assertEquals(expectedText, page.asText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void asXml() throws Exception {
         final String content
             = "<html><head><title>foo</title></head><body>\n"

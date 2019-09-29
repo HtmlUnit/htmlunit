@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -137,6 +138,28 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
+    public void defaultValue2() throws Exception {
+        final String html
+            = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById('textArea1').defaultValue);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='textArea1'> foo \n bar\r\n test\r a "
+            + "<p>html snippet</p>\n"
+            + "</textarea>\n"
+            + "</form></body></html>";
         loadPageWithAlerts2(html);
     }
 
@@ -278,39 +301,23 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(" foo \n bar\n test\n a <p>html snippet</p>")
-    public void asText() throws Exception {
+    public void getVisibleText() throws Exception {
         final String html
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
-            + "<textarea id='textArea1'> foo \n bar\r\n test\r a "
+            + "<textarea id='tester'> foo \n bar\r\n test\r a "
             + "<p>html snippet</p>\n"
             + "</textarea>\n"
             + "</form></body></html>";
-        final WebDriver driver = loadPage2(html);
-        final WebElement textArea = driver.findElement(By.id("textArea1"));
-        assertEquals(getExpectedAlerts()[0], textArea.getText());
-    }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
-    public void asTextDefaultValue() throws Exception {
-        final String html
-            = "<html><head><title>foo</title>\n"
-            + "<script>\n"
-            + "  function test() {\n"
-            + "    alert(document.getElementById('textArea1').defaultValue);\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<form id='form1'>\n"
-            + "<textarea id='textArea1'> foo \n bar\r\n test\r a "
-            + "<p>html snippet</p>\n"
-            + "</textarea>\n"
-            + "</form></body></html>";
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 
     /**
@@ -318,16 +325,21 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    public void asTextAndVisibility() throws Exception {
+    public void getVisibleTextAndVisibility() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
-            + "<textarea id='textArea1' style='visibility:hidden'> foo \n bar "
+            + "<textarea id='tester' style='visibility:hidden'> foo \n bar "
             + "</textarea>\n"
             + "</form></body></html>";
         final WebDriver driver = loadPage2(html);
-        final WebElement textArea = driver.findElement(By.id("textArea1"));
+        final WebElement textArea = driver.findElement(By.id("tester"));
         assertEquals(getExpectedAlerts()[0], textArea.getText());
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 
     /**
