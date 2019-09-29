@@ -131,6 +131,7 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final URL baseUrl = new URL("http://localhost:" + primitiveWebServer.getPort() + "/");
             final WebDriver driver = getWebDriver();
@@ -419,7 +420,6 @@ public class WebClient7Test extends WebDriverTestCase {
             final String addHeader,
             final String addHtml,
             final boolean click) throws Exception {
-
         String html = "<html>\n"
                 + "<head><title>foo</title>\n";
         if (!header) {
@@ -449,6 +449,7 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "Connection: close\r\n"
                 + "\r\n";
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer =
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
@@ -504,6 +505,7 @@ public class WebClient7Test extends WebDriverTestCase {
                 + "Connection: close\r\n"
                 + "\r\n";
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer =
                 new PrimitiveWebServer(Charset.forName(charset), firstResponse, secondResponse)) {
             final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
