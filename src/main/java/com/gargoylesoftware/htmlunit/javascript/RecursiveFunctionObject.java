@@ -130,7 +130,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 return "SpeechGrammarList";
 
             case "webkitSpeechRecognitionError":
-                return "SpeechRecognitionError";
+                return "SpeechRecognitionErrorEvent";
 
             case "webkitSpeechRecognitionEvent":
                 return "SpeechRecognitionEvent";

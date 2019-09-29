@@ -1206,7 +1206,7 @@ public final class StyleAttributes {
         LINE_HEIGHT_("line-height", "line-height", ff("20px")),
 
         /** The style property {@code listStyle}. */
-        LIST_STYLE("listStyle", "list-style", chrome("disc outside none"), ff(""), ie("")),
+        LIST_STYLE("listStyle", "list-style", chrome("outside none disc"), ff(""), ie("")),
 
         /** The style property {@code list-style}. */
         LIST_STYLE_("list-style", "list-style", ff("")),
@@ -2366,6 +2366,12 @@ public final class StyleAttributes {
         /** The style property {@code overscroll-behavior}. */
         OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff60up("")),
 
+        /** The style property {@code overscrollBehaviorBlock}. */
+        OVERSCROLL_BEHAVIOR_BLOCK("overscrollBehaviorBlock", "overscroll-behavior-block", chrome("auto")),
+
+        /** The style property {@code overscrollBehaviorInline}. */
+        OVERSCROLL_BEHAVIOR_INLINR("overscrollBehaviorInline", "overscroll-behavior-inline", chrome("auto")),
+
         /** The style property {@code overscrollBehaviorX}. */
         OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior-x", chrome("auto"), ff60up("auto")),
 
@@ -2501,19 +2507,19 @@ public final class StyleAttributes {
         PIXEL_WIDTH("pixelWidth", "pixel-width", ie("")),
 
         /** The style property {@code placeContent}. */
-        PLACE_CONTENT("placeContent", "place-content", chrome("normal normal"), ff("")),
+        PLACE_CONTENT("placeContent", "place-content", chrome("normal"), ff("")),
 
         /** The style property {@code place-content}. */
         PLACE_CONTENT_("place-content", "place-content", ff("")),
 
         /** The style property {@code placeItems}. */
-        PLACE_ITEMS("placeItems", "place-items", chrome("normal normal"), ff("")),
+        PLACE_ITEMS("placeItems", "place-items", chrome("normal"), ff("")),
 
         /** The style property {@code place-items}. */
         PLACE_ITEMS_("place-items", "place-items", ff("")),
 
         /** The style property {@code placeSelf}. */
-        PLACE_SELF("placeSelf", "place-self", chrome("auto auto"), ff("")),
+        PLACE_SELF("placeSelf", "place-self", chrome("auto"), ff("")),
 
         /** The style property {@code place-self}. */
         PLACE_SELF_("place-self", "place-self", ff("")),

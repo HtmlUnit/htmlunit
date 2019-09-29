@@ -14,20 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link ImageData}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ImageDataTest extends WebDriverTestCase {
@@ -36,9 +34,7 @@ public class ImageDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"200", "100", "50", "255", "100", "50", "125", "255", "123", "111", "222", "255"},
-            CHROME = {"200", "100", "50", "255", "99", "50", "125", "255", "123", "111", "222", "255"})
-    @NotYetImplemented(CHROME)
+    @Alerts({"200", "100", "50", "255", "100", "50", "125", "255", "123", "111", "222", "255"})
     public void getImageData() throws Exception {
         final String html =
             "<html><head><script>\n"
