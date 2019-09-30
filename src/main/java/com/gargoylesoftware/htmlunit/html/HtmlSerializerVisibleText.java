@@ -424,14 +424,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode) {
-        final List<HtmlOption> options;
-        if (htmlSelect.isMultipleSelectEnabled()) {
-            options = htmlSelect.getOptions();
-        }
-        else {
-            options = htmlSelect.getSelectedOptions();
-        }
-
+        final List<HtmlOption> options = htmlSelect.getOptions();
         for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
             final HtmlOption currentOption = i.next();
             appendNode(builder, currentOption, mode);

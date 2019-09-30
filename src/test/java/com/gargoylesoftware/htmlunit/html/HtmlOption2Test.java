@@ -42,6 +42,50 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlOption2Test extends WebDriverTestCase {
 
     /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"option1", "", "Number Three", "Number 4",
+                "option1\nNumber Three\nNumber 4"},
+            CHROME = {"option1", "      ", "Number Three", "Number 4",
+                "      option1\n      \n      Number Three\n      Number 4\n    "},
+            IE = {"option1", "", "Number Three", "Number 4",
+                "option1 Number Three Number 4"})
+    public void getVisibleText() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body id='tester'>\n"
+            + "  <form>\n"
+            + "    <select>\n"
+            + "      <option id='option1'>option1</option>\n"
+            + "      <option id='option2' label='Number Two'/>\n"
+            + "      <option id='option3' label='overridden'>Number Three</option>\n"
+            + "      <option id='option4'>Number&nbsp;4</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        String text = driver.findElement(By.id("option1")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+        text = driver.findElement(By.id("option2")).getText();
+        assertEquals(getExpectedAlerts()[1], text);
+        text = driver.findElement(By.id("option3")).getText();
+        assertEquals(getExpectedAlerts()[2], text);
+        text = driver.findElement(By.id("option4")).getText();
+        assertEquals(getExpectedAlerts()[3], text);
+        text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[4], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[4], page.getElementById("tester").getVisibleText());
+        }
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
