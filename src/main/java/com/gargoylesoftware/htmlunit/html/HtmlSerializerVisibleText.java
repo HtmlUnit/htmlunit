@@ -452,15 +452,12 @@ public class HtmlSerializerVisibleText {
             final HtmlOrderedList htmlOrderedList, final Mode mode) {
         builder.appendBlockSeparator();
         boolean first = true;
-        int i = 1;
         for (final DomNode item : htmlOrderedList.getChildren()) {
             if (!first) {
                 builder.appendBlockSeparator();
             }
             first = false;
             if (item instanceof HtmlListItem) {
-                builder.append(Integer.toString(i++), mode);
-                builder.append(". ", mode);
                 appendChildren(builder, item, mode);
             }
             else {

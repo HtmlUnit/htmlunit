@@ -59,6 +59,7 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
+
     /**
      * @throws Exception if the test fails
      */
