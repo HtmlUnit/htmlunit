@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -28,9 +29,35 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlMenuTest extends WebDriverTestCase {
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("First Item\nSecond Item")
+    public void getVisibleText() throws Exception {
+        final String html = "<html><head></head>\n"
+                + "<body>\n"
+                + "  <menu id='tester'>\n"
+                + "    <li>First Item</li>\n"
+                + "    <li>Second Item</li>\n"
+                + "  </menu>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -47,7 +74,7 @@ public class HtmlMenuTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "  <menu id='myId'>\n"
             + "    <li>First Item</li>\n"
-            + "    <li>Secong Item</li>\n"
+            + "    <li>Second Item</li>\n"
             + "  </menu>\n"
             + "</body></html>";
 

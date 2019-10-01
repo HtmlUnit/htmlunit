@@ -136,6 +136,9 @@ public class HtmlSerializerVisibleText {
         else if (node instanceof HtmlInlineFrame) {
             appendInlineFrame(builder, (HtmlInlineFrame) node, mode);
         }
+        else if (node instanceof HtmlMenu) {
+            appendMenu(builder, (HtmlMenu) node, mode);
+        }
         else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
             appendNoScript(builder, (HtmlNoScript) node, mode);
         }
@@ -293,6 +296,26 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
+     * Process {@link HtmlMenu}.
+     * @param builder the StringBuilder to add to
+     * @param htmlMenu the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
+    protected void appendMenu(final HtmlSerializerTextBuilder builder,
+                    final HtmlMenu htmlMenu, final Mode mode) {
+        builder.appendBlockSeparator();
+        boolean first = true;
+        for (final DomNode item : htmlMenu.getChildren()) {
+            if (!first) {
+                builder.appendBlockSeparator();
+            }
+            first = false;
+            appendNode(builder, item, mode);
+        }
+        builder.appendBlockSeparator();
+    }
+
+    /**
      * Process {@link HtmlTitle}.
      * @param builder the StringBuilder to add to
      * @param htmlTitle the target to process
@@ -323,7 +346,7 @@ public class HtmlSerializerVisibleText {
         boolean first = true;
         for (final HtmlTableCell cell : htmlTableRow.getCells()) {
             if (!first) {
-                builder.appendTab();
+                builder.appendBlank();
             }
             else {
                 first = false;
@@ -798,12 +821,7 @@ public class HtmlSerializerVisibleText {
             trimRightPos_ = builder_.length();
         }
 
-        public void appendTab() {
-            builder_.append('\t');
-            trimRightPos_ = builder_.length();
-        }
-
-        private void appendBlank() {
+        public void appendBlank() {
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();

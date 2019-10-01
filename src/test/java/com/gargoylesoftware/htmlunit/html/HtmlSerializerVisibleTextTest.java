@@ -139,14 +139,6 @@ public class HtmlSerializerVisibleTextTest {
         assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
-        serializer.append("a", Mode.NORMALIZE);
-        serializer.appendTab();
-        serializer.append(" ", Mode.NORMALIZE);
-        serializer.appendTab();
-        serializer.append("x", Mode.NORMALIZE);
-        assertEquals("a\t \tx", serializer.getText());
-
-        serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.appendBlockSeparator();
         serializer.append("\n", Mode.NORMALIZE);
         serializer.appendBlockSeparator();

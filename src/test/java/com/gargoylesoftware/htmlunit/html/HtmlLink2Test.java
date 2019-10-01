@@ -66,23 +66,28 @@ public class HtmlLink2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if an error occurs
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
-        final String html
-                = "<html>\n"
-                + "<head>\n"
-                + "  <link id='l' href='file1.css'>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "</body>\n"
-                + "</html>";
-        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+    @Alerts("")
+    public void getVisibleText() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head>\n"
+            + "  <link id='tester' href='file1.css'>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        final String text = driver.findElement(By.id("l")).getText();
-        assertEquals("", text);
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
     }
 
     /**
