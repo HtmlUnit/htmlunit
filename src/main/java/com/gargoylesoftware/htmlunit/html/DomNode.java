@@ -817,11 +817,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *         be visible to the user if this page was shown in a web browser
      */
     public String getVisibleText() {
-        if (getPage() instanceof XmlPage) {
-            final XmlSerializer ser = new XmlSerializer();
-            return ser.asText(this);
-        }
-
         final HtmlSerializerVisibleText ser = new HtmlSerializerVisibleText();
         return ser.asText(this);
     }
