@@ -58,7 +58,6 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
         }
     }
 
-
     /**
      * @throws Exception if the test fails
      */

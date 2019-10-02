@@ -60,7 +60,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
 
         if (driver instanceof HtmlUnitDriver) {
             final XmlPage page = (XmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            DomNode node = page.getFirstByXPath("//foo");
+            final DomNode node = page.getFirstByXPath("//foo");
             assertEquals(getExpectedAlerts()[0], node.getVisibleText());
         }
     }
