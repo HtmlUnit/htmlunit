@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * A handler for <tt>onbeforeunload</tt> events.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public interface OnbeforeunloadHandler {
+public interface OnbeforeunloadHandler extends Serializable {
 
     /**
      * Handles an <tt>onbeforeunload</tt> event for the specified page.

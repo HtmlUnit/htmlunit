@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * A handler for changes to <tt>window.status</tt>.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ronald Brill
  */
-public interface StatusHandler {
+public interface StatusHandler extends Serializable {
 
     /**
      * Handles a change to <tt>window.status</tt>.

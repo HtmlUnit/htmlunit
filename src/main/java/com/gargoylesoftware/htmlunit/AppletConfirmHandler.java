@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 
@@ -23,7 +25,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlObject;
  *
  * @author Ronald Brill
  */
-public interface AppletConfirmHandler {
+public interface AppletConfirmHandler extends Serializable {
 
     /**
      * Handles a confirm for the specified page.

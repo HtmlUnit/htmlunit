@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.attachment;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -41,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @see com.gargoylesoftware.htmlunit.WebClient#getAttachmentHandler()
  * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
  */
-public interface AttachmentHandler {
+public interface AttachmentHandler extends Serializable {
 
     /**
      * Handles the specified attached page.

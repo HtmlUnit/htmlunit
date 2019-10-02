@@ -14,13 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * A handler for JavaScript alerts. Alerts are triggered when the JavaScript method Window.alert()
  * is called.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ronald Brill
  */
-public interface AlertHandler {
+public interface AlertHandler extends Serializable {
 
     /**
      * Handle an alert for the given page.

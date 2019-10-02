@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * A handler for the JavaScript function <tt>window.confirm()</tt>. Confirms
  * are triggered when the JavaScript function <tt>window.confirm()</tt> is invoked.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */
-public interface ConfirmHandler {
+public interface ConfirmHandler extends Serializable {
 
     /**
      * Handles a confirm for the specified page.

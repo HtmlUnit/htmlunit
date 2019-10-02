@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.webstart;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
@@ -21,7 +23,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  *
  * @author Ronald Brill
  */
-public interface WebStartHandler {
+public interface WebStartHandler extends Serializable {
 
     /**
      * Handles the jnlp file response.
