@@ -365,7 +365,7 @@ public class HtmlSerializerVisibleText {
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
         if (isVisible(htmlTextArea)) {
-            builder.append(StringUtils.stripEnd(htmlTextArea.getText(), SPACES),
+            builder.append(StringUtils.stripEnd(htmlTextArea.getDefaultValue(), SPACES),
                     whiteSpaceStyle(htmlTextArea, Mode.NORMALIZE_PRE));
         }
     }

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 
@@ -309,6 +312,68 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<p>html snippet</p>\n"
             + "</textarea>\n"
             + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Hello World",
+            IE = "Hello WorldHtmlUnit")
+    @NotYetImplemented(IE)
+    public void getVisibleTextValueChangedWithTyping() throws Exception {
+        final String html
+            = "<html>"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='tester'>Hello World</textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textArea = driver.findElement(By.id("tester"));
+        textArea.sendKeys("HtmlUnit");
+        final String text = textArea.getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Hello World",
+            IE = "HtmlUnit")
+    @NotYetImplemented(IE)
+    public void getVisibleTextValueChangedFromJs() throws Exception {
+        final String html
+            = "<html>"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    document.getElementById('tester').value = 'HtmlUnit';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<textarea id='tester'>Hello World</textarea>\n"
+            + "</form>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final String text = driver.findElement(By.id("tester")).getText();
