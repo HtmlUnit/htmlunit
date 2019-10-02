@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 77">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.21.v20190926.
+            </action>
             <action type="fix" dev="rbri" issue="#84">
                 WebClient#openWindow no longer throws a ClassCastException when called from a non html page.
             </action>
