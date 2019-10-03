@@ -719,6 +719,33 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object HTMLImageElement]", "[object HTMLImageElement]"})
+    public void findImageWhenNotDirectChild() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  alert(document.fmLogin.myImgName);\n"
+            + "  alert(document.fmLogin.myImgId);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "  <form name='fmLogin' action='doLogin' method='POST'>\n"
+            + "    <div>\n"
+            + "      <img name='myImgName' src='somewhere'>\n"
+            + "      <img id='myImgId' src='somewhere'>\n"
+            + "    <div/>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * This test shows a problem in current implementation of host object with visible constructors
      * used to retrieve JS object associated to a particular DOM node. The general problem needs
      * later.

@@ -408,9 +408,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
         addElements(name, getHtmlForm().getHtmlElementDescendants(), elements);
         addElements(name, getHtmlForm().getLostChildren(), elements);
 
-        // If no form fields are found, IE and Firefox are able to find img elements by ID or name.
+        // If no form fields are found, browsers are able to find img elements by ID or name.
         if (elements.isEmpty()) {
-            for (final DomNode node : getHtmlForm().getChildren()) {
+            for (final DomNode node : getHtmlForm().getHtmlElementDescendants()) {
                 if (node instanceof HtmlImage) {
                     final HtmlImage img = (HtmlImage) node;
                     if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
