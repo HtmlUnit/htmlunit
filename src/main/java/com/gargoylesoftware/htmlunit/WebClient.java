@@ -1178,7 +1178,8 @@ public class WebClient implements Serializable, AutoCloseable {
         }
     }
 
-    private static WebResponse makeWebResponseForAboutUrl(final URL url) throws MalformedURLException {
+    private static WebResponse makeWebResponseForAboutUrl(final WebRequest webRequest) throws MalformedURLException {
+        final URL url = webRequest.getUrl();
         final String urlWithoutQuery = StringUtils.substringBefore(url.toExternalForm(), "?");
         if (!"blank".equalsIgnoreCase(StringUtils.substringAfter(urlWithoutQuery, WebClient.ABOUT_SCHEME))) {
             throw new MalformedURLException(url + " is not supported, only about:blank is supported now.");
@@ -1315,7 +1316,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public WebResponse loadWebResponse(final WebRequest webRequest) throws IOException {
         switch (webRequest.getUrl().getProtocol()) {
             case "about":
-                return makeWebResponseForAboutUrl(webRequest.getUrl());
+                return makeWebResponseForAboutUrl(webRequest);
 
             case "file":
                 return makeWebResponseForFileUrl(webRequest);
