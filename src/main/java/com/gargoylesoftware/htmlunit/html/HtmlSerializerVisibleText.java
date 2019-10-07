@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -107,6 +106,9 @@ public class HtmlSerializerVisibleText {
         }
         else if (node instanceof HtmlSelect) {
             appendSelect(builder, (HtmlSelect) node, mode);
+        }
+        else if (node instanceof HtmlOption) {
+            appendOption(builder, (HtmlOption) node, mode);
         }
         else if (node instanceof HtmlSubmitInput) {
             appendSubmitInput(builder, (HtmlSubmitInput) node, mode);
@@ -420,18 +422,40 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendSelect(final HtmlSerializerTextBuilder builder,
             final HtmlSelect htmlSelect, final Mode mode) {
-        final List<HtmlOption> options = htmlSelect.getOptions();
-        for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
-            final HtmlOption currentOption = i.next();
-            appendNode(builder, currentOption, mode);
-            if (i.hasNext()) {
+        builder.appendBlockSeparator();
+        boolean leadingNlPending = false;
+        final Mode selectMode = whiteSpaceStyle(htmlSelect, mode);
+        for (final DomNode item : htmlSelect.getChildren()) {
+            if (leadingNlPending) {
                 builder.appendBlockSeparator();
+                leadingNlPending = false;
+            }
+
+            builder.resetContentAdded();
+            appendNode(builder, item, whiteSpaceStyle(item, selectMode));
+            if (!leadingNlPending && builder.contentAdded) {
+                leadingNlPending= true;
             }
         }
+        builder.appendBlockSeparator();
     }
 
     /**
-     * Process {@link HtmlOrderedList} taking care to numerate it.
+     * Process {@link HtmlSelect}.
+     *
+     * @param builder the StringBuilder to add to
+     * @param htmlSelect the target to process
+     * @param mode the {@link Mode} to use for processing
+     */
+    protected void appendOption(final HtmlSerializerTextBuilder builder,
+            final HtmlOption htmlOption, final Mode mode) {
+        builder.ignoreHtmlBreaks();
+        appendChildren(builder, htmlOption, mode);
+        builder.processHtmlBreaks();
+    }
+
+    /**
+     * Process {@link HtmlOrderedList}.
      *
      * @param builder the StringBuilder to add to
      * @param htmlOrderedList the OL element
@@ -440,14 +464,18 @@ public class HtmlSerializerVisibleText {
     protected void appendOrderedList(final HtmlSerializerTextBuilder builder,
             final HtmlOrderedList htmlOrderedList, final Mode mode) {
         builder.appendBlockSeparator();
+        boolean leadingNlPending = false;
         final Mode olMode = whiteSpaceStyle(htmlOrderedList, mode);
         for (final DomNode item : htmlOrderedList.getChildren()) {
-            if (item instanceof HtmlListItem) {
+            if (leadingNlPending) {
                 builder.appendBlockSeparator();
+                leadingNlPending = false;
             }
+
+            builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, olMode));
-            if (item instanceof HtmlListItem) {
-                builder.appendBlockSeparator();
+            if (!leadingNlPending && builder.contentAdded) {
+                leadingNlPending= true;
             }
         }
         builder.appendBlockSeparator();
@@ -462,14 +490,18 @@ public class HtmlSerializerVisibleText {
     protected void appendUnorderedList(final HtmlSerializerTextBuilder builder,
                     final HtmlUnorderedList htmlUnorderedList, final Mode mode) {
         builder.appendBlockSeparator();
+        boolean leadingNlPending = false;
         final Mode ulMode = whiteSpaceStyle(htmlUnorderedList, mode);
         for (final DomNode item : htmlUnorderedList.getChildren()) {
-            if (item instanceof HtmlListItem) {
+            if (leadingNlPending) {
                 builder.appendBlockSeparator();
+                leadingNlPending = false;
             }
+
+            builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, ulMode));
-            if (item instanceof HtmlListItem) {
-                builder.appendBlockSeparator();
+            if (!leadingNlPending && builder.contentAdded) {
+                leadingNlPending= true;
             }
         }
         builder.appendBlockSeparator();
@@ -557,7 +589,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendBreak(final HtmlSerializerTextBuilder builder,
             final HtmlBreak htmlBreak, final Mode mode) {
-        builder.appendNewLine();
+        builder.appendBreak(mode);
     }
 
     /**
@@ -656,16 +688,18 @@ public class HtmlSerializerVisibleText {
         private enum State {
             DEFAULT,
             EMPTY,
-            TRIM,
             BLANK_AT_END,
             BLANK_AT_END_AFTER_NEWLINE,
             NEWLINE_AT_END,
+            BREAK_AT_END,
             BLOCK_SEPARATOR_AT_END
         }
 
         private State state_;
         private final StringBuilder builder_;
         private int trimRightPos_;
+        private boolean contentAdded;
+        private boolean ignoreHtmlBreaks;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
@@ -717,20 +751,26 @@ public class HtmlSerializerVisibleText {
                     }
 
                     if (mode == Mode.WHITE_SPACE_PRE_LINE) {
-                        builder_.append('\n');
-                        state_ = State.DEFAULT;
-                        trimRightPos_ = builder_.length();
-
+                        switch (state_) {
+                            case EMPTY:
+                            case BLOCK_SEPARATOR_AT_END:
+                                break;
+                            default:
+                                builder_.append('\n');
+                                state_ = State.NEWLINE_AT_END;
+                                trimRightPos_ = builder_.length();
+                                break;
+                        }
                         continue;
                     }
 
                     switch (state_) {
                         case EMPTY:
-                        case TRIM:
                         case BLANK_AT_END:
                         case BLANK_AT_END_AFTER_NEWLINE:
                         case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
+                        case BREAK_AT_END:
                             break;
                         default:
                             builder_.append(' ');
@@ -746,13 +786,28 @@ public class HtmlSerializerVisibleText {
                         continue;
                     }
 
+                    if (mode == Mode.WHITE_SPACE_PRE_LINE) {
+                        switch (state_) {
+                            case EMPTY:
+                            case BLANK_AT_END:
+                            case BLANK_AT_END_AFTER_NEWLINE:
+                            case BREAK_AT_END:
+                                break;
+                            default:
+                                builder_.append(' ');
+                                state_ = State.BLANK_AT_END;
+                                break;
+                        }
+                        continue;
+                    }
+
                     switch (state_) {
                         case EMPTY:
-                        case TRIM:
                         case BLANK_AT_END:
                         case BLANK_AT_END_AFTER_NEWLINE:
                         case BLOCK_SEPARATOR_AT_END:
                         case NEWLINE_AT_END:
+                        case BREAK_AT_END:
                             break;
                         default:
                             builder_.append(' ');
@@ -769,11 +824,7 @@ public class HtmlSerializerVisibleText {
                 builder_.append(c);
                 state_ = State.DEFAULT;
                 trimRightPos_ = builder_.length();
-            }
-
-            if (mode != Mode.WHITE_SPACE_NORMAL && mode != Mode.WHITE_SPACE_PRE) {
-                // reset state to empty to restart whitespace normalization afterwards
-                state_ = State.TRIM;
+                contentAdded = true;
             }
         }
 
@@ -804,6 +855,7 @@ public class HtmlSerializerVisibleText {
                 case BLOCK_SEPARATOR_AT_END:
                     break;
                 case NEWLINE_AT_END:
+                case BREAK_AT_END:
                     builder_.setLength(builder_.length() - 1);
                     trimRightPos_ = trimRightPos_ - 1;
                     if (builder_.length() == 0) {
@@ -821,11 +873,15 @@ public class HtmlSerializerVisibleText {
             }
         }
 
-        public void appendNewLine() {
+        public void appendBreak(final Mode mode) {
+            if (ignoreHtmlBreaks) {
+                return;
+            }
+
             builder_.setLength(trimRightPos_);
 
             builder_.append('\n');
-            state_ = State.NEWLINE_AT_END;
+            state_ = State.BREAK_AT_END;
             trimRightPos_ = builder_.length();
         }
 
@@ -833,6 +889,22 @@ public class HtmlSerializerVisibleText {
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();
+        }
+
+        public boolean wasContentAdded() {
+            return contentAdded;
+        }
+
+        public void resetContentAdded() {
+            contentAdded = false;
+        }
+
+        public void ignoreHtmlBreaks() {
+            ignoreHtmlBreaks = true;
+        }
+
+        public void processHtmlBreaks() {
+            ignoreHtmlBreaks = false;
         }
 
         public String getText() {

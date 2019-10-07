@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -824,10 +825,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
-    @NotYetImplemented({CHROME, IE})
+    @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "A B C D EF G H I\nSecond")
+    @NotYetImplemented(FF)
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
     }
@@ -837,10 +837,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
-            CHROME = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            IE = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ")
-    @NotYetImplemented({CHROME, IE})
+    @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
+            FF = "A B C D EF G H I\nSecond")
+    @NotYetImplemented(FF)
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");
     }
@@ -853,7 +852,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             CHROME = "  A B  C     D \nEF\nG \n H   I  \nSecond",
             IE = "A B C D \nEF\nG \n H I \n Second")
-    @NotYetImplemented({CHROME, IE})
+    @NotYetImplemented
     public void getVisibleTextWhiteSpaceSelectPreLine() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-line");
     }

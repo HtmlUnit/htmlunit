@@ -98,34 +98,34 @@ public class HtmlSerializerVisibleTextTest {
         assertEquals("a\nx", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         serializer.append(" ", Mode.WHITE_SPACE_NORMAL);
         assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append(" ", Mode.WHITE_SPACE_NORMAL);
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append(" ", Mode.WHITE_SPACE_NORMAL);
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         serializer.append(" ", Mode.WHITE_SPACE_NORMAL);
         assertEquals("\n", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.WHITE_SPACE_NORMAL);
         assertEquals("x", serializer.getText());
 
         serializer = new HtmlSerializerVisibleText.HtmlSerializerTextBuilder();
         serializer.append("a", Mode.WHITE_SPACE_NORMAL);
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         serializer.appendBlockSeparator();
         serializer.append("x", Mode.WHITE_SPACE_NORMAL);
         assertEquals("a\nx", serializer.getText());
@@ -145,7 +145,7 @@ public class HtmlSerializerVisibleTextTest {
         serializer.append("x", Mode.WHITE_SPACE_NORMAL);
         serializer.appendBlockSeparator();
         serializer.append("y", Mode.WHITE_SPACE_NORMAL);
-        serializer.appendNewLine();
+        serializer.appendBreak(Mode.WHITE_SPACE_NORMAL);
         serializer.appendBlockSeparator();
         serializer.appendBlockSeparator();
         assertEquals("x\ny", serializer.getText());
