@@ -41,6 +41,9 @@ public class HtmlSerializerVisibleText {
      * @return the text representation according to the setting of this serializer
      */
     public String asText(final DomNode node) {
+        if (node instanceof HtmlBreak) {
+            return "";
+        }
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
         appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL));
         return builder.getText();
