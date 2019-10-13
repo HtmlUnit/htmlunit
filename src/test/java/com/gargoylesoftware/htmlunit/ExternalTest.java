@@ -53,7 +53,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_77";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.25.0";
+    static String GECKO_DRIVER_ = "0.26.0";
     /** IE driver. */
     static String IE_DRIVER_ = "3.14.0.0";
 
