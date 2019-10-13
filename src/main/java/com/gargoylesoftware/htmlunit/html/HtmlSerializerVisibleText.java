@@ -342,6 +342,7 @@ public class HtmlSerializerVisibleText {
             final HtmlTextArea htmlTextArea, final Mode mode) {
         if (isVisible(htmlTextArea)) {
             builder.append(htmlTextArea.getDefaultValue(), whiteSpaceStyle(htmlTextArea, Mode.PRE));
+            builder.trimRight(Mode.PRE);
         }
     }
 
@@ -889,6 +890,26 @@ public class HtmlSerializerVisibleText {
             builder_.append(' ');
             state_ = State.BLANK_AT_END;
             trimRightPos_ = builder_.length();
+        }
+
+        public void trimRight(final Mode mode) {
+            if (mode == Mode.PRE) {
+                switch (state_) {
+                    case BLOCK_SEPARATOR_AT_END:
+                    case NEWLINE_AT_END:
+                    case BREAK_AT_END:
+                        trimRightPos_--;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            builder_.setLength(trimRightPos_);
+            state_ = State.DEFAULT;
+            if (builder_.length() == 0) {
+                state_ = State.EMPTY;
+            }
         }
 
         public boolean wasContentAdded() {
