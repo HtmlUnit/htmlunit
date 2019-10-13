@@ -433,8 +433,8 @@ public class HtmlSerializerVisibleText {
 
             builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, selectMode));
-            if (!leadingNlPending && builder.contentAdded) {
-                leadingNlPending= true;
+            if (!leadingNlPending && builder.contentAdded_) {
+                leadingNlPending = true;
             }
         }
         builder.appendBlockSeparator();
@@ -444,7 +444,7 @@ public class HtmlSerializerVisibleText {
      * Process {@link HtmlSelect}.
      *
      * @param builder the StringBuilder to add to
-     * @param htmlSelect the target to process
+     * @param htmlOption the target to process
      * @param mode the {@link Mode} to use for processing
      */
     protected void appendOption(final HtmlSerializerTextBuilder builder,
@@ -474,8 +474,8 @@ public class HtmlSerializerVisibleText {
 
             builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, olMode));
-            if (!leadingNlPending && builder.contentAdded) {
-                leadingNlPending= true;
+            if (!leadingNlPending && builder.contentAdded_) {
+                leadingNlPending = true;
             }
         }
         builder.appendBlockSeparator();
@@ -500,8 +500,8 @@ public class HtmlSerializerVisibleText {
 
             builder.resetContentAdded();
             appendNode(builder, item, whiteSpaceStyle(item, ulMode));
-            if (!leadingNlPending && builder.contentAdded) {
-                leadingNlPending= true;
+            if (!leadingNlPending && builder.contentAdded_) {
+                leadingNlPending = true;
             }
         }
         builder.appendBlockSeparator();
@@ -698,8 +698,8 @@ public class HtmlSerializerVisibleText {
         private State state_;
         private final StringBuilder builder_;
         private int trimRightPos_;
-        private boolean contentAdded;
-        private boolean ignoreHtmlBreaks;
+        private boolean contentAdded_;
+        private boolean ignoreHtmlBreaks_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
@@ -780,7 +780,7 @@ public class HtmlSerializerVisibleText {
                     continue;
                 }
 
-                if (c== ' ' || c == '\t' || c == '\f') {
+                if (c == ' ' || c == '\t' || c == '\f') {
                     if (mode == Mode.WHITE_SPACE_PRE || mode == Mode.PRE) {
                         appendBlank();
                         continue;
@@ -824,7 +824,7 @@ public class HtmlSerializerVisibleText {
                 builder_.append(c);
                 state_ = State.DEFAULT;
                 trimRightPos_ = builder_.length();
-                contentAdded = true;
+                contentAdded_ = true;
             }
         }
 
@@ -874,7 +874,7 @@ public class HtmlSerializerVisibleText {
         }
 
         public void appendBreak(final Mode mode) {
-            if (ignoreHtmlBreaks) {
+            if (ignoreHtmlBreaks_) {
                 return;
             }
 
@@ -892,19 +892,19 @@ public class HtmlSerializerVisibleText {
         }
 
         public boolean wasContentAdded() {
-            return contentAdded;
+            return contentAdded_;
         }
 
         public void resetContentAdded() {
-            contentAdded = false;
+            contentAdded_ = false;
         }
 
         public void ignoreHtmlBreaks() {
-            ignoreHtmlBreaks = true;
+            ignoreHtmlBreaks_ = true;
         }
 
         public void processHtmlBreaks() {
-            ignoreHtmlBreaks = false;
+            ignoreHtmlBreaks_ = false;
         }
 
         public String getText() {

@@ -863,7 +863,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "  <form>\n"
-            + "    <select id='tester' " + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
+            + "    <select id='tester' "
+                    + (whiteSpace == null ? "" : ("style='white-space: " + whiteSpace + "'")) + ">\n"
             + "      <option>  A B  C\t \t  D \r\nEF\nG \n H  <br> I  </option>\n"
             + "      <option>Second</option>\n"
             + "    </select>\n"
@@ -1242,7 +1243,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n    third item\n4. item\n    some text \n    \nlast item\n  ")
+    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n"
+                + "    third item\n4. item\n    some text \n    \nlast item\n  ")
     public void getVisibleTextWhiteSpaceOrderedListPre() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre");
     }
@@ -1252,7 +1254,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n    third item\n4. item\n    some text \n    \nlast item\n  ")
+    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n"
+                + "    third item\n4. item\n    some text \n    \nlast item\n  ")
     public void getVisibleTextWhiteSpaceOrderedListPreWrap() throws Exception {
         getVisibleTextWhiteSpaceOrderedList("pre-wrap");
     }
@@ -1326,7 +1329,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n    third item\n4. item\n    some text \n    \nlast item\n  ")
+    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n"
+                + "    third item\n4. item\n    some text \n    \nlast item\n  ")
     public void getVisibleTextWhiteSpaceUnorderedListPre() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre");
     }
@@ -1336,7 +1340,8 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n    third item\n4. item\n    some text \n    \nlast item\n  ")
+    @Alerts("    first item\n      A B  C     D \nEF\nG \n H  \n I  \n"
+                + "    third item\n4. item\n    some text \n    \nlast item\n  ")
     public void getVisibleTextWhiteSpaceUnorderedListPreWrap() throws Exception {
         getVisibleTextWhiteSpaceUnorderedList("pre-wrap");
     }
