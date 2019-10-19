@@ -47,7 +47,8 @@ public class Cache implements Serializable {
     private int maxSize_ = 40;
 
     private static final Pattern DATE_HEADER_PATTERN = Pattern.compile("-?\\d+");
-    private static final long DELAY = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
+    static final long DELAY = 10 * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_MINUTE;
+
     /**
      * The map which holds the cached responses. Note that when keying on URLs, we key on the string version
      * of the URLs, rather than on the URLs themselves. This is done for performance, because a) the
@@ -55,7 +56,7 @@ public class Cache implements Serializable {
      * method triggers DNS lookups of the URL hostnames' IPs. As of this writing, the HtmlUnit unit tests
      * run ~20% faster whey keying on strings rather than on {@link java.net.URL} instances.
      */
-    private final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
+    final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
 
     /**
      * A cache entry.

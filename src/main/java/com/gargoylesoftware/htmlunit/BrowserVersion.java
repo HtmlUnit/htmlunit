@@ -802,18 +802,17 @@ public final class BrowserVersion implements Serializable {
                 .setPlatform(version.getPlatform())
                 .setSystemLanguage(version.getSystemLanguage())
                 .setSystemTimezone(version.getSystemTimezone())
-                .setUserLanguage(version.getUserLanguage());
-
-            workPiece_.buildId_ = version.getBuildId();
-            workPiece_.productSub_ = version.getProductSub();
-            workPiece_.acceptEncodingHeader_ = version.getAcceptEncodingHeader();
-            workPiece_.htmlAcceptHeader_ = version.getHtmlAcceptHeader();
-            workPiece_.imgAcceptHeader_ = version.getImgAcceptHeader();
-            workPiece_.cssAcceptHeader_ = version.getCssAcceptHeader();
-            workPiece_.scriptAcceptHeader_ = version.getScriptAcceptHeader();
-            workPiece_.xmlHttpRequestAcceptHeader_ = version.getXmlHttpRequestAcceptHeader();
-            workPiece_.headerNamesOrdered_ = version.getHeaderNamesOrdered();
-            workPiece_.fontHeights_ = version.fontHeights_;
+                .setUserLanguage(version.getUserLanguage())
+                .setBuildId(version.getBuildId())
+                .setProductSub(version.getProductSub())
+                .setAcceptEncodingHeader(version.getAcceptEncodingHeader())
+                .setHtmlAcceptHeader(version.getHtmlAcceptHeader())
+                .setImgAcceptHeader(version.getImgAcceptHeader())
+                .setCssAcceptHeader(version.getCssAcceptHeader())
+                .setScriptAcceptHeader(version.getScriptAcceptHeader())
+                .setXmlHttpRequestAcceptHeader(version.getXmlHttpRequestAcceptHeader())
+                .setHeaderNamesOrdered(version.getHeaderNamesOrdered())
+                .setFontHeights(version.fontHeights_);
 
             for (final PluginConfiguration pluginConf : version.getPlugins()) {
                 workPiece_.plugins_.add(pluginConf.clone());
@@ -999,6 +998,42 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
             workPiece_.xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param productSub the productSub
+         * @return this for fluent use
+         */
+        BrowserVersionBuilder setProductSub(final String productSub) {
+            workPiece_.productSub_ = productSub;
+            return this;
+        }
+
+        /**
+         * @param headerNamesOrdered the headerNamesOrdered
+         * @return this for fluent use
+         */
+        BrowserVersionBuilder setHeaderNamesOrdered(final String[] headerNamesOrdered) {
+            workPiece_.headerNamesOrdered_ = headerNamesOrdered;
+            return this;
+        }
+
+        /**
+         * @param headerNamesOrdered the headerNamesOrdered
+         * @return this for fluent use
+         */
+        BrowserVersionBuilder setFontHeights(final int[] fontHeights) {
+            workPiece_.fontHeights_ = fontHeights;
+            return this;
+        }
+
+        /**
+         * @param buildId the buildId
+         * @return this for fluent use
+         */
+        BrowserVersionBuilder setBuildId(final String buildId) {
+            workPiece_.buildId_ = buildId;
             return this;
         }
     }
