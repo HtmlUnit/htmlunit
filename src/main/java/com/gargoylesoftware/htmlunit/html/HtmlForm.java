@@ -119,7 +119,8 @@ public class HtmlForm extends HtmlElement {
         if (webClient.getOptions().isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
-                if (!areChildrenValid()) {
+                if (getAttributeDirect("novalidate") == ATTRIBUTE_NOT_DEFINED
+                        && !areChildrenValid()) {
                     return htmlPage;
                 }
                 final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
@@ -222,7 +223,7 @@ public class HtmlForm extends HtmlElement {
         for (HtmlElement element : getFormHtmlElementDescendants()) {
             if (element instanceof HtmlInput && !((HtmlInput) element).isValid()) {
                 if (LOG.isInfoEnabled()) {
-                    LOG.info("Form validation faild; element '" + element + "' was not valid. Submit cancelled.");
+                    LOG.info("Form validation failed; element '" + element + "' was not valid. Submit cancelled.");
                 }
                 valid = false;
                 break;

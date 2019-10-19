@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 77">
+            <action type="fix" dev="rbri" issue="#75">
+                Respect form 'novalidate' attribute.
+            </action>
             <action type="update" dev="rbri">
                 Resync cure-js with rhino trunk (2019-10-19).
             </action>
