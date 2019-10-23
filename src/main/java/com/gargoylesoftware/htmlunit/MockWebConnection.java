@@ -213,6 +213,14 @@ public class MockWebConnection implements WebConnection {
     }
 
     /**
+     * Gets the list of requested URLs.
+     * @return the list of relative URLs
+     */
+    public List<URL> getRequestedUrls() {
+        return Collections.unmodifiableList(requestedUrls_);
+    }
+
+    /**
      * Gets the list of requested URLs relative to the provided URL.
      * @param relativeTo what should be removed from the requested URLs.
      * @return the list of relative URLs
@@ -228,7 +236,7 @@ public class MockWebConnection implements WebConnection {
             response.add(s);
         }
 
-        return response;
+        return Collections.unmodifiableList(response);
     }
 
     /**
