@@ -898,7 +898,9 @@ public class HtmlSerializerVisibleText {
                     case BLOCK_SEPARATOR_AT_END:
                     case NEWLINE_AT_END:
                     case BREAK_AT_END:
-                        trimRightPos_--;
+                        if (trimRightPos_ == builder_.length()) {
+                            trimRightPos_--;
+                        }
                         break;
                     default:
                         break;
