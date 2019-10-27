@@ -23,10 +23,10 @@
         <htmlunitdriver.version>2.37.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.36.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.36.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.37.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.10</httpcomponents.version>
-        <jetty.version>9.4.21.v20190926</jetty.version>
+        <jetty.version>9.4.22.v20191022</jetty.version>
         <log4j.version>2.12.1</log4j.version>
         <slf4j.version>1.7.28</slf4j.version>
         <selenium.version>3.141.59</selenium.version>
