@@ -72,6 +72,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -138,7 +139,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         webClient_ = webClient;
         contextFactory_ = new HtmlUnitContextFactory(webClient);
         initTransientFields();
+
         jsConfig_ = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
+        RhinoException.useMozillaStackStyle(true);
     }
 
     /**
@@ -977,9 +980,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 }
             }
         }
-        getWebClient().getJavaScriptErrorListener().scriptException(page, scriptException);
+        final WebClient webClient = getWebClient();
+        webClient.getJavaScriptErrorListener().scriptException(page, scriptException);
         // Throw a Java exception if the user wants us to.
-        if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
+        if (webClient.getOptions().isThrowExceptionOnScriptError()) {
             throw scriptException;
         }
     }
