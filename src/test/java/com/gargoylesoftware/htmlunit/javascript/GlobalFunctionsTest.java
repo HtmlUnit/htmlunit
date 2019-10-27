@@ -175,4 +175,30 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8);
         verifyAlerts(driver, getExpectedAlerts());
     }
+
+    /**
+     * Test case for https://github.com/HtmlUnit/htmlunit/issues/94.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034",
+                "\u00ee\u0010\u0043\u0072\u00f4\u00ef\u00b6\u0062\u0034"})
+    public void decodeURIComponent() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var uri='%c3%ae%10%43%72%c3%b4%c3%af%c2%b6%62%34';\n"
+            + "    alert(decodeURIComponent(uri));\n"
+
+            + "    alert(decodeURIComponent(uri, false));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
