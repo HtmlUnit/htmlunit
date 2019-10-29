@@ -988,7 +988,7 @@ public final class StyleAttributes {
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
         /** The style property {@code gap}. */
-        GAP("gap", "gap", chrome("normal normal")),
+        GAP("gap", "gap", chrome("normal")),
 
         /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
@@ -1282,7 +1282,7 @@ public final class StyleAttributes {
         MARGIN_TOP_("margin-top", "margin-top", ff("0px")),
 
         /** The style property {@code marker}. */
-        MARKER("marker", "marker", ff(""), ie("none"), chrome("")),
+        MARKER("marker", "marker", ff(""), ie("none"), chrome("none")),
 
         /** The style property {@code markerEnd}. */
         MARKER_END("markerEnd", "marker-end", ff("none"), ie("none"), chrome("none")),
