@@ -450,6 +450,17 @@ public class AwtRenderingBackend implements RenderingBackend {
         transformation_.translate(x, y);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void closePath() {
+        if (subPaths_.isEmpty()) {
+            return;
+        }
+        subPaths_.get(subPaths_.size() - 1).closePath();
+    }
+
     private Path2D getCurrentSubPath() {
         if (subPaths_.isEmpty()) {
             final Path2D subPath = new Path2D.Double();

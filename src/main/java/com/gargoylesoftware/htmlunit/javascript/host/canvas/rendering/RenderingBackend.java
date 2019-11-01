@@ -247,4 +247,10 @@ public interface RenderingBackend {
      * @param y the y
      */
     void translate(int x, int y);
+
+    /**
+     * Attempts to add a straight line from the current point to the start of the current sub-path.
+     * If the shape has already been closed or has only one point, this function does nothing.
+     */
+    void closePath();
 }

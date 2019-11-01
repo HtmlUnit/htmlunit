@@ -235,11 +235,11 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
-     * Closes the subpaths.
+     * Closes the current subpath.
      */
     @JsxFunction
     public void closePath() {
-        LOG.info("CanvasRenderingContext2D.closePath() not yet implemented");
+        getRenderingBackend().closePath();
     }
 
     /**

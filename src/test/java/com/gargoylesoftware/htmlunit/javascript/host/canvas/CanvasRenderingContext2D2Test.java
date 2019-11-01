@@ -752,4 +752,151 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //
 //        loadPageWithAlerts(html);
 //    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAYU"
+//            + "lEQVR42mNgGAXUBhJA/J8MLIHP0PlQTAwgSq0KEH+H0tRQR7TNpPiEoO0kuY4YF5DkOkKu"
+//            + "IMt1+FxClutwuYYi12FzEUWuQ3elBzVch+zK/9RwHbIr/1PLdTBgMzzKPwBs1inGPcAUbg"
+//            + "AAAABJRU5ErkJggg==")
+//    public void closePath() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.moveTo(4,4);\n"
+//            + "      context.lineTo(10,16);\n"
+//            + "      context.lineTo(16,4);\n"
+//            + "      context.closePath();\n"
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
+//            + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
+//    public void closePathNoSubpath() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.closePath();\n"
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
+//            + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
+//    public void closePathPointOnly() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.moveTo(4,4);\n"
+//            + "      context.closePath();\n"
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUl"
+//            + "EQVR42mNgGAWjYBSMglEwCqgDAAZUAAEyx8IOAAAAAElFTkSuQmCC")
+//    public void closePathTwice() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.closePath();\n"
+//            + "      context.closePath();\n"
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA"
+//            + "XklEQVR42mNgoCHgIFGcoGHPgVgFTRzEfw3E8kD8Hw+WwGbofCjGJUZIHgOAXPMdyZWk"
+//            + "8hkIuZIcF+N0pQcO2wnJ43Tlfzy2E5LH6sr/eGwnJI8V2FAoPwpGwSjACwDUtCTLu8r4"
+//            + "+AAAAABJRU5ErkJggg==")
+//    public void closePathClosesOnlyLastSubpath() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.moveTo(2,2);\n"
+//            + "      context.lineTo(5,8);\n"
+//            + "      context.lineTo(8,2);\n"
+//
+//            + "      context.moveTo(10,2);\n"
+//            + "      context.lineTo(13,8);\n"
+//            + "      context.lineTo(16,2);\n"
+//            + "      context.closePath();\n"
+//
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
 }
