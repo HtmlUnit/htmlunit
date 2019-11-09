@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -342,7 +341,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void typeAtEndOfEditableDiv() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -366,7 +365,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

@@ -199,7 +199,7 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
                 "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
-            FF = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
+            FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
     @NotYetImplemented({CHROME, FF})
     public void minimalLineHeight() throws Exception {

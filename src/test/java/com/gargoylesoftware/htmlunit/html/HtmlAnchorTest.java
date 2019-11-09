@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -269,7 +268,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void clickNestedOptionElement() throws Exception {
         final String html =
               "<html>\n"

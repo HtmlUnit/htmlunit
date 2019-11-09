@@ -42,7 +42,7 @@ public class BrowserVersionTest extends WebTestCase {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.FIREFOX_68;
+        final BrowserVersion ff = BrowserVersion.INTERNET_EXPLORER;
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups

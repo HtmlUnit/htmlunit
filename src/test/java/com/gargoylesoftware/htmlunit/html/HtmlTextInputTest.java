@@ -538,9 +538,8 @@ public class HtmlTextInputTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
-            CHROME = {"0,0", "11,11", "11,11", "11,11"},
-            FF60 = {"0,0", "11,11", "11,11", "11,11"},
+    @Alerts(CHROME = {"0,0", "11,11", "11,11", "11,11"},
+            FF = {"0,0", "11,11", "11,11", "11,11"},
             IE = {"0,0", "0,0", "0,0", "0,11"})
     public void selection2_2() throws Exception {
         selection2(-3, 15);

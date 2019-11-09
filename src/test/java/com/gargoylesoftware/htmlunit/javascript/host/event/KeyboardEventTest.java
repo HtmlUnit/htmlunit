@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import java.util.Arrays;
 
@@ -135,7 +135,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void keyCodes_keyup() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -191,7 +191,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("32, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, ")
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void keyCodes_keydown() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

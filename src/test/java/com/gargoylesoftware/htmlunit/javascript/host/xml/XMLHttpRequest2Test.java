@@ -950,12 +950,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "",
-                "Date XYZ GMT\r\n"
-                + "Content-Type: text/xml;charset=iso-8859-1\r\n"
-                + "Transfer-Encoding: chunked\r\n"
-                + "Server: Jetty(XXX)\r\n"},
-            IE = {"", "",
+    @Alerts(IE = {"", "",
                 "Date XYZ GMT\n"
                 + "Content-Type: text/xml;charset=iso-8859-1\n"
                 + "Transfer-Encoding: chunked\n"
@@ -965,11 +960,16 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                 + "date XYZ GMT\n"
                 + "server: Jetty(XXX)\n"
                 + "transfer-encoding: chunked\n"},
-            FF = {"", "",
+            FF60 = {"", "",
                 "Content-Type: text/xml;charset=iso-8859-1\n"
                 + "Date XYZ GMT\n"
                 + "Server: Jetty(XXX)\n"
-                + "Transfer-Encoding: chunked\n"})
+                + "Transfer-Encoding: chunked\n"},
+            FF68 = {"", "",
+                    "content-type: text/xml;charset=iso-8859-1\n"
+                    + "date XYZ GMT\n"
+                    + "server: Jetty(XXX)\n"
+                    + "transfer-Encoding: chunked\n"})
     @NotYetImplemented({CHROME, FF60})
     public void getAllResponseHeaders() throws Exception {
         final String html =

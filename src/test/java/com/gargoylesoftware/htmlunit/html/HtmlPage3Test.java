@@ -467,9 +467,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Something",
-            FF60 = "error",
-            IE = "error")
+    @Alerts(DEFAULT = "error",
+            CHROME = "Something")
     @NotYetImplemented({IE, FF60})
     public void shouldBeAbleToFindElementByXPathInXmlDocument() throws Exception {
         final String html = "<?xml version='1.0' encoding='UTF-8'?>\n"

@@ -82,9 +82,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                         HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.COOKIE},
-            FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+            FF60 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION,
                         HttpHeader.UPGRADE_INSECURE_REQUESTS},
+            FF68 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
+                    HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.CONNECTION, HttpHeader.COOKIE,
+                    HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION,
                         HttpHeader.COOKIE})
