@@ -37,7 +37,7 @@ public class HtmlUnitContextFactoryTest extends SimpleWebTestCase {
         final String html = "<html></html>";
 
         final BrowserVersion browserVersion
-                = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
+                = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
                     .setApplicationName("Firefox")
                     .setApplicationVersion("5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0")
                     .setUserAgent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0")

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -29,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, FF60})
-@JsxClass(isJSObject = false, value = FF52)
 public class BaseAudioContext extends EventTarget {
 
     /**

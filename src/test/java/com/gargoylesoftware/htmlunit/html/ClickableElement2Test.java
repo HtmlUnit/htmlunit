@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -24,7 +22,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -63,7 +60,6 @@ public class ClickableElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("click click dblclick ")
-    @BuggyWebDriver(FF52)
     public void dblClick() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"

@@ -288,15 +288,20 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+                        "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
+            IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+                        "Content-Type: text/plain", "", "Hello HtmlUnit"})
     public void appendFileWithUnknownExtension() throws Exception {
         final String alerts = appendFile(".htmlunit", "test");
 
+        final String[] expectedAlerts = getExpectedAlerts();
         final String[] lines = alerts.split("\\n");
         assertEquals(6, lines.length);
-        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"", lines[1]);
-        assertEquals("Content-Type: application/octet-stream", lines[2]);
-        assertEquals("", lines[3]);
-        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(expectedAlerts[0], lines[1]);
+        assertEquals(expectedAlerts[1], lines[2]);
+        assertEquals(expectedAlerts[2], lines[3]);
+        assertEquals(expectedAlerts[3], lines[4]);
         assertEquals(lines[0] + "--", lines[5]);
     }
 
@@ -304,15 +309,20 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+                        "Content-Type: application/octet-stream", "", "Hello HtmlUnit"},
+              IE = {"Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"",
+                      "Content-Type: text/plain", "", "Hello HtmlUnit"})
     public void appendFileWithoutExtension() throws Exception {
         final String alerts = appendFile("", "test");
 
+        final String[] expectedAlerts = getExpectedAlerts();
         final String[] lines = alerts.split("\\n");
         assertEquals(6, lines.length);
-        assertEquals("Content-Disposition: form-data; name=\"myKey\"; filename=\"test\"", lines[1]);
-        assertEquals("Content-Type: application/octet-stream", lines[2]);
-        assertEquals("", lines[3]);
-        assertEquals("Hello HtmlUnit", lines[4]);
+        assertEquals(expectedAlerts[0], lines[1]);
+        assertEquals(expectedAlerts[1], lines[2]);
+        assertEquals(expectedAlerts[2], lines[3]);
+        assertEquals(expectedAlerts[3], lines[4]);
         assertEquals(lines[0] + "--", lines[5]);
     }
 

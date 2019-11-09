@@ -43,13 +43,13 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *      String userAgent = "USERAGENT";
  *      int browserVersionNumeric = NUMERIC;
  *
- *      BrowserVersion browser = new BrowserVersion.BrowserVersionFactory(FF52)
+ *      BrowserVersion browser = new BrowserVersion.BrowserVersionFactory(FF68)
  *          .setApplicationName(applicationName)
  *          .setApplicationVersion(applicationVersion)
  *          .setUserAgent(userAgent)
  *          .build();
  * </pre>
- * <p>But keep in mind this now one still behaves like a FF52, only the stuff reported to the
+ * <p>But keep in mind this now one still behaves like a FF68, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -100,12 +100,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX_60 = new BrowserVersion(60, "FF60");
 
     /**
-     * Firefox 52 ESR.
-     * @since 2.26
-     * @deprecated as of version 2.36.0
+     * Firefox 68 ESR.
+     * @since 2.37
      */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_52 = new BrowserVersion(52, "FF52");
+    public static final BrowserVersion FIREFOX_68 = new BrowserVersion(68, "FF68");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
@@ -149,12 +147,12 @@ public final class BrowserVersion implements Serializable {
             116, 117, 118, 119, 120, 121, 122, 123, 125, 126, 127, 128, 129, 130, 131, 132, 133, 135, 136, 138, 139,
             139, 141, 142, 143, 144, 146, 147, 148, 149};
 
-        // FF52
-        FIREFOX_52.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_52.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:52.0) Gecko/20100101 Firefox/52.0";
-        FIREFOX_52.buildId_ = "20180621064021";
-        FIREFOX_52.productSub_ = "20100101";
-        FIREFOX_52.headerNamesOrdered_ = new String[] {
+        // FF68
+        FIREFOX_68.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0";
+        FIREFOX_68.buildId_ = "20190124141046";
+        FIREFOX_68.productSub_ = "20100101";
+        FIREFOX_68.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -162,11 +160,12 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.REFERER,
             HttpHeader.COOKIE,
-            HttpHeader.CONNECTION,
-            "Upgrade-Insecure-Requests"};
-        FIREFOX_52.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
-        FIREFOX_52.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX_52.fontHeights_ = new int[] {
+            HttpHeader.CONNECTION};
+        FIREFOX_68.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX_68.xmlHttpRequestAcceptHeader_ = "*/*";
+        FIREFOX_68.imgAcceptHeader_ = "*/*";
+        FIREFOX_68.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX_68.fontHeights_ = new int[] {
             0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
             30, 31, 32, 33, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 53, 55, 57, 58,
             59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 84, 85, 86, 87, 88,
@@ -285,29 +284,29 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_60.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         FIREFOX_60.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
-        FIREFOX_52.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        FIREFOX_52.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        FIREFOX_52.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        FIREFOX_52.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX_52.registerUploadMimeType("gif", "image/gif");
-        FIREFOX_52.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX_52.registerUploadMimeType("jpg", "image/jpeg");
-        FIREFOX_52.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_52.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_52.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_52.registerUploadMimeType("png", "image/png");
-        FIREFOX_52.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_52.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_52.registerUploadMimeType("ogm", "video/x-ogm");
-        FIREFOX_52.registerUploadMimeType("ogg", "video/ogg");
-        FIREFOX_52.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_52.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_52.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_52.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_52.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_52.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_52.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        FIREFOX_52.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
+        FIREFOX_68.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_68.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_68.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_68.registerUploadMimeType("xml", MimeType.TEXT_XML);
+        FIREFOX_68.registerUploadMimeType("gif", "image/gif");
+        FIREFOX_68.registerUploadMimeType("jpeg", "image/jpeg");
+        FIREFOX_68.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_68.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_68.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_68.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_68.registerUploadMimeType("png", "image/png");
+        FIREFOX_68.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_68.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_68.registerUploadMimeType("ogm", "video/x-ogm");
+        FIREFOX_68.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_68.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_68.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_68.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_68.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_68.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_68.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_68.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        FIREFOX_68.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         INTERNET_EXPLORER.registerUploadMimeType("html", MimeType.TEXT_HTML);
         INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -330,12 +329,6 @@ public final class BrowserVersion implements Serializable {
 
         // flush plugin (windows version)
         PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
-                "Shockwave Flash 30.0 r0", "30.0.0.113", "NPSWF64_30_0_0_113.dll"); //NOPMD
-        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
-                "Shockwave Flash", "swf"));
-        FIREFOX_52.plugins_.add(flash);
-
-        flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));
@@ -376,7 +369,7 @@ public final class BrowserVersion implements Serializable {
      * Creates a new browser version instance.
      *
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF52", "IE", ...) - has to be unique
+     * @param nickname the short name of the browser (like "FF68", "IE", ...) - has to be unique
      */
     private BrowserVersion(final int browserVersionNumeric, final String nickname) {
         browserVersionNumeric_ = browserVersionNumeric;
@@ -402,11 +395,11 @@ public final class BrowserVersion implements Serializable {
         if (isChrome()) {
             expectedBrowser = SupportedBrowser.CHROME;
         }
-        else if (isFirefox52()) {
-            expectedBrowser = SupportedBrowser.FF52;
+        else if (isFirefox60()) {
+            expectedBrowser = SupportedBrowser.FF60;
         }
         else if (isFirefox()) {
-            expectedBrowser = SupportedBrowser.FF60;
+            expectedBrowser = SupportedBrowser.FF68;
         }
         else {
             expectedBrowser = SupportedBrowser.IE;
@@ -479,10 +472,10 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether or not this version version 52 of a Firefox browser
+     * @return whether or not this version version 60 of a Firefox browser
      */
-    public boolean isFirefox52() {
-        return isFirefox() && getBrowserVersionNumeric() == 52;
+    public boolean isFirefox60() {
+        return isFirefox() && getBrowserVersionNumeric() == 60;
     }
 
     /**

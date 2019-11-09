@@ -394,7 +394,7 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-text\r\n")
+            IE = "child-text\n")
     public void xml_lineBreak() throws Exception {
         final String test =
                 "var text = doc.createTextNode('child-text\\n');\n"

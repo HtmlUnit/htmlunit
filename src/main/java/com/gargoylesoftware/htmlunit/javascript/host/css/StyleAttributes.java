@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chrome;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff60up;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow60;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff68up;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffBelow68;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
 
 import java.util.ArrayList;
@@ -216,11 +216,11 @@ public final class StyleAttributes {
 
         /** The style property {@code backgroundColor}. */
         BACKGROUND_COLOR("backgroundColor", "background-color", chrome("rgba(0, 0, 0, 0)"),
-                ffBelow60("transparent"), ff60up("rgba(0, 0, 0, 0)"),
+                ff("rgba(0, 0, 0, 0)"),
                 ie("transparent")),
 
         /** The style property {@code background-color}. */
-        BACKGROUND_COLOR_("background-color", "background-color", ffBelow60("transparent"), ff60up("rgba(0, 0, 0, 0)")),
+        BACKGROUND_COLOR_("background-color", "background-color", ff("rgba(0, 0, 0, 0)")),
 
         /** The style property {@code backgroundImage}. */
         BACKGROUND_IMAGE("backgroundImage", "background-image", chrome("none"), ff("none"), ie("none")),
@@ -395,10 +395,10 @@ public final class StyleAttributes {
 
         /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ie("0"), chrome("0px"),
-                ffBelow60("0 0 0 0"), ff60up("0")),
+                ff("0")),
 
         /** The style property {@code border-image-outset}. */
-        BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ffBelow60("0 0 0 0"), ff60up("0")),
+        BORDER_IMAGE_OUTSET_("border-image-outset", "border-image-outset", ff("0")),
 
         /** The style property {@code borderImageRepeat}. */
         BORDER_IMAGE_REPEAT("borderImageRepeat", "border-image-repeat",
@@ -409,11 +409,11 @@ public final class StyleAttributes {
 
         /** The style property {@code borderImageSlice}. */
         BORDER_IMAGE_SLICE("borderImageSlice", "border-image-slice", ie("100%"), chrome("100%"),
-                ffBelow60("100% 100% 100% 100%"), ff60up("100%")),
+                ff("100%")),
 
         /** The style property {@code border-image-slice}. */
         BORDER_IMAGE_SLICE_("border-image-slice", "border-image-slice",
-                ffBelow60("100% 100% 100% 100%"), ff60up("100%")),
+                ff("100%")),
 
         /** The style property {@code borderImageSource}. */
         BORDER_IMAGE_SOURCE("borderImageSource", "border-image-source", ff("none"), ie("none"), chrome("none")),
@@ -423,10 +423,10 @@ public final class StyleAttributes {
 
         /** The style property {@code borderImageWidth}. */
         BORDER_IMAGE_WIDTH("borderImageWidth", "border-image-width", ie("1"), chrome("1"),
-                ffBelow60("1 1 1 1"), ff60up("1")),
+                ff("1")),
 
         /** The style property {@code border-image-width}. */
-        BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ffBelow60("1 1 1 1"), ff60up("1")),
+        BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff("1")),
 
         /** The style property {@code borderInlineEnd}. */
         BORDER_INLINE_END("borderInlineEnd", "border-inline-end", chrome("0px none rgb(0, 0, 0)"), ff("")),
@@ -610,13 +610,13 @@ public final class StyleAttributes {
         BOX_SIZING_("box-sizing", "box-sizing", ff("content-box")),
 
         /** The style property {@code breakAfter}. */
-        BREAK_AFTER("breakAfter", "break-after", chrome("auto"), ie("auto")),
+        BREAK_AFTER("breakAfter", "break-after", chrome("auto"), ff68up("auto"), ie("auto")),
 
         /** The style property {@code breakBefore}. */
-        BREAK_BEFORE("breakBefore", "break-before", chrome("auto"), ie("auto")),
+        BREAK_BEFORE("breakBefore", "break-before", chrome("auto"), ff68up("auto"), ie("auto")),
 
         /** The style property {@code breakInside}. */
-        BREAK_INSIDE("breakInside", "break-inside", chrome("auto"), ie("auto")),
+        BREAK_INSIDE("breakInside", "break-inside", chrome("auto"), ff68up("auto"), ie("auto")),
 
         /** The style property {@code bufferedRendering}. */
         BUFFERED_RENDERING("bufferedRendering", "buffered-rendering", chrome("auto")),
@@ -628,10 +628,10 @@ public final class StyleAttributes {
         CAPTION_SIDE_("caption-side", "caption-side", ff("top")),
 
         /** The style property {@code caretColor}. */
-        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)"), ff60up("rgb(0, 0, 0)")),
+        CARET_COLOR("caretColor", "caret-color", chrome("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)")),
 
         /** The style property {@code caret-color}. */
-        CARET_COLOR_("caret-color", "caret-color", ff60up("rgb(0, 0, 0)")),
+        CARET_COLOR_("caret-color", "caret-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code clear}. */
         CLEAR("clear", "clear", chrome("none"), ff("none"), ie("none")),
@@ -689,11 +689,10 @@ public final class StyleAttributes {
         COLUMN_FILL_("column-fill", "column-fill", ff("balance")),
 
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ie("normal"),
-                ffBelow60("16px"), ff60up("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chrome("normal"), ie("normal"), ff("normal")),
 
         /** The style property {@code column-gap}. */
-        COLUMN_GAP_("column-gap", "column-gap", ffBelow60("16px"), ff60up("normal")),
+        COLUMN_GAP_("column-gap", "column-gap", ff("normal")),
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -988,7 +987,7 @@ public final class StyleAttributes {
         FONT_WEIGHT_("font-weight", "font-weight", ff("400")),
 
         /** The style property {@code gap}. */
-        GAP("gap", "gap", chrome("normal")),
+        GAP("gap", "gap", chrome("normal"), ff68up("normal")),
 
         /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
@@ -1312,64 +1311,64 @@ public final class StyleAttributes {
         MASK("mask", "mask", ff("none"), ie("none"), chrome("none")),
 
         /** The style property {@code maskClip}. */
-        MASK_CLIP("maskClip", "mask-clip", ff60up("border-box")),
+        MASK_CLIP("maskClip", "mask-clip", ff("border-box")),
 
         /** The style property {@code mask-clip}. */
-        MASK_CLIP_("mask-clip", "mask-clip", ff60up("border-box")),
+        MASK_CLIP_("mask-clip", "mask-clip", ff("border-box")),
 
         /** The style property {@code maskComposite}. */
-        MASK_COMPOSITE("maskComposite", "mask-composite", ff60up("add")),
+        MASK_COMPOSITE("maskComposite", "mask-composite", ff("add")),
 
         /** The style property {@code mask-composite}. */
-        MASK_COMPOSITE_("mask-composite", "mask-composite", ff60up("add")),
+        MASK_COMPOSITE_("mask-composite", "mask-composite", ff("add")),
 
         /** The style property {@code maskImage}. */
-        MASK_IMAGE("maskImage", "mask-image", ff60up("none")),
+        MASK_IMAGE("maskImage", "mask-image", ff("none")),
 
         /** The style property {@code mask-image}. */
-        MASK_IMAGE_("mask-image", "mask-image", ff60up("none")),
+        MASK_IMAGE_("mask-image", "mask-image", ff("none")),
 
         /** The style property {@code maskMode}. */
-        MASK_MODE("maskMode", "mask-mode", ff60up("match-source")),
+        MASK_MODE("maskMode", "mask-mode", ff("match-source")),
 
         /** The style property {@code mask-mode}. */
-        MASK_MODE_("mask-mode", "mask-mode", ff60up("match-source")),
+        MASK_MODE_("mask-mode", "mask-mode", ff("match-source")),
 
         /** The style property {@code maskOrigin}. */
-        MASK_ORIGIN("maskOrigin", "mask-origin", ff60up("border-box")),
+        MASK_ORIGIN("maskOrigin", "mask-origin", ff("border-box")),
 
         /** The style property {@code mask-origin}. */
-        MASK_ORIGIN_("mask-origin", "mask-origin", ff60up("border-box")),
+        MASK_ORIGIN_("mask-origin", "mask-origin", ff("border-box")),
 
         /** The style property {@code maskPosition}. */
-        MASK_POSITION("maskPosition", "mask-position", ff60up("0% 0%")),
+        MASK_POSITION("maskPosition", "mask-position", ff("0% 0%")),
 
         /** The style property {@code mask-position}. */
-        MASK_POSITION_("mask-position", "mask-position", ff60up("0% 0%")),
+        MASK_POSITION_("mask-position", "mask-position", ff("0% 0%")),
 
         /** The style property {@code maskPositionX}. */
-        MASK_POSITION_X("maskPositionX", "mask-position-x", ff60up("0%")),
+        MASK_POSITION_X("maskPositionX", "mask-position-x", ff("0%")),
 
         /** The style property {@code mask-position-x}. */
-        MASK_POSITION_X_("mask-position-x", "mask-position-x", ff60up("0%")),
+        MASK_POSITION_X_("mask-position-x", "mask-position-x", ff("0%")),
 
         /** The style property {@code maskPositionY}. */
-        MASK_POSITION_Y("maskPositionY", "mask-position-y", ff60up("0%")),
+        MASK_POSITION_Y("maskPositionY", "mask-position-y", ff("0%")),
 
         /** The style property {@code mask-position-y}. */
-        MASK_POSITION_Y_("mask-position-y", "mask-position-y", ff60up("0%")),
+        MASK_POSITION_Y_("mask-position-y", "mask-position-y", ff("0%")),
 
         /** The style property {@code maskRepeat}. */
-        MASK_REPEAT("maskRepeat", "mask-repeat", ff60up("repeat")),
+        MASK_REPEAT("maskRepeat", "mask-repeat", ff("repeat")),
 
         /** The style property {@code mask-repeat}. */
-        MASK_REPEAT_("mask-repeat", "mask-repeat", ff60up("repeat")),
+        MASK_REPEAT_("mask-repeat", "mask-repeat", ff("repeat")),
 
         /** The style property {@code maskSize}. */
-        MASK_SIZE("maskSize", "mask-size", ff60up("auto auto")),
+        MASK_SIZE("maskSize", "mask-size", ff("auto auto")),
 
         /** The style property {@code mask-size}. */
-        MASK_SIZE_("mask-size", "mask-size", ff60up("auto auto")),
+        MASK_SIZE_("mask-size", "mask-size", ff("auto auto")),
 
         /** The style property {@code maskType}. */
         MASK_TYPE("maskType", "mask-type", ff("luminance"), chrome("luminance")),
@@ -1516,18 +1515,18 @@ public final class StyleAttributes {
         MOZ_BACKGROUND_SIZE("MozBackgroundSize", "-moz-background-size"),
 
         /** The style property {@code MozBinding}. */
-        MOZ_BINDING("MozBinding", "-moz-binding", ff("none")),
+        MOZ_BINDING("MozBinding", "-moz-binding", ffBelow68("none")),
 
         /** The style property {@code -moz-binding}. */
-        MOZ_BINDING__("-moz-binding", "-moz-binding", ff("none")),
+        MOZ_BINDING__("-moz-binding", "-moz-binding", ffBelow68("none")),
 
         /** The style property {@code MozBorderBottomColors}. */
         MOZ_BORDER_BOTTOM_COLORS("MozBorderBottomColors", "-moz-border-bottom-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-bottom-colors}. */
         MOZ_BORDER_BOTTOM_COLORS__("-moz-border-bottom-colors", "-moz-border-bottom-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code MozBorderEnd}. */
         MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ff("")),
@@ -1561,11 +1560,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozBorderLeftColors}. */
         MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-left-colors}. */
         MOZ_BORDER_LEFT_COLORS__("-moz-border-left-colors", "-moz-border-left-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code MozBorderRadius}. */
         MOZ_BORDER_RADIUS("MozBorderRadius", "-moz-border-radius"),
@@ -1584,11 +1583,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozBorderRightColors}. */
         MOZ_BORDER_RIGHT_COLORS("MozBorderRightColors", "-moz-border-right-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-right-colors}. */
         MOZ_BORDER_RIGHT_COLORS__("-moz-border-right-colors", "-moz-border-right-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code MozBorderStart}. */
         MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ff("")),
@@ -1616,11 +1615,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozBorderTopColors}. */
         MOZ_BORDER_TOP_COLORS("MozBorderTopColors", "-moz-border-top-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code -moz-border-top-colors}. */
         MOZ_BORDER_TOP_COLORS__("-moz-border-top-colors", "-moz-border-top-colors",
-                ffBelow60("none"), ff60up("none").setIteratable(false)),
+                ff("none").setIteratable(false)),
 
         /** The style property {@code MozBoxAlign}. */
         MOZ_BOX_ALIGN("MozBoxAlign", "-moz-box-align", ff("stretch")),
@@ -1680,10 +1679,10 @@ public final class StyleAttributes {
         MOZ_COLUMN_FILL__("-moz-column-fill", "-moz-column-fill", ff("balance")),
 
         /** The style property {@code MozColumnGap}. */
-        MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ffBelow60("16px"), ff60up("normal")),
+        MOZ_COLUMN_GAP("MozColumnGap", "-moz-column-gap", ff("normal")),
 
         /** The style property {@code -moz-column-gap}. */
-        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ffBelow60("16px"), ff60up("normal")),
+        MOZ_COLUMN_GAP__("-moz-column-gap", "-moz-column-gap", ff("normal")),
 
         /** The style property {@code MozColumnRule}. */
         MOZ_COLUMN_RULE("MozColumnRule", "-moz-column-rule", ff("")),
@@ -1883,11 +1882,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozTextAlignLast}. */
         MOZ_TEXT_ALIGN_LAST("MozTextAlignLast", "-moz-text-align-last",
-                ffBelow60("auto"), ff60up("auto").setIteratable(false)),
+                ff("auto").setIteratable(false)),
 
         /** The style property {@code -moz-text-align-last}. */
         MOZ_TEXT_ALIGN_LAST__("-moz-text-align-last", "-moz-text-align-last",
-                ffBelow60("auto"), ff60up("auto").setIteratable(false)),
+                ff("auto").setIteratable(false)),
 
         /** The style property {@code MozTextSizeAdjust}. */
         MOZ_TEXT_SIZE_ADJUST("MozTextSizeAdjust", "-moz-text-size-adjust",
@@ -2264,31 +2263,31 @@ public final class StyleAttributes {
         OFFSET("offset", "offset", chrome("none 0px auto 0deg")),
 
         /** The style property {@code offsetBlockEnd}. */
-        OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ff("")),
+        OFFSET_BLOCK_END("offsetBlockEnd", "offset-block-end", ffBelow68("")),
 
         /** The style property {@code offset-block-end}. */
-        OFFSET_BLOCK_END_("offset-block-end", "offset-block-end", ff("")),
+        OFFSET_BLOCK_END_("offset-block-end", "offset-block-end", ffBelow68("")),
 
         /** The style property {@code offsetBlockStart}. */
-        OFFSET_BLOCK_START("offsetBlockStart", "offset-block-start", ff("")),
+        OFFSET_BLOCK_START("offsetBlockStart", "offset-block-start", ffBelow68("")),
 
         /** The style property {@code offset-block-start}. */
-        OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ff("")),
+        OFFSET_BLOCK_START_("offset-block-start", "offset-block-start", ffBelow68("")),
 
         /** The style property {@code offsetDistance}. */
         OFFSET_DISTANCE("offsetDistance", "offsetDistance", chrome("0px")),
 
         /** The style property {@code offsetInlineEnd}. */
-        OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ff("")),
+        OFFSET_INLINE_END("offsetInlineEnd", "offset-inline-end", ffBelow68("")),
 
         /** The style property {@code offset-inline-end}. */
-        OFFSET_INLINE_END_("offset-inline-end", "offset-inline-end", ff("")),
+        OFFSET_INLINE_END_("offset-inline-end", "offset-inline-end", ffBelow68("")),
 
         /** The style property {@code offsetInlineStart}. */
-        OFFSET_INLINE_START("offsetInlineStart", "offset-inline-start", ff("")),
+        OFFSET_INLINE_START("offsetInlineStart", "offset-inline-start", ffBelow68("")),
 
         /** The style property {@code offset-inline-start}. */
-        OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ff("")),
+        OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start",ffBelow68("")),
 
         /** The style property {@code offsetPath}. */
         OFFSET_PATH("offsetPath", "offsetPath", chrome("none")),
@@ -2340,7 +2339,7 @@ public final class StyleAttributes {
         OVERFLOW("overflow", "overflow", chrome("visible"), ff("visible"), ie("visible")),
 
         /** The style property {@code overflowAnchor}. */
-        OVERFLOW_ANCHOR("overflowAnchor", "overflow-anchor", chrome("auto")),
+        OVERFLOW_ANCHOR("overflowAnchor", "overflow-anchor", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code overflowWrap}. */
         OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chrome("normal"), ff("normal")),
@@ -2361,10 +2360,10 @@ public final class StyleAttributes {
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
         /** The style property {@code overscrollBehavior}. */
-        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto"), ff60up("")),
+        OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chrome("auto"), ff("")),
 
         /** The style property {@code overscroll-behavior}. */
-        OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff60up("")),
+        OVERSCROLL_BEHAVIOR_("overscroll-behavior", "overscroll-behavior", ff("")),
 
         /** The style property {@code overscrollBehaviorBlock}. */
         OVERSCROLL_BEHAVIOR_BLOCK("overscrollBehaviorBlock", "overscroll-behavior-block", chrome("auto")),
@@ -2373,16 +2372,16 @@ public final class StyleAttributes {
         OVERSCROLL_BEHAVIOR_INLINR("overscrollBehaviorInline", "overscroll-behavior-inline", chrome("auto")),
 
         /** The style property {@code overscrollBehaviorX}. */
-        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior-x", chrome("auto"), ff60up("auto")),
+        OVERSCROLL_BEHAVIOR_X("overscrollBehaviorX", "overscroll-behavior-x", chrome("auto"), ff("auto")),
 
         /** The style property {@code overscroll-behavior-x}. */
-        OVERSCROLL_BEHAVIOR_X_("overscroll-behavior-x", "overscroll-behavior-x", ff60up("auto")),
+        OVERSCROLL_BEHAVIOR_X_("overscroll-behavior-x", "overscroll-behavior-x", ff("auto")),
 
         /** The style property {@code overscrollBehaviorY}. */
-        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior-y", chrome("auto"), ff60up("auto")),
+        OVERSCROLL_BEHAVIOR_Y("overscrollBehaviorY", "overscroll-behavior-y", chrome("auto"), ff("auto")),
 
         /** The style property {@code overscroll-behavior-y}. */
-        OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff60up("auto")),
+        OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff("auto")),
 
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
@@ -2567,7 +2566,7 @@ public final class StyleAttributes {
         RIGHT("right", "right", chrome("auto"), ff(""), ie("")),
 
         /** The style property {@code rowGap}. */
-        ROW_GAP("rowGap", "rowGap", chrome("normal")),
+        ROW_GAP("rowGap", "rowGap", chrome("normal"), ff68up("normal")),
 
         /** The style property {@code rubyAlign}. */
         RUBY_ALIGN("rubyAlign", "ruby-align", ff("space-around"), ie("")),
@@ -2597,97 +2596,97 @@ public final class StyleAttributes {
         SCROLL_BEHAVIOR_("scroll-behavior", "scroll-behavior", ff("auto")),
 
         /** The style property {@code scrollMargin}. */
-        SCROLL_MARGIN("scrollMargin", "scroll-margin", chrome("0px")),
+        SCROLL_MARGIN("scrollMargin", "scroll-margin", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginBlock}. */
-        SCROLL_MARGIN_BLOCK("scrollMarginBlock", "scroll-margin-block", chrome("0px")),
+        SCROLL_MARGIN_BLOCK("scrollMarginBlock", "scroll-margin-block", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginBlockEnd}. */
-        SCROLL_MARGIN_BLOCK_END("scrollMarginBlockEnd", "scroll-margin-block-end", chrome("0px")),
+        SCROLL_MARGIN_BLOCK_END("scrollMarginBlockEnd", "scroll-margin-block-end", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginBlockStart}. */
-        SCROLL_MARGIN_BLOCK_START("scrollMarginBlockStart", "scroll-margin-block-start", chrome("0px")),
+        SCROLL_MARGIN_BLOCK_START("scrollMarginBlockStart", "scroll-margin-block-start", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginBottom}. */
-        SCROLL_MARGIN_BOTTOM("scrollMarginBottom", "scroll-margin-bottom", chrome("0px")),
+        SCROLL_MARGIN_BOTTOM("scrollMarginBottom", "scroll-margin-bottom", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginInline}. */
-        SCROLL_MARGIN_INLINE("scrollMarginInline", "scroll-margin-inline", chrome("0px")),
+        SCROLL_MARGIN_INLINE("scrollMarginInline", "scroll-margin-inline", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginInlineEnd}. */
-        SCROLL_MARGIN_INLINE_END("scrollMarginInlineEnd", "scroll-margin-inline-end", chrome("0px")),
+        SCROLL_MARGIN_INLINE_END("scrollMarginInlineEnd", "scroll-margin-inline-end", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginInlineStart}. */
-        SCROLL_MARGIN_INLINE_START("scrollMarginInlineStart", "scroll-margin-inline-start", chrome("0px")),
+        SCROLL_MARGIN_INLINE_START("scrollMarginInlineStart", "scroll-margin-inline-start", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginLeft}. */
-        SCROLL_MARGIN_LEFT("scrollMarginLeft", "scroll-margin-left", chrome("0px")),
+        SCROLL_MARGIN_LEFT("scrollMarginLeft", "scroll-margin-left", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginRight}. */
-        SCROLL_MARGIN_RIGHT("scrollMarginRight", "scroll-margin-right", chrome("0px")),
+        SCROLL_MARGIN_RIGHT("scrollMarginRight", "scroll-margin-right", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginTop}. */
-        SCROLL_MARGIN_TOP("scrollMarginTop", "scroll-margin-top", chrome("0px")),
+        SCROLL_MARGIN_TOP("scrollMarginTop", "scroll-margin-top", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollPadding}. */
-        SCROLL_PADDING("scrollPadding", "scroll-padding", chrome("auto")),
+        SCROLL_PADDING("scrollPadding", "scroll-padding", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlock}. */
-        SCROLL_PADDING_BLOCK("scrollPaddingBlock", "scroll-padding-block", chrome("auto")),
+        SCROLL_PADDING_BLOCK("scrollPaddingBlock", "scroll-padding-block", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlockEnd}. */
-        SCROLL_PADDING_BLOCK_END("scrollPaddingBlockEnd", "scroll-padding-block-end", chrome("auto")),
+        SCROLL_PADDING_BLOCK_END("scrollPaddingBlockEnd", "scroll-padding-block-end", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlockStart}. */
-        SCROLL_PADDING_BLOCK_START("scrollPaddingBlockStart", "scroll-padding-block-start", chrome("auto")),
+        SCROLL_PADDING_BLOCK_START("scrollPaddingBlockStart", "scroll-padding-block-start", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBottom}. */
-        SCROLL_PADDING_BOTTOM("scrollPaddingBottom", "scroll-padding-bottom", chrome("auto")),
+        SCROLL_PADDING_BOTTOM("scrollPaddingBottom", "scroll-padding-bottom", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingInline}. */
-        SCROLL_PADDING_INLINE("scrollPaddingInline", "scroll-padding-inline", chrome("auto")),
+        SCROLL_PADDING_INLINE("scrollPaddingInline", "scroll-padding-inline", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingInlineEnd}. */
-        SCROLL_PADDING_INLINE_END("scrollPaddingInlineEnd", "scroll-padding-inline-end", chrome("auto")),
+        SCROLL_PADDING_INLINE_END("scrollPaddingInlineEnd", "scroll-padding-inline-end", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingInlineStart}. */
-        SCROLL_PADDING_INLINE_START("scrollPaddingInlineStart", "scroll-padding-inline-start", chrome("auto")),
+        SCROLL_PADDING_INLINE_START("scrollPaddingInlineStart", "scroll-padding-inline-start", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingLeft}. */
-        SCROLL_PADDING_LEFT("scrollPaddingLeft", "scroll-padding-left", chrome("auto")),
+        SCROLL_PADDING_LEFT("scrollPaddingLeft", "scroll-padding-left", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingRight}. */
-        SCROLL_PADDING_RIGHT("scrollPaddingRight", "scroll-padding-right", chrome("auto")),
+        SCROLL_PADDING_RIGHT("scrollPaddingRight", "scroll-padding-right", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingTop}. */
-        SCROLL_PADDING_TOP("scrollPaddingTop", "scroll-padding-top", chrome("auto")),
+        SCROLL_PADDING_TOP("scrollPaddingTop", "scroll-padding-top", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollSnapAlign}. */
-        SCROLL_SNAP_ALIGN("scrollSnapAlign", "scroll-snap-align", chrome("none")),
+        SCROLL_SNAP_ALIGN("scrollSnapAlign", "scroll-snap-align", chrome("none"), ff68up("none")),
 
         /** The style property {@code scrollSnapCoordinate}. */
-        SCROLL_SNAP_COORDINATE("scrollSnapCoordinate", "scroll-snap-coordinate", ff("none")),
+        SCROLL_SNAP_COORDINATE("scrollSnapCoordinate", "scroll-snap-coordinate", ffBelow68("none")),
 
         /** The style property {@code scroll-snap-coordinate}. */
-        SCROLL_SNAP_COORDINATE_("scroll-snap-coordinate", "scroll-snap-coordinate", ff("none")),
+        SCROLL_SNAP_COORDINATE_("scroll-snap-coordinate", "scroll-snap-coordinate", ffBelow68("none")),
 
         /** The style property {@code scrollSnapDestination}. */
-        SCROLL_SNAP_DESTINATION("scrollSnapDestination", "scroll-snap-destination", ff("0px 0px")),
+        SCROLL_SNAP_DESTINATION("scrollSnapDestination", "scroll-snap-destination", ffBelow68("0px 0px")),
 
         /** The style property {@code scroll-snap-destination}. */
-        SCROLL_SNAP_DESTINATION_("scroll-snap-destination", "scroll-snap-destination", ff("0px 0px")),
+        SCROLL_SNAP_DESTINATION_("scroll-snap-destination", "scroll-snap-destination", ffBelow68("0px 0px")),
 
         /** The style property {@code scrollSnapPointsX}. */
-        SCROLL_SNAP_POINTS_X("scrollSnapPointsX", "scroll-snap-points-x", ff("none")),
+        SCROLL_SNAP_POINTS_X("scrollSnapPointsX", "scroll-snap-points-x", ffBelow68("none")),
 
         /** The style property {@code scroll-snap-points-x}. */
-        SCROLL_SNAP_POINTS_X_("scroll-snap-points-x", "scroll-snap-points-x", ff("none")),
+        SCROLL_SNAP_POINTS_X_("scroll-snap-points-x", "scroll-snap-points-x", ffBelow68("none")),
 
         /** The style property {@code scrollSnapPointsY}. */
-        SCROLL_SNAP_POINTS_Y("scrollSnapPointsY", "scroll-snap-points-y", ff("none")),
+        SCROLL_SNAP_POINTS_Y("scrollSnapPointsY", "scroll-snap-points-y", ffBelow68("none")),
 
         /** The style property {@code scroll-snap-points-y}. */
-        SCROLL_SNAP_POINTS_Y_("scroll-snap-points-y", "scroll-snap-points-y", ff("none")),
+        SCROLL_SNAP_POINTS_Y_("scroll-snap-points-y", "scroll-snap-points-y", ffBelow68("none")),
 
         /** The style property {@code scrollSnapStop}. */
         SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chrome("normal")),
@@ -2699,16 +2698,16 @@ public final class StyleAttributes {
         SCROLL_SNAP_TYPE_("scroll-snap-type", "scroll-snap-type", ff("")),
 
         /** The style property {@code scrollSnapTypeX}. */
-        SCROLL_SNAP_TYPE_X("scrollSnapTypeX", "scroll-snap-type-x", ff("none")),
+        SCROLL_SNAP_TYPE_X("scrollSnapTypeX", "scroll-snap-type-x", ffBelow68("none")),
 
         /** The style property {@code scroll-snap-type-x}. */
-        SCROLL_SNAP_TYPE_X_("scroll-snap-type-x", "scroll-snap-type-x", ff("none")),
+        SCROLL_SNAP_TYPE_X_("scroll-snap-type-x", "scroll-snap-type-x", ffBelow68("none")),
 
         /** The style property {@code scrollSnapTypeY}. */
-        SCROLL_SNAP_TYPE_Y("scrollSnapTypeY", "scroll-snap-type-y", ff("none")),
+        SCROLL_SNAP_TYPE_Y("scrollSnapTypeY", "scroll-snap-type-y", ffBelow68("none")),
 
         /** The style property {@code scroll-snap-type-y}. */
-        SCROLL_SNAP_TYPE_Y_("scroll-snap-type-y", "scroll-snap-type-y", ff("none")),
+        SCROLL_SNAP_TYPE_Y_("scroll-snap-type-y", "scroll-snap-type-y", ffBelow68("none")),
 
         /** The style property {@code scrollbar3dLightColor}. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie("undefined")),
@@ -2735,13 +2734,13 @@ public final class StyleAttributes {
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie("undefined")),
 
         /** The style property {@code shapeImageThreshold}. */
-        SHAPE_IMAGE_THRESHOLD("shapeImageThreshold", "shape-image-threshold", chrome("0")),
+        SHAPE_IMAGE_THRESHOLD("shapeImageThreshold", "shape-image-threshold", chrome("0"), ff68up("0")),
 
         /** The style property {@code shapeMargin}. */
-        SHAPE_MARGIN("shapeMargin", "shape-margin", chrome("0px")),
+        SHAPE_MARGIN("shapeMargin", "shape-margin", chrome("0px"), ff68up("0")),
 
         /** The style property {@code shapeOutside}. */
-        SHAPE_OUTSIDE("shapeOutside", "shape-outside", chrome("none")),
+        SHAPE_OUTSIDE("shapeOutside", "shape-outside", chrome("none"), ff68up("none")),
 
         /** The style property {@code shapeRendering}. */
         SHAPE_RENDERING("shapeRendering", "shape-rendering", ff("auto"), chrome("auto")),
@@ -2946,10 +2945,10 @@ public final class StyleAttributes {
         TEXT_INDENT_("text-indent", "text-indent", ff("0px")),
 
         /** The style property {@code textJustify}. */
-        TEXT_JUSTIFY("textJustify", "text-justify", ie("auto"), ff60up("auto")),
+        TEXT_JUSTIFY("textJustify", "text-justify", ie("auto"), ff("auto")),
 
         /** The style property {@code text-justify}. */
-        TEXT_JUSTIFY_("text-justify", "text-justify", ff60up("auto")),
+        TEXT_JUSTIFY_("text-justify", "text-justify", ff("auto")),
 
         /** The style property {@code textJustifyTrim}. */
         TEXT_JUSTIFY_TRIM("textJustifyTrim", "text-justify-trim", ie("undefined")),
@@ -3009,10 +3008,10 @@ public final class StyleAttributes {
         TRANSFORM("transform", "transform", ff("none"), ie("none"), chrome("none")),
 
         /** The style property {@code transformBox}. */
-        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box"), ff60up("border-box")),
+        TRANSFORM_BOX("transformBox", "transform-box", chrome("view-box"), ff("border-box")),
 
         /** The style property {@code transform-box}. */
-        TRANSFORM_BOX_("transform-box", "transform-box", ff60up("border-box")),
+        TRANSFORM_BOX_("transform-box", "transform-box", ff("border-box")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
@@ -3217,7 +3216,7 @@ public final class StyleAttributes {
         WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("none")),
 
         /** The style property {@code webkitAppearance}. */
-        WEBKIT_APPEARANCE("webkitAppearance", "webkit-appearance", chrome("none")),
+        WEBKIT_APPEARANCE("webkitAppearance", "webkit-appearance", chrome("none"), ff68up("none")),
 
         /** The style property {@code webkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",
@@ -3602,7 +3601,7 @@ public final class StyleAttributes {
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chrome("auto")),
 
         /** The style property {@code webkitLineClamp}. */
-        WEBKIT_LINE_CLAMP("webkitLineClamp", "webkit-line-clamp", chrome("none")),
+        WEBKIT_LINE_CLAMP("webkitLineClamp", "webkit-line-clamp", chrome("none"), ff68up("none")),
 
         /** The style property {@code webkitLocale}. */
         WEBKIT_LOCALE("webkitLocale", "webkit-locale", chrome("auto")),
@@ -3643,13 +3642,13 @@ public final class StyleAttributes {
         WEBKIT_MARGIN_TOP_COLLAPSE("webkitMarginTopCollapse", "webkit-margin-top-collapse", chrome("collapse")),
 
         /** The style property {@code webkitMask}. */
-        WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff60up("none")),
+        WEBKIT_MASK("webkitMask", "webkit-mask", chrome(""), ff("none")),
 
         /** The style property {@code WebkitMask}. */
-        WEBKIT_MASK_("WebkitMask", "webkit-mask", ff60up("none")),
+        WEBKIT_MASK_("WebkitMask", "webkit-mask", ff("none")),
 
         /** The style property {@code -webkit-mask}. */
-        WEBKIT_MASK__("-webkit-mask", "webkit-mask", ff60up("none")),
+        WEBKIT_MASK__("-webkit-mask", "webkit-mask", ff("none")),
 
         /** The style property {@code webkitMaskBoxImage}. */
         WEBKIT_MASK_BOX_IMAGE("webkitMaskBoxImage", "webkit-mask-box-image", chrome("none")),
@@ -3670,76 +3669,76 @@ public final class StyleAttributes {
         WEBKIT_MASK_BOX_IMAGE_WIDTH("webkitMaskBoxImageWidth", "webkit-mask-box-image-width", chrome("auto")),
 
         /** The style property {@code webkitMaskClip}. */
-        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box"), ff60up("border-box")),
+        WEBKIT_MASK_CLIP("webkitMaskClip", "webkit-mask-clip", chrome("border-box"), ff("border-box")),
 
         /** The style property {@code WebkitMaskClip}. */
-        WEBKIT_MASK_CLIP_("WebkitMaskClip", "webkit-mask-clip", ff60up("border-box")),
+        WEBKIT_MASK_CLIP_("WebkitMaskClip", "webkit-mask-clip", ff("border-box")),
 
         /** The style property {@code -webkit-mask-clip}. */
-        WEBKIT_MASK_CLIP__("-webkit-mask-clip", "webkit-mask-clip", ff60up("border-box")),
+        WEBKIT_MASK_CLIP__("-webkit-mask-clip", "webkit-mask-clip", ff("border-box")),
 
         /** The style property {@code webkitMaskComposite}. */
-        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over"), ff60up("add")),
+        WEBKIT_MASK_COMPOSITE("webkitMaskComposite", "webkit-mask-composite", chrome("source-over"), ff("add")),
 
         /** The style property {@code WebkitMaskComposite}. */
-        WEBKIT_MASK_COMPOSITE_("WebkitMaskComposite", "webkit-mask-composite", ff60up("add")),
+        WEBKIT_MASK_COMPOSITE_("WebkitMaskComposite", "webkit-mask-composite", ff("add")),
 
         /** The style property {@code -webkit-mask-composite}. */
-        WEBKIT_MASK_COMPOSITE__("-webkit-mask-composite", "webkit-mask-composite", ff60up("add")),
+        WEBKIT_MASK_COMPOSITE__("-webkit-mask-composite", "webkit-mask-composite", ff("add")),
 
         /** The style property {@code webkitMaskImage}. */
-        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none"), ff60up("none")),
+        WEBKIT_MASK_IMAGE("webkitMaskImage", "webkit-mask-image", chrome("none"), ff("none")),
 
         /** The style property {@code WebkitMaskImage}. */
-        WEBKIT_MASK_IMAGE_("WebkitMaskImage", "webkit-mask-image", ff60up("none")),
+        WEBKIT_MASK_IMAGE_("WebkitMaskImage", "webkit-mask-image", ff("none")),
 
         /** The style property {@code -webkit-mask-image}. */
-        WEBKIT_MASK_IMAGE__("-webkit-mask-image", "webkit-mask-image", ff60up("none")),
+        WEBKIT_MASK_IMAGE__("-webkit-mask-image", "webkit-mask-image", ff("none")),
 
         /** The style property {@code webkitMaskOrigin}. */
-        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box"), ff60up("border-box")),
+        WEBKIT_MASK_ORIGIN("webkitMaskOrigin", "webkit-mask-origin", chrome("border-box"), ff("border-box")),
 
         /** The style property {@code WebkitMaskOrigin}. */
-        WEBKIT_MASK_ORIGIN_("WebkitMaskOrigin", "webkit-mask-origin", ff60up("border-box")),
+        WEBKIT_MASK_ORIGIN_("WebkitMaskOrigin", "webkit-mask-origin", ff("border-box")),
 
         /** The style property {@code -webkit-mask-origin}. */
-        WEBKIT_MASK_ORIGIN__("-webkit-mask-origin", "webkit-mask-origin", ff60up("border-box")),
+        WEBKIT_MASK_ORIGIN__("-webkit-mask-origin", "webkit-mask-origin", ff("border-box")),
 
         /** The style property {@code webkitMaskPosition}. */
-        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%"), ff60up("0% 0%")),
+        WEBKIT_MASK_POSITION("webkitMaskPosition", "webkit-mask-position", chrome("0% 0%"), ff("0% 0%")),
 
         /** The style property {@code WebkitMaskPosition}. */
-        WEBKIT_MASK_POSITION_("WebkitMaskPosition", "webkit-mask-position", ff60up("0% 0%")),
+        WEBKIT_MASK_POSITION_("WebkitMaskPosition", "webkit-mask-position", ff("0% 0%")),
 
         /** The style property {@code -webkit-mask-position}. */
-        WEBKIT_MASK_POSITION__("-webkit-mask-position", "webkit-mask-position", ff60up("0% 0%")),
+        WEBKIT_MASK_POSITION__("-webkit-mask-position", "webkit-mask-position", ff("0% 0%")),
 
         /** The style property {@code webkitMaskPositionX}. */
-        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%"), ff60up("0%")),
+        WEBKIT_MASK_POSITION_X("webkitMaskPositionX", "webkit-mask-position-x", chrome("0%"), ff("0%")),
 
         /** The style property {@code WebkitMaskPositionX}. */
-        WEBKIT_MASK_POSITION_X_("WebkitMaskPositionX", "webkit-mask-position-x", ff60up("0%")),
+        WEBKIT_MASK_POSITION_X_("WebkitMaskPositionX", "webkit-mask-position-x", ff("0%")),
 
         /** The style property {@code -webkit-mask-position-x}. */
-        WEBKIT_MASK_POSITION_X__("-webkit-mask-position-x", "webkit-mask-position-x", ff60up("0%")),
+        WEBKIT_MASK_POSITION_X__("-webkit-mask-position-x", "webkit-mask-position-x", ff("0%")),
 
         /** The style property {@code webkitMaskPositionY}. */
-        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%"), ff60up("0%")),
+        WEBKIT_MASK_POSITION_Y("webkitMaskPositionY", "webkit-mask-position-y", chrome("0%"), ff("0%")),
 
         /** The style property {@code WebkitMaskPositionY}. */
-        WEBKIT_MASK_POSITION_Y_("WebkitMaskPositionY", "webkit-mask-position-y", ff60up("0%")),
+        WEBKIT_MASK_POSITION_Y_("WebkitMaskPositionY", "webkit-mask-position-y", ff("0%")),
 
         /** The style property {@code -webkit-mask-position-y}. */
-        WEBKIT_MASK_POSITION_Y__("-webkit-mask-position-y", "webkit-mask-position-y", ff60up("0%")),
+        WEBKIT_MASK_POSITION_Y__("-webkit-mask-position-y", "webkit-mask-position-y", ff("0%")),
 
         /** The style property {@code webkitMaskRepeat}. */
-        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat"), ff60up("repeat")),
+        WEBKIT_MASK_REPEAT("webkitMaskRepeat", "webkit-mask-repeat", chrome("repeat"), ff("repeat")),
 
         /** The style property {@code WebkitMaskRepeat}. */
-        WEBKIT_MASK_REPEAT_("WebkitMaskRepeat", "webkit-mask-repeat", ff60up("repeat")),
+        WEBKIT_MASK_REPEAT_("WebkitMaskRepeat", "webkit-mask-repeat", ff("repeat")),
 
         /** The style property {@code -webkit-mask-repeat}. */
-        WEBKIT_MASK_REPEAT__("-webkit-mask-repeat", "webkit-mask-repeat", ff60up("repeat")),
+        WEBKIT_MASK_REPEAT__("-webkit-mask-repeat", "webkit-mask-repeat", ff("repeat")),
 
         /** The style property {@code webkitMaskRepeatX}. */
         WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chrome("")),
@@ -3748,13 +3747,13 @@ public final class StyleAttributes {
         WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chrome("")),
 
         /** The style property {@code webkitMaskSize}. */
-        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto"), ff60up("auto auto")),
+        WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chrome("auto"), ff("auto auto")),
 
         /** The style property {@code WebkitMaskSize}. */
-        WEBKIT_MASK_SIZE_("WebkitMaskSize", "webkit-mask-size", ff60up("auto auto")),
+        WEBKIT_MASK_SIZE_("WebkitMaskSize", "webkit-mask-size", ff("auto auto")),
 
         /** The style property {@code -webkit-mask-size}. */
-        WEBKIT_MASK_SIZE__("-webkit-mask-size", "webkit-mask-size", ff60up("auto auto")),
+        WEBKIT_MASK_SIZE__("-webkit-mask-size", "webkit-mask-size", ff("auto auto")),
 
         /** The style property {@code webkitMaxLogicalHeight}. */
         WEBKIT_MAX_LOGICAL_HEIGHT("webkitMaxLogicalHeight", "webkit-max-logical-height", chrome("none")),

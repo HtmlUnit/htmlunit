@@ -238,18 +238,18 @@ public final class JQueryExtractor {
 
                 // Hack a bit to avoid redundant alerts
                 final List<String> cleanedBrowserNames = new ArrayList<>(testExpectation.keySet());
-                if (cleanedBrowserNames.contains(TestedBrowser.FF52.name())
+                if (cleanedBrowserNames.contains(TestedBrowser.FF68.name())
                         && cleanedBrowserNames.contains(TestedBrowser.FF60.name())
                         && StringUtils.equals(
-                                    testExpectation.get(TestedBrowser.FF52.name()),
+                                    testExpectation.get(TestedBrowser.FF68.name()),
                                     testExpectation.get(TestedBrowser.FF60.name()))) {
                     if (testExpectation.get(TestedBrowser.FF60.name()) != null) {
                         testExpectation.put("FF", testExpectation.get(TestedBrowser.FF60.name()));
                         testExpectation.remove(TestedBrowser.FF60.name());
-                        testExpectation.remove(TestedBrowser.FF52.name());
+                        testExpectation.remove(TestedBrowser.FF68.name());
                     }
                     cleanedBrowserNames.remove(TestedBrowser.FF60.name());
-                    cleanedBrowserNames.remove(TestedBrowser.FF52.name());
+                    cleanedBrowserNames.remove(TestedBrowser.FF68.name());
                     cleanedBrowserNames.add("FF");
                 }
                 Collections.sort(cleanedBrowserNames);

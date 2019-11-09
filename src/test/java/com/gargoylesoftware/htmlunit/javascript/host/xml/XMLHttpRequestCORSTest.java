@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -51,11 +52,19 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
     /**
+     * Closes the real IE; otherwise tests are failing because of cached responses.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
+
+    /**
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0" /* "0" */},
-            IE = {"error [object ProgressEvent]", "error", "true", "0" /* "4479" */})
+    @Alerts(DEFAULT = {"error [object ProgressEvent]", "error", "false", "0", "false"},
+            IE =      {"error [object ProgressEvent]", "error", "false", "0", "true"})
     @NotYetImplemented(IE)
     public void noCorsHeaderCallsErrorHandler() throws Exception {
         final String html = "<html><head>\n"
@@ -70,7 +79,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "                    alert(event.type);\n"
                 + "                    alert(event.lengthComputable);\n"
                 + "                    alert(event.loaded);\n"
-                // + "                    alert(event.total);\n"
+                + "                    alert(event.total > 0);\n"
                 + "                  };\n"
                 + "    xhr.send();\n"
                 + "  } catch(e) { alert('exception'); }\n"

@@ -14,14 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -137,7 +134,6 @@ public class Prototype161Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @BuggyWebDriver(FF52)
     public void form() throws Exception {
         test("form.html");
     }

@@ -35,7 +35,6 @@ public class IntersectionObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF52 = "false",
             IE = "false")
     public void inWindow() throws Exception {
         final String html
@@ -58,9 +57,8 @@ public class IntersectionObserverTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "no IntersectionObserver",
-            CHROME = {"function", "function", "function", "function"},
-            FF60 = {"function", "function", "function", "function"})
+    @Alerts(DEFAULT = {"function", "function", "function", "function"},
+            IE = "no IntersectionObserver")
     public void functions() throws Exception {
         final String html =
             "<html><head><script>\n"

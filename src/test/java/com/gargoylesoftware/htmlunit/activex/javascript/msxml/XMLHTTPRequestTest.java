@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -56,6 +57,14 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHTTPRequestTest extends WebDriverTestCase {
+
+    /**
+     * Closes the real IE; otherwise tests are failing because of cached responses.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /**
      * @throws Exception if the test fails
@@ -358,9 +367,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"exception-created",
                    "",
-                   "<root/>\r\n",
+                   "<root/>\n",
                    "",
-                   "<root/>\r\n"})
+                   "<root/>\n"})
     public void responseXML_sync() throws Exception {
         property_lifecycleSync("responseXML.xml");
     }
@@ -370,7 +379,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1:", "1:", "2:", "3:", "4:<root/>\r\n"})
+            IE = {"1:", "1:", "2:", "3:", "4:<root/>\n"})
     public void responseXML_async() throws Exception {
         property_lifecycleAsync("responseXML.xml");
     }
@@ -432,7 +441,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root/>\r\n")
+            IE = "<root/>\n")
     public void responseXML_contentTypeApplicationXML() throws Exception {
         final String html = ""
             + "  var xhr;\n"
@@ -459,7 +468,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root>ol\u00E9</root>\r\n")
+            IE = "<root>ol\u00E9</root>\n")
     public void responseXML_defaultEncodingIsUTF8() throws Exception {
         final String html = ""
             + "  var xhr;\n"
@@ -582,7 +591,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"4:200 <root/> <root/>\r\n",
+            IE = {"4:200 <root/> <root/>\n",
                    "0:ex status ex text ex xml"})
     public void abort_sentSync() throws Exception {
         final String test = ""
@@ -629,9 +638,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {"exception-created",
                    "exception-opened",
-                   "Date XYZ GMT\r\n"
-                   + "Content-Type: text/xml;charset=iso-8859-1\r\n"
-                   + "Transfer-Encoding: chunked\r\nServer: Jetty(XXX)\r\n\r\n"})
+                   "Date XYZ GMT\n"
+                   + "Content-Type: text/xml;charset=iso-8859-1\n"
+                   + "Transfer-Encoding: chunked\nServer: Jetty(XXX)\n\n"})
     public void getAllResponseHeaders() throws Exception {
         final String test = ""
             // create

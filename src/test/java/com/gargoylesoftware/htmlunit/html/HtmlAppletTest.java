@@ -616,6 +616,6 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     }
 
     private boolean areAppletsNotSupported() {
-        return getBrowserVersion().isChrome() || getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox52();
+        return getBrowserVersion().isChrome() || getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox60();
     }
 }

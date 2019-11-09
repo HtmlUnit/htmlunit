@@ -682,13 +682,11 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"http:||||||/", "https:||||||/", "mailto:||||||", "tel:||||||",
-                        "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
-            IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
+    @Alerts(IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"},
             CHROME = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
-            FF60 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+            FF = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"

@@ -79,8 +79,8 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff60")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, true));
                 }
-                if (browsers.contains("ff52")) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, true));
+                if (browsers.contains("ff68")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_68, true));
                 }
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
@@ -93,8 +93,8 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-ff60")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, false));
             }
-            if (browsers.contains("hu-ff52")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_52, false));
+            if (browsers.contains("hu-ff68")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_68, false));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
@@ -162,8 +162,8 @@ public class BrowserRunner extends Suite {
         /** Firefox 60. */
         FF60,
 
-        /** Firefox 52. */
-        FF52
+        /** Firefox 68. */
+        FF68
     }
 
     /**
@@ -204,10 +204,10 @@ public class BrowserRunner extends Suite {
         String[] FF60() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 52. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
-        String[] FF52() default { EMPTY_DEFAULT };
+        String[] FF68() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -256,10 +256,10 @@ public class BrowserRunner extends Suite {
         String[] FF60() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 52. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
          * @return the alerts
          */
-        String[] FF52() default { EMPTY_DEFAULT };
+        String[] FF68() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.

@@ -364,8 +364,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            CHROME = "16",
-            FF52 = "24")
+            CHROME = "16")
     @NotYetImplemented
     public void button() throws Exception {
         loadPageWithAlerts2(test("button"));
@@ -843,7 +842,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF52 = "143",
             IE = "145")
     @NotYetImplemented
     public void isindex() throws Exception {
@@ -1339,7 +1337,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "24",
-            FF = "33",
+            FF60 = "33",
+            FF68 = "31",
             IE = "25")
     @NotYetImplemented
     public void select() throws Exception {
@@ -1714,8 +1713,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            CHROME = "16",
-            FF52 = "24")
+            CHROME = "16")
     @NotYetImplemented
     public void inputButton() throws Exception {
         loadPageWithAlerts2(testInput("button"));
@@ -1739,8 +1737,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "253",
-            FF52 = "237",
             FF60 = "235",
+            FF68 = "240",
             IE = "262")
     @NotYetImplemented
     public void inputFile() throws Exception {
@@ -1790,8 +1788,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "51",
-            FF52 = "56",
-            FF60 = "54",
+            FF = "54",
             IE = "102")
     @NotYetImplemented
     public void inputReset() throws Exception {
@@ -1819,8 +1816,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "58",
-            FF52 = "102",
-            FF60 = "100",
+            FF = "100",
             IE = "116")
     @NotYetImplemented
     public void inputSubmit() throws Exception {

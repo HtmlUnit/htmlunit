@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.applet.Applet;
@@ -23,7 +22,6 @@ import java.lang.reflect.Method;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -40,15 +38,8 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-@JsxClass(domClass = HtmlApplet.class, value = {FF52, IE})
+@JsxClass(domClass = HtmlApplet.class, value = IE)
 public class HTMLAppletElement extends HTMLElement {
-
-    /**
-     * The constructor.
-     */
-    @JsxConstructor(FF52)
-    public HTMLAppletElement() {
-    }
 
     /**
      * {@inheritDoc}

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,6 +35,14 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  */
 @RunWith(BrowserRunner.class)
 public class XMLDocument2Test extends WebDriverTestCase {
+
+    /**
+     * Closes the real IE; otherwise tests are failing because of cached responses.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /**
      * @throws Exception if the test fails

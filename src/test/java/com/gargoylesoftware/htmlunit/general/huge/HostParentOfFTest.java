@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.general.huge;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import java.util.Collection;
 
 import org.junit.Test;
@@ -24,7 +22,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -122,8 +119,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF60 = "true")
-    @NotYetImplemented(FF52)
+            FF = "true")
     public void _FileSystemEntry_FileSystemDirectoryEntry() throws Exception {
         test("FileSystemEntry", "FileSystemDirectoryEntry");
     }
@@ -143,8 +139,7 @@ public class HostParentOfFTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF60 = "true")
-    @NotYetImplemented(FF52)
+            FF = "true")
     public void _FileSystemEntry_FileSystemFileEntry() throws Exception {
         test("FileSystemEntry", "FileSystemFileEntry");
     }

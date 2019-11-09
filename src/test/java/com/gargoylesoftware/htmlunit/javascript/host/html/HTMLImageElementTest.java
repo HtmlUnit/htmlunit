@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.File;
@@ -321,6 +320,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                 "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             CHROME = {"left", "right", "center", "justify", "bottom", "middle",
                 "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+            FF68 = {"left", "right", "middle", "justify", "bottom", "middle",
+                    "top", "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             IE = {"left", "right", "center", "", "bottom", "middle",
                 "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented(FF)
@@ -358,6 +359,8 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                 "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             CHROME = {"CenTer", "8", "foo", "left", "right", "center", "justify",
                 "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
+            FF68 = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
+                    "bottom", "middle", "top", "bottom", "absmiddle", "baseline", "texttop"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
                 "center", "error", "center", "bottom", "middle", "top", "absBottom",
                 "absMiddle", "baseline", "textTop"})
@@ -476,7 +479,6 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"number: 300", "number: 200", "number: 0", "number: 0", "number: 0", "number: 0"},
             IE = {"number: 300", "number: 200", "number: 28", "number: 30", "number: 28", "number: 30"})
-    @NotYetImplemented(FF52)
     public void widthHeightEmptySource() throws Exception {
         getMockWebConnection().setDefaultResponse("");
 

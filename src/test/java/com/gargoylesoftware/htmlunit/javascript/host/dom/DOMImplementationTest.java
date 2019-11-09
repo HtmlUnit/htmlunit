@@ -651,7 +651,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"before", "1"})
+    @Alerts(DEFAULT = {"before", "1"},
+            FF = {"1"})
     @NotYetImplemented
     public void createHTMLDocumentInnerAddImgAddDocToIframe() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

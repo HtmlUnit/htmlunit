@@ -1836,7 +1836,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<myns:foo xmlns:myns=\"http://myNS\"/>\r\n", "myns:foo"})
+            IE = {"<myns:foo xmlns:myns=\"http://myNS\"/>\n", "myns:foo"})
     public void loadXML_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"

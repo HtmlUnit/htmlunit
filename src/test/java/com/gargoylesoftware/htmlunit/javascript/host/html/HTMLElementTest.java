@@ -2513,8 +2513,8 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object DOMRect]", "1"},
-            CHROME = {"[object DOMRectList]", "1"},
+    @Alerts(DEFAULT = {"[object DOMRectList]", "1"},
+            FF60 = {"[object DOMRect]", "1"},
             IE = {"[object ClientRectList]", "1"})
     public void getClientRects() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -2535,9 +2535,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ClientRectList]", "0"},
-            CHROME = {"[object DOMRectList]", "0"},
-            FF = {"", "0"})
+    @Alerts(DEFAULT = {"[object DOMRectList]", "0"},
+            IE = {"[object ClientRectList]", "0"},
+            FF60 = {"", "0"})
     public void getClientRectsDisconnected() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
@@ -2556,9 +2556,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"},
-            CHROME = {"[object DOMRectList]", "0", "[object DOMRectList]", "0"},
-            FF = {"", "0", "", "0"})
+    @Alerts(DEFAULT = {"[object DOMRectList]", "0", "[object DOMRectList]", "0"},
+            IE = {"[object ClientRectList]", "0", "[object ClientRectList]", "0"},
+            FF60 = {"", "0", "", "0"})
     public void getClientRectsDisplayNone() throws Exception {
         final String html =
             "<html><head><title>foo</title><script>\n"
@@ -4567,8 +4567,10 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
-        + "mouseup--body\nmouseup--undefined")
+    @Alerts(DEFAULT = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+        + "mouseup--body\nmouseup--undefined",
+            FF68 = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+            + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
     @NotYetImplemented
     public void clickAnElementThatDisappears() throws Exception {
         final String html =

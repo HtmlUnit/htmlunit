@@ -39,9 +39,11 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"left", "right", "bottom", "middle", "top",
-                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+                    "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             CHROME = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+            FF60 = {"left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                 "undefined", "undefined", "undefined", "undefined", "undefined"})
     @NotYetImplemented(FF)
@@ -75,7 +77,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop"},
-            FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+            FF68 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                    "bottom", "absmiddle", "baseline", "texttop"},
+            FF60 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop"})
     @NotYetImplemented(FF)
     public void setAlign() throws Exception {

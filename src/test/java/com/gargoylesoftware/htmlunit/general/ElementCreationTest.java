@@ -97,9 +97,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLAppletElement]",
-            CHROME = "[object HTMLUnknownElement]",
-            FF60 = "[object HTMLUnknownElement]")
+    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
+            IE = "[object HTMLAppletElement]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -190,7 +189,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLElement]")
+            CHROME = "[object HTMLElement]",
+            FF68 = "[object HTMLElement]")
     public void bdi() throws Exception {
         test("bdi");
     }
@@ -882,7 +882,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLMarqueeElement]",
-            FF = "[object HTMLDivElement]")
+            FF60 = "[object HTMLDivElement]")
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -2055,7 +2055,8 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLSlotElement]")
+            CHROME = "[object HTMLSlotElement]",
+            FF68 = "[object HTMLSlotElement]")
     public void slot() throws Exception {
         test("slot");
     }

@@ -199,7 +199,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _IdleDeadline_IdleDeadline() throws Exception {
         test("IdleDeadline", "IdleDeadline");
     }
@@ -334,7 +334,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _IntersectionObserver_IntersectionObserver() throws Exception {
         test("IntersectionObserver", "IntersectionObserver");
     }
@@ -345,7 +345,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _IntersectionObserverEntry_IntersectionObserverEntry() throws Exception {
         test("IntersectionObserverEntry", "IntersectionObserverEntry");
     }
@@ -366,7 +366,8 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF68 = "true")
     public void _KeyframeEffect_KeyframeEffect() throws Exception {
         test("KeyframeEffect", "KeyframeEffect");
     }
@@ -377,7 +378,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _LocalMediaStream_LocalMediaStream() throws Exception {
         test("LocalMediaStream", "LocalMediaStream");
     }

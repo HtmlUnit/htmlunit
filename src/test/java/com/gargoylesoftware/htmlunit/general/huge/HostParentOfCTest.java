@@ -304,7 +304,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _Credential_Credential() throws Exception {
         test("Credential", "Credential");
     }
@@ -335,7 +335,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _CredentialsContainer_CredentialsContainer() throws Exception {
         test("CredentialsContainer", "CredentialsContainer");
     }
@@ -509,8 +509,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false")
+    @Alerts("true")
     public void _CSSNamespaceRule_CSSNamespaceRule() throws Exception {
         test("CSSNamespaceRule", "CSSNamespaceRule");
     }
@@ -529,7 +528,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _CSSPrimitiveValue_CSSPrimitiveValue() throws Exception {
         test("CSSPrimitiveValue", "CSSPrimitiveValue");
     }
@@ -613,8 +612,7 @@ public class HostParentOfCTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false")
+    @Alerts("true")
     public void _CSSRule_CSSNamespaceRule() throws Exception {
         test("CSSRule", "CSSNamespaceRule");
     }
@@ -717,7 +715,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _CSSValue_CSSPrimitiveValue() throws Exception {
         test("CSSValue", "CSSPrimitiveValue");
     }
@@ -727,7 +725,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _CSSValue_CSSValue() throws Exception {
         test("CSSValue", "CSSValue");
     }
@@ -737,7 +735,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _CSSValue_CSSValueList() throws Exception {
         test("CSSValue", "CSSValueList");
     }
@@ -747,7 +745,7 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _CSSValueList_CSSValueList() throws Exception {
         test("CSSValueList", "CSSValueList");
     }
@@ -757,7 +755,8 @@ public class HostParentOfCTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF68 = "true")
     public void _CustomElementRegistry_CustomElementRegistry() throws Exception {
         test("CustomElementRegistry", "CustomElementRegistry");
     }

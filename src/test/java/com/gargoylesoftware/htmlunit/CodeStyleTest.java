@@ -853,7 +853,7 @@ public class CodeStyleTest {
                 break;
 
             case "FF":
-                if (previousList.contains("FF60") || previousList.contains("FF52")) {
+                if (previousList.contains("FF60") || previousList.contains("FF68")) {
                     addFailure("FF must be before specifc FF version in "
                             + relativePath + ", line: " + (lineIndex + 1));
                 }
@@ -899,7 +899,7 @@ public class CodeStyleTest {
                     || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
                     || line.startsWith("        FF60 = ")
-                    || line.startsWith("        FF52 = ")) {
+                    || line.startsWith("        FF68 = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }
         }

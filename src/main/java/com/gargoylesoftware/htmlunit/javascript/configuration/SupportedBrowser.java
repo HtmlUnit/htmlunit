@@ -33,6 +33,6 @@ public enum SupportedBrowser {
     /** Firefox 60. */
     FF60,
 
-    /** Firefox 52. */
-    FF52
+    /** Firefox 68. */
+    FF68
 }

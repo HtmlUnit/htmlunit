@@ -574,7 +574,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "18"},
-            FF = {"0", "20"})
+            FF60 = {"0", "20"})
     public void offsetHeight_explicitHeightZero() throws Exception {
         final String html
             = "<html><body>\n"
@@ -591,7 +591,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"75", "2", "5", "20", "50", "50", "18"},
-            FF = {"77", "2", "5", "20", "50", "50", "20"})
+            FF60 = {"77", "2", "5", "20", "50", "50", "20"})
     public void offsetHeight_calculatedBasedOnChildren() throws Exception {
         final String html
             = "<html>\n"

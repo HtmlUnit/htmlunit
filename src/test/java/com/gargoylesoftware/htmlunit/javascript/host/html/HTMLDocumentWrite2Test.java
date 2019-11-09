@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -258,9 +257,7 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"2", "§§URL§§foo"},
-            IE = {"1", "§§URL§§"})
-    @NotYetImplemented(IE)
+    @Alerts({"2", "§§URL§§foo"})
     public void urlResolutionInWriteForm() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

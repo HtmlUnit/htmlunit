@@ -261,7 +261,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myHead-undefined",
-            CHROME = "null")
+            CHROME = "null",
+            FF68 = "null")
     public void item_DoubleIndex() throws Exception {
         item("1.1");
     }
@@ -280,7 +281,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "null",
-            CHROME = "myHead-undefined")
+            CHROME = "myHead-undefined",
+            FF68 = "myHead-undefined")
     public void item_IndexAsString() throws Exception {
         item("'1'");
     }
@@ -487,7 +489,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myHtml-undefined",
-            FF = "null")
+            FF60 = "null")
     public void functionIndex_ZeroIndex() throws Exception {
         functionIndex("0");
     }
@@ -497,7 +499,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myHead-undefined",
-            FF = "null")
+            FF60 = "null")
     public void functionIndex_ValidIndex() throws Exception {
         functionIndex("1");
     }
@@ -527,7 +529,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "myTitle-undefined",
-            FF = "null")
+            FF60 = "null")
     public void functionIndex_IndexAsString() throws Exception {
         functionIndex("'2'");
     }
@@ -596,7 +598,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function () { [native code] }",
-            FF = "function () {\n}",
+            FF60 = "function () {\n}",
+            FF68 = "function () {\n    [native code]\n}",
             IE = "[object Object]")
     @NotYetImplemented({FF, IE})
     public void proto() throws Exception {

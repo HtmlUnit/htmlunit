@@ -84,10 +84,10 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF60(), alerts.DEFAULT());
-                assertNotEquals(alerts.FF52(), alerts.DEFAULT());
+                assertNotEquals(alerts.FF68(), alerts.DEFAULT());
 
                 assertNotEquals(alerts.FF60(), alerts.FF());
-                assertNotEquals(alerts.FF52(), alerts.FF());
+                assertNotEquals(alerts.FF68(), alerts.FF());
                 if (BrowserVersionClassRunner.isDefined(alerts.IE())) {
                     assertNotEquals(alerts.FF(), alerts.CHROME());
                 }
@@ -107,10 +107,10 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
-                assertNotEquals(alerts2.FF52(), alerts2.DEFAULT());
+                assertNotEquals(alerts2.FF68(), alerts2.DEFAULT());
 
                 assertNotEquals(alerts2.FF60(), alerts2.FF());
-                assertNotEquals(alerts2.FF52(), alerts2.FF());
+                assertNotEquals(alerts2.FF68(), alerts2.FF());
                 if (BrowserVersionClassRunner.isDefined(alerts2.IE())) {
                     assertNotEquals(alerts2.FF(), alerts2.CHROME());
                 }

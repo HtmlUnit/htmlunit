@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -746,8 +745,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "92", "true", "true", "16"},
-            FF = {"true", "true", "94", "true", "true", "14"},
+    @Alerts(CHROME = {"true", "true", "136", "true", "true", "16"},
+            FF = {"true", "true", "86", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
         final String html
@@ -769,7 +768,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "1234"})
+    @Alerts(DEFAULT = {"true", "1234"},
+            IE = {"true", "1256"})
     public void setInnerWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -787,7 +787,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "1234"})
+    @Alerts(DEFAULT = {"true", "1234"},
+            IE = {"true", "705"})
     public void setInnerHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -805,7 +806,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "1234"})
+    @Alerts(DEFAULT = {"true", "1234"},
+            IE = {"true", "1272"})
     public void setOuterWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -823,7 +825,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "1234"})
+    @Alerts(DEFAULT = {"true", "1234"},
+            IE = {"true", "768"})
     public void setOuterHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -843,8 +846,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"632", "1256", "615", "1239"},
-            FF60 = {"674", "1258", "657", "1241"},
-            FF52 = {"674", "1258", "657", "1241"},
+            FF = {"682", "1258", "665", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -878,7 +880,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
-            FF52 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1238"},
+            FF68 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
             FF60 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1254"})
     @NotYetImplemented(FF)
     public void scrolling1() throws Exception {
@@ -968,9 +970,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF52 = {"11", "91"},
-            FF60 = {"11", "83"})
-    @NotYetImplemented(FF52)
+            FF = {"11", "83"})
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -1264,7 +1264,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"string string 7 number object", "string string 1 number object"})
+    @Alerts(DEFAULT = {"string string 7 number object", "string string 1 number object"},
+            IE = {"string string 7 number object", "string string 8 number object"})
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"
@@ -2220,9 +2221,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            CHROME = "undefined",
-            FF60 = "undefined")
+    @Alerts(DEFAULT = "undefined",
+            IE = "function")
     public void showModalDialog() throws Exception {
         final String html
             = "<html><body><script>\n"

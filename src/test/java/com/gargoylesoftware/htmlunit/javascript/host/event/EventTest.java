@@ -259,7 +259,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "true"},
-            FF = {"undefined", "false"})
+            FF60 = {"undefined", "false"})
     public void eventSrcElementSameAsThis() throws Exception {
         final String content
             = "<html><head></head><body>\n"
@@ -504,7 +504,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false"},
-            FF = {"true", "exception"})
+            FF60 = {"true", "exception"})
     public void ieWindowEvent() throws Exception {
         final String html =
             "<html><head>\n"
@@ -785,6 +785,7 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "activeElement BODY",
+            FF68 = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
     @NotYetImplemented(IE)
@@ -1040,7 +1041,8 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            CHROME = {"true", "boolean"})
+            CHROME = {"true", "boolean"},
+            FF68 = {"true", "boolean"})
     public void returnValue() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -1067,6 +1069,11 @@ public class EventTest extends WebDriverTestCase {
                         "undefined", "undefined", "false - false",
                         "undefined", "undefined"},
             CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean",
+                        "true", "boolean", "false - false",
+                        "true", "boolean"},
+            FF68 = {"true", "boolean", "false - false",
                         "true", "true - false",
                         "false", "boolean",
                         "true", "boolean", "false - false",
@@ -1122,6 +1129,13 @@ public class EventTest extends WebDriverTestCase {
                         "true", "boolean", "false - false",
                         "true", "boolean", "true",
                         "true", "boolean", "true - false",
+                        "false", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
                         "false", "boolean", "false"})
     public void returnValueSetterFalse() throws Exception {
         returnValueSetterUndefined("false");
@@ -1139,6 +1153,13 @@ public class EventTest extends WebDriverTestCase {
                         "undefined", "undefined", "true - false",
                         "true", "boolean", "false"},
             CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "true", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
                         "true", "true - false",
                         "true", "boolean", "false",
                         "true", "boolean", "false - false",
@@ -1166,6 +1187,13 @@ public class EventTest extends WebDriverTestCase {
                         "true", "boolean", "false - false",
                         "true", "boolean", "true",
                         "true", "boolean", "true - false",
+                        "true", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
                         "true", "boolean", "false"})
     public void returnValueSetterString() throws Exception {
         returnValueSetterUndefined("'test'");
@@ -1183,6 +1211,13 @@ public class EventTest extends WebDriverTestCase {
                         "undefined", "undefined", "true - false",
                         "0", "number", "true"},
             CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "false", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
                         "true", "true - false",
                         "false", "boolean", "false",
                         "true", "boolean", "false - false",
@@ -1210,6 +1245,13 @@ public class EventTest extends WebDriverTestCase {
                         "true", "boolean", "false - false",
                         "true", "boolean", "true",
                         "true", "boolean", "true - false",
+                        "true", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
                         "true", "boolean", "false"})
     public void returnValueSetterOne() throws Exception {
         returnValueSetterUndefined("1");
@@ -1232,6 +1274,13 @@ public class EventTest extends WebDriverTestCase {
                         "true", "boolean", "false - false",
                         "true", "boolean", "true",
                         "true", "boolean", "true - false",
+                        "true", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "true", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
                         "true", "boolean", "false"})
     public void returnValueSetterMinusOne() throws Exception {
         returnValueSetterUndefined("-1");
@@ -1249,6 +1298,13 @@ public class EventTest extends WebDriverTestCase {
                         "undefined", "undefined", "true - false",
                         "undefined", "undefined", "true"},
             CHROME = {"true", "boolean", "false - false",
+                        "true", "true - false",
+                        "false", "boolean", "false",
+                        "true", "boolean", "false - false",
+                        "true", "boolean", "true",
+                        "true", "boolean", "true - false",
+                        "false", "boolean", "false"},
+            FF68 = {"true", "boolean", "false - false",
                         "true", "true - false",
                         "false", "boolean", "false",
                         "true", "boolean", "false - false",

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -33,13 +32,13 @@ import com.gargoylesoftware.htmlunit.svg.SvgFilter;
 public class SVGFilterElement extends SVGElement {
 
     /** Constant for {@code SVG_UNIT_TYPE_UNKNOWN}. */
-    @JsxConstant({FF52, IE})
+    @JsxConstant(IE)
     public static final int SVG_UNIT_TYPE_UNKNOWN = 0;
     /** Constant for {@code SVG_UNIT_TYPE_USERSPACEONUSE}. */
-    @JsxConstant({FF52, IE})
+    @JsxConstant(IE)
     public static final int SVG_UNIT_TYPE_USERSPACEONUSE = 1;
     /** Constant for {@code SVG_UNIT_TYPE_OBJECTBOUNDINGBOX}. */
-    @JsxConstant({FF52, IE})
+    @JsxConstant(IE)
     public static final int SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 
     /**

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 
 import java.util.Collection;
 
@@ -203,9 +202,7 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF52 = "true")
-    @NotYetImplemented(FF52)
+    @Alerts("false")
     public void _AudioContext_OfflineAudioContext() throws Exception {
         test("AudioContext", "OfflineAudioContext");
     }
@@ -246,7 +243,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(FF52)
     public void _AudioNode_AudioBufferSourceNode() throws Exception {
         test("AudioNode", "AudioBufferSourceNode");
     }
@@ -277,7 +273,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _AudioNode_AudioScheduledSourceNode() throws Exception {
         test("AudioNode", "AudioScheduledSourceNode");
     }
@@ -318,7 +314,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(FF52)
     public void _AudioNode_ConstantSourceNode() throws Exception {
         test("AudioNode", "ConstantSourceNode");
     }
@@ -409,7 +404,6 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented(FF52)
     public void _AudioNode_OscillatorNode() throws Exception {
         test("AudioNode", "OscillatorNode");
     }
@@ -480,7 +474,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioBufferSourceNode");
     }
@@ -491,7 +485,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _AudioScheduledSourceNode_AudioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioScheduledSourceNode");
     }
@@ -502,7 +496,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _AudioScheduledSourceNode_ConstantSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "ConstantSourceNode");
     }
@@ -513,7 +507,7 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
         test("AudioScheduledSourceNode", "OscillatorNode");
     }

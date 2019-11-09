@@ -655,12 +655,12 @@ public class XMLDOMElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root child-attribute=\"test\">\r\n"
-                        + "\t<![CDATA[child-cdata]]>\r\n"
-                        + "\t<!--child-comment-->\r\n"
-                        + "\t<child-element/>\r\n"
-                        + "\t<child-element2><grand-child-element/></child-element2>\r\n"
-                        + "child-text\r\n"
+            IE = "<root child-attribute=\"test\">\n"
+                        + "\t<![CDATA[child-cdata]]>\n"
+                        + "\t<!--child-comment-->\n"
+                        + "\t<child-element/>\n"
+                        + "\t<child-element2><grand-child-element/></child-element2>\n"
+                        + "child-text\n"
                         + "</root>")
     public void xml_lineBreak() throws Exception {
         final String xml = ""

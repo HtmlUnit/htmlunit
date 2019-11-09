@@ -434,7 +434,7 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"text", "text\r\ntext", "  text  text  "})
+            IE = {"text", "text\ntext", "  text  text  "})
     public void xml() throws Exception {
         final String test =
             // text

@@ -595,7 +595,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "SPAN"},
-            FF = {"false", "true", "SPAN"})
+            FF60 = {"false", "true", "SPAN"})
     public void eventTransmission() throws Exception {
         final String html =
             "<html>\n"
@@ -861,7 +861,7 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Event]",
-            FF = "undefined")
+            FF60 = "undefined")
     public void windowEvent() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

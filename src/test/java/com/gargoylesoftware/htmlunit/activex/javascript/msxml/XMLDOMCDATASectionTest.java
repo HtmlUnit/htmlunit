@@ -429,7 +429,7 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\r\ntext]]>", "<![CDATA[<tag/>]]>"})
+            IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\ntext]]>", "<![CDATA[<tag/>]]>"})
     public void xml() throws Exception {
         final String test = ""
             + "alert(cdata.xml);\n"

@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FUNCTION_TOSOURCE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_Iterator;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
@@ -223,9 +222,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             deleteProperties(window, "XML", "XMLList", "Namespace", "QName");
         }
 
-        if (!browserVersion.hasFeature(JS_Iterator)) {
-            deleteProperties(window, "Iterator", "StopIteration");
-        }
+        deleteProperties(window, "Iterator", "StopIteration");
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -26,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 
@@ -147,7 +144,6 @@ public class Prototype160Test extends PrototypeTestBase {
      * @throws Exception if test fails
      */
     @Test
-    @BuggyWebDriver(FF52)
     public void form() throws Exception {
         test("form.html");
     }

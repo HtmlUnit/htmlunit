@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_52;
+import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_68;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX_60;
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
@@ -76,14 +76,14 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
         leakyMap.clear();
         final int knownBrowsers = leakyMap.size();
 
-        BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
+        BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
                                                 .setApplicationVersion("App")
                                                 .setApplicationVersion("Version")
                                                 .setUserAgent("User agent")
                                                 .build();
         JavaScriptConfiguration.getInstance(browserVersion);
 
-        browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
+        browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
                             .setApplicationVersion("App2")
                             .setApplicationVersion("Version2")
                             .setUserAgent("User agent2")
@@ -104,7 +104,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
 
         long count = 0;
         while (count++ < 3000) {
-            final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_52)
+            final BrowserVersion browserVersion = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
                                                     .setApplicationVersion("App" + generator.generate(20))
                                                     .setApplicationVersion("Version" + generator.generate(20))
                                                     .setUserAgent("User Agent" + generator.generate(20))
@@ -261,7 +261,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     public void obsoleteJsxClasses() {
         final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX_60);
         final BrowserVersion[] browsers = new BrowserVersion[]
-        {FIREFOX_60, FIREFOX_52, CHROME, INTERNET_EXPLORER};
+        {FIREFOX_60, FIREFOX_68, CHROME, INTERNET_EXPLORER};
 
         for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
             boolean found = false;

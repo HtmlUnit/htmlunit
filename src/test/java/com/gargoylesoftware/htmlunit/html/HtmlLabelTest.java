@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Arrays;
@@ -85,9 +84,8 @@ public class HtmlLabelTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "labelclick,textfocus,textclick,",
-            FF52 = "textfocus,labelclick,textclick,",
             IE = "labelclick,textclick,textfocus,")
-    @NotYetImplemented({FF52, IE})
+    @NotYetImplemented(IE)
     public void clickForSetFocusToInput() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

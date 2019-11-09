@@ -304,7 +304,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"13", "13", "13"},
-            FF = {"0", "13", "13"})
+            FF60 = {"0", "13", "13"})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

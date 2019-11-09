@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.Annotation;
@@ -107,11 +107,11 @@ public abstract class AbstractJavaScriptConfiguration {
             else if (browser.isIE()) {
                 expectedBrowser = IE;
             }
-            else if (browser.isFirefox52()) {
-                expectedBrowser = FF52;
+            else if (browser.isFirefox60()) {
+                expectedBrowser = FF60;
             }
             else if (browser.isFirefox()) {
-                expectedBrowser = FF60;
+                expectedBrowser = FF68;
             }
             else {
                 expectedBrowser = CHROME;  // our current fallback
@@ -324,8 +324,8 @@ public abstract class AbstractJavaScriptConfiguration {
      */
     public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
         return (browser1 == browser2)
-                || (browser1 == FF && (browser2 == FF60 || browser2 == FF52))
-                || (browser2 == FF && (browser1 == FF60 || browser1 == FF52));
+                || (browser1 == FF && (browser2 == FF60 || browser2 == FF68))
+                || (browser2 == FF && (browser1 == FF60 || browser1 == FF68));
     }
 
     /**

@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.arrays;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -234,9 +233,8 @@ public class Int8ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF52 = "exception",
             IE = "exception")
-    @NotYetImplemented({FF52, IE})
+    @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

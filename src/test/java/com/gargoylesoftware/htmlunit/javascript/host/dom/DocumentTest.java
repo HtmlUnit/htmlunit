@@ -253,9 +253,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "3", "3", "true"},
-            CHROME = {"0", "0", "0", "true"},
-            FF60 = {"0", "0", "0", "true"})
+    @Alerts(DEFAULT = {"0", "0", "0", "true"},
+            IE = {"0", "3", "3", "true"})
     public void applets() throws Exception {
         final String html =
             "<html>\n"
@@ -1236,7 +1235,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"HTML", "HEAD", "TITLE", "SCRIPT", "BODY"},
-            FF = {"all == null", "all == null", "all == null", "all == null", "all == null"})
+            FF60 = {"all == null", "all == null", "all == null", "all == null", "all == null"})
     public void all_WithParentheses() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -2427,7 +2426,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null", "text1", "not available"},
-            IE = {"null", "text1", "text2", "onfocus text2"})
+            IE = {"null", "text1", "onfocus text2"})
     @NotYetImplemented(IE)
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
@@ -2542,7 +2541,8 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"0", "1"})
+    @Alerts(DEFAULT = {"0", "1"},
+            IE = {"0"})
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

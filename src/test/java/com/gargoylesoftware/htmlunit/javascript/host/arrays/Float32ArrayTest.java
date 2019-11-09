@@ -22,7 +22,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -166,9 +165,8 @@ public class Float32ArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF52 = "exception",
             IE = "exception")
-    @NotYetImplemented({TestedBrowser.FF52, IE})
+    @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
             = "<html><head><title>foo</title><script>\n"

@@ -535,7 +535,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§",
-            FF52 = "",
             IE = "")
     public void action() throws Exception {
         final String html =
@@ -554,8 +553,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "§§URL§§",
-            FF52 = "")
+    @Alerts("§§URL§§")
     public void actionEmpty() throws Exception {
         final String html =
             "<html>\n"
@@ -1384,7 +1382,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"srcElement null: false", "srcElement==form: true",
                                                         "target null: false", "target==form: true"},
-            FF = {"srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"})
+            FF60 = {"srcElement null: true", "srcElement==form: false", "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head><title>first</title>\n"
             + "<script>\n"

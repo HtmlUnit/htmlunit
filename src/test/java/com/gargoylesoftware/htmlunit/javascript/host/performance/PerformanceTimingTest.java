@@ -86,9 +86,8 @@ public class PerformanceTimingTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "0",
-            FF60 = "0")
+    @Alerts(DEFAULT = "0",
+            IE = "undefined")
     public void secureConnectionStart() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_

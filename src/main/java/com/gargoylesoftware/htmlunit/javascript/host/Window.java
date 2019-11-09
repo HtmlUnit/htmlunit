@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SEL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -1924,7 +1923,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
      * @see <a href="https://developer.mozilla.org/en/DOM/window.showModalDialog">Mozilla Documentation</a>
      */
-    @JsxFunction({IE, FF52})
+    @JsxFunction(IE)
     public Object showModalDialog(final String url, final Object arguments, final String features) {
         final WebWindow webWindow = getWebWindow();
         final WebClient client = webWindow.getWebClient();
@@ -2640,7 +2639,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onanimationiteration} event handler.
      * @return the {@code onanimationiteration} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnanimationiteration() {
         return getEventHandler("animationiteration");
     }
@@ -2649,7 +2648,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onanimationiteration} event handler.
      * @param onanimationiteration the {@code onanimationiteration} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnanimationiteration(final Object onanimationiteration) {
         setHandlerForJavaScript("animationiteration", onanimationiteration);
     }
@@ -2802,7 +2801,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onwebkitanimationstart} event handler.
      * @return the {@code onwebkitanimationstart} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnwebkitanimationstart() {
         return getEventHandler("webkitanimationstart");
     }
@@ -2811,7 +2810,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onwebkitanimationstart} event handler.
      * @param onwebkitanimationstart the {@code onwebkitanimationstart} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnwebkitanimationstart(final Object onwebkitanimationstart) {
         setHandlerForJavaScript("webkitanimationstart", onwebkitanimationstart);
     }
@@ -3000,7 +2999,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code ontoggle} event handler.
      * @return the {@code ontoggle} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOntoggle() {
         return getEventHandler("toggle");
     }
@@ -3009,7 +3008,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code ontoggle} event handler.
      * @param ontoggle the {@code ontoggle} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOntoggle(final Object ontoggle) {
         setHandlerForJavaScript("toggle", ontoggle);
     }
@@ -3234,7 +3233,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onanimationend} event handler.
      * @return the {@code onanimationend} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnanimationend() {
         return getEventHandler("animationend");
     }
@@ -3243,7 +3242,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onanimationend} event handler.
      * @param onanimationend the {@code onanimationend} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnanimationend(final Object onanimationend) {
         setHandlerForJavaScript("animationend", onanimationend);
     }
@@ -3900,7 +3899,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onanimationstart} event handler.
      * @return the {@code onanimationstart} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnanimationstart() {
         return getEventHandler("animationstart");
     }
@@ -3909,7 +3908,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onanimationstart} event handler.
      * @param onanimationstart the {@code onanimationstart} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnanimationstart(final Object onanimationstart) {
         setHandlerForJavaScript("animationstart", onanimationstart);
     }
@@ -3972,7 +3971,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onwebkitanimationiteration} event handler.
      * @return the {@code onwebkitanimationiteration} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnwebkitanimationiteration() {
         return getEventHandler("webkitanimationiteration");
     }
@@ -3981,7 +3980,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onwebkitanimationiteration} event handler.
      * @param onwebkitanimationiteration the {@code onwebkitanimationiteration} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnwebkitanimationiteration(final Object onwebkitanimationiteration) {
         setHandlerForJavaScript("webkitanimationiteration", onwebkitanimationiteration);
     }
@@ -4188,7 +4187,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onwebkittransitionend} event handler.
      * @return the {@code onwebkittransitionend} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnwebkittransitionend() {
         return getEventHandler("webkittransitionend");
     }
@@ -4197,7 +4196,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onwebkittransitionend} event handler.
      * @param onwebkittransitionend the {@code onwebkittransitionend} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnwebkittransitionend(final Object onwebkittransitionend) {
         setHandlerForJavaScript("webkittransitionend", onwebkittransitionend);
     }
@@ -4350,7 +4349,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code onwebkitanimationend} event handler.
      * @return the {@code onwebkitanimationend} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOnwebkitanimationend() {
         return getEventHandler("webkitanimationend");
     }
@@ -4359,7 +4358,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code onwebkitanimationend} event handler.
      * @param onwebkitanimationend the {@code onwebkitanimationend} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOnwebkitanimationend(final Object onwebkitanimationend) {
         setHandlerForJavaScript("webkitanimationend", onwebkitanimationend);
     }
@@ -4386,7 +4385,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the {@code ontransitionend} event handler.
      * @return the {@code ontransitionend} event handler
      */
-    @JsxGetter({CHROME, FF52})
+    @JsxGetter(CHROME)
     public Function getOntransitionend() {
         return getEventHandler("transitionend");
     }
@@ -4395,7 +4394,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Sets the {@code ontransitionend} event handler.
      * @param ontransitionend the {@code ontransitionend} event handler
      */
-    @JsxSetter({CHROME, FF52})
+    @JsxSetter(CHROME)
     public void setOntransitionend(final Object ontransitionend) {
         setHandlerForJavaScript("transitionend", ontransitionend);
     }
@@ -4524,78 +4523,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
     @JsxSetter
     public void setOnpopstate(final Object onpopstate) {
         setHandlerForJavaScript(Event.TYPE_POPSTATE, onpopstate);
-    }
-
-    /**
-     * Returns the {@code onabsolutedeviceorientation} event handler.
-     * @return the {@code onabsolutedeviceorientation} event handler
-     */
-    @JsxGetter(FF52)
-    public Function getOnabsolutedeviceorientation() {
-        return getEventHandler("absolutedeviceorientation");
-    }
-
-    /**
-     * Sets the {@code onabsolutedeviceorientation} event handler.
-     * @param absolutedeviceorientation the {@code onabsolutedeviceorientation} event handler
-     */
-    @JsxSetter(FF52)
-    public void setOnabsolutedeviceorientation(final Object absolutedeviceorientation) {
-        setEventHandler("absolutedeviceorientation", absolutedeviceorientation);
-    }
-
-    /**
-     * Returns the {@code ondragexit} event handler.
-     * @return the {@code ondragexit} event handler
-     */
-    @JsxGetter(FF52)
-    public Function getOndragexit() {
-        return getEventHandler("dragexit");
-    }
-
-    /**
-     * Sets the {@code ondragexit} event handler.
-     * @param dragexit the {@code ondragexit} event handler
-     */
-    @JsxSetter(FF52)
-    public void setOndragexit(final Object dragexit) {
-        setEventHandler("dragexit", dragexit);
-    }
-
-    /**
-     * Returns the {@code onloadend} event handler.
-     * @return the {@code onloadend} event handler
-     */
-    @JsxGetter(FF52)
-    public Function getOnloadend() {
-        return getEventHandler("loadend");
-    }
-
-    /**
-     * Sets the {@code onloadend} event handler.
-     * @param loadend the {@code onloadend} event handler
-     */
-    @JsxSetter(FF52)
-    public void setOnloadend(final Object loadend) {
-        setEventHandler("loadend", loadend);
-    }
-
-    /**
-     * Returns the {@code onselectstart} event handler.
-     * @return the {@code onselectstart} event handler
-     */
-    @JsxGetter(FF52)
-    public Function getOnselectstart() {
-        return getEventHandler("selectstart");
-    }
-
-    /**
-     * Sets the {@code onselectstart} event handler.
-     * @param selectstart the {@code onselectstart} event handler
-     */
-    @JsxSetter(FF52)
-    public void setOnselectstart(final Object selectstart) {
-        setEventHandler("selectstart", selectstart);
     }
 
     /**

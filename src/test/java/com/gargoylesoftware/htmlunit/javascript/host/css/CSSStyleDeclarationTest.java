@@ -907,6 +907,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)"},
             CHROME = {"", "", "none", "rgb(0, 128, 0)"},
+            FF68 = {"", "", "none", "rgb(0, 128, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
     @NotYetImplemented(IE)
     public void displayDefaultOverwritesNone() throws Exception {
@@ -936,10 +937,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"block", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
+    @Alerts(DEFAULT = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
             CHROME = {"", "", "inline", "rgb(0, 0, 0)"},
-            FF60 = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
-            IE = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"})
+            FF68 = {"", "", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1529,7 +1529,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"green ", "black important", "green "},
-            FF = {"green ", "green ", "green "})
+            FF60 = {"green ", "green ", "green "})
     public void setPropertyImportant() throws Exception {
         final String[] expected = getExpectedAlerts();
         setPropertyBackgroundColor("'background-color', 'white', 'crucial'", expected[0]);
@@ -2378,8 +2378,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"black", "pink", "color: pink;", "color: pink;"},
-            FF52 = {"BLACK", "pink", "color: pink;", "color: pink;"})
+    @Alerts({"black", "pink", "color: pink;", "color: pink;"})
     public void caseInsensitive() throws Exception {
         final String html
             = "<html><head><title>First</title><script>\n"
@@ -2633,7 +2632,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"auto", "auto"},
-            CHROME = {"auto", ""})
+            CHROME = {"auto", ""},
+            FF68 = {"auto", ""})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

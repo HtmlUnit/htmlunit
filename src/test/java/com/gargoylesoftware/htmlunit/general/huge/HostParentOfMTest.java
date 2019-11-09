@@ -208,7 +208,7 @@ public class HostParentOfMTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent", "MediaQueryListEvent");
     }
@@ -251,7 +251,7 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF60 = "true")
     public void _MediaStream_LocalMediaStream() throws Exception {
         test("MediaStream", "LocalMediaStream");
     }
@@ -551,8 +551,7 @@ public class HostParentOfMTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false")
+    @Alerts("true")
     public void _MouseEvent_PointerEvent() throws Exception {
         test("MouseEvent", "PointerEvent");
     }

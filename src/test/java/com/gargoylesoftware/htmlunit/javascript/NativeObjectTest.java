@@ -183,9 +183,9 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () {}",
-            CHROME = "function () { [native code] }",
-            FF = "function () {\n}",
+    @Alerts(CHROME = "function () { [native code] }",
+            FF60 = "function () {\n}",
+            FF68 = "function () {\n    [native code]\n}",
             IE = "\nfunction() {\n    [native code]\n}\n")
     @NotYetImplemented({FF, IE})
     public void proto() throws Exception {

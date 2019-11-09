@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -130,11 +129,9 @@ public class EventNodeTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "mousedown label,focus text,mouseup label,click label,click text,",
-            CHROME = "mousedown label,mouseup label,click label,focus text,click text,",
-            FF60 = "mousedown label,mouseup label,click label,focus text,click text,",
+    @Alerts(DEFAULT = "mousedown label,mouseup label,click label,focus text,click text,",
             IE = "mousedown label,mouseup label,click label,click text,focus text,")
-    @NotYetImplemented({FF52, IE})
+    @NotYetImplemented(IE)
     public void clickEventsLabel() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

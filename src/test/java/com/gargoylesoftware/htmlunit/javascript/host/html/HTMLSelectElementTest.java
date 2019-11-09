@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -27,7 +25,6 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -2636,7 +2633,6 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      */
     @Test
     // https://github.com/mozilla/geckodriver/issues/584
-    @BuggyWebDriver(FF52)
     public void optionClickActions() throws Exception {
         final String html
             = "<html><body>\n"

@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
@@ -108,7 +106,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -570,12 +567,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final BrowserVersion browserVersion = getBrowserVersion();
             if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
                 return "";
-            }
-            if (!ignoreBlockIfNotAttached
-                    && (browserVersion.hasFeature(CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED)
-                            || (domElem instanceof HtmlDefinitionDescription
-                                    && browserVersion.hasFeature(HTMLDEFINITION_INLINE_IN_QUIRKS)))) {
-                changeValueIfEmpty = true;
             }
         }
         final String value = super.getStyleAttribute(DISPLAY, false);

@@ -212,8 +212,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF52 = {"false", "true"})
+    @Alerts({"undefined", "undefined"})
     public void scoped() throws Exception {
         final String html
             = "<html><head>\n"
@@ -240,8 +239,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "true", "false"},
-            FF52 = {"false", "true", "false"})
+    @Alerts({"undefined", "true", "false"})
     public void scoped_setter() throws Exception {
         final String html
             = "<html><head>\n"

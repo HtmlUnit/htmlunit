@@ -14,11 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code SVGPathSegCurvetoQuadraticSmoothRel}.
@@ -26,14 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF52, IE})
+@JsxClass(IE)
 public class SVGPathSegCurvetoQuadraticSmoothRel extends SVGPathSeg {
-
-    /**
-     * Creates an instance.
-     */
-    @JsxConstructor(FF52)
-    public SVGPathSegCurvetoQuadraticSmoothRel() {
-    }
-
 }

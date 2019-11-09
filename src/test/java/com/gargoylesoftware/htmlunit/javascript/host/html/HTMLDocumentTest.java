@@ -865,7 +865,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "0", "0"},
-            FF60 = {"0", "0", "0"})
+            FF = {"0", "0", "0"})
     public void getElementsByName_emptyName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

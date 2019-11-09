@@ -87,8 +87,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                     expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_52) {
-                    expectedAlerts = firstDefined(alerts.FF52(), alerts.FF(), alerts.DEFAULT());
+                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                    expectedAlerts = firstDefined(alerts.FF68(), alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME) {
                     expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
@@ -112,8 +112,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                     expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_52) {
-                    expectedAlerts = firstDefined(alerts.FF52(), alerts.FF(), alerts.DEFAULT());
+                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                    expectedAlerts = firstDefined(alerts.FF68(), alerts.FF(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME) {
                     expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
@@ -262,8 +262,8 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     }
                     break;
 
-                case FF52:
-                    if (browserVersion_ == BrowserVersion.FIREFOX_52) {
+                case FF68:
+                    if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                         return true;
                     }
                     break;

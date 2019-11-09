@@ -364,8 +364,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF52 = "18",
-            FF60 = "16",
+            FF = "16",
             IE = "20")
     @NotYetImplemented
     public void button() throws Exception {
@@ -845,7 +844,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF52 = "141",
             IE = "143")
     @NotYetImplemented
     public void isindex() throws Exception {
@@ -1339,7 +1337,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            FF = "33",
+            FF60 = "33",
+            FF68 = "31",
             IE = "23")
     @NotYetImplemented
     public void select() throws Exception {
@@ -1462,7 +1461,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "300",
-            FF = "0",
+            FF60 = "0",
             IE = "-16")
     @NotYetImplemented({CHROME, FF})
     public void svg() throws Exception {
@@ -1717,8 +1716,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12",
-            FF52 = "18",
-            FF60 = "16",
+            FF = "16",
             IE = "20")
     @NotYetImplemented
     public void inputButton() throws Exception {
@@ -1743,7 +1741,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "253",
-            FF52 = "237",
             FF60 = "235",
             IE = "262")
     @NotYetImplemented
@@ -1794,7 +1791,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "47",
-            FF52 = "50",
             FF60 = "48",
             IE = "100")
     @NotYetImplemented
@@ -1822,7 +1818,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "54",
-            FF52 = "96",
             FF60 = "94",
             IE = "114")
     @NotYetImplemented

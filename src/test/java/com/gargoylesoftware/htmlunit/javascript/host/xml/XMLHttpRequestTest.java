@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.junit.After;
 import org.junit.ComparisonFailure;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,6 +69,14 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     private static final String UNINITIALIZED = String.valueOf(XMLHttpRequest.UNSENT);
     private static final String LOADING = String.valueOf(XMLHttpRequest.OPENED);
     private static final String COMPLETED = String.valueOf(XMLHttpRequest.DONE);
+
+    /**
+     * Closes the real IE; otherwise tests are failing because of cached responses.
+     */
+    @After
+    public void shutDownRealBrowsersAfter() {
+        shutDownRealIE();
+    }
 
     /**
      * Tests synchronous use of XMLHttpRequest.
@@ -1622,7 +1631,11 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF = {"[object Object]", "undefined", "undefined",
+    @Alerts(FF68 = {"[object Object]", "undefined", "undefined",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                        "function onreadystatechange() {\n    [native code]\n}",
+                    "true", "true"},
+            FF60 = {"[object Object]", "undefined", "undefined",
                         "function get onreadystatechange() {\n    [native code]\n}",
                         "function set onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
@@ -1665,9 +1678,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(FF52 = {"[object Object]", "undefined", "undefined",
-                        "function () { return !0 }",
-                        "function set onreadystatechange() {\n    [native code]\n}",
+    @Alerts(FF68 = {"[object Object]", "undefined", "undefined",
+                        "function() { return !0 }",
+                        "function onreadystatechange() {\n    [native code]\n}",
                         "true", "true"},
             FF60 = {"[object Object]", "undefined", "undefined",
                         "function() { return !0 }",

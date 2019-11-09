@@ -52,7 +52,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver({CHROME, FF60, IE})
+    @BuggyWebDriver({CHROME, FF60})
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
@@ -852,7 +852,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null", "[object Text]", "null"},
-            FF = {"[object Text]", "[object Text]", "null"})
+            FF60 = {"[object Text]", "[object Text]", "null"})
     public void setText() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -1436,7 +1436,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "o-mouse over [option1] s-mouse over [option1]")
+            FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
     public void mouseOverDisabledOption() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

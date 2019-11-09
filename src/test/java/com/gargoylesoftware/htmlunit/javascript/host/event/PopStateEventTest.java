@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -101,7 +100,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
-            FF60 = "exception")
+            FF = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -123,7 +122,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object PopStateEvent]", "null", "", "false", "false", "null"},
-            FF60 = "exception")
+            FF = "exception")
     public void setState() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -146,7 +145,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "dispatched",
-            FF60 = "exception ctor")
+            FF = "exception ctor")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -176,8 +175,8 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF60 = "exception ctor")
-    @NotYetImplemented({CHROME, FF52, IE})
+            FF = "exception ctor")
+    @NotYetImplemented({CHROME, IE})
     public void dispatchEventWithoutInit() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"
@@ -206,7 +205,7 @@ public class PopStateEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no initPopStateEvent",
-            FF60 = "exception ctor",
+            FF = "exception ctor",
             IE = {"[object PopStateEvent]", "null", "PopState", "true", "false", "html"})
     public void initPopStateEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

@@ -104,7 +104,7 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF60 = "false")
+            FF = "false")
     public void _HTMLAppletElement_HTMLAppletElement() throws Exception {
         test("HTMLAppletElement", "HTMLAppletElement");
     }
@@ -381,7 +381,7 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF60 = "false")
+            FF = "false")
     public void _HTMLElement_HTMLAppletElement() throws Exception {
         test("HTMLElement", "HTMLAppletElement");
     }
@@ -761,7 +761,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF60 = "false")
     public void _HTMLElement_HTMLMarqueeElement() throws Exception {
         test("HTMLElement", "HTMLMarqueeElement");
     }
@@ -976,7 +976,8 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF68 = "true")
     public void _HTMLElement_HTMLSlotElement() throws Exception {
         test("HTMLElement", "HTMLSlotElement");
     }
@@ -1371,7 +1372,7 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF60 = "false")
     public void _HTMLMarqueeElement_HTMLMarqueeElement() throws Exception {
         test("HTMLMarqueeElement", "HTMLMarqueeElement");
     }
@@ -1633,7 +1634,8 @@ public class HostParentOfHTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF68 = "true")
     public void _HTMLSlotElement_HTMLSlotElement() throws Exception {
         test("HTMLSlotElement", "HTMLSlotElement");
     }

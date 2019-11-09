@@ -1032,8 +1032,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "C:\\fakepath\\pom.xml--null",
-            FF52 = "pom.xml--null")
+    @Alerts("C:\\fakepath\\pom.xml--null")
     // since 2.28
     // there is an option for IE, for local and trusted sites IE includes the file path
     // because we do not support any IE specific setting we do not send the filename as
@@ -1114,8 +1113,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "C:\\fakepath\\pom.xml",
-            FF52 = "pom.xml")
+    @Alerts("C:\\fakepath\\pom.xml")
     // since 2.28
     // there is an option for IE, for local and trusted sites IE includes the file path
     // because we do not support any IE specific setting we do not send the filename as

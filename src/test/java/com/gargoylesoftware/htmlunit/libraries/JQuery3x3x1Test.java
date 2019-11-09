@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -1427,7 +1426,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented({ CHROME, FF52 })
+    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
@@ -5690,8 +5689,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(FF52 = "0")
-    @NotYetImplemented(FF52)
     public void skippedmanipulation__html_script_type_module_() throws Exception {
         runTest("skippedmanipulation: html(script type module)");
     }

@@ -14,13 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code SVGPathSeg}.
@@ -28,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF52, IE})
+@JsxClass(IE)
 public class SVGPathSeg extends SimpleScriptable {
 
     /** The constant {@code PATHSEG_UNKNOWN}. */
@@ -91,12 +89,4 @@ public class SVGPathSeg extends SimpleScriptable {
     /** The constant {@code PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL}. */
     @JsxConstant
     public static final int PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL = 19;
-
-    /**
-     * Creates an instance.
-     */
-    @JsxConstructor(FF52)
-    public SVGPathSeg() {
-    }
-
 }

@@ -66,7 +66,7 @@ public class BrowserVersionFeaturesTest  {
     public void unusedFeatures() throws Exception {
         final List<BrowserVersion> browsers = new LinkedList<>();
         browsers.add(BrowserVersion.FIREFOX_60);
-        browsers.add(BrowserVersion.FIREFOX_52);
+        browsers.add(BrowserVersion.FIREFOX_68);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
         browsers.add(BrowserVersion.CHROME);
 
@@ -111,8 +111,8 @@ public class BrowserVersionFeaturesTest  {
         if (browser == BrowserVersion.FIREFOX_60) {
             return SupportedBrowser.FF60;
         }
-        if (browser == BrowserVersion.FIREFOX_52) {
-            return SupportedBrowser.FF52;
+        if (browser == BrowserVersion.FIREFOX_68) {
+            return SupportedBrowser.FF68;
         }
 
         return SupportedBrowser.IE;

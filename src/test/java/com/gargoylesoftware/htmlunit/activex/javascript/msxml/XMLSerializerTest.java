@@ -220,7 +220,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<foo/>\r\n", "<foo/>"})
+            IE = {"<foo/>\n", "<foo/>"})
     public void document() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -268,7 +268,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\r\n")
+            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\n")
     public void namespace() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK

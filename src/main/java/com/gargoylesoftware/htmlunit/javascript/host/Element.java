@@ -25,7 +25,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF52;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -1451,7 +1450,6 @@ public class Element extends Node {
      * Returns the {@code onwheel} event handler for this element.
      * @return the {@code onwheel} event handler for this element
      */
-    @JsxGetter(FF52)
     public Function getOnwheel() {
         return getEventHandler("wheel");
     }
@@ -1460,7 +1458,6 @@ public class Element extends Node {
      * Sets the {@code onwheel} event handler for this element.
      * @param onwheel the {@code onwheel} event handler for this element
      */
-    @JsxSetter(FF52)
     public void setOnwheel(final Object onwheel) {
         setEventHandler("wheel", onwheel);
     }

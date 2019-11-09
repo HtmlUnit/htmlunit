@@ -32,7 +32,7 @@ public class BrowserVersionTest extends WebTestCase {
     @Test
     public void getBrowserVersionNumeric() {
         assertEquals(60, BrowserVersion.FIREFOX_60.getBrowserVersionNumeric());
-        assertEquals(52, BrowserVersion.FIREFOX_52.getBrowserVersionNumeric());
+        assertEquals(68, BrowserVersion.FIREFOX_68.getBrowserVersionNumeric());
         assertEquals(11, BrowserVersion.INTERNET_EXPLORER.getBrowserVersionNumeric());
         assertEquals(67, BrowserVersion.CHROME.getBrowserVersionNumeric());
     }
@@ -42,7 +42,7 @@ public class BrowserVersionTest extends WebTestCase {
      */
     @Test
     public void testClone() {
-        final BrowserVersion ff = BrowserVersion.FIREFOX_52;
+        final BrowserVersion ff = BrowserVersion.FIREFOX_68;
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups

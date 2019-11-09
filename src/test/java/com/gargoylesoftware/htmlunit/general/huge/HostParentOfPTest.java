@@ -176,7 +176,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     @NotYetImplemented(IE)
     public void _PerformanceEntry_PerformanceNavigationTiming() throws Exception {
         test("PerformanceEntry", "PerformanceNavigationTiming");
@@ -226,8 +226,7 @@ public class HostParentOfPTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false")
+    @Alerts("true")
     public void _PerformanceNavigationTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceNavigationTiming", "PerformanceNavigationTiming");
     }
@@ -239,7 +238,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _PerformanceObserver_PerformanceObserver() throws Exception {
         test("PerformanceObserver", "PerformanceObserver");
     }
@@ -251,7 +250,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     public void _PerformanceObserverEntryList_PerformanceObserverEntryList() throws Exception {
         test("PerformanceObserverEntryList", "PerformanceObserverEntryList");
     }
@@ -263,7 +262,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF60 = "true")
+            FF = "true")
     @NotYetImplemented(IE)
     public void _PerformanceResourceTiming_PerformanceNavigationTiming() throws Exception {
         test("PerformanceResourceTiming", "PerformanceNavigationTiming");
@@ -347,8 +346,7 @@ public class HostParentOfPTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            FF52 = "false")
+    @Alerts("true")
     public void _PointerEvent_PointerEvent() throws Exception {
         test("PointerEvent", "PointerEvent");
     }
@@ -545,7 +543,8 @@ public class HostParentOfPTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            CHROME = "true")
+            CHROME = "true",
+            FF68 = "true")
     public void _ReadableStream_ReadableStream() throws Exception {
         test("ReadableStream", "ReadableStream");
     }

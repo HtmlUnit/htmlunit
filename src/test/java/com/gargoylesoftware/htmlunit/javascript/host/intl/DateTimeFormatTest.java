@@ -181,7 +181,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF52 = "20.12.2012",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2012")
     public void format_ban() throws Exception {
         test("new Intl.DateTimeFormat('ban').format(date)");
@@ -306,9 +305,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
             FF60 = "\u0627\u0644\u062e\u0645\u064a\u0633\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0662 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
-            FF52 = "\u0627\u0644\u062E\u0645\u064A\u0633\u060C \u0662\u0660 \u062F\u064A\u0633\u0645\u0628\u0631"
-                + "\u060C \u0662\u0660\u0661\u0662 \u0645\u064A\u0644\u0627\u062F\u064A \u0664:\u0660\u0660:\u0660"
-                + "\u0660 \u0635",
             IE = "\u200F\u0627\u0644\u062E\u0645\u064A\u0633\u200F,"
                 + " \u200F\u0660\u0667\u200F \u200F\u0635\u0641\u0631\u200F,"
                 + " \u200F\u0661\u0664\u0663\u0664\u200F \u200E\u0660\u0664\u200E:\u200E\u0660\u0660\u200E:\u200E"
@@ -324,9 +320,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Thursday, December 20, 2012, GMT",
-            CHROME = "Thursday, December 20, 2012, UTC",
-            FF60 = "Thursday, December 20, 2012, UTC",
+    @Alerts(CHROME = "Thursday, December 20, 2012, UTC",
+            FF = "Thursday, December 20, 2012, UTC",
             IE = "\u200EThursday\u200E, \u200EDecember\u200E \u200E20\u200E, \u200E2012")
     @NotYetImplemented
     public void format_utc_short() throws Exception {
@@ -638,6 +633,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2012",
             CHROME = "20.12.2012",
+            FF68 = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da() throws Exception {
         test("new Intl.DateTimeFormat('da').format(date)");
@@ -649,6 +645,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2012",
             CHROME = "20.12.2012",
+            FF68 = "20.12.2012",
             IE = "\u200E20\u200E-\u200E12\u200E-\u200E2012")
     public void format_da_dk() throws Exception {
         test("new Intl.DateTimeFormat('da-DK').format(date)");
@@ -1455,7 +1452,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF = "20/12/2012",
+            FF60 = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt').format(date)");
@@ -1466,7 +1463,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2012",
-            FF = "20/12/2012",
+            FF60 = "20/12/2012",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2012")
     public void format_mt_mt() throws Exception {
         test("new Intl.DateTimeFormat('mt-MT').format(date)");

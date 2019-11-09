@@ -41,7 +41,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"text-datetime", "text-Date"},
             CHROME = {"text-datetime", "date-Date"},
-            FF60 = {"text-datetime", "date-Date"})
+            FF = {"text-datetime", "date-Date"})
     public void type() throws Exception {
         final String html =
               "<html>\n"

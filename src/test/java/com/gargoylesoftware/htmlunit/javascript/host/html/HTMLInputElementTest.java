@@ -83,10 +83,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF52 = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "abc", "abc", "abc", "abc", "abc",
-                        "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF60 = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+    @Alerts(FF = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
                         "abc", "", "50", "abc", "abc", "abc", "abc"},
             CHROME = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
@@ -117,7 +114,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF52 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
+    @Alerts(FF68 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
                         "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "  ", "  ", "  ", "  ", "  ",
                         "  ", "", "50", "  ", "", "  ", ""},
             FF60 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
@@ -137,10 +134,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF52 = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "#000000", "12", "12", "12", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "12"},
-            FF60 = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+    @Alerts(FF = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
                         "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
                         "12", "12", "12", "12", "12", "12", "12"},
             CHROME = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
@@ -281,12 +275,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "submit", "submit", "text", "textarea", "color", "date", "text",
                         "datetime-local", "time", "week", "month", "number",
                         "range", "search", "email", "tel", "url"},
-            FF52 = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
-                        "password", "radio", "reset", "reset",
-                        "submit", "submit", "text", "textarea", "color", "text", "text",
-                        "text", "text", "text", "text", "number", "range",
-                        "search", "email", "tel", "url"},
-            FF60 = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+            FF = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
                         "password", "radio", "reset", "reset",
                         "submit", "submit", "text", "textarea", "color", "date", "text",
                         "text", "time", "text", "text", "number", "range",
@@ -372,10 +361,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF52 = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF60 = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+    @Alerts(FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                     "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
                     "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",

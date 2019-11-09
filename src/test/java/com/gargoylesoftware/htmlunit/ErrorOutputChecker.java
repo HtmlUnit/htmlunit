@@ -49,8 +49,8 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile("INFO(RMATION)?: Detected dialect: W3C\r?\n"),
 
             // GeckoDriver
-            Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
-                                + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
+//            Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sgeckodriver "
+//                                + ExternalTest.GECKO_DRIVER_.replace(".", "\\.") + ".*", Pattern.DOTALL),
             Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
                     + ".*\\n.*\\r\\n.*TLS certificate errors will be ignored for this session\\r\\n"),
             Pattern.compile("Unable to read VR Path Registry from .*\\r\\n"

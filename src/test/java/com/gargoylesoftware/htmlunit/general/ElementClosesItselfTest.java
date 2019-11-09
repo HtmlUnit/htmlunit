@@ -811,7 +811,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "1",
-            FF60 = "1")
+            FF = "1")
     public void isindex() throws Exception {
         loadPageWithAlerts2(test("isindex"));
     }
