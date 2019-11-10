@@ -236,10 +236,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_BEFOREUNLOADEVENT,
 
-    /** Supports event type 'FocusEvent'. */
-    @BrowserFeature({CHROME, FF, IE})
-    EVENT_TYPE_FOCUSEVENT,
-
     /** Supports event type 'HashChangeEvent'. */
     @BrowserFeature({CHROME, FF})
     EVENT_TYPE_HASHCHANGEEVENT,

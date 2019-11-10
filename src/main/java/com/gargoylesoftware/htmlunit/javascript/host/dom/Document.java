@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_FOCUSEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_KEY_EVENTS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MOUSEWHEELEVENT;
@@ -1206,20 +1205,19 @@ public class Document extends Node {
                 && ("Events".equals(eventType)
                 || "KeyEvents".equals(eventType) && getBrowserVersion().hasFeature(EVENT_TYPE_KEY_EVENTS)
                 || "HashChangeEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)
                 || "BeforeUnloadEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_BEFOREUNLOADEVENT)
                 || "MouseWheelEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_MOUSEWHEELEVENT)
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_MOUSEWHEELEVENT)
                 || "PointerEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_POINTEREVENT)
                 || "PopStateEvent".equals(eventType)
                 || "ProgressEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
                 || "FocusEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_FOCUSEVENT)
                 || "WheelEvent".equals(eventType)
-                    && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
 
             if (PopStateEvent.class == clazz
