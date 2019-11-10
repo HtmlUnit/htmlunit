@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code HTMLSlotElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlSlot.class, value = CHROME)
 public class HTMLSlotElement extends HTMLElement {

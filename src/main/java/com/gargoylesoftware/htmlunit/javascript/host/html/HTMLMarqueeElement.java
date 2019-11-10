@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlMarquee;
@@ -29,13 +30,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-@JsxClass(domClass = HtmlMarquee.class, value = {CHROME, IE})
+@JsxClass(domClass = HtmlMarquee.class, value = {CHROME, FF68, IE})
 public class HTMLMarqueeElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor(CHROME)
+    @JsxConstructor({CHROME, FF68})
     public HTMLMarqueeElement() {
     }
 

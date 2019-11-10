@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @author Marc Guillemot
  * @author Ronald Brill
  */
-@JsxClass(FF68)
+@JsxClass(FF60)
 public class CSSPrimitiveValue extends CSSValue {
 
     /**

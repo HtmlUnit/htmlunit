@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -33,7 +32,7 @@ public class CSSSupportsRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60})
+    @JsxConstructor({CHROME, FF})
     public CSSSupportsRule() {
     }
 }

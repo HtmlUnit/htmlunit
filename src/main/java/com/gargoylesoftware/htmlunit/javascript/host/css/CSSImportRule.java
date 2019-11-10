@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
@@ -42,7 +42,7 @@ public class CSSImportRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, FF60})
+    @JsxConstructor({CHROME, FF})
     public CSSImportRule() {
     }
 

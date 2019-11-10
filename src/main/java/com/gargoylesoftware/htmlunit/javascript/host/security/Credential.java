@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.security;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -25,8 +25,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * A JavaScript object for {@code Credential}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({CHROME, FF60})
+@JsxClass({CHROME, FF})
 public class Credential extends SimpleScriptable {
 
     /**
