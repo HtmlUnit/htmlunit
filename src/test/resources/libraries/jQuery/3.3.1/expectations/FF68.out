@@ -1,0 +1,1349 @@
+
+jQuery Test Suite
+Hide passed testsCheck for GlobalsNo try-catchLoad with AMDLoad unminifiedAlways check jQuery.data
+Filter:
+Module:
+QUnit 1.23.1; Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0
+
+Tests completed in 868148 milliseconds.
+4625 assertions of 5349 passed, 724 failed.
+
+    ready: jQuery.isReady (2)Rerun [fc73fe42]1 ms
+    ready: jQuery ready (10)Rerun [b6c34eda]49 ms
+    ready: jQuery.when(jQuery.ready) (2)Rerun [2abf4f9f]35 ms
+    ready: Promise.resolve(jQuery.ready) (2)Rerun [cdc6ad2e]21 ms
+    ready: Error in ready callback does not halt all future executions (gh-1823) (1)Rerun [4d1242b7]23 ms
+    ready: holdReady test needs to be a standalone test since it deals with DOM ready (2)Rerun [216c3c4d]400 ms
+    basic: ajax (4)Rerun [b948dcce]66 ms
+    basic: attributes (6)Rerun [0b3d9985]4 ms
+    basic: css (1)Rerun [9a9f4995]26 ms
+    basic: show/hide (2)Rerun [201dfb26]10 ms
+    basic: core (18)Rerun [b949da4d]4 ms
+    basic: data (4)Rerun [b94a1a58]1 ms
+    basic: dimensions (3)Rerun [0bc22ffb]15 ms
+    basic: event (1)Rerun [70109dac]4 ms
+    basic: manipulation (5)Rerun [4555384b]2 ms
+    basic: offset (3)Rerun [a2329bc1]14 ms
+    basic: selector (2)Rerun [5410178d]1 ms
+    basic: serialize (2)Rerun [720bb8f2]2 ms
+    basic: traversing (12)Rerun [1c17bddd]3 ms
+    basic: wrap (3)Rerun [b952faf8]2 ms
+    core: Unit Testing Environment (2)Rerun [2e3f04a4]0 ms
+    core: Basic requirements (7)Rerun [b8dae67f]0 ms
+    core: jQuery() (2, 4, 6)Rerun [0680cf5c]5 ms
+        jQuery() === jQuery([])@ 2 ms
+        jQuery(undefined) === jQuery([])@ 3 ms
+        jQuery(null) === jQuery([])@ 4 ms
+        jQuery('') === jQuery([])@ 4 ms
+        Died on test #5 @http://localhost:22222/jquery/test/unit/core.js:20:1
+        : Syntax error, unrecognized expression: #@ 4 ms
+        Source:     
+
+        E</oe.error@http://localhost:22222/jquery/dist/jquery.min.js:2:12961
+        E</oe.tokenize@http://localhost:22222/jquery/dist/jquery.min.js:2:18943
+        E</oe.select@http://localhost:22222/jquery/dist/jquery.min.js:2:21833
+        oe@http://localhost:22222/jquery/dist/jquery.min.js:2:6808
+        find@http://localhost:22222/jquery/dist/jquery.min.js:2:24400
+        w.fn.init@http://localhost:22222/jquery/dist/jquery.min.js:2:24889
+        w@http://localhost:22222/jquery/dist/jquery.min.js:2:896
+        @http://localhost:22222/jquery/test/unit/core.js:66:9
+        runTest@http://localhost:22222/jquery/external/qunit/qunit.js:843:28
+        run@http://localhost:22222/jquery/external/qunit/qunit.js:828:4
+        run/<@http://localhost:22222/jquery/external/qunit/qunit.js:970:11
+        process@http://localhost:22222/jquery/external/qunit/qunit.js:629:24
+        begin@http://localhost:22222/jquery/external/qunit/qunit.js:611:2
+        resumeProcessing/<@http://localhost:22222/jquery/external/qunit/qunit.js:671:4
+
+        Expected 28 assertions, but 5 were run@ 5 ms
+        Source:     
+
+        @http://localhost:22222/jquery/test/unit/core.js:20:1
+
+    Source: @http://localhost:22222/jquery/test/unit/core.js:20:1
+    core: jQuery(selector, context) (3)Rerun [196dd81a]1 ms
+    core: selector state (17, 1, 18)Rerun [8d8d06ad]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/core.js:160:1
+    core: globalEval (3)Rerun [0440d2fc]1 ms
+    core: noConflict (7)Rerun [59f980d0]0 ms
+    core: trim (13)Rerun [9dba41ff]0 ms
+    core: type (28)Rerun [9dba5d17]2 ms
+    core: isPlainObject (16)Rerun [887480e2]137 ms
+    core: isFunction (19)Rerun [5a7e4f3f]1 ms
+    core: isNumeric (1, 37, 38)Rerun [0d28b6c6]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/core.js:464:1
+    core: isXMLDoc - HTML (4)Rerun [e01cfc16]2 ms
+    core: XSS via location.hash (1)Rerun [78959170]25 ms
+    core: isXMLDoc - XML (3)Rerun [59cf9e2c]0 ms
+    core: isWindow (14)Rerun [72386517]1 ms
+    core: jQuery('html') (18)Rerun [a16831a7]4 ms
+    core: jQuery('massive html #7990') (3)Rerun [9798de1f]36 ms
+    core: jQuery('html', context) (1)Rerun [21c16e10]0 ms
+    core: jQuery(selector, xml).text(str) - loaded via xml document (2)Rerun [fafab1b5]2 ms
+    core: end() (3)Rerun [18b8b0df]0 ms
+    core: length (1)Rerun [09d60583]1 ms
+    core: get() (1)Rerun [18d1049a]1 ms
+    core: toArray() (1)Rerun [1809f262]0 ms
+    core: inArray() (19)Rerun [51380078]2 ms
+    core: get(Number) (2)Rerun [56995191]0 ms
+    core: get(-Number) (2)Rerun [17b75382]0 ms
+    core: each(Function) (1)Rerun [0fa24667]0 ms
+    core: slice() (7)Rerun [aedfaf16]1 ms
+    core: first()/last() (4)Rerun [976fc3d2]1 ms
+    core: map() (2)Rerun [1923b120]1 ms
+    core: jQuery.map (25)Rerun [698e2e09]4 ms
+    core: jQuery.merge() (10)Rerun [8265e566]1 ms
+    core: jQuery.grep() (8)Rerun [8f4e4e8a]0 ms
+    core: jQuery.extend(Object, Object) (28)Rerun [bbeda45c]3 ms
+    core: jQuery.each(Object,Function) (23)Rerun [5889c4d8]2 ms
+    core: JIT compilation does not interfere with length retrieval (gh-2145) (4)Rerun [35566d78]2 ms
+    core: jQuery.makeArray (15)Rerun [696f93f8]2 ms
+    core: jQuery.inArray (3)Rerun [bb7b4e61]0 ms
+    core: jQuery.isEmptyObject (2)Rerun [f2b417cf]0 ms
+    core: jQuery.proxy (9)Rerun [3eecdbdb]1 ms
+    core: jQuery.parseHTML (3, 14, 17)Rerun [b2541bcb]26 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/core.js:1323:1
+    core: jQuery.parseJSON (20)Rerun [b2550108]2 ms
+    core: jQuery.parseXML (8)Rerun [2f0b33d7]0 ms
+    core: jQuery.camelCase() (1, 6, 7)Rerun [b504e034]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/core.js:1479:1
+    core: global failure (2, 0, 2)Rerun [2f805baa]0 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    callbacks: jQuery.Callbacks( '' ) - no filter (21)Rerun [7e717211]100 ms
+    callbacks: jQuery.Callbacks( { } ) - no filter (21)Rerun [379676d3]25 ms
+    callbacks: jQuery.Callbacks( '' ) - filter (21)Rerun [e676825e]53 ms
+    callbacks: jQuery.Callbacks( { } ) - filter (21)Rerun [e55384dc]55 ms
+    callbacks: jQuery.Callbacks( 'once' ) - no filter (21)Rerun [b69b7af0]54 ms
+    callbacks: jQuery.Callbacks( { 'once': true } ) - no filter (21)Rerun [2c977bc6]60 ms
+    callbacks: jQuery.Callbacks( 'once' ) - filter (21)Rerun [9a493ddf]65 ms
+    callbacks: jQuery.Callbacks( { 'once': true } ) - filter (21)Rerun [5ceadcc9]53 ms
+    callbacks: jQuery.Callbacks( 'memory' ) - no filter (21)Rerun [18655130]87 ms
+    callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter (21)Rerun [aff804c6]93 ms
+    callbacks: jQuery.Callbacks( 'memory' ) - filter (21)Rerun [15790f9f]43 ms
+    callbacks: jQuery.Callbacks( { 'memory': true } ) - filter (21)Rerun [6b7ef3c9]27 ms
+    callbacks: jQuery.Callbacks( 'unique' ) - no filter (21)Rerun [46f00860]27 ms
+    callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter (21)Rerun [6cb08bf6]26 ms
+    callbacks: jQuery.Callbacks( 'unique' ) - filter (21)Rerun [40cd266f]39 ms
+    callbacks: jQuery.Callbacks( { 'unique': true } ) - filter (21)Rerun [5bf73a99]40 ms
+    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter (21)Rerun [a8ca7f15]40 ms
+    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter (21)Rerun [afdb5241]38 ms
+    callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter (21)Rerun [64ac33da]39 ms
+    callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter (21)Rerun [d264102e]38 ms
+    callbacks: jQuery.Callbacks( 'once memory' ) - no filter (21)Rerun [15ef8bf7]39 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter (21)Rerun [ff40c7ed]39 ms
+    callbacks: jQuery.Callbacks( 'once memory' ) - filter (21)Rerun [28232238]41 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter (21)Rerun [644e5a02]39 ms
+    callbacks: jQuery.Callbacks( 'once unique' ) - no filter (21)Rerun [447a4327]39 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter (21)Rerun [bbf94f1d]39 ms
+    callbacks: jQuery.Callbacks( 'once unique' ) - filter (21)Rerun [53773908]40 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter (21)Rerun [54c6a0d2]40 ms
+    callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter (21)Rerun [de28e8ae]43 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter (21)Rerun [b1216f7a]40 ms
+    callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter (21)Rerun [2892d8e1]40 ms
+    callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter (21)Rerun [7288a595]44 ms
+    callbacks: jQuery.Callbacks( 'memory unique' ) - no filter (21)Rerun [325ee4e7]40 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter (21)Rerun [6727d81d]40 ms
+    callbacks: jQuery.Callbacks( 'memory unique' ) - filter (21)Rerun [73ebef48]41 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter (21)Rerun [fe4cb7d2]48 ms
+    callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter (21)Rerun [02a35eee]40 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter (21)Rerun [9aa0867a]43 ms
+    callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter (21)Rerun [2fd60aa1]41 ms
+    callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter (21)Rerun [0c38ee95]39 ms
+    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter (21)Rerun [1464ce1e]40 ms
+    callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter (21)Rerun [3f655d4a]39 ms
+    callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter (21)Rerun [0a2e6971]40 ms
+    callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter (21)Rerun [747009c5]41 ms
+    callbacks: jQuery.Callbacks( options ) - options are copied (1)Rerun [923a6442]1 ms
+    callbacks: jQuery.Callbacks.fireWith - arguments are copied (1)Rerun [78b2320f]0 ms
+    callbacks: jQuery.Callbacks.remove - should remove all instances (1)Rerun [cb02f2c3]0 ms
+    callbacks: jQuery.Callbacks.has (13)Rerun [6fd17bf8]1 ms
+    callbacks: jQuery.Callbacks() - adding a string doesn't cause a stack overflow (1)Rerun [5258dfa5]0 ms
+    deferred: jQuery.Deferred (3, 1, 4)Rerun [09ee1fb2]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:11:2 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/deferred.js:5:8
+    deferred: jQuery.Deferred - new operator (3, 1, 4)Rerun [62d20265]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:11:2 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/deferred.js:5:8
+    deferred: jQuery.Deferred - chainability (10)Rerun [8f1ac28a]1 ms
+    deferred: jQuery.Deferred.then - filtering (done) (2, 2, 4)Rerun [d0d4d16f]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:96:1
+    deferred: jQuery.Deferred.then - filtering (fail) (2, 2, 4)Rerun [d0ea9153]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:130:1
+    deferred: jQuery.Deferred.then - filtering (progress) (1, 2, 3)Rerun [357d8424]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:164:1
+    deferred: jQuery.Deferred.then - deferred (done) (1, 2, 3)Rerun [877e85a6]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:190:1
+    deferred: jQuery.Deferred.then - deferred (fail) (1, 2, 3)Rerun [8794458a]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:218:1
+    deferred: jQuery.Deferred.then - deferred (progress) (1, 2, 3)Rerun [5b3444db]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:246:1
+    deferred: jQuery.Deferred.then - context (1, 0, 1)Rerun [d230e435]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:274:1
+    deferred: jQuery.when (37)Rerun [6b29306d]4 ms
+    deferred: jQuery.when - joined (13, 35, 48)Rerun [fe8b6cef]26 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deferred.js:377:1
+    deprecated: bind/unbind (4)Rerun [7e81b3ff]2 ms
+    deprecated: delegate/undelegate (2)Rerun [5f1b027f]3 ms
+    deprecated: hover() mouseenter mouseleave (1)Rerun [fd2a1553]3 ms
+    deprecated: trigger() shortcuts (5)Rerun [e295cadd]3 ms
+    deprecated: Event aliases (18)Rerun [6cee512f]20 ms
+    deprecated: jQuery.parseJSON (20)Rerun [6097b574]1 ms
+    deprecated: jQuery.isArray (1)Rerun [fe0068e8]1 ms
+    deprecated: jQuery.nodeName (8)Rerun [30cbb534]0 ms
+    deprecated: type (28)Rerun [fe775383]1 ms
+    deprecated: type for `Symbol` (2)Rerun [a918d83c]1 ms
+    deprecated: isFunction (20)Rerun [cc4bc4ab]1 ms
+    deprecated: isFunction(cross-realm function) (7, 6, 13)Rerun [46f5c2b6]82 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/deprecated.js:379:7
+    deprecated: isFunction(GeneratorFunction) (1)Rerun [353ef97b]0 ms
+    deprecated: isFunction(AsyncFunction) (1)Rerun [1bcb8672]0 ms
+    deprecated: isFunction(custom @@toStringTag) (2)Rerun [ee44842d]0 ms
+    deprecated: jQuery.isWindow (14)Rerun [e716b741]2 ms
+    deprecated: jQuery.camelCase() (7)Rerun [dd6c29a0]0 ms
+    deprecated: jQuery.now (1)Rerun [db5ba8ef]1 ms
+    deprecated: jQuery.proxy (9)Rerun [7332a647]1 ms
+    deprecated: isNumeric (43)Rerun [4260e3da]2 ms
+    deprecated: isNumeric(Symbol) (2)Rerun [09914223]0 ms
+    support: zoom of doom (#13089) (1)Rerun [04c165a3]0 ms
+    support: global failure (2, 0, 2)Rerun [5f7c257a]0 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    data: expando (1)Rerun [59d58323]0 ms
+    data: jQuery.data(div) (2, 25, 27)Rerun [f1b20eb8]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:73:1
+    data: jQuery.data({}) (25)Rerun [419abc07]3 ms
+    data: jQuery.data(window) (25)Rerun [4c810139]2 ms
+    data: jQuery.data(document) (2, 25, 27)Rerun [7572f16e]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:96:1
+    data: Expando cleanup (2, 2, 4)Rerun [f2c75a87]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:102:1
+    data: Data is not being set on comment and text nodes (2)Rerun [2e27dfab]1 ms
+    data: jQuery.acceptData (2, 0, 2)Rerun [f98e92d0]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:144:1
+    data: jQuery().data() === undefined (#14101) (2)Rerun [bc9e4320]0 ms
+    data: .data() (5)Rerun [d972e5e7]0 ms
+    data: jQuery(Element).data(String, Object).data(String) (18)Rerun [45a0b398]2 ms
+    data: jQuery(plain Object).data(String, Object).data(String) (16)Rerun [eaf0a56f]1 ms
+    data: data-* attributes (1, 42, 43)Rerun [e11170de]8 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:251:1
+    data: .data(Object) (4)Rerun [b21f7be8]1 ms
+    data: jQuery.removeData (10)Rerun [842bb84c]0 ms
+    data: .removeData() (6)Rerun [dde09a8b]1 ms
+    data: JSON serialization (#8108) (1)Rerun [c57d2337]0 ms
+    data: jQuery.data should follow html5 specification regarding camel casing (10)Rerun [d89a4121]2 ms
+    data: jQuery.data should not miss data with preset hyphenated property names (2)Rerun [d088f21e]0 ms
+    data: jQuery.data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values (24)Rerun [ee44b820]2 ms
+    data: jQuery.data supports interoperable removal of hyphenated/camelCase properties (27)Rerun [505ec023]3 ms
+    data: .removeData supports removal of hyphenated properties via array (#12786) (2, 2, 4)Rerun [34c1ffc9]4 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/data.js:607:1
+    data: Triggering the removeData should not throw exceptions. (#10080) (1)Rerun [8a66db26]92 ms
+    data: Only check element attributes once when calling .data() - #8909 (2)Rerun [f7fc1685]1 ms
+    data: JSON data- attributes can have newlines (1)Rerun [0c916fc1]1 ms
+    data: global failure (2, 0, 2)Rerun [583ca43f]0 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    queue: queue() with other types (14)Rerun [cfea7bc8]30 ms
+    queue: queue(name) passes in the next item in the queue as a parameter (2)Rerun [a0b7b5e8]1 ms
+    queue: queue() passes in the next item in the queue as a parameter to fx queues (3)Rerun [b635b198]514 ms
+    queue: callbacks keep their place in the queue (5)Rerun [b44ac744]419 ms
+    queue: delay() (2)Rerun [67daca39]114 ms
+    queue: clearQueue(name) clears the queue (2)Rerun [cbec94c3]27 ms
+    queue: clearQueue() clears the fx queue (1)Rerun [43a0847c]1 ms
+    queue: fn.promise() - called when fx queue is empty (3)Rerun [3d95283f]45 ms
+    queue: fn.promise( "queue" ) - called whenever last queue function is dequeued (5)Rerun [bd53cbc7]45 ms
+    queue: fn.promise( "queue" ) - waits for animation to complete before resolving (2)Rerun [8c35be6e]32 ms
+    queue: .promise(obj) (2)Rerun [5302fde2]1 ms
+    queue: delay() can be stopped (3)Rerun [6927c207]1515 ms
+    queue: queue stop hooks (2)Rerun [a3692fac]48 ms
+    attributes: jQuery.propFix integrity test (1, 0, 1)Rerun [6ba2179e]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/attributes.js:27:1
+    attributes: attr(String) (50)Rerun [e3b0c806]6 ms
+    attributes: attr(String) on cloned elements, #9646 (4)Rerun [d30b9b85]1 ms
+    attributes: attr(String) in XML Files (3)Rerun [cbf8a58d]2 ms
+    attributes: attr(String, Function) (2)Rerun [e7a05bda]2 ms
+    attributes: attr(Hash) (3)Rerun [ce0ca229]2 ms
+    attributes: attr(String, Object) (71)Rerun [dd42a793]17 ms
+    attributes: attr - extending the boolean attrHandle (1)Rerun [951743f5]1 ms
+    attributes: attr(String, Object) - Loaded via XML document (2)Rerun [39a11351]2 ms
+    attributes: attr(String, Object) - Loaded via XML fragment (2)Rerun [a3e72486]0 ms
+    attributes: attr('tabindex') (8)Rerun [4e40e254]1 ms
+    attributes: attr('tabindex', value) (9)Rerun [ac9022c1]1 ms
+    attributes: removeAttr(String) (1, 11, 12)Rerun [88bb7eea]4 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/attributes.js:568:1
+    attributes: removeAttr(String) in XML (7)Rerun [5ce00072]1 ms
+    attributes: removeAttr(Multi String, variable space width) (8)Rerun [0c02eb67]1 ms
+    attributes: prop(String, Object) (17)Rerun [5c3c4d05]1 ms
+    attributes: prop(String, Object) on null/undefined (14)Rerun [f72c08ce]2 ms
+    attributes: prop('tabindex') (11)Rerun [8bbb10c6]1 ms
+    attributes: prop('tabindex', value) (10)Rerun [ea2c300f]2 ms
+    attributes: removeProp(String) (6)Rerun [e462b65c]1 ms
+    attributes: val() after modification (1)Rerun [6376b503]1 ms
+    attributes: val() (26)Rerun [b03d455d]5 ms
+    attributes: val() with non-matching values on dropdown list (2, 1, 3)Rerun [e1a731fe]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/attributes.js:891:1
+    attributes: val() respects numbers without exception (Bug #9319) (4)Rerun [114aac89]1 ms
+    attributes: val(String/Number) (9)Rerun [6de1bd4e]2 ms
+    attributes: val(Function) (9)Rerun [221ff865]2 ms
+    attributes: val(Array of Numbers) (Bug #7123) (4)Rerun [c6dd91b4]1 ms
+    attributes: val(Function) with incoming value (10)Rerun [41db3b56]3 ms
+    attributes: val(select) after form.reset() (Bug #2551) (3)Rerun [4e5c2644]2 ms
+    attributes: addClass(String) (9)Rerun [fe5d0aec]3 ms
+    attributes: addClass(Function) (9)Rerun [de2e1305]2 ms
+    attributes: addClass(Function) with incoming value (52)Rerun [d371c5f6]4 ms
+    attributes: removeClass(String) - simple (8)Rerun [926c1586]4 ms
+    attributes: removeClass(Function) - simple (8)Rerun [b788da4d]5 ms
+    attributes: removeClass(Function) with incoming value (52)Rerun [6f69a149]5 ms
+    attributes: removeClass() removes duplicates (1)Rerun [2f658969]1 ms
+    attributes: removeClass(undefined) is a no-op (1)Rerun [9a4915c6]1 ms
+    attributes: toggleClass(String|boolean|undefined[, boolean]) (2, 17, 19)Rerun [2b9e011f]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/attributes.js:1275:1
+    attributes: toggleClass(Function[, boolean]) (2, 17, 19)Rerun [0c5ee926]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/attributes.js:1279:1
+    attributes: toggleClass(Function[, boolean]) with incoming value (14)Rerun [86934197]2 ms
+    attributes: addClass, removeClass, hasClass (17)Rerun [a56f0856]2 ms
+    attributes: addClass, removeClass, hasClass on many elements (19)Rerun [cb2313a1]2 ms
+    attributes: contents().hasClass() returns correct values (2)Rerun [c32ecd68]0 ms
+    attributes: hasClass correctly interprets non-space separators (#13835) (4)Rerun [3dc381d0]1 ms
+    attributes: coords returns correct values in IE6/IE7, see #10828 (1)Rerun [7e4920d6]0 ms
+    attributes: should not throw at $(option).val() (#14686) (1)Rerun [822ce1ad]0 ms
+    attributes: Insignificant white space returned for $(option).val() (#14858) (3)Rerun [518874e8]0 ms
+    event: null or undefined handler (2)Rerun [4f7c55f4]15 ms
+    event: on() with non-null,defined data (2)Rerun [a75c7c8a]9 ms
+    event: Handler changes and .trigger() order (1)Rerun [92be6c97]8 ms
+    event: on(), with data (4)Rerun [67870fae]8 ms
+    event: click(), with data (3)Rerun [1bb483e9]6 ms
+    event: on(), with data, trigger with data (4)Rerun [e110c4fa]7 ms
+    event: on(), multiple events at once (2)Rerun [73ce31c1]6 ms
+    event: on(), five events at once (1)Rerun [83218ddf]6 ms
+    event: on(), multiple events at once and namespaces (7)Rerun [a567b4a0]7 ms
+    event: on(), namespace with special add (27)Rerun [5357ecdb]9 ms
+    event: on(), no data (1)Rerun [f9acca13]7 ms
+    event: on/one/off(Object) (6)Rerun [97deefda]10 ms
+    event: on/off(Object), on/off(Object, String) (6)Rerun [25945833]10 ms
+    event: on immediate propagation (2)Rerun [03abeb1e]8 ms
+    event: on bubbling, isDefaultPrevented, stopImmediatePropagation (3)Rerun [cc6b914d]12 ms
+    event: on(), iframes (1)Rerun [e65459b9]9 ms
+    event: on(), trigger change on select (5)Rerun [1452ed2b]9 ms
+    event: on(), namespaced events, cloned events (18)Rerun [83c2eae4]12 ms
+    event: on(), multi-namespaced events (6)Rerun [dd022686]8 ms
+    event: namespace-only event binding is a no-op (2)Rerun [dddfcdb9]7 ms
+    event: on(), with same function (2)Rerun [0b544ace]7 ms
+    event: on(), make sure order is maintained (1)Rerun [0f22ec1f]8 ms
+    event: on(), with different this object (4)Rerun [13398616]6 ms
+    event: on(name, false), off(name, false) (3)Rerun [d4d7a3fe]6 ms
+    event: on(name, selector, false), off(name, selector, false) (3)Rerun [b1e4caa4]8 ms
+    event: on()/trigger()/off() on plain object (7)Rerun [2be9b583]7 ms
+    event: off(type) (1)Rerun [3378a8b4]8 ms
+    event: off(eventObject) (4)Rerun [39bba8ab]7 ms
+    event: hover() mouseenter mouseleave (1)Rerun [002bd3fa]8 ms
+    event: mouseover triggers mouseenter (1)Rerun [1ad46faf]6 ms
+    event: pointerover triggers pointerenter (1)Rerun [fc52722f]6 ms
+    event: withinElement implemented with jQuery.contains() (1)Rerun [976ee805]7 ms
+    event: mouseenter, mouseleave don't catch exceptions (2)Rerun [7700a8fe]6 ms
+    event: trigger() shortcuts (1, 5, 6)Rerun [962f5e44]8 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/event.js:918:2
+    event: trigger() bubbling (18)Rerun [2b1e2612]9 ms
+    event: trigger(type, [data], [fn]) (16)Rerun [5bfbb1c3]10 ms
+    event: submit event bubbles on copied forms (#11649) (3)Rerun [8e85e03a]23 ms
+    event: change event bubbles on copied forms (#11796) (3)Rerun [ec9b3869]12 ms
+    event: trigger(eventObject, [data], [fn]) (28)Rerun [f8fcfbc8]8 ms
+    event: .trigger() bubbling on disconnected elements (#10489) (2)Rerun [57fcf00f]7 ms
+    event: .trigger() doesn't bubble load event (#10717) (1)Rerun [5b3fa683]8 ms
+    event: Delegated events in SVG (#10791; #13180) (2)Rerun [c841373e]13 ms
+    event: Delegated events in forms (#10844; #11145; #8165; #11382, #11764) (5)Rerun [7304f0a8]28 ms
+    event: Submit event can be stopped (#11049) (1)Rerun [85069023]9 ms
+    event: on(beforeunload) (4)Rerun [c4ca9de4]294 ms
+    event: jQuery.Event( type, props ) (5)Rerun [9ee7af47]10 ms
+    event: jQuery.Event properties (12)Rerun [4862ed07]13 ms
+    event: .on()/.off() (65)Rerun [86f809e5]40 ms
+    event: jQuery.off using dispatched jQuery.Event (1)Rerun [a6cd39f6]7 ms
+    event: delegated event with delegateTarget-relative selector (3)Rerun [72cc648d]12 ms
+    event: delegated event with selector matching Object.prototype property (#13203) (1)Rerun [02402d82]8 ms
+    event: delegated event with intermediate DOM manipulation (#13208) (1)Rerun [99091f7b]9 ms
+    event: stopPropagation() stops directly-bound events on delegated target (1)Rerun [97a76f1f]9 ms
+    event: off all bound delegated events (2)Rerun [fbfed32e]8 ms
+    event: on with multiple delegated events (1)Rerun [e8bc1bef]10 ms
+    event: delegated on with change (8)Rerun [825bc50c]12 ms
+    event: delegated on with submit (2)Rerun [9e60f174]10 ms
+    event: delegated off() with only namespaces (2)Rerun [478bcc85]9 ms
+    event: Non DOM element events (1)Rerun [c54cd510]10 ms
+    event: inline handler returning false stops default (1)Rerun [f2abf84c]8 ms
+    event: window resize (2)Rerun [50fdc562]9 ms
+    event: focusin bubbles (2)Rerun [e1fefb42]35 ms
+    event: custom events with colons (#3533, #8272) (1)Rerun [8e42386e]7 ms
+    event: .on and .off (9)Rerun [fa721d1f]12 ms
+    event: special on name mapping (7)Rerun [3334c871]10 ms
+    event: .on and .off, selective mixed removal (#10705) (7)Rerun [7bd80ad7]7 ms
+    event: .on( event-map, null-selector, data ) #11130 (1)Rerun [1f7323b9]7 ms
+    event: clone() delegated events (#11076) (3)Rerun [3233ef57]9 ms
+    event: checkbox state (#3827) (9)Rerun [40ec06fa]7 ms
+    event: hover event no longer special since 1.9 (1)Rerun [0541090b]6 ms
+    event: fixHooks extensions (2, 0, 2)Rerun [7bcb00b7]7 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/event.js:2469:1
+    event: focusin using non-element targets (2)Rerun [5b20ac5d]7 ms
+    event: global failure (2, 0, 2)Rerun [1d30e34f]7 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    selector: element - jQuery only (7)Rerun [9e9fea7a]1 ms
+    selector: id (2, 0, 2)Rerun [0db701f8]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/selector.js:24:1
+    selector: class - jQuery only (4)Rerun [fa5d90b6]6 ms
+    selector: name (2, 0, 2)Rerun [7c00ac28]0 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/selector.js:75:1
+    selector: selectors with comma (4)Rerun [83b7e1c4]1 ms
+    selector: child and adjacent (2, 0, 2)Rerun [484374cc]0 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/selector.js:103:1
+    selector: attributes (2, 0, 2)Rerun [48c47134]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/selector.js:144:1
+    selector: disconnected nodes (1)Rerun [610f9769]0 ms
+    selector: disconnected nodes - jQuery only (3)Rerun [50740424]1 ms
+    selector: selector/html5_selector (2, 0, 2)Rerun [c4e15a07]60015 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/selector.js:274:1
+    selector: jQuery.contains (16)Rerun [c8b315d2]2 ms
+    selector: jQuery.unique (14)Rerun [68a67c44]5 ms
+    selector: selector/sizzle_cache (2, 0, 2)Rerun [7f192785]60027 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/selector.js:467:1
+    selector: Iframe dispatch should not affect jQuery (#13936) (1)Rerun [958e0234]483 ms
+    traversing: find(String) (1)Rerun [44dc4676]2 ms
+    traversing: find(String) under non-elements (1, 1, 2)Rerun [8a165e29]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:8:1
+    traversing: find(leading combinator) (4)Rerun [6c067eb1]5 ms
+    traversing: find(node|jQuery object) (1, 12, 13)Rerun [165911c0]5 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:26:1
+    traversing: is(String|undefined) (23)Rerun [53d824d3]3 ms
+    traversing: is() against non-elements (#10178) (14)Rerun [32648f33]1 ms
+    traversing: is(jQuery) (1, 18, 19)Rerun [09b3677a]21 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:108:1
+    traversing: is() with :has() selectors (6)Rerun [6b8baba7]13 ms
+    traversing: is() with positional selectors (27)Rerun [435ba0da]14 ms
+    traversing: index() (2)Rerun [2a27d866]1 ms
+    traversing: index(Object|String|undefined) (16)Rerun [c3ba094a]6 ms
+    traversing: filter(Selector|undefined) (9)Rerun [47ce3153]13 ms
+    traversing: filter(Function) (2)Rerun [33bf57ce]1 ms
+    traversing: filter(Element) (1)Rerun [5405ec90]1 ms
+    traversing: filter(Array) (1)Rerun [5296a193]1 ms
+    traversing: filter(jQuery) (1)Rerun [40f92948]0 ms
+    traversing: filter() with positional selectors (19)Rerun [9a4c6fa8]6 ms
+    traversing: closest() (13)Rerun [53163f6d]4 ms
+    traversing: closest() with positional selectors (1, 1, 2)Rerun [818a3e8f]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:358:1
+    traversing: closest(jQuery) (8)Rerun [588031af]2 ms
+    traversing: not(Selector|undefined) (2, 9, 11)Rerun [cd9ff434]46 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:381:1
+    traversing: not(Element) (1)Rerun [ce912c4f]0 ms
+    traversing: not(Function) (1)Rerun [0a9c0fef]0 ms
+    traversing: not(Array) (2)Rerun [961cc512]12 ms
+    traversing: not(jQuery) (1, 0, 1)Rerun [6e3775a9]47 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:424:1
+    traversing: has(Element) (3)Rerun [879c1468]2 ms
+    traversing: has(Selector) (5)Rerun [1507abcf]4 ms
+    traversing: has(Arrayish) (4)Rerun [266a38e9]4 ms
+    traversing: addBack() (5)Rerun [51c2327c]5 ms
+    traversing: siblings([String]) (6)Rerun [9243394e]7 ms
+    traversing: siblings([String]) - jQuery only (2)Rerun [4b7ff149]1 ms
+    traversing: children([String]) (2)Rerun [7c54abdc]1 ms
+    traversing: children([String]) - jQuery only (1)Rerun [50d6d357]0 ms
+    traversing: parent([String]) (6)Rerun [a93e9c07]3 ms
+    traversing: parents([String]) (1, 5, 6)Rerun [29f562ac]4 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:536:1
+    traversing: parentsUntil([String]) (3, 7, 10)Rerun [c1716bb2]4 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/traversing.js:546:1
+    traversing: next([String]) (6)Rerun [2604c650]2 ms
+    traversing: prev([String]) (5)Rerun [9e01cd90]1 ms
+    traversing: nextAll([String]) (5)Rerun [29363911]4 ms
+    traversing: prevAll([String]) (5)Rerun [5764e9d1]3 ms
+    traversing: nextUntil([String]) (12)Rerun [fe62ae8e]12 ms
+    traversing: prevUntil([String]) (11)Rerun [5ba82f4e]6 ms
+    traversing: contents() (12)Rerun [993eada8]5 ms
+    traversing: sort direction (12)Rerun [b377110a]11 ms
+    traversing: add(String selector) (2)Rerun [17cf5c6f]1 ms
+    traversing: add(String selector, String context) (1)Rerun [46df2fbb]2 ms
+    traversing: add(String html) (3)Rerun [f23daca3]1 ms
+    traversing: add(jQuery) (4)Rerun [1b2b9577]2 ms
+    traversing: add(Element) (2)Rerun [c0210641]1 ms
+    traversing: add(Array elements) (1)Rerun [a613a4f7]0 ms
+    traversing: add(Window) (1)Rerun [56a65a25]1 ms
+    traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement) (4)Rerun [b1b47397]22 ms
+    traversing: add(String, Context) (6)Rerun [5c1fe653]1 ms
+    traversing: eq('-1') #10616 (3)Rerun [abea487b]2 ms
+    traversing: index(no arg) #10977 (2)Rerun [88c07b48]1 ms
+    traversing: traversing non-elements with attribute filters (#12523) (5)Rerun [fd8d0eed]1 ms
+    manipulation: text() (5)Rerun [79abb7cd]9 ms
+    manipulation: text(undefined) (1)Rerun [b76b69b5]0 ms
+    manipulation: text(String) (7)Rerun [b853a6bc]2 ms
+    manipulation: text(Function) (7)Rerun [f4ecfad5]2 ms
+    manipulation: text(Function) with incoming value (2)Rerun [60fea5c6]0 ms
+    manipulation: append(String|Element|Array<Element>|jQuery) (2, 49, 51)Rerun [d1fdf7d0]25 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/manipulation.js:309:1
+    manipulation: append(Function) (2, 49, 51)Rerun [72a7c4c2]25 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/manipulation.js:313:1
+    manipulation: append(param) to object, see #11280 (5)Rerun [65c5f097]2 ms
+    manipulation: append(Function) returns String (4)Rerun [750e10cc]0 ms
+    manipulation: append(Function) returns Element (2)Rerun [39c085a1]1 ms
+    manipulation: append(Function) returns Array<Element> (2)Rerun [29c710a0]0 ms
+    manipulation: append(Function) returns jQuery (2)Rerun [9a619f19]2 ms
+    manipulation: append(Function) returns Number (2)Rerun [6c918c04]1 ms
+    manipulation: XML DOM manipulation (#9960) (5)Rerun [5daa93d7]4 ms
+    manipulation: append the same fragment with events (Bug #6997, 5566) (2)Rerun [5aad1eac]183 ms
+    manipulation: append HTML5 sectioning elements (Bug #6485) (2)Rerun [2831131c]3 ms
+    manipulation: HTML5 Elements inherit styles from style rules (Bug #10501) (1)Rerun [6118970a]9 ms
+    manipulation: html(String) with HTML5 (Bug #6485) (2)Rerun [9dd21615]1 ms
+    manipulation: IE8 serialization bug (2)Rerun [7eedaf01]1 ms
+    manipulation: html() object element #10324 (1)Rerun [4c0b7603]1 ms
+    manipulation: append(xml) (1)Rerun [15c79ec1]1 ms
+    manipulation: appendTo(String) (4)Rerun [78206d44]1 ms
+    manipulation: appendTo(Element|Array<Element>) (2)Rerun [498a1bd0]0 ms
+    manipulation: appendTo(jQuery) (2, 2, 4)Rerun [fd3ea897]6 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/manipulation.js:624:1
+    manipulation: prepend(String) (2)Rerun [fefaf07f]2 ms
+    manipulation: prepend(Element) (1)Rerun [74e63b46]3 ms
+    manipulation: prepend(Array<Element>) (1)Rerun [ced9292b]1 ms
+    manipulation: prepend(jQuery) (1)Rerun [84192bd2]2 ms
+    manipulation: prepend(Array<jQuery>) (1)Rerun [d2e2c485]5 ms
+    manipulation: prepend(Function) with incoming value -- String (4)Rerun [a2fa629a]2 ms
+    manipulation: prepend(Function) with incoming value -- Element (2)Rerun [c95e6d93]0 ms
+    manipulation: prepend(Function) with incoming value -- Array<Element> (2)Rerun [a1e3b46e]1 ms
+    manipulation: prepend(Function) with incoming value -- jQuery (2)Rerun [c84df0e7]2 ms
+    manipulation: prependTo(String) (2)Rerun [3461885a]0 ms
+    manipulation: prependTo(Element) (1)Rerun [ec529ecb]0 ms
+    manipulation: prependTo(Array<Element>) (1)Rerun [7243b606]2 ms
+    manipulation: prependTo(jQuery) (1)Rerun [b97fc3ad]3 ms
+    manipulation: prependTo(Array<jQuery>) (1, 0, 1)Rerun [8dd5b04a]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/manipulation.js:836:1
+    manipulation: before(String) (1)Rerun [7bc7434e]0 ms
+    manipulation: before(Element) (1)Rerun [91a44257]1 ms
+    manipulation: before(Array<Element>) (1)Rerun [8e893cfa]1 ms
+    manipulation: before(jQuery) (1)Rerun [00e57ea1]2 ms
+    manipulation: before(Array<jQuery>) (1)Rerun [b8097ad6]2 ms
+    manipulation: before(Function) -- Returns String (1)Rerun [7c1eb755]1 ms
+    manipulation: before(Function) -- Returns Element (1)Rerun [14c4b038]1 ms
+    manipulation: before(Function) -- Returns Array<Element> (1)Rerun [d9711e29]1 ms
+    manipulation: before(Function) -- Returns jQuery (1)Rerun [a17245a2]2 ms
+    manipulation: before(Function) -- Returns Array<jQuery> (1)Rerun [a85fb759]2 ms
+    manipulation: before(no-op) (2)Rerun [be0e6066]1 ms
+    manipulation: before and after w/ empty object (#10812) (1)Rerun [e9f42ddf]1 ms
+    manipulation: .before() and .after() disconnected node (2)Rerun [bff98b50]1 ms
+    manipulation: insert with .before() on disconnected node last (1)Rerun [3197d82c]1 ms
+    manipulation: insert with .before() on disconnected node first (1)Rerun [01123fda]0 ms
+    manipulation: insert with .before() on disconnected node last (1)Rerun [01632d74]1 ms
+    manipulation: insert with .before() on disconnected node last (1)Rerun [2b02812c]0 ms
+    manipulation: insertBefore(String) (1)Rerun [2884f727]0 ms
+    manipulation: insertBefore(Element) (1)Rerun [7c9d099e]0 ms
+    manipulation: insertBefore(Array<Element>) (1)Rerun [b5e607d3]1 ms
+    manipulation: insertBefore(jQuery) (1)Rerun [ada3327a]1 ms
+    manipulation: .after(String) (1)Rerun [e8e4973d]0 ms
+    manipulation: .after(Element) (1)Rerun [c8316c48]0 ms
+    manipulation: .after(Array<Element>) (1)Rerun [2a8731e9]0 ms
+    manipulation: .after(jQuery) (1)Rerun [6e02d290]1 ms
+    manipulation: .after(Function) returns String (1)Rerun [d5b993f8]1 ms
+    manipulation: .after(Function) returns Element (1)Rerun [ee8567f5]0 ms
+    manipulation: .after(Function) returns Array<Element> (1)Rerun [3002a7cc]0 ms
+    manipulation: .after(Function) returns jQuery (1)Rerun [fb0d2245]2 ms
+    manipulation: .after(disconnected node) (2)Rerun [1de765fd]1 ms
+    manipulation: insertAfter(String) (1)Rerun [58a72614]1 ms
+    manipulation: insertAfter(Element) (1)Rerun [50c0b851]0 ms
+    manipulation: insertAfter(Array<Element>) (1)Rerun [3354f9c0]0 ms
+    manipulation: insertAfter(jQuery) (1)Rerun [ddc56167]2 ms
+    manipulation: replaceWith(String|Element|Array<Element>|jQuery) (29)Rerun [819c8672]16 ms
+    manipulation: replaceWith(Function) (30)Rerun [85c93a64]13 ms
+    manipulation: replaceWith(string) for more than one element (3)Rerun [691afae2]0 ms
+    manipulation: Empty replaceWith (#13401; #13596) (8)Rerun [5b1d9bf7]1 ms
+    manipulation: replaceAll(String) (2)Rerun [8a81309c]0 ms
+    manipulation: replaceAll(Element) (2)Rerun [5a27fec9]1 ms
+    manipulation: replaceAll(Array<Element>) (3)Rerun [5bdffc48]1 ms
+    manipulation: replaceAll(jQuery) (3)Rerun [0f9f6bef]2 ms
+    manipulation: jQuery.clone() (#8017) (2)Rerun [420b951d]1 ms
+    manipulation: append to multiple elements (#8070) (2)Rerun [1423a5a6]1 ms
+    manipulation: table manipulation (2)Rerun [cb6ffd0e]37 ms
+    manipulation: clone() (45)Rerun [43f2961f]49 ms
+    manipulation: clone(script type=non-javascript) (#11359) (3)Rerun [ba6bf709]1 ms
+    manipulation: clone(form element) (Bug #3879, #6655) (5)Rerun [5b5d57f1]1 ms
+    manipulation: clone(multiple selected options) (Bug #8129) (1)Rerun [b4779b24]2 ms
+    manipulation: clone() on XML nodes (2)Rerun [549e70a8]2 ms
+    manipulation: clone() on local XML nodes with html5 nodename (2)Rerun [14569a30]2 ms
+    manipulation: html(undefined) (1)Rerun [3ff2cc77]1 ms
+    manipulation: html() on empty set (1)Rerun [efc42543]0 ms
+    manipulation: html(String|Number) (39)Rerun [177371b3]8 ms
+    manipulation: html(Function) (39)Rerun [5c6d37d3]6 ms
+    manipulation: html( $.text() ) (1)Rerun [65e95643]1 ms
+    manipulation: html( fn ) returns $.text() (1)Rerun [ecc5d222]1 ms
+    manipulation: html(Function) with incoming value -- direct selection (4)Rerun [3bbe8a39]0 ms
+    manipulation: html(Function) with incoming value -- jQuery.contents() (14)Rerun [bf0a0767]3 ms
+    manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858) (2)Rerun [9c138b84]0 ms
+    manipulation: remove() no filters (3)Rerun [3b3ef098]1 ms
+    manipulation: remove() with filters (8)Rerun [90ccaf9d]1 ms
+    manipulation: remove() event cleaning (1)Rerun [4ba995c5]2 ms
+    manipulation: remove() in document order #13779 (1)Rerun [9233c3ec]3 ms
+    manipulation: detach() no filters (3)Rerun [d4e901e9]0 ms
+    manipulation: detach() with filters (8)Rerun [6837b0ae]2 ms
+    manipulation: detach() event cleaning (1)Rerun [b8daaf14]2 ms
+    manipulation: empty() (6)Rerun [af85020f]2 ms
+    manipulation: jQuery.cleanData (14)Rerun [3cbc3042]3 ms
+    manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779) (1)Rerun [88c3811f]1 ms
+    manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221) (3)Rerun [2decd219]2 ms
+    manipulation: jQuery.buildFragment - plain objects are not a document #8950 (1)Rerun [8b8e8f7a]0 ms
+    manipulation: jQuery.clone - no exceptions for object elements #9587 (1)Rerun [0202079b]1 ms
+    manipulation: Cloned, detached HTML5 elems (#10667,10670) (7)Rerun [bc2d65ae]3 ms
+    manipulation: Guard against exceptions when clearing safeChildNodes (1)Rerun [a093336a]0 ms
+    manipulation: Ensure oldIE creates a new set on appendTo (#8894) (5)Rerun [bab3ba63]3 ms
+    manipulation: html() - script exceptions bubble (#11743) (5, 0, 5)Rerun [af5cc233]181 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/manipulation.js:2266:1
+    manipulation: checked state is cloned with clone() (2)Rerun [0c51698e]3 ms
+    manipulation: manipulate mixed jQuery and text (#12384, #12346) (2)Rerun [4cb95a05]3 ms
+    manipulation: global failure (2, 0, 2)Rerun [827533ec]0 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    wrap: wrap(String|Element) (19)Rerun [3ad4676c]6 ms
+    wrap: wrap(Function) (19)Rerun [14b24165]5 ms
+    wrap: wrap(Function) with index (#10177) (6)Rerun [e82d35bf]2 ms
+    wrap: wrap(String) consecutive elements (#10177) (12)Rerun [199d8111]2 ms
+    wrap: wrapAll(String) (5)Rerun [62f06b95]4 ms
+    wrap: wrapAll(Element) (3)Rerun [8fa022f0]3 ms
+    wrap: wrapInner(String) (6)Rerun [13d74a4a]2 ms
+    wrap: wrapInner(Element) (5)Rerun [fb951adb]0 ms
+    wrap: wrapInner(Function) returns String (6)Rerun [a98bbc8b]1 ms
+    wrap: wrapInner(Function) returns Element (5)Rerun [94f851c2]1 ms
+    wrap: unwrap() (9)Rerun [d4a4e9b6]14 ms
+    wrap: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667) (2)Rerun [df27d084]0 ms
+    wrap: wrapping scripts (#10470) (2)Rerun [52f4a540]1 ms
+    css: css(String|Hash) (2, 28, 30)Rerun [bd70ccae]47 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/css.js:5:1
+    css: css() explicit and relative values (29)Rerun [55e67956]49 ms
+    css: css(String, Object) (20)Rerun [040f8367]36 ms
+    css: css(Array) (2)Rerun [b21d870e]31 ms
+    css: css(String, Object) for MSIE (3, 2, 5)Rerun [9bc97ad2]10 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/css.js:276:2
+    css: Setting opacity to 1 properly removes filter: style (#6652) (1, 1, 2)Rerun [0cbec846]0 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/css.js:294:2
+    css: css(String, Function) (3)Rerun [8ea592ae]9 ms
+    css: css(String, Function) with incoming value (3)Rerun [d52dd71f]8 ms
+    css: css(Object) where values are Functions (3)Rerun [90ac0dfe]10 ms
+    css: css(Object) where values are Functions with incoming values (3)Rerun [b8bbc3e4]9 ms
+    css: show(); hide() (4)Rerun [80fc46bf]10 ms
+    css: show(); (18)Rerun [c4053aa4]15 ms
+    css: show() resolves correct default display #8099 (2, 5, 7)Rerun [011c2478]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/css.js:513:1
+    css: show() resolves correct default display for detached nodes (7, 6, 13)Rerun [6c7f821d]18 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/css.js:533:1
+    css: show() resolves correct default display #10227 (4)Rerun [2205ab18]62 ms
+    css: show() resolves correct default display when iframe display:none #12904 (2)Rerun [ea7383d0]12 ms
+    css: toggle() (9)Rerun [886670ce]96 ms
+    css: hide hidden elements (bug #7141) (3)Rerun [03e6c6eb]8 ms
+    css: jQuery.css(elem, 'height') doesn't clear radio buttons (bug #1095) (4)Rerun [b2ecf73b]57 ms
+    css: internal ref to elem.runtimeStyle (bug #7608) (1)Rerun [088cf83d]19 ms
+    css: marginRight computed style (bug #3333) (1)Rerun [9a54c243]11 ms
+    css: box model properties incorrectly returning % instead of px, see #10639 and #12088 (2)Rerun [9d1b7146]12 ms
+    css: jQuery.cssProps behavior, (bug #8402) (2)Rerun [bf0079da]30 ms
+    css: widows & orphans #8936 (1)Rerun [2d0ffbea]0 ms
+    css: can't get css for disconnected in IE<9, see #10254 and #8388 (2)Rerun [ce12502e]11 ms
+    css: can't get background-position in IE<9, see #10796 (8)Rerun [a21fbb69]8 ms
+    css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311 (1)Rerun [543290a6]0 ms
+    css: percentage properties for left and top should be transformed to pixels, see #9505 (2)Rerun [9c39f1cc]31 ms
+    css: Do not append px (#9548, #12990) (2)Rerun [e52d4453]8 ms
+    css: css('width') and css('height') should respect box-sizing, see #11004 (4)Rerun [e203a9fa]32 ms
+    css: global failure (2, 0, 2)Rerun [1669f4c6]0 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    serialize: jQuery.param() (13, 9, 22)Rerun [9004571a]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/serialize.js:3:1
+    serialize: jQuery.param() Constructed prop values (4)Rerun [2ed25aef]1 ms
+    serialize: serialize() (3, 2, 5)Rerun [1a0f6125]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/serialize.js:112:1
+    ajax: jQuery.ajax() - success callbacks (2, 6, 8)Rerun [11a69f33]117 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:33:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - success callbacks - (url, options) syntax (2, 6, 8)Rerun [473f095d]66 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:47:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - success callbacks (late binding) (3, 3, 6)Rerun [df5387e3]50 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:63:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - success callbacks (oncomplete binding) (5, 3, 8)Rerun [2a91caf1]84 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:81:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - error callbacks (1, 6, 7)Rerun [ed8cd778]68 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:99:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - textStatus and errorThrown values (4)Rerun [4af235be]75 ms
+    ajax: jQuery.ajax() - responseText on error (1, 0, 1)Rerun [7d19049b]79 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:139:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - retry with jQuery.ajax( this ) (2)Rerun [fbd996cb]84 ms
+    ajax: jQuery.ajax() - headers (2, 0, 2)Rerun [809a3448]67 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:180:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - Accept header (1, 0, 1)Rerun [41e037c7]64 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:224:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - contentType (2, 0, 2)Rerun [25ace715]44 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:237:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - protocol-less urls (1)Rerun [f9877014]57 ms
+    ajax: jQuery.ajax() - hash (3, 0, 3)Rerun [57d8038c]64 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:265:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - cross-domain detection (1, 6, 7)Rerun [4d4f7314]86 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:295:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - abort (1, 7, 8)Rerun [a2c63072]64 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:349:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - events with context (1, 11, 12)Rerun [6b614dbe]69 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:366:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - events without context (3)Rerun [dc08b44e]65 ms
+    ajax: #15118 - jQuery.ajax() - function without jQuery.event (2, 1, 3)Rerun [eb310de2]64 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:418:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - context modification (2, 1, 3)Rerun [8a14e6eb]71 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:434:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - context modification through ajaxSetup (2, 1, 3)Rerun [70060ead]73 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:446:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - disabled globals (1, 2, 3)Rerun [2120810a]63 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:470:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (2, 0, 2)Rerun [294e634f]66 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:485:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP) (3, 0, 3)Rerun [6c0c8596]42 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:495:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - HEAD requests (2, 0, 2)Rerun [c9f4c146]77 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:505:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - beforeSend (1, 0, 1)Rerun [41e697a5]105 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:525:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - beforeSend, cancel request manually (2)Rerun [be018331]69 ms
+    ajax: jQuery.ajax() - dataType html (2, 0, 2)Rerun [2f65b789]64 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:559:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - synchronous request (3, 0, 3)Rerun [3354227a]48 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:574:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - synchronous request with callbacks (2, 0, 2)Rerun [6ac8a05a]66 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:584:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object (3, 5, 8)Rerun [e0e98fe7]60042 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:599:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - cache (12)Rerun [a2e1bcc4]111 ms
+    ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain (9, 0, 9)Rerun [0af1ad6b]123 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:680:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain (8, 1, 9)Rerun [89307bc0]100 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:715:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain (5, 0, 5)Rerun [21ec63be]104 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:779:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - POST - Same Domain (7, 0, 7)Rerun [4563ce54]103 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:801:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Same Domain (5, 0, 5)Rerun [317c8a55]105 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:833:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain (4, 0, 4)Rerun [b40cd6d7]122 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:680:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain (5, 1, 6)Rerun [fda7d322]109 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:715:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain (2, 0, 2)Rerun [7c68eae4]136 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:779:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - POST - Cross Domain (3, 0, 3)Rerun [c7ded30e]127 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:801:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSONP - Cross Domain (3, 0, 3)Rerun [5edd972d]140 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:833:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:678:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - script, Remote (2, 0, 2)Rerun [bc1195a3]105 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:865:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - script, Remote with POST (3, 0, 3)Rerun [4085a57d]103 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:876:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - script, Remote with scheme-less URL (2, 0, 2)Rerun [40650873]74 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:889:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - malformed JSON (2)Rerun [4743732b]73 ms
+    ajax: jQuery.ajax() - script by content-type (2, 0, 2)Rerun [37339ee0]77 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:909:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSON by content-type (2, 0, 2)Rerun [e18e807d]67 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:926:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - JSON by content-type disabled with options (2, 0, 2)Rerun [93d5d505]67 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:941:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - simple get (1, 0, 1)Rerun [cd930fe6]81 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:961:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - simple post (1, 0, 1)Rerun [e4d32a10]67 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:969:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - data option - empty bodies for non-GET requests (1, 0, 1)Rerun [beecf48c]74 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:978:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - If-Modified-Since support (cache) (3, 0, 3)Rerun [a14493a6]67 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:998:4 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/ajax.js:989:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - Etag support (cache) (2, 0, 2)Rerun [2e99b551]68 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:1043:4 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/ajax.js:989:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - If-Modified-Since support (no cache) (3, 0, 3)Rerun [17b51107]40 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:998:4 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/ajax.js:989:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - Etag support (no cache) (2, 0, 2)Rerun [1d8e0b7c]72 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:1043:4 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/ajax.js:989:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - failing cross-domain (non-existing) (1)Rerun [8fe7268b]4536 ms
+    ajax: jQuery.ajax() - failing cross-domain (1)Rerun [cf74d80b]86 ms
+    ajax: jQuery.ajax() - atom+xml (1, 0, 1)Rerun [ed49f85b]78 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1105:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - statusText (2, 0, 2)Rerun [31c72c3d]60015 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:1112:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - statusCode (9, 11, 20)Rerun [31bf94fd]278 ms
+
+    Source: asyncTest@http://localhost:22222/jquery/external/qunit/qunit.js:1305:8 @http://localhost:22222/jquery/test/unit/ajax.js:1124:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - transitive conversions (3, 0, 3)Rerun [970147a0]86 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1226:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - overrideMimeType (2, 0, 2)Rerun [e90656f8]57 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1260:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: jQuery.ajax() - empty json gets to error callback instead of success callback. (1, 0, 1)Rerun [b1aea05b]50 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1279:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #2688 - jQuery.ajax() - beforeSend, cancel request (2)Rerun [d97cf56e]59 ms
+    ajax: #2806 - jQuery.ajax() - data option - evaluate function values (1, 0, 1)Rerun [048476ed]83 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1311:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #7531 - jQuery.ajax() - Location object as url (1)Rerun [ba63b869]2 ms
+    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain (1)Rerun [ee78960e]73 ms
+    ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain (1)Rerun [41630294]86 ms
+    ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5 (4)Rerun [93452e30]117 ms
+    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain (2, 0, 2)Rerun [c61fc201]94 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1388:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:1387:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain (2, 0, 2)Rerun [5ea15501]79 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1388:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:1387:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #9887 - jQuery.ajax() - Context with circular references (#9887) (2)Rerun [f66111a0]2 ms
+    ajax: #10093 - jQuery.ajax() - falsy url as argument (4)Rerun [2ed44440]98 ms
+    ajax: #10093 - jQuery.ajax() - falsy url in settings object (4)Rerun [af4a1dec]118 ms
+    ajax: #11151 - jQuery.ajax() - parse error body (2, 0, 2)Rerun [d8837896]146 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1452:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE (1, 0, 1)Rerun [dc9cbb04]89 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1464:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #11743 - jQuery.ajax() - script, throws exception (3, 0, 3)Rerun [fb3d7f01]76 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/ajax.js:1471:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally (3, 0, 3)Rerun [11112fda]70 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1510:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:1491:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally (3, 0, 3)Rerun [b6160961]99 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1510:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2573 @http://localhost:22222/jquery/test/unit/ajax.js:1491:9 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string (1)Rerun [4a5ae56b]88 ms
+    ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests (3, 0, 3)Rerun [ae3814fb]95 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1547:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #13388 - jQuery.ajax() - responseXML (2, 0, 2)Rerun [5fc9540b]85 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1567:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests (3, 0, 3)Rerun [5a6e2185]55 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1577:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: #13240 - jQuery.ajax() - support non-RFC2616 methods (1, 0, 1)Rerun [14c6c1a9]85 ms
+
+    Source: this.ajaxTest@http://localhost:22222/jquery/test/data/testinit.js:171:8 @http://localhost:22222/jquery/test/unit/ajax.js:1600:2 @http://localhost:22222/jquery/test/unit/ajax.js:2078:3
+    ajax: global failure (2, 0, 2)Rerun [1fdde709]1 ms
+
+    Source: window.onerror@http://localhost:22222/jquery/external/qunit/qunit.js:372:11
+    effects: sanity check (1, 0, 1)Rerun [efdae790]124 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:25:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: show() basic (2, 2, 4)Rerun [b34666a6]13 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:30:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: show() (2, 13, 15)Rerun [d8a15098]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:48:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: show(Number) - other displays (3, 0, 3)Rerun [3cc75445]12 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:133:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Persist correct display value (3, 0, 3)Rerun [cfd734d7]11 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:176:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate(Hash, Object, Function) (1)Rerun [cf19d4bb]9 ms
+    effects: animate relative values (2, 0, 2)Rerun [bc0d4d1d]64 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:217:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate negative height (1, 0, 1)Rerun [94637799]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:256:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate negative margin (1, 0, 1)Rerun [9cb76c20]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:264:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate negative margin with px (1, 0, 1)Rerun [aa03bfa2]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:272:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate negative padding (1, 0, 1)Rerun [982223df]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:280:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate block as inline width/height (2, 0, 2)Rerun [fa0a9ef5]26 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:288:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate native inline width/height (2, 0, 2)Rerun [563ce3a7]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:313:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate block width/height (2, 0, 2)Rerun [5c02ecbc]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:340:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate table width/height (1, 0, 1)Rerun [2014071b]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:367:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate table-row width/height (2, 0, 2)Rerun [b9cdf82e]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:378:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate table-cell width/height (2, 0, 2)Rerun [7ac0fc76]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:397:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate percentage(%) on width/height (2, 0, 2)Rerun [3ca3cfea]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:417:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate resets overflow-x and overflow-y when finished (2, 0, 2)Rerun [2ea5bb3f]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:431:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate option { queue: false } (1, 1, 2)Rerun [228dc8a0]10 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:463:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate option { queue: true } (1, 1, 2)Rerun [012e6a8b]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:481:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate option { queue: 'name' } (2, 2, 4)Rerun [3b587672]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:501:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate with no properties (1, 1, 2)Rerun [0c707191]58 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:534:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate duration 0 (2, 8, 10)Rerun [de89c01d]3 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:557:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate hyphenated properties (1, 0, 1)Rerun [e0741176]10 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:607:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate non-element (1, 0, 1)Rerun [8a2a7ba3]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:620:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: stop() (3, 1, 4)Rerun [d94a505d]43 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:631:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: stop() - several in queue (5)Rerun [900f6230]43 ms
+    effects: stop(clearQueue) (2, 2, 4)Rerun [99389d19]42 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:700:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: stop(clearQueue, gotoEnd) (1, 0, 1)Rerun [185a6135]41 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:724:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: stop( queue, ..., ... ) - Stop single queues (2, 1, 3)Rerun [91a9f589]40 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:751:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: toggle() (6)Rerun [0153e8af]41 ms
+    effects: jQuery.fx.prototype.cur() - <1.8 Back Compat (7)Rerun [1185dbde]40 ms
+    effects: Overflow and Display (2, 0, 2)Rerun [fbe416b5]12 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:856:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS Auto to 0 (2, 0, 2)Rerun [cd18cc65]4 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS Auto to 50 (2, 0, 2)Rerun [d600c106]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS Auto to 100 (2, 0, 2)Rerun [ea1750e6]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS Auto to show (2, 0, 2)Rerun [58f1a6a8]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS Auto to hide (2, 0, 2)Rerun [58eca8ed]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS Auto to 0 (2, 0, 2)Rerun [d95a1dbf]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS Auto to 50 (2, 0, 2)Rerun [51e99aec]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS Auto to 100 (2, 0, 2)Rerun [eb49b3c0]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS Auto to show (2, 0, 2)Rerun [7e0b9f0e]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS Auto to hide (2, 0, 2)Rerun [7e06a153]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 100 to 0 (2, 0, 2)Rerun [20d4da91]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 100 to 50 (2, 0, 2)Rerun [f9c6785a]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 100 to 100 (2, 0, 2)Rerun [3f088412]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 100 to show (2, 0, 2)Rerun [a226d8fc]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 100 to hide (2, 0, 2)Rerun [a221db41]19 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 100 to 0 (2, 0, 2)Rerun [94d6f5f7]25 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 100 to 50 (2, 0, 2)Rerun [0607c9b4]25 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 100 to 100 (2, 0, 2)Rerun [baf15df8]25 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 100 to show (2, 0, 2)Rerun [a3593bd6]20 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 100 to hide (2, 0, 2)Rerun [a3543e1b]18 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 50 to 0 (2, 0, 2)Rerun [2ec35d59]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 50 to 50 (2, 0, 2)Rerun [a9a84e92]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 50 to 100 (2, 0, 2)Rerun [8b6174da]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 50 to show (2, 0, 2)Rerun [e0ec0134]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 50 to hide (2, 0, 2)Rerun [e0e70379]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 50 to 0 (2, 0, 2)Rerun [21fd3d33]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 50 to 50 (2, 0, 2)Rerun [1daa69f8]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 50 to 100 (2, 0, 2)Rerun [97a2c634]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 50 to show (2, 0, 2)Rerun [5cd4db1a]17 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 50 to hide (2, 0, 2)Rerun [5ccfdd5f]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 0 to 0 (2, 0, 2)Rerun [cef43972]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 0 to 50 (2, 0, 2)Rerun [0f92f599]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 0 to 100 (2, 0, 2)Rerun [e2cbaeb3]19 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 0 to show (2, 0, 2)Rerun [76c9027b]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: CSS 0 to hide (2, 0, 2)Rerun [76c404c0]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 0 to 0 (2, 0, 2)Rerun [6b71f658]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 0 to 50 (2, 0, 2)Rerun [02ccd573]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 0 to 100 (2, 0, 2)Rerun [56cdca19]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 0 to show (2, 0, 2)Rerun [830a53d5]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: JS 0 to hide (2, 0, 2)Rerun [8305561a]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:935:3 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:914:9 each@http://localhost:22222/jquery/dist/jquery.min.js:2:2623 @http://localhost:22222/jquery/test/unit/effects.js:878:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Effects chaining (2, 0, 2)Rerun [30b31e59]0 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1050:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095) (2, 0, 2)Rerun [64f5d5da]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1113:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: interrupt toggle (2, 0, 2)Rerun [bfb8430b]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1126:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate with per-property easing (2, 0, 2)Rerun [31782e85]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1185:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate with CSS shorthand properties (2, 0, 2)Rerun [6cdfbda6]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1226:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: hide hidden elements, with animation (bug #7141) (3, 2, 5)Rerun [f7e757ea]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1272:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate unit-less properties (#4966) (3, 1, 4)Rerun [8ba15e93]10 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1287:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate properties missing px w/ opacity as last (#9074) (3, 2, 5)Rerun [4de2c7cb]44 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1296:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: callbacks should fire in correct order (#9100) (3, 0, 3)Rerun [ee12de1c]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1323:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: callbacks that throw exceptions will be removed (#5684) (99, 0, 99)Rerun [b234370d]139 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1342:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate will scale margin properties individually (3, 1, 4)Rerun [eb5df1cc]46 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1370:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Do not append px to 'fill-opacity' #9548 (1)Rerun [de39926d]10 ms
+    effects: line-height animates correctly (#13855) (8, 4, 12)Rerun [2692e84b]66 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1409:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: jQuery.Animation( object, props, opts ) (3, 0, 3)Rerun [06a080f4]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1471:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animate Option: step: function( percent, tween ) (3, 0, 3)Rerun [d9eb74b1]10 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1496:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animate callbacks have correct context (2, 0, 2)Rerun [48f58a6c]47 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1521:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: User supplied callback called after show when fx off (#8892) (2)Rerun [fab3ee0c]16 ms
+    effects: animate should set display for disconnected nodes (5, 1, 6)Rerun [1cea88d3]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1550:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animation callback should not show animated element as :animated (#7157) (3, 0, 3)Rerun [4b540974]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1600:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Initial step callback should show element as :animated (#14623) (3, 0, 3)Rerun [775bf4aa]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1611:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: hide called on element within hidden parent should set display to none (#10045) (3, 0, 3)Rerun [89eb04cf]55 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1626:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none (3, 0, 3)Rerun [eda025cc]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1646:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: hide should not leave hidden inline elements visible (#14848) (2, 0, 2)Rerun [7da02112]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1675:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Handle queue:false promises (2, 0, 2)Rerun [4a1e01dc]1 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1688:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: multiple unqueued and promise (3, 0, 3)Rerun [7b25a5f4]18 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1739:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: animate does not change start value for non-px animation (#7109) (3, 0, 3)Rerun [aad22350]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1771:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: non-px animation handles non-numeric start (#11971) (2, 0, 2)Rerun [42f0f191]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1791:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animation callbacks (#11797) (4, 6, 10)Rerun [5f8a45b7]12 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1821:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animate properly sets overflow hidden when animating width/height (#12117) (3, 0, 3)Rerun [843718d3]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1902:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Each tick of the timer loop uses a fresh time (#12837) (3, 0, 3)Rerun [c33eae3e]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1922:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Animations with 0 duration don't ease (#12273) (1)Rerun [015c4700]16 ms
+    effects: toggle state tests: toggle (#8685) (2, 0, 2)Rerun [053bfcad]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1969:2 map@http://localhost:22222/jquery/dist/jquery.min.js:2:3169 @http://localhost:22222/jquery/test/unit/effects.js:1965:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: toggle state tests: slideToggle (#8685) (2, 0, 2)Rerun [10217f72]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1969:2 map@http://localhost:22222/jquery/dist/jquery.min.js:2:3169 @http://localhost:22222/jquery/test/unit/effects.js:1965:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: toggle state tests: fadeToggle (#8685) (2, 0, 2)Rerun [a103e349]11 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:1969:2 map@http://localhost:22222/jquery/dist/jquery.min.js:2:3169 @http://localhost:22222/jquery/test/unit/effects.js:1965:8 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: jQuery.fx.start & jQuery.fx.stop hook points (3)Rerun [c6e72c4c]2 ms
+    effects: .finish() completes all queued animations (3, 0, 3)Rerun [792af4ff]16 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2039:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: .finish( false ) - unqueued animations (3, 0, 3)Rerun [ee304b1d]14 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2072:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: .finish( "custom" ) - custom queue animations (3, 1, 4)Rerun [cc2d89b1]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2106:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: .finish() calls finish of custom queue functions (6)Rerun [a098b6dc]2 ms
+    effects: .finish() is applied correctly when multiple elements were animated (#13937) (3, 0, 3)Rerun [7edca75c]2 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2169:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: slideDown() after stop() (#13483) (2, 0, 2)Rerun [a874816a]46 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2186:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    effects: Respect display value on inline elements (#14824) (2, 0, 2)Rerun [647e4e8f]15 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/effects.js:2217:1 @http://localhost:22222/jquery/test/unit/effects.js:2241:3
+    offset: empty set (2)Rerun [a2eac746]16 ms
+    offset: object without getBoundingClientRect (2, 0, 2)Rerun [a44dc5f9]13 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/offset.js:51:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: disconnected node (2)Rerun [f048ddfe]13 ms
+    offset: offset/absolute (2, 0, 2)Rerun [4e04a26a]60028 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:69:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/absolute (2, 0, 2)Rerun [728faaf6]60066 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:95:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/relative (2, 0, 2)Rerun [c5f78fbf]60067 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:182:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/static (2, 0, 2)Rerun [f7880421]60066 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:245:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/fixed (2, 0, 2)Rerun [bcedaf61]60065 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:314:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/table (2, 0, 2)Rerun [bdaf03bb]60064 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:404:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/scroll (2, 0, 2)Rerun [f6a01c80]60073 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:414:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offset/body (2, 0, 2)Rerun [ed504015]60067 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/offset.js:478:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: chaining (3, 0, 3)Rerun [6d9ef26a]62 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/offset.js:487:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: offsetParent (1, 12, 13)Rerun [f4faf786]32 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/offset.js:495:1 @http://localhost:22222/jquery/test/unit/offset.js:559:3
+    offset: fractions (see #7730 and #7885) (2)Rerun [373463ce]48 ms
+    dimensions: width() (2, 9, 11)Rerun [855ae478]33 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:63:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: width(Function) (2, 9, 11)Rerun [ae664c80]69 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:67:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: width(Function(args)) (2)Rerun [0db1c3fc]49 ms
+    dimensions: height() (2, 9, 11)Rerun [44094357]57 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:116:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: height(Function) (2, 9, 11)Rerun [27735c5f]55 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:120:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: height(Function(args)) (2)Rerun [5b05309b]52 ms
+    dimensions: innerWidth() (2, 6, 8)Rerun [3033c180]52 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:136:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: innerHeight() (3, 5, 8)Rerun [f44c074f]53 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:172:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: outerWidth() (4, 9, 13)Rerun [2a572bbb]59 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:208:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #9441 #9300 (16)Rerun [f05103b6]57 ms
+    dimensions: getting dimensions shouldn't modify runtimeStyle see #9233 (1)Rerun [fd1a1aee]46 ms
+    dimensions: table dimensions (2)Rerun [5a628b4e]14 ms
+    dimensions: box-sizing:border-box child of a hidden elem (or unconnected node) has accurate inner/outer/Width()/Height() see #10413 (16)Rerun [16694f32]61 ms
+    dimensions: outerHeight() (4, 9, 13)Rerun [3e95e474]55 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:355:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: passing undefined is a setter #5571 (4)Rerun [bdb02bc3]114 ms
+    dimensions: getters on non elements should return null (8, 0, 8)Rerun [e0ba59c6]9 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/dimensions.js:402:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: setters with and without box-sizing:border-box (20)Rerun [6d13f464]65 ms
+    dimensions: dimensions/documentSmall (2, 0, 2)Rerun [e1ec02d9]60015 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/dimensions.js:451:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    dimensions: dimensions/documentLarge (2, 0, 2)Rerun [e184290d]60015 ms
+
+    Source: this.testIframe@http://localhost:22222/jquery/test/data/testinit.js:245:10 @http://localhost:22222/jquery/test/unit/dimensions.js:466:1 @http://localhost:22222/jquery/test/unit/dimensions.js:473:3
+    animation: Animation( subject, props, opts ) - shape (3, 0, 3)Rerun [b1e3617f]5 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/animation.js:34:7 @http://localhost:22222/jquery/test/unit/animation.js:261:4
+    animation: Animation.prefilter( fn ) - calls prefilter after defaultPrefilter (1)Rerun [2a50ba1f]4 ms
+    animation: Animation.prefilter( fn, true ) - calls prefilter before defaultPrefilter (1)Rerun [c55d16bc]2 ms
+    animation: Animation.prefilter - prefilter return hooks (34)Rerun [2b51eabf]14 ms
+    animation: Animation.tweener( fn ) - unshifts a * tweener (2)Rerun [803364a1]2 ms
+    animation: Animation.tweener( 'prop', fn ) - unshifts a 'prop' tweener (4)Rerun [12355747]2 ms
+    animation: Animation.tweener( 'list of props', fn ) - unshifts a tweener to each prop (2)Rerun [590e4dc3]2 ms
+    tween: jQuery.Tween - Default propHooks on plain objects (8)Rerun [09121f56]3 ms
+    tween: jQuery.Tween - Default propHooks on elements (19)Rerun [03fab35f]13 ms
+    tween: jQuery.Tween - Plain Object (13)Rerun [064e21dc]2 ms
+    tween: jQuery.Tween - Element (2, 8, 10)Rerun [1a509f35]61 ms
+
+    Source: @http://localhost:22222/jquery/test/unit/tween.js:172:7 @http://localhost:22222/jquery/test/unit/tween.js:317:4
+    tween: jQuery.Tween - No duration (3)Rerun [05bfc4cc]0 ms
+    tween: jQuery.Tween - step function option (4)Rerun [5caad4b0]1 ms
+    tween: jQuery.Tween - custom propHooks (3)Rerun [8af203e5]2 ms
+    tween: jQuery.Tween - custom propHooks - advanced values (5)Rerun [701d4d72]6 ms
+

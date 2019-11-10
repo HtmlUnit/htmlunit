@@ -328,7 +328,7 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
 
         // flush plugin (windows version)
-        PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
+        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
                 "Shockwave Flash 30.0 r0", "30.0.0.113", "Flash32_30_0_0_113.ocx"); //NOPMD
         flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
                 "Shockwave Flash", "swf"));

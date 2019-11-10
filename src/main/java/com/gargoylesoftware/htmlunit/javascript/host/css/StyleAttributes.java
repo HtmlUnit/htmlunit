@@ -2287,7 +2287,7 @@ public final class StyleAttributes {
         OFFSET_INLINE_START("offsetInlineStart", "offset-inline-start", ffBelow68("")),
 
         /** The style property {@code offset-inline-start}. */
-        OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start",ffBelow68("")),
+        OFFSET_INLINE_START_("offset-inline-start", "offset-inline-start", ffBelow68("")),
 
         /** The style property {@code offsetPath}. */
         OFFSET_PATH("offsetPath", "offsetPath", chrome("none")),
@@ -2617,7 +2617,8 @@ public final class StyleAttributes {
         SCROLL_MARGIN_INLINE_END("scrollMarginInlineEnd", "scroll-margin-inline-end", chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginInlineStart}. */
-        SCROLL_MARGIN_INLINE_START("scrollMarginInlineStart", "scroll-margin-inline-start", chrome("0px"), ff68up("0px")),
+        SCROLL_MARGIN_INLINE_START("scrollMarginInlineStart", "scroll-margin-inline-start",
+                chrome("0px"), ff68up("0px")),
 
         /** The style property {@code scrollMarginLeft}. */
         SCROLL_MARGIN_LEFT("scrollMarginLeft", "scroll-margin-left", chrome("0px"), ff68up("0px")),
@@ -2632,13 +2633,16 @@ public final class StyleAttributes {
         SCROLL_PADDING("scrollPadding", "scroll-padding", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlock}. */
-        SCROLL_PADDING_BLOCK("scrollPaddingBlock", "scroll-padding-block", chrome("auto"), ff68up("auto")),
+        SCROLL_PADDING_BLOCK("scrollPaddingBlock", "scroll-padding-block",
+                chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlockEnd}. */
-        SCROLL_PADDING_BLOCK_END("scrollPaddingBlockEnd", "scroll-padding-block-end", chrome("auto"), ff68up("auto")),
+        SCROLL_PADDING_BLOCK_END("scrollPaddingBlockEnd", "scroll-padding-block-end",
+                chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBlockStart}. */
-        SCROLL_PADDING_BLOCK_START("scrollPaddingBlockStart", "scroll-padding-block-start", chrome("auto"), ff68up("auto")),
+        SCROLL_PADDING_BLOCK_START("scrollPaddingBlockStart", "scroll-padding-block-start",
+                chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingBottom}. */
         SCROLL_PADDING_BOTTOM("scrollPaddingBottom", "scroll-padding-bottom", chrome("auto"), ff68up("auto")),
@@ -2647,10 +2651,12 @@ public final class StyleAttributes {
         SCROLL_PADDING_INLINE("scrollPaddingInline", "scroll-padding-inline", chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingInlineEnd}. */
-        SCROLL_PADDING_INLINE_END("scrollPaddingInlineEnd", "scroll-padding-inline-end", chrome("auto"), ff68up("auto")),
+        SCROLL_PADDING_INLINE_END("scrollPaddingInlineEnd", "scroll-padding-inline-end",
+                chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingInlineStart}. */
-        SCROLL_PADDING_INLINE_START("scrollPaddingInlineStart", "scroll-padding-inline-start", chrome("auto"), ff68up("auto")),
+        SCROLL_PADDING_INLINE_START("scrollPaddingInlineStart", "scroll-padding-inline-start",
+                chrome("auto"), ff68up("auto")),
 
         /** The style property {@code scrollPaddingLeft}. */
         SCROLL_PADDING_LEFT("scrollPaddingLeft", "scroll-padding-left", chrome("auto"), ff68up("auto")),

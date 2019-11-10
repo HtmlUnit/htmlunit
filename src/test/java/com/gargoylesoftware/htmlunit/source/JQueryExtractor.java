@@ -73,13 +73,14 @@ public final class JQueryExtractor {
      * @throws Exception s
      */
     public static void main(final String[] args) throws Exception {
+        // final Class<? extends WebDriverTestCase> testClass = JQuery1x8x2Test.class;
         // final Class<? extends WebDriverTestCase> testClass = JQuery1x11x3Test.class;
         final Class<? extends WebDriverTestCase> testClass = JQuery3x3x1Test.class;
 
         final String version = (String) MethodUtils.invokeExactMethod(testClass.newInstance(), "getVersion");
         final File baseDir = new File("src/test/resources/libraries/jQuery/" + version + "/expectations");
 
-        for (String browser : new String[] {"CHROME", "FF60", "FF52", "IE"}) {
+        for (String browser : new String[] {"CHROME", "FF60", "FF68", "IE"}) {
             final File out = new File(baseDir, browser + ".out");
             final File results = new File(baseDir, "results." + browser + ".txt");
             extractExpectations(out, results);
@@ -128,7 +129,8 @@ public final class JQueryExtractor {
                     // instead a ordered list is used by qunit
                     // if (line.startsWith("" + testNumber + '.') && endPos > -1) {
                     else if (line.indexOf("Rerun") > -1) {
-                        line = line.substring(0, line.indexOf("Rerun"));
+                        line = line.substring(0, line.indexOf("Rerun"))
+                                + " [" + testNumber + ']';
                         writer.write(line + System.lineSeparator());
                         testNumber++;
                     }
@@ -138,7 +140,9 @@ public final class JQueryExtractor {
                                     + ", please correct it manually");
                             break;
                         }
-                        line = "" + testNumber + '.' + ' ' + line.substring(0, line.length() - 5);
+                        line = "" + testNumber + '.'
+                                + ' ' + line.substring(0, line.length() - 5)
+                                + " [" + testNumber + ']';
                         writer.write(line + System.lineSeparator());
                         testNumber++;
                     }
@@ -377,7 +381,7 @@ public final class JQueryExtractor {
             final Expectations expectations = new Expectations();
             final List<String> lines = FileUtils.readLines(file, ISO_8859_1);
             for (int i = 0; i < lines.size(); i++) {
-                expectations.add(new Expectation(i + 1, lines.get(i)));
+                expectations.add(new Expectation(file, i + 1, lines.get(i)));
             }
 
             return expectations;
@@ -402,22 +406,22 @@ public final class JQueryExtractor {
     static class Expectation {
 
         private static final Pattern pattern_ =
-                Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+(, \\d+, \\d+)?)\\) \\[([0-9a-f]{8})\\]");
+                Pattern.compile("(\\d+\\. ?)?(.+)\\((\\d+(, \\d+, \\d+)?)\\) \\[([0-9a-f]{1,8})\\]");
 
         private final int line_;
         private final String testId_;
         private final String testName_;
         private final String testResult_;
 
-        Expectation(final int line, final String string) {
+        Expectation(final File file, final int line, final String string) {
             line_ = line;
             final Matcher matcher = pattern_.matcher(string);
             if (!matcher.matches()) {
-                throw new RuntimeException("Invalid line " + line + ": " + string);
+                throw new RuntimeException("Invalid line " + line + ": '" + string + "' in file: " + file.getAbsolutePath());
             }
             final String testNumber = matcher.group(1);
             if (testNumber != null && !testNumber.trim().equals(line + ".")) {
-                throw new RuntimeException("Invalid test number for line " + line + ": " + string);
+                throw new RuntimeException("Invalid test number for line " + line + ": " + string + " in file: " + file.getAbsolutePath());
             }
 
             testName_ = matcher.group(2).trim();

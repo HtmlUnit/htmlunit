@@ -61,6 +61,7 @@ public class TinyMceTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"89", "0"},
+            CHROME = {"89", "1"},
             IE = {"89", "4"})
     @NotYetImplemented
     // TODO [IE]XML tinymce 3.2.7 is not compatible with IE

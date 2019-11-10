@@ -92,7 +92,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1=[CHROME, FF52, FF60, IE]}.
+     * Test {1=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -102,7 +102,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {2=[CHROME, FF52, FF60, IE]}.
+     * Test {2=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -113,7 +113,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {3=[CHROME, FF52, FF60, IE]}.
+     * Test {3=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -123,7 +123,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {4=[CHROME, FF52, FF60, IE]}.
+     * Test {4=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -133,7 +133,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {5=[CHROME, FF52, FF60, IE]}.
+     * Test {5=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -143,7 +143,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {6=[CHROME, FF52, FF60, IE]}.
+     * Test {6=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -153,7 +153,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {7=[CHROME, FF52, FF60, IE]}.
+     * Test {7=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -163,7 +163,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {8=[CHROME, FF52, FF60, IE]}.
+     * Test {8=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -173,7 +173,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {9=[CHROME, FF52, FF60, IE]}.
+     * Test {9=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -183,7 +183,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {10=[CHROME, FF52, FF60, IE]}.
+     * Test {10=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -193,7 +193,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {11=[CHROME, FF52, FF60, IE]}.
+     * Test {11=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -203,7 +203,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {12=[CHROME, FF52, FF60, IE]}.
+     * Test {12=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -213,7 +213,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {13=[CHROME, FF52, FF60, IE]}.
+     * Test {13=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -223,7 +223,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {14=[CHROME, FF52, FF60, IE]}.
+     * Test {14=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -233,7 +233,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {15=[CHROME, FF52, FF60, IE]}.
+     * Test {15=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -243,7 +243,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {16=[CHROME, FF52, FF60, IE]}.
+     * Test {16=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -254,7 +254,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {17=[CHROME, FF52, FF60, IE]}.
+     * Test {17=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -264,7 +264,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {18=[CHROME, FF52, FF60, IE]}.
+     * Test {18=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -274,7 +274,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {19=[CHROME, FF52, FF60, IE]}.
+     * Test {19=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -284,7 +284,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {20=[CHROME, FF52, FF60, IE]}.
+     * Test {20=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -294,7 +294,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {21=[CHROME, FF52, FF60, IE]}.
+     * Test {21=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2")
+    public void core__Unit_Testing_Environment() throws Exception {
+        runTest("core: Unit Testing Environment");
+    }
+
+    /**
+     * Test {21=[CHROME, FF60, IE], 22=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -304,17 +314,20 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {22=[CHROME, FF52, FF60, IE]}.
+     * Test {22=[CHROME, FF60, IE], 23=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "29",
+            FF60 = "29",
+            FF68 = "2, 4, 6",
+            IE = "29")
     public void core__jQuery__() throws Exception {
         runTest("core: jQuery()");
     }
 
     /**
-     * Test {23=[CHROME, FF52, FF60, IE]}.
+     * Test {23=[CHROME, FF60, IE], 24=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -324,7 +337,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {24=[CHROME, FF52, FF60, IE]}.
+     * Test {24=[CHROME, FF60, IE], 26=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -334,27 +347,39 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {25=[CHROME, FF52, FF60, IE]}.
+     * Test {25=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
     public void core__globalEval_with__use_strict_() throws Exception {
         runTest("core: globalEval with 'use strict'");
     }
 
     /**
-     * Test {26=[CHROME, FF52, FF60, IE]}.
+     * Test {25=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF68 = "17, 1, 18")
+    public void core__selector_state() throws Exception {
+        runTest("core: selector state");
+    }
+
+    /**
+     * Test {26=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
     public void core__globalEval_execution_after_script_injection___7862_() throws Exception {
         runTest("core: globalEval execution after script injection (#7862)");
     }
 
     /**
-     * Test {27=[CHROME, FF52, FF60, IE]}.
+     * Test {27=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -364,7 +389,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {28=[CHROME, FF52, FF60, IE]}.
+     * Test {28=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -374,49 +399,85 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {29=[CHROME, FF52, FF60, IE]}.
+     * Test {29=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("23")
+    @Alerts(FF68 = "28")
+    public void core__type() throws Exception {
+        runTest("core: type");
+    }
+
+    /**
+     * Test {29=[CHROME, FF60, IE], 30=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "23",
+            FF60 = "23",
+            FF68 = "16",
+            IE = "23")
     public void core__isPlainObject() throws Exception {
         runTest("core: isPlainObject");
     }
 
     /**
-     * Test {30=[CHROME, FF52, FF60, IE]}.
+     * Test {30=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
+    @Alerts(CHROME = "2",
+            FF60 = "2",
             IE = "0")
     public void core__isPlainObject_Symbol_() throws Exception {
         runTest("core: isPlainObject(Symbol)");
     }
 
     /**
-     * Test {31=[CHROME, FF52, FF60, IE]}.
+     * Test {31=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF68 = "19")
+    public void core__isFunction() throws Exception {
+        runTest("core: isFunction");
+    }
+
+    /**
+     * Test {31=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
     public void core__isPlainObject_localStorage_() throws Exception {
         runTest("core: isPlainObject(localStorage)");
     }
 
     /**
-     * Test {32=[CHROME, FF52, FF60, IE]}.
+     * Test {32=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
+    @Alerts(FF68 = "1, 37, 38")
+    public void core__isNumeric() throws Exception {
+        runTest("core: isNumeric");
+    }
+
+    /**
+     * Test {32=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1",
+            FF60 = "1",
             IE = "0")
     public void core__isPlainObject_Object_assign______() throws Exception {
         runTest("core: isPlainObject(Object.assign(...))");
     }
 
     /**
-     * Test {33=[CHROME, FF52, FF60, IE]}.
+     * Test {33=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -426,7 +487,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {34=[CHROME, FF52, FF60, IE]}.
+     * Test {34=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -436,7 +497,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {35=[CHROME, FF52, FF60, IE]}.
+     * Test {35=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -446,7 +507,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {36=[CHROME, FF52, FF60, IE]}.
+     * Test {36=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "14")
+    public void core__isWindow() throws Exception {
+        runTest("core: isWindow");
+    }
+
+    /**
+     * Test {36=[CHROME, FF60, IE], 37=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -456,17 +527,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {37=[CHROME, FF52, FF60, IE]}.
+     * Test {37=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("36")
+    @Alerts(DEFAULT = "36",
+            FF60 = "36")
     public void core__jQuery_element_with_non_alphanumeric_name_() throws Exception {
         runTest("core: jQuery(element with non-alphanumeric name)");
     }
 
     /**
-     * Test {38=[CHROME, FF52, FF60, IE]}.
+     * Test {38=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -476,7 +548,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {39=[CHROME, FF52, FF60, IE]}.
+     * Test {39=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -486,7 +558,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {40=[CHROME, FF52, FF60, IE]}.
+     * Test {40=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -496,7 +568,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {41=[CHROME, FF52, FF60, IE]}.
+     * Test {41=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -506,7 +578,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {42=[CHROME, FF52, FF60, IE]}.
+     * Test {42=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -516,7 +588,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {43=[CHROME, FF52, FF60, IE]}.
+     * Test {43=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -526,7 +598,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {44=[CHROME, FF52, FF60, IE]}.
+     * Test {44=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -536,7 +608,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {45=[CHROME, FF52, FF60, IE]}.
+     * Test {45=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -546,7 +618,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {46=[CHROME, FF52, FF60, IE]}.
+     * Test {46=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -556,7 +628,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {47=[CHROME, FF52, FF60, IE]}.
+     * Test {47=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -566,7 +638,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {48=[CHROME, FF52, FF60, IE]}.
+     * Test {48=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -576,7 +648,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {49=[CHROME, FF52, FF60, IE]}.
+     * Test {49=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -586,7 +658,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {50=[CHROME, FF52, FF60, IE]}.
+     * Test {50=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -596,7 +668,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {51=[CHROME, FF52, FF60, IE]}.
+     * Test {51=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -606,7 +678,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {52=[CHROME, FF52, FF60, IE]}.
+     * Test {52=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -616,7 +688,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {53=[CHROME, FF52, FF60, IE]}.
+     * Test {53=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -626,7 +698,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {54=[CHROME, FF52, FF60, IE]}.
+     * Test {54=[CHROME, FF60, FF68, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -636,17 +708,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {55=[CHROME, FF52, FF60, IE]}.
+     * Test {55=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
+    @Alerts(DEFAULT = "7",
+            FF60 = "7")
     public void core__jQuery_grep_Array_like_() throws Exception {
         runTest("core: jQuery.grep(Array-like)");
     }
 
     /**
-     * Test {56=[CHROME, FF52, FF60, IE]}.
+     * Test {55=[FF68], 56=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -656,27 +729,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {57=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void core__jQuery_extend_Object__Object__created_with__defineProperties___() throws Exception {
-        runTest("core: jQuery.extend(Object, Object {created with \"defineProperties\"})");
-    }
-
-    /**
-     * Test {58=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void core__jQuery_extend_true_____a_____o_______deep_copy_with_array__followed_by_object() throws Exception {
-        runTest("core: jQuery.extend(true,{},{a:[], o:{}}); deep copy with array, followed by object");
-    }
-
-    /**
-     * Test {59=[CHROME, FF52, FF60, IE]}.
+     * Test {56=[FF68], 59=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -686,17 +739,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {60=[CHROME, FF52, FF60, IE]}.
+     * Test {57=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void core__jQuery_each_map_undefined_null_Function_() throws Exception {
-        runTest("core: jQuery.each/map(undefined/null,Function)");
+    @Alerts(DEFAULT = "2",
+            FF60 = "2")
+    public void core__jQuery_extend_Object__Object__created_with__defineProperties___() throws Exception {
+        runTest("core: jQuery.extend(Object, Object {created with \"defineProperties\"})");
     }
 
     /**
-     * Test {61=[CHROME, FF52, FF60, IE]}.
+     * Test {57=[FF68], 61=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -706,18 +760,30 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {62=[CHROME, FF52, FF60, IE]}.
+     * Test {58=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("15")
+    @Alerts(DEFAULT = "2",
+            FF60 = "2")
+    public void core__jQuery_extend_true_____a_____o_______deep_copy_with_array__followed_by_object() throws Exception {
+        runTest("core: jQuery.extend(true,{},{a:[], o:{}}); deep copy with array, followed by object");
+    }
+
+    /**
+     * Test {58=[FF68], 62=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "15",
+            CHROME = "1, 14, 15")
     @NotYetImplemented(CHROME)
     public void core__jQuery_makeArray() throws Exception {
         runTest("core: jQuery.makeArray");
     }
 
     /**
-     * Test {63=[CHROME, FF52, FF60, IE]}.
+     * Test {59=[FF68], 63=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -727,7 +793,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {64=[CHROME, FF52, FF60, IE]}.
+     * Test {60=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__jQuery_each_map_undefined_null_Function_() throws Exception {
+        runTest("core: jQuery.each/map(undefined/null,Function)");
+    }
+
+    /**
+     * Test {60=[FF68], 64=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -737,28 +814,41 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {66=[CHROME, FF52, FF60, IE]}.
+     * Test {61=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void core__jQuery_parseHTML__a_href_____gh_2965() throws Exception {
-        runTest("core: jQuery.parseHTML(<a href>) - gh-2965");
+    @Alerts(FF68 = "9")
+    public void core__jQuery_proxy() throws Exception {
+        runTest("core: jQuery.proxy");
     }
 
     /**
-     * Test {67=[CHROME, FF52, FF60, IE]}.
+     * Test {62=[FF68], 67=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "3, 14, 17",
+            IE = "1")
     @NotYetImplemented
     public void core__jQuery_parseHTML() throws Exception {
         runTest("core: jQuery.parseHTML");
     }
 
     /**
-     * Test {68=[CHROME, FF52, FF60, IE]}.
+     * Test {63=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "20")
+    public void core__jQuery_parseJSON() throws Exception {
+        runTest("core: jQuery.parseJSON");
+    }
+
+    /**
+     * Test {64=[FF68], 68=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -768,518 +858,986 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {69=[CHROME, FF52, FF60, IE]}.
+     * Test {65=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(FF68 = "1, 6, 7")
+    public void core__jQuery_camelCase__() throws Exception {
+        runTest("core: jQuery.camelCase()");
+    }
+
+    /**
+     * Test {66=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2, 0, 2")
+    public void core__global_failure() throws Exception {
+        runTest("core: global failure");
+    }
+
+    /**
+     * Test {66=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__jQuery_parseHTML__a_href_____gh_2965() throws Exception {
+        runTest("core: jQuery.parseHTML(<a href>) - gh-2965");
+    }
+
+    /**
+     * Test {67=[FF68], 76=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
+    public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( '' ) - no filter");
+    }
+
+    /**
+     * Test {68=[FF68], 77=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20",
+            FF60 = "29",
+            FF68 = "21",
+            IE = "29")
+    public void callbacks__jQuery_Callbacks__________no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { } ) - no filter");
+    }
+
+    /**
+     * Test {69=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "3",
+            FF60 = "3")
     public void core__Conditional_compilation_compatibility___13274_() throws Exception {
         runTest("core: Conditional compilation compatibility (#13274)");
     }
 
     /**
-     * Test {70=[CHROME, FF52, FF60, IE]}.
+     * Test {69=[FF68], 78=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
+    public void callbacks__jQuery_Callbacks_________filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( '' ) - filter");
+    }
+
+    /**
+     * Test {70=[CHROME, FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
     @NotYetImplemented
     public void core__document_ready_when_jQuery_loaded_asynchronously___13655_() throws Exception {
         runTest("core: document ready when jQuery loaded asynchronously (#13655)");
     }
 
     /**
-     * Test {71=[CHROME, FF52, FF60, IE]}.
+     * Test {70=[FF68], 79=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void core__Tolerating_alias_masked_DOM_properties___14074_() throws Exception {
-        runTest("core: Tolerating alias-masked DOM properties (#14074)");
-    }
-
-    /**
-     * Test {72=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void core__Don_t_call_window_onready___14802_() throws Exception {
-        runTest("core: Don't call window.onready (#14802)");
-    }
-
-    /**
-     * Test {73=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void core__Iterability_of_jQuery_objects__gh_1693_() throws Exception {
-        runTest("core: Iterability of jQuery objects (gh-1693)");
-    }
-
-    /**
-     * Test {74=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void core__jQuery_readyException__original_() throws Exception {
-        runTest("core: jQuery.readyException (original)");
-    }
-
-    /**
-     * Test {75=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void core__jQuery_readyException__custom_() throws Exception {
-        runTest("core: jQuery.readyException (custom)");
-    }
-
-    /**
-     * Test {76=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("29")
-    public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
-        runTest("callbacks: jQuery.Callbacks( '' ) - no filter");
-    }
-
-    /**
-     * Test {77=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("29")
-    public void callbacks__jQuery_Callbacks__________no_filter() throws Exception {
-        runTest("callbacks: jQuery.Callbacks( { } ) - no filter");
-    }
-
-    /**
-     * Test {78=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("29")
-    public void callbacks__jQuery_Callbacks_________filter() throws Exception {
-        runTest("callbacks: jQuery.Callbacks( '' ) - filter");
-    }
-
-    /**
-     * Test {79=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20",
+            FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks__________filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { } ) - filter");
     }
 
     /**
-     * Test {80=[CHROME, FF52, FF60, IE]}.
+     * Test {71=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__Tolerating_alias_masked_DOM_properties___14074_() throws Exception {
+        runTest("core: Tolerating alias-masked DOM properties (#14074)");
+    }
+
+    /**
+     * Test {71=[FF68], 80=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once' ) - no filter");
     }
 
     /**
-     * Test {81=[CHROME, FF52, FF60, IE]}.
+     * Test {72=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__Don_t_call_window_onready___14802_() throws Exception {
+        runTest("core: Don't call window.onready (#14802)");
+    }
+
+    /**
+     * Test {72=[FF68], 81=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true } ) - no filter");
     }
 
     /**
-     * Test {82=[CHROME, FF52, FF60, IE]}.
+     * Test {73=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__Iterability_of_jQuery_objects__gh_1693_() throws Exception {
+        runTest("core: Iterability of jQuery objects (gh-1693)");
+    }
+
+    /**
+     * Test {73=[FF68], 82=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once' ) - filter");
     }
 
     /**
-     * Test {83=[CHROME, FF52, FF60, IE]}.
+     * Test {74=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__jQuery_readyException__original_() throws Exception {
+        runTest("core: jQuery.readyException (original)");
+    }
+
+    /**
+     * Test {74=[FF68], 83=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true } ) - filter");
     }
 
     /**
-     * Test {84=[CHROME, FF52, FF60, IE]}.
+     * Test {75=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(DEFAULT = "1",
+            FF60 = "1")
+    public void core__jQuery_readyException__custom_() throws Exception {
+        runTest("core: jQuery.readyException (custom)");
+    }
+
+    /**
+     * Test {75=[FF68], 84=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory' ) - no filter");
     }
 
     /**
-     * Test {85=[CHROME, FF52, FF60, IE]}.
+     * Test {76=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_________no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"\" ) - no filter");
+    }
+
+    /**
+     * Test {76=[FF68], 85=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true } ) - no filter");
     }
 
     /**
-     * Test {86=[CHROME, FF52, FF60, IE]}.
+     * Test {77=[FF68], 86=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory' ) - filter");
     }
 
     /**
-     * Test {87=[CHROME, FF52, FF60, IE]}.
+     * Test {78=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_________filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"\" ) - filter");
+    }
+
+    /**
+     * Test {78=[FF68], 87=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true } ) - filter");
     }
 
     /**
-     * Test {88=[CHROME, FF52, FF60, IE]}.
+     * Test {79=[FF68], 88=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique' ) - no filter");
     }
 
     /**
-     * Test {89=[CHROME, FF52, FF60, IE]}.
+     * Test {80=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once\" ) - no filter");
+    }
+
+    /**
+     * Test {80=[FF68], 89=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true } ) - no filter");
     }
 
     /**
-     * Test {90=[CHROME, FF52, FF60, IE]}.
+     * Test {81=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - no filter");
+    }
+
+    /**
+     * Test {81=[FF68], 90=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique' ) - filter");
     }
 
     /**
-     * Test {91=[CHROME, FF52, FF60, IE]}.
+     * Test {82=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once\" ) - filter");
+    }
+
+    /**
+     * Test {82=[FF68], 91=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true } ) - filter");
     }
 
     /**
-     * Test {92=[CHROME, FF52, FF60, IE]}.
+     * Test {83=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true } ) - filter");
+    }
+
+    /**
+     * Test {83=[FF68], 92=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'stopOnFalse' ) - no filter");
     }
 
     /**
-     * Test {93=[CHROME, FF52, FF60, IE]}.
+     * Test {84=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory\" ) - no filter");
+    }
+
+    /**
+     * Test {84=[FF68], 93=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - no filter");
     }
 
     /**
-     * Test {94=[CHROME, FF52, FF60, IE]}.
+     * Test {85=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - no filter");
+    }
+
+    /**
+     * Test {85=[FF68], 94=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'stopOnFalse' ) - filter");
     }
 
     /**
-     * Test {95=[CHROME, FF52, FF60, IE]}.
+     * Test {86=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory\" ) - filter");
+    }
+
+    /**
+     * Test {86=[FF68], 95=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'stopOnFalse': true } ) - filter");
     }
 
     /**
-     * Test {96=[CHROME, FF52, FF60, IE]}.
+     * Test {87=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true } ) - filter");
+    }
+
+    /**
+     * Test {87=[FF68], 96=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_memory______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once memory' ) - no filter");
     }
 
     /**
-     * Test {97=[CHROME, FF52, FF60, IE]}.
+     * Test {88=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___unique______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"unique\" ) - no filter");
+    }
+
+    /**
+     * Test {88=[FF68], 97=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - no filter");
     }
 
     /**
-     * Test {98=[CHROME, FF52, FF60, IE]}.
+     * Test {89=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____unique___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"unique\": true } ) - no filter");
+    }
+
+    /**
+     * Test {89=[FF68], 98=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_memory______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once memory' ) - filter");
     }
 
     /**
-     * Test {99=[CHROME, FF52, FF60, IE]}.
+     * Test {90=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___unique______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"unique\" ) - filter");
+    }
+
+    /**
+     * Test {90=[FF68], 99=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___memory___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'memory': true } ) - filter");
     }
 
     /**
-     * Test {100=[CHROME, FF52, FF60, IE]}.
+     * Test {91=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____unique___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"unique\": true } ) - filter");
+    }
+
+    /**
+     * Test {91=[FF68], 100=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once unique' ) - no filter");
     }
 
     /**
-     * Test {101=[CHROME, FF52, FF60, IE]}.
+     * Test {92=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___stopOnFalse______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - no filter");
+    }
+
+    /**
+     * Test {92=[FF68], 101=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - no filter");
     }
 
     /**
-     * Test {102=[CHROME, FF52, FF60, IE]}.
+     * Test {93=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - no filter");
+    }
+
+    /**
+     * Test {93=[FF68], 102=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once unique' ) - filter");
     }
 
     /**
-     * Test {103=[CHROME, FF52, FF60, IE]}.
+     * Test {94=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___stopOnFalse______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"stopOnFalse\" ) - filter");
+    }
+
+    /**
+     * Test {94=[FF68], 103=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'unique': true } ) - filter");
     }
 
     /**
-     * Test {104=[CHROME, FF52, FF60, IE]}.
+     * Test {95=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____stopOnFalse___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"stopOnFalse\": true } ) - filter");
+    }
+
+    /**
+     * Test {95=[FF68], 104=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - no filter");
     }
 
     /**
-     * Test {105=[CHROME, FF52, FF60, IE]}.
+     * Test {96=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_memory______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once memory\" ) - no filter");
+    }
+
+    /**
+     * Test {96=[FF68], 105=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - no filter");
     }
 
     /**
-     * Test {106=[CHROME, FF52, FF60, IE]}.
+     * Test {97=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___memory___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - no filter");
+    }
+
+    /**
+     * Test {97=[FF68], 106=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___once_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'once stopOnFalse' ) - filter");
     }
 
     /**
-     * Test {107=[CHROME, FF52, FF60, IE]}.
+     * Test {98=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_memory______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once memory\" ) - filter");
+    }
+
+    /**
+     * Test {98=[FF68], 107=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'once': true, 'stopOnFalse': true } ) - filter");
     }
 
     /**
-     * Test {108=[CHROME, FF52, FF60, IE]}.
+     * Test {99=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___memory___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"memory\": true } ) - filter");
+    }
+
+    /**
+     * Test {99=[FF68], 108=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory_unique______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory unique' ) - no filter");
     }
 
     /**
-     * Test {109=[CHROME, FF52, FF60, IE]}.
+     * Test {100=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_unique______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once unique\" ) - no filter");
+    }
+
+    /**
+     * Test {100=[FF68], 109=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - no filter");
     }
 
     /**
-     * Test {110=[CHROME, FF52, FF60, IE]}.
+     * Test {101=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___unique___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - no filter");
+    }
+
+    /**
+     * Test {101=[FF68], 110=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory_unique______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory unique' ) - filter");
     }
 
     /**
-     * Test {111=[CHROME, FF52, FF60, IE]}.
+     * Test {102=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_unique______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once unique\" ) - filter");
+    }
+
+    /**
+     * Test {102=[FF68], 111=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'unique': true } ) - filter");
     }
 
     /**
-     * Test {112=[CHROME, FF52, FF60, IE]}.
+     * Test {103=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___unique___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"unique\": true } ) - filter");
+    }
+
+    /**
+     * Test {103=[FF68], 112=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - no filter");
     }
 
     /**
-     * Test {113=[CHROME, FF52, FF60, IE]}.
+     * Test {104=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_stopOnFalse______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - no filter");
+    }
+
+    /**
+     * Test {104=[FF68], 113=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - no filter");
     }
 
     /**
-     * Test {114=[CHROME, FF52, FF60, IE]}.
+     * Test {105=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - no filter");
+    }
+
+    /**
+     * Test {105=[FF68], 114=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___memory_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'memory stopOnFalse' ) - filter");
     }
 
     /**
-     * Test {115=[CHROME, FF52, FF60, IE]}.
+     * Test {106=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___once_stopOnFalse______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"once stopOnFalse\" ) - filter");
+    }
+
+    /**
+     * Test {106=[FF68], 115=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'memory': true, 'stopOnFalse': true } ) - filter");
     }
 
     /**
-     * Test {116=[CHROME, FF52, FF60, IE]}.
+     * Test {107=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____once___true___stopOnFalse___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"once\": true, \"stopOnFalse\": true } ) - filter");
+    }
+
+    /**
+     * Test {107=[FF68], 116=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___unique_stopOnFalse______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - no filter");
     }
 
     /**
-     * Test {117=[CHROME, FF52, FF60, IE]}.
+     * Test {108=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory_unique______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory unique\" ) - no filter");
+    }
+
+    /**
+     * Test {108=[FF68], 117=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______no_filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - no filter");
     }
 
     /**
-     * Test {118=[CHROME, FF52, FF60, IE]}.
+     * Test {109=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - no filter");
+    }
+
+    /**
+     * Test {109=[FF68], 118=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks___unique_stopOnFalse______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( 'unique stopOnFalse' ) - filter");
     }
 
     /**
-     * Test {119=[CHROME, FF52, FF60, IE]}.
+     * Test {110=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("29")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory_unique______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory unique\" ) - filter");
+    }
+
+    /**
+     * Test {110=[FF68], 119=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "29",
+            FF68 = "21",
+            IE = "29")
     public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______filter() throws Exception {
         runTest("callbacks: jQuery.Callbacks( { 'unique': true, 'stopOnFalse': true } ) - filter");
     }
 
     /**
-     * Test {120=[CHROME, FF52, FF60, IE]}.
+     * Test {111=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true___unique___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"unique\": true } ) - filter");
+    }
+
+    /**
+     * Test {111=[FF68], 120=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1289,7 +1847,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {121=[CHROME, FF52, FF60, IE]}.
+     * Test {112=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory_stopOnFalse______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - no filter");
+    }
+
+    /**
+     * Test {112=[FF68], 121=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1299,7 +1867,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {122=[CHROME, FF52, FF60, IE]}.
+     * Test {113=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - no filter");
+    }
+
+    /**
+     * Test {113=[FF68], 122=[CHROME, FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1309,17 +1887,38 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {123=[CHROME, FF52, FF60, IE]}.
+     * Test {114=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("13")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___memory_stopOnFalse______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"memory stopOnFalse\" ) - filter");
+    }
+
+    /**
+     * Test {114=[FF68], 123=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "13",
+            IE = "13")
     public void callbacks__jQuery_Callbacks_has() throws Exception {
         runTest("callbacks: jQuery.Callbacks.has");
     }
 
     /**
-     * Test {124=[CHROME, FF52, FF60, IE]}.
+     * Test {115=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____memory___true___stopOnFalse___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"memory\": true, \"stopOnFalse\": true } ) - filter");
+    }
+
+    /**
+     * Test {115=[FF68], 123=[CHROME], 124=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1329,47 +1928,63 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {125=[CHROME, FF52, FF60, IE]}.
+     * Test {116=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void callbacks__jQuery_Callbacks_____disabled_callback_doesn_t_fire__gh_1790_() throws Exception {
-        runTest("callbacks: jQuery.Callbacks() - disabled callback doesn't fire (gh-1790)");
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___unique_stopOnFalse______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - no filter");
     }
 
     /**
-     * Test {126=[CHROME, FF52, FF60, IE]}.
+     * Test {116=[FF68], 124=[CHROME], 127=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void callbacks__jQuery_Callbacks_____list_with_memory_stays_locked__gh_3469_() throws Exception {
-        runTest("callbacks: jQuery.Callbacks() - list with memory stays locked (gh-3469)");
-    }
-
-    /**
-     * Test {127=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("23")
+    @Alerts(CHROME = "3, 1, 4",
+            FF60 = "23",
+            FF68 = "3, 1, 4",
+            IE = "23")
     public void deferred__jQuery_Deferred() throws Exception {
         runTest("deferred: jQuery.Deferred");
     }
 
     /**
-     * Test {128=[CHROME, FF52, FF60, IE]}.
+     * Test {117=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("23")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______no_filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - no filter");
+    }
+
+    /**
+     * Test {117=[FF68], 125=[CHROME], 128=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 1, 4",
+            FF60 = "23",
+            FF68 = "3, 1, 4",
+            IE = "23")
     public void deferred__jQuery_Deferred___new_operator() throws Exception {
         runTest("deferred: jQuery.Deferred - new operator");
     }
 
     /**
-     * Test {129=[CHROME, FF52, FF60, IE]}.
+     * Test {118=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks___unique_stopOnFalse______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( \"unique stopOnFalse\" ) - filter");
+    }
+
+    /**
+     * Test {118=[FF68], 126=[CHROME], 129=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1379,514 +1994,330 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {130=[CHROME, FF52, FF60, IE]}.
+     * Test {119=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(CHROME = "20")
+    public void callbacks__jQuery_Callbacks_____unique___true___stopOnFalse___true_______filter() throws Exception {
+        runTest("callbacks: jQuery.Callbacks( { \"unique\": true, \"stopOnFalse\": true } ) - filter");
+    }
+
+    /**
+     * Test {119=[FF68], 127=[CHROME], 130=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 2, 4",
+            FF60 = "4",
+            FF68 = "2, 2, 4",
+            IE = "4")
     public void deferred__jQuery_Deferred_then___filtering__done_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (done)");
     }
 
     /**
-     * Test {131=[CHROME, FF52, FF60, IE]}.
+     * Test {120=[FF68], 128=[CHROME], 131=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(CHROME = "2, 2, 4",
+            FF60 = "4",
+            FF68 = "2, 2, 4",
+            IE = "4")
     @NotYetImplemented({ CHROME, IE })
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
 
     /**
-     * Test {132=[CHROME, FF52, FF60, IE]}.
+     * Test {121=[FF68], 129=[CHROME], 134=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    @NotYetImplemented({ CHROME, FF60 })
-    public void deferred__jQuery_Deferred_catch() throws Exception {
-        runTest("deferred: jQuery.Deferred.catch");
-    }
-
-    /**
-     * Test {133=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___filtering__fail_() throws Exception {
-        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - filtering (fail)");
-    }
-
-    /**
-     * Test {134=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            FF68 = "1, 2, 3",
+            IE = "3")
     @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
 
     /**
-     * Test {135=[CHROME, FF52, FF60, IE]}.
+     * Test {122=[FF68], 130=[CHROME], 135=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            FF68 = "1, 2, 3",
+            IE = "3")
     public void deferred__jQuery_Deferred_then___deferred__done_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (done)");
     }
 
     /**
-     * Test {136=[CHROME, FF52, FF60, IE]}.
+     * Test {123=[FF68], 131=[CHROME], 136=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            FF68 = "1, 2, 3",
+            IE = "3")
     public void deferred__jQuery_Deferred_then___deferred__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (fail)");
     }
 
     /**
-     * Test {137=[CHROME, FF52, FF60, IE]}.
+     * Test {124=[FF68], 132=[CHROME], 137=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            FF68 = "1, 2, 3",
+            IE = "3")
     public void deferred__jQuery_Deferred_then___deferred__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - deferred (progress)");
     }
 
     /**
-     * Test {138=[CHROME, FF52, FF60, IE]}.
+     * Test {125=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___deferred__progress_() throws Exception {
-        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - deferred (progress)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void callbacks__jQuery_Callbacks_____disabled_callback_doesn_t_fire__gh_1790_() throws Exception {
+        runTest("callbacks: jQuery.Callbacks() - disabled callback doesn't fire (gh-1790)");
     }
 
     /**
-     * Test {139=[CHROME, FF52, FF60, IE]}.
+     * Test {125=[FF68], 133=[CHROME], 139=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
+    @Alerts(CHROME = "1, 0, 1",
+            FF60 = "11",
+            FF68 = "1, 0, 1",
+            IE = "11")
     public void deferred__jQuery_Deferred_then___context() throws Exception {
         runTest("deferred: jQuery.Deferred.then - context");
     }
 
     /**
-     * Test {140=[CHROME, FF52, FF60, IE]}.
+     * Test {126=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
-    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___context() throws Exception {
-        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - context");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void callbacks__jQuery_Callbacks_____list_with_memory_stays_locked__gh_3469_() throws Exception {
+        runTest("callbacks: jQuery.Callbacks() - list with memory stays locked (gh-3469)");
     }
 
     /**
-     * Test {141=[CHROME, FF52, FF60, IE]}.
+     * Test {126=[FF68], 134=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented(FF)
-    public void deferred__jQuery_Deferred_then___spec_compatibility() throws Exception {
-        runTest("deferred: jQuery.Deferred.then - spec compatibility");
+    @Alerts(CHROME = "34",
+            FF68 = "37")
+    public void deferred__jQuery_when() throws Exception {
+        runTest("deferred: jQuery.when");
     }
 
     /**
-     * Test {142=[CHROME, FF52, FF60, IE]}.
+     * Test {127=[FF68], 135=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
-    public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
-        runTest("deferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
+    @Alerts(CHROME = "13, 35, 48",
+            FF68 = "13, 35, 48")
+    public void deferred__jQuery_when___joined() throws Exception {
+        runTest("deferred: jQuery.when - joined");
     }
 
     /**
-     * Test {143=[CHROME, FF52, FF60, IE]}.
+     * Test {128=[FF68], 155=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented({ CHROME, FF })
-    public void deferred__jQuery_Deferred_exceptionHook() throws Exception {
-        runTest("deferred: jQuery.Deferred.exceptionHook");
-    }
-
-    /**
-     * Test {144=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void deferred__jQuery_Deferred_exceptionHook_with_stack_hooks() throws Exception {
-        runTest("deferred: jQuery.Deferred.exceptionHook with stack hooks");
-    }
-
-    /**
-     * Test {145=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
-    public void deferred__jQuery_Deferred___1_x_2_x_compatibility() throws Exception {
-        runTest("deferred: jQuery.Deferred - 1.x/2.x compatibility");
-    }
-
-    /**
-     * Test {146=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void deferred__jQuery_Deferred_then___progress_and_thenables() throws Exception {
-        runTest("deferred: jQuery.Deferred.then - progress and thenables");
-    }
-
-    /**
-     * Test {147=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("7")
-    public void deferred__jQuery_Deferred___notify_and_resolve() throws Exception {
-        runTest("deferred: jQuery.Deferred - notify and resolve");
-    }
-
-    /**
-     * Test {148=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void deferred__jQuery_Deferred___resolved_to_a_notifying_deferred() throws Exception {
-        runTest("deferred: jQuery.Deferred - resolved to a notifying deferred");
-    }
-
-    /**
-     * Test {149=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("44")
-    public void deferred__jQuery_when_nonThenable____like_Promise_resolve() throws Exception {
-        runTest("deferred: jQuery.when(nonThenable) - like Promise.resolve");
-    }
-
-    /**
-     * Test {150=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("68")
-    @NotYetImplemented({ CHROME, FF })
-    public void deferred__jQuery_when_thenable____like_Promise_resolve() throws Exception {
-        runTest("deferred: jQuery.when(thenable) - like Promise.resolve");
-    }
-
-    /**
-     * Test {151=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("196")
-    @NotYetImplemented({ CHROME, FF })
-    public void deferred__jQuery_when_a__b____like_Promise_all() throws Exception {
-        runTest("deferred: jQuery.when(a, b) - like Promise.all");
-    }
-
-    /**
-     * Test {152=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("42")
-    public void deferred__jQuery_when___always_returns_a_new_promise() throws Exception {
-        runTest("deferred: jQuery.when - always returns a new promise");
-    }
-
-    /**
-     * Test {153=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void deferred__jQuery_when___notify_does_not_affect_resolved() throws Exception {
-        runTest("deferred: jQuery.when - notify does not affect resolved");
-    }
-
-    /**
-     * Test {154=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void deferred__jQuery_when________opportunistically_synchronous() throws Exception {
-        runTest("deferred: jQuery.when(...) - opportunistically synchronous");
-    }
-
-    /**
-     * Test {155=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
+    @Alerts(FF = "4",
+            IE = "4")
     public void deprecated__bind_unbind() throws Exception {
         runTest("deprecated: bind/unbind");
     }
 
     /**
-     * Test {156=[CHROME, FF52, FF60, IE]}.
+     * Test {129=[FF68], 156=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF = "2",
+            IE = "2")
     public void deprecated__delegate_undelegate() throws Exception {
         runTest("deprecated: delegate/undelegate");
     }
 
     /**
-     * Test {157=[CHROME, FF52, FF60, IE]}.
+     * Test {130=[FF68], 157=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF = "1",
+            IE = "1")
     public void deprecated__hover___mouseenter_mouseleave() throws Exception {
         runTest("deprecated: hover() mouseenter mouseleave");
     }
 
     /**
-     * Test {158=[CHROME, FF52, FF60, IE]}.
+     * Test {131=[FF68], 158=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF = "5",
+            IE = "5")
     public void deprecated__trigger___shortcuts() throws Exception {
         runTest("deprecated: trigger() shortcuts");
     }
 
     /**
-     * Test {159=[CHROME, FF52, FF60, IE]}.
+     * Test {132=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
+    @Alerts(FF60 = "4",
+            IE = "4")
+    @NotYetImplemented({ CHROME, FF60 })
+    public void deferred__jQuery_Deferred_catch() throws Exception {
+        runTest("deferred: jQuery.Deferred.catch");
+    }
+
+    /**
+     * Test {132=[FF68], 159=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "18",
+            IE = "18")
     public void deprecated__Event_aliases() throws Exception {
         runTest("deprecated: Event aliases");
     }
 
     /**
-     * Test {160=[CHROME, FF52, FF60, IE]}.
+     * Test {133=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("20")
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___filtering__fail_() throws Exception {
+        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - filtering (fail)");
+    }
+
+    /**
+     * Test {133=[FF68], 160=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "20",
+            IE = "20")
     public void deprecated__jQuery_parseJSON() throws Exception {
         runTest("deprecated: jQuery.parseJSON");
     }
 
     /**
-     * Test {161=[CHROME, FF52, FF60, IE]}.
+     * Test {134=[FF68], 161=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF = "1",
+            IE = "1")
     public void deprecated__jQuery_isArray() throws Exception {
         runTest("deprecated: jQuery.isArray");
     }
 
     /**
-     * Test {162=[CHROME, FF52, FF60, IE]}.
+     * Test {135=[FF68], 162=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(FF = "8",
+            IE = "8")
     public void deprecated__jQuery_nodeName() throws Exception {
         runTest("deprecated: jQuery.nodeName");
     }
 
     /**
-     * Test {163=[CHROME, FF52, FF60, IE]}.
+     * Test {136=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("28")
+    @Alerts(CHROME = "1, 0, 1")
+    public void support__boxModel() throws Exception {
+        runTest("support: boxModel");
+    }
+
+    /**
+     * Test {136=[FF68], 163=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "28",
+            IE = "28")
     public void deprecated__type() throws Exception {
         runTest("deprecated: type");
     }
 
     /**
-     * Test {164=[CHROME, FF52, FF60, IE]}.
+     * Test {137=[FF68], 164=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
+    @Alerts(FF = "2",
             IE = "0")
     public void deprecated__type_for__Symbol_() throws Exception {
         runTest("deprecated: type for `Symbol`");
     }
 
     /**
-     * Test {165=[CHROME, FF52, FF60, IE]}.
+     * Test {137=[CHROME], 150=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("20")
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void support__global_failure() throws Exception {
+        runTest("support: global failure");
+    }
+
+    /**
+     * Test {138=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___deferred__progress_() throws Exception {
+        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - deferred (progress)");
+    }
+
+    /**
+     * Test {138=[FF68], 165=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "20",
+            IE = "20")
     public void deprecated__isFunction() throws Exception {
         runTest("deprecated: isFunction");
     }
 
     /**
-     * Test {166=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void deprecated__isFunction_cross_realm_function_() throws Exception {
-        runTest("deprecated: isFunction(cross-realm function)");
-    }
-
-    /**
-     * Test {167=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
-    @NotYetImplemented({ CHROME, FF })
-    public void deprecated__isFunction_GeneratorFunction_() throws Exception {
-        runTest("deprecated: isFunction(GeneratorFunction)");
-    }
-
-    /**
-     * Test {168=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "1",
-            IE = "0")
-    @NotYetImplemented({ CHROME, FF })
-    public void deprecated__isFunction_AsyncFunction_() throws Exception {
-        runTest("deprecated: isFunction(AsyncFunction)");
-    }
-
-    /**
-     * Test {169=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
-    public void deprecated__isFunction_custom___toStringTag_() throws Exception {
-        runTest("deprecated: isFunction(custom @@toStringTag)");
-    }
-
-    /**
-     * Test {170=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("14")
-    public void deprecated__jQuery_isWindow() throws Exception {
-        runTest("deprecated: jQuery.isWindow");
-    }
-
-    /**
-     * Test {171=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("7")
-    public void deprecated__jQuery_camelCase__() throws Exception {
-        runTest("deprecated: jQuery.camelCase()");
-    }
-
-    /**
-     * Test {172=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void deprecated__jQuery_now() throws Exception {
-        runTest("deprecated: jQuery.now");
-    }
-
-    /**
-     * Test {173=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("9")
-    public void deprecated__jQuery_proxy() throws Exception {
-        runTest("deprecated: jQuery.proxy");
-    }
-
-    /**
-     * Test {174=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("43")
-    public void deprecated__isNumeric() throws Exception {
-        runTest("deprecated: isNumeric");
-    }
-
-    /**
-     * Test {175=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
-    public void deprecated__isNumeric_Symbol_() throws Exception {
-        runTest("deprecated: isNumeric(Symbol)");
-    }
-
-    /**
-     * Test {176=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9239_() throws Exception {
-        runTest("support: body background is not lost if set prior to loading jQuery (#9239)");
-    }
-
-    /**
-     * Test {177=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1, 1, 2")
-    @NotYetImplemented
-    public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
-        runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
-    }
-
-    /**
-     * Test {178=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("15")
-    @NotYetImplemented
-    public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
-        runTest("support: Verify that support tests resolve as expected per browser");
-    }
-
-    /**
-     * Test {179=[CHROME, FF52, FF60, IE]}.
+     * Test {138=[CHROME], 151=[FF68], 179=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -1896,107 +2327,87 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {180=[CHROME, FF52, FF60, IE]}.
+     * Test {139=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void data__jQuery_data___removeData__expected_returns() throws Exception {
-        runTest("data: jQuery.data & removeData, expected returns");
+    @Alerts(CHROME = "8, 116, 124")
+    public void data__jQuery_data() throws Exception {
+        runTest("data: jQuery.data");
     }
 
     /**
-     * Test {181=[CHROME, FF52, FF60, IE]}.
+     * Test {139=[FF68], 166=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void data__jQuery__data____removeData__expected_returns() throws Exception {
-        runTest("data: jQuery._data & _removeData, expected returns");
+    @Alerts(FF60 = "1",
+            FF68 = "7, 6, 13",
+            IE = "1")
+    public void deprecated__isFunction_cross_realm_function_() throws Exception {
+        runTest("deprecated: isFunction(cross-realm function)");
     }
 
     /**
-     * Test {182=[CHROME, FF52, FF60, IE]}.
+     * Test {140=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__jQuery_hasData_no_side_effects() throws Exception {
-        runTest("data: jQuery.hasData no side effects");
+    @Alerts(FF60 = "11",
+            IE = "11")
+    public void deferred___PIPE_ONLY__jQuery_Deferred_pipe___context() throws Exception {
+        runTest("deferred: [PIPE ONLY] jQuery.Deferred.pipe - context");
     }
 
     /**
-     * Test {183=[CHROME, FF52, FF60, IE]}.
+     * Test {140=[CHROME], 158=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("25")
-    public void data__jQuery_data_div_() throws Exception {
-        runTest("data: jQuery.data(div)");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void data__jQuery_acceptData() throws Exception {
+        runTest("data: jQuery.acceptData");
     }
 
     /**
-     * Test {184=[CHROME, FF52, FF60, IE]}.
+     * Test {140=[FF68], 167=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("25")
-    public void data__jQuery_data____() throws Exception {
-        runTest("data: jQuery.data({})");
+    @Alerts(FF = "1",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF })
+    public void deprecated__isFunction_GeneratorFunction_() throws Exception {
+        runTest("deprecated: isFunction(GeneratorFunction)");
     }
 
     /**
-     * Test {185=[CHROME, FF52, FF60, IE]}.
+     * Test {141=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("25")
-    public void data__jQuery_data_window_() throws Exception {
-        runTest("data: jQuery.data(window)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented(FF)
+    public void deferred__jQuery_Deferred_then___spec_compatibility() throws Exception {
+        runTest("deferred: jQuery.Deferred.then - spec compatibility");
     }
 
     /**
-     * Test {186=[CHROME, FF52, FF60, IE]}.
+     * Test {141=[FF68], 168=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("25")
-    public void data__jQuery_data_document_() throws Exception {
-        runTest("data: jQuery.data(document)");
+    @Alerts(FF = "1",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF })
+    public void deprecated__isFunction_AsyncFunction_() throws Exception {
+        runTest("deprecated: isFunction(AsyncFunction)");
     }
 
     /**
-     * Test {187=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("25")
-    public void data__jQuery_data__embed__() throws Exception {
-        runTest("data: jQuery.data(<embed>)");
-    }
-
-    /**
-     * Test {188=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("25")
-    public void data__jQuery_data_object_flash_() throws Exception {
-        runTest("data: jQuery.data(object/flash)");
-    }
-
-    /**
-     * Test {189=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void data__jQuery___data_______undefined___14101_() throws Exception {
-        runTest("data: jQuery().data() === undefined (#14101)");
-    }
-
-    /**
-     * Test {190=[CHROME, FF52, FF60, IE]}.
+     * Test {141=[CHROME], 160=[FF68], 190=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2006,47 +2417,97 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {191=[CHROME, FF52, FF60, IE]}.
+     * Test {142=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
-    public void data__jQuery_Element__data_String__Object__data_String_() throws Exception {
-        runTest("data: jQuery(Element).data(String, Object).data(String)");
+    @Alerts(CHROME = "13, 16, 29")
+    public void data___data_String__and__data_String__Object_() throws Exception {
+        runTest("data: .data(String) and .data(String, Object)");
     }
 
     /**
-     * Test {192=[CHROME, FF52, FF60, IE]}.
+     * Test {142=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("16")
-    public void data__jQuery_plain_Object__data_String__Object__data_String_() throws Exception {
-        runTest("data: jQuery(plain Object).data(String, Object).data(String)");
+    @Alerts(FF60 = "1",
+            IE = "0")
+    public void deferred__jQuery_Deferred_then___IsCallable_determination__gh_3596_() throws Exception {
+        runTest("deferred: jQuery.Deferred.then - IsCallable determination (gh-3596)");
     }
 
     /**
-     * Test {193=[CHROME, FF52, FF60, IE]}.
+     * Test {142=[FF68], 169=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void data___data_object__does_not_retain_references___13815() throws Exception {
-        runTest("data: .data(object) does not retain references. #13815");
+    @Alerts(FF = "2",
+            IE = "0")
+    public void deprecated__isFunction_custom___toStringTag_() throws Exception {
+        runTest("deprecated: isFunction(custom @@toStringTag)");
     }
 
     /**
-     * Test {194=[CHROME, FF52, FF60, IE]}.
+     * Test {143=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("46")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented({ CHROME, FF })
+    public void deferred__jQuery_Deferred_exceptionHook() throws Exception {
+        runTest("deferred: jQuery.Deferred.exceptionHook");
+    }
+
+    /**
+     * Test {143=[FF68], 170=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "14",
+            IE = "14")
+    public void deprecated__jQuery_isWindow() throws Exception {
+        runTest("deprecated: jQuery.isWindow");
+    }
+
+    /**
+     * Test {143=[CHROME], 163=[FF68], 194=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "40",
+            FF60 = "46",
+            FF68 = "1, 42, 43",
+            IE = "46")
     public void data__data___attributes() throws Exception {
         runTest("data: data-* attributes");
     }
 
     /**
-     * Test {195=[CHROME, FF52, FF60, IE]}.
+     * Test {144=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void deferred__jQuery_Deferred_exceptionHook_with_stack_hooks() throws Exception {
+        runTest("deferred: jQuery.Deferred.exceptionHook with stack hooks");
+    }
+
+    /**
+     * Test {144=[FF68], 171=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "7",
+            IE = "7")
+    public void deprecated__jQuery_camelCase__() throws Exception {
+        runTest("deprecated: jQuery.camelCase()");
+    }
+
+    /**
+     * Test {144=[CHROME], 164=[FF68], 195=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2056,7 +2517,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {196=[CHROME, FF52, FF60, IE]}.
+     * Test {145=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void deferred__jQuery_Deferred___1_x_2_x_compatibility() throws Exception {
+        runTest("deferred: jQuery.Deferred - 1.x/2.x compatibility");
+    }
+
+    /**
+     * Test {145=[FF68], 172=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void deprecated__jQuery_now() throws Exception {
+        runTest("deprecated: jQuery.now");
+    }
+
+    /**
+     * Test {145=[CHROME], 165=[FF68], 196=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2066,7 +2549,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {197=[CHROME, FF52, FF60, IE]}.
+     * Test {146=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void deferred__jQuery_Deferred_then___progress_and_thenables() throws Exception {
+        runTest("deferred: jQuery.Deferred.then - progress and thenables");
+    }
+
+    /**
+     * Test {146=[FF68], 173=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "9",
+            IE = "9")
+    public void deprecated__jQuery_proxy() throws Exception {
+        runTest("deprecated: jQuery.proxy");
+    }
+
+    /**
+     * Test {146=[CHROME], 166=[FF68], 197=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2076,7 +2581,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {198=[CHROME, FF52, FF60, IE]}.
+     * Test {147=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "7",
+            IE = "7")
+    public void deferred__jQuery_Deferred___notify_and_resolve() throws Exception {
+        runTest("deferred: jQuery.Deferred - notify and resolve");
+    }
+
+    /**
+     * Test {147=[FF68], 174=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "43",
+            IE = "43")
+    public void deprecated__isNumeric() throws Exception {
+        runTest("deprecated: isNumeric");
+    }
+
+    /**
+     * Test {147=[CHROME], 167=[FF68], 198=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2086,207 +2613,230 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {199=[CHROME, FF52, FF60, IE]}.
+     * Test {148=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    public void data___data_should_follow_html5_specification_regarding_camel_casing() throws Exception {
-        runTest("data: .data should follow html5 specification regarding camel casing");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void deferred__jQuery_Deferred___resolved_to_a_notifying_deferred() throws Exception {
+        runTest("deferred: jQuery.Deferred - resolved to a notifying deferred");
     }
 
     /**
-     * Test {200=[CHROME, FF52, FF60, IE]}.
+     * Test {148=[CHROME], 168=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void data___data_should_not_miss_preset_data___w__hyphenated_property_names() throws Exception {
-        runTest("data: .data should not miss preset data-* w/ hyphenated property names");
+    @Alerts(CHROME = "10",
+            FF68 = "10")
+    public void data__jQuery_data_should_follow_html5_specification_regarding_camel_casing() throws Exception {
+        runTest("data: jQuery.data should follow html5 specification regarding camel casing");
     }
 
     /**
-     * Test {201=[CHROME, FF52, FF60, IE]}.
+     * Test {148=[FF68], 175=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__jQuery_data_should_not_miss_data___w__hyphenated_property_names__14047() throws Exception {
-        runTest("data: jQuery.data should not miss data-* w/ hyphenated property names #14047");
+    @Alerts(FF = "2",
+            IE = "0")
+    public void deprecated__isNumeric_Symbol_() throws Exception {
+        runTest("deprecated: isNumeric(Symbol)");
     }
 
     /**
-     * Test {202=[CHROME, FF52, FF60, IE]}.
+     * Test {149=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void data___data_should_not_miss_attr___set_data___with_hyphenated_property_names() throws Exception {
-        runTest("data: .data should not miss attr() set data-* with hyphenated property names");
+    @Alerts(FF60 = "44",
+            IE = "44")
+    public void deferred__jQuery_when_nonThenable____like_Promise_resolve() throws Exception {
+        runTest("deferred: jQuery.when(nonThenable) - like Promise.resolve");
     }
 
     /**
-     * Test {203=[CHROME, FF52, FF60, IE]}.
+     * Test {149=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
-    public void data___data_always_sets_data_with_the_camelCased_key__gh_2257_() throws Exception {
-        runTest("data: .data always sets data with the camelCased key (gh-2257)");
+    @Alerts(FF68 = "1")
+    public void support__zoom_of_doom___13089_() throws Exception {
+        runTest("support: zoom of doom (#13089)");
     }
 
     /**
-     * Test {204=[CHROME, FF52, FF60, IE]}.
+     * Test {149=[CHROME], 169=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void data___data_should_not_strip_more_than_one_hyphen_when_camelCasing__gh_2070_() throws Exception {
-        runTest("data: .data should not strip more than one hyphen when camelCasing (gh-2070)");
+    @Alerts(CHROME = "2",
+            FF68 = "2")
+    public void data__jQuery_data_should_not_miss_data_with_preset_hyphenated_property_names() throws Exception {
+        runTest("data: jQuery.data should not miss data with preset hyphenated property names");
     }
 
     /**
-     * Test {205=[CHROME, FF52, FF60, IE]}.
+     * Test {150=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("24")
-    public void data___data_supports_interoperable_hyphenated_camelCase_get_set_of_properties_with_arbitrary_non_null_NaN_undefined_values() throws Exception {
-        runTest("data: .data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values");
+    @Alerts(FF60 = "68",
+            IE = "68")
+    @NotYetImplemented({ CHROME, FF })
+    public void deferred__jQuery_when_thenable____like_Promise_resolve() throws Exception {
+        runTest("deferred: jQuery.when(thenable) - like Promise.resolve");
     }
 
     /**
-     * Test {206=[CHROME, FF52, FF60, IE]}.
+     * Test {150=[CHROME], 170=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("27")
-    public void data___data_supports_interoperable_removal_of_hyphenated_camelCase_properties() throws Exception {
-        runTest("data: .data supports interoperable removal of hyphenated/camelCase properties");
+    @Alerts(CHROME = "24",
+            FF68 = "24")
+    public void data__jQuery_data_supports_interoperable_hyphenated_camelCase_get_set_of_properties_with_arbitrary_non_null_NaN_undefined_values() throws Exception {
+        runTest("data: jQuery.data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values");
     }
 
     /**
-     * Test {207=[CHROME, FF52, FF60, IE]}.
+     * Test {151=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
-    public void data___data_supports_interoperable_removal_of_properties_SET_TWICE__13850() throws Exception {
-        runTest("data: .data supports interoperable removal of properties SET TWICE #13850");
+    @Alerts(FF60 = "196",
+            IE = "196")
+    @NotYetImplemented({ CHROME, FF })
+    public void deferred__jQuery_when_a__b____like_Promise_all() throws Exception {
+        runTest("deferred: jQuery.when(a, b) - like Promise.all");
     }
 
     /**
-     * Test {208=[CHROME, FF52, FF60, IE]}.
+     * Test {151=[CHROME], 171=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void data___removeData_supports_removal_of_hyphenated_properties_via_array___12786__gh_2257_() throws Exception {
-        runTest("data: .removeData supports removal of hyphenated properties via array (#12786, gh-2257)");
+    @Alerts(CHROME = "27",
+            FF68 = "27")
+    public void data__jQuery_data_supports_interoperable_removal_of_hyphenated_camelCase_properties() throws Exception {
+        runTest("data: jQuery.data supports interoperable removal of hyphenated/camelCase properties");
     }
 
     /**
-     * Test {209=[CHROME, FF52, FF60, IE]}.
+     * Test {152=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data___removeData_should_not_throw_exceptions____10080_() throws Exception {
-        runTest("data: .removeData should not throw exceptions. (#10080)");
+    @Alerts(FF60 = "42",
+            IE = "42")
+    public void deferred__jQuery_when___always_returns_a_new_promise() throws Exception {
+        runTest("deferred: jQuery.when - always returns a new promise");
     }
 
     /**
-     * Test {210=[CHROME, FF52, FF60, IE]}.
+     * Test {152=[CHROME], 173=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void data___data_only_checks_element_attributes_once___8909() throws Exception {
-        runTest("data: .data only checks element attributes once. #8909");
+    @Alerts(CHROME = "2, 3, 5",
+            FF68 = "1")
+    public void data__Triggering_the_removeData_should_not_throw_exceptions____10080_() throws Exception {
+        runTest("data: Triggering the removeData should not throw exceptions. (#10080)");
     }
 
     /**
-     * Test {211=[CHROME, FF52, FF60, IE]}.
+     * Test {152=[FF68], 183=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__data___with_JSON_value_can_have_newlines() throws Exception {
-        runTest("data: data-* with JSON value can have newlines");
+    @Alerts(FF60 = "25",
+            FF68 = "2, 25, 27",
+            IE = "25")
+    public void data__jQuery_data_div_() throws Exception {
+        runTest("data: jQuery.data(div)");
     }
 
     /**
-     * Test {212=[CHROME, FF52, FF60, IE]}.
+     * Test {153=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data___data_doesn_t_throw_when_calling_selection_is_empty___13551() throws Exception {
-        runTest("data: .data doesn't throw when calling selection is empty. #13551");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void deferred__jQuery_when___notify_does_not_affect_resolved() throws Exception {
+        runTest("deferred: jQuery.when - notify does not affect resolved");
     }
 
     /**
-     * Test {213=[CHROME, FF52, FF60, IE]}.
+     * Test {153=[CHROME], 174=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
-    public void data__acceptData() throws Exception {
-        runTest("data: acceptData");
+    @Alerts(CHROME = "2",
+            FF68 = "2")
+    public void data__Only_check_element_attributes_once_when_calling__data______8909() throws Exception {
+        runTest("data: Only check element attributes once when calling .data() - #8909");
     }
 
     /**
-     * Test {214=[CHROME, FF52, FF60, IE]}.
+     * Test {153=[FF68], 184=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__Check_proper_data_removal_of_non_element_descendants_nodes___8335_() throws Exception {
-        runTest("data: Check proper data removal of non-element descendants nodes (#8335)");
+    @Alerts(FF = "25",
+            IE = "25")
+    public void data__jQuery_data____() throws Exception {
+        runTest("data: jQuery.data({})");
     }
 
     /**
-     * Test {215=[CHROME, FF52, FF60, IE]}.
+     * Test {154=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__enumerate_data_attrs_on_body___14894_() throws Exception {
-        runTest("data: enumerate data attrs on body (#14894)");
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void deferred__jQuery_when________opportunistically_synchronous() throws Exception {
+        runTest("deferred: jQuery.when(...) - opportunistically synchronous");
     }
 
     /**
-     * Test {216=[CHROME, FF52, FF60, IE]}.
+     * Test {154=[CHROME], 175=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void data__Check_that_the_expando_is_removed_when_there_s_no_more_data() throws Exception {
-        runTest("data: Check that the expando is removed when there's no more data");
+    @Alerts(CHROME = "1",
+            FF68 = "1")
+    public void data__JSON_data__attributes_can_have_newlines() throws Exception {
+        runTest("data: JSON data- attributes can have newlines");
     }
 
     /**
-     * Test {217=[CHROME, FF52, FF60, IE]}.
+     * Test {154=[FF68], 185=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data__Check_that_the_expando_is_removed_when_there_s_no_more_data_on_non_nodes() throws Exception {
-        runTest("data: Check that the expando is removed when there's no more data on non-nodes");
+    @Alerts(FF = "25",
+            IE = "25")
+    public void data__jQuery_data_window_() throws Exception {
+        runTest("data: jQuery.data(window)");
     }
 
     /**
-     * Test {218=[CHROME, FF52, FF60, IE]}.
+     * Test {155=[FF68], 186=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void data___data_prop__does_not_create_expando() throws Exception {
-        runTest("data: .data(prop) does not create expando");
+    @Alerts(FF60 = "25",
+            FF68 = "2, 25, 27",
+            IE = "25")
+    public void data__jQuery_data_document_() throws Exception {
+        runTest("data: jQuery.data(document)");
     }
 
     /**
-     * Test {219=[CHROME, FF52, FF60, IE]}.
+     * Test {155=[CHROME], 177=[FF68], 219=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2296,7 +2846,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {220=[CHROME, FF52, FF60, IE]}.
+     * Test {156=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2, 2, 4")
+    public void data__Expando_cleanup() throws Exception {
+        runTest("data: Expando cleanup");
+    }
+
+    /**
+     * Test {156=[CHROME], 178=[FF68], 220=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2306,7 +2866,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {221=[CHROME, FF52, FF60, IE]}.
+     * Test {157=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2")
+    public void data__Data_is_not_being_set_on_comment_and_text_nodes() throws Exception {
+        runTest("data: Data is not being set on comment and text nodes");
+    }
+
+    /**
+     * Test {157=[CHROME], 179=[FF68], 221=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2316,7 +2886,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {222=[CHROME, FF52, FF60, IE]}.
+     * Test {158=[CHROME], 180=[FF68], 222=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2326,17 +2896,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {223=[CHROME, FF52, FF60, IE]}.
+     * Test {159=[FF68], 189=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void queue__jQuery_queue_should_return_array_while_manipulating_the_queue() throws Exception {
-        runTest("queue: jQuery.queue should return array while manipulating the queue");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void data__jQuery___data_______undefined___14101_() throws Exception {
+        runTest("data: jQuery().data() === undefined (#14101)");
     }
 
     /**
-     * Test {224=[CHROME, FF52, FF60, IE]}.
+     * Test {159=[CHROME], 181=[FF68], 224=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2346,7 +2917,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {225=[CHROME, FF52, FF60, IE]}.
+     * Test {160=[CHROME], 182=[FF68], 225=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2356,7 +2927,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {226=[CHROME, FF52, FF60, IE]}.
+     * Test {161=[FF68], 191=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "18",
+            IE = "18")
+    public void data__jQuery_Element__data_String__Object__data_String_() throws Exception {
+        runTest("data: jQuery(Element).data(String, Object).data(String)");
+    }
+
+    /**
+     * Test {161=[CHROME], 183=[FF68], 226=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2366,17 +2948,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {227=[CHROME, FF52, FF60, IE]}.
+     * Test {162=[FF68], 192=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(FF = "16",
+            IE = "16")
+    public void data__jQuery_plain_Object__data_String__Object__data_String_() throws Exception {
+        runTest("data: jQuery(plain Object).data(String, Object).data(String)");
+    }
+
+    /**
+     * Test {162=[CHROME], 184=[FF68], 227=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "3",
+            CHROME = "2, 0, 2")
     public void queue__fn_promise_____called_when_fx_queue_is_empty() throws Exception {
         runTest("queue: fn.promise() - called when fx queue is empty");
     }
 
     /**
-     * Test {228=[CHROME, FF52, FF60, IE]}.
+     * Test {163=[CHROME], 185=[FF68], 228=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2386,7 +2980,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {229=[CHROME, FF52, FF60, IE]}.
+     * Test {164=[CHROME], 186=[FF68], 229=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2397,7 +2991,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {230=[CHROME, FF52, FF60, IE]}.
+     * Test {165=[CHROME], 187=[FF68], 230=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2407,7 +3001,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {231=[CHROME, FF52, FF60, IE]}.
+     * Test {166=[CHROME], 188=[FF68], 231=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2417,7 +3011,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {232=[CHROME, FF52, FF60, IE]}.
+     * Test {167=[CHROME], 189=[FF68], 232=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2427,37 +3021,31 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {233=[CHROME, FF52, FF60, IE]}.
+     * Test {168=[CHROME], 190=[FF68], 233=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1, 0, 1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void attributes__jQuery_propFix_integrity_test() throws Exception {
         runTest("attributes: jQuery.propFix integrity test");
     }
 
     /**
-     * Test {234=[CHROME, FF52, FF60, IE]}.
+     * Test {169=[CHROME], 191=[FF68], 234=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("50")
+    @Alerts(DEFAULT = "50",
+            CHROME = "3, 30, 33")
     public void attributes__attr_String_() throws Exception {
         runTest("attributes: attr(String)");
     }
 
     /**
-     * Test {235=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void attributes__attr_String__on_cloned_elements___9646() throws Exception {
-        runTest("attributes: attr(String) on cloned elements, #9646");
-    }
-
-    /**
-     * Test {236=[CHROME, FF52, FF60, IE]}.
+     * Test {170=[CHROME], 193=[FF68], 236=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2467,7 +3055,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {237=[CHROME, FF52, FF60, IE]}.
+     * Test {171=[CHROME], 194=[FF68], 237=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2477,7 +3065,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {238=[CHROME, FF52, FF60, IE]}.
+     * Test {172=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2, 2, 4")
+    public void data___removeData_supports_removal_of_hyphenated_properties_via_array___12786_() throws Exception {
+        runTest("data: .removeData supports removal of hyphenated properties via array (#12786)");
+    }
+
+    /**
+     * Test {172=[CHROME], 195=[FF68], 238=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2487,37 +3085,28 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {239=[CHROME, FF52, FF60, IE]}.
+     * Test {173=[CHROME], 196=[FF68], 239=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("71")
+    @Alerts(DEFAULT = "71",
+            CHROME = "2, 0, 2")
     public void attributes__attr_String__Object_() throws Exception {
         runTest("attributes: attr(String, Object)");
     }
 
     /**
-     * Test {240=[CHROME, FF52, FF60, IE]}.
+     * Test {174=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void attributes__attr_non_ASCII_() throws Exception {
-        runTest("attributes: attr(non-ASCII)");
+    @Alerts(CHROME = "9, 0, 9")
+    public void attributes__attr_jquery_method_() throws Exception {
+        runTest("attributes: attr(jquery_method)");
     }
 
     /**
-     * Test {241=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void attributes__attr___extending_the_boolean_attrHandle() throws Exception {
-        runTest("attributes: attr - extending the boolean attrHandle");
-    }
-
-    /**
-     * Test {242=[CHROME, FF52, FF60, IE]}.
+     * Test {175=[CHROME], 198=[FF68], 242=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2527,17 +3116,28 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {243=[CHROME, FF52, FF60, IE]}.
+     * Test {176=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void attributes__attr_String__Object____Loaded_via_XML_fragment() throws Exception {
-        runTest("attributes: attr(String, Object) - Loaded via XML fragment");
+    @Alerts(FF68 = "2, 0, 2")
+    public void data__global_failure() throws Exception {
+        runTest("data: global failure");
     }
 
     /**
-     * Test {244=[CHROME, FF52, FF60, IE]}.
+     * Test {176=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void support__body_background_is_not_lost_if_set_prior_to_loading_jQuery___9239_() throws Exception {
+        runTest("support: body background is not lost if set prior to loading jQuery (#9239)");
+    }
+
+    /**
+     * Test {176=[CHROME], 200=[FF68], 244=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2547,7 +3147,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {245=[CHROME, FF52, FF60, IE]}.
+     * Test {177=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1, 1, 2",
+            IE = "1, 1, 2")
+    @NotYetImplemented
+    public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
+        runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
+    }
+
+    /**
+     * Test {177=[CHROME], 201=[FF68], 245=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2557,17 +3169,32 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {246=[CHROME, FF52, FF60, IE]}.
+     * Test {178=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
+    @Alerts(FF60 = "15",
+            IE = "15")
+    @NotYetImplemented
+    public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
+        runTest("support: Verify that support tests resolve as expected per browser");
+    }
+
+    /**
+     * Test {178=[CHROME], 202=[FF68], 246=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 11, 12",
+            FF60 = "12",
+            FF68 = "1, 11, 12",
+            IE = "12")
     public void attributes__removeAttr_String_() throws Exception {
         runTest("attributes: removeAttr(String)");
     }
 
     /**
-     * Test {247=[CHROME, FF52, FF60, IE]}.
+     * Test {179=[CHROME], 203=[FF68], 247=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2577,7 +3204,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {248=[CHROME, FF52, FF60, IE]}.
+     * Test {180=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void data__jQuery_data___removeData__expected_returns() throws Exception {
+        runTest("data: jQuery.data & removeData, expected returns");
+    }
+
+    /**
+     * Test {180=[CHROME], 204=[FF68], 248=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2587,77 +3225,62 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {249=[CHROME, FF52, FF60, IE]}.
+     * Test {181=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void attributes__removeAttr_Multi_String__non_HTML_whitespace_is_valid_in_attribute_names__gh_3003_() throws Exception {
-        runTest("attributes: removeAttr(Multi String, non-HTML whitespace is valid in attribute names (gh-3003)");
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void data__jQuery__data____removeData__expected_returns() throws Exception {
+        runTest("data: jQuery._data & _removeData, expected returns");
     }
 
     /**
-     * Test {250=[CHROME, FF52, FF60, IE]}.
+     * Test {181=[CHROME], 205=[FF68], 250=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("17")
+    @Alerts(DEFAULT = "17",
+            CHROME = "1, 30, 31")
     public void attributes__prop_String__Object_() throws Exception {
         runTest("attributes: prop(String, Object)");
     }
 
     /**
-     * Test {251=[CHROME, FF52, FF60, IE]}.
+     * Test {182=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("14")
-    public void attributes__prop_String__Object__on_null_undefined() throws Exception {
-        runTest("attributes: prop(String, Object) on null/undefined");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__jQuery_hasData_no_side_effects() throws Exception {
+        runTest("data: jQuery.hasData no side effects");
     }
 
     /**
-     * Test {252=[CHROME, FF52, FF60, IE]}.
+     * Test {182=[CHROME], 207=[FF68], 252=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
+    @Alerts(DEFAULT = "11",
+            CHROME = "2, 6, 8")
     public void attributes__prop__tabindex__() throws Exception {
         runTest("attributes: prop('tabindex')");
     }
 
     /**
-     * Test {253=[CHROME, FF52, FF60, IE]}.
+     * Test {183=[CHROME], 208=[FF68], 254=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void attributes__image_prop___tabIndex___() throws Exception {
-        runTest("attributes: image.prop( 'tabIndex' )");
-    }
-
-    /**
-     * Test {254=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("10")
+    @Alerts(DEFAULT = "10",
+            CHROME = "1, 8, 9")
     public void attributes__prop__tabindex___value_() throws Exception {
         runTest("attributes: prop('tabindex', value)");
     }
 
     /**
-     * Test {255=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void attributes__option_prop__selected___true__affects_select_selectedIndex__gh_2732_() throws Exception {
-        runTest("attributes: option.prop('selected', true) affects select.selectedIndex (gh-2732)");
-    }
-
-    /**
-     * Test {256=[CHROME, FF52, FF60, IE]}.
+     * Test {184=[CHROME], 209=[FF68], 256=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2667,17 +3290,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {257=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void attributes__val___after_modification() throws Exception {
-        runTest("attributes: val() after modification");
-    }
-
-    /**
-     * Test {258=[CHROME, FF52, FF60, IE]}.
+     * Test {185=[CHROME], 211=[FF68], 258=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2688,17 +3301,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {259=[CHROME, FF52, FF60, IE]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void attributes__val___with_non_matching_values_on_dropdown_list() throws Exception {
-        runTest("attributes: val() with non-matching values on dropdown list");
-    }
-
-    /**
-     * Test {260=[CHROME, FF52, FF60]}.
+     * Test {186=[CHROME], 213=[FF68], 260=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2709,27 +3312,51 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {260=[IE], 261=[CHROME, FF52, FF60]}.
+     * Test {187=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(FF60 = "25",
+            IE = "25")
+    public void data__jQuery_data__embed__() throws Exception {
+        runTest("data: jQuery.data(<embed>)");
+    }
+
+    /**
+     * Test {187=[CHROME], 214=[FF68], 260=[IE], 261=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "9",
+            CHROME = "8")
     public void attributes__val_String_Number_() throws Exception {
         runTest("attributes: val(String/Number)");
     }
 
     /**
-     * Test {261=[IE], 262=[CHROME, FF52, FF60]}.
+     * Test {188=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(FF60 = "25",
+            IE = "25")
+    public void data__jQuery_data_object_flash_() throws Exception {
+        runTest("data: jQuery.data(object/flash)");
+    }
+
+    /**
+     * Test {188=[CHROME], 215=[FF68], 261=[IE], 262=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "9",
+            CHROME = "8")
     public void attributes__val_Function_() throws Exception {
         runTest("attributes: val(Function)");
     }
 
     /**
-     * Test {262=[IE], 263=[CHROME, FF52, FF60]}.
+     * Test {189=[CHROME], 216=[FF68], 262=[IE], 263=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2739,7 +3366,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {263=[IE], 264=[CHROME, FF52, FF60]}.
+     * Test {190=[CHROME], 217=[FF68], 263=[IE], 264=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2749,7 +3376,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {264=[IE], 265=[CHROME, FF52, FF60]}.
+     * Test {191=[CHROME], 218=[FF68], 264=[IE], 265=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2759,97 +3386,106 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {265=[IE], 266=[CHROME, FF52, FF60]}.
+     * Test {192=[FF68], 235=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("37")
-    public void attributes__select_val_space_characters___gh_2978_() throws Exception {
-        runTest("attributes: select.val(space characters) (gh-2978)");
+    @Alerts(FF = "4",
+            IE = "4")
+    public void attributes__attr_String__on_cloned_elements___9646() throws Exception {
+        runTest("attributes: attr(String) on cloned elements, #9646");
     }
 
     /**
-     * Test {266=[IE], 267=[CHROME, FF52, FF60]}.
+     * Test {192=[CHROME], 219=[FF68], 266=[IE], 267=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(DEFAULT = "9",
+            CHROME = "2, 0, 2")
     public void attributes__addClass_String_() throws Exception {
         runTest("attributes: addClass(String)");
     }
 
     /**
-     * Test {267=[IE], 268=[CHROME, FF52, FF60]}.
+     * Test {193=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void data___data_object__does_not_retain_references___13815() throws Exception {
+        runTest("data: .data(object) does not retain references. #13815");
+    }
+
+    /**
+     * Test {193=[CHROME], 220=[FF68], 267=[IE], 268=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "9",
+            CHROME = "2, 0, 2")
     public void attributes__addClass_Function_() throws Exception {
         runTest("attributes: addClass(Function)");
     }
 
     /**
-     * Test {268=[IE], 269=[CHROME, FF52, FF60]}.
+     * Test {194=[CHROME], 221=[FF68], 269=[IE], 270=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
-    public void attributes__addClass_Array_() throws Exception {
-        runTest("attributes: addClass(Array)");
-    }
-
-    /**
-     * Test {269=[IE], 270=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("52")
+    @Alerts(DEFAULT = "52",
+            CHROME = "1, 56, 57")
     public void attributes__addClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: addClass(Function) with incoming value");
     }
 
     /**
-     * Test {270=[IE], 271=[CHROME, FF52, FF60]}.
+     * Test {195=[CHROME], 222=[FF68], 270=[IE], 271=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(DEFAULT = "8",
+            CHROME = "7")
     public void attributes__removeClass_String____simple() throws Exception {
         runTest("attributes: removeClass(String) - simple");
     }
 
     /**
-     * Test {271=[IE], 272=[CHROME, FF52, FF60]}.
+     * Test {196=[CHROME], 223=[FF68], 271=[IE], 272=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(DEFAULT = "8",
+            CHROME = "7")
     public void attributes__removeClass_Function____simple() throws Exception {
         runTest("attributes: removeClass(Function) - simple");
     }
 
     /**
-     * Test {272=[IE], 273=[CHROME, FF52, FF60]}.
+     * Test {197=[FF68], 241=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void attributes__removeClass_Array____simple() throws Exception {
-        runTest("attributes: removeClass(Array) - simple");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void attributes__attr___extending_the_boolean_attrHandle() throws Exception {
+        runTest("attributes: attr - extending the boolean attrHandle");
     }
 
     /**
-     * Test {273=[IE], 274=[CHROME, FF52, FF60]}.
+     * Test {197=[CHROME], 224=[FF68], 273=[IE], 274=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("52")
+    @Alerts(DEFAULT = "52",
+            CHROME = "1, 56, 57")
     public void attributes__removeClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: removeClass(Function) with incoming value");
     }
 
     /**
-     * Test {274=[IE], 275=[CHROME, FF52, FF60]}.
+     * Test {198=[CHROME], 225=[FF68], 274=[IE], 275=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2859,57 +3495,98 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {275=[IE], 276=[CHROME, FF52, FF60]}.
+     * Test {199=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void attributes__removeClass_undefined__is_a_no_op() throws Exception {
-        runTest("attributes: removeClass(undefined) is a no-op");
+    @Alerts(FF60 = "12",
+            IE = "12")
+    public void data___data_should_follow_html5_specification_regarding_camel_casing() throws Exception {
+        runTest("data: .data should follow html5 specification regarding camel casing");
     }
 
     /**
-     * Test {276=[IE], 277=[CHROME, FF52, FF60]}.
+     * Test {199=[FF68], 243=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void attributes__attr_String__Object____Loaded_via_XML_fragment() throws Exception {
+        runTest("attributes: attr(String, Object) - Loaded via XML fragment");
+    }
+
+    /**
+     * Test {199=[CHROME], 227=[FF68], 276=[IE], 277=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "17",
+            FF60 = "19",
+            FF68 = "2, 17, 19",
+            IE = "19")
     public void attributes__toggleClass_String_boolean_undefined___boolean__() throws Exception {
         runTest("attributes: toggleClass(String|boolean|undefined[, boolean])");
     }
 
     /**
-     * Test {277=[IE], 278=[CHROME, FF52, FF60]}.
+     * Test {200=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void data___data_should_not_miss_preset_data___w__hyphenated_property_names() throws Exception {
+        runTest("data: .data should not miss preset data-* w/ hyphenated property names");
+    }
+
+    /**
+     * Test {200=[CHROME], 228=[FF68], 277=[IE], 278=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "17",
+            FF60 = "19",
+            FF68 = "2, 17, 19",
+            IE = "19")
     public void attributes__toggleClass_Function___boolean__() throws Exception {
         runTest("attributes: toggleClass(Function[, boolean])");
     }
 
     /**
-     * Test {278=[IE], 279=[CHROME, FF52, FF60]}.
+     * Test {201=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
-    public void attributes__toggleClass_Array___boolean__() throws Exception {
-        runTest("attributes: toggleClass(Array[, boolean])");
+    @Alerts(CHROME = "14")
+    public void attributes__toggleClass_Fucntion___boolean___with_incoming_value() throws Exception {
+        runTest("attributes: toggleClass(Fucntion[, boolean]) with incoming value");
     }
 
     /**
-     * Test {279=[IE], 280=[CHROME, FF52, FF60]}.
+     * Test {201=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("14")
-    public void attributes__toggleClass_Function___boolean___with_incoming_value() throws Exception {
-        runTest("attributes: toggleClass(Function[, boolean]) with incoming value");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__jQuery_data_should_not_miss_data___w__hyphenated_property_names__14047() throws Exception {
+        runTest("data: jQuery.data should not miss data-* w/ hyphenated property names #14047");
     }
 
     /**
-     * Test {280=[IE], 281=[CHROME, FF52, FF60]}.
+     * Test {202=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void data___data_should_not_miss_attr___set_data___with_hyphenated_property_names() throws Exception {
+        runTest("data: .data should not miss attr() set data-* with hyphenated property names");
+    }
+
+    /**
+     * Test {202=[CHROME], 230=[FF68], 280=[IE], 281=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2919,37 +3596,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {281=[IE], 282=[CHROME, FF52, FF60]}.
+     * Test {203=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
-    public void attributes__addClass__removeClass__hasClass_on_many_elements() throws Exception {
-        runTest("attributes: addClass, removeClass, hasClass on many elements");
+    @Alerts(FF60 = "18",
+            IE = "18")
+    public void data___data_always_sets_data_with_the_camelCased_key__gh_2257_() throws Exception {
+        runTest("data: .data always sets data with the camelCased key (gh-2257)");
     }
 
     /**
-     * Test {282=[IE], 283=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("16")
-    public void attributes__addClass__removeClass__hasClass_on_many_elements___Array() throws Exception {
-        runTest("attributes: addClass, removeClass, hasClass on many elements - Array");
-    }
-
-    /**
-     * Test {283=[IE], 284=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("9")
-    public void attributes__addClass__removeClass__hasClass_on_elements_with_classes_with_non_HTML_whitespace__gh_3072__gh_3003_() throws Exception {
-        runTest("attributes: addClass, removeClass, hasClass on elements with classes with non-HTML whitespace (gh-3072, gh-3003)");
-    }
-
-    /**
-     * Test {284=[IE], 285=[CHROME, FF52, FF60]}.
+     * Test {203=[CHROME], 232=[FF68], 284=[IE], 285=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -2959,117 +3617,139 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {285=[IE], 286=[CHROME, FF52, FF60]}.
+     * Test {204=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void attributes__hasClass_correctly_interprets_non_space_separators___13835_() throws Exception {
-        runTest("attributes: hasClass correctly interprets non-space separators (#13835)");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void data___data_should_not_strip_more_than_one_hyphen_when_camelCasing__gh_2070_() throws Exception {
+        runTest("data: .data should not strip more than one hyphen when camelCasing (gh-2070)");
     }
 
     /**
-     * Test {286=[IE], 287=[CHROME, FF52, FF60]}.
+     * Test {204=[CHROME], 234=[FF68], 286=[IE], 287=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "2")
     public void attributes__coords_returns_correct_values_in_IE6_IE7__see__10828() throws Exception {
         runTest("attributes: coords returns correct values in IE6/IE7, see #10828");
     }
 
     /**
-     * Test {287=[IE], 288=[CHROME, FF52, FF60]}.
+     * Test {205=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void attributes__should_not_throw_at___option__val_____14686_() throws Exception {
-        runTest("attributes: should not throw at $(option).val() (#14686)");
+    @Alerts(FF60 = "24",
+            IE = "24")
+    public void data___data_supports_interoperable_hyphenated_camelCase_get_set_of_properties_with_arbitrary_non_null_NaN_undefined_values() throws Exception {
+        runTest("data: .data supports interoperable hyphenated/camelCase get/set of properties with arbitrary non-null|NaN|undefined values");
     }
 
     /**
-     * Test {288=[IE], 289=[CHROME, FF52, FF60]}.
+     * Test {205=[CHROME], 237=[FF68], 292=[IE], 293=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void attributes__option_value_not_trimmed_when_setting_via_parent_select() throws Exception {
-        runTest("attributes: option value not trimmed when setting via parent select");
-    }
-
-    /**
-     * Test {289=[IE], 290=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("16")
-    public void attributes__Insignificant_white_space_returned_for___option__val_____14858__gh_2978_() throws Exception {
-        runTest("attributes: Insignificant white space returned for $(option).val() (#14858, gh-2978)");
-    }
-
-    /**
-     * Test {290=[IE], 291=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("12")
-    public void attributes__SVG_class_manipulation__gh_2199_() throws Exception {
-        runTest("attributes: SVG class manipulation (gh-2199)");
-    }
-
-    /**
-     * Test {291=[IE], 292=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void attributes__non_lowercase_boolean_attribute_getters_should_not_crash() throws Exception {
-        runTest("attributes: non-lowercase boolean attribute getters should not crash");
-    }
-
-    /**
-     * Test {292=[IE], 293=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
+    @Alerts(CHROME = "2",
+            FF60 = "4",
+            FF68 = "2",
+            IE = "4")
     public void event__null_or_undefined_handler() throws Exception {
         runTest("event: null or undefined handler");
     }
 
     /**
-     * Test {293=[IE], 294=[CHROME, FF52, FF60]}.
+     * Test {206=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__on___with_non_null_defined_data() throws Exception {
-        runTest("event: on() with non-null,defined data");
+    @Alerts(FF60 = "27",
+            IE = "27")
+    public void data___data_supports_interoperable_removal_of_hyphenated_camelCase_properties() throws Exception {
+        runTest("data: .data supports interoperable removal of hyphenated/camelCase properties");
     }
 
     /**
-     * Test {294=[IE], 295=[CHROME, FF52, FF60]}.
+     * Test {206=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__bind___live___delegate___with_non_null_defined_data() throws Exception {
+        runTest("event: bind(),live(),delegate() with non-null,defined data");
+    }
+
+    /**
+     * Test {206=[FF68], 251=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "14",
+            IE = "14")
+    public void attributes__prop_String__Object__on_null_undefined() throws Exception {
+        runTest("attributes: prop(String, Object) on null/undefined");
+    }
+
+    /**
+     * Test {207=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "9",
+            IE = "9")
+    public void data___data_supports_interoperable_removal_of_properties_SET_TWICE__13850() throws Exception {
+        runTest("data: .data supports interoperable removal of properties SET TWICE #13850");
+    }
+
+    /**
+     * Test {207=[CHROME], 239=[FF68], 294=[IE], 295=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            CHROME = "1, 0, 1")
     public void event__Handler_changes_and__trigger___order() throws Exception {
         runTest("event: Handler changes and .trigger() order");
     }
 
     /**
-     * Test {295=[IE], 296=[CHROME, FF52, FF60]}.
+     * Test {208=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__on____with_data() throws Exception {
-        runTest("event: on(), with data");
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void data___removeData_supports_removal_of_hyphenated_properties_via_array___12786__gh_2257_() throws Exception {
+        runTest("data: .removeData supports removal of hyphenated properties via array (#12786, gh-2257)");
     }
 
     /**
-     * Test {296=[IE], 297=[CHROME, FF52, FF60]}.
+     * Test {208=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4")
+    public void event__bind____with_data() throws Exception {
+        runTest("event: bind(), with data");
+    }
+
+    /**
+     * Test {209=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data___removeData_should_not_throw_exceptions____10080_() throws Exception {
+        runTest("data: .removeData should not throw exceptions. (#10080)");
+    }
+
+    /**
+     * Test {209=[CHROME], 241=[FF68], 296=[IE], 297=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3079,267 +3759,424 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {297=[IE], 298=[CHROME, FF52, FF60]}.
+     * Test {210=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__on____with_data__trigger_with_data() throws Exception {
-        runTest("event: on(), with data, trigger with data");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void data___data_only_checks_element_attributes_once___8909() throws Exception {
+        runTest("data: .data only checks element attributes once. #8909");
     }
 
     /**
-     * Test {298=[IE], 299=[CHROME, FF52, FF60]}.
+     * Test {210=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__on____multiple_events_at_once() throws Exception {
-        runTest("event: on(), multiple events at once");
+    @Alerts(CHROME = "4")
+    public void event__bind____with_data__trigger_with_data() throws Exception {
+        runTest("event: bind(), with data, trigger with data");
     }
 
     /**
-     * Test {299=[IE], 300=[CHROME, FF52, FF60]}.
+     * Test {210=[FF68], 257=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__on____five_events_at_once() throws Exception {
-        runTest("event: on(), five events at once");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void attributes__val___after_modification() throws Exception {
+        runTest("attributes: val() after modification");
     }
 
     /**
-     * Test {300=[IE], 301=[CHROME, FF52, FF60]}.
+     * Test {211=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
-    public void event__on____multiple_events_at_once_and_namespaces() throws Exception {
-        runTest("event: on(), multiple events at once and namespaces");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__data___with_JSON_value_can_have_newlines() throws Exception {
+        runTest("data: data-* with JSON value can have newlines");
     }
 
     /**
-     * Test {301=[IE], 302=[CHROME, FF52, FF60]}.
+     * Test {211=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("27")
-    public void event__on____namespace_with_special_add() throws Exception {
-        runTest("event: on(), namespace with special add");
+    @Alerts(CHROME = "2")
+    public void event__bind____multiple_events_at_once() throws Exception {
+        runTest("event: bind(), multiple events at once");
     }
 
     /**
-     * Test {302=[IE], 303=[CHROME, FF52, FF60]}.
+     * Test {212=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__on____no_data() throws Exception {
-        runTest("event: on(), no data");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data___data_doesn_t_throw_when_calling_selection_is_empty___13551() throws Exception {
+        runTest("data: .data doesn't throw when calling selection is empty. #13551");
     }
 
     /**
-     * Test {303=[IE], 304=[CHROME, FF52, FF60]}.
+     * Test {212=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void event__on_one_off_Object_() throws Exception {
-        runTest("event: on/one/off(Object)");
+    @Alerts(CHROME = "1")
+    public void event__bind____five_events_at_once() throws Exception {
+        runTest("event: bind(), five events at once");
     }
 
     /**
-     * Test {304=[IE], 305=[CHROME, FF52, FF60]}.
+     * Test {212=[FF68], 259=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void event__on_off_Object___on_off_Object__String_() throws Exception {
-        runTest("event: on/off(Object), on/off(Object, String)");
+    @Alerts(FF60 = "3",
+            FF68 = "2, 1, 3",
+            IE = "3")
+    public void attributes__val___with_non_matching_values_on_dropdown_list() throws Exception {
+        runTest("attributes: val() with non-matching values on dropdown list");
     }
 
     /**
-     * Test {305=[IE], 306=[CHROME, FF52, FF60]}.
+     * Test {213=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__on_immediate_propagation() throws Exception {
-        runTest("event: on immediate propagation");
+    @Alerts(FF60 = "10",
+            IE = "10")
+    public void data__acceptData() throws Exception {
+        runTest("data: acceptData");
     }
 
     /**
-     * Test {306=[IE], 307=[CHROME, FF52, FF60]}.
+     * Test {213=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void event__on_bubbling__isDefaultPrevented__stopImmediatePropagation() throws Exception {
-        runTest("event: on bubbling, isDefaultPrevented, stopImmediatePropagation");
+    @Alerts(CHROME = "7")
+    public void event__bind____multiple_events_at_once_and_namespaces() throws Exception {
+        runTest("event: bind(), multiple events at once and namespaces");
     }
 
     /**
-     * Test {307=[IE], 308=[CHROME, FF52, FF60]}.
+     * Test {214=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__triggered_events_stopPropagation___for_natively_bound_events() throws Exception {
-        runTest("event: triggered events stopPropagation() for natively-bound events");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__Check_proper_data_removal_of_non_element_descendants_nodes___8335_() throws Exception {
+        runTest("data: Check proper data removal of non-element descendants nodes (#8335)");
     }
 
     /**
-     * Test {308=[IE], 309=[CHROME, FF52, FF60]}.
+     * Test {214=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0")
-    public void event__trigger___works_with_events_that_were_previously_stopped() throws Exception {
-        runTest("event: trigger() works with events that were previously stopped");
+    @Alerts(CHROME = "3, 24, 27")
+    public void event__bind____namespace_with_special_add() throws Exception {
+        runTest("event: bind(), namespace with special add");
     }
 
     /**
-     * Test {309=[IE], 310=[CHROME, FF52, FF60]}.
+     * Test {215=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__on____iframes() throws Exception {
-        runTest("event: on(), iframes");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__enumerate_data_attrs_on_body___14894_() throws Exception {
+        runTest("data: enumerate data attrs on body (#14894)");
     }
 
     /**
-     * Test {310=[IE], 311=[CHROME, FF52, FF60]}.
+     * Test {215=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
-    public void event__on____trigger_change_on_select() throws Exception {
-        runTest("event: on(), trigger change on select");
+    @Alerts(CHROME = "1")
+    public void event__bind____no_data() throws Exception {
+        runTest("event: bind(), no data");
     }
 
     /**
-     * Test {311=[IE], 312=[CHROME, FF52, FF60]}.
+     * Test {216=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
-    public void event__on____namespaced_events__cloned_events() throws Exception {
-        runTest("event: on(), namespaced events, cloned events");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void data__Check_that_the_expando_is_removed_when_there_s_no_more_data() throws Exception {
+        runTest("data: Check that the expando is removed when there's no more data");
     }
 
     /**
-     * Test {312=[IE], 313=[CHROME, FF52, FF60]}.
+     * Test {216=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void event__on____multi_namespaced_events() throws Exception {
-        runTest("event: on(), multi-namespaced events");
+    @Alerts(CHROME = "6")
+    public void event__bind_one_unbind_Object_() throws Exception {
+        runTest("event: bind/one/unbind(Object)");
     }
 
     /**
-     * Test {313=[IE], 314=[CHROME, FF52, FF60]}.
+     * Test {217=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__namespace_only_event_binding_is_a_no_op() throws Exception {
-        runTest("event: namespace-only event binding is a no-op");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data__Check_that_the_expando_is_removed_when_there_s_no_more_data_on_non_nodes() throws Exception {
+        runTest("data: Check that the expando is removed when there's no more data on non-nodes");
     }
 
     /**
-     * Test {314=[IE], 315=[CHROME, FF52, FF60]}.
+     * Test {217=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__Empty_namespace_is_ignored() throws Exception {
-        runTest("event: Empty namespace is ignored");
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_die_Object___delegate_undelegate_String__Object_() throws Exception {
+        runTest("event: live/die(Object), delegate/undelegate(String, Object)");
     }
 
     /**
-     * Test {315=[IE], 316=[CHROME, FF52, FF60]}.
+     * Test {218=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__on____with_same_function() throws Exception {
-        runTest("event: on(), with same function");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void data___data_prop__does_not_create_expando() throws Exception {
+        runTest("data: .data(prop) does not create expando");
     }
 
     /**
-     * Test {316=[IE], 317=[CHROME, FF52, FF60]}.
+     * Test {218=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__on____make_sure_order_is_maintained() throws Exception {
-        runTest("event: on(), make sure order is maintained");
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_delegate_immediate_propagation() throws Exception {
+        runTest("event: live/delegate immediate propagation");
     }
 
     /**
-     * Test {317=[IE], 318=[CHROME, FF52, FF60]}.
+     * Test {219=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__on____with_different_this_object() throws Exception {
-        runTest("event: on(), with different this object");
+    @Alerts(CHROME = "2")
+    public void event__bind_delegate_bubbling__isDefaultPrevented() throws Exception {
+        runTest("event: bind/delegate bubbling, isDefaultPrevented");
     }
 
     /**
-     * Test {318=[IE], 319=[CHROME, FF52, FF60]}.
+     * Test {220=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void event__on_name__false___off_name__false_() throws Exception {
-        runTest("event: on(name, false), off(name, false)");
+    @Alerts(CHROME = "1, 1, 2")
+    public void event__bind____iframes() throws Exception {
+        runTest("event: bind(), iframes");
     }
 
     /**
-     * Test {319=[IE], 320=[CHROME, FF52, FF60]}.
+     * Test {221=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void event__on_name__selector__false___off_name__selector__false_() throws Exception {
-        runTest("event: on(name, selector, false), off(name, selector, false)");
+    @Alerts(CHROME = "5")
+    public void event__bind____trigger_change_on_select() throws Exception {
+        runTest("event: bind(), trigger change on select");
     }
 
     /**
-     * Test {320=[IE], 321=[CHROME, FF52, FF60]}.
+     * Test {222=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
-    public void event__on___trigger___off___on_plain_object() throws Exception {
-        runTest("event: on()/trigger()/off() on plain object");
+    @Alerts(CHROME = "18")
+    public void event__bind____namespaced_events__cloned_events() throws Exception {
+        runTest("event: bind(), namespaced events, cloned events");
     }
 
     /**
-     * Test {321=[IE], 322=[CHROME, FF52, FF60]}.
+     * Test {223=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__off_type_() throws Exception {
-        runTest("event: off(type)");
+    @Alerts(CHROME = "6")
+    public void event__bind____multi_namespaced_events() throws Exception {
+        runTest("event: bind(), multi-namespaced events");
     }
 
     /**
-     * Test {322=[IE], 323=[CHROME, FF52, FF60]}.
+     * Test {223=[FF60, IE]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__off_eventObject_() throws Exception {
-        runTest("event: off(eventObject)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void queue__jQuery_queue_should_return_array_while_manipulating_the_queue() throws Exception {
+        runTest("queue: jQuery.queue should return array while manipulating the queue");
     }
 
     /**
-     * Test {323=[IE], 324=[CHROME, FF52, FF60]}.
+     * Test {224=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void event__bind____with_same_function() throws Exception {
+        runTest("event: bind(), with same function");
+    }
+
+    /**
+     * Test {225=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void event__bind____make_sure_order_is_maintained() throws Exception {
+        runTest("event: bind(), make sure order is maintained");
+    }
+
+    /**
+     * Test {226=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4")
+    public void event__bind____with_different_this_object() throws Exception {
+        runTest("event: bind(), with different this object");
+    }
+
+    /**
+     * Test {226=[FF68], 275=[IE], 276=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void attributes__removeClass_undefined__is_a_no_op() throws Exception {
+        runTest("attributes: removeClass(undefined) is a no-op");
+    }
+
+    /**
+     * Test {227=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3")
+    public void event__bind_name__false___unbind_name__false_() throws Exception {
+        runTest("event: bind(name, false), unbind(name, false)");
+    }
+
+    /**
+     * Test {228=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_name__false___die_name__false_() throws Exception {
+        runTest("event: live(name, false), die(name, false)");
+    }
+
+    /**
+     * Test {229=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3")
+    public void event__delegate_selector__name__false___undelegate_selector__name__false_() throws Exception {
+        runTest("event: delegate(selector, name, false), undelegate(selector, name, false)");
+    }
+
+    /**
+     * Test {229=[FF68], 279=[IE], 280=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "14",
+            IE = "14")
+    public void attributes__toggleClass_Function___boolean___with_incoming_value() throws Exception {
+        runTest("attributes: toggleClass(Function[, boolean]) with incoming value");
+    }
+
+    /**
+     * Test {230=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7")
+    public void event__bind___trigger___unbind___on_plain_object() throws Exception {
+        runTest("event: bind()/trigger()/unbind() on plain object");
+    }
+
+    /**
+     * Test {231=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void event__unbind_type_() throws Exception {
+        runTest("event: unbind(type)");
+    }
+
+    /**
+     * Test {231=[FF68], 281=[IE], 282=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "19",
+            IE = "19")
+    public void attributes__addClass__removeClass__hasClass_on_many_elements() throws Exception {
+        runTest("attributes: addClass, removeClass, hasClass on many elements");
+    }
+
+    /**
+     * Test {232=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4")
+    public void event__unbind_eventObject_() throws Exception {
+        runTest("event: unbind(eventObject)");
+    }
+
+    /**
+     * Test {233=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3")
+    public void event__hover___and_hover_pseudo_event() throws Exception {
+        runTest("event: hover() and hover pseudo-event");
+    }
+
+    /**
+     * Test {233=[FF68], 285=[IE], 286=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void attributes__hasClass_correctly_interprets_non_space_separators___13835_() throws Exception {
+        runTest("attributes: hasClass correctly interprets non-space separators (#13835)");
+    }
+
+    /**
+     * Test {234=[CHROME], 266=[FF68], 323=[IE], 324=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3349,17 +4186,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {324=[IE], 325=[CHROME, FF52, FF60]}.
+     * Test {235=[FF68], 287=[IE], 288=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__pointerover_triggers_pointerenter() throws Exception {
-        runTest("event: pointerover triggers pointerenter");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void attributes__should_not_throw_at___option__val_____14686_() throws Exception {
+        runTest("attributes: should not throw at $(option).val() (#14686)");
     }
 
     /**
-     * Test {325=[IE], 326=[CHROME, FF52, FF60]}.
+     * Test {235=[CHROME], 268=[FF68], 325=[IE], 326=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3369,7 +4207,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {326=[IE], 327=[CHROME, FF52, FF60]}.
+     * Test {236=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "3")
+    public void attributes__Insignificant_white_space_returned_for___option__val_____14858_() throws Exception {
+        runTest("attributes: Insignificant white space returned for $(option).val() (#14858)");
+    }
+
+    /**
+     * Test {236=[CHROME], 269=[FF68], 326=[IE], 327=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3379,7 +4227,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {327=[IE], 328=[CHROME, FF52, FF60]}.
+     * Test {237=[CHROME], 270=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 5, 6",
+            FF68 = "1, 5, 6")
+    public void event__trigger___shortcuts() throws Exception {
+        runTest("event: trigger() shortcuts");
+    }
+
+    /**
+     * Test {238=[FF68], 293=[IE], 294=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__on___with_non_null_defined_data() throws Exception {
+        runTest("event: on() with non-null,defined data");
+    }
+
+    /**
+     * Test {238=[CHROME], 271=[FF68], 327=[IE], 328=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3389,17 +4259,40 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {328=[IE], 329=[CHROME, FF52, FF60]}.
+     * Test {239=[CHROME], 272=[FF68], 328=[IE], 329=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("16")
+    @Alerts(DEFAULT = "16",
+            CHROME = "2, 0, 2")
     public void event__trigger_type___data____fn__() throws Exception {
         runTest("event: trigger(type, [data], [fn])");
     }
 
     /**
-     * Test {329=[IE], 330=[CHROME, FF52, FF60]}.
+     * Test {240=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void attributes__attr_non_ASCII_() throws Exception {
+        runTest("attributes: attr(non-ASCII)");
+    }
+
+    /**
+     * Test {240=[FF68], 295=[IE], 296=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void event__on____with_data() throws Exception {
+        runTest("event: on(), with data");
+    }
+
+    /**
+     * Test {240=[CHROME], 273=[FF68], 329=[IE], 330=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3410,7 +4303,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {330=[IE], 331=[CHROME, FF52, FF60]}.
+     * Test {241=[CHROME], 274=[FF68], 330=[IE], 331=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3421,7 +4314,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {331=[IE], 332=[CHROME, FF52, FF60]}.
+     * Test {242=[FF68], 297=[IE], 298=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void event__on____with_data__trigger_with_data() throws Exception {
+        runTest("event: on(), with data, trigger with data");
+    }
+
+    /**
+     * Test {242=[CHROME], 275=[FF68], 331=[IE], 332=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3431,7 +4335,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {332=[IE], 333=[CHROME, FF52, FF60]}.
+     * Test {243=[FF68], 298=[IE], 299=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__on____multiple_events_at_once() throws Exception {
+        runTest("event: on(), multiple events at once");
+    }
+
+    /**
+     * Test {243=[CHROME], 276=[FF68], 332=[IE], 333=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3441,7 +4356,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {333=[IE], 334=[CHROME, FF52, FF60]}.
+     * Test {244=[FF68], 299=[IE], 300=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__on____five_events_at_once() throws Exception {
+        runTest("event: on(), five events at once");
+    }
+
+    /**
+     * Test {244=[CHROME], 277=[FF68], 333=[IE], 334=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3451,27 +4377,39 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {334=[IE], 335=[CHROME, FF52, FF60]}.
+     * Test {245=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__Delegated_events_in_SVG___10791___13180_() throws Exception {
-        runTest("event: Delegated events in SVG (#10791; #13180)");
+    @Alerts(CHROME = "2")
+    public void event__Delegated_events_in_SVG___10791_() throws Exception {
+        runTest("event: Delegated events in SVG (#10791)");
     }
 
     /**
-     * Test {335=[IE], 336=[CHROME, FF52, FF60]}.
+     * Test {245=[FF68], 300=[IE], 301=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void event__Delegated_events_with_malformed_selectors__gh_3071_() throws Exception {
-        runTest("event: Delegated events with malformed selectors (gh-3071)");
+    @Alerts(FF = "7",
+            IE = "7")
+    public void event__on____multiple_events_at_once_and_namespaces() throws Exception {
+        runTest("event: on(), multiple events at once and namespaces");
     }
 
     /**
-     * Test {336=[IE], 337=[CHROME, FF52, FF60]}.
+     * Test {246=[FF68], 301=[IE], 302=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "27",
+            IE = "27")
+    public void event__on____namespace_with_special_add() throws Exception {
+        runTest("event: on(), namespace with special add");
+    }
+
+    /**
+     * Test {246=[CHROME], 279=[FF68], 336=[IE], 337=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3481,7 +4419,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {337=[IE], 338=[CHROME, FF52, FF60]}.
+     * Test {247=[FF68], 302=[IE], 303=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__on____no_data() throws Exception {
+        runTest("event: on(), no data");
+    }
+
+    /**
+     * Test {247=[CHROME], 280=[FF68], 337=[IE], 338=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3491,48 +4440,306 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {338=[IE], 339=[CHROME, FF52, FF60]}.
+     * Test {248=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void event__on_beforeunload_() throws Exception {
-        runTest("event: on(beforeunload)");
+    @Alerts(CHROME = "1, 2, 3")
+    public void event__on_beforeunload__creates_deletes_window_property_instead_of_adding_removing_event_listener() throws Exception {
+        runTest("event: on(beforeunload) creates/deletes window property instead of adding/removing event listener");
     }
 
     /**
-     * Test {339=[IE], 340=[CHROME, FF52, FF60]}.
+     * Test {248=[FF68], 303=[IE], 304=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF = "6",
+            IE = "6")
+    public void event__on_one_off_Object_() throws Exception {
+        runTest("event: on/one/off(Object)");
+    }
+
+    /**
+     * Test {249=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void attributes__removeAttr_Multi_String__non_HTML_whitespace_is_valid_in_attribute_names__gh_3003_() throws Exception {
+        runTest("attributes: removeAttr(Multi String, non-HTML whitespace is valid in attribute names (gh-3003)");
+    }
+
+    /**
+     * Test {249=[FF68], 304=[IE], 305=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "6",
+            IE = "6")
+    public void event__on_off_Object___on_off_Object__String_() throws Exception {
+        runTest("event: on/off(Object), on/off(Object, String)");
+    }
+
+    /**
+     * Test {249=[CHROME], 282=[FF68], 339=[IE], 340=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5",
+            FF60 = "6",
+            FF68 = "5",
+            IE = "6")
     public void event__jQuery_Event__type__props__() throws Exception {
         runTest("event: jQuery.Event( type, props )");
     }
 
     /**
-     * Test {340=[IE], 341=[CHROME, FF52, FF60]}.
+     * Test {250=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    public void event__jQuery_Event_properties() throws Exception {
-        runTest("event: jQuery.Event properties");
+    @Alerts(CHROME = "2")
+    public void event__jQuery_Event_currentTarget() throws Exception {
+        runTest("event: jQuery.Event.currentTarget");
     }
 
     /**
-     * Test {341=[IE], 342=[CHROME, FF52, FF60]}.
+     * Test {250=[FF68], 305=[IE], 306=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("65")
-    public void event___on____off__() throws Exception {
-        runTest("event: .on()/.off()");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__on_immediate_propagation() throws Exception {
+        runTest("event: on immediate propagation");
     }
 
     /**
-     * Test {342=[IE], 343=[CHROME, FF52, FF60]}.
+     * Test {251=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "13, 2, 15")
+    public void event__toggle_Function__Function______() throws Exception {
+        runTest("event: toggle(Function, Function, ...)");
+    }
+
+    /**
+     * Test {251=[FF68], 306=[IE], 307=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void event__on_bubbling__isDefaultPrevented__stopImmediatePropagation() throws Exception {
+        runTest("event: on bubbling, isDefaultPrevented, stopImmediatePropagation");
+    }
+
+    /**
+     * Test {252=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event___live____die__() throws Exception {
+        runTest("event: .live()/.die()");
+    }
+
+    /**
+     * Test {252=[FF68], 309=[IE], 310=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__on____iframes() throws Exception {
+        runTest("event: on(), iframes");
+    }
+
+    /**
+     * Test {253=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void attributes__image_prop___tabIndex___() throws Exception {
+        runTest("attributes: image.prop( 'tabIndex' )");
+    }
+
+    /**
+     * Test {253=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1")
+    public void event__die_all_bound_events() throws Exception {
+        runTest("event: die all bound events");
+    }
+
+    /**
+     * Test {253=[FF68], 310=[IE], 311=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "5",
+            IE = "5")
+    public void event__on____trigger_change_on_select() throws Exception {
+        runTest("event: on(), trigger change on select");
+    }
+
+    /**
+     * Test {254=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1")
+    public void event__live_with_multiple_events() throws Exception {
+        runTest("event: live with multiple events");
+    }
+
+    /**
+     * Test {254=[FF68], 311=[IE], 312=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "18",
+            IE = "18")
+    public void event__on____namespaced_events__cloned_events() throws Exception {
+        runTest("event: on(), namespaced events, cloned events");
+    }
+
+    /**
+     * Test {255=[FF60, IE]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void attributes__option_prop__selected___true__affects_select_selectedIndex__gh_2732_() throws Exception {
+        runTest("attributes: option.prop('selected', true) affects select.selectedIndex (gh-2732)");
+    }
+
+    /**
+     * Test {255=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_with_namespaces() throws Exception {
+        runTest("event: live with namespaces");
+    }
+
+    /**
+     * Test {255=[FF68], 312=[IE], 313=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "6",
+            IE = "6")
+    public void event__on____multi_namespaced_events() throws Exception {
+        runTest("event: on(), multi-namespaced events");
+    }
+
+    /**
+     * Test {256=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_with_change() throws Exception {
+        runTest("event: live with change");
+    }
+
+    /**
+     * Test {256=[FF68], 313=[IE], 314=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__namespace_only_event_binding_is_a_no_op() throws Exception {
+        runTest("event: namespace-only event binding is a no-op");
+    }
+
+    /**
+     * Test {257=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_with_submit() throws Exception {
+        runTest("event: live with submit");
+    }
+
+    /**
+     * Test {257=[FF68], 315=[IE], 316=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__on____with_same_function() throws Exception {
+        runTest("event: on(), with same function");
+    }
+
+    /**
+     * Test {258=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void event__live_with_special_events() throws Exception {
+        runTest("event: live with special events");
+    }
+
+    /**
+     * Test {258=[FF68], 316=[IE], 317=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__on____make_sure_order_is_maintained() throws Exception {
+        runTest("event: on(), make sure order is maintained");
+    }
+
+    /**
+     * Test {259=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6, 64, 70")
+    public void event___delegate____undelegate__() throws Exception {
+        runTest("event: .delegate()/.undelegate()");
+    }
+
+    /**
+     * Test {259=[FF68], 317=[IE], 318=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void event__on____with_different_this_object() throws Exception {
+        runTest("event: on(), with different this object");
+    }
+
+    /**
+     * Test {260=[FF68], 318=[IE], 319=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void event__on_name__false___off_name__false_() throws Exception {
+        runTest("event: on(name, false), off(name, false)");
+    }
+
+    /**
+     * Test {260=[CHROME], 285=[FF68], 342=[IE], 343=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3542,7 +4749,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {343=[IE], 344=[CHROME, FF52, FF60]}.
+     * Test {261=[FF68], 319=[IE], 320=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void event__on_name__selector__false___off_name__selector__false_() throws Exception {
+        runTest("event: on(name, selector, false), off(name, selector, false)");
+    }
+
+    /**
+     * Test {261=[CHROME], 286=[FF68], 343=[IE], 344=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3552,38 +4770,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {344=[IE], 345=[CHROME, FF52, FF60]}.
+     * Test {262=[FF68], 320=[IE], 321=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__delegated_event_with_selector_matching_Object_prototype_property___13203_() throws Exception {
-        runTest("event: delegated event with selector matching Object.prototype property (#13203)");
+    @Alerts(FF = "7",
+            IE = "7")
+    public void event__on___trigger___off___on_plain_object() throws Exception {
+        runTest("event: on()/trigger()/off() on plain object");
     }
 
     /**
-     * Test {345=[IE], 346=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void event__delegated_event_with_intermediate_DOM_manipulation___13208_() throws Exception {
-        runTest("event: delegated event with intermediate DOM manipulation (#13208)");
-    }
-
-    /**
-     * Test {346=[IE], 347=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void event__ignore_comment_nodes_in_event_delegation__gh_2055_() throws Exception {
-        runTest("event: ignore comment nodes in event delegation (gh-2055)");
-    }
-
-    /**
-     * Test {347=[IE], 348=[CHROME, FF52, FF60]}.
+     * Test {262=[CHROME], 289=[FF68], 347=[IE], 348=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3593,57 +4791,122 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {348=[IE], 349=[CHROME, FF52, FF60]}.
+     * Test {263=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__off_all_bound_delegated_events() throws Exception {
-        runTest("event: off all bound delegated events");
+    @Alerts(CHROME = "2")
+    public void event__undelegate_all_bound_events() throws Exception {
+        runTest("event: undelegate all bound events");
     }
 
     /**
-     * Test {349=[IE], 350=[CHROME, FF52, FF60]}.
+     * Test {263=[FF68], 321=[IE], 322=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__on_with_multiple_delegated_events() throws Exception {
-        runTest("event: on with multiple delegated events");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__off_type_() throws Exception {
+        runTest("event: off(type)");
     }
 
     /**
-     * Test {350=[IE], 351=[CHROME, FF52, FF60]}.
+     * Test {264=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void event__delegated_on_with_change() throws Exception {
-        runTest("event: delegated on with change");
+    @Alerts(CHROME = "1")
+    public void event__delegate_with_multiple_events() throws Exception {
+        runTest("event: delegate with multiple events");
     }
 
     /**
-     * Test {351=[IE], 352=[CHROME, FF52, FF60]}.
+     * Test {264=[FF68], 322=[IE], 323=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__delegated_on_with_submit() throws Exception {
-        runTest("event: delegated on with submit");
+    @Alerts(FF = "4",
+            IE = "4")
+    public void event__off_eventObject_() throws Exception {
+        runTest("event: off(eventObject)");
     }
 
     /**
-     * Test {352=[IE], 353=[CHROME, FF52, FF60]}.
+     * Test {265=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__delegated_off___with_only_namespaces() throws Exception {
-        runTest("event: delegated off() with only namespaces");
+    @Alerts(CHROME = "2, 4, 6")
+    public void event__delegate_with_change() throws Exception {
+        runTest("event: delegate with change");
     }
 
     /**
-     * Test {353=[IE], 354=[CHROME, FF52, FF60]}.
+     * Test {265=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "1")
+    public void event__hover___mouseenter_mouseleave() throws Exception {
+        runTest("event: hover() mouseenter mouseleave");
+    }
+
+    /**
+     * Test {265=[IE], 266=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "37",
+            IE = "37")
+    public void attributes__select_val_space_characters___gh_2978_() throws Exception {
+        runTest("attributes: select.val(space characters) (gh-2978)");
+    }
+
+    /**
+     * Test {266=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 2, 3")
+    public void event__delegate_with_submit() throws Exception {
+        runTest("event: delegate with submit");
+    }
+
+    /**
+     * Test {267=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void event__undelegate___with_only_namespaces() throws Exception {
+        runTest("event: undelegate() with only namespaces");
+    }
+
+    /**
+     * Test {267=[FF68], 324=[IE], 325=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__pointerover_triggers_pointerenter() throws Exception {
+        runTest("event: pointerover triggers pointerenter");
+    }
+
+    /**
+     * Test {268=[IE], 269=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "9",
+            IE = "9")
+    public void attributes__addClass_Array_() throws Exception {
+        runTest("attributes: addClass(Array)");
+    }
+
+    /**
+     * Test {268=[CHROME], 295=[FF68], 353=[IE], 354=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3653,7 +4916,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {354=[IE], 355=[CHROME, FF52, FF60]}.
+     * Test {269=[CHROME], 296=[FF68], 354=[IE], 355=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3663,7 +4926,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {355=[IE], 356=[CHROME, FF52, FF60]}.
+     * Test {270=[CHROME], 297=[FF68], 355=[IE], 356=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3673,7 +4936,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {356=[IE], 357=[CHROME, FF52, FF60]}.
+     * Test {271=[CHROME], 298=[FF68], 356=[IE], 357=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3683,7 +4946,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {357=[IE], 358=[CHROME, FF52, FF60]}.
+     * Test {272=[IE], 273=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void attributes__removeClass_Array____simple() throws Exception {
+        runTest("attributes: removeClass(Array) - simple");
+    }
+
+    /**
+     * Test {272=[CHROME], 299=[FF68], 357=[IE], 358=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3693,7 +4967,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {358=[IE], 359=[CHROME, FF52, FF60]}.
+     * Test {273=[CHROME], 300=[FF68], 358=[IE], 359=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3703,17 +4977,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {359=[IE], 360=[CHROME, FF52, FF60]}.
+     * Test {274=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
-    public void event__special_on_name_mapping() throws Exception {
-        runTest("event: special on name mapping");
+    @Alerts(CHROME = "7")
+    public void event__special_bind_delegate_name_mapping() throws Exception {
+        runTest("event: special bind/delegate name mapping");
     }
 
     /**
-     * Test {360=[IE], 361=[CHROME, FF52, FF60]}.
+     * Test {275=[CHROME], 302=[FF68], 360=[IE], 361=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3723,17 +4997,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {361=[IE], 362=[CHROME, FF52, FF60]}.
+     * Test {276=[CHROME], 303=[FF68], 361=[IE], 362=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "2, 5, 7")
     public void event___on__event_map__null_selector__data____11130() throws Exception {
         runTest("event: .on( event-map, null-selector, data ) #11130");
     }
 
     /**
-     * Test {362=[IE], 363=[CHROME, FF52, FF60]}.
+     * Test {277=[CHROME], 304=[FF68], 362=[IE], 363=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -3743,511 +5018,336 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {363=[IE], 364=[CHROME, FF52, FF60]}.
+     * Test {278=[IE], 279=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
-    public void event__checkbox_state___3827_() throws Exception {
-        runTest("event: checkbox state (#3827)");
+    @Alerts(FF60 = "19",
+            IE = "19")
+    public void attributes__toggleClass_Array___boolean__() throws Exception {
+        runTest("attributes: toggleClass(Array[, boolean])");
     }
 
     /**
-     * Test {364=[IE], 365=[CHROME, FF52, FF60]}.
+     * Test {278=[CHROME], 307=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void event__event_object_properties_on_natively_triggered_event() throws Exception {
-        runTest("event: event object properties on natively-triggered event");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void event__fixHooks_extensions() throws Exception {
+        runTest("event: fixHooks extensions");
     }
 
     /**
-     * Test {365=[IE], 366=[CHROME, FF52, FF60]}.
+     * Test {278=[FF68], 334=[IE], 335=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__addProp_extensions() throws Exception {
-        runTest("event: addProp extensions");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__Delegated_events_in_SVG___10791___13180_() throws Exception {
+        runTest("event: Delegated events in SVG (#10791; #13180)");
     }
 
     /**
-     * Test {366=[IE], 367=[CHROME, FF52, FF60]}.
+     * Test {279=[CHROME], 309=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__drag_drop_events_copy_mouse_related_event_properties__gh_1925__gh_2009_() throws Exception {
-        runTest("event: drag/drop events copy mouse-related event properties (gh-1925, gh-2009)");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void event__global_failure() throws Exception {
+        runTest("event: global failure");
     }
 
     /**
-     * Test {367=[IE], 368=[CHROME, FF52, FF60]}.
+     * Test {280=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__focusin_using_non_element_targets() throws Exception {
-        runTest("event: focusin using non-element targets");
+    @Alerts(CHROME = "4, 3, 7")
+    public void selector___jQuery_only__element___jQuery_only() throws Exception {
+        runTest("selector - jQuery only: element - jQuery only");
     }
 
     /**
-     * Test {368=[IE], 369=[CHROME, FF52, FF60]}.
+     * Test {281=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__focusin_from_an_iframe() throws Exception {
-        runTest("event: focusin from an iframe");
+    @Alerts(CHROME = "4")
+    public void selector___jQuery_only__class___jQuery_only() throws Exception {
+        runTest("selector - jQuery only: class - jQuery only");
     }
 
     /**
-     * Test {369=[IE], 370=[CHROME, FF52, FF60]}.
+     * Test {281=[FF68], 338=[IE], 339=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__jQuery_ready_promise() throws Exception {
-        runTest("event: jQuery.ready promise");
-    }
-
-    /**
-     * Test {370=[IE], 371=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
+    @Alerts(FF60 = "1",
+            FF68 = "4",
+            IE = "1")
     @NotYetImplemented
-    public void event__jQuery_ready_uses_interactive() throws Exception {
-        runTest("event: jQuery.ready uses interactive");
+    public void event__on_beforeunload_() throws Exception {
+        runTest("event: on(beforeunload)");
     }
 
     /**
-     * Test {371=[IE], 372=[CHROME, FF52, FF60]}.
+     * Test {282=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__Focusing_iframe_element() throws Exception {
-        runTest("event: Focusing iframe element");
+    @Alerts(CHROME = "2, 0, 2")
+    public void selector___jQuery_only__attributes___jQuery_only() throws Exception {
+        runTest("selector - jQuery only: attributes - jQuery only");
     }
 
     /**
-     * Test {372=[IE], 373=[CHROME, FF52, FF60]}.
+     * Test {282=[IE], 283=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__triggerHandler_onbeforeunload_() throws Exception {
-        runTest("event: triggerHandler(onbeforeunload)");
+    @Alerts(FF60 = "16",
+            IE = "16")
+    public void attributes__addClass__removeClass__hasClass_on_many_elements___Array() throws Exception {
+        runTest("attributes: addClass, removeClass, hasClass on many elements - Array");
     }
 
     /**
-     * Test {373=[IE], 374=[CHROME, FF52, FF60]}.
+     * Test {283=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void event__jQuery_ready_synchronous_load_with_long_loading_subresources() throws Exception {
-        runTest("event: jQuery.ready synchronous load with long loading subresources");
+    @Alerts(CHROME = "2, 0, 2")
+    public void selector___jQuery_only__pseudo___visibility() throws Exception {
+        runTest("selector - jQuery only: pseudo - visibility");
     }
 
     /**
-     * Test {374=[IE], 375=[CHROME, FF52, FF60]}.
+     * Test {283=[IE], 284=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__change_handler_should_be_detached_from_element() throws Exception {
-        runTest("event: change handler should be detached from element");
+    @Alerts(FF60 = "9",
+            IE = "9")
+    public void attributes__addClass__removeClass__hasClass_on_elements_with_classes_with_non_HTML_whitespace__gh_3072__gh_3003_() throws Exception {
+        runTest("attributes: addClass, removeClass, hasClass on elements with classes with non-HTML whitespace (gh-3072, gh-3003)");
     }
 
     /**
-     * Test {375=[IE], 376=[CHROME, FF52, FF60]}.
+     * Test {283=[FF68], 340=[IE], 341=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__trigger_click_on_checkbox__fires_change_event() throws Exception {
-        runTest("event: trigger click on checkbox, fires change event");
+    @Alerts(FF = "12",
+            IE = "12")
+    public void event__jQuery_Event_properties() throws Exception {
+        runTest("event: jQuery.Event properties");
     }
 
     /**
-     * Test {376=[IE], 377=[CHROME, FF52, FF60]}.
+     * Test {284=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void event__Namespace_preserved_when_passed_an_Event___12739_() throws Exception {
-        runTest("event: Namespace preserved when passed an Event (#12739)");
+    @Alerts(CHROME = "4")
+    public void selector___jQuery_only__disconnected_nodes() throws Exception {
+        runTest("selector - jQuery only: disconnected nodes");
     }
 
     /**
-     * Test {377=[IE], 378=[CHROME, FF52, FF60]}.
+     * Test {284=[FF68], 341=[IE], 342=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
-    public void event__make_sure_events_cloned_correctly() throws Exception {
-        runTest("event: make sure events cloned correctly");
+    @Alerts(FF = "65",
+            IE = "65")
+    public void event___on____off__() throws Exception {
+        runTest("event: .on()/.off()");
     }
 
     /**
-     * Test {378=[IE], 379=[CHROME, FF52, FF60]}.
+     * Test {285=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__String_prototype_namespace_does_not_cause_trigger___to_throw___13360_() throws Exception {
-        runTest("event: String.prototype.namespace does not cause trigger() to throw (#13360)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void selector___jQuery_only__selector_html5_selector() throws Exception {
+        runTest("selector - jQuery only: selector/html5_selector");
     }
 
     /**
-     * Test {379=[IE], 380=[CHROME, FF52, FF60]}.
+     * Test {286=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void event__Inline_event_result_is_returned___13993_() throws Exception {
-        runTest("event: Inline event result is returned (#13993)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void selector___jQuery_only__selector_sizzle_cache() throws Exception {
+        runTest("selector - jQuery only: selector/sizzle_cache");
     }
 
     /**
-     * Test {380=[IE], 381=[CHROME, FF52, FF60]}.
+     * Test {287=[FF68], 344=[IE], 345=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event___off___removes_the_expando_when_there_s_no_more_data() throws Exception {
-        runTest("event: .off() removes the expando when there's no more data");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__delegated_event_with_selector_matching_Object_prototype_property___13203_() throws Exception {
+        runTest("event: delegated event with selector matching Object.prototype property (#13203)");
     }
 
     /**
-     * Test {381=[IE], 382=[CHROME, FF52, FF60]}.
+     * Test {287=[CHROME], 324=[FF68], 405=[IE], 406=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void event__jQuery_Event__src___does_not_require_a_target_property() throws Exception {
-        runTest("event: jQuery.Event( src ) does not require a target property");
-    }
-
-    /**
-     * Test {382=[IE], 383=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void event__preventDefault___on_focusin_does_not_throw_exception() throws Exception {
-        runTest("event: preventDefault() on focusin does not throw exception");
-    }
-
-    /**
-     * Test {383=[IE], 384=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
-    public void event__Donor_event_interference() throws Exception {
-        runTest("event: Donor event interference");
-    }
-
-    /**
-     * Test {384=[IE], 385=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void event__simulated_events_shouldn_t_forward_stopPropagation_preventDefault_methods() throws Exception {
-        runTest("event: simulated events shouldn't forward stopPropagation/preventDefault methods");
-    }
-
-    /**
-     * Test {385=[IE], 386=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void event__originalEvent_type_of_simulated_event() throws Exception {
-        runTest("event: originalEvent type of simulated event");
-    }
-
-    /**
-     * Test {386=[IE], 387=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void event__trigger__click___on_radio_passes_extra_params() throws Exception {
-        runTest("event: trigger('click') on radio passes extra params");
-    }
-
-    /**
-     * Test {387=[IE], 388=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void event__VML_with_special_event_handlers__trac_7071_() throws Exception {
-        runTest("event: VML with special event handlers (trac-7071)");
-    }
-
-    /**
-     * Test {388=[IE], 389=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void event__Check_order_of_focusin_focusout_events() throws Exception {
-        runTest("event: Check order of focusin/focusout events");
-    }
-
-    /**
-     * Test {389=[IE], 390=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void event__focus_blur_order___12868_() throws Exception {
-        runTest("event: focus-blur order (#12868)");
-    }
-
-    /**
-     * Test {390=[IE], 391=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("7")
-    public void selector__element() throws Exception {
-        runTest("selector: element");
-    }
-
-    /**
-     * Test {391=[IE], 392=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("26")
-    public void selector__id() throws Exception {
-        runTest("selector: id");
-    }
-
-    /**
-     * Test {392=[IE], 393=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void selector__class() throws Exception {
-        runTest("selector: class");
-    }
-
-    /**
-     * Test {393=[IE], 394=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void selector__name() throws Exception {
-        runTest("selector: name");
-    }
-
-    /**
-     * Test {394=[IE], 395=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void selector__selectors_with_comma() throws Exception {
-        runTest("selector: selectors with comma");
-    }
-
-    /**
-     * Test {395=[IE], 396=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("27")
-    public void selector__child_and_adjacent() throws Exception {
-        runTest("selector: child and adjacent");
-    }
-
-    /**
-     * Test {396=[IE], 397=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("54")
-    public void selector__attributes() throws Exception {
-        runTest("selector: attributes");
-    }
-
-    /**
-     * Test {398=[IE], 399=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    @NotYetImplemented
-    public void selector__disconnected_nodes() throws Exception {
-        runTest("selector: disconnected nodes");
-    }
-
-    /**
-     * Test {399=[IE], 400=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("38")
-    public void selector__attributes___jQuery_attr() throws Exception {
-        runTest("selector: attributes - jQuery.attr");
-    }
-
-    /**
-     * Test {400=[IE], 401=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("16")
-    public void selector__jQuery_contains() throws Exception {
-        runTest("selector: jQuery.contains");
-    }
-
-    /**
-     * Test {401=[IE], 402=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("15")
-    @NotYetImplemented
-    public void selector__jQuery_uniqueSort() throws Exception {
-        runTest("selector: jQuery.uniqueSort");
-    }
-
-    /**
-     * Test {402=[IE], 403=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void selector__Sizzle_cache_collides_with_multiple_Sizzles_on_a_page() throws Exception {
-        runTest("selector: Sizzle cache collides with multiple Sizzles on a page");
-    }
-
-    /**
-     * Test {403=[IE], 404=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void selector__Iframe_dispatch_should_not_affect_jQuery___13936_() throws Exception {
-        runTest("selector: Iframe dispatch should not affect jQuery (#13936)");
-    }
-
-    /**
-     * Test {404=[IE], 405=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void selector__Ensure_escapeSelector_exists__escape_tests_in_Sizzle_() throws Exception {
-        runTest("selector: Ensure escapeSelector exists (escape tests in Sizzle)");
-    }
-
-    /**
-     * Test {405=[IE], 406=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "1, 4, 5")
     public void traversing__find_String_() throws Exception {
         runTest("traversing: find(String)");
     }
 
     /**
-     * Test {406=[IE], 407=[CHROME, FF52, FF60]}.
+     * Test {288=[IE], 289=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void traversing__find_String__under_non_elements() throws Exception {
-        runTest("traversing: find(String) under non-elements");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void attributes__option_value_not_trimmed_when_setting_via_parent_select() throws Exception {
+        runTest("attributes: option value not trimmed when setting via parent select");
     }
 
     /**
-     * Test {407=[IE], 408=[CHROME, FF52, FF60]}.
+     * Test {288=[FF68], 345=[IE], 346=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void traversing__find_leading_combinator_() throws Exception {
-        runTest("traversing: find(leading combinator)");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__delegated_event_with_intermediate_DOM_manipulation___13208_() throws Exception {
+        runTest("event: delegated event with intermediate DOM manipulation (#13208)");
     }
 
     /**
-     * Test {408=[IE], 409=[CHROME, FF52, FF60]}.
+     * Test {288=[CHROME], 327=[FF68], 408=[IE], 409=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("13")
+    @Alerts(CHROME = "11",
+            FF60 = "13",
+            FF68 = "1, 12, 13",
+            IE = "13")
     public void traversing__find_node_jQuery_object_() throws Exception {
         runTest("traversing: find(node|jQuery object)");
     }
 
     /**
-     * Test {409=[IE], 410=[CHROME, FF52, FF60]}.
+     * Test {289=[IE], 290=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("23")
+    @Alerts(FF60 = "16",
+            IE = "16")
+    public void attributes__Insignificant_white_space_returned_for___option__val_____14858__gh_2978_() throws Exception {
+        runTest("attributes: Insignificant white space returned for $(option).val() (#14858, gh-2978)");
+    }
+
+    /**
+     * Test {289=[CHROME], 328=[FF68], 409=[IE], 410=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "23",
+            CHROME = "30")
     public void traversing__is_String_undefined_() throws Exception {
         runTest("traversing: is(String|undefined)");
     }
 
     /**
-     * Test {410=[IE], 411=[CHROME, FF52, FF60]}.
+     * Test {290=[IE], 291=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("14")
-    public void traversing__is___against_non_elements___10178_() throws Exception {
-        runTest("traversing: is() against non-elements (#10178)");
+    @Alerts(FF60 = "12",
+            IE = "12")
+    public void attributes__SVG_class_manipulation__gh_2199_() throws Exception {
+        runTest("attributes: SVG class manipulation (gh-2199)");
     }
 
     /**
-     * Test {411=[IE], 412=[CHROME, FF52, FF60]}.
+     * Test {290=[FF68], 348=[IE], 349=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__off_all_bound_delegated_events() throws Exception {
+        runTest("event: off all bound delegated events");
+    }
+
+    /**
+     * Test {290=[CHROME], 330=[FF68], 411=[IE], 412=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 20, 21",
+            FF60 = "19",
+            FF68 = "1, 18, 19",
+            IE = "19")
     public void traversing__is_jQuery_() throws Exception {
         runTest("traversing: is(jQuery)");
     }
 
     /**
-     * Test {412=[IE], 413=[CHROME, FF52, FF60]}.
+     * Test {291=[IE], 292=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void traversing__is___with__has___selectors() throws Exception {
-        runTest("traversing: is() with :has() selectors");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void attributes__non_lowercase_boolean_attribute_getters_should_not_crash() throws Exception {
+        runTest("attributes: non-lowercase boolean attribute getters should not crash");
     }
 
     /**
-     * Test {413=[IE], 414=[CHROME, FF52, FF60]}.
+     * Test {291=[FF68], 349=[IE], 350=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("27")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void event__on_with_multiple_delegated_events() throws Exception {
+        runTest("event: on with multiple delegated events");
+    }
+
+    /**
+     * Test {291=[CHROME], 332=[FF68], 413=[IE], 414=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "27",
+            CHROME = "23")
     public void traversing__is___with_positional_selectors() throws Exception {
         runTest("traversing: is() with positional selectors");
     }
 
     /**
-     * Test {414=[IE], 415=[CHROME, FF52, FF60]}.
+     * Test {292=[FF68], 350=[IE], 351=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "8",
+            IE = "8")
+    public void event__delegated_on_with_change() throws Exception {
+        runTest("event: delegated on with change");
+    }
+
+    /**
+     * Test {292=[CHROME], 333=[FF68], 414=[IE], 415=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4257,7 +5357,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {415=[IE], 416=[CHROME, FF52, FF60]}.
+     * Test {293=[FF68], 351=[IE], 352=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__delegated_on_with_submit() throws Exception {
+        runTest("event: delegated on with submit");
+    }
+
+    /**
+     * Test {293=[CHROME], 334=[FF68], 415=[IE], 416=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4267,7 +5378,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {416=[IE], 417=[CHROME, FF52, FF60]}.
+     * Test {294=[FF68], 352=[IE], 353=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__delegated_off___with_only_namespaces() throws Exception {
+        runTest("event: delegated off() with only namespaces");
+    }
+
+    /**
+     * Test {294=[CHROME], 335=[FF68], 416=[IE], 417=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4277,7 +5399,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {417=[IE], 418=[CHROME, FF52, FF60]}.
+     * Test {295=[CHROME], 336=[FF68], 417=[IE], 418=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4287,7 +5409,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {418=[IE], 419=[CHROME, FF52, FF60]}.
+     * Test {296=[CHROME], 337=[FF68], 418=[IE], 419=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4297,7 +5419,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {419=[IE], 420=[CHROME, FF52, FF60]}.
+     * Test {297=[CHROME], 338=[FF68], 419=[IE], 420=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4307,7 +5429,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {420=[IE], 421=[CHROME, FF52, FF60]}.
+     * Test {298=[CHROME], 339=[FF68], 420=[IE], 421=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4317,7 +5439,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {421=[IE], 422=[CHROME, FF52, FF60]}.
+     * Test {299=[CHROME], 340=[FF68], 421=[IE], 422=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4327,57 +5449,53 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {422=[IE], 423=[CHROME, FF52, FF60]}.
+     * Test {300=[CHROME], 341=[FF68], 422=[IE], 423=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("14")
+    @Alerts(CHROME = "1, 13, 14",
+            FF60 = "14",
+            FF68 = "13",
+            IE = "14")
     public void traversing__closest__() throws Exception {
         runTest("traversing: closest()");
     }
 
     /**
-     * Test {423=[IE], 424=[CHROME, FF52, FF60]}.
+     * Test {301=[FF68], 359=[IE], 360=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void traversing__closest___with_positional_selectors() throws Exception {
-        runTest("traversing: closest() with positional selectors");
+    @Alerts(FF = "7",
+            IE = "7")
+    public void event__special_on_name_mapping() throws Exception {
+        runTest("event: special on name mapping");
     }
 
     /**
-     * Test {424=[IE], 425=[CHROME, FF52, FF60]}.
+     * Test {301=[CHROME], 343=[FF68], 424=[IE], 425=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(DEFAULT = "8",
+            CHROME = "2, 6, 8")
     public void traversing__closest_jQuery_() throws Exception {
         runTest("traversing: closest(jQuery)");
     }
 
     /**
-     * Test {425=[IE], 426=[CHROME, FF52, FF60]}.
+     * Test {302=[CHROME], 344=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
-    public void traversing__not_Selector_() throws Exception {
-        runTest("traversing: not(Selector)");
+    @Alerts(CHROME = "3, 8, 11",
+            FF68 = "2, 9, 11")
+    public void traversing__not_Selector_undefined_() throws Exception {
+        runTest("traversing: not(Selector|undefined)");
     }
 
     /**
-     * Test {426=[IE], 427=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void traversing__not_undefined_() throws Exception {
-        runTest("traversing: not(undefined)");
-    }
-
-    /**
-     * Test {427=[IE], 428=[CHROME, FF52, FF60]}.
+     * Test {303=[CHROME], 345=[FF68], 427=[IE], 428=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4387,17 +5505,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {428=[IE], 429=[CHROME, FF52, FF60]}.
+     * Test {304=[CHROME], 346=[FF68], 428=[IE], 429=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "1, 1, 2")
     public void traversing__not_Function_() throws Exception {
         runTest("traversing: not(Function)");
     }
 
     /**
-     * Test {429=[IE], 430=[CHROME, FF52, FF60]}.
+     * Test {305=[FF68], 363=[IE], 364=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "9",
+            IE = "9")
+    public void event__checkbox_state___3827_() throws Exception {
+        runTest("event: checkbox state (#3827)");
+    }
+
+    /**
+     * Test {305=[CHROME], 347=[FF68], 429=[IE], 430=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4407,37 +5537,41 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {430=[IE], 431=[CHROME, FF52, FF60]}.
+     * Test {306=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF68 = "1")
+    public void event__hover_event_no_longer_special_since_1_9() throws Exception {
+        runTest("event: hover event no longer special since 1.9");
+    }
+
+    /**
+     * Test {306=[CHROME], 348=[FF68], 430=[IE], 431=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void traversing__not_jQuery_() throws Exception {
         runTest("traversing: not(jQuery)");
     }
 
     /**
-     * Test {431=[IE], 432=[CHROME, FF52, FF60]}.
+     * Test {307=[IE], 308=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void traversing__not_Selector__excludes_non_element_nodes__gh_2808_() throws Exception {
-        runTest("traversing: not(Selector) excludes non-element nodes (gh-2808)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__triggered_events_stopPropagation___for_natively_bound_events() throws Exception {
+        runTest("event: triggered events stopPropagation() for natively-bound events");
     }
 
     /**
-     * Test {432=[IE], 433=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void traversing__not_arraylike__passes_non_element_nodes__gh_3226_() throws Exception {
-        runTest("traversing: not(arraylike) passes non-element nodes (gh-3226)");
-    }
-
-    /**
-     * Test {433=[IE], 434=[CHROME, FF52, FF60]}.
+     * Test {307=[CHROME], 349=[FF68], 433=[IE], 434=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4447,7 +5581,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {434=[IE], 435=[CHROME, FF52, FF60]}.
+     * Test {308=[IE], 309=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "0",
+            IE = "0")
+    public void event__trigger___works_with_events_that_were_previously_stopped() throws Exception {
+        runTest("event: trigger() works with events that were previously stopped");
+    }
+
+    /**
+     * Test {308=[FF68], 367=[IE], 368=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void event__focusin_using_non_element_targets() throws Exception {
+        runTest("event: focusin using non-element targets");
+    }
+
+    /**
+     * Test {308=[CHROME], 350=[FF68], 434=[IE], 435=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4457,7 +5613,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {435=[IE], 436=[CHROME, FF52, FF60]}.
+     * Test {309=[CHROME], 351=[FF68], 435=[IE], 436=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4467,7 +5623,17 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {436=[IE], 437=[CHROME, FF52, FF60]}.
+     * Test {310=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "7")
+    public void selector__element___jQuery_only() throws Exception {
+        runTest("selector: element - jQuery only");
+    }
+
+    /**
+     * Test {310=[CHROME], 352=[FF68], 436=[IE], 437=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4477,119 +5643,282 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {438=[IE], 439=[CHROME, FF52, FF60]}.
+     * Test {311=[FF68], 391=[IE], 392=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "26",
+            FF68 = "2, 0, 2",
+            IE = "26")
+    public void selector__id() throws Exception {
+        runTest("selector: id");
+    }
+
+    /**
+     * Test {311=[CHROME], 353=[FF68], 438=[IE], 439=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7",
+            FF60 = "2",
+            FF68 = "6",
+            IE = "2")
     @NotYetImplemented
     public void traversing__siblings__String__() throws Exception {
         runTest("traversing: siblings([String])");
     }
 
     /**
-     * Test {440=[IE], 441=[CHROME, FF52, FF60]}.
+     * Test {312=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF68 = "4")
+    public void selector__class___jQuery_only() throws Exception {
+        runTest("selector: class - jQuery only");
+    }
+
+    /**
+     * Test {312=[CHROME], 355=[FF68], 440=[IE], 441=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3",
+            FF60 = "1",
+            FF68 = "2",
+            IE = "1")
     @NotYetImplemented
     public void traversing__children__String__() throws Exception {
         runTest("traversing: children([String])");
     }
 
     /**
-     * Test {441=[IE], 442=[CHROME, FF52, FF60]}.
+     * Test {313=[FF68], 393=[IE], 394=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
+    public void selector__name() throws Exception {
+        runTest("selector: name");
+    }
+
+    /**
+     * Test {313=[CHROME], 357=[FF68], 441=[IE], 442=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "6",
+            CHROME = "5")
     public void traversing__parent__String__() throws Exception {
         runTest("traversing: parent([String])");
     }
 
     /**
-     * Test {442=[IE], 443=[CHROME, FF52, FF60]}.
+     * Test {314=[IE], 315=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__Empty_namespace_is_ignored() throws Exception {
+        runTest("event: Empty namespace is ignored");
+    }
+
+    /**
+     * Test {314=[FF68], 394=[IE], 395=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void selector__selectors_with_comma() throws Exception {
+        runTest("selector: selectors with comma");
+    }
+
+    /**
+     * Test {314=[CHROME], 358=[FF68], 442=[IE], 443=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "6",
+            FF68 = "1, 5, 6",
+            IE = "6")
     public void traversing__parents__String__() throws Exception {
         runTest("traversing: parents([String])");
     }
 
     /**
-     * Test {443=[IE], 444=[CHROME, FF52, FF60]}.
+     * Test {315=[FF68], 395=[IE], 396=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
+    @Alerts(FF60 = "27",
+            FF68 = "2, 0, 2",
+            IE = "27")
+    public void selector__child_and_adjacent() throws Exception {
+        runTest("selector: child and adjacent");
+    }
+
+    /**
+     * Test {315=[CHROME], 359=[FF68], 443=[IE], 444=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 6, 9",
+            FF60 = "10",
+            FF68 = "3, 7, 10",
+            IE = "10")
     public void traversing__parentsUntil__String__() throws Exception {
         runTest("traversing: parentsUntil([String])");
     }
 
     /**
-     * Test {444=[IE], 445=[CHROME, FF52, FF60]}.
+     * Test {316=[FF68], 396=[IE], 397=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "54",
+            FF68 = "2, 0, 2",
+            IE = "54")
+    public void selector__attributes() throws Exception {
+        runTest("selector: attributes");
+    }
+
+    /**
+     * Test {316=[CHROME], 360=[FF68], 444=[IE], 445=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "6",
+            CHROME = "1, 4, 5")
     public void traversing__next__String__() throws Exception {
         runTest("traversing: next([String])");
     }
 
     /**
-     * Test {445=[IE], 446=[CHROME, FF52, FF60]}.
+     * Test {317=[FF68], 398=[IE], 399=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "3",
+            FF68 = "1",
+            IE = "3")
+    @NotYetImplemented
+    public void selector__disconnected_nodes() throws Exception {
+        runTest("selector: disconnected nodes");
+    }
+
+    /**
+     * Test {317=[CHROME], 361=[FF68], 445=[IE], 446=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            CHROME = "4")
     public void traversing__prev__String__() throws Exception {
         runTest("traversing: prev([String])");
     }
 
     /**
-     * Test {446=[IE], 447=[CHROME, FF52, FF60]}.
+     * Test {318=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF68 = "3")
+    public void selector__disconnected_nodes___jQuery_only() throws Exception {
+        runTest("selector: disconnected nodes - jQuery only");
+    }
+
+    /**
+     * Test {318=[CHROME], 362=[FF68], 446=[IE], 447=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            CHROME = "4")
     public void traversing__nextAll__String__() throws Exception {
         runTest("traversing: nextAll([String])");
     }
 
     /**
-     * Test {447=[IE], 448=[CHROME, FF52, FF60]}.
+     * Test {319=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF68 = "2, 0, 2")
+    public void selector__selector_html5_selector() throws Exception {
+        runTest("selector: selector/html5_selector");
+    }
+
+    /**
+     * Test {319=[CHROME], 363=[FF68], 447=[IE], 448=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            CHROME = "4")
     public void traversing__prevAll__String__() throws Exception {
         runTest("traversing: prevAll([String])");
     }
 
     /**
-     * Test {448=[IE], 449=[CHROME, FF52, FF60]}.
+     * Test {320=[FF68], 400=[IE], 401=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
+    @Alerts(FF = "16",
+            IE = "16")
+    public void selector__jQuery_contains() throws Exception {
+        runTest("selector: jQuery.contains");
+    }
+
+    /**
+     * Test {320=[CHROME], 364=[FF68], 448=[IE], 449=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "12",
+            CHROME = "11")
     public void traversing__nextUntil__String__() throws Exception {
         runTest("traversing: nextUntil([String])");
     }
 
     /**
-     * Test {449=[IE], 450=[CHROME, FF52, FF60]}.
+     * Test {321=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
+    @Alerts(FF68 = "14")
+    public void selector__jQuery_unique() throws Exception {
+        runTest("selector: jQuery.unique");
+    }
+
+    /**
+     * Test {321=[CHROME], 365=[FF68], 449=[IE], 450=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "11",
+            CHROME = "10")
     public void traversing__prevUntil__String__() throws Exception {
         runTest("traversing: prevUntil([String])");
     }
 
     /**
-     * Test {450=[IE], 451=[CHROME, FF52, FF60]}.
+     * Test {322=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2, 0, 2")
+    public void selector__selector_sizzle_cache() throws Exception {
+        runTest("selector: selector/sizzle_cache");
+    }
+
+    /**
+     * Test {322=[CHROME], 366=[FF68], 450=[IE], 451=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4599,118 +5928,28 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {451=[IE], 452=[CHROME, FF52, FF60]}.
+     * Test {323=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void traversing__contents___for__template___() throws Exception {
-        runTest("traversing: contents() for <template />");
+    @Alerts(CHROME = "2, 14, 16")
+    public void traversing__add_String_Element_Array_undefined_() throws Exception {
+        runTest("traversing: add(String|Element|Array|undefined)");
     }
 
     /**
-     * Test {452=[IE], 453=[CHROME, FF52, FF60]}.
+     * Test {323=[FF68], 403=[IE], 404=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
-            IE = "0")
-    public void traversing__contents___for__template____remains_inert() throws Exception {
-        runTest("traversing: contents() for <template /> remains inert");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void selector__Iframe_dispatch_should_not_affect_jQuery___13936_() throws Exception {
+        runTest("selector: Iframe dispatch should not affect jQuery (#13936)");
     }
 
     /**
-     * Test {453=[IE], 454=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("12")
-    public void traversing__sort_direction() throws Exception {
-        runTest("traversing: sort direction");
-    }
-
-    /**
-     * Test {454=[IE], 455=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void traversing__add_String_selector_() throws Exception {
-        runTest("traversing: add(String selector)");
-    }
-
-    /**
-     * Test {455=[IE], 456=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void traversing__add_String_selector__String_context_() throws Exception {
-        runTest("traversing: add(String selector, String context)");
-    }
-
-    /**
-     * Test {456=[IE], 457=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void traversing__add_String_html_() throws Exception {
-        runTest("traversing: add(String html)");
-    }
-
-    /**
-     * Test {457=[IE], 458=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void traversing__add_jQuery_() throws Exception {
-        runTest("traversing: add(jQuery)");
-    }
-
-    /**
-     * Test {458=[IE], 459=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void traversing__add_Element_() throws Exception {
-        runTest("traversing: add(Element)");
-    }
-
-    /**
-     * Test {459=[IE], 460=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void traversing__add_Array_elements_() throws Exception {
-        runTest("traversing: add(Array elements)");
-    }
-
-    /**
-     * Test {460=[IE], 461=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void traversing__add_Window_() throws Exception {
-        runTest("traversing: add(Window)");
-    }
-
-    /**
-     * Test {461=[IE], 462=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void traversing__add_NodeList_undefined_HTMLFormElement_HTMLSelectElement_() throws Exception {
-        runTest("traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement)");
-    }
-
-    /**
-     * Test {462=[IE], 463=[CHROME, FF52, FF60]}.
+     * Test {324=[CHROME], 376=[FF68], 462=[IE], 463=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4720,7 +5959,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {463=[IE], 464=[CHROME, FF52, FF60]}.
+     * Test {325=[FF68], 406=[IE], 407=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "1, 1, 2",
+            IE = "2")
+    public void traversing__find_String__under_non_elements() throws Exception {
+        runTest("traversing: find(String) under non-elements");
+    }
+
+    /**
+     * Test {325=[CHROME], 377=[FF68], 463=[IE], 464=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4730,27 +5981,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {464=[IE], 465=[CHROME, FF52, FF60]}.
+     * Test {326=[FF68], 407=[IE], 408=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void traversing__index_no_arg___10977() throws Exception {
-        runTest("traversing: index(no arg) #10977");
+    @Alerts(FF = "4",
+            IE = "4")
+    public void traversing__find_leading_combinator_() throws Exception {
+        runTest("traversing: find(leading combinator)");
     }
 
     /**
-     * Test {465=[IE], 466=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void traversing__traversing_non_elements_with_attribute_filters___12523_() throws Exception {
-        runTest("traversing: traversing non-elements with attribute filters (#12523)");
-    }
-
-    /**
-     * Test {466=[IE], 467=[CHROME, FF52, FF60]}.
+     * Test {326=[CHROME], 380=[FF68], 466=[IE], 467=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4760,7 +6002,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {467=[IE], 468=[CHROME, FF52, FF60]}.
+     * Test {327=[CHROME], 381=[FF68], 467=[IE], 468=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4770,27 +6012,44 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {468=[IE], 469=[CHROME, FF52, FF60]}.
+     * Test {328=[CHROME], 382=[FF68], 468=[IE], 469=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(CHROME = "4",
+            FF60 = "6",
+            FF68 = "7",
+            IE = "6")
     public void manipulation__text_String_() throws Exception {
         runTest("manipulation: text(String)");
     }
 
     /**
-     * Test {469=[IE], 470=[CHROME, FF52, FF60]}.
+     * Test {329=[FF68], 410=[IE], 411=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF = "14",
+            IE = "14")
+    public void traversing__is___against_non_elements___10178_() throws Exception {
+        runTest("traversing: is() against non-elements (#10178)");
+    }
+
+    /**
+     * Test {329=[CHROME], 383=[FF68], 469=[IE], 470=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "6",
+            FF68 = "7",
+            IE = "6")
     public void manipulation__text_Function_() throws Exception {
         runTest("manipulation: text(Function)");
     }
 
     /**
-     * Test {470=[IE], 471=[CHROME, FF52, FF60]}.
+     * Test {330=[CHROME], 384=[FF68], 470=[IE], 471=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4800,97 +6059,165 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {471=[IE], 472=[CHROME, FF52, FF60]}.
+     * Test {331=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("78")
-    public void manipulation__append_String_Element_Array_Element__jQuery_() throws Exception {
-        runTest("manipulation: append(String|Element|Array<Element>|jQuery)");
+    @Alerts(CHROME = "2, 17, 19")
+    public void manipulation__wrap_String_Element_() throws Exception {
+        runTest("manipulation: wrap(String|Element)");
     }
 
     /**
-     * Test {472=[IE], 473=[CHROME, FF52, FF60]}.
+     * Test {331=[FF68], 412=[IE], 413=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("78")
+    @Alerts(FF = "6",
+            IE = "6")
+    public void traversing__is___with__has___selectors() throws Exception {
+        runTest("traversing: is() with :has() selectors");
+    }
+
+    /**
+     * Test {332=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 17, 19")
+    public void manipulation__wrap_Function_() throws Exception {
+        runTest("manipulation: wrap(Function)");
+    }
+
+    /**
+     * Test {333=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6")
+    public void manipulation__wrap_Function__with_index___10177_() throws Exception {
+        runTest("manipulation: wrap(Function) with index (#10177)");
+    }
+
+    /**
+     * Test {334=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "12")
+    public void manipulation__wrap_String__consecutive_elements___10177_() throws Exception {
+        runTest("manipulation: wrap(String) consecutive elements (#10177)");
+    }
+
+    /**
+     * Test {335=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "8")
+    public void manipulation__wrapAll_String_Element_() throws Exception {
+        runTest("manipulation: wrapAll(String|Element)");
+    }
+
+    /**
+     * Test {335=[IE], 336=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void event__Delegated_events_with_malformed_selectors__gh_3071_() throws Exception {
+        runTest("event: Delegated events with malformed selectors (gh-3071)");
+    }
+
+    /**
+     * Test {336=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "11")
+    public void manipulation__wrapInner_String_Element_() throws Exception {
+        runTest("manipulation: wrapInner(String|Element)");
+    }
+
+    /**
+     * Test {337=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "11")
+    public void manipulation__wrapInner_Function_() throws Exception {
+        runTest("manipulation: wrapInner(Function)");
+    }
+
+    /**
+     * Test {338=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "9")
+    public void manipulation__unwrap__() throws Exception {
+        runTest("manipulation: unwrap()");
+    }
+
+    /**
+     * Test {339=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 9, 11")
+    public void manipulation__append_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: append(String|Element|Array&lt;Element&gt;|jQuery)");
+    }
+
+    /**
+     * Test {340=[CHROME], 386=[FF68], 472=[IE], 473=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 9, 11",
+            FF60 = "78",
+            FF68 = "2, 49, 51",
+            IE = "78")
     public void manipulation__append_Function_() throws Exception {
         runTest("manipulation: append(Function)");
     }
 
     /**
-     * Test {473=[IE], 474=[CHROME, FF52, FF60]}.
+     * Test {341=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
-    public void manipulation__append_param__to_object__see__11280() throws Exception {
-        runTest("manipulation: append(param) to object, see #11280");
+    @Alerts(CHROME = "12")
+    public void manipulation__append_Function__with_incoming_value() throws Exception {
+        runTest("manipulation: append(Function) with incoming value");
     }
 
     /**
-     * Test {474=[IE], 475=[CHROME, FF52, FF60]}.
+     * Test {342=[CHROME], 394=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void manipulation__append_Function__returns_String() throws Exception {
-        runTest("manipulation: append(Function) returns String");
+    @Alerts(CHROME = "2",
+            FF68 = "2")
+    public void manipulation__append_the_same_fragment_with_events__Bug__6997__5566_() throws Exception {
+        runTest("manipulation: append the same fragment with events (Bug #6997, 5566)");
     }
 
     /**
-     * Test {475=[IE], 476=[CHROME, FF52, FF60]}.
+     * Test {342=[FF68], 423=[IE], 424=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__append_Function__returns_Element() throws Exception {
-        runTest("manipulation: append(Function) returns Element");
+    @Alerts(FF60 = "3",
+            FF68 = "1, 1, 2",
+            IE = "3")
+    public void traversing__closest___with_positional_selectors() throws Exception {
+        runTest("traversing: closest() with positional selectors");
     }
 
     /**
-     * Test {476=[IE], 477=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__append_Function__returns_Array_Element_() throws Exception {
-        runTest("manipulation: append(Function) returns Array<Element>");
-    }
-
-    /**
-     * Test {477=[IE], 478=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__append_Function__returns_jQuery() throws Exception {
-        runTest("manipulation: append(Function) returns jQuery");
-    }
-
-    /**
-     * Test {478=[IE], 479=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__append_Function__returns_Number() throws Exception {
-        runTest("manipulation: append(Function) returns Number");
-    }
-
-    /**
-     * Test {479=[IE], 480=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void manipulation__XML_DOM_manipulation___9960_() throws Exception {
-        runTest("manipulation: XML DOM manipulation (#9960)");
-    }
-
-    /**
-     * Test {480=[IE], 481=[CHROME, FF52, FF60]}.
+     * Test {343=[CHROME], 395=[FF68], 480=[IE], 481=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4900,7 +6227,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {481=[IE], 482=[CHROME, FF52, FF60]}.
+     * Test {344=[CHROME], 396=[FF68], 481=[IE], 482=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4910,7 +6237,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {482=[IE], 483=[CHROME, FF52, FF60]}.
+     * Test {345=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void manipulation__html5_clone___cannot_use_the_fragment_cache_in_IE___6485_() throws Exception {
+        runTest("manipulation: html5 clone() cannot use the fragment cache in IE (#6485)");
+    }
+
+    /**
+     * Test {346=[IE], 347=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void event__ignore_comment_nodes_in_event_delegation__gh_2055_() throws Exception {
+        runTest("event: ignore comment nodes in event delegation (gh-2055)");
+    }
+
+    /**
+     * Test {346=[CHROME], 397=[FF68], 482=[IE], 483=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4920,28 +6269,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {483=[IE], 484=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("27")
-    public void manipulation__html_String__tag_hyphenated_elements__Bug__1987_() throws Exception {
-        runTest("manipulation: html(String) tag-hyphenated elements (Bug #1987)");
-    }
-
-    /**
-     * Test {484=[IE], 485=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("240")
-    @NotYetImplemented
-    public void manipulation__Tag_name_processing_respects_the_HTML_Standard__gh_2005_() throws Exception {
-        runTest("manipulation: Tag name processing respects the HTML Standard (gh-2005)");
-    }
-
-    /**
-     * Test {485=[IE], 486=[CHROME, FF52, FF60]}.
+     * Test {347=[CHROME], 398=[FF68], 485=[IE], 486=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4951,7 +6279,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {486=[IE], 487=[CHROME, FF52, FF60]}.
+     * Test {348=[CHROME], 399=[FF68], 486=[IE], 487=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4961,7 +6289,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {487=[IE], 488=[CHROME, FF52, FF60]}.
+     * Test {349=[CHROME], 400=[FF68], 487=[IE], 488=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -4971,517 +6299,201 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {488=[IE], 489=[CHROME, FF52, FF60]}.
+     * Test {350=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void manipulation__appendTo_String_() throws Exception {
-        runTest("manipulation: appendTo(String)");
+    @Alerts(CHROME = "2, 8, 10")
+    public void manipulation__appendTo_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: appendTo(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {489=[IE], 490=[CHROME, FF52, FF60]}.
+     * Test {351=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__appendTo_Element_Array_Element__() throws Exception {
-        runTest("manipulation: appendTo(Element|Array<Element>)");
+    @Alerts(CHROME = "6")
+    public void manipulation__prepend_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: prepend(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {490=[IE], 491=[CHROME, FF52, FF60]}.
+     * Test {352=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
-    public void manipulation__appendTo_jQuery_() throws Exception {
-        runTest("manipulation: appendTo(jQuery)");
+    @Alerts(CHROME = "6")
+    public void manipulation__prepend_Function_() throws Exception {
+        runTest("manipulation: prepend(Function)");
     }
 
     /**
-     * Test {491=[IE], 492=[CHROME, FF52, FF60]}.
+     * Test {353=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__prepend_String_() throws Exception {
-        runTest("manipulation: prepend(String)");
+    @Alerts(CHROME = "10")
+    public void manipulation__prepend_Function__with_incoming_value() throws Exception {
+        runTest("manipulation: prepend(Function) with incoming value");
     }
 
     /**
-     * Test {492=[IE], 493=[CHROME, FF52, FF60]}.
+     * Test {354=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__prepend_Element_() throws Exception {
-        runTest("manipulation: prepend(Element)");
+    @Alerts(CHROME = "1, 5, 6")
+    public void manipulation__prependTo_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: prependTo(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {493=[IE], 494=[CHROME, FF52, FF60]}.
+     * Test {354=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__prepend_Array_Element__() throws Exception {
-        runTest("manipulation: prepend(Array<Element>)");
+    @Alerts(FF68 = "2")
+    public void traversing__siblings__String_____jQuery_only() throws Exception {
+        runTest("traversing: siblings([String]) - jQuery only");
     }
 
     /**
-     * Test {494=[IE], 495=[CHROME, FF52, FF60]}.
+     * Test {355=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__prepend_jQuery_() throws Exception {
-        runTest("manipulation: prepend(jQuery)");
+    @Alerts(CHROME = "2, 5, 7")
+    public void manipulation__before_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: before(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {495=[IE], 496=[CHROME, FF52, FF60]}.
+     * Test {356=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__prepend_Array_jQuery__() throws Exception {
-        runTest("manipulation: prepend(Array<jQuery>)");
+    @Alerts(CHROME = "2, 5, 7")
+    public void manipulation__before_Function_() throws Exception {
+        runTest("manipulation: before(Function)");
     }
 
     /**
-     * Test {496=[IE], 497=[CHROME, FF52, FF60]}.
+     * Test {356=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void manipulation__prepend_Function__with_incoming_value____String() throws Exception {
-        runTest("manipulation: prepend(Function) with incoming value -- String");
+    @Alerts(FF68 = "1")
+    public void traversing__children__String_____jQuery_only() throws Exception {
+        runTest("traversing: children([String]) - jQuery only");
     }
 
     /**
-     * Test {497=[IE], 498=[CHROME, FF52, FF60]}.
+     * Test {357=[CHROME], 429=[FF68], 516=[IE], 517=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__prepend_Function__with_incoming_value____Element() throws Exception {
-        runTest("manipulation: prepend(Function) with incoming value -- Element");
-    }
-
-    /**
-     * Test {498=[IE], 499=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__prepend_Function__with_incoming_value____Array_Element_() throws Exception {
-        runTest("manipulation: prepend(Function) with incoming value -- Array<Element>");
-    }
-
-    /**
-     * Test {499=[IE], 500=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__prepend_Function__with_incoming_value____jQuery() throws Exception {
-        runTest("manipulation: prepend(Function) with incoming value -- jQuery");
-    }
-
-    /**
-     * Test {500=[IE], 501=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__prependTo_String_() throws Exception {
-        runTest("manipulation: prependTo(String)");
-    }
-
-    /**
-     * Test {501=[IE], 502=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__prependTo_Element_() throws Exception {
-        runTest("manipulation: prependTo(Element)");
-    }
-
-    /**
-     * Test {502=[IE], 503=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__prependTo_Array_Element__() throws Exception {
-        runTest("manipulation: prependTo(Array<Element>)");
-    }
-
-    /**
-     * Test {503=[IE], 504=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__prependTo_jQuery_() throws Exception {
-        runTest("manipulation: prependTo(jQuery)");
-    }
-
-    /**
-     * Test {504=[IE], 505=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__prependTo_Array_jQuery__() throws Exception {
-        runTest("manipulation: prependTo(Array<jQuery>)");
-    }
-
-    /**
-     * Test {505=[IE], 506=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_String_() throws Exception {
-        runTest("manipulation: before(String)");
-    }
-
-    /**
-     * Test {506=[IE], 507=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Element_() throws Exception {
-        runTest("manipulation: before(Element)");
-    }
-
-    /**
-     * Test {507=[IE], 508=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Array_Element__() throws Exception {
-        runTest("manipulation: before(Array<Element>)");
-    }
-
-    /**
-     * Test {508=[IE], 509=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_jQuery_() throws Exception {
-        runTest("manipulation: before(jQuery)");
-    }
-
-    /**
-     * Test {509=[IE], 510=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Array_jQuery__() throws Exception {
-        runTest("manipulation: before(Array<jQuery>)");
-    }
-
-    /**
-     * Test {510=[IE], 511=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Function_____Returns_String() throws Exception {
-        runTest("manipulation: before(Function) -- Returns String");
-    }
-
-    /**
-     * Test {511=[IE], 512=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Function_____Returns_Element() throws Exception {
-        runTest("manipulation: before(Function) -- Returns Element");
-    }
-
-    /**
-     * Test {512=[IE], 513=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Function_____Returns_Array_Element_() throws Exception {
-        runTest("manipulation: before(Function) -- Returns Array<Element>");
-    }
-
-    /**
-     * Test {513=[IE], 514=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Function_____Returns_jQuery() throws Exception {
-        runTest("manipulation: before(Function) -- Returns jQuery");
-    }
-
-    /**
-     * Test {514=[IE], 515=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__before_Function_____Returns_Array_jQuery_() throws Exception {
-        runTest("manipulation: before(Function) -- Returns Array<jQuery>");
-    }
-
-    /**
-     * Test {515=[IE], 516=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__before_no_op_() throws Exception {
-        runTest("manipulation: before(no-op)");
-    }
-
-    /**
-     * Test {516=[IE], 517=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = "2, 0, 2")
     public void manipulation__before_and_after_w__empty_object___10812_() throws Exception {
         runTest("manipulation: before and after w/ empty object (#10812)");
     }
 
     /**
-     * Test {517=[IE], 518=[CHROME, FF52, FF60]}.
+     * Test {358=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation___before___and__after___disconnected_node() throws Exception {
-        runTest("manipulation: .before() and .after() disconnected node");
+    @Alerts(CHROME = "2, 0, 2")
+    public void manipulation__before_and_after_on_disconnected_node___10517_() throws Exception {
+        runTest("manipulation: before and after on disconnected node (#10517)");
     }
 
     /**
-     * Test {519=[IE], 520=[CHROME, FF52, FF60]}.
+     * Test {359=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insert_with__before___on_disconnected_node_first() throws Exception {
-        runTest("manipulation: insert with .before() on disconnected node first");
+    @Alerts(CHROME = "4")
+    public void manipulation__insertBefore_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: insertBefore(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {521=[IE], 522=[CHROME, FF52, FF60]}.
+     * Test {360=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insert_with__before___on_disconnected_node_last() throws Exception {
-        runTest("manipulation: insert with .before() on disconnected node last");
+    @Alerts(CHROME = "2, 5, 7")
+    public void manipulation__after_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: after(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {522=[IE], 523=[CHROME, FF52, FF60]}.
+     * Test {361=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insertBefore_String_() throws Exception {
-        runTest("manipulation: insertBefore(String)");
+    @Alerts(CHROME = "2, 5, 7")
+    public void manipulation__after_Function_() throws Exception {
+        runTest("manipulation: after(Function)");
     }
 
     /**
-     * Test {523=[IE], 524=[CHROME, FF52, FF60]}.
+     * Test {362=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insertBefore_Element_() throws Exception {
-        runTest("manipulation: insertBefore(Element)");
+    @Alerts(CHROME = "4")
+    public void manipulation__insertAfter_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: insertAfter(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {524=[IE], 525=[CHROME, FF52, FF60]}.
+     * Test {363=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insertBefore_Array_Element__() throws Exception {
-        runTest("manipulation: insertBefore(Array<Element>)");
+    @Alerts(CHROME = "2, 20, 22")
+    public void manipulation__replaceWith_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: replaceWith(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {525=[IE], 526=[CHROME, FF52, FF60]}.
+     * Test {364=[IE], 365=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__insertBefore_jQuery_() throws Exception {
-        runTest("manipulation: insertBefore(jQuery)");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void event__event_object_properties_on_natively_triggered_event() throws Exception {
+        runTest("event: event object properties on natively-triggered event");
     }
 
     /**
-     * Test {526=[IE], 527=[CHROME, FF52, FF60]}.
+     * Test {364=[CHROME], 453=[FF68], 540=[IE], 541=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation___after_String_() throws Exception {
-        runTest("manipulation: .after(String)");
-    }
-
-    /**
-     * Test {527=[IE], 528=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Element_() throws Exception {
-        runTest("manipulation: .after(Element)");
-    }
-
-    /**
-     * Test {528=[IE], 529=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Array_Element__() throws Exception {
-        runTest("manipulation: .after(Array<Element>)");
-    }
-
-    /**
-     * Test {529=[IE], 530=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_jQuery_() throws Exception {
-        runTest("manipulation: .after(jQuery)");
-    }
-
-    /**
-     * Test {530=[IE], 531=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Function__returns_String() throws Exception {
-        runTest("manipulation: .after(Function) returns String");
-    }
-
-    /**
-     * Test {531=[IE], 532=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Function__returns_Element() throws Exception {
-        runTest("manipulation: .after(Function) returns Element");
-    }
-
-    /**
-     * Test {532=[IE], 533=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Function__returns_Array_Element_() throws Exception {
-        runTest("manipulation: .after(Function) returns Array<Element>");
-    }
-
-    /**
-     * Test {533=[IE], 534=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation___after_Function__returns_jQuery() throws Exception {
-        runTest("manipulation: .after(Function) returns jQuery");
-    }
-
-    /**
-     * Test {534=[IE], 535=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation___after_disconnected_node_() throws Exception {
-        runTest("manipulation: .after(disconnected node)");
-    }
-
-    /**
-     * Test {535=[IE], 536=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__insertAfter_String_() throws Exception {
-        runTest("manipulation: insertAfter(String)");
-    }
-
-    /**
-     * Test {536=[IE], 537=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__insertAfter_Element_() throws Exception {
-        runTest("manipulation: insertAfter(Element)");
-    }
-
-    /**
-     * Test {537=[IE], 538=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__insertAfter_Array_Element__() throws Exception {
-        runTest("manipulation: insertAfter(Array<Element>)");
-    }
-
-    /**
-     * Test {538=[IE], 539=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__insertAfter_jQuery_() throws Exception {
-        runTest("manipulation: insertAfter(jQuery)");
-    }
-
-    /**
-     * Test {539=[IE], 540=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("29")
-    public void manipulation__replaceWith_String_Element_Array_Element__jQuery_() throws Exception {
-        runTest("manipulation: replaceWith(String|Element|Array<Element>|jQuery)");
-    }
-
-    /**
-     * Test {540=[IE], 541=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("30")
+    @Alerts(DEFAULT = "30",
+            CHROME = "2, 21, 23")
     public void manipulation__replaceWith_Function_() throws Exception {
         runTest("manipulation: replaceWith(Function)");
     }
 
     /**
-     * Test {541=[IE], 542=[CHROME, FF52, FF60]}.
+     * Test {365=[IE], 366=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event__addProp_extensions() throws Exception {
+        runTest("event: addProp extensions");
+    }
+
+    /**
+     * Test {365=[CHROME], 454=[FF68], 541=[IE], 542=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5491,57 +6503,39 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {542=[IE], 543=[CHROME, FF52, FF60]}.
+     * Test {366=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("25")
-    public void manipulation__Empty_replaceWith__trac_13401__trac_13596__gh_2204_() throws Exception {
-        runTest("manipulation: Empty replaceWith (trac-13401; trac-13596; gh-2204)");
+    @Alerts(CHROME = "10")
+    public void manipulation__replaceAll_String_Element_Array_lt_Element_gt__jQuery_() throws Exception {
+        runTest("manipulation: replaceAll(String|Element|Array&lt;Element&gt;|jQuery)");
     }
 
     /**
-     * Test {543=[IE], 544=[CHROME, FF52, FF60]}.
+     * Test {366=[IE], 367=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__replaceAll_String_() throws Exception {
-        runTest("manipulation: replaceAll(String)");
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void event__drag_drop_events_copy_mouse_related_event_properties__gh_1925__gh_2009_() throws Exception {
+        runTest("event: drag/drop events copy mouse-related event properties (gh-1925, gh-2009)");
     }
 
     /**
-     * Test {544=[IE], 545=[CHROME, FF52, FF60]}.
+     * Test {367=[FF68], 453=[IE], 454=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__replaceAll_Element_() throws Exception {
-        runTest("manipulation: replaceAll(Element)");
+    @Alerts(FF = "12",
+            IE = "12")
+    public void traversing__sort_direction() throws Exception {
+        runTest("traversing: sort direction");
     }
 
     /**
-     * Test {545=[IE], 546=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void manipulation__replaceAll_Array_Element__() throws Exception {
-        runTest("manipulation: replaceAll(Array<Element>)");
-    }
-
-    /**
-     * Test {546=[IE], 547=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void manipulation__replaceAll_jQuery_() throws Exception {
-        runTest("manipulation: replaceAll(jQuery)");
-    }
-
-    /**
-     * Test {547=[IE], 548=[CHROME, FF52, FF60]}.
+     * Test {367=[CHROME], 460=[FF68], 547=[IE], 548=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5551,38 +6545,95 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {548=[IE], 549=[CHROME, FF52, FF60]}.
+     * Test {368=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__append_to_multiple_elements___8070_() throws Exception {
-        runTest("manipulation: append to multiple elements (#8070)");
+    @Alerts(CHROME = "2")
+    public void manipulation__clone_____8070_() throws Exception {
+        runTest("manipulation: clone() (#8070)");
     }
 
     /**
-     * Test {549=[IE], 550=[CHROME, FF52, FF60]}.
+     * Test {368=[IE], 369=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void manipulation__table_manipulation() throws Exception {
-        runTest("manipulation: table manipulation");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__focusin_from_an_iframe() throws Exception {
+        runTest("event: focusin from an iframe");
     }
 
     /**
-     * Test {550=[IE], 551=[CHROME, FF52, FF60]}.
+     * Test {368=[FF68], 454=[IE], 455=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("45")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void traversing__add_String_selector_() throws Exception {
+        runTest("traversing: add(String selector)");
+    }
+
+    /**
+     * Test {369=[IE], 370=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__jQuery_ready_promise() throws Exception {
+        runTest("event: jQuery.ready promise");
+    }
+
+    /**
+     * Test {369=[FF68], 455=[IE], 456=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void traversing__add_String_selector__String_context_() throws Exception {
+        runTest("traversing: add(String selector, String context)");
+    }
+
+    /**
+     * Test {369=[CHROME], 463=[FF68], 550=[IE], 551=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "45",
+            CHROME = "1, 43, 44")
     public void manipulation__clone__() throws Exception {
         runTest("manipulation: clone()");
     }
 
     /**
-     * Test {551=[IE], 552=[CHROME, FF52, FF60]}.
+     * Test {370=[IE], 371=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void event__jQuery_ready_uses_interactive() throws Exception {
+        runTest("event: jQuery.ready uses interactive");
+    }
+
+    /**
+     * Test {370=[FF68], 456=[IE], 457=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void traversing__add_String_html_() throws Exception {
+        runTest("traversing: add(String html)");
+    }
+
+    /**
+     * Test {370=[CHROME], 464=[FF68], 551=[IE], 552=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5592,7 +6643,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {552=[IE], 553=[CHROME, FF52, FF60]}.
+     * Test {371=[IE], 372=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__Focusing_iframe_element() throws Exception {
+        runTest("event: Focusing iframe element");
+    }
+
+    /**
+     * Test {371=[FF68], 457=[IE], 458=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void traversing__add_jQuery_() throws Exception {
+        runTest("traversing: add(jQuery)");
+    }
+
+    /**
+     * Test {371=[CHROME], 465=[FF68], 552=[IE], 553=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5602,7 +6675,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {553=[IE], 554=[CHROME, FF52, FF60]}.
+     * Test {372=[IE], 373=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__triggerHandler_onbeforeunload_() throws Exception {
+        runTest("event: triggerHandler(onbeforeunload)");
+    }
+
+    /**
+     * Test {372=[FF68], 458=[IE], 459=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void traversing__add_Element_() throws Exception {
+        runTest("traversing: add(Element)");
+    }
+
+    /**
+     * Test {372=[CHROME], 466=[FF68], 553=[IE], 554=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5612,7 +6707,30 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {554=[IE], 555=[CHROME, FF52, FF60]}.
+     * Test {373=[IE], 374=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void event__jQuery_ready_synchronous_load_with_long_loading_subresources() throws Exception {
+        runTest("event: jQuery.ready synchronous load with long loading subresources");
+    }
+
+    /**
+     * Test {373=[FF68], 459=[IE], 460=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void traversing__add_Array_elements_() throws Exception {
+        runTest("traversing: add(Array elements)");
+    }
+
+    /**
+     * Test {373=[CHROME], 467=[FF68], 554=[IE], 555=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5622,7 +6740,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {555=[IE], 556=[CHROME, FF52, FF60]}.
+     * Test {374=[IE], 375=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event__change_handler_should_be_detached_from_element() throws Exception {
+        runTest("event: change handler should be detached from element");
+    }
+
+    /**
+     * Test {374=[FF68], 460=[IE], 461=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void traversing__add_Window_() throws Exception {
+        runTest("traversing: add(Window)");
+    }
+
+    /**
+     * Test {374=[CHROME], 468=[FF68], 555=[IE], 556=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5632,7 +6772,29 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {556=[IE], 557=[CHROME, FF52, FF60]}.
+     * Test {375=[IE], 376=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__trigger_click_on_checkbox__fires_change_event() throws Exception {
+        runTest("event: trigger click on checkbox, fires change event");
+    }
+
+    /**
+     * Test {375=[FF68], 461=[IE], 462=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void traversing__add_NodeList_undefined_HTMLFormElement_HTMLSelectElement_() throws Exception {
+        runTest("traversing: add(NodeList|undefined|HTMLFormElement|HTMLSelectElement)");
+    }
+
+    /**
+     * Test {375=[CHROME], 469=[FF68], 556=[IE], 557=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5642,7 +6804,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {557=[IE], 558=[CHROME, FF52, FF60]}.
+     * Test {376=[IE], 377=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void event__Namespace_preserved_when_passed_an_Event___12739_() throws Exception {
+        runTest("event: Namespace preserved when passed an Event (#12739)");
+    }
+
+    /**
+     * Test {376=[CHROME], 470=[FF68], 557=[IE], 558=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5652,159 +6825,172 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {558=[IE], 559=[CHROME, FF52, FF60]}.
+     * Test {377=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("40")
-    public void manipulation__html_String_Number_() throws Exception {
-        runTest("manipulation: html(String|Number)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void manipulation__html_String_() throws Exception {
+        runTest("manipulation: html(String)");
     }
 
     /**
-     * Test {559=[IE], 560=[CHROME, FF52, FF60]}.
+     * Test {377=[IE], 378=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("40")
+    @Alerts(FF60 = "18",
+            IE = "18")
+    public void event__make_sure_events_cloned_correctly() throws Exception {
+        runTest("event: make sure events cloned correctly");
+    }
+
+    /**
+     * Test {378=[IE], 379=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__String_prototype_namespace_does_not_cause_trigger___to_throw___13360_() throws Exception {
+        runTest("event: String.prototype.namespace does not cause trigger() to throw (#13360)");
+    }
+
+    /**
+     * Test {378=[FF68], 464=[IE], 465=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void traversing__index_no_arg___10977() throws Exception {
+        runTest("traversing: index(no arg) #10977");
+    }
+
+    /**
+     * Test {378=[CHROME], 472=[FF68], 559=[IE], 560=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF60 = "40",
+            FF68 = "39",
+            IE = "40")
     public void manipulation__html_Function_() throws Exception {
         runTest("manipulation: html(Function)");
     }
 
     /**
-     * Test {560=[IE], 561=[CHROME, FF60]}.
+     * Test {379=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(CHROME = "4",
-            FF60 = "4",
-            IE = "0")
-    @NotYetImplemented({ CHROME, FF60 })
-    public void manipulation__html_script_type_module_() throws Exception {
-        runTest("manipulation: html(script type module)");
+    @Alerts(CHROME = "1, 22, 23")
+    public void manipulation__html_Function__with_incoming_value() throws Exception {
+        runTest("manipulation: html(Function) with incoming value");
     }
 
     /**
-     * Test {561=[FF52]}.
+     * Test {379=[IE], 380=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    public void skippedmanipulation__html_script_type_module_() throws Exception {
-        runTest("skippedmanipulation: html(script type module)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__Inline_event_result_is_returned___13993_() throws Exception {
+        runTest("event: Inline event result is returned (#13993)");
     }
 
     /**
-     * Test {561=[IE], 562=[CHROME, FF52, FF60]}.
+     * Test {379=[FF68], 465=[IE], 466=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void manipulation__html_Function__with_incoming_value____direct_selection() throws Exception {
-        runTest("manipulation: html(Function) with incoming value -- direct selection");
+    @Alerts(FF = "5",
+            IE = "5")
+    public void traversing__traversing_non_elements_with_attribute_filters___12523_() throws Exception {
+        runTest("traversing: traversing non-elements with attribute filters (#12523)");
     }
 
     /**
-     * Test {562=[IE], 563=[CHROME, FF52, FF60]}.
+     * Test {380=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("14")
-    public void manipulation__html_Function__with_incoming_value____jQuery_contents__() throws Exception {
-        runTest("manipulation: html(Function) with incoming value -- jQuery.contents()");
+    @Alerts(CHROME = "9")
+    public void manipulation__remove__() throws Exception {
+        runTest("manipulation: remove()");
     }
 
     /**
-     * Test {563=[IE], 564=[CHROME, FF52, FF60]}.
+     * Test {380=[IE], 381=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__clone___html___don_t_expose_jQuery_Sizzle_expandos___12858_() throws Exception {
-        runTest("manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858)");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event___off___removes_the_expando_when_there_s_no_more_data() throws Exception {
+        runTest("event: .off() removes the expando when there's no more data");
     }
 
     /**
-     * Test {564=[IE], 565=[CHROME, FF52, FF60]}.
+     * Test {381=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__remove___no_filters() throws Exception {
-        runTest("manipulation: remove() no filters");
+    @Alerts(CHROME = "9")
+    public void manipulation__detach__() throws Exception {
+        runTest("manipulation: detach()");
     }
 
     /**
-     * Test {565=[IE], 566=[CHROME, FF52, FF60]}.
+     * Test {381=[IE], 382=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void manipulation__remove___with_filters() throws Exception {
-        runTest("manipulation: remove() with filters");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event__jQuery_Event__src___does_not_require_a_target_property() throws Exception {
+        runTest("event: jQuery.Event( src ) does not require a target property");
     }
 
     /**
-     * Test {566=[IE], 567=[CHROME, FF52, FF60]}.
+     * Test {382=[IE], 383=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__remove___event_cleaning() throws Exception {
-        runTest("manipulation: remove() event cleaning");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__preventDefault___on_focusin_does_not_throw_exception() throws Exception {
+        runTest("event: preventDefault() on focusin does not throw exception");
     }
 
     /**
-     * Test {567=[IE], 568=[CHROME, FF52, FF60]}.
+     * Test {382=[CHROME], 485=[FF68], 571=[IE], 572=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__remove___in_document_order__13779() throws Exception {
-        runTest("manipulation: remove() in document order #13779");
-    }
-
-    /**
-     * Test {568=[IE], 569=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void manipulation__detach___no_filters() throws Exception {
-        runTest("manipulation: detach() no filters");
-    }
-
-    /**
-     * Test {569=[IE], 570=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
-    public void manipulation__detach___with_filters() throws Exception {
-        runTest("manipulation: detach() with filters");
-    }
-
-    /**
-     * Test {570=[IE], 571=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__detach___event_cleaning() throws Exception {
-        runTest("manipulation: detach() event cleaning");
-    }
-
-    /**
-     * Test {571=[IE], 572=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "6",
+            IE = "3")
     public void manipulation__empty__() throws Exception {
         runTest("manipulation: empty()");
     }
 
     /**
-     * Test {572=[IE], 573=[CHROME, FF52, FF60]}.
+     * Test {383=[IE], 384=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void event__Donor_event_interference() throws Exception {
+        runTest("event: Donor event interference");
+    }
+
+    /**
+     * Test {383=[CHROME], 486=[FF68], 572=[IE], 573=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5814,67 +7000,107 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {573=[IE], 574=[CHROME, FF52, FF60]}.
+     * Test {384=[IE], 385=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void manipulation__jQuery_cleanData_eliminates_all_private_data__gh_2127_() throws Exception {
-        runTest("manipulation: jQuery.cleanData eliminates all private data (gh-2127)");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void event__simulated_events_shouldn_t_forward_stopPropagation_preventDefault_methods() throws Exception {
+        runTest("event: simulated events shouldn't forward stopPropagation/preventDefault methods");
     }
 
     /**
-     * Test {574=[IE], 575=[CHROME, FF52, FF60]}.
+     * Test {384=[CHROME], 487=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void manipulation__jQuery_cleanData_eliminates_all_public_data() throws Exception {
-        runTest("manipulation: jQuery.cleanData eliminates all public data");
+    @Alerts(CHROME = "1",
+            FF68 = "1")
+    public void manipulation__jQuery_buildFragment___no_plain_text_caching__Bug__6779_() throws Exception {
+        runTest("manipulation: jQuery.buildFragment - no plain-text caching (Bug #6779)");
     }
 
     /**
-     * Test {575=[IE], 576=[CHROME, FF52, FF60]}.
+     * Test {385=[IE], 386=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__domManip_plain_text_caching__trac_6779_() throws Exception {
-        runTest("manipulation: domManip plain-text caching (trac-6779)");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event__originalEvent_type_of_simulated_event() throws Exception {
+        runTest("event: originalEvent type of simulated event");
     }
 
     /**
-     * Test {576=[IE], 577=[CHROME, FF52, FF60]}.
+     * Test {385=[CHROME], 488=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void manipulation__domManip_executes_scripts_containing_html_comments_or_CDATA__trac_9221_() throws Exception {
-        runTest("manipulation: domManip executes scripts containing html comments or CDATA (trac-9221)");
+    @Alerts(CHROME = "3",
+            FF68 = "3")
+    public void manipulation__jQuery_html___execute_scripts_escaped_with_html_comment_or_CDATA___9221_() throws Exception {
+        runTest("manipulation: jQuery.html - execute scripts escaped with html comment or CDATA (#9221)");
     }
 
     /**
-     * Test {577=[IE], 578=[CHROME, FF52, FF60]}.
+     * Test {385=[FF68], 471=[IE], 472=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void manipulation__domManip_tolerates_window_valued_document_0__in_IE9_10__trac_12266_() throws Exception {
-        runTest("manipulation: domManip tolerates window-valued document[0] in IE9/10 (trac-12266)");
+    @Alerts(FF60 = "78",
+            FF68 = "2, 49, 51",
+            IE = "78")
+    public void manipulation__append_String_Element_Array_Element__jQuery_() throws Exception {
+        runTest("manipulation: append(String|Element|Array<Element>|jQuery)");
     }
 
     /**
-     * Test {578=[IE], 579=[CHROME, FF52, FF60]}.
+     * Test {386=[IE], 387=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void manipulation__domManip_executes_scripts_in_iframes_in_the_iframes__context() throws Exception {
-        runTest("manipulation: domManip executes scripts in iframes in the iframes' context");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__trigger__click___on_radio_passes_extra_params() throws Exception {
+        runTest("event: trigger('click') on radio passes extra params");
     }
 
     /**
-     * Test {579=[IE], 580=[CHROME, FF52, FF60]}.
+     * Test {386=[CHROME], 489=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1",
+            FF68 = "1")
+    public void manipulation__jQuery_buildFragment___plain_objects_are_not_a_document__8950() throws Exception {
+        runTest("manipulation: jQuery.buildFragment - plain objects are not a document #8950");
+    }
+
+    /**
+     * Test {387=[IE], 388=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void event__VML_with_special_event_handlers__trac_7071_() throws Exception {
+        runTest("event: VML with special event handlers (trac-7071)");
+    }
+
+    /**
+     * Test {387=[FF68], 473=[IE], 474=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "5",
+            IE = "5")
+    public void manipulation__append_param__to_object__see__11280() throws Exception {
+        runTest("manipulation: append(param) to object, see #11280");
+    }
+
+    /**
+     * Test {387=[CHROME], 490=[FF68], 579=[IE], 580=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5884,7 +7110,61 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {580=[IE], 581=[CHROME, FF52, FF60]}.
+     * Test {388=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void manipulation__jQuery__tag_____wrap_Inner_All____handle_unknown_elems___10667_() throws Exception {
+        runTest("manipulation: jQuery(<tag>) & wrap[Inner/All]() handle unknown elems (#10667)");
+    }
+
+    /**
+     * Test {388=[IE], 389=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void event__Check_order_of_focusin_focusout_events() throws Exception {
+        runTest("event: Check order of focusin/focusout events");
+    }
+
+    /**
+     * Test {388=[FF68], 474=[IE], 475=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void manipulation__append_Function__returns_String() throws Exception {
+        runTest("manipulation: append(Function) returns String");
+    }
+
+    /**
+     * Test {389=[IE], 390=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void event__focus_blur_order___12868_() throws Exception {
+        runTest("event: focus-blur order (#12868)");
+    }
+
+    /**
+     * Test {389=[FF68], 475=[IE], 476=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__append_Function__returns_Element() throws Exception {
+        runTest("manipulation: append(Function) returns Element");
+    }
+
+    /**
+     * Test {389=[CHROME], 491=[FF68], 580=[IE], 581=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5894,7 +7174,50 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {581=[IE], 582=[CHROME, FF52, FF60]}.
+     * Test {390=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3")
+    public void manipulation__jQuery_fragments_cache_expectations() throws Exception {
+        runTest("manipulation: jQuery.fragments cache expectations");
+    }
+
+    /**
+     * Test {390=[IE], 391=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "7",
+            IE = "7")
+    public void selector__element() throws Exception {
+        runTest("selector: element");
+    }
+
+    /**
+     * Test {390=[FF68], 476=[IE], 477=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__append_Function__returns_Array_Element_() throws Exception {
+        runTest("manipulation: append(Function) returns Array<Element>");
+    }
+
+    /**
+     * Test {391=[FF68], 477=[IE], 478=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__append_Function__returns_jQuery() throws Exception {
+        runTest("manipulation: append(Function) returns jQuery");
+    }
+
+    /**
+     * Test {391=[CHROME], 492=[FF68], 581=[IE], 582=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5904,28 +7227,65 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {582=[IE], 583=[CHROME, FF52, FF60]}.
+     * Test {392=[IE], 393=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void selector__class() throws Exception {
+        runTest("selector: class");
+    }
+
+    /**
+     * Test {392=[FF68], 478=[IE], 479=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__append_Function__returns_Number() throws Exception {
+        runTest("manipulation: append(Function) returns Number");
+    }
+
+    /**
+     * Test {392=[CHROME], 493=[FF68], 582=[IE], 583=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            CHROME = "5, 1, 6")
     public void manipulation__Ensure_oldIE_creates_a_new_set_on_appendTo___8894_() throws Exception {
         runTest("manipulation: Ensure oldIE creates a new set on appendTo (#8894)");
     }
 
     /**
-     * Test {583=[IE], 584=[CHROME, FF52, FF60]}.
+     * Test {393=[FF68], 479=[IE], 480=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF = "5",
+            IE = "5")
+    public void manipulation__XML_DOM_manipulation___9960_() throws Exception {
+        runTest("manipulation: XML DOM manipulation (#9960)");
+    }
+
+    /**
+     * Test {393=[CHROME], 494=[FF68], 583=[IE], 584=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5, 0, 5",
+            FF60 = "2",
+            FF68 = "5, 0, 5",
+            IE = "2")
     @NotYetImplemented
     public void manipulation__html_____script_exceptions_bubble___11743_() throws Exception {
         runTest("manipulation: html() - script exceptions bubble (#11743)");
     }
 
     /**
-     * Test {584=[IE], 585=[CHROME, FF52, FF60]}.
+     * Test {394=[CHROME], 495=[FF68], 584=[IE], 585=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5935,7 +7295,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {585=[IE], 586=[CHROME, FF52, FF60]}.
+     * Test {395=[CHROME], 496=[FF68], 585=[IE], 586=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -5945,159 +7305,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {586=[IE], 587=[CHROME, FF52, FF60]}.
+     * Test {396=[CHROME], 497=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("13")
-    @NotYetImplemented
-    public void manipulation__script_evaluation___11795_() throws Exception {
-        runTest("manipulation: script evaluation (#11795)");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void manipulation__global_failure() throws Exception {
+        runTest("manipulation: global failure");
     }
 
     /**
-     * Test {587=[IE], 588=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void manipulation__jQuery__evalUrl___12838_() throws Exception {
-        runTest("manipulation: jQuery._evalUrl (#12838)");
-    }
-
-    /**
-     * Test {588=[IE], 589=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void manipulation__jQuery_htmlPrefilter__gh_1747_() throws Exception {
-        runTest("manipulation: jQuery.htmlPrefilter (gh-1747)");
-    }
-
-    /**
-     * Test {589=[IE], 590=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("10")
-    public void manipulation__insertAfter__insertBefore__etc_do_not_work_when_destination_is_original_element__Element_is_removed___4087_() throws Exception {
-        runTest("manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087)");
-    }
-
-    /**
-     * Test {590=[IE], 591=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void manipulation__Index_for_function_argument_should_be_received___13094_() throws Exception {
-        runTest("manipulation: Index for function argument should be received (#13094)");
-    }
-
-    /**
-     * Test {591=[IE], 592=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_jQuery_fn_remove_can_work_on_elements_in_documentFragment() throws Exception {
-        runTest("manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment");
-    }
-
-    /**
-     * Test {592=[IE], 593=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("20")
-    public void manipulation__Make_sure_specific_elements_with_content_created_correctly___13232_() throws Exception {
-        runTest("manipulation: Make sure specific elements with content created correctly (#13232)");
-    }
-
-    /**
-     * Test {593=[IE], 594=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("44")
-    public void manipulation__Validate_creation_of_multiple_quantities_of_certain_elements___13818_() throws Exception {
-        runTest("manipulation: Validate creation of multiple quantities of certain elements (#13818)");
-    }
-
-    /**
-     * Test {594=[IE], 595=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_tr_element_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
-        runTest("manipulation: Make sure tr element will be appended to tbody element of table when present");
-    }
-
-    /**
-     * Test {595=[IE], 596=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_tr_elements_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
-        runTest("manipulation: Make sure tr elements will be appended to tbody element of table when present");
-    }
-
-    /**
-     * Test {596=[IE], 597=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_tfoot_element_will_not_be_appended_to_tbody_element_of_table_when_present() throws Exception {
-        runTest("manipulation: Make sure tfoot element will not be appended to tbody element of table when present");
-    }
-
-    /**
-     * Test {597=[IE], 598=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_document_fragment_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
-        runTest("manipulation: Make sure document fragment will be appended to tbody element of table when present");
-    }
-
-    /**
-     * Test {598=[IE], 599=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void manipulation__Make_sure_col_element_is_appended_correctly() throws Exception {
-        runTest("manipulation: Make sure col element is appended correctly");
-    }
-
-    /**
-     * Test {599=[IE], 600=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Make_sure_tr_is_not_appended_to_the_wrong_tbody__gh_3439_() throws Exception {
-        runTest("manipulation: Make sure tr is not appended to the wrong tbody (gh-3439)");
-    }
-
-    /**
-     * Test {600=[IE], 601=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void manipulation__Insert_script_with_data_URI__gh_1887_() throws Exception {
-        runTest("manipulation: Insert script with data-URI (gh-1887)");
-    }
-
-    /**
-     * Test {601=[IE], 602=[CHROME, FF52, FF60]}.
+     * Test {397=[CHROME], 498=[FF68], 601=[IE], 602=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6107,7 +7326,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {602=[IE], 603=[CHROME, FF52, FF60]}.
+     * Test {398=[CHROME], 499=[FF68], 602=[IE], 603=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6117,7 +7336,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {603=[IE], 604=[CHROME, FF52, FF60]}.
+     * Test {399=[IE], 400=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "38",
+            IE = "38")
+    public void selector__attributes___jQuery_attr() throws Exception {
+        runTest("selector: attributes - jQuery.attr");
+    }
+
+    /**
+     * Test {399=[CHROME], 500=[FF68], 603=[IE], 604=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6127,7 +7357,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {604=[IE], 605=[CHROME, FF52, FF60]}.
+     * Test {400=[CHROME], 501=[FF68], 604=[IE], 605=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6137,7 +7367,30 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {605=[IE], 606=[CHROME, FF52, FF60]}.
+     * Test {401=[IE], 402=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "15",
+            IE = "15")
+    @NotYetImplemented
+    public void selector__jQuery_uniqueSort() throws Exception {
+        runTest("selector: jQuery.uniqueSort");
+    }
+
+    /**
+     * Test {401=[FF68], 488=[IE], 489=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void manipulation__appendTo_String_() throws Exception {
+        runTest("manipulation: appendTo(String)");
+    }
+
+    /**
+     * Test {401=[CHROME], 502=[FF68], 605=[IE], 606=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6147,27 +7400,85 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {606=[IE], 607=[CHROME, FF52, FF60]}.
+     * Test {402=[IE], 403=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void selector__Sizzle_cache_collides_with_multiple_Sizzles_on_a_page() throws Exception {
+        runTest("selector: Sizzle cache collides with multiple Sizzles on a page");
+    }
+
+    /**
+     * Test {402=[FF68], 489=[IE], 490=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__appendTo_Element_Array_Element__() throws Exception {
+        runTest("manipulation: appendTo(Element|Array<Element>)");
+    }
+
+    /**
+     * Test {402=[CHROME], 606=[IE], 607=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            FF60 = "5")
     public void wrap__wrapAll_Function_() throws Exception {
         runTest("wrap: wrapAll(Function)");
     }
 
     /**
-     * Test {607=[IE], 608=[CHROME, FF52, FF60]}.
+     * Test {403=[FF68], 490=[IE], 491=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(FF60 = "10",
+            FF68 = "2, 2, 4",
+            IE = "10")
+    public void manipulation__appendTo_jQuery_() throws Exception {
+        runTest("manipulation: appendTo(jQuery)");
+    }
+
+    /**
+     * Test {403=[CHROME], 607=[IE], 608=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "3",
+            FF60 = "3")
     public void wrap__wrapAll_Function__check_execution_characteristics() throws Exception {
         runTest("wrap: wrapAll(Function) check execution characteristics");
     }
 
     /**
-     * Test {608=[IE], 609=[CHROME, FF52, FF60]}.
+     * Test {404=[IE], 405=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void selector__Ensure_escapeSelector_exists__escape_tests_in_Sizzle_() throws Exception {
+        runTest("selector: Ensure escapeSelector exists (escape tests in Sizzle)");
+    }
+
+    /**
+     * Test {404=[FF68], 491=[IE], 492=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__prepend_String_() throws Exception {
+        runTest("manipulation: prepend(String)");
+    }
+
+    /**
+     * Test {404=[CHROME], 503=[FF68], 608=[IE], 609=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6177,7 +7488,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {609=[IE], 610=[CHROME, FF52, FF60]}.
+     * Test {405=[FF68], 492=[IE], 493=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prepend_Element_() throws Exception {
+        runTest("manipulation: prepend(Element)");
+    }
+
+    /**
+     * Test {405=[CHROME], 504=[FF68], 609=[IE], 610=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6187,7 +7509,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {610=[IE], 611=[CHROME, FF52, FF60]}.
+     * Test {406=[FF68], 493=[IE], 494=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prepend_Array_Element__() throws Exception {
+        runTest("manipulation: prepend(Array<Element>)");
+    }
+
+    /**
+     * Test {406=[CHROME], 505=[FF68], 610=[IE], 611=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6197,7 +7530,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {611=[IE], 612=[CHROME, FF52, FF60]}.
+     * Test {407=[FF68], 494=[IE], 495=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prepend_jQuery_() throws Exception {
+        runTest("manipulation: prepend(jQuery)");
+    }
+
+    /**
+     * Test {407=[CHROME], 506=[FF68], 611=[IE], 612=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6207,7 +7551,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {612=[IE], 613=[CHROME, FF52, FF60]}.
+     * Test {408=[FF68], 495=[IE], 496=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prepend_Array_jQuery__() throws Exception {
+        runTest("manipulation: prepend(Array<jQuery>)");
+    }
+
+    /**
+     * Test {408=[CHROME], 507=[FF68], 612=[IE], 613=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6217,7 +7572,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {613=[IE], 614=[CHROME, FF52, FF60]}.
+     * Test {409=[FF68], 496=[IE], 497=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void manipulation__prepend_Function__with_incoming_value____String() throws Exception {
+        runTest("manipulation: prepend(Function) with incoming value -- String");
+    }
+
+    /**
+     * Test {409=[CHROME], 508=[FF68], 613=[IE], 614=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6227,17 +7593,40 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {614=[IE], 615=[CHROME, FF52, FF60]}.
+     * Test {410=[FF68], 497=[IE], 498=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__prepend_Function__with_incoming_value____Element() throws Exception {
+        runTest("manipulation: prepend(Function) with incoming value -- Element");
+    }
+
+    /**
+     * Test {410=[CHROME], 614=[IE], 615=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            FF60 = "5")
     public void wrap__unwrap__selector__() throws Exception {
         runTest("wrap: unwrap( selector )");
     }
 
     /**
-     * Test {615=[IE], 616=[CHROME, FF52, FF60]}.
+     * Test {411=[FF68], 498=[IE], 499=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__prepend_Function__with_incoming_value____Array_Element_() throws Exception {
+        runTest("manipulation: prepend(Function) with incoming value -- Array<Element>");
+    }
+
+    /**
+     * Test {411=[CHROME], 509=[FF68], 615=[IE], 616=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6247,7 +7636,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {616=[IE], 617=[CHROME, FF52, FF60]}.
+     * Test {412=[FF68], 499=[IE], 500=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__prepend_Function__with_incoming_value____jQuery() throws Exception {
+        runTest("manipulation: prepend(Function) with incoming value -- jQuery");
+    }
+
+    /**
+     * Test {412=[CHROME], 510=[FF68], 616=[IE], 617=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6257,18 +7657,43 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {617=[IE], 618=[CHROME, FF52, FF60]}.
+     * Test {413=[FF68], 500=[IE], 501=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("42")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__prependTo_String_() throws Exception {
+        runTest("manipulation: prependTo(String)");
+    }
+
+    /**
+     * Test {413=[CHROME], 511=[FF68], 617=[IE], 618=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4, 31, 35",
+            FF60 = "42",
+            FF68 = "2, 28, 30",
+            IE = "42")
     @NotYetImplemented(IE)
     public void css__css_String_Hash_() throws Exception {
         runTest("css: css(String|Hash)");
     }
 
     /**
-     * Test {618=[IE], 619=[CHROME, FF52, FF60]}.
+     * Test {414=[FF68], 501=[IE], 502=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prependTo_Element_() throws Exception {
+        runTest("manipulation: prependTo(Element)");
+    }
+
+    /**
+     * Test {414=[CHROME], 512=[FF68], 618=[IE], 619=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6278,60 +7703,88 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {619=[IE], 620=[CHROME, FF52, FF60]}.
+     * Test {415=[FF68], 502=[IE], 503=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("17")
-    @NotYetImplemented
-    public void css__css___non_px_relative_values__gh_1711_() throws Exception {
-        runTest("css: css() non-px relative values (gh-1711)");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prependTo_Array_Element__() throws Exception {
+        runTest("manipulation: prependTo(Array<Element>)");
     }
 
     /**
-     * Test {620=[IE], 621=[CHROME, FF52, FF60]}.
+     * Test {415=[CHROME], 513=[FF68], 621=[IE], 622=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void css__css___mismatched_relative_values_with_bounded_styles__gh_2144_() throws Exception {
-        runTest("css: css() mismatched relative values with bounded styles (gh-2144)");
-    }
-
-    /**
-     * Test {621=[IE], 622=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("19")
+    @Alerts(CHROME = "22",
+            FF60 = "19",
+            FF68 = "20",
+            IE = "19")
     @NotYetImplemented(IE)
     public void css__css_String__Object_() throws Exception {
         runTest("css: css(String, Object)");
     }
 
     /**
-     * Test {622=[IE], 623=[CHROME, FF52, FF60]}.
+     * Test {416=[CHROME], 515=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void css__css_String__Object__with_negative_values() throws Exception {
-        runTest("css: css(String, Object) with negative values");
+    @Alerts(CHROME = "4, 2, 6",
+            FF68 = "3, 2, 5")
+    public void css__css_String__Object__for_MSIE() throws Exception {
+        runTest("css: css(String, Object) for MSIE");
     }
 
     /**
-     * Test {623=[IE], 624=[CHROME, FF52, FF60]}.
+     * Test {416=[FF68], 503=[IE], 504=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void css__css_Array_() throws Exception {
-        runTest("css: css(Array)");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__prependTo_jQuery_() throws Exception {
+        runTest("manipulation: prependTo(jQuery)");
     }
 
     /**
-     * Test {624=[IE], 625=[CHROME, FF52, FF60]}.
+     * Test {417=[CHROME], 516=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 1, 2",
+            FF68 = "1, 1, 2")
+    public void css__Setting_opacity_to_1_properly_removes_filter__style___6652_() throws Exception {
+        runTest("css: Setting opacity to 1 properly removes filter: style (#6652)");
+    }
+
+    /**
+     * Test {417=[FF68], 504=[IE], 505=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void manipulation__prependTo_Array_jQuery__() throws Exception {
+        runTest("manipulation: prependTo(Array<jQuery>)");
+    }
+
+    /**
+     * Test {418=[FF68], 505=[IE], 506=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_String_() throws Exception {
+        runTest("manipulation: before(String)");
+    }
+
+    /**
+     * Test {418=[CHROME], 517=[FF68], 624=[IE], 625=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6341,7 +7794,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {625=[IE], 626=[CHROME, FF52, FF60]}.
+     * Test {419=[FF68], 506=[IE], 507=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Element_() throws Exception {
+        runTest("manipulation: before(Element)");
+    }
+
+    /**
+     * Test {419=[CHROME], 518=[FF68], 625=[IE], 626=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6351,7 +7815,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {626=[IE], 627=[CHROME, FF52, FF60]}.
+     * Test {420=[FF68], 507=[IE], 508=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Array_Element__() throws Exception {
+        runTest("manipulation: before(Array<Element>)");
+    }
+
+    /**
+     * Test {420=[CHROME], 519=[FF68], 626=[IE], 627=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6361,7 +7836,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {627=[IE], 628=[CHROME, FF52, FF60]}.
+     * Test {421=[FF68], 508=[IE], 509=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_jQuery_() throws Exception {
+        runTest("manipulation: before(jQuery)");
+    }
+
+    /**
+     * Test {421=[CHROME], 520=[FF68], 627=[IE], 628=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6371,107 +7857,94 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {628=[IE], 629=[CHROME, FF52, FF60]}.
+     * Test {422=[CHROME], 521=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("18")
-    public void css__show__() throws Exception {
-        runTest("css: show()");
+    @Alerts(CHROME = "22",
+            FF68 = "4")
+    public void css__show____hide__() throws Exception {
+        runTest("css: show(); hide()");
     }
 
     /**
-     * Test {629=[IE], 630=[CHROME, FF52, FF60]}.
+     * Test {422=[FF68], 509=[IE], 510=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("19")
-    public void css__show_hide_detached_nodes() throws Exception {
-        runTest("css: show/hide detached nodes");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Array_jQuery__() throws Exception {
+        runTest("manipulation: before(Array<jQuery>)");
     }
 
     /**
-     * Test {630=[IE], 631=[CHROME, FF52, FF60]}.
+     * Test {423=[CHROME], 523=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void css__hide_hidden_elements__bug__7141_() throws Exception {
-        runTest("css: hide hidden elements (bug #7141)");
+    @Alerts(CHROME = "2, 5, 7",
+            FF68 = "2, 5, 7")
+    public void css__show___resolves_correct_default_display__8099() throws Exception {
+        runTest("css: show() resolves correct default display #8099");
     }
 
     /**
-     * Test {631=[IE], 632=[CHROME, FF52, FF60]}.
+     * Test {423=[FF68], 510=[IE], 511=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void css__show___after_hide___should_always_set_display_to_initial_value___14750_() throws Exception {
-        runTest("css: show() after hide() should always set display to initial value (#14750)");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Function_____Returns_String() throws Exception {
+        runTest("manipulation: before(Function) -- Returns String");
     }
 
     /**
-     * Test {632=[IE], 633=[CHROME, FF52, FF60]}.
+     * Test {424=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("36")
-    public void css__show_hide_3_0__default_display() throws Exception {
-        runTest("css: show/hide 3.0, default display");
+    @Alerts(CHROME = "5, 6, 11")
+    public void css__show___resolves_correct_default_display__detached_nodes___10006_() throws Exception {
+        runTest("css: show() resolves correct default display, detached nodes (#10006)");
     }
 
     /**
-     * Test {633=[IE], 634=[CHROME, FF52, FF60]}.
+     * Test {424=[FF68], 511=[IE], 512=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void css__show_hide_3_0__default_body_display() throws Exception {
-        runTest("css: show/hide 3.0, default body display");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Function_____Returns_Element() throws Exception {
+        runTest("manipulation: before(Function) -- Returns Element");
     }
 
     /**
-     * Test {634=[IE], 635=[CHROME, FF52, FF60]}.
+     * Test {425=[IE], 426=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("36")
-    public void css__show_hide_3_0__cascade_display() throws Exception {
-        runTest("css: show/hide 3.0, cascade display");
+    @Alerts(FF60 = "7",
+            IE = "7")
+    public void traversing__not_Selector_() throws Exception {
+        runTest("traversing: not(Selector)");
     }
 
     /**
-     * Test {635=[IE], 636=[CHROME, FF52, FF60]}.
+     * Test {425=[FF68], 512=[IE], 513=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("96")
-    public void css__show_hide_3_0__inline_display() throws Exception {
-        runTest("css: show/hide 3.0, inline display");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Function_____Returns_Array_Element_() throws Exception {
+        runTest("manipulation: before(Function) -- Returns Array<Element>");
     }
 
     /**
-     * Test {636=[IE], 637=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("72")
-    public void css__show_hide_3_0__cascade_hidden() throws Exception {
-        runTest("css: show/hide 3.0, cascade hidden");
-    }
-
-    /**
-     * Test {637=[IE], 638=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("84")
-    public void css__show_hide_3_0__inline_hidden() throws Exception {
-        runTest("css: show/hide 3.0, inline hidden");
-    }
-
-    /**
-     * Test {638=[IE], 639=[CHROME, FF52, FF60]}.
+     * Test {425=[CHROME], 527=[FF68], 638=[IE], 639=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6481,17 +7954,50 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {639=[IE], 640=[CHROME, FF52, FF60]}.
+     * Test {426=[IE], 427=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void css__detached_toggle__() throws Exception {
-        runTest("css: detached toggle()");
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void traversing__not_undefined_() throws Exception {
+        runTest("traversing: not(undefined)");
     }
 
     /**
-     * Test {640=[IE], 641=[CHROME, FF52, FF60]}.
+     * Test {426=[FF68], 513=[IE], 514=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Function_____Returns_jQuery() throws Exception {
+        runTest("manipulation: before(Function) -- Returns jQuery");
+    }
+
+    /**
+     * Test {426=[CHROME], 528=[FF68], 630=[IE], 631=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("3")
+    public void css__hide_hidden_elements__bug__7141_() throws Exception {
+        runTest("css: hide hidden elements (bug #7141)");
+    }
+
+    /**
+     * Test {427=[FF68], 514=[IE], 515=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__before_Function_____Returns_Array_jQuery_() throws Exception {
+        runTest("manipulation: before(Function) -- Returns Array<jQuery>");
+    }
+
+    /**
+     * Test {427=[CHROME], 529=[FF68], 640=[IE], 641=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6501,7 +8007,49 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {641=[IE], 642=[CHROME, FF52, FF60]}.
+     * Test {428=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void css___visible_selector_works_properly_on_table_elements__bug__4512_() throws Exception {
+        runTest("css: :visible selector works properly on table elements (bug #4512)");
+    }
+
+    /**
+     * Test {428=[FF68], 515=[IE], 516=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__before_no_op_() throws Exception {
+        runTest("manipulation: before(no-op)");
+    }
+
+    /**
+     * Test {429=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void css___visible_selector_works_properly_on_children_with_a_hidden_parent__bug__4512_() throws Exception {
+        runTest("css: :visible selector works properly on children with a hidden parent (bug #4512)");
+    }
+
+    /**
+     * Test {430=[FF68], 517=[IE], 518=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation___before___and__after___disconnected_node() throws Exception {
+        runTest("manipulation: .before() and .after() disconnected node");
+    }
+
+    /**
+     * Test {430=[CHROME], 530=[FF68], 641=[IE], 642=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6511,48 +8059,108 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {642=[IE], 643=[CHROME, FF52, FF60]}.
+     * Test {431=[CHROME], 531=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void css__computed_margins__trac_3333__gh_2237_() throws Exception {
-        runTest("css: computed margins (trac-3333; gh-2237)");
+    @Alerts(CHROME = "1",
+            FF68 = "1")
+    public void css__marginRight_computed_style__bug__3333_() throws Exception {
+        runTest("css: marginRight computed style (bug #3333)");
     }
 
     /**
-     * Test {643=[IE], 644=[CHROME, FF52, FF60]}.
+     * Test {431=[IE], 432=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void traversing__not_Selector__excludes_non_element_nodes__gh_2808_() throws Exception {
+        runTest("traversing: not(Selector) excludes non-element nodes (gh-2808)");
+    }
+
+    /**
+     * Test {432=[IE], 433=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void traversing__not_arraylike__passes_non_element_nodes__gh_3226_() throws Exception {
+        runTest("traversing: not(arraylike) passes non-element nodes (gh-3226)");
+    }
+
+    /**
+     * Test {432=[FF68], 519=[IE], 520=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insert_with__before___on_disconnected_node_first() throws Exception {
+        runTest("manipulation: insert with .before() on disconnected node first");
+    }
+
+    /**
+     * Test {432=[CHROME], 532=[FF68], 643=[IE], 644=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1, 2, 3")
     public void css__box_model_properties_incorrectly_returning___instead_of_px__see__10639_and__12088() throws Exception {
         runTest("css: box model properties incorrectly returning % instead of px, see #10639 and #12088");
     }
 
     /**
-     * Test {644=[IE], 645=[CHROME, FF52, FF60]}.
+     * Test {433=[CHROME], 533=[FF68], 644=[IE], 645=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(DEFAULT = "2",
+            CHROME = "1, 2, 3")
     public void css__jQuery_cssProps_behavior___bug__8402_() throws Exception {
         runTest("css: jQuery.cssProps behavior, (bug #8402)");
     }
 
     /**
-     * Test {645=[IE], 646=[CHROME, FF52, FF60]}.
+     * Test {434=[FF68], 521=[IE], 522=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insert_with__before___on_disconnected_node_last() throws Exception {
+        runTest("manipulation: insert with .before() on disconnected node last");
+    }
+
+    /**
+     * Test {434=[CHROME], 534=[FF68], 645=[IE], 646=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 2, 4",
+            FF60 = "2",
+            FF68 = "1",
+            IE = "2")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }
 
     /**
-     * Test {646=[IE], 647=[CHROME, FF52, FF60]}.
+     * Test {435=[FF68], 522=[IE], 523=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertBefore_String_() throws Exception {
+        runTest("manipulation: insertBefore(String)");
+    }
+
+    /**
+     * Test {435=[CHROME], 535=[FF68], 646=[IE], 647=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6562,17 +8170,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {647=[IE], 648=[CHROME, FF52, FF60]}.
+     * Test {436=[FF68], 523=[IE], 524=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void css__Ensure_styles_are_retrieving_from_parsed_html_on_document_fragments() throws Exception {
-        runTest("css: Ensure styles are retrieving from parsed html on document fragments");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertBefore_Element_() throws Exception {
+        runTest("manipulation: insertBefore(Element)");
     }
 
     /**
-     * Test {648=[IE], 649=[CHROME, FF52, FF60]}.
+     * Test {436=[CHROME], 536=[FF68], 648=[IE], 649=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6582,7 +8191,40 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {649=[IE], 650=[CHROME, FF52, FF60]}.
+     * Test {437=[CHROME], 537=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1",
+            FF68 = "1")
+    public void css__percentage_properties_for_bottom_and_right_in_IE_9_should_not_be_incorrectly_transformed_to_pixels__see__11311() throws Exception {
+        runTest("css: percentage properties for bottom and right in IE<9 should not be incorrectly transformed to pixels, see #11311");
+    }
+
+    /**
+     * Test {437=[FF68], 524=[IE], 525=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertBefore_Array_Element__() throws Exception {
+        runTest("manipulation: insertBefore(Array<Element>)");
+    }
+
+    /**
+     * Test {438=[FF68], 525=[IE], 526=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertBefore_jQuery_() throws Exception {
+        runTest("manipulation: insertBefore(jQuery)");
+    }
+
+    /**
+     * Test {438=[CHROME], 538=[FF68], 649=[IE], 650=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6592,225 +8234,130 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {650=[IE], 651=[CHROME, FF52, FF60]}.
+     * Test {439=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void css__Do_not_append_px___9548___12990___2792_() throws Exception {
-        runTest("css: Do not append px (#9548, #12990, #2792)");
+    @Alerts(CHROME = "1")
+    public void css__Do_not_append_px_to__fill_opacity___9548() throws Exception {
+        runTest("css: Do not append px to 'fill-opacity' #9548");
     }
 
     /**
-     * Test {651=[IE], 652=[CHROME, FF52, FF60]}.
+     * Test {439=[FF68], 526=[IE], 527=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_String_() throws Exception {
+        runTest("manipulation: .after(String)");
+    }
+
+    /**
+     * Test {440=[FF68], 527=[IE], 528=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Element_() throws Exception {
+        runTest("manipulation: .after(Element)");
+    }
+
+    /**
+     * Test {440=[CHROME], 540=[FF68], 651=[IE], 652=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "4",
+            CHROME = "1, 4, 5")
     public void css__css__width___and_css__height___should_respect_box_sizing__see__11004() throws Exception {
         runTest("css: css('width') and css('height') should respect box-sizing, see #11004");
     }
 
     /**
-     * Test {652=[IE], 653=[CHROME, FF52, FF60]}.
+     * Test {441=[CHROME], 656=[IE], 657=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void css__css__width___should_work_correctly_before_document_ready___14084_() throws Exception {
-        runTest("css: css('width') should work correctly before document ready (#14084)");
-    }
-
-    /**
-     * Test {653=[IE], 654=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__css__width___should_work_correctly_with_browser_zooming() throws Exception {
-        runTest("css: css('width') should work correctly with browser zooming");
-    }
-
-    /**
-     * Test {654=[IE], 655=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void css__css__width___and_css__height___should_return_fractional_values_for_nodes_in_the_document() throws Exception {
-        runTest("css: css('width') and css('height') should return fractional values for nodes in the document");
-    }
-
-    /**
-     * Test {655=[IE], 656=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void css__css__width___and_css__height___should_return_fractional_values_for_disconnected_nodes() throws Exception {
-        runTest("css: css('width') and css('height') should return fractional values for disconnected nodes");
-    }
-
-    /**
-     * Test {656=[IE], 657=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            IE = "3")
     public void css__certain_css_values_of__normal__should_be_convertable_to_a_number__see__8627() throws Exception {
         runTest("css: certain css values of 'normal' should be convertable to a number, see #8627");
     }
 
     /**
-     * Test {657=[IE], 658=[CHROME, FF52, FF60]}.
+     * Test {441=[FF68], 528=[IE], 529=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("15")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Array_Element__() throws Exception {
+        runTest("manipulation: .after(Array<Element>)");
+    }
+
+    /**
+     * Test {442=[CHROME], 657=[IE], 658=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "15",
+            FF60 = "15")
     public void css__cssHooks___expand() throws Exception {
         runTest("css: cssHooks - expand");
     }
 
     /**
-     * Test {658=[IE], 659=[CHROME, FF52, FF60]}.
+     * Test {442=[FF68], 529=[IE], 530=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void css__css_opacity_consistency_across_browsers___12685_() throws Exception {
-        runTest("css: css opacity consistency across browsers (#12685)");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_jQuery_() throws Exception {
+        runTest("manipulation: .after(jQuery)");
     }
 
     /**
-     * Test {659=[IE], 660=[CHROME, FF52, FF60]}.
+     * Test {443=[FF68], 530=[IE], 531=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("17")
-    @NotYetImplemented
-    public void css___visible__hidden_selectors() throws Exception {
-        runTest("css: :visible/:hidden selectors");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Function__returns_String() throws Exception {
+        runTest("manipulation: .after(Function) returns String");
     }
 
     /**
-     * Test {660=[IE], 661=[CHROME, FF52, FF60]}.
+     * Test {443=[CHROME], 542=[FF68], 669=[IE], 670=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void css__Keep_the_last_style_if_the_new_one_isn_t_recognized_by_the_browser___14836_() throws Exception {
-        runTest("css: Keep the last style if the new one isn't recognized by the browser (#14836)");
-    }
-
-    /**
-     * Test {661=[IE], 662=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__Keep_the_last_style_if_the_new_one_is_a_non_empty_whitespace__gh_3204_() throws Exception {
-        runTest("css: Keep the last style if the new one is a non-empty whitespace (gh-3204)");
-    }
-
-    /**
-     * Test {662=[IE], 663=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__Reset_the_style_if_set_to_an_empty_string() throws Exception {
-        runTest("css: Reset the style if set to an empty string");
-    }
-
-    /**
-     * Test {663=[IE], 664=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("24")
-    public void css__Clearing_a_Cloned_Element_s_Style_Shouldn_t_Clear_the_Original_Element_s_Style___8908_() throws Exception {
-        runTest("css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908)");
-    }
-
-    /**
-     * Test {664=[IE], 665=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__Don_t_append_px_to_CSS__order__value___14049_() throws Exception {
-        runTest("css: Don't append px to CSS \"order\" value (#14049)");
-    }
-
-    /**
-     * Test {665=[IE], 666=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__Do_not_throw_on_frame_elements_from_css_method___15098_() throws Exception {
-        runTest("css: Do not throw on frame elements from css method (#15098)");
-    }
-
-    /**
-     * Test {666=[IE], 667=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "3",
-            IE = "2")
-    @NotYetImplemented(CHROME)
-    public void css__Don_t_default_to_a_cached_previously_used_wrong_prefixed_name__gh_2015_() throws Exception {
-        runTest("css: Don't default to a cached previously used wrong prefixed name (gh-2015)");
-    }
-
-    /**
-     * Test {667=[IE], 668=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void css__Don_t_detect_fake_set_properties_on_a_node_when_caching_the_prefixed_version() throws Exception {
-        runTest("css: Don't detect fake set properties on a node when caching the prefixed version");
-    }
-
-    /**
-     * Test {668=[IE], 669=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(CHROME = "8",
-            FF = "10",
-            IE = "0")
-    @NotYetImplemented
-    public void css__css___customProperty_() throws Exception {
-        runTest("css: css(--customProperty)");
-    }
-
-    /**
-     * Test {669=[IE], 670=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("23")
+    @Alerts(CHROME = "13, 9, 22",
+            FF60 = "23",
+            FF68 = "13, 9, 22",
+            IE = "23")
     public void serialize__jQuery_param__() throws Exception {
         runTest("serialize: jQuery.param()");
     }
 
     /**
-     * Test {670=[IE], 671=[CHROME, FF52, FF60]}.
+     * Test {444=[FF68], 531=[IE], 532=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void serialize__jQuery_param___not_affected_by_ajaxSettings() throws Exception {
-        runTest("serialize: jQuery.param() not affected by ajaxSettings");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Function__returns_Element() throws Exception {
+        runTest("manipulation: .after(Function) returns Element");
     }
 
     /**
-     * Test {671=[IE], 672=[CHROME, FF52, FF60]}.
+     * Test {444=[CHROME], 543=[FF68], 671=[IE], 672=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6820,108 +8367,225 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {672=[IE], 673=[CHROME, FF52, FF60]}.
+     * Test {445=[FF68], 532=[IE], 533=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Function__returns_Array_Element_() throws Exception {
+        runTest("manipulation: .after(Function) returns Array<Element>");
+    }
+
+    /**
+     * Test {445=[CHROME], 544=[FF68], 672=[IE], 673=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 2, 5",
+            FF60 = "6",
+            FF68 = "3, 2, 5",
+            IE = "6")
     public void serialize__serialize__() throws Exception {
         runTest("serialize: serialize()");
     }
 
     /**
-     * Test {673=[IE], 674=[CHROME, FF52, FF60]}.
+     * Test {446=[FF68], 533=[IE], 534=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__Unit_Testing_Environment() throws Exception {
-        runTest("ajax: Unit Testing Environment");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation___after_Function__returns_jQuery() throws Exception {
+        runTest("manipulation: .after(Function) returns jQuery");
     }
 
     /**
-     * Test {674=[IE], 675=[CHROME, FF52, FF60]}.
+     * Test {446=[CHROME], 545=[FF68], 675=[IE], 676=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void ajax__XMLHttpRequest___Attempt_to_block_tests_because_of_dangling_XHR_requests__IE_() throws Exception {
-        runTest("ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE)");
-    }
-
-    /**
-     * Test {675=[IE], 676=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
+    @Alerts(CHROME = "3, 2, 5",
+            FF60 = "8",
+            FF68 = "2, 6, 8",
+            IE = "8")
     public void ajax__jQuery_ajax_____success_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks");
     }
 
     /**
-     * Test {676=[IE], 677=[CHROME, FF52, FF60]}.
+     * Test {447=[FF68], 534=[IE], 535=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation___after_disconnected_node_() throws Exception {
+        runTest("manipulation: .after(disconnected node)");
+    }
+
+    /**
+     * Test {447=[CHROME], 546=[FF68], 676=[IE], 677=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 2, 5",
+            FF60 = "8",
+            FF68 = "2, 6, 8",
+            IE = "8")
     public void ajax__jQuery_ajax_____success_callbacks____url__options__syntax() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks - (url, options) syntax");
     }
 
     /**
-     * Test {677=[IE], 678=[CHROME, FF52, FF60]}.
+     * Test {448=[FF68], 535=[IE], 536=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____execute_js_for_crossOrigin_when_dataType_option_is_provided() throws Exception {
-        runTest("ajax: jQuery.ajax() - execute js for crossOrigin when dataType option is provided");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertAfter_String_() throws Exception {
+        runTest("manipulation: insertAfter(String)");
     }
 
     /**
-     * Test {678=[IE], 679=[CHROME, FF52, FF60]}.
+     * Test {448=[CHROME], 547=[FF68], 679=[IE], 680=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____do_not_execute_js__crossOrigin_() throws Exception {
-        runTest("ajax: jQuery.ajax() - do not execute js (crossOrigin)");
-    }
-
-    /**
-     * Test {679=[IE], 680=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
+    @Alerts(CHROME = "3, 1, 4",
+            FF60 = "8",
+            FF68 = "3, 3, 6",
+            IE = "8")
     public void ajax__jQuery_ajax_____success_callbacks__late_binding_() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks (late binding)");
     }
 
     /**
-     * Test {680=[IE], 681=[CHROME, FF52, FF60]}.
+     * Test {449=[FF68], 536=[IE], 537=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertAfter_Element_() throws Exception {
+        runTest("manipulation: insertAfter(Element)");
+    }
+
+    /**
+     * Test {449=[CHROME], 548=[FF68], 680=[IE], 681=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4, 1, 5",
+            FF60 = "8",
+            FF68 = "5, 3, 8",
+            IE = "8")
     public void ajax__jQuery_ajax_____success_callbacks__oncomplete_binding_() throws Exception {
         runTest("ajax: jQuery.ajax() - success callbacks (oncomplete binding)");
     }
 
     /**
-     * Test {681=[IE], 682=[CHROME, FF52, FF60]}.
+     * Test {450=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(CHROME = "3, 1, 4")
+    public void ajax__jQuery_ajax_____success_callbacks__very_late_binding_() throws Exception {
+        runTest("ajax: jQuery.ajax() - success callbacks (very late binding)");
+    }
+
+    /**
+     * Test {450=[FF68], 537=[IE], 538=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertAfter_Array_Element__() throws Exception {
+        runTest("manipulation: insertAfter(Array<Element>)");
+    }
+
+    /**
+     * Test {451=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax_____success_callbacks__order_() throws Exception {
+        runTest("ajax: jQuery.ajax() - success callbacks (order)");
+    }
+
+    /**
+     * Test {451=[IE], 452=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void traversing__contents___for__template___() throws Exception {
+        runTest("traversing: contents() for <template />");
+    }
+
+    /**
+     * Test {451=[FF68], 538=[IE], 539=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__insertAfter_jQuery_() throws Exception {
+        runTest("manipulation: insertAfter(jQuery)");
+    }
+
+    /**
+     * Test {452=[IE], 453=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "0")
+    public void traversing__contents___for__template____remains_inert() throws Exception {
+        runTest("traversing: contents() for <template /> remains inert");
+    }
+
+    /**
+     * Test {452=[FF68], 539=[IE], 540=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "29",
+            IE = "29")
+    public void manipulation__replaceWith_String_Element_Array_Element__jQuery_() throws Exception {
+        runTest("manipulation: replaceWith(String|Element|Array<Element>|jQuery)");
+    }
+
+    /**
+     * Test {452=[CHROME], 549=[FF68], 681=[IE], 682=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 3, 5",
+            FF60 = "8",
+            FF68 = "1, 6, 7",
+            IE = "8")
     public void ajax__jQuery_ajax_____error_callbacks() throws Exception {
         runTest("ajax: jQuery.ajax() - error callbacks");
     }
 
     /**
-     * Test {682=[IE], 683=[CHROME, FF52, FF60]}.
+     * Test {453=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___multiple_method_signatures_introduced_in_1_5____8107_() throws Exception {
+        runTest("ajax: jQuery.ajax - multiple method signatures introduced in 1.5 ( #8107)");
+    }
+
+    /**
+     * Test {454=[CHROME], 550=[FF68], 682=[IE], 683=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -6931,430 +8595,738 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {683=[IE], 684=[CHROME, FF52, FF60]}.
+     * Test {455=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF68 = "8")
+    public void manipulation__Empty_replaceWith___13401___13596_() throws Exception {
+        runTest("manipulation: Empty replaceWith (#13401; #13596)");
+    }
+
+    /**
+     * Test {455=[CHROME], 551=[FF68], 683=[IE], 684=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void ajax__jQuery_ajax_____responseText_on_error() throws Exception {
         runTest("ajax: jQuery.ajax() - responseText on error");
     }
 
     /**
-     * Test {684=[IE], 685=[CHROME, FF52, FF60]}.
+     * Test {456=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____retry_with_jQuery_ajax__this__() throws Exception {
-        runTest("ajax: jQuery.ajax() - retry with jQuery.ajax( this )");
+    @Alerts(CHROME = "2")
+    public void ajax___ajax_____retry_with_jQuery_ajax__this__() throws Exception {
+        runTest("ajax: .ajax() - retry with jQuery.ajax( this )");
     }
 
     /**
-     * Test {685=[IE], 686=[CHROME, FF52, FF60]}.
+     * Test {456=[FF68], 543=[IE], 544=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
-    public void ajax__jQuery_ajax_____headers() throws Exception {
-        runTest("ajax: jQuery.ajax() - headers");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__replaceAll_String_() throws Exception {
+        runTest("manipulation: replaceAll(String)");
     }
 
     /**
-     * Test {686=[IE], 687=[CHROME, FF52, FF60]}.
+     * Test {457=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____Accept_header() throws Exception {
-        runTest("ajax: jQuery.ajax() - Accept header");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax___ajax_____headers() throws Exception {
+        runTest("ajax: .ajax() - headers");
     }
 
     /**
-     * Test {687=[IE], 688=[CHROME, FF52, FF60]}.
+     * Test {457=[FF68], 544=[IE], 545=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____contentType() throws Exception {
-        runTest("ajax: jQuery.ajax() - contentType");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__replaceAll_Element_() throws Exception {
+        runTest("manipulation: replaceAll(Element)");
     }
 
     /**
-     * Test {688=[IE], 689=[CHROME, FF52, FF60]}.
+     * Test {458=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____protocol_less_urls() throws Exception {
-        runTest("ajax: jQuery.ajax() - protocol-less urls");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax___ajax_____Accept_header() throws Exception {
+        runTest("ajax: .ajax() - Accept header");
     }
 
     /**
-     * Test {689=[IE], 690=[CHROME, FF52, FF60]}.
+     * Test {458=[FF68], 545=[IE], 546=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____hash() throws Exception {
-        runTest("ajax: jQuery.ajax() - hash");
+    @Alerts(FF = "3",
+            IE = "3")
+    public void manipulation__replaceAll_Array_Element__() throws Exception {
+        runTest("manipulation: replaceAll(Array<Element>)");
     }
 
     /**
-     * Test {690=[IE], 691=[CHROME, FF52, FF60]}.
+     * Test {459=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____traditional_param_encoding() throws Exception {
-        runTest("ajax: jQuery.ajax() - traditional param encoding");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax___ajax_____contentType() throws Exception {
+        runTest("ajax: .ajax() - contentType");
     }
 
     /**
-     * Test {691=[IE], 692=[CHROME, FF52, FF60]}.
+     * Test {459=[FF68], 546=[IE], 547=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void ajax__jQuery_ajax_____cross_domain_detection() throws Exception {
-        runTest("ajax: jQuery.ajax() - cross-domain detection");
+    @Alerts(FF = "3",
+            IE = "3")
+    public void manipulation__replaceAll_jQuery_() throws Exception {
+        runTest("manipulation: replaceAll(jQuery)");
     }
 
     /**
-     * Test {692=[IE], 693=[CHROME, FF52, FF60]}.
+     * Test {460=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(CHROME = "1")
+    public void ajax___ajax_____protocol_less_urls() throws Exception {
+        runTest("ajax: .ajax() - protocol-less urls");
+    }
+
+    /**
+     * Test {461=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax___ajax_____hash() throws Exception {
+        runTest("ajax: .ajax() - hash");
+    }
+
+    /**
+     * Test {461=[FF68], 548=[IE], 549=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__append_to_multiple_elements___8070_() throws Exception {
+        runTest("manipulation: append to multiple elements (#8070)");
+    }
+
+    /**
+     * Test {462=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6")
+    public void ajax__jQuery_ajax___cross_domain_detection() throws Exception {
+        runTest("ajax: jQuery ajax - cross-domain detection");
+    }
+
+    /**
+     * Test {462=[FF68], 549=[IE], 550=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void manipulation__table_manipulation() throws Exception {
+        runTest("manipulation: table manipulation");
+    }
+
+    /**
+     * Test {463=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 1, 3")
+    public void ajax___load_____404_error_callbacks() throws Exception {
+        runTest("ajax: .load() - 404 error callbacks");
+    }
+
+    /**
+     * Test {464=[CHROME], 559=[FF68], 692=[IE], 693=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 4, 6",
+            FF60 = "9",
+            FF68 = "1, 7, 8",
+            IE = "9")
     public void ajax__jQuery_ajax_____abort() throws Exception {
         runTest("ajax: jQuery.ajax() - abort");
     }
 
     /**
-     * Test {693=[IE], 694=[CHROME, FF52, FF60]}.
+     * Test {465=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void ajax__jQuery_ajax_____native_abort() throws Exception {
-        runTest("ajax: jQuery.ajax() - native abort");
+    @Alerts(CHROME = "14")
+    public void ajax__Ajax_events_with_context() throws Exception {
+        runTest("ajax: Ajax events with context");
     }
 
     /**
-     * Test {694=[IE], 695=[CHROME, FF52, FF60]}.
+     * Test {466=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void ajax__jQuery_ajax_____native_timeout() throws Exception {
-        runTest("ajax: jQuery.ajax() - native timeout");
+    @Alerts(CHROME = "1")
+    public void ajax__jQuery_ajax_context_modification() throws Exception {
+        runTest("ajax: jQuery.ajax context modification");
     }
 
     /**
-     * Test {695=[IE], 696=[CHROME, FF52, FF60]}.
+     * Test {467=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    public void ajax__jQuery_ajax_____events_with_context() throws Exception {
-        runTest("ajax: jQuery.ajax() - events with context");
+    @Alerts(CHROME = "4")
+    public void ajax__jQuery_ajax_context_modification_through_ajaxSetup() throws Exception {
+        runTest("ajax: jQuery.ajax context modification through ajaxSetup");
     }
 
     /**
-     * Test {696=[IE], 697=[CHROME, FF52, FF60]}.
+     * Test {468=[CHROME], 565=[FF68], 701=[IE], 702=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____events_without_context() throws Exception {
-        runTest("ajax: jQuery.ajax() - events without context");
-    }
-
-    /**
-     * Test {697=[IE], 698=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___15118___jQuery_ajax_____function_without_jQuery_event() throws Exception {
-        runTest("ajax: #15118 - jQuery.ajax() - function without jQuery.event");
-    }
-
-    /**
-     * Test {698=[IE], 699=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax___15160___jQuery_ajax_____request_manually_aborted_in_ajaxSend() throws Exception {
-        runTest("ajax: #15160 - jQuery.ajax() - request manually aborted in ajaxSend");
-    }
-
-    /**
-     * Test {699=[IE], 700=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____context_modification() throws Exception {
-        runTest("ajax: jQuery.ajax() - context modification");
-    }
-
-    /**
-     * Test {700=[IE], 701=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____context_modification_through_ajaxSetup() throws Exception {
-        runTest("ajax: jQuery.ajax() - context modification through ajaxSetup");
-    }
-
-    /**
-     * Test {701=[IE], 702=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
+    @Alerts(CHROME = "1, 2, 3",
+            FF60 = "3",
+            FF68 = "1, 2, 3",
+            IE = "3")
     public void ajax__jQuery_ajax_____disabled_globals() throws Exception {
         runTest("ajax: jQuery.ajax() - disabled globals");
     }
 
     /**
-     * Test {702=[IE], 703=[CHROME, FF52, FF60]}.
+     * Test {469=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements() throws Exception {
-        runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements() throws Exception {
+        runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements");
     }
 
     /**
-     * Test {703=[IE], 704=[CHROME, FF52, FF60]}.
+     * Test {470=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
-        runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP)");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax___xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
+        runTest("ajax: jQuery.ajax - xml: non-namespace elements inside namespaced elements (over JSONP)");
     }
 
     /**
-     * Test {704=[IE], 705=[CHROME, FF52, FF60]}.
+     * Test {471=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____HEAD_requests() throws Exception {
-        runTest("ajax: jQuery.ajax() - HEAD requests");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___HEAD_requests() throws Exception {
+        runTest("ajax: jQuery.ajax - HEAD requests");
     }
 
     /**
-     * Test {705=[IE], 706=[CHROME, FF52, FF60]}.
+     * Test {471=[FF68], 558=[IE], 559=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____beforeSend() throws Exception {
-        runTest("ajax: jQuery.ajax() - beforeSend");
+    @Alerts(FF60 = "40",
+            FF68 = "39",
+            IE = "40")
+    public void manipulation__html_String_Number_() throws Exception {
+        runTest("manipulation: html(String|Number)");
     }
 
     /**
-     * Test {706=[IE], 707=[CHROME, FF52, FF60]}.
+     * Test {472=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____beforeSend__cancel_request_manually() throws Exception {
-        runTest("ajax: jQuery.ajax() - beforeSend, cancel request manually");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_ajax___beforeSend() throws Exception {
+        runTest("ajax: jQuery.ajax - beforeSend");
     }
 
     /**
-     * Test {707=[IE], 708=[CHROME, FF52, FF60]}.
+     * Test {473=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
-    public void ajax__jQuery_ajax_____dataType_html() throws Exception {
-        runTest("ajax: jQuery.ajax() - dataType html");
+    @Alerts(CHROME = "2")
+    public void ajax__jQuery_ajax___beforeSend__cancel_request___2688_() throws Exception {
+        runTest("ajax: jQuery.ajax - beforeSend, cancel request (#2688)");
     }
 
     /**
-     * Test {708=[IE], 709=[CHROME, FF52, FF60]}.
+     * Test {473=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____synchronous_request() throws Exception {
-        runTest("ajax: jQuery.ajax() - synchronous request");
+    @Alerts(FF68 = "1")
+    public void manipulation__html____text____() throws Exception {
+        runTest("manipulation: html( $.text() )");
     }
 
     /**
-     * Test {709=[IE], 710=[CHROME, FF52, FF60]}.
+     * Test {474=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____synchronous_request_with_callbacks() throws Exception {
-        runTest("ajax: jQuery.ajax() - synchronous request with callbacks");
+    @Alerts(CHROME = "2")
+    public void ajax__jQuery_ajax___beforeSend__cancel_request_manually() throws Exception {
+        runTest("ajax: jQuery.ajax - beforeSend, cancel request manually");
     }
 
     /**
-     * Test {710=[IE], 711=[CHROME, FF52, FF60]}.
+     * Test {474=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void ajax__jQuery_ajax____jQuery_get_Script_JSON_____jQuery_post____pass_through_request_object() throws Exception {
-        runTest("ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object");
+    @Alerts(FF68 = "1")
+    public void manipulation__html__fn___returns___text__() throws Exception {
+        runTest("manipulation: html( fn ) returns $.text()");
     }
 
     /**
-     * Test {711=[IE], 712=[CHROME, FF52, FF60]}.
+     * Test {475=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("28")
-    public void ajax__jQuery_ajax_____cache() throws Exception {
-        runTest("ajax: jQuery.ajax() - cache");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___dataType_html() throws Exception {
+        runTest("ajax: jQuery.ajax - dataType html");
     }
 
     /**
-     * Test {712=[IE], 713=[CHROME, FF52, FF60]}.
+     * Test {475=[FF68], 561=[IE], 562=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5, 2, 7")
+    @Alerts(FF = "4",
+            IE = "4")
+    public void manipulation__html_Function__with_incoming_value____direct_selection() throws Exception {
+        runTest("manipulation: html(Function) with incoming value -- direct selection");
+    }
+
+    /**
+     * Test {476=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__synchronous_request() throws Exception {
+        runTest("ajax: synchronous request");
+    }
+
+    /**
+     * Test {476=[FF68], 562=[IE], 563=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "14",
+            IE = "14")
+    public void manipulation__html_Function__with_incoming_value____jQuery_contents__() throws Exception {
+        runTest("manipulation: html(Function) with incoming value -- jQuery.contents()");
+    }
+
+    /**
+     * Test {477=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__synchronous_request_with_callbacks() throws Exception {
+        runTest("ajax: synchronous request with callbacks");
+    }
+
+    /**
+     * Test {477=[FF68], 563=[IE], 564=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void manipulation__clone___html___don_t_expose_jQuery_Sizzle_expandos___12858_() throws Exception {
+        runTest("manipulation: clone()/html() don't expose jQuery/Sizzle expandos (#12858)");
+    }
+
+    /**
+     * Test {478=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 5, 8")
+    public void ajax__pass_through_request_object() throws Exception {
+        runTest("ajax: pass-through request object");
+    }
+
+    /**
+     * Test {478=[FF68], 564=[IE], 565=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "3",
+            IE = "2")
+    public void manipulation__remove___no_filters() throws Exception {
+        runTest("manipulation: remove() no filters");
+    }
+
+    /**
+     * Test {479=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 6, 8")
+    public void ajax__ajax_cache() throws Exception {
+        runTest("ajax: ajax cache");
+    }
+
+    /**
+     * Test {479=[FF68], 565=[IE], 566=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "8",
+            IE = "8")
+    public void manipulation__remove___with_filters() throws Exception {
+        runTest("manipulation: remove() with filters");
+    }
+
+    /**
+     * Test {480=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void ajax__load_String_() throws Exception {
+        runTest("ajax: load(String)");
+    }
+
+    /**
+     * Test {480=[FF68], 566=[IE], 567=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__remove___event_cleaning() throws Exception {
+        runTest("manipulation: remove() event cleaning");
+    }
+
+    /**
+     * Test {481=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void ajax__load_String_null_() throws Exception {
+        runTest("ajax: load(String,null)");
+    }
+
+    /**
+     * Test {481=[FF68], 567=[IE], 568=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__remove___in_document_order__13779() throws Exception {
+        runTest("manipulation: remove() in document order #13779");
+    }
+
+    /**
+     * Test {482=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void ajax__load_String_undefined_() throws Exception {
+        runTest("ajax: load(String,undefined)");
+    }
+
+    /**
+     * Test {482=[FF68], 568=[IE], 569=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void manipulation__detach___no_filters() throws Exception {
+        runTest("manipulation: detach() no filters");
+    }
+
+    /**
+     * Test {483=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1")
+    public void ajax__load__url_selector__() throws Exception {
+        runTest("ajax: load('url selector')");
+    }
+
+    /**
+     * Test {483=[IE], 484=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "27",
+            IE = "27")
+    public void manipulation__html_String__tag_hyphenated_elements__Bug__1987_() throws Exception {
+        runTest("manipulation: html(String) tag-hyphenated elements (Bug #1987)");
+    }
+
+    /**
+     * Test {483=[FF68], 569=[IE], 570=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "8",
+            IE = "8")
+    public void manipulation__detach___with_filters() throws Exception {
+        runTest("manipulation: detach() with filters");
+    }
+
+    /**
+     * Test {484=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__load_String__Function__with_ajaxSetup_on_dataType_json__see__2046() throws Exception {
+        runTest("ajax: load(String, Function) with ajaxSetup on dataType json, see #2046");
+    }
+
+    /**
+     * Test {484=[IE], 485=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "240",
+            IE = "240")
     @NotYetImplemented
-    public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
+    public void manipulation__Tag_name_processing_respects_the_HTML_Standard__gh_2005_() throws Exception {
+        runTest("manipulation: Tag name processing respects the HTML Standard (gh-2005)");
     }
 
     /**
-     * Test {713=[IE], 714=[CHROME, FF52, FF60]}.
+     * Test {484=[FF68], 570=[IE], 571=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
-    public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Same_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain");
+    @Alerts(FF = "1",
+            IE = "1")
+    public void manipulation__detach___event_cleaning() throws Exception {
+        runTest("manipulation: detach() event cleaning");
     }
 
     /**
-     * Test {714=[IE], 715=[CHROME, FF52, FF60]}.
+     * Test {485=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Same_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__load_String__Function____simple__inject_text_into_DOM() throws Exception {
+        runTest("ajax: load(String, Function) - simple: inject text into DOM");
     }
 
     /**
-     * Test {715=[IE], 716=[CHROME, FF52, FF60]}.
+     * Test {486=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____JSONP___POST___Same_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - POST - Same Domain");
+    @Alerts(CHROME = "6, 0, 6")
+    public void ajax__load_String__Function____check_scripts() throws Exception {
+        runTest("ajax: load(String, Function) - check scripts");
     }
 
     /**
-     * Test {716=[IE], 717=[CHROME, FF52, FF60]}.
+     * Test {487=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____JSONP___Same_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Same Domain");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__load_String__Function____check_file_with_only_a_script_tag() throws Exception {
+        runTest("ajax: load(String, Function) - check file with only a script tag");
     }
 
     /**
-     * Test {717=[IE], 718=[CHROME, FF52, FF60]}.
+     * Test {488=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2, 2, 4")
-    public void ajax__jQuery_ajax_____JSONP___Query_String___n____Cross_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__load_String__Function____dataFilter_in_ajaxSettings() throws Exception {
+        runTest("ajax: load(String, Function) - dataFilter in ajaxSettings");
     }
 
     /**
-     * Test {718=[IE], 719=[CHROME, FF52, FF60]}.
+     * Test {489=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
-    public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Cross_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__load_String__Object__Function_() throws Exception {
+        runTest("ajax: load(String, Object, Function)");
     }
 
     /**
-     * Test {719=[IE], 720=[CHROME, FF52, FF60]}.
+     * Test {490=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Cross_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__load_String__String__Function_() throws Exception {
+        runTest("ajax: load(String, String, Function)");
     }
 
     /**
-     * Test {720=[IE], 721=[CHROME, FF52, FF60]}.
+     * Test {491=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____JSONP___POST___Cross_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - POST - Cross Domain");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__load_____data_specified_in_ajaxSettings_is_merged_in___10524_() throws Exception {
+        runTest("ajax: load() - data specified in ajaxSettings is merged in (#10524)");
     }
 
     /**
-     * Test {721=[IE], 722=[CHROME, FF52, FF60]}.
+     * Test {492=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____JSONP___Cross_Domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSONP - Cross Domain");
+    @Alerts(CHROME = "8")
+    public void ajax__load_____callbacks_get_the_correct_parameters() throws Exception {
+        runTest("ajax: load() - callbacks get the correct parameters");
     }
 
     /**
-     * Test {722=[IE], 723=[CHROME, FF52, FF60]}.
+     * Test {493=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_get_String__Function____data_in_ajaxSettings___8277_() throws Exception {
+        runTest("ajax: jQuery.get(String, Function) - data in ajaxSettings (#8277)");
+    }
+
+    /**
+     * Test {494=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_get_String__Hash__Function____parse_xml_and_use_text___on_nodes() throws Exception {
+        runTest("ajax: jQuery.get(String, Hash, Function) - parse xml and use text() on nodes");
+    }
+
+    /**
+     * Test {495=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_getScript_String__Function____with_callback() throws Exception {
+        runTest("ajax: jQuery.getScript(String, Function) - with callback");
+    }
+
+    /**
+     * Test {496=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_getScript_String__Function____no_callback() throws Exception {
+        runTest("ajax: jQuery.getScript(String, Function) - no callback");
+    }
+
+    /**
+     * Test {497=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "33, 2, 35")
+    public void ajax__jQuery_ajax_____JSONP__Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP, Same Domain");
+    }
+
+    /**
+     * Test {498=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "17, 2, 19")
+    public void ajax__jQuery_ajax_____JSONP__Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP, Cross Domain");
+    }
+
+    /**
+     * Test {499=[CHROME], 586=[FF68], 722=[IE], 723=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void ajax__jQuery_ajax_____script__Remote() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote");
     }
 
     /**
-     * Test {723=[IE], 724=[CHROME, FF52, FF60]}.
+     * Test {500=[CHROME], 587=[FF68], 723=[IE], 724=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3, 0, 3",
+            FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
     public void ajax__jQuery_ajax_____script__Remote_with_POST() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote with POST");
     }
 
     /**
-     * Test {724=[IE], 725=[CHROME, FF52, FF60]}.
+     * Test {501=[CHROME], 588=[FF68], 724=[IE], 725=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(CHROME = "2, 0, 2",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void ajax__jQuery_ajax_____script__Remote_with_scheme_less_URL() throws Exception {
         runTest("ajax: jQuery.ajax() - script, Remote with scheme-less URL");
     }
 
     /**
-     * Test {725=[IE], 726=[CHROME, FF52, FF60]}.
+     * Test {502=[CHROME], 589=[FF68], 725=[IE], 726=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -7364,977 +9336,470 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {726=[IE], 727=[CHROME, FF52, FF60]}.
+     * Test {503=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax_____script__throws_exception___11743_() throws Exception {
+        runTest("ajax: jQuery.ajax() - script, throws exception (#11743)");
+    }
+
+    /**
+     * Test {504=[CHROME], 590=[FF68], 726=[IE], 727=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void ajax__jQuery_ajax_____script_by_content_type() throws Exception {
         runTest("ajax: jQuery.ajax() - script by content-type");
     }
 
     /**
-     * Test {727=[IE], 728=[CHROME, FF52, FF60]}.
+     * Test {505=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
-    public void ajax__jQuery_ajax_____JSON_by_content_type() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSON by content-type");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax_____json_by_content_type() throws Exception {
+        runTest("ajax: jQuery.ajax() - json by content-type");
     }
 
     /**
-     * Test {728=[IE], 729=[CHROME, FF52, FF60]}.
+     * Test {506=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
-    public void ajax__jQuery_ajax_____JSON_by_content_type_disabled_with_options() throws Exception {
-        runTest("ajax: jQuery.ajax() - JSON by content-type disabled with options");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax_____json_by_content_type_disabled_with_options() throws Exception {
+        runTest("ajax: jQuery.ajax() - json by content-type disabled with options");
     }
 
     /**
-     * Test {729=[IE], 730=[CHROME, FF52, FF60]}.
+     * Test {507=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____simple_get() throws Exception {
-        runTest("ajax: jQuery.ajax() - simple get");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_getJSON_String__Hash__Function____JSON_array() throws Exception {
+        runTest("ajax: jQuery.getJSON(String, Hash, Function) - JSON array");
     }
 
     /**
-     * Test {730=[IE], 731=[CHROME, FF52, FF60]}.
+     * Test {508=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____simple_post() throws Exception {
-        runTest("ajax: jQuery.ajax() - simple post");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_getJSON_String__Function____JSON_object() throws Exception {
+        runTest("ajax: jQuery.getJSON(String, Function) - JSON object");
     }
 
     /**
-     * Test {731=[IE], 732=[CHROME, FF52, FF60]}.
+     * Test {509=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____data_option___empty_bodies_for_non_GET_requests() throws Exception {
-        runTest("ajax: jQuery.ajax() - data option - empty bodies for non-GET requests");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_getJSON___Using_Native_JSON() throws Exception {
+        runTest("ajax: jQuery.getJSON - Using Native JSON");
     }
 
     /**
-     * Test {732=[IE], 733=[CHROME, FF52, FF60]}.
+     * Test {510=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____data___x_www_form_urlencoded__gh_2658_() throws Exception {
-        runTest("ajax: jQuery.ajax() - data - x-www-form-urlencoded (gh-2658)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_getJSON_String__Function____JSON_object_with_absolute_url_to_local_content() throws Exception {
+        runTest("ajax: jQuery.getJSON(String, Function) - JSON object with absolute url to local content");
     }
 
     /**
-     * Test {733=[IE], 734=[CHROME, FF52, FF60]}.
+     * Test {511=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____data___text_plain__gh_2658_() throws Exception {
-        runTest("ajax: jQuery.ajax() - data - text/plain (gh-2658)");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_post___data() throws Exception {
+        runTest("ajax: jQuery.post - data");
     }
 
     /**
-     * Test {734=[IE], 735=[CHROME, FF52, FF60]}.
+     * Test {512=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____data___no_processing_POST() throws Exception {
-        runTest("ajax: jQuery.ajax() - data - no processing POST");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_post_String__Hash__Function____simple_with_xml() throws Exception {
+        runTest("ajax: jQuery.post(String, Hash, Function) - simple with xml");
     }
 
     /**
-     * Test {735=[IE], 736=[CHROME, FF52, FF60]}.
+     * Test {513=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____data___no_processing_GET() throws Exception {
-        runTest("ajax: jQuery.ajax() - data - no processing GET");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajaxSetup__timeout__Number_____with_global_timeout() throws Exception {
+        runTest("ajax: jQuery.ajaxSetup({timeout: Number}) - with global timeout");
     }
 
     /**
-     * Test {736=[IE], 737=[CHROME, FF52, FF60]}.
+     * Test {514=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____data___process_string_with_GET() throws Exception {
-        runTest("ajax: jQuery.ajax() - data - process string with GET");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajaxSetup__timeout__Number___with_localtimeout() throws Exception {
+        runTest("ajax: jQuery.ajaxSetup({timeout: Number}) with localtimeout");
     }
 
     /**
-     * Test {737=[IE], 738=[CHROME, FF52, FF60]}.
+     * Test {514=[FF68], 623=[IE], 624=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____If_Modified_Since_support__cache_() throws Exception {
-        runTest("ajax: jQuery.ajax() - If-Modified-Since support (cache)");
+    @Alerts(FF = "2",
+            IE = "2")
+    public void css__css_Array_() throws Exception {
+        runTest("css: css(Array)");
     }
 
     /**
-     * Test {738=[IE], 739=[CHROME, FF52, FF60]}.
+     * Test {515=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____Etag_support__cache_() throws Exception {
-        runTest("ajax: jQuery.ajax() - Etag support (cache)");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_ajax___simple_get() throws Exception {
+        runTest("ajax: jQuery.ajax - simple get");
     }
 
     /**
-     * Test {739=[IE], 740=[CHROME, FF52, FF60]}.
+     * Test {516=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____If_Modified_Since_support__no_cache_() throws Exception {
-        runTest("ajax: jQuery.ajax() - If-Modified-Since support (no cache)");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_ajax___simple_post() throws Exception {
+        runTest("ajax: jQuery.ajax - simple post");
     }
 
     /**
-     * Test {740=[IE], 741=[CHROME, FF52, FF60]}.
+     * Test {517=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax__jQuery_ajax_____Etag_support__no_cache_() throws Exception {
-        runTest("ajax: jQuery.ajax() - Etag support (no cache)");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__ajaxSetup__() throws Exception {
+        runTest("ajax: ajaxSetup()");
     }
 
     /**
-     * Test {741=[IE], 742=[CHROME, FF52, FF60]}.
+     * Test {518=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
-        runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__data_option__evaluate_function_values___2806_() throws Exception {
+        runTest("ajax: data option: evaluate function values (#2806)");
     }
 
     /**
-     * Test {742=[IE], 743=[CHROME, FF52, FF60]}.
+     * Test {519=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
-        runTest("ajax: jQuery.ajax() - failing cross-domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__data_option__empty_bodies_for_non_GET_requests() throws Exception {
+        runTest("ajax: data option: empty bodies for non-GET requests");
     }
 
     /**
-     * Test {743=[IE], 744=[CHROME, FF52, FF60]}.
+     * Test {520=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____atom_xml() throws Exception {
-        runTest("ajax: jQuery.ajax() - atom+xml");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax___If_Modified_Since_support__cache_() throws Exception {
+        runTest("ajax: jQuery.ajax - If-Modified-Since support (cache)");
     }
 
     /**
-     * Test {744=[IE], 745=[CHROME, FF52, FF60]}.
+     * Test {521=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax__jQuery_ajax_____statusText() throws Exception {
-        runTest("ajax: jQuery.ajax() - statusText");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___Etag_support__cache_() throws Exception {
+        runTest("ajax: jQuery.ajax - Etag support (cache)");
     }
 
     /**
-     * Test {745=[IE], 746=[CHROME, FF52, FF60]}.
+     * Test {522=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("20")
-    public void ajax__jQuery_ajax_____statusCode() throws Exception {
-        runTest("ajax: jQuery.ajax() - statusCode");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax___If_Modified_Since_support__no_cache_() throws Exception {
+        runTest("ajax: jQuery.ajax - If-Modified-Since support (no cache)");
     }
 
     /**
-     * Test {746=[IE], 747=[CHROME, FF52, FF60]}.
+     * Test {522=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
-    public void ajax__jQuery_ajax_____transitive_conversions() throws Exception {
-        runTest("ajax: jQuery.ajax() - transitive conversions");
+    @Alerts(FF68 = "18")
+    public void css__show___() throws Exception {
+        runTest("css: show();");
     }
 
     /**
-     * Test {747=[IE], 748=[CHROME, FF52, FF60]}.
+     * Test {523=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax__jQuery_ajax_____overrideMimeType() throws Exception {
-        runTest("ajax: jQuery.ajax() - overrideMimeType");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___Etag_support__no_cache_() throws Exception {
+        runTest("ajax: jQuery.ajax - Etag support (no cache)");
     }
 
     /**
-     * Test {748=[IE], 749=[CHROME, FF52, FF60]}.
+     * Test {524=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajax_____empty_json_gets_to_error_callback_instead_of_success_callback_() throws Exception {
-        runTest("ajax: jQuery.ajax() - empty json gets to error callback instead of success callback.");
+    @Alerts(CHROME = "2")
+    public void ajax__jQuery_ajax___failing_cross_domain() throws Exception {
+        runTest("ajax: jQuery ajax - failing cross-domain");
     }
 
     /**
-     * Test {749=[IE], 750=[CHROME, FF52, FF60]}.
+     * Test {524=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax___2688___jQuery_ajax_____beforeSend__cancel_request() throws Exception {
-        runTest("ajax: #2688 - jQuery.ajax() - beforeSend, cancel request");
+    @Alerts(FF68 = "7, 6, 13")
+    public void css__show___resolves_correct_default_display_for_detached_nodes() throws Exception {
+        runTest("css: show() resolves correct default display for detached nodes");
     }
 
     /**
-     * Test {750=[IE], 751=[CHROME, FF52, FF60]}.
+     * Test {525=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax___2806___jQuery_ajax_____data_option___evaluate_function_values() throws Exception {
-        runTest("ajax: #2806 - jQuery.ajax() - data option - evaluate function values");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___atom_xml() throws Exception {
+        runTest("ajax: jQuery ajax - atom+xml");
     }
 
     /**
-     * Test {751=[IE], 752=[CHROME, FF52, FF60]}.
+     * Test {525=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax___7531___jQuery_ajax_____Location_object_as_url() throws Exception {
-        runTest("ajax: #7531 - jQuery.ajax() - Location object as url");
+    @Alerts(FF68 = "4")
+    public void css__show___resolves_correct_default_display__10227() throws Exception {
+        runTest("css: show() resolves correct default display #10227");
     }
 
     /**
-     * Test {752=[IE], 753=[CHROME, FF52, FF60]}.
+     * Test {526=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Same_Domain() throws Exception {
-        runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain");
+    @Alerts(CHROME = "1")
+    public void ajax__jQuery_ajax___Location_object_as_url___7531_() throws Exception {
+        runTest("ajax: jQuery.ajax - Location object as url (#7531)");
     }
 
     /**
-     * Test {753=[IE], 754=[CHROME, FF52, FF60]}.
+     * Test {526=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Cross_Domain() throws Exception {
-        runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain");
+    @Alerts(FF68 = "2")
+    public void css__show___resolves_correct_default_display_when_iframe_display_none__12904() throws Exception {
+        runTest("css: show() resolves correct default display when iframe display:none #12904");
     }
 
     /**
-     * Test {754=[IE], 755=[CHROME, FF52, FF60]}.
+     * Test {527=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax___8107___jQuery_ajax_____multiple_method_signatures_introduced_in_1_5() throws Exception {
-        runTest("ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5");
+    @Alerts(CHROME = "2")
+    public void ajax__jQuery_ajax___Context_with_circular_references___9887_() throws Exception {
+        runTest("ajax: jQuery.ajax - Context with circular references (#9887)");
     }
 
     /**
-     * Test {755=[IE], 756=[CHROME, FF52, FF60]}.
+     * Test {528=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Same_Domain() throws Exception {
-        runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___statusText() throws Exception {
+        runTest("ajax: jQuery.ajax - statusText");
     }
 
     /**
-     * Test {756=[IE], 757=[CHROME, FF52, FF60]}.
+     * Test {529=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Cross_Domain() throws Exception {
-        runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain");
+    @Alerts(CHROME = "9, 11, 20")
+    public void ajax__jQuery_ajax___statusCode() throws Exception {
+        runTest("ajax: jQuery.ajax - statusCode");
     }
 
     /**
-     * Test {757=[IE], 758=[CHROME, FF52, FF60]}.
+     * Test {530=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax___9887___jQuery_ajax_____Context_with_circular_references___9887_() throws Exception {
-        runTest("ajax: #9887 - jQuery.ajax() - Context with circular references (#9887)");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___transitive_conversions() throws Exception {
+        runTest("ajax: jQuery.ajax - transitive conversions");
     }
 
     /**
-     * Test {758=[IE], 759=[CHROME, FF52, FF60]}.
+     * Test {531=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax___10093___jQuery_ajax_____falsy_url_as_argument() throws Exception {
-        runTest("ajax: #10093 - jQuery.ajax() - falsy url as argument");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_ajax___overrideMimeType() throws Exception {
+        runTest("ajax: jQuery.ajax - overrideMimeType");
     }
 
     /**
-     * Test {759=[IE], 760=[CHROME, FF52, FF60]}.
+     * Test {532=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void ajax___10093___jQuery_ajax_____falsy_url_in_settings_object() throws Exception {
-        runTest("ajax: #10093 - jQuery.ajax() - falsy url in settings object");
+    @Alerts(CHROME = "1")
+    public void ajax__jQuery_ajax___abort_in_prefilter() throws Exception {
+        runTest("ajax: jQuery.ajax - abort in prefilter");
     }
 
     /**
-     * Test {760=[IE], 761=[CHROME, FF52, FF60]}.
+     * Test {533=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void ajax___11151___jQuery_ajax_____parse_error_body() throws Exception {
-        runTest("ajax: #11151 - jQuery.ajax() - parse error body");
+    @Alerts(CHROME = "3, 0, 3")
+    public void ajax__jQuery_ajax___loading_binary_data_shouldn_t_throw_an_exception_in_IE___11426_() throws Exception {
+        runTest("ajax: jQuery.ajax - loading binary data shouldn't throw an exception in IE (#11426)");
     }
 
     /**
-     * Test {761=[IE], 762=[CHROME, FF52, FF60]}.
+     * Test {534=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void ajax___11426___jQuery_ajax_____loading_binary_data_shouldn_t_throw_an_exception_in_IE() throws Exception {
-        runTest("ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE");
+    @Alerts(CHROME = "1, 0, 1")
+    public void ajax__jQuery_domManip___no_side_effect_because_of_ajaxSetup_or_global_events___11264_() throws Exception {
+        runTest("ajax: jQuery.domManip - no side effect because of ajaxSetup or global events (#11264)");
     }
 
     /**
-     * Test {762=[IE], 763=[CHROME, FF52, FF60]}.
+     * Test {535=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void ajax__gh_2498___jQuery_ajax_____binary_data_shouldn_t_throw_an_exception() throws Exception {
-        runTest("ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception");
+    @Alerts(CHROME = "2")
+    public void ajax__jQuery_domManip___script_in_comments_are_properly_evaluated___11402_() throws Exception {
+        runTest("ajax: jQuery.domManip - script in comments are properly evaluated (#11402)");
     }
 
     /**
-     * Test {763=[IE], 764=[CHROME, FF52, FF60]}.
+     * Test {536=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void ajax___11743___jQuery_ajax_____script__throws_exception() throws Exception {
-        runTest("ajax: #11743 - jQuery.ajax() - script, throws exception");
+    @Alerts(CHROME = "2, 0, 2")
+    public void ajax__jQuery_ajax___active_counter() throws Exception {
+        runTest("ajax: jQuery.ajax - active counter");
     }
 
     /**
-     * Test {764=[IE], 765=[CHROME, FF52, FF60]}.
+     * Test {537=[CHROME], 630=[FF68], 816=[IE], 817=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___method_set_globally() throws Exception {
-        runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally");
-    }
-
-    /**
-     * Test {765=[IE], 766=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___type_set_globally() throws Exception {
-        runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally");
-    }
-
-    /**
-     * Test {766=[IE], 767=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___13276___jQuery_ajax_____compatibility_between_XML_documents_from_ajax_requests_and_parsed_string() throws Exception {
-        runTest("ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string");
-    }
-
-    /**
-     * Test {767=[IE], 768=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax___13292___jQuery_ajax_____converter_is_bypassed_for_204_requests() throws Exception {
-        runTest("ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests");
-    }
-
-    /**
-     * Test {768=[IE], 769=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax___13388___jQuery_ajax_____responseXML() throws Exception {
-        runTest("ajax: #13388 - jQuery.ajax() - responseXML");
-    }
-
-    /**
-     * Test {769=[IE], 770=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax___13922___jQuery_ajax_____converter_is_bypassed_for_HEAD_requests() throws Exception {
-        runTest("ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests");
-    }
-
-    /**
-     * Test {770=[IE], 771=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
-        runTest("ajax: #14379 - jQuery.ajax() on unload");
-    }
-
-    /**
-     * Test {771=[IE], 772=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void ajax___14683___jQuery_ajax_____Exceptions_thrown_synchronously_by_xhr_send_should_be_caught() throws Exception {
-        runTest("ajax: #14683 - jQuery.ajax() - Exceptions thrown synchronously by xhr.send should be caught");
-    }
-
-    /**
-     * Test {773=[IE], 774=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__gh_2587___when_content_type_not_xml__but_looks_like_one() throws Exception {
-        runTest("ajax: gh-2587 - when content-type not xml, but looks like one");
-    }
-
-    /**
-     * Test {774=[IE], 775=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__gh_2587___when_content_type_not_json__but_looks_like_one() throws Exception {
-        runTest("ajax: gh-2587 - when content-type not json, but looks like one");
-    }
-
-    /**
-     * Test {775=[IE], 776=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__gh_2587___when_content_type_not_html__but_looks_like_one() throws Exception {
-        runTest("ajax: gh-2587 - when content-type not html, but looks like one");
-    }
-
-    /**
-     * Test {776=[IE], 777=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__gh_2587___when_content_type_not_javascript__but_looks_like_one() throws Exception {
-        runTest("ajax: gh-2587 - when content-type not javascript, but looks like one");
-    }
-
-    /**
-     * Test {777=[IE], 778=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__gh_2587___when_content_type_not_ecmascript__but_looks_like_one() throws Exception {
-        runTest("ajax: gh-2587 - when content-type not ecmascript, but looks like one");
-    }
-
-    /**
-     * Test {778=[IE], 779=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajaxPrefilter_____abort() throws Exception {
-        runTest("ajax: jQuery.ajaxPrefilter() - abort");
-    }
-
-    /**
-     * Test {779=[IE], 780=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajaxSetup__() throws Exception {
-        runTest("ajax: jQuery.ajaxSetup()");
-    }
-
-    /**
-     * Test {780=[IE], 781=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
-        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
-    }
-
-    /**
-     * Test {781=[IE], 782=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_ajaxSetup___timeout__Number____with_localtimeout() throws Exception {
-        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout");
-    }
-
-    /**
-     * Test {782=[IE], 783=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void ajax___11264___jQuery_domManip_____no_side_effect_because_of_ajaxSetup_or_global_events() throws Exception {
-        runTest("ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events");
-    }
-
-    /**
-     * Test {783=[IE], 784=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_load_____always_use_GET_method_even_if_it_overrided_through_ajaxSetup___11264_() throws Exception {
-        runTest("ajax: jQuery#load() - always use GET method even if it overrided through ajaxSetup (#11264)");
-    }
-
-    /**
-     * Test {784=[IE], 785=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_load_____should_resolve_with_correct_context() throws Exception {
-        runTest("ajax: jQuery#load() - should resolve with correct context");
-    }
-
-    /**
-     * Test {785=[IE], 786=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax___11402___jQuery_domManip_____script_in_comments_are_properly_evaluated() throws Exception {
-        runTest("ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated");
-    }
-
-    /**
-     * Test {786=[IE], 787=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_get__String__Hash__Function_____parse_xml_and_use_text___on_nodes() throws Exception {
-        runTest("ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes");
-    }
-
-    /**
-     * Test {787=[IE], 788=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___8277___jQuery_get__String__Function_____data_in_ajaxSettings() throws Exception {
-        runTest("ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings");
-    }
-
-    /**
-     * Test {788=[IE], 789=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void ajax__jQuery_getJSON__String__Hash__Function_____JSON_array() throws Exception {
-        runTest("ajax: jQuery.getJSON( String, Hash, Function ) - JSON array");
-    }
-
-    /**
-     * Test {789=[IE], 790=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_getJSON__String__Function_____JSON_object() throws Exception {
-        runTest("ajax: jQuery.getJSON( String, Function ) - JSON object");
-    }
-
-    /**
-     * Test {790=[IE], 791=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_getJSON__String__Function_____JSON_object_with_absolute_url_to_local_content() throws Exception {
-        runTest("ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content");
-    }
-
-    /**
-     * Test {791=[IE], 792=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_getScript__String__Function_____with_callback() throws Exception {
-        runTest("ajax: jQuery.getScript( String, Function ) - with callback");
-    }
-
-    /**
-     * Test {792=[IE], 793=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_getScript__String__Function_____no_callback() throws Exception {
-        runTest("ajax: jQuery.getScript( String, Function ) - no callback");
-    }
-
-    /**
-     * Test {793=[IE], 794=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax___8082___jQuery_getScript__String__Function_____source_as_responseText() throws Exception {
-        runTest("ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText");
-    }
-
-    /**
-     * Test {794=[IE], 795=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_getScript__Object_____with_callback() throws Exception {
-        runTest("ajax: jQuery.getScript( Object ) - with callback");
-    }
-
-    /**
-     * Test {795=[IE], 796=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_getScript__Object_____no_callback() throws Exception {
-        runTest("ajax: jQuery.getScript( Object ) - no callback");
-    }
-
-    /**
-     * Test {796=[IE], 797=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__() throws Exception {
-        runTest("ajax: jQuery.fn.load( String )");
-    }
-
-    /**
-     * Test {797=[IE], 798=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("6")
-    public void ajax__jQuery_fn_load_____404_error_callbacks() throws Exception {
-        runTest("ajax: jQuery.fn.load() - 404 error callbacks");
-    }
-
-    /**
-     * Test {798=[IE], 799=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__null__() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, null )");
-    }
-
-    /**
-     * Test {799=[IE], 800=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__undefined__() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, undefined )");
-    }
-
-    /**
-     * Test {800=[IE], 801=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_fn_load__URL_SELECTOR__() throws Exception {
-        runTest("ajax: jQuery.fn.load( URL_SELECTOR )");
-    }
-
-    /**
-     * Test {801=[IE], 802=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_fn_load__URL_SELECTOR_with_spaces__() throws Exception {
-        runTest("ajax: jQuery.fn.load( URL_SELECTOR with spaces )");
-    }
-
-    /**
-     * Test {802=[IE], 803=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_fn_load__URL_SELECTOR_with_non_HTML_whitespace__3003___() throws Exception {
-        runTest("ajax: jQuery.fn.load( URL_SELECTOR with non-HTML whitespace(#3003) )");
-    }
-
-    /**
-     * Test {803=[IE], 804=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__Function_____simple__inject_text_into_DOM() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM");
-    }
-
-    /**
-     * Test {804=[IE], 805=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("7")
-    @NotYetImplemented
-    public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
-    }
-
-    /**
-     * Test {805=[IE], 806=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax__jQuery_fn_load__String__Function_____check_file_with_only_a_script_tag() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, Function ) - check file with only a script tag");
-    }
-
-    /**
-     * Test {806=[IE], 807=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__Function_____dataFilter_in_ajaxSettings() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings");
-    }
-
-    /**
-     * Test {807=[IE], 808=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__Object__Function__() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, Object, Function )");
-    }
-
-    /**
-     * Test {808=[IE], 809=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_fn_load__String__String__Function__() throws Exception {
-        runTest("ajax: jQuery.fn.load( String, String, Function )");
-    }
-
-    /**
-     * Test {809=[IE], 810=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
-    public void ajax__jQuery_fn_load_____callbacks_get_the_correct_parameters() throws Exception {
-        runTest("ajax: jQuery.fn.load() - callbacks get the correct parameters");
-    }
-
-    /**
-     * Test {810=[IE], 811=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___2046___jQuery_fn_load__String__Function___with_ajaxSetup_on_dataType_json() throws Exception {
-        runTest("ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json");
-    }
-
-    /**
-     * Test {811=[IE], 812=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax___10524___jQuery_fn_load_____data_specified_in_ajaxSettings_is_merged_in() throws Exception {
-        runTest("ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in");
-    }
-
-    /**
-     * Test {812=[IE], 813=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void ajax__jQuery_post_____data() throws Exception {
-        runTest("ajax: jQuery.post() - data");
-    }
-
-    /**
-     * Test {813=[IE], 814=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void ajax__jQuery_post__String__Hash__Function_____simple_with_xml() throws Exception {
-        runTest("ajax: jQuery.post( String, Hash, Function ) - simple with xml");
-    }
-
-    /**
-     * Test {814=[IE], 815=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void ajax__jQuery_get_post___options_____simple_with_xml() throws Exception {
-        runTest("ajax: jQuery[get|post]( options ) - simple with xml");
-    }
-
-    /**
-     * Test {815=[IE], 816=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
-    public void ajax__jQuery_active() throws Exception {
-        runTest("ajax: jQuery.active");
-    }
-
-    /**
-     * Test {816=[IE], 817=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1, 0, 1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__sanity_check() throws Exception {
         runTest("effects: sanity check");
     }
 
     /**
-     * Test {817=[IE], 818=[CHROME, FF52, FF60]}.
+     * Test {538=[CHROME], 632=[FF68], 818=[IE], 819=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void effects__show___basic() throws Exception {
-        runTest("effects: show() basic");
-    }
-
-    /**
-     * Test {818=[IE], 819=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("27")
+    @Alerts(CHROME = "26",
+            FF60 = "27",
+            FF68 = "2, 13, 15",
+            IE = "27")
     @NotYetImplemented({ CHROME, FF })
     public void effects__show__() throws Exception {
         runTest("effects: show()");
     }
 
     /**
-     * Test {819=[IE], 820=[CHROME, FF52, FF60]}.
+     * Test {539=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("30")
-    @NotYetImplemented(IE)
-    public void effects__show_Number____inline_hidden() throws Exception {
-        runTest("effects: show(Number) - inline hidden");
+    @Alerts(FF68 = "2")
+    public void css__Do_not_append_px___9548___12990_() throws Exception {
+        runTest("css: Do not append px (#9548, #12990)");
     }
 
     /**
-     * Test {820=[IE], 821=[CHROME, FF52, FF60]}.
+     * Test {539=[CHROME], 633=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("30")
-    @NotYetImplemented(IE)
-    public void effects__show_Number____cascade_hidden() throws Exception {
-        runTest("effects: show(Number) - cascade hidden");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "3, 0, 3")
+    public void effects__show_Number____other_displays() throws Exception {
+        runTest("effects: show(Number) - other displays");
     }
 
     /**
-     * Test {821=[IE], 822=[CHROME, FF52, FF60]}.
+     * Test {540=[CHROME], 634=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void effects__Persist_correct_display_value___inline_hidden() throws Exception {
-        runTest("effects: Persist correct display value - inline hidden");
+    @Alerts(CHROME = "1, 2, 3",
+            FF68 = "3, 0, 3")
+    public void effects__Persist_correct_display_value() throws Exception {
+        runTest("effects: Persist correct display value");
     }
 
     /**
-     * Test {822=[IE], 823=[CHROME, FF52, FF60]}.
+     * Test {541=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void effects__Persist_correct_display_value___cascade_hidden() throws Exception {
-        runTest("effects: Persist correct display value - cascade hidden");
+    @Alerts(FF68 = "2, 0, 2")
+    public void css__global_failure() throws Exception {
+        runTest("css: global failure");
     }
 
     /**
-     * Test {823=[IE], 824=[CHROME, FF52, FF60]}.
+     * Test {541=[CHROME], 635=[FF68], 823=[IE], 824=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8344,262 +9809,497 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {824=[IE], 825=[CHROME, FF52, FF60]}.
+     * Test {542=[IE], 543=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    @NotYetImplemented
-    public void effects__animate_relative_values() throws Exception {
-        runTest("effects: animate relative values");
+    @Alerts(FF60 = "25",
+            IE = "25")
+    public void manipulation__Empty_replaceWith__trac_13401__trac_13596__gh_2204_() throws Exception {
+        runTest("manipulation: Empty replaceWith (trac-13401; trac-13596; gh-2204)");
     }
 
     /**
-     * Test {825=[IE], 826=[CHROME, FF52, FF60]}.
+     * Test {542=[CHROME], 637=[FF68], 825=[IE], 826=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_negative_height() throws Exception {
         runTest("effects: animate negative height");
     }
 
     /**
-     * Test {826=[IE], 827=[CHROME, FF52, FF60]}.
+     * Test {543=[CHROME], 638=[FF68], 826=[IE], 827=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_negative_margin() throws Exception {
         runTest("effects: animate negative margin");
     }
 
     /**
-     * Test {827=[IE], 828=[CHROME, FF52, FF60]}.
+     * Test {544=[CHROME], 639=[FF68], 827=[IE], 828=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_negative_margin_with_px() throws Exception {
         runTest("effects: animate negative margin with px");
     }
 
     /**
-     * Test {828=[IE], 829=[CHROME, FF52, FF60]}.
+     * Test {545=[CHROME], 640=[FF68], 828=[IE], 829=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     @NotYetImplemented
     public void effects__animate_negative_padding() throws Exception {
         runTest("effects: animate negative padding");
     }
 
     /**
-     * Test {829=[IE], 830=[CHROME, FF52, FF60]}.
+     * Test {546=[CHROME], 641=[FF68], 829=[IE], 830=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
     public void effects__animate_block_as_inline_width_height() throws Exception {
         runTest("effects: animate block as inline width/height");
     }
 
     /**
-     * Test {830=[IE], 831=[CHROME, FF52, FF60]}.
+     * Test {547=[CHROME], 642=[FF68], 830=[IE], 831=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
     @NotYetImplemented(IE)
     public void effects__animate_native_inline_width_height() throws Exception {
         runTest("effects: animate native inline width/height");
     }
 
     /**
-     * Test {831=[IE], 832=[CHROME, FF52, FF60]}.
+     * Test {548=[CHROME], 643=[FF68], 831=[IE], 832=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
     public void effects__animate_block_width_height() throws Exception {
         runTest("effects: animate block width/height");
     }
 
     /**
-     * Test {832=[IE], 833=[CHROME, FF52, FF60]}.
+     * Test {549=[CHROME], 644=[FF68], 832=[IE], 833=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_table_width_height() throws Exception {
         runTest("effects: animate table width/height");
     }
 
     /**
-     * Test {833=[IE], 834=[CHROME, FF52, FF60]}.
+     * Test {550=[CHROME], 645=[FF68], 833=[IE], 834=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
     @NotYetImplemented
     public void effects__animate_table_row_width_height() throws Exception {
         runTest("effects: animate table-row width/height");
     }
 
     /**
-     * Test {834=[IE], 835=[CHROME, FF52, FF60]}.
+     * Test {551=[CHROME], 646=[FF68], 834=[IE], 835=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
     @NotYetImplemented
     public void effects__animate_table_cell_width_height() throws Exception {
         runTest("effects: animate table-cell width/height");
     }
 
     /**
-     * Test {835=[IE], 836=[CHROME, FF52, FF60]}.
+     * Test {552=[FF68], 684=[IE], 685=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____retry_with_jQuery_ajax__this__() throws Exception {
+        runTest("ajax: jQuery.ajax() - retry with jQuery.ajax( this )");
+    }
+
+    /**
+     * Test {552=[CHROME], 647=[FF68], 835=[IE], 836=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void effects__animate_percentage____on_width_height() throws Exception {
         runTest("effects: animate percentage(%) on width/height");
     }
 
     /**
-     * Test {836=[IE], 837=[CHROME, FF52, FF60]}.
+     * Test {553=[FF68], 685=[IE], 686=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
+    public void ajax__jQuery_ajax_____headers() throws Exception {
+        runTest("ajax: jQuery.ajax() - headers");
+    }
+
+    /**
+     * Test {553=[CHROME], 648=[FF68], 836=[IE], 837=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void effects__animate_resets_overflow_x_and_overflow_y_when_finished() throws Exception {
         runTest("effects: animate resets overflow-x and overflow-y when finished");
     }
 
     /**
-     * Test {837=[IE], 838=[CHROME, FF52, FF60]}.
+     * Test {554=[FF68], 686=[IE], 687=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____Accept_header() throws Exception {
+        runTest("ajax: jQuery.ajax() - Accept header");
+    }
+
+    /**
+     * Test {554=[CHROME], 649=[FF68], 837=[IE], 838=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF60 = "2",
+            FF68 = "1, 1, 2",
+            IE = "2")
     public void effects__animate_option___queue__false__() throws Exception {
         runTest("effects: animate option { queue: false }");
     }
 
     /**
-     * Test {838=[IE], 839=[CHROME, FF52, FF60]}.
+     * Test {555=[FF68], 687=[IE], 688=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____contentType() throws Exception {
+        runTest("ajax: jQuery.ajax() - contentType");
+    }
+
+    /**
+     * Test {555=[CHROME], 650=[FF68], 838=[IE], 839=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF60 = "2",
+            FF68 = "1, 1, 2",
+            IE = "2")
     public void effects__animate_option___queue__true__() throws Exception {
         runTest("effects: animate option { queue: true }");
     }
 
     /**
-     * Test {839=[IE], 840=[CHROME, FF52, FF60]}.
+     * Test {556=[FF68], 688=[IE], 689=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____protocol_less_urls() throws Exception {
+        runTest("ajax: jQuery.ajax() - protocol-less urls");
+    }
+
+    /**
+     * Test {556=[CHROME], 651=[FF68], 839=[IE], 840=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5",
+            FF60 = "5",
+            FF68 = "2, 2, 4",
+            IE = "5")
     public void effects__animate_option___queue___name___() throws Exception {
         runTest("effects: animate option { queue: 'name' }");
     }
 
     /**
-     * Test {840=[IE], 841=[CHROME, FF52, FF60]}.
+     * Test {557=[FF68], 689=[IE], 690=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "4",
+            FF68 = "3, 0, 3",
+            IE = "4")
+    public void ajax__jQuery_ajax_____hash() throws Exception {
+        runTest("ajax: jQuery.ajax() - hash");
+    }
+
+    /**
+     * Test {557=[CHROME], 652=[FF68], 840=[IE], 841=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF60 = "2",
+            FF68 = "1, 1, 2",
+            IE = "2")
     public void effects__animate_with_no_properties() throws Exception {
         runTest("effects: animate with no properties");
     }
 
     /**
-     * Test {841=[IE], 842=[CHROME, FF52, FF60]}.
+     * Test {558=[FF68], 691=[IE], 692=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
+    @Alerts(FF60 = "8",
+            FF68 = "1, 6, 7",
+            IE = "8")
+    public void ajax__jQuery_ajax_____cross_domain_detection() throws Exception {
+        runTest("ajax: jQuery.ajax() - cross-domain detection");
+    }
+
+    /**
+     * Test {558=[CHROME], 653=[FF68], 841=[IE], 842=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 10, 11",
+            FF60 = "11",
+            FF68 = "2, 8, 10",
+            IE = "11")
     public void effects__animate_duration_0() throws Exception {
         runTest("effects: animate duration 0");
     }
 
     /**
-     * Test {842=[IE], 843=[CHROME, FF52, FF60]}.
+     * Test {559=[CHROME], 654=[FF68], 842=[IE], 843=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_hyphenated_properties() throws Exception {
         runTest("effects: animate hyphenated properties");
     }
 
     /**
-     * Test {843=[IE], 844=[CHROME, FF52, FF60]}.
+     * Test {560=[IE], 561=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF60 = "4",
+            IE = "0")
+    @NotYetImplemented({ CHROME, FF60 })
+    public void manipulation__html_script_type_module_() throws Exception {
+        runTest("manipulation: html(script type module)");
+    }
+
+    /**
+     * Test {560=[FF68], 695=[IE], 696=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "12",
+            FF68 = "1, 11, 12",
+            IE = "12")
+    public void ajax__jQuery_ajax_____events_with_context() throws Exception {
+        runTest("ajax: jQuery.ajax() - events with context");
+    }
+
+    /**
+     * Test {560=[CHROME], 655=[FF68], 843=[IE], 844=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__animate_non_element() throws Exception {
         runTest("effects: animate non-element");
     }
 
     /**
-     * Test {844=[IE], 845=[CHROME, FF52, FF60]}.
+     * Test {561=[FF68], 696=[IE], 697=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF = "3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____events_without_context() throws Exception {
+        runTest("ajax: jQuery.ajax() - events without context");
+    }
+
+    /**
+     * Test {561=[CHROME], 656=[FF68], 844=[IE], 845=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "3, 1, 4",
+            IE = "4")
     public void effects__stop__() throws Exception {
         runTest("effects: stop()");
     }
 
     /**
-     * Test {845=[IE], 846=[CHROME, FF52, FF60]}.
+     * Test {562=[FF68], 697=[IE], 698=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "1",
+            FF68 = "2, 1, 3",
+            IE = "1")
+    public void ajax___15118___jQuery_ajax_____function_without_jQuery_event() throws Exception {
+        runTest("ajax: #15118 - jQuery.ajax() - function without jQuery.event");
+    }
+
+    /**
+     * Test {562=[CHROME], 657=[FF68], 845=[IE], 846=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "5",
+            CHROME = "3")
     public void effects__stop_____several_in_queue() throws Exception {
         runTest("effects: stop() - several in queue");
     }
 
     /**
-     * Test {846=[IE], 847=[CHROME, FF52, FF60]}.
+     * Test {563=[FF68], 699=[IE], 700=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "1",
+            FF68 = "2, 1, 3",
+            IE = "1")
+    public void ajax__jQuery_ajax_____context_modification() throws Exception {
+        runTest("ajax: jQuery.ajax() - context modification");
+    }
+
+    /**
+     * Test {563=[CHROME], 658=[FF68], 846=[IE], 847=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 2, 4",
+            IE = "4")
     public void effects__stop_clearQueue_() throws Exception {
         runTest("effects: stop(clearQueue)");
     }
 
     /**
-     * Test {847=[IE], 848=[CHROME, FF52, FF60]}.
+     * Test {564=[FF68], 700=[IE], 701=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF60 = "3",
+            FF68 = "2, 1, 3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____context_modification_through_ajaxSetup() throws Exception {
+        runTest("ajax: jQuery.ajax() - context modification through ajaxSetup");
+    }
+
+    /**
+     * Test {564=[CHROME], 659=[FF68], 847=[IE], 848=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1",
+            FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
     public void effects__stop_clearQueue__gotoEnd_() throws Exception {
         runTest("effects: stop(clearQueue, gotoEnd)");
     }
 
     /**
-     * Test {848=[IE], 849=[CHROME, FF52, FF60]}.
+     * Test {565=[CHROME], 660=[FF68], 848=[IE], 849=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(CHROME = "3",
+            FF60 = "3",
+            FF68 = "2, 1, 3",
+            IE = "3")
     public void effects__stop__queue_______________Stop_single_queues() throws Exception {
         runTest("effects: stop( queue, ..., ... ) - Stop single queues");
     }
 
     /**
-     * Test {849=[IE], 850=[CHROME, FF52, FF60]}.
+     * Test {566=[FF68], 702=[IE], 703=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
+    public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements() throws Exception {
+        runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements");
+    }
+
+    /**
+     * Test {566=[CHROME], 661=[FF68], 849=[IE], 850=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8609,7 +10309,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {850=[IE], 851=[CHROME, FF52, FF60]}.
+     * Test {567=[FF68], 703=[IE], 704=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____xml__non_namespace_elements_inside_namespaced_elements__over_JSONP_() throws Exception {
+        runTest("ajax: jQuery.ajax() - xml: non-namespace elements inside namespaced elements (over JSONP)");
+    }
+
+    /**
+     * Test {567=[CHROME], 662=[FF68], 850=[IE], 851=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -8619,529 +10331,1920 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {851=[IE], 852=[CHROME, FF52, FF60]}.
+     * Test {568=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void effects__Overflow_and_Display() throws Exception {
-        runTest("effects: Overflow and Display");
+    @Alerts(CHROME = "2")
+    public void effects__JS_Overflow_and_Display() throws Exception {
+        runTest("effects: JS Overflow and Display");
     }
 
     /**
-     * Test {852=[IE], 853=[CHROME, FF52, FF60]}.
+     * Test {568=[FF68], 704=[IE], 705=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____HEAD_requests() throws Exception {
+        runTest("ajax: jQuery.ajax() - HEAD requests");
+    }
+
+    /**
+     * Test {569=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2")
+    public void effects__CSS_Overflow_and_Display() throws Exception {
+        runTest("effects: CSS Overflow and Display");
+    }
+
+    /**
+     * Test {569=[FF68], 705=[IE], 706=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____beforeSend() throws Exception {
+        runTest("ajax: jQuery.ajax() - beforeSend");
+    }
+
+    /**
+     * Test {570=[FF68], 706=[IE], 707=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____beforeSend__cancel_request_manually() throws Exception {
+        runTest("ajax: jQuery.ajax() - beforeSend, cancel request manually");
+    }
+
+    /**
+     * Test {570=[CHROME], 664=[FF68], 852=[IE], 853=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_Auto_to_0() throws Exception {
         runTest("effects: CSS Auto to 0");
     }
 
     /**
-     * Test {853=[IE], 854=[CHROME, FF52, FF60]}.
+     * Test {571=[FF68], 707=[IE], 708=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
+    public void ajax__jQuery_ajax_____dataType_html() throws Exception {
+        runTest("ajax: jQuery.ajax() - dataType html");
+    }
+
+    /**
+     * Test {571=[CHROME], 665=[FF68], 853=[IE], 854=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_Auto_to_50() throws Exception {
         runTest("effects: CSS Auto to 50");
     }
 
     /**
-     * Test {854=[IE], 855=[CHROME, FF52, FF60]}.
+     * Test {572=[FF68], 708=[IE], 709=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
+    public void ajax__jQuery_ajax_____synchronous_request() throws Exception {
+        runTest("ajax: jQuery.ajax() - synchronous request");
+    }
+
+    /**
+     * Test {572=[CHROME], 666=[FF68], 854=[IE], 855=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_Auto_to_100() throws Exception {
         runTest("effects: CSS Auto to 100");
     }
 
     /**
-     * Test {855=[IE], 856=[CHROME, FF52, FF60]}.
+     * Test {573=[IE], 574=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void manipulation__jQuery_cleanData_eliminates_all_private_data__gh_2127_() throws Exception {
+        runTest("manipulation: jQuery.cleanData eliminates all private data (gh-2127)");
+    }
+
+    /**
+     * Test {573=[FF68], 709=[IE], 710=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____synchronous_request_with_callbacks() throws Exception {
+        runTest("ajax: jQuery.ajax() - synchronous request with callbacks");
+    }
+
+    /**
+     * Test {573=[CHROME], 667=[FF68], 855=[IE], 856=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     @NotYetImplemented
     public void effects__CSS_Auto_to_show() throws Exception {
         runTest("effects: CSS Auto to show");
     }
 
     /**
-     * Test {856=[IE], 857=[CHROME, FF52, FF60]}.
+     * Test {574=[IE], 575=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void manipulation__jQuery_cleanData_eliminates_all_public_data() throws Exception {
+        runTest("manipulation: jQuery.cleanData eliminates all public data");
+    }
+
+    /**
+     * Test {574=[FF68], 710=[IE], 711=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            FF68 = "3, 5, 8",
+            IE = "8")
+    public void ajax__jQuery_ajax____jQuery_get_Script_JSON_____jQuery_post____pass_through_request_object() throws Exception {
+        runTest("ajax: jQuery.ajax(), jQuery.get[Script|JSON](), jQuery.post(), pass-through request object");
+    }
+
+    /**
+     * Test {574=[CHROME], 668=[FF68], 856=[IE], 857=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__CSS_Auto_to_hide() throws Exception {
         runTest("effects: CSS Auto to hide");
     }
 
     /**
-     * Test {857=[IE], 858=[CHROME, FF52, FF60]}.
+     * Test {575=[IE], 576=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__domManip_plain_text_caching__trac_6779_() throws Exception {
+        runTest("manipulation: domManip plain-text caching (trac-6779)");
+    }
+
+    /**
+     * Test {575=[FF68], 711=[IE], 712=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "28",
+            FF68 = "12",
+            IE = "28")
+    public void ajax__jQuery_ajax_____cache() throws Exception {
+        runTest("ajax: jQuery.ajax() - cache");
+    }
+
+    /**
+     * Test {575=[CHROME], 669=[FF68], 857=[IE], 858=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_Auto_to_0() throws Exception {
         runTest("effects: JS Auto to 0");
     }
 
     /**
-     * Test {858=[IE], 859=[CHROME, FF52, FF60]}.
+     * Test {576=[IE], 577=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void manipulation__domManip_executes_scripts_containing_html_comments_or_CDATA__trac_9221_() throws Exception {
+        runTest("manipulation: domManip executes scripts containing html comments or CDATA (trac-9221)");
+    }
+
+    /**
+     * Test {576=[FF68], 712=[IE], 713=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5, 2, 7",
+            FF68 = "9, 0, 9",
+            IE = "5, 2, 7")
+    @NotYetImplemented
+    public void ajax__jQuery_ajax_____JSONP___Query_String___n____Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Same Domain");
+    }
+
+    /**
+     * Test {576=[CHROME], 670=[FF68], 858=[IE], 859=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_Auto_to_50() throws Exception {
         runTest("effects: JS Auto to 50");
     }
 
     /**
-     * Test {859=[IE], 860=[CHROME, FF52, FF60]}.
+     * Test {577=[IE], 578=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__domManip_tolerates_window_valued_document_0__in_IE9_10__trac_12266_() throws Exception {
+        runTest("manipulation: domManip tolerates window-valued document[0] in IE9/10 (trac-12266)");
+    }
+
+    /**
+     * Test {577=[FF68], 713=[IE], 714=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "10",
+            FF68 = "8, 1, 9",
+            IE = "10")
+    public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Same Domain");
+    }
+
+    /**
+     * Test {577=[CHROME], 671=[FF68], 859=[IE], 860=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_Auto_to_100() throws Exception {
         runTest("effects: JS Auto to 100");
     }
 
     /**
-     * Test {860=[IE], 861=[CHROME, FF52, FF60]}.
+     * Test {578=[IE], 579=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void manipulation__domManip_executes_scripts_in_iframes_in_the_iframes__context() throws Exception {
+        runTest("manipulation: domManip executes scripts in iframes in the iframes' context");
+    }
+
+    /**
+     * Test {578=[FF68], 714=[IE], 715=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "5, 0, 5",
+            IE = "2")
+    public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Same Domain");
+    }
+
+    /**
+     * Test {578=[CHROME], 672=[FF68], 860=[IE], 861=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     @NotYetImplemented
     public void effects__JS_Auto_to_show() throws Exception {
         runTest("effects: JS Auto to show");
     }
 
     /**
-     * Test {861=[IE], 862=[CHROME, FF52, FF60]}.
+     * Test {579=[FF68], 715=[IE], 716=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "3",
+            FF68 = "7, 0, 7",
+            IE = "3")
+    public void ajax__jQuery_ajax_____JSONP___POST___Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - POST - Same Domain");
+    }
+
+    /**
+     * Test {579=[CHROME], 673=[FF68], 861=[IE], 862=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__JS_Auto_to_hide() throws Exception {
         runTest("effects: JS Auto to hide");
     }
 
     /**
-     * Test {862=[IE], 863=[CHROME, FF52, FF60]}.
+     * Test {580=[FF68], 716=[IE], 717=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "3",
+            FF68 = "5, 0, 5",
+            IE = "3")
+    public void ajax__jQuery_ajax_____JSONP___Same_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Same Domain");
+    }
+
+    /**
+     * Test {580=[CHROME], 674=[FF68], 862=[IE], 863=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_100_to_0() throws Exception {
         runTest("effects: CSS 100 to 0");
     }
 
     /**
-     * Test {863=[IE], 864=[CHROME, FF52, FF60]}.
+     * Test {581=[FF68], 717=[IE], 718=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "2, 2, 4",
+            FF68 = "4, 0, 4",
+            IE = "2, 2, 4")
+    public void ajax__jQuery_ajax_____JSONP___Query_String___n____Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Query String (?n) - Cross Domain");
+    }
+
+    /**
+     * Test {581=[CHROME], 675=[FF68], 863=[IE], 864=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_100_to_50() throws Exception {
         runTest("effects: CSS 100 to 50");
     }
 
     /**
-     * Test {864=[IE], 865=[CHROME, FF52, FF60]}.
+     * Test {582=[FF68], 718=[IE], 719=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "10",
+            FF68 = "5, 1, 6",
+            IE = "10")
+    public void ajax__jQuery_ajax_____JSONP___Explicit_callback_param___Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Explicit callback param - Cross Domain");
+    }
+
+    /**
+     * Test {582=[CHROME], 676=[FF68], 864=[IE], 865=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_100_to_100() throws Exception {
         runTest("effects: CSS 100 to 100");
     }
 
     /**
-     * Test {865=[IE], 866=[CHROME, FF52, FF60]}.
+     * Test {583=[FF68], 719=[IE], 720=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____JSONP___Callback_in_data___Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Callback in data - Cross Domain");
+    }
+
+    /**
+     * Test {583=[CHROME], 677=[FF68], 865=[IE], 866=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__CSS_100_to_show() throws Exception {
         runTest("effects: CSS 100 to show");
     }
 
     /**
-     * Test {866=[IE], 867=[CHROME, FF52, FF60]}.
+     * Test {584=[FF68], 720=[IE], 721=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____JSONP___POST___Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - POST - Cross Domain");
+    }
+
+    /**
+     * Test {584=[CHROME], 678=[FF68], 866=[IE], 867=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__CSS_100_to_hide() throws Exception {
         runTest("effects: CSS 100 to hide");
     }
 
     /**
-     * Test {867=[IE], 868=[CHROME, FF52, FF60]}.
+     * Test {585=[FF68], 721=[IE], 722=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____JSONP___Cross_Domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSONP - Cross Domain");
+    }
+
+    /**
+     * Test {585=[CHROME], 679=[FF68], 867=[IE], 868=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_100_to_0() throws Exception {
         runTest("effects: JS 100 to 0");
     }
 
     /**
-     * Test {868=[IE], 869=[CHROME, FF52, FF60]}.
+     * Test {586=[IE], 587=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "13",
+            IE = "13")
+    @NotYetImplemented
+    public void manipulation__script_evaluation___11795_() throws Exception {
+        runTest("manipulation: script evaluation (#11795)");
+    }
+
+    /**
+     * Test {586=[CHROME], 680=[FF68], 868=[IE], 869=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_100_to_50() throws Exception {
         runTest("effects: JS 100 to 50");
     }
 
     /**
-     * Test {869=[IE], 870=[CHROME, FF52, FF60]}.
+     * Test {587=[IE], 588=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void manipulation__jQuery__evalUrl___12838_() throws Exception {
+        runTest("manipulation: jQuery._evalUrl (#12838)");
+    }
+
+    /**
+     * Test {587=[CHROME], 681=[FF68], 869=[IE], 870=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_100_to_100() throws Exception {
         runTest("effects: JS 100 to 100");
     }
 
     /**
-     * Test {870=[IE], 871=[CHROME, FF52, FF60]}.
+     * Test {588=[IE], 589=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void manipulation__jQuery_htmlPrefilter__gh_1747_() throws Exception {
+        runTest("manipulation: jQuery.htmlPrefilter (gh-1747)");
+    }
+
+    /**
+     * Test {588=[CHROME], 682=[FF68], 870=[IE], 871=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__JS_100_to_show() throws Exception {
         runTest("effects: JS 100 to show");
     }
 
     /**
-     * Test {871=[IE], 872=[CHROME, FF52, FF60]}.
+     * Test {589=[IE], 590=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "10",
+            IE = "10")
+    public void manipulation__insertAfter__insertBefore__etc_do_not_work_when_destination_is_original_element__Element_is_removed___4087_() throws Exception {
+        runTest("manipulation: insertAfter, insertBefore, etc do not work when destination is original element. Element is removed (#4087)");
+    }
+
+    /**
+     * Test {589=[CHROME], 683=[FF68], 871=[IE], 872=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__JS_100_to_hide() throws Exception {
         runTest("effects: JS 100 to hide");
     }
 
     /**
-     * Test {872=[IE], 873=[CHROME, FF52, FF60]}.
+     * Test {590=[IE], 591=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void manipulation__Index_for_function_argument_should_be_received___13094_() throws Exception {
+        runTest("manipulation: Index for function argument should be received (#13094)");
+    }
+
+    /**
+     * Test {590=[CHROME], 684=[FF68], 872=[IE], 873=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_50_to_0() throws Exception {
         runTest("effects: CSS 50 to 0");
     }
 
     /**
-     * Test {873=[IE], 874=[CHROME, FF52, FF60]}.
+     * Test {591=[IE], 592=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_jQuery_fn_remove_can_work_on_elements_in_documentFragment() throws Exception {
+        runTest("manipulation: Make sure jQuery.fn.remove can work on elements in documentFragment");
+    }
+
+    /**
+     * Test {591=[FF68], 727=[IE], 728=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
+    public void ajax__jQuery_ajax_____JSON_by_content_type() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSON by content-type");
+    }
+
+    /**
+     * Test {591=[CHROME], 685=[FF68], 873=[IE], 874=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_50_to_50() throws Exception {
         runTest("effects: CSS 50 to 50");
     }
 
     /**
-     * Test {874=[IE], 875=[CHROME, FF52, FF60]}.
+     * Test {592=[IE], 593=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "20",
+            IE = "20")
+    public void manipulation__Make_sure_specific_elements_with_content_created_correctly___13232_() throws Exception {
+        runTest("manipulation: Make sure specific elements with content created correctly (#13232)");
+    }
+
+    /**
+     * Test {592=[FF68], 728=[IE], 729=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
+    public void ajax__jQuery_ajax_____JSON_by_content_type_disabled_with_options() throws Exception {
+        runTest("ajax: jQuery.ajax() - JSON by content-type disabled with options");
+    }
+
+    /**
+     * Test {592=[CHROME], 686=[FF68], 874=[IE], 875=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_50_to_100() throws Exception {
         runTest("effects: CSS 50 to 100");
     }
 
     /**
-     * Test {875=[IE], 876=[CHROME, FF52, FF60]}.
+     * Test {593=[IE], 594=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "44",
+            IE = "44")
+    public void manipulation__Validate_creation_of_multiple_quantities_of_certain_elements___13818_() throws Exception {
+        runTest("manipulation: Validate creation of multiple quantities of certain elements (#13818)");
+    }
+
+    /**
+     * Test {593=[FF68], 729=[IE], 730=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____simple_get() throws Exception {
+        runTest("ajax: jQuery.ajax() - simple get");
+    }
+
+    /**
+     * Test {593=[CHROME], 687=[FF68], 875=[IE], 876=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__CSS_50_to_show() throws Exception {
         runTest("effects: CSS 50 to show");
     }
 
     /**
-     * Test {876=[IE], 877=[CHROME, FF52, FF60]}.
+     * Test {594=[IE], 595=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_tr_element_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
+        runTest("manipulation: Make sure tr element will be appended to tbody element of table when present");
+    }
+
+    /**
+     * Test {594=[FF68], 730=[IE], 731=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____simple_post() throws Exception {
+        runTest("ajax: jQuery.ajax() - simple post");
+    }
+
+    /**
+     * Test {594=[CHROME], 688=[FF68], 876=[IE], 877=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__CSS_50_to_hide() throws Exception {
         runTest("effects: CSS 50 to hide");
     }
 
     /**
-     * Test {877=[IE], 878=[CHROME, FF52, FF60]}.
+     * Test {595=[IE], 596=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_tr_elements_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
+        runTest("manipulation: Make sure tr elements will be appended to tbody element of table when present");
+    }
+
+    /**
+     * Test {595=[FF68], 731=[IE], 732=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____data_option___empty_bodies_for_non_GET_requests() throws Exception {
+        runTest("ajax: jQuery.ajax() - data option - empty bodies for non-GET requests");
+    }
+
+    /**
+     * Test {595=[CHROME], 689=[FF68], 877=[IE], 878=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_50_to_0() throws Exception {
         runTest("effects: JS 50 to 0");
     }
 
     /**
-     * Test {878=[IE], 879=[CHROME, FF52, FF60]}.
+     * Test {596=[IE], 597=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_tfoot_element_will_not_be_appended_to_tbody_element_of_table_when_present() throws Exception {
+        runTest("manipulation: Make sure tfoot element will not be appended to tbody element of table when present");
+    }
+
+    /**
+     * Test {596=[FF68], 737=[IE], 738=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "3, 0, 3",
+            IE = "4")
+    public void ajax__jQuery_ajax_____If_Modified_Since_support__cache_() throws Exception {
+        runTest("ajax: jQuery.ajax() - If-Modified-Since support (cache)");
+    }
+
+    /**
+     * Test {596=[CHROME], 690=[FF68], 878=[IE], 879=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_50_to_50() throws Exception {
         runTest("effects: JS 50 to 50");
     }
 
     /**
-     * Test {879=[IE], 880=[CHROME, FF52, FF60]}.
+     * Test {597=[IE], 598=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_document_fragment_will_be_appended_to_tbody_element_of_table_when_present() throws Exception {
+        runTest("manipulation: Make sure document fragment will be appended to tbody element of table when present");
+    }
+
+    /**
+     * Test {597=[FF68], 738=[IE], 739=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void ajax__jQuery_ajax_____Etag_support__cache_() throws Exception {
+        runTest("ajax: jQuery.ajax() - Etag support (cache)");
+    }
+
+    /**
+     * Test {597=[CHROME], 691=[FF68], 879=[IE], 880=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_50_to_100() throws Exception {
         runTest("effects: JS 50 to 100");
     }
 
     /**
-     * Test {880=[IE], 881=[CHROME, FF52, FF60]}.
+     * Test {598=[IE], 599=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void manipulation__Make_sure_col_element_is_appended_correctly() throws Exception {
+        runTest("manipulation: Make sure col element is appended correctly");
+    }
+
+    /**
+     * Test {598=[FF68], 739=[IE], 740=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "3, 0, 3",
+            IE = "4")
+    public void ajax__jQuery_ajax_____If_Modified_Since_support__no_cache_() throws Exception {
+        runTest("ajax: jQuery.ajax() - If-Modified-Since support (no cache)");
+    }
+
+    /**
+     * Test {598=[CHROME], 692=[FF68], 880=[IE], 881=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__JS_50_to_show() throws Exception {
         runTest("effects: JS 50 to show");
     }
 
     /**
-     * Test {881=[IE], 882=[CHROME, FF52, FF60]}.
+     * Test {599=[IE], 600=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Make_sure_tr_is_not_appended_to_the_wrong_tbody__gh_3439_() throws Exception {
+        runTest("manipulation: Make sure tr is not appended to the wrong tbody (gh-3439)");
+    }
+
+    /**
+     * Test {599=[FF68], 740=[IE], 741=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void ajax__jQuery_ajax_____Etag_support__no_cache_() throws Exception {
+        runTest("ajax: jQuery.ajax() - Etag support (no cache)");
+    }
+
+    /**
+     * Test {599=[CHROME], 693=[FF68], 881=[IE], 882=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__JS_50_to_hide() throws Exception {
         runTest("effects: JS 50 to hide");
     }
 
     /**
-     * Test {882=[IE], 883=[CHROME, FF52, FF60]}.
+     * Test {600=[IE], 601=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void manipulation__Insert_script_with_data_URI__gh_1887_() throws Exception {
+        runTest("manipulation: Insert script with data-URI (gh-1887)");
+    }
+
+    /**
+     * Test {600=[FF68], 741=[IE], 742=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
+        runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
+    }
+
+    /**
+     * Test {600=[CHROME], 694=[FF68], 882=[IE], 883=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_0_to_0() throws Exception {
         runTest("effects: CSS 0 to 0");
     }
 
     /**
-     * Test {883=[IE], 884=[CHROME, FF52, FF60]}.
+     * Test {601=[FF68], 742=[IE], 743=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void ajax__jQuery_ajax_____failing_cross_domain() throws Exception {
+        runTest("ajax: jQuery.ajax() - failing cross-domain");
+    }
+
+    /**
+     * Test {601=[CHROME], 695=[FF68], 883=[IE], 884=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_0_to_50() throws Exception {
         runTest("effects: CSS 0 to 50");
     }
 
     /**
-     * Test {884=[IE], 885=[CHROME, FF52, FF60]}.
+     * Test {602=[FF68], 743=[IE], 744=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____atom_xml() throws Exception {
+        runTest("ajax: jQuery.ajax() - atom+xml");
+    }
+
+    /**
+     * Test {602=[CHROME], 696=[FF68], 884=[IE], 885=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__CSS_0_to_100() throws Exception {
         runTest("effects: CSS 0 to 100");
     }
 
     /**
-     * Test {885=[IE], 886=[CHROME, FF52, FF60]}.
+     * Test {603=[FF68], 744=[IE], 745=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
+    public void ajax__jQuery_ajax_____statusText() throws Exception {
+        runTest("ajax: jQuery.ajax() - statusText");
+    }
+
+    /**
+     * Test {603=[CHROME], 697=[FF68], 885=[IE], 886=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__CSS_0_to_show() throws Exception {
         runTest("effects: CSS 0 to show");
     }
 
     /**
-     * Test {886=[IE], 887=[CHROME, FF52, FF60]}.
+     * Test {604=[FF68], 745=[IE], 746=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "20",
+            FF68 = "9, 11, 20",
+            IE = "20")
+    public void ajax__jQuery_ajax_____statusCode() throws Exception {
+        runTest("ajax: jQuery.ajax() - statusCode");
+    }
+
+    /**
+     * Test {604=[CHROME], 698=[FF68], 886=[IE], 887=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__CSS_0_to_hide() throws Exception {
         runTest("effects: CSS 0 to hide");
     }
 
     /**
-     * Test {887=[IE], 888=[CHROME, FF52, FF60]}.
+     * Test {605=[FF68], 746=[IE], 747=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "8",
+            FF68 = "3, 0, 3",
+            IE = "8")
+    public void ajax__jQuery_ajax_____transitive_conversions() throws Exception {
+        runTest("ajax: jQuery.ajax() - transitive conversions");
+    }
+
+    /**
+     * Test {605=[CHROME], 699=[FF68], 887=[IE], 888=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_0_to_0() throws Exception {
         runTest("effects: JS 0 to 0");
     }
 
     /**
-     * Test {888=[IE], 889=[CHROME, FF52, FF60]}.
+     * Test {606=[FF68], 747=[IE], 748=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____overrideMimeType() throws Exception {
+        runTest("ajax: jQuery.ajax() - overrideMimeType");
+    }
+
+    /**
+     * Test {606=[CHROME], 700=[FF68], 888=[IE], 889=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_0_to_50() throws Exception {
         runTest("effects: JS 0 to 50");
     }
 
     /**
-     * Test {889=[IE], 890=[CHROME, FF52, FF60]}.
+     * Test {607=[FF68], 748=[IE], 749=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____empty_json_gets_to_error_callback_instead_of_success_callback_() throws Exception {
+        runTest("ajax: jQuery.ajax() - empty json gets to error callback instead of success callback.");
+    }
+
+    /**
+     * Test {607=[CHROME], 701=[FF68], 889=[IE], 890=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "6",
+            FF68 = "2, 0, 2",
+            IE = "6")
     public void effects__JS_0_to_100() throws Exception {
         runTest("effects: JS 0 to 100");
     }
 
     /**
-     * Test {890=[IE], 891=[CHROME, FF52, FF60]}.
+     * Test {608=[FF68], 749=[IE], 750=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF = "2",
+            IE = "2")
+    public void ajax___2688___jQuery_ajax_____beforeSend__cancel_request() throws Exception {
+        runTest("ajax: #2688 - jQuery.ajax() - beforeSend, cancel request");
+    }
+
+    /**
+     * Test {608=[CHROME], 702=[FF68], 890=[IE], 891=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "1, 4, 5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__JS_0_to_show() throws Exception {
         runTest("effects: JS 0 to show");
     }
 
     /**
-     * Test {891=[IE], 892=[CHROME, FF52, FF60]}.
+     * Test {609=[FF68], 750=[IE], 751=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax___2806___jQuery_ajax_____data_option___evaluate_function_values() throws Exception {
+        runTest("ajax: #2806 - jQuery.ajax() - data option - evaluate function values");
+    }
+
+    /**
+     * Test {609=[CHROME], 703=[FF68], 891=[IE], 892=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__JS_0_to_hide() throws Exception {
         runTest("effects: JS 0 to hide");
     }
 
     /**
-     * Test {892=[IE], 893=[CHROME, FF52, FF60]}.
+     * Test {610=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("16")
-    public void effects__Effects_chaining() throws Exception {
-        runTest("effects: Effects chaining");
+    @Alerts(CHROME = "5")
+    public void effects__Chain_fadeOut_fadeIn() throws Exception {
+        runTest("effects: Chain fadeOut fadeIn");
     }
 
     /**
-     * Test {893=[IE], 894=[CHROME, FF52, FF60]}.
+     * Test {610=[FF68], 751=[IE], 752=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF = "1",
+            IE = "1")
+    public void ajax___7531___jQuery_ajax_____Location_object_as_url() throws Exception {
+        runTest("ajax: #7531 - jQuery.ajax() - Location object as url");
+    }
+
+    /**
+     * Test {611=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_fadeIn_fadeOut() throws Exception {
+        runTest("effects: Chain fadeIn fadeOut");
+    }
+
+    /**
+     * Test {611=[FF68], 752=[IE], 753=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Same_Domain() throws Exception {
+        runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Same Domain");
+    }
+
+    /**
+     * Test {612=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_hide_show() throws Exception {
+        runTest("effects: Chain hide show");
+    }
+
+    /**
+     * Test {612=[FF68], 753=[IE], 754=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void ajax___7578___jQuery_ajax_____JSONP___default_for_cache_option___Cross_Domain() throws Exception {
+        runTest("ajax: #7578 - jQuery.ajax() - JSONP - default for cache option - Cross Domain");
+    }
+
+    /**
+     * Test {613=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_show_hide() throws Exception {
+        runTest("effects: Chain show hide");
+    }
+
+    /**
+     * Test {613=[FF68], 754=[IE], 755=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void ajax___8107___jQuery_ajax_____multiple_method_signatures_introduced_in_1_5() throws Exception {
+        runTest("ajax: #8107 - jQuery.ajax() - multiple method signatures introduced in 1.5");
+    }
+
+    /**
+     * Test {614=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_show_hide_with_easing_and_callback() throws Exception {
+        runTest("effects: Chain show hide with easing and callback");
+    }
+
+    /**
+     * Test {614=[FF68], 755=[IE], 756=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Same_Domain() throws Exception {
+        runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Same Domain");
+    }
+
+    /**
+     * Test {615=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_toggle_in() throws Exception {
+        runTest("effects: Chain toggle in");
+    }
+
+    /**
+     * Test {615=[FF68], 756=[IE], 757=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void ajax___8205___jQuery_ajax_____JSONP___re_use_callbacks_name___Cross_Domain() throws Exception {
+        runTest("ajax: #8205 - jQuery.ajax() - JSONP - re-use callbacks name - Cross Domain");
+    }
+
+    /**
+     * Test {616=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_toggle_out() throws Exception {
+        runTest("effects: Chain toggle out");
+    }
+
+    /**
+     * Test {616=[FF68], 757=[IE], 758=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "2",
+            IE = "2")
+    public void ajax___9887___jQuery_ajax_____Context_with_circular_references___9887_() throws Exception {
+        runTest("ajax: #9887 - jQuery.ajax() - Context with circular references (#9887)");
+    }
+
+    /**
+     * Test {617=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_toggle_out_with_easing_and_callback() throws Exception {
+        runTest("effects: Chain toggle out with easing and callback");
+    }
+
+    /**
+     * Test {617=[FF68], 758=[IE], 759=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void ajax___10093___jQuery_ajax_____falsy_url_as_argument() throws Exception {
+        runTest("ajax: #10093 - jQuery.ajax() - falsy url as argument");
+    }
+
+    /**
+     * Test {618=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_slideDown_slideUp() throws Exception {
+        runTest("effects: Chain slideDown slideUp");
+    }
+
+    /**
+     * Test {618=[FF68], 759=[IE], 760=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "4",
+            IE = "4")
+    public void ajax___10093___jQuery_ajax_____falsy_url_in_settings_object() throws Exception {
+        runTest("ajax: #10093 - jQuery.ajax() - falsy url in settings object");
+    }
+
+    /**
+     * Test {619=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_slideUp_slideDown() throws Exception {
+        runTest("effects: Chain slideUp slideDown");
+    }
+
+    /**
+     * Test {619=[IE], 620=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "17",
+            IE = "17")
+    @NotYetImplemented
+    public void css__css___non_px_relative_values__gh_1711_() throws Exception {
+        runTest("css: css() non-px relative values (gh-1711)");
+    }
+
+    /**
+     * Test {619=[FF68], 760=[IE], 761=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void ajax___11151___jQuery_ajax_____parse_error_body() throws Exception {
+        runTest("ajax: #11151 - jQuery.ajax() - parse error body");
+    }
+
+    /**
+     * Test {620=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_slideUp_slideDown_with_easing_and_callback() throws Exception {
+        runTest("effects: Chain slideUp slideDown with easing and callback");
+    }
+
+    /**
+     * Test {620=[IE], 621=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void css__css___mismatched_relative_values_with_bounded_styles__gh_2144_() throws Exception {
+        runTest("css: css() mismatched relative values with bounded styles (gh-2144)");
+    }
+
+    /**
+     * Test {620=[FF68], 761=[IE], 762=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "1, 0, 1",
+            IE = "1")
+    public void ajax___11426___jQuery_ajax_____loading_binary_data_shouldn_t_throw_an_exception_in_IE() throws Exception {
+        runTest("ajax: #11426 - jQuery.ajax() - loading binary data shouldn't throw an exception in IE");
+    }
+
+    /**
+     * Test {621=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_slideToggle_in() throws Exception {
+        runTest("effects: Chain slideToggle in");
+    }
+
+    /**
+     * Test {621=[FF68], 763=[IE], 764=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
+    @NotYetImplemented
+    public void ajax___11743___jQuery_ajax_____script__throws_exception() throws Exception {
+        runTest("ajax: #11743 - jQuery.ajax() - script, throws exception");
+    }
+
+    /**
+     * Test {622=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_slideToggle_out() throws Exception {
+        runTest("effects: Chain slideToggle out");
+    }
+
+    /**
+     * Test {622=[IE], 623=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void css__css_String__Object__with_negative_values() throws Exception {
+        runTest("css: css(String, Object) with negative values");
+    }
+
+    /**
+     * Test {622=[FF68], 764=[IE], 765=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___method_set_globally() throws Exception {
+        runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - method set globally");
+    }
+
+    /**
+     * Test {623=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_fadeToggle_in() throws Exception {
+        runTest("effects: Chain fadeToggle in");
+    }
+
+    /**
+     * Test {623=[FF68], 765=[IE], 766=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax___12004___jQuery_ajax_____method_is_an_alias_of_type___type_set_globally() throws Exception {
+        runTest("ajax: #12004 - jQuery.ajax() - method is an alias of type - type set globally");
+    }
+
+    /**
+     * Test {624=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_fadeToggle_out() throws Exception {
+        runTest("effects: Chain fadeToggle out");
+    }
+
+    /**
+     * Test {624=[FF68], 766=[IE], 767=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void ajax___13276___jQuery_ajax_____compatibility_between_XML_documents_from_ajax_requests_and_parsed_string() throws Exception {
+        runTest("ajax: #13276 - jQuery.ajax() - compatibility between XML documents from ajax requests and parsed string");
+    }
+
+    /**
+     * Test {625=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5")
+    public void effects__Chain_fadeTo_0_5_1_0_with_easing_and_callback_() throws Exception {
+        runTest("effects: Chain fadeTo 0.5 1.0 with easing and callback)");
+    }
+
+    /**
+     * Test {625=[FF68], 767=[IE], 768=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax___13292___jQuery_ajax_____converter_is_bypassed_for_204_requests() throws Exception {
+        runTest("ajax: #13292 - jQuery.ajax() - converter is bypassed for 204 requests");
+    }
+
+    /**
+     * Test {626=[FF68], 768=[IE], 769=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "2, 0, 2",
+            IE = "3")
+    public void ajax___13388___jQuery_ajax_____responseXML() throws Exception {
+        runTest("ajax: #13388 - jQuery.ajax() - responseXML");
+    }
+
+    /**
+     * Test {626=[CHROME], 705=[FF68], 893=[IE], 894=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "4",
+            FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
     public void effects__jQuery_show__fast___doesn_t_clear_radio_buttons__bug__1095_() throws Exception {
         runTest("effects: jQuery.show('fast') doesn't clear radio buttons (bug #1095)");
     }
 
     /**
-     * Test {894=[IE], 895=[CHROME, FF52, FF60]}.
+     * Test {627=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("24")
-    public void effects__interrupt_toggle() throws Exception {
-        runTest("effects: interrupt toggle");
+    @Alerts(CHROME = "8")
+    public void effects__slideToggle___stop___slideToggle__() throws Exception {
+        runTest("effects: slideToggle().stop().slideToggle()");
     }
 
     /**
-     * Test {895=[IE], 896=[CHROME, FF52, FF60]}.
+     * Test {627=[FF68], 769=[IE], 770=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void ajax___13922___jQuery_ajax_____converter_is_bypassed_for_HEAD_requests() throws Exception {
+        runTest("ajax: #13922 - jQuery.ajax() - converter is bypassed for HEAD requests");
+    }
+
+    /**
+     * Test {628=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "1, 0, 1")
+    public void ajax___13240___jQuery_ajax_____support_non_RFC2616_methods() throws Exception {
+        runTest("ajax: #13240 - jQuery.ajax() - support non-RFC2616 methods");
+    }
+
+    /**
+     * Test {628=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "8")
+    public void effects__fadeToggle___stop___fadeToggle__() throws Exception {
+        runTest("effects: fadeToggle().stop().fadeToggle()");
+    }
+
+    /**
+     * Test {628=[IE], 629=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "18",
+            IE = "18")
+    public void css__show__() throws Exception {
+        runTest("css: show()");
+    }
+
+    /**
+     * Test {629=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF68 = "2, 0, 2")
+    public void ajax__global_failure() throws Exception {
+        runTest("ajax: global failure");
+    }
+
+    /**
+     * Test {629=[CHROME]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "8")
+    public void effects__toggle___stop___toggle__() throws Exception {
+        runTest("effects: toggle().stop().toggle()");
+    }
+
+    /**
+     * Test {629=[IE], 630=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "19",
+            IE = "19")
+    public void css__show_hide_detached_nodes() throws Exception {
+        runTest("css: show/hide detached nodes");
+    }
+
+    /**
+     * Test {630=[CHROME], 707=[FF68], 895=[IE], 896=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "5",
+            FF60 = "5",
+            FF68 = "2, 0, 2",
+            IE = "5")
     public void effects__animate_with_per_property_easing() throws Exception {
         runTest("effects: animate with per-property easing");
     }
 
     /**
-     * Test {896=[IE], 897=[CHROME, FF52, FF60]}.
+     * Test {631=[IE], 632=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("11")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__show___after_hide___should_always_set_display_to_initial_value___14750_() throws Exception {
+        runTest("css: show() after hide() should always set display to initial value (#14750)");
+    }
+
+    /**
+     * Test {631=[FF68], 817=[IE], 818=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "2, 2, 4",
+            IE = "1")
+    public void effects__show___basic() throws Exception {
+        runTest("effects: show() basic");
+    }
+
+    /**
+     * Test {631=[CHROME], 708=[FF68], 896=[IE], 897=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "11",
+            FF60 = "11",
+            FF68 = "2, 0, 2",
+            IE = "11")
     public void effects__animate_with_CSS_shorthand_properties() throws Exception {
         runTest("effects: animate with CSS shorthand properties");
     }
 
     /**
-     * Test {897=[IE], 898=[CHROME, FF52, FF60]}.
+     * Test {632=[IE], 633=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(FF60 = "36",
+            IE = "36")
+    public void css__show_hide_3_0__default_display() throws Exception {
+        runTest("css: show/hide 3.0, default display");
+    }
+
+    /**
+     * Test {632=[CHROME], 709=[FF68], 897=[IE], 898=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7, 2, 9",
+            FF60 = "4",
+            FF68 = "3, 2, 5",
+            IE = "4")
     public void effects__hide_hidden_elements__with_animation__bug__7141_() throws Exception {
         runTest("effects: hide hidden elements, with animation (bug #7141)");
     }
 
     /**
-     * Test {898=[IE], 899=[CHROME, FF52, FF60]}.
+     * Test {633=[IE], 634=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void css__show_hide_3_0__default_body_display() throws Exception {
+        runTest("css: show/hide 3.0, default body display");
+    }
+
+    /**
+     * Test {633=[CHROME], 710=[FF68], 898=[IE], 899=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "9, 1, 10",
+            FF60 = "2",
+            FF68 = "3, 1, 4",
+            IE = "2")
     public void effects__animate_unit_less_properties___4966_() throws Exception {
         runTest("effects: animate unit-less properties (#4966)");
     }
 
     /**
-     * Test {899=[IE], 900=[CHROME, FF52, FF60]}.
+     * Test {634=[IE], 635=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("6")
+    @Alerts(FF60 = "36",
+            IE = "36")
+    public void css__show_hide_3_0__cascade_display() throws Exception {
+        runTest("css: show/hide 3.0, cascade display");
+    }
+
+    /**
+     * Test {634=[CHROME], 711=[FF68], 899=[IE], 900=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "7, 2, 9",
+            FF60 = "6",
+            FF68 = "3, 2, 5",
+            IE = "6")
     public void effects__animate_properties_missing_px_w__opacity_as_last___9074_() throws Exception {
         runTest("effects: animate properties missing px w/ opacity as last (#9074)");
     }
 
     /**
-     * Test {900=[IE], 901=[CHROME, FF52, FF60]}.
+     * Test {635=[IE], 636=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(FF60 = "96",
+            IE = "96")
+    public void css__show_hide_3_0__inline_display() throws Exception {
+        runTest("css: show/hide 3.0, inline display");
+    }
+
+    /**
+     * Test {635=[CHROME], 712=[FF68], 900=[IE], 901=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "13, 0, 13",
+            FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
     public void effects__callbacks_should_fire_in_correct_order___9100_() throws Exception {
         runTest("effects: callbacks should fire in correct order (#9100)");
     }
 
     /**
-     * Test {901=[IE], 902=[CHROME, FF52, FF60]}.
+     * Test {636=[IE], 637=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "72",
+            IE = "72")
+    public void css__show_hide_3_0__cascade_hidden() throws Exception {
+        runTest("css: show/hide 3.0, cascade hidden");
+    }
+
+    /**
+     * Test {636=[FF68], 824=[IE], 825=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "12",
+            FF68 = "2, 0, 2",
+            IE = "12")
+    @NotYetImplemented
+    public void effects__animate_relative_values() throws Exception {
+        runTest("effects: animate relative values");
+    }
+
+    /**
+     * Test {636=[CHROME], 713=[FF68], 901=[IE], 902=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "15, 0, 15",
+            FF60 = "2",
+            FF68 = "99, 0, 99",
+            IE = "2")
     public void effects__callbacks_that_throw_exceptions_will_be_removed___5684_() throws Exception {
         runTest("effects: callbacks that throw exceptions will be removed (#5684)");
     }
 
     /**
-     * Test {902=[IE], 903=[CHROME, FF52, FF60]}.
+     * Test {637=[IE], 638=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "84",
+            IE = "84")
+    public void css__show_hide_3_0__inline_hidden() throws Exception {
+        runTest("css: show/hide 3.0, inline hidden");
+    }
+
+    /**
+     * Test {637=[CHROME], 714=[FF68], 902=[IE], 903=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "17, 1, 18",
+            FF60 = "2",
+            FF68 = "3, 1, 4",
+            IE = "2")
     public void effects__animate_will_scale_margin_properties_individually() throws Exception {
         runTest("effects: animate will scale margin properties individually");
     }
 
     /**
-     * Test {903=[IE], 904=[CHROME, FF52, FF60]}.
+     * Test {638=[CHROME], 715=[FF68], 903=[IE], 904=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9151,48 +12254,69 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {904=[IE], 905=[CHROME, FF52, FF60]}.
+     * Test {639=[IE], 640=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    @NotYetImplemented
-    public void effects__line_height_animates_correctly___13855_() throws Exception {
-        runTest("effects: line-height animates correctly (#13855)");
+    @Alerts(FF60 = "6",
+            IE = "6")
+    public void css__detached_toggle__() throws Exception {
+        runTest("css: detached toggle()");
     }
 
     /**
-     * Test {905=[IE], 906=[CHROME, FF52, FF60]}.
+     * Test {639=[CHROME], 717=[FF68], 905=[IE], 906=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(CHROME = "21, 0, 21",
+            FF60 = "4",
+            FF68 = "3, 0, 3",
+            IE = "4")
     public void effects__jQuery_Animation__object__props__opts__() throws Exception {
         runTest("effects: jQuery.Animation( object, props, opts )");
     }
 
     /**
-     * Test {906=[IE], 907=[CHROME, FF52, FF60]}.
+     * Test {640=[CHROME], 718=[FF68], 906=[IE], 907=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "13, 0, 13",
+            FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
     public void effects__Animate_Option__step__function__percent__tween__() throws Exception {
         runTest("effects: Animate Option: step: function( percent, tween )");
     }
 
     /**
-     * Test {907=[IE], 908=[CHROME, FF52, FF60]}.
+     * Test {641=[CHROME], 719=[FF68], 907=[IE], 908=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(CHROME = "25, 0, 25",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
     public void effects__Animate_callbacks_have_correct_context() throws Exception {
         runTest("effects: Animate callbacks have correct context");
     }
 
     /**
-     * Test {908=[IE], 909=[CHROME, FF52, FF60]}.
+     * Test {642=[IE], 643=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void css__computed_margins__trac_3333__gh_2237_() throws Exception {
+        runTest("css: computed margins (trac-3333; gh-2237)");
+    }
+
+    /**
+     * Test {642=[CHROME], 720=[FF68], 908=[IE], 909=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9202,102 +12326,124 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {909=[IE], 910=[CHROME, FF52, FF60]}.
+     * Test {643=[CHROME], 721=[FF68], 909=[IE], 910=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("20")
+    @Alerts(CHROME = "7, 1, 8",
+            FF60 = "20",
+            FF68 = "5, 1, 6",
+            IE = "20")
     public void effects__animate_should_set_display_for_disconnected_nodes() throws Exception {
         runTest("effects: animate should set display for disconnected nodes");
     }
 
     /**
-     * Test {910=[IE], 911=[CHROME, FF52, FF60]}.
+     * Test {644=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void effects__Animation_callback_should_not_show_animated_element_as__animated___7157_() throws Exception {
-        runTest("effects: Animation callback should not show animated element as :animated (#7157)");
+    @Alerts(CHROME = "5, 0, 5")
+    public void effects__Animation_callback_should_not_show_animated_element_as_animated___7157_() throws Exception {
+        runTest("effects: Animation callback should not show animated element as animated (#7157)");
     }
 
     /**
-     * Test {911=[IE], 912=[CHROME, FF52, FF60]}.
+     * Test {645=[CHROME], 724=[FF68], 912=[IE], 913=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void effects__Initial_step_callback_should_show_element_as__animated___14623_() throws Exception {
-        runTest("effects: Initial step callback should show element as :animated (#14623)");
-    }
-
-    /**
-     * Test {912=[IE], 913=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
+    @Alerts(CHROME = "7, 0, 7",
+            FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
     public void effects__hide_called_on_element_within_hidden_parent_should_set_display_to_none___10045_() throws Exception {
         runTest("effects: hide called on element within hidden parent should set display to none (#10045)");
     }
 
     /**
-     * Test {913=[IE], 914=[CHROME, FF52, FF60]}.
+     * Test {646=[CHROME], 725=[FF68], 913=[IE], 914=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("5")
+    @Alerts(CHROME = "8, 0, 8",
+            FF60 = "5",
+            FF68 = "3, 0, 3",
+            IE = "5")
     public void effects__hide__fadeOut_and_slideUp_called_on_element_width_height_and_width___0_should_set_display_to_none() throws Exception {
         runTest("effects: hide, fadeOut and slideUp called on element width height and width = 0 should set display to none");
     }
 
     /**
-     * Test {914=[IE], 915=[CHROME, FF52, FF60]}.
+     * Test {647=[IE], 648=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    public void effects__hide_should_not_leave_hidden_inline_elements_visible___14848_() throws Exception {
-        runTest("effects: hide should not leave hidden inline elements visible (#14848)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Ensure_styles_are_retrieving_from_parsed_html_on_document_fragments() throws Exception {
+        runTest("css: Ensure styles are retrieving from parsed html on document fragments");
     }
 
     /**
-     * Test {915=[IE], 916=[CHROME, FF52, FF60]}.
+     * Test {647=[CHROME], 727=[FF68], 915=[IE], 916=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("10")
+    @Alerts(CHROME = "2, 0, 2",
+            FF60 = "10",
+            FF68 = "2, 0, 2",
+            IE = "10")
     public void effects__Handle_queue_false_promises() throws Exception {
         runTest("effects: Handle queue:false promises");
     }
 
     /**
-     * Test {916=[IE], 917=[CHROME, FF52, FF60]}.
+     * Test {648=[CHROME], 728=[FF68], 916=[IE], 917=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
+    @Alerts(CHROME = "4, 0, 4",
+            FF60 = "4",
+            FF68 = "3, 0, 3",
+            IE = "4")
     public void effects__multiple_unqueued_and_promise() throws Exception {
         runTest("effects: multiple unqueued and promise");
     }
 
     /**
-     * Test {917=[IE], 918=[CHROME, FF52, FF60]}.
+     * Test {649=[CHROME], 729=[FF68], 917=[IE], 918=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(CHROME = "5, 0, 5",
+            FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
     @NotYetImplemented
     public void effects__animate_does_not_change_start_value_for_non_px_animation___7109_() throws Exception {
         runTest("effects: animate does not change start value for non-px animation (#7109)");
     }
 
     /**
-     * Test {918=[IE], 919=[CHROME, FF52, FF60]}.
+     * Test {650=[IE], 651=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "2",
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void css__Do_not_append_px___9548___12990___2792_() throws Exception {
+        runTest("css: Do not append px (#9548, #12990, #2792)");
+    }
+
+    /**
+     * Test {650=[CHROME], 730=[FF68], 918=[IE], 919=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6, 0, 6",
+            FF60 = "2",
+            FF68 = "2, 0, 2",
             IE = "1")
     @NotYetImplemented(IE)
     public void effects__non_px_animation_handles_non_numeric_start___11971_() throws Exception {
@@ -9305,47 +12451,55 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {919=[IE], 920=[CHROME, FF52, FF60]}.
+     * Test {651=[CHROME], 731=[FF68], 919=[IE], 920=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("15")
+    @Alerts(CHROME = "15, 5, 20",
+            FF60 = "15",
+            FF68 = "4, 6, 10",
+            IE = "15")
     public void effects__Animation_callbacks___11797_() throws Exception {
         runTest("effects: Animation callbacks (#11797)");
     }
 
     /**
-     * Test {920=[IE], 921=[CHROME, FF52, FF60]}.
+     * Test {652=[IE], 653=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
-    public void effects__Animation_callbacks_in_order___2292_() throws Exception {
-        runTest("effects: Animation callbacks in order (#2292)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__css__width___should_work_correctly_before_document_ready___14084_() throws Exception {
+        runTest("css: css('width') should work correctly before document ready (#14084)");
     }
 
     /**
-     * Test {921=[IE], 922=[CHROME, FF52, FF60]}.
+     * Test {652=[CHROME], 732=[FF68], 921=[IE], 922=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("8")
+    @Alerts(CHROME = "3, 0, 3",
+            FF60 = "8",
+            FF68 = "3, 0, 3",
+            IE = "8")
     public void effects__Animate_properly_sets_overflow_hidden_when_animating_width_height___12117_() throws Exception {
         runTest("effects: Animate properly sets overflow hidden when animating width/height (#12117)");
     }
 
     /**
-     * Test {922=[IE], 923=[CHROME, FF52, FF60]}.
+     * Test {653=[IE], 654=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
-    public void effects__Each_tick_of_the_timer_loop_uses_a_fresh_time___12837_() throws Exception {
-        runTest("effects: Each tick of the timer loop uses a fresh time (#12837)");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__css__width___should_work_correctly_with_browser_zooming() throws Exception {
+        runTest("css: css('width') should work correctly with browser zooming");
     }
 
     /**
-     * Test {923=[IE], 924=[CHROME, FF52, FF60]}.
+     * Test {653=[CHROME], 734=[FF68], 923=[IE], 924=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9355,228 +12509,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {924=[IE], 925=[CHROME, FF52, FF60]}.
+     * Test {654=[IE], 655=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void effects__toggle_state_tests__toggle___8685_() throws Exception {
-        runTest("effects: toggle state tests: toggle (#8685)");
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void css__css__width___and_css__height___should_return_fractional_values_for_nodes_in_the_document() throws Exception {
+        runTest("css: css('width') and css('height') should return fractional values for nodes in the document");
     }
 
     /**
-     * Test {925=[IE], 926=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__toggle_state_tests__slideToggle___8685_() throws Exception {
-        runTest("effects: toggle state tests: slideToggle (#8685)");
-    }
-
-    /**
-     * Test {926=[IE], 927=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__toggle_state_tests__fadeToggle___8685_() throws Exception {
-        runTest("effects: toggle state tests: fadeToggle (#8685)");
-    }
-
-    /**
-     * Test {927=[IE], 928=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void effects__jQuery_fx_start___jQuery_fx_stop_hook_points() throws Exception {
-        runTest("effects: jQuery.fx.start & jQuery.fx.stop hook points");
-    }
-
-    /**
-     * Test {928=[IE], 929=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("11")
-    public void effects___finish___completes_all_queued_animations() throws Exception {
-        runTest("effects: .finish() completes all queued animations");
-    }
-
-    /**
-     * Test {929=[IE], 930=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("10")
-    public void effects___finish__false_____unqueued_animations() throws Exception {
-        runTest("effects: .finish( false ) - unqueued animations");
-    }
-
-    /**
-     * Test {930=[IE], 931=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("11")
-    public void effects___finish___custom______custom_queue_animations() throws Exception {
-        runTest("effects: .finish( \"custom\" ) - custom queue animations");
-    }
-
-    /**
-     * Test {931=[IE], 932=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("6")
-    public void effects___finish___calls_finish_of_custom_queue_functions() throws Exception {
-        runTest("effects: .finish() calls finish of custom queue functions");
-    }
-
-    /**
-     * Test {932=[IE], 933=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void effects___finish___is_applied_correctly_when_multiple_elements_were_animated___13937_() throws Exception {
-        runTest("effects: .finish() is applied correctly when multiple elements were animated (#13937)");
-    }
-
-    /**
-     * Test {933=[IE], 934=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void effects__slideDown___after_stop_____13483_() throws Exception {
-        runTest("effects: slideDown() after stop() (#13483)");
-    }
-
-    /**
-     * Test {934=[IE], 935=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void effects__Respect_display_value_on_inline_elements___14824_() throws Exception {
-        runTest("effects: Respect display value on inline elements (#14824)");
-    }
-
-    /**
-     * Test {935=[IE], 936=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void effects__jQuery_easing__default__gh_2218_() throws Exception {
-        runTest("effects: jQuery.easing._default (gh-2218)");
-    }
-
-    /**
-     * Test {936=[IE], 937=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void effects__jQuery_easing__default_in_Animation__gh_2218() throws Exception {
-        runTest("effects: jQuery.easing._default in Animation (gh-2218");
-    }
-
-    /**
-     * Test {937=[IE], 938=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void effects__jQuery_easing__default_in_Tween__gh_2218_() throws Exception {
-        runTest("effects: jQuery.easing._default in Tween (gh-2218)");
-    }
-
-    /**
-     * Test {938=[IE], 939=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("3")
-    public void effects__Display_value_is_correct_for_disconnected_nodes__trac_13310_() throws Exception {
-        runTest("effects: Display value is correct for disconnected nodes (trac-13310)");
-    }
-
-    /**
-     * Test {939=[IE], 940=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("40")
-    @NotYetImplemented(IE)
-    public void effects__Show_hide_toggle_and_display__inline() throws Exception {
-        runTest("effects: Show/hide/toggle and display: inline");
-    }
-
-    /**
-     * Test {940=[IE], 941=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__jQuery_speed__speed__easing__complete__() throws Exception {
-        runTest("effects: jQuery.speed( speed, easing, complete )");
-    }
-
-    /**
-     * Test {941=[IE], 942=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__jQuery_speed__speed__easing__complete_____with_easing_function() throws Exception {
-        runTest("effects: jQuery.speed( speed, easing, complete ) - with easing function");
-    }
-
-    /**
-     * Test {942=[IE], 943=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__jQuery_speed__options__() throws Exception {
-        runTest("effects: jQuery.speed( options )");
-    }
-
-    /**
-     * Test {943=[IE], 944=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void effects__jQuery_speed__options_____with_easing_function() throws Exception {
-        runTest("effects: jQuery.speed( options ) - with easing function");
-    }
-
-    /**
-     * Test {944=[IE], 945=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void effects__jQuery_speed__options_____queue_values() throws Exception {
-        runTest("effects: jQuery.speed( options ) - queue values");
-    }
-
-    /**
-     * Test {945=[IE], 946=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("5")
-    public void effects__jQuery_speed_____durations() throws Exception {
-        runTest("effects: jQuery.speed() - durations");
-    }
-
-    /**
-     * Test {946=[IE], 947=[CHROME, FF52, FF60]}.
+     * Test {654=[CHROME], 746=[FF68], 946=[IE], 947=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9586,370 +12531,328 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {947=[IE], 948=[CHROME, FF52, FF60]}.
+     * Test {655=[IE], 656=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    public void offset__disconnected_element() throws Exception {
-        runTest("offset: disconnected element");
-    }
-
-    /**
-     * Test {948=[IE], 949=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void offset__hidden__display__none__element() throws Exception {
-        runTest("offset: hidden (display: none) element");
-    }
-
-    /**
-     * Test {949=[IE], 950=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void offset__0_sized_element() throws Exception {
-        runTest("offset: 0 sized element");
-    }
-
-    /**
-     * Test {950=[IE], 951=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void offset__hidden__visibility__hidden__element() throws Exception {
-        runTest("offset: hidden (visibility: hidden) element");
-    }
-
-    /**
-     * Test {951=[IE], 952=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    public void offset__normal_element() throws Exception {
-        runTest("offset: normal element");
-    }
-
-    /**
-     * Test {953=[IE], 954=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("178")
+    @Alerts(FF60 = "2",
+            IE = "2")
     @NotYetImplemented
-    public void offset__absolute() throws Exception {
-        runTest("offset: absolute");
+    public void css__css__width___and_css__height___should_return_fractional_values_for_disconnected_nodes() throws Exception {
+        runTest("css: css('width') and css('height') should return fractional values for disconnected nodes");
     }
 
     /**
-     * Test {954=[IE], 955=[CHROME, FF52, FF60]}.
+     * Test {655=[CHROME], 747=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("64")
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__object_without_getBoundingClientRect() throws Exception {
+        runTest("offset: object without getBoundingClientRect");
+    }
+
+    /**
+     * Test {656=[CHROME], 748=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2",
+            FF68 = "2")
+    public void offset__disconnected_node() throws Exception {
+        runTest("offset: disconnected node");
+    }
+
+    /**
+     * Test {658=[IE], 659=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void css__css_opacity_consistency_across_browsers___12685_() throws Exception {
+        runTest("css: css opacity consistency across browsers (#12685)");
+    }
+
+    /**
+     * Test {658=[CHROME], 750=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_absolute() throws Exception {
+        runTest("offset: offset/absolute");
+    }
+
+    /**
+     * Test {659=[IE], 660=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "17",
+            IE = "17")
     @NotYetImplemented
-    public void offset__relative() throws Exception {
-        runTest("offset: relative");
+    public void css___visible__hidden_selectors() throws Exception {
+        runTest("css: :visible/:hidden selectors");
     }
 
     /**
-     * Test {955=[IE], 956=[CHROME, FF52, FF60]}.
+     * Test {659=[CHROME], 751=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("80")
-    @NotYetImplemented
-    public void offset__static() throws Exception {
-        runTest("offset: static");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_relative() throws Exception {
+        runTest("offset: offset/relative");
     }
 
     /**
-     * Test {956=[IE], 957=[CHROME, FF52, FF60]}.
+     * Test {660=[IE], 661=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("38")
-    public void offset__fixed() throws Exception {
-        runTest("offset: fixed");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Keep_the_last_style_if_the_new_one_isn_t_recognized_by_the_browser___14836_() throws Exception {
+        runTest("css: Keep the last style if the new one isn't recognized by the browser (#14836)");
     }
 
     /**
-     * Test {957=[IE], 958=[CHROME, FF52, FF60]}.
+     * Test {660=[CHROME], 752=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    @NotYetImplemented
-    public void offset__table() throws Exception {
-        runTest("offset: table");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_static() throws Exception {
+        runTest("offset: offset/static");
     }
 
     /**
-     * Test {958=[IE], 959=[CHROME, FF52, FF60]}.
+     * Test {661=[IE], 662=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("26")
-    @NotYetImplemented
-    public void offset__scroll() throws Exception {
-        runTest("offset: scroll");
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Keep_the_last_style_if_the_new_one_is_a_non_empty_whitespace__gh_3204_() throws Exception {
+        runTest("css: Keep the last style if the new one is a non-empty whitespace (gh-3204)");
     }
 
     /**
-     * Test {959=[IE], 960=[CHROME, FF52, FF60]}.
+     * Test {661=[CHROME], 753=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("4")
-    @NotYetImplemented
-    public void offset__body() throws Exception {
-        runTest("offset: body");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_fixed() throws Exception {
+        runTest("offset: offset/fixed");
     }
 
     /**
-     * Test {960=[IE], 961=[CHROME, FF52, FF60]}.
+     * Test {662=[IE], 663=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("3")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Reset_the_style_if_set_to_an_empty_string() throws Exception {
+        runTest("css: Reset the style if set to an empty string");
+    }
+
+    /**
+     * Test {662=[CHROME], 754=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_table() throws Exception {
+        runTest("offset: offset/table");
+    }
+
+    /**
+     * Test {663=[IE], 664=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "24",
+            IE = "24")
+    public void css__Clearing_a_Cloned_Element_s_Style_Shouldn_t_Clear_the_Original_Element_s_Style___8908_() throws Exception {
+        runTest("css: Clearing a Cloned Element's Style Shouldn't Clear the Original Element's Style (#8908)");
+    }
+
+    /**
+     * Test {663=[CHROME], 755=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_scroll() throws Exception {
+        runTest("offset: offset/scroll");
+    }
+
+    /**
+     * Test {663=[FF68], 851=[IE], 852=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void effects__Overflow_and_Display() throws Exception {
+        runTest("effects: Overflow and Display");
+    }
+
+    /**
+     * Test {664=[IE], 665=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Don_t_append_px_to_CSS__order__value___14049_() throws Exception {
+        runTest("css: Don't append px to CSS \"order\" value (#14049)");
+    }
+
+    /**
+     * Test {664=[CHROME], 756=[FF68]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void offset__offset_body() throws Exception {
+        runTest("offset: offset/body");
+    }
+
+    /**
+     * Test {665=[IE], 666=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Do_not_throw_on_frame_elements_from_css_method___15098_() throws Exception {
+        runTest("css: Do not throw on frame elements from css method (#15098)");
+    }
+
+    /**
+     * Test {665=[CHROME], 757=[FF68], 960=[IE], 961=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "3, 0, 3",
+            FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
     public void offset__chaining() throws Exception {
         runTest("offset: chaining");
     }
 
     /**
-     * Test {961=[IE], 962=[CHROME, FF52, FF60]}.
+     * Test {666=[IE], 667=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_static_body_static() throws Exception {
-        runTest("offset: nonzero box properties - html.static body.static");
+    @Alerts(FF60 = "3",
+            IE = "2")
+    @NotYetImplemented(CHROME)
+    public void css__Don_t_default_to_a_cached_previously_used_wrong_prefixed_name__gh_2015_() throws Exception {
+        runTest("css: Don't default to a cached previously used wrong prefixed name (gh-2015)");
     }
 
     /**
-     * Test {962=[IE], 963=[CHROME, FF52, FF60]}.
+     * Test {666=[CHROME], 758=[FF68], 977=[IE], 978=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_static_body_relative() throws Exception {
-        runTest("offset: nonzero box properties - html.static body.relative");
-    }
-
-    /**
-     * Test {963=[IE], 964=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_static_body_absolute() throws Exception {
-        runTest("offset: nonzero box properties - html.static body.absolute");
-    }
-
-    /**
-     * Test {964=[IE], 965=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_static_body_fixed() throws Exception {
-        runTest("offset: nonzero box properties - html.static body.fixed");
-    }
-
-    /**
-     * Test {965=[IE], 966=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_relative_body_static() throws Exception {
-        runTest("offset: nonzero box properties - html.relative body.static");
-    }
-
-    /**
-     * Test {966=[IE], 967=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_relative_body_relative() throws Exception {
-        runTest("offset: nonzero box properties - html.relative body.relative");
-    }
-
-    /**
-     * Test {967=[IE], 968=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_relative_body_absolute() throws Exception {
-        runTest("offset: nonzero box properties - html.relative body.absolute");
-    }
-
-    /**
-     * Test {968=[IE], 969=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_relative_body_fixed() throws Exception {
-        runTest("offset: nonzero box properties - html.relative body.fixed");
-    }
-
-    /**
-     * Test {969=[IE], 970=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_absolute_body_static() throws Exception {
-        runTest("offset: nonzero box properties - html.absolute body.static");
-    }
-
-    /**
-     * Test {970=[IE], 971=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_absolute_body_relative() throws Exception {
-        runTest("offset: nonzero box properties - html.absolute body.relative");
-    }
-
-    /**
-     * Test {971=[IE], 972=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_absolute_body_absolute() throws Exception {
-        runTest("offset: nonzero box properties - html.absolute body.absolute");
-    }
-
-    /**
-     * Test {972=[IE], 973=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_absolute_body_fixed() throws Exception {
-        runTest("offset: nonzero box properties - html.absolute body.fixed");
-    }
-
-    /**
-     * Test {973=[IE], 974=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_fixed_body_static() throws Exception {
-        runTest("offset: nonzero box properties - html.fixed body.static");
-    }
-
-    /**
-     * Test {974=[IE], 975=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_fixed_body_relative() throws Exception {
-        runTest("offset: nonzero box properties - html.fixed body.relative");
-    }
-
-    /**
-     * Test {975=[IE], 976=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_fixed_body_absolute() throws Exception {
-        runTest("offset: nonzero box properties - html.fixed body.absolute");
-    }
-
-    /**
-     * Test {976=[IE], 977=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("33")
-    @NotYetImplemented
-    public void offset__nonzero_box_properties___html_fixed_body_fixed() throws Exception {
-        runTest("offset: nonzero box properties - html.fixed body.fixed");
-    }
-
-    /**
-     * Test {977=[IE], 978=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("13")
+    @Alerts(CHROME = "5, 7, 12",
+            FF60 = "13",
+            FF68 = "1, 12, 13",
+            IE = "13")
     public void offset__offsetParent() throws Exception {
         runTest("offset: offsetParent");
     }
 
     /**
-     * Test {978=[IE], 979=[CHROME, FF52, FF60]}.
+     * Test {667=[IE], 668=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void css__Don_t_detect_fake_set_properties_on_a_node_when_caching_the_prefixed_version() throws Exception {
+        runTest("css: Don't detect fake set properties on a node when caching the prefixed version");
+    }
+
+    /**
+     * Test {667=[CHROME], 759=[FF68], 978=[IE], 979=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "2",
+            CHROME = "1, 1, 2")
     public void offset__fractions__see__7730_and__7885_() throws Exception {
         runTest("offset: fractions (see #7730 and #7885)");
     }
 
     /**
-     * Test {979=[IE], 980=[CHROME, FF52, FF60]}.
+     * Test {668=[IE], 669=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
+    @Alerts(FF60 = "10",
+            IE = "0")
     @NotYetImplemented
-    public void offset__iframe_scrollTop_Left__see_gh_1945_() throws Exception {
-        runTest("offset: iframe scrollTop/Left (see gh-1945)");
+    public void css__css___customProperty_() throws Exception {
+        runTest("css: css(--customProperty)");
     }
 
     /**
-     * Test {980=[IE], 981=[CHROME, FF52, FF60]}.
+     * Test {668=[CHROME], 760=[FF68], 980=[IE], 981=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(CHROME = "9",
+            FF60 = "9",
+            FF68 = "2, 9, 11",
+            IE = "9")
     public void dimensions__width__() throws Exception {
         runTest("dimensions: width()");
     }
 
     /**
-     * Test {981=[IE], 982=[CHROME, FF52, FF60]}.
+     * Test {669=[CHROME], 761=[FF68], 981=[IE], 982=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(CHROME = "9",
+            FF60 = "9",
+            FF68 = "2, 9, 11",
+            IE = "9")
     public void dimensions__width_Function_() throws Exception {
         runTest("dimensions: width(Function)");
     }
 
     /**
-     * Test {982=[IE], 983=[CHROME, FF52, FF60]}.
+     * Test {670=[IE], 671=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void serialize__jQuery_param___not_affected_by_ajaxSettings() throws Exception {
+        runTest("serialize: jQuery.param() not affected by ajaxSettings");
+    }
+
+    /**
+     * Test {670=[CHROME], 762=[FF68], 982=[IE], 983=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9959,27 +12862,44 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {983=[IE], 984=[CHROME, FF52, FF60]}.
+     * Test {671=[CHROME], 763=[FF68], 983=[IE], 984=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(CHROME = "9",
+            FF60 = "9",
+            FF68 = "2, 9, 11",
+            IE = "9")
     public void dimensions__height__() throws Exception {
         runTest("dimensions: height()");
     }
 
     /**
-     * Test {984=[IE], 985=[CHROME, FF52, FF60]}.
+     * Test {672=[CHROME], 764=[FF68], 984=[IE], 985=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("9")
+    @Alerts(CHROME = "9",
+            FF60 = "9",
+            FF68 = "2, 9, 11",
+            IE = "9")
     public void dimensions__height_Function_() throws Exception {
         runTest("dimensions: height(Function)");
     }
 
     /**
-     * Test {985=[IE], 986=[CHROME, FF52, FF60]}.
+     * Test {673=[IE], 674=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__Unit_Testing_Environment() throws Exception {
+        runTest("ajax: Unit Testing Environment");
+    }
+
+    /**
+     * Test {673=[CHROME], 765=[FF68], 985=[IE], 986=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -9989,47 +12909,69 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {986=[IE], 987=[CHROME, FF52, FF60]}.
+     * Test {674=[IE], 675=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void ajax__XMLHttpRequest___Attempt_to_block_tests_because_of_dangling_XHR_requests__IE_() throws Exception {
+        runTest("ajax: XMLHttpRequest - Attempt to block tests because of dangling XHR requests (IE)");
+    }
+
+    /**
+     * Test {674=[CHROME], 766=[FF68], 986=[IE], 987=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "6",
+            FF60 = "7",
+            FF68 = "2, 6, 8",
+            IE = "7")
     public void dimensions__innerWidth__() throws Exception {
         runTest("dimensions: innerWidth()");
     }
 
     /**
-     * Test {987=[IE], 988=[CHROME, FF52, FF60]}.
+     * Test {675=[CHROME], 767=[FF68], 987=[IE], 988=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("7")
+    @Alerts(CHROME = "1, 5, 6",
+            FF60 = "7",
+            FF68 = "3, 5, 8",
+            IE = "7")
     public void dimensions__innerHeight__() throws Exception {
         runTest("dimensions: innerHeight()");
     }
 
     /**
-     * Test {988=[IE], 989=[CHROME, FF52, FF60]}.
+     * Test {676=[CHROME], 768=[FF68], 988=[IE], 989=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
+    @Alerts(CHROME = "2, 9, 11",
+            FF60 = "12",
+            FF68 = "4, 9, 13",
+            IE = "12")
     public void dimensions__outerWidth__() throws Exception {
         runTest("dimensions: outerWidth()");
     }
 
     /**
-     * Test {989=[IE], 990=[CHROME, FF52, FF60]}.
+     * Test {677=[IE], 678=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("12")
-    public void dimensions__outerHeight__() throws Exception {
-        runTest("dimensions: outerHeight()");
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void ajax__jQuery_ajax_____execute_js_for_crossOrigin_when_dataType_option_is_provided() throws Exception {
+        runTest("ajax: jQuery.ajax() - execute js for crossOrigin when dataType option is provided");
     }
 
     /**
-     * Test {990=[IE], 991=[CHROME, FF52, FF60]}.
+     * Test {677=[CHROME], 769=[FF68], 990=[IE], 991=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10039,17 +12981,28 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {991=[IE], 992=[CHROME, FF52, FF60]}.
+     * Test {678=[CHROME]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void dimensions__getting_dimensions_shouldn_t_modify_runtimeStyle_see__9233() throws Exception {
-        runTest("dimensions: getting dimensions shouldn't modify runtimeStyle see #9233");
+    @Alerts(CHROME = "1")
+    public void dimensions__getting_dimensions_shouldnt_modify_runtimeStyle_see__9233() throws Exception {
+        runTest("dimensions: getting dimensions shouldnt modify runtimeStyle see #9233");
     }
 
     /**
-     * Test {992=[IE], 993=[CHROME, FF52, FF60]}.
+     * Test {678=[IE], 679=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____do_not_execute_js__crossOrigin_() throws Exception {
+        runTest("ajax: jQuery.ajax() - do not execute js (crossOrigin)");
+    }
+
+    /**
+     * Test {679=[CHROME], 771=[FF68], 992=[IE], 993=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10059,7 +13012,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {993=[IE], 994=[CHROME, FF52, FF60]}.
+     * Test {680=[CHROME], 772=[FF68], 993=[IE], 994=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10069,7 +13022,20 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {994=[IE], 995=[CHROME, FF52, FF60]}.
+     * Test {681=[CHROME], 773=[FF68], 989=[IE], 990=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "2, 9, 11",
+            FF60 = "12",
+            FF68 = "4, 9, 13",
+            IE = "12")
+    public void dimensions__outerHeight__() throws Exception {
+        runTest("dimensions: outerHeight()");
+    }
+
+    /**
+     * Test {682=[CHROME], 774=[FF68], 994=[IE], 995=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10079,111 +13045,66 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {995=[IE], 996=[CHROME, FF52, FF60]}.
+     * Test {683=[CHROME], 775=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("120")
+    @Alerts(CHROME = "8, 0, 8",
+            FF68 = "8, 0, 8")
+    public void dimensions__getters_on_non_elements_should_return_null() throws Exception {
+        runTest("dimensions: getters on non elements should return null");
+    }
+
+    /**
+     * Test {684=[CHROME], 776=[FF68], 995=[IE], 996=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(CHROME = "20",
+            FF60 = "120",
+            FF68 = "20",
+            IE = "120")
     public void dimensions__setters_with_and_without_box_sizing_border_box() throws Exception {
         runTest("dimensions: setters with and without box-sizing:border-box");
     }
 
     /**
-     * Test {996=[IE], 997=[CHROME, FF52, FF60]}.
+     * Test {685=[CHROME], 777=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("2")
-    @NotYetImplemented
-    public void dimensions__window_vs__large_document() throws Exception {
-        runTest("dimensions: window vs. large document");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void dimensions__dimensions_documentSmall() throws Exception {
+        runTest("dimensions: dimensions/documentSmall");
     }
 
     /**
-     * Test {997=[IE], 998=[CHROME, FF52, FF60]}.
+     * Test {686=[CHROME], 778=[FF68]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    public void dimensions__allow_modification_of_coordinates_argument__gh_1848_() throws Exception {
-        runTest("dimensions: allow modification of coordinates argument (gh-1848)");
+    @Alerts(CHROME = "2, 0, 2",
+            FF68 = "2, 0, 2")
+    public void dimensions__dimensions_documentLarge() throws Exception {
+        runTest("dimensions: dimensions/documentLarge");
     }
 
     /**
-     * Test {998=[IE], 999=[CHROME, FF52, FF60]}.
+     * Test {687=[CHROME], 779=[FF68], 1004=[IE], 1005=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
-    @NotYetImplemented
-    public void dimensions__outside_view_position__gh_2836_() throws Exception {
-        runTest("dimensions: outside view position (gh-2836)");
-    }
-
-    /**
-     * Test {999=[IE], 1000=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("2")
-    public void dimensions__width_height_on_element_with_transform__gh_3193_() throws Exception {
-        runTest("dimensions: width/height on element with transform (gh-3193)");
-    }
-
-    /**
-     * Test {1000=[IE], 1001=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("8")
-    public void dimensions__width_height_on_an_inline_element_with_no_explicitly_set_dimensions__gh_3571_() throws Exception {
-        runTest("dimensions: width/height on an inline element with no explicitly-set dimensions (gh-3571)");
-    }
-
-    /**
-     * Test {1001=[IE], 1002=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    @NotYetImplemented
-    public void dimensions__width_height_on_an_inline_element_with_percentage_dimensions__gh_3611_() throws Exception {
-        runTest("dimensions: width/height on an inline element with percentage dimensions (gh-3611)");
-    }
-
-    /**
-     * Test {1002=[IE], 1003=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("4")
-    @NotYetImplemented
-    public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
-        runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
-    }
-
-    /**
-     * Test {1003=[IE], 1004=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("48")
-    public void dimensions__interaction_with_scrollbars__gh_3589_() throws Exception {
-        runTest("dimensions: interaction with scrollbars (gh-3589)");
-    }
-
-    /**
-     * Test {1004=[IE], 1005=[CHROME, FF52, FF60]}.
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("20")
+    @Alerts(CHROME = "3, 0, 3",
+            FF60 = "20",
+            FF68 = "3, 0, 3",
+            IE = "20")
     public void animation__Animation__subject__props__opts_____shape() throws Exception {
         runTest("animation: Animation( subject, props, opts ) - shape");
     }
 
     /**
-     * Test {1005=[IE], 1006=[CHROME, FF52, FF60]}.
+     * Test {688=[CHROME], 780=[FF68], 1005=[IE], 1006=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10193,7 +13114,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1006=[IE], 1007=[CHROME, FF52, FF60]}.
+     * Test {689=[CHROME], 781=[FF68], 1006=[IE], 1007=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10203,7 +13124,18 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1007=[IE], 1008=[CHROME, FF52, FF60]}.
+     * Test {690=[IE], 691=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void ajax__jQuery_ajax_____traditional_param_encoding() throws Exception {
+        runTest("ajax: jQuery.ajax() - traditional param encoding");
+    }
+
+    /**
+     * Test {690=[CHROME], 782=[FF68], 1007=[IE], 1008=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10213,7 +13145,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1008=[IE], 1009=[CHROME, FF52, FF60]}.
+     * Test {691=[CHROME], 783=[FF68], 1008=[IE], 1009=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10223,7 +13155,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1009=[IE], 1010=[CHROME, FF52, FF60]}.
+     * Test {692=[CHROME], 784=[FF68], 1009=[IE], 1010=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10233,7 +13165,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1010=[IE], 1011=[CHROME, FF52, FF60]}.
+     * Test {693=[IE], 694=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void ajax__jQuery_ajax_____native_abort() throws Exception {
+        runTest("ajax: jQuery.ajax() - native abort");
+    }
+
+    /**
+     * Test {693=[CHROME], 785=[FF68], 1010=[IE], 1011=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10243,7 +13187,19 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1011=[IE], 1012=[CHROME, FF52, FF60]}.
+     * Test {694=[IE], 695=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void ajax__jQuery_ajax_____native_timeout() throws Exception {
+        runTest("ajax: jQuery.ajax() - native timeout");
+    }
+
+    /**
+     * Test {694=[CHROME], 786=[FF68], 1011=[IE], 1012=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10253,7 +13209,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1012=[IE], 1013=[CHROME, FF52, FF60]}.
+     * Test {695=[CHROME], 787=[FF68], 1012=[IE], 1013=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10263,7 +13219,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1013=[IE], 1014=[CHROME, FF52, FF60]}.
+     * Test {696=[CHROME], 788=[FF68], 1013=[IE], 1014=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10273,17 +13229,31 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1014=[IE], 1015=[CHROME, FF52, FF60]}.
+     * Test {697=[CHROME], 789=[FF68], 1014=[IE], 1015=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("15")
+    @Alerts(CHROME = "2, 8, 10",
+            FF60 = "15",
+            FF68 = "2, 8, 10",
+            IE = "15")
     public void tween__jQuery_Tween___Element() throws Exception {
         runTest("tween: jQuery.Tween - Element");
     }
 
     /**
-     * Test {1015=[IE], 1016=[CHROME, FF52, FF60]}.
+     * Test {698=[IE], 699=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void ajax___15160___jQuery_ajax_____request_manually_aborted_in_ajaxSend() throws Exception {
+        runTest("ajax: #15160 - jQuery.ajax() - request manually aborted in ajaxSend");
+    }
+
+    /**
+     * Test {698=[CHROME], 790=[FF68], 1015=[IE], 1016=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10293,7 +13263,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1016=[IE], 1017=[CHROME, FF52, FF60]}.
+     * Test {699=[CHROME], 791=[FF68], 1016=[IE], 1017=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10303,7 +13273,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1017=[IE], 1018=[CHROME, FF52, FF60]}.
+     * Test {700=[CHROME], 792=[FF68], 1017=[IE], 1018=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -10313,12 +13283,1416 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     }
 
     /**
-     * Test {1018=[IE], 1019=[CHROME, FF52, FF60]}.
+     * Test {701=[CHROME], 793=[FF68], 1018=[IE], 1019=[FF60]}.
      * @throws Exception if an error occurs
      */
     @Test
     @Alerts("5")
     public void tween__jQuery_Tween___custom_propHooks___advanced_values() throws Exception {
         runTest("tween: jQuery.Tween - custom propHooks - advanced values");
+    }
+
+    /**
+     * Test {704=[FF68], 892=[IE], 893=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "16",
+            FF68 = "2, 0, 2",
+            IE = "16")
+    public void effects__Effects_chaining() throws Exception {
+        runTest("effects: Effects chaining");
+    }
+
+    /**
+     * Test {706=[FF68], 894=[IE], 895=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "24",
+            FF68 = "2, 0, 2",
+            IE = "24")
+    public void effects__interrupt_toggle() throws Exception {
+        runTest("effects: interrupt toggle");
+    }
+
+    /**
+     * Test {716=[FF68], 904=[IE], 905=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "12",
+            FF68 = "8, 4, 12",
+            IE = "12")
+    @NotYetImplemented
+    public void effects__line_height_animates_correctly___13855_() throws Exception {
+        runTest("effects: line-height animates correctly (#13855)");
+    }
+
+    /**
+     * Test {722=[FF68], 910=[IE], 911=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
+    public void effects__Animation_callback_should_not_show_animated_element_as__animated___7157_() throws Exception {
+        runTest("effects: Animation callback should not show animated element as :animated (#7157)");
+    }
+
+    /**
+     * Test {723=[FF68], 911=[IE], 912=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            FF68 = "3, 0, 3",
+            IE = "1")
+    public void effects__Initial_step_callback_should_show_element_as__animated___14623_() throws Exception {
+        runTest("effects: Initial step callback should show element as :animated (#14623)");
+    }
+
+    /**
+     * Test {726=[FF68], 914=[IE], 915=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void effects__hide_should_not_leave_hidden_inline_elements_visible___14848_() throws Exception {
+        runTest("effects: hide should not leave hidden inline elements visible (#14848)");
+    }
+
+    /**
+     * Test {732=[IE], 733=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____data___x_www_form_urlencoded__gh_2658_() throws Exception {
+        runTest("ajax: jQuery.ajax() - data - x-www-form-urlencoded (gh-2658)");
+    }
+
+    /**
+     * Test {733=[IE], 734=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____data___text_plain__gh_2658_() throws Exception {
+        runTest("ajax: jQuery.ajax() - data - text/plain (gh-2658)");
+    }
+
+    /**
+     * Test {733=[FF68], 922=[IE], 923=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void effects__Each_tick_of_the_timer_loop_uses_a_fresh_time___12837_() throws Exception {
+        runTest("effects: Each tick of the timer loop uses a fresh time (#12837)");
+    }
+
+    /**
+     * Test {734=[IE], 735=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____data___no_processing_POST() throws Exception {
+        runTest("ajax: jQuery.ajax() - data - no processing POST");
+    }
+
+    /**
+     * Test {735=[IE], 736=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajax_____data___no_processing_GET() throws Exception {
+        runTest("ajax: jQuery.ajax() - data - no processing GET");
+    }
+
+    /**
+     * Test {735=[FF68], 924=[IE], 925=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void effects__toggle_state_tests__toggle___8685_() throws Exception {
+        runTest("effects: toggle state tests: toggle (#8685)");
+    }
+
+    /**
+     * Test {736=[IE], 737=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_ajax_____data___process_string_with_GET() throws Exception {
+        runTest("ajax: jQuery.ajax() - data - process string with GET");
+    }
+
+    /**
+     * Test {736=[FF68], 925=[IE], 926=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void effects__toggle_state_tests__slideToggle___8685_() throws Exception {
+        runTest("effects: toggle state tests: slideToggle (#8685)");
+    }
+
+    /**
+     * Test {737=[FF68], 926=[IE], 927=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            FF68 = "2, 0, 2",
+            IE = "4")
+    public void effects__toggle_state_tests__fadeToggle___8685_() throws Exception {
+        runTest("effects: toggle state tests: fadeToggle (#8685)");
+    }
+
+    /**
+     * Test {738=[FF68], 927=[IE], 928=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "3",
+            IE = "3")
+    public void effects__jQuery_fx_start___jQuery_fx_stop_hook_points() throws Exception {
+        runTest("effects: jQuery.fx.start & jQuery.fx.stop hook points");
+    }
+
+    /**
+     * Test {739=[FF68], 928=[IE], 929=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "11",
+            FF68 = "3, 0, 3",
+            IE = "11")
+    public void effects___finish___completes_all_queued_animations() throws Exception {
+        runTest("effects: .finish() completes all queued animations");
+    }
+
+    /**
+     * Test {740=[FF68], 929=[IE], 930=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "10",
+            FF68 = "3, 0, 3",
+            IE = "10")
+    public void effects___finish__false_____unqueued_animations() throws Exception {
+        runTest("effects: .finish( false ) - unqueued animations");
+    }
+
+    /**
+     * Test {741=[FF68], 930=[IE], 931=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "11",
+            FF68 = "3, 1, 4",
+            IE = "11")
+    public void effects___finish___custom______custom_queue_animations() throws Exception {
+        runTest("effects: .finish( \"custom\" ) - custom queue animations");
+    }
+
+    /**
+     * Test {742=[FF68], 931=[IE], 932=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "6",
+            IE = "6")
+    public void effects___finish___calls_finish_of_custom_queue_functions() throws Exception {
+        runTest("effects: .finish() calls finish of custom queue functions");
+    }
+
+    /**
+     * Test {743=[FF68], 932=[IE], 933=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            FF68 = "3, 0, 3",
+            IE = "3")
+    public void effects___finish___is_applied_correctly_when_multiple_elements_were_animated___13937_() throws Exception {
+        runTest("effects: .finish() is applied correctly when multiple elements were animated (#13937)");
+    }
+
+    /**
+     * Test {744=[FF68], 933=[IE], 934=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void effects__slideDown___after_stop_____13483_() throws Exception {
+        runTest("effects: slideDown() after stop() (#13483)");
+    }
+
+    /**
+     * Test {745=[FF68], 934=[IE], 935=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            FF68 = "2, 0, 2",
+            IE = "2")
+    public void effects__Respect_display_value_on_inline_elements___14824_() throws Exception {
+        runTest("effects: Respect display value on inline elements (#14824)");
+    }
+
+    /**
+     * Test {762=[IE], 763=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void ajax__gh_2498___jQuery_ajax_____binary_data_shouldn_t_throw_an_exception() throws Exception {
+        runTest("ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception");
+    }
+
+    /**
+     * Test {770=[IE], 771=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
+        runTest("ajax: #14379 - jQuery.ajax() on unload");
+    }
+
+    /**
+     * Test {770=[FF68], 991=[IE], 992=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF = "1",
+            IE = "1")
+    public void dimensions__getting_dimensions_shouldn_t_modify_runtimeStyle_see__9233() throws Exception {
+        runTest("dimensions: getting dimensions shouldn't modify runtimeStyle see #9233");
+    }
+
+    /**
+     * Test {771=[IE], 772=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void ajax___14683___jQuery_ajax_____Exceptions_thrown_synchronously_by_xhr_send_should_be_caught() throws Exception {
+        runTest("ajax: #14683 - jQuery.ajax() - Exceptions thrown synchronously by xhr.send should be caught");
+    }
+
+    /**
+     * Test {773=[IE], 774=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__gh_2587___when_content_type_not_xml__but_looks_like_one() throws Exception {
+        runTest("ajax: gh-2587 - when content-type not xml, but looks like one");
+    }
+
+    /**
+     * Test {774=[IE], 775=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__gh_2587___when_content_type_not_json__but_looks_like_one() throws Exception {
+        runTest("ajax: gh-2587 - when content-type not json, but looks like one");
+    }
+
+    /**
+     * Test {775=[IE], 776=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__gh_2587___when_content_type_not_html__but_looks_like_one() throws Exception {
+        runTest("ajax: gh-2587 - when content-type not html, but looks like one");
+    }
+
+    /**
+     * Test {776=[IE], 777=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__gh_2587___when_content_type_not_javascript__but_looks_like_one() throws Exception {
+        runTest("ajax: gh-2587 - when content-type not javascript, but looks like one");
+    }
+
+    /**
+     * Test {777=[IE], 778=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__gh_2587___when_content_type_not_ecmascript__but_looks_like_one() throws Exception {
+        runTest("ajax: gh-2587 - when content-type not ecmascript, but looks like one");
+    }
+
+    /**
+     * Test {778=[IE], 779=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajaxPrefilter_____abort() throws Exception {
+        runTest("ajax: jQuery.ajaxPrefilter() - abort");
+    }
+
+    /**
+     * Test {779=[IE], 780=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajaxSetup__() throws Exception {
+        runTest("ajax: jQuery.ajaxSetup()");
+    }
+
+    /**
+     * Test {780=[IE], 781=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void ajax__jQuery_ajaxSetup___timeout__Number______with_global_timeout() throws Exception {
+        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) - with global timeout");
+    }
+
+    /**
+     * Test {781=[IE], 782=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_ajaxSetup___timeout__Number____with_localtimeout() throws Exception {
+        runTest("ajax: jQuery.ajaxSetup({ timeout: Number }) with localtimeout");
+    }
+
+    /**
+     * Test {782=[IE], 783=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void ajax___11264___jQuery_domManip_____no_side_effect_because_of_ajaxSetup_or_global_events() throws Exception {
+        runTest("ajax: #11264 - jQuery.domManip() - no side effect because of ajaxSetup or global events");
+    }
+
+    /**
+     * Test {783=[IE], 784=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_load_____always_use_GET_method_even_if_it_overrided_through_ajaxSetup___11264_() throws Exception {
+        runTest("ajax: jQuery#load() - always use GET method even if it overrided through ajaxSetup (#11264)");
+    }
+
+    /**
+     * Test {784=[IE], 785=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_load_____should_resolve_with_correct_context() throws Exception {
+        runTest("ajax: jQuery#load() - should resolve with correct context");
+    }
+
+    /**
+     * Test {785=[IE], 786=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax___11402___jQuery_domManip_____script_in_comments_are_properly_evaluated() throws Exception {
+        runTest("ajax: #11402 - jQuery.domManip() - script in comments are properly evaluated");
+    }
+
+    /**
+     * Test {786=[IE], 787=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_get__String__Hash__Function_____parse_xml_and_use_text___on_nodes() throws Exception {
+        runTest("ajax: jQuery.get( String, Hash, Function ) - parse xml and use text() on nodes");
+    }
+
+    /**
+     * Test {787=[IE], 788=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax___8277___jQuery_get__String__Function_____data_in_ajaxSettings() throws Exception {
+        runTest("ajax: #8277 - jQuery.get( String, Function ) - data in ajaxSettings");
+    }
+
+    /**
+     * Test {788=[IE], 789=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void ajax__jQuery_getJSON__String__Hash__Function_____JSON_array() throws Exception {
+        runTest("ajax: jQuery.getJSON( String, Hash, Function ) - JSON array");
+    }
+
+    /**
+     * Test {789=[IE], 790=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_getJSON__String__Function_____JSON_object() throws Exception {
+        runTest("ajax: jQuery.getJSON( String, Function ) - JSON object");
+    }
+
+    /**
+     * Test {790=[IE], 791=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_getJSON__String__Function_____JSON_object_with_absolute_url_to_local_content() throws Exception {
+        runTest("ajax: jQuery.getJSON( String, Function ) - JSON object with absolute url to local content");
+    }
+
+    /**
+     * Test {791=[IE], 792=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_getScript__String__Function_____with_callback() throws Exception {
+        runTest("ajax: jQuery.getScript( String, Function ) - with callback");
+    }
+
+    /**
+     * Test {792=[IE], 793=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_getScript__String__Function_____no_callback() throws Exception {
+        runTest("ajax: jQuery.getScript( String, Function ) - no callback");
+    }
+
+    /**
+     * Test {793=[IE], 794=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax___8082___jQuery_getScript__String__Function_____source_as_responseText() throws Exception {
+        runTest("ajax: #8082 - jQuery.getScript( String, Function ) - source as responseText");
+    }
+
+    /**
+     * Test {794=[IE], 795=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_getScript__Object_____with_callback() throws Exception {
+        runTest("ajax: jQuery.getScript( Object ) - with callback");
+    }
+
+    /**
+     * Test {795=[IE], 796=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_getScript__Object_____no_callback() throws Exception {
+        runTest("ajax: jQuery.getScript( Object ) - no callback");
+    }
+
+    /**
+     * Test {796=[IE], 797=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__() throws Exception {
+        runTest("ajax: jQuery.fn.load( String )");
+    }
+
+    /**
+     * Test {797=[IE], 798=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "6",
+            IE = "6")
+    public void ajax__jQuery_fn_load_____404_error_callbacks() throws Exception {
+        runTest("ajax: jQuery.fn.load() - 404 error callbacks");
+    }
+
+    /**
+     * Test {798=[IE], 799=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__null__() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, null )");
+    }
+
+    /**
+     * Test {799=[IE], 800=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__undefined__() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, undefined )");
+    }
+
+    /**
+     * Test {800=[IE], 801=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_fn_load__URL_SELECTOR__() throws Exception {
+        runTest("ajax: jQuery.fn.load( URL_SELECTOR )");
+    }
+
+    /**
+     * Test {801=[IE], 802=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_fn_load__URL_SELECTOR_with_spaces__() throws Exception {
+        runTest("ajax: jQuery.fn.load( URL_SELECTOR with spaces )");
+    }
+
+    /**
+     * Test {802=[IE], 803=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_fn_load__URL_SELECTOR_with_non_HTML_whitespace__3003___() throws Exception {
+        runTest("ajax: jQuery.fn.load( URL_SELECTOR with non-HTML whitespace(#3003) )");
+    }
+
+    /**
+     * Test {803=[IE], 804=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__Function_____simple__inject_text_into_DOM() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, Function ) - simple: inject text into DOM");
+    }
+
+    /**
+     * Test {804=[IE], 805=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "7",
+            IE = "7")
+    @NotYetImplemented
+    public void ajax__jQuery_fn_load__String__Function_____check_scripts() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, Function ) - check scripts");
+    }
+
+    /**
+     * Test {805=[IE], 806=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void ajax__jQuery_fn_load__String__Function_____check_file_with_only_a_script_tag() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, Function ) - check file with only a script tag");
+    }
+
+    /**
+     * Test {806=[IE], 807=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__Function_____dataFilter_in_ajaxSettings() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, Function ) - dataFilter in ajaxSettings");
+    }
+
+    /**
+     * Test {807=[IE], 808=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__Object__Function__() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, Object, Function )");
+    }
+
+    /**
+     * Test {808=[IE], 809=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_fn_load__String__String__Function__() throws Exception {
+        runTest("ajax: jQuery.fn.load( String, String, Function )");
+    }
+
+    /**
+     * Test {809=[IE], 810=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void ajax__jQuery_fn_load_____callbacks_get_the_correct_parameters() throws Exception {
+        runTest("ajax: jQuery.fn.load() - callbacks get the correct parameters");
+    }
+
+    /**
+     * Test {810=[IE], 811=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax___2046___jQuery_fn_load__String__Function___with_ajaxSetup_on_dataType_json() throws Exception {
+        runTest("ajax: #2046 - jQuery.fn.load( String, Function ) with ajaxSetup on dataType json");
+    }
+
+    /**
+     * Test {811=[IE], 812=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax___10524___jQuery_fn_load_____data_specified_in_ajaxSettings_is_merged_in() throws Exception {
+        runTest("ajax: #10524 - jQuery.fn.load() - data specified in ajaxSettings is merged in");
+    }
+
+    /**
+     * Test {812=[IE], 813=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void ajax__jQuery_post_____data() throws Exception {
+        runTest("ajax: jQuery.post() - data");
+    }
+
+    /**
+     * Test {813=[IE], 814=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void ajax__jQuery_post__String__Hash__Function_____simple_with_xml() throws Exception {
+        runTest("ajax: jQuery.post( String, Hash, Function ) - simple with xml");
+    }
+
+    /**
+     * Test {814=[IE], 815=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void ajax__jQuery_get_post___options_____simple_with_xml() throws Exception {
+        runTest("ajax: jQuery[get|post]( options ) - simple with xml");
+    }
+
+    /**
+     * Test {815=[IE], 816=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void ajax__jQuery_active() throws Exception {
+        runTest("ajax: jQuery.active");
+    }
+
+    /**
+     * Test {819=[IE], 820=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "30",
+            IE = "30")
+    @NotYetImplemented(IE)
+    public void effects__show_Number____inline_hidden() throws Exception {
+        runTest("effects: show(Number) - inline hidden");
+    }
+
+    /**
+     * Test {820=[IE], 821=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "30",
+            IE = "30")
+    @NotYetImplemented(IE)
+    public void effects__show_Number____cascade_hidden() throws Exception {
+        runTest("effects: show(Number) - cascade hidden");
+    }
+
+    /**
+     * Test {821=[IE], 822=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void effects__Persist_correct_display_value___inline_hidden() throws Exception {
+        runTest("effects: Persist correct display value - inline hidden");
+    }
+
+    /**
+     * Test {822=[IE], 823=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void effects__Persist_correct_display_value___cascade_hidden() throws Exception {
+        runTest("effects: Persist correct display value - cascade hidden");
+    }
+
+    /**
+     * Test {920=[IE], 921=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "9",
+            IE = "9")
+    public void effects__Animation_callbacks_in_order___2292_() throws Exception {
+        runTest("effects: Animation callbacks in order (#2292)");
+    }
+
+    /**
+     * Test {935=[IE], 936=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void effects__jQuery_easing__default__gh_2218_() throws Exception {
+        runTest("effects: jQuery.easing._default (gh-2218)");
+    }
+
+    /**
+     * Test {936=[IE], 937=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void effects__jQuery_easing__default_in_Animation__gh_2218() throws Exception {
+        runTest("effects: jQuery.easing._default in Animation (gh-2218");
+    }
+
+    /**
+     * Test {937=[IE], 938=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void effects__jQuery_easing__default_in_Tween__gh_2218_() throws Exception {
+        runTest("effects: jQuery.easing._default in Tween (gh-2218)");
+    }
+
+    /**
+     * Test {938=[IE], 939=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "3",
+            IE = "3")
+    public void effects__Display_value_is_correct_for_disconnected_nodes__trac_13310_() throws Exception {
+        runTest("effects: Display value is correct for disconnected nodes (trac-13310)");
+    }
+
+    /**
+     * Test {939=[IE], 940=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "40",
+            IE = "40")
+    @NotYetImplemented(IE)
+    public void effects__Show_hide_toggle_and_display__inline() throws Exception {
+        runTest("effects: Show/hide/toggle and display: inline");
+    }
+
+    /**
+     * Test {940=[IE], 941=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void effects__jQuery_speed__speed__easing__complete__() throws Exception {
+        runTest("effects: jQuery.speed( speed, easing, complete )");
+    }
+
+    /**
+     * Test {941=[IE], 942=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void effects__jQuery_speed__speed__easing__complete_____with_easing_function() throws Exception {
+        runTest("effects: jQuery.speed( speed, easing, complete ) - with easing function");
+    }
+
+    /**
+     * Test {942=[IE], 943=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void effects__jQuery_speed__options__() throws Exception {
+        runTest("effects: jQuery.speed( options )");
+    }
+
+    /**
+     * Test {943=[IE], 944=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void effects__jQuery_speed__options_____with_easing_function() throws Exception {
+        runTest("effects: jQuery.speed( options ) - with easing function");
+    }
+
+    /**
+     * Test {944=[IE], 945=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void effects__jQuery_speed__options_____queue_values() throws Exception {
+        runTest("effects: jQuery.speed( options ) - queue values");
+    }
+
+    /**
+     * Test {945=[IE], 946=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "5",
+            IE = "5")
+    public void effects__jQuery_speed_____durations() throws Exception {
+        runTest("effects: jQuery.speed() - durations");
+    }
+
+    /**
+     * Test {947=[IE], 948=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void offset__disconnected_element() throws Exception {
+        runTest("offset: disconnected element");
+    }
+
+    /**
+     * Test {948=[IE], 949=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void offset__hidden__display__none__element() throws Exception {
+        runTest("offset: hidden (display: none) element");
+    }
+
+    /**
+     * Test {949=[IE], 950=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void offset__0_sized_element() throws Exception {
+        runTest("offset: 0 sized element");
+    }
+
+    /**
+     * Test {950=[IE], 951=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void offset__hidden__visibility__hidden__element() throws Exception {
+        runTest("offset: hidden (visibility: hidden) element");
+    }
+
+    /**
+     * Test {951=[IE], 952=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    public void offset__normal_element() throws Exception {
+        runTest("offset: normal element");
+    }
+
+    /**
+     * Test {953=[IE], 954=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "178",
+            IE = "178")
+    @NotYetImplemented
+    public void offset__absolute() throws Exception {
+        runTest("offset: absolute");
+    }
+
+    /**
+     * Test {954=[IE], 955=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "64",
+            IE = "64")
+    @NotYetImplemented
+    public void offset__relative() throws Exception {
+        runTest("offset: relative");
+    }
+
+    /**
+     * Test {955=[IE], 956=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "80",
+            IE = "80")
+    @NotYetImplemented
+    public void offset__static() throws Exception {
+        runTest("offset: static");
+    }
+
+    /**
+     * Test {956=[IE], 957=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "38",
+            IE = "38")
+    public void offset__fixed() throws Exception {
+        runTest("offset: fixed");
+    }
+
+    /**
+     * Test {957=[IE], 958=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    @NotYetImplemented
+    public void offset__table() throws Exception {
+        runTest("offset: table");
+    }
+
+    /**
+     * Test {958=[IE], 959=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "26",
+            IE = "26")
+    @NotYetImplemented
+    public void offset__scroll() throws Exception {
+        runTest("offset: scroll");
+    }
+
+    /**
+     * Test {959=[IE], 960=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    @NotYetImplemented
+    public void offset__body() throws Exception {
+        runTest("offset: body");
+    }
+
+    /**
+     * Test {961=[IE], 962=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_static_body_static() throws Exception {
+        runTest("offset: nonzero box properties - html.static body.static");
+    }
+
+    /**
+     * Test {962=[IE], 963=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_static_body_relative() throws Exception {
+        runTest("offset: nonzero box properties - html.static body.relative");
+    }
+
+    /**
+     * Test {963=[IE], 964=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_static_body_absolute() throws Exception {
+        runTest("offset: nonzero box properties - html.static body.absolute");
+    }
+
+    /**
+     * Test {964=[IE], 965=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_static_body_fixed() throws Exception {
+        runTest("offset: nonzero box properties - html.static body.fixed");
+    }
+
+    /**
+     * Test {965=[IE], 966=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_relative_body_static() throws Exception {
+        runTest("offset: nonzero box properties - html.relative body.static");
+    }
+
+    /**
+     * Test {966=[IE], 967=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_relative_body_relative() throws Exception {
+        runTest("offset: nonzero box properties - html.relative body.relative");
+    }
+
+    /**
+     * Test {967=[IE], 968=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_relative_body_absolute() throws Exception {
+        runTest("offset: nonzero box properties - html.relative body.absolute");
+    }
+
+    /**
+     * Test {968=[IE], 969=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_relative_body_fixed() throws Exception {
+        runTest("offset: nonzero box properties - html.relative body.fixed");
+    }
+
+    /**
+     * Test {969=[IE], 970=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_absolute_body_static() throws Exception {
+        runTest("offset: nonzero box properties - html.absolute body.static");
+    }
+
+    /**
+     * Test {970=[IE], 971=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_absolute_body_relative() throws Exception {
+        runTest("offset: nonzero box properties - html.absolute body.relative");
+    }
+
+    /**
+     * Test {971=[IE], 972=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_absolute_body_absolute() throws Exception {
+        runTest("offset: nonzero box properties - html.absolute body.absolute");
+    }
+
+    /**
+     * Test {972=[IE], 973=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_absolute_body_fixed() throws Exception {
+        runTest("offset: nonzero box properties - html.absolute body.fixed");
+    }
+
+    /**
+     * Test {973=[IE], 974=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_fixed_body_static() throws Exception {
+        runTest("offset: nonzero box properties - html.fixed body.static");
+    }
+
+    /**
+     * Test {974=[IE], 975=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_fixed_body_relative() throws Exception {
+        runTest("offset: nonzero box properties - html.fixed body.relative");
+    }
+
+    /**
+     * Test {975=[IE], 976=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_fixed_body_absolute() throws Exception {
+        runTest("offset: nonzero box properties - html.fixed body.absolute");
+    }
+
+    /**
+     * Test {976=[IE], 977=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "33",
+            IE = "33")
+    @NotYetImplemented
+    public void offset__nonzero_box_properties___html_fixed_body_fixed() throws Exception {
+        runTest("offset: nonzero box properties - html.fixed body.fixed");
+    }
+
+    /**
+     * Test {979=[IE], 980=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void offset__iframe_scrollTop_Left__see_gh_1945_() throws Exception {
+        runTest("offset: iframe scrollTop/Left (see gh-1945)");
+    }
+
+    /**
+     * Test {996=[IE], 997=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    @NotYetImplemented
+    public void dimensions__window_vs__large_document() throws Exception {
+        runTest("dimensions: window vs. large document");
+    }
+
+    /**
+     * Test {997=[IE], 998=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    public void dimensions__allow_modification_of_coordinates_argument__gh_1848_() throws Exception {
+        runTest("dimensions: allow modification of coordinates argument (gh-1848)");
+    }
+
+    /**
+     * Test {998=[IE], 999=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "1",
+            IE = "1")
+    @NotYetImplemented
+    public void dimensions__outside_view_position__gh_2836_() throws Exception {
+        runTest("dimensions: outside view position (gh-2836)");
+    }
+
+    /**
+     * Test {999=[IE], 1000=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "2",
+            IE = "2")
+    public void dimensions__width_height_on_element_with_transform__gh_3193_() throws Exception {
+        runTest("dimensions: width/height on element with transform (gh-3193)");
+    }
+
+    /**
+     * Test {1000=[IE], 1001=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "8",
+            IE = "8")
+    public void dimensions__width_height_on_an_inline_element_with_no_explicitly_set_dimensions__gh_3571_() throws Exception {
+        runTest("dimensions: width/height on an inline element with no explicitly-set dimensions (gh-3571)");
+    }
+
+    /**
+     * Test {1001=[IE], 1002=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    @NotYetImplemented
+    public void dimensions__width_height_on_an_inline_element_with_percentage_dimensions__gh_3611_() throws Exception {
+        runTest("dimensions: width/height on an inline element with percentage dimensions (gh-3611)");
+    }
+
+    /**
+     * Test {1002=[IE], 1003=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "4",
+            IE = "4")
+    @NotYetImplemented
+    public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
+        runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
+    }
+
+    /**
+     * Test {1003=[IE], 1004=[FF60]}.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(FF60 = "48",
+            IE = "48")
+    public void dimensions__interaction_with_scrollbars__gh_3589_() throws Exception {
+        runTest("dimensions: interaction with scrollbars (gh-3589)");
     }
 }
