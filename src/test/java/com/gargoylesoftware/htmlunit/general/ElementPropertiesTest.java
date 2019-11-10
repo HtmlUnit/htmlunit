@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -2914,7 +2913,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             IE = "exception")
-    @NotYetImplemented({CHROME, FF60})
+    @NotYetImplemented({CHROME, FF})
     public void pointerEvent() throws Exception {
         testString("new PointerEvent('click'), document.createEvent('MouseEvent')");
     }
@@ -3001,7 +3000,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF68 = "relatedTarget",
             FF60 = "relatedTarget",
             IE = "initFocusEvent(),relatedTarget")
-    @NotYetImplemented({CHROME, FF60, IE})
+    @NotYetImplemented({CHROME, FF, IE})
     public void focusEvent() throws Exception {
         testString("document.createEvent('FocusEvent'), document.createEvent('UIEvent')");
     }

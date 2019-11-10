@@ -59,7 +59,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = "",
             CHROME = "Your browser doesn't support applets",
-            FF60 = "Your browser doesn't support applets")
+            FF = "Your browser doesn't support applets")
     public void asText_appletEnabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
@@ -616,6 +616,6 @@ public class HtmlAppletTest extends SimpleWebTestCase {
     }
 
     private boolean areAppletsNotSupported() {
-        return getBrowserVersion().isChrome() || getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox60();
+        return getBrowserVersion().isChrome() || getBrowserVersion().isFirefox();
     }
 }

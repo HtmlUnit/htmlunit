@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIG
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -158,7 +159,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 @JsxClass(domClass = HtmlArticle.class)
 @JsxClass(domClass = HtmlAside.class)
 @JsxClass(domClass = HtmlBaseFont.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlBidirectionalIsolation.class, value = CHROME)
+@JsxClass(domClass = HtmlBidirectionalIsolation.class, value = {CHROME, FF68})
 @JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBig.class, value = {CHROME, FF})
 @JsxClass(domClass = HtmlBold.class, value = {CHROME, FF})

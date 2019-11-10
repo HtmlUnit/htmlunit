@@ -261,7 +261,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none.
      */
-    @JsxFunction({CHROME, FF60})
+    @JsxFunction({CHROME, FF})
     public void empty() {
         removeAllRanges();
     }

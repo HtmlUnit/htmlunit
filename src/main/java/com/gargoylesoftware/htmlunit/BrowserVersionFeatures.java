@@ -1200,14 +1200,14 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_NULL_FOR_OUTSIDE,
 
     /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF68})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_NEGATIVE,
 
     /** Indicates that select.options.remove ignores the call if index is too large. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF68, IE})
     JS_SELECT_OPTIONS_REMOVE_IGNORE_IF_INDEX_TOO_LARGE,
 
-    /** Indicates that select.options[i] throws an exception if the requested index is neagtive. */
+    /** Indicates that select.options[i] throws an exception if the requested index is negative. */
     @BrowserFeature(IE)
     JS_SELECT_OPTIONS_REMOVE_THROWS_IF_NEGATIV,
 
