@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
@@ -70,6 +71,10 @@ public enum BrowserVersionFeatures {
     /** Is display style 'block'. */
     @BrowserFeature({CHROME, FF})
     CSS_DISPLAY_BLOCK2,
+
+    /** Display style is '' for detached nodes. */
+    @BrowserFeature({CHROME, FF68})
+    CSS_DISPLAY_DETACHED_EMTPTY,
 
     /** {@code CSSFontFaceRule.cssText} uses {@code \r\n} to break lines. */
     @BrowserFeature(IE)

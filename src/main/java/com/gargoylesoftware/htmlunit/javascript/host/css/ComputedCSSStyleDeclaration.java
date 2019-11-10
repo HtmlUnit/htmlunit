@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_DETACHED_EMTPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
@@ -106,6 +108,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
@@ -554,8 +557,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /**
      * Returns the {@code display} attribute.
-     * @param ignoreBlockIfNotAttached is
-     * {@link com.gargoylesoftware.htmlunit.BrowserVersionFeatures#CSS_COMPUTED_BLOCK_IF_NOT_ATTACHED} ignored
+     * @param ignoreBlockIfNotAttached flag
      * @return the {@code display} attribute
      */
     public String getDisplay(final boolean ignoreBlockIfNotAttached) {
@@ -565,8 +567,13 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         boolean changeValueIfEmpty = false;
         if (!domElem.isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
-            if (browserVersion.hasFeature(CSS_COMPUTED_NO_Z_INDEX)) {
+            if (browserVersion.hasFeature(CSS_DISPLAY_DETACHED_EMTPTY)) {
                 return "";
+            }
+            if (!ignoreBlockIfNotAttached
+                    && (domElem instanceof HtmlDefinitionDescription
+                         && browserVersion.hasFeature(HTMLDEFINITION_INLINE_IN_QUIRKS))) {
+                changeValueIfEmpty = true;
             }
         }
         final String value = super.getStyleAttribute(DISPLAY, false);
