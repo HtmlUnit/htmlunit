@@ -58,7 +58,7 @@ public enum BrowserVersionFeatures {
     CSS_BACKGROUND_RGBA,
 
     /** Computed {@code zIndex} is not considered. */
-    @BrowserFeature({CHROME, FF68})
+    @BrowserFeature(CHROME)
     CSS_COMPUTED_NO_Z_INDEX,
 
     /** Is display style of HtmlDialog is 'none'. */

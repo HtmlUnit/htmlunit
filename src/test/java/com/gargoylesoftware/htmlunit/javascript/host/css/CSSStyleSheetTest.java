@@ -111,8 +111,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null"},
-            IE = {"2", "null", "null"})
+    @Alerts({"4", "§§URL§§style2.css", "§§URL§§style4.css", "null", "null"})
     public void href() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

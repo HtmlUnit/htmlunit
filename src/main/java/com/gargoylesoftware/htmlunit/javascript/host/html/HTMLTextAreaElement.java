@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TEXT_AREA_SET_VALUE_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -374,7 +373,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF60})
+    @JsxGetter({CHROME, FF})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());

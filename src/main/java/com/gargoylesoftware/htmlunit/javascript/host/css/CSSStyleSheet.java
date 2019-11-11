@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HR
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -1151,7 +1152,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param rule the rule
      * @return always return -1 as of MSDN documentation
      */
-    @JsxFunction({IE, CHROME})
+    @JsxFunction({IE, CHROME, FF68})
     public int addRule(final String selector, final String rule) {
         String completeRule = selector + " {" + rule + "}";
         try {
@@ -1181,7 +1182,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param position the position of the rule to be deleted
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms531195(v=VS.85).aspx">MSDN</a>
      */
-    @JsxFunction({IE, CHROME})
+    @JsxFunction({IE, CHROME, FF68})
     public void removeRule(final int position) {
         try {
             initCssRules();

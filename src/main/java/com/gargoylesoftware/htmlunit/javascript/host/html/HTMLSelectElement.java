@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import java.util.List;
 
@@ -312,7 +311,7 @@ public class HTMLSelectElement extends FormField {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF60})
+    @JsxGetter({CHROME, FF})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
