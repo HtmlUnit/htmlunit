@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -210,7 +210,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:null/0/null/0/true/None/0/",
                         "3:s2/1/s3/1/false/Range/1/[foo"})
-    @NotYetImplemented(FF60)
+    @NotYetImplemented(FF)
     public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -242,7 +242,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "3:null/0/null/0/true/None/0/"})
-    @NotYetImplemented(FF60)
+    @NotYetImplemented(FF)
     public void removeAllRanges() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -273,7 +273,7 @@ public class SelectionTest extends WebDriverTestCase {
             FF = {
                         "1:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "2:null/0/null/0/true/None/0/"})
-    @NotYetImplemented(FF60)
+    @NotYetImplemented(FF)
     public void removeAllRanges2() throws Exception {
         final String jsSnippet = ""
             + "      var range = document.createRange();\n"
