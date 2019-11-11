@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -745,7 +746,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "136", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "92", "true", "true", "16"},
             FF = {"true", "true", "86", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -770,6 +771,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "1256"})
+    @NotYetImplemented(IE)
     public void setInnerWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -789,6 +791,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "705"})
+    @NotYetImplemented(IE)
     public void setInnerHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -808,6 +811,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "1272"})
+    @NotYetImplemented(IE)
     public void setOuterWidth() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -827,6 +831,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "1234"},
             IE = {"true", "768"})
+    @NotYetImplemented(IE)
     public void setOuterHeight() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -845,7 +850,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"632", "1256", "615", "1239"},
+    @Alerts(CHROME = {"676", "1256", "659", "1239"},
             FF = {"682", "1258", "665", "1241"},
             IE = {"705", "1256", "688", "1239"})
     @NotYetImplemented
@@ -1266,6 +1271,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"string string 7 number object", "string string 1 number object"},
             IE = {"string string 7 number object", "string string 8 number object"})
+    @NotYetImplemented(IE)
     public void onErrorExceptionInstance2() throws Exception {
         final String html
                 = "<html>\n"

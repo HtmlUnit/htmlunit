@@ -14,8 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CRLF;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_NO_CRLF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_FF60_STYLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_FONTFACERULE_CSSTEXT_IE_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
@@ -73,23 +74,30 @@ public class CSSFontFaceRule extends CSSRule {
     public String getCssText() {
         String cssText = super.getCssText();
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_CRLF)) {
-            cssText = StringUtils.replace(cssText, "{", "{\r\n\t");
-            cssText = StringUtils.replace(cssText, "}", ";\r\n}\r\n");
-            cssText = StringUtils.replace(cssText, "; ", ";\r\n\t");
+        if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_IE_STYLE)) {
+            cssText = StringUtils.replace(cssText, "{", "{\n\t");
+            cssText = StringUtils.replace(cssText, "}", ";\n}\n");
+            cssText = StringUtils.replace(cssText, "; ", ";\n\t");
         }
-        else if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_NO_CRLF)) {
+        else if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE)) {
             cssText = StringUtils.replace(cssText, "{", "{ ");
             cssText = StringUtils.replace(cssText, "}", "; }");
             cssText = StringUtils.replace(cssText, "; ", "; ");
             cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: $1;");
             cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
         }
-        else {
+        else if (browserVersion.hasFeature(CSS_FONTFACERULE_CSSTEXT_FF60_STYLE)) {
             cssText = StringUtils.replace(cssText, "{", "{\n  ");
             cssText = StringUtils.replace(cssText, "}", ";\n}");
             cssText = StringUtils.replace(cssText, "; ", ";\n  ");
             cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: \"$1\";");
+            cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
+        }
+        else {
+            cssText = StringUtils.replace(cssText, "{", "{\n  ");
+            cssText = StringUtils.replace(cssText, "}", ";\n}");
+            cssText = StringUtils.replace(cssText, "; ", ";\n  ");
+            cssText = REPLACEMENT_1.matcher(cssText).replaceFirst("font-family: $1;");
             cssText = REPLACEMENT_2.matcher(cssText).replaceFirst("src: url(\"$1\");");
         }
         return cssText;

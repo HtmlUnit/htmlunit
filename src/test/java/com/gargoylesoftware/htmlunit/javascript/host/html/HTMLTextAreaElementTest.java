@@ -161,8 +161,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(CHROME = {"0,0", "11,11", "11,11", "11,11", "7,7"},
-            FF = {"0,0", "11,11", "11,11", "11,11", "7,7"},
+    @Alerts(DEFAULT = {"0,0", "11,11", "11,11", "11,11", "7,7"},
             IE = {"0,0", "0,0", "0,0", "0,11", "0,0"})
     public void selection_outOfBounds() throws Exception {
         selection(-3, 15);

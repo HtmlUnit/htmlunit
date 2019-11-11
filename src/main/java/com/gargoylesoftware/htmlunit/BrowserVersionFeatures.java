@@ -77,13 +77,17 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF68})
     CSS_DISPLAY_DETACHED_EMTPTY,
 
-    /** {@code CSSFontFaceRule.cssText} uses {@code \r\n} to break lines. */
-    @BrowserFeature(IE)
-    CSS_FONTFACERULE_CSSTEXT_CRLF,
-
     /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
     @BrowserFeature(CHROME)
-    CSS_FONTFACERULE_CSSTEXT_NO_CRLF,
+    CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
+
+    /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
+    @BrowserFeature(FF60)
+    CSS_FONTFACERULE_CSSTEXT_FF60_STYLE,
+
+    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
+    @BrowserFeature(IE)
+    CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
     /** The default value of the display property for the 'input' tags is 'inline-block'. */
     @BrowserFeature({CHROME, IE})
@@ -646,7 +650,7 @@ public enum BrowserVersionFeatures {
     JS_CLIENTHIGHT_INPUT_17,
 
     /** ClientRectList toString reports the first item. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF60)
     JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST,
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
@@ -1374,16 +1378,16 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63,
 
     /**
+     * Difference of window.outer/inner height is 86.
+     */
+    @BrowserFeature(FF)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86,
+
+    /**
      * Difference of window.outer/inner height is 92.
      */
     @BrowserFeature(CHROME)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_92,
-
-    /**
-     * Difference of window.outer/inner height is 94.
-     */
-    @BrowserFeature(FF)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_94,
 
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature(FF)
