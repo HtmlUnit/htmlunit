@@ -450,10 +450,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
-    /** HTMLInputElement: type {@code file} value to be {@code fakepath}. */
-    @BrowserFeature({CHROME, FF, IE})
-    HTMLINPUT_FILE_VALUE_FAKEPATH,
-
     /** HTMLInputElement date and time types are supported. */
     @BrowserFeature({CHROME, FF})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
@@ -840,10 +836,6 @@ public enum BrowserVersionFeatures {
     /** DOMTokenList removed all whitespace chars during add. */
     @BrowserFeature({CHROME, FF})
     JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD,
-
-    /** DOMTokenList removed all whitespace chars during edit. */
-    @BrowserFeature({CHROME, FF, IE})
-    JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_EDIT,
 
     /** DOMTokenList removed all whitespace chars during remove. */
     @BrowserFeature({CHROME, FF})
@@ -1238,10 +1230,6 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(IE)
     JS_STYLE_UNSUPPORTED_PROPERTY_GETTER,
-
-    /** Indicates if style properties are always in lower case. */
-    @BrowserFeature({CHROME, FF, IE})
-    JS_STYLE_VALUES_LOWERCASE,
 
     /** Indicates wordSpacing support percent values. */
     @BrowserFeature(FF)

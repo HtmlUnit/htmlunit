@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -280,7 +281,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF)
     public void click_javascriptUrlMixedCase() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -294,7 +295,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
             + "<img src='img.jpg' width='145' height='126' usemap='#somename'>\n"
             + "<map name='somename'>\n"
             + "  <area href='javasCRIpT:alert(\"clicked\")' id='a2' shape='rect' coords='0,0,30,30'/>\n"
-            + "</map></body></html>";
+            + "</map>\n"
+            + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final Page page;

@@ -82,11 +82,14 @@ public class IEWeirdSyntaxTest extends WebDriverTestCase {
      */
     @Test
     public void windowDotHandlerFunction() throws Exception {
-        final String html = "<html><head><script>\n"
-            + "function window.onload() {\n"
-            + "  alert(1);\n"
-            + "}\n"
-            + "</script></head>\n"
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function window.onload() {\n"
+            + "    alert(1);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
             + "<body></body></html>";
         doTestWithEvaluatorExceptionExcept(html);
     }
