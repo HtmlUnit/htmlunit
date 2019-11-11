@@ -58,7 +58,7 @@ public enum BrowserVersionFeatures {
     CSS_BACKGROUND_RGBA,
 
     /** Computed {@code zIndex} is not considered. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF68})
     CSS_COMPUTED_NO_Z_INDEX,
 
     /** Is display style of HtmlDialog is 'none'. */
@@ -1222,7 +1222,7 @@ public enum BrowserVersionFeatures {
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** Indicates if style.setProperty ignores case when determining the priority. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF68, IE})
     JS_STYLE_SET_PROPERTY_IMPORTANT_IGNORES_CASE,
 
     /** IE supports accessing unsupported style elements via getter

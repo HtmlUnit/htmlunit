@@ -184,7 +184,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "true", "true", "object", "object"},
-            FF = {"false", "false", "true", "false", "true", "undefined", "undefined"})
+            FF68 = {"false", "false", "true", "false", "false", "object", "undefined"},
+            FF60 = {"false", "false", "true", "false", "true", "undefined", "undefined"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
