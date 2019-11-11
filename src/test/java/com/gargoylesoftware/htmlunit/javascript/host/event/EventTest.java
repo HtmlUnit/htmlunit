@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -788,7 +789,7 @@ public class EventTest extends WebDriverTestCase {
             FF68 = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
-    @NotYetImplemented(IE)
+    @NotYetImplemented({IE, FF68})
     public void document_focus() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -305,15 +306,15 @@ public enum BrowserVersionFeatures {
     HTMLABBREVIATED,
 
     /** HtmlAllCollection.item returns null instead of undefined if an element was not found. */
-    @BrowserFeature({IE, FF})
+    @BrowserFeature({IE, FF60})
     HTMLALLCOLLECTION_DO_NOT_CONVERT_STRINGS_TO_NUMBER,
 
     /** HtmlAllCollection.item(int) is not supported. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF60)
     HTMLALLCOLLECTION_DO_NOT_SUPPORT_PARANTHESES,
 
     /** HtmlAllCollection.item(int) requires int parameter. */
-    @BrowserFeature(CHROME)
+    @BrowserFeature({CHROME, FF68})
     HTMLALLCOLLECTION_INTEGER_INDEX,
 
     /** HtmlCollection returns the first hit instead of a collection if many elements found. */
@@ -333,7 +334,7 @@ public enum BrowserVersionFeatures {
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
     /** HtmlCollection.item() supports also doubles as index. */
-    @BrowserFeature({IE, FF})
+    @BrowserFeature({IE, FF60})
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
 
     /** HtmlCollection.item[] supports also doubles as index. */

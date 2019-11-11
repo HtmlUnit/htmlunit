@@ -23,6 +23,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SEL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -489,7 +490,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * Returns the current event.
      * @return the current event, or {@code null} if no event is currently available
      */
-    @JsxGetter({IE, CHROME})
+    @JsxGetter({IE, CHROME, FF68})
     public Object getEvent() {
         return currentEvent_;
     }

@@ -119,7 +119,7 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("lv", yyyyDotDot);
         commonFormats.put("mk", ddDot);
         commonFormats.put("ms", ddSlash);
-        commonFormats.put("mt", yyyyDash);
+        commonFormats.put("mt", mmSlash);
         commonFormats.put("nl", ddDash);
         commonFormats.put("pl", ddDot);
         commonFormats.put("pt", ddSlash);
@@ -146,16 +146,16 @@ public class DateTimeFormat extends SimpleScriptable {
         commonFormats.put("es-US", ddSlash);
         commonFormats.put("ga", ddSlash);
         commonFormats.put("fr-CH", ddDot);
-        commonFormats.put("mt", ddSlash);
         commonFormats.put("nl-BE", ddSlash);
         commonFormats.put("sk", ddDotBlank);
         commonFormats.put("sr", ddDotDot);
         commonFormats.put("sq", ddDot);
 
         FF_68_FORMATS_.putAll(commonFormats);
-        FF_68_FORMATS_.put("ban", ddDot);
+        FF_68_FORMATS_.put("da", ddDot);
 
         FF_60_FORMATS_.putAll(commonFormats);
+        FF_60_FORMATS_.put("mt", ddSlash);
 
         CHROME_FORMATS_.put("be", mmSlash);
         CHROME_FORMATS_.put("da", ddDot);
@@ -171,7 +171,6 @@ public class DateTimeFormat extends SimpleScriptable {
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("iw", ddDot);
         CHROME_FORMATS_.put("mk", mmSlash);
-        CHROME_FORMATS_.put("mt", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sk", ddDotBlank);
         CHROME_FORMATS_.put("sq", mmSlash);

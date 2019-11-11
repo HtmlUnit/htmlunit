@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -601,7 +601,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             FF60 = "function () {\n}",
             FF68 = "function () {\n    [native code]\n}",
             IE = "[object Object]")
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF60, IE})
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
