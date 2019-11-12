@@ -2426,7 +2426,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             CHROME = {"0", "2", "1", "2", "1", "1"},
-            FF60 = {"0", "2", "1", "2", "1", "1"})
+            FF = {"0", "2", "1", "2", "1", "1"})
     public void labels() throws Exception {
         final String html =
             "<html><head>\n"

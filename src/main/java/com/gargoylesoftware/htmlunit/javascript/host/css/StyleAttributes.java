@@ -288,6 +288,12 @@ public final class StyleAttributes {
         /** The style property {@code border}. */
         BORDER("border", "border", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
 
+        /** The style property {@code borderBlock}. */
+        BORDER_BLOCK("borderBlock", "border-block", ff68up("")),
+
+        /** The style property {@code borderBlockColor}. */
+        BORDER_BLOCK_COLOR("borderBlockColor", "border-block-color", ff68up("")),
+
         /** The style property {@code borderBlockEnd}. */
         BORDER_BLOCK_END("borderBlockEnd", "border-block-end", chrome("0px none rgb(0, 0, 0)"), ff("")),
 
@@ -335,6 +341,12 @@ public final class StyleAttributes {
 
         /** The style property {@code border-block-start-width}. */
         BORDER_BLOCK_START_WIDTH_("border-block-start-width", "border-block-start-width", ff("")),
+
+        /** The style property {@code borderBlockStyle}. */
+        BORDER_BLOCK_STYLE("borderBlockStyle", "border-block-style", ff68up("")),
+
+        /** The style property {@code borderBlockWidth}. */
+        BORDER_BLOCK_WIDTH("borderBlockWidth", "border-block-width", ff68up("")),
 
         /** The style property {@code borderBottom}. */
         BORDER_BOTTOM("borderBottom", "border-bottom", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -387,6 +399,12 @@ public final class StyleAttributes {
         /** The style property {@code border-color}. */
         BORDER_COLOR_("border-color", "border-color", ff("")),
 
+        /** The style property {@code borderEndEndRadius}. */
+        BORDER_END_END_RADIUS("borderEndEndRadius", "border-end-end-radius", ff68up("")),
+
+        /** The style property {@code borderEndStartRadius}. */
+        BORDER_END_START_RADIUS("borderEndStartRadius", "border-end-start-radius", ff68up("")),
+
         /** The style property {@code borderImage}. */
         BORDER_IMAGE("borderImage", "border-image", ff(""), ie(""), chrome("none")),
 
@@ -427,6 +445,12 @@ public final class StyleAttributes {
 
         /** The style property {@code border-image-width}. */
         BORDER_IMAGE_WIDTH_("border-image-width", "border-image-width", ff("1")),
+
+        /** The style property {@code borderInline}. */
+        BORDER_INLINE("borderInline", "border-inline", ff68up("")),
+
+        /** The style property {@code borderInlineColor}. */
+        BORDER_INLINE_COLOR("borderInlineColor", "border-inline-color", ff68up("")),
 
         /** The style property {@code borderInlineEnd}. */
         BORDER_INLINE_END("borderInlineEnd", "border-inline-end", chrome("0px none rgb(0, 0, 0)"), ff("")),
@@ -476,6 +500,12 @@ public final class StyleAttributes {
 
         /** The style property {@code border-inline-start-width}. */
         BORDER_INLINE_START_WIDTH_("border-inline-start-width", "border-inline-start-width", ff("")),
+
+        /** The style property {@code borderInlineStyle}. */
+        BORDER_INLINE_STYLE("borderInlineStyle", "border-inline-style", ff68up("")),
+
+        /** The style property {@code borderInlineWidth}. */
+        BORDER_INLINE_WIDTH("borderInlineWidth", "border-inline-color", ff68up("")),
 
         /** The style property {@code borderLeft}. */
         BORDER_LEFT("borderLeft", "border-left", chrome("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -537,6 +567,12 @@ public final class StyleAttributes {
 
         /** The style property {@code border-spacing}. */
         BORDER_SPACING_("border-spacing", "border-spacing", ff("0px 0px")),
+
+        /** The style property {@code borderStartEndRadius}. */
+        BORDER_START_END_RADIUS("borderStartEndRadius", "border-start-end-radius", ff68up("")),
+
+        /** The style property {@code borderStartStartRadius}. */
+        BORDER_START_START_RADIUS("borderStartStartRadius", "border-start-start-radius", ff68up("")),
 
         /** The style property {@code borderStyle}. */
         BORDER_STYLE("borderStyle", "border-style", chrome("none"), ff(""), ie("")),
@@ -748,6 +784,9 @@ public final class StyleAttributes {
 
         /** The style property {@code counter-reset}. */
         COUNTER_RESET_("counter-reset", "counter-reset", ff("none")),
+
+        /** The style property {@code counterSet}. */
+        COUNTER_SET("counterSet", "counter-set", ff68up("none")),
 
         /** The style property {@code cssFloat}. */
         CSS_FLOAT("cssFloat", "css-float", chrome("none"), ff("none"), ie("none")),
@@ -1135,6 +1174,27 @@ public final class StyleAttributes {
         /** The style property {@code inline-size}. */
         INLINE_SIZE_("inline-size", "inline-size", ff("")),
 
+        /** The style property {@code inset}. */
+        INSET("inset", "inset", ff68up("")),
+
+        /** The style property {@code insetBlock}. */
+        INSET_BLOCK("insetBlock", "inset-block", ff68up("")),
+
+        /** The style property {@code insetBlockEnd}. */
+        INSET_BLOCK_END("insetBlockEnd", "inset-block-end", ff68up("")),
+
+        /** The style property {@code insetBlockStart}. */
+        INSET_BLOCK_START("insetBlockStart", "inset-block-start", ff68up("")),
+
+        /** The style property {@code insetInline}. */
+        INSET_INLINE("insetInline", "inset-inline", ff68up("")),
+
+        /** The style property {@code insetInlineEnd}. */
+        INSET_INLINE_END("insetInlineEnd", "inset-inline-end", ff68up("")),
+
+        /** The style property {@code insetInlineStart}. */
+        INSET_INLINE_START("insetInlineStart", "inset-inline-start", ff68up("")),
+
         /** The style property {@code isolation}. */
         ISOLATION("isolation", "isolation", ff("auto"), chrome("auto")),
 
@@ -1232,6 +1292,9 @@ public final class StyleAttributes {
         /** The style property {@code margin}. */
         MARGIN("margin", "margin", chrome("0px"), ff(""), ie("")),
 
+        /** The style property {@code marginBlock}. */
+        MARGIN_BLOCK("marginBlock", "margin-block", ff68up("")),
+
         /** The style property {@code marginBlockEnd}. */
         MARGIN_BLOCK_END("marginBlockEnd", "margin-block-end", chrome("0px"), ff("")),
 
@@ -1249,6 +1312,9 @@ public final class StyleAttributes {
 
         /** The style property {@code margin-bottom}. */
         MARGIN_BOTTOM_("margin-bottom", "margin-bottom", ff("0px")),
+
+        /** The style property {@code marginInline}. */
+        MARGIN_INLINE("marginInline", "margin-inline", ff68up("")),
 
         /** The style property {@code marginInlineEnd}. */
         MARGIN_INLINE_END("marginInlineEnd", "margin-inline-end", chrome("0px"), ff("")),
@@ -2386,6 +2452,9 @@ public final class StyleAttributes {
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chrome("0px"), ff(""), ie("")),
 
+        /** The style property {@code paddingBlock}. */
+        PADDING_BLOCK("paddingBlock", "padding-block", ff68up("")),
+
         /** The style property {@code paddingBlockEnd}. */
         PADDING_BLOCK_END("paddingBlockEnd", "padding-block-end", chrome("0px"), ff("")),
 
@@ -2403,6 +2472,9 @@ public final class StyleAttributes {
 
         /** The style property {@code padding-bottom}. */
         PADDING_BOTTOM_("padding-bottom", "padding-bottom", ff("0px")),
+
+        /** The style property {@code paddingInline}. */
+        PADDING_INLINE("paddingInline", "padding-inline", ff68up("")),
 
         /** The style property {@code paddingInlineEnd}. */
         PADDING_INLINE_END("paddingInlineEnd", "padding-inline-end", chrome("0px"), ff("")),
@@ -2724,6 +2796,9 @@ public final class StyleAttributes {
         /** The style property {@code scrollbarBaseColor}. */
         SCROLLBAR_BASE_COLOR("scrollbarBaseColor", "scrollbar-base-color", ie("undefined")),
 
+        /** The style property {@code scrollbarColor}. */
+        SCROLLBAR_COLOR("scrollbarColor", "scrollbar-color", ff68up("")),
+
         /** The style property {@code scrollbarDarkShadowColor}. */
         SCROLLBAR_DARKSHADOW_COLOR("scrollbarDarkShadowColor", "scrollbar-darkshadow-color", ie("undefined")),
 
@@ -2738,6 +2813,9 @@ public final class StyleAttributes {
 
         /** The style property {@code scrollbarTrackColor}. */
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie("undefined")),
+
+        /** The style property {@code scrollbarWidth}. */
+        SCROLLBAR_WIDTH("scrollbarWidth", "scrollbar-width", ff68up("")),
 
         /** The style property {@code shapeImageThreshold}. */
         SHAPE_IMAGE_THRESHOLD("shapeImageThreshold", "shape-image-threshold", chrome("0"), ff68up("0")),
@@ -3224,6 +3302,9 @@ public final class StyleAttributes {
         /** The style property {@code webkitAppearance}. */
         WEBKIT_APPEARANCE("webkitAppearance", "webkit-appearance", chrome("none"), ff68up("none")),
 
+        /** The style property {@code WebkitAppearance}. */
+        WEBKIT_APPEARANCE_("WebkitAppearance", "webkit-appearance", ff68up("none")),
+
         /** The style property {@code webkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",
                 chrome("visible"), ff("visible")),
@@ -3608,6 +3689,9 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitLineClamp}. */
         WEBKIT_LINE_CLAMP("webkitLineClamp", "webkit-line-clamp", chrome("none"), ff68up("none")),
+
+        /** The style property {@code WebkitLineClamp}. */
+        WEBKIT_LINE_CLAMP_("WebkitLineClamp", "webkit-line-clamp", ff68up("none")),
 
         /** The style property {@code webkitLocale}. */
         WEBKIT_LOCALE("webkitLocale", "webkit-locale", chrome("auto")),

@@ -48,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass({CHROME, FF})
 public class URLSearchParams extends SimpleScriptable {
 
-    private static final String ITERATOR_NAME = "URLSearchParamsIterator";
+    private static final String ITERATOR_NAME = "URLSearchParams Iterator";
     private static com.gargoylesoftware.htmlunit.javascript.host.Iterator ITERATOR_PROTOTYPE_;
 
     private final List<Entry<String, String>> params_ = new LinkedList<>();

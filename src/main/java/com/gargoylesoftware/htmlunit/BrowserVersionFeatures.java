@@ -1543,8 +1543,9 @@ public enum BrowserVersionFeatures {
     WEBSOCKET_ORIGIN_SET,
 
     /** Set the srcElement property for web socket events. */
-    @BrowserFeature({CHROME, IE})
+    @BrowserFeature({CHROME, FF68, IE})
     WEBSOCKET_SRC_ELEMENT_SET,
+
     /** Execute window events. */
     @BrowserFeature(IE)
     WINDOW_EXECUTE_EVENTS,

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -261,7 +262,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF68 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
             IE = {})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF60})
     public void keys() throws Exception {
         final String html =
             "<html>\n"
@@ -306,7 +307,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF68 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
             IE = {})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF60})
     public void values() throws Exception {
         final String html =
             "<html>\n"
@@ -351,7 +352,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF68 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF60})
     public void entries() throws Exception {
         final String html =
             "<html>\n"
