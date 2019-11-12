@@ -14,11 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -363,6 +366,7 @@ public class RangeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
+    @NotYetImplemented(IE)
     public void getClientRectsMany() throws Exception {
         final String html =
             "<html><body><div id='d'><span id='a'>a</span><span id='b'>b</span><span id='c'>c</span>"

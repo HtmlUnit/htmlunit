@@ -1193,7 +1193,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "Jane", "Smith", "sdg", "finished"},
             CHROME = "not available",
-            FF60 = "not available")
+            FF = "not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"

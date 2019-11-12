@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -651,8 +652,7 @@ public class DOMImplementationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"before", "1"},
-            FF = "1")
+    @Alerts("before1")
     @NotYetImplemented
     public void createHTMLDocumentInnerAddImgAddDocToIframe() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -664,16 +664,17 @@ public class DOMImplementationTest extends WebDriverTestCase {
                 + "      var frame = document.getElementById('theFrame');\n"
 
                 + "      var doc = document.implementation.createHTMLDocument('test');\n"
-                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"alert(1)\">';\n"
+                + "      doc.body.innerHTML = '<img src=\"x\" onerror=\"window.parent.document.title += 1\">';\n"
 
                          // Copy the new HTML document into the frame
                 + "      var destDocument = frame.contentDocument;\n"
                 + "      var srcNode = doc.documentElement;\n"
                 + "      var newNode = destDocument.importNode(srcNode, true);\n"
                 + "      destDocument.replaceChild(newNode, destDocument.documentElement);\n"
-                + "      alert('before');\n"
+                // + "      alert('before');\n"
+                + "      window.parent.document.title += 'before';"
 
-                + "    } catch(e) { alert('exception'); }\n"
+                + "    } catch(e) { window.parent.document.title += 'exception'; }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -683,7 +684,8 @@ public class DOMImplementationTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

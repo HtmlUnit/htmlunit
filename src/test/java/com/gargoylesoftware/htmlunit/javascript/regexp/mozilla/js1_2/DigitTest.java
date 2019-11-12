@@ -155,7 +155,10 @@ public class DigitTest extends WebDriverTestCase {
                     break;
 
                 case 'r':
-                    expected = "\r";
+                    expected = "\n";
+                    if (getBrowserVersion().isFirefox60() || getBrowserVersion().isIE()) {
+                        expected = "\r";
+                    }
                     input = "\\" + ch;
                     break;
 

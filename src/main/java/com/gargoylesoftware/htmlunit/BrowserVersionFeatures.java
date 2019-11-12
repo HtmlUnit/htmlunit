@@ -366,7 +366,7 @@ public enum BrowserVersionFeatures {
     HTMLDEFINITION_INLINE_IN_QUIRKS,
 
     /** {@code document.applets} returns a NodeList. */
-    @BrowserFeature(FF)
+    @BrowserFeature(FF60)
     HTMLDOCUMENT_APPLETS_NODELIST,
 
     /** Is {@code document.charset} lower-case. */

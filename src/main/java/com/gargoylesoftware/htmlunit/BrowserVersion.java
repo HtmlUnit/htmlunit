@@ -163,7 +163,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION};
         FIREFOX_68.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
         FIREFOX_68.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX_68.imgAcceptHeader_ = "*/*";
+        FIREFOX_68.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX_68.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX_68.fontHeights_ = new int[] {
             0, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
