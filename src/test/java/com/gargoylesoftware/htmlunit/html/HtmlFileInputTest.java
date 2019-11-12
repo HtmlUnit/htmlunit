@@ -147,7 +147,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"CONTENT_TYPE:application/octet-stream", "charset"},
-            CHROME = {"CONTENT_TYPE:image/webp", "charset"})
+            CHROME = {"CONTENT_TYPE:image/webp", "charset"},
+            FF68 = {"CONTENT_TYPE:image/webp", "charset"})
     public void contentTypeWebp() throws Exception {
         contentType("webp");
     }

@@ -34,7 +34,10 @@ public class DigitTest extends WebDriverTestCase {
         + "\\f\\n\\r\\t\\v~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./? \"";
 
     private static final String non_digits_expected = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        + "\f\n\r\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
+        + "\f\n\n\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
+
+    private static final String non_digits_expected_ff60 = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            + "\f\n\r\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
 
     private static final String digits = "1234567890";
 
@@ -54,7 +57,9 @@ public class DigitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(non_digits_expected)
+    @Alerts(DEFAULT = non_digits_expected,
+            FF60 = non_digits_expected_ff60,
+            IE = non_digits_expected_ff60)
     public void test2() throws Exception {
         final String initialScript = "var non_digits = '" + non_digits + "'";
         test(initialScript, "non_digits.match(new RegExp('\\\\D+'))");
@@ -98,7 +103,9 @@ public class DigitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(non_digits_expected)
+    @Alerts(DEFAULT = non_digits_expected,
+            FF60 = non_digits_expected_ff60,
+            IE = non_digits_expected_ff60)
     public void test6() throws Exception {
         final String initialScript = "var s = '" + digits + non_digits + "'";
         test(initialScript, "s.match(new RegExp('\\\\D+'))");
