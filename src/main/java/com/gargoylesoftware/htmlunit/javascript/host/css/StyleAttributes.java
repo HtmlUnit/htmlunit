@@ -2998,10 +2998,10 @@ public final class StyleAttributes {
         SCROLLBAR_TRACK_COLOR("scrollbarTrackColor", "scrollbar-track-color", ie("undefined")),
 
         /** The style property {@code scrollbarWidth}. */
-        SCROLLBAR_WIDTH_("scrollbarWidth", "scrollbar-width", ff68up("auto")),
+        SCROLLBAR_WIDTH("scrollbarWidth", "scrollbar-width", ff68up("auto")),
 
         /** The style property {@code scrollbar-width}. */
-        SCROLLBAR_WIDTH("scrollbar-width", "scrollbar-width", ff68up("auto")),
+        SCROLLBAR_WIDTH_("scrollbar-width", "scrollbar-width", ff68up("auto")),
 
         /** The style property {@code shapeImageThreshold}. */
         SHAPE_IMAGE_THRESHOLD("shapeImageThreshold", "shape-image-threshold", chrome("0"), ff68up("0")),
@@ -3491,9 +3491,6 @@ public final class StyleAttributes {
         WEBKIT_ANIMATION_TIMING_FUNCTION__("-webkit-animation-timing-function", "webkit-animation-timing-function",
                 ff("ease")),
 
-        /** The style property {@code -webkit-appearance}. */
-        WEBKIT_APPEARANCE__("-webkit-appearance", "webkit-appearance", ff68up("none")),
-
         /** The style property {@code webkitAppRegion}. */
         WEBKIT_APP_REGION("webkitAppRegion", "webkit-app-region", chrome("none")),
 
@@ -3502,6 +3499,9 @@ public final class StyleAttributes {
 
         /** The style property {@code WebkitAppearance}. */
         WEBKIT_APPEARANCE_("WebkitAppearance", "webkit-appearance", ff68up("none")),
+
+        /** The style property {@code -webkit-appearance}. */
+        WEBKIT_APPEARANCE__("-webkit-appearance", "webkit-appearance", ff68up("none")),
 
         /** The style property {@code webkitBackfaceVisibility}. */
         WEBKIT_BACKFACE_VISIBILITY("webkitBackfaceVisibility", "webkit-backface-visibility",

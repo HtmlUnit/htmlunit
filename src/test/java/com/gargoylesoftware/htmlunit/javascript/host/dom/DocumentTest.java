@@ -2426,7 +2426,7 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"null", "text1", "not available"},
-            IE = {"null", "text1", "onfocus text2"})
+            IE = {"null", "text1", "onfocus text2", "text2", "onfocus text2"})
     @NotYetImplemented(IE)
     // the execution order is not yet correct: the onfocus is called during onload not after it
     public void setActive() throws Exception {
@@ -2452,7 +2452,12 @@ public class DocumentTest extends WebDriverTestCase {
         Thread.sleep(100);
 
         driver.findElement(By.id("text1")).click();
-        verifyAlerts(driver, alerts[1], alerts[2]);
+        if (alerts.length > 3) {
+            verifyAlerts(driver, alerts[1], alerts[2], alerts[3], alerts[4]);
+        }
+        else {
+            verifyAlerts(driver, alerts[1], alerts[2]);
+        }
     }
 
     /**
@@ -2541,8 +2546,7 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0", "1"},
-            IE = "0")
+    @Alerts({"0", "1"})
     public void getElementsByTagNameNS() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "  function test() {\n"

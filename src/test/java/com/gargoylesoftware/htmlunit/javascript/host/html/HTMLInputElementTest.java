@@ -115,7 +115,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(FF68 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
-                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "  ", "  ", "  ", "  ", "  ",
+                        "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "  ", "", "  ",
                         "  ", "", "50", "  ", "", "  ", ""},
             FF60 = {"error fileupload1", "  ", "  ", "  ", "", "  ", "", "", "  ", "  ",
                         "  ", "  ", "  ", "  ", "  ", "  ", "#000000", "", "  ", "  ", "", "  ",

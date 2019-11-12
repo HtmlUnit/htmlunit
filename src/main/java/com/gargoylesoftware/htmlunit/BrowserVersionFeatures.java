@@ -1014,6 +1014,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     JS_INTL_V8_BREAK_ITERATOR,
 
+    /** Indicates that isSearchProviderInstalled returns zero instead of undefined. */
+    @BrowserFeature({CHROME, FF60, IE})
+    JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO,
+
     /** Property form for label always returns null. */
     @BrowserFeature({CHROME, FF})
     JS_LABEL_FORM_NULL,

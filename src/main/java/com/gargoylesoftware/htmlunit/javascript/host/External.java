@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -21,6 +22,8 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code External}.
@@ -61,7 +64,10 @@ public class External extends SimpleScriptable {
      * @return 0
      */
     @JsxFunction(functionName = "IsSearchProviderInstalled")
-    public int isSearchProviderInstalled() {
-        return 0;
+    public Object isSearchProviderInstalled() {
+        if (getBrowserVersion().hasFeature(JS_IS_SEARCH_PROVIDER_INSTALLED_ZERO)) {
+            return 0;
+        }
+        return Undefined.instance;
     }
 }

@@ -28,6 +28,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND;
@@ -2572,7 +2573,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param name the name of the property to retrieve
      * @return the value
      */
-    @JsxFunction(FF)
+    @JsxFunction(FF60)
     public CSSValue getPropertyCSSValue(final String name) {
         if (LOG.isInfoEnabled()) {
             LOG.info("getPropertyCSSValue(" + name + "): getPropertyCSSValue support is experimental");

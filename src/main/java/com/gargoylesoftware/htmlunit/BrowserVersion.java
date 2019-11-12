@@ -150,7 +150,7 @@ public final class BrowserVersion implements Serializable {
         // FF68
         FIREFOX_68.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_68.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0";
-        FIREFOX_68.buildId_ = "20190124141046";
+        FIREFOX_68.buildId_ = "20181001000000";
         FIREFOX_68.productSub_ = "20100101";
         FIREFOX_68.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
