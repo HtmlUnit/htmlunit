@@ -403,5 +403,4 @@ public class KeyboardEventTest extends WebDriverTestCase {
         final String[] actual = driver.findElement(By.id("myTextarea")).getAttribute("value").split("\r\n");
         assertEquals(Arrays.asList(getExpectedAlerts()).toString(), Arrays.asList(actual).toString());
     }
-
 }

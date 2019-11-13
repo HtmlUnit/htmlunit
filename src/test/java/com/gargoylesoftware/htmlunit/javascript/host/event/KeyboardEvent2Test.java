@@ -39,13 +39,13 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:65 keypress:97 keyup:65",
+    @Alerts(DEFAULT = "keydown:65,0,65 keypress:97,97,97 keyup:65,0,65",
             FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
     public void a() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type('a');
         final String log = page.getHtmlElementById("log").asText();
-        assertTrue(log.contains(getExpectedAlerts()[0]));
+        assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 
     private HtmlPage getHtmlPage() throws Exception {
@@ -58,12 +58,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
                 + "\n"
                 + "  function checkEvent(e) {\n"
                 + "    if (!e) var e = window.event;\n"
-                + "    var string;\n"
-                + "    if (window.event) {\n"
-                + "      string = e.keyCode;\n"
-                + "    } else {\n"
-                + "      string = e.keyCode + ',' + e.charCode + ',' + e.which;\n"
-                + "    }\n"
+                + "    var string = e.keyCode + ',' + e.charCode + ',' + e.which;\n"
                 + "    log(e.type + ':' + string + ' ');\n"
                 + "    if (e.type == 'keyup') {\n"
                 + "      log('\\n');\n"
@@ -94,13 +89,13 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:113 keyup:113",
+    @Alerts(DEFAULT = "keydown:113,0,113 keyup:113,0,113",
             FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
     public void dom_vk_f2() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_F2);
         final String log = page.getHtmlElementById("log").asText();
-        assertTrue(log.contains(getExpectedAlerts()[0]));
+        assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 
     /**
@@ -108,7 +103,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:39 keyup:39",
+    @Alerts(DEFAULT = "keydown:39,0,39 keyup:39,0,39",
             FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();
