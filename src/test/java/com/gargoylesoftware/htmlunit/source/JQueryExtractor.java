@@ -417,11 +417,13 @@ public final class JQueryExtractor {
             line_ = line;
             final Matcher matcher = pattern_.matcher(string);
             if (!matcher.matches()) {
-                throw new RuntimeException("Invalid line " + line + ": '" + string + "' in file: " + file.getAbsolutePath());
+                throw new RuntimeException("Invalid line " + line + ": '" + string
+                        + "' in file: " + file.getAbsolutePath());
             }
             final String testNumber = matcher.group(1);
             if (testNumber != null && !testNumber.trim().equals(line + ".")) {
-                throw new RuntimeException("Invalid test number for line " + line + ": " + string + " in file: " + file.getAbsolutePath());
+                throw new RuntimeException("Invalid test number for line " + line + ": " + string
+                        + " in file: " + file.getAbsolutePath());
             }
 
             testName_ = matcher.group(2).trim();

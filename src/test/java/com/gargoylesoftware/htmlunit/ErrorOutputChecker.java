@@ -66,7 +66,6 @@ public class ErrorOutputChecker implements TestRule {
             Pattern.compile("Unable to read VR Path Registry from .*\\r\\n"
                     + ".*\\r\\n"),
             Pattern.compile("JavaScript warning: .*\\r\\n"),
-            
 
             // ie
             Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
