@@ -73,10 +73,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     CSS_DISPLAY_BLOCK2,
 
-    /** Display style is '' for detached nodes. */
-    @BrowserFeature({CHROME, FF68})
-    CSS_DISPLAY_DETACHED_EMTPTY,
-
     /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
     @BrowserFeature(CHROME)
     CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
@@ -133,6 +129,10 @@ public enum BrowserVersionFeatures {
     /** Throws exception on setting a CSS style value to null. */
     @BrowserFeature(IE)
     CSS_SET_NULL_THROWS,
+
+    /** For disconnectd items style properties are blank. */
+    @BrowserFeature({CHROME, FF68})
+    CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement

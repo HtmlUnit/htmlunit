@@ -748,7 +748,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo")
+    @Alerts(DEFAULT = {"foo", "foo"},
+            FF = {"foo", "from button"})
     public void onChange() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -767,16 +768,17 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        verifyAlerts(driver, getExpectedAlerts());
-        Thread.sleep(10);
-        assertEquals("from button", textinput.getAttribute("value"));
+        verifyAlerts(driver, getExpectedAlerts()[0]);
+        Thread.sleep(100);
+        assertEquals(getExpectedAlerts()[1], textinput.getAttribute("value"));
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo")
+    @Alerts(DEFAULT = {"foo", "foo"},
+            FF = {"foo", "from button"})
     public void onChangeSetByJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -798,10 +800,10 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyAlerts(driver, getExpectedAlerts()[0]);
 
         Thread.sleep(100);
-        assertEquals("from button", textinput.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], textinput.getAttribute("value"));
     }
 
     /**

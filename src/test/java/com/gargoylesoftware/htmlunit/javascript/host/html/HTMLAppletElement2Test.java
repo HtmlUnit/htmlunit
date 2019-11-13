@@ -43,8 +43,7 @@ public class HTMLAppletElement2Test extends SimpleWebTestCase {
      */
     @Test
     public void callAppletMethodFromJS() throws Exception {
-        if (getBrowserVersion().isChrome()
-                || (getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox60())) {
+        if (getBrowserVersion().isChrome() || getBrowserVersion().isFirefox()) {
             return;
         }
 
