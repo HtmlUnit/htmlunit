@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
- * A factory for all the things we have to construct from outside of the
+ * A factory default implementation for all the things we have to construct from outside of the
  * JavaScript engine.
  *
  * @author Ronald Brill
