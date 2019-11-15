@@ -35,8 +35,9 @@ public class HtmlSlotTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLSlotElement]")
+    @Alerts(DEFAULT = "[object HTMLSlotElement]",
+            FF60 = "[object HTMLUnknownElement]",
+            IE = "[object HTMLUnknownElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

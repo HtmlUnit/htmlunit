@@ -969,7 +969,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                     "content-type: text/xml;charset=iso-8859-1\n"
                     + "date XYZ GMT\n"
                     + "server: Jetty(XXX)\n"
-                    + "transfer-Encoding: chunked\n"})
+                    + "transfer-encoding: chunked\n"})
     @NotYetImplemented({CHROME, FF})
     public void getAllResponseHeaders() throws Exception {
         final String html =

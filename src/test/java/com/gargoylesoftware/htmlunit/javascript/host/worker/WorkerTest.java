@@ -118,9 +118,43 @@ public class WorkerTest extends WebDriverTestCase {
         final String scriptToImportJs1 = "postMessage(' in imported script1');\n";
         final String scriptToImportJs2 = "postMessage(' in imported script2');\n";
 
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1,
+                                                    MimeType.APPLICATION_JAVASCRIPT);
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport2.js"), scriptToImportJs2,
+                                                    MimeType.APPLICATION_JAVASCRIPT);
+
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "start worker",
+            FF60 = "start worker in imported script1 end worker",
+            IE = "start worker in imported script1 end worker")
+    public void importScriptsWrongContentType() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    document.title += e.data;\n"
+            + "  };\n"
+            + "} catch(e) { document.title += ' exception'; }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "postMessage('start worker');\n"
+                + "try {\n"
+                + "  importScripts('scriptToImport1.js');\n"
+                + "} catch(e) { document.title += ' import exception'; }\n"
+                + "postMessage(' end worker');\n";
+
+        final String scriptToImportJs1 = "postMessage(' in imported script1');\n";
+
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport1.js"), scriptToImportJs1);
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "scriptToImport2.js"), scriptToImportJs2);
 
         final WebDriver driver = loadPage2(html);
         assertTitle(driver, getExpectedAlerts()[0]);
