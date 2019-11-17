@@ -1538,10 +1538,11 @@ public class DomElement extends DomNamespaceNode implements Element {
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
     protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
+    private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
     private boolean dirty_ = false;
-    private DomAttr[] attrPositions_ = new DomAttr[0];
+    private DomAttr[] attrPositions_ = EMPTY_ARRAY;
     private final DomElement domNode_;
     private final boolean caseSensitive_;
 
