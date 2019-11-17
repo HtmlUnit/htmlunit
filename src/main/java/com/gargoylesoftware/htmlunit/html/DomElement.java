@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -596,7 +595,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /**
      * This should be {@link #getElementsByTagName(String)}, but is separate because of the type erasure in Java.
-     * @param name The name of the tag to match on
+     * @param tagName The name of the tag to match on
      * @return A list of matching elements.
      */
     <E extends HtmlElement> DomNodeList<E> getElementsByTagNameImpl(final String tagName) {
@@ -1541,7 +1540,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
-    private final List<String> attrPositions_ = new ArrayList<>();
+    private boolean dirty_ = false;
+    private DomAttr[] attrPositions_ = new DomAttr[0];
     private final DomElement domNode_;
     private final boolean caseSensitive_;
 
@@ -1605,10 +1605,14 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public Node item(final int index) {
-        if (index < 0 || index >= attrPositions_.size()) {
+        if (index < 0 || index >= map_.size()) {
             return null;
         }
-        return map_.get(attrPositions_.get(index));
+        if (dirty_) {
+            attrPositions_ = map_.values().toArray(attrPositions_);
+            dirty_ = false;
+        }
+        return attrPositions_[index];
     }
 
     /**
@@ -1652,11 +1656,8 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     @Override
     public DomAttr put(final String key, final DomAttr value) {
         final String name = fixName(key);
-        final DomAttr previous = map_.put(name, value);
-        if (null == previous) {
-            attrPositions_.add(name);
-        }
-        return previous;
+        dirty_ = true;
+        return map_.put(name, value);
     }
 
     /**
@@ -1666,7 +1667,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     public DomAttr remove(final Object key) {
         if (key instanceof String) {
             final String name = fixName((String) key);
-            attrPositions_.remove(name);
+            dirty_ = true;
             return map_.remove(name);
         }
         return null;
@@ -1677,7 +1678,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
      */
     @Override
     public void clear() {
-        attrPositions_.clear();
+        dirty_ = true;
         map_.clear();
     }
 
@@ -1718,7 +1719,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
 
     /**
      * Fast access.
-     * @param the key
+     * @param key the key
      */
     protected DomAttr getDirect(final String key) {
         return map_.get(key);
