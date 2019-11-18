@@ -14,9 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.LinkedList;
@@ -52,7 +50,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("SELECT;")
-    @BuggyWebDriver({CHROME, FF60})
+    @BuggyWebDriver(CHROME = "",
+                    FF60 = "")
     //https://bugs.chromium.org/p/chromedriver/issues/detail?id=1352
     public void clickSelect() throws Exception {
         final String html =
@@ -102,7 +101,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "opt-a; opt-b",
             CHROME = "opt-b")
-    @BuggyWebDriver
+    @BuggyWebDriver("opt-a; b;")
     @NotYetImplemented
     //TODO: Needs further investigation of clicking an option without clicking the select
     // See the first comment in http://code.google.com/p/selenium/issues/detail?id=2131#c1
@@ -155,7 +154,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; onclick-option; onclick-select;",
             IE = "onchange-select; onclick-select;")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(CHROME = "onchange-select; onclick-select;",
+                    FF = "onchange-select; onclick-select;")
     public void clickOptionEventSequence1() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -196,7 +196,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "change-SELECT; click-OPTION; click-OPTION;",
             IE = "change-SELECT; click-SELECT;")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(CHROME = "change-SELECT; click-SELECT;",
+                    FF = "change-SELECT; click-SELECT;")
     public void clickOptionEventSequence2() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -252,7 +253,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onchange-select; change-SELECT; onclick-option; click-OPTION; onclick-select; click-OPTION;",
             IE = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(CHROME = "onchange-select; change-SELECT; onclick-select; click-SELECT;",
+                    FF = "onchange-select; change-SELECT; onclick-select; click-SELECT;")
     public void clickOptionEventSequence3() throws Exception {
         final String html =
                 HtmlPageTest.STANDARDS_MODE_PREFIX_

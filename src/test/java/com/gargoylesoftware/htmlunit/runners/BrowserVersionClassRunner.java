@@ -95,6 +95,34 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 }
             }
         }
+
+        if (isRealBrowser()) {
+            final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
+            if (buggyWebDriver != null) {
+                if (isDefined(buggyWebDriver.value())) {
+                    expectedAlerts = buggyWebDriver.value();
+                }
+                else {
+                    if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
+                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
+                                            buggyWebDriver.IE(), buggyWebDriver.DEFAULT());
+                    }
+                    else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
+                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
+                                            buggyWebDriver.FF60(), buggyWebDriver.FF(), buggyWebDriver.DEFAULT());
+                    }
+                    else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
+                                            buggyWebDriver.FF68(), buggyWebDriver.FF(), buggyWebDriver.DEFAULT());
+                    }
+                    else if (browserVersion_ == BrowserVersion.CHROME) {
+                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
+                                            buggyWebDriver.CHROME(), buggyWebDriver.DEFAULT());
+                    }
+                }
+            }
+        }
+
         testCase.setExpectedAlerts(expectedAlerts);
     }
 
@@ -133,6 +161,15 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             }
         }
         return new String[] {};
+    }
+
+    private static String[] firstDefinedOrGiven(final String[] given, final String[]... variants) {
+        for (final String[] var : variants) {
+            if (isDefined(var)) {
+                return var;
+            }
+        }
+        return given;
     }
 
     /**
@@ -189,9 +226,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
         String prefix = "";
         if (isNotYetImplemented(method) && !realBrowser_) {
             prefix = "(NYI) ";
-        }
-        else if (realBrowser_ && isBuggyWebDriver(method)) {
-            prefix = "(buggy) ";
         }
 
         String browserString = browserVersion_.getNickname();
@@ -307,11 +341,10 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
         //  End of copy & paste from super.methodBlock()  //
 
-        final boolean notYetImplemented;
+        boolean notYetImplemented = false;
         final int tries;
 
         if (testCase instanceof WebDriverTestCase && realBrowser_) {
-            notYetImplemented = isBuggyWebDriver(method);
             tries = 1;
         }
         else {
@@ -369,16 +402,6 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
         return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
-    }
-
-    /**
-     * Is buggy web driver.
-     * @param method the method
-     * @return is buggy web driver
-     */
-    protected boolean isBuggyWebDriver(final FrameworkMethod method) {
-        final BuggyWebDriver buggyWebDriver = method.getAnnotation(BuggyWebDriver.class);
-        return buggyWebDriver != null && isDefinedIn(buggyWebDriver.value());
     }
 
     private static int getTries(final FrameworkMethod method) {

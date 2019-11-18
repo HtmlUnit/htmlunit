@@ -30,7 +30,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -206,7 +205,6 @@ public class HtmlPage3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"[object HTMLInputElement]", "1"})
-    @BuggyWebDriver(IE)
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
             + "<head><title>foo</title><script>\n"

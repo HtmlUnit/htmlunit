@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -102,15 +99,19 @@ public class ExternalTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"},
             FF68 = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
-    @BuggyWebDriver({IE, CHROME}) // fail with missing permission
+    // fail with missing permission
+    @BuggyWebDriver(IE = {"IsSearchProviderInstalled defined", "exception"},
+                    CHROME = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     public void isSearchProviderInstalled() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
             + "  if (window.external) {\n"
             + "    if ('IsSearchProviderInstalled' in window.external) {\n"
             + "      alert('IsSearchProviderInstalled defined');\n"
-            + "      var res = window.external.IsSearchProviderInstalled('http://htmlunit.sourceforge.net');\n"
-            + "      alert('IsSearchProviderInstalled: ' + res);\n"
+            + "      try {\n"
+            + "        var res = window.external.IsSearchProviderInstalled('http://htmlunit.sourceforge.net');\n"
+            + "        alert('IsSearchProviderInstalled: ' + res);\n"
+            + "      } catch(e) { alert('exception'); }\n"
             + "    } else {\n"
             + "      alert('no IsSearchProviderInstalled');\n"
             + "    }\n"

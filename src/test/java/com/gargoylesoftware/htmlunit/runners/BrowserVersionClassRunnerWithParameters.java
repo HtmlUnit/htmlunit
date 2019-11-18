@@ -128,9 +128,6 @@ public class BrowserVersionClassRunnerWithParameters extends BrowserVersionClass
         if (isNotYetImplemented(method) && !isRealBrowser()) {
             prefix = "(NYI) ";
         }
-        else if (isRealBrowser() && isBuggyWebDriver(method)) {
-            prefix = "(buggy) ";
-        }
 
         String browserString = getBrowserVersion().getNickname();
         if (isRealBrowser()) {

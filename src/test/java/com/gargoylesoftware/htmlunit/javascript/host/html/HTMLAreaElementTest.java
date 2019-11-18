@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -95,7 +93,8 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
                 "§§URL§§", "http://srv/htmlunit.org"})
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = {"[object HTMLButtonElement]", "",
+            "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

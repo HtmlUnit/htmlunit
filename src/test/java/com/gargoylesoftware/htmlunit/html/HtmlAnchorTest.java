@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.InputStream;
@@ -268,7 +266,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "")
     public void clickNestedOptionElement() throws Exception {
         final String html =
               "<html>\n"
@@ -591,7 +589,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "click href click doubleClick href ",
             IE = "click href click doubleClick ")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "click click doubleClick href href ")
     @NotYetImplemented
     public void doubleClick() throws Exception {
         final String html =
@@ -674,7 +672,8 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @exception Exception If the test fails
      */
     @Test
-    @BuggyWebDriver(IE)
+    @Alerts({"1", "First"})
+    @BuggyWebDriver(IE = {"0", "Second"})
     public void shiftClick() throws Exception {
         final String html = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
@@ -684,8 +683,6 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         final WebElement link = driver.findElement(By.linkText("Click Me"));
-
-        final String originalTitle = driver.getTitle();
 
         final int windowsSize = driver.getWindowHandles().size();
 
@@ -697,15 +694,17 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             .perform();
 
         Thread.sleep(100);
-        assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
-        assertEquals("Should not have navigated away", originalTitle, driver.getTitle());
+        assertEquals("Should have opened a new window",
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
+        assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
     }
 
     /**
      * @exception Exception If the test fails
      */
     @Test
-    @BuggyWebDriver({IE, FF})
+    @Alerts({"1", "First"})
+    @BuggyWebDriver(IE = {"0", "Second"})
     public void ctrlClick() throws Exception {
         final String html = "<html><head><title>First</title></head><body>\n"
             + "<a href='" + URL_SECOND + "'>Click Me</a>\n"
@@ -716,18 +715,18 @@ public class HtmlAnchorTest extends WebDriverTestCase {
 
         final WebElement link = driver.findElement(By.linkText("Click Me"));
 
-        final String originalTitle = driver.getTitle();
-
         final int windowsSize = driver.getWindowHandles().size();
 
         new Actions(driver)
-            .moveToElement(link)
-            .keyDown(Keys.CONTROL)
-            .click()
-            .keyUp(Keys.CONTROL)
-            .perform();
+                .moveToElement(link)
+                .keyDown(Keys.CONTROL)
+                .click()
+                .keyUp(Keys.CONTROL)
+                .perform();
 
-        assertEquals("Should have opened a new window", windowsSize + 1, driver.getWindowHandles().size());
-        assertEquals("Should not have navigated away", originalTitle, driver.getTitle());
+        Thread.sleep(DEFAULT_WAIT_TIME);
+        assertEquals("Should have opened a new window",
+                windowsSize + Integer.parseInt(getExpectedAlerts()[0]), driver.getWindowHandles().size());
+        assertEquals("Should not have navigated away", getExpectedAlerts()[1], driver.getTitle());
     }
 }

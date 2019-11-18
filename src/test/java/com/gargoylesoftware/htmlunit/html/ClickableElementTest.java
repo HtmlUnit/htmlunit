@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -578,7 +576,7 @@ public class ClickableElementTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = "foo",
             IE = "")
-    @BuggyWebDriver(CHROME)
+    @BuggyWebDriver(CHROME = "")
     // ChromeDriver does not generate a "foo" but it occurs manually
     public void option_onClick() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head>\n"

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.util.List;
@@ -25,6 +24,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -694,9 +694,10 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("§§URL§§test.html")
     //real browsers don't show the alert, since it is quickly closed through JavaScript
     @NotYetImplemented
-    @BuggyWebDriver(IE)
+    @BuggyWebDriver(IE = "§§URL§§")
     public void locationAfterOpenClosePopup() throws Exception {
         final String html =
               "<html>\n"
@@ -735,10 +736,11 @@ public class Location2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, popup);
         getMockWebConnection().setResponse(new URL(URL_FIRST, "test.html"), target);
 
+        expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("click")).click();
         try {
-            assertEquals(URL_FIRST + "test.html", driver.getCurrentUrl());
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
         }
         finally {
             // TODO [IE] when run with real IE the window is closed and all following tests are broken
@@ -899,9 +901,10 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"null", "§§URL§§/"},
-            CHROME = {"§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"})
-    @BuggyWebDriver(FF) // FF opens a confirmation window
+    @Alerts(DEFAULT = {"3", "null", "§§URL§§/"},
+            CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"})
+    // FF opens a confirmation window for the post
+    @BuggyWebDriver(FF = {"2", "null", "§§URL§§/"})
     public void reloadPost() throws Exception {
         final String form =
                 "<html>\n"
@@ -932,7 +935,15 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(2, getMockWebConnection().getRequestCount());
 
         driver.findElement(By.id("link")).click();
-        assertEquals(3, getMockWebConnection().getRequestCount());
+
+        // works only in the debugger
+        try {
+            driver.switchTo().alert().accept();
+        }
+        catch (final NoAlertPresentException e) {
+            // ignore
+        }
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
 
         assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());
         assertEquals(URL_SECOND + "a.html?urlParam=urlVal", getMockWebConnection().getLastWebRequest().getUrl());
@@ -950,8 +961,8 @@ public class Location2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables("http://localhost:" + PORT);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], "" + additionalHeaders.get(HttpHeader.ORIGIN));
-        assertEquals(getExpectedAlerts()[1], additionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[1], "" + additionalHeaders.get(HttpHeader.ORIGIN));
+        assertEquals(getExpectedAlerts()[2], additionalHeaders.get(HttpHeader.REFERER));
         assertEquals("localhost:" + PORT, additionalHeaders.get(HttpHeader.HOST));
     }
 }

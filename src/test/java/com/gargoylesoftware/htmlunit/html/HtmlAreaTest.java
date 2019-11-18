@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collections;
@@ -29,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -79,15 +76,23 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver({FF60, IE})
+    @Alerts("§§URL§§")
+    @BuggyWebDriver(FF = "WebDriverException",
+                    IE = "WebDriverException")
     public void referer() throws Exception {
+        expandExpectedAlertsVariables(URL_FIRST);
+
         final WebDriver driver = createWebClient("");
-
         driver.get(URL_FIRST.toExternalForm());
-        driver.findElement(By.id("third")).click();
+        try {
+            driver.findElement(By.id("third")).click();
 
-        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
+            final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+            assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        }
+        catch (final WebDriverException e) {
+            assertEquals(getExpectedAlerts()[0], "WebDriverException");
+        }
     }
 
     /**
@@ -241,7 +246,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF60)
+    @BuggyWebDriver(FF60 = "")
     public void click_javascriptUrl() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -281,7 +286,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF)
+    @Alerts("clicked")
+    @BuggyWebDriver(FF = "Todo")
     public void click_javascriptUrlMixedCase() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -311,7 +317,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         driver.findElement(By.id("a2")).click();
 
-        verifyAlerts(driver, "clicked");
+        verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
             final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertSame(page, secondPage);
@@ -322,7 +328,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF60)
+    @Alerts("clicked")
+    @BuggyWebDriver(FF = "Todo")
     public void click_javascriptUrlLeadingWhitespace() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -351,7 +358,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         driver.findElement(By.id("a2")).click();
 
-        verifyAlerts(driver, "clicked");
+        verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
             final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertSame(page, secondPage);
@@ -363,7 +370,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(FF60)
+    @Alerts("true")
+    @BuggyWebDriver(FF = "Todo")
     public void thisInJavascriptHref() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -392,7 +400,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         driver.findElement(By.id("a2")).click();
 
-        verifyAlerts(driver, "true");
+        verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
             final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertSame(page, secondPage);

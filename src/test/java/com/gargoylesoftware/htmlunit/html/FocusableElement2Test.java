@@ -255,8 +255,8 @@ public class FocusableElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @BuggyWebDriver(IE)
     @Alerts({"input1", "focus1", "div", "input2", "blur1", "focus2"})
+    @BuggyWebDriver(IE = {"input1", "div", "input2", "focus1", "blur1", "focus2"})
     public void focusOnNonFocusableElementShouldNotChangeCurrentFocus() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

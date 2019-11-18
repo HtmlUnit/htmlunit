@@ -38,7 +38,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -720,7 +719,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(IE)
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"})
     // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
@@ -734,7 +732,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(IE)
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"})
     // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle

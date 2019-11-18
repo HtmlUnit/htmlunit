@@ -83,7 +83,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"null", "one", "two", "three"})
-    @BuggyWebDriver(IE)
+    @BuggyWebDriver(IE = {"undefined", "one", "two", "three"})
     public void opener() throws Exception {
         final URL urlThird = new URL(URL_FIRST, "third/");
 
@@ -310,7 +310,7 @@ public class Window3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false", "true"})
-    @BuggyWebDriver(IE)
+    @BuggyWebDriver(IE = {"false", "false", "true"})
     public void closed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

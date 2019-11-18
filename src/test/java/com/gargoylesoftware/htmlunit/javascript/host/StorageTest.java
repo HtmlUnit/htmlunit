@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 
 import java.util.List;
@@ -162,7 +161,8 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("I was here")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(CHROME = "null",
+                    FF = "null")
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
     // But when executed manually the LocalStorage is shared.
     @NotYetImplemented

@@ -428,8 +428,9 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"hello", "in timeout"})
-    @BuggyWebDriver(IE)
+    @Alerts("hello in timeout")
+    @BuggyWebDriver(FF68 = "in timeouthello",
+                    IE = "in timeouthello")
     // IEDriver catches "in timeout", "hello" but real IE gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"
@@ -439,12 +440,12 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "  xhr.send('');\n"
             + "}\n"
             + "function doTest() {\n"
-            + "  setTimeout(function() { alert('in timeout');}, 5);\n"
+            + "  setTimeout(function() { document.title += ' in timeout'; }, 5);\n"
             + "  wait();\n"
             + "  var xhr2 = new XMLHttpRequest();\n"
             + "  var handler = function() {\n"
             + "    if (xhr2.readyState == 4)\n"
-            + "      alert(xhr2.responseText);\n"
+            + "      document.title += xhr2.responseText;\n"
             + "  }\n"
             + "  xhr2.onreadystatechange = handler;\n"
             + "  xhr2.open('GET', '/foo.txt', true);\n"
@@ -455,7 +456,8 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             + "</script></head><body></body></html>";
 
         getMockWebConnection().setDefaultResponse("hello", MimeType.TEXT_PLAIN);
-        loadPageWithAlerts2(html, 2000);
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, getExpectedAlerts()[0]);
     }
 
     /**

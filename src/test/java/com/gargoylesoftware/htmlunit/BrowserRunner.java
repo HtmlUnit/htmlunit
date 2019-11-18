@@ -300,14 +300,47 @@ public class BrowserRunner extends Suite {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public static @interface BuggyWebDriver {
+        /**
+         * Alerts that is used for all browsers (if defined, the other values are ignored).
+         * @return the alerts
+         */
+        String[] value() default { EMPTY_DEFAULT };
 
         /**
-         * The browsers with which the case is failing.
-         * @return the browsers
+         * Alerts for Internet Explorer 11.
+         * @return the alerts
          */
-        TestedBrowser[] value() default {
-            IE, FF, CHROME
-        };
+        String[] IE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for any Firefox, it can be overridden by specific FF version.
+         * @return the alerts
+         */
+        String[] FF() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF60() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF68() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for latest Chrome.
+         * @return the alerts
+         */
+        String[] CHROME() default { EMPTY_DEFAULT };
+
+        /**
+         * The default alerts, if nothing more specific is defined.
+         * @return the alerts
+         */
+        String[] DEFAULT() default { EMPTY_DEFAULT };
     }
 
     /**

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import java.util.List;
 
 import org.eclipse.jetty.server.Server;
@@ -28,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
@@ -163,14 +162,15 @@ public class ExtJS22Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(IE)
+    @Alerts("Hello from the Ext console.")
+    @BuggyWebDriver(IE = "Todo")
     public void debug_console() throws Exception {
         final WebDriver driver = getPage("debug", "debug-console");
 
         final List<WebElement> anchors = driver.findElements(By.xpath("//a"));
         assertEquals(2, anchors.size());
         anchors.get(1).click();
-        assertEquals("Hello from the Ext console.",
+        assertEquals(getExpectedAlerts()[0],
                 driver.findElement(By.xpath("//div[starts-with(text(), 'Hello')][1]")).getText());
     }
 

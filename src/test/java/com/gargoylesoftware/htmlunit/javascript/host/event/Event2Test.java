@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -49,7 +47,8 @@ public class Event2Test extends WebDriverTestCase {
                 + " [object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "[object Event] change b:true c:false [select] [-]"
                 + " [object MouseEvent] click b:true c:true [select] [1]")
-    @BuggyWebDriver({CHROME, FF})
+    @BuggyWebDriver(CHROME = "",
+                    FF = "")
     // FFDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" first that doesn't occur
     // manually
     // ChromeDriver wrongly generates a "[object MouseEvent] click b:true c:true [select] [1]" instead of "clickMe"
@@ -73,7 +72,8 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
             IE = "")
-    @BuggyWebDriver(CHROME)
+    @BuggyWebDriver(CHROME = "",
+                    FF = "")
     // ChromeDriver does not generate a "[object MouseEvent] click b:true c:true [clickMe] [1]" but it occurs manually
     public void optionClick2() throws Exception {
         final String firstSnippet = "       <select name='select' id='select' size='2'>\n"

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-
 import java.net.URL;
 import java.util.Arrays;
 
@@ -325,7 +323,11 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLHeadingElement]-attributes")
     public void attributeValue2() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function makeRed() {\n"

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -190,7 +188,7 @@ public class MouseEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Click on DIV(id=div1): true, true, false, false")
-    @BuggyWebDriver(IE)
+    @BuggyWebDriver(IE = "Click on SPAN(id=span1): true, true, true, false")
     public void eventCoordinates_div() throws Exception {
         eventCoordinates("div1");
     }

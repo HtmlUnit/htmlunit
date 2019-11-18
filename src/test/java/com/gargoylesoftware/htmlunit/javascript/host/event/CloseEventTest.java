@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -103,7 +101,7 @@ public class CloseEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "0", "", "false"},
             FF = "exception")
-    @BuggyWebDriver(IE)
+    @BuggyWebDriver(IE = {"[object CloseEvent]", "", "false", "false", "0", "exception"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>foo</title><script>\n"

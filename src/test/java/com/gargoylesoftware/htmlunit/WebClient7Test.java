@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -24,6 +23,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
@@ -212,7 +212,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
             IE = "/area.html?k\u00c3\u00b6nig")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingUTF8Header() throws Exception {
         areaUrlEncoding(true, "UTF-8");
@@ -224,7 +224,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
             IE = "/area.html?k\u00c3\u00b6nig")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingUTF8Meta() throws Exception {
         areaUrlEncoding(false, "UTF-8");
@@ -236,7 +236,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/area.html?k%F6nig",
             IE = "/area.html?k\u00f6nig")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingISO8859_1Header() throws Exception {
         areaUrlEncoding(true, "ISO-8859-1");
@@ -248,7 +248,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/area.html?k%F6nig",
             IE = "/area.html?k\u00f6nig")
-    @BuggyWebDriver(FF)
+    @BuggyWebDriver(FF = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingISO8859_1Meta() throws Exception {
         areaUrlEncoding(false, "ISO-8859-1");
@@ -456,14 +456,19 @@ public class WebClient7Test extends WebDriverTestCase {
             final WebDriver driver = getWebDriver();
 
             driver.get(url);
-            if (click) {
-                driver.findElement(By.id("myLink")).click();
+            try {
+                if (click) {
+                    driver.findElement(By.id("myLink")).click();
+                }
+
+                String reqUrl = primitiveWebServer.getRequests().get(1);
+                reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
+
+                assertEquals(getExpectedAlerts()[0], reqUrl);
             }
-
-            String reqUrl = primitiveWebServer.getRequests().get(1);
-            reqUrl = reqUrl.substring(4, reqUrl.indexOf("HTTP/1.1") - 1);
-
-            assertEquals(getExpectedAlerts()[0], reqUrl);
+            catch (final WebDriverException e) {
+                assertEquals(getExpectedAlerts()[0], "WebDriverException");
+            }
         }
     }
 

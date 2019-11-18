@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html.parser;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -446,11 +444,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
-    @BuggyWebDriver(IE)
-    // The correct values for IE are:
-    //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-    //                "bodyTitles", "DIV", "",
-    //                "innerDiv", "outerDiv"})
+    @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
+            "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void completeHtmlInsideDiv() throws Exception {
@@ -504,11 +499,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
                 "bodyTitles", "DIV", "Inner Html",
                 "innerDiv", "outerDiv"})
-    @BuggyWebDriver(IE)
-    // The correct values for IE are:
-    //            IE = {"titles", "HEAD", "Outer Html", "DIV", "",
-    //                "bodyTitles", "DIV", "",
-    //                "innerDiv", "outerDiv"})
+    @BuggyWebDriver(IE = {"titles", "HEAD", "Outer Html", "DIV", "",
+                 "bodyTitles", "DIV", "", "innerDiv", "outerDiv"})
     // This is pretty mysterious because the second title HAS the text 'Inner Html' inside.
     // Currently I do not know why it behaves this way so I take the default behavior.
     public void writeCompleteHtmlInsideDIV() throws Exception {
