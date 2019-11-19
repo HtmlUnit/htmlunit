@@ -382,8 +382,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 17, 17",
-            CHROME = "1, 16, 17")
+    @Alerts("0, 17, 17")
     public void core__jQuery_makeArray() throws Exception {
         runTest("core: jQuery.makeArray");
     }
@@ -1543,8 +1542,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 31, 31",
-            CHROME = "1, 30, 31")
+    @Alerts("0, 31, 31")
     public void attributes__prop_String__Object_() throws Exception {
         runTest("attributes: prop(String, Object)");
     }
@@ -1675,8 +1673,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 48, 48",
-            CHROME = "1, 49, 50")
+    @Alerts("0, 48, 48")
     public void attributes__addClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: addClass(Function) with incoming value");
     }
@@ -1706,8 +1703,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 48, 48",
-            CHROME = "1, 49, 50")
+    @Alerts("0, 48, 48")
     public void attributes__removeClass_Function__with_incoming_value() throws Exception {
         runTest("attributes: removeClass(Function) with incoming value");
     }
@@ -2947,8 +2943,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 5, 5",
-            CHROME = "1, 4, 5")
+    @Alerts("0, 5, 5")
     public void traversing__next__String__() throws Exception {
         runTest("traversing: next([String])");
     }
@@ -6631,8 +6626,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "0, 33, 33",
-            CHROME = "1, 32, 33")
+    @Alerts("0, 33, 33")
     public void Sizzle__selector__pseudo___position() throws Exception {
         runTest("Sizzle: selector: pseudo - position");
     }

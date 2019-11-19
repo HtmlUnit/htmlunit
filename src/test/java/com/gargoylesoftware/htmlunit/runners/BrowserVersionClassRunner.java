@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.runners;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -166,6 +168,13 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     private static String[] firstDefinedOrGiven(final String[] given, final String[]... variants) {
         for (final String[] var : variants) {
             if (isDefined(var)) {
+                try {
+                    assertArrayEquals(var, given);
+                    fail("BuggyWebDriver duplicates expectations");
+                }
+                catch (final AssertionError e) {
+                    // ok
+                }
                 return var;
             }
         }

@@ -1,8 +1,8 @@
 jQuery Test Suite
 Hide passed testsCheck for GlobalsNo try-catchminnoqsaModule:
-Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36
-Tests completed in 135619 milliseconds.
-6915 tests of 6924 passed, 9 failed.
+Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36
+Tests completed in 87714 milliseconds.
+6917 tests of 6920 passed, 3 failed.
 
 core: Unit Testing Environment (0, 2, 2)Rerun
 core: Basic requirements (0, 7, 7)Rerun
@@ -37,36 +37,7 @@ core: map() (0, 8, 8)Rerun
 core: jQuery.merge() (0, 8, 8)Rerun
 core: jQuery.extend(Object, Object) (0, 28, 28)Rerun
 core: jQuery.each(Object,Function) (0, 14, 14)Rerun
-core: jQuery.makeArray (1, 16, 17)Rerun
-Pass makeArray a jQuery object
-Expected:   
-"HEAD"
-Result:     
-"SCRIPT"
-Diff:   
-"HEAD" "SCRIPT" 
-Source:     
-    at Object.<anonymous> (http://localhost:22222/jquery/test/unit/core.js:1030:2)
-    at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
-    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
-    at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at next (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1270:3)
-Pass makeArray a nodelist
-Pass makeArray an arguments array
-Pass makeArray a real array
-Pass nothing to makeArray and expect an empty array
-Pass makeArray a number
-Pass makeArray a string
-Pass makeArray a boolean
-Pass makeArray a single node
-Pass makeArray an array like map (with length)
-Pass makeArray a childNodes array
-Pass makeArray a function
-Pass makeArray the window
-Pass makeArray a regex
-Pass makeArray a form (treat as elements)
-Make sure object is coerced properly.
-Make sure object is coerced properly.
+core: jQuery.makeArray (0, 17, 17)Rerun
 core: jQuery.inArray (0, 3, 3)Rerun
 core: jQuery.isEmptyObject (0, 2, 2)Rerun
 core: jQuery.proxy (0, 7, 7)Rerun
@@ -182,44 +153,7 @@ attributes: attr('tabindex', value) (0, 9, 9)Rerun
 attributes: removeAttr(String) (0, 12, 12)Rerun
 attributes: removeAttr(String) in XML (0, 7, 7)Rerun
 attributes: removeAttr(Multi String, variable space width) (0, 8, 8)Rerun
-attributes: prop(String, Object) (1, 30, 31)Rerun
-Check for value attribute
-Check for defaultValue attribute
-Check for selectedIndex attribute
-Check for nodeName attribute
-Check for tagName attribute
-Check selected attribute on disconnected element.
-Check retrieving tabindex
-Check setting readOnly property with 'readonly'
-Check retrieving htmlFor
-Check setting className with 'class'
-Check retrieving maxLength
-Check setting and retrieving cellSpacing
-Check setting and retrieving cellPadding
-Check setting and retrieving rowSpan
-Check setting and retrieving colSpan
-Check setting and retrieving useMap
-Check setting and retrieving frameBorder
-Make sure a null expando returns null
-Source:     
-    at Object.<anonymous> (http://localhost:22222/jquery/test/unit/attributes.js:606:2)
-    at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
-    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
-    at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:383:5
-Make sure the expando is preferred over the dom attribute
-Make sure the expando is preferred over the dom attribute, even if undefined
-Make sure that a single option is selected, even when in an optgroup.
-prop works correctly on document nodes (bug #7451).
-prop works correctly for non existing attributes (bug #7500).
-prop works correctly for non existing attributes (bug #7500).
-prop works correctly for non existing attributes (bug #7500).
-prop works correctly for non existing attributes (bug #7500).
-prop works correctly for non existing attributes (bug #7500).
-prop works correctly for non existing attributes (bug #7500).
-prop(name, value) works correctly for non existing attributes (bug #7500).
-prop(name, value) works correctly for non existing attributes (bug #7500).
-Set the enctype of a form (encoding in IE6/7 #6743)
+attributes: prop(String, Object) (0, 31, 31)Rerun
 attributes: prop('tabindex') (0, 8, 8)Rerun
 attributes: prop('tabindex', value) (0, 9, 9)Rerun
 attributes: removeProp(String) (0, 6, 6)Rerun
@@ -232,114 +166,10 @@ attributes: val(Function) with incoming value (0, 10, 10)Rerun
 attributes: val(select) after form.reset() (Bug #2551) (0, 3, 3)Rerun
 attributes: addClass(String) (0, 9, 9)Rerun
 attributes: addClass(Function) (0, 9, 9)Rerun
-attributes: addClass(Function) with incoming value (1, 49, 50)Rerun
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Add Class
-Expected 48 assertions, but 49 were run
-Source:     
-    at http://localhost:22222/jquery/test/unit/attributes.js:990:1
+attributes: addClass(Function) with incoming value (0, 48, 48)Rerun
 attributes: removeClass(String) - simple (0, 7, 7)Rerun
 attributes: removeClass(Function) - simple (0, 7, 7)Rerun
-attributes: removeClass(Function) with incoming value (1, 49, 50)Rerun
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Make sure the incoming value is correct.
-Remove Class
-Expected 48 assertions, but 49 were run
-Source:     
-    at http://localhost:22222/jquery/test/unit/attributes.js:1064:1
+attributes: removeClass(Function) with incoming value (0, 48, 48)Rerun
 attributes: removeClass() removes duplicates (0, 1, 1)Rerun
 attributes: toggleClass(String|boolean|undefined[, boolean]) (0, 17, 17)Rerun
 attributes: toggleClass(Function[, boolean]) (0, 17, 17)Rerun
@@ -463,24 +293,7 @@ traversing: children([String]) (0, 3, 3)Rerun
 traversing: parent([String]) (0, 5, 5)Rerun
 traversing: parents([String]) (0, 5, 5)Rerun
 traversing: parentsUntil([String]) (0, 9, 9)Rerun
-traversing: next([String]) (1, 4, 5)Rerun
-Simple next check
-Filtered next check
-Filtered next check, no match
-Multiple filters
-Simple next check, no match
-Expected:   
-0
-Result:     
-1
-Diff:   
-0 1 
-Source:     
-    at Object.<anonymous> (http://localhost:22222/jquery/test/unit/traversing.js:481:2)
-    at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
-    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
-    at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at next (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1270:3)
+traversing: next([String]) (0, 5, 5)Rerun
 traversing: prev([String]) (0, 4, 4)Rerun
 traversing: nextAll([String]) (0, 4, 4)Rerun
 traversing: prevAll([String]) (0, 4, 4)Rerun
@@ -593,7 +406,7 @@ Source:
     at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
     at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
     at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at next (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1270:3)
+    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:383:5
 orphans correctly start with value 0
 Expected:   
 0
@@ -606,7 +419,7 @@ Source:
     at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
     at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
     at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at next (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1270:3)
+    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:383:5
 widows correctly set to 3
 orphans correctly set to 3
 css: can't get css for disconnected in IE<9, see #10254 and #8388 (0, 2, 2)Rerun
@@ -889,61 +702,7 @@ Sizzle: selector: attributes (0, 62, 62)Rerun
 Sizzle: selector: pseudo - child (0, 42, 42)Rerun
 Sizzle: selector: pseudo - misc (0, 42, 42)Rerun
 Sizzle: selector: pseudo - :not (0, 43, 43)Rerun
-Sizzle: selector: pseudo - position (1, 32, 33)Rerun
-First element (div:first)
-First element(case-insensitive) (div:fiRst)
-nth Element (#qunit-fixture p:nth(1))
-First Element (#qunit-fixture p:first)
-Last Element (p:last)
-Even Elements (#qunit-fixture p:even)
-Odd Elements (#qunit-fixture p:odd)
-Position Equals (#qunit-fixture p:eq(1))
-Position Equals (negative) (#qunit-fixture p:eq(-1))
-Position Greater Than (#qunit-fixture p:gt(0))
-Position Less Than (#qunit-fixture p:lt(3))
-Check position filtering (div#nothiddendiv:eq(0))
-Check position filtering (div#nothiddendiv:last)
-Check position filtering (div#nothiddendiv:not(:gt(0)))
-Check position filtering (#foo > :not(:first))
-Check position filtering (#qunit-fixture select > :not(:gt(2)))
-Check position filtering (#qunit-fixture select:lt(2) :not(:first))
-Check position filtering (div.nothiddendiv:eq(0))
-Check position filtering (div.nothiddendiv:last)
-Check position filtering (div.nothiddendiv:not(:lt(0)))
-Check element position (div div:eq(0))
-Check element position (div div:eq(5))
-Check element position (div div:eq(29))
-Check element position (div div:first)
-Check element position (div > div:first)
-Check element position (#dl div:first div:first)
-Check element position (#dl div:first > div:first)
-Check element position (div#nothiddendiv:first > div:first)
-Chained pseudo after a pos pseudo (#listWithTabIndex li:eq(0):contains(Rice))
-Check sort order with POS and comma (#qunit-fixture em>em>em>em:first-child,div>em:first)
-Isolated position (:last)
-Expected:   
-[
-  <div id="fx-tests"></div>
-]
-Result:     
-[
-  <iframe id="abine15085150doNotRemove" class="abineContentFrame"></iframe>
-]
-Diff:   
- [
-  <div id="fx-tests"></div>
-<iframe id="abine15085150doNotRemove" class="abineContentFrame"></iframe>
- ] 
-Source:     
-    at t (http://localhost:22222/jquery/test/data/testinit.js:53:2)
-    at Object.<anonymous> (http://localhost:22222/jquery/src/sizzle/test/unit/selector.js:790:2)
-    at Object.<anonymous> (http://localhost:22222/jquery/test/data/testrunner.js:125:11)
-    at Test.run (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:136:18)
-    at http://localhost:22222/jquery/test/qunit/qunit/qunit.js:279:10
-    at process (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1277:24)
-    at next (http://localhost:22222/jquery/test/qunit/qunit/qunit.js:1270:3)
-Post-manipulation positional
-Extend Sizzle's POS selectors to rename first to primary (div:primary)
+Sizzle: selector: pseudo - position (0, 33, 33)Rerun
 Sizzle: selector: pseudo - form (0, 10, 10)Rerun
 Sizzle: selector: caching (0, 1, 1)Rerun
 Sizzle: selector: Sizzle.contains (0, 16, 16)Rerun
