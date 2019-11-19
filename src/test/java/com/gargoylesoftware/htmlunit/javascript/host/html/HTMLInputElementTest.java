@@ -776,12 +776,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"foo", "foo"},
-            FF = {"foo", "from button"})
+    @Alerts({"foo", "from button"})
     public void onChangeSetByJavaScript() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head><title></title>\n"
             + "</head><body>\n"
             + "<p>hello world</p>\n"
             + "<form name='form1'>\n"
@@ -789,7 +788,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input name='myButton' type='button' onclick='document.form1.text1.value=\"from button\"'>\n"
             + "</form>\n"
             + "<script>\n"
-            + "  document.getElementById('text1').onchange = function(event) { alert(this.value) };\n"
+            + "  document.getElementById('text1').onchange = function(event) { document.title += this.value; };\n"
             + "</script>\n"
             + "</body></html>";
 
@@ -799,7 +798,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         textinput.sendKeys("foo");
         final WebElement button = driver.findElement(By.name("myButton"));
         button.click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        assertTitle(driver, getExpectedAlerts()[0]);
 
         Thread.sleep(100);
         assertEquals(getExpectedAlerts()[1], textinput.getAttribute("value"));

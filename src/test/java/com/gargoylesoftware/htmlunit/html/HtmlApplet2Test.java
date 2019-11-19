@@ -57,8 +57,7 @@ public class HtmlApplet2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
-            if (getBrowserVersion().isChrome()
-                    || (getBrowserVersion().isFirefox() && !getBrowserVersion().isFirefox60())) {
+            if (getBrowserVersion().isChrome() || getBrowserVersion().isFirefox()) {
                 final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
             }
