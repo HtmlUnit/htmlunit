@@ -303,6 +303,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_68.registerUploadMimeType("oga", "audio/ogg");
         FIREFOX_68.registerUploadMimeType("opus", "audio/ogg");
         FIREFOX_68.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_68.registerUploadMimeType("webp", "image/webp");
         FIREFOX_68.registerUploadMimeType("wav", "audio/wav");
         FIREFOX_68.registerUploadMimeType("xhtml", "application/xhtml+xml");
         FIREFOX_68.registerUploadMimeType("xht", "application/xhtml+xml");

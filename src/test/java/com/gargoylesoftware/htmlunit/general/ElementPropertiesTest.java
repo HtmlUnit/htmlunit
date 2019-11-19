@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -1858,7 +1859,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF60 = "align",
             IE = "behavior,bgColor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,scrollDelay,"
                 + "start(),stop(),trueSpeed,vspace,width")
-    @NotYetImplemented({IE, CHROME})
+    @NotYetImplemented({IE, CHROME, FF68})
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -3094,7 +3095,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "-",
             CHROME = "assignedElements(),assignedNodes(),name",
             FF68 = "assignedElements(),assignedNodes(),name")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented({CHROME, FF68})
     public void slot() throws Exception {
         test("slot");
     }
