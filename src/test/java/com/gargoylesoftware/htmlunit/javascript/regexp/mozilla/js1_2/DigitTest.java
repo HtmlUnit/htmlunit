@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DigitTest extends WebDriverTestCase {
