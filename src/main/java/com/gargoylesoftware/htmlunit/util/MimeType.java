@@ -27,6 +27,8 @@ public final class MimeType {
 
     /** "application/javascript". */
     public static final String APPLICATION_JAVASCRIPT = "application/javascript";
+    /** "application/octet-stream". */
+    public static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
     /** application/xhtml+xml. */
     public static final String APPLICATION_XHTML = "application/xhtml+xml";
     /** "text/css". */

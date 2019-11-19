@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -145,7 +146,7 @@ public class FileReader extends EventTarget {
                 final boolean includeConentType = browserVersion.hasFeature(JS_FILEREADER_CONTENT_TYPE);
                 if (!value.isEmpty() || includeConentType) {
                     if (contentType == null) {
-                        contentType = "application/octet-stream";
+                        contentType = MimeType.APPLICATION_OCTET_STREAM;
                     }
                     result_ += contentType + ";base64," + value;
                 }

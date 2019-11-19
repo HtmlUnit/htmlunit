@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -27,6 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * A JavaScript object for {@code CSS}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass({CHROME, FF})
 public class CSS extends SimpleScriptable {
@@ -34,7 +36,7 @@ public class CSS extends SimpleScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
+    @JsxConstructor({CHROME, FF60})
     public CSS() {
     }
 
@@ -47,5 +49,16 @@ public class CSS extends SimpleScriptable {
             return NOT_FOUND;
         }
         return super.get(name, start);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        if (String.class.equals(hint) || hint == null) {
+            return "[object Object]";
+        }
+        return super.getDefaultValue(hint);
     }
 }

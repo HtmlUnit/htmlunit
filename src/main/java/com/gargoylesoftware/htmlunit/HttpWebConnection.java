@@ -413,7 +413,7 @@ public class HttpWebConnection implements WebConnection {
     void buildFilePart(final KeyDataPair pairWithFile, final MultipartEntityBuilder builder) {
         String mimeType = pairWithFile.getMimeType();
         if (mimeType == null) {
-            mimeType = "application/octet-stream";
+            mimeType = MimeType.APPLICATION_OCTET_STREAM;
         }
 
         final ContentType contentType = ContentType.create(mimeType);

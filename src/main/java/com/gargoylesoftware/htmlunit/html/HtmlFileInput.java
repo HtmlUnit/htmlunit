@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -108,7 +109,7 @@ public class HtmlFileInput extends HtmlInput {
             if (contentType_ == null) {
                 contentType = getPage().getWebClient().getBrowserVersion().getUploadMimeType(file);
                 if (StringUtils.isEmpty(contentType)) {
-                    contentType = "application/octet-stream";
+                    contentType = MimeType.APPLICATION_OCTET_STREAM;
                 }
             }
             else {

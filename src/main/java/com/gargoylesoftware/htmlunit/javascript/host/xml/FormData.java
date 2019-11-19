@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -85,7 +87,12 @@ public class FormData extends SimpleScriptable {
             }
             contentType = file.getType();
             if (StringUtils.isEmpty(contentType)) {
-                contentType = "application/octet-stream";
+                if (getBrowserVersion().hasFeature(JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN)) {
+                    contentType = MimeType.TEXT_PLAIN;
+                }
+                else {
+                    contentType = MimeType.APPLICATION_OCTET_STREAM;
+                }
             }
             requestParameters_.add(new KeyDataPair(name, file.getFile(), fileName, contentType, (Charset) null));
         }

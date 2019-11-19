@@ -215,7 +215,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return MimeType.APPLICATION_JAVASCRIPT;
             }
             else if (isBinary(bytes)) {
-                return "application/octet-stream";
+                return MimeType.APPLICATION_OCTET_STREAM;
             }
         }
         return MimeType.TEXT_PLAIN;

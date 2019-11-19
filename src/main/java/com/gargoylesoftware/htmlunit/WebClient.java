@@ -1272,7 +1272,7 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
         if (contentType == null) {
-            contentType = "application/octet-stream";
+            contentType = MimeType.APPLICATION_OCTET_STREAM;
         }
         return contentType;
     }

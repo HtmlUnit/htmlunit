@@ -889,6 +889,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_FORM_ACTION_EXPANDURL_NOT_DEFINED,
 
+    /** use content-type text/plain if the file type is unknown'. */
+    @BrowserFeature(IE)
+    JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN,
+
     /** form.dispatchEvent(e) submits the form if the event is of type 'submit'. */
     @BrowserFeature(FF)
     JS_FORM_DISPATCHEVENT_SUBMITS,

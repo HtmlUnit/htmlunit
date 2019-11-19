@@ -88,7 +88,7 @@ public class WebClient3Test extends WebDriverTestCase {
         for (int i = 0; i < binaryContent.length; i++) {
             binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
         }
-        mockConnection.setDefaultResponse(binaryContent, 200, "OK", "application/octet-stream");
+        mockConnection.setDefaultResponse(binaryContent, 200, "OK", MimeType.APPLICATION_OCTET_STREAM);
         final URL urlFoo = new URL(URL_FIRST, "foo.html");
         mockConnection.setResponse(urlFoo, "<html></html>");
 
