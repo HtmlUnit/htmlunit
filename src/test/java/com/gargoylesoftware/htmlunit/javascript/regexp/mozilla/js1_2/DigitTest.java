@@ -34,10 +34,7 @@ public class DigitTest extends WebDriverTestCase {
         + "\\f\\n\\r\\t\\v~`!@#$%^&*()-+={[}]|\\\\:;\\'<,>./? \"";
 
     private static final String non_digits_expected = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        + "\f\n\n\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
-
-    private static final String non_digits_expected_ff60 = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            + "\f\n\r\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
+        + "\f\\n\\r\t\u000B~`!@#$%^&*()-+={[}]|\\:;\'<,>./? \"";
 
     private static final String digits = "1234567890";
 
@@ -57,9 +54,7 @@ public class DigitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = non_digits_expected,
-            FF60 = non_digits_expected_ff60,
-            IE = non_digits_expected_ff60)
+    @Alerts(non_digits_expected)
     public void test2() throws Exception {
         final String initialScript = "var non_digits = '" + non_digits + "'";
         test(initialScript, "non_digits.match(new RegExp('\\\\D+'))");
@@ -103,9 +98,7 @@ public class DigitTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = non_digits_expected,
-            FF60 = non_digits_expected_ff60,
-            IE = non_digits_expected_ff60)
+    @Alerts(non_digits_expected)
     public void test6() throws Exception {
         final String initialScript = "var s = '" + digits + non_digits + "'";
         test(initialScript, "s.match(new RegExp('\\\\D+'))");
@@ -150,15 +143,12 @@ public class DigitTest extends WebDriverTestCase {
                     break;
 
                 case 'n':
-                    expected = "\n";
+                    expected = "\\n";
                     input = "\\" + ch;
                     break;
 
                 case 'r':
-                    expected = "\n";
-                    if (getBrowserVersion().isFirefox60() || getBrowserVersion().isIE()) {
-                        expected = "\r";
-                    }
+                    expected = "\\r";
                     input = "\\" + ch;
                     break;
 
@@ -186,11 +176,14 @@ public class DigitTest extends WebDriverTestCase {
     }
 
     private void test(final String initialScript, final String script) throws Exception {
-        String html = "<html><head><title>foo</title><script>\n";
+        String html = "<html><head><title></title><script>\n";
         if (initialScript != null) {
             html += initialScript + ";\n";
         }
-        html += "  alert(" + script + ");\n"
+        html += "  var txt = '' + " + script + ";\n"
+            + "  txt = txt.replace('\\r', '\\\\r');\n"
+            + "  txt = txt.replace('\\n', '\\\\n');\n"
+            + "  alert(txt);\n"
             + "</script></head><body>\n"
             + "</body></html>";
         loadPageWithAlerts2(html);
