@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -1780,6 +1781,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0px", "20%", "80px", "25%", "100px"},
             FF68 = {"", "0px", "20%", "360px", "25%", "100px"})
+    @NotYetImplemented(FF68)
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

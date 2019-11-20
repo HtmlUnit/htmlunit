@@ -115,12 +115,12 @@
         },
 
         _oncloseListener : function(ce) {
-            log('onCloseListener code: ' + ce.code);
+            log('onCloseListener code: ' + ce.code + '  wasClean: ' + ce.wasClean);
         },
 
         _onclose : function(ce) {
             this._ws = null;
-            log('onClose code: ' + ce.code);
+            log('onClose code: ' + ce.code + '  wasClean: ' + ce.wasClean);
         },
 
         _onerror : function(e) {

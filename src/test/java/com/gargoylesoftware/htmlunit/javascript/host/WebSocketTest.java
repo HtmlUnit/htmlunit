@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
@@ -406,6 +407,78 @@ public class WebSocketTest extends WebDriverTestCase {
                     "[object ArrayBuffer]", "§§URL§§", "", "null",
                 "onMessageBinary", "message", "[object WebSocket]", "[object WebSocket]",
                     "[object ArrayBuffer]", "§§URL§§", "", "null",
+                "onCloseListener code: 1000",
+                "onClose code: 1000"},
+            FF60 = {"onOpenListener",
+                "onOpen", "open", "[object WebSocket]", "undefined",
+                    "undefined", "undefined", "undefined", "undefined",
+                "onMessageTextListener", "message", "[object WebSocket]", "undefined",
+                    "server_text", "§§URL§§", "", "null",
+                "onMessageText", "message", "[object WebSocket]", "undefined",
+                    "server_text", "§§URL§§", "", "null",
+                "onMessageBinaryListener", "message", "[object WebSocket]", "undefined",
+                    "[object ArrayBuffer]", "§§URL§§", "", "null",
+                "onMessageBinary", "message", "[object WebSocket]", "undefined",
+                    "[object ArrayBuffer]", "§§URL§§", "", "null",
+                "onCloseListener code: 1000",
+                "onClose code: 1000"},
+            IE = {"onOpenListener",
+                  "onOpen", "open", "[object WebSocket]", "[object WebSocket]",
+                      "undefined", "undefined", "undefined", "undefined",
+                  "onMessageTextListener", "message", "[object WebSocket]", "[object WebSocket]",
+                      "server_text", "", "undefined", "null",
+                  "onMessageText", "message", "[object WebSocket]", "[object WebSocket]",
+                      "server_text", "", "undefined", "null",
+                  "onMessageBinaryListener", "message", "[object WebSocket]", "[object WebSocket]",
+                      "[object ArrayBuffer]", "", "undefined", "null",
+                  "onMessageBinary", "message", "[object WebSocket]", "[object WebSocket]",
+                      "[object ArrayBuffer]", "", "undefined", "null",
+                  "onCloseListener code: 1005",
+                  "onClose code: 1005"})
+    @NotYetImplemented(IE)
+    public void events() throws Exception {
+        expandExpectedAlertsVariables("ws://localhost:" + PORT);
+        final String expected = String.join("\n", getExpectedAlerts());
+
+        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+            null, null, new EventsWebSocketHandler());
+        try {
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "WebSocketTest_events.html");
+
+            final WebElement logElement = driver.findElement(By.id("log"));
+            final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
+
+            String text;
+            do {
+                Thread.sleep(100);
+
+                text = logElement.getAttribute("value").trim().replaceAll("\r", "");
+            }
+            while (text.length() <= expected.length() && System.currentTimeMillis() < maxWait);
+
+            assertEquals(expected, text);
+        }
+        finally {
+            stopWebServers();
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"onOpenListener",
+                "onOpen", "open", "[object WebSocket]", "[object WebSocket]",
+                    "undefined", "undefined", "undefined", "undefined",
+                "onMessageTextListener", "message", "[object WebSocket]", "[object WebSocket]",
+                    "server_text", "§§URL§§", "", "null",
+                "onMessageText", "message", "[object WebSocket]", "[object WebSocket]",
+                    "server_text", "§§URL§§", "", "null",
+                "onMessageBinaryListener", "message", "[object WebSocket]", "[object WebSocket]",
+                    "[object ArrayBuffer]", "§§URL§§", "", "null",
+                "onMessageBinary", "message", "[object WebSocket]", "[object WebSocket]",
+                    "[object ArrayBuffer]", "§§URL§§", "", "null",
                 "onCloseListener code: 1000  wasClean: true",
                 "onClose code: 1000  wasClean: true"},
             FF68 = {"onOpenListener",
@@ -447,8 +520,8 @@ public class WebSocketTest extends WebDriverTestCase {
                     "[object ArrayBuffer]", "", "undefined", "null",
                 "onCloseListener code: 1005  wasClean: true",
                 "onClose code: 1005  wasClean: true"})
-    @NotYetImplemented(IE)
-    public void events() throws Exception {
+    @NotYetImplemented({FF, IE})
+    public void wasClean() throws Exception {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
         final String expected = String.join("\n", getExpectedAlerts());
 
@@ -456,7 +529,7 @@ public class WebSocketTest extends WebDriverTestCase {
             null, null, new EventsWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
-            driver.get(URL_FIRST + "WebSocketTest_events.html");
+            driver.get(URL_FIRST + "WebSocketTest_wasClean.html");
 
             final WebElement logElement = driver.findElement(By.id("log"));
             final long maxWait = System.currentTimeMillis() + DEFAULT_WAIT_TIME;
@@ -487,7 +560,7 @@ public class WebSocketTest extends WebDriverTestCase {
         startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host", null, null, null);
         try {
             final WebDriver driver = getWebDriver();
-            driver.get(URL_FIRST + "WebSocketTest_events.html");
+            driver.get(URL_FIRST + "WebSocketTest_wasClean.html");
 
             final WebElement logElement = driver.findElement(By.id("log"));
             int counter = 0;

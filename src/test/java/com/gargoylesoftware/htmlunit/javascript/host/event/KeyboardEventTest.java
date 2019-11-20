@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -26,6 +28,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -303,6 +306,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"13", "13", "13"},
             FF60 = {"0", "13", "13"})
+    @NotYetImplemented(FF68)
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -370,9 +374,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     "keydown:190,0,190,.,.,undefined,false",
                     "keypress:46,46,46,.,.,undefined,false",
                     "keyup:190,0,190,.,.,undefined,false",
-                    "keydown:13,0,13,Enter,\n,undefined,false",
-                    "keypress:13,13,13,Enter,\n,undefined,false",
-                    "keyup:13,0,13,Enter,\n,undefined,false"}
+                    "keydown:13,0,13,Enter,\\n,undefined,false",
+                    "keypress:13,13,13,Enter,\\n,undefined,false",
+                    "keyup:13,0,13,Enter,\\n,undefined,false"}
             )
     // https://github.com/SeleniumHQ/selenium/issues/2531
     @BuggyWebDriver(CHROME = {"keydown:16,0,16,Shift,undefined,ShiftLeft,false",
@@ -424,9 +428,9 @@ public class KeyboardEventTest extends WebDriverTestCase {
                             "keydown:190,0,190,.,.,undefined,false",
                             "keypress:46,46,46,.,.,undefined,false",
                             "keyup:190,0,190,.,.,undefined,false",
-                            "keydown:13,0,13,Enter,, ,undefined,false",
-                            "keypress:13,13,13,, ,, ,undefined,false",
-                            "keyup:13,0,13,Enter,, ,undefined,false"})
+                            "keydown:13,0,13,Enter,\\n,undefined,false",
+                            "keypress:13,13,13,\\r,\\r,undefined,false",
+                            "keyup:13,0,13,Enter,\\n,undefined,false"})
     public void which() throws Exception {
         final String html
             = "<html><head></head><body>\n"
@@ -434,9 +438,11 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "<script>\n"
             + "function handler(e) {\n"
             + "  e = e ? e : window.event;\n"
-            + "  document.getElementById('myTextarea').value "
-            + "+= e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
-            + "+ e.key + ',' + e.char + ',' + e.code + ',' + e.shiftKey + '\\n';\n"
+            + "  var log = e.type + ':' + e.keyCode + ',' + e.charCode + ',' + e.which + ',' "
+                            + "+ e.key + ',' + e.char + ',' + e.code + ',' + e.shiftKey;\n"
+            + "  log = log.replace(/\\r/g, '\\\\r');\n"
+            + "  log = log.replace(/\\n/g, '\\\\n');\n"
+            + "  document.getElementById('myTextarea').value += log + '\\n';"
             + "}\n"
             + "document.getElementById('keyId').onkeyup = handler;\n"
             + "document.getElementById('keyId').onkeydown = handler;\n"
