@@ -33,7 +33,14 @@ public final class StringUtils {
 
     private static final Pattern HEX_COLOR = Pattern.compile("#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
     private static final Pattern RGB_COLOR =
-        Pattern.compile("rgb\\s*?\\(\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?,\\s*?(\\d{1,3})\\s*?\\)");
+        Pattern.compile("rgb\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
+                            + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
+                            + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*\\)");
+    private static final Pattern RGBA_COLOR =
+            Pattern.compile("rgba\\(\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
+                                 + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
+                                 + "\\s*(0|[1-9]\\d?|1\\d\\d?|2[0-4]\\d|25[0-5])%?\\s*,"
+                                 + "\\s*((0?.[1-9])|[01])\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
     /**
@@ -174,6 +181,27 @@ public final class StringUtils {
         final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
         final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
         return new Color(tmpRed, tmpGreen, tmpBlue);
+    }
+
+    /**
+     * Returns a Color parsed from the given rgb notation.
+     * @param token the token to parse
+     * @return a Color whether the token is a color in RGB notation; otherwise null
+     */
+    public static Color findColorRGBA(final String token) {
+        if (token == null) {
+            return null;
+        }
+        final Matcher tmpMatcher = RGBA_COLOR.matcher(token);
+        if (!tmpMatcher.find()) {
+            return null;
+        }
+
+        final int tmpRed = Integer.parseInt(tmpMatcher.group(1));
+        final int tmpGreen = Integer.parseInt(tmpMatcher.group(2));
+        final int tmpBlue = Integer.parseInt(tmpMatcher.group(3));
+        final int tmpAlpha = (int) (Float.parseFloat(tmpMatcher.group(4)) * 255);
+        return new Color(tmpRed, tmpGreen, tmpBlue, tmpAlpha);
     }
 
     /**

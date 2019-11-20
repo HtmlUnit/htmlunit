@@ -51,8 +51,31 @@ public class StringUtilsTest extends SimpleWebTestCase {
         assertNull(StringUtils.findColorRGB("    "));
 
         assertNull(StringUtils.findColorRGB("#a1"));
+        assertNull(StringUtils.findColorRGB("rgb(1,12,256)"));
+        assertNull(StringUtils.findColorRGB("rgb(1,256,7)"));
+        assertNull(StringUtils.findColorRGB("rgb(256,13,7)"));
+
         assertEquals(new Color(1, 12, 13), StringUtils.findColorRGB("rgb(1,12,13)"));
+        assertEquals(new Color(1, 12, 13), StringUtils.findColorRGB("rgb(  1, \t12, 13  )"));
         assertEquals(new Color(1, 12, 13), StringUtils.findColorRGB("beforergb(1,12,13)after"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void findColorRGBA() throws Exception {
+        assertNull(StringUtils.findColorRGBA(null));
+        assertNull(StringUtils.findColorRGBA(""));
+        assertNull(StringUtils.findColorRGBA("    "));
+
+        assertNull(StringUtils.findColorRGBA("#a1"));
+        assertNull(StringUtils.findColorRGBA("rgba(1,12,256, .1)"));
+
+        assertEquals(new Color(1, 12, 13), StringUtils.findColorRGBA("rgba(1,12,13, 1)"));
+        assertEquals(new Color(1, 12, 17, 25), StringUtils.findColorRGBA("rgba(1, 12, 17, 0.1)"));
+        assertEquals(new Color(1, 12, 17, 25), StringUtils.findColorRGBA("rgba(1, 12, 17, .1)"));
+        assertEquals(new Color(1, 12, 13, 127), StringUtils.findColorRGBA("beforergba(1,12,13,0.5)after"));
     }
 
     /**

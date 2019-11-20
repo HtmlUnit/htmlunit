@@ -41,6 +41,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.util.StringUtils;
+
 /**
  * The default implementation of {@link RenderingBackend}.
  *
@@ -328,29 +330,26 @@ public class AwtRenderingBackend implements RenderingBackend {
     @Override
     public void setStrokeStyle(final String strokeStyle) {
         final String tmpFillStyle = strokeStyle.replaceAll("\\s", "");
-        Color color = null;
-        if (tmpFillStyle.startsWith("rgb(")) {
-            final String[] colors = tmpFillStyle.substring(4, tmpFillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]));
+        Color color = StringUtils.findColorRGB(tmpFillStyle);
+        if (color == null) {
+            color = StringUtils.findColorRGBA(tmpFillStyle);
         }
-        else if (tmpFillStyle.startsWith("rgba(")) {
-            final String[] colors = tmpFillStyle.substring(5, tmpFillStyle.length() - 1).split(",");
-            color = new Color(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]),
-                (int) (Float.parseFloat(colors[3]) * 255));
-        }
-        else if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
-            color = Color.decode(tmpFillStyle);
-        }
-        else {
-            try {
-                final Field f = Color.class.getField(tmpFillStyle);
-                color = (Color) f.get(null);
+
+        if (color == null) {
+            if (tmpFillStyle.length() > 0 && tmpFillStyle.charAt(0) == '#') {
+                color = Color.decode(tmpFillStyle);
             }
-            catch (final Exception e) {
-                if (LOG.isInfoEnabled()) {
-                    LOG.info("Can not find color '" + tmpFillStyle + '\'');
+            else {
+                try {
+                    final Field f = Color.class.getField(tmpFillStyle);
+                    color = (Color) f.get(null);
                 }
-                color = Color.black;
+                catch (final Exception e) {
+                    if (LOG.isInfoEnabled()) {
+                        LOG.info("Can not find color '" + tmpFillStyle + '\'');
+                    }
+                    color = Color.black;
+                }
             }
         }
         strokeColor_ = color;
