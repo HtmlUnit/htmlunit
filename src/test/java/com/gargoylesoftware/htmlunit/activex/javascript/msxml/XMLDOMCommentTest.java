@@ -404,23 +404,38 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<!---->", "<!--  -->", "<!--text-->", "<!--text\ntext-->", "<!--  text  text  -->"})
+            IE = {"<!---->", "<!--  -->", "<!--text-->", "<!--text\\r\\ntext-->", "<!--  text  text  -->"})
     public void xml() throws Exception {
         final String test =
             // empty
-              "alert(comment.xml);\n"
+            "var txt = comment.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // blank
             + "comment = root.childNodes[1];\n"
-            + "alert(comment.xml);\n"
+            + "txt = comment.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // normal
             + "comment = root.childNodes[2];\n"
-            + "alert(comment.xml);\n"
+            + "txt = comment.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // linebreak
             + "comment = root.childNodes[3];\n"
-            + "alert(comment.xml);\n"
+            + "txt = comment.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // space
             + "comment = root.childNodes[4];\n"
-            + "alert(comment.xml);\n";
+            + "txt = comment.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n";
 
         final String xml = ""
             + "<root>"

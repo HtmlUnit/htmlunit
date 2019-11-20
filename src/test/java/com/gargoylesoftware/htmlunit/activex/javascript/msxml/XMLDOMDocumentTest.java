@@ -291,7 +291,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"true", "<new/>\r\n"})
+            IE = {"true", "<new/>\\r\\n"})
     public void documentElement_replaceExisting() throws Exception {
         final String test = ""
             + "doc.documentElement = doc.createElement('foo');\n"
@@ -299,7 +299,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "var element = doc.createElement('new');\n"
             + "doc.documentElement = element;\n"
             + "alert(doc.documentElement === element);\n"
-            + "alert(doc.xml);\n";
+            + "var txt = doc.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n";
 
         tester_create(test);
     }
@@ -793,8 +796,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "<root><test><element/></test></root>\r\n",
-                   "true", "<root><test><element/></test></root>\r\n"})
+            IE = {"false", "<root><test><element/></test></root>\\r\\n",
+                   "true", "<root><test><element/></test></root>\\r\\n"})
     public void preserveWhiteSpace() throws Exception {
         final String test = ""
             + "doc.documentElement = doc.createElement('root');\n"
@@ -804,12 +807,18 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "test.appendChild(element);\n"
             + "try {\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  var txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception1'); }\n"
             + "try {\n"
             + "  doc.preserveWhiteSpace = true;\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception2'); }\n";
 
         tester_create(test);
@@ -820,10 +829,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"false", "false", "<root>\r\n\t<test>\r\n\t\t<element/>\r\n\t</test>\r\nA B  C\tD\r\n</root>\r\n",
-                   "false", "true", "<root>\r\n\t<test>\r\n\t\t<element/>\r\n\t</test>\r\nA B  C\tD\r\n</root>\r\n",
-                   "true", "false", "<root>\r\n<test>\r\n  <element/>\r\n</test>\r\nA B  C\tD\r\n</root>\r\n",
-                   "true", "true", "<root>\r\n<test>\r\n  <element/>\r\n</test>\r\nA B  C\tD\r\n</root>\r\n"})
+            IE = {"false", "false", "<root>\\r\\n\t<test>\\r\\n\t\t<element/>\\r\\n\t</test>\\r\\nA B  C\tD\\r\\n</root>\\r\\n",
+                   "false", "true", "<root>\\r\\n\t<test>\\r\\n\t\t<element/>\\r\\n\t</test>\\r\\nA B  C\tD\\r\\n</root>\\r\\n",
+                   "true", "false", "<root>\\r\\n<test>\\r\\n  <element/>\\r\\n</test>\\r\\nA B  C\tD\\r\\n</root>\\r\\n",
+                   "true", "true", "<root>\\r\\n<test>\\r\\n  <element/>\\r\\n</test>\\r\\nA B  C\tD\\r\\n</root>\\r\\n"})
     public void preserveWhiteSpace_load() throws Exception {
         final String test = ""
             + "doc.async = false;\n"
@@ -832,7 +841,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  alert(doc.preserveWhiteSpace);\n"
             + "  doc.load('" + URL_SECOND + "');\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  var txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception1'); }\n"
             // read false, write true
             + "try {\n"
@@ -840,7 +852,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  doc.load('" + URL_SECOND + "');\n"
             + "  doc.preserveWhiteSpace = true;\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception2'); }\n"
             // read true, write false
             + "try {\n"
@@ -848,7 +863,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  doc.load('" + URL_SECOND + "');\n"
             + "  doc.preserveWhiteSpace = false;\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception2'); }\n"
             // read true, write true
             + "try {\n"
@@ -856,7 +874,10 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
             + "  alert(doc.preserveWhiteSpace);\n"
             + "  doc.load('" + URL_SECOND + "');\n"
             + "  alert(doc.preserveWhiteSpace);\n"
-            + "  alert(doc.xml);\n"
+            + "  txt = doc.xml;\n"
+            + "  txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "  txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "  alert(txt);\n"
             + "} catch(e) { alert('exception2'); }\n";
 
         final String xml
@@ -1010,12 +1031,19 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"", "<foo/>\r\n"})
+            IE = {"", "<foo/>\\r\\n"})
     public void xml() throws Exception {
         final String test = ""
-            + "alert(doc.xml);\n"
+            + "var txt = doc.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
+
             + "doc.documentElement = doc.createElement('foo');\n"
-            + "alert(doc.xml);\n";
+            + "txt = doc.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n";
 
         tester_create(test);
     }
@@ -1818,14 +1846,17 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"", "<foo><bar/></foo>\r\n", "foo"})
+            IE = {"", "<foo><bar/></foo>\\r\\n", "foo"})
     public void loadXML() throws Exception {
         final String test = ""
             + "var text='<foo><bar/></foo>';\n"
             + "doc.async = false;\n"
             + "alert(doc.xml);\n"
             + "doc.loadXML(text);\n"
-            + "alert(doc.xml);\n"
+            + "var txt = doc.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             + "alert(doc.documentElement.nodeName);\n";
 
         tester_create(test);
@@ -1836,15 +1867,23 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<myns:foo xmlns:myns=\"http://myNS\"/>\n", "myns:foo"})
+            IE = {"<myns:foo xmlns:myns=\"http://myNS\"/>\\r\\n", "myns:foo"})
     public void loadXML_namespace() throws Exception {
         final String html = ""
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var text='<myns:foo xmlns:myns=\"http://myNS\"/>';\n"
             + "    var doc = " + callLoadXMLDOMDocumentFromString("text") + ";\n"
-            + "    alert(doc.xml);\n"
-            + "    alert(doc.documentElement.nodeName);\n"
+
+            + "    var txt = doc.xml;\n"
+            + "    txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "    txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "    alert(txt);\n"
+
+            + "    txt = doc.documentElement.nodeName;\n"
+            + "    txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "    txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "    alert(txt);\n"
             + "  }\n"
             + LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
 

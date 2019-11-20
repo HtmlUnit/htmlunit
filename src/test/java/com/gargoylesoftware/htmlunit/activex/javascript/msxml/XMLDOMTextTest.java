@@ -434,17 +434,26 @@ public class XMLDOMTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"text", "text\ntext", "  text  text  "})
+            IE = {"text", "text\\r\\ntext", "  text  text  "})
     public void xml() throws Exception {
         final String test =
             // text
-              "alert(text.firstChild.xml);\n"
+            "var txt = text.firstChild.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // linebreak
             + "text = text.nextSibling;\n"
-            + "alert(text.firstChild.xml);\n"
+            + "txt = text.firstChild.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // space
             + "text = text.nextSibling;\n"
-            + "alert(text.firstChild.xml);\n";
+            + "var txt = text.firstChild.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n";
 
         final String xml = ""
             + "<root>"

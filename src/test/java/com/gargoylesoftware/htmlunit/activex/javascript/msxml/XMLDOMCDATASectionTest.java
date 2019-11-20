@@ -429,19 +429,28 @@ public class XMLDOMCDATASectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\ntext]]>", "<![CDATA[<tag/>]]>"})
+            IE = {"<![CDATA[ ]]>", "<![CDATA[text]]>", "<![CDATA[text\\r\\ntext]]>", "<![CDATA[<tag/>]]>"})
     public void xml() throws Exception {
         final String test = ""
             + "alert(cdata.xml);\n"
             // text
             + "cdata = root.childNodes[1];\n"
-            + "alert(cdata.xml);\n"
+            + "var txt = cdata.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // linebreak
             + "cdata = root.childNodes[2];\n"
-            + "alert(cdata.xml);\n"
+            + "txt = cdata.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n"
             // xml
             + "cdata = root.childNodes[3];\n"
-            + "alert(cdata.xml);\n";
+            + "txt = cdata.xml;\n"
+            + "txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "alert(txt);\n";
 
         final String xml = ""
             + "<root>"

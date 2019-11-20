@@ -54,8 +54,8 @@ public class XMLSerializerTest extends WebDriverTestCase {
             IE = {})
     public void test() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""
-                : "<note>13109<to>Tove</to>13109<from>Jani</from>13109<body>Do32not32forget32me32this32weekend!</body>"
-                + "13109<outer>131099<inner>Some32Value</inner></outer>1310</note>1310";
+                : "<note>\\r\\n9<to>Tove</to>\\r\\n9<from>Jani</from>\\r\\n9<body>Do32not32forget32me32this32weekend!</body>"
+                + "\\r\\n9<outer>\\r\\n99<inner>Some32Value</inner></outer>\\r\\n</note>\\r\\n";
 
         final String serializationText =
                 "<note> "
@@ -79,7 +79,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {})
     public void comment() throws Exception {
-        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a><!--32abc32--></a>1310";
+        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a><!--32abc32--></a>\\r\\n";
 
         final String serializationText = "<a><!-- abc --></a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
@@ -94,7 +94,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "no ActiveX",
             IE = {})
     public void xmlEntities() throws Exception {
-        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a>&lt;&gt;&amp;</a>1310";
+        final String expectedString = getExpectedAlerts().length != 0 ? "" : "<a>&lt;&gt;&amp;</a>\\r\\n";
         final String serializationText = "<a>&lt;&gt;&amp;</a>";
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
         final WebElement textArea = driver.findElement(By.id("myTextArea"));
@@ -111,19 +111,19 @@ public class XMLSerializerTest extends WebDriverTestCase {
     // so far we are not able to add the XML header
     public void nameSpaces() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""
-                : "<?xml32version=\"1.0\"?>1310<xsl:stylesheet32version=\"1.0\"32"
-                + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">13109<xsl:template32match=\"/\">131099<html>"
-                + "1310999<body>1310999</body>131099</html>13109</xsl:template>1310</xsl:stylesheet>1310";
+                : "<?xml32version=\"1.0\"?>\\r\\n<xsl:stylesheet32version=\"1.0\"32"
+                + "xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\r\\n9<xsl:template32match=\"/\">\\r\\n99<html>"
+                + "\\r\\n999<body>\\r\\n999</body>\\r\\n99</html>\\r\\n9</xsl:template>\\r\\n</xsl:stylesheet>\\r\\n";
 
         final String serializationText =
-                "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\n"
-                + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\n"
-                + "  <xsl:template match=\"/\">\\n"
-                + "  <html>\\n"
-                + "    <body>\\n"
-                + "    </body>\\n"
-                + "  </html>\\n"
-                + "  </xsl:template>\\n"
+                "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\\r\\n"
+                + "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\\r\\n"
+                + "  <xsl:template match=\"/\">\\r\\n"
+                + "  <html>\\r\\n"
+                + "    <body>\\r\\n"
+                + "    </body>\\r\\n"
+                + "  </html>\\r\\n"
+                + "  </xsl:template>\\r\\n"
                 + "</xsl:stylesheet>";
 
         final WebDriver driver = loadPageWithAlerts2(constructPageContent(serializationText));
@@ -140,7 +140,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
     public void attributes() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""
                 : "<document32attrib=\"attribValue\"><outer32attrib=\"attribValue\">"
-                + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>1310";
+                + "<inner32attrib=\"attribValue\"/><meta32attrib=\"attribValue\"/></outer></document>\\r\\n";
 
         final String serializationText = "<document attrib=\"attribValue\">"
                                             + "<outer attrib=\"attribValue\">"
@@ -163,12 +163,12 @@ public class XMLSerializerTest extends WebDriverTestCase {
     // so far we are not able to add the XML header
     public void htmlAttributes() throws Exception {
         final String expectedString = getExpectedAlerts().length != 0 ? ""
-                : "<?xml32version=\"1.0\"?>1310<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
+                : "<?xml32version=\"1.0\"?>\\r\\n<html32xmlns=\"http://www.w3.org/1999/xhtml\">"
                         + "<head><title>html</title></head>"
                         + "<body32id=\"bodyId\">"
                         + "<span32class=\"spanClass\">foo</span>"
                         + "</body>"
-                        + "</html>1310";
+                        + "</html>\\r\\n";
 
         final String serializationText = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
                                           + "<html xmlns=\"http://www.w3.org/1999/xhtml\">"
@@ -220,7 +220,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = {"<foo/>\n", "<foo/>"})
+            IE = {"<foo/>\\r\\n", "<foo/>"})
     public void document() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK
@@ -268,7 +268,7 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\n")
+            IE = "<root><my:parent xmlns:my=\"myUri\"><my:child/><another_child/></my:parent></root>\\r\\n")
     public void namespace() throws Exception {
         final String html = "  function test() {\n"
             + ACTIVEX_CHECK

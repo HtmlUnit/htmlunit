@@ -131,7 +131,10 @@ public final class MSXMLTestHelper {
     /** Helper. */
     public static final String SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION = ""
             + "  function " + SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION_NAME + "(doc) {\n"
-            + "    return doc.xml;\n"
+            + "    var txt = doc.xml;\n"
+            + "    txt = txt.replace(/\\r/g, '\\\\r');\n"
+            + "    txt = txt.replace(/\\n/g, '\\\\n');\n"
+            + "    return txt;\n"
             + "  }\n";
 
     /**

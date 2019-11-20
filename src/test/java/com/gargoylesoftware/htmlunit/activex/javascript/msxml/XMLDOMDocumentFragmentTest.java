@@ -394,12 +394,15 @@ public class XMLDOMDocumentFragmentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no ActiveX",
-            IE = "child-text\n")
+            IE = "child-text\\r\\n")
     public void xml_lineBreak() throws Exception {
         final String test =
                 "var text = doc.createTextNode('child-text\\n');\n"
               + "fragment.appendChild(text);\n"
-              + "alert(fragment.xml);\n";
+              + "var txt = fragment.xml;\n"
+              + "txt = txt.replace('\\r', '\\\\r');\n"
+              + "txt = txt.replace('\\n', '\\\\n');\n"
+              + "alert(txt);\n";
 
         tester(test);
     }
