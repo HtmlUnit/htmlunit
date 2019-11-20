@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_21;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_169;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -1231,11 +1232,15 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 defaultHeight = 20;
             }
             else if (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput)) {
-                if (getBrowserVersion().hasFeature(JS_CLIENTHIGHT_INPUT_17)) {
+                final BrowserVersion browser = getBrowserVersion();
+                if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_17)) {
                     defaultHeight = 17;
                 }
-                else {
+                else if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_21)) {
                     defaultHeight = 21;
+                }
+                else {
+                    defaultHeight = 20;
                 }
             }
             else if (node instanceof HtmlSelect) {

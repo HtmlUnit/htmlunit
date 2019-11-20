@@ -649,6 +649,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(CHROME)
     JS_CLIENTHIGHT_INPUT_17,
 
+    /** ClientHeight for input is 21. */
+    @BrowserFeature(FF60)
+    JS_CLIENTHIGHT_INPUT_21,
+
     /** ClientRectList toString reports the first item. */
     @BrowserFeature(FF60)
     JS_CLIENTRECTLIST_DEFAUL_VALUE_FROM_FIRST,
