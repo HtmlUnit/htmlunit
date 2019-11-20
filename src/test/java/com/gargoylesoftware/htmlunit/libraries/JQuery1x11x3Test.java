@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -1217,6 +1218,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
             FF60 = "1, 1, 2",
             FF68 = "0, 2, 2",
             IE = "0, 2, 2")
+    @NotYetImplemented({FF68, IE})
     public void support__Check_CSP__https___developer_mozilla_org_en_US_docs_Security_CSP__restrictions() throws Exception {
         runTest("support: Check CSP (https://developer.mozilla.org/en-US/docs/Security/CSP) restrictions");
     }
@@ -6265,6 +6267,7 @@ public class JQuery1x11x3Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "0, 1, 1",
             CHROME = "1, 0, 1")
+    @NotYetImplemented(CHROME)
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
