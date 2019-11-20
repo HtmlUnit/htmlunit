@@ -418,6 +418,10 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_NEVER_FOR_SELECT_OPTION)) {
             return page;
         }
+
+        if (hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION) && isDisabled()) {
+            getEnclosingSelect().mouseOver(shiftKey, ctrlKey, altKey, button);
+        }
         return super.mouseOver(shiftKey, ctrlKey, altKey, button);
     }
 

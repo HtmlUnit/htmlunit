@@ -33,6 +33,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+
 /**
  * The JavaScript object that represents an option.
  *
@@ -55,7 +58,7 @@ public class HTMLOptionElement extends HTMLElement {
      * @param selected the current selection state of the option
      */
     @JsxConstructor({CHROME, FF})
-    public void jsConstructor(final String newText, final String newValue,
+    public void jsConstructor(final Object newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         final HtmlPage page = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
         AttributesImpl attributes = null;
@@ -70,9 +73,10 @@ public class HTMLOptionElement extends HTMLElement {
         htmlOption.setSelected(selected);
         setDomNode(htmlOption);
 
-        if (!"undefined".equals(newText)) {
-            htmlOption.appendChild(new DomText(page, newText));
-            htmlOption.setLabelAttribute(newText);
+        if (!Undefined.isUndefined(newText)) {
+            final String newTextString = Context.toString(newText);
+            htmlOption.appendChild(new DomText(page, newTextString));
+            htmlOption.setLabelAttribute(newTextString);
         }
         if (!"undefined".equals(newValue)) {
             htmlOption.setValueAttribute(newValue);

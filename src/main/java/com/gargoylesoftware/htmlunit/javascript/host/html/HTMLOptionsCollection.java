@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_OPTIONS_IN_ALWAYS_TRUE;
@@ -230,7 +230,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
             for (int i = currentLength; i < newLength; i++) {
                 final HtmlOption option = (HtmlOption) factory.createElement(page, HtmlOption.TAG_NAME, null);
                 htmlSelect_.appendOption(option);
-                if (!getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING)) {
+                if (getBrowserVersion().hasFeature(JS_SELECT_OPTIONS_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING)) {
                     option.appendChild(new DomText(option.getPage(), ""));
                 }
             }

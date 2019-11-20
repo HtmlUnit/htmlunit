@@ -32,7 +32,7 @@ public class Option extends HTMLOptionElement {
      */
     @Override
     @JsxConstructor
-    public void jsConstructor(final String newText, final String newValue,
+    public void jsConstructor(final Object newText, final String newValue,
             final boolean defaultSelected, final boolean selected) {
         super.jsConstructor(newText, newValue, defaultSelected, selected);
     }

@@ -1179,10 +1179,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_SELECT_FILE_THROWS,
 
-    /** When expanding the collection by setting the length don't add
+    /** When expanding the options collection by setting the length don't add
      * an empty text node. */
-    @BrowserFeature({CHROME, IE})
-    JS_SELECT_OPTIONS_DONT_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
+    @BrowserFeature(FF60)
+    JS_SELECT_OPTIONS_ADD_EMPTY_TEXT_CHILD_WHEN_EXPANDING,
 
     /** Indicates that select.options has a wong class name. */
     @BrowserFeature(IE)
