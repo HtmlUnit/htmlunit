@@ -12,7 +12,7 @@
                 CanvasRenderingContext2D.closePath() implemented.
             </action>
             <action type="update" dev="rbri">
-                Upgrade Jetty to 9.4.22.v20191022.
+                Upgrade Jetty to 9.4.23.v20191118.
             </action>
             <action type="add" dev="rbri" issue="#91">
                 MockWebConnection.getRequestedUrls() added.
