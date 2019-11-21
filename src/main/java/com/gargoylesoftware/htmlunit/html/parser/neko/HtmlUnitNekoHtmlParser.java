@@ -32,6 +32,7 @@ import java.util.Map;
 import org.apache.xerces.util.DefaultErrorHandler;
 import org.apache.xerces.xni.QName;
 import org.apache.xerces.xni.XNIException;
+import org.apache.xerces.xni.parser.XMLErrorHandler;
 import org.apache.xerces.xni.parser.XMLInputSource;
 import org.apache.xerces.xni.parser.XMLParseException;
 import org.w3c.dom.Element;
@@ -388,7 +389,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
 /**
  * Utility to transmit parsing errors to a {@link HTMLParserListener}.
  */
-class HtmlUnitNekoHTMLErrorHandler extends DefaultErrorHandler {
+class HtmlUnitNekoHTMLErrorHandler implements XMLErrorHandler {
     private final HTMLParserListener listener_;
     private final URL url_;
     private String html_;
@@ -418,6 +419,17 @@ class HtmlUnitNekoHTMLErrorHandler extends DefaultErrorHandler {
     public void warning(final String domain, final String key,
             final XMLParseException exception) throws XNIException {
         listener_.warning(exception.getMessage(),
+                url_,
+                html_,
+                exception.getLineNumber(),
+                exception.getColumnNumber(),
+                key);
+    }
+
+    @Override
+    public void fatalError(final String domain, final String key,
+            final XMLParseException exception) throws XNIException {
+        listener_.error(exception.getMessage(),
                 url_,
                 html_,
                 exception.getLineNumber(),
