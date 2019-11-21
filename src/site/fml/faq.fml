@@ -136,8 +136,9 @@
 
         String htmlCode = "<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN".........</html>"
         try (WebClient webClient = new WebClient(browserVersion)) {
+            HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
             StringWebResponse response = new StringWebResponse(htmlCode, new URL("http://http://htmlunit.sourceforge.net//test.html"));
-            XHtmlPage page = HTMLParser.parseXHtml(response, webClient.getCurrentWindow());
+            XHtmlPage page = htmlParser.parseXHtml(response, webClient.getCurrentWindow());
             // work with the html page
         }
             ]]></source>
@@ -146,8 +147,9 @@
 
         String htmlCode = "<html>.........</html>"
         try (WebClient webClient = new WebClient(browserVersion)) {
+            HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
             StringWebResponse response = new StringWebResponse(htmlCode, new URL("http://http://htmlunit.sourceforge.net//test.html"));
-            HtmlPage page = HTMLParser.parseHtml(response, webClient.getCurrentWindow());
+            HtmlPage page = htmlParser.parseHtml(response, webClient.getCurrentWindow());
             // work with the html page
         }
             ]]></source>
