@@ -27,10 +27,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.apache.xerces.xni.Augmentations;
 import org.apache.xerces.xni.QName;
@@ -99,6 +102,66 @@ import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
  */
 final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         implements ContentHandler, LexicalHandler, HTMLTagBalancingListener, HTMLParserDOMBuilder {
+
+    // cache Neko Elements for performance and memory
+    private static final Map<Triple<Boolean, Boolean, Boolean>, HTMLElements> ELEMENTS;
+    static {
+        ELEMENTS = new HashMap<>();
+
+        Triple<Boolean, Boolean, Boolean> key;
+        HTMLElements value;
+
+        final HTMLElements.Element command = new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
+                HTMLElements.Element.EMPTY, HTMLElements.BODY, null);
+        final HTMLElements.Element isIndex = new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
+                HTMLElements.Element.INLINE, HTMLElements.BODY, null);
+        final HTMLElements.Element main = new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
+                HTMLElements.Element.INLINE, HTMLElements.BODY, null);
+
+        key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
+        value = new HTMLElements();
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE);
+        value = new HTMLElements();
+        value.setElement(main);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
+        value = new HTMLElements();
+        value.setElement(isIndex);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
+        value = new HTMLElements();
+        value.setElement(isIndex);
+        value.setElement(main);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
+        value = new HTMLElements();
+        value.setElement(command);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
+        value = new HTMLElements();
+        value.setElement(command);
+        value.setElement(main);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
+        value = new HTMLElements();
+        value.setElement(command);
+        value.setElement(isIndex);
+        ELEMENTS.put(key, value);
+
+        key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
+        value = new HTMLElements();
+        value.setElement(command);
+        value.setElement(isIndex);
+        value.setElement(main);
+        ELEMENTS.put(key, value);
+    }
 
     private enum HeadParsed { YES, SYNTHESIZED, NO }
 
@@ -192,21 +255,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {
-        final HTMLConfiguration configuration = new HTMLConfiguration();
-        if (browserVersion.hasFeature(HTML_COMMAND_TAG)) {
-            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
-                    HTMLElements.Element.EMPTY, HTMLElements.BODY, null));
-        }
-        if (browserVersion.hasFeature(HTML_ISINDEX_TAG)) {
-            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
-                    HTMLElements.Element.INLINE, HTMLElements.BODY, null));
-        }
-        if (browserVersion.hasFeature(HTML_MAIN_TAG)) {
-            configuration.htmlElements_.setElement(new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
-                    HTMLElements.Element.INLINE, HTMLElements.BODY, null));
-        }
-
-        return configuration;
+        final HTMLElements elements = ELEMENTS.get(
+                Triple.of(browserVersion.hasFeature(HTML_COMMAND_TAG),
+                        browserVersion.hasFeature(HTML_ISINDEX_TAG),
+                        browserVersion.hasFeature(HTML_MAIN_TAG)));
+        return new HTMLConfiguration(elements);
     }
 
     /**
