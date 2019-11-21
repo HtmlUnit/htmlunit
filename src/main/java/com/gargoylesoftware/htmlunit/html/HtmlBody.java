@@ -52,8 +52,12 @@ public class HtmlBody extends HtmlElement {
         temporary_ = temporary;
 
         // Force script object creation now to forward onXXX handlers to window.
-        if (getOwnerDocument() instanceof HtmlPage) {
-            getScriptableObject();
+        final Object ownerDocument = getOwnerDocument();
+        if (ownerDocument instanceof HtmlPage) {
+            if (((HtmlPage) getOwnerDocument()).getEnclosingWindow().getWebClient()
+                    .getOptions().isJavaScriptEnabled()) {
+                getScriptableObject();
+            }
         }
     }
 

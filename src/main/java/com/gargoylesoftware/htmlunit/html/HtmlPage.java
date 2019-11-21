@@ -1808,11 +1808,12 @@ public class HtmlPage extends SgmlPage {
         }
     }
 
-    private static String getAttributeValue(final DomElement element, final String attribute) {
+    private String getAttributeValue(final DomElement element, final String attribute) {
         // first try real attributes
         String value = element.getAttribute(attribute);
 
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value
+                && getWebClient().getOptions().isJavaScriptEnabled()
                 && !(element instanceof HtmlApplet)
                 && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes
