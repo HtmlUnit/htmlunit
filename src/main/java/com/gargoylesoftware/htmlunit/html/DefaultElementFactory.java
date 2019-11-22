@@ -245,6 +245,12 @@ public class DefaultElementFactory implements ElementFactory {
 
             case HtmlBody.TAG_NAME:
                 element = new HtmlBody(qualifiedName, page, attributeMap, false);
+                // Force script object creation now to forward onXXX handlers to window.
+                if (page instanceof HtmlPage) {
+                    if (page.getWebClient().getOptions().isJavaScriptEnabled()) {
+                        element.getScriptableObject();
+                    }
+                }
                 break;
 
             case HtmlBold.TAG_NAME:

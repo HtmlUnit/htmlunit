@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
@@ -257,7 +258,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      * @param originalCall
      * @param checkInsideFrameOnly true if the original page had body that was removed by JavaScript
      */
-    private static void addBodyToPageIfNecessary(
+    private void addBodyToPageIfNecessary(
             final HtmlPage page, final boolean originalCall, final boolean checkInsideFrameOnly) {
         // IE waits for the whole page to load before initializing bodies for frames.
         final boolean waitToLoad = page.hasFeature(PAGE_WAIT_LOAD_BEFORE_BODY);
@@ -277,7 +278,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
 
         // If the document does not have a body, add it.
         if (!hasBody && !checkInsideFrameOnly) {
-            final HtmlBody body = new HtmlBody("body", page, null, false);
+            final DomElement body = getFactory("body").createElement(page, "body", null);
             doc.appendChild(body);
         }
 
