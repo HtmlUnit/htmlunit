@@ -181,13 +181,17 @@ public class NotYetImplementedTest {
                 else {
                     builder.append("    <td>");
                 }
-                builder.append(fileName);
+                builder.append("<a target='_blank' href='https://github.com/HtmlUnit/htmlunit/blob/master/")
+                        .append(file)
+                        .append("'>")
+                        .append(fileName)
+                        .append("</a>");
                 builder.append("</td>\n");
                 lastFile = file;
             }
             builder.append("    <td>").append(Integer.toString(count++)).append("</td>\n");
 
-            builder.append("    <td><a href='https://github.com/HtmlUnit/htmlunit/blob/master/")
+            builder.append("    <td><a target='_blank' href='https://github.com/HtmlUnit/htmlunit/blob/master/")
                     .append(file)
                     .append("#L")
                     .append(line)
