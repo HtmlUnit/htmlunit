@@ -186,9 +186,16 @@ public class NotYetImplementedTest {
                 lastFile = file;
             }
             builder.append("    <td>").append(Integer.toString(count++)).append("</td>\n");
-            builder.append("    <td><a href='https://sourceforge.net/p/htmlunit/code/" + "HEAD"
-                    + "/tree/trunk/htmlunit/" + file + "#l" + line + "'>").append(method).append("</a> ")
-                    .append(browser).append("</td>\n");
+
+            builder.append("    <td><a href='https://github.com/HtmlUnit/htmlunit/blob/master/")
+                    .append(file)
+                    .append("#L")
+                    .append(line)
+                    .append("'>")
+                    .append(method)
+                    .append("</a> ")
+                    .append(browser)
+                    .append("</td>\n");
             builder.append("    <td class='numeric'>").append(line).append("</td>\n");
             builder.append("    <td>").append(description).append("</td>\n");
             builder.append("  </tr>\n");
