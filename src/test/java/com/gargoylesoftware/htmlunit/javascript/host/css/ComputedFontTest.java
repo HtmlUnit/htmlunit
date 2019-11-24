@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -189,7 +188,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             "", "\"Times New Roman\"", "", "normal normal 400 normal 16px / normal abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
-    @NotYetImplemented(TestedBrowser.CHROME)
+    @NotYetImplemented(CHROME)
     public void minimalFontFamilyReversed() throws Exception {
         font("xyz 1px", "fontFamily", "abc");
     }

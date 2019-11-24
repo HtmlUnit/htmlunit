@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -39,7 +40,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "false", "true", "true", "false", "false"},
             IE = "no Number.isFinite")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void isFinite() throws Exception {
         final String html =
             "<html>\n"
@@ -71,7 +72,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
                 "false", "false", "false", "false", "false"},
             IE = "no Number.isInteger")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void isInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -110,7 +111,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "true", "true", "false", "false", "false", "false",
                 "false", "false", "false", "false", "false", "false", "false"},
             IE = "no Number.isNaN")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void isNaN() throws Exception {
         final String html =
             "<html>\n"
@@ -150,7 +151,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "false", "false", "false", "false", "true"},
             IE = "no Number.isSafeInteger")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void isSafeInteger() throws Exception {
         final String html =
             "<html>\n"
@@ -182,7 +183,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "3.14",
             IE = "no Number.parseFloat")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void parseFloat() throws Exception {
         final String html =
             "<html>\n"
@@ -207,7 +208,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "4",
             IE = "no Number.parseInt")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void parseInt() throws Exception {
         final String html =
             "<html>\n"

@@ -28,7 +28,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -220,7 +219,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"onLoad1", "onLoadJs1", "onLoad2", "body onLoad;"},
             IE = {"onLoadJs1", "body onLoad", "onLoad1", "onLoad2;"})
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void onLoadOrder() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple1.css"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple2.css"), "");
@@ -289,7 +288,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "onError [object Event]",
             IE = "onLoad [object Event]")
-    @NotYetImplemented(TestedBrowser.IE)
+    @NotYetImplemented(IE)
     public void onLoadDynamicUnknown() throws Exception {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "simple.css"), "");
         final String html
