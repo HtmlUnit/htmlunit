@@ -1347,6 +1347,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     JS_TYPE_ACCEPTS_ARBITRARY_VALUES,
 
+    /** Setting the property valign converts to lowercase. */
+    @BrowserFeature(IE)
+    JS_VALIGN_CONVERTS_TO_LOWERCASE,
+
     /** Allow inheriting parent constants
      * in {@link com.gargoylesoftware.htmlunit.javascript.host.event.WebGLContextEvent}. */
     @BrowserFeature({CHROME, FF})
