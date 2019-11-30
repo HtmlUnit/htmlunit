@@ -47,7 +47,7 @@ public class ClientRectList extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor(CHROME)
+    @JsxConstructor({CHROME, FF})
     public ClientRectList() {
         clientRects_ = new ArrayList<>();
     }

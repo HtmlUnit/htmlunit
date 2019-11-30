@@ -1290,7 +1290,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    @NotYetImplemented({CHROME, FF})
     public void domRectList() throws Exception {
         test("DOMRectList");
     }
