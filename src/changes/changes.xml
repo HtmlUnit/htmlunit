@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 78, FF52 removed, FF68 added">
+            <action type="update" dev="rbri">
+                DOMRectList is visible.
+            </action>
+            <action type="update" dev="rbri">
+                Resync core-js with rhino trunk (2019-11-25). This fixes a bug regarding isExtensible handling.
+            </action>
+            <action type="fix" dev="rbri">
+                Browser specific vAling handling fixed.
+            </action>
             <action type="fix" dev="rbri">
                 Do not create js peers during html parsing if js is disabled.
             </action>
@@ -33,7 +42,7 @@
                 Respect form 'novalidate' attribute.
             </action>
             <action type="update" dev="rbri">
-                Resync cure-js with rhino trunk (2019-10-19).
+                Resync core-js with rhino trunk (2019-10-19).
             </action>
             <action type="fix" dev="rbri">
                 Img elements in forms are accessible directly using the name also when nested.
