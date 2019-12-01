@@ -26,7 +26,7 @@ import org.junit.Test;
 public class DocumentationTests {
 
     /**
-     * see {@link BrowserVersion} class comment.
+     * See {@link BrowserVersion} class comment.
      * @throws Exception if the test fails
      */
     @Test
