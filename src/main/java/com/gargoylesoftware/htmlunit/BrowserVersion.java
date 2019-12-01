@@ -38,16 +38,16 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *
  * <p>You can create a different browser setup by using the BrowserVersionFactory.
  * <pre id='htmlUnitCode'>
- *      String applicationName = "APPNAME";
- *      String applicationVersion = "APPVERSION";
- *      String userAgent = "USERAGENT";
- *      int browserVersionNumeric = NUMERIC;
+ *         final String applicationName = "APPNAME";
+ *         final String applicationVersion = "APPVERSION";
+ *         final String userAgent = "USERAGENT";
  *
- *      BrowserVersion browser = new BrowserVersion.BrowserVersionFactory(FF68)
- *          .setApplicationName(applicationName)
- *          .setApplicationVersion(applicationVersion)
- *          .setUserAgent(userAgent)
- *          .build();
+ *         final BrowserVersion browser =
+ *                 new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_68)
+ *                     .setApplicationName(applicationName)
+ *                     .setApplicationVersion(applicationVersion)
+ *                     .setUserAgent(userAgent)
+ *                     .build();
  * </pre>
  * <p>But keep in mind this now one still behaves like a FF68, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
