@@ -381,7 +381,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
                     final double radiusX, final double radiusY,
                     final double rotation, final double startAngle, final double endAngle,
                     final boolean anticlockwise) {
-        LOG.info("CanvasRenderingContext2D.ellipse() not yet implemented");
+        getRenderingBackend().ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise);
     }
 
     /**

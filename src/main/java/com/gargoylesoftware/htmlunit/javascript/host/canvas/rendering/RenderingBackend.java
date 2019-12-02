@@ -88,6 +88,24 @@ public interface RenderingBackend {
     String encodeToString(String type) throws IOException;
 
     /**
+     * Creates an elliptical arc centered at (x, y) with the radii radiusX and radiusY.
+     * The path starts at startAngle and ends at endAngle, and travels in the direction
+     * given by anticlockwise (defaulting to clockwise).
+     * @param x the x
+     * @param y the y
+     * @param radiusX the radiusX
+     * @param radiusY the radiusY
+     * @param rotation the rotation
+     * @param startAngle the start angle
+     * @param endAngle the end angle
+     * @param anticlockwise is anti-clockwise
+     */
+    void ellipse(double x, double y,
+            double radiusX, double radiusY,
+            double rotation, double startAngle, double endAngle,
+            boolean anticlockwise);
+
+    /**
      * Fills the current or given path with the current fillStyle.
      */
     void fill();

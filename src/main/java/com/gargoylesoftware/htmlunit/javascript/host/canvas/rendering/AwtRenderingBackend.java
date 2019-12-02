@@ -105,6 +105,34 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
+    public void ellipse(final double x, final double y,
+            final double radiusX, final double radiusY,
+            final double rotation, final double startAngle, final double endAngle,
+            final boolean anticlockwise) {
+        final Path2D subPath = getCurrentSubPath();
+        if (subPath != null) {
+            final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
+            final double startAngleDegree = startAngle * 180 / Math.PI;
+            final double endAngleDegree = endAngle * 180 / Math.PI;
+
+            double extendAngle = startAngleDegree - endAngleDegree;
+            extendAngle = Math.min(360, Math.abs(extendAngle));
+            if (anticlockwise && extendAngle < 360) {
+                extendAngle = extendAngle - 360;
+            }
+
+            final AffineTransform transformation = new AffineTransform();
+            transformation.rotate(rotation, p.getX(), p.getY());
+            final Arc2D arc = new Arc2D.Double(p.getX() - radiusX, p.getY() - radiusY, radiusX * 2, radiusY * 2,
+                                            startAngleDegree, extendAngle * -1, Arc2D.OPEN);
+            subPath.append(transformation.createTransformedShape(arc), false);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void bezierCurveTo(final double cp1x, final double cp1y,
             final double cp2x, final double cp2y, final double x, final double y) {
         final Path2D subPath = getCurrentSubPath();

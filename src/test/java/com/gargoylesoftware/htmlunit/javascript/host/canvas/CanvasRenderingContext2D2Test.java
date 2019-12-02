@@ -644,6 +644,65 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //     */
 //    @Test
 //    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoUlEQVR42mNgGAVAYAHE04F4PhCXALE"
+//            + "MpYa9B+ICIE4B4uVA/B2Iu4GYhxwDZ0MNQwYqQLwdiK8DsQY5BmbgkMuBut6FFANzoN7EBTyA+DkQCx"
+//            + "BrICgCPhPwmgCp3m4G4t1AzEKtZAOKzctYIocioAGNgABqGupCS0MzqO39+0C8HprIKYpxZI3TodlwO"
+//            + "dTFGaSmSVzptACao+aTmmuGKQAA9NQeZdHpsYYAAAAASUVORK5CYII=")
+//    public void ellipseStroke() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI);\n"
+//            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlUlEQVR42mNgGAUg8P8/gwMQhwCxATUM2"
+//            + "wzE/5HwYyDOAGIOcl32Hwc+D8QKpBoYgsdAEP4MxC6kGGhAwECYoRykGHqbCENDSDEwhQgD15NiIAsQny"
+//            + "Zg4Hsg5iHFUBmoJnyG+pAa4y7QCMBl4Gxy0qULHpe+Jzexy+AJUxdysyMLNPuhJ6lmauR1A2iOAgUHy2h"
+//            + "RygAA45xHqtsvRxIAAAAASUVORK5CYII=")
+//    public void ellipseFill() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.fillStyle = 'yellow';\n"
+//            + "      context.ellipse(10, 10, 8, 4, Math.PI / 4, 0, 1.5 * Math.PI);\n"
+//            + "      context.fill();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
 //            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAc0lEQVR42mNgGAVDEvBQ07ASIH4"
 //            + "NxBzUMCwBiB8DsQa1XAcyzINahikA8XMgZqGWgSZQF+IDv0mN2c9ALIJDXgWIT5PqynYgng7EAl"
 //            + "A+KKZ1oOIg17uQaiALVPNrqAHfgfg2EC+GGkw24IBGEs9oHh+iAAAZGRFncAWu2AAAAABJRU5ErkJggg==")
@@ -742,6 +801,36 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "      var context = canvas.getContext('2d');\n"
 //            + "      context.arc(10, 10, 4, 0, 2 * Math.PI, true);\n"
 //            + "      context.stroke();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAUElEQVR42mNgGAUjHfxnMADi7UD8HIjf"
+//            + "A/F+IDahxLDPQIwOfwOxBTkG7sZiGAweJsfA53gMfD8oDKS6l6kcKQhDQS59DU02h8k3bBQMHwAAK9tu"
+//            + "aRzvBV4AAAAASUVORK5CYII=")
+//    public void arcFillPath() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.fillStyle = 'green';\n"
+//            + "      context.beginPath();\n"
+//            + "      context.arc(10, 10, 4, 0, 2 * Math.PI);\n"
+//            + "      context.fill();\n"
 //            + "      alert(canvas.toDataURL());\n"
 //            + "    }\n"
 //            + "  }\n"
