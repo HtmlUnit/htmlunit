@@ -1108,15 +1108,25 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void enctype() throws Exception {
-        enctypeTest("", "post", "application/x-www-form-urlencoded");
-        enctypeTest("application/x-www-form-urlencoded", "post", "application/x-www-form-urlencoded");
-        enctypeTest("multipart/form-data", "post", "multipart/form-data");
-
+    public void enctypeGet() throws Exception {
         // for GET, no Content-Type header should be sent
         enctypeTest("", "get", null);
         enctypeTest("application/x-www-form-urlencoded", "get", null);
         enctypeTest("multipart/form-data", "get", null);
+    }
+
+    /**
+     * Verify Content-Type header sent with form submission.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"application/x-www-form-urlencoded",
+                "application/x-www-form-urlencoded",
+                "multipart/form-data"})
+    public void enctypePost() throws Exception {
+        enctypeTest("", "post", getExpectedAlerts()[0]);
+        enctypeTest("application/x-www-form-urlencoded", "post", getExpectedAlerts()[1]);
+        enctypeTest("multipart/form-data", "post", getExpectedAlerts()[2]);
     }
 
     /**
@@ -1157,8 +1167,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  <input name='myField' value='some value'>\n"
             + "</form></body></html>";
 
-        getMockWebConnection().setDefaultResponse("");
-        loadPageWithAlerts2(html);
+        getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
+        final WebDriver driver = loadPage2(html);
+        assertTitle(driver, "Response");
         String headerValue = getMockWebConnection().getLastWebRequest().getAdditionalHeaders()
             .get(HttpHeader.CONTENT_TYPE);
         // Can't test equality for multipart/form-data as it will have the form:
