@@ -157,4 +157,18 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final DomElement col = page.getElementsByTagName("col").get(0);
         assertEquals(col.getParentNode().getNodeName(), HtmlTableColumnGroup.TAG_NAME);
     }
+
+    @Test
+    public void test() throws Exception {
+        final String html = "<html><head></head><body><div><span>some content</span></div></body></html>";
+        final WebClient webClient = new WebClient();
+        webClient.getOptions().setJavaScriptEnabled(false);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setCssEnabled(false);
+        final StringWebResponse response = new StringWebResponse(html, new URL("https://www.someurl.com"));
+        for (int i = 0; i < 1000000; i++) {
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            htmlParser.parseHtml(response, webClient.getCurrentWindow());
+        }
+    }
 }

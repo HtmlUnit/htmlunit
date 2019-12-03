@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 78, FF52 removed, FF68 added">
+            <action type="fix" dev="rbri" issue="#107">
+                No longer use annotations for the implementation of isReadOnlySettable to
+                make the code simpler and faster.
+            </action>
             <action type="add" dev="rbri" issue="#92">
                 CanvasRenderingContext2D.ellipse(..) implemented.
             </action>
