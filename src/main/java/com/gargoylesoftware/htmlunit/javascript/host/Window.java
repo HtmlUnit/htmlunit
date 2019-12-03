@@ -93,6 +93,8 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -1200,6 +1202,7 @@ public class Window extends EventTarget implements Function, AutoCloseable {
      * @return {@code true} if this window is closed
      */
     @JsxGetter
+    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public boolean isClosed() {
         final WebWindow webWindow = getWebWindow();
         return !webWindow.getWebClient().containsWebWindow(webWindow);
@@ -4534,14 +4537,6 @@ public class Window extends EventTarget implements Function, AutoCloseable {
             return 1;
         }
         return null;
-    }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("closed".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
     }
 }
 

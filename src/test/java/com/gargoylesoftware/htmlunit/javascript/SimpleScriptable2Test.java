@@ -292,17 +292,6 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     }
 
     /**
-     * Setting the property works in FF.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("0")
-    public void set_ReadOnly_style_length() throws Exception {
-        set_ReadOnly("document.body.style.length");
-    }
-
-    /**
      * All functions seem to be able to be set.
      *
      * @throws Exception if the test fails

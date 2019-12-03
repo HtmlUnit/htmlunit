@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
+import java.lang.reflect.Method;
 import java.util.Deque;
 
 import org.apache.commons.logging.Log;
@@ -29,11 +30,14 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -382,5 +386,39 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
         if (prototype instanceof SimpleScriptable) {
             ((SimpleScriptable) prototype).setCaseSensitive(caseSensitive);
         }
+    }
+
+    @Override
+    protected boolean isReadOnlySettable(final String name, final Object value) {
+        for (final Method m : getClass().getMethods()) {
+            final JsxGetter jsxGetter = m.getAnnotation(JsxGetter.class);
+            if (jsxGetter != null) {
+                String methodProperty;
+                if (jsxGetter.propertyName().isEmpty()) {
+                    final int prefix = m.getName().startsWith("is") ? 2 : 3;
+                    methodProperty = m.getName().substring(prefix);
+                    methodProperty = Character.toLowerCase(methodProperty.charAt(0)) + methodProperty.substring(1);
+                }
+                else {
+                    methodProperty = jsxGetter.propertyName();
+                }
+                if (methodProperty.equals(name)) {
+                    final CanSetReadOnly canSetReadOnly = m.getAnnotation(CanSetReadOnly.class);
+                    if (canSetReadOnly != null) {
+                        switch (canSetReadOnly.value()) {
+                            case YES:
+                                return true;
+                            case IGNORE:
+                                return false;
+                            case EXCEPTION:
+                                throw ScriptRuntime.typeError3("msg.set.prop.no.setter",
+                                    name, getClassName(), Context.toString(value));
+                            default:
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

@@ -131,6 +131,8 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
+import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -1426,6 +1428,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the {@code length} property
      */
     @JsxGetter
+    @CanSetReadOnly(CanSetReadOnlyStatus.IGNORE)
     public int getLength() {
         return getStyleMap().size();
     }
@@ -3016,14 +3019,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             i = i * 24;
         }
         return i;
-    }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("length".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
     }
 
     /**
