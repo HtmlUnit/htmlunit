@@ -97,8 +97,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnly;
-import com.gargoylesoftware.htmlunit.javascript.configuration.CanSetReadOnlyStatus;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -910,7 +908,6 @@ public class Document extends Node {
      * @return this document's {@code body} element
      */
     @JsxGetter({CHROME, IE})
-    @CanSetReadOnly(CanSetReadOnlyStatus.EXCEPTION)
     public HTMLElement getBody() {
         final Page page = getPage();
         if (page instanceof HtmlPage) {
