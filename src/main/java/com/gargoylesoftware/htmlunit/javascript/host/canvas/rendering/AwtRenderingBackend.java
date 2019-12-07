@@ -112,8 +112,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            final double startAngleDegree = startAngle * 180 / Math.PI;
-            final double endAngleDegree = endAngle * 180 / Math.PI;
+            final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
+            final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
 
             double extendAngle = startAngleDegree - endAngleDegree;
             extendAngle = Math.min(360, Math.abs(extendAngle));
@@ -153,8 +153,8 @@ public class AwtRenderingBackend implements RenderingBackend {
         final Path2D subPath = getCurrentSubPath();
         if (subPath != null) {
             final Point2D p = transformation_.transform(new Point2D.Double(x, y), null);
-            final double startAngleDegree = startAngle * 180 / Math.PI;
-            final double endAngleDegree = endAngle * 180 / Math.PI;
+            final double startAngleDegree = 360 - (startAngle * 180 / Math.PI);
+            final double endAngleDegree = 360 - (endAngle * 180 / Math.PI);
 
             double extendAngle = startAngleDegree - endAngleDegree;
             extendAngle = Math.min(360, Math.abs(extendAngle));

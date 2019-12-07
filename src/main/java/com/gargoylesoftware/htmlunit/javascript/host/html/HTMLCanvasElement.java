@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -136,9 +137,12 @@ public class HTMLCanvasElement extends HTMLElement {
     @JsxFunction
     public String toDataURL(final Object type) {
         if (context2d_ != null) {
-            String typeInUse = type.toString();
+            final String typeInUse;
             if (Undefined.isUndefined(type)) {
                 typeInUse = null;
+            }
+            else {
+                typeInUse = Context.toString(type);
             }
             return context2d_.toDataURL(typeInUse);
         }

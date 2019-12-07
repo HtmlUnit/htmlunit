@@ -52,7 +52,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;''></canvas>"
+            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
             + "</body></html>";
 
         loadPageWithAlerts(html);
@@ -78,7 +78,33 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAHklEQVR42mNgg"
+//                + "ID/VMJwMGrgqIGjBo4aOGrgiDMQAMu0ZqjgcrwWAAAAAElFTkSuQmCC")
+//    public void fillRectWidthHeight() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.fillRect(1, 0, 18, 20);\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -105,7 +131,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -135,7 +161,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -162,7 +188,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -189,7 +215,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -220,7 +246,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -250,7 +276,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -277,7 +303,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -309,7 +335,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -338,7 +364,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -368,7 +394,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -399,7 +425,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -429,7 +455,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -458,7 +484,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -487,7 +513,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -516,7 +542,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -546,7 +572,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -575,7 +601,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -606,7 +632,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -633,7 +659,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -662,7 +688,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -692,7 +718,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -720,7 +746,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -749,7 +775,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -777,7 +803,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -806,7 +832,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -836,7 +862,38 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
+//            + "</body></html>";
+//
+//        loadPageWithAlerts(html);
+//    }
+//
+//    /**
+//     * @throws Exception if the test fails
+//     */
+//    @Test
+//    @Alerts("data:image/png;base64,"
+//            + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoUlEQVR42mNgGLrgP4MKELcD8WUg/g7Ev"
+//            + "6FskJgOKQZxAHE31ABc8DfUYA5ChvEA8Wk8BqHD3UDMgs/A+SQYBoPduAwzIeBNfFADm4GTyTQMBPuxGX"
+//            + "iaAgNvYzPwOwUG/sdmILnhtxmIbbAZeJkEQ0C+mY49MkhLMs+BuAaIRYjJIfiSDcj1KeCET2L+XY0lJ7j"
+//            + "gzw2E8/FpqPc1GEbBgAAA5clFDZmvvgIAAAAASUVORK5CYII=")
+//    public void arcFillPathAngle() throws Exception {
+//        final String html = "<html><head>\n"
+//            + "<script>\n"
+//            + "  function test() {\n"
+//            + "    var canvas = document.getElementById('myCanvas');\n"
+//            + "    if (canvas.getContext) {\n"
+//            + "      var context = canvas.getContext('2d');\n"
+//            + "      context.fillStyle = 'green';\n"
+//            + "      context.beginPath();\n"
+//            + "      context.arc(10, 10, 8, 2.3, 2 * Math.PI);\n"
+//            + "      context.fill();\n"
+//            + "      alert(canvas.toDataURL());\n"
+//            + "    }\n"
+//            + "  }\n"
+//            + "</script>\n"
+//            + "</head><body onload='test()'>\n"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -867,7 +924,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -893,7 +950,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -920,7 +977,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -947,7 +1004,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
@@ -983,7 +1040,7 @@ public class CanvasRenderingContext2D2Test extends SimpleWebTestCase {
 //            + "  }\n"
 //            + "</script>\n"
 //            + "</head><body onload='test()'>\n"
-//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;''></canvas>"
+//            + "  <canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>"
 //            + "</body></html>";
 //
 //        loadPageWithAlerts(html);
