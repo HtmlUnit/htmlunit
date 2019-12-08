@@ -40,6 +40,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -452,6 +453,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "inner", "# "})
+    @BuggyWebDriver({"1", "Please run manually", ""})
     public void javascriptTargetWhitespace() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='  '",
@@ -473,6 +475,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "inner", "# "})
+    @BuggyWebDriver({"1", "Please run manually", ""})
     public void javascriptTargetBlank() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='_blank'",
@@ -503,6 +506,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"1", "inner", "# "})
+    @BuggyWebDriver({"1", "Please run manually", ""})
     public void javascriptTargetUnknown() throws Exception {
         final String[] alerts = getExpectedAlerts();
         javascriptTarget("target='unknown'",
@@ -513,6 +517,13 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     private void javascriptTarget(final String target, final int newWindows,
                     final String frameAlerts, final String windowAlerts) throws Exception {
         assertTrue(newWindows < 2);
+
+        // real browsers (selenium) are getting confused by this scenario
+        // and as result the stuck in the code that tries to get the body
+        if (newWindows > 0 && useRealBrowser()) {
+            assertEquals(frameAlerts, "Please run manually");
+            return;
+        }
 
         final String html
             = "<html>\n"
@@ -544,13 +555,18 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
         String titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
         assertEquals(frameAlerts, titleVal);
 
+        // we have to switch back to the outer content
+        // otherwise selenium gets confused
+        driver.switchTo().defaultContent();
+
         final Set<String> windows = driver.getWindowHandles();
         assertEquals(1 + newWindows, windows.size());
 
         if (newWindows > 0) {
             windows.remove(firstWindow);
+            driver.switchTo().window(windows.iterator().next());
         }
-        driver.switchTo().window(windows.iterator().next());
+
         titleVal = driver.findElement(By.tagName("body")).getAttribute("title");
         assertEquals(windowAlerts, titleVal);
     }
