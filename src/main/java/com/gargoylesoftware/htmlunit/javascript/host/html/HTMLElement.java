@@ -2523,7 +2523,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public boolean isHidden() {
-        return getDomNodeOrDie().hasAttribute("hidden");
+        return getDomNodeOrDie().isHidden();
     }
 
     /**

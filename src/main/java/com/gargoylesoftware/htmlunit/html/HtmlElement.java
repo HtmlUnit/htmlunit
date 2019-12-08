@@ -1188,12 +1188,19 @@ public abstract class HtmlElement extends DomElement {
     }
 
     /**
+     * @return true if the hidden attribute is set.
+     */
+    public boolean isHidden() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect("hidden");
+    }
+
+    /**
      * {@inheritDoc}
      * Overwritten to support the hidden attribute (html5).
      */
     @Override
     public boolean isDisplayed() {
-        if (ATTRIBUTE_NOT_DEFINED != getAttributeDirect("hidden")) {
+        if (isHidden()) {
             return false;
         }
         return super.isDisplayed();

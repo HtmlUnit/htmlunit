@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -738,19 +739,21 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (htmlPage != null && htmlPage.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
+        final WebClientOptions options = htmlPage.getEnclosingWindow().getWebClient().getOptions();
+        if (htmlPage != null && options.isCssEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors();
             final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
+                if (node instanceof HtmlElement && ((HtmlElement) node).isHidden()) {
+                    return false;
+                }
+
                 final Object scriptableObject = ((DomNode) node).getScriptableObject();
                 if (scriptableObject instanceof HTMLElement) {
                     final HTMLElement elem = (HTMLElement) scriptableObject;
-                    if (elem.isHidden()) {
-                        return false;
-                    }
                     final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
                     if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
