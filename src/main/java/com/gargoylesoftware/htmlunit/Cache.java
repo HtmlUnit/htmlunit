@@ -56,7 +56,7 @@ public class Cache implements Serializable {
      * method triggers DNS lookups of the URL hostnames' IPs. As of this writing, the HtmlUnit unit tests
      * run ~20% faster whey keying on strings rather than on {@link java.net.URL} instances.
      */
-    final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
+    private final Map<String, Entry> entries_ = Collections.synchronizedMap(new HashMap<String, Entry>(maxSize_));
 
     /**
      * A cache entry.
