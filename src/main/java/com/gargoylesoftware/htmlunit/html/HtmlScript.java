@@ -224,9 +224,9 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
             @Override
             public void execute() {
                 Object jsDoc = null;
-                final Object window = getPage().getEnclosingWindow().getScriptableObject();
-                if (window instanceof Window) {
-                    jsDoc = ((Window) window).getDocument();
+                final Window window = getPage().getEnclosingWindow().getScriptableObject();
+                if (window != null) {
+                    jsDoc = window.getDocument();
                     ((HTMLDocument) jsDoc).setExecutingDynamicExternalPosponed(getStartLineNumber() == -1
                             && getSrcAttribute() != ATTRIBUTE_NOT_DEFINED);
                 }

@@ -293,7 +293,7 @@ public final class ScriptElementSupport {
         final String scriptCode = getScriptCode(element);
         if (event != ATTRIBUTE_NOT_DEFINED && forr != ATTRIBUTE_NOT_DEFINED) {
             if (element.hasFeature(JS_SCRIPT_SUPPORTS_FOR_AND_EVENT_WINDOW) && "window".equals(forr)) {
-                final Window window = (Window) element.getPage().getEnclosingWindow().getScriptableObject();
+                final Window window = element.getPage().getEnclosingWindow().getScriptableObject();
                 final BaseFunction function = new EventHandler(element, event, scriptCode);
                 window.getEventListenersContainer().addEventListener(StringUtils.substring(event, 2), function, false);
                 return;

@@ -289,8 +289,8 @@ public class History implements Serializable {
                 page.getWebResponse().getWebRequest().setUrl(entry.getUrl());
             }
 
-            final Window jsWindow = (Window) window_.getScriptableObject();
-            if (jsWindow.hasEventHandlers("onpopstate")) {
+            final Window jsWindow = window_.getScriptableObject();
+            if (jsWindow != null && jsWindow.hasEventHandlers("onpopstate")) {
                 final Event event = new PopStateEvent(jsWindow, Event.TYPE_POPSTATE, entry.getState());
                 jsWindow.executeEventLocally(event);
             }
