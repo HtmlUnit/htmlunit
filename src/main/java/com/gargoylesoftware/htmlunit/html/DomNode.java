@@ -738,9 +738,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             return false;
         }
 
-        final HtmlPage htmlPage = getHtmlPageOrNull();
-        final WebClientOptions options = htmlPage.getEnclosingWindow().getWebClient().getOptions();
-        if (htmlPage != null && options.isCssEnabled()) {
+        final Page page = getPage();
+        final WebClientOptions options = page.getEnclosingWindow().getWebClient().getOptions();
+        if (page != null && options.isCssEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors();
