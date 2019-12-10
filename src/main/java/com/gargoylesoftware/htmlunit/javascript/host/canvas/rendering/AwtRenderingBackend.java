@@ -522,12 +522,14 @@ public class AwtRenderingBackend implements RenderingBackend {
 
     private static final class SaveState {
         private AffineTransform transformation_;
+        private float globalAlpha_;
         private int lineWidth_;
         private Color fillColor_;
         private Color strokeColor_;
 
         private SaveState(final AwtRenderingBackend backend) {
             transformation_ = backend.transformation_;
+            globalAlpha_ = backend.globalAlpha_;
             lineWidth_ = backend.lineWidth_;
             fillColor_ = backend.fillColor_;
             strokeColor_ = backend.strokeColor_;
@@ -535,6 +537,7 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         private void applyOn(final AwtRenderingBackend backend) {
             backend.transformation_ = transformation_;
+            backend.globalAlpha_ = globalAlpha_;
             backend.lineWidth_ = lineWidth_;
             backend.fillColor_ = fillColor_;
             backend.strokeColor_ = strokeColor_;

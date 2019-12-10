@@ -271,4 +271,17 @@ public interface RenderingBackend {
      * If the shape has already been closed or has only one point, this function does nothing.
      */
     void closePath();
+
+    /**
+     * @return the alpha (transparency) value that is applied to shapes and images
+     * before they are drawn onto the canvas.
+     */
+    double getGlobalAlpha();
+
+    /**
+     * Specifies the alpha (transparency) value that is applied to shapes and images
+     * before they are drawn onto the canvas.
+     * @param globalAlpha the new alpha
+     */
+    void setGlobalAlpha(double globalAlpha);
 }
