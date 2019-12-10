@@ -820,6 +820,9 @@ public class HtmlSerializerVisibleText {
 
                 if (c == (char) 160) {
                     appendBlank();
+                    if (mode == Mode.WHITE_SPACE_NORMAL || mode == Mode.WHITE_SPACE_PRE_LINE) {
+                        state_ = State.DEFAULT;
+                    }
                     continue;
                 }
                 builder_.append(c);

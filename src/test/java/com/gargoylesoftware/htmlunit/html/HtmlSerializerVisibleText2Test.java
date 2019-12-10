@@ -1392,6 +1392,191 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         getVisibleTextFormated("<label id='tester'>The text to be <span>tested</span></label>");
     }
 
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabelNormal() throws Exception {
+        getVisibleTextFormated("<label id='tester' style='white-space: normal'>"
+                + "The text to be <span>tested</span></label>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabelNowrap() throws Exception {
+        getVisibleTextFormated("<label id='tester' style='white-space: nowrap'>"
+                + "The text to be <span>tested</span></label>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabelPre() throws Exception {
+        getVisibleTextFormated("<label id='tester' style='white-space: pre'>"
+                + "The text to be <span>tested</span></label>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabelPreWrap() throws Exception {
+        getVisibleTextFormated("<label id='tester' style='white-space: pre-wrap'>"
+                + "The text to be <span>tested</span></label>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabelPreLine() throws Exception {
+        getVisibleTextFormated("<label id='tester' style='white-space: pre-line'>"
+                + "The text to be <span>tested</span></label>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbsp() throws Exception {
+        getVisibleTextFormated("<p id='tester'>A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbspNormal() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: normal'>"
+                + "A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbspNowrap() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: nowrap'>"
+                + "A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbspPre() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre'>"
+                + "A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbspPreWrap() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre-wrap'>"
+                + "A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A   nbsp and spaces")
+    public void getVisibleTextParagraphNbspPreLine() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre-line'>"
+                + "A &nbsp; nbsp and spaces</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbsp() throws Exception {
+        getVisibleTextFormated("<p id='tester'>A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbspNormal() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: normal'>"
+                + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbspNowrap() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: nowrap'>"
+                + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbspPre() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre'>"
+                + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbspPreWrap() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre-wrap'>"
+                + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("A  \n  NBSPs  ")
+    public void getVisibleTextParagraphMultilineNbspPreLine() throws Exception {
+        getVisibleTextFormated("<p id='tester' style='white-space: pre-line'>"
+                + "A &nbsp<br />&nbsp NBSPs&nbsp;&nbsp;</p>");
+    }
+
     private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
         final String htmlContent
             = "<html>\n"
