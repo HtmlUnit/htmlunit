@@ -360,7 +360,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     webWindow.getHistory().addPage(page);
                 }
 
-                final Window window = (Window) webWindow.getScriptableObject();
+                final Window window = webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
                     window.clearComputedStyles();
@@ -809,10 +809,10 @@ public class WebClient implements Serializable, AutoCloseable {
             //2. onFocus event is triggered for focusedElement of new current window
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final Object jsWindow = currentWindow_.getScriptableObject();
-                if (jsWindow instanceof Window) {
+                final Window jsWindow = currentWindow_.getScriptableObject();
+                if (jsWindow != null) {
                     final HTMLElement activeElement =
-                            ((HTMLDocument) ((Window) jsWindow).getDocument()).getActiveElement();
+                            ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
                     if (activeElement != null) {
                         ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
                     }
@@ -1093,9 +1093,9 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
-        final WebWindow webWindow = newPage.getEnclosingWindow();
-        if (webWindow.getScriptableObject() instanceof Window) {
-            ((Window) webWindow.getScriptableObject()).initialize(newPage);
+        final Window window = newPage.getEnclosingWindow().getScriptableObject();
+        if (window instanceof Window) {
+            ((Window) window).initialize(newPage);
         }
     }
 
@@ -2253,7 +2253,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     req.setUrl(loadJob.urlWithOnlyHashChange_);
 
                     // update location.hash
-                    final Window jsWindow = (Window) win.getScriptableObject();
+                    final Window jsWindow = win.getScriptableObject();
                     if (null != jsWindow) {
                         final Location location = jsWindow.getLocation();
                         location.setHash(oldURL, loadJob.urlWithOnlyHashChange_.getRef());
