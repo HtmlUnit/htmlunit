@@ -1381,4 +1381,32 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
         }
     }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("The text to be tested")
+    public void getVisibleTextLabel() throws Exception {
+        getVisibleTextFormated("<label id='tester'>The text to be <span>tested</span></label>");
+    }
+
+    private void getVisibleTextFormated(final String htmlTesterSnipped) throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  " + htmlTesterSnipped + "\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
+        }
+    }
 }
