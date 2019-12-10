@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -56,6 +57,7 @@ public class AwtRenderingBackend implements RenderingBackend {
     private final Graphics2D graphics2D_;
 
     private AffineTransform transformation_;
+    private float globalAlpha_;
     private int lineWidth_;
     private Color fillColor_;
     private Color strokeColor_;
@@ -91,6 +93,27 @@ public class AwtRenderingBackend implements RenderingBackend {
         strokeColor_ = Color.black;
         lineWidth_ = 1;
         transformation_ = new AffineTransform();
+        setGlobalAlpha(1.0);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getGlobalAlpha() {
+        return globalAlpha_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setGlobalAlpha(final double globalAlpha) {
+        if (globalAlpha >= 0 && globalAlpha <= 1) {
+            globalAlpha_ = (float) globalAlpha;
+            final AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, globalAlpha_);
+            graphics2D_.setComposite(composite);
+        }
     }
 
     /**

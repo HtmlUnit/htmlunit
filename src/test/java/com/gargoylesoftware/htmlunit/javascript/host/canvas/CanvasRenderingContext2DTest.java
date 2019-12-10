@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
@@ -417,6 +419,67 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             + "  var ctx = canvas.getContext('2d');\n"
             + "  var gradient = ctx.createRadialGradient(100, 100, 100, 100, 100, 0);\n"
             + "  alert(gradient);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "0.5", "0", "0.699999988079071", "0"},
+            CHROME = {"1", "0.5", "0", "0.7", "0"})
+    @NotYetImplemented(CHROME)
+    public void globalAlpha() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  try {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = 0.5;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = 0;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = 0.7;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = null;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "  } catch(e) { alert('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
+            + "</html>";
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0.5", "0.5", "0.5", "0.5"})
+    public void globalAlphaInvalid() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + "function test() {\n"
+            + "  var canvas = document.getElementById('myCanvas');\n"
+            + "  try {\n"
+            + "    var ctx = canvas.getContext('2d');\n"
+            + "    ctx.globalAlpha = 0.5;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = -1;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = 'test';\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "    ctx.globalAlpha = undefined;\n"
+            + "    alert(ctx.globalAlpha);\n"
+            + "  } catch(e) { alert('exception'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"

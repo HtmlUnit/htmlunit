@@ -83,6 +83,25 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
     }
 
     /**
+     * Specifies the alpha (transparency) value that is applied to shapes and images
+     * before they are drawn onto the canvas..
+     * @return the {@code globalAlpha} property
+     */
+    @JsxGetter
+    public double getGlobalAlpha() {
+        return getRenderingBackend().getGlobalAlpha();
+    }
+
+    /**
+     * Sets the {@code globalAlpha} property.
+     * @param globalAlpha the {@code globalAlpha} property
+     */
+    @JsxSetter
+    public void setGlobalAlpha(final double globalAlpha) {
+        getRenderingBackend().setGlobalAlpha(globalAlpha);
+    }
+
+    /**
      * Returns the {@code fillStyle} property.
      * @return the {@code fillStyle} property
      */
@@ -141,25 +160,6 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
                 getRenderingBackend().setLineWidth((int) width);
             }
         }
-    }
-
-    /**
-     * Returns the {@code globalAlpha} property.
-     * @return the {@code globalAlpha} property
-     */
-    @JsxGetter
-    public double getGlobalAlpha() {
-        LOG.info("CanvasRenderingContext2D.getGlobalAlpha() not yet implemented");
-        return 0;
-    }
-
-    /**
-     * Sets the {@code globalAlpha} property.
-     * @param globalAlpha the {@code globalAlpha} property
-     */
-    @JsxSetter
-    public void setGlobalAlpha(final Object globalAlpha) {
-        LOG.info("CanvasRenderingContext2D.setGlobalAlpha() not yet implemented");
     }
 
     /**
