@@ -143,7 +143,11 @@ public class AlphanumericTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "\n",
+            FF60 = "\r",
+            IE = "\r")
     public void test11() throws Exception {
+        final String[] exp = getExpectedAlerts();
         for (int i = 0; i < non_alphanumeric.length() - 1; i++) {
             final char ch = non_alphanumeric.charAt(i);
             String expected = String.valueOf(ch);
@@ -168,7 +172,7 @@ public class AlphanumericTest extends WebDriverTestCase {
                     break;
 
                 case 'r':
-                    expected = "\r";
+                    expected = exp[0];
                     input = "\\" + ch;
                     break;
 
