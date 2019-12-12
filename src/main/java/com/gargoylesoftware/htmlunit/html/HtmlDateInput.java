@@ -24,6 +24,7 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "date".
@@ -192,7 +193,7 @@ public class HtmlDateInput extends HtmlInput implements SelectableTextInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)) {
+            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValueAttribute(newValue);

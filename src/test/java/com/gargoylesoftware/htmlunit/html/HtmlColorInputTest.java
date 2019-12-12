@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -59,12 +60,36 @@ public class HtmlColorInputTest extends WebDriverTestCase {
     }
 
     /**
+     * Verifies clear().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void clearInput() throws Exception {
+        final String htmlContent
+                = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='color' name='tester' id='tester' value='#ff0000'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final WebElement element = driver.findElement(By.id("tester"));
+
+        element.clear();
+        assertEquals("", element.getAttribute("value"));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
     @Alerts("--")
     public void minMaxStep() throws Exception {
-        final String html = "<html>\n"
+        final String html
+            = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"

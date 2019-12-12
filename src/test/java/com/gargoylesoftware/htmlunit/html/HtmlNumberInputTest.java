@@ -718,4 +718,26 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void clearInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form>\n"
+            + "  <input type='number' id='tester' value='10'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        WebDriver driver = loadPage2(html);
+        WebElement element = driver.findElement(By.id("tester"));
+        assertEquals("10", element.getAttribute("value"));
+
+        element.clear();
+        assertEquals("", element.getAttribute("value"));
+    }
 }

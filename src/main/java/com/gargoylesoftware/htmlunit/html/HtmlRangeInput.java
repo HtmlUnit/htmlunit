@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "range".
@@ -125,7 +126,11 @@ public class HtmlRangeInput extends HtmlInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            setValueAttribute(Double.parseDouble(newValue));
+            if (StringUtils.isNotEmpty(newValue)) {
+                setValueAttribute(Double.parseDouble(newValue));
+            } else {
+                super.setValueAttribute(newValue);
+            }
         }
         catch (final NumberFormatException e) {
             // ignore
