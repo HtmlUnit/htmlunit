@@ -326,8 +326,8 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        WebDriver driver = loadPage2(html);
-        WebElement element = driver.findElement(By.id("tester"));
+        final WebDriver driver = loadPage2(html);
+        final WebElement element = driver.findElement(By.id("tester"));
         element.clear();
 
         assertEquals("", element.getAttribute("value"));

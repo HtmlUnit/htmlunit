@@ -733,8 +733,8 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        WebDriver driver = loadPage2(html);
-        WebElement element = driver.findElement(By.id("tester"));
+        final WebDriver driver = loadPage2(html);
+        final WebElement element = driver.findElement(By.id("tester"));
         assertEquals("10", element.getAttribute("value"));
 
         element.clear();

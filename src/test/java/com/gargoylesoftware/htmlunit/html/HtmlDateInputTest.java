@@ -105,7 +105,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
               + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        WebElement input = driver.findElement(By.id("input"));
+        final WebElement input = driver.findElement(By.id("input"));
 
         assertEquals("2018-03-22", input.getAttribute("value"));
 
@@ -126,7 +126,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
               + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        WebElement input = driver.findElement(By.id("input"));
+        final WebElement input = driver.findElement(By.id("input"));
 
         assertEquals("2018-03-22T10:10", input.getAttribute("value"));
 

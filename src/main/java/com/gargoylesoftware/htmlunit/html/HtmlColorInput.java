@@ -58,7 +58,9 @@ public class HtmlColorInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START) || StringUtils.isEmpty(newValue) || isValid(newValue)) {
+        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)
+                || StringUtils.isEmpty(newValue)
+                || isValid(newValue)) {
             super.setValueAttribute(newValue);
         }
     }

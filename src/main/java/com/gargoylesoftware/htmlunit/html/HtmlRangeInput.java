@@ -128,7 +128,8 @@ public class HtmlRangeInput extends HtmlInput {
         try {
             if (StringUtils.isNotEmpty(newValue)) {
                 setValueAttribute(Double.parseDouble(newValue));
-            } else {
+            }
+            else {
                 super.setValueAttribute(newValue);
             }
         }
