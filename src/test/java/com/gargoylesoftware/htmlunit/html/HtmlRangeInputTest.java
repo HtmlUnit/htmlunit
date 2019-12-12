@@ -20,6 +20,9 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Tests for {@link HtmlRangeInput}.
@@ -307,5 +310,26 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void clearInput() throws Exception {
+        final String html = "<html>\n"
+            + "<body>\n"
+            + "<form>\n"
+            + "  <input type='range' id='tester' value='5.6'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        WebDriver driver = loadPage2(html);
+        WebElement element = driver.findElement(By.id("tester"));
+        element.clear();
+
+        assertEquals("", element.getAttribute("value"));
     }
 }

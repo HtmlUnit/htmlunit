@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "color".
@@ -57,7 +58,7 @@ public class HtmlColorInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START) || isValid(newValue)) {
+        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START) || StringUtils.isEmpty(newValue) || isValid(newValue)) {
             super.setValueAttribute(newValue);
         }
     }

@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import org.openqa.selenium.WebElement;
 
 /**
  * Tests for {@link HtmlDateInput}.
@@ -89,6 +90,48 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         driver.findElement(By.id("tester")).click();
 
         verifyAlerts(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void clearDateInput() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<body>\n"
+              + "  <input id='input' type='date' value='2018-03-22'>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        WebElement input = driver.findElement(By.id("input"));
+
+        assertEquals("2018-03-22", input.getAttribute("value"));
+
+        input.clear();
+        assertEquals("", input.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void clearDateTimeInput() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<body>\n"
+              + "  <input id='input' type='datetime-local' value='2018-03-22T10:10'>\n"
+              + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        WebElement input = driver.findElement(By.id("input"));
+
+        assertEquals("2018-03-22T10:10", input.getAttribute("value"));
+
+        input.clear();
+        assertEquals("", input.getAttribute("value"));
     }
 
     /**
