@@ -101,11 +101,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "", "", "", "", "", "", "", "",
-                        "", "", "", "", "", "", "#000000", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""},
-            IE = {"", "", "", "", "", "", "", "", "",
                         "", "", "", "", "", "", "", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""})
+                        "", "", "", "", "", "", ""})
     @Test
     public void setValueEmptyString() throws Exception {
         testValue("''");
@@ -152,11 +149,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Alerts(DEFAULT = {"", "null", "", "", "", "", "", "", "",
-                        "", "null", "", "null", "", "", "#000000", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""},
+                        "", "null", "", "null", "", "", "", "", "", "", "", "",
+                        "", "", "", "", "", "", ""},
             IE = {"", "null", "", "", "", "", "", "", "",
                         "", "null", "", "null", "", "null", "", "", "", "", "", "",
-                        "", "", "50", "", "", "", ""})
+                        "", "", "", "", "", "", ""})
     @Test
     public void setValueNull() throws Exception {
         testValue("null");
