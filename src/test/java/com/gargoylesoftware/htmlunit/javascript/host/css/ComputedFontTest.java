@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -174,7 +173,6 @@ public class ComputedFontTest extends WebDriverTestCase {
                 "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"},
             FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
-    @NotYetImplemented({CHROME, FF68})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
     }

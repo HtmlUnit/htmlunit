@@ -134,6 +134,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF68})
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
+    /** For disconnectd items style font property is blank. */
+    @BrowserFeature(CHROME)
+    CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
+
     /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
      * you use CSS to attach a script to a specific element in order to implement
      * DHTML (Dynamic HTML) components.

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_COMPUTED_NO_Z_INDEX;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDEFINITION_INLINE_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_21;
@@ -612,7 +613,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getFont() {
-        if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)
+        if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)
                 && getElement().getDomNodeOrDie().isAttachedToPage()) {
             return super.getFont();
         }
