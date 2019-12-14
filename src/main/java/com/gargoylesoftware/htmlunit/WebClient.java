@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_308;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
@@ -1501,6 +1502,20 @@ public class WebClient implements Serializable, AutoCloseable {
         if (!wrs.isAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE)) {
             wrs.setAdditionalHeader(HttpHeader.ACCEPT_LANGUAGE, getBrowserVersion().getBrowserLanguage());
         }
+
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_MODE)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "navigate");
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_SITE)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_SEC_FETCH)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_FETCH_USER)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
+        }
+
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
                 && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
             wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");

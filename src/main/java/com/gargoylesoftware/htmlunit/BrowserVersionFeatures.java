@@ -559,6 +559,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     HTTP_HEADER_UPGRADE_INSECURE_REQUEST,
 
+    /** Browser sends Sec-Fetch headers. */
+    @BrowserFeature(CHROME)
+    HTTP_HEADER_SEC_FETCH,
+
     /** Supports redirect via 308 code. */
     @BrowserFeature({CHROME, FF})
     HTTP_REDIRECT_308,

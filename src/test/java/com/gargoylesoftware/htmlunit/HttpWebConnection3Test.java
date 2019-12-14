@@ -47,12 +47,13 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
                         HttpHeader.USER_AGENT,
-                        "Sec-Fetch-User", HttpHeader.ACCEPT, "Sec-Fetch-Site", "Sec-Fetch-Mode",
+                        HttpHeader.SEC_FETCH_USER, HttpHeader.ACCEPT,
+                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION, "Cookie"})
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.COOKIE})
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -81,7 +82,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
                         HttpHeader.USER_AGENT,
-                        "Sec-Fetch-User", HttpHeader.ACCEPT, "Sec-Fetch-Site", "Sec-Fetch-Mode",
+                        HttpHeader.SEC_FETCH_USER, HttpHeader.ACCEPT,
+                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE,
                         HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.COOKIE},
             FF60 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,

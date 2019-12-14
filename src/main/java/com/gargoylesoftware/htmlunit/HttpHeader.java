@@ -98,6 +98,15 @@ public final class HttpHeader {
     /** Upgrade-Insecure-Requests. */
     public static final String UPGRADE_INSECURE_REQUESTS = "Upgrade-Insecure-Requests";
 
+    /** Sec-Fetch-Mode. */
+    public static final String SEC_FETCH_MODE = "Sec-Fetch-Mode";
+
+    /** Sec-Fetch-Site. */
+    public static final String SEC_FETCH_SITE = "Sec-Fetch-Site";
+
+    /** Sec-Fetch-User. */
+    public static final String SEC_FETCH_USER = "Sec-Fetch-User";
+
     /** Access-Control-Request-Method. */
     public static final String ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     /** Access-Control-Request-Headers. */
