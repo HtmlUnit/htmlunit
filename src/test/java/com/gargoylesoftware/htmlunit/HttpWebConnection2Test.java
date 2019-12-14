@@ -78,6 +78,9 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
             expectedHeaders = "Connection: keep-alive\n"
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Sec-Fetch-Mode: navigate\n"
+                                + "Sec-Fetch-Site: same-origin\n"
+                                + "Sec-Fetch-User: ?1\n"
                                 + "Upgrade-Insecure-Requests: 1\n"
                                 + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
         }
@@ -147,6 +150,9 @@ public class HttpWebConnection2Test extends WebDriverTestCase {
                                 + "Host: localhost:" + PORT + "\n"
                                 + "Origin: http://localhost:" + PORT + "\n"
                                 + "Referer: http://localhost:" + PORT + "/\n"
+                                + "Sec-Fetch-Mode: navigate\n"
+                                + "Sec-Fetch-Site: same-origin\n"
+                                + "Sec-Fetch-User: ?1\n"
                                 + "Upgrade-Insecure-Requests: 1\n"
                                 + "User-Agent: " + getBrowserVersion().getUserAgent() + "\n";
         }
