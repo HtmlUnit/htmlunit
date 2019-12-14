@@ -316,13 +316,12 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "49.6",
-            IE = "50")
+    @Alerts("50")
     public void clearInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "<form>\n"
-            + "  <input type='range' id='tester' value='5.6'>\n"
+            + "  <input type='range' id='tester' value='42'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
@@ -332,5 +331,30 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         element.clear();
 
         assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("--")
+    public void minMaxStep() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('tester');\n"
+            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='range' id='tester'>\n"
+            + "</form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
     }
 }

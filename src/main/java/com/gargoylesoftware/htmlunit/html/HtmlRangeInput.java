@@ -130,7 +130,11 @@ public class HtmlRangeInput extends HtmlInput {
                 setValueAttribute(Double.parseDouble(newValue));
             }
             else {
-                super.setValueAttribute(newValue);
+                final double min = getMinNumeric();
+                final double max = getMaxNumeric();
+
+                // place in the middle
+                setValueAttribute(min + ((max - min) / 2));
             }
         }
         catch (final NumberFormatException e) {
