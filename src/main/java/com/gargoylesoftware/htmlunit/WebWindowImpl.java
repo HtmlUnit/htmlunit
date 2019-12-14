@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_63;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_92;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -83,8 +83,8 @@ public abstract class WebWindowImpl implements WebWindow {
             outerHeight_ = innerHeight_ + 86;
             outerWidth_ = innerWidth_ + 14;
         }
-        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_136)) {
-            outerHeight_ = innerHeight_ + 136;
+        else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_92)) {
+            outerHeight_ = innerHeight_ + 92;
             outerWidth_ = innerWidth_ + 16;
         }
         else {
