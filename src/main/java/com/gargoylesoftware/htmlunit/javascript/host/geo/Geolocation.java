@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -51,8 +52,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(IE)
-@JsxClass(isJSObject = false, value = {CHROME, FF})
+@JsxClass({CHROME, IE})
+@JsxClass(isJSObject = false, value = FF)
 public class Geolocation extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
@@ -67,6 +68,7 @@ public class Geolocation extends SimpleScriptable {
     /**
      * Creates an instance.
      */
+    @JsxConstructor(CHROME)
     public Geolocation() {
     }
 
