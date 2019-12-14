@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -106,6 +110,7 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "36",
             CHROME = "")
+    @NotYetImplemented({FF, IE})
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

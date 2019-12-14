@@ -14,13 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.awt.Color;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input" where type is "color".
@@ -59,11 +61,12 @@ public class HtmlColorInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
+        if (hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED)) {
+            super.setValueAttribute(newValue);
+            return;
+        }
+
         if (StringUtils.isEmpty(newValue)) {
-            if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                super.setValueAttribute("");
-                return;
-            }
             super.setValueAttribute("#000000");
             return;
         }

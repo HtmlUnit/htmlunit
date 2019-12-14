@@ -21,8 +21,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input" where type is "week".
@@ -58,12 +59,15 @@ public class HtmlWeekInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
+        if (!hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                || hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)
+                || StringUtils.isEmpty(newValue)) {
+            super.setValueAttribute(newValue);
+            return;
+        }
+
         try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                    && !hasFeature(HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED)
-                    && StringUtils.isNotEmpty(newValue)) {
-                FORMATTER_.parse(newValue);
-            }
+            FORMATTER_.parse(newValue);
             super.setValueAttribute(newValue);
         }
         catch (final DateTimeParseException e) {

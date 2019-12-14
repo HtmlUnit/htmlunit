@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,6 +25,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -106,6 +109,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             IE = "8:04")
+    @NotYetImplemented(IE)
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

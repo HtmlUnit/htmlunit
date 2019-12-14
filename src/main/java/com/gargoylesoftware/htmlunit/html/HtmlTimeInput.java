@@ -58,7 +58,8 @@ public class HtmlTimeInput extends HtmlInput {
     @Override
     public void setValueAttribute(final String newValue) {
         try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
+            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                    && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
             super.setValueAttribute(newValue);

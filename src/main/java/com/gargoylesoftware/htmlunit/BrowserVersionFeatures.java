@@ -458,11 +458,15 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, FF})
     HTMLINPUT_FILE_SELECTION_START_END_NULL,
 
+    /** HTMLInputElement color type is not supported. */
+    @BrowserFeature(IE)
+    HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
+
     /** HTMLInputElement date and time types are supported. */
     @BrowserFeature({CHROME, FF})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
-    /** HTMLInputElement date and time types are supported. */
+    /** HTMLInputElement date and time types are not supported. */
     @BrowserFeature(FF)
     HTMLINPUT_TYPE_MONTH_NOT_SUPPORTED,
 

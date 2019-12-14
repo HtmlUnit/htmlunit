@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static org.junit.Assert.fail;
 
 import java.net.URL;
@@ -53,7 +54,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.COOKIE})
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION})
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -220,6 +221,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
             CHROME = "§§URL§§")
+    @NotYetImplemented(CHROME)
     public void locationQueryUTF8Encoded() throws Exception {
         final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
 
