@@ -428,10 +428,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "accessKey,attachInternals(),autocapitalize,"
+    @Alerts(CHROME = "accessKey,attachInternals(),autocapitalize,autofocus,"
                 + "blur(),click(),contentEditable,dataset,dir,draggable,enterKeyHint,focus(),hidden,"
                 + "innerText,inputMode,isContentEditable,lang,nonce,"
                 + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
+                + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "onclose,oncontextmenu,oncopy,oncuechange,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
@@ -443,7 +444,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerrawupdate,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
-                + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
+                + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,"
                 + "onvolumechange,onwaiting,onwheel,outerText,"
                 + "spellcheck,style,tabIndex,title,translate",
             FF68 = "accessKey,accessKeyLabel,blur(),click(),contentEditable,contextMenu,dataset,dir,draggable,"
@@ -1119,7 +1120,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
+    @Alerts(CHROME = "checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
                 + "formTarget,labels,name,reportValidity(),setCustomValidity(),type,validationMessage,validity,"
                 + "value,willValidate",
             FF68 = "autofocus,checkValidity(),disabled,form,formAction,formEnctype,formMethod,formNoValidate,"
@@ -2241,7 +2242,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "add(),autocomplete,autofocus,checkValidity(),"
+    @Alerts(CHROME = "add(),autocomplete,checkValidity(),"
                 + "disabled,form,item(),labels,length,multiple,name,namedItem(),"
                 + "options,reportValidity(),required,selectedIndex,selectedOptions,setCustomValidity(),size,type,"
                 + "validationMessage,validity,value,"
@@ -2487,7 +2488,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "autocomplete,autofocus,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,"
+    @Alerts(CHROME = "autocomplete,checkValidity(),cols,defaultValue,dirName,disabled,form,labels,"
                 + "maxLength,minLength,name,placeholder,readOnly,reportValidity(),required,rows,select(),"
                 + "selectionDirection,selectionEnd,selectionStart,setCustomValidity(),setRangeText(),"
                 + "setSelectionRange(),textLength,type,validationMessage,validity,value,willValidate,"
@@ -2728,7 +2729,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "min,multiple,name,pattern,placeholder,readOnly,required,select(),selectionEnd,selectionStart,"
                 + "setCustomValidity(),setSelectionRange(),size,src,start,status,step,stepDown(),stepUp(),type,"
                 + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,willValidate",
-            CHROME = "accept,align,alt,autocomplete,autofocus,checked,checkValidity(),"
+            CHROME = "accept,align,alt,autocomplete,checked,checkValidity(),"
                 + "defaultChecked,defaultValue,"
                 + "dirName,disabled,files,form,formAction,formEnctype,formMethod,formNoValidate,formTarget,height,"
                 + "incremental,indeterminate,labels,list,max,maxLength,min,minLength,multiple,name,pattern,"
@@ -3139,7 +3140,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "getElementById(),getElementsByClassName(),getElementsByName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getSelection(),hasFocus(),head,hidden,images,implementation,importNode(),"
                 + "inputEncoding,lastElementChild,lastModified,"
-                + "linkColor,links,location,onabort,onauxclick,onbeforecopy,"
+                + "linkColor,links,location,onabort,onanimationend,onanimationiteration,onanimationstart,"
+                + "onauxclick,onbeforecopy,"
                 + "onbeforecut,onbeforepaste,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
                 + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,"
@@ -3152,8 +3154,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,"
                 + "onresume,onscroll,onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,"
                 + "onselectstart,onstalled,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvisibilitychange,onvolumechange,onwaiting,"
-                + "onwebkitfullscreenchange,"
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvisibilitychange,"
+                + "onvolumechange,onwaiting,onwebkitfullscreenchange,"
                 + "onwebkitfullscreenerror,onwheel,open(),pictureInPictureElement,pictureInPictureEnabled,"
                 + "plugins,pointerLockElement,"
                 + "prepend(),queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
@@ -3267,8 +3269,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "blur(),dataset,focus(),nonce,"
-                + "onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
+    @Alerts(CHROME = "autofocus,blur(),dataset,focus(),nonce,"
+                + "onabort,onanimationend,onanimationiteration,onanimationstart,"
+                + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,onclose,oncontextmenu,oncopy,oncuechange,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
                 + "ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,onerror,onfocus,onformdata,"
@@ -3279,7 +3282,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerrawupdate,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onselectionchange,onselectstart,onstalled,"
-                + "onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,"
+                + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitionend,onvolumechange,onwaiting,onwheel,"
                 + "ownerSVGElement,style,tabIndex,"
                 + "viewportElement",
             FF68 = "blur(),dataset,focus(),onabort,onanimationcancel,onanimationend,onanimationiteration,"

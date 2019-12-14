@@ -133,7 +133,7 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"done", "value", "object", "0", "[object HTMLHtmlElement]"},
+    @Alerts(DEFAULT = {"value", "done", "object", "0", "[object HTMLHtmlElement]"},
             IE = "not defined")
     public void entries() throws Exception {
         final String html = "<html><head><title>test</title>\n"

@@ -1746,6 +1746,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
             IE = "object")
     public void geolocation() throws Exception {
         test("Geolocation");

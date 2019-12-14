@@ -68,7 +68,7 @@ public class ComputedFontTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                "", "normal normal 400 normal 16px / normal \"Times New Roman\"",
+                "", "16px \"Times New Roman\"",
                 "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "\"Times New Roman\""},
             FF60 = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif",
                 "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "20px", "", "serif"},
@@ -113,9 +113,9 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"15px arial, sans-serif", "normal normal 400 normal 15px / normal arial, sans-serif",
+    @Alerts(CHROME = {"15px arial, sans-serif", "15px arial, sans-serif",
                 "normal", "normal",
-                "oblique 15px arial, sans-serif", "italic normal 400 normal 15px / normal arial, sans-serif",
+                "oblique 15px arial, sans-serif", "italic 15px arial, sans-serif",
                 "oblique", "italic"},
             FF60 = {"15px arial, sans-serif", "", "normal", "normal",
                     "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
@@ -159,8 +159,7 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "normal normal 400 normal 16px / normal \"Times New Roman\"",
-                "", "\"Times New Roman\""},
+    @Alerts(CHROME = {"", "16px \"Times New Roman\"", "", "\"Times New Roman\""},
             FF = {"", "", "", "serif"},
             IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
@@ -171,8 +170,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px xyz", "normal normal 400 normal 1px / normal xyz",
-                "xyz", "xyz", "1px abc", "normal normal 400 normal 1px / normal abc", "abc", "abc"},
+    @Alerts(CHROME = {"1px xyz", "1px xyz",
+                "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"},
             FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
     @NotYetImplemented({CHROME, FF68})
@@ -184,8 +183,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"", "normal normal 400 normal 16px / normal \"Times New Roman\"",
-            "", "\"Times New Roman\"", "", "normal normal 400 normal 16px / normal abc", "abc", "abc"},
+    @Alerts(CHROME = {"", "16px \"Times New Roman\"",
+            "", "\"Times New Roman\"", "", "16px abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     @NotYetImplemented(CHROME)
@@ -197,8 +196,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
-                "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
+    @Alerts(CHROME = {"1px / 2px xyz", "1px / 2px xyz",
+                "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
@@ -211,8 +210,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
-                "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
+    @Alerts(CHROME = {"1px / 2px xyz", "1px / 2px xyz",
+                "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
@@ -225,8 +224,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
-                "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
+    @Alerts(CHROME = {"1px / 2px xyz", "1px / 2px xyz",
+                "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
@@ -239,8 +238,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
-                "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
+    @Alerts(CHROME = {"1px / 2px xyz", "1px / 2px xyz",
+                "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
@@ -253,8 +252,8 @@ public class ComputedFontTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"1px/2px xyz", "normal normal 400 normal 1px / 2px xyz",
-                "2px", "2px", "1px xyz", "normal normal 400 normal 1px / normal xyz", "normal", "normal"},
+    @Alerts(CHROME = {"1px / 2px xyz", "1px / 2px xyz",
+                "2px", "2px", "1px xyz", "1px xyz", "normal", "normal"},
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})

@@ -746,7 +746,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "92", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "136", "true", "true", "16"},
             FF = {"true", "true", "86", "true", "true", "14"},
             IE = {"true", "true", "63", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {

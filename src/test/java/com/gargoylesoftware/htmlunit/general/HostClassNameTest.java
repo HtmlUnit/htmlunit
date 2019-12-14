@@ -2870,6 +2870,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function Geolocation() { [native code] }",
             IE = "[object Geolocation]")
     public void geolocation() throws Exception {
         test("Geolocation");

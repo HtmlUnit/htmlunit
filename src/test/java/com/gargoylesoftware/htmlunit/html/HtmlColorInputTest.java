@@ -64,7 +64,8 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts(DEFAULT = "#000000",
+            IE = "")
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"
@@ -79,7 +80,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
         final WebElement element = driver.findElement(By.id("tester"));
 
         element.clear();
-        assertEquals("", element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
     }
 
     /**

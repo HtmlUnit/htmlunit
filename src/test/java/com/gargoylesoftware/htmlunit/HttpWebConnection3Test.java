@@ -47,11 +47,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
                         HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
+                        "Sec-Fetch-User", HttpHeader.ACCEPT, "Sec-Fetch-Site", "Sec-Fetch-Mode",
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION})
+                        HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION, "Cookie"})
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -80,7 +81,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
                         HttpHeader.USER_AGENT,
-                        HttpHeader.ACCEPT, HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
+                        "Sec-Fetch-User", HttpHeader.ACCEPT, "Sec-Fetch-Site", "Sec-Fetch-Mode",
+                        HttpHeader.REFERER, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.COOKIE},
             FF60 = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                         HttpHeader.ACCEPT_ENCODING, HttpHeader.REFERER, HttpHeader.COOKIE, HttpHeader.CONNECTION,
@@ -214,7 +216,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B")
+    @Alerts(DEFAULT = "§§URL§§test?%D8%A3%D9%87%D9%84%D8%A7%D9%8B",
+            CHROME = "§§URL§§")
     public void locationQueryUTF8Encoded() throws Exception {
         final String url = "http://localhost:" + PORT_PRIMITIVE_SERVER + "/";
 

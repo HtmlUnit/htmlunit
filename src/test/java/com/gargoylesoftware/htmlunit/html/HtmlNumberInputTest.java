@@ -723,7 +723,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("")
+    @Alerts({"10", ""})
     public void clearInput() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -735,9 +735,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("tester"));
-        assertEquals("10", element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
 
         element.clear();
-        assertEquals("", element.getAttribute("value"));
+        assertEquals(getExpectedAlerts()[1], element.getAttribute("value"));
     }
 }
