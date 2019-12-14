@@ -985,7 +985,7 @@ public final class StyleAttributes {
         FLOOD_OPACITY_("flood-opacity", "flood-opacity", ff("1")),
 
         /** The style property {@code font}. */
-        FONT("font", "font", chrome("normal normal 400 normal 16px / normal \"Times New Roman\""), ff(""), ie("")),
+        FONT("font", "font", chrome("16px \"Times New Roman\""), ff(""), ie("")),
 
         /** The style property {@code fontDisplay}. */
         FONT_DISPLAY("fontDisplay", "font-display", chrome("")),

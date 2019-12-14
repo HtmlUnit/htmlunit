@@ -44,7 +44,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             CHROME = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
-                    + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+                    + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             IE = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderGetUrl() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -60,7 +60,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
             CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"},
+                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
     public void acceptHeaderWindowOpen() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -89,7 +89,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"},
             CHROME = {"2", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"},
+                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             IE = {"2", "Accept: text/html, application/xhtml+xml, */*"})
     public void acceptHeaderAnchorClick() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -114,7 +114,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             CHROME = "Accept: text/html,application/xhtml+xml,application/xml;"
-                    + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+                    + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             IE = "Accept: text/html, application/xhtml+xml, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -326,7 +326,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
             CHROME = {"1", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"},
+                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             IE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssDifferentType() throws Exception {
         final String html
@@ -358,7 +358,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "Accept: text/css,*/*;q=0.1"},
             CHROME = {"1", "Accept: text/html,application/xhtml+xml,"
-                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"},
+                    + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             IE = {"2", "Accept: text/css, */*"})
     public void acceptHeaderCssWrongType() throws Exception {
         final String html
