@@ -26,18 +26,18 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
- * Tests for {@link HtmlColorInput}.
+ * Tests for {@link HtmlTimeInput}.
  *
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlColorInputTest extends WebDriverTestCase {
+public class HtmlTimeInputTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
+    @Alerts(DEFAULT = {"--null", "--null", "--null"},
             IE = "--null")
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -47,18 +47,18 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
-            + "    input.type = 'color';\n"
+            + "    input.type = 'time';\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"color\">';\n"
+            + "    builder.innerHTML = '<input type=\"time\">';\n"
             + "    input = builder.firstChild;\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='color' id='text1'>\n"
+            + "  <input type='time' id='text1'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -69,7 +69,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
+    @Alerts(DEFAULT = {"--null", "--null", "--null"},
             IE = "--null")
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
@@ -80,12 +80,12 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
-            + "    input.type = 'color';\n"
+            + "    input.type = 'time';\n"
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"color\">';\n"
+            + "    builder.innerHTML = '<input type=\"time\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
@@ -93,11 +93,31 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='color' id='text1'>\n"
+            + "  <input type='time' id='text1'>\n"
             + "</form>\n"
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            IE = "8:04")
+    public void typing() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='time' id='foo'>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("foo"));
+        input.sendKeys("8:04");
+        assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
     }
 
     /**
@@ -112,7 +132,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='color' name='tester' id='tester' value='#ff0000'>\n"
+            + "  <input type='time' name='tester' id='tester' value='11:55' min='09:00' max='18:00'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -131,15 +151,14 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "#000000",
-            IE = "")
+    @Alerts("")
     public void clearInput() throws Exception {
         final String htmlContent
                 = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
-                + "  <input type='color' name='tester' id='tester' value='#ff0000'>\n"
+                + "  <input type='time' name='tester' id='tester' value='11:55'>\n"
                 + "</form>\n"
                 + "</body></html>";
 
@@ -168,7 +187,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "<form>\n"
-            + "  <input type='color' id='tester'>\n"
+            + "  <input type='time' id='tester'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";

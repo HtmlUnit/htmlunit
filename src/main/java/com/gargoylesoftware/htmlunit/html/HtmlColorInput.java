@@ -40,7 +40,8 @@ public class HtmlColorInput extends HtmlInput {
     HtmlColorInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED && !hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+        if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED
+                && !hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
             setValueAttribute("#" + Integer.toHexString(Color.black.getRGB()).substring(2));
         }
     }
@@ -58,9 +59,16 @@ public class HtmlColorInput extends HtmlInput {
      */
     @Override
     public void setValueAttribute(final String newValue) {
-        if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)
-                || StringUtils.isEmpty(newValue)
-                || isValid(newValue)) {
+        if (StringUtils.isEmpty(newValue)) {
+            if (hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+                super.setValueAttribute("");
+                return;
+            }
+            super.setValueAttribute("#000000");
+            return;
+        }
+
+        if (isValid(newValue)) {
             super.setValueAttribute(newValue);
         }
     }

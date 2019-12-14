@@ -313,7 +313,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"text\">';\n"
+            + "    builder.innerHTML = '<input type=\"number\">';\n"
             + "    input = builder.firstChild;\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
@@ -346,7 +346,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
-            + "    builder.innerHTML = '<input type=\"text\">';\n"
+            + "    builder.innerHTML = '<input type=\"number\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"

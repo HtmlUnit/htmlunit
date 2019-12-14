@@ -35,6 +35,73 @@ import org.openqa.selenium.WebElement;
 public class HtmlDateInputTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"--null", "--null", "--null"},
+            IE = "--null")
+    public void defaultValues() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'date';\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"date\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='date' id='text1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"--null", "--null", "--null"},
+            IE = "--null")
+    public void defaultValuesAfterClone() throws Exception {
+        final String html = "<html><head><title>foo</title>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    input = document.createElement('input');\n"
+            + "    input.type = 'date';\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"date\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='date' id='text1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -97,7 +164,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("")
-    public void clearDateInput() throws Exception {
+    public void clearInput() throws Exception {
         final String html =
               "<html>\n"
               + "<body>\n"
@@ -108,27 +175,6 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         final WebElement input = driver.findElement(By.id("input"));
 
         assertEquals("2018-03-22", input.getAttribute("value"));
-
-        input.clear();
-        assertEquals("", input.getAttribute("value"));
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("")
-    public void clearDateTimeInput() throws Exception {
-        final String html =
-              "<html>\n"
-              + "<body>\n"
-              + "  <input id='input' type='datetime-local' value='2018-03-22T10:10'>\n"
-              + "</body></html>";
-
-        final WebDriver driver = loadPage2(html);
-        final WebElement input = driver.findElement(By.id("input"));
-
-        assertEquals("2018-03-22T10:10", input.getAttribute("value"));
 
         input.clear();
         assertEquals("", input.getAttribute("value"));
