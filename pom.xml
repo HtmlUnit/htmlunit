@@ -27,7 +27,7 @@
 
         <httpcomponents.version>4.5.10</httpcomponents.version>
         <jetty.version>9.4.24.v20191120</jetty.version>
-        <log4j.version>2.12.1</log4j.version>
+        <log4j.version>2.13.0</log4j.version>
         <slf4j.version>1.7.29</slf4j.version>
         <selenium.version>3.141.59</selenium.version>
 
