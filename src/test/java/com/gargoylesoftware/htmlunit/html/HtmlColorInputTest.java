@@ -38,7 +38,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
-            IE = "--null")
+            IE = {"--null", "exception", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -46,9 +46,11 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "    var input = document.getElementById('text1');\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'color';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'color';\n"
+            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { alert('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"color\">';\n"
@@ -70,7 +72,7 @@ public class HtmlColorInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"#000000--null", "#000000--null", "#000000--null"},
-            IE = "--null")
+            IE = {"--null", "exception", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -79,10 +81,12 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'color';\n"
-            + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'color';\n"
+            + "      input = input.cloneNode(false);\n"
+            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { alert('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"color\">';\n"

@@ -184,7 +184,10 @@ public class HTMLInputElement extends FormField {
             }
 
             if (!getBrowserVersion().hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                    && ("week".equals(newType) || "time".equals(newType))) {
+                    && ("week".equals(newType)
+                            || "month".equals(newType)
+                            || "date".equals(newType)
+                            || "time".equals(newType))) {
                 throw Context.reportRuntimeError("Invalid argument '" + newType + "' for setting property type.");
             }
 

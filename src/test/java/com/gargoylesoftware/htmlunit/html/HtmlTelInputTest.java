@@ -38,8 +38,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = "--null")
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -47,9 +46,11 @@ public class HtmlTelInputTest extends WebDriverTestCase {
             + "    var input = document.getElementById('text1');\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'tel';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'tel';\n"
+            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { alert('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"tel\">';\n"
@@ -70,8 +71,7 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"--null", "--null", "--null"},
-            IE = "--null")
+    @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head><title>foo</title>\n"
             + "<script>\n"
@@ -80,10 +80,12 @@ public class HtmlTelInputTest extends WebDriverTestCase {
             + "    input = input.cloneNode(false);\n"
             + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
-            + "    input = document.createElement('input');\n"
-            + "    input.type = 'tel';\n"
-            + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'tel';\n"
+            + "      input = input.cloneNode(false);\n"
+            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { alert('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"tel\">';\n"
