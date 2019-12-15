@@ -182,6 +182,12 @@ public class HTMLInputElement extends FormField {
             if (newType != null && getBrowserVersion().hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
                 newType = newType.toLowerCase(Locale.ROOT);
             }
+
+            if (!getBrowserVersion().hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+                    && ("week".equals(newType) || "time".equals(newType))) {
+                throw Context.reportRuntimeError("Invalid argument '" + newType + "' for setting property type.");
+            }
+
             final AttributesImpl attributes = readAttributes(input);
             final int index = attributes.getIndex("type");
             if (index > -1) {
