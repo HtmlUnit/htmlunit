@@ -178,16 +178,23 @@ public class HTMLInputElement extends FormField {
 
         final String currentType = input.getAttributeDirect("type");
 
+        final BrowserVersion browser = getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
-            if (newType != null && getBrowserVersion().hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
+            if (newType != null && browser.hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
                 newType = newType.toLowerCase(Locale.ROOT);
             }
 
-            if (!getBrowserVersion().hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
+            if (!browser.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                     && ("week".equals(newType)
                             || "month".equals(newType)
                             || "date".equals(newType)
+                            || "datetime-local".equals(newType)
                             || "time".equals(newType))) {
+                throw Context.reportRuntimeError("Invalid argument '" + newType + "' for setting property type.");
+            }
+
+            if (browser.hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED)
+                    && "color".equals(newType)) {
                 throw Context.reportRuntimeError("Invalid argument '" + newType + "' for setting property type.");
             }
 
