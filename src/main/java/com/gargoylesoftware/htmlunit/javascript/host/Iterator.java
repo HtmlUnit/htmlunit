@@ -98,8 +98,8 @@ public class Iterator extends SimpleScriptable {
             value = Undefined.instance;
             done = true;
         }
-        object.defineProperty("done", done, ScriptableObject.EMPTY);
         object.defineProperty("value", value, ScriptableObject.EMPTY);
+        object.defineProperty("done", done, ScriptableObject.EMPTY);
         return object;
     }
 
