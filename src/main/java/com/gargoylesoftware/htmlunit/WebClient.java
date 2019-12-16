@@ -236,7 +236,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param proxyPort the port to use on the proxy server
      */
     public WebClient(final BrowserVersion browserVersion, final String proxyHost, final int proxyPort) {
-        this(browserVersion, true, null, -1);
+        this(browserVersion, true, proxyHost, proxyPort);
     }
 
     /**
