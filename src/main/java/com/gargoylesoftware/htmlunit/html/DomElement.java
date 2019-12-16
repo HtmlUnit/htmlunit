@@ -1415,7 +1415,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public ScriptResult fireEvent(final Event event) {
         final WebClient client = getPage().getWebClient();
-        if (!client.getOptions().isJavaScriptEnabled()) {
+        if (!client.isJavaScriptEnabled()) {
             return null;
         }
 

@@ -247,7 +247,7 @@ public class DefaultElementFactory implements ElementFactory {
                 element = new HtmlBody(qualifiedName, page, attributeMap, false);
                 // Force script object creation now to forward onXXX handlers to window.
                 if (page instanceof HtmlPage) {
-                    if (page.getWebClient().getOptions().isJavaScriptEnabled()) {
+                    if (page.getWebClient().isJavaScriptEnabled()) {
                         element.getScriptableObject();
                     }
                 }

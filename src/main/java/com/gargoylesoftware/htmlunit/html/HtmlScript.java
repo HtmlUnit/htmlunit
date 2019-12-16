@@ -426,7 +426,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
         // If JavaScript is disabled, we don't need to execute.
         final SgmlPage page = getPage();
-        if (!page.getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!page.getWebClient().isJavaScriptEnabled()) {
             return false;
         }
 

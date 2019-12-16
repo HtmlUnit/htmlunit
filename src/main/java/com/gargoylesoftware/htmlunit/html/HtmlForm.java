@@ -116,7 +116,7 @@ public class HtmlForm extends HtmlElement {
     Page submit(final SubmittableElement submitElement) {
         final HtmlPage htmlPage = (HtmlPage) getPage();
         final WebClient webClient = htmlPage.getWebClient();
-        if (webClient.getOptions().isJavaScriptEnabled()) {
+        if (webClient.isJavaScriptEnabled()) {
             if (submitElement != null) {
                 isPreventDefault_ = false;
                 if (getAttributeDirect("novalidate") == ATTRIBUTE_NOT_DEFINED

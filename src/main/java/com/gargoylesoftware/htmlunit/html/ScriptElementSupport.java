@@ -189,7 +189,7 @@ public final class ScriptElementSupport {
 
         // If JavaScript is disabled, we don't need to execute.
         final SgmlPage page = element.getPage();
-        if (!page.getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!page.getWebClient().isJavaScriptEnabled()) {
             return false;
         }
 

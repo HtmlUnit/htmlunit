@@ -237,7 +237,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 setProperty("http://cyberneko.org/html/properties/names/attrs", "no-change");
             }
             setFeature("http://cyberneko.org/html/features/report-errors", reportErrors);
-            setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.getOptions().isJavaScriptEnabled());
+            setFeature(FEATURE_PARSE_NOSCRIPT, !webClient.isJavaScriptEnabled());
             setFeature(HTMLScanner.ALLOW_SELFCLOSING_IFRAME, false);
 
             setContentHandler(this);

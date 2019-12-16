@@ -55,7 +55,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -739,8 +738,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         final Page page = getPage();
-        final WebClientOptions options = page.getEnclosingWindow().getWebClient().getOptions();
-        if (page != null && options.isCssEnabled()) {
+        final WebClient webClient = page.getEnclosingWindow().getWebClient();
+        if (page != null && webClient.getOptions().isCssEnabled() && webClient.isJavaScriptEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors();

@@ -143,7 +143,7 @@ public class HtmlSerializerVisibleText {
         else if (node instanceof HtmlMenu) {
             appendMenu(builder, (HtmlMenu) node, mode);
         }
-        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
             appendNoScript(builder, (HtmlNoScript) node, mode);
         }
         else {

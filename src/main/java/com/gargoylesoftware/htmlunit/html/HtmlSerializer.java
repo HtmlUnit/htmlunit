@@ -134,7 +134,7 @@ public class HtmlSerializer {
         else if (node instanceof HtmlInlineFrame) {
             appendInlineFrame(builder, (HtmlInlineFrame) node);
         }
-        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+        else if (node instanceof HtmlNoScript && node.getPage().getWebClient().isJavaScriptEnabled()) {
             appendNoScript(builder, (HtmlNoScript) node);
         }
         else {
@@ -149,18 +149,17 @@ public class HtmlSerializer {
      * @param domNode the target to process
      */
     protected void appendDomNode(final HtmlSerializerTextBuilder builder, final DomNode domNode) {
-        final boolean block;
-        final Object scriptableObject = domNode.getScriptableObject();
-        if (domNode instanceof HtmlBody) {
-            block = false;
-        }
-        else if (scriptableObject instanceof Element) {
-            final Element element = (Element) scriptableObject;
-            final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
-            block = "block".equals(display);
-        }
-        else {
-            block = false;
+        boolean block = false;
+        if (!(domNode instanceof HtmlBody)) {
+            final SgmlPage page = domNode.getPage();
+            if (page != null && page.getWebClient().isJavaScriptEnabled()) {
+                final Object scriptableObject = domNode.getScriptableObject();
+                if (scriptableObject instanceof Element) {
+                    final Element element = (Element) scriptableObject;
+                    final String display = element.getWindow().getComputedStyle(element, null).getDisplay(true);
+                    block = "block".equals(display);
+                }
+            }
         }
 
         if (block) {

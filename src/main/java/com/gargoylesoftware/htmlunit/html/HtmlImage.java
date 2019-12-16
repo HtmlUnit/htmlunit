@@ -257,7 +257,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final WebClient client = htmlPage.getWebClient();
-        if (!client.getOptions().isJavaScriptEnabled()) {
+        if (!client.isJavaScriptEnabled()) {
             onloadProcessed_ = true;
             return;
         }

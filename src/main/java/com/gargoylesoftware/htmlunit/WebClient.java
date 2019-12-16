@@ -2451,6 +2451,6 @@ public class WebClient implements Serializable, AutoCloseable {
      * @return true if the javaScript support is enabled.
      */
     public boolean isJavaScriptEnabled() {
-        return javaScriptEnabled_;
+        return javaScriptEnabled_ && getOptions().isJavaScriptEnabled();
     }
 }

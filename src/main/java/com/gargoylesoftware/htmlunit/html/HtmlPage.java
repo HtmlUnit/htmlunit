@@ -880,7 +880,7 @@ public class HtmlPage extends SgmlPage {
      * be achieved to execute JavaScript in the current page by entering "javascript:...some JS code..."
      * in the URL field of a native browser.</p>
      * <p><b>Note:</b> the provided code won't be executed if JavaScript has been disabled on the WebClient
-     * (see {@link com.gargoylesoftware.htmlunit.WebClientOptions#isJavaScriptEnabled()}.</p>
+     * (see {@link com.gargoylesoftware.htmlunit.WebClient#isJavaScriptEnabled()}.</p>
      * @param sourceCode the JavaScript code to execute
      * @return a ScriptResult which will contain both the current page (which may be different than
      * the previous page) and a JavaScript result object
@@ -910,7 +910,7 @@ public class HtmlPage extends SgmlPage {
      * the previous page and a JavaScript result object.
      */
     public ScriptResult executeJavaScript(String sourceCode, final String sourceName, final int startLine) {
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(Undefined.instance);
         }
 
@@ -953,7 +953,7 @@ public class HtmlPage extends SgmlPage {
         throws FailingHttpStatusCodeException {
 
         final WebClient client = getWebClient();
-        if (StringUtils.isBlank(srcAttribute) || !client.getOptions().isJavaScriptEnabled()) {
+        if (StringUtils.isBlank(srcAttribute) || !client.isJavaScriptEnabled()) {
             return JavaScriptLoadResult.NOOP;
         }
 
@@ -1215,7 +1215,7 @@ public class HtmlPage extends SgmlPage {
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return true;
         }
 
@@ -1438,7 +1438,7 @@ public class HtmlPage extends SgmlPage {
      * Executes any deferred scripts, if necessary.
      */
     private void executeDeferredScriptsIfNeeded() {
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return;
         }
         if (hasFeature(JS_DEFERRED)) {
@@ -1459,7 +1459,7 @@ public class HtmlPage extends SgmlPage {
      * Sets the ready state on any deferred scripts, if necessary.
      */
     private void setReadyStateOnDeferredScriptsIfNeeded() {
-        if (getWebClient().getOptions().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
+        if (getWebClient().isJavaScriptEnabled() && hasFeature(JS_DEFERRED)) {
             final List<HtmlElement> elements = getDocumentElement().getElementsByTagName("script");
             for (final HtmlElement e : elements) {
                 if (e instanceof HtmlScript) {
@@ -1813,7 +1813,7 @@ public class HtmlPage extends SgmlPage {
         String value = element.getAttribute(attribute);
 
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value
-                && getWebClient().getOptions().isJavaScriptEnabled()
+                && getWebClient().isJavaScriptEnabled()
                 && !(element instanceof HtmlApplet)
                 && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes
@@ -2551,7 +2551,7 @@ public class HtmlPage extends SgmlPage {
      */
     public ScriptResult executeJavaScriptFunction(final Object function, final Object thisObject,
             final Object[] args, final DomNode htmlElementScope) {
-        if (!getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!getWebClient().isJavaScriptEnabled()) {
             return new ScriptResult(null);
         }
 

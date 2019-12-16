@@ -52,7 +52,7 @@ public class HtmlNoScript extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (!getPage().getWebClient().getOptions().isJavaScriptEnabled()) {
+        if (!getPage().getWebClient().isJavaScriptEnabled()) {
             return DisplayStyle.BLOCK;
         }
         if (hasFeature(CSS_NOSCRIPT_DISPLAY_INLINE)) {
