@@ -32,13 +32,14 @@ public class WebClient8Test extends SimpleWebTestCase {
      */
     @Test
     public void asText() throws Exception {
+        final String ls = System.lineSeparator();
         final String html =
                 "<html><head><title>foo</title></head>\n"
                 + "<body><div>Hello <b>HtmlUnit</b></div></body></html>";
 
         try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
             final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
-            assertEquals("foo\r\nHello HtmlUnit", page.asText());
+            assertEquals("foo" + ls + "Hello HtmlUnit", page.asText());
         }
     }
 
