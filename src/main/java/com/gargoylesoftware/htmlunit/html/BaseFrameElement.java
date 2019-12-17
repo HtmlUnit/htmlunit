@@ -125,8 +125,9 @@ public abstract class BaseFrameElement extends HtmlElement {
         final Page enclosedPage = getEnclosedPage();
         if (enclosedPage != null && enclosedPage.isHtmlPage()) {
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
+
             final AbstractJavaScriptEngine<?> jsEngine = getPage().getWebClient().getJavaScriptEngine();
-            if (jsEngine.isScriptRunning()) {
+            if (jsEngine != null && jsEngine.isScriptRunning()) {
                 final PostponedAction action = new PostponedAction(getPage()) {
                     @Override
                     public void execute() throws Exception {

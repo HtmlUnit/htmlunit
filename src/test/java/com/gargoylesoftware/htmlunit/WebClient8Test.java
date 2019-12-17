@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
+import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -119,6 +120,35 @@ public class WebClient8Test extends SimpleWebTestCase {
 
             page.getBody().appendChild(page2.getElementById("tester"));
             assertEquals(6, elements.getLength());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void iFrame() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='tester' src='second.html'></iframe>\n"
+                + "</body></html>";
+
+        final String html2 = "<html>\n"
+                + "<head><title>frame</title></head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setDefaultResponse(html2);
+            webClient.setWebConnection(webConnection);
+
+            final HtmlPage page = webClient.getPage(URL_FIRST);
+
+            final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
+            assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
         }
     }
 }
