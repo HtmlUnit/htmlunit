@@ -1243,7 +1243,13 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     protected void detach() {
-        final Object document = getPage().getScriptableObject();
+        final SgmlPage page = getPage();
+        if (!page.getWebClient().isJavaScriptEnabled()) {
+            super.detach();
+            return;
+        }
+
+        final Object document = page.getScriptableObject();
 
         if (document instanceof HTMLDocument) {
             final HTMLDocument doc = (HTMLDocument) document;
@@ -1252,10 +1258,10 @@ public abstract class HtmlElement extends DomElement {
             if (activeElement == getScriptableObject()) {
                 doc.setActiveElement(null);
                 if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                    ((HtmlPage) getPage()).setFocusedElement(null);
+                    ((HtmlPage) page).setFocusedElement(null);
                 }
                 else {
-                    ((HtmlPage) getPage()).setElementWithFocus(null);
+                    ((HtmlPage) page).setElementWithFocus(null);
                 }
             }
             else {
@@ -1263,10 +1269,10 @@ public abstract class HtmlElement extends DomElement {
                     if (activeElement == child.getScriptableObject()) {
                         doc.setActiveElement(null);
                         if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
-                            ((HtmlPage) getPage()).setFocusedElement(null);
+                            ((HtmlPage) page).setFocusedElement(null);
                         }
                         else {
-                            ((HtmlPage) getPage()).setElementWithFocus(null);
+                            ((HtmlPage) page).setElementWithFocus(null);
                         }
 
                         break;

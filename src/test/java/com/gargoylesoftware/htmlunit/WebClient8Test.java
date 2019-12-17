@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -88,6 +90,35 @@ public class WebClient8Test extends SimpleWebTestCase {
             final String clone = clonedPage.asXml();
 
             assertEquals(org, clone);
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void appendChildMoved() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<p>hello</p>\n"
+                + "</body></html>";
+
+        final String html2 = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<p id='tester'>world</p>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+            final HtmlPage page2 = loadPage(webClient, html2, null, URL_SECOND);
+
+            final DomNodeList<DomElement> elements = page.getElementsByTagName("*");
+            assertEquals(5, elements.getLength());
+
+            page.getBody().appendChild(page2.getElementById("tester"));
+            assertEquals(6, elements.getLength());
         }
     }
 }
