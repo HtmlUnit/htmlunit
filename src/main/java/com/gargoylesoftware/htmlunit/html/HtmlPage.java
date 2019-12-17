@@ -1978,8 +1978,10 @@ public class HtmlPage extends SgmlPage {
     public HtmlPage cloneNode(final boolean deep) {
         // we need the ScriptObject clone before cloning the kids.
         final HtmlPage result = (HtmlPage) super.cloneNode(false);
-        final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
-        jsObjClone.setDomNode(result);
+        if (getWebClient().isJavaScriptEnabled()) {
+            final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
+            jsObjClone.setDomNode(result);
+        }
 
         // if deep, clone the kids too, and re initialize parts of the clone
         if (deep) {

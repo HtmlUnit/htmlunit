@@ -67,4 +67,27 @@ public class WebClient8Test extends SimpleWebTestCase {
                     page.asXml());
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void cloneNode() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<p>hello world</p>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final HtmlPage page = loadPage(webClient, html, null, URL_FIRST);
+
+            final String org = page.asXml();
+
+            final HtmlPage clonedPage = page.cloneNode(true);
+            final String clone = clonedPage.asXml();
+
+            assertEquals(org, clone);
+        }
+    }
 }
