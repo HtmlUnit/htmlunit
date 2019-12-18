@@ -1915,7 +1915,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
-                if (frameElement.isDisplayed()) {
+                if (webClient_.isJavaScriptEnabled() && frameElement.isDisplayed()) {
                     final Object element = frameElement.getScriptableObject();
                     final HTMLElement htmlElement = (HTMLElement) element;
                     final ComputedCSSStyleDeclaration style =

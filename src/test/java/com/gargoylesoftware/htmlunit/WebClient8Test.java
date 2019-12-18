@@ -151,4 +151,37 @@ public class WebClient8Test extends SimpleWebTestCase {
             assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void iFrameInFragment() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "<p id='para'>hello</p>\n"
+                + "</body></html>";
+
+        final String html2 = "<html>\n"
+                + "<head><title>frame</title></head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final String fragment = "<iframe id='tester' src='second.html'></iframe>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setDefaultResponse(html2);
+            webClient.setWebConnection(webConnection);
+
+            final HtmlPage page = webClient.getPage(URL_FIRST);
+            final DomElement para = page.getElementById("para");
+            page.getWebClient().getPageCreator().getHtmlParser().parseFragment(para, fragment);
+
+//            final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
+//            assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
+        }
+    }
 }

@@ -413,7 +413,8 @@ public abstract class BaseFrameElement extends HtmlElement {
         // When src is set from a script, loading is postponed until script finishes
         // in fact this implementation is probably wrong: JavaScript URL should be
         // first evaluated and only loading, when any, should be postponed.
-        if (!jsEngine.isScriptRunning() || src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
+        if (jsEngine == null || !jsEngine.isScriptRunning()
+                || src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             loadInnerPageIfPossible(src);
         }
         else {
