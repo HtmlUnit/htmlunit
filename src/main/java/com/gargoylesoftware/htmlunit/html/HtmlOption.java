@@ -286,7 +286,9 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
+    public <P extends Page> P click(final Event event,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final boolean ignoreVisibility) throws IOException {
         if (hasFeature(EVENT_ONCLICK_FOR_SELECT_ONLY)) {
             final SgmlPage page = getPage();
 
@@ -298,9 +300,9 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
                 doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
             }
 
-            return getEnclosingSelect().click(event, ignoreVisibility);
+            return getEnclosingSelect().click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
         }
-        return super.click(event, ignoreVisibility);
+        return super.click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
     }
 
     /**

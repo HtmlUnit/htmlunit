@@ -73,17 +73,18 @@ public class HtmlAnchor extends HtmlElement {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
-        final boolean ctrl = event.isCtrlKey();
+    public <P extends Page> P click(final Event event,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final boolean ignoreVisibility) throws IOException {
         WebWindow oldWebWindow = null;
-        if (ctrl) {
+        if (ctrlKey) {
             oldWebWindow = ((HTMLElement) event.getSrcElement()).getDomNodeOrDie()
                     .getPage().getWebClient().getCurrentWindow();
         }
 
-        P page = super.click(event, ignoreVisibility);
+        P page = super.click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
 
-        if (ctrl) {
+        if (ctrlKey) {
             page.getEnclosingWindow().getWebClient().setCurrentWindow(oldWebWindow);
             page = (P) oldWebWindow.getEnclosedPage();
         }

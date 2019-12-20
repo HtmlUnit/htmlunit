@@ -972,20 +972,22 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseUp(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            final MouseEvent event;
-            if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-            }
-            else {
-                event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                        ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
-            }
+            MouseEvent event = null;
+            if (page.getWebClient().isJavaScriptEnabled()) {
+                if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                }
+                else {
+                    event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                }
 
-            if (disableProcessLabelAfterBubbling) {
-                event.disableProcessLabelAfterBubbling();
+                if (disableProcessLabelAfterBubbling) {
+                    event.disableProcessLabelAfterBubbling();
+                }
             }
-            return click(event, ignoreVisibility);
+            return click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
         }
     }
 
@@ -1007,17 +1009,28 @@ public class DomElement extends DomNamespaceNode implements Element {
      * action listeners, etc.
      *
      * @param event the click event used
+     * @param shiftKey {@code true} if SHIFT is pressed during the click
+     * @param ctrlKey {@code true} if CTRL is pressed during the click
+     * @param altKey {@code true} if ALT is pressed during the click
      * @param ignoreVisibility whether to ignore visibility or not
      * @param <P> the page type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs
      */
     @SuppressWarnings("unchecked")
-    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
+    public <P extends Page> P click(final Event event,
+                        final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+                        final boolean ignoreVisibility) throws IOException {
         final SgmlPage page = getPage();
 
         if ((!ignoreVisibility && !isDisplayed()) || isDisabledElementAndDisabled()) {
             return (P) page;
+        }
+
+        if (!page.getWebClient().isJavaScriptEnabled()) {
+            doClickStateUpdate(shiftKey, ctrlKey);
+            page.getWebClient().loadDownloadedResponses();
+            return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
         }
 
         // may be different from page when working with "orphaned pages"
@@ -1027,7 +1040,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         boolean stateUpdated = false;
         boolean changed = false;
         if (isStateUpdateFirst()) {
-            changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
+            changed = doClickStateUpdate(shiftKey, ctrlKey);
             stateUpdated = true;
         }
 
@@ -1039,7 +1052,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             final boolean pageAlreadyChanged = contentPage != page.getEnclosingWindow().getEnclosedPage();
             if (!pageAlreadyChanged && !stateUpdated && !eventIsAborted) {
-                changed = doClickStateUpdate(event.isShiftKey(), event.isCtrlKey());
+                changed = doClickStateUpdate(shiftKey, ctrlKey);
             }
         }
         finally {
@@ -1364,6 +1377,9 @@ public class DomElement extends DomNamespaceNode implements Element {
     private Page doMouseEvent(final String eventType, final boolean shiftKey, final boolean ctrlKey,
         final boolean altKey, final int button) {
         final SgmlPage page = getPage();
+        if (!page.getWebClient().isJavaScriptEnabled()) {
+            return page;
+        }
 
         final ScriptResult scriptResult;
         final Event event;
@@ -1403,7 +1419,10 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        return fireEvent(new Event(this, eventType));
+        if (getPage().getWebClient().isJavaScriptEnabled()) {
+            return fireEvent(new Event(this, eventType));
+        }
+        return null;
     }
 
     /**
@@ -1452,9 +1471,12 @@ public class DomElement extends DomNamespaceNode implements Element {
     public void focus() {
         final HtmlPage page = (HtmlPage) getPage();
         page.setFocusedElement(this);
-        final Object o = getScriptableObject();
-        if (o instanceof HTMLElement) {
-            ((HTMLElement) o).setActive();
+
+        if (page.getWebClient().isJavaScriptEnabled()) {
+            final Object o = getScriptableObject();
+            if (o instanceof HTMLElement) {
+                ((HTMLElement) o).setActive();
+            }
         }
     }
 

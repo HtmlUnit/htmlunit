@@ -261,7 +261,7 @@ public class EventTarget extends SimpleScriptable {
         ScriptResult result = null;
         if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
             try {
-                element.click(event, true);
+                element.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
             }
             catch (final IOException e) {
                 throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());

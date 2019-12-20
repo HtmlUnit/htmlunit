@@ -148,9 +148,11 @@ public class HtmlLabel extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    public <P extends Page> P click(final Event event, final boolean ignoreVisibility) throws IOException {
+    public <P extends Page> P click(final Event event,
+            final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
+            final boolean ignoreVisibility) throws IOException {
         // first the click on the label
-        final P page = super.click(event, ignoreVisibility);
+        final P page = super.click(event, shiftKey, ctrlKey, altKey, ignoreVisibility);
 
         // then the click on the referenced element
         final HtmlElement element = getReferencedElement();

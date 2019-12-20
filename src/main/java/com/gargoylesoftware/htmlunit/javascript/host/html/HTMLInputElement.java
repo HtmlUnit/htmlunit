@@ -709,7 +709,7 @@ public class HTMLInputElement extends FormField {
         else {
             event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
         }
-        domNode.click(event, true);
+        domNode.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
 
         final boolean newState = domNode.isChecked();
 
