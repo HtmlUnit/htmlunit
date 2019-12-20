@@ -151,7 +151,6 @@ public class HtmlAnchor2Test extends SimpleWebTestCase {
         assertEquals("url", "http://www.foo2.com/", secondPage.getUrl());
         assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
         assertEquals("parameters", expectedParameters, webConnection.getLastParameters());
-        assertNotNull(secondPage);
     }
 
     /**
