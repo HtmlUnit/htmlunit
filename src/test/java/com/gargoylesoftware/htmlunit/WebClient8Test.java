@@ -180,8 +180,34 @@ public class WebClient8Test extends SimpleWebTestCase {
             final DomElement para = page.getElementById("para");
             page.getWebClient().getPageCreator().getHtmlParser().parseFragment(para, fragment);
 
-//            final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
-//            assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
+            final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
+            assertEquals("frame", ((HtmlPage) iFrame.getEnclosedWindow().getEnclosedPage()).getTitleText());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void script() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <script src='script.js'></script>\n"
+                + "  <script src='script.js' async></script>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final String script = "alert('test');";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setDefaultResponse(script);
+            webClient.setWebConnection(webConnection);
+
+            webClient.getPage(URL_FIRST);
         }
     }
 }

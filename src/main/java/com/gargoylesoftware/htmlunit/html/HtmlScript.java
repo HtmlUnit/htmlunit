@@ -242,12 +242,13 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
         };
 
         final AbstractJavaScriptEngine<?> engine = getPage().getWebClient().getJavaScriptEngine();
-        if (hasAttribute("async") && !engine.isScriptRunning()) {
+        if (engine != null
+                && hasAttribute("async") && !engine.isScriptRunning()) {
             final HtmlPage owningPage = getHtmlPageOrNull();
             owningPage.addAfterLoadAction(action);
         }
-        else if (hasAttribute("async")
-                || postponed && StringUtils.isBlank(getTextContent())) {
+        else if (engine != null && (hasAttribute("async")
+                                    || postponed && StringUtils.isBlank(getTextContent()))) {
             engine.addPostponedAction(action);
         }
         else {
