@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Details about HtmlUnit</title>
+        <author>RBRi</author>
+    </properties>
+
+    <body>
+        <section name="File uploads">
+            <p>
+                From the browsers point of view the file upload is supported using a special input control.
+                You can find some basics <a href="https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications">here.</a><br/>
+                To trigger the file upload from HtmlUnit you have to
+                <ul>
+                  <li>get the page</li>
+                  <li>find the file input element</li>
+                  <li>assign the path to the file you like to upload to the file input</li>
+                  <li>submit the form (by pressing the button like the user does)</li>
+                </ul>
+            </p>
+            <p>
+                Example:<br/>Upload a file using the path to a local file
+            </p>
+<source><![CDATA[
+HtmlPage firstPage = client.getPage(URL_FIRST);
+HtmlForm f = firstPage.getForms().get(0);
+HtmlFileInput fileInput = f.getInputByName("myInput");
+
+String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.img").toExternalForm();
+fileInput.setValueAttribute(path);
+firstPage.getHtmlElementById("mySubmit").click();
+]]></source>
+            <p>
+                Example:<br/>Upload file content from memory
+            </p>
+<source><![CDATA[
+HtmlPage firstPage = client.getPage(URL_FIRST);
+HtmlForm f = firstPage.getForms().get(0);
+HtmlFileInput fileInput = f.getInputByName("myInput");
+
+fileInput.setValueAttribute("dummy.txt");
+fileInput.setContentType("text/csv");
+fileInput.setData("My file data".getBytes());
+firstPage.getHtmlElementById("mySubmit").click();
+]]></source>
+            <p>
+                Example:<br/>Upload multiple files (if the 'multiple' attribut is set for the file input control)
+            </p>
+<source><![CDATA[
+String filename1 = "HtmlFileInputTest_one.txt";
+String path1 = getClass().getResource(filename1).toExternalForm();
+File file1 = new File(new URI(path1));
+
+String filename2 = "HtmlFileInputTest_two.txt";
+String path2 = getClass().getResource(filename2).toExternalForm();
+File file2 = new File(new URI(path2));
+
+HtmlPage firstPage = client.getPage(URL_FIRST);
+HtmlForm form = firstPage.getForms().get(0);
+HtmlFileInput fileInput = form.getInputByName("myInput");
+
+fileInput.setFiles(file1, file2);
+
+firstPage.getHtmlElementById("mySubmit").click();
+]]></source>
+        </section>
+    </body>
+</document>
