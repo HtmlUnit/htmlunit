@@ -380,10 +380,20 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     public void close(final Object code, final Object reason) {
         if (readyState_ != CLOSED) {
             if (incomingSession_ != null) {
-                incomingSession_.close();
+                try {
+                    incomingSession_.close();
+                }
+                catch (final Throwable e) {
+                    LOG.error("WS close error - incomingSession_.close() failed", e);
+                }
             }
             if (outgoingSession_ != null) {
-                outgoingSession_.close();
+                try {
+                    outgoingSession_.close();
+                }
+                catch (final Throwable e) {
+                    LOG.error("WS close error - outgoingSession_.close() failed", e);
+                }
             }
         }
 
@@ -391,6 +401,7 @@ public class WebSocket extends EventTarget implements AutoCloseable {
             if (client_ != null) {
                 try {
                     client_.stop();
+                    client_.destroy();
                 }
                 catch (final UpgradeException e) {
                     LOG.error("WS stop error (connection was not established so far)", e);

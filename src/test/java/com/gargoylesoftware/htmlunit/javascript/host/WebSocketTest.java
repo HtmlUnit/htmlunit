@@ -697,4 +697,27 @@ public class WebSocketTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void socketsGetClosedOnPageReplace() throws Exception {
+        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+                null, null, new ChatWebSocketHandler());
+        try {
+            final WebDriver driver = getWebDriver();
+            driver.get(URL_FIRST + "WebSocketTest_chat.html");
+
+            driver.findElement(By.id("username")).sendKeys("Browser");
+            driver.findElement(By.id("joinB")).click();
+
+            assertVisible("joined", driver);
+
+            driver.get(URL_FIRST + "plain.html");
+        }
+        finally {
+            stopWebServers();
+        }
+    }
 }
