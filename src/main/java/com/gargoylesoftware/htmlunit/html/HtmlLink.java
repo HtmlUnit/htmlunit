@@ -293,6 +293,14 @@ public class HtmlLink extends HtmlElement {
             return;
         }
 
+        if (!webClient.isJavaScriptEnabled()) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Stylesheet Link found but ignored because javascript support is disabled ("
+                            + asXml().replaceAll("\\r|\\n", "") + ").");
+            }
+            return;
+        }
+
         final PostponedAction action = new PostponedAction(getPage(), "Loading of link " + this) {
             @Override
             public void execute() {

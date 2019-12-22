@@ -560,7 +560,8 @@ public class WebClient implements Serializable, AutoCloseable {
                     newPage.initialize();
                     // hack: onload should be fired the same way for all type of pages
                     // here is a hack to handle non HTML pages
-                    if (webWindow instanceof FrameWindow && !newPage.isHtmlPage()) {
+                    if (isJavaScriptEnabled()
+                            && webWindow instanceof FrameWindow && !newPage.isHtmlPage()) {
                         final FrameWindow fw = (FrameWindow) webWindow;
                         final BaseFrameElement frame = fw.getFrameElement();
                         if (frame.hasEventHandlers("onload")) {

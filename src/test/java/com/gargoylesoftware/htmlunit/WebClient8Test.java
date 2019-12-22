@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -21,6 +23,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link WebClient} running with js disabled.
@@ -156,6 +159,32 @@ public class WebClient8Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
+    public void iFrameTextContent() throws Exception {
+        final String html = "<html>\n"
+                + "<head><title>foo</title></head>\n"
+                + "<body>\n"
+                + "  <iframe id='tester' src='second.html'></iframe>\n"
+                + "</body></html>";
+
+        final String plainContent = "plain frame content";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setDefaultResponse(plainContent, 200, "OK", MimeType.TEXT_PLAIN);
+            webClient.setWebConnection(webConnection);
+
+            final HtmlPage page = webClient.getPage(URL_FIRST);
+
+            final HtmlInlineFrame iFrame = (HtmlInlineFrame) page.getElementById("tester");
+            assertEquals(plainContent, ((TextPage) iFrame.getEnclosedWindow().getEnclosedPage()).getContent());
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
     public void iFrameInFragment() throws Exception {
         final String html = "<html>\n"
                 + "<head><title>foo</title></head>\n"
@@ -205,6 +234,30 @@ public class WebClient8Test extends SimpleWebTestCase {
             final MockWebConnection webConnection = getMockWebConnection();
             webConnection.setResponse(URL_FIRST, html);
             webConnection.setDefaultResponse(script);
+            webClient.setWebConnection(webConnection);
+
+            webClient.getPage(URL_FIRST);
+        }
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void link() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "  <link rel='stylesheet' href='simple.css'>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setResponse(new URL(URL_FIRST, "simple.css"), "");
+
             webClient.setWebConnection(webConnection);
 
             webClient.getPage(URL_FIRST);
