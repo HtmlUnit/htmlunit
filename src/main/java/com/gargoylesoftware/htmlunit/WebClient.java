@@ -840,6 +840,34 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
     }
+    
+    /**
+     * Set the current window to the original window instantiated by the browser
+     * (the earliest opened window).
+     */
+    public void setFirstWindow() {
+    	setCurrentWindow(topLevelWindows_.get(0));
+    }
+    
+    /**
+     * Set the current window to a frame, identified by index.
+     */
+    public void setCurrentFrame(final int index) throws IndexOutOfBoundsException {
+    	HtmlPage page = (HtmlPage) getCurrentWindow().getEnclosedPage();
+    	List<FrameWindow> frames = page.getFrames();
+    	if (index >= frames.size())
+    		throw new IndexOutOfBoundsException("Attempt to select frame " + index + " of " + frames.size() + " frames");
+    	setCurrentWindow(frames.get(index));
+    }
+    
+    /**
+     * Set the current window to a frame, identified by name.
+     */
+    public void setCurrentFrame(final String name) throws ElementNotFoundException {
+    	HtmlPage page = (HtmlPage) getCurrentWindow().getEnclosedPage();
+    	FrameWindow frame = page.getFrameByName(name);
+    	setCurrentWindow(frame);
+    }
 
     /**
      * Adds a listener for {@link WebWindowEvent}s. All events from all windows associated with this
@@ -1092,6 +1120,29 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         throw new WebWindowNotFoundException(name);
+    }
+    
+    /**
+     * Get @{@code TopLevelWindow} or {@code DialogWindow} with the specified name.
+     */
+    public WebWindow getTopLevelOrDialog(final String name) throws WebWindowNotFoundException {
+    	WebAssert.notNull("name", name);
+
+        for (final WebWindow webWindow : windows_) {
+            if ((webWindow instanceof TopLevelWindow || webWindow instanceof DialogWindow ) && name.equals(webWindow.getName())) {
+                return webWindow;
+            }
+        }
+
+        throw new WebWindowNotFoundException(name);
+    }
+    
+    /**
+     * Get the {@code FrameWindow}s within the current page. 
+     */
+    public List<FrameWindow> getFrames() {
+    	HtmlPage page = (HtmlPage) getCurrentWindow().getEnclosedPage();
+    	return page.getFrames();
     }
 
     /**
