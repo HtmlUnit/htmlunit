@@ -1265,7 +1265,7 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"done", "object", "3", "3,1337,Success"},
             IE = {})
-    public void allAsync() throws Exception {
+    public void allAsyncArray() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -1309,7 +1309,7 @@ public class PromiseTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"done", "first 3,1337,Success", "second 3,Success"},
             IE = {})
-    public void allAsync2() throws Exception {
+    public void allAsyncArray2() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
@@ -1328,6 +1328,50 @@ public class PromiseTest extends WebDriverTestCase {
             + "        });\n"
             + "        Promise.all([p1, p3]).then(function(values) {\n"
             + "          log('second ' + values);\n"
+            + "        });\n"
+            + "        log('done');\n"
+            + "      }\n"
+            + "    }\n"
+            + "\n"
+            + "    function log(x) {\n"
+            + "      document.getElementById('log').value += x + '\\n';\n"
+            + "    }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+            + "</body>\n"
+            + "</html>\n";
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyAlerts(() -> driver.findElement(By.id("log"))
+                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"done", "object", "3", "3,1337,Success"},
+            IE = {})
+    public void allAsyncSet() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "    function test() {\n"
+            + "      if (window.Promise) {\n"
+            + "        var p1 = Promise.resolve(3);\n"
+            + "        var p2 = 1337;\n"
+            + "        var p3 = new Promise(function(resolve, reject) {\n"
+            + "            window.setTimeout( function() {\n"
+            + "              resolve('Success');\n"
+            + "            }, 20);\n"
+            + "        });\n"
+            + "\n"
+            + "        Promise.all(new Set([p1, p2, p3])).then(function(values) {\n"
+            + "          log(typeof values);\n"
+            + "          log(values.length);\n"
+            + "          log(values);\n"
             + "        });\n"
             + "        log('done');\n"
             + "      }\n"

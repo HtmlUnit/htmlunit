@@ -37,6 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.IteratorLikeIterable;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
@@ -291,7 +292,7 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise all(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        return all(false, thisObj, args);
+        return all(false, context, thisObj, args);
     }
 
     /**
@@ -307,35 +308,42 @@ public class Promise extends SimpleScriptable {
     @JsxStaticFunction
     public static Promise race(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
-        return all(true, thisObj, args);
+        return all(true, context, thisObj, args);
     }
 
-    private static Promise all(final boolean race, final Scriptable thisObj, final Object[] args) {
+    private static Promise all(final boolean race,
+            final Context context, final Scriptable thisObj, final Object[] args) {
         final Window window = getWindow(thisObj);
         final Promise returnPromise = new Promise(window);
 
         if (args.length == 0) {
             returnPromise.all_ = new Promise[0];
         }
-        else if (args[0] instanceof NativeArray) {
-            final NativeArray array = (NativeArray) args[0];
-            final int length = (int) array.getLength();
-            returnPromise.all_ = new Promise[length];
-            for (int i = 0; i < length; i++) {
-                final Object o = array.get(i);
-                if (o instanceof Promise) {
-                    returnPromise.all_[i] = (Promise) o;
-                    if (returnPromise.all_[i].dependentPromises_ == null) {
-                        returnPromise.all_[i].dependentPromises_ = new ArrayList<Promise>(2);
+        else {
+            // Call the "[Symbol.iterator]" property as a function.
+            final Object ito = ScriptRuntime.callIterator(args[0], context, window);
+            final ArrayList<Promise> promises = new ArrayList<>();
+            if (!Undefined.isUndefined(ito)) {
+                // run through all the iterated values and add them!
+                try (IteratorLikeIterable it = new IteratorLikeIterable(context, window, ito)) {
+                    for (Object val : it) {
+                        if (val instanceof Promise) {
+                            final Promise promis = (Promise) val;
+                            promises.add(promis);
+                            if (promis.dependentPromises_ == null) {
+                                promis.dependentPromises_ = new ArrayList<Promise>(2);
+                            }
+                            promis.dependentPromises_.add(returnPromise);
+                        }
+                        else {
+                            promises.add(create(thisObj, new Object[] {val}, PromiseState.FULFILLED));
+                        }
                     }
-                    returnPromise.all_[i].dependentPromises_.add(returnPromise);
                 }
-                else {
-                    returnPromise.all_[i] = create(thisObj, new Object[] {o}, PromiseState.FULFILLED);
-                }
+
+                returnPromise.all_ = promises.toArray(new Promise[promises.size()]);
             }
         }
-        // TODO handle the other cases
 
         returnPromise.race_ = race;
 
