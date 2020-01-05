@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 
@@ -1587,6 +1588,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "constructor()",
             FF68 = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            IE = "constructor")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -1601,6 +1604,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "compact,constructor()",
             FF68 = "compact,constructor()",
             IE = "compact,constructor,type")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            FF60 = "constructor()",
+            FF68 = "constructor()",
+            IE = "constructor")
     public void dir() throws Exception {
         test("dir");
     }
@@ -1627,6 +1634,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "compact,constructor()",
             IE = "compact,constructor")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            FF60 = "constructor()",
+            FF68 = "constructor()",
+            IE = "constructor")
     public void dl() throws Exception {
         test("dl");
     }
@@ -1704,6 +1715,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,getSVGDocument(),height,hidden,msPlayToDisabled,msPlayToPreferredSourceUri,"
                 + "msPlayToPrimary,name,palette,pluginspage,readyState,src,units,"
                 + "width")
+    @HtmlUnitNYI(CHROME = "align,constructor(),height,name,width",
+            FF60 = "align,constructor(),height,name,width",
+            FF68 = "align,constructor(),height,name,width",
+            IE = "constructor,height,name,width")
     public void embed() throws Exception {
         test("embed");
     }
@@ -1786,6 +1801,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "align,checkValidity(),constructor,form,setCustomValidity(),validationMessage,validity,"
                 + "willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,name",
+            FF60 = "checkValidity(),constructor(),disabled,form,name",
+            FF68 = "checkValidity(),constructor(),disabled,form,name",
+            IE = "align,checkValidity(),constructor,disabled,form")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -5225,6 +5244,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "constructor(),isComposing",
             FF68 = "constructor(),data,dataTransfer,inputType,isComposing",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            FF60 = "constructor()",
+            FF68 = "constructor()")
     public void inputEvent() throws Exception {
         testString("new InputEvent('input')");
     }
@@ -5239,6 +5261,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "exception",
             FF60 = "exception",
             IE = "constructor,initMouseWheelEvent(),wheelDelta")
+    @HtmlUnitNYI(IE = "constructor")
     public void mouseWheelEvent() throws Exception {
         testString("document.createEvent('MouseWheelEvent')");
     }
@@ -5268,6 +5291,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE,"
                 + "initTextEvent(),inputMethod,"
                 + "locale")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            FF60 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            FF68 = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+            IE = "constructor,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
+                + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
+                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE")
     public void textEvent() throws Exception {
         testString("document.createEvent('TextEvent')");
     }
@@ -5282,6 +5311,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "exception",
             CHROME = "altKey,changedTouches,constructor(),ctrlKey,metaKey,shiftKey,targetTouches,touches",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()")
     public void touchEvent2() throws Exception {
         testString("new TouchEvent('touch')");
     }
@@ -5296,6 +5326,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF68 = "assignedElements(),assignedNodes(),constructor(),name",
             FF60 = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            FF68 = "constructor()",
+            IE = "constructor")
     public void slot() throws Exception {
         test("slot");
     }
@@ -5306,8 +5339,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            CHROME = "constructor()",
+    @Alerts(CHROME = "constructor()",
             FF60 = "alinkColor,all,anchors,applets,bgColor,captureEvents(),clear(),close(),constructor(),cookie,"
                 + "designMode,domain,embeds,execCommand(),fgColor,forms,head,images,linkColor,links,open(),plugins,"
                 + "queryCommandEnabled(),queryCommandIndeterm(),queryCommandState(),queryCommandSupported(),"
@@ -5319,6 +5351,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "write(),"
                 + "writeln()",
             IE = "constructor")
+    @HtmlUnitNYI(CHROME = "alinkColor,all,bgColor,captureEvents(),clear(),constructor(),cookie,dispatchEvent(),"
+                + "documentElement,fgColor,getElementById(),getSelection(),head,linkColor,open(),releaseEvents(),"
+                + "vlinkColor,write(),writeln()",
+            FF60 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),"
+                + "cookie,designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
+            FF68 = "alinkColor,all,anchors,applets,bgColor,body,captureEvents(),clear(),close(),constructor(),cookie,"
+                + "designMode,dispatchEvent(),documentElement,domain,embeds,execCommand(),fgColor,forms,"
+                + "getElementById(),getElementsByName(),getSelection(),head,images,linkColor,links,open(),plugins,"
+                + "queryCommandEnabled(),queryCommandSupported(),releaseEvents(),scripts,vlinkColor,write(),writeln()",
+            IE = "all,clear(),constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
+                + "head,open(),parentWindow,write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("document");
     }
@@ -5333,6 +5378,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "async,constructor(),load()",
             FF68 = "async,constructor(),load()",
             IE = "constructor")
+    @HtmlUnitNYI(CHROME = "constructor(),createCDATASection(),createProcessingInstruction(),"
+                + "getElementById(),getElementsByTagName()",
+            FF60 = "async,constructor(),createCDATASection(),createProcessingInstruction(),"
+                + "getElementById(),getElementsByTagName(),load()",
+            FF68 = "async,constructor(),createCDATASection(),createProcessingInstruction(),"
+                + "getElementById(),getElementsByTagName(),load()",
+            IE = "constructor,createCDATASection(),createProcessingInstruction(),"
+                + "getElementById(),getElementsByTagName()")
     //IE expectations are bigger than real IE alert length, test should be changed to store value in textarea
     public void document() throws Exception {
         testString("xmlDocument");
@@ -5412,6 +5465,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "constructor(),localName,name,namespaceURI,ownerElement,prefix,specified,value",
             FF68 = "constructor(),localName,name,namespaceURI,ownerElement,prefix,specified,value",
             IE = "constructor,expando,name,ownerElement,specified,value")
+    @HtmlUnitNYI(IE = "constructor,expando,localName,name,namespaceURI,ownerElement,prefix,specified,value")
     public void nodeAndAttr() throws Exception {
         testString("document.createAttribute('some_attrib')");
     }

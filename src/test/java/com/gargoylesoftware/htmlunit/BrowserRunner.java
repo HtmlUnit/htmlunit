@@ -56,6 +56,7 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
  * </pre>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class BrowserRunner extends Suite {
 
@@ -341,6 +342,44 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] DEFAULT() default { EMPTY_DEFAULT };
+    }
+
+    /**
+     * Indicates that the test produces different result when running with HtmlUnit.
+     * @see TestedBrowser
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public static @interface HtmlUnitNYI {
+        /**
+         * Alerts that is used for all browsers (if defined, the other values are ignored).
+         * @return the alerts
+         */
+        String[] value() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Internet Explorer 11.
+         * @return the alerts
+         */
+        String[] IE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF60() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
+         * @return the alerts
+         */
+        String[] FF68() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for latest Chrome.
+         * @return the alerts
+         */
+        String[] CHROME() default { EMPTY_DEFAULT };
     }
 
     /**

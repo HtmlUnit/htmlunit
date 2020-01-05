@@ -40,6 +40,7 @@ import org.junit.runners.model.TestClass;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
@@ -54,6 +55,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
@@ -121,6 +123,23 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.CHROME(), buggyWebDriver.DEFAULT());
                     }
+                }
+            }
+        }
+        else {
+            final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
+            if (htmlUnitNYI != null) {
+                if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.IE());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF60());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF68());
+                }
+                else if (browserVersion_ == BrowserVersion.CHROME) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
                 }
             }
         }
