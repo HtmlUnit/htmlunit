@@ -24,6 +24,7 @@ import org.junit.runners.model.Statement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -31,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * The Browser Statement.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class BrowserStatement extends Statement {
 
@@ -116,6 +118,26 @@ class BrowserStatement extends Statement {
                 }
                 if (BrowserVersionClassRunner.isDefined(alerts.CHROME())) {
                     assertNotEquals(alerts.IE(), alerts.FF());
+                }
+            }
+
+            final HtmlUnitNYI nyiAlerts = method_.getAnnotation(HtmlUnitNYI.class);
+            if (nyiAlerts != null) {
+                if (BrowserVersionClassRunner.isDefined(alerts.CHROME())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.CHROME())) {
+                    assertNotEquals(alerts.CHROME(), nyiAlerts.CHROME());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts.FF60())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF60())) {
+                    assertNotEquals(alerts.FF60(), nyiAlerts.FF60());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts.FF68())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF68())) {
+                    assertNotEquals(alerts.FF68(), nyiAlerts.FF68());
+                }
+                if (BrowserVersionClassRunner.isDefined(alerts.FF68())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.IE())) {
+                    assertNotEquals(alerts.IE(), nyiAlerts.IE());
                 }
             }
         }
