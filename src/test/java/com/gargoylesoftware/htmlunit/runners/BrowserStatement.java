@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.runners;
 
+import static org.junit.Assert.assertFalse;
+
 import java.util.Arrays;
 
 import org.junit.runners.model.FrameworkMethod;
@@ -80,6 +82,24 @@ class BrowserStatement extends Statement {
         final Alerts alerts = method_.getAnnotation(Alerts.class);
         if (alerts != null) {
             if (!BrowserVersionClassRunner.isDefined(alerts.value())) {
+                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(alerts.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF60())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF68())
+                        && BrowserVersionClassRunner.isDefined(alerts.IE()));
+
+                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(alerts.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF())
+                        && BrowserVersionClassRunner.isDefined(alerts.IE()));
+
+                assertFalse("Obsolete FF because FF60 and FF68 expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts.FF())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF60())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF68()));
+
                 assertNotEquals(alerts.IE(), alerts.DEFAULT());
                 assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF(), alerts.DEFAULT());
@@ -103,6 +123,24 @@ class BrowserStatement extends Statement {
         final AlertsStandards alerts2 = method_.getAnnotation(AlertsStandards.class);
         if (alerts2 != null) {
             if (!BrowserVersionClassRunner.isDefined(alerts2.value())) {
+                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF60())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF68())
+                        && BrowserVersionClassRunner.isDefined(alerts2.IE()));
+
+                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
+                        && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF())
+                        && BrowserVersionClassRunner.isDefined(alerts2.IE()));
+
+                assertFalse("Obsolete FF because FF60 and FF68 expectations are defined individually",
+                        BrowserVersionClassRunner.isDefined(alerts2.FF())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF60())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF68()));
+
                 assertNotEquals(alerts2.IE(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
