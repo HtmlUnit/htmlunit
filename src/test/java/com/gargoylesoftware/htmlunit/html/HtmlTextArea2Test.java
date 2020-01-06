@@ -228,8 +228,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if test fails
      */
     @Test
-    @Alerts(DEFAULT = {"0,0", "11,11", "0,11", "0,11"},
-            CHROME = {"0,0", "11,11", "11,11", "11,11"},
+    @Alerts(CHROME = {"0,0", "11,11", "11,11", "11,11"},
             FF60 = {"0,0", "11,11", "11,11", "11,11"},
             FF68 = {"0,0", "11,11", "11,11", "11,11"},
             IE = {"0,0", "0,0", "0,0", "0,11"})

@@ -2185,8 +2185,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function DragEvent() { [native code] }",
+    @Alerts(CHROME = "function DragEvent() { [native code] }",
             FF = "function DragEvent() {\n    [native code]\n}",
             IE = "[object DragEvent]")
     public void dragEvent() throws Exception {
@@ -11083,8 +11082,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
+    @Alerts(CHROME = "function XMLHttpRequestEventTarget() { [native code] }",
             FF = "function XMLHttpRequestEventTarget() {\n    [native code]\n}",
             IE = "[object XMLHttpRequestEventTarget]")
     public void xmlHttpRequestEventTarget() throws Exception {

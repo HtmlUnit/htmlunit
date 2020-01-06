@@ -170,8 +170,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object XSLTProcessor]", "NaN", "true", "Yes", "Yes"},
-            CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
+    @Alerts(CHROME = {"function XSLTProcessor() { [native code] }", "NaN", "true", "Yes", "Yes"},
             FF = {"function XSLTProcessor() {\n    [native code]\n}", "NaN", "true", "Yes", "Yes"},
             IE = {"exception str", "exception numb", "exception bool", "exception ?", "exception if"})
     public void browserDetection() throws Exception {
