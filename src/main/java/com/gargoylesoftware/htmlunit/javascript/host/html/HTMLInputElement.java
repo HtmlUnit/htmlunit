@@ -242,6 +242,7 @@ public class HTMLInputElement extends HTMLElement {
      *
      * @param newValue the new value
      */
+    @JsxSetter({CHROME, FF})
     public void setValue(final Object newValue) {
         if (null == newValue) {
             getDomNodeOrDie().setValueAttribute("");
@@ -660,6 +661,7 @@ public class HTMLInputElement extends HTMLElement {
      *
      * @return the value of this attribute
      */
+    @JsxGetter({CHROME, FF})
     public String getValue() {
         final HtmlInput htmlInput = getDomNodeOrDie();
         if (htmlInput instanceof HtmlFileInput) {
