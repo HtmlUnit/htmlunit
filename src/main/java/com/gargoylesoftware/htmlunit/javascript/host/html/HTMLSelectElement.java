@@ -46,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Carsten Steul
  */
 @JsxClass(domClass = HtmlSelect.class)
-public class HTMLSelectElement extends FormField {
+public class HTMLSelectElement extends HTMLElement {
 
     private HTMLOptionsCollection optionsArray_;
 
@@ -185,7 +185,6 @@ public class HTMLSelectElement extends FormField {
      * Returns the actual value of the selected Option.
      * @return the value
      */
-    @Override
     public String getValue() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
@@ -250,7 +249,6 @@ public class HTMLSelectElement extends FormField {
      * Selects the option with the specified value.
      * @param newValue the value of the option to select
      */
-    @Override
     public void setValue(final Object newValue) {
         final String val = Context.toString(newValue);
         getHtmlSelect().setSelectedAttribute(val, true, false);
@@ -346,4 +344,45 @@ public class HTMLSelectElement extends FormField {
         getDomNodeOrDie().setRequired(required);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public String getName() {
+        return super.getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    public void setName(final String newName) {
+        super.setName(newName);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter({CHROME, FF})
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        return super.getForm();
+    }
 }

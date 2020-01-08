@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlButton.class)
-public class HTMLButtonElement extends FormField {
+public class HTMLButtonElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
     private AbstractList labels_;
@@ -114,4 +114,45 @@ public class HTMLButtonElement extends FormField {
         return getDomNodeOrDie().isValid();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public String getName() {
+        return super.getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    public void setName(final String newName) {
+        super.setName(newName);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter({CHROME, FF})
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        return super.getForm();
+    }
 }

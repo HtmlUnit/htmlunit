@@ -77,6 +77,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlEmphasis;
 import com.gargoylesoftware.htmlunit.html.HtmlFigure;
 import com.gargoylesoftware.htmlunit.html.HtmlFigureCaption;
 import com.gargoylesoftware.htmlunit.html.HtmlFooter;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlItalic;
 import com.gargoylesoftware.htmlunit.html.HtmlKeyboard;
@@ -407,6 +408,24 @@ public class HTMLElement extends Element {
                 || "track".equalsIgnoreCase(name)) {
             endTagForbidden_ = true;
         }
+
+        final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
+        if (form != null) {
+            setParentScope(getScriptableFor(form));
+        }
+    }
+
+    /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
     }
 
     /**
@@ -3814,5 +3833,23 @@ public class HTMLElement extends Element {
     @JsxSetter(IE)
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler("selectstart", onselectstart);
+    }
+
+    /**
+     * Returns the value of the JavaScript attribute {@code name}.
+     *
+     * @return the value of this attribute
+     */
+    public String getName() {
+        return getDomNodeOrDie().getAttributeDirect("name");
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute {@code name}.
+     *
+     * @param newName the new name
+     */
+    public void setName(final String newName) {
+        getDomNodeOrDie().setAttribute("name", newName);
     }
 }

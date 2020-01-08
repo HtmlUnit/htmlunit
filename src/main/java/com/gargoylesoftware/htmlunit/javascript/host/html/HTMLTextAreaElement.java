@@ -49,7 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Carsten Steul
  */
 @JsxClass(domClass = HtmlTextArea.class)
-public class HTMLTextAreaElement extends FormField {
+public class HTMLTextAreaElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
     private AbstractList labels_;
@@ -74,7 +74,7 @@ public class HTMLTextAreaElement extends FormField {
      * Returns the value of the {@code value} attribute.
      * @return the value of the {@code value} attribute
      */
-    @Override
+    // @Override
     public String getValue() {
         return ((HtmlTextArea) getDomNodeOrDie()).getText();
     }
@@ -83,7 +83,7 @@ public class HTMLTextAreaElement extends FormField {
      * Sets the value of the {@code value} attribute.
      * @param value the new value
      */
-    @Override
+    // @Override
     public void setValue(final Object value) {
         if (null == value && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_VALUE_NULL)) {
             ((HtmlTextArea) getDomNodeOrDie()).setText("");
@@ -417,4 +417,45 @@ public class HTMLTextAreaElement extends FormField {
         getDomNodeOrDie().setRequired(required);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public String getName() {
+        return super.getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    public void setName(final String newName) {
+        super.setName(newName);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter({CHROME, FF})
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        return super.getForm();
+    }
 }

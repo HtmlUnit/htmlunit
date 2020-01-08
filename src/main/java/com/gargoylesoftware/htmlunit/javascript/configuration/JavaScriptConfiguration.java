@@ -444,7 +444,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         FileSystem.class, FileSystemDirectoryEntry.class, FileSystemDirectoryReader.class,
         FileSystemEntry.class, FileSystemFileEntry.class,
         FocusEvent.class, FontFace.class,
-        FontFaceSet.class, FormData.class, FormField.class, GainNode.class, Gamepad.class,
+        FontFaceSet.class, FormData.class, GainNode.class, Gamepad.class,
         GamepadButton.class, GamepadEvent.class, Geolocation.class, HashChangeEvent.class, Headers.class, History.class,
         HTMLAllCollection.class,
         HTMLAnchorElement.class, HTMLAppletElement.class, HTMLAreaElement.class, HTMLAudioElement.class,

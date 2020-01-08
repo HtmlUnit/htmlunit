@@ -74,7 +74,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(domClass = HtmlInput.class)
-public class HTMLInputElement extends FormField {
+public class HTMLInputElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
     private AbstractList labels_;
@@ -242,7 +242,6 @@ public class HTMLInputElement extends FormField {
      *
      * @param newValue the new value
      */
-    @Override
     public void setValue(final Object newValue) {
         if (null == newValue) {
             getDomNodeOrDie().setValueAttribute("");
@@ -657,13 +656,14 @@ public class HTMLInputElement extends FormField {
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the value of the JavaScript attribute {@code value}.
+     *
+     * @return the value of this attribute
      */
-    @Override
     public String getValue() {
         final HtmlInput htmlInput = getDomNodeOrDie();
         if (htmlInput instanceof HtmlFileInput) {
-            final File[] files = ((HtmlFileInput) getDomNodeOrDie()).getFiles();
+            final File[] files = ((HtmlFileInput) htmlInput).getFiles();
             if (files == null || files.length == 0) {
                 return ATTRIBUTE_NOT_DEFINED;
             }
@@ -674,7 +674,7 @@ public class HTMLInputElement extends FormField {
             }
             return "C:\\fakepath\\" + name;
         }
-        return super.getValue();
+        return htmlInput.getAttributeDirect("value");
     }
 
     /**
@@ -912,5 +912,47 @@ public class HTMLInputElement extends FormField {
     @JsxFunction(IE)
     public TextRange createTextRange() {
         return super.createTextRange();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public String getName() {
+        return super.getName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    public void setName(final String newName) {
+        super.setName(newName);
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxGetter({CHROME, FF})
+    public boolean isDisabled() {
+        return super.isDisabled();
+    }
+
+    /**
+     * {@inheritDoc} Overridden to modify browser configurations.
+     */
+    @Override
+    @JsxSetter({CHROME, FF})
+    public void setDisabled(final boolean disabled) {
+        super.setDisabled(disabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    public HTMLFormElement getForm() {
+        return super.getForm();
     }
 }
