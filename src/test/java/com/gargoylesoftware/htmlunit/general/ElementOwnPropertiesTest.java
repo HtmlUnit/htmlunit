@@ -7006,7 +7006,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,textLength,type,value,width",
             IE = "accept,align,alt,autocomplete,border,checked,checkValidity(),constructor,createTextRange(),"
                 + "defaultChecked,defaultValue,files,form,height,max,maxLength,min,name,placeholder,readOnly,required,"
-                + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,type,width")
+                + "select(),selectionEnd,selectionStart,setSelectionRange(),size,src,step,type,value,width")
     public void input() throws Exception {
         test("input");
     }

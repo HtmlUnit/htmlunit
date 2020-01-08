@@ -391,7 +391,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     @HtmlUnitNYI(FF60 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF68 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
-            IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "undefined", "exception"})
+            IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -442,7 +442,9 @@ public class NativeObjectTest extends WebDriverTestCase {
             FF60 = {"[object HTMLInputElement]", "x = [object Object]",
                         "x.get = function value() {\n    [native code]\n}",
                         "x.get.call = function call() {\n    [native code]\n}"},
-            IE = {"[object HTMLInputElement]", "x = undefined"})
+            IE = {"[object HTMLInputElement]", "x = [object Object]",
+                    "x.get = \nfunction value() {\n    [native code]\n}\n",
+                    "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
             + "function test() {\n"
