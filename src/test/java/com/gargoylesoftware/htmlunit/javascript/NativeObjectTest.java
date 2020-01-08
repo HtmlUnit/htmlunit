@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -388,7 +389,9 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElementPrototype]",
                         "[object Object]", "function"},
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
-    @NotYetImplemented
+    @HtmlUnitNYI(FF60 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
+            FF68 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
+            IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "undefined", "exception"})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -414,4 +417,47 @@ public class NativeObjectTest extends WebDriverTestCase {
         loadPageWithAlerts2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
+                        "x.get = function get value() { [native code] }",
+                        "x.get.call = function call() { [native code] }"},
+            FF68 = {"[object HTMLInputElementPrototype]", "x = [object Object]",
+                        "x.get = function value() {\n    [native code]\n}",
+                        "x.get.call = function call() {\n    [native code]\n}"},
+            FF60 = {"[object HTMLInputElementPrototype]", "x = [object Object]",
+                        "x.get = function get value() {\n    [native code]\n}",
+                        "x.get.call = function call() {\n    [native code]\n}"},
+            IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",
+                        "x.get = \nfunction value() {\n    [native code]\n}\n",
+                        "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
+    @HtmlUnitNYI(CHROME = {"[object HTMLInputElement]", "x = [object Object]",
+                        "x.get = function value() { [native code] }",
+                        "x.get.call = function call() { [native code] }"},
+            FF68 = {"[object HTMLInputElement]", "x = [object Object]",
+                        "x.get = function value() {\n    [native code]\n}",
+                        "x.get.call = function call() {\n    [native code]\n}"},
+            FF60 = {"[object HTMLInputElement]", "x = [object Object]",
+                        "x.get = function value() {\n    [native code]\n}",
+                        "x.get.call = function call() {\n    [native code]\n}"},
+            IE = {"[object HTMLInputElement]", "x = undefined"})
+    public void getOwnPropertyDescriptorGetCall() throws Exception {
+        final String html = "<html><head><title>foo</title><script>\n"
+            + "function test() {\n"
+            + "  var proto = i1.constructor.prototype;\n"
+            + "  alert(proto);\n"
+            + "  var x = Object.getOwnPropertyDescriptor(i1.constructor.prototype, 'value');\n"
+            + "  alert('x = ' + x);\n"
+            + "  alert('x.get = ' + x.get);\n"
+            + "  alert('x.get.call = ' + x.get.call);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='text' id='i1' value='foo' />\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
 }
