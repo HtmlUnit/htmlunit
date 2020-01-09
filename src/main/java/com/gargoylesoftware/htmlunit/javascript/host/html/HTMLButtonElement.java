@@ -155,4 +155,22 @@ public class HTMLButtonElement extends HTMLElement {
     public HTMLFormElement getForm() {
         return super.getForm();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxGetter
+    @Override
+    public Object getValue() {
+        return super.getValue();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxSetter
+    @Override
+    public void setValue(final Object newValue) {
+        super.setValue(newValue);
+    }
 }

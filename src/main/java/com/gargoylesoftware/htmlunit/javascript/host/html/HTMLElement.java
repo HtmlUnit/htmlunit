@@ -3852,4 +3852,22 @@ public class HTMLElement extends Element {
     public void setName(final String newName) {
         getDomNodeOrDie().setAttribute("name", newName);
     }
+
+    /**
+     * Returns the value of the JavaScript attribute {@code value}.
+     *
+     * @return the value of this attribute
+     */
+    public Object getValue() {
+        return getDomNodeOrDie().getAttributeDirect("value");
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute {@code value}.
+     *
+     * @param newValue the new value
+     */
+    public void setValue(final Object newValue) {
+        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
+    }
 }

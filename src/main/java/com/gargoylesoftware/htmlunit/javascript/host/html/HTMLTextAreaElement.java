@@ -74,7 +74,8 @@ public class HTMLTextAreaElement extends HTMLElement {
      * Returns the value of the {@code value} attribute.
      * @return the value of the {@code value} attribute
      */
-    // @Override
+    @JsxGetter
+    @Override
     public String getValue() {
         return ((HtmlTextArea) getDomNodeOrDie()).getText();
     }
@@ -83,7 +84,8 @@ public class HTMLTextAreaElement extends HTMLElement {
      * Sets the value of the {@code value} attribute.
      * @param value the new value
      */
-    // @Override
+    @JsxSetter
+    @Override
     public void setValue(final Object value) {
         if (null == value && getBrowserVersion().hasFeature(JS_TEXT_AREA_SET_VALUE_NULL)) {
             ((HtmlTextArea) getDomNodeOrDie()).setText("");

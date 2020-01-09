@@ -185,6 +185,8 @@ public class HTMLSelectElement extends HTMLElement {
      * Returns the actual value of the selected Option.
      * @return the value
      */
+    @Override
+    @JsxGetter
     public String getValue() {
         final HtmlSelect htmlSelect = getHtmlSelect();
         final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
@@ -249,6 +251,8 @@ public class HTMLSelectElement extends HTMLElement {
      * Selects the option with the specified value.
      * @param newValue the value of the option to select
      */
+    @Override
+    @JsxSetter
     public void setValue(final Object newValue) {
         final String val = Context.toString(newValue);
         getHtmlSelect().setSelectedAttribute(val, true, false);

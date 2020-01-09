@@ -1717,19 +1717,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "value,willValidate",
             FF60 = "autofocus,checkValidity(),constructor(),disabled,form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,labels,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,value,"
-                + "willValidate",
+                + "validationMessage,validity,value,willValidate",
             FF68 = "autofocus,checkValidity(),constructor(),disabled,form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,labels,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,value,"
-                + "willValidate",
+                + "validationMessage,validity,value,willValidate",
             IE = "autofocus,checkValidity(),constructor,createTextRange(),form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,labels,name,type",
-            FF60 = "checkValidity(),constructor(),disabled,form,labels,name,type",
-            FF68 = "checkValidity(),constructor(),disabled,form,labels,name,type",
-            IE = "checkValidity(),constructor,createTextRange(),form,name,type")
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
+            FF60 = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
+            FF68 = "checkValidity(),constructor(),disabled,form,labels,name,type,value",
+            IE = "checkValidity(),constructor,createTextRange(),form,name,type,value")
     public void button() throws Exception {
         test("button");
     }
@@ -5562,8 +5560,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "add(),autocomplete,checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
                 + "name,namedItem(),options,remove(),reportValidity(),required,selectedIndex,selectedOptions,"
-                + "setCustomValidity(),size,type,validationMessage,validity,value,"
-                + "willValidate",
+                + "setCustomValidity(),size,type,validationMessage,validity,value,willValidate",
             FF60 = "add(),autocomplete,autofocus,checkValidity(),constructor(),disabled,form,item(),labels,length,"
                 + "multiple,name,namedItem(),options,remove(),reportValidity(),required,selectedIndex,"
                 + "selectedOptions,setCustomValidity(),size,type,validationMessage,validity,value,"
@@ -5574,16 +5571,15 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willValidate",
             IE = "add(),autofocus,checkValidity(),constructor,form,item(),length,multiple,name,namedItem(),options,"
                 + "remove(),required,selectedIndex,setCustomValidity(),size,tags(),type,urns(),validationMessage,"
-                + "validity,value,"
-                + "willValidate")
+                + "validity,value,willValidate")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,size,type",
+                + "name,options,remove(),required,selectedIndex,size,type,value",
             FF60 = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,size,type",
+                + "name,options,remove(),required,selectedIndex,size,type,value",
             FF68 = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,size,type",
+                + "name,options,remove(),required,selectedIndex,size,type,value",
             IE = "add(),checkValidity(),constructor,form,item(),length,multiple,"
-                + "name,options,remove(),required,selectedIndex,size,type")
+                + "name,options,remove(),required,selectedIndex,size,type,value")
     public void select() throws Exception {
         test("select");
     }
@@ -6396,17 +6392,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
                 + "wrap")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,"
-                + "maxLength,minLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
-                + "textLength,type",
+                + "maxLength,minLength,name,placeholder,readOnly,required,rows,select(),selectionEnd,"
+                + "selectionStart,setSelectionRange(),textLength,type,value",
             FF60 = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),textLength,type",
+                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
+                + "textLength,type,value",
             FF68 = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),textLength,type",
+                + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),"
+                + "textLength,type,value",
             IE = "checkValidity(),cols,constructor,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),type")
+                + "readOnly,required,rows,select(),selectionEnd,selectionStart,setSelectionRange(),type,value")
     public void textarea() throws Exception {
         test("textarea");
     }

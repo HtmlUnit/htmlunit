@@ -48,7 +48,7 @@ public class HTMLMeterElement extends HTMLElement {
      * @return the value
      */
     @JsxGetter
-    public double getValue() {
+    public Double getValue() {
         return getAttributeAsDouble("value", 0);
     }
 
