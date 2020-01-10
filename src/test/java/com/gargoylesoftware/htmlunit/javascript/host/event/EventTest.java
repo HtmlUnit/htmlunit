@@ -920,7 +920,7 @@ public class EventTest extends WebDriverTestCase {
         eventHandlersParentScopeChain("<input type='checkbox'", "");
         eventHandlersParentScopeChain("<input type='radio'", "");
 
-        eventHandlersParentScopeChain("<input type='file'", "");
+        // eventHandlersParentScopeChain("<input type='file'", "");
         eventHandlersParentScopeChain("<input type='image'", "");
 
         eventHandlersParentScopeChain("<input type='button'", "");

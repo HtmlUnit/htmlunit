@@ -409,9 +409,14 @@ public class HTMLElement extends Element {
             endTagForbidden_ = true;
         }
 
-        final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
-        if (form != null) {
-            setParentScope(getScriptableFor(form));
+        if ("input".equalsIgnoreCase(name)
+                || "button".equalsIgnoreCase(name)
+                || "textarea".equalsIgnoreCase(name)
+                || "select".equalsIgnoreCase(name)) {
+            final HtmlForm form = ((HtmlElement) domNode).getEnclosingForm();
+            if (form != null) {
+                setParentScope(getScriptableFor(form));
+            }
         }
     }
 
