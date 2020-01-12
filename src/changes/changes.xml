@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.37.0" date="xxxx, 2019" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
+        <release version="2.37.0" date="xxxx, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
+            <action type="fix" dev="rbri" issue="#79">
+                The entity processing was broken if an '&' was in front of a tag like </div>&X</div>.
+            </action>
             <action type="fix" dev="rbri" issue="#114">
                 Promise.all() and Promise.race() are now able to work with iterables instead of only supporting
                 arrays.
