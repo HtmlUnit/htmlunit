@@ -1758,6 +1758,32 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"null", "null", "null"})
+    public void getElementById_emptyParams() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function test() {\n"
+            + "    alert(document.getElementById(''));\n"
+            + "    alert(document.getElementById(undefined));\n"
+            + "    alert(document.getElementById(null));\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>\n"
+            + "  <div></div>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("[object HTMLHeadElement]")
     public void head() throws Exception {
         final String html = "<html><body>\n"
