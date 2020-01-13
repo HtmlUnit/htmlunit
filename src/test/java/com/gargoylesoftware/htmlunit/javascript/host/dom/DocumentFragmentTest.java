@@ -150,4 +150,80 @@ public class DocumentFragmentTest extends WebDriverTestCase {
 
         loadPageWithAlerts2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "null", "null", "1", "myDiv", "myDiv"},
+            IE = {"undefined", "undefined", "undefined"})
+    public void firstElementChild() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+
+            + "    alert(fragment.childElementCount);\n"
+            + "    alert(fragment.firstElementChild);\n"
+            + "    alert(fragment.lastElementChild);\n"
+
+            + "    if (fragment.childElementCount === undefined) { return; };\n"
+
+            + "    var d = document.createElement('div');\n"
+            + "    d.id = 'myDiv';\n"
+            + "    fragment.appendChild(d);\n"
+            + "    var e = document.createElement('input');\n"
+            + "    e.id = 'first';\n"
+            + "    d.appendChild(e);\n"
+
+            + "    alert(fragment.childElementCount);\n"
+            + "    alert(fragment.firstElementChild.id);\n"
+            + "    alert(fragment.lastElementChild.id);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null", "null", "null", "[object HTMLDivElement]", "null", "null"})
+    public void getElementById() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+            + "    var d = document.createElement('div');\n"
+            + "    d.id = 'myDiv';\n"
+            + "    fragment.appendChild(d);\n"
+            + "    var e = document.createElement('input');\n"
+            + "    e.id = 'first';\n"
+            + "    d.appendChild(e);\n"
+
+            + "    alert(document.getElementById(''));\n"
+            + "    alert(document.getElementById(undefined));\n"
+            + "    alert(document.getElementById(null));\n"
+            + "    alert(document.getElementById('unknown'));\n"
+            + "    alert(document.getElementById('myDiv'));\n"
+            + "    alert(document.getElementById('mydiv'));\n"
+            + "    alert(document.getElementById('first'));\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='myDiv'>\n"
+            + "  <div></div>\n"
+            + "</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageWithAlerts2(html);
+    }
 }

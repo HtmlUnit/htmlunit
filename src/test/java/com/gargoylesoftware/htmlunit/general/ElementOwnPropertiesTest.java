@@ -7733,9 +7733,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild,prepend(),querySelector(),"
                 + "querySelectorAll()",
             IE = "constructor,querySelector(),querySelectorAll(),removeNode(),replaceNode(),swapNode()")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            FF60 = "constructor()",
-            FF68 = "constructor()",
+    @HtmlUnitNYI(CHROME = "childElementCount,children,constructor(),firstElementChild,getElementById(),"
+                + "lastElementChild,querySelector(),querySelectorAll()",
+            FF60 = "childElementCount,children,constructor(),firstElementChild,getElementById(),"
+                + "lastElementChild,querySelector(),querySelectorAll()",
+            FF68 = "childElementCount,children,constructor(),firstElementChild,getElementById()"
+                + ",lastElementChild,querySelector(),querySelectorAll()",
             IE = "constructor,querySelector(),querySelectorAll()")
     public void documentFragment() throws Exception {
         testString("document.createDocumentFragment()");

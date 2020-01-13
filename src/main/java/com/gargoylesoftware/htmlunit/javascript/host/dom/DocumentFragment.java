@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DocumentFragment}.
@@ -103,7 +105,12 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, FF})
     public int getChildElementCount() {
-        return super.getChildElementCount();
+        int counter = 0;
+        for (DomNode child : getDomNodeOrDie().getChildren()) {
+            counter++;
+        }
+        return counter;
+
     }
 
     /**
@@ -112,7 +119,10 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, FF})
     public Element getFirstElementChild() {
-        return super.getFirstElementChild();
+        for (DomNode child : getDomNodeOrDie().getChildren()) {
+            return (Element) child.getScriptableObject();
+        }
+        return null;
     }
 
     /**
@@ -121,7 +131,15 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, FF})
     public Element getLastElementChild() {
-        return super.getLastElementChild();
+        DomNode lastChild = null;
+        for (DomNode child : getDomNodeOrDie().getChildren()) {
+            lastChild = child;
+        }
+
+        if (lastChild != null) {
+            return (Element) lastChild.getScriptableObject();
+        }
+        return null;
     }
 
     /**
@@ -133,4 +151,26 @@ public class DocumentFragment extends Node {
         return super.getChildren();
     }
 
+    /**
+     * Returns the element with the specified ID, or {@code null} if that element could not be found.
+     * @param id the ID to search for
+     * @return the element, or {@code null} if it could not be found
+     */
+    @JsxFunction({CHROME, FF})
+    public Object getElementById(final Object id) {
+        if (id == null || Undefined.isUndefined(id)) {
+            return null;
+        }
+        final String idString = ScriptRuntime.toString(id);
+        if (id == null || idString.length() == 0) {
+            return null;
+        }
+        for (DomNode child : getDomNodeOrDie().getChildren()) {
+            final Element elem = (Element) child.getScriptableObject();
+            if (idString.equals(elem.getId())) {
+                return elem;
+            }
+        }
+        return null;
+    }
 }
