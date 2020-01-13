@@ -17,6 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import java.util.Iterator;
+
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -106,11 +108,11 @@ public class DocumentFragment extends Node {
     @JsxGetter({CHROME, FF})
     public int getChildElementCount() {
         int counter = 0;
-        for (DomNode child : getDomNodeOrDie().getChildren()) {
+        final Iterator<DomNode> iterator = getDomNodeOrDie().getChildren().iterator();
+        while (iterator.hasNext()) {
             counter++;
         }
         return counter;
-
     }
 
     /**

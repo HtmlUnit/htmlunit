@@ -1178,7 +1178,7 @@
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
-            <version>0.12.0</version>
+            <version>0.13.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
