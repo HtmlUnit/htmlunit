@@ -1244,7 +1244,7 @@ public abstract class HtmlElement extends DomElement {
     @Override
     protected void detach() {
         final SgmlPage page = getPage();
-        if (!page.getWebClient().isJavaScriptEnabled()) {
+        if (!page.getWebClient().isJavaScriptEngineEnabled()) {
             super.detach();
             return;
         }

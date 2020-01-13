@@ -152,7 +152,7 @@ public class HtmlSerializer {
         boolean block = false;
         if (!(domNode instanceof HtmlBody)) {
             final SgmlPage page = domNode.getPage();
-            if (page != null && page.getWebClient().isJavaScriptEnabled()) {
+            if (page != null && page.getWebClient().isJavaScriptEngineEnabled()) {
                 final Object scriptableObject = domNode.getScriptableObject();
                 if (scriptableObject instanceof Element) {
                     final Element element = (Element) scriptableObject;

@@ -206,7 +206,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
     private WebClientOptions options_ = new WebClientOptions();
-    private final boolean javaScriptEnabled_;
+    private final boolean javaScriptEngineEnabled_;
     private WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
@@ -242,16 +242,16 @@ public class WebClient implements Serializable, AutoCloseable {
     /**
      * Creates an instance that will use the specified {@link BrowserVersion} and proxy server.
      * @param browserVersion the browser version to simulate
-     * @param javaScriptEnabled set to false if the simulated browser should not support javaScript
+     * @param javaScriptEngineEnabled set to false if the simulated browser should not support javaScript
      * @param proxyHost the server that will act as proxy or null for no proxy
      * @param proxyPort the port to use on the proxy server
      */
-    public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEnabled,
+    public WebClient(final BrowserVersion browserVersion, final boolean javaScriptEngineEnabled,
             final String proxyHost, final int proxyPort) {
         WebAssert.notNull("browserVersion", browserVersion);
 
         browserVersion_ = browserVersion;
-        javaScriptEnabled_ = javaScriptEnabled;
+        javaScriptEngineEnabled_ = javaScriptEngineEnabled;
 
         if (proxyHost == null) {
             getOptions().setProxyConfig(new ProxyConfig());
@@ -261,7 +261,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         webConnection_ = new HttpWebConnection(this); // this has to be done after the browser version was set
-        if (isJavaScriptEnabled()) {
+        if (javaScriptEngineEnabled_) {
             scriptEngine_ = new JavaScriptEngine(this);
         }
         loadQueue_ = new ArrayList<>();
@@ -1103,7 +1103,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void initialize(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
 
-        if (isJavaScriptEnabled()) {
+        if (isJavaScriptEngineEnabled()) {
             scriptEngine_.initialize(webWindow);
         }
     }
@@ -1117,7 +1117,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void initialize(final Page newPage) {
         WebAssert.notNull("newPage", newPage);
 
-        if (isJavaScriptEnabled()) {
+        if (isJavaScriptEngineEnabled()) {
             final Window window = newPage.getEnclosingWindow().getScriptableObject();
             if (window instanceof Window) {
                 ((Window) window).initialize(newPage);
@@ -1135,7 +1135,7 @@ public class WebClient implements Serializable, AutoCloseable {
     public void initializeEmptyWindow(final WebWindow webWindow) {
         WebAssert.notNull("webWindow", webWindow);
 
-        if (isJavaScriptEnabled()) {
+        if (isJavaScriptEngineEnabled()) {
             initialize(webWindow);
             ((Window) webWindow.getScriptableObject()).initialize();
         }
@@ -2447,11 +2447,22 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns true if the javaScript support is enabled.
-     * To disable javascript support you have to use the
-     * {@link WebClient#WebClient(BrowserVersion, boolean, String, int)} constructor.
-     * @return true if the javaScript support is enabled.
+     * To disable the javascript support (eg. temporary)
+     * you have to use the {@link WebClientOptions#setJavaScriptEnabled(boolean)} setter.
+     * @see #isJavaScriptEngineEnabled()
+     * @return true if the javaScript engine and the javaScript support is enabled.
      */
     public boolean isJavaScriptEnabled() {
-        return javaScriptEnabled_ && getOptions().isJavaScriptEnabled();
+        return javaScriptEngineEnabled_ && getOptions().isJavaScriptEnabled();
+    }
+
+    /**
+     * Returns true if the javaScript engine is enabled.
+     * To disable the javascript engine you have to use the
+     * {@link WebClient#WebClient(BrowserVersion, boolean, String, int)} constructor.
+     * @return true if the javaScript engine is enabled.
+     */
+    public boolean isJavaScriptEngineEnabled() {
+        return javaScriptEngineEnabled_;
     }
 }

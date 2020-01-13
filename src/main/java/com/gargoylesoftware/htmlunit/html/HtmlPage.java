@@ -1813,7 +1813,7 @@ public class HtmlPage extends SgmlPage {
         String value = element.getAttribute(attribute);
 
         if (DomElement.ATTRIBUTE_NOT_DEFINED == value
-                && getWebClient().isJavaScriptEnabled()
+                && getWebClient().isJavaScriptEngineEnabled()
                 && !(element instanceof HtmlApplet)
                 && !(element instanceof HtmlObject)) {
             // second try are JavaScript attributes

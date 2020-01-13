@@ -293,9 +293,9 @@ public class HtmlLink extends HtmlElement {
             return;
         }
 
-        if (!webClient.isJavaScriptEnabled()) {
+        if (!webClient.isJavaScriptEngineEnabled()) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("Stylesheet Link found but ignored because javascript support is disabled ("
+                LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
                             + asXml().replaceAll("\\r|\\n", "") + ").");
             }
             return;
