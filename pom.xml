@@ -20,6 +20,9 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
         <htmlunitdriver.version>2.37.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.5.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.37.0-SNAPSHOT</htmlunitneko.version>
@@ -44,9 +47,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <!-- Update the links reference in PDM plugin when this changes -->
-                    <source>1.8</source>
-                    <target>1.8</target>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
                     </testExcludes>
@@ -102,7 +102,6 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <targetJdk>1.8</targetJdk>
                     <rulesets>
                         <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
                     </rulesets>
