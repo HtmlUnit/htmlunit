@@ -42,7 +42,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"97", "[object Element]"})
+            FF = {"134", "[object Element]"})
     @NotYetImplemented(FF)
     public void test() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
@@ -50,7 +50,7 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var xmlDoc = createXmlDocument();\n"
             + "      xmlDoc.async = false;\n"
-            + "      xmlDoc.load('" + URL_SECOND + "2');\n"
+            + "      xmlDoc.load('" + URL_SECOND + "1');\n"
 
             + "      var xslDoc;\n"
             + "      xslDoc = createXmlDocument();\n"
