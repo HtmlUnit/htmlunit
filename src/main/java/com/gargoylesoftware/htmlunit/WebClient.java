@@ -1119,9 +1119,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (isJavaScriptEngineEnabled()) {
             final Window window = newPage.getEnclosingWindow().getScriptableObject();
-            if (window instanceof Window) {
-                ((Window) window).initialize(newPage);
-            }
+            window.initialize(newPage);
         }
     }
 

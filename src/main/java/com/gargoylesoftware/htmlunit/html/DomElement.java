@@ -1559,7 +1559,7 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
-    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
+    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl(null, true);
     private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
@@ -1567,12 +1567,6 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     private DomAttr[] attrPositions_ = EMPTY_ARRAY;
     private final DomElement domNode_;
     private final boolean caseSensitive_;
-
-    private NamedAttrNodeMapImpl() {
-        super();
-        domNode_ = null;
-        caseSensitive_ = true;
-    }
 
     NamedAttrNodeMapImpl(final DomElement domNode, final boolean caseSensitive) {
         super();

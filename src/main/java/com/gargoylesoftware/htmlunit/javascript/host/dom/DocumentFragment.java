@@ -165,7 +165,7 @@ public class DocumentFragment extends Node {
             return null;
         }
         final String idString = ScriptRuntime.toString(id);
-        if (id == null || idString.length() == 0) {
+        if (idString == null || idString.length() == 0) {
             return null;
         }
         for (DomNode child : getDomNodeOrDie().getChildren()) {

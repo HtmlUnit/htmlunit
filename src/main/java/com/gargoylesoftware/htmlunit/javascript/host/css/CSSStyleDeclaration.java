@@ -1782,7 +1782,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setOpacity(final Object opacity) {
-        if (ScriptRuntime.NaNobj == opacity) {
+        if (ScriptRuntime.isNaN(opacity)) {
             return;
         }
 
@@ -3102,7 +3102,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
                 final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired) {
 
-        if (ScriptRuntime.NaNobj == value) {
+        if (ScriptRuntime.isNaN(value)) {
             return;
         }
 
