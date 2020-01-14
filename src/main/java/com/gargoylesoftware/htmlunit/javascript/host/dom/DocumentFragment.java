@@ -110,6 +110,7 @@ public class DocumentFragment extends Node {
         int counter = 0;
         final Iterator<DomNode> iterator = getDomNodeOrDie().getChildren().iterator();
         while (iterator.hasNext()) {
+            iterator.next();
             counter++;
         }
         return counter;
