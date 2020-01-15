@@ -1076,6 +1076,9 @@
         <contributor>
             <name>Le Stephane</name>
         </contributor>
+        <contributor>
+            <name>Michael Anstis</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
