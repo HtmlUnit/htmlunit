@@ -494,6 +494,67 @@ public class XMLSerializerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                    + "<catalog>\n"
+                    + "  <cd>\n"
+                    + "    <title>Empire Burlesque</title>\n"
+                    + "    <artist>Bob Dylan</artist>\n"
+                    + "  </cd>\n"
+                    + "</catalog>")
+    public void outputIndentStaticXMLandXSLT() throws Exception {
+        final String xml
+                = "<?xml version='1.0' encoding='ISO-8859-1'?>"
+                + "<catalog><cd><title>Empire Burlesque</title>"
+                + "<artist>Bob Dylan</artist>"
+                + "</cd>"
+                + "</catalog>";
+
+        final String xsl
+                = "<?xml version='1.0' encoding='ISO-8859-1'?>"
+                + "<xsl:stylesheet version='1.0' "
+                + "xmlns:xsl='http://www.w3.org/1999/XSL/Transform' "
+                + "xmlns:xalan='http://xml.apache.org/xslt' >"
+                + "  <xsl:output indent='yes' xalan:indent-amount='4' />"
+                + "  <xsl:template match='@*|node()'>"
+                + "    <xsl:copy>"
+                + "      <xsl:apply-templates select='@*|node()'/>"
+                + "    </xsl:copy>"
+                + "  </xsl:template>"
+                + "</xsl:stylesheet>";
+
+        final String html = "<html><head><title>foo</title><script>\n"
+                + "  function test() {\n"
+                + "    var ta = document.getElementById('myTextArea');\n"
+                + "    try {\n"
+                + "        var xsltProcessor = new XSLTProcessor();\n"
+                + "        var xmlDoc = new DOMParser().parseFromString(\""+xml+"\", \"application/xml\");\n"
+                + "        var xsltDoc = new DOMParser().parseFromString(\""+xsl+"\", \"application/xml\");\n"
+                + "        xsltProcessor.importStylesheet(xsltDoc);\n"
+                + "        var resultDocument = xsltProcessor.transformToDocument(xmlDoc);\n"
+                + "        var xml = new XMLSerializer().serializeToString(resultDocument);\n"
+                + "        ta.value = xml;\n"
+                + "    } catch(e) { ta.value = 'exception '+e; }\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+                + "</body></html>";
+
+        final MockWebConnection conn = getMockWebConnection();
+        conn.setResponse(new URL(URL_SECOND, "1"), xml, MimeType.TEXT_XML);
+        conn.setResponse(new URL(URL_SECOND, "2"), xsl, MimeType.TEXT_XML);
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement textArea = driver.findElement(By.id("myTextArea"));
+
+        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "exception",
             FF = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                     + "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>")
     @HtmlUnitNYI(FF60 = "<catalog><cd><title>Empire Burlesque</title><artist>Bob Dylan</artist></cd></catalog>",
