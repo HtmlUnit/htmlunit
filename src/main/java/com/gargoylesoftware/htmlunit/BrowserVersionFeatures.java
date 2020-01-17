@@ -1457,6 +1457,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_XML_SUPPORT_VIA_ACTIVEXOBJECT,
 
+    /** {@code XSLTProcessor.transformToDocument} supports output indent attribute. */
+    @BrowserFeature(CHROME)
+    JS_XSLT_TRANSFORM_INDENT,
+
     /** With special keys [in .type(int)], should we trigger onkeypress event or not. */
     @BrowserFeature(FF)
     KEYBOARD_EVENT_SPECIAL_KEYPRESS,

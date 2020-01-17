@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.37.0" date="xxxx, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
+            <action type="fix" dev="rbri" issue=" #118">
+                XSLTProcessor now respectes the xsl:output indent='yes' setting when simulating chrome.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.25.v20200117.
+            </action>
             <action type="add" dev="rbri">
                 DocumentFragment.getElementById() added.
             </action>

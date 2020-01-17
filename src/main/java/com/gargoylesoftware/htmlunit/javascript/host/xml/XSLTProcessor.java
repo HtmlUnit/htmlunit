@@ -14,14 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XSLT_TRANSFORM_INDENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
+import java.io.ByteArrayOutputStream;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -33,6 +36,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebResponseData;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -112,28 +117,51 @@ public class XSLTProcessor extends SimpleScriptable {
      */
     private Object transform(final Node source) {
         try {
-            Source xmlSource = new DOMSource(source.getDomNodeOrDie());
-            final Source xsltSource = new DOMSource(style_.getDomNodeOrDie());
+            final DomNode sourceDomNode = source.getDomNodeOrDie();
+            Source xmlSource = new DOMSource(sourceDomNode);
 
-            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            final org.w3c.dom.Document containerDocument =
-                factory.newDocumentBuilder().newDocument();
-            final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
-            containerDocument.appendChild(containerElement);
-
-            final DOMResult result = new DOMResult(containerElement);
+            final DomNode xsltDomNode = style_.getDomNodeOrDie();
+            final Source xsltSource = new DOMSource(xsltDomNode);
 
             final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
             for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
                 transformer.setParameter(entry.getKey(), entry.getValue());
             }
+
+            // hack to preserve indention
+            // the transformer only accepts the OutputKeys.INDENT setting if
+            // the StreamResult is used
+            final SgmlPage page = sourceDomNode.getPage();
+            if (page != null && page.getWebClient().getBrowserVersion()
+                                            .hasFeature(JS_XSLT_TRANSFORM_INDENT)) {
+                final DomNode outputNode = findOutputNode(xsltDomNode);
+                if (outputNode != null) {
+                    final org.w3c.dom.Node indentNode = outputNode.getAttributes().getNamedItem("indent");
+                    if (indentNode != null && "yes".equalsIgnoreCase(indentNode.getNodeValue())) {
+                        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+                        try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                            transformer.transform(xmlSource, new StreamResult(out));
+                            final WebResponseData data =
+                                    new WebResponseData(out.toByteArray(), 200, null, Collections.emptyList());
+                            final WebResponse response = new WebResponse(data, null, 0);
+                            final org.w3c.dom.Document doc = XmlUtils.buildDocument(response);
+                            return doc;
+                        }
+                    }
+                }
+            }
+
+            final DOMResult result = new DOMResult();
             transformer.transform(xmlSource, result);
 
             final org.w3c.dom.Node transformedNode = result.getNode();
             if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
                 return transformedNode;
             }
-            //output is not DOM (text)
+
+            // output is not DOM (text)
             xmlSource = new DOMSource(source.getDomNodeOrDie());
             final StringWriter writer = new StringWriter();
             final Result streamResult = new StreamResult(writer);
@@ -213,5 +241,20 @@ public class XSLTProcessor extends SimpleScriptable {
             qualifiedName = localName;
         }
         return qualifiedName;
+    }
+
+    private static DomNode findOutputNode(final DomNode xsltDomNode) {
+        for (DomNode child : xsltDomNode.getChildren()) {
+            if ("output".equals(child.getLocalName())) {
+                return child;
+            }
+
+            for (DomNode child1 : child.getChildren()) {
+                if ("output".equals(child1.getLocalName())) {
+                    return child1;
+                }
+            }
+        }
+        return null;
     }
 }
