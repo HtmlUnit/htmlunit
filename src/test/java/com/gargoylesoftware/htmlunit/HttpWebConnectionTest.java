@@ -239,7 +239,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             @Override
             protected HttpClientBuilder createHttpClientBuilder() {
                 tabCalled[0] = true;
-                return HttpClientBuilder.create();
+
+                final HttpClientBuilder builder = HttpClientBuilder.create();
+                builder.setConnectionManagerShared(true);
+                return builder;
             }
         };
 
