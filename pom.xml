@@ -28,7 +28,7 @@
         <htmlunitneko.version>2.37.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.37.0-SNAPSHOT</htmlunitcorejs.version>
 
-        <httpcomponents.version>4.5.10</httpcomponents.version>
+        <httpcomponents.version>4.5.11</httpcomponents.version>
         <jetty.version>9.4.26.v20200117</jetty.version>
         <log4j.version>2.13.0</log4j.version>
         <slf4j.version>1.7.30</slf4j.version>
