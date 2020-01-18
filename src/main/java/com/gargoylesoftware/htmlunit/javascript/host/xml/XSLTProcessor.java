@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -153,7 +154,12 @@ public class XSLTProcessor extends SimpleScriptable {
                 }
             }
 
-            final DOMResult result = new DOMResult();
+            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            final org.w3c.dom.Document containerDocument = factory.newDocumentBuilder().newDocument();
+            final org.w3c.dom.Element containerElement = containerDocument.createElement("container");
+            containerDocument.appendChild(containerElement);
+
+            final DOMResult result = new DOMResult(containerElement);
             transformer.transform(xmlSource, result);
 
             final org.w3c.dom.Node transformedNode = result.getNode();
