@@ -295,7 +295,7 @@ public class HtmlObject extends HtmlElement {
         }
 
         final String clsId = getClassIdAttribute();
-        if (ATTRIBUTE_NOT_DEFINED != clsId) {
+        if (ATTRIBUTE_NOT_DEFINED != clsId && getPage().getWebClient().isJavaScriptEngineEnabled()) {
             ((HTMLObjectElement) getScriptableObject()).setClassid(clsId);
         }
     }

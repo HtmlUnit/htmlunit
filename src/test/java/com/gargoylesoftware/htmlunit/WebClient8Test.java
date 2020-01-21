@@ -263,4 +263,28 @@ public class WebClient8Test extends SimpleWebTestCase {
             webClient.getPage(URL_FIRST);
         }
     }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    public void object() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>foo</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<object type='application/pdf' classid='cls12345'></object>\n"
+                + "</body></html>";
+
+        try (WebClient webClient = new WebClient(getBrowserVersion(), false, null, -1)) {
+            final MockWebConnection webConnection = getMockWebConnection();
+            webConnection.setResponse(URL_FIRST, html);
+            webConnection.setResponse(new URL(URL_FIRST, "simple.css"), "");
+
+            webClient.setWebConnection(webConnection);
+
+            webClient.getPage(URL_FIRST);
+        }
+    }
 }
