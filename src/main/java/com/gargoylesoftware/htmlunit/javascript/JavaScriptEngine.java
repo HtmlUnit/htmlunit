@@ -216,8 +216,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(window, "java", "javax", "org", "com", "edu", "net",
-                "JavaAdapter", "JavaImporter", "Continuation", "Packages", "getClass");
+        deleteProperties(window, "Continuation");
         if (!browserVersion.hasFeature(JS_XML)) {
             deleteProperties(window, "XML", "XMLList", "Namespace", "QName");
         }

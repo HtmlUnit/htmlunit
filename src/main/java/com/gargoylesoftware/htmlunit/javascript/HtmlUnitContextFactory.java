@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.ClassShutter;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -273,6 +274,14 @@ public class HtmlUnitContextFactory extends ContextFactory {
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
         cx.setLanguageVersion(Context.VERSION_ES6);
+
+        // make sure no java classes are usable from js
+        cx.setClassShutter(new ClassShutter() {
+            @Override
+            public boolean visibleToScripts(final String fullClassName) {
+                return false;
+            }
+        });
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
         cx.setOptimizationLevel(-1);
