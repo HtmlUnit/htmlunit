@@ -82,7 +82,7 @@ public class DedicatedWorkerGlobalScope extends HtmlUnitScriptable {
      */
     DedicatedWorkerGlobalScope(final Window owningWindow, final Context context, final BrowserVersion browserVersion,
             final Worker worker) throws Exception {
-        context.initStandardObjects(this);
+        context.initSafeStandardObjects(this);
 
         final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
                 DedicatedWorkerGlobalScope.class, browserVersion);

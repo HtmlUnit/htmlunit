@@ -202,7 +202,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         final Window window = new Window();
         ((SimpleScriptable) window).setClassName("Window");
-        context.initStandardObjects(window);
+        context.initSafeStandardObjects(window);
 
         final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
         if (windowConfig.getJsConstructor() != null) {

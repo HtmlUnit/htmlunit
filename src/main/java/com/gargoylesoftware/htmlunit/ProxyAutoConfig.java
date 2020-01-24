@@ -55,7 +55,7 @@ public final class ProxyAutoConfig {
         final Context cx = Context.enter();
         try {
             final ProxyAutoConfig config = new ProxyAutoConfig();
-            final Scriptable scope = cx.initStandardObjects();
+            final Scriptable scope = cx.initSafeStandardObjects();
 
             config.defineMethod("isPlainHostName", scope);
             config.defineMethod("dnsDomainIs", scope);
