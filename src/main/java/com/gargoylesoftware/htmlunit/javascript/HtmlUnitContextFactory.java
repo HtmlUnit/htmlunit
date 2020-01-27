@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_D
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROPERTY_DESCRIPTOR_NEW_LINE;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptException;
@@ -279,6 +280,14 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setClassShutter(new ClassShutter() {
             @Override
             public boolean visibleToScripts(final String fullClassName) {
+                final  Map<String, String> activeXObjectMap = webClient_.getActiveXObjectMap();
+                if (activeXObjectMap != null) {
+                    for (String mappedClass : activeXObjectMap.values()) {
+                        if (fullClassName.equals(mappedClass)) {
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
         });
