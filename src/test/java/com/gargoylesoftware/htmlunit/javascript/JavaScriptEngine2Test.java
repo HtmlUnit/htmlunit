@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static org.junit.Assert.fail;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -890,5 +892,53 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void javaNotAccessable() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + "function test() {\n"
+                + "  try {\n"
+                + "    alert(java.lang.Math.PI);\n"
+                + "  } catch (e) { alert('exception'); }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Received: from worker - exception")
+    public void javaNotAccessableFromWorker() throws Exception {
+        final String html = "<html><body>\n"
+            + "<script async>\n"
+            + "try {\n"
+            + "  var myWorker = new Worker('worker.js');\n"
+            + "  myWorker.onmessage = function(e) {\n"
+            + "    alert('Received: ' + e.data);\n"
+            + "  };\n"
+            + "} catch(e) { alert('exception' + e); }\n"
+            + "</script></body></html>\n";
+
+        final String workerJs = "var pi = 'from worker';\n"
+                + "try {\n"
+                + "  pi = pi + ' - ' + java.lang.Math.PI\n"
+                + "} catch (e) { pi = pi + ' - ' + 'exception'; }\n"
+                + "postMessage(pi);\n";
+
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs);
+
+        loadPageWithAlerts2(html, 2000);
     }
 }
