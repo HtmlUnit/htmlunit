@@ -7534,15 +7534,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF60 = "async,constructor(),load()",
             FF68 = "async,constructor(),load()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "constructor(),createCDATASection(),createProcessingInstruction(),"
-                + "getElementById(),getElementsByTagName()",
-            FF60 = "async,constructor(),createCDATASection(),createProcessingInstruction(),"
-                + "getElementById(),getElementsByTagName(),load()",
-            FF68 = "async,constructor(),createCDATASection(),createProcessingInstruction(),"
-                + "getElementById(),getElementsByTagName(),load()",
-            IE = "constructor,createCDATASection(),createProcessingInstruction(),"
-                + "getElementById(),getElementsByTagName()")
-    //IE expectations are bigger than real IE alert length, test should be changed to store value in textarea
+    @HtmlUnitNYI(CHROME = "constructor(),getElementsByTagName()",
+            FF60 = "async,constructor(),getElementsByTagName(),load()",
+            FF68 = "async,constructor(),getElementsByTagName(),load()",
+            IE = "constructor,getElementsByTagName()")
     public void document() throws Exception {
         testString("xmlDocument");
     }

@@ -32,6 +32,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_S
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_EXPAND_ENTITY_REFERENCES_FALSE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_TREEWALKER_FILTER_FUNCTION_ONLY;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -59,8 +60,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.xml.utils.PrefixResolver;
+import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
+import org.w3c.dom.ProcessingInstruction;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -134,6 +137,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -4156,5 +4160,49 @@ public class Document extends Node {
             throw ScriptRuntime.typeError3("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
         }
         return super.isReadOnlySettable(name, value);
+    }
+
+    /**
+     * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
+     * @param id the ID to search for
+     * @return the element with the specified ID, as long as it is an HTML element; {@code null} otherwise
+     */
+    @JsxFunction
+    public Object getElementById(final String id) {
+        final DomNode domNode = getDomNodeOrDie();
+        final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
+        if (domElement != null) {
+            if (!(domNode instanceof XmlPage) || domElement instanceof HtmlElement
+                    || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
+                return ((DomElement) domElement).getScriptableObject();
+            }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Creates a new ProcessingInstruction.
+     * @param target the target
+     * @param data the data
+     * @return the new ProcessingInstruction
+     */
+    @JsxFunction
+    public Object createProcessingInstruction(final String target, final String data) {
+        final ProcessingInstruction node = getPage().createProcessingInstruction(target, data);
+        return getScriptableFor(node);
+    }
+
+    /**
+     * Creates a new createCDATASection.
+     * @param data the data
+     * @return the new CDATASection
+     */
+    @JsxFunction
+    public Object createCDATASection(final String data) {
+        final CDATASection node = getPage().createCDATASection(data);
+        return getScriptableFor(node);
     }
 }

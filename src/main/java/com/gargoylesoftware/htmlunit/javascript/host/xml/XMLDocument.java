@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_EXCEPTION_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOMPARSER_PARSERERROR_ON_ERROR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
@@ -27,9 +26,6 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.ProcessingInstruction;
-
 import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -274,49 +270,5 @@ public class XMLDocument extends Document {
         };
 
         return collection;
-    }
-
-    /**
-     * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
-     * @param id the ID to search for
-     * @return the element with the specified ID, as long as it is an HTML element; {@code null} otherwise
-     */
-    @JsxFunction
-    public Object getElementById(final String id) {
-        final DomNode domNode = getDomNodeOrDie();
-        final Object domElement = domNode.getFirstByXPath("//*[@id = \"" + id + "\"]");
-        if (domElement != null) {
-            if (!(domNode instanceof XmlPage) || domElement instanceof HtmlElement
-                    || getBrowserVersion().hasFeature(JS_XML_GET_ELEMENT_BY_ID__ANY_ELEMENT)) {
-                return ((DomElement) domElement).getScriptableObject();
-            }
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("getElementById(" + id + "): no HTML DOM node found with this ID");
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Creates a new ProcessingInstruction.
-     * @param target the target
-     * @param data the data
-     * @return the new ProcessingInstruction
-     */
-    @JsxFunction
-    public Object createProcessingInstruction(final String target, final String data) {
-        final ProcessingInstruction node = getPage().createProcessingInstruction(target, data);
-        return getScriptableFor(node);
-    }
-
-    /**
-     * Creates a new createCDATASection.
-     * @param data the data
-     * @return the new CDATASection
-     */
-    @JsxFunction
-    public Object createCDATASection(final String data) {
-        final CDATASection node = getPage().createCDATASection(data);
-        return getScriptableFor(node);
     }
 }
