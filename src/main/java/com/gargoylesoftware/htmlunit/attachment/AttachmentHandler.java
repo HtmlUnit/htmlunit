@@ -62,6 +62,6 @@ public interface AttachmentHandler extends Serializable {
         if (disp == null) {
             return false;
         }
-        return disp.startsWith("attachment");
+        return disp.toLowerCase().startsWith("attachment");
     }
 }
