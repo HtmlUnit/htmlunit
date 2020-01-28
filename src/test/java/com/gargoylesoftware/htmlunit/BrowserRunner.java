@@ -364,13 +364,13 @@ public class BrowserRunner extends Suite {
         String[] IE() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 60. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 60.
          * @return the alerts
          */
         String[] FF60() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 68. If not defined, {@link #FF()} is used.
+         * Alerts for Firefox 68.
          * @return the alerts
          */
         String[] FF68() default { EMPTY_DEFAULT };

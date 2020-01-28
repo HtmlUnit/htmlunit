@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.37.0" date="xxxx, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
+        <release version="2.37.0" date="January 28, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
             <action type="fix" dev="rbri">
                 Security: prevent Rhinos access to Java resources; e.g. call java methods.
             </action>
@@ -31,7 +31,7 @@
                 Resync core-js with rhino trunk (2019-11-25). This includes some improvements to iterable processing.
             </action>
             <action type="fix" dev="rbri" issue="#79">
-                The entity processing was broken if an '&' was in front of a tag like </div>&X</div>.
+                The entity processing was broken if an '&amp;' was in front of a tag like &lt;/div&gt;&amp;X&lt;/div&gt;.
             </action>
             <action type="fix" dev="rbri" issue="#114">
                 Promise.all() and Promise.race() are now able to work with iterables instead of only supporting
