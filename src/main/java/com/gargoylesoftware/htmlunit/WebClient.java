@@ -540,7 +540,7 @@ public class WebClient implements Serializable, AutoCloseable {
             final WebWindow w = openWindow(null, null, webWindow);
             final Page page = pageCreator_.createPage(webResponse, w);
             attachmentHandler_.handleAttachment(page);
-            return page;
+            return webWindow.getEnclosedPage();
         }
 
         final Page oldPage = webWindow.getEnclosedPage();
