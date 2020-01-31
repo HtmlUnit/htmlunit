@@ -1077,6 +1077,9 @@
         <contributor>
             <name>Le Stephane</name>
         </contributor>
+        <contributor>
+            <name>Alex Gorbatovsky</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
