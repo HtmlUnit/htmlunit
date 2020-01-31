@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.38.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                AttachmentHandler.isAttachment(WebResponse) has to check case insensitive.
+            </action>
             <action type="fix" dev="rbri" issue="neko #5">
                 Neko: Make sure rewind is working in all cases.
             </action>

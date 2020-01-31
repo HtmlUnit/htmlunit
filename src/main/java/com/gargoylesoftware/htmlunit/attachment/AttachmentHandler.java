@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.attachment;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
@@ -62,6 +63,6 @@ public interface AttachmentHandler extends Serializable {
         if (disp == null) {
             return false;
         }
-        return disp.startsWith("attachment");
+        return disp.toLowerCase(Locale.ROOT).startsWith("attachment");
     }
 }
