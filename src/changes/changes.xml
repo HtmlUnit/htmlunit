@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <release version="2.38.0" date="xxxx, 2020" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="neko #5">
+                Neko: Make sure rewind is working in all cases.
+            </action>
+        </release>
         <release version="2.37.0" date="January 28, 2020" description="Bugfixes, CHROME 79, FF52 removed, FF68 added">
             <action type="fix" dev="rbri">
                 Security: prevent Rhinos access to Java resources; e.g. call java methods.
