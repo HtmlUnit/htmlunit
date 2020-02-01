@@ -188,7 +188,8 @@ public class HostParentOfNTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             CHROME = "false",
-            FF = "false")
+            FF68 = "false",
+            FF60 = "false")
     public void _Node_HTMLAppletElement() throws Exception {
         test("Node", "HTMLAppletElement");
     }
@@ -650,7 +651,8 @@ public class HostParentOfNTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _Node_HTMLMenuItemElement() throws Exception {
         test("Node", "HTMLMenuItemElement");
     }
@@ -1532,7 +1534,8 @@ public class HostParentOfNTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _Node_SVGGeometryElement() throws Exception {
         test("Node", "SVGGeometryElement");
     }

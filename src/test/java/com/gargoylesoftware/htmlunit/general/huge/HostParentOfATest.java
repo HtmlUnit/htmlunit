@@ -105,7 +105,8 @@ public class HostParentOfATest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "true",
-            FF = "false")
+            FF68 = "false",
+            FF60 = "false")
     public void _ApplicationCache_ApplicationCache() throws Exception {
         test("ApplicationCache", "ApplicationCache");
     }
@@ -273,7 +274,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _AudioNode_AudioScheduledSourceNode() throws Exception {
         test("AudioNode", "AudioScheduledSourceNode");
     }
@@ -474,7 +476,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _AudioScheduledSourceNode_AudioBufferSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioBufferSourceNode");
     }
@@ -485,7 +488,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _AudioScheduledSourceNode_AudioScheduledSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "AudioScheduledSourceNode");
     }
@@ -496,7 +500,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _AudioScheduledSourceNode_ConstantSourceNode() throws Exception {
         test("AudioScheduledSourceNode", "ConstantSourceNode");
     }
@@ -507,7 +512,8 @@ public class HostParentOfATest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF68 = "true",
+            FF60 = "true")
     public void _AudioScheduledSourceNode_OscillatorNode() throws Exception {
         test("AudioScheduledSourceNode", "OscillatorNode");
     }

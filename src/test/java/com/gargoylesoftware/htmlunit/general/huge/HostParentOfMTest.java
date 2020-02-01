@@ -121,7 +121,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _MediaKeyError_MediaKeyError() throws Exception {
         test("MediaKeyError", "MediaKeyError");
     }
@@ -208,7 +210,9 @@ public class HostParentOfMTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _MediaQueryListEvent_MediaQueryListEvent() throws Exception {
         test("MediaQueryListEvent", "MediaQueryListEvent");
     }
@@ -240,7 +244,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _MediaStream_CanvasCaptureMediaStream() throws Exception {
         test("MediaStream", "CanvasCaptureMediaStream");
     }
@@ -529,7 +535,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _MouseEvent_MouseScrollEvent() throws Exception {
         test("MouseEvent", "MouseScrollEvent");
     }
@@ -572,7 +580,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _MouseScrollEvent_MouseScrollEvent() throws Exception {
         test("MouseScrollEvent", "MouseScrollEvent");
     }
@@ -593,7 +603,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _mozRTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -604,7 +616,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _mozRTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -615,7 +629,9 @@ public class HostParentOfMTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void _mozRTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription", "mozRTCSessionDescription");
     }

@@ -191,7 +191,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _a_command() throws Exception {
         test("a", "command");
     }
@@ -374,7 +375,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _abbr_command() throws Exception {
         test("abbr", "command");
     }
@@ -557,7 +559,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _acronym_command() throws Exception {
         test("acronym", "command");
     }
@@ -740,7 +743,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _address_command() throws Exception {
         test("address", "command");
     }
@@ -923,7 +927,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _applet_command() throws Exception {
         test("applet", "command");
     }
@@ -2384,7 +2389,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _article_command() throws Exception {
         test("article", "command");
     }
@@ -2567,7 +2573,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _aside_command() throws Exception {
         test("aside", "command");
     }
@@ -2750,7 +2757,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _audio_command() throws Exception {
         test("audio", "command");
     }
@@ -2933,7 +2941,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _b_command() throws Exception {
         test("b", "command");
     }
@@ -5672,7 +5681,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _bdi_command() throws Exception {
         test("bdi", "command");
     }
@@ -5855,7 +5865,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _bdo_command() throws Exception {
         test("bdo", "command");
     }
@@ -7316,7 +7327,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _big_command() throws Exception {
         test("big", "command");
     }
@@ -7499,7 +7511,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _blink_command() throws Exception {
         test("blink", "command");
     }
@@ -7682,7 +7695,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _blockquote_command() throws Exception {
         test("blockquote", "command");
     }
@@ -8036,7 +8050,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "3",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _body_command() throws Exception {
         test("body", "command");
     }
@@ -10307,7 +10322,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _button_command() throws Exception {
         test("button", "command");
     }
@@ -10499,7 +10515,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _canvas_command() throws Exception {
         test("canvas", "command");
     }
@@ -11960,7 +11977,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _center_command() throws Exception {
         test("center", "command");
     }
@@ -12143,7 +12161,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _cite_command() throws Exception {
         test("cite", "command");
     }
@@ -12326,7 +12345,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _code_command() throws Exception {
         test("code", "command");
     }
@@ -15020,7 +15040,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_a() throws Exception {
         test("command", "a");
     }
@@ -15030,7 +15051,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_abbr() throws Exception {
         test("command", "abbr");
     }
@@ -15040,7 +15062,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_acronym() throws Exception {
         test("command", "acronym");
     }
@@ -15050,7 +15073,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_address() throws Exception {
         test("command", "address");
     }
@@ -15060,7 +15084,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_applet() throws Exception {
         test("command", "applet");
     }
@@ -15070,7 +15095,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_area() throws Exception {
         test("command", "area");
     }
@@ -15080,7 +15106,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_article() throws Exception {
         test("command", "article");
     }
@@ -15090,7 +15117,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_aside() throws Exception {
         test("command", "aside");
     }
@@ -15100,7 +15128,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_audio() throws Exception {
         test("command", "audio");
     }
@@ -15110,7 +15139,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_b() throws Exception {
         test("command", "b");
     }
@@ -15120,7 +15150,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_base() throws Exception {
         test("command", "base");
     }
@@ -15130,7 +15161,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_basefont() throws Exception {
         test("command", "basefont");
     }
@@ -15140,7 +15172,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_bdi() throws Exception {
         test("command", "bdi");
     }
@@ -15150,7 +15183,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_bdo() throws Exception {
         test("command", "bdo");
     }
@@ -15160,7 +15194,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_bgsound() throws Exception {
         test("command", "bgsound");
     }
@@ -15170,7 +15205,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_big() throws Exception {
         test("command", "big");
     }
@@ -15180,7 +15216,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_blink() throws Exception {
         test("command", "blink");
     }
@@ -15190,7 +15227,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_blockquote() throws Exception {
         test("command", "blockquote");
     }
@@ -15200,7 +15238,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_body() throws Exception {
         test("command", "body");
     }
@@ -15210,7 +15249,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_br() throws Exception {
         test("command", "br");
     }
@@ -15220,7 +15260,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_button() throws Exception {
         test("command", "button");
     }
@@ -15230,7 +15271,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_canvas() throws Exception {
         test("command", "canvas");
     }
@@ -15240,7 +15282,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_caption() throws Exception {
         test("command", "caption");
     }
@@ -15250,7 +15293,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_center() throws Exception {
         test("command", "center");
     }
@@ -15260,7 +15304,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_cite() throws Exception {
         test("command", "cite");
     }
@@ -15270,7 +15315,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_code() throws Exception {
         test("command", "code");
     }
@@ -15280,7 +15326,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_col() throws Exception {
         test("command", "col");
     }
@@ -15290,7 +15337,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_colgroup() throws Exception {
         test("command", "colgroup");
     }
@@ -15300,7 +15348,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_command() throws Exception {
         test("command", "command");
     }
@@ -15310,7 +15359,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_content() throws Exception {
         test("command", "content");
     }
@@ -15320,7 +15370,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_data() throws Exception {
         test("command", "data");
     }
@@ -15330,7 +15381,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_datalist() throws Exception {
         test("command", "datalist");
     }
@@ -15340,7 +15392,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dd() throws Exception {
         test("command", "dd");
     }
@@ -15350,7 +15403,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_del() throws Exception {
         test("command", "del");
     }
@@ -15360,7 +15414,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_details() throws Exception {
         test("command", "details");
     }
@@ -15370,7 +15425,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dfn() throws Exception {
         test("command", "dfn");
     }
@@ -15380,7 +15436,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dialog() throws Exception {
         test("command", "dialog");
     }
@@ -15390,7 +15447,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dir() throws Exception {
         test("command", "dir");
     }
@@ -15400,7 +15458,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_div() throws Exception {
         test("command", "div");
     }
@@ -15410,7 +15469,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dl() throws Exception {
         test("command", "dl");
     }
@@ -15420,7 +15480,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_dt() throws Exception {
         test("command", "dt");
     }
@@ -15430,7 +15491,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_em() throws Exception {
         test("command", "em");
     }
@@ -15440,7 +15502,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_embed() throws Exception {
         test("command", "embed");
     }
@@ -15450,7 +15513,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_fieldset() throws Exception {
         test("command", "fieldset");
     }
@@ -15460,7 +15524,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_figcaption() throws Exception {
         test("command", "figcaption");
     }
@@ -15470,7 +15535,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_figure() throws Exception {
         test("command", "figure");
     }
@@ -15480,7 +15546,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_font() throws Exception {
         test("command", "font");
     }
@@ -15490,7 +15557,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_footer() throws Exception {
         test("command", "footer");
     }
@@ -15500,7 +15568,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_form() throws Exception {
         test("command", "form");
     }
@@ -15510,7 +15579,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_frame() throws Exception {
         test("command", "frame");
     }
@@ -15520,7 +15590,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_frameset() throws Exception {
         test("command", "frameset");
     }
@@ -15530,7 +15601,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h1() throws Exception {
         test("command", "h1");
     }
@@ -15540,7 +15612,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h2() throws Exception {
         test("command", "h2");
     }
@@ -15550,7 +15623,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h3() throws Exception {
         test("command", "h3");
     }
@@ -15560,7 +15634,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h4() throws Exception {
         test("command", "h4");
     }
@@ -15570,7 +15645,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h5() throws Exception {
         test("command", "h5");
     }
@@ -15580,7 +15656,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_h6() throws Exception {
         test("command", "h6");
     }
@@ -15590,7 +15667,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_head() throws Exception {
         test("command", "head");
     }
@@ -15600,7 +15678,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_header() throws Exception {
         test("command", "header");
     }
@@ -15610,7 +15689,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_hr() throws Exception {
         test("command", "hr");
     }
@@ -15620,7 +15700,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_html() throws Exception {
         test("command", "html");
     }
@@ -15630,7 +15711,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_i() throws Exception {
         test("command", "i");
     }
@@ -15640,7 +15722,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_iframe() throws Exception {
         test("command", "iframe");
     }
@@ -15650,7 +15733,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_image() throws Exception {
         test("command", "image");
     }
@@ -15660,7 +15744,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_img() throws Exception {
         test("command", "img");
     }
@@ -15670,7 +15755,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_input() throws Exception {
         test("command", "input");
     }
@@ -15680,7 +15766,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_ins() throws Exception {
         test("command", "ins");
     }
@@ -15690,7 +15777,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_isindex() throws Exception {
         test("command", "isindex");
     }
@@ -15700,7 +15788,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_kbd() throws Exception {
         test("command", "kbd");
     }
@@ -15710,7 +15799,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_keygen() throws Exception {
         test("command", "keygen");
     }
@@ -15720,7 +15810,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_label() throws Exception {
         test("command", "label");
     }
@@ -15730,7 +15821,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_layer() throws Exception {
         test("command", "layer");
     }
@@ -15740,7 +15832,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_legend() throws Exception {
         test("command", "legend");
     }
@@ -15750,7 +15843,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_li() throws Exception {
         test("command", "li");
     }
@@ -15760,7 +15854,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_link() throws Exception {
         test("command", "link");
     }
@@ -15770,7 +15865,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_listing() throws Exception {
         test("command", "listing");
     }
@@ -15780,7 +15876,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_main() throws Exception {
         test("command", "main");
     }
@@ -15790,7 +15887,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_map() throws Exception {
         test("command", "map");
     }
@@ -15800,7 +15898,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_mark() throws Exception {
         test("command", "mark");
     }
@@ -15810,7 +15909,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_marquee() throws Exception {
         test("command", "marquee");
     }
@@ -15820,7 +15920,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_menu() throws Exception {
         test("command", "menu");
     }
@@ -15830,7 +15931,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_menuitem() throws Exception {
         test("command", "menuitem");
     }
@@ -15840,7 +15942,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_meta() throws Exception {
         test("command", "meta");
     }
@@ -15850,7 +15953,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_meter() throws Exception {
         test("command", "meter");
     }
@@ -15860,7 +15964,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_multicol() throws Exception {
         test("command", "multicol");
     }
@@ -15870,7 +15975,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_nav() throws Exception {
         test("command", "nav");
     }
@@ -15880,7 +15986,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_nextid() throws Exception {
         test("command", "nextid");
     }
@@ -15890,7 +15997,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_nobr() throws Exception {
         test("command", "nobr");
     }
@@ -15900,7 +16008,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_noembed() throws Exception {
         test("command", "noembed");
     }
@@ -15910,7 +16019,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_noframes() throws Exception {
         test("command", "noframes");
     }
@@ -15920,7 +16030,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_nolayer() throws Exception {
         test("command", "nolayer");
     }
@@ -15930,7 +16041,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_noscript() throws Exception {
         test("command", "noscript");
     }
@@ -15940,7 +16052,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_object() throws Exception {
         test("command", "object");
     }
@@ -15950,7 +16063,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_ol() throws Exception {
         test("command", "ol");
     }
@@ -15960,7 +16074,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_optgroup() throws Exception {
         test("command", "optgroup");
     }
@@ -15970,7 +16085,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_option() throws Exception {
         test("command", "option");
     }
@@ -15980,7 +16096,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_output() throws Exception {
         test("command", "output");
     }
@@ -15990,7 +16107,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_p() throws Exception {
         test("command", "p");
     }
@@ -16000,7 +16118,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_param() throws Exception {
         test("command", "param");
     }
@@ -16010,7 +16129,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_picture() throws Exception {
         test("command", "picture");
     }
@@ -16020,7 +16140,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_plaintext() throws Exception {
         test("command", "plaintext");
     }
@@ -16030,7 +16151,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_pre() throws Exception {
         test("command", "pre");
     }
@@ -16040,7 +16162,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_progress() throws Exception {
         test("command", "progress");
     }
@@ -16050,7 +16173,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_q() throws Exception {
         test("command", "q");
     }
@@ -16060,7 +16184,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_rp() throws Exception {
         test("command", "rp");
     }
@@ -16070,7 +16195,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_rt() throws Exception {
         test("command", "rt");
     }
@@ -16080,7 +16206,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_ruby() throws Exception {
         test("command", "ruby");
     }
@@ -16090,7 +16217,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_s() throws Exception {
         test("command", "s");
     }
@@ -16100,7 +16228,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_samp() throws Exception {
         test("command", "samp");
     }
@@ -16110,7 +16239,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_script() throws Exception {
         test("command", "script");
     }
@@ -16120,7 +16250,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_section() throws Exception {
         test("command", "section");
     }
@@ -16130,7 +16261,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_select() throws Exception {
         test("command", "select");
     }
@@ -16140,7 +16272,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_slot() throws Exception {
         test("command", "slot");
     }
@@ -16150,7 +16283,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_small() throws Exception {
         test("command", "small");
     }
@@ -16160,7 +16294,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_source() throws Exception {
         test("command", "source");
     }
@@ -16170,7 +16305,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_span() throws Exception {
         test("command", "span");
     }
@@ -16180,7 +16316,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_strike() throws Exception {
         test("command", "strike");
     }
@@ -16190,7 +16327,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_strong() throws Exception {
         test("command", "strong");
     }
@@ -16200,7 +16338,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_style() throws Exception {
         test("command", "style");
     }
@@ -16210,7 +16349,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_sub() throws Exception {
         test("command", "sub");
     }
@@ -16220,7 +16360,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_summary() throws Exception {
         test("command", "summary");
     }
@@ -16230,7 +16371,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_sup() throws Exception {
         test("command", "sup");
     }
@@ -16240,7 +16382,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_svg() throws Exception {
         test("command", "svg");
     }
@@ -16250,7 +16393,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_table() throws Exception {
         test("command", "table");
     }
@@ -16260,7 +16404,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_tbody() throws Exception {
         test("command", "tbody");
     }
@@ -16270,7 +16415,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_td() throws Exception {
         test("command", "td");
     }
@@ -16280,7 +16426,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_template() throws Exception {
         test("command", "template");
     }
@@ -16290,7 +16437,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_textarea() throws Exception {
         test("command", "textarea");
     }
@@ -16300,7 +16448,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_tfoot() throws Exception {
         test("command", "tfoot");
     }
@@ -16310,7 +16459,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_th() throws Exception {
         test("command", "th");
     }
@@ -16320,7 +16470,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_thead() throws Exception {
         test("command", "thead");
     }
@@ -16330,7 +16481,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_time() throws Exception {
         test("command", "time");
     }
@@ -16340,7 +16492,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_title() throws Exception {
         test("command", "title");
     }
@@ -16350,7 +16503,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_tr() throws Exception {
         test("command", "tr");
     }
@@ -16360,7 +16514,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_track() throws Exception {
         test("command", "track");
     }
@@ -16370,7 +16525,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_tt() throws Exception {
         test("command", "tt");
     }
@@ -16380,7 +16536,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_u() throws Exception {
         test("command", "u");
     }
@@ -16390,7 +16547,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_ul() throws Exception {
         test("command", "ul");
     }
@@ -16400,7 +16558,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_var() throws Exception {
         test("command", "var");
     }
@@ -16410,7 +16569,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_video() throws Exception {
         test("command", "video");
     }
@@ -16420,7 +16580,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _command_wbr() throws Exception {
         test("command", "wbr");
     }
@@ -16430,7 +16591,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _command_xmp() throws Exception {
         test("command", "xmp");
     }
@@ -16485,7 +16647,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _content_command() throws Exception {
         test("content", "command");
     }
@@ -16668,7 +16831,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _data_command() throws Exception {
         test("data", "command");
     }
@@ -16851,7 +17015,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _datalist_command() throws Exception {
         test("datalist", "command");
     }
@@ -17034,7 +17199,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dd_command() throws Exception {
         test("dd", "command");
     }
@@ -17235,7 +17401,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _del_command() throws Exception {
         test("del", "command");
     }
@@ -17418,7 +17585,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _details_command() throws Exception {
         test("details", "command");
     }
@@ -17601,7 +17769,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dfn_command() throws Exception {
         test("dfn", "command");
     }
@@ -17784,7 +17953,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dialog_command() throws Exception {
         test("dialog", "command");
     }
@@ -17967,7 +18137,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dir_command() throws Exception {
         test("dir", "command");
     }
@@ -18150,7 +18321,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _div_command() throws Exception {
         test("div", "command");
     }
@@ -18333,7 +18505,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dl_command() throws Exception {
         test("dl", "command");
     }
@@ -18516,7 +18689,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _dt_command() throws Exception {
         test("dt", "command");
     }
@@ -18717,7 +18891,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _em_command() throws Exception {
         test("em", "command");
     }
@@ -20178,7 +20353,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _fieldset_command() throws Exception {
         test("fieldset", "command");
     }
@@ -20361,7 +20537,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _figcaption_command() throws Exception {
         test("figcaption", "command");
     }
@@ -20544,7 +20721,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _figure_command() throws Exception {
         test("figure", "command");
     }
@@ -20727,7 +20905,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _font_command() throws Exception {
         test("font", "command");
     }
@@ -20910,7 +21089,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _footer_command() throws Exception {
         test("footer", "command");
     }
@@ -21093,7 +21273,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _form_command() throws Exception {
         test("form", "command");
     }
@@ -23821,7 +24002,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h1_command() throws Exception {
         test("h1", "command");
     }
@@ -24058,7 +24240,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h2_command() throws Exception {
         test("h2", "command");
     }
@@ -24295,7 +24478,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h3_command() throws Exception {
         test("h3", "command");
     }
@@ -24532,7 +24716,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h4_command() throws Exception {
         test("h4", "command");
     }
@@ -24769,7 +24954,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h5_command() throws Exception {
         test("h5", "command");
     }
@@ -25006,7 +25192,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _h6_command() throws Exception {
         test("h6", "command");
     }
@@ -26521,7 +26708,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _header_command() throws Exception {
         test("header", "command");
     }
@@ -29402,7 +29590,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _i_command() throws Exception {
         test("i", "command");
     }
@@ -33419,7 +33608,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _ins_command() throws Exception {
         test("ins", "command");
     }
@@ -33866,7 +34056,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             CHROME = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     @NotYetImplemented(IE)
     public void _isindex_command() throws Exception {
         test("isindex", "command");
@@ -35164,7 +35355,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _kbd_command() throws Exception {
         test("kbd", "command");
     }
@@ -35302,7 +35494,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_a() throws Exception {
         test("keygen", "a");
     }
@@ -35312,7 +35505,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_abbr() throws Exception {
         test("keygen", "abbr");
     }
@@ -35322,7 +35516,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_acronym() throws Exception {
         test("keygen", "acronym");
     }
@@ -35332,7 +35527,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_address() throws Exception {
         test("keygen", "address");
     }
@@ -35342,7 +35538,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_applet() throws Exception {
         test("keygen", "applet");
     }
@@ -35352,7 +35549,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_area() throws Exception {
         test("keygen", "area");
     }
@@ -35362,7 +35560,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_article() throws Exception {
         test("keygen", "article");
     }
@@ -35372,7 +35571,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_aside() throws Exception {
         test("keygen", "aside");
     }
@@ -35382,7 +35582,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_audio() throws Exception {
         test("keygen", "audio");
     }
@@ -35392,7 +35593,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_b() throws Exception {
         test("keygen", "b");
     }
@@ -35402,7 +35604,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_base() throws Exception {
         test("keygen", "base");
     }
@@ -35412,7 +35615,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_basefont() throws Exception {
         test("keygen", "basefont");
     }
@@ -35422,7 +35626,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_bdi() throws Exception {
         test("keygen", "bdi");
     }
@@ -35432,7 +35637,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_bdo() throws Exception {
         test("keygen", "bdo");
     }
@@ -35442,7 +35648,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_bgsound() throws Exception {
         test("keygen", "bgsound");
     }
@@ -35452,7 +35659,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_big() throws Exception {
         test("keygen", "big");
     }
@@ -35462,7 +35670,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_blink() throws Exception {
         test("keygen", "blink");
     }
@@ -35472,7 +35681,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_blockquote() throws Exception {
         test("keygen", "blockquote");
     }
@@ -35482,7 +35692,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_body() throws Exception {
         test("keygen", "body");
     }
@@ -35492,7 +35703,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_br() throws Exception {
         test("keygen", "br");
     }
@@ -35502,7 +35714,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_button() throws Exception {
         test("keygen", "button");
     }
@@ -35512,7 +35725,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_canvas() throws Exception {
         test("keygen", "canvas");
     }
@@ -35522,7 +35736,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_caption() throws Exception {
         test("keygen", "caption");
     }
@@ -35532,7 +35747,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_center() throws Exception {
         test("keygen", "center");
     }
@@ -35542,7 +35758,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_cite() throws Exception {
         test("keygen", "cite");
     }
@@ -35552,7 +35769,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_code() throws Exception {
         test("keygen", "code");
     }
@@ -35562,7 +35780,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_col() throws Exception {
         test("keygen", "col");
     }
@@ -35572,7 +35791,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_colgroup() throws Exception {
         test("keygen", "colgroup");
     }
@@ -35582,7 +35802,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_command() throws Exception {
         test("keygen", "command");
     }
@@ -35592,7 +35813,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_content() throws Exception {
         test("keygen", "content");
     }
@@ -35602,7 +35824,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_data() throws Exception {
         test("keygen", "data");
     }
@@ -35612,7 +35835,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_datalist() throws Exception {
         test("keygen", "datalist");
     }
@@ -35622,7 +35846,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dd() throws Exception {
         test("keygen", "dd");
     }
@@ -35632,7 +35857,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_del() throws Exception {
         test("keygen", "del");
     }
@@ -35642,7 +35868,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_details() throws Exception {
         test("keygen", "details");
     }
@@ -35652,7 +35879,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dfn() throws Exception {
         test("keygen", "dfn");
     }
@@ -35662,7 +35890,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dialog() throws Exception {
         test("keygen", "dialog");
     }
@@ -35672,7 +35901,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dir() throws Exception {
         test("keygen", "dir");
     }
@@ -35682,7 +35912,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_div() throws Exception {
         test("keygen", "div");
     }
@@ -35692,7 +35923,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dl() throws Exception {
         test("keygen", "dl");
     }
@@ -35702,7 +35934,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_dt() throws Exception {
         test("keygen", "dt");
     }
@@ -35712,7 +35945,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_em() throws Exception {
         test("keygen", "em");
     }
@@ -35722,7 +35956,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_embed() throws Exception {
         test("keygen", "embed");
     }
@@ -35732,7 +35967,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_fieldset() throws Exception {
         test("keygen", "fieldset");
     }
@@ -35742,7 +35978,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_figcaption() throws Exception {
         test("keygen", "figcaption");
     }
@@ -35752,7 +35989,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_figure() throws Exception {
         test("keygen", "figure");
     }
@@ -35762,7 +36000,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_font() throws Exception {
         test("keygen", "font");
     }
@@ -35772,7 +36011,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_footer() throws Exception {
         test("keygen", "footer");
     }
@@ -35782,7 +36022,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_form() throws Exception {
         test("keygen", "form");
     }
@@ -35792,7 +36033,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_frame() throws Exception {
         test("keygen", "frame");
     }
@@ -35802,7 +36044,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_frameset() throws Exception {
         test("keygen", "frameset");
     }
@@ -35812,7 +36055,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h1() throws Exception {
         test("keygen", "h1");
     }
@@ -35822,7 +36066,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h2() throws Exception {
         test("keygen", "h2");
     }
@@ -35832,7 +36077,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h3() throws Exception {
         test("keygen", "h3");
     }
@@ -35842,7 +36088,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h4() throws Exception {
         test("keygen", "h4");
     }
@@ -35852,7 +36099,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h5() throws Exception {
         test("keygen", "h5");
     }
@@ -35862,7 +36110,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_h6() throws Exception {
         test("keygen", "h6");
     }
@@ -35872,7 +36121,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_head() throws Exception {
         test("keygen", "head");
     }
@@ -35882,7 +36132,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_header() throws Exception {
         test("keygen", "header");
     }
@@ -35892,7 +36143,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_hr() throws Exception {
         test("keygen", "hr");
     }
@@ -35902,7 +36154,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_html() throws Exception {
         test("keygen", "html");
     }
@@ -35912,7 +36165,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_i() throws Exception {
         test("keygen", "i");
     }
@@ -35922,7 +36176,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_iframe() throws Exception {
         test("keygen", "iframe");
     }
@@ -35932,7 +36187,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_image() throws Exception {
         test("keygen", "image");
     }
@@ -35942,7 +36198,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_img() throws Exception {
         test("keygen", "img");
     }
@@ -35952,7 +36209,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_input() throws Exception {
         test("keygen", "input");
     }
@@ -35962,7 +36220,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_ins() throws Exception {
         test("keygen", "ins");
     }
@@ -35972,7 +36231,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_isindex() throws Exception {
         test("keygen", "isindex");
     }
@@ -35982,7 +36242,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_kbd() throws Exception {
         test("keygen", "kbd");
     }
@@ -35992,7 +36253,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_keygen() throws Exception {
         test("keygen", "keygen");
     }
@@ -36002,7 +36264,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_label() throws Exception {
         test("keygen", "label");
     }
@@ -36012,7 +36275,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_layer() throws Exception {
         test("keygen", "layer");
     }
@@ -36022,7 +36286,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_legend() throws Exception {
         test("keygen", "legend");
     }
@@ -36032,7 +36297,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_li() throws Exception {
         test("keygen", "li");
     }
@@ -36042,7 +36308,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_link() throws Exception {
         test("keygen", "link");
     }
@@ -36052,7 +36319,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_listing() throws Exception {
         test("keygen", "listing");
     }
@@ -36062,7 +36330,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_main() throws Exception {
         test("keygen", "main");
     }
@@ -36072,7 +36341,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_map() throws Exception {
         test("keygen", "map");
     }
@@ -36082,7 +36352,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_mark() throws Exception {
         test("keygen", "mark");
     }
@@ -36092,7 +36363,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_marquee() throws Exception {
         test("keygen", "marquee");
     }
@@ -36102,7 +36374,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_menu() throws Exception {
         test("keygen", "menu");
     }
@@ -36112,7 +36385,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_menuitem() throws Exception {
         test("keygen", "menuitem");
     }
@@ -36122,7 +36396,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_meta() throws Exception {
         test("keygen", "meta");
     }
@@ -36132,7 +36407,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_meter() throws Exception {
         test("keygen", "meter");
     }
@@ -36142,7 +36418,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_multicol() throws Exception {
         test("keygen", "multicol");
     }
@@ -36152,7 +36429,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_nav() throws Exception {
         test("keygen", "nav");
     }
@@ -36162,7 +36440,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_nextid() throws Exception {
         test("keygen", "nextid");
     }
@@ -36172,7 +36451,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_nobr() throws Exception {
         test("keygen", "nobr");
     }
@@ -36182,7 +36462,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_noembed() throws Exception {
         test("keygen", "noembed");
     }
@@ -36192,7 +36473,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_noframes() throws Exception {
         test("keygen", "noframes");
     }
@@ -36202,7 +36484,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_nolayer() throws Exception {
         test("keygen", "nolayer");
     }
@@ -36212,7 +36495,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_noscript() throws Exception {
         test("keygen", "noscript");
     }
@@ -36222,7 +36506,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_object() throws Exception {
         test("keygen", "object");
     }
@@ -36232,7 +36517,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_ol() throws Exception {
         test("keygen", "ol");
     }
@@ -36242,7 +36528,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_optgroup() throws Exception {
         test("keygen", "optgroup");
     }
@@ -36252,7 +36539,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_option() throws Exception {
         test("keygen", "option");
     }
@@ -36262,7 +36550,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_output() throws Exception {
         test("keygen", "output");
     }
@@ -36272,7 +36561,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_p() throws Exception {
         test("keygen", "p");
     }
@@ -36282,7 +36572,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_param() throws Exception {
         test("keygen", "param");
     }
@@ -36292,7 +36583,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_picture() throws Exception {
         test("keygen", "picture");
     }
@@ -36302,7 +36594,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_plaintext() throws Exception {
         test("keygen", "plaintext");
     }
@@ -36312,7 +36605,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_pre() throws Exception {
         test("keygen", "pre");
     }
@@ -36322,7 +36616,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_progress() throws Exception {
         test("keygen", "progress");
     }
@@ -36332,7 +36627,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_q() throws Exception {
         test("keygen", "q");
     }
@@ -36342,7 +36638,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_rp() throws Exception {
         test("keygen", "rp");
     }
@@ -36352,7 +36649,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_rt() throws Exception {
         test("keygen", "rt");
     }
@@ -36362,7 +36660,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_ruby() throws Exception {
         test("keygen", "ruby");
     }
@@ -36372,7 +36671,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_s() throws Exception {
         test("keygen", "s");
     }
@@ -36382,7 +36682,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_samp() throws Exception {
         test("keygen", "samp");
     }
@@ -36392,7 +36693,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_script() throws Exception {
         test("keygen", "script");
     }
@@ -36402,7 +36704,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_section() throws Exception {
         test("keygen", "section");
     }
@@ -36412,7 +36715,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_select() throws Exception {
         test("keygen", "select");
     }
@@ -36422,7 +36726,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_slot() throws Exception {
         test("keygen", "slot");
     }
@@ -36432,7 +36737,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_small() throws Exception {
         test("keygen", "small");
     }
@@ -36442,7 +36748,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_source() throws Exception {
         test("keygen", "source");
     }
@@ -36452,7 +36759,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_span() throws Exception {
         test("keygen", "span");
     }
@@ -36462,7 +36770,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_strike() throws Exception {
         test("keygen", "strike");
     }
@@ -36472,7 +36781,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_strong() throws Exception {
         test("keygen", "strong");
     }
@@ -36482,7 +36792,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_style() throws Exception {
         test("keygen", "style");
     }
@@ -36492,7 +36803,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_sub() throws Exception {
         test("keygen", "sub");
     }
@@ -36502,7 +36814,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_summary() throws Exception {
         test("keygen", "summary");
     }
@@ -36512,7 +36825,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_sup() throws Exception {
         test("keygen", "sup");
     }
@@ -36522,7 +36836,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_svg() throws Exception {
         test("keygen", "svg");
     }
@@ -36532,7 +36847,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_table() throws Exception {
         test("keygen", "table");
     }
@@ -36542,7 +36858,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_tbody() throws Exception {
         test("keygen", "tbody");
     }
@@ -36552,7 +36869,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_td() throws Exception {
         test("keygen", "td");
     }
@@ -36562,7 +36880,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_template() throws Exception {
         test("keygen", "template");
     }
@@ -36572,7 +36891,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_textarea() throws Exception {
         test("keygen", "textarea");
     }
@@ -36582,7 +36902,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_tfoot() throws Exception {
         test("keygen", "tfoot");
     }
@@ -36592,7 +36913,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_th() throws Exception {
         test("keygen", "th");
     }
@@ -36602,7 +36924,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_thead() throws Exception {
         test("keygen", "thead");
     }
@@ -36612,7 +36935,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_time() throws Exception {
         test("keygen", "time");
     }
@@ -36622,7 +36946,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_title() throws Exception {
         test("keygen", "title");
     }
@@ -36632,7 +36957,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_tr() throws Exception {
         test("keygen", "tr");
     }
@@ -36642,7 +36968,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_track() throws Exception {
         test("keygen", "track");
     }
@@ -36652,7 +36979,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_tt() throws Exception {
         test("keygen", "tt");
     }
@@ -36662,7 +36990,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_u() throws Exception {
         test("keygen", "u");
     }
@@ -36672,7 +37001,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_ul() throws Exception {
         test("keygen", "ul");
     }
@@ -36682,7 +37012,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_var() throws Exception {
         test("keygen", "var");
     }
@@ -36692,7 +37023,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_video() throws Exception {
         test("keygen", "video");
     }
@@ -36702,7 +37034,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_wbr() throws Exception {
         test("keygen", "wbr");
     }
@@ -36712,7 +37045,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void _keygen_xmp() throws Exception {
         test("keygen", "xmp");
     }
@@ -36767,7 +37101,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _label_command() throws Exception {
         test("label", "command");
     }
@@ -36950,7 +37285,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _layer_command() throws Exception {
         test("layer", "command");
     }
@@ -37133,7 +37469,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _legend_command() throws Exception {
         test("legend", "command");
     }
@@ -37316,7 +37653,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _li_command() throws Exception {
         test("li", "command");
     }
@@ -38786,7 +39124,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _listing_command() throws Exception {
         test("listing", "command");
     }
@@ -38969,7 +39308,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _main_command() throws Exception {
         test("main", "command");
     }
@@ -39152,7 +39492,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _map_command() throws Exception {
         test("map", "command");
     }
@@ -39335,7 +39676,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _mark_command() throws Exception {
         test("mark", "command");
     }
@@ -39518,7 +39860,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _marquee_command() throws Exception {
         test("marquee", "command");
     }
@@ -39701,7 +40044,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _menu_command() throws Exception {
         test("menu", "command");
     }
@@ -39884,7 +40228,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _menuitem_command() throws Exception {
         test("menuitem", "command");
     }
@@ -41345,7 +41690,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _meter_command() throws Exception {
         test("meter", "command");
     }
@@ -41528,7 +41874,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _multicol_command() throws Exception {
         test("multicol", "command");
     }
@@ -41711,7 +42058,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _nav_command() throws Exception {
         test("nav", "command");
     }
@@ -41894,7 +42242,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _nextid_command() throws Exception {
         test("nextid", "command");
     }
@@ -42077,7 +42426,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _nobr_command() throws Exception {
         test("nobr", "command");
     }
@@ -42459,7 +42809,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _nolayer_command() throws Exception {
         test("nolayer", "command");
     }
@@ -42642,7 +42993,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _object_command() throws Exception {
         test("object", "command");
     }
@@ -42825,7 +43177,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _ol_command() throws Exception {
         test("ol", "command");
     }
@@ -43008,7 +43361,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _optgroup_command() throws Exception {
         test("optgroup", "command");
     }
@@ -43191,7 +43545,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _option_command() throws Exception {
         test("option", "command");
     }
@@ -43392,7 +43747,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _output_command() throws Exception {
         test("output", "command");
     }
@@ -43620,7 +43976,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _p_command() throws Exception {
         test("p", "command");
     }
@@ -43648,7 +44005,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF = "0")
+            FF68 = "0",
+            FF60 = "0")
     @NotYetImplemented(FF)
     public void _p_dialog() throws Exception {
         test("p", "dialog");
@@ -45371,7 +45729,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _picture_command() throws Exception {
         test("picture", "command");
     }
@@ -45554,7 +45913,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _pre_command() throws Exception {
         test("pre", "command");
     }
@@ -45737,7 +46097,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _progress_command() throws Exception {
         test("progress", "command");
     }
@@ -45920,7 +46281,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _q_command() throws Exception {
         test("q", "command");
     }
@@ -46103,7 +46465,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _rp_command() throws Exception {
         test("rp", "command");
     }
@@ -46296,7 +46659,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _rt_command() throws Exception {
         test("rt", "command");
     }
@@ -46479,7 +46843,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _ruby_command() throws Exception {
         test("ruby", "command");
     }
@@ -46662,7 +47027,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _s_command() throws Exception {
         test("s", "command");
     }
@@ -46845,7 +47211,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _samp_command() throws Exception {
         test("samp", "command");
     }
@@ -47046,7 +47413,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _section_command() throws Exception {
         test("section", "command");
     }
@@ -47447,7 +47815,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _slot_command() throws Exception {
         test("slot", "command");
     }
@@ -47630,7 +47999,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _small_command() throws Exception {
         test("small", "command");
     }
@@ -49091,7 +49461,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _span_command() throws Exception {
         test("span", "command");
     }
@@ -49274,7 +49645,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _strike_command() throws Exception {
         test("strike", "command");
     }
@@ -49457,7 +49829,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _strong_command() throws Exception {
         test("strong", "command");
     }
@@ -49640,7 +50013,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _sub_command() throws Exception {
         test("sub", "command");
     }
@@ -49823,7 +50197,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _summary_command() throws Exception {
         test("summary", "command");
     }
@@ -50006,7 +50381,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _sup_command() throws Exception {
         test("sup", "command");
     }
@@ -50716,7 +51092,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF = "0")
+            FF68 = "0",
+            FF60 = "0")
     public void _table_command() throws Exception {
         test("table", "command");
     }
@@ -59430,7 +59807,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _time_command() throws Exception {
         test("time", "command");
     }
@@ -62369,7 +62747,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _tt_command() throws Exception {
         test("tt", "command");
     }
@@ -62552,7 +62931,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _u_command() throws Exception {
         test("u", "command");
     }
@@ -62735,7 +63115,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _ul_command() throws Exception {
         test("ul", "command");
     }
@@ -62918,7 +63299,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _var_command() throws Exception {
         test("var", "command");
     }
@@ -63101,7 +63483,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2",
-            FF = "1")
+            FF68 = "1",
+            FF60 = "1")
     public void _video_command() throws Exception {
         test("video", "command");
     }
