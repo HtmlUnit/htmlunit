@@ -149,7 +149,7 @@ final class TestCaseCorrector {
 
     private static String getActualString(final ComparisonFailure failure) {
         String actual = failure.getActual();
-        actual = actual.substring(1, actual.length() - 1).replace("\r", "\\r").replace("\n", "\\n");
+        actual = actual.substring(1, actual.length() - 1);
         actual = StringEscapeUtils.escapeJava(actual);
         if (actual.length() > 96) {
             final StringBuilder builder = new StringBuilder();

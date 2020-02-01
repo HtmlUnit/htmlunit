@@ -134,20 +134,10 @@ class BrowserStatement extends Statement {
                 assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
                         BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF60())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts2.IE()));
-
-                assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
-                        BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
-                        && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts2.IE()));
-
-                assertFalse("Obsolete FF because FF60 and FF68 expectations are defined individually",
-                        BrowserVersionClassRunner.isDefined(alerts2.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF60())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF68()));
 
                 assertNotEquals(alerts2.IE(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.CHROME(), alerts2.DEFAULT());
