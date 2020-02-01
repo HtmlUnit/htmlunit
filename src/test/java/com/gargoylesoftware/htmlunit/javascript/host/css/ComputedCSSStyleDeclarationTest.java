@@ -279,7 +279,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"},
-            FF = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
+            FF = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"},
+            FF68 = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"},
+            FF60 = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -416,7 +418,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "block", "inline", "inline", "inline", "inline", "block", "block", "block", "block"},
             CHROME = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"},
-            FF = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"})
+            FF = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"},
+            FF68 = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"},
+            FF60 = {"none", "block", "inline", "block", "inline", "none", "block", "block", "block", "block"})
     public void defaultDisplayValues_D() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <datalist id='datalist'></datalist>\n"
@@ -580,6 +584,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"inline", "inline", "inline", "inline-block", "inline-block",
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline"},
             FF = {"inline", "inline", "inline", "inline", "inline", "inline",
+                    "inline", "inline-block", "inline-block", "inline"},
+            FF68 = {"inline", "inline", "inline", "inline", "inline", "inline",
+                    "inline", "inline-block", "inline-block", "inline"},
+            FF60 = {"inline", "inline", "inline", "inline", "inline", "inline",
                     "inline", "inline-block", "inline-block", "inline"})
     public void defaultDisplayValues_I() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -811,6 +819,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"inline", "block", "none"},
             FF = {"ruby", "ruby-text", "none"},
+            FF68 = {"ruby", "ruby-text", "none"},
+            FF60 = {"ruby", "ruby-text", "none"},
             IE = {"ruby", "ruby-text", "inline"})
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -905,6 +915,10 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
             FF = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
+                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+            FF68 = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
+                    "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+            FF60 = {"table", "table-row-group", "table-cell", "inline", "table-footer-group",
                     "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -996,7 +1010,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"transparent", "rgb(255, 0, 0)", "rgb(255, 255, 255)"},
             CHROME = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"},
-            FF = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"})
+            FF = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"},
+            FF68 = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"},
+            FF60 = {"rgba(0, 0, 0, 0)", "rgb(255, 0, 0)", "rgb(255, 255, 255)"})
     public void backgroundColor() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='d0'>div 0</div>\n"
@@ -1518,7 +1534,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "false"},
-            FF = {"true", "true"})
+            FF = {"true", "true"},
+            FF68 = {"true", "true"},
+            FF60 = {"true", "true"})
     @NotYetImplemented(FF)
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"

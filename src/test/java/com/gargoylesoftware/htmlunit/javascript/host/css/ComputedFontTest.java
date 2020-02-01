@@ -160,6 +160,8 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"", "16px \"Times New Roman\"", "", "\"Times New Roman\""},
             FF = {"", "", "", "serif"},
+            FF68 = {"", "", "", "serif"},
+            FF60 = {"", "", "", "serif"},
             IE = {"", "", "", "Times New Roman"})
     public void wrongFontFamily() throws Exception {
         font("xyz", "fontFamily", null);
@@ -172,6 +174,8 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(CHROME = {"1px xyz", "1px xyz",
                 "xyz", "xyz", "1px abc", "1px abc", "abc", "abc"},
             FF = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
+            FF68 = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
+            FF60 = {"1px xyz", "", "xyz", "xyz", "1px abc", "", "abc", "abc"},
             IE = {"1px/normal xyz", "", "xyz", "xyz", "1px/normal abc", "", "abc", "abc"})
     public void minimalFontFamily() throws Exception {
         font("1px xyz", "fontFamily", "abc");
@@ -184,6 +188,8 @@ public class ComputedFontTest extends WebDriverTestCase {
     @Alerts(CHROME = {"", "16px \"Times New Roman\"",
             "", "\"Times New Roman\"", "", "16px abc", "abc", "abc"},
             FF = {"", "", "", "serif", "", "", "abc", "abc"},
+            FF68 = {"", "", "", "serif", "", "", "abc", "abc"},
+            FF60 = {"", "", "", "serif", "", "", "abc", "abc"},
             IE = {"", "", "", "Times New Roman", "", "", "abc", "abc"})
     @NotYetImplemented(CHROME)
     public void minimalFontFamilyReversed() throws Exception {

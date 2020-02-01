@@ -34,7 +34,9 @@ public class StyleMediaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object StyleMedia]", "screen"},
-            FF = "undefined")
+            FF = "undefined",
+            FF68 = "undefined",
+            FF60 = "undefined")
     public void type() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -55,7 +57,9 @@ public class StyleMediaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "true", "true", "false"},
-            FF = {})
+            FF = {},
+            FF68 = {},
+            FF60 = {})
     public void matchMedium() throws Exception {
         final String html
             = "<html><head><script>\n"

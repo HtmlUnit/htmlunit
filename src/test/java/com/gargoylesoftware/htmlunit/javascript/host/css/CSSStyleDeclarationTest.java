@@ -238,7 +238,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "blue",
-            FF = "blue none repeat scroll 0% 0%")
+            FF = "blue none repeat scroll 0% 0%",
+            FF68 = "blue none repeat scroll 0% 0%",
+            FF60 = "blue none repeat scroll 0% 0%")
     @NotYetImplemented(FF)
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
@@ -2140,6 +2142,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
+            FF68 = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
+            FF60 = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWordSpacingProperty() throws Exception {
@@ -2153,6 +2159,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"4px", "5px", "6em", "17px", "17px", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
+            FF68 = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
+            FF60 = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                         "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                     "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
@@ -2793,7 +2803,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
+            FF68 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
+            FF60 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void widows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2825,7 +2837,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
-            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
+            FF68 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
+            FF60 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2889,6 +2903,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
+            FF68 = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
+            FF60 = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
     @NotYetImplemented({FF, IE})
     public void setStyle() throws Exception {
