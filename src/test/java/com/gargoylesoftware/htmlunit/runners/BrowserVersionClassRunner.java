@@ -88,11 +88,14 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
+                else if (browserVersion_ == BrowserVersion.FIREFOX) {
+                    expectedAlerts = firstDefined(alerts.FF(), alerts.DEFAULT());
+                }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                    expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = firstDefined(alerts.FF60(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
-                    expectedAlerts = firstDefined(alerts.FF68(), alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME) {
                     expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());
@@ -111,13 +114,17 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.IE(), buggyWebDriver.DEFAULT());
                     }
+                    else if (browserVersion_ == BrowserVersion.FIREFOX) {
+                        expectedAlerts = firstDefinedOrGiven(expectedAlerts,
+                                            buggyWebDriver.FF(), buggyWebDriver.DEFAULT());
+                    }
                     else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
-                                            buggyWebDriver.FF60(), buggyWebDriver.FF(), buggyWebDriver.DEFAULT());
+                                            buggyWebDriver.FF60(), buggyWebDriver.DEFAULT());
                     }
                     else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
-                                            buggyWebDriver.FF68(), buggyWebDriver.FF(), buggyWebDriver.DEFAULT());
+                                            buggyWebDriver.FF68(), buggyWebDriver.DEFAULT());
                     }
                     else if (browserVersion_ == BrowserVersion.CHROME) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
@@ -131,6 +138,9 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
             if (htmlUnitNYI != null) {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.IE());
+                }
+                else if (browserVersion_ == BrowserVersion.FIREFOX) {
+                    expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF60());
@@ -158,11 +168,14 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 if (browserVersion_ == BrowserVersion.INTERNET_EXPLORER) {
                     expectedAlerts = firstDefined(alerts.IE(), alerts.DEFAULT());
                 }
+                else if (browserVersion_ == BrowserVersion.FIREFOX) {
+                    expectedAlerts = firstDefined(alerts.FF(), alerts.DEFAULT());
+                }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_60) {
-                    expectedAlerts = firstDefined(alerts.FF60(), alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = firstDefined(alerts.FF60(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX_68) {
-                    expectedAlerts = firstDefined(alerts.FF68(), alerts.FF(), alerts.DEFAULT());
+                    expectedAlerts = firstDefined(alerts.FF68(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.CHROME) {
                     expectedAlerts = firstDefined(alerts.CHROME(), alerts.DEFAULT());

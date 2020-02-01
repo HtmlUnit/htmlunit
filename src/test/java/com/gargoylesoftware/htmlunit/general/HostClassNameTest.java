@@ -192,6 +192,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            FF = "function AnimationPlaybackEvent() {\n    [native code]\n}",
             FF68 = "function AnimationPlaybackEvent() {\n    [native code]\n}")
     @NotYetImplemented(FF68)
     public void animationPlaybackEvent() throws Exception {
@@ -506,7 +507,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function BatteryManager() { [native code] }",
-            FF = "function BatteryManager() {\n    [native code]\n}")
+            FF68 = "function BatteryManager() {\n    [native code]\n}",
+            FF60 = "function BatteryManager() {\n    [native code]\n}")
     public void batteryManager() throws Exception {
         test("BatteryManager");
     }
@@ -1227,8 +1229,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function CSS() { [native code] }",
             IE = "exception",
-            FF60 = "function CSS() {\n    [native code]\n}",
-            FF68 = "[object Object]")
+            FF = "[object Object]",
+            FF68 = "[object Object]",
+            FF60 = "function CSS() {\n    [native code]\n}")
     public void css() throws Exception {
         test("CSS");
     }
@@ -1517,6 +1520,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function CustomElementRegistry() { [native code] }",
+            FF = "function CustomElementRegistry() {\n    [native code]\n}",
             FF68 = "function CustomElementRegistry() {\n    [native code]\n}")
     public void customElementRegistry() throws Exception {
         test("CustomElementRegistry");
@@ -1901,7 +1905,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function DOMError() { [native code] }",
-            FF = "function DOMError() {\n    [native code]\n}",
+            FF = "exception",
+            FF68 = "function DOMError() {\n    [native code]\n}",
+            FF60 = "function DOMError() {\n    [native code]\n}",
             IE = "[object DOMError]")
     public void domError() throws Exception {
         test("DOMError");
@@ -2870,6 +2876,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function Geolocation() { [native code] }",
+            FF = "function Geolocation() {\n    [native code]\n}",
             IE = "[object Geolocation]")
     public void geolocation() throws Exception {
         test("Geolocation");
@@ -3634,6 +3641,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function HTMLMarqueeElement() { [native code] }",
             IE = "[object HTMLMarqueeElement]",
+            FF = "function HTMLMarqueeElement() {\n    [native code]\n}",
             FF60 = "exception",
             FF68 = "function HTMLMarqueeElement() {\n    [native code]\n}")
     public void htmlMarqueeElement() throws Exception {
@@ -3948,6 +3956,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLSlotElement() { [native code] }",
+            FF = "function HTMLSlotElement() {\n    [native code]\n}",
             FF68 = "function HTMLSlotElement() {\n    [native code]\n}")
     public void htmlSlotElement() throws Exception {
         test("HTMLSlotElement");
@@ -4803,6 +4812,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function KeyframeEffect() { [native code] }",
+            FF = "function KeyframeEffect() {\n    [native code]\n}",
             FF68 = "function KeyframeEffect() {\n    [native code]\n}")
     public void keyframeEffect() throws Exception {
         test("KeyframeEffect");
@@ -6930,7 +6940,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PromiseRejectionEvent() { [native code] }")
+            CHROME = "function PromiseRejectionEvent() { [native code] }",
+            FF = "function PromiseRejectionEvent() {\n    [native code]\n}")
     public void promiseRejectionEvent() throws Exception {
         test("PromiseRejectionEvent");
     }
@@ -6970,7 +6981,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PushManager() { [native code] }")
+            CHROME = "function PushManager() { [native code] }",
+            FF = "function PushManager() {\n    [native code]\n}")
     public void pushManager() throws Exception {
         test("PushManager");
     }
@@ -6998,7 +7010,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PushSubscription() { [native code] }")
+            CHROME = "function PushSubscription() { [native code] }",
+            FF = "function PushSubscription() {\n    [native code]\n}")
     public void pushSubscription() throws Exception {
         test("PushSubscription");
     }
@@ -7008,7 +7021,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function PushSubscriptionOptions() { [native code] }")
+            CHROME = "function PushSubscriptionOptions() { [native code] }",
+            FF = "function PushSubscriptionOptions() {\n    [native code]\n}")
     public void pushSubscriptionOptions() throws Exception {
         test("PushSubscriptionOptions");
     }
@@ -7072,6 +7086,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ReadableStream() { [native code] }",
+            FF = "function ReadableStream() {\n    [native code]\n}",
             FF68 = "function ReadableStream() {\n    [native code]\n}")
     public void readableStream() throws Exception {
         test("ReadableStream");
@@ -7356,6 +7371,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function SecurityPolicyViolationEvent() { [native code] }",
+            FF = "function SecurityPolicyViolationEvent() {\n    [native code]\n}",
             FF68 = "function SecurityPolicyViolationEvent() {\n    [native code]\n}")
     public void securityPolicyViolationEvent() throws Exception {
         test("SecurityPolicyViolationEvent");
@@ -7379,7 +7395,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function ServiceWorker() { [native code] }")
+            CHROME = "function ServiceWorker() { [native code] }",
+            FF = "function ServiceWorker() {\n    [native code]\n}")
     public void serviceWorker() throws Exception {
         test("ServiceWorker");
     }
@@ -7389,7 +7406,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function ServiceWorkerContainer() { [native code] }")
+            CHROME = "function ServiceWorkerContainer() { [native code] }",
+            FF = "function ServiceWorkerContainer() {\n    [native code]\n}")
     public void serviceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer");
     }
@@ -7417,7 +7435,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function ServiceWorkerRegistration() { [native code] }")
+            CHROME = "function ServiceWorkerRegistration() { [native code] }",
+            FF = "function ServiceWorkerRegistration() {\n    [native code]\n}")
     public void serviceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration");
     }
@@ -7468,6 +7487,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function ShadowRoot() { [native code] }",
+            FF = "function ShadowRoot() {\n    [native code]\n}",
             FF68 = "function ShadowRoot() {\n    [native code]\n}")
     public void shadowRoot() throws Exception {
         test("ShadowRoot");
@@ -10672,7 +10692,9 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function DOMMatrix() { [native code] }",
-            FF = "function WebKitCSSMatrix() {\n    [native code]\n}")
+            FF = "function DOMMatrix() {\n    [native code]\n}",
+            FF68 = "function WebKitCSSMatrix() {\n    [native code]\n}",
+            FF60 = "function WebKitCSSMatrix() {\n    [native code]\n}")
     @NotYetImplemented(CHROME)
     public void webKitCSSMatrix() throws Exception {
         test("WebKitCSSMatrix");
@@ -10862,7 +10884,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            CHROME = "function URL() { [native code] }")
+            CHROME = "function URL() { [native code] }",
+            FF = "function URL() {\n    [native code]\n}")
     public void webkitURL() throws Exception {
         test("webkitURL");
     }

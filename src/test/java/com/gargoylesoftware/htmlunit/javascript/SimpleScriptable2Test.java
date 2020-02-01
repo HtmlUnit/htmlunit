@@ -337,6 +337,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "true", "function get length() {\n    [native code]\n}", "0", "0"},
             CHROME = {"undefined", "false", "undefined", "exception"},
+            FF = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
             FF68 = {"function", "true", "function length() {\n    [native code]\n}", "0", "0"},
             IE = {"function", "true", "\nfunction length() {\n    [native code]\n}\n", "0", "0"})
     @NotYetImplemented({CHROME, FF60})

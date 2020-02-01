@@ -98,6 +98,7 @@ public class ExternalTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: 0"},
+            FF = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"},
             FF68 = {"IsSearchProviderInstalled defined", "IsSearchProviderInstalled: undefined"})
     // fail with missing permission
     @BuggyWebDriver(IE = {"IsSearchProviderInstalled defined", "exception"},

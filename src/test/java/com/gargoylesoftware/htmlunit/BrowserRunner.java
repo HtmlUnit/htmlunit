@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.lang.annotation.ElementType;
@@ -83,6 +85,9 @@ public class BrowserRunner extends Suite {
                 if (browsers.contains("ff68")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_68, true));
                 }
+                if (browsers.contains("ff")) {
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, true));
+                }
                 if (browsers.contains("ie")) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, true));
                 }
@@ -90,6 +95,9 @@ public class BrowserRunner extends Suite {
 
             if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
+            }
+            if (browsers.contains("hu-ff")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
             }
             if (browsers.contains("hu-ff60")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_60, false));
@@ -157,7 +165,7 @@ public class BrowserRunner extends Suite {
         /** Internet Explorer 11. */
         IE,
 
-        /** All versions of Firefox. */
+        /** Firefox. */
         FF,
 
         /** Firefox 60. */
@@ -193,7 +201,7 @@ public class BrowserRunner extends Suite {
         String[] IE() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for any Firefox, it can be overridden by specific FF version.
+         * Alerts for latest Firefox.
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
@@ -290,7 +298,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         TestedBrowser[] value() default {
-            IE, FF, CHROME
+            IE, FF60, FF68, FF, CHROME
         };
     }
 
@@ -362,6 +370,12 @@ public class BrowserRunner extends Suite {
          * @return the alerts
          */
         String[] IE() default { EMPTY_DEFAULT };
+
+        /**
+         * Alerts for Firefox.
+         * @return the alerts
+         */
+        String[] FF() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for Firefox 60.

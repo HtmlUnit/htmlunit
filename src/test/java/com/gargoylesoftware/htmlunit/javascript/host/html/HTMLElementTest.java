@@ -4568,9 +4568,11 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
-        + "mouseup--body\nmouseup--undefined",
+                    + "mouseup--body\nmouseup--undefined",
+            FF = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+                    + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined",
             FF68 = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
-            + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
+                    + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
     @NotYetImplemented
     public void clickAnElementThatDisappears() throws Exception {
         final String html =

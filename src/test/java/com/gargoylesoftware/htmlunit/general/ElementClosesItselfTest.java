@@ -843,7 +843,8 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "2")
+            FF68 = "2",
+            FF60 = "2")
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
     }

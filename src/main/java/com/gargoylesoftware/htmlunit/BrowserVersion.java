@@ -94,6 +94,12 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /**
+     * Firefox.
+     * @since 2.38
+     */
+    public static final BrowserVersion FIREFOX = new BrowserVersion(72, "FF");
+
+    /**
      * Firefox 60 ESR.
      * @since 2.32
      */
@@ -109,7 +115,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(67, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(79, "Chrome");
 
     /**
      * The best supported browser version at the moment.
@@ -166,6 +172,33 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_68.imgAcceptHeader_ = "image/webp,*/*";
         FIREFOX_68.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX_68.fontHeights_ = new int[] {
+            0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
+            31, 32, 33, 34, 35, 37, 38, 38, 39, 41, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 56, 58, 59, 59,
+            60, 61, 63, 64, 65, 66, 68, 69, 69, 70, 71, 73, 74, 75, 76, 77, 79, 79,
+            80, 82, 84, 85, 86, 87, 88, 90, 91, 91, 92, 94, 95, 96, 97, 98,
+            100, 101, 101, 102, 103, 105, 106, 107, 108, 111, 112, 112, 113, 114, 116, 117, 118, 119,
+            120, 122, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 137, 138, 139,
+            140, 141, 143, 143, 144, 145, 146, 148};
+
+        // FF
+        FIREFOX.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0";
+        FIREFOX.buildId_ = "20181001000000";
+        FIREFOX.productSub_ = "20100101";
+        FIREFOX.headerNamesOrdered_ = new String[] {
+            HttpHeader.HOST,
+            HttpHeader.USER_AGENT,
+            HttpHeader.ACCEPT,
+            HttpHeader.ACCEPT_LANGUAGE,
+            HttpHeader.ACCEPT_ENCODING,
+            HttpHeader.REFERER,
+            HttpHeader.CONNECTION,
+            HttpHeader.COOKIE};
+        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+        FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
+        FIREFOX.imgAcceptHeader_ = "image/webp,*/*";
+        FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
             31, 32, 33, 34, 35, 37, 38, 38, 39, 41, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 56, 58, 59, 59,
             60, 61, 63, 64, 65, 66, 68, 69, 69, 70, 71, 73, 74, 75, 76, 77, 79, 79,

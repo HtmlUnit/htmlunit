@@ -477,7 +477,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-56",
-            FF = "0")
+            FF68 = "0",
+            FF60 = "0")
     @NotYetImplemented({CHROME, IE})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
@@ -875,7 +876,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "110")
+            FF68 = "110",
+            FF60 = "110")
     @NotYetImplemented(FF)
     public void keygen() throws Exception {
         loadPageWithAlerts2(test("keygen"));
@@ -1337,6 +1339,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "24",
+            FF = "27",
             FF60 = "33",
             FF68 = "31",
             IE = "25")
@@ -1737,8 +1740,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "253",
-            FF60 = "235",
+            FF = "271",
             FF68 = "240",
+            FF60 = "235",
             IE = "262")
     @NotYetImplemented
     public void inputFile() throws Exception {
@@ -1788,7 +1792,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "51",
-            FF = "54",
+            FF = "97",
+            FF68 = "54",
+            FF60 = "54",
             IE = "102")
     @NotYetImplemented
     public void inputReset() throws Exception {
@@ -1816,7 +1822,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "58",
-            FF = "100",
+            FF = "114",
+            FF68 = "100",
+            FF60 = "100",
             IE = "116")
     @NotYetImplemented
     public void inputSubmit() throws Exception {

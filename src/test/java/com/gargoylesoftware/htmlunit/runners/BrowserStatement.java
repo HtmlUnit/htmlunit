@@ -87,6 +87,7 @@ class BrowserStatement extends Statement {
                 assertFalse("Obsolete DEFAULT because all browser expectations are defined individually",
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF())
                         && BrowserVersionClassRunner.isDefined(alerts.FF60())
                         && BrowserVersionClassRunner.isDefined(alerts.FF68())
                         && BrowserVersionClassRunner.isDefined(alerts.IE()));
@@ -95,30 +96,15 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts.IE()));
-
-                assertFalse("Obsolete FF because FF60 and FF68 expectations are defined individually",
-                        BrowserVersionClassRunner.isDefined(alerts.FF())
                         && BrowserVersionClassRunner.isDefined(alerts.FF60())
-                        && BrowserVersionClassRunner.isDefined(alerts.FF68()));
+                        && BrowserVersionClassRunner.isDefined(alerts.FF68())
+                        && BrowserVersionClassRunner.isDefined(alerts.IE()));
 
                 assertNotEquals(alerts.IE(), alerts.DEFAULT());
                 assertNotEquals(alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF60(), alerts.DEFAULT());
                 assertNotEquals(alerts.FF68(), alerts.DEFAULT());
-
-                assertNotEquals(alerts.FF60(), alerts.FF());
-                assertNotEquals(alerts.FF68(), alerts.FF());
-                if (BrowserVersionClassRunner.isDefined(alerts.IE())) {
-                    assertNotEquals(alerts.FF(), alerts.CHROME());
-                }
-                if (BrowserVersionClassRunner.isDefined(alerts.FF())) {
-                    assertNotEquals(alerts.IE(), alerts.CHROME());
-                }
-                if (BrowserVersionClassRunner.isDefined(alerts.CHROME())) {
-                    assertNotEquals(alerts.IE(), alerts.FF());
-                }
             }
 
             final HtmlUnitNYI nyiAlerts = method_.getAnnotation(HtmlUnitNYI.class);
@@ -168,18 +154,6 @@ class BrowserStatement extends Statement {
                 assertNotEquals(alerts2.FF(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF60(), alerts2.DEFAULT());
                 assertNotEquals(alerts2.FF68(), alerts2.DEFAULT());
-
-                assertNotEquals(alerts2.FF60(), alerts2.FF());
-                assertNotEquals(alerts2.FF68(), alerts2.FF());
-                if (BrowserVersionClassRunner.isDefined(alerts2.IE())) {
-                    assertNotEquals(alerts2.FF(), alerts2.CHROME());
-                }
-                if (BrowserVersionClassRunner.isDefined(alerts2.FF())) {
-                    assertNotEquals(alerts2.IE(), alerts2.CHROME());
-                }
-                if (BrowserVersionClassRunner.isDefined(alerts2.CHROME())) {
-                    assertNotEquals(alerts2.IE(), alerts2.FF());
-                }
             }
         }
     }

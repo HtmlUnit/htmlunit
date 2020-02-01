@@ -151,6 +151,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     private static List<BrowserVersion> ALL_BROWSERS_ = Collections.unmodifiableList(
             Arrays.asList(BrowserVersion.CHROME,
+                    BrowserVersion.FIREFOX,
                     BrowserVersion.FIREFOX_60,
                     BrowserVersion.FIREFOX_68,
                     BrowserVersion.INTERNET_EXPLORER));
@@ -166,6 +167,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     private static Set<String> BROWSERS_PROPERTIES_;
     private static String CHROME_BIN_;
     private static String IE_BIN_;
+    private static String FF_BIN_;
     private static String FF60_BIN_;
     private static String FF68_BIN_;
 
@@ -222,6 +224,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                             .toLowerCase(Locale.ROOT).split(",")));
                     CHROME_BIN_ = properties.getProperty("chrome.bin");
                     IE_BIN_ = properties.getProperty("ie.bin");
+                    FF_BIN_ = properties.getProperty("ff.bin");
                     FF60_BIN_ = properties.getProperty("ff60.bin");
                     FF68_BIN_ = properties.getProperty("ff68.bin");
 
@@ -464,6 +467,10 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 options.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 
                 return new ChromeDriver(options);
+            }
+
+            if (BrowserVersion.FIREFOX == getBrowserVersion()) {
+                return createFirefoxDriver(FF_BIN_);
             }
 
             if (BrowserVersion.FIREFOX_68 == getBrowserVersion()) {

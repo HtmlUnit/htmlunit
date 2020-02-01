@@ -181,6 +181,10 @@ public class HtmlElement2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0",
             FF = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
+                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0",
+            FF68 = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
+                + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0",
+            FF60 = "down: 16,0 down: 49,0 press: 0,33 up: 49,0 up: 16,0"
                 + " down: 16,0 down: 220,0 press: 0,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
     @BuggyWebDriver(FF60 = "down: 49,0 press: 0,33 up: 49,0 down: 220,0 press: 0,124 up: 220,0",

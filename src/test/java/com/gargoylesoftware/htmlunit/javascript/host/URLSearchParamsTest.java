@@ -257,9 +257,11 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function keys() { [native code] }", "[object Iterator]",
                     "key1", "key2", "key1", "", "true"},
-            FF60 = {"function keys() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+            FF = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
             FF68 = {"function keys() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+                    "key1", "key2", "key1", "", "true"},
+            FF60 = {"function keys() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
                     "key1", "key2", "key1", "", "true"},
             IE = {})
     @NotYetImplemented({CHROME, FF60})
@@ -302,9 +304,11 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }", "[object Iterator]",
                     "val1", "", "val3", "val4", "true"},
-            FF60 = {"function values() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+            FF = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
             FF68 = {"function values() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+                    "val1", "", "val3", "val4", "true"},
+            FF60 = {"function values() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
                     "val1", "", "val3", "val4", "true"},
             IE = {})
     @NotYetImplemented({CHROME, FF60})
@@ -347,9 +351,11 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }", "[object Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF60 = {"function entries() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
+            FF = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF68 = {"function entries() {\n    [native code]\n}", "[object URLSearchParams Iterator]",
+                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+            FF60 = {"function entries() {\n    [native code]\n}", "[object URLSearchParamsIterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
     @NotYetImplemented({CHROME, FF60})
