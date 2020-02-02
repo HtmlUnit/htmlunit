@@ -383,15 +383,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+    @Alerts(CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                     "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
                     "", "", "", "", "", "50", "abc", "abc", "abc", "abc"},
+            FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF68 = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF60 = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
+                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
+                    "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueAttribute() throws Exception {
         testAttribute("value", "", "abc");
@@ -1849,7 +1855,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverResetDisabled() throws Exception {
         mouseOver("<input id='tester' type='reset' onmouseover='dumpEvent(event);' disabled >");
     }
@@ -1868,7 +1876,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverTextDisabled() throws Exception {
         mouseOver("<input id='tester' type='text' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -1929,7 +1939,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverCheckboxDisabled() throws Exception {
         mouseOver("<input id='tester' type='checkbox' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -1948,7 +1960,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverRadioDisabled() throws Exception {
         mouseOver("<input id='tester' type='radio' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }

@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -186,7 +187,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"false", "false", "true", "true", "true", "object", "object"},
             FF68 = {"false", "false", "true", "false", "false", "object", "undefined"},
             FF60 = {"false", "false", "true", "false", "true", "undefined", "undefined"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -392,7 +393,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"uninitialized", "complete"},
             CHROME = {"complete", "complete"},
             IE = {"loading", "complete"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"

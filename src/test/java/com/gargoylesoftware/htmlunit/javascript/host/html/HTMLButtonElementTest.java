@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -132,7 +133,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"myFormId", "null", "null", "null", "null", "myFormId", "null", "myForm2Id", "myForm2Id"},
             IE = {"myFormId", "myFormId", "null", "myFormId", "myFormId", "null", "myFormId", "myFormId", "null"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void getForm() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

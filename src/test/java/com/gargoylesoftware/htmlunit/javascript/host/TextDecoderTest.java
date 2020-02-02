@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -235,7 +236,7 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "iso-8859-8-i",
             IE = "no TextDecoder")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void encoding_iso_8859_8i() throws Exception {
         encoding("csiso88598i");
         encoding("iso-8859-8-i");
@@ -248,7 +249,7 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "iso-8859-10",
             IE = "no TextDecoder")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void encoding_iso_8859_10() throws Exception {
         encoding("csisolatin6");
         encoding("iso-8859-10");
@@ -277,7 +278,7 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "iso-8859-14",
             IE = "no TextDecoder")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void encoding_iso_8859_14() throws Exception {
         encoding("iso-8859-14");
         encoding("iso8859-14");
@@ -315,7 +316,7 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "iso-8859-16",
             IE = "no TextDecoder")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void encoding_iso_8859_16() throws Exception {
         encoding("iso-8859-16");
     }
@@ -662,7 +663,7 @@ public class TextDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "x-user-defined",
             IE = "no TextDecoder")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void encoding_x_user_defined() throws Exception {
         encoding("x-user-defined");
     }
