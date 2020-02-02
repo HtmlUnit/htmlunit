@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import java.util.Collection;
 
@@ -26,6 +28,7 @@ import org.junit.runners.Parameterized.Parameters;
 import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.
@@ -347,7 +350,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void _DOMRectReadOnly_DOMRect() throws Exception {
         test("DOMRectReadOnly", "DOMRect");
     }
@@ -1946,7 +1949,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             IE = "false")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, TestedBrowser.FF60})
     public void _Error_DOMException() throws Exception {
         test("Error", "DOMException");
     }
