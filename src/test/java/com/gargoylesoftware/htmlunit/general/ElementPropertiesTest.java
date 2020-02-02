@@ -1980,6 +1980,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "compact",
             FF = "compact,label,type",
+            FF68 = "compact,label,type",
+            FF60 = "compact,label,type",
             IE = "compact,type")
     public void menu() throws Exception {
         test("menu");
@@ -1992,7 +1994,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-",
-            FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
+            FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
+            FF68 = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
+            FF60 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
     @NotYetImplemented(FF)
     public void menuitem() throws Exception {
         test("menuitem");

@@ -62,7 +62,9 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"[object HTMLBaseElement]", "[object HTMLBaseElement]"},
             CHROME = {"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"},
-            FF = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"})
+            FF = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"},
+            FF68 = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"},
+            FF60 = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"

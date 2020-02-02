@@ -826,7 +826,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "A B C D EF G H I\nSecond")
+            FF = "A B C D EF G H I\nSecond",
+            FF68 = "A B C D EF G H I\nSecond",
+            FF60 = "A B C D EF G H I\nSecond")
     @NotYetImplemented(FF)
     public void getVisibleTextWhiteSpaceSelectPre() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre");
@@ -838,7 +840,9 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "        A B  C     D \nEF\nG \n H   I  \n      Second\n    ",
-            FF = "A B C D EF G H I\nSecond")
+            FF = "A B C D EF G H I\nSecond",
+            FF68 = "A B C D EF G H I\nSecond",
+            FF60 = "A B C D EF G H I\nSecond")
     @NotYetImplemented(FF)
     public void getVisibleTextWhiteSpaceSelectPreWrap() throws Exception {
         getVisibleTextWhiteSpaceSelect("pre-wrap");

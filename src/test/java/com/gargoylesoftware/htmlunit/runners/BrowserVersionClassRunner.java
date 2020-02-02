@@ -326,7 +326,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     break;
 
                 case FF:
-                    if (browserVersion_.isFirefox()) {
+                    if (browserVersion_ == BrowserVersion.FIREFOX) {
                         return true;
                     }
                     break;

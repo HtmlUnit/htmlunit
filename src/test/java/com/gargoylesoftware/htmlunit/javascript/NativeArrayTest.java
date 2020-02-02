@@ -97,7 +97,9 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF = "toSource: function")
+            FF = "toSource: function",
+            FF68 = "toSource: function",
+            FF60 = "toSource: function")
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("[]", methods);
@@ -133,6 +135,8 @@ public class NativeArrayTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "function Array() { [native code] }",
             FF = "function Array() {\n    [native code]\n}",
+            FF68 = "function Array() {\n    [native code]\n}",
+            FF60 = "function Array() {\n    [native code]\n}",
             IE = "\nfunction Array() {\n    [native code]\n}\n")
     public void constructorToString() throws Exception {
         final String html
