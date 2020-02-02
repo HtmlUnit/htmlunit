@@ -5206,7 +5206,8 @@ public class JQuery1x11x3Test extends JQueryTestBase {
      */
     @Test
     @Alerts(DEFAULT = "0, 2, 2",
-            FF = "0, 1, 1")
+            FF68 = "0, 1, 1",
+            FF60 = "0, 1, 1")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
     }

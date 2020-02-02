@@ -3947,7 +3947,8 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "2, 2, 4",
-            FF = "0, 1, 1",
+            FF68 = "0, 1, 1",
+            FF60 = "0, 1, 1",
             IE = "0, 4, 4")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
