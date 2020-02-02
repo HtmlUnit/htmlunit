@@ -90,7 +90,9 @@ public class NativeDateTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF = "toSource: function")
+            FF = "toSource: function",
+            FF68 = "toSource: function",
+            FF60 = "toSource: function")
     public void methods_toSource() throws Exception {
         final String[] methods = {"toSource"};
         final String html = createHTMLTestMethods("new Date()", methods);

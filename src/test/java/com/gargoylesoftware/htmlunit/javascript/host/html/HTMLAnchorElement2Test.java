@@ -599,7 +599,9 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(IE = {"§§URL§§second/", "object", "[object HTMLAnchorElement]"},
             CHROME = {"§§URL§§second/", "object", "function HTMLAnchorElement() { [native code] }"},
-            FF = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
+            FF = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"},
+            FF68 = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"},
+            FF60 = {"§§URL§§second/", "object", "function HTMLAnchorElement() {\n    [native code]\n}"})
     public void typeof() throws Exception {
         final String html = ""
             + "<html><head><title>foo</title>\n"
@@ -703,6 +705,10 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             CHROME = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                         "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+                    "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
+            FF68 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+                    "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
+            FF60 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"})
     public void propertiesNonStandardHref() throws Exception {
         final String html = "<html>\n"

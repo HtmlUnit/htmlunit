@@ -246,7 +246,9 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF = "toSource: function")
+            FF = "toSource: function",
+            FF68 = "toSource: function",
+            FF60 = "toSource: function")
     public void methods_different() throws Exception {
         final String html = NativeDateTest.createHTMLTestMethods("new Number()", "toSource");
         loadPageWithAlerts2(html);
