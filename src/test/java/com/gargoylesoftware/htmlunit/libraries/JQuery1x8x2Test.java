@@ -1593,7 +1593,8 @@ public class JQuery1x8x2Test extends JQueryTestBase {
      */
     @Test
     @Alerts(CHROME = "0, 4, 4",
-            FF = "0, 4, 4")
+            FF68 = "0, 4, 4",
+            FF60 = "0, 4, 4",)
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
