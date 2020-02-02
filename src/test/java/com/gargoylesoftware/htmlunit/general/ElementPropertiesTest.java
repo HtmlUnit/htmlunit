@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.general;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
@@ -1997,7 +1997,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
             FF68 = "checked,defaultChecked,disabled,icon,label,radiogroup,type",
             FF60 = "checked,defaultChecked,disabled,icon,label,radiogroup,type")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void menuitem() throws Exception {
         test("menuitem");
     }
@@ -2193,7 +2193,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "validationMessage,validity,value,"
                 + "willValidate",
             IE = "-")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void output() throws Exception {
         test("output");
     }
@@ -3064,7 +3064,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF60 = "detail,initUIEvent(),layerX,layerY,pageX,pageY,rangeOffset,rangeParent,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view,which",
             IE = "detail,initUIEvent(),view")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void uiEvent() throws Exception {
         testString("document.createEvent('UIEvent'), document.createEvent('Event')");
     }
@@ -3096,8 +3096,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
+            FF68 = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+                + "tangentialPressure,tiltX,tiltY,twist,width",
+            FF60 = "getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+                + "tangentialPressure,tiltX,tiltY,twist,width",
             IE = "exception")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void pointerEvent() throws Exception {
         testString("new PointerEvent('click'), document.createEvent('MouseEvent')");
     }
@@ -3193,7 +3197,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF68 = "relatedTarget",
             FF60 = "relatedTarget",
             IE = "initFocusEvent(),relatedTarget")
-    @NotYetImplemented({CHROME, FF, IE})
+    @NotYetImplemented({CHROME, FF68, FF60, IE})
     public void focusEvent() throws Exception {
         testString("document.createEvent('FocusEvent'), document.createEvent('UIEvent')");
     }
@@ -3209,7 +3213,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF68 = "data,dataTransfer,inputType,isComposing",
             FF60 = "isComposing",
             IE = "exception")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void inputEvent() throws Exception {
         testString("new InputEvent('input'), document.createEvent('UIEvent')");
     }
@@ -3553,7 +3557,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
                 + "onwebkitanimationstart,onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,viewportElement",
             IE = "-")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void svgElement() throws Exception {
         testString("svg, element");
     }
@@ -3639,7 +3643,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "intersectsNode(),isPointInRange(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
                 + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
                 + "startContainer,startOffset,surroundContents()")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void range() throws Exception {
         testString("document.createRange(), window.performance");
     }

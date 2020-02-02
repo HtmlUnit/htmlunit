@@ -125,7 +125,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             CHROME = {"[object HTMLImageElement]", "[object HTMLUnknownElement]", "IMG", "IMAGE",
                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                 "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+            FF68 = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+            FF60 = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
+                "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"

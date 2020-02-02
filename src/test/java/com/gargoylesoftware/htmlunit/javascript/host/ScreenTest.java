@@ -134,7 +134,9 @@ public class ScreenTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "1234"},
-            FF = {"0", "0"})
+            FF = {"0", "0"},
+            FF68 = {"0", "0"},
+            FF60 = {"0", "0"})
     public void left() throws Exception {
         testNumericProperty("left");
     }
