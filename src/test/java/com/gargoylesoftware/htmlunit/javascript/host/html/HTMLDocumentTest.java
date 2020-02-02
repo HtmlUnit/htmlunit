@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -2622,7 +2623,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF68 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             FF60 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             CHROME = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

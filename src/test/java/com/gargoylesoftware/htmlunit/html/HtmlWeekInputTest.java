@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -114,7 +115,7 @@ public class HtmlWeekInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "36",
             CHROME = "")
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF68, FF60, IE})
     public void typing() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"

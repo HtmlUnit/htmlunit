@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -241,7 +243,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = "blue none repeat scroll 0% 0%",
             FF68 = "blue none repeat scroll 0% 0%",
             FF60 = "blue none repeat scroll 0% 0%")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><title>First</title><script>\n"
             + "function doTest() {\n"

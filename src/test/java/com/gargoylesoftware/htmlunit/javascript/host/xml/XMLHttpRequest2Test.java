@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -972,7 +973,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
                     + "date XYZ GMT\n"
                     + "server: Jetty(XXX)\n"
                     + "transfer-encoding: chunked\n"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void getAllResponseHeaders() throws Exception {
         final String html =
                 "<html>\n"

@@ -377,7 +377,9 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF = "0")
+            FF = "0",
+            FF68 = "0",
+            FF60 = "0")
     public void submitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "submitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }
@@ -1075,7 +1077,9 @@ public class PageReloadTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "1",
-            FF = "0")
+            FF = "0",
+            FF68 = "0",
+            FF60 = "0")
     public void jsSubmitGet_url_emptyHash() throws Exception {
         openUrlAndClickById(RELOAD_URL, "jsSubmitGetEmptyHash", Integer.parseInt(getExpectedAlerts()[0]), PATHNAME, "");
     }

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
@@ -1537,7 +1537,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"true", "true"},
             FF68 = {"true", "true"},
             FF60 = {"true", "true"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void scrollbarHeight() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -1837,7 +1837,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"},
             IE = {"", "auto", "", "auto", "", "auto", "", "auto"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

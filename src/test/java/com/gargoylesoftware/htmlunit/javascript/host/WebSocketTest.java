@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
@@ -520,7 +521,7 @@ public class WebSocketTest extends WebDriverTestCase {
                     "[object ArrayBuffer]", "", "undefined", "null",
                 "onCloseListener code: 1005  wasClean: true",
                 "onClose code: 1005  wasClean: true"})
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF68, FF60, IE})
     public void wasClean() throws Exception {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
         final String expected = String.join("\n", getExpectedAlerts());

@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -205,7 +206,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"1px/2px xyz", "", "2px", "2px", "1px/normal xyz", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void minimalLineHeight() throws Exception {
         font("1px/2px xyz", "lineHeight", "normal");
     }
@@ -219,7 +220,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void minimalLineHeightSpace() throws Exception {
         font("1px / 2px xyz", "lineHeight", "normal");
     }
@@ -233,7 +234,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF60 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "3px"},
             FF68 = {"1px/2px xyz", "", "2px", "2px", "1px xyz", "", "normal", "2px"},
             IE = {"", "", "", "normal", "", "", "normal", "normal"})
-    @NotYetImplemented({CHROME, FF})
+    @NotYetImplemented({CHROME, FF68, FF60})
     public void minimalLineHeightSpace2() throws Exception {
         font("1px/ 2px xyz", "lineHeight", "normal");
     }

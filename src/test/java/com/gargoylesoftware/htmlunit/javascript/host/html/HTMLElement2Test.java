@@ -263,7 +263,9 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"15", "15"},
-            FF = {"12", "12"})
+            FF = {"12", "12"},
+            FF68 = {"12", "12"},
+            FF60 = {"12", "12"})
     @NotYetImplemented({CHROME, IE})
     public void offsetTopAndLeft_Borders() throws Exception {
         final String html =
