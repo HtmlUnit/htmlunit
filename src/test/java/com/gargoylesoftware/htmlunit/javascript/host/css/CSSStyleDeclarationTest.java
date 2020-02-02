@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -2908,7 +2907,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF68 = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             FF60 = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
-    @NotYetImplemented({FF, IE})
+    @NotYetImplemented({FF68, FF60, IE})
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

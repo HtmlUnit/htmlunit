@@ -40,7 +40,9 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "keydown:65,0,65 keypress:97,97,97 keyup:65,0,65",
-            FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
+            FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65",
+            FF68 = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65",
+            FF60 = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
     public void a() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type('a');
@@ -90,7 +92,9 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "keydown:113,0,113 keyup:113,0,113",
-            FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
+            FF = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113",
+            FF68 = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113",
+            FF60 = "keydown:113,0,113 keypress:113,0,0 keyup:113,0,113")
     public void dom_vk_f2() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_F2);
@@ -104,7 +108,9 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      */
     @Test
     @Alerts(DEFAULT = "keydown:39,0,39 keyup:39,0,39",
-            FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
+            FF = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39",
+            FF68 = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39",
+            FF60 = "keydown:39,0,39 keypress:39,0,0 keyup:39,0,39")
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_RIGHT);
