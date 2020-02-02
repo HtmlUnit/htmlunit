@@ -14,7 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -93,6 +95,12 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
             FF = {
+                    "1:null/0/null/0/true/None/0/",
+                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
+            FF68 = {
+                    "1:null/0/null/0/true/None/0/",
+                    "2:s2/0/s2/1/false/Range/1/xyz[xyz"},
+            FF60 = {
                     "1:null/0/null/0/true/None/0/",
                     "2:s2/0/s2/1/false/Range/1/xyz[xyz"})
     public void selectAllChildren() throws Exception {
@@ -220,7 +228,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:null/0/null/0/true/None/0/",
                         "3:s2/1/s3/1/false/Range/1/[foo"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({TestedBrowser.FF68, TestedBrowser.FF60})
     public void addRange() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -260,7 +268,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "1:null/0/null/0/true/None/0/",
                         "2:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "3:null/0/null/0/true/None/0/"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void removeAllRanges() throws Exception {
         final String jsSnippet = ""
             + "      alertSelection(selection);\n"
@@ -297,7 +305,7 @@ public class SelectionTest extends WebDriverTestCase {
             FF60 = {
                         "1:s1/1/s3/1/false/Range/1/[xyzfoo",
                         "2:null/0/null/0/true/None/0/"})
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void removeAllRanges2() throws Exception {
         final String jsSnippet = ""
             + "      var range = document.createRange();\n"
@@ -453,6 +461,14 @@ public class SelectionTest extends WebDriverTestCase {
             FF = {
                     "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
                     "2:null/0/null/0/true/None/0/",
+                    "false", "true"},
+            FF68 = {
+                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
+                    "2:null/0/null/0/true/None/0/",
+                    "false", "true"},
+            FF60 = {
+                    "1:[object Text]/1/[object Text]/2/false/Range/1/yzfo[yzfo",
+                    "2:null/0/null/0/true/None/0/",
                     "false", "true"})
     public void aLittleBitOfEverything_removeRange() throws Exception {
         final String jsSnippet = ""
@@ -507,7 +523,9 @@ public class SelectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"},
-            FF = {"", "null-0", "", "null-0", "null", "null"})
+            FF = {"", "null-0", "", "null-0", "null", "null"},
+            FF68 = {"", "null-0", "", "null-0", "null", "null"},
+            FF60 = {"", "null-0", "", "null-0", "null", "null"})
     public void getSelection_display() throws Exception {
         final String html = "<html>\n"
             + "<body onload='test()'>\n"
