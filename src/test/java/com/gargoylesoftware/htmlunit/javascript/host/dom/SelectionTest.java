@@ -135,14 +135,15 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+    @Alerts(DEFAULT = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
                         "2:s2/0/s2/0/true/undefined/1/["},
-            CHROME = {
-                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+            CHROME = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
                         "2:s2/0/s2/0/true/Caret/1/["},
-            FF = {
-                    "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+            FF = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/0/s2/0/true/Caret/1/["},
+            FF68 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/0/s2/0/true/Caret/1/["},
+            FF60 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
                     "2:s2/0/s2/0/true/Caret/1/["})
     public void collapseToStart() throws Exception {
         final String jsSnippet = ""
@@ -158,14 +159,15 @@ public class SelectionTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {
-                        "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
+    @Alerts(DEFAULT = { "1:s2/0/s2/1/false/undefined/1/xyz[xyz",
                         "2:s2/1/s2/1/true/undefined/1/["},
-            CHROME = {
-                        "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+            CHROME = { "1:s2/0/s2/1/false/Range/1/xyz[xyz",
                         "2:s2/1/s2/1/true/Caret/1/["},
-            FF = {
-                    "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+            FF = {  "1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/1/s2/1/true/Caret/1/["},
+            FF68 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
+                    "2:s2/1/s2/1/true/Caret/1/["},
+            FF60 = {"1:s2/0/s2/1/false/Range/1/xyz[xyz",
                     "2:s2/1/s2/1/true/Caret/1/["})
     public void collapseToEnd() throws Exception {
         final String jsSnippet = ""
