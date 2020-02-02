@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 
@@ -4146,7 +4145,7 @@ public class HostParentOfDTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF68 = "true",
             FF60 = "true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _EventTarget_Screen() throws Exception {
         test("EventTarget", "Screen");
     }

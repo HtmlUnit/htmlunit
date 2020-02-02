@@ -44009,7 +44009,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             FF68 = "0",
             FF60 = "0")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _p_dialog() throws Exception {
         test("p", "dialog");
     }
@@ -51396,7 +51396,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _table_keygen() throws Exception {
         test("table", "keygen");
     }

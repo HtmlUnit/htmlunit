@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.util.Collection;
@@ -614,7 +615,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF68 = "true",
             FF60 = "true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _RTCIceCandidate_mozRTCIceCandidate() throws Exception {
         test("RTCIceCandidate", "mozRTCIceCandidate");
     }
@@ -637,7 +638,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF68 = "true",
             FF60 = "true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _RTCPeerConnection_mozRTCPeerConnection() throws Exception {
         test("RTCPeerConnection", "mozRTCPeerConnection");
     }
@@ -681,7 +682,7 @@ public class HostParentOfPTest extends HostParentOf {
     @Alerts(DEFAULT = "false",
             FF68 = "true",
             FF60 = "true")
-    @NotYetImplemented(FF)
+    @NotYetImplemented({FF68, FF60})
     public void _RTCSessionDescription_mozRTCSessionDescription() throws Exception {
         test("RTCSessionDescription", "mozRTCSessionDescription");
     }
