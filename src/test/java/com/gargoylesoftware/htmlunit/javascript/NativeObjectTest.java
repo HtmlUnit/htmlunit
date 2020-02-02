@@ -67,7 +67,9 @@ public class NativeObjectTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "toSource: undefined",
-            FF = "toSource: function")
+            FF = "toSource: function",
+            FF68 = "toSource: function",
+            FF60 = "toSource: function")
     public void others() throws Exception {
         final String[] methods = {"toSource"};
         final String html = NativeDateTest.createHTMLTestMethods("new Object()", methods);

@@ -127,7 +127,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "object",
             CHROME = "function",
-            FF = "undefined")
+            FF = "undefined",
+            FF68 = "undefined",
+            FF60 = "undefined")
     public void applicationCache() throws Exception {
         test("ApplicationCache");
     }
@@ -3237,7 +3239,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "object")
+            FF = "object",
+            FF68 = "object",
+            FF60 = "object")
     public void installTrigger() throws Exception {
         test("InstallTrigger");
     }

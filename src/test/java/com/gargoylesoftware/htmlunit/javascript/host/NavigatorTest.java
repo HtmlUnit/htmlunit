@@ -405,6 +405,8 @@ public class NavigatorTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = {"Google Inc.", ""},
             FF = {"", ""},
+            FF68 = {"", ""},
+            FF60 = {"", ""},
             IE = {"", "undefined"})
     public void vendor() throws Exception {
         final String html
@@ -426,7 +428,9 @@ public class NavigatorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true")
+            FF = "true",
+            FF68 = "true",
+            FF60 = "true")
     public void oscpu() throws Exception {
         final String html
             = "<html><head><title>First</title>\n"

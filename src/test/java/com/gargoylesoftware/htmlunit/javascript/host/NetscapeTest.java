@@ -35,7 +35,9 @@ public class NetscapeTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "exception"},
-            FF = {"[object Object]", "undefined", "[object Object]", "undefined"})
+            FF = {"[object Object]", "undefined", "[object Object]", "undefined"},
+            FF68 = {"[object Object]", "undefined", "[object Object]", "undefined"},
+            FF60 = {"[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
         final String html = "<html><body><script>\n"
             + "try {\n"

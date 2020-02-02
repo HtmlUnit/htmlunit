@@ -83,12 +83,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                        "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
-                        "abc", "", "50", "abc", "abc", "abc", "abc"},
-            CHROME = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+    @Alerts(CHROME = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                         "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "",
                         "", "", "50", "abc", "abc", "abc", "abc"},
+            FF = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
+                    "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF68 = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
+                    "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF60 = {"error fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
+                    "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                     "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
                     "abc", "", "50", "abc", "abc", "abc", "abc"})
@@ -134,12 +140,18 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(FF = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
-                        "12", "12", "12", "12", "12", "12", "12"},
-            CHROME = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+    @Alerts(CHROME = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
                         "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "",
                         "", "12", "12", "12", "12", "12", "12"},
+            FF = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                        "12", "12", "12", "12", "12", "12", "12"},
+            FF68 = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                        "12", "12", "12", "12", "12", "12", "12"},
+            FF60 = {"error fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
+                        "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                        "12", "12", "12", "12", "12", "12", "12"},
             IE = {"12", "12", "12", "", "12", "", "", "12", "12",
                         "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
                         "12", "12", "12", "12", "12", "12", "12"})
@@ -276,6 +288,16 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                         "datetime-local", "time", "week", "month", "number",
                         "range", "search", "email", "tel", "url"},
             FF = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "date", "text",
+                        "text", "time", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"},
+            FF68 = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
+                        "password", "radio", "reset", "reset",
+                        "submit", "submit", "text", "textarea", "color", "date", "text",
+                        "text", "time", "text", "text", "number", "range",
+                        "search", "email", "tel", "url"},
+            FF60 = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
                         "password", "radio", "reset", "reset",
                         "submit", "submit", "text", "textarea", "color", "date", "text",
                         "text", "time", "text", "text", "number", "range",
@@ -1785,7 +1807,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverButtonDisabled() throws Exception {
         mouseOver("<input id='tester' type='button' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -1804,7 +1828,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverSubmitDisabled() throws Exception {
         mouseOver("<input id='tester' type='submit' onmouseover='dumpEvent(event);' disabled >");
     }
@@ -1861,7 +1887,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverPasswordDisabled() throws Exception {
         mouseOver("<input id='tester' type='password' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -1880,7 +1908,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]")
+            FF = "mouse over [tester]",
+            FF68 = "mouse over [tester]",
+            FF60 = "mouse over [tester]")
     public void mouseOverFileDisabled() throws Exception {
         mouseOver("<input id='tester' type='file' onmouseover='dumpEvent(event);' disabled >");
     }

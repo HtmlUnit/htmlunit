@@ -111,6 +111,14 @@ public class PromiseTest extends WebDriverTestCase {
                        "function () {\n    [native code]\n}",
                        "[object Window]",
                        "done", "resolved value"},
+            FF68 = { "function () {\n    [native code]\n}",
+                        "function () {\n    [native code]\n}",
+                        "[object Window]",
+                        "done", "resolved value"},
+            FF60 = { "function () {\n    [native code]\n}",
+                        "function () {\n    [native code]\n}",
+                        "[object Window]",
+                        "done", "resolved value"},
             IE = {})
     public void constructor() throws Exception {
         final String html = "<html>\n"
