@@ -448,8 +448,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @AlertsStandards(DEFAULT = {"block", "block"},
             CHROME = {"", "block"},
             FF = {"", "block"},
-            FF68 = {"", "block"},
-            FF60 = {"", "block"})
+            FF68 = {"", "block"})
     public void dd() throws Exception {
         loadPageWithAlerts2(test("dd"));
     }

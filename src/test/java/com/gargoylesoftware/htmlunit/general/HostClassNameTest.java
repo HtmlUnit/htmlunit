@@ -197,8 +197,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             FF = "function AnimationPlaybackEvent() {\n    [native code]\n}",
-            FF68 = "function AnimationPlaybackEvent() {\n    [native code]\n}",
-            FF60 = "function AnimationPlaybackEvent() {\n    [native code]\n}")
+            FF68 = "function AnimationPlaybackEvent() {\n    [native code]\n}")
     @NotYetImplemented(FF68)
     public void animationPlaybackEvent() throws Exception {
         test("AnimationPlaybackEvent");

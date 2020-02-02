@@ -690,7 +690,9 @@ public class ElementCreationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object HTMLImageElement]",
             CHROME = "[object HTMLUnknownElement]",
-            FF = "[object HTMLElement]")
+            FF = "[object HTMLElement]",
+            FF68 = "[object HTMLElement]",
+            FF60 = "[object HTMLElement]")
     public void image() throws Exception {
         test("image");
     }
