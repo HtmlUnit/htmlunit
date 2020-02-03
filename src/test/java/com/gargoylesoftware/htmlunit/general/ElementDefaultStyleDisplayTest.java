@@ -444,6 +444,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "block"},
             FF68 = {"", "inline"},
+            FF60 = {"block", "inline"},
             IE = {"block", "block"})
     @AlertsStandards(DEFAULT = {"block", "block"},
             CHROME = {"", "block"},
