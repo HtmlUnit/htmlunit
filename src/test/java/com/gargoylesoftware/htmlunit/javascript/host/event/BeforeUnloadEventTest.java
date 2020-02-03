@@ -140,8 +140,8 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"-[object Event]", "-beforeunload", "-true", "-false", "-undefined"},
             CHROME = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"},
-            FF68 = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"},
-            FF = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"})
+            FF = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"},
+            FF68 = {"-[object Event]", "-beforeunload", "-true", "-false", "-true"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
