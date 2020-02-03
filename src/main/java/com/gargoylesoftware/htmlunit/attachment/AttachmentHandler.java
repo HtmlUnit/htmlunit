@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * @author Sudhan Moghe
  * @author Daniel Gredler
  * @author Ronald Brill
+ * @author Alex Gorbatovsky
  * @see com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler)
  * @see com.gargoylesoftware.htmlunit.WebClient#getAttachmentHandler()
  * @see <a href="http://www.ietf.org/rfc/rfc2183.txt">RFC 2183</a>
