@@ -479,7 +479,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "-56",
-            FF = "0",
             FF68 = "0",
             FF60 = "0")
     @NotYetImplemented({CHROME, IE})
@@ -880,7 +879,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "110",
             FF68 = "110",
             FF60 = "110")
     @NotYetImplemented({FF68, FF60})
@@ -1344,8 +1342,9 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            FF60 = "33",
+            FF = "27",
             FF68 = "31",
+            FF60 = "33",
             IE = "23")
     @NotYetImplemented
     public void select() throws Exception {

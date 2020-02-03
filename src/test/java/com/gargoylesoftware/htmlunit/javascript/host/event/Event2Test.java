@@ -50,7 +50,9 @@ public class Event2Test extends WebDriverTestCase {
                 + " [object MouseEvent] click b:true c:true [select] [1]",
             IE = "[object Event] change b:true c:false [select] [-]"
                 + " [object PointerEvent] click b:true c:true [select] [1]")
-    @BuggyWebDriver(FF = "[object Event] change b:true c:true [select] [-]"
+    @BuggyWebDriver(FF68 = "[object Event] change b:true c:true [select] [-]"
+                + " [object Event] click b:true c:true [select] [-]",
+            FF60 = "[object Event] change b:true c:true [select] [-]"
                 + " [object Event] click b:true c:true [select] [-]",
             IE = "[object Event] change b:true c:false [select] [-]"
                 + " [object MouseEvent] click b:true c:true [select] [1]")

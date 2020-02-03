@@ -258,7 +258,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "3:null/0/null/0/true/None/0/"},
             FF = {
                         "1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/1/[xyzfoo",
+                        "2:s1/1/s3/1/false/Range/1/xyzfoo[xyzfoo",
                         "3:null/0/null/0/true/None/0/"},
             FF68 = {
                         "1:null/0/null/0/true/None/0/",
@@ -334,7 +334,7 @@ public class SelectionTest extends WebDriverTestCase {
                         "3:null/0/null/0/true/None/0/"},
             FF = {
                         "1:null/0/null/0/true/None/0/",
-                        "2:s1/1/s3/1/false/Range/2/[abc[xyzfoo",
+                        "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                         "3:null/0/null/0/true/None/0/"},
             FF68 = {
                         "1:null/0/null/0/true/None/0/",

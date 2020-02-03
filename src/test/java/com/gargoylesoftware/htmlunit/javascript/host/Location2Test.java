@@ -905,7 +905,8 @@ public class Location2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"3", "null", "§§URL§§/"},
             CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"})
     // FF opens a confirmation window for the post
-    @BuggyWebDriver(FF = {"2", "null", "§§URL§§/"})
+    @BuggyWebDriver(FF68 = {"2", "null", "§§URL§§/"},
+                FF60 = {"2", "null", "§§URL§§/"})
     public void reloadPost() throws Exception {
         final String form =
                 "<html>\n"

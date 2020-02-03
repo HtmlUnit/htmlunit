@@ -43,10 +43,12 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                     "bottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             CHROME = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
+            FF = {"left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF60 = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                "undefined", "undefined", "undefined", "undefined", "undefined"})
+                    "undefined", "undefined", "undefined", "undefined", "undefined"})
     @NotYetImplemented({FF68, FF60})
     public void getAlign() throws Exception {
         final String html
@@ -78,6 +80,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "baseline", "texttop"},
+            FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+                    "absbottom", "absmiddle", "bottom", "texttop"},
             FF68 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "bottom", "absmiddle", "baseline", "texttop"},
             FF60 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",

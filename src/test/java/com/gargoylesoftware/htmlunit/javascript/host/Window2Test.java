@@ -891,6 +891,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
+            FF = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
             FF68 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1262"},
             FF60 = {"0,0", "100,200", "110,230", "0,0", "0,95", "0,0", "0,1254"})
     @NotYetImplemented({FF68, FF60})
@@ -1003,7 +1004,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "number",
             FF68 = "number",
             FF60 = "number")
     public void mozPaintCount() throws Exception {

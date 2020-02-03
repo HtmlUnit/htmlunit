@@ -43,7 +43,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = {"134", "[object Element]"},
             FF68 = {"134", "[object Element]"},
             FF60 = {"134", "[object Element]"})
     @NotYetImplemented({FF68, FF60})

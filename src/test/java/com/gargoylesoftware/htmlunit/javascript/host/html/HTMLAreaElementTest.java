@@ -95,8 +95,10 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
                 "§§URL§§", "http://srv/htmlunit.org"})
-    @BuggyWebDriver(FF = {"[object HTMLButtonElement]", "",
-            "§§URL§§", "http://srv/htmlunit.org"})
+    @BuggyWebDriver(FF68 = {"[object HTMLButtonElement]", "",
+                "§§URL§§", "http://srv/htmlunit.org"},
+            FF60 = {"[object HTMLButtonElement]", "",
+                "§§URL§§", "http://srv/htmlunit.org"})
     public void focus() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

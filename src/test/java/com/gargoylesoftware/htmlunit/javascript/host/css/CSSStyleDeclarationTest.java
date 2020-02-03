@@ -910,6 +910,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"none", "rgb(0, 128, 0)", "none", "rgb(0, 128, 0)"},
             CHROME = {"", "", "none", "rgb(0, 128, 0)"},
+            FF = {"", "", "none", "rgb(0, 128, 0)"},
             FF68 = {"", "", "none", "rgb(0, 128, 0)"},
             IE = {"inline", "rgb(0, 0, 0)", "none", "rgb(0, 128, 0)"})
     @NotYetImplemented(IE)
@@ -942,6 +943,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "rgb(0, 0, 0)", "inline", "rgb(0, 0, 0)"},
             CHROME = {"", "", "inline", "rgb(0, 0, 0)"},
+            FF = {"", "", "inline", "rgb(0, 0, 0)"},
             FF68 = {"", "", "inline", "rgb(0, 0, 0)"})
     public void displayDefault() throws Exception {
         final String html = "<html>\n"
@@ -2644,6 +2646,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"auto", "auto"},
             CHROME = {"auto", ""},
+            FF = {"auto", ""},
             FF68 = {"auto", ""})
     public void jQueryPixelPosition() throws Exception {
         final String html = "<html><head>\n"

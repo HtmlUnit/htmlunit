@@ -268,7 +268,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @BuggyWebDriver(FF = "")
+    @BuggyWebDriver(FF68 = "", FF60 = "")
     public void clickNestedOptionElement() throws Exception {
         final String html =
               "<html>\n"

@@ -323,7 +323,12 @@ public class MutationObserverTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("[object HTMLHeadingElement]-attributes")
-    @BuggyWebDriver(FF = "[object HTMLInputElement]-attributes\n"
+    @BuggyWebDriver(FF68 = "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLInputElement]-attributes\n"
+            + "[object HTMLHeadingElement]-attributes",
+            FF60 = "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"
             + "[object HTMLInputElement]-attributes\n"

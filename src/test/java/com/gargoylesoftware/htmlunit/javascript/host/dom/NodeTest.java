@@ -1356,6 +1356,7 @@ public class NodeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "2", "§§URL§§second"},
             CHROME = {"1", "2", "§§URL§§"},
+            FF = {"1", "2", "§§URL§§"},
             FF68 = {"1", "2", "§§URL§§"})
     public void eventListener_returnValue_false() throws Exception {
         final String html
