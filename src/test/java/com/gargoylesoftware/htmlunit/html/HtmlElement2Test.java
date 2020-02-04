@@ -347,7 +347,9 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF68 = "-worldHello", FF60 = "-worldHello")
+    @BuggyWebDriver(FF = "-worldHello",
+            FF68 = "-worldHello",
+            FF60 = "-worldHello")
     public void typeAtEndOfEditableDiv() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"
@@ -371,7 +373,9 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF68 = "-worldHello", FF60 = "-worldHello")
+    @BuggyWebDriver(FF = "-worldHello",
+            FF68 = "-worldHello",
+            FF60 = "-worldHello")
     public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
         final String html = "<html><head><script>\n"
             + "  function test() {\n"

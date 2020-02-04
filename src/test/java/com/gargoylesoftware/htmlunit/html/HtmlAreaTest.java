@@ -77,7 +77,8 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("§§URL§§")
-    @BuggyWebDriver(FF68 = "WebDriverException",
+    @BuggyWebDriver(FF = "WebDriverException",
+                    FF68 = "WebDriverException",
                     FF60 = "WebDriverException",
                     IE = "WebDriverException")
     public void referer() throws Exception {

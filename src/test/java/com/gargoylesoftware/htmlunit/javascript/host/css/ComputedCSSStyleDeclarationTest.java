@@ -583,8 +583,6 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "inline", "inline-block", "inline-block",
                     "inline-block", "inline-block", "inline-block", "inline-block", "inline"},
-            FF = {"inline", "inline", "inline", "inline", "inline", "inline",
-                    "inline", "inline-block", "inline-block", "inline"},
             FF68 = {"inline", "inline", "inline", "inline", "inline", "inline",
                     "inline", "inline-block", "inline-block", "inline"},
             FF60 = {"inline", "inline", "inline", "inline", "inline", "inline",
@@ -641,6 +639,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline-block", "inline", "block", "list-item"},
             CHROME = { "inline", "inline", "inline", "block", "list-item" },
+            FF = { "inline", "inline", "inline", "block", "list-item" },
             IE = {"inline", "inline", "inline", "inline", "list-item"})
     public void defaultDisplayValues_KL() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1116,7 +1115,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"underline", "none", "underline"},
-            CHROME = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"})
+            CHROME = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
+            FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
     @NotYetImplemented(CHROME)
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
@@ -1266,6 +1266,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"auto", "auto"},
             CHROME = {"", ""},
+            FF = {"", ""},
             FF68 = {"", ""})
     public void widthAndHeightDisconnected() throws Exception {
         final String html = "<html>\n"
@@ -1594,6 +1595,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
                 "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"},
             CHROME = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
                     "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"},
+            FF = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
+                    "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"},
             FF68 = {"0", "0", "0", "0", "", "", "", "", "", "", "", "",
                     "104", "104", "104", "104", "auto", "100px", "100px", "3px", "block", "content-box", "0px", "0px"})
     public void offsetWidth() throws Exception {
@@ -1797,6 +1800,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "0px", "20%", "80px", "25%", "100px"},
+            FF = {"", "0px", "20%", "360px", "25%", "100px"},
             FF68 = {"", "0px", "20%", "360px", "25%", "100px"})
     @NotYetImplemented(FF68)
     public void marginLeftRight() throws Exception {

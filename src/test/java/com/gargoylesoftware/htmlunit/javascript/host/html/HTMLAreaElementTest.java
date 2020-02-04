@@ -95,7 +95,9 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"[object HTMLButtonElement]", "[object HTMLButtonElement]",
                 "§§URL§§", "http://srv/htmlunit.org"})
-    @BuggyWebDriver(FF68 = {"[object HTMLButtonElement]", "",
+    @BuggyWebDriver(FF = {"[object HTMLButtonElement]", "",
+                "§§URL§§", "http://srv/htmlunit.org"},
+            FF68 = {"[object HTMLButtonElement]", "",
                 "§§URL§§", "http://srv/htmlunit.org"},
             FF60 = {"[object HTMLButtonElement]", "",
                 "§§URL§§", "http://srv/htmlunit.org"})
