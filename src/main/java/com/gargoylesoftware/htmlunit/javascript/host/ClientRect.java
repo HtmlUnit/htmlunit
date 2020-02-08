@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -32,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms535906.aspx">MSDN Documentation</a>
  */
 @JsxClass(IE)
-@JsxClass(className = "DOMRect", value = {CHROME, FF})
+@JsxClass(className = "DOMRect", value = {CHROME, FF68, FF60})
 public class ClientRect extends SimpleScriptable {
 
     private int bottom_;
@@ -43,7 +44,7 @@ public class ClientRect extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public ClientRect() {
     }
 

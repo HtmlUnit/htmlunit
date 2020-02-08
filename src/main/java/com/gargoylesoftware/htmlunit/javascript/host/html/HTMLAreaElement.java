@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
@@ -40,7 +41,7 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLAreaElement() {
     }
 
@@ -89,7 +90,7 @@ public class HTMLAreaElement extends HTMLElement {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public DOMTokenList getRelList() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }

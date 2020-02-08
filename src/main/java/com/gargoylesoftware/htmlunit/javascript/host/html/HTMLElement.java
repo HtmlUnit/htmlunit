@@ -22,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -155,56 +154,56 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  * @author Frank Danek
  */
-@JsxClass(domClass = HtmlAbbreviated.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlAcronym.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlAddress.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlAbbreviated.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlAcronym.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlAddress.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlArticle.class)
 @JsxClass(domClass = HtmlAside.class)
-@JsxClass(domClass = HtmlBaseFont.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlBaseFont.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlBidirectionalIsolation.class, value = {CHROME, FF68})
-@JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlBig.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlBold.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlCitation.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlCode.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlDefinition.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlDefinitionDescription.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlElement.class, value = {FF, IE})
-@JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlBidirectionalOverride.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlBig.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlBold.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlCenter.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlCitation.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlCode.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlDefinition.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlDefinitionDescription.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlDefinitionTerm.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlElement.class, value = {FF68, FF60, IE})
+@JsxClass(domClass = HtmlEmphasis.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlFigure.class)
 @JsxClass(domClass = HtmlFigureCaption.class)
 @JsxClass(domClass = HtmlFooter.class)
 @JsxClass(domClass = HtmlHeader.class)
-@JsxClass(domClass = HtmlItalic.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlKeyboard.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlItalic.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlKeyboard.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlLayer.class, value = CHROME)
 @JsxClass(domClass = HtmlMark.class)
 @JsxClass(domClass = HtmlNav.class)
-@JsxClass(domClass = HtmlNoBreak.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlNoBreak.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlNoEmbed.class)
 @JsxClass(domClass = HtmlNoFrames.class)
 @JsxClass(domClass = HtmlNoLayer.class, value = CHROME)
 @JsxClass(domClass = HtmlNoScript.class)
-@JsxClass(domClass = HtmlPlainText.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlPlainText.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlRuby.class, value = CHROME)
 @JsxClass(domClass = HtmlRp.class, value = CHROME)
 @JsxClass(domClass = HtmlRt.class, value = CHROME)
-@JsxClass(domClass = HtmlS.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlSample.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlS.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlSample.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlSection.class)
-@JsxClass(domClass = HtmlSmall.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlStrike.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlStrong.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlSubscript.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlSummary.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlSuperscript.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlTeletype.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlUnderlined.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlSmall.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlStrike.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlStrong.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlSubscript.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlSummary.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlSuperscript.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlTeletype.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlUnderlined.class, value = {CHROME, FF68, FF60})
 @JsxClass(domClass = HtmlWordBreak.class)
-@JsxClass(domClass = HtmlMain.class, value = {CHROME, FF})
-@JsxClass(domClass = HtmlVariable.class, value = {CHROME, FF})
+@JsxClass(domClass = HtmlMain.class, value = {CHROME, FF68, FF60})
+@JsxClass(domClass = HtmlVariable.class, value = {CHROME, FF68, FF60})
 public class HTMLElement extends Element {
 
     private static final Class<?>[] METHOD_PARAMS_OBJECT = new Class[] {Object.class};
@@ -389,7 +388,7 @@ public class HTMLElement extends Element {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLElement() {
     }
 
@@ -1382,7 +1381,7 @@ public class HTMLElement extends Element {
      * Returns the {@code spellcheck} property.
      * @return the {@code spellcheck} property
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public boolean isSpellcheck() {
         return Context.toBoolean(getDomNodeOrDie().getAttributeDirect("spellcheck"));
     }
@@ -1391,7 +1390,7 @@ public class HTMLElement extends Element {
      * Sets the {@code spellcheck} property.
      * @param spellcheck the {@code spellcheck} property
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setSpellcheck(final boolean spellcheck) {
         getDomNodeOrDie().setAttribute("spellcheck", Boolean.toString(spellcheck));
     }
@@ -2482,7 +2481,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onresize} event handler for this element.
      * @param handler the {@code onresize} event handler for this element
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setOnresize(final Object handler) {
         setEventHandler("resize", handler);
     }
@@ -2491,7 +2490,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onresize} event handler for this element.
      * @return the {@code onresize} event handler for this element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOnresize() {
         return getEventHandler("resize");
     }
@@ -2912,7 +2911,7 @@ public class HTMLElement extends Element {
      * Returns the {@code oninvalid} event handler for this element.
      * @return the {@code oninvalid} event handler for this element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOninvalid() {
         return getEventHandler("invalid");
     }
@@ -2921,7 +2920,7 @@ public class HTMLElement extends Element {
      * Sets the {@code oninvalid} event handler for this element.
      * @param oninvalid the {@code oninvalid} event handler for this element
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setOninvalid(final Object oninvalid) {
         setEventHandler("invalid", oninvalid);
     }
@@ -3416,7 +3415,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onshow} event handler for this element.
      * @return the {@code onshow} event handler for this element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOnshow() {
         return getEventHandler("show");
     }
@@ -3425,7 +3424,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onshow} event handler for this element.
      * @param onshow the {@code onshow} event handler for this element
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setOnshow(final Object onshow) {
         setEventHandler("show", onshow);
     }
@@ -3543,7 +3542,7 @@ public class HTMLElement extends Element {
      * @return the {@code oncopy} event handler for this element
      */
     @Override
-    @JsxGetter({FF, IE})
+    @JsxGetter({FF68, FF60, IE})
     public Function getOncopy() {
         return getEventHandler("copy");
     }
@@ -3553,7 +3552,7 @@ public class HTMLElement extends Element {
      * @param oncopy the {@code oncopy} event handler for this element
      */
     @Override
-    @JsxSetter({FF, IE})
+    @JsxSetter({FF68, FF60, IE})
     public void setOncopy(final Object oncopy) {
         setEventHandler("copy", oncopy);
     }
@@ -3563,7 +3562,7 @@ public class HTMLElement extends Element {
      * @return the {@code oncut} event handler for this element
      */
     @Override
-    @JsxGetter({FF, IE})
+    @JsxGetter({FF68, FF60, IE})
     public Function getOncut() {
         return getEventHandler("cut");
     }
@@ -3573,7 +3572,7 @@ public class HTMLElement extends Element {
      * @param oncut the {@code oncut} event handler for this element
      */
     @Override
-    @JsxSetter({FF, IE})
+    @JsxSetter({FF68, FF60, IE})
     public void setOncut(final Object oncut) {
         setEventHandler("cut", oncut);
     }
@@ -3583,7 +3582,7 @@ public class HTMLElement extends Element {
      * @return the {@code onpaste} event handler for this element
      */
     @Override
-    @JsxGetter({FF, IE})
+    @JsxGetter({FF68, FF60, IE})
     public Function getOnpaste() {
         return getEventHandler("paste");
     }
@@ -3593,7 +3592,7 @@ public class HTMLElement extends Element {
      * @param onpaste the {@code onpaste} event handler for this element
      */
     @Override
-    @JsxSetter({FF, IE})
+    @JsxSetter({FF68, FF60, IE})
     public void setOnpaste(final Object onpaste) {
         setEventHandler("paste", onpaste);
     }
@@ -3602,7 +3601,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozfullscreenchange} event handler for this element.
      * @return the {@code onmozfullscreenchange} event handler for this element
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Function getOnmozfullscreenchange() {
         return getEventHandler("mozfullscreenchange");
     }
@@ -3611,7 +3610,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozfullscreenchange} event handler for this element.
      * @param onmozfullscreenchange the {@code onmozfullscreenchange} event handler for this element
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setOnmozfullscreenchange(final Object onmozfullscreenchange) {
         setEventHandler("mozfullscreenchange", onmozfullscreenchange);
     }
@@ -3620,7 +3619,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onmozfullscreenerror} event handler for this element.
      * @return the {@code onmozfullscreenerror} event handler for this element
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Function getOnmozfullscreenerror() {
         return getEventHandler("mozfullscreenerror");
     }
@@ -3629,7 +3628,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onmozfullscreenerror} event handler for this element.
      * @param onmozfullscreenerror the {@code onmozfullscreenerror} event handler for this element
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setOnmozfullscreenerror(final Object onmozfullscreenerror) {
         setEventHandler("mozfullscreenerror", onmozfullscreenerror);
     }

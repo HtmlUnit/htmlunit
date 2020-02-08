@@ -16,7 +16,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM_NULL;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Element;
@@ -41,7 +42,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLLabelElement() {
     }
 
@@ -67,7 +68,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * @return the HTMLElement to which the given label object is assigned
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public HTMLElement getControl() {
         final String id = getHtmlFor();
         if (StringUtils.isBlank(id)) {

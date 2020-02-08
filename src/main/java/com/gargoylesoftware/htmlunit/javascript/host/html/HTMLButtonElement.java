@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.Locale;
@@ -47,7 +48,7 @@ public class HTMLButtonElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLButtonElement() {
     }
 
@@ -88,7 +89,7 @@ public class HTMLButtonElement extends HTMLElement {
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public AbstractList getLabels() {
         if (labels_ == null) {
             labels_ = new LabelsHelper(getDomNodeOrDie());
@@ -134,7 +135,7 @@ public class HTMLButtonElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public boolean isDisabled() {
         return super.isDisabled();
     }
@@ -143,7 +144,7 @@ public class HTMLButtonElement extends HTMLElement {
      * {@inheritDoc} Overridden to modify browser configurations.
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
     }

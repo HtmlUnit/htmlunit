@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -38,11 +39,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 public class UIEvent extends Event {
 
     /** Constant. */
-    @JsxConstant(FF)
+    @JsxConstant({FF68, FF60})
     public static final int SCROLL_PAGE_DOWN = 0x8000;
 
     /** Constant. */
-    @JsxConstant(FF)
+    @JsxConstant({FF68, FF60})
     public static final short SCROLL_PAGE_UP = 0xFFFF8000;
 
     /** Specifies some detail information about the event. */
@@ -51,7 +52,7 @@ public class UIEvent extends Event {
     /**
      * Creates a new UI event instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public UIEvent() {
     }
 

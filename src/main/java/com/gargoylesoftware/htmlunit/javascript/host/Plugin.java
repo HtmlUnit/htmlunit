@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -40,7 +41,7 @@ public class Plugin extends SimpleArray {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public Plugin() {
     }
 
@@ -99,7 +100,7 @@ public class Plugin extends SimpleArray {
      * Gets the plugin's version.
      * @return the name
      */
-    @JsxGetter({IE, FF})
+    @JsxGetter({IE, FF68, FF60})
     public String getVersion() {
         return version_;
     }

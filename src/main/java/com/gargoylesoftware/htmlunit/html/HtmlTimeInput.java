@@ -20,8 +20,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the HTML element "input" where type is "time".

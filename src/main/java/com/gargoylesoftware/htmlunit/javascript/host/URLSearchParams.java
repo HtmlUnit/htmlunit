@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Ween Jiann
  */
-@JsxClass({CHROME, FF})
+@JsxClass({CHROME, FF68, FF60})
 public class URLSearchParams extends SimpleScriptable {
 
     private static final String ITERATOR_NAME = "URLSearchParams Iterator";

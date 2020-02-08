@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.configuration;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
@@ -323,9 +322,7 @@ public abstract class AbstractJavaScriptConfiguration {
      * @return whether the two {@link SupportedBrowser} are compatible or not
      */
     public static boolean isCompatible(final SupportedBrowser browser1, final SupportedBrowser browser2) {
-        return (browser1 == browser2)
-                || (browser1 == FF && (browser2 == FF60 || browser2 == FF68))
-                || (browser2 == FF && (browser1 == FF60 || browser1 == FF68));
+        return browser1 == browser2;
     }
 
     /**

@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
@@ -25,7 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.media.MediaStream;
  *
  * @author Ahmed Ashour
  */
-@JsxClass(FF)
+@JsxClass({FF68, FF60})
 public class CanvasCaptureMediaStream extends MediaStream {
 
     /**

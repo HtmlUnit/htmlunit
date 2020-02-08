@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -26,13 +25,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  *
  * @author Ahmed Ashour
  */
-@JsxClass({FF, IE})
+@JsxClass({FF68, FF60, IE})
 public class SVGPathSegList extends SimpleScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor(FF)
+    @JsxConstructor({FF68, FF60})
     public SVGPathSegList() {
     }
 

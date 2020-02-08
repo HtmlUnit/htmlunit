@@ -23,7 +23,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -115,7 +116,7 @@ public class HTMLDocument extends Document {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLDocument() {
     }
 
@@ -145,7 +146,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getForms() {
         return super.getForms();
     }
@@ -154,7 +155,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getEmbeds() {
         return super.getEmbeds();
     }
@@ -163,7 +164,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getPlugins() {
         return super.getPlugins();
     }
@@ -172,7 +173,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getLinks() {
         return super.getLinks();
     }
@@ -181,7 +182,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getAnchors() {
         return super.getAnchors();
     }
@@ -190,7 +191,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getApplets() {
         return super.getApplets();
     }
@@ -515,7 +516,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getImages() {
         return super.getImages();
     }
@@ -582,7 +583,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(FF)
+    @JsxFunction({FF68, FF60})
     public void close() throws IOException {
         if (writeInCurrentDocument_) {
             LOG.warn("close() called when document is not open.");
@@ -623,7 +624,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(FF)
+    @JsxFunction({FF68, FF60})
     public boolean execCommand(final String cmd, final boolean userInterface, final Object value) {
         return super.execCommand(cmd, userInterface, value);
     }
@@ -632,7 +633,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(FF)
+    @JsxFunction({FF68, FF60})
     public boolean queryCommandEnabled(final String cmd) {
         return super.queryCommandEnabled(cmd);
     }
@@ -641,7 +642,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(FF)
+    @JsxFunction({FF68, FF60})
     public boolean queryCommandSupported(final String cmd) {
         return super.queryCommandSupported(cmd);
     }
@@ -721,7 +722,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction(FF)
+    @JsxFunction({FF68, FF60})
     public HTMLCollection getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
         if ("null".equals(elementName)
@@ -852,7 +853,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public HTMLElement getBody() {
         return super.getBody();
     }
@@ -877,7 +878,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getBgColor() {
         String color = getPage().getBody().getAttribute("bgColor");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -893,7 +894,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setBgColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setBgColor(color);
@@ -903,7 +904,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getAlinkColor() {
         String color = getPage().getBody().getAttribute("aLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -919,7 +920,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setAlinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setALink(color);
@@ -929,7 +930,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getLinkColor() {
         String color = getPage().getBody().getAttributeDirect("link");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -945,7 +946,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setLinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setLink(color);
@@ -955,7 +956,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getVlinkColor() {
         String color = getPage().getBody().getAttribute("vLink");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -971,7 +972,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setVlinkColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setVLink(color);
@@ -981,7 +982,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getFgColor() {
         String color = getPage().getBody().getAttributeDirect("text");
         if (color == DomElement.ATTRIBUTE_NOT_DEFINED && getBrowserVersion().hasFeature(HTMLDOCUMENT_COLOR)) {
@@ -997,7 +998,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setFgColor(final String color) {
         final HTMLBodyElement body = getPage().getBody().getScriptableObject();
         body.setText(color);
@@ -1007,7 +1008,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public String getDomain() {
         return super.getDomain();
     }
@@ -1016,7 +1017,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setDomain(final String newDomain) {
         super.setDomain(newDomain);
     }
@@ -1025,7 +1026,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public Object getScripts() {
         return super.getScripts();
     }
@@ -1108,7 +1109,7 @@ public class HTMLDocument extends Document {
      * Sets the head.
      * @param head the head
      */
-    @JsxSetter({FF, IE})
+    @JsxSetter({FF68, FF60, IE})
     public void setHead(final ScriptableObject head) {
         //ignore
     }
@@ -1151,7 +1152,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF68, FF60})
     public void captureEvents(final String type) {
         // Empty.
     }
@@ -1160,7 +1161,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF68, FF60})
     public void releaseEvents(final String type) {
         // Empty.
     }
@@ -1169,7 +1170,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public String getDesignMode() {
         return super.getDesignMode();
     }
@@ -1178,7 +1179,7 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setDesignMode(final String mode) {
         super.setDesignMode(mode);
     }

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BGSOUND_AS_UNKNOWN;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound;
@@ -27,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  */
 @JsxClass(domClass = HtmlBackgroundSound.class, value = IE)
-@JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, value = FF)
+@JsxClass(isJSObject = false, domClass = HtmlBackgroundSound.class, value = {FF68, FF60})
 public class HTMLBGSoundElement extends HTMLElement {
 
     /**

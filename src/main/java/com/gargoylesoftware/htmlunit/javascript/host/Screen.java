@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -43,7 +44,7 @@ public class Screen extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public Screen() {
     }
 
@@ -69,7 +70,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availLeft} property.
      * @return the {@code availLeft} property
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public int getAvailLeft() {
         return 0;
     }
@@ -78,7 +79,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availLeft} property.
      * @param availLeft the {@code availLeft} property
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setAvailLeft(final int availLeft) {
         // otherwise ignore
     }
@@ -87,7 +88,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code availTop} property.
      * @return the {@code availTop} property
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public int getAvailTop() {
         return 0;
     }
@@ -96,7 +97,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code availTop} property.
      * @param availTop the {@code availTop} property
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setAvailTop(final int availTop) {
         // ignore
     }
@@ -231,7 +232,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code left} property.
      * @return the {@code left} property
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public int getLeft() {
         return 0;
     }
@@ -240,7 +241,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code left} property.
      * @param left the {@code left} property
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setLeft(final int left) {
         // ignore
     }
@@ -339,7 +340,7 @@ public class Screen extends SimpleScriptable {
      * Returns the {@code top} property.
      * @return the {@code top} property
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF68, FF60})
     public int getTop() {
         return 0;
     }
@@ -348,7 +349,7 @@ public class Screen extends SimpleScriptable {
      * Sets the {@code top} property.
      * @param top the {@code top} property
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF68, FF60})
     public void setTop(final int top) {
         // ignore
     }

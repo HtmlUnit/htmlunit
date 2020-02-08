@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -25,13 +23,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(FF)
+@JsxClass({FF68, FF60})
 public class CSSCounterStyleRule extends CSSRule {
 
     /**
      * Creates a new instance.
      */
-    @JsxConstructor(FF)
+    @JsxConstructor({FF68, FF60})
     public CSSCounterStyleRule() {
     }
 }

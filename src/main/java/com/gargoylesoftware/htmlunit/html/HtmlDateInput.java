@@ -21,10 +21,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Wrapper for the HTML element "input" where type is "date".

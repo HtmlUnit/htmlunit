@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import com.gargoylesoftware.htmlunit.html.HtmlBlockQuote;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation;
@@ -31,14 +32,14 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ronald Brill
  * @author Carsten Steul
  */
-@JsxClass(domClass = HtmlInlineQuotation.class, value = {FF, CHROME})
-@JsxClass(domClass = HtmlBlockQuote.class, value = {FF, CHROME})
+@JsxClass(domClass = HtmlInlineQuotation.class, value = {FF68, FF60, CHROME})
+@JsxClass(domClass = HtmlBlockQuote.class, value = {FF68, FF60, CHROME})
 public class HTMLQuoteElement extends HTMLElement {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLQuoteElement() {
     }
 

@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
@@ -41,7 +42,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public HTMLFrameSetElement() {
     }
 
@@ -171,7 +172,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onlanguagechange} event handler.
      * @return the {@code onlanguagechange} event handler
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOnlanguagechange() {
         return getEventHandler("languagechange");
     }
@@ -180,7 +181,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onlanguagechange} event handler.
      * @param languagechange the {@code onlanguagechange} event handler
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setOnlanguagechange(final Object languagechange) {
         setEventHandler("languagechange", languagechange);
     }
@@ -207,7 +208,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onmessageerror} event handler for this element.
      * @return the {@code onmessageerror} event handler for this element
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOnmessageerror() {
         return getEventHandler("onmessageerror");
     }
@@ -297,7 +298,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onpopstate} event handler.
      * @return the {@code onpopstate} event handler
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public Function getOnpopstate() {
         return getEventHandler(Event.TYPE_POPSTATE);
     }
@@ -306,7 +307,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onpopstate} event handler.
      * @param popstate the {@code onpopstate} event handler
      */
-    @JsxSetter({CHROME, FF})
+    @JsxSetter({CHROME, FF68, FF60})
     public void setOnpopstate(final Object popstate) {
         setEventHandler(Event.TYPE_POPSTATE, popstate);
     }

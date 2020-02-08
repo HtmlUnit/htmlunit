@@ -15,7 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, FF})
+    @JsxConstructor({CHROME, FF68, FF60})
     public Selection() {
     }
 
@@ -147,7 +148,7 @@ public class Selection extends SimpleScriptable {
      * Returns the type of selection (IE only).
      * @return the type of selection
      */
-    @JsxGetter({CHROME, FF})
+    @JsxGetter({CHROME, FF68, FF60})
     public String getType() {
         return type_;
     }
@@ -260,7 +261,7 @@ public class Selection extends SimpleScriptable {
     /**
      * Cancels the current selection, sets the selection type to none.
      */
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF68, FF60})
     public void empty() {
         removeAllRanges();
     }
@@ -270,7 +271,7 @@ public class Selection extends SimpleScriptable {
      * @param parentNode the node within which the focus will be moved
      * @param offset the number of characters from the beginning of parentNode's text the focus will be placed
      */
-    @JsxFunction({CHROME, FF})
+    @JsxFunction({CHROME, FF68, FF60})
     public void extend(final Node parentNode, final int offset) {
         final Range last = getLastRange();
         if (last != null) {
