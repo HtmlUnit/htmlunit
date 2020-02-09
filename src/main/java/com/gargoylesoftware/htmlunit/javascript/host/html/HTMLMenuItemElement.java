@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF60;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF68;
+
 import com.gargoylesoftware.htmlunit.html.HtmlMenuItem;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;

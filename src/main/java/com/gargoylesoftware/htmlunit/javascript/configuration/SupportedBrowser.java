@@ -27,7 +27,7 @@ public enum SupportedBrowser {
     /** Internet Explorer 11. */
     IE,
 
-    /** All versions of Firefox. */
+    /** Firefox latest. */
     FF,
 
     /** Firefox 60. */

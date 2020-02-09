@@ -115,7 +115,7 @@ public class UIEvent extends Event {
      * @param view the view to use for this event
      * @param detail the detail to set for the event
      */
-    @JsxFunction({CHROME, FF, IE})
+    @JsxFunction({CHROME, FF68, FF60, IE})
     public void initUIEvent(
             final String type,
             final boolean bubbles,

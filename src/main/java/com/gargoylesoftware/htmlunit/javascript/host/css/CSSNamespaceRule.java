@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({CHROME, FF, IE})
+@JsxClass({CHROME, FF68, FF60, IE})
 public class CSSNamespaceRule extends CSSRule {
 
     /**

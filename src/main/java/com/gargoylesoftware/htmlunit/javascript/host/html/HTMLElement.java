@@ -2020,8 +2020,7 @@ public class HTMLElement extends Element {
      * Returns the {@code dataset} attribute.
      * @return the {@code dataset} attribute
      */
-    @JsxGetter({CHROME, FF,
-        IE})
+    @JsxGetter({CHROME, FF68, FF60, IE})
     public DOMStringMap getDataset() {
         return new DOMStringMap(this);
     }
